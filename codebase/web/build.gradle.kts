@@ -1,6 +1,42 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+
 plugins {
-    // this is necessary to avoid the plugins to be loaded multiple times
-    // in each subproject's classloader
-    alias(libs.plugins.jetbrainsCompose) apply false
-    alias(libs.plugins.kotlinMultiplatform) apply false
+    kotlin("multiplatform")
+    id("org.jetbrains.compose")
 }
+
+repositories {
+    mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    google()
+}
+
+kotlin {
+    js(IR) {
+        browser()
+        binaries.executable()
+    }
+    sourceSets {
+        val jsMain by getting {
+            kotlin.srcDir("src/main/kotlin")
+            resources.srcDir("src/main/resources")
+
+            dependencies {
+                implementation(npm("highlight.js", "10.7.2"))
+                implementation(compose.html.core)
+                implementation(compose.runtime)
+            }
+        }
+    }
+}
+
+// a temporary workaround for a bug in jsRun invocation - see https://youtrack.jetbrains.com/issue/KT-48273
+afterEvaluate {
+    rootProject.extensions.configure<NodeJsRootExtension> {
+        nodeVersion = "16.0.0"
+        versions.webpackDevServer.version = "4.0.0"
+        versions.webpackCli.version = "4.10.0"
+    }
+}
+
