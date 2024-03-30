@@ -1,25 +1,13 @@
-rootProject.name = "KotlinProject"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     repositories {
-        maven(
-            url = "https://maven.pkg.jetbrains.space/public/p/compose/dev",
-        )
-        google()
         gradlePluginPortal()
-        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    }
+
+    plugins {
+        kotlin("multiplatform").version(extra["kotlin.version"] as String)
+        id("org.jetbrains.compose").version(extra["compose.version"] as String)
     }
 }
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        maven(
-            url = "https://maven.pkg.jetbrains.space/public/p/compose/dev",
-        )
-    }
-}
-
-include(":composeApp")
+rootProject.name = "make-apps-simple"
