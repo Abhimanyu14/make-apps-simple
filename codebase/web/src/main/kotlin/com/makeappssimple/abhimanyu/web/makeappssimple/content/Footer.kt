@@ -28,48 +28,61 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun PageFooter() {
-    Footer({
-        style {
-            flexShrink(0)
-            boxSizing("border-box")
-        }
-    }) {
-        Section({
-            classes(WtSections.wtSectionBgGrayDark)
+    Footer(
+        attrs = {
             style {
-                padding(24.px, 0.px)
+                flexShrink(0)
+                boxSizing("border-box")
             }
-        }) {
-            Div({ classes(WtContainer.wtContainer) }) {
-                Div({
-                    classes(WtRows.wtRow, WtRows.wtRowSizeM, WtRows.wtRowSmAlignItemsCenter)
-                    style {
-                        justifyContent(JustifyContent.Center)
-                        flexWrap(FlexWrap.Wrap)
-                    }
-                }) {
-
-                    Div({
-                        classes(WtCols.wtColInline)
-                    }) {
-                        P({
-                            classes(WtTexts.wtText1, WtTexts.wtText1ThemeDark)
-                        }) {
-                            Text("Social Links : ")
+        },
+    ) {
+        Section(
+            attrs = {
+                classes(WtSections.wtSectionBgGrayDark)
+                style {
+                    padding(24.px, 0.px)
+                }
+            },
+        ) {
+            Div(
+                attrs = { classes(WtContainer.wtContainer) },
+            ) {
+                Div(
+                    attrs = {
+                        classes(WtRows.wtRow, WtRows.wtRowSizeM, WtRows.wtRowSmAlignItemsCenter)
+                        style {
+                            justifyContent(JustifyContent.Center)
+                            flexWrap(FlexWrap.Wrap)
+                        }
+                    },
+                ) {
+                    Div(
+                        attrs = {
+                            classes(WtCols.wtColInline)
+                        },
+                    ) {
+                        P(
+                            attrs = {
+                                classes(WtTexts.wtText1, WtTexts.wtText1ThemeDark)
+                            },
+                        ) {
+                            Text(
+                                value = "Social Links : ",
+                            )
                         }
                     }
-
-                    Div({
-                        classes(WtCols.wtColInline)
-                    }) {
-                        getSocialLinks().forEach {
+                    Div(
+                        attrs = {
+                            classes(WtCols.wtColInline)
+                        },
+                    ) {
+                        getSocialLinks().map { socialLink ->
                             SocialIconLink(
-                                socialLink = it,
+                                socialLink = socialLink,
                             )
                         }
                     }
                 }
-
                 CopyrightInFooter()
             }
         }
