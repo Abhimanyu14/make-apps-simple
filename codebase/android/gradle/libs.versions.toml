@@ -1,0 +1,49 @@
+[versions]
+app-version-code = "6"
+app-version-name = "1.0.5"
+
+compile-sdk = "35"
+target-sdk = "35"
+min-sdk = "26"
+
+android-gradle-plugin = "8.7.3"
+androidx-activity-compose = "1.10.1"
+androidx-compose-bom = "2025.03.00"
+androidx-compose-foundation = "1.7.8"
+androidx-compose-runtime = "1.7.8"
+detekt = "1.23.8"
+detekt-rules = "1.0.0"
+detekt-rules-compose-nlopez = "0.4.22"
+dokka = "2.0.0"
+kotlin = "2.1.10"
+kotlinx-binary-compatibility-validator = "0.17.0"
+maven-publish = "0.31.0"
+screenshot = "0.0.1-alpha09"
+
+[libraries]
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity-compose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose-bom" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "androidx-compose-foundation" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "androidx-compose-runtime" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+detekt-rules = { group = "com.github.Abhimanyu14", name = "detekt-rules", version.ref = "detekt-rules" }
+detekt-rules-compose-nlopez = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "detekt-rules-compose-nlopez" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
+
+[bundles]
+detekt = [
+    "detekt-rules",
+    "detekt-rules-compose-nlopez",
+]
