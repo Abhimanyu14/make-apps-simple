@@ -1,55 +1,13 @@
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
 # Make Apps Simple
 
-A repo for handling website hosting for projects
+---
 
-## Start dev server
+This is a monorepo containing all my apps.  
+Each app has a separate README file in its root directory, explaining its purpose.
 
-```
-./gradlew jsBrowserRun --continuous
-```
+# List of Apps
 
-## To Deploy the changes
-
-1. Generate production files
-
-   ```
-   ./gradlew jsBrowserProductionWebpack
-   ```
-
-2. Copy files from
-   ```
-   codebase/web/composeApp/build/dist/wasmJs/productionExecutable
-   ```
-   to
-   ```
-   /public
-   ```
-3. Deploy using firebase
-   ```
-   firebase deploy --only hosting -m "message"
-   ```
-
-### Compose Web & Compose HTML References
-
-1. [Initial Setup](https://kotlinlang.org/docs/wasm-get-started.html#what-s-next)
-2. [Hot reloading](https://blaszcz.uk/live-reload-with-compose-web/)
-3. [Basic Setup](https://youtu.be/F5B-CxJTKlg?si=rBUb2A_vHAmnSSGL)
-
-# Brand Guidelines
-
-[LinkedIn](https://brand.linkedin.com/downloads)
-[Google Play Store]()
-[GitHub](https://github.com/logos)
-[StackOverflow](https://stackoverflow.design/brand/logo/)
-[Medium]()
-[LeetCode]()
-[Resume]()
-[HashNode](https://hashnode.com/brand-resources)
-[Threads](https://about.meta.com/brand/resources/instagram/threads/)
-[X](https://about.x.com/en/who-we-are/brand-toolkit)
-[LinkTree]()
+1. Website Source code of https://makeappssimple.com/.
 
 # License
 
