@@ -8,6 +8,8 @@ Each app has a separate README file in its root directory, explaining its purpos
 # List of Apps
 
 1. Website Source code of https://makeappssimple.com/.
+2. Cosmos Design System
+3. Cosmos Design System Catalog
 
 # License
 
