@@ -23,6 +23,7 @@
     <!-- region launcher activity -->
     <string name="screen_launcher">Make Apps Simple!</string>
     <string name="screen_launcher_cosmos_catalog">Cosmos Catalog</string>
+    <string name="screen_launcher_barcodes">Barcodes</string>
     <!-- endregion -->
 
 </resources>

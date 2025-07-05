@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.event
 import android.app.Activity
 import android.content.Intent
 import androidx.core.content.ContextCompat
+import com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity
 
 internal class PlatformEventHandlerImpl : PlatformEventHandler {
@@ -33,6 +34,17 @@ internal class PlatformEventHandlerImpl : PlatformEventHandler {
                     Intent(
                         activity,
                         CosmosDesignSystemCatalogActivity::class.java,
+                    ),
+                    null,
+                )
+            }
+
+            PlatformEvent.NavigateToBarcodesActivity -> {
+                ContextCompat.startActivity(
+                    activity,
+                    Intent(
+                        activity,
+                        BarcodesActivity::class.java,
                     ),
                     null,
                 )

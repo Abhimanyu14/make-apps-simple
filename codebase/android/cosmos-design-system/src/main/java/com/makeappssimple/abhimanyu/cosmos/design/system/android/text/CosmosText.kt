@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.text
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -37,6 +38,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.R
  */
 @Composable
 public fun CosmosText(
+    modifier: Modifier = Modifier,
     text: String,
     softWrap: Boolean = true,
     style: CosmosTextStyle = CosmosTextStyle.Body2,
@@ -46,6 +48,7 @@ public fun CosmosText(
 ) {
     BasicText(
         text = text,
+        modifier = modifier,
         style = TextStyle.Default.merge(
             fontFamily = FontFamily(
                 Font(

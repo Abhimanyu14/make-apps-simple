@@ -36,6 +36,15 @@ internal fun LauncherApp(
                 handlePlatformEvent(PlatformEvent.NavigateToCosmosDesignSystemCatalogActivity)
             },
         ),
+        LauncherItem(
+            iconResourceId = com.makeappssimple.abhimanyu.barcodes.android.R.drawable.ic_launcher_foreground,
+            text = stringResource(
+                R.string.screen_launcher_barcodes,
+            ),
+            onClick = {
+                handlePlatformEvent(PlatformEvent.NavigateToBarcodesActivity)
+            },
+        ),
     )
 
     LauncherAppUI(

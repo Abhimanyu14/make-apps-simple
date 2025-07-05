@@ -18,4 +18,5 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.event
 
 internal sealed class PlatformEvent {
     object NavigateToCosmosDesignSystemCatalogActivity : PlatformEvent()
+    object NavigateToBarcodesActivity : PlatformEvent()
 }
