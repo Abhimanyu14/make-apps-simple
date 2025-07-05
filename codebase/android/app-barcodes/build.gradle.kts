@@ -25,20 +25,15 @@ kotlin {
 }
 
 android {
-    namespace =
-        "com.makeappssimple.abhimanyu.app.cosmos.design.system.catalog.android"
+    namespace = "com.makeappssimple.abhimanyu.app.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId =
-            "com.makeappssimple.abhimanyu.app.cosmos.design.system.catalog.android"
+        applicationId = "com.makeappssimple.abhimanyu.app.barcodes.android"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
-        versionCode =
-            libs.versions.app.cosmos.design.system.catalog.version.code.get()
-                .toInt()
-        versionName =
-            libs.versions.app.cosmos.design.system.catalog.version.name.get()
+        versionCode = libs.versions.app.barcodes.version.code.get().toInt()
+        versionName = libs.versions.app.barcodes.version.name.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -71,5 +66,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":cosmos-design-system-catalog"))
+    implementation(project(":barcodes"))
 }

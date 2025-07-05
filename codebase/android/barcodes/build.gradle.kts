@@ -15,30 +15,17 @@
  */
 
 plugins {
-    alias(libs.plugins.plugin.android.application)
+    alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
-    namespace =
-        "com.makeappssimple.abhimanyu.app.cosmos.design.system.catalog.android"
+    namespace = "com.makeappssimple.abhimanyu.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId =
-            "com.makeappssimple.abhimanyu.app.cosmos.design.system.catalog.android"
         minSdk = libs.versions.min.sdk.get().toInt()
-        targetSdk = libs.versions.target.sdk.get().toInt()
-        versionCode =
-            libs.versions.app.cosmos.design.system.catalog.version.code.get()
-                .toInt()
-        versionName =
-            libs.versions.app.cosmos.design.system.catalog.version.name.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -71,5 +58,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":cosmos-design-system-catalog"))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation)
+
+    implementation(project.dependencies.platform(libs.androidx.compose.bom))
 }

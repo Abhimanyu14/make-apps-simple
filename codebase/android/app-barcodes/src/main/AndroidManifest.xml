@@ -22,14 +22,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/cosmos_design_system_catalog_app_name"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CosmosDesignSystemCatalog">
+        android:theme="@style/Theme.Barcodes">
 
         <activity
-            android:name="com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity"
+            android:name="com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity"
             android:exported="true"
-            android:theme="@style/Theme.CosmosDesignSystemCatalog"
+            android:theme="@style/Theme.Barcodes"
             tools:replace="android:exported">
 
             <intent-filter>

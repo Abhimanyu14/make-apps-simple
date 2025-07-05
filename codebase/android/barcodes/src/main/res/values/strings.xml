@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright 2025-2025 Abhimanyu
   ~
@@ -18,6 +16,8 @@
 
 <resources>
 
-    <style name="Theme.CosmosDesignSystemCatalog" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- region app name -->
+    <string name="app_name">Barcodes</string>
+    <!-- endregion -->
 
 </resources>

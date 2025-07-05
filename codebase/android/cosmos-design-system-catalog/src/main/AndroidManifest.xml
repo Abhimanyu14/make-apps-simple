@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
   ~ Copyright 2025-2025 Abhimanyu
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +19,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
+
         <activity
             android:name=".activity.CosmosDesignSystemCatalogActivity"
             android:exported="false" />
+
     </application>
+
 </manifest>
