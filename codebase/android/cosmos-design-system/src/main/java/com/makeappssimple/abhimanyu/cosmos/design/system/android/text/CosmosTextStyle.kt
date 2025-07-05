@@ -77,4 +77,3 @@ public enum class CosmosTextStyle {
      */
     Small2,
 }
-

@@ -60,7 +60,7 @@ android {
 
 dependencies {
     implementation(project(":cosmos-design-system"))
-    
+
     implementation(platform(libs.androidx.compose.bom))
 
     implementation(libs.androidx.activity.compose)

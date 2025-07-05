@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.makeappssimple.android
+package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
 import android.content.Intent
 import androidx.compose.foundation.clickable
@@ -32,7 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.text.CosmosTextStyle
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.CosmosDesignSystemCatalogActivity
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity
+import com.makeappssimple.abhimanyu.makeappssimple.android.activity.MainActivity
 
 @Composable
 internal fun AppUI() {

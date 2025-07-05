@@ -19,4 +19,5 @@
 <resources>
 
     <style name="Theme.MakeAppsSimple" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>

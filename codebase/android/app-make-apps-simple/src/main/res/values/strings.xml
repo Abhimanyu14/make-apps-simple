@@ -15,5 +15,7 @@
   -->
 
 <resources>
+    <!-- region app name -->
     <string name="make_apps_simple_app_name">Make Apps Simple</string>
+    <!-- endregion -->
 </resources>

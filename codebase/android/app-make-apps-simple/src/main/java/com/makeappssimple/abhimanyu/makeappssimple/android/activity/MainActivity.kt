@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.makeappssimple.android
+package com.makeappssimple.abhimanyu.makeappssimple.android.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.makeappssimple.abhimanyu.makeappssimple.android.app.AppUI
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(
