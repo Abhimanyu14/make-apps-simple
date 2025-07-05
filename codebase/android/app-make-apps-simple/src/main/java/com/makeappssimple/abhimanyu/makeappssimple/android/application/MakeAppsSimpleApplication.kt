@@ -20,13 +20,13 @@ import android.app.Application
 import com.makeappssimple.abhimanyu.makeappssimple.android.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
-internal class MyApplication : Application() {
+internal class MakeAppsSimpleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initKoin(
             config = {
                 androidContext(
-                    androidContext = this@MyApplication,
+                    androidContext = this@MakeAppsSimpleApplication,
                 )
             },
         )
