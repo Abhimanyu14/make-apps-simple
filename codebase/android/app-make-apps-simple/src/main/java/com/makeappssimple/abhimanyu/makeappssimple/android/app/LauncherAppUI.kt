@@ -118,27 +118,8 @@ private fun LauncherItemUI(
             ),
     ) {
         Column {
-            AsyncImage(
-                model = launcherItem.iconResourceId,
-                contentDescription = launcherItem.text,
-                modifier = Modifier
-                    .padding(
-                        top = 4.dp,
-                        start = 4.dp,
-                        end = 4.dp,
-                        bottom = 2.dp,
-                    )
-                    .clip(
-                        shape = RoundedCornerShape(
-                            size = 12.dp,
-                        ),
-                    )
-                    .background(
-                        color = Black,
-                    )
-                    .padding(
-                        all = 4.dp,
-                    ),
+            LauncherItemIcon(
+                launcherItem = launcherItem,
             )
             CosmosText(
                 text = launcherItem.text,
@@ -148,4 +129,32 @@ private fun LauncherItemUI(
             )
         }
     }
+}
+
+@Composable
+private fun LauncherItemIcon(
+    launcherItem: LauncherItem,
+) {
+    AsyncImage(
+        model = launcherItem.iconResourceId,
+        contentDescription = launcherItem.text,
+        modifier = Modifier
+            .padding(
+                top = 4.dp,
+                start = 4.dp,
+                end = 4.dp,
+                bottom = 2.dp,
+            )
+            .clip(
+                shape = RoundedCornerShape(
+                    size = 12.dp,
+                ),
+            )
+            .background(
+                color = Black,
+            )
+            .padding(
+                all = 4.dp,
+            ),
+    )
 }
