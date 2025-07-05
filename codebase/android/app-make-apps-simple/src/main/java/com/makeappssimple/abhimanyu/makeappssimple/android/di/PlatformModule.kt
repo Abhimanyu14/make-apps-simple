@@ -14,22 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity
+package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app.AppUI
+import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEventHandler
+import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEventHandlerImpl
+import org.koin.core.module.Module
+import org.koin.dsl.module
 
-public class CosmosDesignSystemCatalogActivity : ComponentActivity() {
-    override fun onCreate(
-        savedInstanceState: Bundle?,
-    ) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AppUI()
-        }
+internal val platformModule: Module = module {
+    single<PlatformEventHandler> {
+        PlatformEventHandlerImpl()
     }
 }

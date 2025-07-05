@@ -15,9 +15,13 @@
  */
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.plugin.android.application)
+    alias(libs.plugins.plugin.kotlin.android)
+    alias(libs.plugins.plugin.kotlin.compose)
+}
+
+kotlin {
+    explicitApi()
 }
 
 android {
@@ -66,8 +70,19 @@ dependencies {
     implementation(project(":cosmos-design-system"))
     implementation(project(":cosmos-design-system-catalog"))
 
-    implementation(platform(libs.androidx.compose.bom))
-
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.compose.viewmodel.navigation)
+    implementation(libs.koin.core)
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.viewmodel.compose)
+
+    implementation(project.dependencies.platform(libs.androidx.compose.bom))
+    implementation(project.dependencies.platform(libs.koin.bom))
 }

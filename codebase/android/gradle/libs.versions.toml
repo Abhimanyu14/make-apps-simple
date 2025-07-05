@@ -1,26 +1,37 @@
 [versions]
+# App versions
 app-cosmos-design-system-catalog-version-code = "6"
 app-cosmos-design-system-catalog-version-name = "1.0.5"
 app-make-apps-simple-version-code = "1"
 app-make-apps-simple-version-name = "0.1.0"
 
+# SDK versions
 compile-sdk = "35"
-target-sdk = "35"
 min-sdk = "26"
+target-sdk = "35"
 
-android-gradle-plugin = "8.7.3"
+# Library versions
 androidx-activity-compose = "1.10.1"
 androidx-compose-bom = "2025.06.01"
 androidx-compose-foundation = "1.8.3"
 androidx-compose-runtime = "1.8.3"
-detekt = "1.23.8"
+coil = "3.2.0"
 detekt-rules = "1.0.0"
 detekt-rules-compose-nlopez = "0.4.22"
-dokka = "2.0.0"
-kotlin = "2.1.21"
-kotlinx-binary-compatibility-validator = "0.17.0"
-maven-publish = "0.31.0"
-screenshot = "0.0.1-alpha10"
+koin-bom = "4.0.3"
+lifecycle-runtime-compose = "2.9.1"
+lifecycle-viewmodel = "2.9.1"
+lifecycle-viewmodel-compose = "2.9.1"
+
+# Plugin versions
+plugin-android-gradle = "8.7.3"
+plugin-detekt = "1.23.8"
+plugin-dokka = "2.0.0"
+plugin-kotlin = "2.1.21"
+plugin-kotlinx-binary-compatibility-validator = "0.17.0"
+plugin-ksp = "2.1.21-2.0.2"
+plugin-maven-publish = "0.31.0"
+plugin-screenshot = "0.0.1-alpha10"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
@@ -30,19 +41,33 @@ androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", versio
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 detekt-rules = { module = "com.github.Abhimanyu14:detekt-rules", version.ref = "detekt-rules" }
 detekt-rules-compose-nlopez = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-rules-compose-nlopez" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-compose = { module = "io.insert-koin:koin-compose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
+koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-test = { module = "io.insert-koin:koin-test" }
+koin-test-junit5 = { module = "io.insert-koin:koin-test-junit5" }
+lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
+lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle-viewmodel" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
-android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
+plugin-android-application = { id = "com.android.application", version.ref = "plugin-android-gradle" }
+plugin-android-library = { id = "com.android.library", version.ref = "plugin-android-gradle" }
+plugin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "plugin-detekt" }
+plugin-dokka = { id = "org.jetbrains.dokka", version.ref = "plugin-dokka" }
+plugin-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
+plugin-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugin-kotlin" }
+plugin-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "plugin-kotlinx-binary-compatibility-validator" }
+plugin-ksp = { id = "com.google.devtools.ksp", version.ref = "plugin-ksp" }
+plugin-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "plugin-maven-publish" }
+plugin-screenshot = { id = "com.android.compose.screenshot", version.ref = "plugin-screenshot" }
 
 [bundles]
 detekt = [

@@ -15,13 +15,5 @@
   -->
 
 <resources>
-    <!-- region app name -->
-    <string name="make_apps_simple_app_name">Make Apps Simple</string>
-    <!-- endregion -->
-
-    <!-- region launcher activity -->
-    <string name="screen_launcher">Make Apps Simple!</string>
-    <string name="screen_launcher_cosmos_catalog">Cosmos Catalog</string>
-    <!-- endregion -->
-
+    <string name="cosmos_design_system_catalog_app_name">Cosmos Catalog</string>
 </resources>

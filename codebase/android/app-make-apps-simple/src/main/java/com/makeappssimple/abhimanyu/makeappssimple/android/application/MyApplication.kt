@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.makeappssimple.android.activity
+package com.makeappssimple.abhimanyu.makeappssimple.android.application
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.makeappssimple.android.app.AppUI
+import android.app.Application
+import com.makeappssimple.abhimanyu.makeappssimple.android.di.initKoin
+import org.koin.android.ext.koin.androidContext
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(
-        savedInstanceState: Bundle?,
-    ) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AppUI()
-        }
+internal class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        initKoin(
+            config = {
+                androidContext(
+                    androidContext = this@MyApplication,
+                )
+            },
+        )
     }
 }

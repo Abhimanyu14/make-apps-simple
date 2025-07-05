@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity
+package com.makeappssimple.abhimanyu.makeappssimple.android.event
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app.AppUI
+import android.app.Activity
 
-public class CosmosDesignSystemCatalogActivity : ComponentActivity() {
-    override fun onCreate(
-        savedInstanceState: Bundle?,
-    ) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AppUI()
-        }
-    }
+internal interface PlatformEventHandler {
+    fun handlePlatformEvent(
+        activity: Activity,
+        platformEvent: PlatformEvent,
+    )
 }
+

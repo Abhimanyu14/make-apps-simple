@@ -18,13 +18,14 @@ import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 
 plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.compose) apply false
-    alias(libs.plugins.maven.publish) apply false
+    alias(libs.plugins.plugin.android.application) apply false
+    alias(libs.plugins.plugin.android.library) apply false
+    alias(libs.plugins.plugin.detekt)
+    alias(libs.plugins.plugin.dokka)
+    alias(libs.plugins.plugin.kotlin.android) apply false
+    alias(libs.plugins.plugin.kotlin.compose) apply false
+    alias(libs.plugins.plugin.ksp) apply false
+    alias(libs.plugins.plugin.maven.publish) apply false
 }
 
 // region Detekt

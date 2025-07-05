@@ -20,14 +20,14 @@ import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlinx.binary.compatibility.validator)
-    alias(libs.plugins.screenshot)
-    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.plugin.android.library)
+    alias(libs.plugins.plugin.detekt)
+    alias(libs.plugins.plugin.dokka)
+    alias(libs.plugins.plugin.kotlin.android)
+    alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.kotlinx.binary.compatibility.validator)
+    alias(libs.plugins.plugin.screenshot)
+    alias(libs.plugins.plugin.maven.publish)
 }
 
 kotlin {

@@ -22,6 +22,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.R
@@ -37,13 +39,13 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.R
 public fun CosmosText(
     text: String,
     softWrap: Boolean = true,
+    style: CosmosTextStyle = CosmosTextStyle.Body2,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
-    style: CosmosTextStyle = CosmosTextStyle.Body2,
+    textAlign: TextAlign = TextAlign.Unspecified,
 ) {
     BasicText(
         text = text,
-        softWrap = softWrap,
         style = TextStyle.Default.merge(
             fontFamily = FontFamily(
                 Font(
@@ -52,7 +54,10 @@ public fun CosmosText(
             ),
             fontSize = style.fontSize,
             fontWeight = style.fontWeight,
+            textAlign = textAlign,
         ),
+        overflow = TextOverflow.Ellipsis,
+        softWrap = softWrap,
         maxLines = maxLines,
         minLines = minLines,
     )
