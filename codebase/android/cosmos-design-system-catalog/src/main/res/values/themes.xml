@@ -17,4 +17,5 @@
 <resources>
 
     <style name="Theme.CosmosDesignSystemCatalog" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>

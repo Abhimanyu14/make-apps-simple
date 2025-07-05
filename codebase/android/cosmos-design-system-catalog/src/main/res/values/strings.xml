@@ -15,5 +15,9 @@
   -->
 
 <resources>
+
+    <!-- region app name -->
     <string name="cosmos_design_system_catalog_app_name">Cosmos Catalog</string>
+    <!-- endregion -->
+
 </resources>
