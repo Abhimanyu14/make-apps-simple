@@ -15,13 +15,37 @@ androidx-activity-compose = "1.10.1"
 androidx-compose-bom = "2025.06.01"
 androidx-compose-foundation = "1.8.3"
 androidx-compose-runtime = "1.8.3"
+androidx-core-ktx = "1.16.0"
+camera = "1.4.2"
+camera-view = "1.4.2"
 coil = "3.2.0"
+compose = "1.8.2"
 detekt-rules = "1.0.0"
 detekt-rules-compose-nlopez = "0.4.22"
+espresso-core = "3.6.1"
+guava = "33.3.1-jre"
+junit = "4.13.2"
 koin-bom = "4.0.3"
+kotlin = "2.1.21"
+kotlin-test = "2.1.21"
+kotlin-test-junit = "2.1.21"
+kotlinx-coroutines = "1.10.2"
+kotlinx-coroutines-swing = "1.10.2"
+kotlinx-datetime = "0.7.0"
+kotlinx-serialization-json = "1.8.1"
 lifecycle-runtime-compose = "2.9.1"
 lifecycle-viewmodel = "2.9.1"
 lifecycle-viewmodel-compose = "2.9.1"
+material-icons-extended = "1.7.3"
+navigation-compose = "2.9.0-beta03"
+play-app-update = "2.1.0"
+play-review = "2.0.2"
+play-services-mlkit-barcode-scanning = "18.3.1"
+play-services-oss-licenses = "17.1.0"
+room = "2.7.2"
+sqlite-bundled = "2.5.2"
+test-ext-junit = "1.2.1"
+zxing-core = "3.5.1"
 
 # Plugin versions
 plugin-android-gradle = "8.7.3"
@@ -41,10 +65,18 @@ androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", versio
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
+camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" }
+camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" }
+camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" }
+camera-view = { module = "androidx.camera:camera-view", version.ref = "camera-view" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 detekt-rules = { module = "com.github.Abhimanyu14:detekt-rules", version.ref = "detekt-rules" }
 detekt-rules-compose-nlopez = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-rules-compose-nlopez" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+junit = { module = "junit:junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
 koin-compose = { module = "io.insert-koin:koin-compose" }
@@ -53,9 +85,32 @@ koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-view
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-test = { module = "io.insert-koin:koin-test" }
 koin-test-junit5 = { module = "io.insert-koin:koin-test-junit5" }
+kotlin = { module = "org.jetbrains.kotlin:kotlin", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-test" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-test-junit" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines-swing" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle-viewmodel" }
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
+material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core" }
+material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+navigation-testing = { module = "org.jetbrains.androidx.navigation:navigation-testing", version.ref = "navigation-compose" }
+play-app-update = { module = "com.google.android.play:app-update", version.ref = "play-app-update" }
+play-review = { module = "com.google.android.play:review-ktx", version.ref = "play-review" }
+play-services-mlkit-barcode-scanning = { module = "com.google.android.gms:play-services-mlkit-barcode-scanning", version.ref = "play-services-mlkit-barcode-scanning" }
+play-services-oss-licenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "play-services-oss-licenses" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite-bundled" }
+test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "test-ext-junit" }
+ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "compose" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
 
 [plugins]
 plugin-android-application = { id = "com.android.application", version.ref = "plugin-android-gradle" }
