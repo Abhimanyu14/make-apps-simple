@@ -47,7 +47,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.scaffold.MyScaffoldContentWrapper
@@ -148,7 +148,7 @@ public fun MyScaffold(
                 WindowInsets.systemBars.only(WindowInsetsSides.Bottom)
             },
         ) {
-            val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+            val screenHeight = LocalWindowInfo.current.containerSize.height.dp
             val navigationBarsHeight =
                 WindowInsets.navigationBars.asPaddingValues()
                     .calculateBottomPadding()

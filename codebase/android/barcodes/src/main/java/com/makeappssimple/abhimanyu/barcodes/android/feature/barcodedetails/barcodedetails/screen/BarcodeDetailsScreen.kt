@@ -21,8 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
@@ -46,10 +46,9 @@ internal fun BarcodeDetailsScreen(
     )
 
     val context = LocalContext.current
-    val configuration = LocalConfiguration.current
-
-    val screenHeight = configuration.screenHeightDp.dp.dpToPx()
-    val screenWidth = configuration.screenWidthDp.dp.dpToPx()
+    val windowContainerSize = LocalWindowInfo.current.containerSize
+    val screenHeight = windowContainerSize.height.dp.dpToPx()
+    val screenWidth = windowContainerSize.width.dp.dpToPx()
 
     val screenUIData: MyResult<BarcodeDetailsScreenUIData>? by screenViewModel.screenUIData.collectAsStateWithLifecycle()
     val uiState = rememberBarcodeDetailsScreenUIState(
