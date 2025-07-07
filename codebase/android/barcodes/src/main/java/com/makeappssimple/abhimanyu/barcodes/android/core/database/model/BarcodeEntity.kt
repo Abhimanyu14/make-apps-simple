@@ -19,12 +19,16 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.database.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.constants.BarcodeEntityConstants
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.google.android.gms.vision.barcode.Barcode as VisionBarcode
 
+/**
+ * Room entity for barcode_table.
+ */
 @Entity(tableName = BarcodeEntityConstants.TABLE_NAME)
-public data class BarcodeEntity(
+internal data class BarcodeEntity(
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_SOURCE)
     val source: BarcodeSource,
 
@@ -45,6 +49,9 @@ public data class BarcodeEntity(
     val value: String,
 )
 
+/**
+ * Convert BarcodeEntity to domain Barcode model.
+ */
 internal fun BarcodeEntity.asExternalModel(): Barcode {
     return Barcode(
         source = source,
@@ -56,6 +63,9 @@ internal fun BarcodeEntity.asExternalModel(): Barcode {
     )
 }
 
+/**
+ * Convert domain Barcode model to BarcodeEntity.
+ */
 internal fun Barcode.asEntity(): BarcodeEntity {
     return BarcodeEntity(
         source = source,
@@ -65,15 +75,4 @@ internal fun Barcode.asEntity(): BarcodeEntity {
         name = name,
         value = value,
     )
-}
-
-internal object BarcodeEntityConstants {
-    const val TABLE_NAME: String = "barcode_table"
-
-    const val COLUMN_SOURCE: String = "source"
-    const val COLUMN_FORMAT: String = "format"
-    const val COLUMN_ID: String = "id"
-    const val COLUMN_TIMESTAMP: String = "timestamp"
-    const val COLUMN_NAME: String = "name"
-    const val COLUMN_VALUE: String = "value"
 }

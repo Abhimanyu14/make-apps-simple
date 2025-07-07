@@ -40,14 +40,14 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.Barcode
 @TypeConverters(
     BarcodeFormatConverter::class,
 )
-public abstract class MyRoomDatabase : RoomDatabase() {
-    public abstract fun barcodeDao(): BarcodeDao
+internal abstract class MyRoomDatabase : RoomDatabase() {
+    abstract fun barcodeDao(): BarcodeDao
 
-    public companion object {
+    companion object {
         @Volatile
         private var INSTANCE: MyRoomDatabase? = null
 
-        public fun getDatabase(
+        internal fun getDatabase(
             context: Context,
         ): MyRoomDatabase {
             val tempInstance: MyRoomDatabase? = INSTANCE

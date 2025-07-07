@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.database.migrations
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntityConstants
 
 internal val manualDatabaseMigrations: Array<Migration> = arrayOf(
 )
@@ -56,5 +55,4 @@ private object ManualDatabaseMigration {
             )
         }
     }
-
 }

@@ -27,73 +27,72 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.Barcode
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Project convention
- * Method ordering - Create, Read, Update and Delete
+ * Data Access Object for barcode_table.
  */
 @Dao
-public interface BarcodeDao {
+internal interface BarcodeDao {
     /**
-     * @return Row id of inserted rows. First valid row id is 1.
-     *
+     * Delete all barcodes from the table.
+     * @return Number of rows deleted
      * @throws [SQLiteException]
      */
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    public suspend fun insertBarcodes(
+    @Query("DELETE FROM barcode_table")
+    suspend fun deleteAllBarcodes(): Int
+
+    /**
+     * Delete barcodes from the table.
+     * @return Number of rows deleted
+     * @throws [SQLiteException]
+     */
+    @Delete
+    suspend fun deleteBarcodes(
         vararg barcodeEntities: BarcodeEntity,
-    ): LongArray
+    ): Int
 
     /**
+     * Get all barcodes as a Flow.
      * @throws [SQLiteException]
      */
     @Query("SELECT * from barcode_table ORDER BY id ASC")
-    public fun getAllBarcodesFlow(): Flow<List<BarcodeEntity>>
+    fun getAllBarcodesFlow(): Flow<List<BarcodeEntity>>
 
     /**
+     * Get all barcodes as a list.
      * @return Returns all barcodes ordered by [BarcodeEntity.id]
-     *
      * @throws [SQLiteException]
      */
     @Query("SELECT * from barcode_table ORDER BY id ASC")
-    public suspend fun getAllBarcodes(): List<BarcodeEntity>
+    suspend fun getAllBarcodes(): List<BarcodeEntity>
 
     /**
+     * Get a barcode by id.
      * @param id Required barcode id
      * @return Barcode with given [id] or returns null if no barcode has the given id.
-     *
      * @throws [SQLiteException]
      */
     @Query(value = "SELECT * from barcode_table WHERE id = :id")
-    public suspend fun getBarcode(
+    suspend fun getBarcode(
         id: Int,
     ): BarcodeEntity?
 
     /**
+     * Insert barcodes into the table.
+     * @return Row id of inserted rows. First valid row id is 1.
+     * @throws [SQLiteException]
+     */
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertBarcodes(
+        vararg barcodeEntities: BarcodeEntity,
+    ): LongArray
+
+    /**
+     * Update barcodes in the table.
      * Only updates the existing rows using the primary key
-     *
      * @return Number of rows updated
-     *
      * @throws [SQLiteException]
      */
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    public suspend fun updateBarcodes(
+    suspend fun updateBarcodes(
         vararg barcodeEntities: BarcodeEntity,
     ): Int
-
-    /**
-     * @return Number of rows deleted
-     *
-     * @throws [SQLiteException]
-     */
-    @Delete
-    public suspend fun deleteBarcodes(
-        vararg barcodeEntities: BarcodeEntity,
-    ): Int
-
-    /**
-     * @return Number of rows deleted
-     *
-     * @throws [SQLiteException]
-     */
-    @Query("DELETE FROM barcode_table")
-    public suspend fun deleteAllBarcodes(): Int
 }

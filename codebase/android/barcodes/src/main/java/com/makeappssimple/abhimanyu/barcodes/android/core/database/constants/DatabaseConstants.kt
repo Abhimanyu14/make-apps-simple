@@ -16,7 +16,23 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.database.constants
 
+/**
+ * General database constants.
+ */
 internal object DatabaseConstants {
-    const val DATABASE_NAME: String = "barcodes_database"
     const val DATABASE_CURRENT_VERSION_NUMBER: Int = 1
+    const val DATABASE_NAME: String = "barcodes_database"
+}
+
+/**
+ * Constants for the BarcodeEntity Room table and columns.
+ */
+internal object BarcodeEntityConstants {
+    const val COLUMN_FORMAT: String = "format"
+    const val COLUMN_ID: String = "id"
+    const val COLUMN_NAME: String = "name"
+    const val COLUMN_SOURCE: String = "source"
+    const val COLUMN_TIMESTAMP: String = "timestamp"
+    const val COLUMN_VALUE: String = "value"
+    const val TABLE_NAME: String = "barcode_table"
 }
