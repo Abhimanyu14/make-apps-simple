@@ -31,6 +31,7 @@ internal fun initKoin(
             BarcodeGeneratorModule().module,
             BarcodeRepositoryModule().module,
             BuildConfigKitModule().module,
+            ClipboardKitModule().module,
             CoroutineScopeModule().module,
             DaosModule().module,
             DateTimeKitModule().module,

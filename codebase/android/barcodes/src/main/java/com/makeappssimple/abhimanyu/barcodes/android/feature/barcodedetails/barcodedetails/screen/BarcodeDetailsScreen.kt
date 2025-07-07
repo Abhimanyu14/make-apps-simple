@@ -26,8 +26,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.copyToClipboard
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.util.dpToPx
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event.BarcodeDetailsScreenUIEventHandler
@@ -35,7 +35,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barc
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel.BarcodeDetailsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.min
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.BARCODE_VALUE_CLIPBOARD_LABEL
 
 @Composable
 internal fun BarcodeDetailsScreen(
@@ -58,7 +57,7 @@ internal fun BarcodeDetailsScreen(
     )
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (
-            copyToClipboard(
+            screenViewModel.clipboardKit.copyToClipboard(
                 context = context,
                 label = BARCODE_VALUE_CLIPBOARD_LABEL,
                 text = uiState.barcode?.value.orEmpty(),

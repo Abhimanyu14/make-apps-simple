@@ -21,6 +21,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGenerator
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
@@ -51,6 +52,7 @@ internal class BarcodeDetailsScreenViewModel(
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
+    val clipboardKit: ClipboardKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     firebaseAnalyticsEventLogger = firebaseAnalyticsEventLogger,
