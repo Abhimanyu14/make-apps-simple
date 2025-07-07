@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
 
 @Composable
-internal fun MyText(
+public fun MyText(
     modifier: Modifier = Modifier,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,

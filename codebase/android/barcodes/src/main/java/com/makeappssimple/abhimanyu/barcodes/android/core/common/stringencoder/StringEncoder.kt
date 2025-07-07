@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder
 
-public interface StringEncoder {
-    public fun encodeString(
+internal interface StringEncoder {
+    fun encodeString(
         string: String,
     ): String
 }

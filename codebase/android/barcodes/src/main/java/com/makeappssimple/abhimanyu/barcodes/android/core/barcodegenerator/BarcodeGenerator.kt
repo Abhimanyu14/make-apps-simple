@@ -26,8 +26,8 @@ private object BarcodeDefault {
     const val BACKGROUND_COLOR: Int = Color.WHITE
 }
 
-public interface BarcodeGenerator {
-    public suspend fun generateBarcode(
+internal interface BarcodeGenerator {
+    suspend fun generateBarcode(
         data: String,
         visionBarcodeFormat: Int,
         width: Int = BarcodeDefault.WIDTH,

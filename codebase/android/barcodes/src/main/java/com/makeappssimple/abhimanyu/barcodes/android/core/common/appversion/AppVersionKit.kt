@@ -16,6 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.appversion
 
-public interface AppVersionKit {
-    public fun getAppVersion(): AppVersion?
+internal interface AppVersionKit {
+    fun getAppVersion(): AppVersion?
 }
