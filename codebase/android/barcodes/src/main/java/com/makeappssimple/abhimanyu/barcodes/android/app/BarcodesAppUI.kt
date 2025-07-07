@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.app
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.LocalOverscrollConfiguration
+import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
@@ -31,7 +31,7 @@ internal fun BarcodesAppUI(
     MyAppTheme {
         // To remove overscroll effect globally
         CompositionLocalProvider(
-            LocalOverscrollConfiguration provides null
+            LocalOverscrollFactory provides null
         ) {
             MyNavGraph(
                 barcodesActivityViewModel = barcodesActivityViewModel,
