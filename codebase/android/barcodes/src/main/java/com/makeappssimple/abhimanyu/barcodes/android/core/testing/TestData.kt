@@ -17,15 +17,15 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.testing
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.google.android.gms.vision.barcode.Barcode as VisionBarcode
 
 internal val TEST_SOURCE_1 = BarcodeSource.CREATED
 internal val TEST_SOURCE_2 = BarcodeSource.SCANNED
 internal val TEST_SOURCE_3 = BarcodeSource.CREATED
-internal const val TEST_FORMAT_1 = VisionBarcode.QR_CODE
-internal const val TEST_FORMAT_2 = VisionBarcode.CODE_128
-internal const val TEST_FORMAT_3 = VisionBarcode.EAN_13
+internal val TEST_FORMAT_1 = BarcodeFormat.QrCode.value
+internal val TEST_FORMAT_2 = BarcodeFormat.Code128.value
+internal val TEST_FORMAT_3 = BarcodeFormat.Ean13.value
 internal const val TEST_ID_1 = 1
 internal const val TEST_ID_2 = 2
 internal const val TEST_ID_3 = 3

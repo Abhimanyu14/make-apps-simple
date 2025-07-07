@@ -21,8 +21,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.constants.BarcodeEntityConstants
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.google.android.gms.vision.barcode.Barcode as VisionBarcode
 
 /**
  * Room entity for barcode_table.
@@ -33,7 +33,7 @@ internal data class BarcodeEntity(
     val source: BarcodeSource,
 
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_FORMAT)
-    val format: Int = VisionBarcode.QR_CODE,
+    val format: Int = BarcodeFormat.QrCode.value,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_ID)

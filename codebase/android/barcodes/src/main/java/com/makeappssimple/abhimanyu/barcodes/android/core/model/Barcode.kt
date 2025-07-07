@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.model
 
-import com.google.android.gms.vision.barcode.Barcode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -26,7 +25,7 @@ public data class Barcode(
     public val source: BarcodeSource,
 
     @SerialName(value = BarcodeConstants.FORMAT)
-    public val format: Int = Barcode.QR_CODE,
+    public val format: Int = BarcodeFormat.QrCode.value,
 
     @SerialName(value = BarcodeConstants.ID)
     public val id: Int = 0,

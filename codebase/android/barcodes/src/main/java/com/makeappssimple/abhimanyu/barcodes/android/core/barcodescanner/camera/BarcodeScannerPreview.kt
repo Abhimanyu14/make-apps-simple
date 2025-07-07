@@ -32,15 +32,17 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.barcodescanner.BarcodeAnalyser
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @Composable
-public fun BarcodeScannerPreview(
+internal fun BarcodeScannerPreview(
     modifier: Modifier = Modifier,
-    onBarcodeScanned: (barcode: Barcode) -> Unit,
+    onBarcodeScanned: (
+        barcodeFormat: BarcodeFormat,
+        barcodeValue: String,
+    ) -> Unit,
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -86,14 +88,13 @@ public fun BarcodeScannerPreview(
                             )
                             cameraProvider.unbindAll()
 
-                            onBarcodeScanned(
-                                Barcode(
-                                    source = BarcodeSource.SCANNED,
-                                    format = barcode.format,
-                                    timestamp = System.currentTimeMillis(), // TODO(Abhi): Inject this to support testing
-                                    value = barcodeValue,
-                                ),
-                            )
+                            BarcodeFormat.fromValue(barcode.format)
+                                ?.let { barcodeFormat ->
+                                    onBarcodeScanned(
+                                        barcodeFormat,
+                                        barcodeValue,
+                                    )
+                                }
                         }
                     }
                 }

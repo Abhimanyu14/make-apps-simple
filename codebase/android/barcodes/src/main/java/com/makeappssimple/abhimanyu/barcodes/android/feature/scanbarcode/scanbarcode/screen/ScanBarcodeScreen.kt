@@ -41,7 +41,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.Deepl
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_VALUE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.rememberScanBarcodeScreenUIState
@@ -71,13 +70,14 @@ internal fun ScanBarcodeScreen(
                 activity?.let {
                     handleActivityResult(
                         activity = activity,
-                        barcode = uiEvent.barcode
+                        barcodeFormat = uiEvent.barcodeFormat.value,
+                        barcodeValue = uiEvent.barcodeValue,
                     )
                 }
             } else {
                 screenViewModel.saveBarcode(
-                    barcodeValue = uiEvent.barcode.value,
-                    barcodeFormat = uiEvent.barcode.format,
+                    barcodeValue = uiEvent.barcodeValue,
+                    barcodeFormat = uiEvent.barcodeFormat.value,
                 )
             }
         }
@@ -135,11 +135,12 @@ internal fun ScanBarcodeScreen(
 
 private fun handleActivityResult(
     activity: Activity,
-    barcode: Barcode,
+    barcodeFormat: Int,
+    barcodeValue: String,
 ) {
     val resultIntent = Intent().apply {
-        putExtra(BARCODE_VALUE, barcode.value)
-        putExtra(BARCODE_FORMAT, barcode.format)
+        putExtra(BARCODE_VALUE, barcodeValue)
+        putExtra(BARCODE_FORMAT, barcodeFormat)
     }
     activity.setResult(RESULT_OK, resultIntent)
     activity.finish()

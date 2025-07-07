@@ -29,6 +29,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.camera.
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -63,10 +64,11 @@ internal fun ScanBarcodeScreenUI(
             visible = isCameraPermissionGranted,
         ) {
             BarcodeScannerPreview(
-                onBarcodeScanned = { barcode ->
+                onBarcodeScanned = { barcodeFormat: BarcodeFormat, barcodeValue: String ->
                     handleUIEvent(
                         ScanBarcodeScreenUIEvent.OnBarcodeScanned(
-                            barcode = barcode,
+                            barcodeFormat = barcodeFormat,
+                            barcodeValue = barcodeValue,
                         )
                     )
                 },

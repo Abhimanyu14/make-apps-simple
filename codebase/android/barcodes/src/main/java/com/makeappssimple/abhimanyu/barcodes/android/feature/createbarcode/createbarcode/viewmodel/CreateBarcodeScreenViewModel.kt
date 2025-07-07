@@ -26,8 +26,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.Sc
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.VisionBarcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
@@ -119,7 +119,7 @@ internal class CreateBarcodeScreenViewModel(
                 barcodeRepository.insertBarcodes(
                     Barcode(
                         source = BarcodeSource.CREATED,
-                        format = VisionBarcode.QR_CODE,
+                        format = BarcodeFormat.QrCode.value,
                         timestamp = dateTimeKit.getCurrentTimeMillis(),
                         name = barcodeName.value,
                         value = barcodeValue.value,
