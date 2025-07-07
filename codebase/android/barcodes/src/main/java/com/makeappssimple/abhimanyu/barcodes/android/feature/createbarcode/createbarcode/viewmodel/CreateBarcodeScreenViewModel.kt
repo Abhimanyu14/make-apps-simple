@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.crea
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
@@ -39,6 +40,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
+import kotlin.time.ExperimentalTime
 
 @KoinViewModel
 internal class CreateBarcodeScreenViewModel(
@@ -47,6 +49,7 @@ internal class CreateBarcodeScreenViewModel(
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
+    private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
@@ -100,6 +103,7 @@ internal class CreateBarcodeScreenViewModel(
         navigationKit.navigateUp()
     }
 
+    @OptIn(ExperimentalTime::class)
     fun saveBarcode() {
         viewModelScope.launch {
             val originalBarcodeValue = originalBarcode.value
@@ -114,7 +118,7 @@ internal class CreateBarcodeScreenViewModel(
                     Barcode(
                         source = BarcodeSource.CREATED,
                         format = VisionBarcode.QR_CODE,
-                        timestamp = System.currentTimeMillis(), // TODO(Abhi): Inject this to support testing
+                        timestamp = dateTimeKit.getCurrentTimeMillis(),
                         name = barcodeName.value,
                         value = barcodeValue.value,
                     )

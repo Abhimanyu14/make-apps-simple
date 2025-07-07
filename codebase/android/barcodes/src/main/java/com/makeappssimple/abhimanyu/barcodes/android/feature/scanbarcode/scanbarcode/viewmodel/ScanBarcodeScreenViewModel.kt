@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanba
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.orFalse
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
@@ -43,6 +44,7 @@ internal class ScanBarcodeScreenViewModel(
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
+    private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
@@ -77,7 +79,7 @@ internal class ScanBarcodeScreenViewModel(
                 Barcode(
                     source = BarcodeSource.SCANNED,
                     format = barcodeFormat,
-                    timestamp = System.currentTimeMillis(), // TODO(Abhi): Inject this to support testing
+                    timestamp = dateTimeKit.getCurrentTimeMillis(),
                     value = barcodeValue,
                 ),
             ).first().toInt()

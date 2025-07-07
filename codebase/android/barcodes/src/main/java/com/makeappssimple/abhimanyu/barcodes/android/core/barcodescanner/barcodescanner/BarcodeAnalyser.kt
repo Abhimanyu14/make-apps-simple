@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.barcodescanner
 
+import androidx.annotation.OptIn
+import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanner
@@ -23,6 +25,7 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +33,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 internal class BarcodeAnalyser(
+    private val dateTimeKit: DateTimeKit,
     private val logKit: LogKit,
     private val onBarcodesDetected: (barcodes: List<Barcode>) -> Unit,
 ) : ImageAnalysis.Analyzer {
@@ -41,6 +45,7 @@ internal class BarcodeAnalyser(
     private val barcodeScanner: BarcodeScanner =
         BarcodeScanning.getClient(barcodeScannerOptions)
 
+    @OptIn(ExperimentalGetImage::class)
     override fun analyze(
         imageProxy: ImageProxy,
     ) {
@@ -48,7 +53,7 @@ internal class BarcodeAnalyser(
             message = "Inside analyze",
         )
 
-        currentTimestamp = System.currentTimeMillis()
+        currentTimestamp = dateTimeKit.getCurrentTimeMillis()
         imageProxy.image?.let { imageToAnalyze ->
             val imageToProcess = InputImage.fromMediaImage(
                 imageToAnalyze,
@@ -74,7 +79,7 @@ internal class BarcodeAnalyser(
                 }
                 .addOnCompleteListener {
                     CoroutineScope(Dispatchers.IO).launch { // TODO(Abhi) - Inject this dispatcher
-                        delay(1000 - (System.currentTimeMillis() - currentTimestamp))
+                        delay(1000 - (dateTimeKit.getCurrentTimeMillis() - currentTimestamp))
                         imageProxy.close()
                     }
                 }

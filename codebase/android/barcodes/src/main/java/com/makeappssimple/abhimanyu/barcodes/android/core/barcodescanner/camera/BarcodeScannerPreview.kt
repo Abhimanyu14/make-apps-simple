@@ -30,6 +30,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.barcodescanner.BarcodeAnalyser
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
@@ -75,6 +76,7 @@ public fun BarcodeScannerPreview(
                 val cameraProvider: ProcessCameraProvider =
                     cameraProviderFuture.get()
                 val barcodeAnalyser = BarcodeAnalyser(
+                    dateTimeKit = DateTimeKitImpl(), // TODO(Abhi): Inject this
                     logKit = myLogger,
                 ) { barcodes ->
                     barcodes.forEach { barcode ->

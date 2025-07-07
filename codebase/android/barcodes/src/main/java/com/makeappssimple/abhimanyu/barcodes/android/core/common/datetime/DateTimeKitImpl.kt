@@ -19,8 +19,15 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 internal class DateTimeKitImpl : DateTimeKit {
+    @OptIn(ExperimentalTime::class)
+    override fun getCurrentTimeMillis(): Long {
+        return Clock.System.now().toEpochMilliseconds()
+    }
+    
     /**
      * Sample format - 2023-Mar-30, 08-24 AM
      */

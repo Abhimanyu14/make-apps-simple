@@ -19,6 +19,8 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime
 import java.time.ZoneId
 
 public interface DateTimeKit {
+    public fun getCurrentTimeMillis(): Long
+
     /**
      * Sample format - 2023-Mar-30, 08-24 AM
      */
