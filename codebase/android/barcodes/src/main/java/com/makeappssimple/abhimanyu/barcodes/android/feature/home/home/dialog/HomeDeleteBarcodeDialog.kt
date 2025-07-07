@@ -32,7 +32,7 @@ internal fun HomeDeleteBarcodeDialog(
     onDismiss: () -> Unit = {},
     onDismissButtonClick: () -> Unit = {},
 ) {
-    val context = LocalContext.current
+    LocalContext.current
     MyDialog(
         dialogData = DialogData(
             isVisible = true,
