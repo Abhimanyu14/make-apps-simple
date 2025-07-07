@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.dialog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.dialog.DialogData
@@ -41,12 +42,12 @@ internal fun HomeDeleteBarcodeDialog(
             dismissButtonText = stringResource(
                 id = R.string.screen_home_delete_barcode_dialog_dismiss_button_label,
             ),
-            title = context.resources.getQuantityString(
+            title = pluralStringResource(
                 R.plurals.screen_home_delete_barcode_dialog_title,
                 selectedBarcodesSize,
                 selectedBarcodesSize,
             ),
-            message = context.resources.getQuantityString(
+            message = pluralStringResource(
                 R.plurals.screen_home_delete_barcode_dialog_message,
                 selectedBarcodesSize,
                 selectedBarcodesSize,

@@ -20,7 +20,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -32,11 +31,6 @@ internal fun BarcodesApp(
     barcodesActivityViewModel: BarcodesActivityViewModel = koinViewModel(),
 ) {
     val myLogger = LocalLogKit.current
-    checkNotNull(
-        value = LocalViewModelStoreOwner.current,
-    ) {
-        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-    }
     rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
     ) { activityResult ->
@@ -69,6 +63,7 @@ internal fun BarcodesApp(
     )
 }
 
+// TODO(Abhi): In-App Updates
 /*
 private fun inAppUpdatesSetup(
     context: Context,
