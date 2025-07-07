@@ -18,26 +18,16 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.screen
 
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.viewinterop.AndroidView
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_WEB_VIEW
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_WEB_VIEW
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNullOrBlank
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.decodeString
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.progressindicator.MyCircularProgressIndicator
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
@@ -93,45 +83,4 @@ internal fun WebViewScreenUI(
             )
         }
     }
-}
-
-@Composable
-private fun WebView(
-    modifier: Modifier = Modifier,
-    url: String,
-    onPageFinished: (title: String) -> Unit
-) {
-    var currentPageUrl by remember {
-        mutableStateOf("")
-    }
-
-    AndroidView(
-        factory = { context ->
-            WebView(context).apply {
-                webViewClient = (object : WebViewClient() {
-                    override fun onPageFinished(
-                        view: WebView,
-                        url: String,
-                    ) {
-                        onPageFinished(view.title.orEmpty())
-                    }
-                })
-            }
-        },
-        update = { webView ->
-            if (url.isNotNullOrBlank() && currentPageUrl != url) {
-                currentPageUrl = url
-                webView.loadUrl(
-                    decodeString(
-                        text = url,
-                    )
-                )
-            }
-        },
-        modifier = modifier
-            .fillMaxSize()
-            .testTag(
-                tag = SCREEN_CONTENT_WEB_VIEW,
-            ),
-    )
 }
