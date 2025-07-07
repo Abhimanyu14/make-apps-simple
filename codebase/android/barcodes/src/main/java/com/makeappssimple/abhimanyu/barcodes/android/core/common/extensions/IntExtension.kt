@@ -16,11 +16,11 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions
 
-public fun Int.isNotZero(): Boolean {
+internal fun Int.isNotZero(): Boolean {
     return this != 0
 }
 
-public fun Int?.orZero(): Int {
+internal fun Int?.orZero(): Int {
     return if (this.isNull()) {
         0
     } else {

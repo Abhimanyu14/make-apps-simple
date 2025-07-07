@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.extensio
 
 import androidx.compose.ui.Modifier
 
-public fun Modifier.ifTrue(
+internal fun Modifier.ifTrue(
     condition: Boolean,
     getModifier: () -> Modifier,
 ): Modifier {

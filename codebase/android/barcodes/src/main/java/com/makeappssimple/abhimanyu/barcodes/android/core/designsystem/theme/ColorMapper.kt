@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme
 import androidx.annotation.ColorInt
 import androidx.compose.ui.graphics.Color
 
-public enum class MyColor(
-    @ColorInt public val color: Int,
-    public val composeColor: Color = Color(
+internal enum class MyColor(
+    @ColorInt val color: Int,
+    val composeColor: Color = Color(
         color = color,
     ),
 ) {

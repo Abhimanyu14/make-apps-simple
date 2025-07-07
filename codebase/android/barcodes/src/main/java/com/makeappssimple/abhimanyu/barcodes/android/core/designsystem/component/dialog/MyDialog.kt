@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.MyText
 
 @Immutable
-public data class DialogData(
+internal data class DialogData(
     val isVisible: Boolean = false,
     val confirmButtonText: String? = null,
     val dismissButtonText: String? = null,
@@ -34,14 +34,14 @@ public data class DialogData(
 )
 
 @Immutable
-public sealed class MyDialogEvent {
-    public data object OnConfirmButtonClick : MyDialogEvent()
-    public data object OnDismiss : MyDialogEvent()
-    public data object OnDismissButtonClick : MyDialogEvent()
+internal sealed class MyDialogEvent {
+    data object OnConfirmButtonClick : MyDialogEvent()
+    data object OnDismiss : MyDialogEvent()
+    data object OnDismissButtonClick : MyDialogEvent()
 }
 
 @Composable
-public fun MyDialog(
+internal fun MyDialog(
     modifier: Modifier = Modifier,
     dialogData: DialogData,
     handleEvent: (event: MyDialogEvent) -> Unit = {},

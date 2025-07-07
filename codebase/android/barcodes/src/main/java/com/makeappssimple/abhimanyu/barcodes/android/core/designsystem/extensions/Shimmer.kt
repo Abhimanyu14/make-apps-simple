@@ -43,7 +43,7 @@ import kotlin.math.sqrt
 private const val DEFAULT_SHIMMER_DURATION = 1500
 private const val DEFAULT_SHIMMER_DELAY = 100
 
-public fun Modifier.shimmer(
+internal fun Modifier.shimmer(
     isShimmerVisible: Boolean = true,
     backgroundColor: Color? = null,
     shimmerColor: Color? = null,
@@ -84,7 +84,7 @@ public fun Modifier.shimmer(
 }
 
 @Composable
-public fun rememberShimmerBrush(
+private fun rememberShimmerBrush(
     isShimmerVisible: Boolean = true,
     targetValue: Float,
     backgroundColor: Color? = MaterialTheme.colorScheme.surfaceVariant,
