@@ -21,13 +21,16 @@ androidx-core-ktx = "1.16.0"
 camera = "1.4.2"
 camera-view = "1.4.2"
 coil = "3.2.0"
+compose-material3 = "1.3.1"
 compose = "1.8.2"
 detekt-rules = "1.0.0"
 detekt-rules-compose-nlopez = "0.4.22"
 espresso-core = "3.6.1"
+firebase-bom = "33.10.0"
 guava = "33.3.1-jre"
 junit = "4.13.2"
-koin-bom = "4.0.3"
+koin-annotations-bom = "2.1.0"
+koin-bom = "4.1.0"
 kotlin = "2.1.21"
 kotlin-test = "2.1.21"
 kotlin-test-junit = "2.1.21"
@@ -44,17 +47,21 @@ play-app-update = "2.1.0"
 play-review = "2.0.2"
 play-services-mlkit-barcode-scanning = "18.3.1"
 play-services-oss-licenses = "17.1.0"
+play-services-vision = "20.1.3"
 room = "2.7.2"
 sqlite-bundled = "2.5.2"
 test-ext-junit = "1.2.1"
 zxing-core = "3.5.1"
 
 # Plugin versions
-plugin-android-gradle = "8.7.3"
+plugin-android-gradle = "8.10.1"
 plugin-detekt = "1.23.8"
 plugin-dokka = "2.0.0"
+plugin-firebase-crashlytics = "3.0.3"
 plugin-kotlin = "2.1.21"
+plugin-kotlin-serialization = "1.9.10"
 plugin-kotlinx-binary-compatibility-validator = "0.17.0"
+plugin-kotlin-kover = "0.6.1"
 plugin-ksp = "2.1.21-2.0.2"
 plugin-maven-publish = "0.31.0"
 plugin-screenshot = "0.0.1-alpha10"
@@ -74,17 +81,23 @@ camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = 
 camera-view = { module = "androidx.camera:camera-view", version.ref = "camera-view" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 detekt-rules = { module = "com.github.Abhimanyu14:detekt-rules", version.ref = "detekt-rules" }
 detekt-rules-compose-nlopez = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-rules-compose-nlopez" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { module = "junit:junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations-bom" }
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
 koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation" }
 koin-core = { module = "io.insert-koin:koin-core" }
+koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-annotations-bom" }
 koin-test = { module = "io.insert-koin:koin-test" }
 koin-test-junit5 = { module = "io.insert-koin:koin-test-junit5" }
 kotlin = { module = "org.jetbrains.kotlin:kotlin", version.ref = "kotlin" }
@@ -105,6 +118,7 @@ play-app-update = { module = "com.google.android.play:app-update", version.ref =
 play-review = { module = "com.google.android.play:review-ktx", version.ref = "play-review" }
 play-services-mlkit-barcode-scanning = { module = "com.google.android.gms:play-services-mlkit-barcode-scanning", version.ref = "play-services-mlkit-barcode-scanning" }
 play-services-oss-licenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "play-services-oss-licenses" }
+play-services-vision = { group = "com.google.android.gms", name = "play-services-vision", version.ref = "play-services-vision" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
@@ -119,14 +133,26 @@ plugin-android-application = { id = "com.android.application", version.ref = "pl
 plugin-android-library = { id = "com.android.library", version.ref = "plugin-android-gradle" }
 plugin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "plugin-detekt" }
 plugin-dokka = { id = "org.jetbrains.dokka", version.ref = "plugin-dokka" }
+plugin-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "plugin-firebase-crashlytics" }
 plugin-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
 plugin-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugin-kotlin" }
+plugin-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "plugin-kotlin-serialization" }
 plugin-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "plugin-kotlinx-binary-compatibility-validator" }
+plugin-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "plugin-kotlin-kover" }
 plugin-ksp = { id = "com.google.devtools.ksp", version.ref = "plugin-ksp" }
 plugin-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "plugin-maven-publish" }
 plugin-screenshot = { id = "com.android.compose.screenshot", version.ref = "plugin-screenshot" }
 
 [bundles]
+compose = [
+    "compose-material3",
+]
+camera = [
+    "camera-core",
+    "camera-lifecycle",
+    "camera-camera2",
+    "camera-view",
+]
 detekt = [
     "detekt-rules",
     "detekt-rules-compose-nlopez",

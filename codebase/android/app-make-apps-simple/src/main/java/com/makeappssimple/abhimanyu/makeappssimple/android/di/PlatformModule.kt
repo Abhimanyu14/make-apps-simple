@@ -18,10 +18,9 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
 import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEventHandler
 import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEventHandlerImpl
-import org.koin.core.module.Module
 import org.koin.dsl.module
 
-internal val platformModule: Module = module {
+internal val platformModule = module {
     single<PlatformEventHandler> {
         PlatformEventHandlerImpl()
     }

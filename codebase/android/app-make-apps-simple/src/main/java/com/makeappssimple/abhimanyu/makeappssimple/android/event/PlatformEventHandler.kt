@@ -24,4 +24,3 @@ internal interface PlatformEventHandler {
         platformEvent: PlatformEvent,
     )
 }
-

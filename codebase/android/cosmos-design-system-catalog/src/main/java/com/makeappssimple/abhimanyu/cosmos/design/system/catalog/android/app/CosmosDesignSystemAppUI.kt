@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.CosmosTypographyDemo
 
 @Composable
-internal fun AppUI() {
+internal fun CosmosDesignSystemAppUI() {
     Box(
         modifier = Modifier.Companion
             .fillMaxSize()

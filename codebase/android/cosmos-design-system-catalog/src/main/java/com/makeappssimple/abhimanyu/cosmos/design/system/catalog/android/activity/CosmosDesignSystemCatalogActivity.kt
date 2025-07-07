@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app.AppUI
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app.CosmosDesignSystemAppUI
 
 public class CosmosDesignSystemCatalogActivity : ComponentActivity() {
     override fun onCreate(
@@ -29,7 +29,7 @@ public class CosmosDesignSystemCatalogActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppUI()
+            CosmosDesignSystemAppUI()
         }
     }
 }

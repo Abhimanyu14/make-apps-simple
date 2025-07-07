@@ -18,6 +18,13 @@ plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.kotlin.serialization)
+    alias(libs.plugins.plugin.kotlinx.kover)
+    alias(libs.plugins.plugin.ksp)
+}
+
+kotlin {
+    explicitApi()
 }
 
 android {
@@ -58,8 +65,52 @@ android {
 }
 
 dependencies {
+    implementation(project(":cosmos-design-system"))
+
+    androidTestImplementation(libs.room.testing)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
+    implementation(libs.bundles.camera)
+    implementation(libs.bundles.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.koin.android)
+    implementation(libs.koin.annotations)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.compose.viewmodel.navigation)
+    implementation(libs.koin.core)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.material.icons.core)
+    implementation(libs.material.icons.extended)
+    implementation(libs.navigation.compose)
+    // implementation(libs.navigation.testing)
+    implementation(libs.play.app.update)
+    implementation(libs.play.review)
+    implementation(libs.play.services.mlkit.barcode.scanning)
+    implementation(libs.play.services.oss.licenses)
+    implementation(libs.play.services.vision)
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    implementation(libs.zxing.core)
 
     implementation(project.dependencies.platform(libs.androidx.compose.bom))
+    implementation(project.dependencies.platform(libs.firebase))
+    implementation(project.dependencies.platform(libs.koin.bom))
+
+    ksp(libs.room.compiler)
+    ksp(libs.koin.ksp.compiler)
+}
+
+ksp {
+    arg("KOIN_CONFIG_CHECK", "true")
+    arg("KOIN_DEFAULT_MODULE", "false")
 }

@@ -1,0 +1,28 @@
+package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button
+
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.semantics
+
+@Composable
+public fun MyTextButton(
+    modifier: Modifier = Modifier,
+    onClickLabel: String,
+    onClick: () -> Unit,
+    content: @Composable RowScope.() -> Unit,
+) {
+    TextButton(
+        onClick = onClick,
+        content = content,
+        modifier = modifier
+            .semantics {
+                onClick(
+                    label = onClickLabel,
+                    action = null,
+                )
+            },
+    )
+}
