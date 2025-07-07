@@ -25,19 +25,19 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class FirebaseModule {
+internal class FirebaseModule {
     @Single
-    public fun provideFirebaseAnalytics(): FirebaseAnalytics {
+    fun provideFirebaseAnalytics(): FirebaseAnalytics {
         return Firebase.analytics
     }
 
     @Single
-    public fun provideFirebaseInstallations(): FirebaseInstallations {
+    fun provideFirebaseInstallations(): FirebaseInstallations {
         return FirebaseInstallations.getInstance()
     }
 
     @Single
-    public fun provideFirebaseAnalyticsEventLogger(
+    fun provideFirebaseAnalyticsEventLogger(
         // firebaseAnalytics: FirebaseAnalytics,
     ): FirebaseAnalyticsEventLogger {
         return FirebaseAnalyticsEventLogger(

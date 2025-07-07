@@ -22,9 +22,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class StringDecoderModule {
+internal class StringDecoderModule {
     @Single
-    public fun provideStringDecoder(): StringDecoder {
+    fun provideStringDecoder(): StringDecoder {
         return StringDecoderImpl()
     }
 }

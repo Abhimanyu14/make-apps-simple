@@ -27,9 +27,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class ScreenUICommonStateModule {
+internal class ScreenUICommonStateModule {
     @Single
-    public fun provideScreenUICommonState(
+    fun provideScreenUICommonState(
         screenUIStateLoading: ScreenUIStateLoading,
     ): ScreenUICommonState {
         return ScreenUICommonStateImpl(
@@ -38,7 +38,7 @@ public class ScreenUICommonStateModule {
     }
 
     @Single
-    public fun provideScreenUIStateLoading(
+    fun provideScreenUIStateLoading(
         screenUIStateRefresh: ScreenUIStateRefresh,
     ): ScreenUIStateLoading {
         return ScreenUIStateLoadingImpl(
@@ -47,7 +47,7 @@ public class ScreenUICommonStateModule {
     }
 
     @Single
-    public fun provideScreenUIStateLoading(
+    fun provideScreenUIStateLoading(
         coroutineScope: CoroutineScope,
     ): ScreenUIStateRefresh {
         return ScreenUIStateRefreshImpl(

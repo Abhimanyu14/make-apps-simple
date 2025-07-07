@@ -22,9 +22,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class PlatformModule {
+internal class PlatformModule {
     @Single
-    public fun provideBarcodeGenerator(): PlatformEventHandler {
+    fun provideBarcodeGenerator(): PlatformEventHandler {
         return PlatformEventHandlerImpl()
     }
 }

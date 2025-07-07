@@ -21,4 +21,4 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan("com.makeappssimple.abhimanyu.barcodes.android")
-public class BarcodesAppModule
+internal class BarcodesAppModule

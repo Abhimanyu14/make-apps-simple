@@ -23,9 +23,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class LogKitModule {
+internal class LogKitModule {
     @Single
-    public fun provideLogKit(
+    fun provideLogKit(
         buildConfigKit: BuildConfigKit,
     ): LogKit {
         return LogKitImpl(

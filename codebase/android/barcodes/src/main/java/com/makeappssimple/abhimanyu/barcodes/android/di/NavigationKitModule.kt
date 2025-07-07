@@ -24,9 +24,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class NavigationKitModule {
+internal class NavigationKitModule {
     @Single
-    public fun provideNavigationKit(
+    fun provideNavigationKit(
         coroutineScope: CoroutineScope,
         stringEncoder: StringEncoder,
     ): NavigationKit {

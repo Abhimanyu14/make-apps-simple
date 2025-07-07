@@ -22,9 +22,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class DaosModule {
+internal class DaosModule {
     @Single
-    public fun provideBarcodeDao(
+    fun provideBarcodeDao(
         myRoomDatabase: MyRoomDatabase,
     ): BarcodeDao {
         return myRoomDatabase.barcodeDao()

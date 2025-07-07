@@ -23,9 +23,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class AppVersionKitModule {
+internal class AppVersionKitModule {
     @Single
-    public fun provideAppVersionKit(
+    fun provideAppVersionKit(
         context: Context,
     ): AppVersionKit {
         return AppVersionKitImpl(

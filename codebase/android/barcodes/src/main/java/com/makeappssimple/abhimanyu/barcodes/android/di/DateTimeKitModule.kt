@@ -22,9 +22,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class DateTimeKitModule {
+internal class DateTimeKitModule {
     @Single
-    public fun provideDateTimeKit(): DateTimeKit {
+    fun provideDateTimeKit(): DateTimeKit {
         return DateTimeKitImpl()
     }
 }
