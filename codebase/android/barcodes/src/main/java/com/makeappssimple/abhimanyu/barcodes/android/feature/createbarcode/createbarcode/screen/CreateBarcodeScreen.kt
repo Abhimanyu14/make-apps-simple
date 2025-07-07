@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.copyToClipboard
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.playstorereview.PlayStoreReviewHandler
@@ -56,7 +57,7 @@ internal fun CreateBarcodeScreen(
         if (
             copyToClipboard(
                 context = context,
-                label = "Barcode value",
+                label = BARCODE_VALUE_CLIPBOARD_LABEL,
                 text = uiState.barcodeValue,
             )
         ) {

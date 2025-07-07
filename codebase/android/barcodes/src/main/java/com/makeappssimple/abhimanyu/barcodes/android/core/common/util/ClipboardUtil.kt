@@ -20,11 +20,24 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 
-public fun copyToClipboard(
+public const val BARCODE_VALUE_CLIPBOARD_LABEL: String = "Barcode value"
+
+/**
+ * Copies the given text to the clipboard with the specified label.
+ *
+ * @param context The context used to access the clipboard service.
+ * @param label The user-visible label for the clipboard content.
+ * @param text The actual text to copy.
+ * @return True if the copy succeeded, false otherwise.
+ */
+internal fun copyToClipboard(
     context: Context,
     label: String,
     text: String,
 ): Boolean {
+    if (text.isBlank()) {
+        return false
+    }
     val clipboardManager =
         (context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)
             ?: return false

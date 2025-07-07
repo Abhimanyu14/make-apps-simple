@@ -35,6 +35,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barc
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel.BarcodeDetailsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.min
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.BARCODE_VALUE_CLIPBOARD_LABEL
 
 @Composable
 internal fun BarcodeDetailsScreen(
@@ -59,7 +60,7 @@ internal fun BarcodeDetailsScreen(
         if (
             copyToClipboard(
                 context = context,
-                label = "Barcode value",
+                label = BARCODE_VALUE_CLIPBOARD_LABEL,
                 text = uiState.barcode?.value.orEmpty(),
             )
         ) {
