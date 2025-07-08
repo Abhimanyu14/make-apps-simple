@@ -22,7 +22,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.event.HomeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.rememberHomeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmodel.HomeScreenViewModel
@@ -32,8 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun HomeScreen(
     screenViewModel: HomeScreenViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    screenViewModel.logKit.logError(
         message = "Inside HomeScreen",
     )
 

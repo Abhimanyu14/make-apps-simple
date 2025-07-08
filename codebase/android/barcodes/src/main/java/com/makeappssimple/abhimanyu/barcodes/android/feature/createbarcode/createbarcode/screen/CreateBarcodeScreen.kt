@@ -26,7 +26,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.playstorereview.PlayStoreReviewHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event.CreateBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.rememberCreateBarcodeScreenUIState
@@ -37,8 +36,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun CreateBarcodeScreen(
     screenViewModel: CreateBarcodeScreenViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    screenViewModel.logKit.logError(
         message = "Inside CreateBarcodeScreen",
     )
 

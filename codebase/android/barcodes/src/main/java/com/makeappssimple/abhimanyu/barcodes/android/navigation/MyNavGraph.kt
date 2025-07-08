@@ -25,15 +25,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import com.makeappssimple.abhimanyu.barcodes.android.app.BarcodesActivityViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Command
 
 @Composable
 internal fun MyNavGraph(
     barcodesActivityViewModel: BarcodesActivityViewModel,
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    barcodesActivityViewModel.logKit.logError(
         message = "Inside MyNavGraph",
     )
     val lifecycle = LocalLifecycleOwner.current.lifecycle

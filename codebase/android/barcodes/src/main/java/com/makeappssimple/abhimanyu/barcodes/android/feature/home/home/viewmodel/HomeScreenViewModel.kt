@@ -23,6 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
+import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -43,6 +44,7 @@ internal class HomeScreenViewModel(
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
+    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,

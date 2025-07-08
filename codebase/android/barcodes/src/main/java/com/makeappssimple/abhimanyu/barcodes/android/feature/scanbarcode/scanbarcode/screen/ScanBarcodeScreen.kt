@@ -40,7 +40,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_FORMAT
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_VALUE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.rememberScanBarcodeScreenUIState
@@ -51,8 +50,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun ScanBarcodeScreen(
     screenViewModel: ScanBarcodeScreenViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    screenViewModel.logKit.logError(
         message = "Inside ScanBarcodeScreen",
     )
 

@@ -21,7 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.event.WebViewScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIStateEvents
@@ -32,8 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun WebViewScreen(
     screenViewModel: WebViewScreenViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    screenViewModel.logKit.logError(
         message = "Inside WebViewScreen",
     )
 

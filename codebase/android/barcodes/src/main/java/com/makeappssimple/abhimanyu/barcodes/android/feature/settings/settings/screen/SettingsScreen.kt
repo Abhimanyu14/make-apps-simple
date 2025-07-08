@@ -24,7 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.makeappssimple.abhimanyu.barcodes.android.R
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.viewmodel.SettingsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -33,8 +32,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun SettingsScreen(
     screenViewModel: SettingsScreenViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    screenViewModel.logKit.logError(
         message = "Inside SettingsScreen",
     )
 

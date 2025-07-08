@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.v
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
+import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
@@ -35,6 +36,7 @@ internal class CreditsScreenViewModel(
     coroutineScope: CoroutineScope,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
+    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,

@@ -29,7 +29,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.util.dpToPx
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event.BarcodeDetailsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.rememberBarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel.BarcodeDetailsScreenViewModel
@@ -40,8 +39,7 @@ import kotlin.math.min
 internal fun BarcodeDetailsScreen(
     screenViewModel: BarcodeDetailsScreenViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
-    myLogger.logError(
+    screenViewModel.logKit.logError(
         message = "Inside BarcodeDetailsScreen",
     )
 

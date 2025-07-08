@@ -20,7 +20,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LocalLogKit
 import org.koin.compose.viewmodel.koinViewModel
 
 // TODO(Abhi): Change to 5 once we can set app update priority when releasing from console
@@ -30,11 +29,10 @@ internal const val HIGH_PRIORITY_APP_UPDATE = 0
 internal fun BarcodesApp(
     barcodesActivityViewModel: BarcodesActivityViewModel = koinViewModel(),
 ) {
-    val myLogger = LocalLogKit.current
     rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
     ) { activityResult ->
-        myLogger.logError(
+        barcodesActivityViewModel.logKit.logError(
             message = "activityResult $activityResult",
         )
         /*

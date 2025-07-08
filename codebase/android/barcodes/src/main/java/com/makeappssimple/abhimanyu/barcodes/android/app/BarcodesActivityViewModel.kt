@@ -17,10 +17,12 @@
 package com.makeappssimple.abhimanyu.barcodes.android.app
 
 import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class BarcodesActivityViewModel(
+    val logKit: LogKit,
     val navigationKit: NavigationKit,
 ) : ViewModel()

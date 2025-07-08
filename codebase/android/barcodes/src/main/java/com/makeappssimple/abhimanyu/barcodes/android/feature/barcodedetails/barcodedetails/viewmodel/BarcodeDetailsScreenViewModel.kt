@@ -28,6 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.Sc
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyColor
+import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -53,6 +54,7 @@ internal class BarcodeDetailsScreenViewModel(
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
     val clipboardKit: ClipboardKit,
+    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
