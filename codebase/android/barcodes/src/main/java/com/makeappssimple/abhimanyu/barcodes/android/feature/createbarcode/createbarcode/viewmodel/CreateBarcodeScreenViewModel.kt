@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.crea
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
@@ -45,8 +45,8 @@ import kotlin.time.ExperimentalTime
 
 @KoinViewModel
 internal class CreateBarcodeScreenViewModel(
+    analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
-    firebaseAnalyticsEventLogger: FirebaseAnalyticsEventLogger,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
@@ -55,7 +55,7 @@ internal class CreateBarcodeScreenViewModel(
     val clipboardKit: ClipboardKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-    firebaseAnalyticsEventLogger = firebaseAnalyticsEventLogger,
+    analyticsKit = analyticsKit,
     screen = Screen.CreateBarcode,
     screenUICommonState = screenUICommonState,
 ) {

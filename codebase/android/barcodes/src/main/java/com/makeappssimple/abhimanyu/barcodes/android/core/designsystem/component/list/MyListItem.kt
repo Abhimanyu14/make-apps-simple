@@ -37,13 +37,13 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
 
 @Immutable
-public data class MyListItemDataEventDataAndEventHandler(
+internal data class MyListItemDataEventDataAndEventHandler(
     val data: MyListItemData,
     val handleEvent: (event: MyListItemDataEvent) -> Unit = {},
 )
 
 @Immutable
-public data class MyListItemData(
+internal data class MyListItemData(
     @StringRes val stringResourceId: Int? = null,
     val text: String? = null,
     val iconVector: ImageVector? = null,
@@ -53,14 +53,14 @@ public data class MyListItemData(
 )
 
 @Immutable
-public sealed class MyListItemDataEvent {
-    public data object OnClick : MyListItemDataEvent()
-    public data object OnLongClick : MyListItemDataEvent()
-    public data object OnToggleSelection : MyListItemDataEvent()
+internal sealed class MyListItemDataEvent {
+    data object OnClick : MyListItemDataEvent()
+    data object OnLongClick : MyListItemDataEvent()
+    data object OnToggleSelection : MyListItemDataEvent()
 }
 
 @Composable
-public fun MyListItem(
+internal fun MyListItem(
     modifier: Modifier = Modifier,
     data: MyListItemData,
     handleEvent: (event: MyListItemDataEvent) -> Unit = {},

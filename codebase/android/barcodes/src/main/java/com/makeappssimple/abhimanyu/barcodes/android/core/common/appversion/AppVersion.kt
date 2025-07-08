@@ -21,7 +21,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 @Keep
-public data class AppVersion(
+internal data class AppVersion(
     val versionName: String,
     val versionNumber: Long,
 )

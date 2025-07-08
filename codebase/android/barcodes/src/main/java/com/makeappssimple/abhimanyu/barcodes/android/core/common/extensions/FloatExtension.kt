@@ -16,10 +16,10 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions
 
-public fun Float.isNotZero(): Boolean {
+internal fun Float.isNotZero(): Boolean {
     return this.toInt() != 0
 }
 
-public fun Float?.orZero(): Float {
+internal fun Float?.orZero(): Float {
     return this ?: 0F
 }

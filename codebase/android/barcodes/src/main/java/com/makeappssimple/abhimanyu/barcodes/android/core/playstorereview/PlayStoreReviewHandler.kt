@@ -20,10 +20,10 @@ import android.app.Activity
 import android.content.Context
 import com.google.android.play.core.review.ReviewManagerFactory
 
-public class PlayStoreReviewHandler(
+internal class PlayStoreReviewHandler(
     private val context: Context,
 ) {
-    public fun triggerInAppReview(
+    fun triggerInAppReview(
         onComplete: () -> Unit
     ) {
         val reviewManager = ReviewManagerFactory.create(context)

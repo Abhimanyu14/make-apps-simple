@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.screen.ScanBarcodeScreen
 
-public fun NavGraphBuilder.scanBarcodeNavGraph() {
+internal fun NavGraphBuilder.scanBarcodeNavGraph() {
     composable(
         route = "${Screen.ScanBarcode.route}?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}",
         arguments = listOf(

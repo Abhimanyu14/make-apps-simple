@@ -35,9 +35,9 @@ private object HomeMenuBottomSheetConstants {
 }
 
 @Immutable
-public sealed class HomeMenuBottomSheetEvent {
-    public data object OnCreateBarcodeButtonClick : HomeMenuBottomSheetEvent()
-    public data object OnScanBarcodeButtonClick : HomeMenuBottomSheetEvent()
+internal sealed class HomeMenuBottomSheetEvent {
+    data object OnCreateBarcodeButtonClick : HomeMenuBottomSheetEvent()
+    data object OnScanBarcodeButtonClick : HomeMenuBottomSheetEvent()
 }
 
 @Composable

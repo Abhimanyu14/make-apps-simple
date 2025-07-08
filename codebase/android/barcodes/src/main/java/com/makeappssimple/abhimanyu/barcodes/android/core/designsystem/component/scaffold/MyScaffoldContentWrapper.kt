@@ -30,7 +30,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.extension
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.typealiases.ColumnScopedComposableContent
 
 @Composable
-public fun MyScaffoldContentWrapper(
+internal fun MyScaffoldContentWrapper(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     onClick: () -> Unit,

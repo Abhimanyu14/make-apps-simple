@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import kotlinx.coroutines.CoroutineScope
@@ -26,15 +26,15 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-public abstract class ScreenViewModel(
+internal abstract class ScreenViewModel(
     viewModelScope: CoroutineScope,
-    private val firebaseAnalyticsEventLogger: FirebaseAnalyticsEventLogger,
+    private val analyticsKit: AnalyticsKit,
     private val screen: Screen,
     private val screenUICommonState: ScreenUICommonState,
 ) : ViewModel(
     viewModelScope = viewModelScope,
 ) {
-    public open fun initViewModel() {
+    open fun initViewModel() {
         trackScreen()
         observeForRefreshSignal()
         fetchData().invokeOnCompletion {
@@ -45,18 +45,18 @@ public abstract class ScreenViewModel(
         observeData()
     }
 
-    public open fun fetchData(): Job {
+    open fun fetchData(): Job {
         return Job().apply {
             complete()
         }
     }
 
-    public open fun observeData() {}
+    open fun observeData() {}
 
-    public abstract fun updateUiStateAndStateEvents()
+    abstract fun updateUiStateAndStateEvents()
 
     private fun trackScreen() {
-        firebaseAnalyticsEventLogger.trackScreen(
+        analyticsKit.trackScreen(
             screenName = screen.route,
         )
     }

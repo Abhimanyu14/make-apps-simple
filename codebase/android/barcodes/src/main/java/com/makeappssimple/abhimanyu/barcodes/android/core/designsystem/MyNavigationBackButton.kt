@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.icon.MyIcon
 
 @Composable
-public fun MyNavigationBackButton(
+internal fun MyNavigationBackButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {

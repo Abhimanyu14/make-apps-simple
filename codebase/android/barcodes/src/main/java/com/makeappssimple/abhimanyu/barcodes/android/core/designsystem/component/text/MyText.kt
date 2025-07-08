@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
 
 @Composable
-public fun MyText(
+internal fun MyText(
     modifier: Modifier = Modifier,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
@@ -64,7 +64,7 @@ public fun MyText(
 }
 
 @Composable
-public fun MyText(
+internal fun MyText(
     modifier: Modifier = Modifier,
     text: String,
     overflow: TextOverflow = TextOverflow.Clip,

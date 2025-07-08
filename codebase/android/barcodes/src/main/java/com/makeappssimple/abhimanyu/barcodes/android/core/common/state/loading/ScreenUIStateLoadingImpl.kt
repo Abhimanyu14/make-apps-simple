@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.state.loading
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.refresh.ScreenUIStateRefresh
 import kotlinx.coroutines.Job
 
-public class ScreenUIStateLoadingImpl(
+internal class ScreenUIStateLoadingImpl(
     private val screenUIStateRefresh: ScreenUIStateRefresh,
 ) : ScreenUIStateLoading,
     ScreenUIStateRefresh by screenUIStateRefresh {

@@ -19,14 +19,14 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 
-public interface DispatcherProvider {
-    public val default: CoroutineDispatcher
-    public val io: CoroutineDispatcher
-    public val main: CoroutineDispatcher
-    public val mainImmediate: CoroutineDispatcher
-    public val unconfined: CoroutineDispatcher
+internal interface DispatcherProvider {
+    val default: CoroutineDispatcher
+    val io: CoroutineDispatcher
+    val main: CoroutineDispatcher
+    val mainImmediate: CoroutineDispatcher
+    val unconfined: CoroutineDispatcher
 
-    public suspend fun <T> executeOnIoDispatcher(
+    suspend fun <T> executeOnIoDispatcher(
         block: suspend CoroutineScope.() -> T,
     ): T
 }

@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.screen.BarcodeDetailsScreen
 
-public fun NavGraphBuilder.barcodeDetailsNavGraph() {
+internal fun NavGraphBuilder.barcodeDetailsNavGraph() {
     composable(
         route = "${Screen.BarcodeDetails.route}/{${NavigationArguments.BARCODE_ID}}",
         arguments = listOf(

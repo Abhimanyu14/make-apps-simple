@@ -31,7 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.extension
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.extensions.shimmer
 
 @Composable
-public fun MyReadOnlyTextField(
+internal fun MyReadOnlyTextField(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
     text: String,

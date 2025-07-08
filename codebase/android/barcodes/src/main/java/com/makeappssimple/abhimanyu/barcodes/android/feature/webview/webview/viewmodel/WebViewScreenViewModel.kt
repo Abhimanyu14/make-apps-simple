@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringdecoder.StringDecoder
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
@@ -34,15 +34,15 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class WebViewScreenViewModel(
+    analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
-    firebaseAnalyticsEventLogger: FirebaseAnalyticsEventLogger,
     savedStateHandle: SavedStateHandle,
     stringDecoder: StringDecoder,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-    firebaseAnalyticsEventLogger = firebaseAnalyticsEventLogger,
+    analyticsKit = analyticsKit,
     screen = Screen.WebView,
     screenUICommonState = screenUICommonState,
 ), WebViewScreenUIStateDelegate by WebViewScreenUIStateDelegateImpl(

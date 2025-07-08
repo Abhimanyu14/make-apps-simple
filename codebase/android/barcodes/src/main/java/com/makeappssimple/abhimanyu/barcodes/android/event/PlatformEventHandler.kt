@@ -18,8 +18,8 @@ package com.makeappssimple.abhimanyu.barcodes.android.event
 
 import android.app.Activity
 
-public interface PlatformEventHandler {
-    public fun handlePlatformEvent(
+internal interface PlatformEventHandler {
+    fun handlePlatformEvent(
         activity: Activity,
         platformEvent: PlatformEvent,
     )

@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants
 
-public object DeeplinkUrl {
-    public const val BASE_URL: String = "makeappssimple://barcodes"
-    public const val BROWSER_BASE_URL: String =
+internal object DeeplinkUrl {
+    const val BASE_URL: String = "makeappssimple://barcodes"
+    const val BROWSER_BASE_URL: String =
         "https://www.makeappssimple.barcodes.com"
 }

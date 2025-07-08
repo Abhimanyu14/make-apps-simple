@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.swipetodismiss.MySwipeToDismissState
 
 @Composable
-public fun MySwipeableList(
+internal fun MySwipeableList(
     modifier: Modifier = Modifier,
     listItemsDataAndEventHandler: List<MyListItemDataEventDataAndEventHandler>,
     contentPadding: PaddingValues = PaddingValues(),

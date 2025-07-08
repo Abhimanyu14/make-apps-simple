@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.viewmodel
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -31,13 +31,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class CreditsScreenViewModel(
+    analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
-    firebaseAnalyticsEventLogger: FirebaseAnalyticsEventLogger,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-    firebaseAnalyticsEventLogger = firebaseAnalyticsEventLogger,
+    analyticsKit = analyticsKit,
     screen = Screen.Credits,
     screenUICommonState = screenUICommonState,
 ), CreditsScreenUIStateDelegate by CreditsScreenUIStateDelegateImpl(

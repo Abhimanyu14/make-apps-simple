@@ -28,7 +28,7 @@ import androidx.compose.ui.text.withStyle
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
 
 // TODO(Abhi): Remove data class
-public data class LinkTextData(
+internal data class LinkTextData(
     val text: String,
     val tag: String? = null,
     val annotation: String? = null,
@@ -36,7 +36,7 @@ public data class LinkTextData(
 )
 
 @Composable
-public fun LinkText(
+internal fun LinkText(
     modifier: Modifier = Modifier,
     linkTextData: List<LinkTextData>,
 ) {

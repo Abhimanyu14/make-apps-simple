@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.stringResource
 
 @Composable
-public fun MyImage(
+internal fun MyImage(
     bitmap: ImageBitmap,
     @StringRes contentDescriptionStringResourceId: Int?,
 ) {

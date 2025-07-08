@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig
 
-public interface BuildConfigKit {
-    public fun isDebugBuild(): Boolean
+internal interface BuildConfigKit {
+    fun isDebugBuild(): Boolean
 
-    public fun getBuildVersion(): Int
+    fun getBuildVersion(): Int
 
-    public fun isAndroidApiEqualToOrAbove(
+    fun isAndroidApiEqualToOrAbove(
         buildVersionNumber: Int,
     ): Boolean
 }

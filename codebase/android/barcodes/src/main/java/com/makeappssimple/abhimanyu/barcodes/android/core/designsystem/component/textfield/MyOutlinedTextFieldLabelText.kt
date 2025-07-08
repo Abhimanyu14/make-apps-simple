@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.MyText
 
 @Composable
-public fun MyOutlinedTextFieldLabelText(
+internal fun MyOutlinedTextFieldLabelText(
     modifier: Modifier = Modifier,
     @StringRes textStringResourceId: Int,
 ) {

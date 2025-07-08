@@ -20,24 +20,24 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class Barcode(
+internal data class Barcode(
     @SerialName(value = BarcodeConstants.SOURCE)
-    public val source: BarcodeSource,
+    val source: BarcodeSource,
 
     @SerialName(value = BarcodeConstants.FORMAT)
-    public val format: Int = BarcodeFormat.QrCode.value,
+    val format: Int = BarcodeFormat.QrCode.value,
 
     @SerialName(value = BarcodeConstants.ID)
-    public val id: Int = 0,
+    val id: Int = 0,
 
     @SerialName(value = BarcodeConstants.TIMESTAMP)
-    public val timestamp: Long,
+    val timestamp: Long,
 
     @SerialName(value = BarcodeConstants.NAME)
-    public val name: String? = null,
+    val name: String? = null,
 
     @SerialName(value = BarcodeConstants.VALUE)
-    public val value: String,
+    val value: String,
 )
 
 private object BarcodeConstants {

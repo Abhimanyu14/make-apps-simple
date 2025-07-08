@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
-public enum class Command {
+internal enum class Command {
     CLEAR_BACKSTACK_AND_NAVIGATE,
     CLEAR_TILL_ROOT,
     NAVIGATE,
@@ -24,8 +24,8 @@ public enum class Command {
     NOOP,
 }
 
-public interface NavigationCommand {
-    public val command: Command
-    public val destination: String
-    public val screen: String
+internal interface NavigationCommand {
+    val command: Command
+    val destination: String
+    val screen: String
 }

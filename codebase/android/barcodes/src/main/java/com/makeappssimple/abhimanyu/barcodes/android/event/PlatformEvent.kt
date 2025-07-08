@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.event
 
-public sealed class PlatformEvent {
-    public object NavigateToCosmosDesignSystemCatalogActivity : PlatformEvent()
-    public object NavigateToBarcodesActivity : PlatformEvent()
+internal sealed class PlatformEvent {
+    object NavigateToCosmosDesignSystemCatalogActivity : PlatformEvent()
+    object NavigateToBarcodesActivity : PlatformEvent()
 }

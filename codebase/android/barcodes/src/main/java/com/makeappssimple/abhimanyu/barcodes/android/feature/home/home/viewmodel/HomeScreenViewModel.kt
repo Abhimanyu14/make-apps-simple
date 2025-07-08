@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
@@ -37,15 +37,15 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class HomeScreenViewModel(
+    analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
-    firebaseAnalyticsEventLogger: FirebaseAnalyticsEventLogger,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-    firebaseAnalyticsEventLogger = firebaseAnalyticsEventLogger,
+    analyticsKit = analyticsKit,
     screen = Screen.Home,
     screenUICommonState = screenUICommonState,
 ) {

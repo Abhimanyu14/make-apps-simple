@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.MyText
 
 @Composable
-public fun MyDropdownMenuItem(
+internal fun MyDropdownMenuItem(
     modifier: Modifier = Modifier,
     @StringRes leadingIconContentDescriptionStringResourceId: Int,
     @StringRes textStringResourceId: Int,

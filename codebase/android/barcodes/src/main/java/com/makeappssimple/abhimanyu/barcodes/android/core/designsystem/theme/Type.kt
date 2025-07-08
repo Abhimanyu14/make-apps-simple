@@ -127,7 +127,7 @@ internal val Typography = Typography(
     ),
 )
 
-public val cosmosFontFamily: FontFamily = FontFamily(
+internal val cosmosFontFamily: FontFamily = FontFamily(
     Font(
         resId = R.font.lexend,
     )

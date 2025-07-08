@@ -16,4 +16,4 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.ui.base
 
-public interface ScreenUIState
+internal interface ScreenUIState

@@ -42,7 +42,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
 
 @Composable
-public fun MyTopAppBar(
+internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
     navigationIcon: ImageVector? = null,
     @StringRes titleStringResourceId: Int,
@@ -63,7 +63,7 @@ public fun MyTopAppBar(
 }
 
 @Composable
-public fun MyTopAppBar(
+internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
     titleText: String,
     navigationIcon: ImageVector? = null,
@@ -135,7 +135,7 @@ private fun MyTopAppBarUI(
 }
 
 @Composable
-public fun MyTopAppBarActionButton(
+internal fun MyTopAppBarActionButton(
     iconImageVector: ImageVector,
     @StringRes iconContentDescriptionStringResourceId: Int,
     @StringRes onClickLabelStringResourceId: Int,

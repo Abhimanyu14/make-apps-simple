@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.model
 
-public enum class BarcodeSource(
-    public val title: String,
+internal enum class BarcodeSource(
+    val title: String,
 ) {
     SCANNED(
         title = "Scanned",

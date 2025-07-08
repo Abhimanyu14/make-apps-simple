@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.componen
 
 import androidx.compose.material3.SwipeToDismissBoxValue
 
-public enum class MySwipeToDismissValue {
+internal enum class MySwipeToDismissValue {
     Default,
     DismissedToEnd,
     DismissedToStart

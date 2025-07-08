@@ -64,7 +64,7 @@ private object MyScaffoldConstants {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-public fun MyScaffold(
+internal fun MyScaffold(
     modifier: Modifier = Modifier,
 
     // ModalBottomSheetLayout

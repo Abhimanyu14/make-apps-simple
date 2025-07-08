@@ -16,38 +16,38 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
-public const val DEEPLINK_BROWSER_BASE_URL: String =
+internal const val DEEPLINK_BROWSER_BASE_URL: String =
     "https://www.makeappssimple.barcodes.com"
-public const val DEEPLINK_BASE_URL: String = "makeappssimple://barcodes"
+internal const val DEEPLINK_BASE_URL: String = "makeappssimple://barcodes"
 
-public sealed class Screen(
-    public val route: String,
+internal sealed class Screen(
+    val route: String,
 ) {
-    public data object BarcodeDetails : Screen(
+    data object BarcodeDetails : Screen(
         route = "barcode_details",
     )
 
-    public data object CreateBarcode : Screen(
+    data object CreateBarcode : Screen(
         route = "create_barcode",
     )
 
-    public data object Credits : Screen(
+    data object Credits : Screen(
         route = "credits",
     )
 
-    public data object Home : Screen(
+    data object Home : Screen(
         route = "home",
     )
 
-    public data object ScanBarcode : Screen(
+    data object ScanBarcode : Screen(
         route = "scan_barcode",
     )
 
-    public data object Settings : Screen(
+    data object Settings : Screen(
         route = "settings",
     )
 
-    public data object WebView : Screen(
+    data object WebView : Screen(
         route = "web_view",
     )
 }

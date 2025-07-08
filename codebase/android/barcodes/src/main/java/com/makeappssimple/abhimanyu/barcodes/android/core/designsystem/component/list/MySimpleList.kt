@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-public fun MySimpleList(
+internal fun MySimpleList(
     modifier: Modifier = Modifier,
     listItemsDataAndEventHandler: List<MyListItemDataEventDataAndEventHandler>,
     contentPadding: PaddingValues = PaddingValues(),

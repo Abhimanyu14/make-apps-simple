@@ -40,7 +40,7 @@ private object MyElevatedButtonConstants {
 }
 
 @Composable
-public fun MyElevatedButton(
+internal fun MyElevatedButton(
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     isLoading: Boolean = false,

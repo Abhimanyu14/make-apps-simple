@@ -21,7 +21,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 
-public class TestDispatcherProviderImpl(
+internal class TestDispatcherProviderImpl(
     testDispatcher: CoroutineDispatcher,
 ) : DispatcherProvider {
     override val default: CoroutineDispatcher = testDispatcher

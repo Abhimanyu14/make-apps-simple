@@ -38,7 +38,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Immutable
 @Keep
-public data class CommonScreenUIState(
+internal data class CommonScreenUIState(
     val context: Context,
     val coroutineScope: CoroutineScope,
     val focusManager: FocusManager,
@@ -49,7 +49,7 @@ public data class CommonScreenUIState(
 )
 
 @Composable
-public fun rememberCommonScreenUIState(
+internal fun rememberCommonScreenUIState(
     context: Context = LocalContext.current,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     focusManager: FocusManager = LocalFocusManager.current,

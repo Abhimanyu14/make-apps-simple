@@ -47,7 +47,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.extension
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
 
 @Composable
-public fun MyOutlinedTextField(
+internal fun MyOutlinedTextField(
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     isLoading: Boolean = false,
@@ -119,7 +119,7 @@ public fun MyOutlinedTextField(
 }
 
 @Composable
-public fun MyOutlinedTextField(
+internal fun MyOutlinedTextField(
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     isLoading: Boolean = false,

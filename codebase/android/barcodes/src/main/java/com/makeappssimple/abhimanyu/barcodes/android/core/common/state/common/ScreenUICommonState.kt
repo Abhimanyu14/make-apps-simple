@@ -19,5 +19,5 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.loading.ScreenUIStateLoading
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.refresh.ScreenUIStateRefresh
 
-public interface ScreenUICommonState : ScreenUIStateRefresh,
+internal interface ScreenUICommonState : ScreenUIStateRefresh,
     ScreenUIStateLoading

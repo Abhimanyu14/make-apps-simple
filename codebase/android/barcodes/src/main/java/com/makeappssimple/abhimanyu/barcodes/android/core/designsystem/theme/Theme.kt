@@ -104,7 +104,7 @@ internal fun Material3AppTheme(
 }
 
 @Composable
-public fun MyAppTheme(
+internal fun MyAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     darkColorScheme: ColorScheme = myDarkColorScheme,
     lightColorScheme: ColorScheme = myLightColorScheme,
@@ -118,4 +118,4 @@ public fun MyAppTheme(
     )
 }
 
-public typealias MyAppTheme = MaterialTheme
+internal typealias MyAppTheme = MaterialTheme

@@ -21,7 +21,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-public class ScreenUIStateRefreshImpl(
+internal class ScreenUIStateRefreshImpl(
     private val coroutineScope: CoroutineScope,
 ) : ScreenUIStateRefresh {
     override val refreshSignal: MutableSharedFlow<Unit> = MutableSharedFlow(

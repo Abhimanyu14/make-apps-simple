@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.divider
+package com.makeappssimple.abhimanyu.barcodes.android.core.analytics
 
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-
-@Composable
-internal fun MyHorizontalDivider(
-    modifier: Modifier = Modifier,
-) {
-    HorizontalDivider(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.outline,
+internal interface AnalyticsKit {
+    fun trackScreen(
+        screenName: String,
     )
 }

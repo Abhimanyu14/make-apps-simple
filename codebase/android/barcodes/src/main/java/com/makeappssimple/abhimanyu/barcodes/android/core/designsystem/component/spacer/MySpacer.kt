@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 private val defaultSpacerSize = 100.dp
 
 @Composable
-public fun HorizontalSpacer(
+internal fun HorizontalSpacer(
     modifier: Modifier = Modifier,
     width: Dp = defaultSpacerSize,
 ) {
@@ -43,7 +43,7 @@ public fun HorizontalSpacer(
 }
 
 @Composable
-public fun VerticalSpacer(
+internal fun VerticalSpacer(
     modifier: Modifier = Modifier,
     height: Dp = defaultSpacerSize,
 ) {
@@ -57,7 +57,7 @@ public fun VerticalSpacer(
 }
 
 @Composable
-public fun NonFillingVerticalSpacer(
+internal fun NonFillingVerticalSpacer(
     modifier: Modifier = Modifier,
     height: Dp = defaultSpacerSize,
 ) {
@@ -70,7 +70,7 @@ public fun NonFillingVerticalSpacer(
 }
 
 @Composable
-public fun NavigationBarsAndImeSpacer() {
+internal fun NavigationBarsAndImeSpacer() {
     Spacer(
         modifier = Modifier
             .navigationBarsPadding()
@@ -78,6 +78,6 @@ public fun NavigationBarsAndImeSpacer() {
     )
 }
 
-public fun Modifier.navigationBarsSpacer(): Modifier {
+internal fun Modifier.navigationBarsSpacer(): Modifier {
     return this.navigationBarsPadding()
 }

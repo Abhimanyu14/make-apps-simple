@@ -25,7 +25,7 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 
 @Composable
-public fun MyIconButton(
+internal fun MyIconButton(
     modifier: Modifier = Modifier,
     @StringRes onClickLabelStringResourceId: Int,
     onClick: () -> Unit,
@@ -43,7 +43,7 @@ public fun MyIconButton(
 }
 
 @Composable
-public fun MyIconButton(
+internal fun MyIconButton(
     modifier: Modifier = Modifier,
     onClickLabel: String,
     onClick: () -> Unit,

@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.divider
+package com.makeappssimple.abhimanyu.barcodes.android.di
 
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsKitImpl
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 
-@Composable
-internal fun MyHorizontalDivider(
-    modifier: Modifier = Modifier,
-) {
-    HorizontalDivider(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.outline,
-    )
+@Module
+internal class AnalyticsModule {
+    @Single
+    fun provideFirebaseAnalyticsEventLogger(): AnalyticsKit {
+        return FirebaseAnalyticsKitImpl()
+    }
 }

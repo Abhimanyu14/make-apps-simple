@@ -20,7 +20,8 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.fake.NoOpLogKitImpl
 
-public val LocalLogKit: ProvidableCompositionLocal<LogKit> =
+// TODO(Abhi): Remove this and DI properly
+internal val LocalLogKit: ProvidableCompositionLocal<LogKit> =
     staticCompositionLocalOf {
         // Provide a default MyLogger which does nothing.
         // This is so that tests and previews do not have to provide one.

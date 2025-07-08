@@ -22,7 +22,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.makeappssimple.abhimanyu.barcodes.android.app.BarcodesApp
 
-public class BarcodesActivity : ComponentActivity() {
+internal class BarcodesActivity : ComponentActivity() {
     override fun onCreate(
         savedInstanceState: Bundle?,
     ) {

@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.icon.MyIcon
 
 @Composable
-public fun MyFloatingActionButton(
+internal fun MyFloatingActionButton(
     modifier: Modifier = Modifier,
     iconImageVector: ImageVector,
     @StringRes contentDescriptionStringResourceId: Int,

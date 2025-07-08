@@ -20,7 +20,6 @@ import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
 import com.google.firebase.installations.FirebaseInstallations
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsEventLogger
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -34,14 +33,5 @@ internal class FirebaseModule {
     @Single
     fun provideFirebaseInstallations(): FirebaseInstallations {
         return FirebaseInstallations.getInstance()
-    }
-
-    @Single
-    fun provideFirebaseAnalyticsEventLogger(
-        // firebaseAnalytics: FirebaseAnalytics,
-    ): FirebaseAnalyticsEventLogger {
-        return FirebaseAnalyticsEventLogger(
-            // firebaseAnalytics = firebaseAnalytics,
-        )
     }
 }

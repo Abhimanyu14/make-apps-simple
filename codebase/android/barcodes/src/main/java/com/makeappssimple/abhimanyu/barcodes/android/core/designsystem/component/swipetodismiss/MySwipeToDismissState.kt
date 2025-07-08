@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.componen
 
 import androidx.compose.material3.SwipeToDismissBoxState
 
-public class MySwipeToDismissState(
+internal class MySwipeToDismissState(
     dismissState: SwipeToDismissBoxState,
-    public val targetValue: MySwipeToDismissValue = dismissState.targetValue.toMySwipeToDismissValue(),
+    val targetValue: MySwipeToDismissValue = dismissState.targetValue.toMySwipeToDismissValue(),
 )

@@ -16,10 +16,11 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.analytics
 
-public class FirebaseAnalyticsEventLogger(
+// TODO(Abhi): Implement Firebase Analytics
+internal class FirebaseAnalyticsKitImpl(
     // private val firebaseAnalytics: FirebaseAnalytics,
-) {
-    public fun trackScreen(
+) : AnalyticsKit {
+    override fun trackScreen(
         screenName: String,
     ) {
         /*

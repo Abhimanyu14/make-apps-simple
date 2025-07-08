@@ -24,7 +24,7 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 
 @Composable
-public fun MyTextButton(
+internal fun MyTextButton(
     modifier: Modifier = Modifier,
     onClickLabel: String,
     onClick: () -> Unit,

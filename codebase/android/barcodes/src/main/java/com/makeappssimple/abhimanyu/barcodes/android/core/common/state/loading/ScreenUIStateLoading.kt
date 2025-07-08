@@ -19,14 +19,14 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.state.loading
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.refresh.ScreenUIStateRefresh
 import kotlinx.coroutines.Job
 
-public interface ScreenUIStateLoading : ScreenUIStateRefresh {
-    public val isLoading: Boolean
+internal interface ScreenUIStateLoading : ScreenUIStateRefresh {
+    val isLoading: Boolean
 
-    public fun completeLoading(
+    fun completeLoading(
         shouldRefresh: Boolean = true,
     ): Job?
 
-    public fun startLoading(
+    fun startLoading(
         shouldRefresh: Boolean = true,
     ): Job?
 }

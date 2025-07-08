@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants.D
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.screen.WebViewScreen
 
-public fun NavGraphBuilder.webViewNavGraph() {
+internal fun NavGraphBuilder.webViewNavGraph() {
     composable(
         route = "${Screen.WebView.route}/{${NavigationArguments.URL}}",
         arguments = listOf(
