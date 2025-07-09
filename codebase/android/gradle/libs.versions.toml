@@ -19,7 +19,8 @@ androidx-compose-foundation = "1.8.3"
 androidx-compose-runtime = "1.8.3"
 androidx-core-ktx = "1.16.0"
 camera = "1.4.2"
-camera-view = "1.4.2"
+camera-compose = "1.5.0-beta01"
+camera-viewfinder-compose = "1.0.0-alpha02"
 coil = "3.2.0"
 compose-material3 = "1.3.1"
 compose = "1.8.2"
@@ -71,21 +72,24 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidx-compose-foundation" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "androidx-compose-runtime" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" }
-camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" }
-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" }
-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera-view" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" }
+androidx-camera-compose = { module = "androidx.camera:camera-compose", version.ref = "camera-compose" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" }
+androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camera" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera" }
+androidx-camera-viewfinder-compose = { module = "androidx.camera:camera-viewfinder-compose", version.ref = "camera-viewfinder-compose" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 detekt-rules = { module = "com.github.Abhimanyu14:detekt-rules", version.ref = "detekt-rules" }
 detekt-rules-compose-nlopez = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-rules-compose-nlopez" }
-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
-firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -144,16 +148,42 @@ plugin-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "plu
 plugin-screenshot = { id = "com.android.compose.screenshot", version.ref = "plugin-screenshot" }
 
 [bundles]
-compose = [
-    "compose-material3",
-]
 camera = [
-    "camera-core",
-    "camera-lifecycle",
-    "camera-camera2",
-    "camera-view",
+    "androidx-camera-camera2",
+    "androidx-camera-compose",
+    "androidx-camera-core",
+    "androidx-camera-lifecycle",
+    "androidx-camera-mlkit-vision",
+    "androidx-camera-view",
+]
+coil = [
+    "coil-compose",
+    "coil-network-okhttp",
+]
+compose = [
+    "androidx-activity-compose",
+    "androidx-compose-foundation",
+    "androidx-compose-runtime",
+    "androidx-compose-material3",
 ]
 detekt = [
     "detekt-rules",
     "detekt-rules-compose-nlopez",
+]
+koin = [
+    "koin-android",
+    "koin-annotations",
+    "koin-compose",
+    "koin-compose-viewmodel",
+    "koin-compose-viewmodel-navigation",
+    "koin-core",
+]
+lifecycle = [
+    "lifecycle-runtime-compose",
+    "lifecycle-viewmodel",
+    "lifecycle-viewmodel-compose",
+]
+room = [
+    "room-ktx",
+    "room-runtime",
 ]

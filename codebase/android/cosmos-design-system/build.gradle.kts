@@ -85,10 +85,11 @@ dependencies {
 
     detektPlugins(libs.bundles.detekt)
 
-    implementation(platform(libs.androidx.compose.bom))
-
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.runtime)
+
+    implementation(platform(libs.androidx.compose.bom))
+
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
 }
 
