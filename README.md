@@ -10,7 +10,6 @@ Each app has a separate README file in its root directory, explaining its purpos
 1. Website Source code of https://makeappssimple.com/.
 2. Make Apps Simple 
 3. Cosmos Design System Catalog
-4. temp
 
 
 # License
