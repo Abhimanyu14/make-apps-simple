@@ -24,7 +24,9 @@
     <string name="navigation_back_button_navigation_icon_content_description">Navigate Back</string>
     <!-- endregion -->
 
-    <string name="screen_home">Barcodes</string>
+    <!-- region screen_scan_barcode -->
+    <string name="permissions_camera_permissions_denied_message">Camera permission required for scanning</string>
+    <!-- endregion -->
 
     <!-- region screen_barcode_details -->
     <string name="screen_barcode_details">Barcode Details</string>
@@ -63,6 +65,7 @@
     <!-- endregion -->
 
     <!-- region screen_home -->
+    <string name="screen_home">Barcodes</string>
     <string name="screen_home_barcode_deleted_snackbar_action_label">Undo</string>
     <string name="screen_home_barcode_deleted_snackbar_message">%1$s deleted!</string>
     <string name="screen_home_bottom_sheet_create_barcode">Create barcode</string>
@@ -87,7 +90,6 @@
 
     <!-- region screen_scan_barcode -->
     <string name="screen_scan_barcode">Scan Barcode</string>
-    <string name="screen_scan_barcode_toast_message_camera_permissions_denied">Camera permission required for scanning</string>
     <!-- endregion -->
 
     <!-- region screen_settings -->
