@@ -45,8 +45,8 @@ internal class ScanBarcodeScreenViewModel(
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
-    private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
+    val dateTimeKit: DateTimeKit,
     val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,

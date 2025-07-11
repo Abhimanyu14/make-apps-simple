@@ -18,6 +18,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.screen
 
+import androidx.camera.core.SurfaceRequest
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,7 +30,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.camera.
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -39,6 +39,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbar
 internal fun ScanBarcodeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     isCameraPermissionGranted: Boolean,
+    surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
 ) {
     MyScaffold(
@@ -63,20 +64,15 @@ internal fun ScanBarcodeScreenUI(
         AnimatedVisibility(
             visible = isCameraPermissionGranted,
         ) {
-            BarcodeScannerPreview(
-                onBarcodeScanned = { barcodeFormat: BarcodeFormat, barcodeValue: String ->
-                    handleUIEvent(
-                        ScanBarcodeScreenUIEvent.OnBarcodeScanned(
-                            barcodeFormat = barcodeFormat,
-                            barcodeValue = barcodeValue,
-                        )
-                    )
-                },
-                modifier = Modifier
-                    .testTag(
-                        tag = SCREEN_CONTENT_SCAN_BARCODE,
-                    ),
-            )
+            surfaceRequest?.let {
+                BarcodeScannerPreview(
+                    surfaceRequest = surfaceRequest,
+                    modifier = Modifier
+                        .testTag(
+                            tag = SCREEN_CONTENT_SCAN_BARCODE,
+                        ),
+                )
+            }
         }
     }
 }

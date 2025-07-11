@@ -26,25 +26,38 @@ import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraSelector.DEFAULT_BACK_CAMERA
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.core.SurfaceRequest
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.lifecycle.awaitInstance
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
+import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.barcodescanner.BarcodeAnalyser
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_FORMAT
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_VALUE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
-import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.rememberScanBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.viewmodel.ScanBarcodeScreenViewModel
+import kotlinx.coroutines.awaitCancellation
 import org.koin.compose.viewmodel.koinViewModel
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 @Composable
 internal fun ScanBarcodeScreen(
@@ -55,6 +68,7 @@ internal fun ScanBarcodeScreen(
     )
 
     val context = LocalContext.current
+    val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
     val activity = context as? Activity
     val isCameraPermissionGranted = rememberIsCameraPermissionGranted()
 
@@ -62,20 +76,20 @@ internal fun ScanBarcodeScreen(
     val uiState = rememberScanBarcodeScreenUIState(
         data = screenUIData,
     )
-    val onBarcodeScanned: (ScanBarcodeScreenUIEvent.OnBarcodeScanned) -> Unit? =
-        { uiEvent: ScanBarcodeScreenUIEvent.OnBarcodeScanned ->
+    val onBarcodeScanned =
+        { barcodeFormat: BarcodeFormat, barcodeValue: String ->
             if (uiState.isDeeplink) {
                 activity?.let {
                     handleActivityResult(
                         activity = activity,
-                        barcodeFormat = uiEvent.barcodeFormat.value,
-                        barcodeValue = uiEvent.barcodeValue,
+                        barcodeFormat = barcodeFormat.value,
+                        barcodeValue = barcodeValue,
                     )
                 }
             } else {
                 screenViewModel.saveBarcode(
-                    barcodeValue = uiEvent.barcodeValue,
-                    barcodeFormat = uiEvent.barcodeFormat.value,
+                    barcodeValue = barcodeValue,
+                    barcodeFormat = barcodeFormat.value,
                 )
             }
         }
@@ -92,13 +106,81 @@ internal fun ScanBarcodeScreen(
     }
 
     val screenUIEventHandler = remember(
-        key1 = onBarcodeScanned,
-        key2 = onTopAppBarNavigationButtonClick,
+        key1 = onTopAppBarNavigationButtonClick,
     ) {
         ScanBarcodeScreenUIEventHandler(
-            onBarcodeScanned = onBarcodeScanned,
             onTopAppBarNavigationButtonClick = onTopAppBarNavigationButtonClick,
         )
+    }
+
+    // Used to set up a link between the Camera and your UI.
+    var surfaceRequest by remember {
+        mutableStateOf<SurfaceRequest?>(
+            null
+        )
+    }
+
+    LaunchedEffect(
+        key1 = lifecycleOwner,
+    ) {
+        val cameraExecutor: ExecutorService =
+            Executors.newSingleThreadExecutor()
+        val processCameraProvider = ProcessCameraProvider.awaitInstance(
+            context = context,
+        )
+        val cameraPreviewUseCase = Preview.Builder().build().apply {
+            setSurfaceProvider { newSurfaceRequest ->
+                surfaceRequest = newSurfaceRequest
+            }
+        }
+
+        val barcodeAnalyser = BarcodeAnalyser(
+            dateTimeKit = screenViewModel.dateTimeKit,
+            logKit = screenViewModel.logKit,
+        ) { barcodes ->
+            barcodes.forEach { barcode ->
+                barcode.rawValue?.let { barcodeValue ->
+                    screenViewModel.logKit.logError(
+                        message = "Barcode value detected: ${barcodeValue}.",
+                    )
+
+                    processCameraProvider.unbindAll()
+                    BarcodeFormat.fromValue(barcode.format)
+                        ?.let { barcodeFormat ->
+                            onBarcodeScanned(barcodeFormat, barcodeValue)
+                        }
+                }
+            }
+        }
+        val imageAnalysis: ImageAnalysis = ImageAnalysis.Builder()
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .build()
+            .also {
+                it.setAnalyzer(cameraExecutor, barcodeAnalyser)
+            }
+
+        try {
+            processCameraProvider.unbindAll()
+            processCameraProvider.bindToLifecycle(
+                lifecycleOwner = lifecycleOwner,
+                cameraSelector = DEFAULT_BACK_CAMERA,
+                cameraPreviewUseCase,
+                imageAnalysis,
+            )
+        } catch (
+            exception: Exception,
+        ) {
+            screenViewModel.logKit.logError(
+                message = "Use case binding failed with exception : $exception",
+            )
+        }
+
+        // Cancellation signals we're done with the camera
+        try {
+            awaitCancellation()
+        } finally {
+            processCameraProvider.unbindAll()
+        }
     }
 
     LaunchedEffect(
@@ -127,6 +209,7 @@ internal fun ScanBarcodeScreen(
 
     ScanBarcodeScreenUI(
         isCameraPermissionGranted = isCameraPermissionGranted == true,
+        surfaceRequest = surfaceRequest,
         handleUIEvent = screenUIEventHandler::handleUIEvent,
     )
 }
