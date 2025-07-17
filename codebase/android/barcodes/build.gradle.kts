@@ -67,7 +67,7 @@ android {
 dependencies {
     implementation(project(":cosmos-design-system"))
 
-    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(libs.androidx.room.testing)
 
     implementation(libs.bundles.camera)
     implementation(libs.bundles.coil)
@@ -94,8 +94,10 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(platform(libs.koin.bom))
 
-    ksp(libs.room.compiler)
+    ksp(libs.androidx.room.compiler)
     ksp(libs.koin.ksp.compiler)
+
+    testImplementation(libs.bundles.test)
 }
 
 ksp {
