@@ -86,4 +86,3 @@ internal fun MyNavGraph(
         navHostController = navHostController,
     )
 }
-
