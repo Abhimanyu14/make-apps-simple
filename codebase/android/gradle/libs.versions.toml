@@ -143,6 +143,7 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines-swing" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary-android" }
@@ -186,7 +187,7 @@ camera = [
     "androidx-camera-lifecycle",
     "androidx-camera-mlkit-vision",
     "androidx-camera-view",
-    "androidx-camera-viewfinder-compose",
+    # "androidx-camera-viewfinder-compose",
 ]
 coil = [
     "coil-compose",
@@ -223,6 +224,8 @@ test = [
     "androidx-test-runner",
     "androidx-test-ext-junit",
     "androidx-test-ext-truth",
+    "junit",
+    "kotlinx-coroutines-test",
 ]
 room = [
     "androidx-room-ktx",
