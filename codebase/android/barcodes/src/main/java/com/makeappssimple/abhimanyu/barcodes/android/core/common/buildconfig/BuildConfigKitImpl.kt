@@ -16,9 +16,12 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig
 
+import android.os.Build
+import com.makeappssimple.abhimanyu.barcodes.android.BuildConfig
+
 internal class BuildConfigKitImpl(
-    private val isDebugBuild: Boolean,
-    private val buildVersion: Int,
+    private val isDebugBuild: Boolean = BuildConfig.DEBUG,
+    private val buildVersion: Int = Build.VERSION.SDK_INT,
 ) : BuildConfigKit {
     override fun isDebugBuild(): Boolean {
         return isDebugBuild
