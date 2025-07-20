@@ -38,9 +38,17 @@ internal class DateTimeKitImpl(
         val millis = Instant
             .ofEpochMilli(timestamp)
         val formattedDateAndTime = DateTimeFormatter
-            .ofPattern("yyyy-MMM-dd, hh-mm a")
+            .ofPattern("yyyy-MMM-dd, hh:mm a")
             .withZone(zoneId)
             .format(millis)
+            .replace(
+                oldValue = "am",
+                newValue = "AM",
+            )
+            .replace(
+                oldValue = "pm",
+                newValue = "PM",
+            )
         return formattedDateAndTime
     }
 
