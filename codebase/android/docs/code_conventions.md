@@ -4,7 +4,7 @@
 
 - **Classes and Objects:**
   - Use PascalCase for class and object names (e.g., `MainActivity`, `UserRepository`).
-  - Use descriptive names that clearly indicate the purpose.
+  - Use descriptive names that clearly indicate their purpose.
 - **Functions and Variables:**
   - Use camelCase for function and variable names (e.g., `getUserData()`, `userName`).
   - Use descriptive names that explain what the function does or what the variable contains.
@@ -23,7 +23,7 @@
   3. Class/object declaration
   4. Properties
   5. Constructor
-  6. Functions - public first, then internal followed by private.
+  6. Functions – public first, then internal, followed by private
   7. Companion object (if any)
 - **Import Organization:**
   - Group imports: standard library, third-party libraries, project-specific imports.
@@ -37,7 +37,7 @@
   - Use `internal` for module-level visibility when needed.
   - Use `public` only when the API is intentionally exposed.
 - **Testing:**
-  - Use `@VisibleForTesting` annotation for internal functions that need to be tested.
+  - Use the `@VisibleForTesting` annotation for internal functions that need to be tested.
 
 ## Code Style
 
@@ -48,15 +48,17 @@
   - Break long lines at logical points.
 - **Spacing:**
   - Use single spaces around operators and after commas.
-  - No spaces before colons in type declarations.
+  - Do not use spaces before colons in type declarations.
 - **Braces:**
   - Use K&R style (opening brace on the same line).
-  - Always use braces for control structures, even single-line blocks.
+  - Always use braces for control structures, even for single-line blocks.
 - **Named Parameters:**
   - Always use named parameters when calling pure Kotlin functions.
-  - Always put each named argument in separate lines.
-- **Trailing commas:**
+  - Always put each named argument on a separate line.
+- **Trailing Commas:**
   - Use trailing commas wherever applicable.
+- **End of files:**
+  - Files should always end with an empty line.
 
 ## Function Design
 
@@ -77,10 +79,10 @@
   - Always document exceptions that can be thrown by any function.
 - **Null Safety:**
   - Prefer non-nullable types when possible.
-  - Always use safe call operator (`?.`) and Elvis operator (`?:`) appropriately.
+  - Always use the safe call operator (`?.`) and Elvis operator (`?:`) appropriately.
   - Never use `!!`.
-  - Always use safe type casting `as?`.
-  - Never use forced casting `as`.
+  - Always use safe type casting (`as?`).
+  - Never use forced casting (`as`).
 
 ## Documentation
 
@@ -88,7 +90,7 @@
   - Use KDoc for public APIs and complex functions.
   - Include `@param`, `@return`, and `@throws` tags where appropriate.
 - **Inline Comments:**
-  - Use comments to explain "why" not "what".
+  - Use comments to explain "why," not "what."
   - Keep comments up to date with code changes.
 
 ## Testing
@@ -104,7 +106,7 @@
   - Use the Arrange-Act-Assert (AAA) pattern for organizing test logic.
   - Use `@Before` and `@After` for setup and teardown logic.
 - **Spacing:**
-  - Within each test method, separate arrange, act and assert by empty lines.
+  - Within each test method, separate arrange, act, and assert sections with empty lines.
   - Do not add unnecessary comments in tests.
 - **Visibility and Annotations:**
   - Use `@Test` for test methods.
@@ -114,7 +116,7 @@
 - **Mocking and Dependency Injection:**
   - Use dependency injection to provide test doubles (mocks, fakes, stubs).
   - Prefer using fakes over mocks.
-  - Use mock libraries for mocking dependencies only when required as the last level of application interaction - interaction with database, files, network, etc.
+  - Use mock libraries for mocking dependencies only when required, such as at the last level of application interaction (e.g., database, files, network, etc.).
 - **Best Practices:**
   - Each test should verify a single behavior or outcome.
   - Avoid shared state between tests; use setup methods to initialize state.
