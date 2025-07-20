@@ -16,18 +16,21 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig
 
-import android.os.Build
-
-internal class BuildConfigKitImpl : BuildConfigKit {
+internal class BuildConfigKitImpl(
+    private val isDebugBuild: Boolean,
+    private val buildVersion: Int,
+) : BuildConfigKit {
     override fun isDebugBuild(): Boolean {
-        return false // BuildConfig.DEBUG
+        return isDebugBuild
     }
 
     override fun getBuildVersion(): Int {
-        return Build.VERSION.SDK_INT
+        return buildVersion
     }
 
-    override fun isAndroidApiEqualToOrAbove(buildVersionNumber: Int): Boolean {
+    override fun isAndroidApiEqualToOrAbove(
+        buildVersionNumber: Int,
+    ): Boolean {
         return getBuildVersion() >= buildVersionNumber
     }
 }

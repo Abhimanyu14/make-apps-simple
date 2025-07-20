@@ -16,18 +16,20 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
+import android.os.Build
+import com.makeappssimple.abhimanyu.barcodes.android.BuildConfig
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.BuildConfigKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.BuildConfigKitImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
 internal class BuildConfigKitModule {
     @Single
-    fun provideBuildConfigKit(
-        dispatcherProvider: DispatcherProvider,
-    ): BuildConfigKit {
-        return BuildConfigKitImpl()
+    fun provideBuildConfigKit(): BuildConfigKit {
+        return BuildConfigKitImpl(
+            isDebugBuild = BuildConfig.DEBUG,
+            buildVersion = Build.VERSION.SDK_INT,
+        )
     }
 }
