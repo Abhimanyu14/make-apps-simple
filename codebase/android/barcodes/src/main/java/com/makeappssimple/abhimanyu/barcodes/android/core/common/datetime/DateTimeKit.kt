@@ -18,16 +18,32 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime
 
 import java.time.ZoneId
 
+/**
+ * Interface for date and time utilities.
+ *
+ * Provides methods to get the current time in milliseconds, format timestamps,
+ * and get the system's default time zone.
+ */
 internal interface DateTimeKit {
+    /**
+     * Returns the current time in milliseconds since the Unix epoch.
+     */
     fun getCurrentTimeMillis(): Long
 
     /**
-     * Sample format - 2023-Mar-30, 08-24 AM
+     * Formats the given [timestamp] (in milliseconds since the Unix epoch) into a human-readable date and time string.
+     *
+     * @param timestamp The time in milliseconds since the Unix epoch to format.
+     * @param zoneId The time zone to use for formatting. Defaults to [getSystemDefaultZoneId()].
+     * @return A formatted date and time string, e.g., "2023-Mar-30, 08-24 AM".
      */
     fun getFormattedDateAndTime(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
 
+    /**
+     * Returns the system default [ZoneId].
+     */
     fun getSystemDefaultZoneId(): ZoneId
 }
