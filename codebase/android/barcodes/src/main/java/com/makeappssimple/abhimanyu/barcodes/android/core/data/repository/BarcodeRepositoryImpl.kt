@@ -27,20 +27,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
-/**
- * Project convention
- * Method ordering - Create, Read, Update and Delete
- */
 internal class BarcodeRepositoryImpl(
     private val barcodeDao: BarcodeDao,
     private val dispatcherProvider: DispatcherProvider,
 ) : BarcodeRepository {
-    override suspend fun insertBarcodes(
+    override suspend fun deleteBarcodes(
         vararg barcodes: Barcode,
-    ): LongArray {
+    ): Int {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.insertBarcodes(
+                barcodeDao.deleteBarcodes(
                     barcodeEntities = barcodes.map(Barcode::asEntity)
                         .toTypedArray(),
                 )
@@ -50,7 +46,7 @@ internal class BarcodeRepositoryImpl(
         ) {
             // TODO(Abhi): Handle error when SQL query fails
             sqLiteException.printStackTrace()
-            longArrayOf()
+            0
         }
     }
 
@@ -86,12 +82,12 @@ internal class BarcodeRepositoryImpl(
         }
     }
 
-    override suspend fun updateBarcodes(
+    override suspend fun insertBarcodes(
         vararg barcodes: Barcode,
-    ): Int {
+    ): LongArray {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.updateBarcodes(
+                barcodeDao.insertBarcodes(
                     barcodeEntities = barcodes.map(Barcode::asEntity)
                         .toTypedArray(),
                 )
@@ -101,16 +97,16 @@ internal class BarcodeRepositoryImpl(
         ) {
             // TODO(Abhi): Handle error when SQL query fails
             sqLiteException.printStackTrace()
-            0
+            longArrayOf()
         }
     }
 
-    override suspend fun deleteBarcodes(
+    override suspend fun updateBarcodes(
         vararg barcodes: Barcode,
     ): Int {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.deleteBarcodes(
+                barcodeDao.updateBarcodes(
                     barcodeEntities = barcodes.map(Barcode::asEntity)
                         .toTypedArray(),
                 )

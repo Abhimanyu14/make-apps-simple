@@ -23,18 +23,14 @@ import kotlinx.coroutines.flow.Flow
  * Responsibilities
  * 1. To handle SQL exceptions
  * 2. Make the calls thread safe
- *
- * Project convention
- * Method ordering - Create, Read, Update and Delete
  */
 internal interface BarcodeRepository {
     /**
-     * @return Row id of inserted rows. First valid row id is 1.
-     * Returns empty array if failed to insert.
+     * @return Number of rows deleted
      */
-    suspend fun insertBarcodes(
+    suspend fun deleteBarcodes(
         vararg barcodes: Barcode,
-    ): LongArray
+    ): Int
 
     fun getAllBarcodesFlow(): Flow<List<Barcode>>
 
@@ -47,18 +43,19 @@ internal interface BarcodeRepository {
     ): Barcode?
 
     /**
+     * @return Row id of inserted rows. First valid row id is 1.
+     * Returns empty array if failed to insert.
+     */
+    suspend fun insertBarcodes(
+        vararg barcodes: Barcode,
+    ): LongArray
+
+    /**
      * Only updates the existing rows using the primary key
      *
      * @return Number of rows updated
      */
     suspend fun updateBarcodes(
-        vararg barcodes: Barcode,
-    ): Int
-
-    /**
-     * @return Number of rows deleted
-     */
-    suspend fun deleteBarcodes(
         vararg barcodes: Barcode,
     ): Int
 }

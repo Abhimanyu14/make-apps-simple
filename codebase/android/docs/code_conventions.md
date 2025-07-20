@@ -23,7 +23,7 @@
   3. Class/object declaration
   4. Properties
   5. Constructor
-  6. Functions – public first, then internal, followed by private
+  6. Functions – public first, then internal, followed by private. Order the methods alphabetically within each visibility modifier section.
   7. Companion object (if any)
 - **Import Organization:**
   - Group imports: standard library, third-party libraries, project-specific imports.
