@@ -16,12 +16,16 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder
 
-import android.net.Uri
+import kotlinx.serialization.json.Json
 
-internal class StringEncoderImpl : StringEncoder {
+internal class StringEncoderImpl(
+    private val json: Json = Json,
+) : StringEncoder {
     override fun encodeString(
         string: String,
     ): String {
-        return Uri.encode(string)
+        return json.encodeToString(
+            value = string,
+        )
     }
 }

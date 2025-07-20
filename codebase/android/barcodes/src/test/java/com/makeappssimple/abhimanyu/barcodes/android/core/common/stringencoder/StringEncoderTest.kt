@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.common.stringdecoder
+package com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder
 
+import com.google.common.truth.Truth.assertThat
 import kotlinx.serialization.json.Json
+import org.junit.Test
 
-internal class StringDecoderImpl(
-    private val json: Json = Json,
-) : StringDecoder {
-    override fun decodeString(
-        encodedString: String,
-    ): String {
-        return json.decodeFromString(
-            string = encodedString,
+internal class StringEncoderTest {
+    @Test
+    fun encodeString_encodesCorrectly() {
+        val encoder = StringEncoderImpl(
+            json = Json,
         )
+
+        val result = encoder.encodeString(
+            string = "hello",
+        )
+
+        assertThat(result).isEqualTo("\"hello\"")
     }
 }

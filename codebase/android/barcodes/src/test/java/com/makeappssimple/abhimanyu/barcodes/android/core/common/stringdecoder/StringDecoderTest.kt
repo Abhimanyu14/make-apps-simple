@@ -16,16 +16,21 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.stringdecoder
 
+import com.google.common.truth.Truth.assertThat
 import kotlinx.serialization.json.Json
+import org.junit.Test
 
-internal class StringDecoderImpl(
-    private val json: Json = Json,
-) : StringDecoder {
-    override fun decodeString(
-        encodedString: String,
-    ): String {
-        return json.decodeFromString(
-            string = encodedString,
+internal class StringDecoderTest {
+    @Test
+    fun decodeString_decodesCorrectly() {
+        val decoder = StringDecoderImpl(
+            json = Json,
         )
+
+        val result = decoder.decodeString(
+            encodedString = "\"hello\"",
+        )
+
+        assertThat(result).isEqualTo("hello")
     }
 }
