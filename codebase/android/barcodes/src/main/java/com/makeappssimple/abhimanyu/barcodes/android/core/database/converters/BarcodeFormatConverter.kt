@@ -25,13 +25,17 @@ internal class BarcodeFormatConverter {
     fun stringToBarcodeFormat(
         value: String,
     ): BarcodeFormat {
-        return Json.decodeFromString<BarcodeFormat>(value)
+        return Json.decodeFromString<BarcodeFormat>(
+            string = value,
+        )
     }
 
     @TypeConverter
     fun barcodeFormatToString(
         barcodeFormat: BarcodeFormat,
     ): String {
-        return Json.encodeToString(barcodeFormat)
+        return Json.encodeToString(
+            value = barcodeFormat,
+        )
     }
 }
