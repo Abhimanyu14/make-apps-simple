@@ -126,6 +126,7 @@
 - **Assertions:**
   - Use expressive assertion libraries (e.g., Truth, AssertJ, JUnit assertions).
   - Prefer `assertThat` over `assertEquals` for readability.
+  - Always use `androidx.test.ext.truth.Truth.assertThat` for assertions, not `com.google.common.truth.Truth.assertThat`.
 
 ---
 
