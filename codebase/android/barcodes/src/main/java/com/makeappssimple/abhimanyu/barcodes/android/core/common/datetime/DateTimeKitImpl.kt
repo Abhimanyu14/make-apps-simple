@@ -22,37 +22,24 @@ import java.time.format.DateTimeFormatter
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
-internal class DateTimeKitImpl : DateTimeKit {
-    @OptIn(ExperimentalTime::class)
+@OptIn(ExperimentalTime::class)
+internal class DateTimeKitImpl(
+    private val instant: kotlin.time.Instant = Clock.System.now(),
+    private val systemDefaultZoneId: ZoneId = ZoneId.systemDefault(),
+) : DateTimeKit {
     override fun getCurrentTimeMillis(): Long {
-        return Clock.System.now().toEpochMilliseconds()
+        return instant.toEpochMilliseconds()
     }
-    
-    /**
-     * Sample format - 2023-Mar-30, 08-24 AM
-     */
+
     override fun getFormattedDateAndTime(
         timestamp: Long,
-        zoneId: ZoneId,
     ): String {
-        return Instant
+        val millis = Instant
             .ofEpochMilli(timestamp)
-            .formattedDateAndTime(
-                zoneId = zoneId,
-            )
-    }
-
-    override fun getSystemDefaultZoneId(): ZoneId {
-        return ZoneId.systemDefault()
-    }
-
-    private fun Instant.formattedDateAndTime(
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): String {
         return DateTimeFormatter
             .ofPattern("yyyy-MMM-dd, hh-mm a")
-            .withZone(zoneId)
-            .format(this)
+            .withZone(systemDefaultZoneId)
+            .format(millis)
             .replace("am", "AM")
             .replace("pm", "PM")
     }

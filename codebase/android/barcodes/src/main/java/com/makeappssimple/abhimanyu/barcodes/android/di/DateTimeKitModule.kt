@@ -20,9 +20,11 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTi
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
+import kotlin.time.ExperimentalTime
 
 @Module
 internal class DateTimeKitModule {
+    @OptIn(ExperimentalTime::class)
     @Single
     fun provideDateTimeKit(): DateTimeKit {
         return DateTimeKitImpl()
