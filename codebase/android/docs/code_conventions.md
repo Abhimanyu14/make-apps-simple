@@ -49,12 +49,19 @@
 - **Spacing:**
   - Use single spaces around operators and after commas.
   - Do not use spaces before colons in type declarations.
+- **Functions:**
+ - Do NOT use function expressions.
+- **Line Separator:**
+  - Put each named parameter in a separate line for every kotlin method calls.
+  - Put parameters in single line for Java method calls if they file within a line, if not put each parameter in a separate line.
+  - For every function declaration, always place each parameter in separate line.
 - **Braces:**
   - Use K&R style (opening brace on the same line).
   - Always use braces for control structures, even for single-line blocks.
 - **Named Parameters:**
-  - Always use named parameters when calling pure Kotlin functions.
-  - Always put each named argument on a separate line.
+  - Always use named parameters when calling pure Kotlin functions except when the parameter has vararg.
+  - Always put each named argument on a separate line even for a single named argument.
+  - Do not use named parameters for Java method calls.
 - **Trailing Commas:**
   - Use trailing commas wherever applicable.
 - **End of files:**
