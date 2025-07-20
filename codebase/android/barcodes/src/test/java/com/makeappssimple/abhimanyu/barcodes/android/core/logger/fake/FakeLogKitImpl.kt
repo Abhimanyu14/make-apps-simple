@@ -16,12 +16,23 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.logger.fake
 
+import androidx.annotation.VisibleForTesting
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 
-internal class NoOpLogKitImpl : LogKit {
+internal class FakeLogKitImpl : LogKit {
+    // Pair<message, tag>
+    @VisibleForTesting
+    internal val loggedMessages = mutableListOf<Pair<String, String>>()
+
     override fun logError(
         message: String,
         tag: String,
     ) {
+        loggedMessages.add(
+            Pair(
+                first = message,
+                second = tag,
+            ),
+        )
     }
-}
+} 
