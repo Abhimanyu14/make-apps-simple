@@ -19,19 +19,25 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.database.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.zxing.BarcodeFormat
 import kotlinx.serialization.json.Json
+import org.junit.Before
 import org.junit.Test
 
 internal class BarcodeFormatConverterTest {
-    private val converter = BarcodeFormatConverter()
+    private lateinit var barcodeFormatConverter: BarcodeFormatConverter
+
+    @Before
+    fun setUp() {
+        barcodeFormatConverter = BarcodeFormatConverter()
+    }
 
     @Test
     fun barcodeFormatToString_and_stringToBarcodeFormat_roundTrip() {
         val barcodeFormat = BarcodeFormat.QR_CODE
 
-        val string = converter.barcodeFormatToString(
+        val string = barcodeFormatConverter.barcodeFormatToString(
             barcodeFormat = barcodeFormat,
         )
-        val result = converter.stringToBarcodeFormat(
+        val result = barcodeFormatConverter.stringToBarcodeFormat(
             value = string,
         )
 
@@ -45,7 +51,7 @@ internal class BarcodeFormatConverterTest {
         val string = Json.encodeToString(
             value = barcodeFormat,
         )
-        val result = converter.stringToBarcodeFormat(
+        val result = barcodeFormatConverter.stringToBarcodeFormat(
             value = string,
         )
 
@@ -56,7 +62,7 @@ internal class BarcodeFormatConverterTest {
     fun barcodeFormatToString_validBarcodeFormat_returnsString() {
         val barcodeFormat = BarcodeFormat.EAN_13
 
-        val result = converter.barcodeFormatToString(
+        val result = barcodeFormatConverter.barcodeFormatToString(
             barcodeFormat = barcodeFormat,
         )
         val expected = Json.encodeToString(

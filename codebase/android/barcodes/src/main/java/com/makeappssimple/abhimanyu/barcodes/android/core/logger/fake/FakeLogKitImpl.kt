@@ -35,4 +35,4 @@ internal class FakeLogKitImpl : LogKit {
             ),
         )
     }
-} 
+}
