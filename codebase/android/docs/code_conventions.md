@@ -49,12 +49,12 @@
 - **Spacing:**
   - Use single spaces around operators and after commas.
   - Do not use spaces before colons in type declarations.
-- **Functions:**
- - Do NOT use function expressions.
 - **Line Separator:**
   - Put each named parameter in a separate line for every kotlin method calls.
   - Put parameters in single line for Java method calls if they file within a line, if not put each parameter in a separate line.
-  - For every function declaration, always place each parameter in separate line.
+  - For every function declaration, always place each parameter in separate line. Do NOT add empty lines when there are not parameters.
+- **Functions:**
+ - Do NOT use function expressions.
 - **Braces:**
   - Use K&R style (opening brace on the same line).
   - Always use braces for control structures, even for single-line blocks.

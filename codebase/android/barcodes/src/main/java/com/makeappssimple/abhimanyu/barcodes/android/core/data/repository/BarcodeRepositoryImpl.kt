@@ -37,7 +37,10 @@ internal class BarcodeRepositoryImpl(
         return try {
             dispatcherProvider.executeOnIoDispatcher {
                 barcodeDao.deleteBarcodes(
-                    barcodeEntities = barcodes.map(Barcode::asEntity)
+                    barcodeEntities = barcodes
+                        .map(
+                            transform = Barcode::asEntity,
+                        )
                         .toTypedArray(),
                 )
             }
@@ -53,7 +56,9 @@ internal class BarcodeRepositoryImpl(
     override fun getAllBarcodesFlow(): Flow<List<Barcode>> {
         return try {
             barcodeDao.getAllBarcodesFlow().map {
-                it.map(BarcodeEntity::asExternalModel)
+                it.map(
+                    transform = BarcodeEntity::asExternalModel,
+                )
             }
         } catch (
             sqLiteException: SQLiteException,
@@ -88,7 +93,10 @@ internal class BarcodeRepositoryImpl(
         return try {
             dispatcherProvider.executeOnIoDispatcher {
                 barcodeDao.insertBarcodes(
-                    barcodeEntities = barcodes.map(Barcode::asEntity)
+                    barcodeEntities = barcodes
+                        .map(
+                            transform = Barcode::asEntity,
+                        )
                         .toTypedArray(),
                 )
             }
@@ -107,7 +115,10 @@ internal class BarcodeRepositoryImpl(
         return try {
             dispatcherProvider.executeOnIoDispatcher {
                 barcodeDao.updateBarcodes(
-                    barcodeEntities = barcodes.map(Barcode::asEntity)
+                    barcodeEntities = barcodes
+                        .map(
+                            transform = Barcode::asEntity,
+                        )
                         .toTypedArray(),
                 )
             }

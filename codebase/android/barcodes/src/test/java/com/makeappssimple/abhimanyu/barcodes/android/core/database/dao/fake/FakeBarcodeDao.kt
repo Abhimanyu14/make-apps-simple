@@ -16,57 +16,65 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake
 
+import androidx.annotation.VisibleForTesting
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
 import kotlinx.coroutines.flow.flow
 
 internal class FakeBarcodeDao : BarcodeDao {
-    val entities = mutableListOf<BarcodeEntity>()
+    @VisibleForTesting
+    internal val fakeBarcodeEntities = mutableListOf<BarcodeEntity>()
 
     override suspend fun deleteAllBarcodes(): Int {
-        val count = entities.size
-        entities.clear()
+        val count = fakeBarcodeEntities.size
+        fakeBarcodeEntities.clear()
         return count
     }
 
     override suspend fun deleteBarcodes(
         vararg barcodeEntities: BarcodeEntity,
     ): Int {
-        val before = entities.size
-        entities.removeAll { e -> barcodeEntities.any { it.id == e.id } }
-        return before - entities.size
+        val sizeBeforeDeletion = fakeBarcodeEntities.size
+        fakeBarcodeEntities.removeAll { entity ->
+            barcodeEntities.any {
+                it.id == entity.id
+            }
+        }
+        return sizeBeforeDeletion - fakeBarcodeEntities.size
     }
 
     override fun getAllBarcodesFlow(
     ) = flow {
         emit(
-            value = entities.toList(),
+            value = fakeBarcodeEntities.toList(),
         )
     }
 
     override suspend fun getAllBarcodes(
-    ): List<BarcodeEntity> =
-        entities.toList()
+    ): List<BarcodeEntity> {
+        return fakeBarcodeEntities.toList()
+    }
 
     override suspend fun getBarcode(
         id: Int,
-    ): BarcodeEntity? =
-        entities.find { it.id == id }
+    ): BarcodeEntity? {
+        return fakeBarcodeEntities.find { it.id == id }
+    }
 
     override suspend fun insertBarcodes(
         vararg barcodeEntities: BarcodeEntity,
     ): LongArray {
-        val ids = mutableListOf<Long>()
+        val insertedBarcodeIds = mutableListOf<Long>()
         barcodeEntities.forEach { entity ->
-            entities.removeAll { it.id == entity.id }
-            entities.add(
+            fakeBarcodeEntities.removeAll { it.id == entity.id }
+            fakeBarcodeEntities.add(
                 element = entity,
             )
-            ids.add(
+            insertedBarcodeIds.add(
                 element = entity.id.toLong(),
             )
         }
-        return ids.toLongArray()
+        return insertedBarcodeIds.toLongArray()
     }
 
     override suspend fun updateBarcodes(
@@ -74,9 +82,9 @@ internal class FakeBarcodeDao : BarcodeDao {
     ): Int {
         var count = 0
         barcodeEntities.forEach { entity ->
-            val index = entities.indexOfFirst { it.id == entity.id }
+            val index = fakeBarcodeEntities.indexOfFirst { it.id == entity.id }
             if (index != -1) {
-                entities[index] = entity
+                fakeBarcodeEntities[index] = entity
                 count++
             }
         }

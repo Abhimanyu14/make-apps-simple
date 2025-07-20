@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.data.repository
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcherProviderImpl
@@ -34,8 +35,7 @@ internal class BarcodeRepositoryTest {
     private lateinit var dispatcherProvider: DispatcherProvider
 
     @Before
-    fun setUp(
-    ) {
+    fun setUp() {
         fakeBarcodeDao = FakeBarcodeDao()
         dispatcherProvider = TestDispatcherProviderImpl(
             testDispatcher = Dispatchers.Unconfined,
@@ -47,30 +47,24 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun insertBarcodes_insertsAndReturnsIds(
-    ) = runTest {
+    fun insertBarcodes_insertsAndReturnsIds() = runTest {
         val barcode = getBarcode(
             id = 1,
         )
 
-        val ids = barcodeRepository.insertBarcodes(
+        val insertedBarcodeIds = barcodeRepository.insertBarcodes(
             barcode,
         )
 
-        assertThat(
-            ids.size,
-        ).isEqualTo(1)
-        assertThat(
-            ids[0],
-        ).isEqualTo(1)
-        assertThat(
-            fakeBarcodeDao.entities[0].id,
-        ).isEqualTo(1)
+        assertThat(insertedBarcodeIds.size).isEqualTo(1)
+        assertThat(insertedBarcodeIds[0]).isEqualTo(1)
+        assertThat(fakeBarcodeDao.fakeBarcodeEntities[0].asExternalModel()).isEqualTo(
+            barcode
+        )
     }
 
     @Test
-    fun getAllBarcodesFlow_returnsAllBarcodes(
-    ) = runTest {
+    fun getAllBarcodesFlow_returnsAllBarcodes() = runTest {
         val barcode1 = getBarcode(
             id = 1,
         )
@@ -84,20 +78,13 @@ internal class BarcodeRepositoryTest {
 
         val result = barcodeRepository.getAllBarcodesFlow().first()
 
-        assertThat(
-            result.size,
-        ).isEqualTo(2)
-        assertThat(
-            result[0].id,
-        ).isEqualTo(1)
-        assertThat(
-            result[1].id,
-        ).isEqualTo(2)
+        assertThat(result.size).isEqualTo(2)
+        assertThat(result[0]).isEqualTo(barcode1)
+        assertThat(result[1]).isEqualTo(barcode2)
     }
 
     @Test
-    fun getBarcode_returnsCorrectBarcode(
-    ) = runTest {
+    fun getBarcode_returnsCorrectBarcode() = runTest {
         val barcode = getBarcode(
             id = 1,
         )
@@ -109,14 +96,11 @@ internal class BarcodeRepositoryTest {
             id = 1,
         )
 
-        assertThat(
-            result,
-        ).isEqualTo(barcode)
+        assertThat(result).isEqualTo(barcode)
     }
 
     @Test
-    fun updateBarcodes_updatesExistingBarcode(
-    ) = runTest {
+    fun updateBarcodes_updatesExistingBarcode() = runTest {
         val barcode = getBarcode(
             id = 1,
             value = "old",
@@ -124,28 +108,23 @@ internal class BarcodeRepositoryTest {
         barcodeRepository.insertBarcodes(
             barcode,
         )
-        val updated = barcode.copy(
+        val updatedBarcode = barcode.copy(
             value = "new",
         )
 
         val count = barcodeRepository.updateBarcodes(
-            updated,
+            updatedBarcode,
         )
         val result = barcodeRepository.getBarcode(
             id = 1,
         )
 
-        assertThat(
-            count,
-        ).isEqualTo(1)
-        assertThat(
-            result?.value,
-        ).isEqualTo("new")
+        assertThat(count).isEqualTo(1)
+        assertThat(result).isEqualTo(updatedBarcode)
     }
 
     @Test
-    fun deleteBarcodes_deletesBarcode(
-    ) = runTest {
+    fun deleteBarcodes_deletesBarcode() = runTest {
         val barcode = getBarcode(
             id = 1,
         )
@@ -160,12 +139,8 @@ internal class BarcodeRepositoryTest {
             id = 1,
         )
 
-        assertThat(
-            count,
-        ).isEqualTo(1)
-        assertThat(
-            result,
-        ).isNull()
+        assertThat(count).isEqualTo(1)
+        assertThat(result).isNull()
     }
 
     private fun getBarcode(
