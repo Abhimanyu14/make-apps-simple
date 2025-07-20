@@ -107,7 +107,7 @@
   - Use `@Before` and `@After` for setup and teardown logic.
 - **Spacing:**
   - Within each test method, separate arrange, act, and assert sections with empty lines.
-  - Do not add unnecessary comments in tests.
+  - Do not add unnecessary comments in tests to segregate arrange, act and assert sections.
 - **Visibility and Annotations:**
   - Use `@Test` for test methods.
   - Use `@VisibleForTesting` for internal members that need to be accessed in tests.
