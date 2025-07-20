@@ -91,6 +91,40 @@
   - Use comments to explain "why" not "what".
   - Keep comments up to date with code changes.
 
+## Testing
+
+- **Test Naming:**
+  - Name test classes with the suffix `Test` (e.g., `UserRepositoryTest`).
+  - Name test functions in the format `functionUnderTest_condition_expectedResult` (e.g., `login_withInvalidCredentials_returnsError`).
+  - Use backticks for descriptive test names (e.g., `fun `login fails with invalid credentials``).
+- **Test File Location:**
+  - Place unit tests in the corresponding `test/` directory, mirroring the main source structure.
+  - Place instrumented tests in the `androidTest/` directory.
+- **Test Structure:**
+  - Use the Arrange-Act-Assert (AAA) pattern for organizing test logic.
+  - Use `@Before` and `@After` for setup and teardown logic.
+- **Spacing:**
+  - Within each test method, separate arrange, act and assert by empty lines.
+  - Do not add unnecessary comments in tests.
+- **Visibility and Annotations:**
+  - Use `@Test` for test methods.
+  - Use `@VisibleForTesting` for internal members that need to be accessed in tests.
+  - Prefer `internal` or `private` visibility for test helpers within test files.
+  - Use `private` or `internal` for test classes.
+- **Mocking and Dependency Injection:**
+  - Use dependency injection to provide test doubles (mocks, fakes, stubs).
+  - Prefer using fakes over mocks.
+  - Use mock libraries for mocking dependencies only when required as the last level of application interaction - interaction with database, files, network, etc.
+- **Best Practices:**
+  - Each test should verify a single behavior or outcome.
+  - Avoid shared state between tests; use setup methods to initialize state.
+  - Use constants for test data to avoid magic values.
+  - Keep tests fast and isolated from external dependencies.
+  - Prefer using test-specific coroutine dispatchers for coroutine-based code.
+- **Assertions:**
+  - Use expressive assertion libraries (e.g., Truth, AssertJ, JUnit assertions).
+  - Prefer `assertThat` over `assertEquals` for readability.
+
 ---
 
 # TOML Files
