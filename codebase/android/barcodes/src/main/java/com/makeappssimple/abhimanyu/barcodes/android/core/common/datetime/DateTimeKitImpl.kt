@@ -24,23 +24,27 @@ import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
 internal class DateTimeKitImpl(
-    private val instant: kotlin.time.Instant = Clock.System.now(),
+    private val clock: Clock = Clock.System,
     private val systemDefaultZoneId: ZoneId = ZoneId.systemDefault(),
 ) : DateTimeKit {
     override fun getCurrentTimeMillis(): Long {
-        return instant.toEpochMilliseconds()
+        return clock.now().toEpochMilliseconds()
     }
 
     override fun getFormattedDateAndTime(
         timestamp: Long,
+        zoneId: ZoneId,
     ): String {
         val millis = Instant
             .ofEpochMilli(timestamp)
-        return DateTimeFormatter
+        val formattedDateAndTime = DateTimeFormatter
             .ofPattern("yyyy-MMM-dd, hh-mm a")
-            .withZone(systemDefaultZoneId)
+            .withZone(zoneId)
             .format(millis)
-            .replace("am", "AM")
-            .replace("pm", "PM")
+        return formattedDateAndTime
+    }
+
+    override fun getSystemDefaultZoneId(): ZoneId {
+        return systemDefaultZoneId
     }
 }

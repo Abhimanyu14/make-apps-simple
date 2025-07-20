@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime
 
+import java.time.ZoneId
+
 internal interface DateTimeKit {
     fun getCurrentTimeMillis(): Long
 
@@ -24,5 +26,8 @@ internal interface DateTimeKit {
      */
     fun getFormattedDateAndTime(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
+
+    fun getSystemDefaultZoneId(): ZoneId
 }
