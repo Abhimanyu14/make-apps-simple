@@ -21,13 +21,16 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.Bui
 
 internal class LogKitImpl(
     private val buildConfigKit: BuildConfigKit,
+    private val logErrorMessage: (String, String) -> Unit = { tag, message ->
+        Log.e(tag, message)
+    },
 ) : LogKit {
     override fun logError(
         message: String,
         tag: String,
     ) {
         if (buildConfigKit.isDebugBuild()) {
-            Log.e(tag, message)
+            logErrorMessage(tag, message)
         }
     }
 }
