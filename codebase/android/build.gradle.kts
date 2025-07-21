@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.plugin.dokka)
     alias(libs.plugins.plugin.kotlin.android) apply false
     alias(libs.plugins.plugin.kotlin.compose) apply false
+    alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp) apply false
     alias(libs.plugins.plugin.maven.publish) apply false
 }
@@ -53,3 +54,11 @@ tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "1.8"
 }
 // endregion
+
+kover {
+    currentProject {
+        instrumentation {
+            disabledForTestTasks.add("testReleaseUnitTest")
+        }
+    }
+}

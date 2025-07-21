@@ -106,6 +106,41 @@ dependencies {
     testImplementation(libs.bundles.test)
 }
 
+kover {
+    currentProject {
+        instrumentation {
+            disabledForTestTasks.add("testReleaseUnitTest")
+        }
+    }
+    reports {
+        filters {
+            excludes {
+                // exclusion rules - classes to exclude from report
+                classes(
+                    // DI
+                    "org.koin.ksp.generated.*",
+                    "com.makeappssimple.abhimanyu.barcodes.android.di.*",
+
+                    // UI
+                    "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
+
+                    // "com.example.Class2",
+                )
+
+                packages(
+                    // UI
+                    "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
+                    "com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.*",
+                )
+            }
+            includes {
+                // inclusion rules - classes only those that will be present in reports
+                // classes("com.example.Class1", "com.example.Class3")
+            }
+        }
+    }
+}
+
 ksp {
     arg("KOIN_CONFIG_CHECK", "true")
     arg("KOIN_DEFAULT_MODULE", "false")
