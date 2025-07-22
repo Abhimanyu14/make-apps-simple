@@ -116,18 +116,15 @@ kover {
         filters {
             excludes {
                 // exclusion rules - classes to exclude from report
-                classes(
-                    // DI
-                    "org.koin.ksp.generated.*",
-                    "com.makeappssimple.abhimanyu.barcodes.android.di.*",
-
-                    // UI
-                    "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
-
-                    // "com.example.Class2",
-                )
+                // classes(
+                //      "com.example.Class2",
+                // )
 
                 packages(
+                    // DI
+                    "org.koin.ksp.generated",
+                    "com.makeappssimple.abhimanyu.barcodes.android.di.*",
+
                     // UI
                     "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
                     "com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.*",
