@@ -226,6 +226,7 @@ test = [
     "androidx-test-ext-truth",
     "junit",
     "kotlinx-coroutines-test",
+    "turbine",
 ]
 room = [
     "androidx-room-ktx",
