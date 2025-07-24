@@ -30,6 +30,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.screen.HomeScreenUIData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -92,8 +93,8 @@ internal class HomeScreenViewModel(
 
     fun saveBarcode(
         barcode: Barcode,
-    ) {
-        viewModelScope.launch {
+    ): Job {
+        return viewModelScope.launch {
             barcodeRepository.insertBarcodes(
                 barcode,
             )
@@ -102,8 +103,8 @@ internal class HomeScreenViewModel(
 
     fun deleteBarcodes(
         barcodes: List<Barcode>,
-    ) {
-        viewModelScope.launch {
+    ): Job {
+        return viewModelScope.launch {
             barcodeRepository.deleteBarcodes(
                 barcodes = barcodes.toTypedArray(),
             )
