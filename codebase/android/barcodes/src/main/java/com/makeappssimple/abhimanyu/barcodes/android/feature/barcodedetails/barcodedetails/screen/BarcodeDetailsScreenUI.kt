@@ -36,7 +36,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -266,7 +265,7 @@ internal fun BarcodeDetailsScreenUI(
                         )
                     }
                 }
-                uiState.bitmap?.let {
+                uiState.imageBitmap?.let {
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
@@ -274,7 +273,7 @@ internal fun BarcodeDetailsScreenUI(
                     ) {
                         // TODO(Abhi): Change image dimensions for Barcode
                         MyImage(
-                            bitmap = it.asImageBitmap(),
+                            bitmap = it,
                             contentDescriptionStringResourceId = R.string.screen_barcode_details_content_description_barcode_image,
                         )
                     }

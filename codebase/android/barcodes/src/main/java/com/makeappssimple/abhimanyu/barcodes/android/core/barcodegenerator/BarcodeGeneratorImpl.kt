@@ -17,6 +17,8 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator
 
 import android.graphics.Bitmap
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
@@ -34,8 +36,8 @@ internal class BarcodeGeneratorImpl(
         height: Int,
         barcodeColor: Int,
         backgroundColor: Int,
-    ): Bitmap? {
-        var bitmap: Bitmap? = null
+    ): ImageBitmap? {
+        var imageBitmap: ImageBitmap? = null
         withContext(
             context = dispatcherProvider.default,
         ) {
@@ -53,13 +55,13 @@ internal class BarcodeGeneratorImpl(
                 barcodeColor = barcodeColor,
                 backgroundColor = backgroundColor,
             )
-            bitmap = createBitmap(
+            imageBitmap = createBitmap(
                 width = bitMatrix.width,
                 height = bitMatrix.height,
                 pixels = pixels,
-            )
+            )?.asImageBitmap()
         }
-        return bitmap
+        return imageBitmap
     }
 
     private fun getBitMatrix(
@@ -74,7 +76,7 @@ internal class BarcodeGeneratorImpl(
         return try {
             MultiFormatWriter().encode(data, barcodeFormat, width, height, null)
         } catch (
-            illegalArgumentException: IllegalArgumentException,
+            _: IllegalArgumentException,
         ) {
             null
         }
@@ -105,7 +107,7 @@ internal class BarcodeGeneratorImpl(
         width: Int,
         height: Int,
         pixels: IntArray,
-    ): Bitmap {
+    ): Bitmap? {
         return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             .also {
                 it.setPixels(pixels, 0, width, 0, 0, width, height)

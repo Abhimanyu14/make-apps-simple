@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel
 
-import android.graphics.Bitmap
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
@@ -73,7 +73,7 @@ internal class BarcodeDetailsScreenViewModel(
     private val barcode = MutableStateFlow<Barcode?>(
         value = null,
     )
-    private val barcodeBitmap: StateFlow<Bitmap?> = combine(
+    private val barcodeBitmap: StateFlow<ImageBitmap?> = combine(
         barcode,
         barcodeBitmapSize,
     ) {
@@ -111,7 +111,7 @@ internal class BarcodeDetailsScreenViewModel(
                         formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
                             timestamp = barcode.timestamp,
                         ),
-                        bitmap = barcodeBitmap,
+                        imageBitmap = barcodeBitmap,
                     ),
                 )
             }

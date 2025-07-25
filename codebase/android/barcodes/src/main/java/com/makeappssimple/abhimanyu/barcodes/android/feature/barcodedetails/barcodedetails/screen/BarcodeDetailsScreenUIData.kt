@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.screen
 
-import android.graphics.Bitmap
 import androidx.annotation.Keep
+import androidx.compose.ui.graphics.ImageBitmap
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIData
 
@@ -25,5 +25,5 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIData
 internal data class BarcodeDetailsScreenUIData(
     val barcode: Barcode,
     val formattedTimestamp: String,
-    val bitmap: Bitmap?,
+    val imageBitmap: ImageBitmap?,
 ) : ScreenUIData

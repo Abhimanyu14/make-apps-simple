@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state
 
-import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.graphics.ImageBitmap
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
@@ -41,7 +41,7 @@ internal class BarcodeDetailsScreenUIState(
     },
     val barcode: Barcode? = unwrappedData?.barcode,
     val formattedTimestamp: String = unwrappedData?.formattedTimestamp.orEmpty(),
-    val bitmap: Bitmap? = unwrappedData?.bitmap,
+    val imageBitmap: ImageBitmap? = unwrappedData?.imageBitmap,
     val isDeleteBarcodeDialogVisible: Boolean,
     val setIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
 ) : ScreenUIState

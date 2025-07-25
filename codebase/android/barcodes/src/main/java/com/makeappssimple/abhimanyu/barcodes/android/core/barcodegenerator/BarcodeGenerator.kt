@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator
 
-import android.graphics.Bitmap
 import android.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 
 private object BarcodeDefault {
     const val WIDTH: Int = 500
@@ -34,5 +34,5 @@ internal interface BarcodeGenerator {
         height: Int = BarcodeDefault.HEIGHT,
         barcodeColor: Int = BarcodeDefault.BARCODE_COLOR,
         backgroundColor: Int = BarcodeDefault.BACKGROUND_COLOR,
-    ): Bitmap?
+    ): ImageBitmap?
 }
