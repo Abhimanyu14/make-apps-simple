@@ -33,6 +33,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
+import com.makeappssimple.abhimanyu.barcodes.android.core.webview.WebView
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.event.WebViewScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIState
 

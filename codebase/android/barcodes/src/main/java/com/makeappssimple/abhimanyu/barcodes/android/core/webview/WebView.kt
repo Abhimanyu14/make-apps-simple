@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.screen
+package com.makeappssimple.abhimanyu.barcodes.android.core.webview
 
 import android.webkit.WebView
 import android.webkit.WebViewClient
