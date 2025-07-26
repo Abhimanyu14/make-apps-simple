@@ -30,30 +30,15 @@ internal class SettingsScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
+    navigationKit: NavigationKit,
     screenUICommonState: ScreenUICommonState,
-    private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.Settings,
     screenUICommonState = screenUICommonState,
 ) {
     override fun updateUiStateAndStateEvents() {}
-
-    fun navigateToCreditsScreen() {
-        navigationKit.navigateToCreditsScreen()
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
-    }
-
-    fun navigateToWebViewScreen(
-        url: String,
-    ) {
-        navigationKit.navigateToWebViewScreen(
-            url = url,
-        )
-    }
 }

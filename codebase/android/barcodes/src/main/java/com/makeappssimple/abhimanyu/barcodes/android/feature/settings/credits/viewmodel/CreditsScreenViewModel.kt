@@ -35,16 +35,16 @@ internal class CreditsScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
-    private val navigationKit: NavigationKit,
+    navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.Credits,
     screenUICommonState = screenUICommonState,
 ), CreditsScreenUIStateDelegate by CreditsScreenUIStateDelegateImpl(
-    navigationKit = navigationKit,
     screenUICommonState = screenUICommonState,
 ) {
     // region uiState and uiStateEvents

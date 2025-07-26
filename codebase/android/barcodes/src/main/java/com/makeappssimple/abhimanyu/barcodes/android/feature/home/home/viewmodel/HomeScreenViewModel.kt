@@ -42,14 +42,15 @@ internal class HomeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
+    navigationKit: NavigationKit,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
-    private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.Home,
     screenUICommonState = screenUICommonState,
 ) {
@@ -71,26 +72,6 @@ internal class HomeScreenViewModel(
     )
 
     override fun updateUiStateAndStateEvents() {}
-
-    fun navigateToCreateBarcodeScreen() {
-        navigationKit.navigateToCreateBarcodeScreen()
-    }
-
-    fun navigateToScanBarcodeScreen() {
-        navigationKit.navigateToScanBarcodeScreen()
-    }
-
-    fun navigateToSettingsScreen() {
-        navigationKit.navigateToSettingsScreen()
-    }
-
-    fun navigateToBarcodeDetailsScreen(
-        barcodeId: Int,
-    ) {
-        navigationKit.navigateToBarcodeDetailsScreen(
-            barcodeId = barcodeId,
-        )
-    }
 
     fun saveBarcode(
         barcode: Barcode,

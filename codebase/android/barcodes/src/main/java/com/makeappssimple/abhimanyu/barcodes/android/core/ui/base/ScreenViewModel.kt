@@ -21,6 +21,7 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -31,11 +32,12 @@ internal abstract class ScreenViewModel(
     viewModelScope: CoroutineScope,
     private val analyticsKit: AnalyticsKit,
     private val logKit: LogKit,
+    private val navigationKit: NavigationKit,
     private val screen: Screen,
     private val screenUICommonState: ScreenUICommonState,
 ) : ViewModel(
     viewModelScope = viewModelScope,
-) {
+), NavigationKit by navigationKit {
     open fun initViewModel() {
         trackScreen()
         observeForRefreshSignal()

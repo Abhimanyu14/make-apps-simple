@@ -81,17 +81,6 @@ internal class NavigationKitImpl(
         )
     }
 
-    override fun navigateUpAndNavigateToBarcodeDetailsScreen(
-        barcodeId: Int,
-    ): Job {
-        return coroutineScope.launch {
-            navigateUp().join()
-            navigateToBarcodeDetailsScreen(
-                barcodeId = barcodeId,
-            )
-        }
-    }
-
     override fun navigateToWebViewScreen(
         url: String,
     ): Job {

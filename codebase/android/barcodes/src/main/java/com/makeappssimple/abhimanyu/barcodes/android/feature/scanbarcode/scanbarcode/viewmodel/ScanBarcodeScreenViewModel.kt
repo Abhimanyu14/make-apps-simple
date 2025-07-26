@@ -43,15 +43,16 @@ internal class ScanBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
-    private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.ScanBarcode,
     screenUICommonState = screenUICommonState,
 ) {
@@ -77,10 +78,6 @@ internal class ScanBarcodeScreenViewModel(
         return dateTimeKit.getCurrentTimeMillis()
     }
 
-    fun navigateUp() {
-        navigationKit.navigateUp()
-    }
-
     fun saveBarcode(
         barcodeFormat: Int,
         barcodeValue: String,
@@ -94,7 +91,8 @@ internal class ScanBarcodeScreenViewModel(
                     value = barcodeValue,
                 ),
             ).first().toInt()
-            navigationKit.navigateUpAndNavigateToBarcodeDetailsScreen(
+            navigateUp().join()
+            navigateToBarcodeDetailsScreen(
                 barcodeId = barcodeId,
             )
         }

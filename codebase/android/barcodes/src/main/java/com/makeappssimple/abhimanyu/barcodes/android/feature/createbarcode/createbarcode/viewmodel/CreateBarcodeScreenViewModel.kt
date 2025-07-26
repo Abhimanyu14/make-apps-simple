@@ -49,16 +49,17 @@ internal class CreateBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
-    private val navigationKit: NavigationKit,
     private val clipboardKit: ClipboardKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.CreateBarcode,
     screenUICommonState = screenUICommonState,
 ) {
@@ -102,10 +103,6 @@ internal class CreateBarcodeScreenViewModel(
         return viewModelScope.launch {
             fetchBarcode()
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     @OptIn(ExperimentalTime::class)

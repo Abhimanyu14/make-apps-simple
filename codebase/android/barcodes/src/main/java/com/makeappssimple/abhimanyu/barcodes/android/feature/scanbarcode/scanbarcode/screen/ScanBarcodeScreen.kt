@@ -94,6 +94,7 @@ internal fun ScanBarcodeScreen(
             }
         } else {
             screenViewModel.navigateUp()
+            Unit
         }
     }
 

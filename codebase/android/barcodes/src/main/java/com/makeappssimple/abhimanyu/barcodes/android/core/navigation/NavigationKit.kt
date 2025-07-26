@@ -40,10 +40,6 @@ internal interface NavigationKit {
 
     fun navigateUp(): Job
 
-    fun navigateUpAndNavigateToBarcodeDetailsScreen(
-        barcodeId: Int,
-    ): Job
-
     fun navigateToWebViewScreen(
         url: String,
     ): Job

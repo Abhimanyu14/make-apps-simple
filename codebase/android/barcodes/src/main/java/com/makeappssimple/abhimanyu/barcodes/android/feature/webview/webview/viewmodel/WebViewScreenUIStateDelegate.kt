@@ -24,8 +24,6 @@ internal interface WebViewScreenUIStateDelegate {
     // endregion
 
     // region state events
-    fun navigateUp(): Job
-
     fun updateScreenTitle(
         updatedScreenTitle: String,
         shouldRefresh: Boolean = true,

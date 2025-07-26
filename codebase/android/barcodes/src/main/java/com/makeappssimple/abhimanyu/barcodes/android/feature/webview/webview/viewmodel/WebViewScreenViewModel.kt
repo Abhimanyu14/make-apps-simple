@@ -38,18 +38,18 @@ internal class WebViewScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     stringDecoder: StringDecoder,
-    private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.WebView,
     screenUICommonState = screenUICommonState,
 ), WebViewScreenUIStateDelegate by WebViewScreenUIStateDelegateImpl(
-    navigationKit = navigationKit,
     screenUICommonState = screenUICommonState,
 ) {
     // region screen args

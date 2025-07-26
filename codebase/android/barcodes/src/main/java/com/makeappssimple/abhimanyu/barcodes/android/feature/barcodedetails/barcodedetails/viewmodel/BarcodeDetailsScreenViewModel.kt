@@ -48,17 +48,18 @@ internal class BarcodeDetailsScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeGenerator: BarcodeGenerator,
     private val barcodeRepository: BarcodeRepository,
     private val clipboardKit: ClipboardKit,
     private val dateTimeKit: DateTimeKit,
-    private val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
+    navigationKit = navigationKit,
     screen = Screen.BarcodeDetails,
     screenUICommonState = screenUICommonState,
 ) {
@@ -134,16 +135,6 @@ internal class BarcodeDetailsScreenViewModel(
         barcodeBitmapSize.value = size
     }
 
-    fun navigateUp() {
-        navigationKit.navigateUp()
-    }
-
-    fun navigateToCreateBarcodeScreen() {
-        navigationKit.navigateToCreateBarcodeScreen(
-            barcodeId = barcode.value?.id,
-        )
-    }
-
     fun deleteBarcode() {
         viewModelScope.launch {
             barcode.value?.let {
@@ -152,7 +143,7 @@ internal class BarcodeDetailsScreenViewModel(
                 )
             }
         }
-        navigationKit.navigateToHomeScreen()
+        navigateToHomeScreen()
     }
 
     fun copyToClipboard(
