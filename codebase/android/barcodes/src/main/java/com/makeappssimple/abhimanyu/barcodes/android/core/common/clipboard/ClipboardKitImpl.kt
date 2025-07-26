@@ -22,7 +22,9 @@ import android.content.Context
 
 internal const val BARCODE_VALUE_CLIPBOARD_LABEL: String = "Barcode value"
 
-internal class ClipboardKitImpl : ClipboardKit {
+internal class ClipboardKitImpl(
+    private val context: Context,
+) : ClipboardKit {
     /**
      * Copies the given text to the clipboard with the specified label.
      *
@@ -32,7 +34,6 @@ internal class ClipboardKitImpl : ClipboardKit {
      * @return True if the copy succeeded, false otherwise.
      */
     override fun copyToClipboard(
-        context: Context,
         label: String,
         text: String,
     ): Boolean {

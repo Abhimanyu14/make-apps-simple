@@ -39,7 +39,7 @@ import kotlin.math.min
 internal fun BarcodeDetailsScreen(
     screenViewModel: BarcodeDetailsScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside BarcodeDetailsScreen",
     )
 
@@ -54,8 +54,7 @@ internal fun BarcodeDetailsScreen(
     )
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (
-            screenViewModel.clipboardKit.copyToClipboard(
-                context = context,
+            screenViewModel.copyToClipboard(
                 label = BARCODE_VALUE_CLIPBOARD_LABEL,
                 text = uiState.barcode?.value.orEmpty(),
             )

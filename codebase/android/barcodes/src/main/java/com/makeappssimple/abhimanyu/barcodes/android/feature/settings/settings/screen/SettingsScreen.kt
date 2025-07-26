@@ -32,7 +32,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun SettingsScreen(
     screenViewModel: SettingsScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside SettingsScreen",
     )
 

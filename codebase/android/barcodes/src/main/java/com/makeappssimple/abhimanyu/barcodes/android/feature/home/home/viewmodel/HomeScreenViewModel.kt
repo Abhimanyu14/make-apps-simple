@@ -41,14 +41,15 @@ import org.koin.android.annotation.KoinViewModel
 internal class HomeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
-    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.Home,
     screenUICommonState = screenUICommonState,
 ) {

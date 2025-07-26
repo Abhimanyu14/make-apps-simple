@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.fake
 
-import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 
@@ -26,7 +25,6 @@ internal class FakeClipboardKitImpl : ClipboardKit {
     internal val copiedTexts = mutableListOf<Pair<String, String>>()
 
     override fun copyToClipboard(
-        context: Context,
         label: String,
         text: String
     ): Boolean {

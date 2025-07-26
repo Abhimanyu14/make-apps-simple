@@ -34,12 +34,13 @@ import org.koin.android.annotation.KoinViewModel
 internal class CreditsScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
-    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.Credits,
     screenUICommonState = screenUICommonState,
 ), CreditsScreenUIStateDelegate by CreditsScreenUIStateDelegateImpl(

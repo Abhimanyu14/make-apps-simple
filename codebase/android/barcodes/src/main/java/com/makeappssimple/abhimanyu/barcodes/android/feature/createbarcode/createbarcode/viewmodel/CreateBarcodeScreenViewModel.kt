@@ -48,16 +48,17 @@ import kotlin.time.ExperimentalTime
 internal class CreateBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
-    val clipboardKit: ClipboardKit,
-    val logKit: LogKit,
+    private val clipboardKit: ClipboardKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.CreateBarcode,
     screenUICommonState = screenUICommonState,
 ) {
@@ -145,6 +146,16 @@ internal class CreateBarcodeScreenViewModel(
         barcodeValue.update {
             updatedBarcodeValue
         }
+    }
+
+    fun copyToClipboard(
+        label: String,
+        text: String,
+    ): Boolean {
+        return clipboardKit.copyToClipboard(
+            label = label,
+            text = text,
+        )
     }
 
     private suspend fun fetchBarcode() {

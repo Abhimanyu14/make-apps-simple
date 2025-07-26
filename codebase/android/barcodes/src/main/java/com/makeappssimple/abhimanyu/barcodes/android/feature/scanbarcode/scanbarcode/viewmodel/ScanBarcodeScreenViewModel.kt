@@ -42,15 +42,16 @@ import org.koin.android.annotation.KoinViewModel
 internal class ScanBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
+    private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
-    val dateTimeKit: DateTimeKit,
-    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.ScanBarcode,
     screenUICommonState = screenUICommonState,
 ) {
@@ -72,6 +73,14 @@ internal class ScanBarcodeScreenViewModel(
             )
         )
 
+    fun getCurrentTimeMillis(): Long {
+        return dateTimeKit.getCurrentTimeMillis()
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
     fun saveBarcode(
         barcodeFormat: Int,
         barcodeValue: String,
@@ -89,9 +98,5 @@ internal class ScanBarcodeScreenViewModel(
                 barcodeId = barcodeId,
             )
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 }

@@ -25,16 +25,14 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 internal class BarcodeAnalyser(
-    private val dateTimeKit: DateTimeKit,
-    private val logKit: LogKit,
+    private val getCurrentTimeMillis: () -> Long,
+    private val logError: (message: String) -> Unit,
     private val onBarcodesDetected: (barcodes: List<Barcode>) -> Unit,
 ) : ImageAnalysis.Analyzer {
     private var currentTimestamp: Long = 0
@@ -49,11 +47,9 @@ internal class BarcodeAnalyser(
     override fun analyze(
         imageProxy: ImageProxy,
     ) {
-        logKit.logError(
-            message = "Inside analyze",
-        )
+        logError("Inside analyze")
 
-        currentTimestamp = dateTimeKit.getCurrentTimeMillis()
+        currentTimestamp = getCurrentTimeMillis()
         imageProxy.image?.let { imageToAnalyze ->
             val imageToProcess = InputImage.fromMediaImage(
                 imageToAnalyze,
@@ -62,24 +58,18 @@ internal class BarcodeAnalyser(
             barcodeScanner.process(imageToProcess)
                 .addOnSuccessListener { barcodes ->
                     if (barcodes.isNotEmpty()) {
-                        logKit.logError(
-                            message = "Scanned: $barcodes",
-                        )
+                        logError("Scanned: $barcodes")
                         onBarcodesDetected(barcodes)
                     } else {
-                        logKit.logError(
-                            message = "No barcode scanned",
-                        )
+                        logError("No barcode scanned")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    logKit.logError(
-                        message = "BarcodeAnalyser: Something went wrong with exception: $exception",
-                    )
+                    logError("BarcodeAnalyser: Something went wrong with exception: $exception")
                 }
                 .addOnCompleteListener {
                     CoroutineScope(Dispatchers.IO).launch { // TODO(Abhi) - Inject this dispatcher
-                        delay(1000 - (dateTimeKit.getCurrentTimeMillis() - currentTimestamp))
+                        delay(1000 - (getCurrentTimeMillis() - currentTimestamp))
                         imageProxy.close()
                     }
                 }

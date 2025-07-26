@@ -16,11 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard
 
-import android.content.Context
-
 internal interface ClipboardKit {
     fun copyToClipboard(
-        context: Context,
         label: String,
         text: String,
     ): Boolean

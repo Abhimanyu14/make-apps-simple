@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
+import android.content.Context
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKitImpl
 import org.koin.core.annotation.Module
@@ -24,7 +25,11 @@ import org.koin.core.annotation.Single
 @Module
 internal class ClipboardKitModule {
     @Single
-    fun provideClipboardKit(): ClipboardKit {
-        return ClipboardKitImpl()
+    fun provideClipboardKit(
+        context: Context,
+    ): ClipboardKit {
+        return ClipboardKitImpl(
+            context = context,
+        )
     }
 }

@@ -29,12 +29,13 @@ import org.koin.android.annotation.KoinViewModel
 internal class SettingsScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     screenUICommonState: ScreenUICommonState,
     private val navigationKit: NavigationKit,
-    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.Settings,
     screenUICommonState = screenUICommonState,
 ) {

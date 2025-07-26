@@ -55,7 +55,7 @@ import java.util.concurrent.Executors
 internal fun ScanBarcodeScreen(
     screenViewModel: ScanBarcodeScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside ScanBarcodeScreen",
     )
 
@@ -127,12 +127,12 @@ internal fun ScanBarcodeScreen(
         }
 
         val barcodeAnalyser = BarcodeAnalyser(
-            dateTimeKit = screenViewModel.dateTimeKit,
-            logKit = screenViewModel.logKit,
+            logError = screenViewModel::logError,
+            getCurrentTimeMillis = screenViewModel::getCurrentTimeMillis,
         ) { barcodes ->
             barcodes.forEach { barcode ->
                 barcode.rawValue?.let { barcodeValue ->
-                    screenViewModel.logKit.logError(
+                    screenViewModel.logError(
                         message = "Barcode value detected: ${barcodeValue}.",
                     )
 
@@ -162,7 +162,7 @@ internal fun ScanBarcodeScreen(
         } catch (
             exception: Exception,
         ) {
-            screenViewModel.logKit.logError(
+            screenViewModel.logError(
                 message = "Use case binding failed with exception : $exception",
             )
         }

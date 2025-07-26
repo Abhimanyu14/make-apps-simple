@@ -47,17 +47,18 @@ import org.koin.android.annotation.KoinViewModel
 internal class BarcodeDetailsScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     savedStateHandle: SavedStateHandle,
     screenUICommonState: ScreenUICommonState,
     private val barcodeGenerator: BarcodeGenerator,
     private val barcodeRepository: BarcodeRepository,
+    private val clipboardKit: ClipboardKit,
     private val dateTimeKit: DateTimeKit,
     private val navigationKit: NavigationKit,
-    val clipboardKit: ClipboardKit,
-    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.BarcodeDetails,
     screenUICommonState = screenUICommonState,
 ) {
@@ -152,6 +153,16 @@ internal class BarcodeDetailsScreenViewModel(
             }
         }
         navigationKit.navigateToHomeScreen()
+    }
+
+    fun copyToClipboard(
+        label: String,
+        text: String,
+    ): Boolean {
+        return clipboardKit.copyToClipboard(
+            label = label,
+            text = text,
+        )
     }
 
     private suspend fun fetchBarcode() {

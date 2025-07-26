@@ -31,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun WebViewScreen(
     screenViewModel: WebViewScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside WebViewScreen",
     )
 

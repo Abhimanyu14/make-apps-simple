@@ -28,7 +28,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun CreditsScreen(
     screenViewModel: CreditsScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside CreditsScreen",
     )
 

@@ -36,7 +36,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun CreateBarcodeScreen(
     screenViewModel: CreateBarcodeScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside CreateBarcodeScreen",
     )
 
@@ -52,8 +52,7 @@ internal fun CreateBarcodeScreen(
 
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (
-            screenViewModel.clipboardKit.copyToClipboard(
-                context = context,
+            screenViewModel.copyToClipboard(
                 label = BARCODE_VALUE_CLIPBOARD_LABEL,
                 text = uiState.barcodeValue,
             )

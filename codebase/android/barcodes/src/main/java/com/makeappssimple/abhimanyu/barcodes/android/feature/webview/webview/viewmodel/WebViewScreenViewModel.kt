@@ -37,14 +37,15 @@ import org.koin.android.annotation.KoinViewModel
 internal class WebViewScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
+    logKit: LogKit,
     savedStateHandle: SavedStateHandle,
     stringDecoder: StringDecoder,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
-    val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
     analyticsKit = analyticsKit,
+    logKit = logKit,
     screen = Screen.WebView,
     screenUICommonState = screenUICommonState,
 ), WebViewScreenUIStateDelegate by WebViewScreenUIStateDelegateImpl(

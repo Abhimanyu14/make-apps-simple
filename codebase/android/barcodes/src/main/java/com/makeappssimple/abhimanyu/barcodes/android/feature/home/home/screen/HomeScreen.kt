@@ -31,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun HomeScreen(
     screenViewModel: HomeScreenViewModel = koinViewModel(),
 ) {
-    screenViewModel.logKit.logError(
+    screenViewModel.logError(
         message = "Inside HomeScreen",
     )
 
