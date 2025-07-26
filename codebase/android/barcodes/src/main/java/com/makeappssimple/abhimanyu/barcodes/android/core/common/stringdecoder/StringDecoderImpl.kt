@@ -16,16 +16,20 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.stringdecoder
 
+import android.net.Uri
 import kotlinx.serialization.json.Json
 
 internal class StringDecoderImpl(
     private val json: Json = Json,
+    private val jsonUriDecodeString: (String) -> String = { encodedString ->
+        json.decodeFromString(
+            string = Uri.decode(encodedString),
+        )
+    },
 ) : StringDecoder {
     override fun decodeString(
         encodedString: String,
     ): String {
-        return json.decodeFromString(
-            string = encodedString,
-        )
+        return jsonUriDecodeString(encodedString)
     }
 }
