@@ -52,6 +52,16 @@ internal fun BarcodeDetailsScreen(
     val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
         screenViewModel.uiStateEvents
 
+    val showBarcodeValueCopiedToastMessage: () -> Unit = {
+        Toast.makeText(
+            context,
+            context.getString(
+                R.string.screen_barcode_details_barcode_value_copied_toast_message,
+                uiState.barcode?.value.orEmpty(),
+            ),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (
             screenViewModel.copyToClipboard(
@@ -72,12 +82,12 @@ internal fun BarcodeDetailsScreen(
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
-        key2 = copyBarcodeValueToClipboard,
+        key2 = showBarcodeValueCopiedToastMessage,
     ) {
         BarcodeDetailsScreenUIEventHandler(
             screenViewModel = screenViewModel,
             uiStateEvents = uiStateEvents,
-            copyBarcodeValueToClipboard = copyBarcodeValueToClipboard,
+            showBarcodeValueCopiedToastMessage = showBarcodeValueCopiedToastMessage,
         )
     }
 

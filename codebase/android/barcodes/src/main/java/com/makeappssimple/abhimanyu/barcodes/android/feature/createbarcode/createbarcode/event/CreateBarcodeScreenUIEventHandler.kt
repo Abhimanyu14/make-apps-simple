@@ -16,13 +16,14 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event
 
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.viewmodel.CreateBarcodeScreenViewModel
 
 internal class CreateBarcodeScreenUIEventHandler internal constructor(
     private val uiStateEvents: CreateBarcodeScreenUIStateEvents,
     private val screenViewModel: CreateBarcodeScreenViewModel,
-    private val copyBarcodeValueToClipboard: () -> Unit,
+    private val showBarcodeValueCopiedToastMessage: () -> Unit,
     private val triggerInAppReview: () -> Unit,
 ) {
     fun handleUIEvent(
@@ -37,10 +38,6 @@ internal class CreateBarcodeScreenUIEventHandler internal constructor(
                 uiStateEvents.updateBarcodeValue(uiEvent.updatedBarcodeValue)
             }
 
-            is CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick -> {
-                copyBarcodeValueToClipboard()
-            }
-
             is CreateBarcodeScreenUIEvent.OnSaveButtonClick -> {
                 screenViewModel.saveBarcode()
                 triggerInAppReview()
@@ -48,6 +45,17 @@ internal class CreateBarcodeScreenUIEventHandler internal constructor(
 
             is CreateBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
                 screenViewModel.navigateUp()
+            }
+
+            is CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick -> {
+                if (
+                    screenViewModel.copyToClipboard(
+                        label = BARCODE_VALUE_CLIPBOARD_LABEL,
+                        text = uiEvent.barcodeValue,
+                    ) && screenViewModel.shouldShowCopiedToClipboardToastMessage()
+                ) {
+                    showBarcodeValueCopiedToastMessage()
+                }
             }
         }
     }

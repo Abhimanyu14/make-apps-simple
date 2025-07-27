@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.crea
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIEvent
 
 internal sealed class CreateBarcodeScreenUIEvent : ScreenUIEvent {
-    data object OnCopyBarcodeValueButtonClick : CreateBarcodeScreenUIEvent()
     data object OnSaveButtonClick : CreateBarcodeScreenUIEvent()
     data object OnTopAppBarNavigationButtonClick : CreateBarcodeScreenUIEvent()
 
@@ -29,5 +28,9 @@ internal sealed class CreateBarcodeScreenUIEvent : ScreenUIEvent {
 
     data class OnBarcodeValueUpdated(
         val updatedBarcodeValue: String,
+    ) : CreateBarcodeScreenUIEvent()
+
+    data class OnCopyBarcodeValueButtonClick(
+        val barcodeValue: String,
     ) : CreateBarcodeScreenUIEvent()
 }

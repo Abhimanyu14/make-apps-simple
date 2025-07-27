@@ -255,7 +255,11 @@ internal fun BarcodeDetailsScreenUI(
                     MyIconButton(
                         onClickLabelStringResourceId = R.string.screen_barcode_details_content_description_copy_barcode_value,
                         onClick = {
-                            handleUIEvent(BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick)
+                            handleUIEvent(
+                                BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick(
+                                    barcodeValue = uiState.barcode.value,
+                                )
+                            )
                         },
                     ) {
                         MyIcon(

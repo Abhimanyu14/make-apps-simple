@@ -16,11 +16,13 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel
 
+import android.os.Build
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGenerator
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.BuildConfigKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
@@ -52,6 +54,7 @@ internal class BarcodeDetailsScreenViewModel(
     savedStateHandle: SavedStateHandle,
     private val barcodeGenerator: BarcodeGenerator,
     private val barcodeRepository: BarcodeRepository,
+    private val buildConfigKit: BuildConfigKit,
     private val clipboardKit: ClipboardKit,
     private val dateTimeKit: DateTimeKit,
 ) : ScreenViewModel(
@@ -164,6 +167,10 @@ internal class BarcodeDetailsScreenViewModel(
             label = label,
             text = text,
         )
+    }
+
+    fun shouldShowCopiedToClipboardToastMessage(): Boolean {
+        return !buildConfigKit.isAndroidApiEqualToOrAbove(Build.VERSION_CODES.TIRAMISU)
     }
 
     // region state events

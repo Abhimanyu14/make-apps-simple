@@ -16,22 +16,19 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event
 
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel.BarcodeDetailsScreenViewModel
 
 internal class BarcodeDetailsScreenUIEventHandler internal constructor(
     private val uiStateEvents: BarcodeDetailsScreenUIStateEvents,
     private val screenViewModel: BarcodeDetailsScreenViewModel,
-    private val copyBarcodeValueToClipboard: () -> Unit
+    private val showBarcodeValueCopiedToastMessage: () -> Unit
 ) {
     fun handleUIEvent(
         uiEvent: BarcodeDetailsScreenUIEvent,
     ) {
         when (uiEvent) {
-            is BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick -> {
-                copyBarcodeValueToClipboard()
-            }
-
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick -> {
                 screenViewModel.deleteBarcode()
                 uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
@@ -55,6 +52,17 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
 
             is BarcodeDetailsScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
                 screenViewModel.navigateUp()
+            }
+
+            is BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick -> {
+                if (
+                    screenViewModel.copyToClipboard(
+                        label = BARCODE_VALUE_CLIPBOARD_LABEL,
+                        text = uiEvent.barcodeValue,
+                    ) && screenViewModel.shouldShowCopiedToClipboardToastMessage()
+                ) {
+                    showBarcodeValueCopiedToastMessage()
+                }
             }
         }
     }

@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.core.playstorereview.PlayStoreReviewHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event.CreateBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
@@ -49,22 +48,15 @@ internal fun CreateBarcodeScreen(
     val uiStateEvents: CreateBarcodeScreenUIStateEvents =
         screenViewModel.uiStateEvents
 
-    val copyBarcodeValueToClipboard: () -> Unit = {
-        if (
-            screenViewModel.copyToClipboard(
-                label = BARCODE_VALUE_CLIPBOARD_LABEL,
-                text = uiState.barcodeValue,
-            )
-        ) {
-            Toast.makeText(
-                context,
-                context.getString(
-                    R.string.screen_create_barcode_barcode_value_copied_toast_message,
-                    uiState.barcodeValue,
-                ),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+    val showBarcodeValueCopiedToastMessage: () -> Unit = {
+        Toast.makeText(
+            context,
+            context.getString(
+                R.string.screen_create_barcode_barcode_value_copied_toast_message,
+                uiState.barcodeValue,
+            ),
+            Toast.LENGTH_SHORT
+        ).show()
     }
     val triggerInAppReview: () -> Unit = {
         playStoreReviewHandler.triggerInAppReview {
@@ -74,13 +66,13 @@ internal fun CreateBarcodeScreen(
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
-        key2 = copyBarcodeValueToClipboard,
+        key2 = showBarcodeValueCopiedToastMessage,
         key3 = triggerInAppReview,
     ) {
         CreateBarcodeScreenUIEventHandler(
             uiStateEvents = uiStateEvents,
             screenViewModel = screenViewModel,
-            copyBarcodeValueToClipboard = copyBarcodeValueToClipboard,
+            showBarcodeValueCopiedToastMessage = showBarcodeValueCopiedToastMessage,
             triggerInAppReview = triggerInAppReview,
         )
     }

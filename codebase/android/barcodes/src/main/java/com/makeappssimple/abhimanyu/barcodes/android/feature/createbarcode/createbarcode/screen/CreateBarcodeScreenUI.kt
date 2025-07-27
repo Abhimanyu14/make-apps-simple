@@ -196,7 +196,11 @@ internal fun CreateBarcodeScreenUI(
                     MyIconButton(
                         onClickLabelStringResourceId = R.string.screen_create_barcode_content_description_copy_barcode_value,
                         onClick = {
-                            handleUIEvent(CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick)
+                            handleUIEvent(
+                                CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick(
+                                    barcodeValue = uiState.barcodeValue,
+                                )
+                            )
                         },
                         modifier = Modifier
                             .padding(

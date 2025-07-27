@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.bar
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIEvent
 
 internal sealed class BarcodeDetailsScreenUIEvent : ScreenUIEvent {
-    data object OnCopyBarcodeValueButtonClick : BarcodeDetailsScreenUIEvent()
     data object OnTopAppBarNavigationButtonClick : BarcodeDetailsScreenUIEvent()
 
     sealed class OnBarcodeDetailsTopAppBar {
@@ -32,4 +31,8 @@ internal sealed class BarcodeDetailsScreenUIEvent : ScreenUIEvent {
         data object Dismiss : BarcodeDetailsScreenUIEvent()
         data object DismissButtonClick : BarcodeDetailsScreenUIEvent()
     }
+
+    data class OnCopyBarcodeValueButtonClick(
+        val barcodeValue: String,
+    ) : BarcodeDetailsScreenUIEvent()
 }
