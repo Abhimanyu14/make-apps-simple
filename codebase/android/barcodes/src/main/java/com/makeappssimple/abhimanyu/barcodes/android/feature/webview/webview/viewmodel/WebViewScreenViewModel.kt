@@ -20,6 +20,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringdecoder.StringDecoder
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -30,6 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.sta
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import org.koin.android.annotation.KoinViewModel
 
@@ -49,8 +51,6 @@ internal class WebViewScreenViewModel(
     navigationKit = navigationKit,
     screen = Screen.WebView,
     screenUICommonState = screenUICommonState,
-), WebViewScreenUIStateDelegate by WebViewScreenUIStateDelegateImpl(
-    screenUICommonState = screenUICommonState,
 ) {
     // region screen args
     private val screenArgs = WebViewScreenArgs(
@@ -59,24 +59,41 @@ internal class WebViewScreenViewModel(
     )
     // endregion
 
+    // region UI state
+    private val screenTitle = MutableStateFlow(
+        value = "",
+    )
+    // endregion
+
     // region uiState and uiStateEvents
-    private val _uiState: MutableStateFlow<WebViewScreenUIState> =
-        MutableStateFlow(
-            value = WebViewScreenUIState(),
+    val uiState: StateFlow<WebViewScreenUIState> =
+        screenTitle.map { screenTitle ->
+            WebViewScreenUIState(
+                url = screenArgs.url.orEmpty(),
+                screenTitle = screenTitle,
+            )
+        }.defaultObjectStateIn(
+            scope = coroutineScope,
+            initialValue = WebViewScreenUIState(
+                url = screenArgs.url.orEmpty(),
+                screenTitle = "",
+            ),
         )
-    val uiState: StateFlow<WebViewScreenUIState> = _uiState
     val uiStateEvents: WebViewScreenUIStateEvents = WebViewScreenUIStateEvents(
-        navigateUp = ::navigateUp,
         updateScreenTitle = ::updateScreenTitle,
     )
     // endregion
 
     override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            WebViewScreenUIState(
-                url = screenArgs.url.orEmpty(),
-                screenTitle = screenTitle,
-            )
+    }
+
+    // region state events
+    fun updateScreenTitle(
+        updatedScreenTitle: String,
+    ) {
+        screenTitle.update {
+            updatedScreenTitle
         }
     }
+    // endregion
 }

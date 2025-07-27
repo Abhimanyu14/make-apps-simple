@@ -16,21 +16,23 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.event
 
-import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.state.CreditsScreenUIStateEvents
+import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.viewmodel.CreditsScreenViewModel
 
 internal class CreditsScreenUIEventHandler internal constructor(
-    private val uiStateEvents: CreditsScreenUIStateEvents,
+    private val screenViewModel: CreditsScreenViewModel,
 ) {
     fun handleUIEvent(
         uiEvent: CreditsScreenUIEvent,
     ) {
         when (uiEvent) {
             is CreditsScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
-                uiStateEvents.navigateUp()
+                screenViewModel.navigateUp()
             }
 
             is CreditsScreenUIEvent.OnLinkClick -> {
-                uiStateEvents.navigateToWebViewScreen(uiEvent.url)
+                screenViewModel.navigateToWebViewScreen(
+                    url = uiEvent.url,
+                )
             }
         }
     }

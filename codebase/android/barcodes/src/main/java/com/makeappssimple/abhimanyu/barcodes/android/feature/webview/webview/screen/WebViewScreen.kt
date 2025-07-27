@@ -40,9 +40,11 @@ internal fun WebViewScreen(
         screenViewModel.uiStateEvents
 
     val screenUIEventHandler = remember(
-        key1 = uiStateEvents,
+        key1 = screenViewModel,
+        key2 = uiStateEvents,
     ) {
         WebViewScreenUIEventHandler(
+            screenViewModel = screenViewModel,
             uiStateEvents = uiStateEvents,
         )
     }

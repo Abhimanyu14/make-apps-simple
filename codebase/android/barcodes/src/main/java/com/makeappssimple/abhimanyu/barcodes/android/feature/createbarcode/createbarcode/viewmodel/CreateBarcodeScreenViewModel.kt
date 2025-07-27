@@ -83,9 +83,11 @@ internal class CreateBarcodeScreenViewModel(
         originalBarcode,
         barcodeName,
         barcodeValue,
-    ) { originalBarcode,
-        barcodeName,
-        barcodeValue ->
+    ) {
+            originalBarcode,
+            barcodeName,
+            barcodeValue,
+        ->
         CreateBarcodeScreenUIState(
             barcodeName = barcodeName,
             barcodeValue = barcodeValue,

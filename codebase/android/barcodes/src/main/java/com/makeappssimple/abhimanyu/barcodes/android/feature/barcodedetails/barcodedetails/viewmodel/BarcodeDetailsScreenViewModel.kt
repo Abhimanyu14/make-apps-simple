@@ -102,40 +102,42 @@ internal class BarcodeDetailsScreenViewModel(
     private val isDeleteBarcodeDialogVisible = MutableStateFlow(
         value = false,
     )
-    val uiState: StateFlow<BarcodeDetailsScreenUIState> =
-        combine(
+
+    // region uiState and uiStateEvents
+    val uiState: StateFlow<BarcodeDetailsScreenUIState> = combine(
+        barcode,
+        barcodeBitmap,
+        isDeleteBarcodeDialogVisible,
+    ) {
             barcode,
             barcodeBitmap,
             isDeleteBarcodeDialogVisible,
-        ) {
-                barcode,
-                barcodeBitmap,
-                isDeleteBarcodeDialogVisible,
-            ->
-            if (barcode == null) {
-                BarcodeDetailsScreenUIState(
-                    isLoading = true,
-                )
-            } else {
-                BarcodeDetailsScreenUIState(
-                    barcode = barcode,
-                    isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
-                    formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
-                        timestamp = barcode.timestamp,
-                    ),
-                    imageBitmap = barcodeBitmap,
-                )
-            }
-        }.defaultObjectStateIn(
-            scope = viewModelScope,
-            initialValue = BarcodeDetailsScreenUIState(
+        ->
+        if (barcode == null) {
+            BarcodeDetailsScreenUIState(
                 isLoading = true,
-            ),
-        )
+            )
+        } else {
+            BarcodeDetailsScreenUIState(
+                barcode = barcode,
+                isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
+                formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
+                    timestamp = barcode.timestamp,
+                ),
+                imageBitmap = barcodeBitmap,
+            )
+        }
+    }.defaultObjectStateIn(
+        scope = viewModelScope,
+        initialValue = BarcodeDetailsScreenUIState(
+            isLoading = true,
+        ),
+    )
     val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
         BarcodeDetailsScreenUIStateEvents(
             setIsDeleteBarcodeDialogVisible = ::setIsDeleteBarcodeDialogVisible,
         )
+    // endregion
 
     override fun updateUiStateAndStateEvents() {}
 

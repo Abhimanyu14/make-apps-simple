@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.event.CreditsScreenUIEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.state.CreditsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.viewmodel.CreditsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -32,14 +31,11 @@ internal fun CreditsScreen(
         message = "Inside CreditsScreen",
     )
 
-    val uiStateEvents: CreditsScreenUIStateEvents =
-        screenViewModel.uiStateEvents
-
     val screenUIEventHandler = remember(
-        key1 = uiStateEvents,
+        key1 = screenViewModel,
     ) {
         CreditsScreenUIEventHandler(
-            uiStateEvents = uiStateEvents,
+            screenViewModel = screenViewModel,
         )
     }
 

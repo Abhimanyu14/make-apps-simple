@@ -18,35 +18,35 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.event
 
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomsheet.HomeMenuBottomSheetEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomsheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmodel.HomeScreenViewModel
 
 internal class HomeScreenUIEventHandler internal constructor(
+    private val uiStateEvents: HomeScreenUIStateEvents,
     private val screenViewModel: HomeScreenViewModel,
-    private val resetScreenBottomSheetType: () -> Unit,
-    private val setScreenBottomSheetType: (HomeScreenBottomSheetType) -> Unit,
 ) {
     fun handleUIEvent(
         uiEvent: HomeScreenUIEvent,
     ) {
         when (uiEvent) {
             is HomeScreenUIEvent.OnAddFloatingActionButtonClick -> {
-                setScreenBottomSheetType(HomeScreenBottomSheetType.Menu)
+                uiStateEvents.setScreenBottomSheetType(HomeScreenBottomSheetType.Menu)
             }
 
             is HomeScreenUIEvent.OnBottomSheetDismiss -> {
-                resetScreenBottomSheetType()
+                uiStateEvents.resetScreenBottomSheetType()
             }
 
             is HomeScreenUIEvent.OnHomeMenuBottomSheetEvent -> {
                 when (uiEvent.event) {
                     HomeMenuBottomSheetEvent.OnCreateBarcodeButtonClick -> {
                         screenViewModel.navigateToCreateBarcodeScreen()
-                        resetScreenBottomSheetType()
+                        uiStateEvents.resetScreenBottomSheetType()
                     }
 
                     HomeMenuBottomSheetEvent.OnScanBarcodeButtonClick -> {
                         screenViewModel.navigateToScanBarcodeScreen()
-                        resetScreenBottomSheetType()
+                        uiStateEvents.resetScreenBottomSheetType()
                     }
                 }
             }

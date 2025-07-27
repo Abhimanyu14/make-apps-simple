@@ -36,6 +36,7 @@ internal fun SettingsScreen(
         message = "Inside SettingsScreen",
     )
 
+    // region navigateToOpenSourceLicensesScreen
     val context = LocalContext.current
     val openSourceLicensesScreenTitle = stringResource(
         id = R.string.screen_settings_open_source_licenses,
@@ -49,6 +50,7 @@ internal fun SettingsScreen(
             )
         )
     }
+    // endregion
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,

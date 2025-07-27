@@ -77,10 +77,8 @@ internal fun BarcodeDetailsScreen(
     ) {
         BarcodeDetailsScreenUIEventHandler(
             screenViewModel = screenViewModel,
+            uiStateEvents = uiStateEvents,
             copyBarcodeValueToClipboard = copyBarcodeValueToClipboard,
-            setIsDeleteBarcodeDialogVisible = {
-                uiStateEvents.setIsDeleteBarcodeDialogVisible(it)
-            },
         )
     }
 

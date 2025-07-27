@@ -23,11 +23,9 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationK
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.state.CreditsScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.state.CreditsScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
@@ -46,20 +44,10 @@ internal class CreditsScreenViewModel(
     screenUICommonState = screenUICommonState,
 ) {
     // region uiState and uiStateEvents
-    private val _uiState: MutableStateFlow<CreditsScreenUIState> =
-        MutableStateFlow(
-            value = CreditsScreenUIState(),
-        )
-    val uiState: StateFlow<CreditsScreenUIState> = _uiState
-    val uiStateEvents: CreditsScreenUIStateEvents = CreditsScreenUIStateEvents(
-        navigateUp = ::navigateUp,
-        navigateToWebViewScreen = ::navigateToWebViewScreen,
+    val uiState: StateFlow<CreditsScreenUIState> = MutableStateFlow(
+        value = CreditsScreenUIState(),
     )
     // endregion
 
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            CreditsScreenUIState()
-        }
-    }
+    override fun updateUiStateAndStateEvents() {}
 }

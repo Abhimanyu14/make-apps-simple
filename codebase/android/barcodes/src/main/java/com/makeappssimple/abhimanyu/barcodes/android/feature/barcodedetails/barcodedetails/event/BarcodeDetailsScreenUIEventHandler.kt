@@ -16,12 +16,13 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event
 
+import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel.BarcodeDetailsScreenViewModel
 
 internal class BarcodeDetailsScreenUIEventHandler internal constructor(
+    private val uiStateEvents: BarcodeDetailsScreenUIStateEvents,
     private val screenViewModel: BarcodeDetailsScreenViewModel,
-    private val copyBarcodeValueToClipboard: () -> Unit,
-    private val setIsDeleteBarcodeDialogVisible: (Boolean) -> Unit
+    private val copyBarcodeValueToClipboard: () -> Unit
 ) {
     fun handleUIEvent(
         uiEvent: BarcodeDetailsScreenUIEvent,
@@ -33,19 +34,19 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick -> {
                 screenViewModel.deleteBarcode()
-                setIsDeleteBarcodeDialogVisible(false)
+                uiStateEvents.setIsDeleteBarcodeDialogVisible(false)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.Dismiss -> {
-                setIsDeleteBarcodeDialogVisible(false)
+                uiStateEvents.setIsDeleteBarcodeDialogVisible(false)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.DismissButtonClick -> {
-                setIsDeleteBarcodeDialogVisible(false)
+                uiStateEvents.setIsDeleteBarcodeDialogVisible(false)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick -> {
-                setIsDeleteBarcodeDialogVisible(true)
+                uiStateEvents.setIsDeleteBarcodeDialogVisible(true)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick -> {

@@ -43,12 +43,7 @@ internal fun HomeScreen(
     ) {
         HomeScreenUIEventHandler(
             screenViewModel = screenViewModel,
-            resetScreenBottomSheetType = {
-                uiStateEvents.resetScreenBottomSheetType()
-            },
-            setScreenBottomSheetType = {
-                uiStateEvents.setScreenBottomSheetType(it)
-            },
+            uiStateEvents = uiStateEvents,
         )
     }
 

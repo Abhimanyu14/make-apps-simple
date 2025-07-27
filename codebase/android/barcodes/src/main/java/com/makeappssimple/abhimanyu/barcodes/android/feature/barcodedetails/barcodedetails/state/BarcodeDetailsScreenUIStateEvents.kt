@@ -23,6 +23,5 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateE
 @Immutable
 @Keep
 internal data class BarcodeDetailsScreenUIStateEvents(
-    val navigateUp: () -> Unit = {},
     val setIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
 ) : ScreenUIStateEvents

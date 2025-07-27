@@ -17,16 +17,18 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.event
 
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIStateEvents
+import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.viewmodel.WebViewScreenViewModel
 
 internal class WebViewScreenUIEventHandler internal constructor(
     private val uiStateEvents: WebViewScreenUIStateEvents,
+    private val screenViewModel: WebViewScreenViewModel,
 ) {
     fun handleUIEvent(
         uiEvent: WebViewScreenUIEvent,
     ) {
         when (uiEvent) {
             is WebViewScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
-                uiStateEvents.navigateUp()
+                screenViewModel.navigateUp()
             }
 
             is WebViewScreenUIEvent.OnPageLoadingCompleted -> {

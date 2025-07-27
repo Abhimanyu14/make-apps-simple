@@ -23,6 +23,5 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateE
 @Immutable
 @Keep
 internal data class WebViewScreenUIStateEvents(
-    val navigateUp: () -> Unit = {},
     val updateScreenTitle: (updatedScreenTitle: String) -> Unit = {},
 ) : ScreenUIStateEvents
