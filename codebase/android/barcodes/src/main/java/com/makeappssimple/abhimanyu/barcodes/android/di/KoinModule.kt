@@ -42,7 +42,6 @@ internal fun initKoin(
             NavigationKitModule().module,
             PlatformModule().module,
             RoomModule().module,
-            ScreenUICommonStateModule().module,
             StringDecoderModule().module,
             StringEncoderModule().module,
         )

@@ -21,7 +21,6 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.orFalse
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
@@ -44,7 +43,6 @@ internal class ScanBarcodeScreenViewModel(
     logKit: LogKit,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
 ) : ScreenViewModel(
@@ -53,7 +51,6 @@ internal class ScanBarcodeScreenViewModel(
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.ScanBarcode,
-    screenUICommonState = screenUICommonState,
 ) {
     // region screen args
     private val screenArgs = ScanBarcodeScreenArgs(
@@ -69,8 +66,6 @@ internal class ScanBarcodeScreenViewModel(
         ),
     )
     // endregion
-
-    override fun updateUiStateAndStateEvents() {}
 
     fun getCurrentTimeMillis(): Long {
         return dateTimeKit.getCurrentTimeMillis()

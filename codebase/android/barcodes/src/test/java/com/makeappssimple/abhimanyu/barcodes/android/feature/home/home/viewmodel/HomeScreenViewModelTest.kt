@@ -20,9 +20,6 @@ import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKitImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonStateImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.loading.ScreenUIStateLoadingImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.refresh.ScreenUIStateRefreshImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder.StringEncoderImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepositoryImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
@@ -55,15 +52,6 @@ class HomeScreenViewModelTest {
     )
 
     private val analyticsKit = FirebaseAnalyticsKitImpl()
-    private val screenUIStateRefresh = ScreenUIStateRefreshImpl(
-        coroutineScope = testCoroutineScope,
-    )
-    private val screenUIStateLoading = ScreenUIStateLoadingImpl(
-        screenUIStateRefresh = screenUIStateRefresh,
-    )
-    private val screenUICommonState = ScreenUICommonStateImpl(
-        screenUIStateLoading = screenUIStateLoading,
-    )
     private val fakeBarcodeDao = FakeBarcodeDao()
     private val barcodeRepository = BarcodeRepositoryImpl(
         barcodeDao = fakeBarcodeDao,
@@ -85,7 +73,6 @@ class HomeScreenViewModelTest {
         homeScreenViewModel = HomeScreenViewModel(
             analyticsKit = analyticsKit,
             coroutineScope = testCoroutineScope,
-            screenUICommonState = screenUICommonState,
             barcodeRepository = barcodeRepository,
             dateTimeKit = dateTimeKit,
             navigationKit = navigationKit,

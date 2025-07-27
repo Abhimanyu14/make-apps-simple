@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmode
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
@@ -46,7 +45,6 @@ internal class HomeScreenViewModel(
     coroutineScope: CoroutineScope,
     logKit: LogKit,
     navigationKit: NavigationKit,
-    screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
 ) : ScreenViewModel(
@@ -55,7 +53,6 @@ internal class HomeScreenViewModel(
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.Home,
-    screenUICommonState = screenUICommonState,
 ) {
     private var allBarcodes: Flow<List<Barcode>> =
         barcodeRepository.getAllBarcodesFlow()
@@ -90,8 +87,6 @@ internal class HomeScreenViewModel(
         setScreenBottomSheetType = ::setScreenBottomSheetType,
     )
     // endregion
-
-    override fun updateUiStateAndStateEvents() {}
 
     fun saveBarcode(
         barcode: Barcode,

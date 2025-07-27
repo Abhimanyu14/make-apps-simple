@@ -23,7 +23,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGenerator
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyColor
@@ -51,7 +50,6 @@ internal class BarcodeDetailsScreenViewModel(
     logKit: LogKit,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    screenUICommonState: ScreenUICommonState,
     private val barcodeGenerator: BarcodeGenerator,
     private val barcodeRepository: BarcodeRepository,
     private val clipboardKit: ClipboardKit,
@@ -62,7 +60,6 @@ internal class BarcodeDetailsScreenViewModel(
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.BarcodeDetails,
-    screenUICommonState = screenUICommonState,
 ) {
     // region screen args
     private val screenArgs = BarcodeDetailsScreenArgs(
@@ -138,8 +135,6 @@ internal class BarcodeDetailsScreenViewModel(
             setIsDeleteBarcodeDialogVisible = ::setIsDeleteBarcodeDialogVisible,
         )
     // endregion
-
-    override fun updateUiStateAndStateEvents() {}
 
     override fun fetchData(): Job {
         return viewModelScope.launch {

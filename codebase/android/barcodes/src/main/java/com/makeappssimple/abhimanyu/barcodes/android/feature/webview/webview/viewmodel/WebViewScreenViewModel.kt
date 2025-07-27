@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.vi
 
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringdecoder.StringDecoder
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
@@ -43,14 +42,12 @@ internal class WebViewScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     stringDecoder: StringDecoder,
-    private val screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.WebView,
-    screenUICommonState = screenUICommonState,
 ) {
     // region screen args
     private val screenArgs = WebViewScreenArgs(
@@ -83,9 +80,6 @@ internal class WebViewScreenViewModel(
         updateScreenTitle = ::updateScreenTitle,
     )
     // endregion
-
-    override fun updateUiStateAndStateEvents() {
-    }
 
     // region state events
     fun updateScreenTitle(

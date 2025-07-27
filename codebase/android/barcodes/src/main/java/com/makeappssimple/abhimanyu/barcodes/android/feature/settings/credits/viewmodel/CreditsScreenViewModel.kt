@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.viewmodel
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -34,20 +33,16 @@ internal class CreditsScreenViewModel(
     coroutineScope: CoroutineScope,
     logKit: LogKit,
     navigationKit: NavigationKit,
-    screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.Credits,
-    screenUICommonState = screenUICommonState,
 ) {
     // region uiState and uiStateEvents
     val uiState: StateFlow<CreditsScreenUIState> = MutableStateFlow(
         value = CreditsScreenUIState(),
     )
     // endregion
-
-    override fun updateUiStateAndStateEvents() {}
 }

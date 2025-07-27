@@ -17,16 +17,12 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.ui.base
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 internal abstract class ScreenViewModel(
     coroutineScope: CoroutineScope,
@@ -34,18 +30,12 @@ internal abstract class ScreenViewModel(
     private val logKit: LogKit,
     private val navigationKit: NavigationKit,
     private val screen: Screen,
-    private val screenUICommonState: ScreenUICommonState,
 ) : ViewModel(
     viewModelScope = coroutineScope,
 ), NavigationKit by navigationKit {
     open fun initViewModel() {
         trackScreen()
-        observeForRefreshSignal()
-        fetchData().invokeOnCompletion {
-            viewModelScope.launch {
-                screenUICommonState.completeLoading()
-            }
-        }
+        fetchData()
         observeData()
     }
 
@@ -56,8 +46,6 @@ internal abstract class ScreenViewModel(
     }
 
     open fun observeData() {}
-
-    abstract fun updateUiStateAndStateEvents()
 
     fun logError(
         message: String,
@@ -71,13 +59,5 @@ internal abstract class ScreenViewModel(
         analyticsKit.trackScreen(
             screenName = screen.route,
         )
-    }
-
-    private fun observeForRefreshSignal(): Job {
-        return viewModelScope.launch {
-            screenUICommonState.refreshSignal.collectLatest {
-                updateUiStateAndStateEvents()
-            }
-        }
     }
 }

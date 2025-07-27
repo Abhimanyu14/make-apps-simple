@@ -21,7 +21,6 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
@@ -50,7 +49,6 @@ internal class CreateBarcodeScreenViewModel(
     logKit: LogKit,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    screenUICommonState: ScreenUICommonState,
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
     private val clipboardKit: ClipboardKit,
@@ -60,7 +58,6 @@ internal class CreateBarcodeScreenViewModel(
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.CreateBarcode,
-    screenUICommonState = screenUICommonState,
 ) {
     // region screen args
     private val screenArgs = CreateBarcodeScreenArgs(
@@ -98,8 +95,6 @@ internal class CreateBarcodeScreenViewModel(
         initialValue = CreateBarcodeScreenUIState(),
     )
     // endregion
-
-    override fun updateUiStateAndStateEvents() {}
 
     override fun fetchData(): Job {
         return viewModelScope.launch {

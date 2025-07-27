@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.viewmodel
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -31,14 +30,10 @@ internal class SettingsScreenViewModel(
     coroutineScope: CoroutineScope,
     logKit: LogKit,
     navigationKit: NavigationKit,
-    screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.Settings,
-    screenUICommonState = screenUICommonState,
-) {
-    override fun updateUiStateAndStateEvents() {}
-}
+)
