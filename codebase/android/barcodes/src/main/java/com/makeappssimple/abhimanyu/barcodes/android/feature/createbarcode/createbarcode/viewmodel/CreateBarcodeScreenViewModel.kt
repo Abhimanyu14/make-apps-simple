@@ -21,7 +21,6 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
@@ -32,7 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.screen.CreateBarcodeScreenUIData
+import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.navigation.CreateBarcodeScreenArgs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -79,24 +78,24 @@ internal class CreateBarcodeScreenViewModel(
         value = "",
     )
 
-    val screenUIData: StateFlow<MyResult<CreateBarcodeScreenUIData>> = combine(
+    // region uiState and uiStateEvents
+    val uiState: StateFlow<CreateBarcodeScreenUIState> = combine(
         originalBarcode,
         barcodeName,
         barcodeValue,
     ) { originalBarcode,
         barcodeName,
         barcodeValue ->
-        MyResult.Success(
-            data = CreateBarcodeScreenUIData(
-                barcodeName = barcodeName,
-                barcodeValue = barcodeValue,
-                isBarcodeValueEditable = originalBarcode == null,
-            ),
+        CreateBarcodeScreenUIState(
+            barcodeName = barcodeName,
+            barcodeValue = barcodeValue,
+            isBarcodeValueEditable = originalBarcode == null,
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,
-        initialValue = MyResult.Loading,
+        initialValue = CreateBarcodeScreenUIState(),
     )
+    // endregion
 
     override fun updateUiStateAndStateEvents() {}
 

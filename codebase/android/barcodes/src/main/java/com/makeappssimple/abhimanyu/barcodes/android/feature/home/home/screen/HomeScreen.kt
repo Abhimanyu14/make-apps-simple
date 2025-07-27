@@ -21,9 +21,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.event.HomeScreenUIEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.rememberHomeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmodel.HomeScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -35,10 +35,8 @@ internal fun HomeScreen(
         message = "Inside HomeScreen",
     )
 
-    val screenUIData: MyResult<HomeScreenUIData>? by screenViewModel.screenUIData.collectAsStateWithLifecycle()
-    val uiState = rememberHomeScreenUIState(
-        data = screenUIData,
-    )
+    val uiState: HomeScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiStateEvents: HomeScreenUIStateEvents = screenViewModel.uiStateEvents
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
@@ -46,7 +44,10 @@ internal fun HomeScreen(
         HomeScreenUIEventHandler(
             screenViewModel = screenViewModel,
             resetScreenBottomSheetType = {
-                uiState.resetScreenBottomSheetType()
+                uiStateEvents.resetScreenBottomSheetType()
+            },
+            setScreenBottomSheetType = {
+                uiStateEvents.setScreenBottomSheetType(it)
             },
         )
     }

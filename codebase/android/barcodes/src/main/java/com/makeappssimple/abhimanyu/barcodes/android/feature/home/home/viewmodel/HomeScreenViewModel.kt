@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmode
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
@@ -28,12 +27,16 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.screen.HomeScreenUIData
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomsheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
@@ -56,21 +59,37 @@ internal class HomeScreenViewModel(
 ) {
     private var allBarcodes: Flow<List<Barcode>> =
         barcodeRepository.getAllBarcodesFlow()
-    val screenUIData: StateFlow<MyResult<HomeScreenUIData>?> = allBarcodes.map {
-        MyResult.Success(
-            data = HomeScreenUIData(
-                allBarcodes = it,
-                barcodeFormattedTimestamps = it.map { barcode ->
-                    dateTimeKit.getFormattedDateAndTime(
-                        timestamp = barcode.timestamp,
-                    )
-                },
-            ),
+
+    private val homeScreenBottomSheetType: MutableStateFlow<HomeScreenBottomSheetType> =
+        MutableStateFlow(
+            value = HomeScreenBottomSheetType.None,
+        )
+
+    // region uiState and uiStateEvents
+    val uiState: StateFlow<HomeScreenUIState> = combine(
+        allBarcodes,
+        homeScreenBottomSheetType,
+    ) {
+            allBarcodes,
+            homeScreenBottomSheetType,
+        ->
+        HomeScreenUIState(
+            allBarcodes = allBarcodes,
+            barcodeFormattedTimestamps = allBarcodes.map { barcode ->
+                dateTimeKit.getFormattedDateAndTime(
+                    timestamp = barcode.timestamp,
+                )
+            },
+            screenBottomSheetType = homeScreenBottomSheetType,
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,
-        initialValue = MyResult.Loading,
+        initialValue = HomeScreenUIState(),
     )
+    val uiStateEvents: HomeScreenUIStateEvents = HomeScreenUIStateEvents(
+        setScreenBottomSheetType = ::setScreenBottomSheetType,
+    )
+    // endregion
 
     override fun updateUiStateAndStateEvents() {}
 
@@ -91,6 +110,14 @@ internal class HomeScreenViewModel(
             barcodeRepository.deleteBarcodes(
                 barcodes = barcodes.toTypedArray(),
             )
+        }
+    }
+
+    fun setScreenBottomSheetType(
+        updatedHomeScreenBottomSheetType: HomeScreenBottomSheetType,
+    ) {
+        homeScreenBottomSheetType.update {
+            updatedHomeScreenBottomSheetType
         }
     }
 }

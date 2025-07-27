@@ -40,11 +40,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.barcodescanner.BarcodeAnalyser
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_FORMAT
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.DeeplinkConstants.BARCODE_VALUE
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.permissions.rememberIsCameraPermissionGranted
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.rememberScanBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.ScanBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.viewmodel.ScanBarcodeScreenViewModel
 import kotlinx.coroutines.awaitCancellation
 import org.koin.compose.viewmodel.koinViewModel
@@ -64,10 +63,7 @@ internal fun ScanBarcodeScreen(
     val activity = context as? Activity
     val isCameraPermissionGranted = rememberIsCameraPermissionGranted()
 
-    val screenUIData: MyResult<ScanBarcodeScreenUIData>? by screenViewModel.screenUIData.collectAsStateWithLifecycle()
-    val uiState = rememberScanBarcodeScreenUIState(
-        data = screenUIData,
-    )
+    val uiState: ScanBarcodeScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
     val onBarcodeScanned =
         { barcodeFormat: BarcodeFormat, barcodeValue: String ->
             if (uiState.isDeeplink) {

@@ -21,7 +21,6 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.orFalse
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
@@ -31,7 +30,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationK
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.navigation.ScanBarcodeScreenArgs
-import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.screen.ScanBarcodeScreenUIData
+import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.ScanBarcodeScreenUIState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -62,17 +61,16 @@ internal class ScanBarcodeScreenViewModel(
     )
     // endregion
 
-    override fun updateUiStateAndStateEvents() {}
+    // region uiState and uiStateEvents
+    val uiState: StateFlow<ScanBarcodeScreenUIState> = MutableStateFlow(
+        value = ScanBarcodeScreenUIState(
+            isDeeplink = screenArgs.isDeeplink.orFalse(),
+            isCameraPermissionGranted = false, // TODO(Abhi): To remove
+        ),
+    )
+    // endregion
 
-    val screenUIData: StateFlow<MyResult<ScanBarcodeScreenUIData>?> =
-        MutableStateFlow(
-            MyResult.Success(
-                data = ScanBarcodeScreenUIData(
-                    isDeeplink = screenArgs.isDeeplink.orFalse(),
-                    isCameraPermissionGranted = false, // TODO(Abhi): To remove
-                ),
-            )
-        )
+    override fun updateUiStateAndStateEvents() {}
 
     fun getCurrentTimeMillis(): Long {
         return dateTimeKit.getCurrentTimeMillis()

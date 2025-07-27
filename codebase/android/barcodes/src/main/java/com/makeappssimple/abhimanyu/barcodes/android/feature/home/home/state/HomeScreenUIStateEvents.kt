@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.screen
+package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state
 
 import androidx.annotation.Keep
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIData
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomsheet.HomeScreenBottomSheetType
 
+@Immutable
 @Keep
-internal data class HomeScreenUIData(
-    val allBarcodes: List<Barcode>,
-    val barcodeFormattedTimestamps: List<String>,
-) : ScreenUIData
+internal data class HomeScreenUIStateEvents(
+    val setScreenBottomSheetType: (HomeScreenBottomSheetType) -> Unit,
+    val resetScreenBottomSheetType: () -> Unit = {
+        setScreenBottomSheetType(HomeScreenBottomSheetType.None)
+    },
+) : ScreenUIStateEvents

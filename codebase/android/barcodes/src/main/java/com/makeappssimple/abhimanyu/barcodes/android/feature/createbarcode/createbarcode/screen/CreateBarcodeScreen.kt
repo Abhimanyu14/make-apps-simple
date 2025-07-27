@@ -25,10 +25,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.playstorereview.PlayStoreReviewHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event.CreateBarcodeScreenUIEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.rememberCreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.viewmodel.CreateBarcodeScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -45,10 +44,7 @@ internal fun CreateBarcodeScreen(
         PlayStoreReviewHandler(context)
     }
 
-    val screenUIData: MyResult<CreateBarcodeScreenUIData>? by screenViewModel.screenUIData.collectAsStateWithLifecycle()
-    val uiState = rememberCreateBarcodeScreenUIState(
-        data = screenUIData,
-    )
+    val uiState: CreateBarcodeScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
 
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (

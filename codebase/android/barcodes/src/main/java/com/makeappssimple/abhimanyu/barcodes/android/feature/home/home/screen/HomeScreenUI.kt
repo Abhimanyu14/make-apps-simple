@@ -243,7 +243,7 @@ internal fun HomeScreenUI(
                 iconImageVector = MyIcons.Add,
                 contentDescriptionStringResourceId = R.string.screen_home_content_description_add,
                 onClick = {
-                    uiState.setScreenBottomSheetType(HomeScreenBottomSheetType.Menu)
+                    handleUIEvent(HomeScreenUIEvent.OnAddFloatingActionButtonClick)
                 },
             )
         },
@@ -253,7 +253,9 @@ internal fun HomeScreenUI(
         isModalBottomSheetVisible = uiState.screenBottomSheetType != HomeScreenBottomSheetType.None,
         isBackHandlerEnabled = uiState.screenBottomSheetType != HomeScreenBottomSheetType.None,
         coroutineScope = state.coroutineScope,
-        onBottomSheetDismiss = uiState.resetScreenBottomSheetType,
+        onBottomSheetDismiss = {
+            handleUIEvent(HomeScreenUIEvent.OnBottomSheetDismiss)
+        },
     ) {
         AnimatedVisibility(
             visible = isDeleteBarcodeDialogVisible,
