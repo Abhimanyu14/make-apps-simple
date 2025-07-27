@@ -29,14 +29,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 internal abstract class ScreenViewModel(
-    viewModelScope: CoroutineScope,
+    coroutineScope: CoroutineScope,
     private val analyticsKit: AnalyticsKit,
     private val logKit: LogKit,
     private val navigationKit: NavigationKit,
     private val screen: Screen,
     private val screenUICommonState: ScreenUICommonState,
 ) : ViewModel(
-    viewModelScope = viewModelScope,
+    viewModelScope = coroutineScope,
 ), NavigationKit by navigationKit {
     open fun initViewModel() {
         trackScreen()

@@ -55,7 +55,7 @@ internal class CreateBarcodeScreenViewModel(
     private val dateTimeKit: DateTimeKit,
     private val clipboardKit: ClipboardKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,

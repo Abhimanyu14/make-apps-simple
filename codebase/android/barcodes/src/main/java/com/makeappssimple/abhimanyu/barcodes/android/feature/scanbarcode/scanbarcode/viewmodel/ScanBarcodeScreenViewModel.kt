@@ -48,7 +48,7 @@ internal class ScanBarcodeScreenViewModel(
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,

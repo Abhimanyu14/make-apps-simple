@@ -50,7 +50,7 @@ internal class HomeScreenViewModel(
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,

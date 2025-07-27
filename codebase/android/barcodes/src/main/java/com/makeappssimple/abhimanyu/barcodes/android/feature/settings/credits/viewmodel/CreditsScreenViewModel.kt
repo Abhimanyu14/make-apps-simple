@@ -38,7 +38,7 @@ internal class CreditsScreenViewModel(
     navigationKit: NavigationKit,
     screenUICommonState: ScreenUICommonState,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
     logKit = logKit,
     navigationKit = navigationKit,
