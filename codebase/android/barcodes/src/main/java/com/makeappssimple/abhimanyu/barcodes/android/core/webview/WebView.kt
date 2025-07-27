@@ -34,7 +34,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNo
 internal fun WebView(
     modifier: Modifier = Modifier,
     url: String,
-    onPageFinished: (title: String) -> Unit
+    onPageLoadingCompleted: (title: String) -> Unit
 ) {
     var currentPageUrl by remember {
         mutableStateOf("")
@@ -48,7 +48,7 @@ internal fun WebView(
                         view: WebView,
                         url: String,
                     ) {
-                        onPageFinished(view.title.orEmpty())
+                        onPageLoadingCompleted(view.title.orEmpty())
                     }
                 })
             }

@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIEvent
 internal sealed class WebViewScreenUIEvent : ScreenUIEvent {
     data object OnTopAppBarNavigationButtonClick : WebViewScreenUIEvent()
 
-    data class OnPageFinished(
+    data class OnPageLoadingCompleted(
         val screenTitle: String,
     ) : WebViewScreenUIEvent()
 }

@@ -29,7 +29,7 @@ internal class WebViewScreenUIEventHandler internal constructor(
                 uiStateEvents.navigateUp()
             }
 
-            is WebViewScreenUIEvent.OnPageFinished -> {
+            is WebViewScreenUIEvent.OnPageLoadingCompleted -> {
                 uiStateEvents.updateScreenTitle(uiEvent.screenTitle)
             }
         }

@@ -73,8 +73,8 @@ internal fun WebViewScreenUI(
         } else {
             WebView(
                 url = uiState.url,
-                onPageFinished = {
-                    handleUIEvent(WebViewScreenUIEvent.OnPageFinished(it))
+                onPageLoadingCompleted = {
+                    handleUIEvent(WebViewScreenUIEvent.OnPageLoadingCompleted(it))
                 },
                 modifier = Modifier
                     .fillMaxSize()
