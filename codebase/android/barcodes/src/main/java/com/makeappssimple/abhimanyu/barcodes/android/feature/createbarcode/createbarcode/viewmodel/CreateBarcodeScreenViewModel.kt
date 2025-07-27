@@ -23,6 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.BuildConfigKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
@@ -92,9 +93,10 @@ internal class CreateBarcodeScreenViewModel(
             barcodeValue,
         ->
         CreateBarcodeScreenUIState(
+            isBarcodeValid = barcodeName.isNotNullOrBlank() && barcodeValue.isNotNullOrBlank(),
+            isBarcodeValueEditable = originalBarcode == null,
             barcodeName = barcodeName,
             barcodeValue = barcodeValue,
-            isBarcodeValueEditable = originalBarcode == null,
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,

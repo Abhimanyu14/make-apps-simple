@@ -21,6 +21,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
 
 @Stable
 internal class CreateBarcodeScreenUIState(
+    val isBarcodeValid: Boolean = false,
     val isBarcodeValueEditable: Boolean = false,
     val barcodeName: String = "",
     val barcodeValue: String = "",

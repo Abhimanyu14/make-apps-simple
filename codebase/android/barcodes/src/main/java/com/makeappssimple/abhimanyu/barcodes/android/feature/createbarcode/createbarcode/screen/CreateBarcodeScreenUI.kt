@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CREATE_BARCODE
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button.MyElevatedButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.icon.MyIcon
@@ -215,7 +214,7 @@ internal fun CreateBarcodeScreenUI(
                 }
             }
             MyElevatedButton(
-                isEnabled = uiState.barcodeName.isNotNullOrBlank() && uiState.barcodeValue.isNotNullOrBlank(), // TODO(Abhi): Move logic to view model
+                isEnabled = uiState.isBarcodeValid,
                 textStringResourceId = R.string.screen_create_barcode_cta_button_label,
                 onClick = {
                     handleUIEvent(CreateBarcodeScreenUIEvent.OnSaveButtonClick)
