@@ -34,11 +34,13 @@ internal class PlayStoreReviewHandler(
                     // We got the ReviewInfo object
                     val reviewInfo = request.result
 
-                    reviewManager
-                        .launchReviewFlow(context as Activity, reviewInfo)
-                        .addOnCompleteListener {
-                            onComplete()
-                        }
+                    (context as? Activity)?.let { activity ->
+                        reviewManager
+                            .launchReviewFlow(activity, reviewInfo)
+                            .addOnCompleteListener {
+                                onComplete()
+                            }
+                    } ?: onComplete()
                 } else {
                     onComplete()
                 }
