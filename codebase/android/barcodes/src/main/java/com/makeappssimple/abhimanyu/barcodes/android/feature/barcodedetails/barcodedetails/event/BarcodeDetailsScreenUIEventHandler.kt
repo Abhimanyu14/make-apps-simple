@@ -21,6 +21,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barc
 internal class BarcodeDetailsScreenUIEventHandler internal constructor(
     private val screenViewModel: BarcodeDetailsScreenViewModel,
     private val copyBarcodeValueToClipboard: () -> Unit,
+    private val setIsDeleteBarcodeDialogVisible: (Boolean) -> Unit
 ) {
     fun handleUIEvent(
         uiEvent: BarcodeDetailsScreenUIEvent,
@@ -32,6 +33,19 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick -> {
                 screenViewModel.deleteBarcode()
+                setIsDeleteBarcodeDialogVisible(false)
+            }
+
+            is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.Dismiss -> {
+                setIsDeleteBarcodeDialogVisible(false)
+            }
+
+            is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.DismissButtonClick -> {
+                setIsDeleteBarcodeDialogVisible(false)
+            }
+
+            is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick -> {
+                setIsDeleteBarcodeDialogVisible(true)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick -> {

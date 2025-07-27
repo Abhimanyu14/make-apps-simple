@@ -117,7 +117,7 @@ internal fun BarcodeDetailsScreenUI(
                                 textStringResourceId = R.string.screen_barcode_details_content_description_delete_barcode,
                                 onClick = {
                                     isExpanded = false
-                                    uiState.setIsDeleteBarcodeDialogVisible(true)
+                                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick)
                                 },
                                 leadingIconImageVector = MyIcons.Delete,
                             )
@@ -137,13 +137,12 @@ internal fun BarcodeDetailsScreenUI(
             BarcodeDetailsDeleteBarcodeDialog(
                 onConfirmButtonClick = {
                     handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick)
-                    uiState.setIsDeleteBarcodeDialogVisible(false)
                 },
                 onDismiss = {
-                    uiState.setIsDeleteBarcodeDialogVisible(false)
+                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.Dismiss)
                 },
                 onDismissButtonClick = {
-                    uiState.setIsDeleteBarcodeDialogVisible(false)
+                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.DismissButtonClick)
                 },
             )
         }

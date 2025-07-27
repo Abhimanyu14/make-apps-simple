@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.ui.base
+package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state
 
-/**
- * Screen data from ViewModel to UI
- */
-internal interface ScreenUIData
+import androidx.annotation.Keep
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateEvents
+
+@Immutable
+@Keep
+internal data class BarcodeDetailsScreenUIStateEvents(
+    val navigateUp: () -> Unit = {},
+    val setIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
+) : ScreenUIStateEvents

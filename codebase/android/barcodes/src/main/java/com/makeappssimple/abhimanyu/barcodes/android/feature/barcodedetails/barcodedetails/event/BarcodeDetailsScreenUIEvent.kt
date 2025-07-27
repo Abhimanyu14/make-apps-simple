@@ -23,10 +23,13 @@ internal sealed class BarcodeDetailsScreenUIEvent : ScreenUIEvent {
     data object OnTopAppBarNavigationButtonClick : BarcodeDetailsScreenUIEvent()
 
     sealed class OnBarcodeDetailsTopAppBar {
+        data object DeleteBarcodeButtonClick : BarcodeDetailsScreenUIEvent()
         data object EditBarcodeButtonClick : BarcodeDetailsScreenUIEvent()
     }
 
     sealed class OnBarcodeDetailsDeleteBarcodeDialog {
         data object ConfirmButtonClick : BarcodeDetailsScreenUIEvent()
+        data object Dismiss : BarcodeDetailsScreenUIEvent()
+        data object DismissButtonClick : BarcodeDetailsScreenUIEvent()
     }
 }

@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.util.dpToPx
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event.BarcodeDetailsScreenUIEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.rememberBarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.viewmodel.BarcodeDetailsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.min
@@ -48,10 +48,10 @@ internal fun BarcodeDetailsScreen(
     val screenHeight = windowContainerSize.height.dp.dpToPx()
     val screenWidth = windowContainerSize.width.dp.dpToPx()
 
-    val screenUIData: MyResult<BarcodeDetailsScreenUIData>? by screenViewModel.screenUIData.collectAsStateWithLifecycle()
-    val uiState = rememberBarcodeDetailsScreenUIState(
-        data = screenUIData,
-    )
+    val uiState: BarcodeDetailsScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
+        screenViewModel.uiStateEvents
+
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (
             screenViewModel.copyToClipboard(
@@ -70,6 +70,7 @@ internal fun BarcodeDetailsScreen(
         }
     }
 
+
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
         key2 = copyBarcodeValueToClipboard,
@@ -77,6 +78,9 @@ internal fun BarcodeDetailsScreen(
         BarcodeDetailsScreenUIEventHandler(
             screenViewModel = screenViewModel,
             copyBarcodeValueToClipboard = copyBarcodeValueToClipboard,
+            setIsDeleteBarcodeDialogVisible = {
+                uiStateEvents.setIsDeleteBarcodeDialogVisible(it)
+            },
         )
     }
 

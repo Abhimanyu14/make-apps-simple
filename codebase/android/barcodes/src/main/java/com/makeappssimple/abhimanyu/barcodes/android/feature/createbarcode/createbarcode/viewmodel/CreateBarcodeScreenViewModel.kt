@@ -68,7 +68,7 @@ internal class CreateBarcodeScreenViewModel(
     )
     // endregion
 
-    private val originalBarcode = MutableStateFlow<Barcode?>(
+    private val originalBarcode: MutableStateFlow<Barcode?> = MutableStateFlow(
         value = null,
     )
     private val barcodeName = MutableStateFlow(

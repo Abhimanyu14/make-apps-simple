@@ -23,7 +23,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGenerator
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.result.MyResult
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
@@ -33,13 +32,15 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.screen.BarcodeDetailsScreenUIData
+import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.navigation.BarcodeDetailsScreenArgs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
@@ -72,7 +73,7 @@ internal class BarcodeDetailsScreenViewModel(
     private val barcodeBitmapSize = MutableStateFlow(
         value = 0,
     )
-    private val barcode = MutableStateFlow<Barcode?>(
+    private val barcode: MutableStateFlow<Barcode?> = MutableStateFlow(
         value = null,
     )
     private val barcodeBitmap: StateFlow<ImageBitmap?> = combine(
@@ -98,29 +99,42 @@ internal class BarcodeDetailsScreenViewModel(
         scope = viewModelScope,
         initialValue = null,
     )
-
-    val screenUIData: StateFlow<MyResult<BarcodeDetailsScreenUIData>?> =
+    private val isDeleteBarcodeDialogVisible = MutableStateFlow(
+        value = false,
+    )
+    val uiState: StateFlow<BarcodeDetailsScreenUIState> =
         combine(
             barcode,
             barcodeBitmap,
-        ) { barcode,
-            barcodeBitmap ->
+            isDeleteBarcodeDialogVisible,
+        ) {
+                barcode,
+                barcodeBitmap,
+                isDeleteBarcodeDialogVisible,
+            ->
             if (barcode == null) {
-                MyResult.Loading
+                BarcodeDetailsScreenUIState(
+                    isLoading = true,
+                )
             } else {
-                MyResult.Success(
-                    data = BarcodeDetailsScreenUIData(
-                        barcode = barcode,
-                        formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
-                            timestamp = barcode.timestamp,
-                        ),
-                        imageBitmap = barcodeBitmap,
+                BarcodeDetailsScreenUIState(
+                    barcode = barcode,
+                    isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
+                    formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
+                        timestamp = barcode.timestamp,
                     ),
+                    imageBitmap = barcodeBitmap,
                 )
             }
         }.defaultObjectStateIn(
             scope = viewModelScope,
-            initialValue = MyResult.Loading,
+            initialValue = BarcodeDetailsScreenUIState(
+                isLoading = true,
+            ),
+        )
+    val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
+        BarcodeDetailsScreenUIStateEvents(
+            setIsDeleteBarcodeDialogVisible = ::setIsDeleteBarcodeDialogVisible,
         )
 
     override fun updateUiStateAndStateEvents() {}
@@ -156,6 +170,14 @@ internal class BarcodeDetailsScreenViewModel(
             label = label,
             text = text,
         )
+    }
+
+    fun setIsDeleteBarcodeDialogVisible(
+        updatedIsDeleteBarcodeDialogVisible: Boolean,
+    ) {
+        isDeleteBarcodeDialogVisible.update {
+            updatedIsDeleteBarcodeDialogVisible
+        }
     }
 
     private suspend fun fetchBarcode() {
