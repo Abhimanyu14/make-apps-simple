@@ -163,10 +163,12 @@ internal class CreateBarcodeScreenViewModel(
     // endregion
 
     private suspend fun fetchBarcode() {
-        screenArgs.barcodeId?.let {
-            originalBarcode.value = barcodeRepository.getBarcode(
-                id = it,
-            )
+        screenArgs.barcodeId?.let { barcodeId ->
+            originalBarcode.update {
+                barcodeRepository.getBarcode(
+                    id = barcodeId,
+                )
+            }
             barcodeName.update {
                 originalBarcode.value?.name.orEmpty()
             }

@@ -57,10 +57,12 @@ internal class HomeScreenViewModel(
     private var allBarcodes: Flow<List<Barcode>> =
         barcodeRepository.getAllBarcodesFlow()
 
+    // region state
     private val homeScreenBottomSheetType: MutableStateFlow<HomeScreenBottomSheetType> =
         MutableStateFlow(
             value = HomeScreenBottomSheetType.None,
         )
+    // endregion
 
     // region uiState and uiStateEvents
     val uiState: StateFlow<HomeScreenUIState> = combine(
