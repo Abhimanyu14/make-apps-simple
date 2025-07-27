@@ -16,4 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.ui.base
 
+/**
+ * Events related to UI State
+ */
 internal interface ScreenUIStateEvents
