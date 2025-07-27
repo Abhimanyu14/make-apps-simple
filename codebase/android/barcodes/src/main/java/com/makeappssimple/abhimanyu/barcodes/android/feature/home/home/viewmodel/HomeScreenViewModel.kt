@@ -69,6 +69,7 @@ internal class HomeScreenViewModel(
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,
+        initialValue = MyResult.Loading,
     )
 
     override fun updateUiStateAndStateEvents() {}

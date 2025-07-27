@@ -79,7 +79,7 @@ internal class CreateBarcodeScreenViewModel(
         value = "",
     )
 
-    val screenUIData: StateFlow<MyResult<CreateBarcodeScreenUIData>?> = combine(
+    val screenUIData: StateFlow<MyResult<CreateBarcodeScreenUIData>> = combine(
         originalBarcode,
         barcodeName,
         barcodeValue,
@@ -95,6 +95,7 @@ internal class CreateBarcodeScreenViewModel(
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,
+        initialValue = MyResult.Loading,
     )
 
     override fun updateUiStateAndStateEvents() {}

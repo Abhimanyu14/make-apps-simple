@@ -96,6 +96,7 @@ internal class BarcodeDetailsScreenViewModel(
         }
     }.defaultObjectStateIn(
         scope = viewModelScope,
+        initialValue = null,
     )
 
     val screenUIData: StateFlow<MyResult<BarcodeDetailsScreenUIData>?> =
@@ -119,6 +120,7 @@ internal class BarcodeDetailsScreenViewModel(
             }
         }.defaultObjectStateIn(
             scope = viewModelScope,
+            initialValue = MyResult.Loading,
         )
 
     override fun updateUiStateAndStateEvents() {}

@@ -48,13 +48,27 @@ internal fun <T> Flow<List<T>>.defaultListStateIn(
     )
 }
 
-internal fun <T> Flow<T>.defaultObjectStateIn(
+internal fun <T> Flow<T>.defaultNullableObjectStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
         stopTimeoutMillis = 5000,
     ),
     initialValue: T? = null,
 ): StateFlow<T?> {
+    return this.stateIn(
+        scope = scope,
+        started = started,
+        initialValue = initialValue,
+    )
+}
+
+internal fun <T> Flow<T>.defaultObjectStateIn(
+    scope: CoroutineScope,
+    started: SharingStarted = SharingStarted.WhileSubscribed(
+        stopTimeoutMillis = 5000,
+    ),
+    initialValue: T,
+): StateFlow<T> {
     return this.stateIn(
         scope = scope,
         started = started,
