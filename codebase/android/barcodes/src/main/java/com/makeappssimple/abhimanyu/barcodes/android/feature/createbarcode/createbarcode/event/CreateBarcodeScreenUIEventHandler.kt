@@ -16,9 +16,11 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event
 
+import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.viewmodel.CreateBarcodeScreenViewModel
 
 internal class CreateBarcodeScreenUIEventHandler internal constructor(
+    private val uiStateEvents: CreateBarcodeScreenUIStateEvents,
     private val screenViewModel: CreateBarcodeScreenViewModel,
     private val copyBarcodeValueToClipboard: () -> Unit,
     private val triggerInAppReview: () -> Unit,
@@ -28,15 +30,11 @@ internal class CreateBarcodeScreenUIEventHandler internal constructor(
     ) {
         when (uiEvent) {
             is CreateBarcodeScreenUIEvent.OnBarcodeNameUpdated -> {
-                screenViewModel.updateBarcodeName(
-                    updatedBarcodeName = uiEvent.updatedBarcodeName,
-                )
+                uiStateEvents.updateBarcodeName(uiEvent.updatedBarcodeName)
             }
 
             is CreateBarcodeScreenUIEvent.OnBarcodeValueUpdated -> {
-                screenViewModel.updateBarcodeValue(
-                    updatedBarcodeValue = uiEvent.updatedBarcodeValue,
-                )
+                uiStateEvents.updateBarcodeValue(uiEvent.updatedBarcodeValue)
             }
 
             is CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick -> {

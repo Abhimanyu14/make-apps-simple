@@ -24,8 +24,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomshe
 @Immutable
 @Keep
 internal data class HomeScreenUIStateEvents(
-    val setScreenBottomSheetType: (HomeScreenBottomSheetType) -> Unit,
+    val updateScreenBottomSheetType: (HomeScreenBottomSheetType) -> Unit,
     val resetScreenBottomSheetType: () -> Unit = {
-        setScreenBottomSheetType(HomeScreenBottomSheetType.None)
+        updateScreenBottomSheetType(HomeScreenBottomSheetType.None)
     },
 ) : ScreenUIStateEvents

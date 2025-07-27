@@ -84,7 +84,7 @@ internal class HomeScreenViewModel(
         initialValue = HomeScreenUIState(),
     )
     val uiStateEvents: HomeScreenUIStateEvents = HomeScreenUIStateEvents(
-        setScreenBottomSheetType = ::setScreenBottomSheetType,
+        updateScreenBottomSheetType = ::updateScreenBottomSheetType,
     )
     // endregion
 
@@ -108,11 +108,13 @@ internal class HomeScreenViewModel(
         }
     }
 
-    fun setScreenBottomSheetType(
+    // region state events
+    private fun updateScreenBottomSheetType(
         updatedHomeScreenBottomSheetType: HomeScreenBottomSheetType,
     ) {
         homeScreenBottomSheetType.update {
             updatedHomeScreenBottomSheetType
         }
     }
+    // endregion
 }

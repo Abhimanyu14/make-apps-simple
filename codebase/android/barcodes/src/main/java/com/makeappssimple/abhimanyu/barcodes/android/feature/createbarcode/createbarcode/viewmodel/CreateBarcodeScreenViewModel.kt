@@ -31,6 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationK
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.navigation.CreateBarcodeScreenArgs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -65,6 +66,7 @@ internal class CreateBarcodeScreenViewModel(
     )
     // endregion
 
+    // region state
     private val originalBarcode: MutableStateFlow<Barcode?> = MutableStateFlow(
         value = null,
     )
@@ -74,6 +76,7 @@ internal class CreateBarcodeScreenViewModel(
     private val barcodeValue = MutableStateFlow(
         value = "",
     )
+    // endregion
 
     // region uiState and uiStateEvents
     val uiState: StateFlow<CreateBarcodeScreenUIState> = combine(
@@ -94,12 +97,27 @@ internal class CreateBarcodeScreenViewModel(
         scope = viewModelScope,
         initialValue = CreateBarcodeScreenUIState(),
     )
+    val uiStateEvents: CreateBarcodeScreenUIStateEvents =
+        CreateBarcodeScreenUIStateEvents(
+            updateBarcodeName = ::updateBarcodeName,
+            updateBarcodeValue = ::updateBarcodeValue,
+        )
     // endregion
 
     override fun fetchData(): Job {
         return viewModelScope.launch {
             fetchBarcode()
         }
+    }
+
+    fun copyToClipboard(
+        label: String,
+        text: String,
+    ): Boolean {
+        return clipboardKit.copyToClipboard(
+            label = label,
+            text = text,
+        )
     }
 
     @OptIn(ExperimentalTime::class)
@@ -126,7 +144,8 @@ internal class CreateBarcodeScreenViewModel(
         }
     }
 
-    fun updateBarcodeName(
+    // region state events
+    private fun updateBarcodeName(
         updatedBarcodeName: String,
     ) {
         barcodeName.update {
@@ -134,23 +153,14 @@ internal class CreateBarcodeScreenViewModel(
         }
     }
 
-    fun updateBarcodeValue(
+    private fun updateBarcodeValue(
         updatedBarcodeValue: String,
     ) {
         barcodeValue.update {
             updatedBarcodeValue
         }
     }
-
-    fun copyToClipboard(
-        label: String,
-        text: String,
-    ): Boolean {
-        return clipboardKit.copyToClipboard(
-            label = label,
-            text = text,
-        )
-    }
+    // endregion
 
     private suspend fun fetchBarcode() {
         screenArgs.barcodeId?.let {

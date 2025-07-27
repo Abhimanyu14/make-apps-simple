@@ -23,5 +23,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateE
 @Immutable
 @Keep
 internal data class BarcodeDetailsScreenUIStateEvents(
-    val setIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
+    val updateBarcodeBitmapSize: (Int) -> Unit,
+    val updateIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
 ) : ScreenUIStateEvents

@@ -30,7 +30,9 @@ internal class HomeScreenUIEventHandler internal constructor(
     ) {
         when (uiEvent) {
             is HomeScreenUIEvent.OnAddFloatingActionButtonClick -> {
-                uiStateEvents.setScreenBottomSheetType(HomeScreenBottomSheetType.Menu)
+                uiStateEvents.updateScreenBottomSheetType(
+                    HomeScreenBottomSheetType.Menu
+                )
             }
 
             is HomeScreenUIEvent.OnBottomSheetDismiss -> {

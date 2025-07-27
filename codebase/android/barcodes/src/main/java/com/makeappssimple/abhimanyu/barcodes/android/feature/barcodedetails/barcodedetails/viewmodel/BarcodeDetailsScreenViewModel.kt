@@ -67,11 +67,15 @@ internal class BarcodeDetailsScreenViewModel(
     )
     // endregion
 
+    // region state
     private val barcodeBitmapSize = MutableStateFlow(
         value = 0,
     )
     private val barcode: MutableStateFlow<Barcode?> = MutableStateFlow(
         value = null,
+    )
+    private val isDeleteBarcodeDialogVisible = MutableStateFlow(
+        value = false,
     )
     private val barcodeBitmap: StateFlow<ImageBitmap?> = combine(
         barcode,
@@ -96,9 +100,7 @@ internal class BarcodeDetailsScreenViewModel(
         scope = viewModelScope,
         initialValue = null,
     )
-    private val isDeleteBarcodeDialogVisible = MutableStateFlow(
-        value = false,
-    )
+    // endregion
 
     // region uiState and uiStateEvents
     val uiState: StateFlow<BarcodeDetailsScreenUIState> = combine(
@@ -132,7 +134,8 @@ internal class BarcodeDetailsScreenViewModel(
     )
     val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
         BarcodeDetailsScreenUIStateEvents(
-            setIsDeleteBarcodeDialogVisible = ::setIsDeleteBarcodeDialogVisible,
+            updateBarcodeBitmapSize = ::updateBarcodeBitmapSize,
+            updateIsDeleteBarcodeDialogVisible = ::updateIsDeleteBarcodeDialogVisible,
         )
     // endregion
 
@@ -140,12 +143,6 @@ internal class BarcodeDetailsScreenViewModel(
         return viewModelScope.launch {
             fetchBarcode()
         }
-    }
-
-    fun updateBarcodeBitmapSize(
-        size: Int,
-    ) {
-        barcodeBitmapSize.value = size
     }
 
     fun deleteBarcode() {
@@ -169,13 +166,23 @@ internal class BarcodeDetailsScreenViewModel(
         )
     }
 
-    fun setIsDeleteBarcodeDialogVisible(
+    // region state events
+    private fun updateBarcodeBitmapSize(
+        updatedBarcodeBitmapSize: Int,
+    ) {
+        barcodeBitmapSize.update {
+            updatedBarcodeBitmapSize
+        }
+    }
+
+    private fun updateIsDeleteBarcodeDialogVisible(
         updatedIsDeleteBarcodeDialogVisible: Boolean,
     ) {
         isDeleteBarcodeDialogVisible.update {
             updatedIsDeleteBarcodeDialogVisible
         }
     }
+    // endregion
 
     private suspend fun fetchBarcode() {
         screenArgs.originalBarcodeId?.let {

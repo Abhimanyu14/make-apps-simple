@@ -70,7 +70,6 @@ internal fun BarcodeDetailsScreen(
         }
     }
 
-
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
         key2 = copyBarcodeValueToClipboard,
@@ -86,8 +85,8 @@ internal fun BarcodeDetailsScreen(
         key1 = Unit,
     ) {
         screenViewModel.initViewModel()
-        screenViewModel.updateBarcodeBitmapSize(
-            size = min(screenWidth, screenHeight).toInt(),
+        uiStateEvents.updateBarcodeBitmapSize(
+            min(screenWidth, screenHeight).toInt()
         )
     }
 

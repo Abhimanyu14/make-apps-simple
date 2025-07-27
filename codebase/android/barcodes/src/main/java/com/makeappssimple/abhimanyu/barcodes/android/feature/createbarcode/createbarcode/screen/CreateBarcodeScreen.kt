@@ -28,6 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCO
 import com.makeappssimple.abhimanyu.barcodes.android.core.playstorereview.PlayStoreReviewHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event.CreateBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.viewmodel.CreateBarcodeScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -45,6 +46,8 @@ internal fun CreateBarcodeScreen(
     }
 
     val uiState: CreateBarcodeScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiStateEvents: CreateBarcodeScreenUIStateEvents =
+        screenViewModel.uiStateEvents
 
     val copyBarcodeValueToClipboard: () -> Unit = {
         if (
@@ -75,6 +78,7 @@ internal fun CreateBarcodeScreen(
         key3 = triggerInAppReview,
     ) {
         CreateBarcodeScreenUIEventHandler(
+            uiStateEvents = uiStateEvents,
             screenViewModel = screenViewModel,
             copyBarcodeValueToClipboard = copyBarcodeValueToClipboard,
             triggerInAppReview = triggerInAppReview,

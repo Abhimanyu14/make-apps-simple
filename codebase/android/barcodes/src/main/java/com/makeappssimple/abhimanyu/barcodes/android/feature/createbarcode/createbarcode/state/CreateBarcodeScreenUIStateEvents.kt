@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.state
+package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state
 
-import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
+import androidx.annotation.Keep
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateEvents
 
-@Stable
-internal class CreditsScreenUIState : ScreenUIState
+@Immutable
+@Keep
+internal data class CreateBarcodeScreenUIStateEvents(
+    val updateBarcodeName: (String) -> Unit,
+    val updateBarcodeValue: (String) -> Unit,
+) : ScreenUIStateEvents

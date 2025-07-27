@@ -34,19 +34,19 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick -> {
                 screenViewModel.deleteBarcode()
-                uiStateEvents.setIsDeleteBarcodeDialogVisible(false)
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.Dismiss -> {
-                uiStateEvents.setIsDeleteBarcodeDialogVisible(false)
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.DismissButtonClick -> {
-                uiStateEvents.setIsDeleteBarcodeDialogVisible(false)
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick -> {
-                uiStateEvents.setIsDeleteBarcodeDialogVisible(true)
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(true)
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick -> {

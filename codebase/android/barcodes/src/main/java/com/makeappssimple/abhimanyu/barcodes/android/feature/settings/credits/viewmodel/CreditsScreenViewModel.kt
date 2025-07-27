@@ -21,10 +21,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.state.CreditsScreenUIState
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
@@ -39,10 +36,4 @@ internal class CreditsScreenViewModel(
     logKit = logKit,
     navigationKit = navigationKit,
     screen = Screen.Credits,
-) {
-    // region uiState and uiStateEvents
-    val uiState: StateFlow<CreditsScreenUIState> = MutableStateFlow(
-        value = CreditsScreenUIState(),
-    )
-    // endregion
-}
+)

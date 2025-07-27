@@ -56,7 +56,7 @@ internal class WebViewScreenViewModel(
     )
     // endregion
 
-    // region UI state
+    // region state
     private val screenTitle = MutableStateFlow(
         value = "",
     )
@@ -82,7 +82,7 @@ internal class WebViewScreenViewModel(
     // endregion
 
     // region state events
-    fun updateScreenTitle(
+    private fun updateScreenTitle(
         updatedScreenTitle: String,
     ) {
         screenTitle.update {
