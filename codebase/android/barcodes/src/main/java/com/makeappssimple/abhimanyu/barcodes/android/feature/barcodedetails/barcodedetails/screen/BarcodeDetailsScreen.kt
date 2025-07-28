@@ -26,7 +26,6 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.util.dpToPx
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event.BarcodeDetailsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
@@ -61,23 +60,6 @@ internal fun BarcodeDetailsScreen(
             ),
             Toast.LENGTH_SHORT
         ).show()
-    }
-    val copyBarcodeValueToClipboard: () -> Unit = {
-        if (
-            screenViewModel.copyToClipboard(
-                label = BARCODE_VALUE_CLIPBOARD_LABEL,
-                text = uiState.barcode?.value.orEmpty(),
-            )
-        ) {
-            Toast.makeText(
-                context,
-                context.getString(
-                    R.string.screen_barcode_details_barcode_value_copied_toast_message,
-                    uiState.barcode?.value.orEmpty(),
-                ),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 
     val screenUIEventHandler = remember(
