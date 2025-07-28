@@ -214,7 +214,7 @@ internal fun CreateBarcodeScreenUI(
                 }
             }
             MyElevatedButton(
-                isEnabled = uiState.isBarcodeValid,
+                isEnabled = uiState.isSaveButtonEnabled,
                 textStringResourceId = R.string.screen_create_barcode_cta_button_label,
                 onClick = {
                     handleUIEvent(CreateBarcodeScreenUIEvent.OnSaveButtonClick)

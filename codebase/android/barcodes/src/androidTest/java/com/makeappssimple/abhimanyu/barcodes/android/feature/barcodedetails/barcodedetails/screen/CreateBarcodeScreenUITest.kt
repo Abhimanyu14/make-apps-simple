@@ -107,7 +107,7 @@ internal class CreateBarcodeScreenUITest {
     fun ctaButtonEnabled_whenBarcodeIsValid() =
         runUITest {
             setScreenContent(
-                isBarcodeValid = true,
+                isSaveButtonEnabled = true,
             )
 
             assertCtaButtonIsEnabled()
@@ -276,7 +276,7 @@ internal class CreateBarcodeScreenUITest {
     // endregion
 
     private fun setScreenContent(
-        isBarcodeValid: Boolean = false,
+        isSaveButtonEnabled: Boolean = false,
         isBarcodeValueEditable: Boolean = true,
         barcodeName: String = "",
         barcodeValue: String = "",
@@ -285,8 +285,8 @@ internal class CreateBarcodeScreenUITest {
             MyAppTheme {
                 CreateBarcodeScreenUI(
                     uiState = CreateBarcodeScreenUIState(
-                        isBarcodeValid = isBarcodeValid,
                         isBarcodeValueEditable = isBarcodeValueEditable,
+                        isSaveButtonEnabled = isSaveButtonEnabled,
                         barcodeName = barcodeName,
                         barcodeValue = barcodeValue,
                     ),

@@ -93,8 +93,8 @@ internal class CreateBarcodeScreenViewModel(
             barcodeValue,
         ->
         CreateBarcodeScreenUIState(
-            isBarcodeValid = barcodeName.isNotNullOrBlank() && barcodeValue.isNotNullOrBlank(),
             isBarcodeValueEditable = originalBarcode == null,
+            isSaveButtonEnabled = barcodeName.isNotNullOrBlank() && barcodeValue.isNotNullOrBlank(),
             barcodeName = barcodeName,
             barcodeValue = barcodeValue,
         )
