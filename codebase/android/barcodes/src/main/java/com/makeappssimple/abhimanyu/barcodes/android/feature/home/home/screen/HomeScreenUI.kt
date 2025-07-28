@@ -91,10 +91,12 @@ internal fun HomeScreenUI(
     ) {
         mutableStateListOf<Int>()
     }
+    // TODO(Abhi): Move to ViewModel
     val (isDeleteBarcodeDialogVisible, setIsDeleteBarcodeDialogVisible) = rememberSaveable {
         mutableStateOf(false)
     }
     val listItemsDataAndEventHandler =
+        // TODO(Abhi): Remove this mapIndexed
         uiState.allBarcodes.mapIndexed { index, barcode ->
             val toggleIsSelected = {
                 if (!selectedBarcodes.remove(index)) {
@@ -285,33 +287,29 @@ internal fun HomeScreenUI(
         // TODO(Abhi): Empty screen UI
         HomeScreenList(
             listItemsDataAndEventHandler = listItemsDataAndEventHandler,
-            handleUIEvent = handleUIEvent,
-            uiState = uiState,
-            showBarcodeDeletedSnackbar = showBarcodeDeletedSnackbar,
+            onSwipeToEnd = {
+                handleUIEvent(
+                    HomeScreenUIEvent.OnListItem.SwipeToEnd(
+                        barcodes = listOf(uiState.allBarcodes[it]),
+                    ),
+                )
+                showBarcodeDeletedSnackbar(uiState.allBarcodes[it])
+            },
         )
     }
 }
 
 @Composable
 private fun HomeScreenList(
-    uiState: HomeScreenUIState,
     listItemsDataAndEventHandler: List<MyListItemDataEventDataAndEventHandler>,
-    handleUIEvent: (uiEvent: HomeScreenUIEvent) -> Unit,
-    showBarcodeDeletedSnackbar: (Barcode) -> Unit
+    onSwipeToEnd: (Int) -> Unit,
 ) {
     MySwipeableList(
         listItemsDataAndEventHandler = listItemsDataAndEventHandler,
         contentPadding = PaddingValues(
             bottom = 80.dp,
         ),
-        actionOnSwipeToEnd = {
-            handleUIEvent(
-                HomeScreenUIEvent.OnListItem.SwipeToEnd(
-                    barcodes = listOf(uiState.allBarcodes[it]),
-                ),
-            )
-            showBarcodeDeletedSnackbar(uiState.allBarcodes[it])
-        },
+        actionOnSwipeToEnd = onSwipeToEnd,
         backgroundContent = { dismissState: MySwipeToDismissState ->
             val color by animateColorAsState(
                 when (dismissState.targetValue) {
