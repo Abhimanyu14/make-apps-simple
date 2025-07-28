@@ -27,4 +27,7 @@ internal class HomeScreenUIState(
     val screenBottomSheetType: HomeScreenBottomSheetType = HomeScreenBottomSheetType.None,
     val allBarcodes: List<Barcode> = emptyList(),
     val barcodeFormattedTimestamps: List<String> = emptyList(),
+
+    val isModalBottomSheetVisible: Boolean = screenBottomSheetType != HomeScreenBottomSheetType.None,
+    val isBackHandlerEnabled: Boolean = screenBottomSheetType != HomeScreenBottomSheetType.None,
 ) : ScreenUIState

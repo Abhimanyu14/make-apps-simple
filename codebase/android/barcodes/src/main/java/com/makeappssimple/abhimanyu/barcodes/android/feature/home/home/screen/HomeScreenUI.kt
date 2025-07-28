@@ -163,7 +163,7 @@ internal fun HomeScreenUI(
     val isInSelectionMode = selectedBarcodes.isNotEmpty()
 
     BottomSheetHandler(
-        isBottomSheetVisible = uiState.screenBottomSheetType != HomeScreenBottomSheetType.None,
+        isBottomSheetVisible = uiState.isModalBottomSheetVisible,
         screenBottomSheetType = uiState.screenBottomSheetType,
         coroutineScope = state.coroutineScope,
         modalBottomSheetState = state.modalBottomSheetState,
@@ -250,8 +250,8 @@ internal fun HomeScreenUI(
         onClick = {
             state.focusManager.clearFocus()
         },
-        isModalBottomSheetVisible = uiState.screenBottomSheetType != HomeScreenBottomSheetType.None,
-        isBackHandlerEnabled = uiState.screenBottomSheetType != HomeScreenBottomSheetType.None,
+        isModalBottomSheetVisible = uiState.isModalBottomSheetVisible,
+        isBackHandlerEnabled = uiState.isBackHandlerEnabled,
         coroutineScope = state.coroutineScope,
         onBottomSheetDismiss = {
             handleUIEvent(HomeScreenUIEvent.OnBottomSheetDismiss)
