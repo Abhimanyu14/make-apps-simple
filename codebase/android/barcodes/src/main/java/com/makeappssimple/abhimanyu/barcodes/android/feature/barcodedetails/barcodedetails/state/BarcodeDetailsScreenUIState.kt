@@ -22,10 +22,11 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
 
 @Stable
-internal class BarcodeDetailsScreenUIState(
+internal data class BarcodeDetailsScreenUIState(
     val barcode: Barcode? = null,
     val isDeleteBarcodeDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
     val formattedTimestamp: String = "",
+    val formattedTimestampLabelId: Int? = null,
     val imageBitmap: ImageBitmap? = null,
 ) : ScreenUIState

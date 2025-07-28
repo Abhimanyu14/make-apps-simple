@@ -58,7 +58,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBarActionButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.icons.MyIcons
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -189,25 +188,23 @@ internal fun BarcodeDetailsScreenUI(
                             ),
                     )
                 }
-                MyText(
-                    textStringResourceId = if (uiState.barcode.source == BarcodeSource.SCANNED) {
-                        R.string.screen_barcode_details_barcode_timestamp_scanned
-                    } else {
-                        R.string.screen_barcode_details_barcode_timestamp_created
-                    },
-                    style = MyAppTheme.typography.bodyMedium.copy(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            top = 16.dp,
-                            start = 16.dp,
-                            end = 16.dp,
-                            bottom = 0.dp,
+                uiState.formattedTimestampLabelId?.let {
+                    MyText(
+                        textStringResourceId = uiState.formattedTimestampLabelId,
+                        style = MyAppTheme.typography.bodyMedium.copy(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
                         ),
-                )
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = 16.dp,
+                                start = 16.dp,
+                                end = 16.dp,
+                                bottom = 0.dp,
+                            ),
+                    )
+                }
                 MyText(
                     text = uiState.formattedTimestamp,
                     modifier = Modifier

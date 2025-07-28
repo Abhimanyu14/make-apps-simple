@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.util.dpToPx
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event.BarcodeDetailsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIStateEvents
@@ -61,6 +62,15 @@ internal fun BarcodeDetailsScreen(
             Toast.LENGTH_SHORT
         ).show()
     }
+    val formattedTimestampLabelId = remember(
+        key1 = uiState.barcode?.source,
+    ) {
+        if (uiState.barcode?.source == BarcodeSource.SCANNED) {
+            R.string.screen_barcode_details_barcode_timestamp_scanned
+        } else {
+            R.string.screen_barcode_details_barcode_timestamp_created
+        }
+    }
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
@@ -83,7 +93,9 @@ internal fun BarcodeDetailsScreen(
     }
 
     BarcodeDetailsScreenUI(
-        uiState = uiState,
+        uiState = uiState.copy(
+            formattedTimestampLabelId = formattedTimestampLabelId,
+        ),
         handleUIEvent = screenUIEventHandler::handleUIEvent,
     )
 }

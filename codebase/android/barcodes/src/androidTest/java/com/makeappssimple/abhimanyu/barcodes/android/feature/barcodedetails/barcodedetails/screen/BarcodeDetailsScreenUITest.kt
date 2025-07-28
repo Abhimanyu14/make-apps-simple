@@ -26,6 +26,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
@@ -49,6 +50,7 @@ internal class BarcodeDetailsScreenUITest {
             value = testBarcodeValue,
         ),
         formattedTimestamp = formattedTimestamp,
+        formattedTimestampLabelId = R.string.screen_barcode_details_barcode_timestamp_created,
         imageBitmap = createRandomBitmap(),
     )
 
