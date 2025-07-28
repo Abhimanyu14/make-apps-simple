@@ -62,7 +62,6 @@ internal class ScanBarcodeScreenViewModel(
     val uiState: StateFlow<ScanBarcodeScreenUIState> = MutableStateFlow(
         value = ScanBarcodeScreenUIState(
             isDeeplink = screenArgs.isDeeplink.orFalse(),
-            isCameraPermissionGranted = false, // TODO(Abhi): To remove
         ),
     )
     // endregion

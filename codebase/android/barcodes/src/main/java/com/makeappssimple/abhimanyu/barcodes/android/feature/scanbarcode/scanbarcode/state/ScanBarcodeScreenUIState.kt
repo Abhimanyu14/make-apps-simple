@@ -20,7 +20,7 @@ import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
 
 @Stable
-internal class ScanBarcodeScreenUIState(
-    val isCameraPermissionGranted: Boolean,
-    val isDeeplink: Boolean,
+internal data class ScanBarcodeScreenUIState(
+    val isCameraPermissionGranted: Boolean = false,
+    val isDeeplink: Boolean = false,
 ) : ScreenUIState

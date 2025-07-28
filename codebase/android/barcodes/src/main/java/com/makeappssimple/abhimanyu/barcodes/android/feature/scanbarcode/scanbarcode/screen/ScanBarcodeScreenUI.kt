@@ -34,11 +34,12 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.ScanBarcodeScreenUIState
 
 @Composable
 internal fun ScanBarcodeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
-    isCameraPermissionGranted: Boolean,
+    uiState: ScanBarcodeScreenUIState,
     surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
 ) {
@@ -62,7 +63,7 @@ internal fun ScanBarcodeScreenUI(
         coroutineScope = state.coroutineScope,
     ) {
         AnimatedVisibility(
-            visible = isCameraPermissionGranted,
+            visible = uiState.isCameraPermissionGranted,
         ) {
             surfaceRequest?.let {
                 BarcodeScannerPreview(

@@ -197,7 +197,9 @@ internal fun ScanBarcodeScreen(
     }
 
     ScanBarcodeScreenUI(
-        isCameraPermissionGranted = isCameraPermissionGranted == true,
+        uiState = uiState.copy(
+            isCameraPermissionGranted = isCameraPermissionGranted == true,
+        ),
         surfaceRequest = surfaceRequest,
         handleUIEvent = screenUIEventHandler::handleUIEvent,
     )
