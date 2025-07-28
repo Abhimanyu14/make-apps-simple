@@ -72,8 +72,11 @@ android {
 dependencies {
     implementation(project(":cosmos-design-system"))
 
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.room.testing)
     androidTestImplementation(libs.bundles.test)
+
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     implementation(libs.bundles.camera)
     implementation(libs.bundles.coil)
