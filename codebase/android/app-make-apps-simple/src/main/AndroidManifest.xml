@@ -28,6 +28,7 @@
 
         <activity
             android:name=".activity.LauncherActivity"
+            android:configChanges="allKnown"
             android:exported="true"
             android:theme="@style/Theme.MakeAppsSimple">
 

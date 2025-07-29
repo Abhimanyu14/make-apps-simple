@@ -28,6 +28,7 @@
 
         <activity
             android:name="com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity"
+            android:configChanges="allKnown"
             android:exported="true"
             android:theme="@style/Theme.CosmosDesignSystemCatalog"
             tools:replace="android:exported">

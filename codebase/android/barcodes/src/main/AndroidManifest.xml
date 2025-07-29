@@ -33,15 +33,18 @@
 
         <activity
             android:name=".activity.BarcodesActivity"
+            android:configChanges="allKnown"
             android:exported="false" />
 
         <!-- region OssLicensesActivity -->
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:configChanges="allKnown"
             android:theme="@style/Theme.AppCompat.Light" />
 
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:configChanges="allKnown"
             android:theme="@style/Theme.AppCompat.Light" />
         <!-- endregion -->
 
