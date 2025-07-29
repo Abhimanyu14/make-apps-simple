@@ -28,8 +28,6 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
 import org.junit.Rule
 import org.junit.Test
@@ -43,15 +41,11 @@ internal class BarcodeDetailsScreenUITest {
     private val testBarcodeValue = "test-value"
     private val formattedTimestamp = "2023-Mar-30, 02:44 PM"
     private val uiState = BarcodeDetailsScreenUIState(
-        barcode = Barcode(
-            source = BarcodeSource.CREATED,
-            timestamp = 1680155040000L,
-            name = testBarcodeName,
-            value = testBarcodeValue,
-        ),
+        barcodeName = testBarcodeName,
+        barcodeValue = testBarcodeValue,
         formattedTimestamp = formattedTimestamp,
         formattedTimestampLabelId = R.string.screen_barcode_details_barcode_timestamp_created,
-        imageBitmap = createRandomBitmap(),
+        barcodeImageBitmap = createRandomBitmap(),
     )
 
     @Test

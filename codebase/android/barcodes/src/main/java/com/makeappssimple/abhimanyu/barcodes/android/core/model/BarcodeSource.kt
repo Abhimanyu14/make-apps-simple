@@ -19,10 +19,10 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.model
 internal enum class BarcodeSource(
     val title: String,
 ) {
-    SCANNED(
-        title = "Scanned",
-    ),
     CREATED(
         title = "Created",
+    ),
+    SCANNED(
+        title = "Scanned",
     ),
 }

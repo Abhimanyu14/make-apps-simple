@@ -18,15 +18,17 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.bar
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.ImageBitmap
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
+import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
 
 @Stable
 internal data class BarcodeDetailsScreenUIState(
-    val barcode: Barcode? = null,
+    val barcodeSource: BarcodeSource = BarcodeSource.CREATED,
     val isDeleteBarcodeDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
+    val barcodeName: String? = null,
+    val barcodeValue: String = "",
     val formattedTimestamp: String = "",
     val formattedTimestampLabelId: Int? = null,
-    val imageBitmap: ImageBitmap? = null,
+    val barcodeImageBitmap: ImageBitmap? = null,
 ) : ScreenUIState

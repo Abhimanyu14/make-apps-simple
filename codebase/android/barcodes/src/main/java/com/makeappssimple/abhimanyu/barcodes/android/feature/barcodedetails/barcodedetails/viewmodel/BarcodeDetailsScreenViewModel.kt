@@ -121,12 +121,13 @@ internal class BarcodeDetailsScreenViewModel(
             )
         } else {
             BarcodeDetailsScreenUIState(
-                barcode = barcode,
                 isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
+                barcodeName = barcode.name.orEmpty(),
+                barcodeValue = barcode.value,
                 formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
                     timestamp = barcode.timestamp,
                 ),
-                imageBitmap = barcodeBitmap,
+                barcodeImageBitmap = barcodeBitmap,
             )
         }
     }.defaultObjectStateIn(

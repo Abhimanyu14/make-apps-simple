@@ -148,67 +148,37 @@ internal fun BarcodeDetailsScreenUI(
             )
         }
 
-        if (uiState.barcode.isNotNull()) {
-            Column(
-                modifier = Modifier
-                    .testTag(
-                        tag = SCREEN_CONTENT_BARCODE_DETAILS,
-                    )
-                    .background(
-                        color = MyAppTheme.colorScheme.background,
-                    )
-                    .fillMaxSize()
-                    .verticalScroll(
-                        state = rememberScrollState(),
-                    ),
-            ) {
-                uiState.barcode.name?.let { barcodeName ->
-                    MyText(
-                        textStringResourceId = R.string.screen_barcode_details_barcode_name,
-                        style = MyAppTheme.typography.bodyMedium.copy(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 16.dp,
-                                start = 16.dp,
-                                end = 16.dp,
-                                bottom = 0.dp,
-                            ),
-                    )
-                    MyText(
-                        text = barcodeName,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 0.dp,
-                                start = 16.dp,
-                                end = 16.dp,
-                                bottom = 8.dp,
-                            ),
-                    )
-                }
-                uiState.formattedTimestampLabelId?.let {
-                    MyText(
-                        textStringResourceId = uiState.formattedTimestampLabelId,
-                        style = MyAppTheme.typography.bodyMedium.copy(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 16.dp,
-                                start = 16.dp,
-                                end = 16.dp,
-                                bottom = 0.dp,
-                            ),
-                    )
-                }
+        Column(
+            modifier = Modifier
+                .testTag(
+                    tag = SCREEN_CONTENT_BARCODE_DETAILS,
+                )
+                .background(
+                    color = MyAppTheme.colorScheme.background,
+                )
+                .fillMaxSize()
+                .verticalScroll(
+                    state = rememberScrollState(),
+                ),
+        ) {
+            uiState.barcodeName?.let { barcodeName ->
                 MyText(
-                    text = uiState.formattedTimestamp,
+                    textStringResourceId = R.string.screen_barcode_details_barcode_name,
+                    style = MyAppTheme.typography.bodyMedium.copy(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = 16.dp,
+                            start = 16.dp,
+                            end = 16.dp,
+                            bottom = 0.dp,
+                        ),
+                )
+                MyText(
+                    text = barcodeName,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
@@ -218,8 +188,10 @@ internal fun BarcodeDetailsScreenUI(
                             bottom = 8.dp,
                         ),
                 )
+            }
+            uiState.formattedTimestampLabelId?.let {
                 MyText(
-                    textStringResourceId = R.string.screen_barcode_details_barcode_value,
+                    textStringResourceId = uiState.formattedTimestampLabelId,
                     style = MyAppTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
@@ -227,66 +199,92 @@ internal fun BarcodeDetailsScreenUI(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
-                            top = 8.dp,
+                            top = 16.dp,
                             start = 16.dp,
                             end = 16.dp,
                             bottom = 0.dp,
                         ),
                 )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            top = 0.dp,
-                            start = 16.dp,
-                            end = 16.dp,
-                            bottom = 24.dp,
-                        ),
-                ) {
-                    MyText(
-                        text = uiState.barcode.value,
-                        modifier = Modifier
-                            .weight(
-                                weight = 1F,
-                            ),
-                    )
-                    MyIconButton(
-                        onClickLabelStringResourceId = R.string.screen_barcode_details_content_description_copy_barcode_value,
-                        onClick = {
-                            handleUIEvent(
-                                BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick(
-                                    barcodeValue = uiState.barcode.value,
-                                )
-                            )
-                        },
-                    ) {
-                        MyIcon(
-                            imageVector = MyIcons.ContentCopy,
-                            contentDescriptionStringResourceId = R.string.screen_barcode_details_content_description_copy_barcode_value,
-                        )
-                    }
-                }
-                uiState.imageBitmap?.let {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                    ) {
-                        // TODO(Abhi): Change image dimensions for Barcode
-                        MyImage(
-                            bitmap = it,
-                            contentDescriptionStringResourceId = R.string.screen_barcode_details_content_description_barcode_image,
-                        )
-                    }
-                }
-                Spacer(
+            }
+            MyText(
+                text = uiState.formattedTimestamp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 0.dp,
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 8.dp,
+                    ),
+            )
+            MyText(
+                textStringResourceId = R.string.screen_barcode_details_barcode_value,
+                style = MyAppTheme.typography.bodyMedium.copy(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 8.dp,
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 0.dp,
+                    ),
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 0.dp,
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 24.dp,
+                    ),
+            ) {
+                MyText(
+                    text = uiState.barcodeValue,
                     modifier = Modifier
                         .weight(
                             weight = 1F,
                         ),
                 )
+                MyIconButton(
+                    onClickLabelStringResourceId = R.string.screen_barcode_details_content_description_copy_barcode_value,
+                    onClick = {
+                        handleUIEvent(
+                            BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick(
+                                barcodeValue = uiState.barcodeValue,
+                            )
+                        )
+                    },
+                ) {
+                    MyIcon(
+                        imageVector = MyIcons.ContentCopy,
+                        contentDescriptionStringResourceId = R.string.screen_barcode_details_content_description_copy_barcode_value,
+                    )
+                }
             }
+            uiState.barcodeImageBitmap?.let {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    // TODO(Abhi): Change image dimensions for Barcode
+                    MyImage(
+                        bitmap = it,
+                        contentDescriptionStringResourceId = R.string.screen_barcode_details_content_description_barcode_image,
+                    )
+                }
+            }
+            Spacer(
+                modifier = Modifier
+                    .weight(
+                        weight = 1F,
+                    ),
+            )
         }
     }
 }

@@ -57,18 +57,22 @@ internal fun BarcodeDetailsScreen(
             context,
             context.getString(
                 R.string.screen_barcode_details_barcode_value_copied_toast_message,
-                uiState.barcode?.value.orEmpty(),
+                uiState.barcodeValue,
             ),
             Toast.LENGTH_SHORT
         ).show()
     }
     val formattedTimestampLabelId = remember(
-        key1 = uiState.barcode?.source,
+        key1 = uiState.barcodeSource,
     ) {
-        if (uiState.barcode?.source == BarcodeSource.SCANNED) {
-            R.string.screen_barcode_details_barcode_timestamp_scanned
-        } else {
-            R.string.screen_barcode_details_barcode_timestamp_created
+        when (uiState.barcodeSource) {
+            BarcodeSource.CREATED -> {
+                R.string.screen_barcode_details_barcode_timestamp_created
+            }
+
+            BarcodeSource.SCANNED -> {
+                R.string.screen_barcode_details_barcode_timestamp_scanned
+            }
         }
     }
 
