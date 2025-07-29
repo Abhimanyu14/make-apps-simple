@@ -80,6 +80,7 @@ internal fun HomeScreenUI(
     val barcodeDeletedSnackbarActionLabel = stringResource(
         id = R.string.screen_home_barcode_deleted_snackbar_action_label,
     )
+    // TODO(Abhi): Move to view model
     val selectedBarcodes = rememberSaveable(
         saver = listSaver(
             save = {
