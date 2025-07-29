@@ -25,6 +25,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.camera.BarcodeScannerPreview
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_SCAN_BARCODE
@@ -37,9 +38,10 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbar
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.ScanBarcodeScreenUIState
 
 @Composable
+@Preview
 internal fun ScanBarcodeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
-    uiState: ScanBarcodeScreenUIState,
+    uiState: ScanBarcodeScreenUIState = ScanBarcodeScreenUIState(),
     surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
 ) {

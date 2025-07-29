@@ -38,6 +38,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_HOME
@@ -70,9 +71,10 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.Hom
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Preview
 @Composable
 internal fun HomeScreenUI(
-    uiState: HomeScreenUIState,
+    uiState: HomeScreenUIState = HomeScreenUIState(),
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: HomeScreenUIEvent) -> Unit = {},
 ) {

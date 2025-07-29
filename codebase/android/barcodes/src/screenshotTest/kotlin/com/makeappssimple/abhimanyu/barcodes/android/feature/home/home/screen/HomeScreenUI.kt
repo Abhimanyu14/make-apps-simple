@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state
+package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.screen
 
-import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.android.tools.screenshot.PreviewTest
 
-@Stable
-internal class CreateBarcodeScreenUIState(
-    val isBarcodeValueEditable: Boolean = true,
-    val isSaveButtonEnabled: Boolean = false,
-    val barcodeName: String = "",
-    val barcodeValue: String = "",
-) : ScreenUIState
+@PreviewTest
+@Preview(showBackground = true)
+@Composable
+internal fun GreetingPreview() {
+    HomeScreenUI(
+        // uiState = HomeScreenUIState(),
+    )
+}

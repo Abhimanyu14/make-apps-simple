@@ -81,6 +81,8 @@ dependencies {
     androidTestImplementation(libs.bundles.test)
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.tooling.preview)
 
     implementation(libs.bundles.camera)
     implementation(libs.bundles.coil)
