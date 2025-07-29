@@ -47,7 +47,9 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
             }
 
             is BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick -> {
-                screenViewModel.navigateToCreateBarcodeScreen()
+                screenViewModel.navigateToCreateBarcodeScreen(
+                    barcodeId = uiEvent.barcodeId,
+                )
             }
 
             is BarcodeDetailsScreenUIEvent.OnTopAppBarNavigationButtonClick -> {

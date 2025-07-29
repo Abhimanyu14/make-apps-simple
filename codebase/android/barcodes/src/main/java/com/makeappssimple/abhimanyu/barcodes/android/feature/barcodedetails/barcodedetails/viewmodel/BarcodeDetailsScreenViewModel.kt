@@ -121,7 +121,9 @@ internal class BarcodeDetailsScreenViewModel(
             )
         } else {
             BarcodeDetailsScreenUIState(
+                barcodeSource = barcode.source,
                 isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
+                barcodeId = barcode.id,
                 barcodeName = barcode.name,
                 barcodeValue = barcode.value,
                 formattedTimestamp = dateTimeKit.getFormattedDateAndTime(

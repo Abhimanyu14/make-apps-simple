@@ -26,6 +26,7 @@ internal data class BarcodeDetailsScreenUIState(
     val barcodeSource: BarcodeSource = BarcodeSource.CREATED,
     val isDeleteBarcodeDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
+    val barcodeId: Int = -1,
     val barcodeName: String? = null,
     val barcodeValue: String = "",
     val formattedTimestamp: String = "",

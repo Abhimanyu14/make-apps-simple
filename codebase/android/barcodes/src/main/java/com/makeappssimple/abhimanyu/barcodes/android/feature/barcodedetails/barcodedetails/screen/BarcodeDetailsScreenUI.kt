@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_BARCODE_DETAILS
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_BARCODE_DETAILS
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.dialog.DialogData
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.dialog.MyDialog
@@ -109,7 +108,11 @@ internal fun BarcodeDetailsScreenUI(
                                 textStringResourceId = R.string.screen_barcode_details_content_description_edit_barcode,
                                 onClick = {
                                     isExpanded = false
-                                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick)
+                                    handleUIEvent(
+                                        BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick(
+                                            barcodeId = uiState.barcodeId,
+                                        )
+                                    )
                                 },
                                 leadingIconImageVector = MyIcons.Edit,
                             )

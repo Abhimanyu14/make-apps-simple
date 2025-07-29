@@ -23,7 +23,9 @@ internal sealed class BarcodeDetailsScreenUIEvent : ScreenUIEvent {
 
     sealed class OnBarcodeDetailsTopAppBar {
         data object DeleteBarcodeButtonClick : BarcodeDetailsScreenUIEvent()
-        data object EditBarcodeButtonClick : BarcodeDetailsScreenUIEvent()
+        data class EditBarcodeButtonClick(
+            val barcodeId: Int,
+        ) : BarcodeDetailsScreenUIEvent()
     }
 
     sealed class OnBarcodeDetailsDeleteBarcodeDialog {
