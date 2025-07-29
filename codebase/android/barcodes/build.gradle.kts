@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.plugin.kotlin.serialization)
     alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp)
+    alias(libs.plugins.plugin.screenshot)
 }
 
 kotlin {
@@ -67,6 +68,9 @@ android {
         baseline = file("lint-baseline.xml")
         disable += "AndroidGradlePluginVersion"
     }
+
+    // Screenshot testing
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -105,6 +109,9 @@ dependencies {
 
     ksp(libs.androidx.room.compiler)
     ksp(libs.koin.ksp.compiler)
+
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+    screenshotTestImplementation(libs.screenshot.validation.api)
 
     testImplementation(libs.bundles.test)
 }
