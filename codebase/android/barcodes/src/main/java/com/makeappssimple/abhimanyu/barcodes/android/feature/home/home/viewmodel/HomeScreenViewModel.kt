@@ -58,6 +58,9 @@ internal class HomeScreenViewModel(
         barcodeRepository.getAllBarcodesFlow()
 
     // region state
+    private val isDeleteBarcodeDialogVisible = MutableStateFlow(
+        value = false,
+    )
     private val homeScreenBottomSheetType: MutableStateFlow<HomeScreenBottomSheetType> =
         MutableStateFlow(
             value = HomeScreenBottomSheetType.None,
@@ -67,12 +70,15 @@ internal class HomeScreenViewModel(
     // region uiState and uiStateEvents
     val uiState: StateFlow<HomeScreenUIState> = combine(
         allBarcodes,
+        isDeleteBarcodeDialogVisible,
         homeScreenBottomSheetType,
     ) {
             allBarcodes,
+            isDeleteBarcodeDialogVisible,
             homeScreenBottomSheetType,
         ->
         HomeScreenUIState(
+            isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
             allBarcodes = allBarcodes,
             barcodeFormattedTimestamps = allBarcodes.map { barcode ->
                 dateTimeKit.getFormattedDateAndTime(
@@ -87,6 +93,7 @@ internal class HomeScreenViewModel(
     )
     val uiStateEvents: HomeScreenUIStateEvents = HomeScreenUIStateEvents(
         updateScreenBottomSheetType = ::updateScreenBottomSheetType,
+        updateIsDeleteBarcodeDialogVisible = ::updateIsDeleteBarcodeDialogVisible,
     )
     // endregion
 
@@ -111,6 +118,14 @@ internal class HomeScreenViewModel(
     }
 
     // region state events
+    private fun updateIsDeleteBarcodeDialogVisible(
+        updatedIsDeleteBarcodeDialogVisible: Boolean,
+    ) {
+        isDeleteBarcodeDialogVisible.update {
+            updatedIsDeleteBarcodeDialogVisible
+        }
+    }
+
     private fun updateScreenBottomSheetType(
         updatedHomeScreenBottomSheetType: HomeScreenBottomSheetType,
     ) {

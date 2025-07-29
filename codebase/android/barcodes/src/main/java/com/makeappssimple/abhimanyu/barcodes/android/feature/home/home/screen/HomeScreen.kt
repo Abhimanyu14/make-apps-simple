@@ -40,6 +40,7 @@ internal fun HomeScreen(
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
+        key2 = uiStateEvents,
     ) {
         HomeScreenUIEventHandler(
             screenViewModel = screenViewModel,

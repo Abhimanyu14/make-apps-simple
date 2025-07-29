@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomshe
 @Keep
 internal data class HomeScreenUIStateEvents(
     val updateScreenBottomSheetType: (HomeScreenBottomSheetType) -> Unit,
+    val updateIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
     val resetScreenBottomSheetType: () -> Unit = {
         updateScreenBottomSheetType(HomeScreenBottomSheetType.None)
     },

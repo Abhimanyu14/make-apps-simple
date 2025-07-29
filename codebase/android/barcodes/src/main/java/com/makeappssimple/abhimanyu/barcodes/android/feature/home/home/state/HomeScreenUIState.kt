@@ -23,6 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomshe
 
 @Stable
 internal class HomeScreenUIState(
+    val isDeleteBarcodeDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
     val screenBottomSheetType: HomeScreenBottomSheetType = HomeScreenBottomSheetType.None,
     val allBarcodes: List<Barcode> = emptyList(),

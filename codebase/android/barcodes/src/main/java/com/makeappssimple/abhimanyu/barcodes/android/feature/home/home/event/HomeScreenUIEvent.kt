@@ -38,6 +38,9 @@ internal sealed class HomeScreenUIEvent : ScreenUIEvent {
         data class ConfirmButtonClick(
             val barcodes: List<Barcode>,
         ) : HomeScreenUIEvent()
+
+        data object Dismiss : HomeScreenUIEvent()
+        data object DismissButtonClick : HomeScreenUIEvent()
     }
 
     sealed class OnListItem {
@@ -51,6 +54,7 @@ internal sealed class HomeScreenUIEvent : ScreenUIEvent {
     }
 
     sealed class OnTopAppBar {
+        data object DeleteBarcodeButtonClick : HomeScreenUIEvent()
         data object SettingsButtonClick : HomeScreenUIEvent()
     }
 }

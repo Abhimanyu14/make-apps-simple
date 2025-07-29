@@ -63,6 +63,15 @@ internal class HomeScreenUIEventHandler internal constructor(
                 screenViewModel.deleteBarcodes(
                     barcodes = uiEvent.barcodes,
                 )
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
+            }
+
+            is HomeScreenUIEvent.OnHomeDeleteBarcodeDialog.Dismiss -> {
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
+            }
+
+            is HomeScreenUIEvent.OnHomeDeleteBarcodeDialog.DismissButtonClick -> {
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(false)
             }
 
             is HomeScreenUIEvent.OnListItem.Click -> {
@@ -75,6 +84,10 @@ internal class HomeScreenUIEventHandler internal constructor(
                 screenViewModel.deleteBarcodes(
                     barcodes = uiEvent.barcodes,
                 )
+            }
+
+            is HomeScreenUIEvent.OnTopAppBar.DeleteBarcodeButtonClick -> {
+                uiStateEvents.updateIsDeleteBarcodeDialogVisible(true)
             }
 
             is HomeScreenUIEvent.OnTopAppBar.SettingsButtonClick -> {

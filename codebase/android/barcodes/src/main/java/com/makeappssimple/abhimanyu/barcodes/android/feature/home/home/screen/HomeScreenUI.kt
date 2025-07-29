@@ -29,7 +29,6 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.toMutableStateList
@@ -92,10 +91,6 @@ internal fun HomeScreenUI(
         ),
     ) {
         mutableStateListOf<Int>()
-    }
-    // TODO(Abhi): Move to ViewModel
-    val (isDeleteBarcodeDialogVisible, setIsDeleteBarcodeDialogVisible) = rememberSaveable {
-        mutableStateOf(false)
     }
     val listItemsDataAndEventHandler =
         // TODO(Abhi): Remove this mapIndexed
@@ -219,7 +214,7 @@ internal fun HomeScreenUI(
                             onClickLabelStringResourceId = R.string.screen_home_content_description_delete_barcode,
                             iconContentDescriptionStringResourceId = R.string.screen_home_content_description_delete_barcode,
                             onClick = {
-                                setIsDeleteBarcodeDialogVisible(true)
+                                handleUIEvent(HomeScreenUIEvent.OnTopAppBar.DeleteBarcodeButtonClick)
                             },
                         )
                     },
@@ -262,7 +257,7 @@ internal fun HomeScreenUI(
         },
     ) {
         AnimatedVisibility(
-            visible = isDeleteBarcodeDialogVisible,
+            visible = uiState.isDeleteBarcodeDialogVisible,
         ) {
             HomeDeleteBarcodeDialog(
                 selectedBarcodesSize = selectedBarcodes.size,
@@ -275,13 +270,12 @@ internal fun HomeScreenUI(
                         ),
                     )
                     selectedBarcodes.clear()
-                    setIsDeleteBarcodeDialogVisible(false)
                 },
                 onDismiss = {
-                    setIsDeleteBarcodeDialogVisible(false)
+                    handleUIEvent(HomeScreenUIEvent.OnHomeDeleteBarcodeDialog.Dismiss)
                 },
                 onDismissButtonClick = {
-                    setIsDeleteBarcodeDialogVisible(false)
+                    handleUIEvent(HomeScreenUIEvent.OnHomeDeleteBarcodeDialog.DismissButtonClick)
                 },
             )
         }
