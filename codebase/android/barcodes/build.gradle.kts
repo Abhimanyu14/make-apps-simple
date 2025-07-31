@@ -31,6 +31,7 @@ kotlin {
 android {
     namespace = "com.makeappssimple.abhimanyu.library.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
+    ndkVersion = libs.versions.ndk.get()
 
     defaultConfig {
         minSdk = libs.versions.min.sdk.get().toInt()
@@ -43,6 +44,9 @@ android {
                 arguments += mapOf("room.schemaLocation" to "$projectDir/schemas".toString())
             }
         }
+
+        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
+        ndk.debugSymbolLevel = "FULL"
     }
 
     buildTypes {

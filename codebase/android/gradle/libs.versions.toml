@@ -11,6 +11,7 @@ app-make-apps-simple-version-name = "0.1.0"
 compile-sdk = "35"
 min-sdk = "26"
 target-sdk = "35"
+ndk = "27.0.12077973"
 
 # Library versions
 androidx-activity-compose = "1.10.1"
