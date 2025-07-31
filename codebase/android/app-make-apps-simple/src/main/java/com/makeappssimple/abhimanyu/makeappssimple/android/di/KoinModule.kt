@@ -16,24 +16,7 @@
 
 package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
-import com.makeappssimple.abhimanyu.barcodes.android.di.AnalyticsModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.AppVersionKitModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodeGeneratorModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodeRepositoryModule
 import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodesAppModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.BuildConfigKitModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.ClipboardKitModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.CoroutineScopeModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.DaosModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.DateTimeKitModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.DispatcherProviderModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.FirebaseModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.LogKitModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.NavigationKitModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.PlatformModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.RoomModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.StringDecoderModule
-import com.makeappssimple.abhimanyu.barcodes.android.di.StringEncoderModule
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.module
@@ -44,28 +27,8 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            platformModule,
-            viewModelModule,
-
-            // Barcodes
-            AnalyticsModule().module,
-            AppVersionKitModule().module,
+            AppModule().module,
             BarcodesAppModule().module,
-            BarcodeGeneratorModule().module,
-            BarcodeRepositoryModule().module,
-            BuildConfigKitModule().module,
-            ClipboardKitModule().module,
-            CoroutineScopeModule().module,
-            DaosModule().module,
-            DateTimeKitModule().module,
-            DispatcherProviderModule().module,
-            FirebaseModule().module,
-            LogKitModule().module,
-            NavigationKitModule().module,
-            PlatformModule().module,
-            RoomModule().module,
-            StringDecoderModule().module,
-            StringEncoderModule().module,
         )
     }
 }

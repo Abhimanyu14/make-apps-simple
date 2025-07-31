@@ -26,24 +26,7 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            AnalyticsModule().module,
-            AppVersionKitModule().module,
             BarcodesAppModule().module,
-            BarcodeGeneratorModule().module,
-            BarcodeRepositoryModule().module,
-            BuildConfigKitModule().module,
-            ClipboardKitModule().module,
-            CoroutineScopeModule().module,
-            DaosModule().module,
-            DateTimeKitModule().module,
-            DispatcherProviderModule().module,
-            FirebaseModule().module,
-            LogKitModule().module,
-            NavigationKitModule().module,
-            PlatformModule().module,
-            RoomModule().module,
-            StringDecoderModule().module,
-            StringEncoderModule().module,
         )
     }
 }

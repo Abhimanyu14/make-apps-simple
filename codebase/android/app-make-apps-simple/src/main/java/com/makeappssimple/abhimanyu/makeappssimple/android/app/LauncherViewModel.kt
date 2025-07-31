@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEventHandler
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 internal class LauncherViewModel(
     val platformEventHandler: PlatformEventHandler,
 ) : ViewModel()

@@ -19,6 +19,25 @@ package com.makeappssimple.abhimanyu.barcodes.android.di
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
-@Module
+@Module(
+    includes = [
+        AnalyticsModule::class,
+        AppVersionKitModule::class,
+        BarcodeGeneratorModule::class,
+        BarcodeRepositoryModule::class,
+        BuildConfigKitModule::class,
+        ClipboardKitModule::class,
+        CoroutineScopeModule::class,
+        DaosModule::class,
+        DateTimeKitModule::class,
+        DispatcherProviderModule::class,
+        FirebaseModule::class,
+        LogKitModule::class,
+        NavigationKitModule::class,
+        RoomModule::class,
+        StringDecoderModule::class,
+        StringEncoderModule::class,
+    ],
+)
 @ComponentScan("com.makeappssimple.abhimanyu.barcodes.android")
 public class BarcodesAppModule

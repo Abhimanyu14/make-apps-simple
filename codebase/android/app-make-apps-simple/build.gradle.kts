@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.plugin.android.application)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.ksp)
 }
 
 kotlin {
@@ -79,4 +80,12 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.koin.bom))
+
+    ksp(libs.koin.ksp.compiler)
+}
+
+ksp {
+    // Koin
+    arg("KOIN_CONFIG_CHECK", "true")
+    arg("KOIN_DEFAULT_MODULE", "false")
 }

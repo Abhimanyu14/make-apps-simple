@@ -16,14 +16,13 @@
 
 package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
-import com.makeappssimple.abhimanyu.makeappssimple.android.app.LauncherViewModel
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-internal val viewModelModule = module {
-    viewModel<LauncherViewModel> {
-        LauncherViewModel(
-            platformEventHandler = get(),
-        )
-    }
-}
+@Module(
+    includes = [
+        PlatformModule::class,
+    ],
+)
+@ComponentScan("com.makeappssimple.abhimanyu.makeappssimple.android")
+public class AppModule
