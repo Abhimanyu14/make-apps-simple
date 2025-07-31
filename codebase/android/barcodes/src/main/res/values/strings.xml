@@ -17,7 +17,7 @@
 <resources>
 
     <!-- region app name -->
-    <string name="app_name">Barcodes</string>
+    <string name="barcodes_app_name">Barcodes</string>
     <!-- endregion -->
 
     <!-- region navigation back button -->

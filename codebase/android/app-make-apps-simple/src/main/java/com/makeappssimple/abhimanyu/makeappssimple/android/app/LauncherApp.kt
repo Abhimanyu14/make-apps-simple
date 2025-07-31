@@ -18,8 +18,9 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.makeappssimple.android.R
 import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEvent
+import com.makeappssimple.abhimanyu.library.barcodes.android.R as BarcodesR
+import com.makeappssimple.abhimanyu.library.cosmos.design.system.catalog.android.R as CosmosDesignSystemR
 
 @Composable
 internal fun LauncherApp(
@@ -28,18 +29,18 @@ internal fun LauncherApp(
 ) {
     val launcherItems = listOf(
         LauncherItem(
-            iconResourceId = com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.R.drawable.ic_launcher,
+            iconResourceId = CosmosDesignSystemR.drawable.cosmos_ic_launcher,
             text = stringResource(
-                R.string.screen_launcher_cosmos_catalog,
+                CosmosDesignSystemR.string.cosmos_design_system_catalog_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToCosmosDesignSystemCatalogActivity)
             },
         ),
         LauncherItem(
-            iconResourceId = com.makeappssimple.abhimanyu.barcodes.android.R.drawable.ic_launcher_foreground,
+            iconResourceId = BarcodesR.drawable.barcodes_ic_launcher,
             text = stringResource(
-                R.string.screen_launcher_barcodes,
+                BarcodesR.string.barcodes_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToBarcodesActivity)

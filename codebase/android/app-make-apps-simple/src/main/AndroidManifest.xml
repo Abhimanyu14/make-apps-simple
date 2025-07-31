@@ -21,7 +21,7 @@
     <application
         android:name=".application.MakeAppsSimpleApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/cosmos_ic_launcher"
         android:label="@string/make_apps_simple_app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MakeAppsSimple">
