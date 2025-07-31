@@ -26,12 +26,12 @@ kotlin {
 
 android {
     namespace =
-        "com.makeappssimple.abhimanyu.app.cosmos.design.system.catalog.android"
+        "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
         applicationId =
-            "com.makeappssimple.abhimanyu.app.cosmos.design.system.catalog.android"
+            "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode =

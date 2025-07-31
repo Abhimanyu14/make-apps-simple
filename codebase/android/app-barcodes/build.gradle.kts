@@ -25,11 +25,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.makeappssimple.abhimanyu.app.barcodes.android"
+    namespace = "com.makeappssimple.abhimanyu.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.makeappssimple.abhimanyu.app.barcodes.android"
+        applicationId = "com.makeappssimple.abhimanyu.barcodes.android"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = libs.versions.app.barcodes.version.code.get().toInt()
