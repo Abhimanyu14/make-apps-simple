@@ -24,14 +24,14 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-internal class FirebaseModule {
+public class FirebaseModule {
     @Single
-    fun provideFirebaseAnalytics(): FirebaseAnalytics {
+    internal fun provideFirebaseAnalytics(): FirebaseAnalytics {
         return Firebase.analytics
     }
 
     @Single
-    fun provideFirebaseInstallations(): FirebaseInstallations {
+    internal fun provideFirebaseInstallations(): FirebaseInstallations {
         return FirebaseInstallations.getInstance()
     }
 }

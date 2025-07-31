@@ -22,9 +22,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-internal class BuildConfigKitModule {
+public class BuildConfigKitModule {
     @Single
-    fun provideBuildConfigKit(): BuildConfigKit {
+    internal fun provideBuildConfigKit(): BuildConfigKit {
         return BuildConfigKitImpl()
     }
 }

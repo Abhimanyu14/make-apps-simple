@@ -23,9 +23,9 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
 
 @Module
-internal class CoroutineScopeModule {
+public class CoroutineScopeModule {
     @Factory
-    fun provideBarcodeDao(
+    internal fun provideBarcodeDao(
         dispatcherProvider: DispatcherProvider,
     ): CoroutineScope {
         return CoroutineScope(

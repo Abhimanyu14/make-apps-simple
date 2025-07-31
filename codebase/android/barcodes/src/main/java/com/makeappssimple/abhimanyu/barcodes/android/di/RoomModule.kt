@@ -22,9 +22,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-internal class RoomModule {
+public class RoomModule {
     @Single
-    fun provideMyRoomDatabase(
+    internal fun provideMyRoomDatabase(
         context: Context,
     ): MyRoomDatabase {
         return MyRoomDatabase.getDatabase(

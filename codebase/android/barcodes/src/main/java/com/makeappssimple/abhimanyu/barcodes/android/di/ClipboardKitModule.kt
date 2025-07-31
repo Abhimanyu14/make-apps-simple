@@ -23,9 +23,9 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-internal class ClipboardKitModule {
+public class ClipboardKitModule {
     @Single
-    fun provideClipboardKit(
+    internal fun provideClipboardKit(
         context: Context,
     ): ClipboardKit {
         return ClipboardKitImpl(
