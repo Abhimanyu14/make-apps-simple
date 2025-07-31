@@ -42,7 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_BARCODE_DETAILS
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_BARCODE_DETAILS
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button.MyIconButton
@@ -63,6 +62,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberComm
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.event.BarcodeDetailsScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview

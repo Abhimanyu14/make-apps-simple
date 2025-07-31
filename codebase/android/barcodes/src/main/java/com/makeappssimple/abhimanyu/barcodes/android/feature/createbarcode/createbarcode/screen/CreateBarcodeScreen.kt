@@ -23,12 +23,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.playstorereview.PlayStoreReviewHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event.CreateBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.viewmodel.CreateBarcodeScreenViewModel
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig
 
 import android.os.Build
-import com.makeappssimple.abhimanyu.barcodes.android.BuildConfig
+import com.makeappssimple.abhimanyu.library.barcodes.android.BuildConfig
 
 internal class BuildConfigKitImpl(
     private val isDebugBuild: Boolean = BuildConfig.DEBUG,

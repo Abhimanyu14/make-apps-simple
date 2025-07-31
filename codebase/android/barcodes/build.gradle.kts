@@ -29,7 +29,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.makeappssimple.abhimanyu.barcodes.android"
+    namespace = "com.makeappssimple.abhimanyu.library.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {

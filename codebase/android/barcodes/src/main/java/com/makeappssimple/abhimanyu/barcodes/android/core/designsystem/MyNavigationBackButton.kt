@@ -21,8 +21,8 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.icon.MyIcon
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
 internal fun MyNavigationBackButton(

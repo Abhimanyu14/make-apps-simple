@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.R
+import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
 
 internal val Typography = Typography(
     displayLarge = TextStyle(

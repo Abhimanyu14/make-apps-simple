@@ -38,7 +38,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button.MyElevatedButton
@@ -53,6 +52,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberComm
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event.CreateBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import kotlinx.coroutines.delay
 import org.jetbrains.annotations.VisibleForTesting
 

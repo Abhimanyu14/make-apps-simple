@@ -26,7 +26,7 @@ kotlin {
 
 android {
     namespace =
-        "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android"
+        "com.makeappssimple.abhimanyu.library.cosmos.design.system.catalog.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {

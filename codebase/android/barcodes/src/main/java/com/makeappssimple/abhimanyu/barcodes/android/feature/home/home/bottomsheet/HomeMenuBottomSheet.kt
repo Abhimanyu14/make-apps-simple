@@ -23,12 +23,12 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.list.MyListItemData
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.list.MyListItemDataEvent
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.list.MyListItemDataEventDataAndEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.list.MySimpleList
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.spacer.NavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 private object HomeMenuBottomSheetConstants {
     val minimumBottomSheetHeight = 24.dp

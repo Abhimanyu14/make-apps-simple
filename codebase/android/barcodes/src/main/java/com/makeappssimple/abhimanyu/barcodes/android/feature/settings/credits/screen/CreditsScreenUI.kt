@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_CREDITS
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CREDITS
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.LinkText
@@ -43,6 +42,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.event.CreditsScreenUIEvent
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview

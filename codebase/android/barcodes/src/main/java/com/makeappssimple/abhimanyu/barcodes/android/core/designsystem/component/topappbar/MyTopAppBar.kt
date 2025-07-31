@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.COMPONENT_MY_TOP_APP_BAR
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.COMPONENT_MY_TOP_APP_BAR_NAVIGATION_BUTTON
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.COMPONENT_MY_TOP_APP_BAR_TITLE_TEXT
@@ -40,6 +39,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
 internal fun MyTopAppBar(

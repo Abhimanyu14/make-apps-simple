@@ -23,9 +23,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.viewmodel.SettingsScreenViewModel
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

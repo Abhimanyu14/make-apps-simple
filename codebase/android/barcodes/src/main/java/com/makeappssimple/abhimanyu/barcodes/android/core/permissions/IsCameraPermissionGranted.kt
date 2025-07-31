@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.permissions
 import android.Manifest
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.barcodes.android.R
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
 internal fun rememberIsCameraPermissionGranted(): Boolean? {

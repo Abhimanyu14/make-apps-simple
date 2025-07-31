@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodescanner.camera.BarcodeScannerPreview
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_SCAN_BARCODE
@@ -36,6 +35,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberComm
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.event.ScanBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.scanbarcode.state.ScanBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
 @Preview
