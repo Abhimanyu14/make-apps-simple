@@ -21,7 +21,7 @@
     <application>
 
         <activity
-            android:name=".activity.CosmosDesignSystemCatalogActivity"
+            android:name="com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity"
             android:configChanges="allKnown"
             android:exported="false" />
 
