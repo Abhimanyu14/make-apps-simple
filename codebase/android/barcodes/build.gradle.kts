@@ -36,6 +36,13 @@ android {
         minSdk = libs.versions.min.sdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Room schema
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas".toString())
+            }
+        }
     }
 
     buildTypes {
@@ -151,6 +158,10 @@ kover {
 }
 
 ksp {
+    // Koin
     arg("KOIN_CONFIG_CHECK", "true")
     arg("KOIN_DEFAULT_MODULE", "false")
+
+    // Room
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
