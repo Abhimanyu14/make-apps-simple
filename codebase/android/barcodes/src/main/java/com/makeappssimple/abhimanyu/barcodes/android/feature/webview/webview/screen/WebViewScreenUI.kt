@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_WEB_VIEW
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.progressindicator.MyCircularProgressIndicator
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
@@ -38,7 +37,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.webview.WebView
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.event.WebViewScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIState
 
-@Preview
 @Composable
 internal fun WebViewScreenUI(
     uiState: WebViewScreenUIState = WebViewScreenUIState(),

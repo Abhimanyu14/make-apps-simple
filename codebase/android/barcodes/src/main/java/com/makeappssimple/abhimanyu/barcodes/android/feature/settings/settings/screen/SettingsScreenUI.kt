@@ -23,7 +23,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_SETTINGS
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_SETTINGS
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.list.MyListItemData
@@ -37,7 +36,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.event.SettingsScreenUIEvent
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
-@Preview
 @Composable
 internal fun SettingsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),

@@ -36,7 +36,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags.SCREEN_CREATE_BARCODE
@@ -60,7 +59,6 @@ import org.jetbrains.annotations.VisibleForTesting
 internal const val REQUEST_FOCUS_DELAY = 300L
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 internal fun CreateBarcodeScreenUI(
     uiState: CreateBarcodeScreenUIState = CreateBarcodeScreenUIState(),
