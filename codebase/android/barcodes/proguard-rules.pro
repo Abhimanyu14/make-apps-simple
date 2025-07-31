@@ -48,3 +48,11 @@
 
 # Add any additional rules specific to your app or libraries here
 -dontwarn java.lang.invoke.StringConcatFactory
+
+# Koin
+
+# Keep annotation definitions
+-keep class org.koin.core.annotation.** { *; }
+
+# Keep classes annotated with Koin annotations
+-keep @org.koin.core.annotation.* class * { *; }
