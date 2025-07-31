@@ -52,7 +52,7 @@ internal fun CreateBarcodeScreen(
         Toast.makeText(
             context,
             context.getString(
-                R.string.screen_create_barcode_barcode_value_copied_toast_message,
+                R.string.barcodes_screen_create_barcode_barcode_value_copied_toast_message,
                 uiState.barcodeValue,
             ),
             Toast.LENGTH_SHORT

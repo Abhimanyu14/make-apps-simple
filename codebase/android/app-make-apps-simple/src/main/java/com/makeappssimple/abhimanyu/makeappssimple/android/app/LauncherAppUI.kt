@@ -69,7 +69,7 @@ internal fun LauncherAppUI(
             )
             CosmosText(
                 text = stringResource(
-                    id = R.string.screen_launcher,
+                    id = R.string.make_apps_simple_screen_launcher,
                 ),
                 style = CosmosTextStyle.Heading1,
             )

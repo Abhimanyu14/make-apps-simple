@@ -24,13 +24,13 @@
         android:icon="@mipmap/cosmos_ic_launcher"
         android:label="@string/cosmos_design_system_catalog_app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CosmosDesignSystemCatalog">
+        android:theme="@style/CosmosDesignSystemCatalogTheme">
 
         <activity
             android:name="com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity"
             android:configChanges="allKnown"
             android:exported="true"
-            android:theme="@style/Theme.CosmosDesignSystemCatalog"
+            android:theme="@style/CosmosDesignSystemCatalogTheme"
             tools:replace="android:exported">
 
             <intent-filter>

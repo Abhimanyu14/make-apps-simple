@@ -39,7 +39,7 @@ internal fun SettingsScreen(
     // region navigateToOpenSourceLicensesScreen
     val context = LocalContext.current
     val openSourceLicensesScreenTitle = stringResource(
-        id = R.string.screen_settings_open_source_licenses,
+        id = R.string.barcodes_screen_settings_open_source_licenses,
     )
     val navigateToOpenSourceLicensesScreen: () -> Unit = {
         OssLicensesMenuActivity.setActivityTitle(openSourceLicensesScreenTitle)

@@ -18,6 +18,6 @@
 
 <resources>
 
-    <style name="Theme.CosmosDesignSystemCatalog" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="CosmosDesignSystemCatalogTheme" parent="android:Theme.Material.Light.NoActionBar" />
 
 </resources>

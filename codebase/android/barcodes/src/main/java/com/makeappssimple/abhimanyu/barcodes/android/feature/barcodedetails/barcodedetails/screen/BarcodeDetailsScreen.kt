@@ -56,7 +56,7 @@ internal fun BarcodeDetailsScreen(
         Toast.makeText(
             context,
             context.getString(
-                R.string.screen_barcode_details_barcode_value_copied_toast_message,
+                R.string.barcodes_screen_barcode_details_barcode_value_copied_toast_message,
                 uiState.barcodeValue,
             ),
             Toast.LENGTH_SHORT
@@ -67,11 +67,11 @@ internal fun BarcodeDetailsScreen(
     ) {
         when (uiState.barcodeSource) {
             BarcodeSource.CREATED -> {
-                R.string.screen_barcode_details_barcode_timestamp_created
+                R.string.barcodes_screen_barcode_details_barcode_timestamp_created
             }
 
             BarcodeSource.SCANNED -> {
-                R.string.screen_barcode_details_barcode_timestamp_scanned
+                R.string.barcodes_screen_barcode_details_barcode_timestamp_scanned
             }
         }
     }

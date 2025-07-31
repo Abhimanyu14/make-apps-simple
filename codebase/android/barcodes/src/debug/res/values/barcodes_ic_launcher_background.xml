@@ -17,5 +17,5 @@
   -->
 
 <resources>
-    <color name="ic_launcher_background">#283338</color>
+    <color name="barcodes_ic_launcher_background">#283338</color>
 </resources>

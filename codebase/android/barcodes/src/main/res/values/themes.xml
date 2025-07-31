@@ -18,6 +18,6 @@
 
 <resources>
 
-    <style name="Theme.Barcodes" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="BarcodesTheme" parent="android:Theme.Material.Light.NoActionBar" />
 
 </resources>

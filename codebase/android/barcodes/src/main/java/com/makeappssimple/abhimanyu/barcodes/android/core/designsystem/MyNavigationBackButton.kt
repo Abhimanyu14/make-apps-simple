@@ -41,6 +41,6 @@ internal fun MyNavigationBackButton(
 private fun NavigationArrowBackIcon() {
     MyIcon(
         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-        contentDescriptionStringResourceId = R.string.navigation_back_button_navigation_icon_content_description,
+        contentDescriptionStringResourceId = R.string.barcodes_navigation_back_button_navigation_icon_content_description,
     )
 }

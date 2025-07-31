@@ -54,9 +54,9 @@ internal fun HomeMenuBottomSheet(
             listItemsDataAndEventHandler = listOf(
                 MyListItemDataEventDataAndEventHandler(
                     data = MyListItemData(
-                        stringResourceId = R.string.screen_home_bottom_sheet_scan_barcode,
+                        stringResourceId = R.string.barcodes_screen_home_bottom_sheet_scan_barcode,
                         painter = painterResource(
-                            id = R.drawable.icon_scanner,
+                            id = R.drawable.barcodes_icon_scanner,
                         ),
                     ),
                     handleEvent = { event ->
@@ -74,9 +74,9 @@ internal fun HomeMenuBottomSheet(
                 MyListItemDataEventDataAndEventHandler(
                     data =
                         MyListItemData(
-                            stringResourceId = R.string.screen_home_bottom_sheet_create_barcode,
+                            stringResourceId = R.string.barcodes_screen_home_bottom_sheet_create_barcode,
                             painter = painterResource(
-                                id = R.drawable.icon_barcode_black_24dp,
+                                id = R.drawable.barcodes_icon_barcode_black_24dp,
                             ),
                         ),
                     handleEvent = { event ->

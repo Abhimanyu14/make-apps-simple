@@ -21,7 +21,7 @@
     <!-- endregion -->
 
     <!-- region launcher activity -->
-    <string name="screen_launcher">Make Apps Simple!</string>
+    <string name="make_apps_simple_screen_launcher">Make Apps Simple!</string>
     <!-- endregion -->
 
 </resources>

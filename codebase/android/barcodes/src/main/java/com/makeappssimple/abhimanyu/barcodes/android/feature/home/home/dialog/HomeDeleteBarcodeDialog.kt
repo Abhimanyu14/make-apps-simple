@@ -35,18 +35,18 @@ internal fun HomeDeleteBarcodeDialog(
         dialogData = DialogData(
             isVisible = true,
             confirmButtonText = stringResource(
-                id = R.string.screen_home_delete_barcode_dialog_confirm_button_label,
+                id = R.string.barcodes_screen_home_delete_barcode_dialog_confirm_button_label,
             ),
             dismissButtonText = stringResource(
-                id = R.string.screen_home_delete_barcode_dialog_dismiss_button_label,
+                id = R.string.barcodes_screen_home_delete_barcode_dialog_dismiss_button_label,
             ),
             title = pluralStringResource(
-                R.plurals.screen_home_delete_barcode_dialog_title,
+                R.plurals.barcodes_screen_home_delete_barcode_dialog_title,
                 selectedBarcodesSize,
                 selectedBarcodesSize,
             ),
             message = pluralStringResource(
-                R.plurals.screen_home_delete_barcode_dialog_message,
+                R.plurals.barcodes_screen_home_delete_barcode_dialog_message,
                 selectedBarcodesSize,
                 selectedBarcodesSize,
             ),

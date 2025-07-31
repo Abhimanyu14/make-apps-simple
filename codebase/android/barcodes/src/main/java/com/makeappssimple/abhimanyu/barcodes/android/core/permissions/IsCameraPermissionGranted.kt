@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.library.barcodes.android.R
 @Composable
 internal fun rememberIsCameraPermissionGranted(): Boolean? {
     val cameraPermissionDeniedMessage = stringResource(
-        id = R.string.permissions_camera_permissions_denied_message,
+        id = R.string.barcodes_permissions_camera_permissions_denied_message,
     )
 
     return rememberIsRequiredPermissionGranted(

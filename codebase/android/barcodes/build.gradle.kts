@@ -32,6 +32,7 @@ android {
     namespace = "com.makeappssimple.abhimanyu.library.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
     ndkVersion = libs.versions.ndk.get()
+    resourcePrefix = "barcodes"
 
     defaultConfig {
         minSdk = libs.versions.min.sdk.get().toInt()

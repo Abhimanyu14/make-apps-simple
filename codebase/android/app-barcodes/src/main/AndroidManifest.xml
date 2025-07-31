@@ -25,13 +25,13 @@
         android:icon="@mipmap/barcodes_ic_launcher"
         android:label="@string/barcodes_app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Barcodes">
+        android:theme="@style/BarcodesTheme">
 
         <activity
             android:name="com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity"
             android:configChanges="allKnown"
             android:exported="true"
-            android:theme="@style/Theme.Barcodes"
+            android:theme="@style/BarcodesTheme"
             tools:replace="android:exported">
 
             <intent-filter>

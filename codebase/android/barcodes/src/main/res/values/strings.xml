@@ -21,82 +21,82 @@
     <!-- endregion -->
 
     <!-- region navigation back button -->
-    <string name="navigation_back_button_navigation_icon_content_description">Navigate Back</string>
+    <string name="barcodes_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
     <!-- endregion -->
 
     <!-- region screen_scan_barcode -->
-    <string name="permissions_camera_permissions_denied_message">Camera permission required for scanning</string>
+    <string name="barcodes_permissions_camera_permissions_denied_message">Camera permission required for scanning</string>
     <!-- endregion -->
 
     <!-- region screen_barcode_details -->
-    <string name="screen_barcode_details">Barcode Details</string>
-    <string name="screen_barcode_details_barcode_name">Barcode Name</string>
-    <string name="screen_barcode_details_barcode_timestamp_scanned">Scanned at </string>
-    <string name="screen_barcode_details_barcode_timestamp_created">Created at </string>
-    <string name="screen_barcode_details_barcode_value">Barcode Value</string>
-    <string name="screen_barcode_details_barcode_value_copied_toast_message">%1$s copied to clipboard</string>
-    <string name="screen_barcode_details_content_description_barcode_image">Barcode image</string>
-    <string name="screen_barcode_details_content_description_copy_barcode_value">Copy barcode value</string>
-    <string name="screen_barcode_details_content_description_delete_barcode">Delete barcode</string>
-    <string name="screen_barcode_details_content_description_edit_barcode">Edit barcode</string>
-    <string name="screen_barcode_details_content_description_options_menu">Options Menu</string>
-    <string name="screen_barcode_details_delete_barcode_dialog_confirm_button_label">Delete</string>
-    <string name="screen_barcode_details_delete_barcode_dialog_dismiss_button_label">Cancel</string>
-    <string name="screen_barcode_details_delete_barcode_dialog_message">Are you sure you want to delete the barcode?</string>
-    <string name="screen_barcode_details_delete_barcode_dialog_title">Delete Barcode</string>
+    <string name="barcodes_screen_barcode_details">Barcode Details</string>
+    <string name="barcodes_screen_barcode_details_barcode_name">Barcode Name</string>
+    <string name="barcodes_screen_barcode_details_barcode_timestamp_scanned">Scanned at </string>
+    <string name="barcodes_screen_barcode_details_barcode_timestamp_created">Created at </string>
+    <string name="barcodes_screen_barcode_details_barcode_value">Barcode Value</string>
+    <string name="barcodes_screen_barcode_details_barcode_value_copied_toast_message">%1$s copied to clipboard</string>
+    <string name="barcodes_screen_barcode_details_content_description_barcode_image">Barcode image</string>
+    <string name="barcodes_screen_barcode_details_content_description_copy_barcode_value">Copy barcode value</string>
+    <string name="barcodes_screen_barcode_details_content_description_delete_barcode">Delete barcode</string>
+    <string name="barcodes_screen_barcode_details_content_description_edit_barcode">Edit barcode</string>
+    <string name="barcodes_screen_barcode_details_content_description_options_menu">Options Menu</string>
+    <string name="barcodes_screen_barcode_details_delete_barcode_dialog_confirm_button_label">Delete</string>
+    <string name="barcodes_screen_barcode_details_delete_barcode_dialog_dismiss_button_label">Cancel</string>
+    <string name="barcodes_screen_barcode_details_delete_barcode_dialog_message">Are you sure you want to delete the barcode?</string>
+    <string name="barcodes_screen_barcode_details_delete_barcode_dialog_title">Delete Barcode</string>
     <!-- endregion -->
 
     <!-- region screen_create_barcode -->
-    <string name="screen_create_barcode">Enter Barcode Details</string>
-    <string name="screen_create_barcode_barcode_name">Barcode Name</string>
-    <string name="screen_create_barcode_barcode_value">Barcode Value</string>
-    <string name="screen_create_barcode_clear_barcode_name">Clear barcode name</string>
-    <string name="screen_create_barcode_clear_barcode_value">Clear barcode value</string>
-    <string name="screen_create_barcode_content_description_copy_barcode_value">Copy barcode value</string>
-    <string name="screen_create_barcode_barcode_value_copied_toast_message">%1$s copied to clipboard</string>
-    <string name="screen_create_barcode_cta_button_label">SAVE</string>
+    <string name="barcodes_screen_create_barcode">Enter Barcode Details</string>
+    <string name="barcodes_screen_create_barcode_barcode_name">Barcode Name</string>
+    <string name="barcodes_screen_create_barcode_barcode_value">Barcode Value</string>
+    <string name="barcodes_screen_create_barcode_clear_barcode_name">Clear barcode name</string>
+    <string name="barcodes_screen_create_barcode_clear_barcode_value">Clear barcode value</string>
+    <string name="barcodes_screen_create_barcode_content_description_copy_barcode_value">Copy barcode value</string>
+    <string name="barcodes_screen_create_barcode_barcode_value_copied_toast_message">%1$s copied to clipboard</string>
+    <string name="barcodes_screen_create_barcode_cta_button_label">SAVE</string>
     <!-- endregion -->
 
     <!-- region screen_credits -->
-    <string name="screen_credits">Credits</string>
-    <string name="screen_credits_icons_title">Icons</string>
-    <string name="screen_credits_privacy_policy_title">Privacy Policy</string>
-    <string name="screen_credits_terms_and_conditions_title">Terms and Conditions</string>
+    <string name="barcodes_screen_credits">Credits</string>
+    <string name="barcodes_screen_credits_icons_title">Icons</string>
+    <string name="barcodes_screen_credits_privacy_policy_title">Privacy Policy</string>
+    <string name="barcodes_screen_credits_terms_and_conditions_title">Terms and Conditions</string>
     <!-- endregion -->
 
     <!-- region screen_home -->
-    <string name="screen_home">Barcodes</string>
-    <string name="screen_home_barcode_deleted_snackbar_action_label">Undo</string>
-    <string name="screen_home_barcode_deleted_snackbar_message">%1$s deleted!</string>
-    <string name="screen_home_bottom_sheet_create_barcode">Create barcode</string>
-    <string name="screen_home_bottom_sheet_scan_barcode">Scan barcode</string>
-    <string name="screen_home_content_description_add">Add</string>
-    <string name="screen_home_content_description_delete">Delete</string>
-    <string name="screen_home_content_description_delete_barcode">Delete barcode</string>
-    <string name="screen_home_content_description_settings">Settings</string>
-    <string name="screen_home_delete_barcode_dialog_confirm_button_label">Delete</string>
-    <string name="screen_home_delete_barcode_dialog_dismiss_button_label">Cancel</string>
-    <plurals name="screen_home_delete_barcode_dialog_message">
+    <string name="barcodes_screen_home">Barcodes</string>
+    <string name="barcodes_screen_home_barcode_deleted_snackbar_action_label">Undo</string>
+    <string name="barcodes_screen_home_barcode_deleted_snackbar_message">%1$s deleted!</string>
+    <string name="barcodes_screen_home_bottom_sheet_create_barcode">Create barcode</string>
+    <string name="barcodes_screen_home_bottom_sheet_scan_barcode">Scan barcode</string>
+    <string name="barcodes_screen_home_content_description_add">Add</string>
+    <string name="barcodes_screen_home_content_description_delete">Delete</string>
+    <string name="barcodes_screen_home_content_description_delete_barcode">Delete barcode</string>
+    <string name="barcodes_screen_home_content_description_settings">Settings</string>
+    <string name="barcodes_screen_home_delete_barcode_dialog_confirm_button_label">Delete</string>
+    <string name="barcodes_screen_home_delete_barcode_dialog_dismiss_button_label">Cancel</string>
+    <plurals name="barcodes_screen_home_delete_barcode_dialog_message">
         <item quantity="one">Are you sure you want to delete %1$d barcode?</item>
         <item quantity="other">Are you sure you want to delete %1$d barcodes?</item>
     </plurals>
-    <plurals name="screen_home_delete_barcode_dialog_title">
+    <plurals name="barcodes_screen_home_delete_barcode_dialog_title">
         <item quantity="one">Delete %d Barcode</item>
         <item quantity="other">Delete %d Barcodes</item>
     </plurals>
-    <string name="screen_home_on_click_label_settings">Open settings</string>
-    <string name="screen_home_selection_mode_top_app_bar_title">%1$d selected</string>
+    <string name="barcodes_screen_home_on_click_label_settings">Open settings</string>
+    <string name="barcodes_screen_home_selection_mode_top_app_bar_title">%1$d selected</string>
     <!-- endregion -->
 
     <!-- region screen_scan_barcode -->
-    <string name="screen_scan_barcode">Scan Barcode</string>
+    <string name="barcodes_screen_scan_barcode">Scan Barcode</string>
     <!-- endregion -->
 
     <!-- region screen_settings -->
-    <string name="screen_settings">Settings</string>
-    <string name="screen_settings_credits">Credits</string>
-    <string name="screen_settings_open_source_licenses">Open Source Licenses</string>
-    <string name="screen_settings_privacy_policy">Privacy Policy</string>
+    <string name="barcodes_screen_settings">Settings</string>
+    <string name="barcodes_screen_settings_credits">Credits</string>
+    <string name="barcodes_screen_settings_open_source_licenses">Open Source Licenses</string>
+    <string name="barcodes_screen_settings_privacy_policy">Privacy Policy</string>
     <!-- endregion -->
 
 </resources>

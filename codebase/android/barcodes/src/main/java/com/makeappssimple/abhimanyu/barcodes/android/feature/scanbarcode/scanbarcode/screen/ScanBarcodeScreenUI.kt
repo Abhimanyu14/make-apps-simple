@@ -51,7 +51,7 @@ internal fun ScanBarcodeScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.screen_scan_barcode,
+                titleStringResourceId = R.string.barcodes_screen_scan_barcode,
                 navigationAction = {
                     handleUIEvent(ScanBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },

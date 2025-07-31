@@ -57,7 +57,7 @@ internal fun CreditsScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.screen_credits,
+                titleStringResourceId = R.string.barcodes_screen_credits,
                 navigationAction = {
                     handleUIEvent(CreditsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
@@ -82,7 +82,7 @@ internal fun CreditsScreenUI(
                 ),
         ) {
             TitleText(
-                titleTextStringResourceId = R.string.screen_credits_icons_title,
+                titleTextStringResourceId = R.string.barcodes_screen_credits_icons_title,
             )
             LinkText(
                 linkTextData = listOf(
@@ -164,7 +164,7 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleTextStringResourceId = R.string.screen_credits_privacy_policy_title,
+                titleTextStringResourceId = R.string.barcodes_screen_credits_privacy_policy_title,
             )
             LinkText(
                 linkTextData = listOf(
@@ -189,7 +189,7 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleTextStringResourceId = R.string.screen_credits_terms_and_conditions_title,
+                titleTextStringResourceId = R.string.barcodes_screen_credits_terms_and_conditions_title,
             )
             LinkText(
                 linkTextData = listOf(

@@ -44,7 +44,7 @@ internal fun SettingsScreenUI(
     val listItemsDataAndEventHandler = arrayListOf(
         MyListItemDataEventDataAndEventHandler(
             data = MyListItemData(
-                stringResourceId = R.string.screen_settings_credits,
+                stringResourceId = R.string.barcodes_screen_settings_credits,
             ),
             handleEvent = { event ->
                 when (event) {
@@ -60,7 +60,7 @@ internal fun SettingsScreenUI(
         ),
         MyListItemDataEventDataAndEventHandler(
             data = MyListItemData(
-                stringResourceId = R.string.screen_settings_open_source_licenses,
+                stringResourceId = R.string.barcodes_screen_settings_open_source_licenses,
             ),
             handleEvent = { event ->
                 when (event) {
@@ -76,7 +76,7 @@ internal fun SettingsScreenUI(
         ),
         MyListItemDataEventDataAndEventHandler(
             data = MyListItemData(
-                stringResourceId = R.string.screen_settings_privacy_policy,
+                stringResourceId = R.string.barcodes_screen_settings_privacy_policy,
             ),
             handleEvent = { event ->
                 when (event) {
@@ -100,7 +100,7 @@ internal fun SettingsScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.screen_settings,
+                titleStringResourceId = R.string.barcodes_screen_settings,
                 navigationAction = {
                     handleUIEvent(SettingsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },

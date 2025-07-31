@@ -76,7 +76,7 @@ internal fun HomeScreenUI(
     handleUIEvent: (uiEvent: HomeScreenUIEvent) -> Unit = {},
 ) {
     val barcodeDeletedSnackbarActionLabel = stringResource(
-        id = R.string.screen_home_barcode_deleted_snackbar_action_label,
+        id = R.string.barcodes_screen_home_barcode_deleted_snackbar_action_label,
     )
     // TODO(Abhi): Move to view model
     val selectedBarcodes = rememberSaveable(
@@ -108,7 +108,7 @@ internal fun HomeScreenUI(
                         barcode.name
                     },
                     painter = painterResource(
-                        id = R.drawable.icon_barcode2_black_24dp,
+                        id = R.drawable.barcodes_icon_barcode2_black_24dp,
                     ),
                     isSelectionMode = selectedBarcodes.isNotEmpty(),
                     isSelected = selectedBarcodes.contains(index),
@@ -139,7 +139,7 @@ internal fun HomeScreenUI(
             val snackbarResult = state.snackbarHostState
                 .showSnackbar(
                     message = state.context.getString(
-                        R.string.screen_home_barcode_deleted_snackbar_message,
+                        R.string.barcodes_screen_home_barcode_deleted_snackbar_message,
                         barcode.name,
                     ),
                     actionLabel = barcodeDeletedSnackbarActionLabel,
@@ -199,7 +199,7 @@ internal fun HomeScreenUI(
             if (isInSelectionMode) {
                 MyTopAppBar(
                     titleText = state.context.getString(
-                        R.string.screen_home_selection_mode_top_app_bar_title,
+                        R.string.barcodes_screen_home_selection_mode_top_app_bar_title,
                         selectedBarcodes.size
                     ),
                     navigationIcon = MyIcons.Close,
@@ -210,8 +210,8 @@ internal fun HomeScreenUI(
                     appBarActions = {
                         MyTopAppBarActionButton(
                             iconImageVector = MyIcons.Delete,
-                            onClickLabelStringResourceId = R.string.screen_home_content_description_delete_barcode,
-                            iconContentDescriptionStringResourceId = R.string.screen_home_content_description_delete_barcode,
+                            onClickLabelStringResourceId = R.string.barcodes_screen_home_content_description_delete_barcode,
+                            iconContentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete_barcode,
                             onClick = {
                                 handleUIEvent(HomeScreenUIEvent.OnTopAppBar.DeleteBarcodeButtonClick)
                             },
@@ -220,12 +220,12 @@ internal fun HomeScreenUI(
                 )
             } else {
                 MyTopAppBar(
-                    titleStringResourceId = R.string.screen_home,
+                    titleStringResourceId = R.string.barcodes_screen_home,
                     appBarActions = {
                         MyTopAppBarActionButton(
                             iconImageVector = MyIcons.Settings,
-                            onClickLabelStringResourceId = R.string.screen_home_on_click_label_settings,
-                            iconContentDescriptionStringResourceId = R.string.screen_home_content_description_settings,
+                            onClickLabelStringResourceId = R.string.barcodes_screen_home_on_click_label_settings,
+                            iconContentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_settings,
                             onClick = {
                                 handleUIEvent(HomeScreenUIEvent.OnTopAppBar.SettingsButtonClick)
                             },
@@ -239,7 +239,7 @@ internal fun HomeScreenUI(
                 modifier = Modifier
                     .navigationBarsSpacer(),
                 iconImageVector = MyIcons.Add,
-                contentDescriptionStringResourceId = R.string.screen_home_content_description_add,
+                contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_add,
                 onClick = {
                     handleUIEvent(HomeScreenUIEvent.OnAddFloatingActionButtonClick)
                 },
@@ -332,7 +332,7 @@ private fun HomeScreenList(
             ) {
                 MyIcon(
                     imageVector = MyIcons.DeleteForever,
-                    contentDescriptionStringResourceId = R.string.screen_home_content_description_delete,
+                    contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete,
                     tint = MyAppTheme.colorScheme.onError,
                     modifier = Modifier
                         .weight(

@@ -79,7 +79,7 @@ internal fun MyTopAppBar(
         navigationButton = {
             MyTopAppBarNavigationButton(
                 onClickLabel = navigationLabel ?: stringResource(
-                    id = R.string.navigation_back_button_navigation_icon_content_description,
+                    id = R.string.barcodes_navigation_back_button_navigation_icon_content_description,
                 ),
                 iconImageVector = navigationIcon
                     ?: Icons.AutoMirrored.Rounded.ArrowBack,
