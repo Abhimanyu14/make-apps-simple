@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -37,7 +38,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -124,7 +124,9 @@ private fun LauncherItemUI(
                 onClick = launcherItem.onClick,
             ),
     ) {
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
             LauncherItemIcon(
                 launcherItem = launcherItem,
             )
@@ -132,6 +134,7 @@ private fun LauncherItemUI(
                 text = launcherItem.text,
                 style = CosmosTextStyle.Footnote,
                 maxLines = 2,
+                minLines = 2,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -147,6 +150,9 @@ private fun LauncherItemIcon(
         model = launcherItem.iconResourceId,
         contentDescription = launcherItem.text,
         modifier = Modifier
+            .size(
+                size = 60.dp,
+            )
             .padding(
                 top = 4.dp,
                 start = 4.dp,
@@ -159,10 +165,7 @@ private fun LauncherItemIcon(
                 ),
             )
             .background(
-                color = Black,
-            )
-            .padding(
-                all = 4.dp,
+                color = launcherItem.backgroundColor,
             ),
     )
 }

@@ -16,7 +16,10 @@
 
 package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
+import androidx.compose.ui.graphics.Color
+
 internal data class LauncherItem(
+    val backgroundColor: Color,
     val iconResourceId: Int,
     val text: String,
     val onClick: () -> Unit,

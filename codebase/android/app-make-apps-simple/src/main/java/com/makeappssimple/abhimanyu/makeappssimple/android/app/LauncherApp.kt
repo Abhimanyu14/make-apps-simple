@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEvent
 import com.makeappssimple.abhimanyu.library.barcodes.android.R as BarcodesR
@@ -29,7 +30,10 @@ internal fun LauncherApp(
 ) {
     val launcherItems = listOf(
         LauncherItem(
-            iconResourceId = CosmosDesignSystemR.drawable.cosmos_ic_launcher_foreground,
+            backgroundColor = colorResource(
+                CosmosDesignSystemR.color.cosmos_launcher_background,
+            ),
+            iconResourceId = CosmosDesignSystemR.mipmap.cosmos_ic_launcher,
             text = stringResource(
                 CosmosDesignSystemR.string.cosmos_design_system_catalog_app_name,
             ),
@@ -38,7 +42,10 @@ internal fun LauncherApp(
             },
         ),
         LauncherItem(
-            iconResourceId = BarcodesR.drawable.barcodes_ic_launcher,
+            backgroundColor = colorResource(
+                BarcodesR.color.barcodes_launcher_background,
+            ),
+            iconResourceId = BarcodesR.mipmap.barcodes_ic_launcher,
             text = stringResource(
                 BarcodesR.string.barcodes_app_name,
             ),
