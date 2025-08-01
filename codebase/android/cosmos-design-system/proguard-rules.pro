@@ -1,22 +1,32 @@
-# Application class
+# region Application class
 -keep class * extends android.app.Application
+# endregion
 
-# Keep all data classes and their fields
+# region All public methods in all classes
+-keepclassmembers class * {
+    public <methods>;
+}
+# endregion
+
+# region Data classes and their fields
 -keepclassmembers class * {
     @kotlin.Metadata *;
 }
+# endregion
 
-# Keep all Kotlin classes and their members
+# region Kotlin classes and their members
 -keep class kotlin.** { *; }
 -dontwarn kotlin.**
+# endregion
 
-# Keep all classes with @Keep annotation
+# region Classes with @Keep annotation
 -keep @androidx.annotation.Keep class * {*;}
 -keepclassmembers class * {
     @androidx.annotation.Keep *;
 }
+# endregion
 
-# Keep all model classes (commonly used for serialization/deserialization)
+# region Model classes (commonly used for serialization/deserialization)
 -keepclassmembers class * implements java.io.Serializable {
     static final long serialVersionUID;
     private static final java.io.ObjectStreamField[] serialPersistentFields;
@@ -25,37 +35,114 @@
     java.lang.Object writeReplace();
     java.lang.Object readResolve();
 }
+# endregion
 
-# Keep all classes used by Gson, Moshi, kotlinx.serialization, etc.
--keepclassmembers class * {
-    @kotlinx.serialization.SerialName <fields>;
-}
-
-# Keep all enums
+# region Enums
 -keepclassmembers enum * { *; }
+# endregion
 
-# Keep all Parcelable implementations
+# region Parcelable implementations
 -keep class * implements android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
+# endregion
 
-# Keep all R classes
+# region R classes
 -keep class **.R$* { *; }
+# endregion
 
-# Keep all classes used by reflection (commonly used in DI frameworks)
+# region Classes used by reflection (commonly used in DI frameworks)
 -keepattributes *Annotation*
 -keepattributes Signature,InnerClasses,EnclosingMethod
+# endregion
 
-# Don't warn about missing classes for kotlinx.serialization
--dontwarn kotlinx.serialization.**
-
-# Add any additional rules specific to your app or libraries here
+# region StringConcatFactory
 -dontwarn java.lang.invoke.StringConcatFactory
+# endregion
 
-# Koin
+# region Classes used by Gson, Moshi, kotlinx.serialization, etc.
+-keepclassmembers class * {
+    @kotlinx.serialization.SerialName <fields>;
+}
+# endregion
+
+# region Kotlinx serialization
+-dontwarn kotlinx.serialization.**
+# endregion
+
+# region Koin
 
 # Keep annotation definitions
 -keep class org.koin.core.annotation.** { *; }
 
 # Keep classes annotated with Koin annotations
 -keep @org.koin.core.annotation.* class * { *; }
+# endregion
+
+# region Jetpack compose
+-dontwarn android.view.RenderNode
+-dontwarn android.view.DisplayListCanvas
+-dontwarn android.view.HardwareCanvas
+
+-keepclassmembers class androidx.compose.ui.platform.ViewLayerContainer {
+    protected void dispatchGetDisplayList();
+}
+
+-keepclassmembers class androidx.compose.ui.platform.AndroidComposeView {
+    android.view.View findViewByAccessibilityIdTraversal(int);
+}
+
+# Users can create Modifier.Node instances that implement multiple Modifier.Node interfaces,
+# so we cannot tell whether two modifier.node instances are of the same type without using
+# reflection to determine the class type. See b/265188224 for more context.
+-keep,allowshrinking class * extends androidx.compose.ui.node.ModifierNodeElement
+
+# Keep all the functions created to throw an exception. We don't want these functions to be
+# inlined in any way, which R8 will do by default. The whole point of these functions is to
+# reduce the amount of code generated at the call site.
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+    static void throw*Exception(...);
+    static void throw*ExceptionForNullCheck(...);
+    # For methods returning Nothing
+    static java.lang.Void throw*Exception(...);
+    static java.lang.Void throw*ExceptionForNullCheck(...);
+    # For functions generating error messages
+    static java.lang.String exceptionMessage*(...);
+    java.lang.String exceptionMessage*(...);
+}
+
+# Keep Compose UI classes
+-keep class androidx.compose.ui.** { *; }
+-keep class androidx.compose.ui.platform.** { *; }
+-keep class androidx.compose.ui.platform.AndroidComposeView { *; }
+-keep class androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat { *; }
+
+# Keep Compose Runtime
+-keep class androidx.compose.runtime.** { *; }
+-keep class androidx.compose.runtime.internal.** { *; }
+-keep class androidx.compose.runtime.snapshots.** { *; }
+
+# Keep Compose Foundation
+-keep class androidx.compose.foundation.** { *; }
+-keep class androidx.compose.foundation.layout.** { *; }
+
+# Keep Material Design
+-keep class androidx.compose.material.** { *; }
+-keep class androidx.compose.material3.** { *; }
+
+# Keep Animation
+-keep class androidx.compose.animation.** { *; }
+
+# Keep setContent and related wrapper functions
+-keep class **.*Wrapper*Kt { *; }
+-keep class androidx.compose.ui.platform.Wrapper_androidKt { *; }
+
+# Keep all Composable functions
+-keepclassmembers class * {
+    @androidx.compose.runtime.Composable <methods>;
+}
+
+# Keep Compose compiler generated classes
+-keep class **.*ComposerKt { *; }
+-keep class **.*$Companion { *; }
+# endregion
