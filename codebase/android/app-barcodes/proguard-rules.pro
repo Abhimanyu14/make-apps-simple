@@ -112,35 +112,35 @@
 }
 
 # Keep Compose UI classes
--keep class androidx.compose.ui.** { *; }
+#-keep class androidx.compose.ui.** { *; }
 -keep class androidx.compose.ui.platform.** { *; }
--keep class androidx.compose.ui.platform.AndroidComposeView { *; }
--keep class androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat { *; }
+#-keep class androidx.compose.ui.platform.AndroidComposeView { *; }
+#-keep class androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat { *; }
 
 # Keep Compose Runtime
--keep class androidx.compose.runtime.** { *; }
--keep class androidx.compose.runtime.internal.** { *; }
--keep class androidx.compose.runtime.snapshots.** { *; }
+#-keep class androidx.compose.runtime.** { *; }
+#-keep class androidx.compose.runtime.internal.** { *; }
+#-keep class androidx.compose.runtime.snapshots.** { *; }
 
 # Keep Compose Foundation
--keep class androidx.compose.foundation.** { *; }
--keep class androidx.compose.foundation.layout.** { *; }
+#-keep class androidx.compose.foundation.** { *; }
+#-keep class androidx.compose.foundation.layout.** { *; }
 
 # Keep Material Design
--keep class androidx.compose.material.** { *; }
--keep class androidx.compose.material3.** { *; }
+#-keep class androidx.compose.material.** { *; }
+#-keep class androidx.compose.material3.** { *; }
 
 # Keep Animation
--keep class androidx.compose.animation.** { *; }
+#-keep class androidx.compose.animation.** { *; }
 
 # Keep setContent and related wrapper functions
 -keep class **.*Wrapper*Kt { *; }
 -keep class androidx.compose.ui.platform.Wrapper_androidKt { *; }
 
 # Keep all Composable functions
--keepclassmembers class * {
-    @androidx.compose.runtime.Composable <methods>;
-}
+#-keepclassmembers class * {
+#    @androidx.compose.runtime.Composable <methods>;
+#}
 
 # Keep Compose compiler generated classes
 -keep class **.*ComposerKt { *; }
