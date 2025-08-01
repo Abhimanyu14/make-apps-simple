@@ -3,9 +3,9 @@
 # endregion
 
 # region All public methods in all classes
--keepclassmembers class * {
-    public <methods>;
-}
+#-keepclassmembers class * {
+#    public <methods>;
+#}
 # endregion
 
 # region Data classes and their fields
@@ -15,8 +15,8 @@
 # endregion
 
 # region Kotlin classes and their members
--keep class kotlin.** { *; }
--dontwarn kotlin.**
+#-keep class kotlin.** { *; }
+#-dontwarn kotlin.**
 # endregion
 
 # region Classes with @Keep annotation
@@ -38,7 +38,7 @@
 # endregion
 
 # region Enums
--keepclassmembers enum * { *; }
+#-keepclassmembers enum * { *; }
 # endregion
 
 # region Parcelable implementations
@@ -80,9 +80,9 @@
 # endregion
 
 # region Jetpack compose
--dontwarn android.view.RenderNode
--dontwarn android.view.DisplayListCanvas
--dontwarn android.view.HardwareCanvas
+#-dontwarn android.view.RenderNode
+#-dontwarn android.view.DisplayListCanvas
+#-dontwarn android.view.HardwareCanvas
 
 -keepclassmembers class androidx.compose.ui.platform.ViewLayerContainer {
     protected void dispatchGetDisplayList();
