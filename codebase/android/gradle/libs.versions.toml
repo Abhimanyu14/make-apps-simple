@@ -1,6 +1,6 @@
 [versions]
 # App versions
-app-barcodes-version-code = "21"
+app-barcodes-version-code = "22"
 app-barcodes-version-name = "1.0.0"
 app-cosmos-design-system-catalog-version-code = "6"
 app-cosmos-design-system-catalog-version-name = "1.0.5"
