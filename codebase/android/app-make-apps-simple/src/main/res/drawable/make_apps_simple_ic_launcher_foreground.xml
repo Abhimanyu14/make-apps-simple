@@ -25,16 +25,16 @@
         android:translateX="110.08"
         android:translateY="110.08">
         <path
-            android:fillColor="#1858BA"
+            android:fillColor="@color/make_apps_simple_launcher_foreground"
             android:pathData="M118,272L208,272A32,32 0,0 1,240 304L240,394A32,32 0,0 1,208 426L118,426A32,32 0,0 1,86 394L86,304A32,32 0,0 1,118 272z" />
         <path
-            android:fillColor="#1858BA"
+            android:fillColor="@color/make_apps_simple_launcher_foreground"
             android:pathData="M118,86L208,86A32,32 0,0 1,240 118L240,208A32,32 0,0 1,208 240L118,240A32,32 0,0 1,86 208L86,118A32,32 0,0 1,118 86z" />
         <path
-            android:fillColor="#1858BA"
+            android:fillColor="@color/make_apps_simple_launcher_foreground"
             android:pathData="M280.63,132.38L334.37,78.64A32,32 52.52,0 1,379.62 78.64L433.36,132.38A32,32 109.7,0 1,433.36 177.63L379.62,231.37A32,32 57.44,0 1,334.37 231.37L280.63,177.63A32,32 81.58,0 1,280.63 132.38z" />
         <path
-            android:fillColor="#1858BA"
+            android:fillColor="@color/make_apps_simple_launcher_foreground"
             android:pathData="M304,272L394,272A32,32 0,0 1,426 304L426,394A32,32 0,0 1,394 426L304,426A32,32 0,0 1,272 394L272,304A32,32 0,0 1,304 272z" />
     </group>
 </vector>

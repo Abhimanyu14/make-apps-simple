@@ -17,5 +17,6 @@
   -->
 
 <resources>
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="cosmos_launcher_background">#263238</color>
+    <color name="cosmos_launcher_foreground">#D9D9D9</color>
 </resources>

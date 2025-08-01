@@ -29,7 +29,7 @@ internal fun LauncherApp(
 ) {
     val launcherItems = listOf(
         LauncherItem(
-            iconResourceId = CosmosDesignSystemR.drawable.cosmos_ic_launcher,
+            iconResourceId = CosmosDesignSystemR.drawable.cosmos_ic_launcher_foreground,
             text = stringResource(
                 CosmosDesignSystemR.string.cosmos_design_system_catalog_app_name,
             ),
