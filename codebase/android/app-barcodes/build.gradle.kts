@@ -25,6 +25,15 @@ kotlin {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile =
+                file("/Users/abhimanyu/Documents/projects/private-files/playstore/keystore/keystore.jks")
+            storePassword = "M@daraUchiha123"
+            keyAlias = "make-apps-simple"
+            keyPassword = "M@daraUchiha123"
+        }
+    }
     namespace = "com.makeappssimple.abhimanyu.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
@@ -57,7 +66,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
