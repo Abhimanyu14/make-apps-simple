@@ -152,8 +152,8 @@ lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecyc
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle-viewmodel" }
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 material-compose-theme-adapter = { module = "com.google.android.material:compose-theme-adapter", version.ref = "material-compose-theme-adapter" }
-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core" }
-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
+#material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core" }
+#material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 navigation-testing = { module = "org.jetbrains.androidx.navigation:navigation-testing", version.ref = "navigation-compose" }
 play-app-update = { module = "com.google.android.play:app-update", version.ref = "play-app-update" }

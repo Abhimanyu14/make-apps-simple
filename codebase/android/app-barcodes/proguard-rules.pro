@@ -20,21 +20,21 @@
 # endregion
 
 # region Classes with @Keep annotation
--keep @androidx.annotation.Keep class * {*;}
--keepclassmembers class * {
-    @androidx.annotation.Keep *;
-}
+#-keep @androidx.annotation.Keep class * {*;}
+#-keepclassmembers class * {
+#    @androidx.annotation.Keep *;
+#}
 # endregion
 
 # region Model classes (commonly used for serialization/deserialization)
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    private static final java.io.ObjectStreamField[] serialPersistentFields;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
+#-keepclassmembers class * implements java.io.Serializable {
+#    static final long serialVersionUID;
+#    private static final java.io.ObjectStreamField[] serialPersistentFields;
+#    private void writeObject(java.io.ObjectOutputStream);
+#    private void readObject(java.io.ObjectInputStream);
+#    java.lang.Object writeReplace();
+#    java.lang.Object readResolve();
+#}
 # endregion
 
 # region Enums
@@ -42,9 +42,9 @@
 # endregion
 
 # region Parcelable implementations
--keep class * implements android.os.Parcelable {
-    public static final android.os.Parcelable$Creator *;
-}
+#-keep class * implements android.os.Parcelable {
+#    public static final android.os.Parcelable$Creator *;
+#}
 # endregion
 
 # region R classes
@@ -52,8 +52,8 @@
 # endregion
 
 # region Classes used by reflection (commonly used in DI frameworks)
--keepattributes *Annotation*
--keepattributes Signature,InnerClasses,EnclosingMethod
+#-keepattributes *Annotation*
+#-keepattributes Signature,InnerClasses,EnclosingMethod
 # endregion
 
 # region StringConcatFactory
@@ -61,13 +61,13 @@
 # endregion
 
 # region Classes used by Gson, Moshi, kotlinx.serialization, etc.
--keepclassmembers class * {
-    @kotlinx.serialization.SerialName <fields>;
-}
+#-keepclassmembers class * {
+#    @kotlinx.serialization.SerialName <fields>;
+#}
 # endregion
 
 # region Kotlinx serialization
--dontwarn kotlinx.serialization.**
+#-dontwarn kotlinx.serialization.**
 # endregion
 
 # region Koin
@@ -84,18 +84,18 @@
 #-dontwarn android.view.DisplayListCanvas
 #-dontwarn android.view.HardwareCanvas
 
--keepclassmembers class androidx.compose.ui.platform.ViewLayerContainer {
-    protected void dispatchGetDisplayList();
-}
+#-keepclassmembers class androidx.compose.ui.platform.ViewLayerContainer {
+#    protected void dispatchGetDisplayList();
+#}
 
--keepclassmembers class androidx.compose.ui.platform.AndroidComposeView {
-    android.view.View findViewByAccessibilityIdTraversal(int);
-}
+#-keepclassmembers class androidx.compose.ui.platform.AndroidComposeView {
+#    android.view.View findViewByAccessibilityIdTraversal(int);
+#}
 
 # Users can create Modifier.Node instances that implement multiple Modifier.Node interfaces,
 # so we cannot tell whether two modifier.node instances are of the same type without using
 # reflection to determine the class type. See b/265188224 for more context.
--keep,allowshrinking class * extends androidx.compose.ui.node.ModifierNodeElement
+#-keep,allowshrinking class * extends androidx.compose.ui.node.ModifierNodeElement
 
 # Keep all the functions created to throw an exception. We don't want these functions to be
 # inlined in any way, which R8 will do by default. The whole point of these functions is to
@@ -134,8 +134,8 @@
 #-keep class androidx.compose.animation.** { *; }
 
 # Keep setContent and related wrapper functions
--keep class **.*Wrapper*Kt { *; }
--keep class androidx.compose.ui.platform.Wrapper_androidKt { *; }
+#-keep class **.*Wrapper*Kt { *; }
+#-keep class androidx.compose.ui.platform.Wrapper_androidKt { *; }
 
 # Keep all Composable functions
 #-keepclassmembers class * {
