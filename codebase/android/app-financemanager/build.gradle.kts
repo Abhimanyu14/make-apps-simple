@@ -46,8 +46,9 @@ android {
         applicationId = "com.makeappssimple.abhimanyu.financemanager.android"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
-        versionCode = libs.versions.app.barcodes.version.code.get().toInt()
-        versionName = libs.versions.app.barcodes.version.name.get()
+        versionCode =
+            libs.versions.app.financemanager.version.code.get().toInt()
+        versionName = libs.versions.app.financemanager.version.name.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
