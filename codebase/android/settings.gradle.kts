@@ -42,7 +42,9 @@ dependencyResolutionManagement {
 rootProject.name = "Make Apps Simple"
 include(":app-barcodes")
 include(":app-cosmos-design-system-catalog")
+include(":app-financemanager")
 include(":app-make-apps-simple")
 include(":barcodes")
 include(":cosmos-design-system")
 include(":cosmos-design-system-catalog")
+include(":financemanager")
