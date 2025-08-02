@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+import java.io.FileInputStream
+import java.util.Properties
+
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(rootProject.file("key.properties")))
+
 plugins {
     alias(libs.plugins.plugin.android.application)
     alias(libs.plugins.plugin.kotlin.android)
@@ -28,11 +34,10 @@ kotlin {
 android {
     signingConfigs {
         create("release") {
-            storePassword = "M@daraUchiha123"
-            keyPassword = "M@daraUchiha123"
-            keyAlias = "make-apps-simple"
-            storeFile =
-                file("/Users/abhimanyu/Documents/projects/private-files/playstore/keystore/keystore.jks")
+            storeFile = file(keystoreProperties.getProperty("keyStoreFile"))
+            storePassword = keystoreProperties.getProperty("keyStorePassword")
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
         }
     }
     namespace = "com.makeappssimple.abhimanyu.makeappssimple.android"
