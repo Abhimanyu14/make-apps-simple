@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
 @Module
 public class PlatformModule {
     @Single
-    internal fun providePlatformEventHandler(): PlatformEventHandler {
+    internal fun providesPlatformEventHandler(): PlatformEventHandler {
         return PlatformEventHandlerImpl()
     }
 }

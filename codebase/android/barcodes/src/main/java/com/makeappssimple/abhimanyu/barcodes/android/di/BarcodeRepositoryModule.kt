@@ -26,7 +26,7 @@ import org.koin.core.annotation.Single
 @Module
 public class BarcodeRepositoryModule {
     @Single
-    internal fun provideBarcodeRepository(
+    internal fun providesBarcodeRepository(
         barcodeDao: BarcodeDao,
         dispatcherProvider: DispatcherProvider,
     ): BarcodeRepository {

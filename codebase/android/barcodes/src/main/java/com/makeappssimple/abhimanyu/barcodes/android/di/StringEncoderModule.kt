@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
 @Module
 public class StringEncoderModule {
     @Single
-    internal fun provideStringEncoder(): StringEncoder {
+    internal fun providesStringEncoder(): StringEncoder {
         return StringEncoderImpl()
     }
 }

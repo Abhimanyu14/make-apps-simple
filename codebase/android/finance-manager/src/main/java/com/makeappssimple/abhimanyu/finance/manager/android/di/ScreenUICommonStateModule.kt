@@ -27,7 +27,7 @@ import org.koin.core.annotation.Single
 @Module
 public class ScreenUICommonStateModule {
     @Single
-    public fun providesScreenUICommonState(
+    internal fun providesScreenUICommonState(
         coroutineScope: CoroutineScope,
     ): ScreenUICommonState {
         return ScreenUICommonStateImpl(

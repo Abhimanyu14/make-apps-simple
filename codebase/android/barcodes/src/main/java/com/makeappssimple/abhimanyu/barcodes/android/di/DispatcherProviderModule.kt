@@ -34,36 +34,36 @@ private const val DISPATCHER_UNCONFINED = "DISPATCHER_UNCONFINED"
 public class DispatcherProviderModule {
     @Single
     @Named(DISPATCHER_DEFAULT)
-    internal fun provideDefaultCoroutineDispatcher(): CoroutineDispatcher {
+    internal fun providesDefaultCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.Default
     }
 
     @Single
     @Named(DISPATCHER_IO)
-    internal fun provideIoCoroutineDispatcher(): CoroutineDispatcher {
+    internal fun providesIoCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.IO
     }
 
     @Single
     @Named(DISPATCHER_MAIN)
-    internal fun provideMainCoroutineDispatcher(): CoroutineDispatcher {
+    internal fun providesMainCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.Main
     }
 
     @Single
     @Named(DISPATCHER_MAIN_IMMEDIATE)
-    internal fun provideMainImmediateCoroutineDispatcher(): CoroutineDispatcher {
+    internal fun providesMainImmediateCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.Main.immediate
     }
 
     @Single
     @Named(DISPATCHER_UNCONFINED)
-    internal fun provideUnconfinedCoroutineDispatcher(): CoroutineDispatcher {
+    internal fun providesUnconfinedCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.Unconfined
     }
 
     @Single
-    internal fun provideDispatcherProvider(
+    internal fun providesDispatcherProvider(
         @Named(DISPATCHER_DEFAULT) defaultCoroutineDispatcher: CoroutineDispatcher,
         @Named(DISPATCHER_IO) ioCoroutineDispatcher: CoroutineDispatcher,
         @Named(DISPATCHER_MAIN) mainCoroutineDispatcher: CoroutineDispatcher,

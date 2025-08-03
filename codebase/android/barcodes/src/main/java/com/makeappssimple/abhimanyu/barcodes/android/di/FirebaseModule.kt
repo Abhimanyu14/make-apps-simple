@@ -26,12 +26,12 @@ import org.koin.core.annotation.Single
 @Module
 public class FirebaseModule {
     @Single
-    internal fun provideFirebaseAnalytics(): FirebaseAnalytics {
+    internal fun providesFirebaseAnalytics(): FirebaseAnalytics {
         return Firebase.analytics
     }
 
     @Single
-    internal fun provideFirebaseInstallations(): FirebaseInstallations {
+    internal fun providesFirebaseInstallations(): FirebaseInstallations {
         return FirebaseInstallations.getInstance()
     }
 }

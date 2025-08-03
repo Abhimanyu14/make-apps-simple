@@ -31,7 +31,7 @@ private object ConfigModuleConstants {
 @Module
 public class ConfigKitModule {
     @Single
-    public fun provideFirebaseRemoteConfigSettings(): FirebaseRemoteConfigSettings {/*
+    internal fun providesFirebaseRemoteConfigSettings(): FirebaseRemoteConfigSettings {/*
         // TODO(Abhi): Use this after adding dependency on debug build checks
         val remoteConfigFetchInterval: Long = if (isDebugBuild()) {
             0L
@@ -46,7 +46,7 @@ public class ConfigKitModule {
     }
 
     @Single
-    public fun provideFirebaseRemoteConfig(
+    internal fun providesFirebaseRemoteConfig(
         firebaseRemoteConfigSettings: FirebaseRemoteConfigSettings,
     ): FirebaseRemoteConfig {
         val firebaseRemoteConfig = Firebase.remoteConfig

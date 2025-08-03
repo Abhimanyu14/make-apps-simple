@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
 @Module
 public class AnalyticsModule {
     @Single
-    internal fun provideFirebaseAnalyticsEventLogger(): AnalyticsKit {
+    internal fun providesAnalyticsKit(): AnalyticsKit {
         return FirebaseAnalyticsKitImpl()
     }
 }

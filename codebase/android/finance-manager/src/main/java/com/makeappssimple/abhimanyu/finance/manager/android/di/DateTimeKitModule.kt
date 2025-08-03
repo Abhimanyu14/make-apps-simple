@@ -26,7 +26,7 @@ import kotlin.time.ExperimentalTime
 public class DateTimeKitModule {
     @OptIn(ExperimentalTime::class)
     @Single
-    internal fun provideDateTimeKit(): DateTimeKit {
+    internal fun providesDateTimeKit(): DateTimeKit {
         return DateTimeKitImpl()
     }
 }

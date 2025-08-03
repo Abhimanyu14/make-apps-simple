@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
 @Module
 public class RoomModule {
     @Single
-    internal fun provideMyRoomDatabase(
+    internal fun providesMyRoomDatabase(
         context: Context,
     ): MyRoomDatabase {
         return MyRoomDatabase.getDatabase(

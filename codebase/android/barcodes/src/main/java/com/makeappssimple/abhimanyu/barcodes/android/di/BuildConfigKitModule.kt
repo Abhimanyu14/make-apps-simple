@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
 @Module
 public class BuildConfigKitModule {
     @Single
-    internal fun provideBuildConfigKit(): BuildConfigKit {
+    internal fun providesBuildConfigKit(): BuildConfigKit {
         return BuildConfigKitImpl()
     }
 }

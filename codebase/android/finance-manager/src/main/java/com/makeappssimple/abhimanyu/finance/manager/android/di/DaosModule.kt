@@ -27,28 +27,28 @@ import org.koin.core.annotation.Single
 @Module
 public class DaosModule {
     @Single
-    public fun providesCategoryDao(
+    internal fun providesCategoryDao(
         myRoomDatabase: MyRoomDatabase,
     ): CategoryDao {
         return myRoomDatabase.categoryDao()
     }
 
     @Single
-    public fun providesAccountDao(
+    internal fun providesAccountDao(
         myRoomDatabase: MyRoomDatabase,
     ): AccountDao {
         return myRoomDatabase.accountDao()
     }
 
     @Single
-    public fun providesTransactionDao(
+    internal fun providesTransactionDao(
         myRoomDatabase: MyRoomDatabase,
     ): TransactionDao {
         return myRoomDatabase.transactionDao()
     }
 
     @Single
-    public fun providesTransactionForDao(
+    internal fun providesTransactionForDao(
         myRoomDatabase: MyRoomDatabase,
     ): TransactionForDao {
         return myRoomDatabase.transactionForDao()

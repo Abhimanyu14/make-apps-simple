@@ -25,7 +25,7 @@ import org.koin.core.annotation.Single
 @Module
 public class DataSourceModule {
     @Single
-    public fun providesCommonDataSource(
+    internal fun providesCommonDataSource(
         myRoomDatabase: MyRoomDatabase,
     ): CommonDataSource {
         return CommonDataSourceImpl(

@@ -25,7 +25,7 @@ import org.koin.core.annotation.Single
 @Module
 public class JsonWriterKitModule {
     @Single
-    public fun providesJsonWriter(
+    internal fun providesJsonWriter(
         context: Context,
     ): JsonWriterKit {
         return JsonWriterKitImpl(

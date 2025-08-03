@@ -36,7 +36,7 @@ import org.koin.core.annotation.Single
 @Module
 public class PreferencesModule {
     @Single
-    internal fun providePreferencesDataStore(
+    internal fun providesPreferencesDataStore(
         appContext: Context,
         dispatcherProvider: DispatcherProvider,
     ): DataStore<Preferences> {

@@ -25,7 +25,7 @@ import org.koin.core.annotation.Single
 @Module
 public class JsonReaderKitModule {
     @Single
-    public fun providesJsonReader(
+    internal fun providesJsonReader(
         context: Context,
     ): JsonReaderKit {
         return JsonReaderKitImpl(

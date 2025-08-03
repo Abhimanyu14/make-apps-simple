@@ -25,7 +25,7 @@ import org.koin.core.annotation.Single
 @Module
 public class BarcodeGeneratorModule {
     @Single
-    internal fun provideBarcodeGenerator(
+    internal fun providesBarcodeGenerator(
         dispatcherProvider: DispatcherProvider,
     ): BarcodeGenerator {
         return BarcodeGeneratorImpl(

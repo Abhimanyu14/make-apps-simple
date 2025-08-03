@@ -25,7 +25,7 @@ import org.koin.core.annotation.Single
 @Module
 public class AppKitModule {
     @Single
-    public fun providesAppKit(
+    internal fun providesAppKit(
         context: Context,
     ): AppKit {
         return AppKitImpl(
