@@ -15,6 +15,12 @@
 
 ---
 
+# Dependency Injection
+
+1. DI methods should always have `provides` as the prefix (not `provide`).
+
+---
+
 # Kotlin Files
 
 ## Naming Conventions
