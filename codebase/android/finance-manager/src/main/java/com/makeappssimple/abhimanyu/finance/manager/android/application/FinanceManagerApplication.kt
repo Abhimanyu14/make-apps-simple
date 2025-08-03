@@ -17,13 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.application
 
 import android.app.Application
+import com.makeappssimple.abhimanyu.finance.manager.android.di.initKoin
+import org.koin.android.ext.koin.androidContext
 
 internal class FinanceManagerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        // TODO(Abhi): Init Koin
-
-        /*
         initKoin(
             config = {
                 androidContext(
@@ -31,6 +30,5 @@ internal class FinanceManagerApplication : Application() {
                 )
             },
         )
-        */
     }
 }

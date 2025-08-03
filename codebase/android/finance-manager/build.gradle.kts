@@ -97,6 +97,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
 
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.work.runtime)
     implementation(libs.bundles.camera)
     implementation(libs.bundles.coil)
     implementation(libs.bundles.compose)

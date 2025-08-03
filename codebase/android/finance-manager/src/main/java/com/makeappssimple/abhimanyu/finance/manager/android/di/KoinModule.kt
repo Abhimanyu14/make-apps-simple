@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
+import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.module
@@ -28,5 +29,6 @@ internal fun initKoin(
         modules(
             FinanceManagerAppModule().module,
         )
+        workManagerFactory()
     }
 }
