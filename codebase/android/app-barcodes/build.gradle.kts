@@ -31,6 +31,11 @@ kotlin {
 }
 
 android {
+    namespace = "com.makeappssimple.abhimanyu.barcodes.android"
+    compileSdk = libs.versions.compile.sdk.get().toInt()
+    ndkVersion = libs.versions.ndk.get()
+    resourcePrefix = "cosmos"
+
     signingConfigs {
         create("release") {
             storeFile = file(keystoreProperties.getProperty("keyStoreFile"))
@@ -39,8 +44,6 @@ android {
             keyPassword = keystoreProperties.getProperty("keyPassword")
         }
     }
-    namespace = "com.makeappssimple.abhimanyu.barcodes.android"
-    compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.makeappssimple.abhimanyu.barcodes.android"

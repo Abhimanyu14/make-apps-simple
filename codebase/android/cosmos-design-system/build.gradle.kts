@@ -38,6 +38,7 @@ android {
     namespace =
         "com.makeappssimple.abhimanyu.library.cosmos.design.system.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
+    ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "cosmos"
 
     defaultConfig {
