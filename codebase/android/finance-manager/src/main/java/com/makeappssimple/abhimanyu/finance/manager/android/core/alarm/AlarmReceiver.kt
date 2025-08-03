@@ -16,30 +16,26 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.alarm
 
-// TODO(Abhi): To Fix - Koin
-//
-//import android.content.BroadcastReceiver
-//import android.content.Context
-//import android.content.Intent
-//import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
-//import dagger.hilt.android.AndroidEntryPoint
-//import javax.inject.Inject
-//
-//@AndroidEntryPoint
-//public class AlarmReceiver : BroadcastReceiver() {
-//    @Inject
-//    public lateinit var logKit: LogKit
-//
-//    // @Inject
-//    // public lateinit var notificationKit: NotificationKit
-//
-//    override fun onReceive(
-//        context: Context,
-//        intent: Intent?,
-//    ) {
-//        logKit.logInfo(
-//            message = "Alarm received : ${System.currentTimeMillis()}",
-//        )
-//        // notificationKit.scheduleNotification()
-//    }
-//}
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+public class AlarmReceiver : BroadcastReceiver(), KoinComponent {
+    public val logKit: LogKit by inject()
+
+    // @Inject
+    // public lateinit var notificationKit: NotificationKit
+
+    override fun onReceive(
+        context: Context,
+        intent: Intent?,
+    ) {
+        logKit.logInfo(
+            message = "Alarm received : ${System.currentTimeMillis()}",
+        )
+        // notificationKit.scheduleNotification()
+    }
+}

@@ -16,41 +16,35 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.time
 
-// TODO(Abhi): To Fix - Koin
-//
-//import android.content.BroadcastReceiver
-//import android.content.Context
-//import android.content.Intent
-//import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
-//import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.orFalse
-//import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
-//import dagger.hilt.android.AndroidEntryPoint
-//import kotlinx.coroutines.runBlocking
-//import javax.inject.Inject
-//
-//@AndroidEntryPoint
-//public class TimeChangedReceiver : BroadcastReceiver() {
-//    @Inject
-//    public lateinit var alarmKit: AlarmKit
-//
-//    @Inject
-//    public lateinit var myPreferencesRepository: MyPreferencesRepository
-//
-//    override fun onReceive(
-//        context: Context?,
-//        intent: Intent?,
-//    ) {
-//        if (intent?.action == "android.intent.action.TIME_SET") {
-//            runBlocking {
-//                doWork()
-//            }
-//        }
-//    }
-//
-//    private suspend fun doWork() {
-//        val reminder = myPreferencesRepository.getReminder() ?: return
-//        if (reminder.isEnabled.orFalse()) {
-//            alarmKit.scheduleReminderAlarm()
-//        }
-//    }
-//}
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import kotlinx.coroutines.runBlocking
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+public class TimeChangedReceiver : BroadcastReceiver(), KoinComponent {
+    public val alarmKit: AlarmKit by inject()
+    public val myPreferencesRepository: MyPreferencesRepository by inject()
+
+    override fun onReceive(
+        context: Context?,
+        intent: Intent?,
+    ) {
+        if (intent?.action == "android.intent.action.TIME_SET") {
+            runBlocking {
+                doWork()
+            }
+        }
+    }
+
+    private suspend fun doWork() {
+        val reminder = myPreferencesRepository.getReminder() ?: return
+        if (reminder.isEnabled.orFalse()) {
+            alarmKit.scheduleReminderAlarm()
+        }
+    }
+}

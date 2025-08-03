@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
-import com.google.android.datatransport.runtime.dagger.Module
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonStateImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.loading.ScreenUIStateLoadingImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.refresh.ScreenUIStateRefreshImpl
 import kotlinx.coroutines.CoroutineScope
+import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module

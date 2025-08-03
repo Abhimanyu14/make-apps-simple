@@ -17,11 +17,17 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.alarm
 
 import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import com.makeappssimple.abhimanyu.finance.manager.android.core.boot.BootCompletedReceiver
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Reminder
+import com.makeappssimple.abhimanyu.finance.manager.android.core.time.TimeChangedReceiver
 import java.time.LocalTime
 
 public class AlarmKitImpl(
@@ -81,32 +87,30 @@ public class AlarmKitImpl(
         initialAlarmTimestamp: Long,
     ): Boolean {
         val alarmManager = getAlarmManager() ?: return false
-        // TODO(Abhi): To Fix
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            context,
-//            0,
-//            getAlarmReceiverIntent(),
-//            PendingIntent.FLAG_IMMUTABLE,
-//        )
-//        alarmManager.setRepeating(
-//            AlarmManager.RTC,
-//            initialAlarmTimestamp,
-//            AlarmManager.INTERVAL_DAY,
-//            pendingIntent,
-//        )
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            getAlarmReceiverIntent(),
+            PendingIntent.FLAG_IMMUTABLE,
+        )
+        alarmManager.setRepeating(
+            AlarmManager.RTC,
+            initialAlarmTimestamp,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent,
+        )
         return true
     }
 
     private fun cancelAlarm(): Boolean {
         val alarmManager = getAlarmManager() ?: return false
-        // TODO(Abhi): To Fix
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            context,
-//            0,
-//            getAlarmReceiverIntent(),
-//            PendingIntent.FLAG_IMMUTABLE,
-//        )
-//        alarmManager.cancel(pendingIntent)
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            getAlarmReceiverIntent(),
+            PendingIntent.FLAG_IMMUTABLE,
+        )
+        alarmManager.cancel(pendingIntent)
         return true
     }
 
@@ -114,9 +118,9 @@ public class AlarmKitImpl(
         return context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
     }
 
-//    private fun getAlarmReceiverIntent(): Intent {
-//        return Intent(context, AlarmReceiver::class.java)
-//    }
+    private fun getAlarmReceiverIntent(): Intent {
+        return Intent(context, AlarmReceiver::class.java)
+    }
     // endregion
 
     // region broadcast receivers
@@ -131,39 +135,35 @@ public class AlarmKitImpl(
     }
 
     private fun enableBootCompleteReceiver() {
-        // TODO(Abhi): To Fix
-//        context.packageManager.setComponentEnabledSetting(
-//            ComponentName(context, BootCompletedReceiver::class.java),
-//            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-//            PackageManager.DONT_KILL_APP
-//        )
+        context.packageManager.setComponentEnabledSetting(
+            ComponentName(context, BootCompletedReceiver::class.java),
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP
+        )
     }
 
     private fun disableBootCompleteReceiver() {
-        // TODO(Abhi): To Fix
-//        context.packageManager.setComponentEnabledSetting(
-//            ComponentName(context, BootCompletedReceiver::class.java),
-//            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-//            PackageManager.DONT_KILL_APP
-//        )
+        context.packageManager.setComponentEnabledSetting(
+            ComponentName(context, BootCompletedReceiver::class.java),
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP
+        )
     }
 
     private fun enableTimeChangedReceiver() {
-        // TODO(Abhi): To Fix
-//        context.packageManager.setComponentEnabledSetting(
-//            ComponentName(context, TimeChangedReceiver::class.java),
-//            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-//            PackageManager.DONT_KILL_APP
-//        )
+        context.packageManager.setComponentEnabledSetting(
+            ComponentName(context, TimeChangedReceiver::class.java),
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP
+        )
     }
 
     private fun disableTimeChangedReceiver() {
-        // TODO(Abhi): To Fix
-//        context.packageManager.setComponentEnabledSetting(
-//            ComponentName(context, TimeChangedReceiver::class.java),
-//            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-//            PackageManager.DONT_KILL_APP
-//        )
+        context.packageManager.setComponentEnabledSetting(
+            ComponentName(context, TimeChangedReceiver::class.java),
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP
+        )
     }
     // endregion
 
