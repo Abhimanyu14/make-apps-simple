@@ -1,3 +1,20 @@
+# Naming
+
+1. Prefer American english words over British english words.
+
+   **Context:** Many programming terms use American English, so it’s easier to follow that convention.
+   e.g. `color`.
+
+---
+
+# Package
+
+1. Prefer multiple words separated by hyphens or underscores over concatenating them into a single word.
+
+   e.g. `finance_manager` vs `financemanager`.
+
+---
+
 # Kotlin Files
 
 ## Naming Conventions
@@ -54,7 +71,7 @@
   - Put parameters in single line for Java method calls if they file within a line, if not put each parameter in a separate line.
   - For every function declaration, always place each parameter in separate line. Do NOT add empty lines when there are not parameters.
 - **Functions:**
- - Do NOT use function expressions.
+- Do NOT use function expressions.
 - **Braces:**
   - Use K&R style (opening brace on the same line).
   - Always use braces for control structures, even for single-line blocks.
