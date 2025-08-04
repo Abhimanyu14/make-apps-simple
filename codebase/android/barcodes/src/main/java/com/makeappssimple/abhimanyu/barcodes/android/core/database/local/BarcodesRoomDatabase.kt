@@ -40,17 +40,17 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 @TypeConverters(
     BarcodeFormatConverter::class,
 )
-internal abstract class MyRoomDatabase : RoomDatabase() {
+internal abstract class BarcodesRoomDatabase : RoomDatabase() {
     abstract fun barcodeDao(): BarcodeDao
 
     companion object {
         @Volatile
-        private var INSTANCE: MyRoomDatabase? = null
+        private var INSTANCE: BarcodesRoomDatabase? = null
 
         internal fun getDatabase(
             context: Context,
-        ): MyRoomDatabase {
-            val tempInstance: MyRoomDatabase? = INSTANCE
+        ): BarcodesRoomDatabase {
+            val tempInstance: BarcodesRoomDatabase? = INSTANCE
             if (tempInstance.isNotNull()) {
                 return tempInstance
             }
@@ -65,11 +65,11 @@ internal abstract class MyRoomDatabase : RoomDatabase() {
 
         private fun buildDatabase(
             context: Context,
-        ): MyRoomDatabase {
+        ): BarcodesRoomDatabase {
             return Room
                 .databaseBuilder(
                     context = context.applicationContext,
-                    klass = MyRoomDatabase::class.java,
+                    klass = BarcodesRoomDatabase::class.java,
                     name = DatabaseConstants.DATABASE_NAME,
                 )
                 .addMigrations(

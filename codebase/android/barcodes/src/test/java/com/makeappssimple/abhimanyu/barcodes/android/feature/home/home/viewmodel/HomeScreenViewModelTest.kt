@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.logger.fake.FakeLogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.MyNavigationDirections
+import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.BarcodesNavigationDirections
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcherProviderImpl
 import kotlinx.coroutines.CoroutineScope
@@ -87,7 +87,7 @@ class HomeScreenViewModelTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.CreateBarcode(
+                BarcodesNavigationDirections.CreateBarcode(
                     barcodeId = null,
                 ),
             )
@@ -101,7 +101,7 @@ class HomeScreenViewModelTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.ScanBarcode,
+                BarcodesNavigationDirections.ScanBarcode,
             )
         }
     }
@@ -113,7 +113,7 @@ class HomeScreenViewModelTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.Settings,
+                BarcodesNavigationDirections.Settings,
             )
         }
     }
@@ -128,7 +128,7 @@ class HomeScreenViewModelTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.BarcodeDetails(
+                BarcodesNavigationDirections.BarcodeDetails(
                     barcodeId = barcodeId,
                 ),
             )

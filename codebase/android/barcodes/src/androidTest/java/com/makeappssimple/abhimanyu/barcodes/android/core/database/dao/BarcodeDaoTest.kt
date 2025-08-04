@@ -21,7 +21,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.MyRoomDatabase
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.BarcodesRoomDatabase
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,26 +36,26 @@ import java.io.IOException
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 internal class BarcodeDaoTest {
-    private lateinit var myRoomDatabase: MyRoomDatabase
+    private lateinit var barcodesRoomDatabase: BarcodesRoomDatabase
     private lateinit var barcodeDao: BarcodeDao
 
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        myRoomDatabase = Room
+        barcodesRoomDatabase = Room
             .inMemoryDatabaseBuilder(
                 context = context,
-                klass = MyRoomDatabase::class.java,
+                klass = BarcodesRoomDatabase::class.java,
             )
             .allowMainThreadQueries()
             .build()
-        barcodeDao = myRoomDatabase.barcodeDao()
+        barcodeDao = barcodesRoomDatabase.barcodeDao()
     }
 
     @After
     @Throws(IOException::class)
     fun tearDown() {
-        myRoomDatabase.close()
+        barcodesRoomDatabase.close()
     }
 
     @Test

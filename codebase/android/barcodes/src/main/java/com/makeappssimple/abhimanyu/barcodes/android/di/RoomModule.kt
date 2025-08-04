@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.MyRoomDatabase
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.BarcodesRoomDatabase
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -26,8 +26,8 @@ public class RoomModule {
     @Single
     internal fun providesMyRoomDatabase(
         context: Context,
-    ): MyRoomDatabase {
-        return MyRoomDatabase.getDatabase(
+    ): BarcodesRoomDatabase {
+        return BarcodesRoomDatabase.getDatabase(
             context = context,
         )
     }

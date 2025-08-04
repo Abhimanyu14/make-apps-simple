@@ -55,7 +55,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.BarcodeDetails(
+                BarcodesNavigationDirections.BarcodeDetails(
                     barcodeId = barcodeId,
                 ),
             )
@@ -72,7 +72,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.CreateBarcode(
+                BarcodesNavigationDirections.CreateBarcode(
                     barcodeId = barcodeId,
                 ),
             )
@@ -90,7 +90,7 @@ internal class NavigationKitTest {
 
                 Assert.assertEquals(
                     awaitItem(),
-                    MyNavigationDirections.CreateBarcode(
+                    BarcodesNavigationDirections.CreateBarcode(
                         barcodeId = barcodeId,
                     ),
                 )
@@ -104,7 +104,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.Credits,
+                BarcodesNavigationDirections.Credits,
             )
         }
     }
@@ -116,7 +116,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.Home,
+                BarcodesNavigationDirections.Home,
             )
         }
     }
@@ -128,7 +128,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.ScanBarcode,
+                BarcodesNavigationDirections.ScanBarcode,
             )
         }
     }
@@ -140,7 +140,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.Settings,
+                BarcodesNavigationDirections.Settings,
             )
         }
     }
@@ -152,7 +152,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.NavigateUp,
+                BarcodesNavigationDirections.NavigateUp,
             )
         }
     }
@@ -167,7 +167,7 @@ internal class NavigationKitTest {
 
             Assert.assertEquals(
                 awaitItem(),
-                MyNavigationDirections.WebView(
+                BarcodesNavigationDirections.WebView(
                     url = url,
                 ),
             )

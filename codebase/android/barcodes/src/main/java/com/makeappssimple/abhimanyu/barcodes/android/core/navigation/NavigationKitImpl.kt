@@ -35,7 +35,7 @@ internal class NavigationKitImpl(
         barcodeId: Int,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.BarcodeDetails(
+            navigationCommand = BarcodesNavigationDirections.BarcodeDetails(
                 barcodeId = barcodeId,
             )
         )
@@ -45,7 +45,7 @@ internal class NavigationKitImpl(
         barcodeId: Int?,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.CreateBarcode(
+            navigationCommand = BarcodesNavigationDirections.CreateBarcode(
                 barcodeId = barcodeId,
             )
         )
@@ -53,31 +53,31 @@ internal class NavigationKitImpl(
 
     override fun navigateToCreditsScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Credits
+            navigationCommand = BarcodesNavigationDirections.Credits
         )
     }
 
     override fun navigateToHomeScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Home
+            navigationCommand = BarcodesNavigationDirections.Home
         )
     }
 
     override fun navigateToScanBarcodeScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.ScanBarcode
+            navigationCommand = BarcodesNavigationDirections.ScanBarcode
         )
     }
 
     override fun navigateToSettingsScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Settings
+            navigationCommand = BarcodesNavigationDirections.Settings
         )
     }
 
     override fun navigateUp(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.NavigateUp
+            navigationCommand = BarcodesNavigationDirections.NavigateUp
         )
     }
 
@@ -85,7 +85,7 @@ internal class NavigationKitImpl(
         url: String,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.WebView(
+            navigationCommand = BarcodesNavigationDirections.WebView(
                 url = stringEncoder.encodeString(
                     string = url,
                 ),

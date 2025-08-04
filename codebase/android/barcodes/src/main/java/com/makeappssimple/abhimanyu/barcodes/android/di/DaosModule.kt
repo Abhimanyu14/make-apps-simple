@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.MyRoomDatabase
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.BarcodesRoomDatabase
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -25,8 +25,8 @@ import org.koin.core.annotation.Single
 public class DaosModule {
     @Single
     internal fun providesBarcodeDao(
-        myRoomDatabase: MyRoomDatabase,
+        barcodesRoomDatabase: BarcodesRoomDatabase,
     ): BarcodeDao {
-        return myRoomDatabase.barcodeDao()
+        return barcodesRoomDatabase.barcodeDao()
     }
 }

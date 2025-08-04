@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants.NavigationArguments.BARCODE_ID
 
-internal object MyNavigationDirections {
+internal object BarcodesNavigationDirections {
     // Default
     object Default : NavigationCommand {
         override val command = Command.NOOP
