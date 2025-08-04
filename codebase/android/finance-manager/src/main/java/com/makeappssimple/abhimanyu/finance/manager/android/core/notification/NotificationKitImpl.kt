@@ -22,8 +22,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.toColorInt
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.app.AppKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 public class NotificationKitImpl(
@@ -48,7 +48,7 @@ public class NotificationKitImpl(
                 PendingIntent.FLAG_IMMUTABLE
             )
 
-        logKit.logInfo(
+        logKit.logError(
             message = "Sending Notification : ${System.currentTimeMillis()}",
         )
         val notification =
@@ -67,7 +67,7 @@ public class NotificationKitImpl(
                 .setAutoCancel(true)
                 .build()
         notificationManager.notify(1, notification)
-        logKit.logInfo(
+        logKit.logError(
             message = "Notification : ${System.currentTimeMillis()}",
         )
     }

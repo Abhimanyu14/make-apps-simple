@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository

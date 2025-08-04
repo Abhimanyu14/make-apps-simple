@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao

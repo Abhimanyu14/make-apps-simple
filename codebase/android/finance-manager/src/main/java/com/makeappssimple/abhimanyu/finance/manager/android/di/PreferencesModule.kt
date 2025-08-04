@@ -23,11 +23,11 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.MyPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.constants.DatastoreConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.preferencesDataMigrations
-import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.core.annotation.Module

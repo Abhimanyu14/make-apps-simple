@@ -22,10 +22,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.boot.BootCompletedReceiver
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Reminder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.time.TimeChangedReceiver
 import java.time.LocalTime
@@ -49,7 +49,7 @@ public class AlarmKitImpl(
         )
 
         if (isAlarmCancelled) {
-            logKit.logInfo(
+            logKit.logError(
                 message = "Alarm cancelled",
             )
         }
@@ -75,7 +75,7 @@ public class AlarmKitImpl(
         )
 
         if (isAlarmSet) {
-            logKit.logInfo(
+            logKit.logError(
                 message = "Alarm set for : ${reminder.hour}:${reminder.min}",
             )
         }

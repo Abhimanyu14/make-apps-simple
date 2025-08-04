@@ -36,7 +36,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
@@ -50,6 +49,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.My
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.emoji_circle.MyEmojiCircleData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 public fun TransactionListItem(

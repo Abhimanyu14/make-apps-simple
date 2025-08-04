@@ -86,6 +86,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(project(":cosmos-design-system"))
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

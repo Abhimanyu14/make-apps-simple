@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.alarm
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -33,7 +33,7 @@ public class AlarmReceiver : BroadcastReceiver(), KoinComponent {
         context: Context,
         intent: Intent?,
     ) {
-        logKit.logInfo(
+        logKit.logError(
             message = "Alarm received : ${System.currentTimeMillis()}",
         )
         // notificationKit.scheduleNotification()

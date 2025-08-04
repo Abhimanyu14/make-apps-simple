@@ -26,12 +26,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumListItemHeight
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 public fun TransactionForListItem(

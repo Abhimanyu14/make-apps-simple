@@ -68,8 +68,10 @@ internal fun calculateMinimumRadiusForSpacedSlice(
     val angleMiddle = startAngle + sweepAngle / 2F
 
     // Other point of the arc
-    val arcEndPointX: Float = center.x + radius * cos((startAngle + sweepAngle) * FDEG2RAD)
-    val arcEndPointY: Float = center.y + radius * sin((startAngle + sweepAngle) * FDEG2RAD)
+    val arcEndPointX: Float =
+        center.x + radius * cos((startAngle + sweepAngle) * FDEG2RAD)
+    val arcEndPointY: Float =
+        center.y + radius * sin((startAngle + sweepAngle) * FDEG2RAD)
 
     // Middle point on the arc
     val arcMidPointX: Float = center.x + radius * cos(angleMiddle * FDEG2RAD)
@@ -92,8 +94,10 @@ internal fun calculateMinimumRadiusForSpacedSlice(
 
     // And now subtract the height of the arc that's between the triangle and the outer circle
     spacedRadius -= sqrt(
-        (arcMidPointX - (arcEndPointX + arcStartPointX) / 2F).toDouble().pow(2.0) +
-                (arcMidPointY - (arcEndPointY + arcStartPointY) / 2F).toDouble().pow(2.0)
+        (arcMidPointX - (arcEndPointX + arcStartPointX) / 2F).toDouble()
+            .pow(2.0) +
+                (arcMidPointY - (arcEndPointY + arcStartPointY) / 2F).toDouble()
+                    .pow(2.0)
     ).toFloat()
 
     return spacedRadius

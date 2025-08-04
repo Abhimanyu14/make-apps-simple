@@ -46,7 +46,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.addIfDoesNotContainItemElseRemove
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.formattedDate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
@@ -72,6 +71,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.te
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.textfield.MyReadOnlyTextFieldData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.textfield.MyReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumBottomSheetHeight
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate

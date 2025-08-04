@@ -18,10 +18,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.b
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.common.MyConfirmationBottomSheet
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.common.MyConfirmationBottomSheetData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.common.MyConfirmationBottomSheetEvent
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 public fun AccountsDeleteConfirmationBottomSheet(

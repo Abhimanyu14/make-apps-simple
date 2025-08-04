@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.b
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.accounts.AccountsListItemContentData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.accounts.AccountsListItemContentDataAndEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.accounts.AccountsListItemContentEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 public fun SelectAccountBottomSheet(

@@ -36,7 +36,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.COMPONENT_TOTAL_BALANCE_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
@@ -47,6 +46,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.ch
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.matchrowsize.matchRowSize
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object TotalBalanceCardConstants {
     val loadingUIHeight = 96.dp

@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.common
 
 import android.net.Uri
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonreader.JsonReaderKit
@@ -31,7 +32,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.util.sanitizeAccounts
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.util.sanitizeTransactions
-import com.makeappssimple.abhimanyu.finance.manager.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import kotlinx.collections.immutable.toImmutableList
@@ -54,7 +54,7 @@ public class RestoreDataUseCase @Inject constructor(
             uri = uri,
         )
         if (jsonString.isNull()) {
-            logKit.logInfo(
+            logKit.logError(
                 message = "Restore Data: Error reading file",
             )
             return false
@@ -64,13 +64,13 @@ public class RestoreDataUseCase @Inject constructor(
             string = jsonString,
         )
         if (backupData.databaseData.isNull()) {
-            logKit.logInfo(
+            logKit.logError(
                 message = "Restore Data: Error in file database data",
             )
             return false
         }
         if (backupData.datastoreData.isNull()) {
-            logKit.logInfo(
+            logKit.logError(
                 message = "Restore Data: Error in file datastore data",
             )
             return false

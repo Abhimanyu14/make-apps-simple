@@ -34,7 +34,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.composepie.ComposePieChart
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.COMPONENT_OVERVIEW_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
@@ -44,6 +43,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.co
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable
 public sealed class OverviewCardEvent {

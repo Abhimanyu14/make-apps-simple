@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.MyPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDataId

@@ -34,13 +34,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.default_tag.MyDefaultTag
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumListItemHeight
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object AccountsListItemContentConstants {
     val loadingUIHeight = 40.dp
