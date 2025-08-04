@@ -20,195 +20,352 @@
     <string name="finance_manager_app_name">Finance Manager</string>
 
     <!-- Notification -->
-    <string name="notification_title"> Reminder!</string>
-    <string name="notification_text">Don\'t forget to add your spending for today!</string>
+    <string name="finance_manager_notification_title"> Reminder!</string>
+    <string name="finance_manager_notification_text">Don\'t forget to add your spending for today!</string>
 
     <!-- region common -->
-    <string name="common_empty_string" />
+    <string name="finance_manager_common_empty_string" />
     <!-- endregion -->
 
     <!-- region accounts delete confirmation bottom sheet -->
-    <string name="screen_accounts_bottom_sheet_delete_title">Delete Account</string>
-    <string name="screen_accounts_bottom_sheet_delete_message">
+    <string name="finance_manager_screen_accounts_bottom_sheet_delete_title">Delete Account</string>
+    <string name="finance_manager_screen_accounts_bottom_sheet_delete_message">
         Are you sure you want to delete this account?
     </string>
-    <string name="screen_accounts_bottom_sheet_delete_positive_button_text">Yes</string>
-    <string name="screen_accounts_bottom_sheet_delete_negative_button_text">Cancel</string>
+    <string name="finance_manager_screen_accounts_bottom_sheet_delete_positive_button_text">Yes</string>
+    <string name="finance_manager_screen_accounts_bottom_sheet_delete_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region accounts set as default confirmation bottom sheet -->
-    <string name="screen_accounts_bottom_sheet_set_as_default_title">Set as default Account</string>
-    <string name="screen_accounts_bottom_sheet_set_as_default_message">
+    <string name="finance_manager_screen_accounts_bottom_sheet_set_as_default_title">Set as default Account</string>
+    <string name="finance_manager_screen_accounts_bottom_sheet_set_as_default_message">
         Are you sure you want to set this as the default account?
     </string>
-    <string name="screen_accounts_bottom_sheet_set_as_default_positive_button_text">Yes</string>
-    <string name="screen_accounts_bottom_sheet_set_as_default_negative_button_text">Cancel</string>
+    <string name="finance_manager_screen_accounts_bottom_sheet_set_as_default_positive_button_text">Yes</string>
+    <string name="finance_manager_screen_accounts_bottom_sheet_set_as_default_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region analysis filter bottom sheet -->
-    <string name="bottom_sheet_analysis_filter_clear">Clear</string>
-    <string name="bottom_sheet_analysis_filter_reset">Reset</string>
-    <string name="bottom_sheet_analysis_filter_apply">Apply</string>
-    <string name="bottom_sheet_analysis_filter_transaction_date">Transaction Date</string>
-    <string name="bottom_sheet_analysis_filter_from_date">From</string>
-    <string name="bottom_sheet_analysis_filter_to_date">To</string>
+    <string name="finance_manager_bottom_sheet_analysis_filter_clear">Clear</string>
+    <string name="finance_manager_bottom_sheet_analysis_filter_reset">Reset</string>
+    <string name="finance_manager_bottom_sheet_analysis_filter_apply">Apply</string>
+    <string name="finance_manager_bottom_sheet_analysis_filter_transaction_date">Transaction Date</string>
+    <string name="finance_manager_bottom_sheet_analysis_filter_from_date">From</string>
+    <string name="finance_manager_bottom_sheet_analysis_filter_to_date">To</string>
     <!-- endregion -->
 
     <!-- region backup card -->
-    <string name="backup_card">Backup data</string>
+    <string name="finance_manager_backup_card">Backup data</string>
     <!-- endregion -->
 
     <!-- region bottom sheet accounts menu -->
-    <string name="bottom_sheet_accounts_menu_edit">Edit</string>
-    <string name="bottom_sheet_accounts_menu_set_as_default_account">Set as default Account</string>
-    <string name="bottom_sheet_accounts_menu_delete">Delete</string>
+    <string name="finance_manager_bottom_sheet_accounts_menu_edit">Edit</string>
+    <string name="finance_manager_bottom_sheet_accounts_menu_set_as_default_account">Set as default Account</string>
+    <string name="finance_manager_bottom_sheet_accounts_menu_delete">Delete</string>
     <!-- endregion -->
 
     <!-- region bottom sheet category menu -->
-    <string name="bottom_sheet_category_menu_edit">Edit</string>
-    <string name="bottom_sheet_category_menu_set_as_default_category">Set as default Category</string>
-    <string name="bottom_sheet_category_menu_delete">Delete</string>
+    <string name="finance_manager_bottom_sheet_category_menu_edit">Edit</string>
+    <string name="finance_manager_bottom_sheet_category_menu_set_as_default_category">Set as default Category</string>
+    <string name="finance_manager_bottom_sheet_category_menu_delete">Delete</string>
     <!-- endregion -->
 
     <!-- region bottom sheet emoji picker -->
-    <string name="emoji_picker_bottom_sheet_placeholder_text">Search Emojis</string>
+    <string name="finance_manager_emoji_picker_bottom_sheet_placeholder_text">Search Emojis</string>
     <!-- endregion -->
 
     <!-- region bottom sheet select account -->
-    <string name="bottom_sheet_select_account_title">Select Account</string>
+    <string name="finance_manager_bottom_sheet_select_account_title">Select Account</string>
     <!-- endregion -->
 
     <!-- region bottom sheet select category -->
-    <string name="bottom_sheet_select_category_title">Select Category</string>
+    <string name="finance_manager_bottom_sheet_select_category_title">Select Category</string>
     <!-- endregion -->
 
     <!-- region bottom sheet select transaction for -->
-    <string name="bottom_sheet_select_transaction_for_title">Select Transaction For</string>
+    <string name="finance_manager_bottom_sheet_select_transaction_for_title">Select Transaction For</string>
     <!-- endregion -->
 
     <!-- region bottom sheet transactions menu -->
-    <string name="bottom_sheet_transactions_menu_update_transaction_for">Update Transaction For</string>
-    <string name="bottom_sheet_transactions_menu_select_all_transactions">Select All Transactions</string>
+    <string name="finance_manager_bottom_sheet_transactions_menu_update_transaction_for">Update Transaction For</string>
+    <string name="finance_manager_bottom_sheet_transactions_menu_select_all_transactions">Select All Transactions</string>
     <!-- endregion -->
 
     <!-- region categories delete confirmation bottom sheet -->
-    <string name="screen_categories_bottom_sheet_delete_title">Delete Category</string>
-    <string name="screen_categories_bottom_sheet_delete_message">
+    <string name="finance_manager_screen_categories_bottom_sheet_delete_title">Delete Category</string>
+    <string name="finance_manager_screen_categories_bottom_sheet_delete_message">
         Are you sure you want to delete this category?
     </string>
-    <string name="screen_categories_bottom_sheet_delete_positive_button_text">Yes</string>
-    <string name="screen_categories_bottom_sheet_delete_negative_button_text">Cancel</string>
+    <string name="finance_manager_screen_categories_bottom_sheet_delete_positive_button_text">Yes</string>
+    <string name="finance_manager_screen_categories_bottom_sheet_delete_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region categories set as default confirmation bottom sheet -->
-    <string name="screen_categories_bottom_sheet_set_as_default_title">Set as default Category</string>
-    <string name="screen_categories_bottom_sheet_set_as_default_message">
+    <string name="finance_manager_screen_categories_bottom_sheet_set_as_default_title">Set as default Category</string>
+    <string name="finance_manager_screen_categories_bottom_sheet_set_as_default_message">
         Are you sure you want to set this as the default %1s category?
     </string>
-    <string name="screen_categories_bottom_sheet_set_as_default_positive_button_text">Yes</string>
-    <string name="screen_categories_bottom_sheet_set_as_default_negative_button_text">Cancel</string>
+    <string name="finance_manager_screen_categories_bottom_sheet_set_as_default_positive_button_text">Yes</string>
+    <string name="finance_manager_screen_categories_bottom_sheet_set_as_default_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region date picker -->
-    <string name="date_picker_negative_button">Cancel</string>
-    <string name="date_picker_positive_button">OK</string>
+    <string name="finance_manager_date_picker_negative_button">Cancel</string>
+    <string name="finance_manager_date_picker_positive_button">OK</string>
     <!-- endregion -->
 
     <!-- region default tag -->
-    <string name="default_tag">DEFAULT</string>
+    <string name="finance_manager_default_tag">DEFAULT</string>
     <!-- endregion -->
 
     <!-- region list item -->
-    <string name="list_item_accounts_edit">Edit</string>
-    <string name="list_item_accounts_delete">Delete</string>
+    <string name="finance_manager_list_item_accounts_edit">Edit</string>
+    <string name="finance_manager_list_item_accounts_delete">Delete</string>
     <!-- endregion -->
 
     <!-- region navigation back button -->
-    <string name="navigation_back_button_navigation_icon_content_description">Navigate Back</string>
-    <string name="navigation_close_button_navigation_icon_content_description">Close</string>
+    <string name="finance_manager_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
+    <string name="finance_manager_navigation_close_button_navigation_icon_content_description">Close</string>
     <!-- endregion -->
 
     <!-- region overview card -->
-    <string name="overview_card_previous_button_content_description">Previous</string>
-    <string name="overview_card_next_button_content_description">Next</string>
+    <string name="finance_manager_overview_card_previous_button_content_description">Previous</string>
+    <string name="finance_manager_overview_card_next_button_content_description">Next</string>
     <!-- endregion -->
 
     <!-- region recent transactions -->
-    <string name="screen_home_recent_transactions">Recent Transactions</string>
-    <string name="screen_home_view_all_transactions">VIEW ALL</string>
+    <string name="finance_manager_screen_home_recent_transactions">Recent Transactions</string>
+    <string name="finance_manager_screen_home_view_all_transactions">VIEW ALL</string>
     <!-- endregion -->
 
     <!-- region time picker -->
-    <string name="time_picker_negative_button_text">Cancel</string>
-    <string name="time_picker_positive_button_text">OK</string>
-    <string name="time_picker_text_input_title">Enter Time</string>
-    <string name="time_picker_touch_input_title">Select Time</string>
-    <string name="time_picker_text_input_switch_icon_button_content_description">Switch to Touch Input</string>
-    <string name="time_picker_touch_input_switch_icon_button_content_description">Switch to Text Input</string>
+    <string name="finance_manager_time_picker_negative_button_text">Cancel</string>
+    <string name="finance_manager_time_picker_positive_button_text">OK</string>
+    <string name="finance_manager_time_picker_text_input_title">Enter Time</string>
+    <string name="finance_manager_time_picker_touch_input_title">Select Time</string>
+    <string name="finance_manager_time_picker_text_input_switch_icon_button_content_description">Switch to Touch Input</string>
+    <string name="finance_manager_time_picker_touch_input_switch_icon_button_content_description">Switch to Text Input</string>
     <!-- endregion -->
 
     <!-- region total balance card -->
-    <string name="total_balance_card_title">TOTAL BALANCE</string>
-    <string name="total_balance_card_view_balance">View Balance</string>
+    <string name="finance_manager_total_balance_card_title">TOTAL BALANCE</string>
+    <string name="finance_manager_total_balance_card_view_balance">View Balance</string>
     <!-- endregion -->
 
     <!-- region transactions filter bottom sheet -->
-    <string name="bottom_sheet_transactions_filter_clear">Clear</string>
-    <string name="bottom_sheet_transactions_filter_reset">Reset</string>
-    <string name="bottom_sheet_transactions_filter_apply">Apply</string>
-    <string name="bottom_sheet_transactions_filter_expand_group">Expand Group</string>
-    <string name="bottom_sheet_transactions_filter_collapse_group">Collapse Group</string>
-    <string name="bottom_sheet_transactions_filter_expense_categories">Expense Categories</string>
-    <string name="bottom_sheet_transactions_filter_income_categories">Income Categories</string>
-    <string name="bottom_sheet_transactions_filter_investment_categories">Investment Categories</string>
-    <string name="bottom_sheet_transactions_filter_accounts">Accounts</string>
-    <string name="bottom_sheet_transactions_filter_transaction_for_values">Transaction For</string>
-    <string name="bottom_sheet_transactions_filter_transaction_types">Transaction Types</string>
-    <string name="bottom_sheet_transactions_filter_transaction_date">Transaction Date</string>
-    <string name="bottom_sheet_transactions_filter_from_date">From</string>
-    <string name="bottom_sheet_transactions_filter_to_date">To</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_clear">Clear</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_reset">Reset</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_apply">Apply</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_expand_group">Expand Group</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_collapse_group">Collapse Group</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_expense_categories">Expense Categories</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_income_categories">Income Categories</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_investment_categories">Investment Categories</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_accounts">Accounts</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_transaction_for_values">Transaction For</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_transaction_types">Transaction Types</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_transaction_date">Transaction Date</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_from_date">From</string>
+    <string name="finance_manager_bottom_sheet_transactions_filter_to_date">To</string>
     <!-- endregion -->
 
     <!-- region transactions sort bottom sheet -->
-    <string name="bottom_sheet_transactions_sort_title">Sort</string>
+    <string name="finance_manager_bottom_sheet_transactions_sort_title">Sort</string>
     <!-- endregion -->
 
     <!-- region transaction delete confirmation bottom sheet -->
-    <string name="screen_transactions_bottom_sheet_delete_title">Delete Transaction</string>
-    <string name="screen_transactions_bottom_sheet_delete_message">
+    <string name="finance_manager_screen_transactions_bottom_sheet_delete_title">Delete Transaction</string>
+    <string name="finance_manager_screen_transactions_bottom_sheet_delete_message">
         Are you sure you want to delete this transaction?
     </string>
-    <string name="screen_transactions_bottom_sheet_delete_positive_button_text">Yes</string>
-    <string name="screen_transactions_bottom_sheet_delete_negative_button_text">Cancel</string>
+    <string name="finance_manager_screen_transactions_bottom_sheet_delete_positive_button_text">Yes</string>
+    <string name="finance_manager_screen_transactions_bottom_sheet_delete_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region transaction for values menu bottom sheet -->
-    <string name="bottom_sheet_transaction_for_values_menu_edit">Edit</string>
-    <string name="bottom_sheet_transaction_for_values_menu_delete">Delete</string>
+    <string name="finance_manager_bottom_sheet_transaction_for_values_menu_edit">Edit</string>
+    <string name="finance_manager_bottom_sheet_transaction_for_values_menu_delete">Delete</string>
     <!-- endregion -->
 
     <!-- region transaction for values delete confirmation bottom sheet -->
-    <string name="bottom_sheet_transaction_for_values_menu_delete_title">Delete Transaction For</string>
-    <string name="bottom_sheet_transaction_for_values_menu_message">
+    <string name="finance_manager_bottom_sheet_transaction_for_values_menu_delete_title">Delete Transaction For</string>
+    <string name="finance_manager_bottom_sheet_transaction_for_values_menu_message">
         Are you sure you want to delete?
     </string>
-    <string name="bottom_sheet_transaction_for_values_menu_positive_button_text">Yes</string>
-    <string name="bottom_sheet_transaction_for_values_menu_negative_button_text">Cancel</string>
+    <string name="finance_manager_bottom_sheet_transaction_for_values_menu_positive_button_text">Yes</string>
+    <string name="finance_manager_bottom_sheet_transaction_for_values_menu_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region transactions list item -->
-    <string name="transaction_list_item_account">%1$s -> %2$s</string>
-    <string name="transaction_list_item_edit">Edit</string>
-    <string name="transaction_list_item_refund">Refund</string>
-    <string name="transaction_list_item_delete">Delete</string>
+    <string name="finance_manager_transaction_list_item_account">%1$s -> %2$s</string>
+    <string name="finance_manager_transaction_list_item_edit">Edit</string>
+    <string name="finance_manager_transaction_list_item_refund">Refund</string>
+    <string name="finance_manager_transaction_list_item_delete">Delete</string>
     <!-- endregion -->
 
     <!-- region transactions for list item -->
-    <string name="transaction_for_list_item_more_options_content_description">More Options</string>
+    <string name="finance_manager_transaction_for_list_item_more_options_content_description">More Options</string>
     <!-- endregion -->
 
     <!-- region account list item -->
-    <string name="account_list_item_more_options_content_description">More Options</string>
+    <string name="finance_manager_account_list_item_more_options_content_description">More Options</string>
+    <!-- endregion -->
+
+    <!-- region add or edit account screen -->
+    <string name="finance_manager_screen_add_or_edit_account_name">Name</string>
+    <string name="finance_manager_screen_add_or_edit_account_clear_name">Clear Name</string>
+    <string name="finance_manager_screen_add_or_edit_account_balance_amount_value">Balance</string>
+    <string name="finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value">Minimum Account Balance</string>
+    <string name="finance_manager_screen_add_or_edit_account_clear_balance_amount_value">Clear Balance</string>
+    <string name="finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value">Clear Minimum Account Balance</string>
+    <string name="finance_manager_screen_add_or_edit_account_error_account_exists">Account already exists</string>
+    <!-- endregion -->
+
+    <!-- region add account screen -->
+    <string name="finance_manager_screen_add_account_appbar_title">Enter Account Details</string>
+    <string name="finance_manager_screen_add_account_floating_action_button_content_description">SAVE</string>
+    <!-- endregion -->
+
+    <!-- region edit account screen -->
+    <string name="finance_manager_screen_edit_account_appbar_title">Edit Account</string>
+    <string name="finance_manager_screen_edit_account_floating_action_button_content_description">UPDATE</string>
+    <!-- endregion -->
+
+    <!-- region accounts screen -->
+    <string name="finance_manager_screen_accounts_appbar_title">Accounts</string>
+    <string name="finance_manager_screen_accounts_floating_action_button_content_description">Add Account</string>
+    <!-- endregion -->
+
+    <!-- region analysis screen -->
+    <string name="finance_manager_screen_analysis_appbar_title">Analysis</string>
+    <string name="finance_manager_screen_analysis_filter_button_content_description">Filter</string>
+    <!-- endregion -->
+
+    <!-- region add or edit category screen -->
+    <string name="finance_manager_screen_add_or_edit_category_title">Title</string>
+    <string name="finance_manager_screen_add_or_edit_category_clear_title">Clear Title</string>
+    <string name="finance_manager_screen_add_or_edit_category_error_category_exists">Category already exists</string>
+    <!-- endregion -->
+
+    <!-- region add category screen -->
+    <string name="finance_manager_screen_add_category_appbar_title">Enter Category Details</string>
+    <string name="finance_manager_screen_add_category_floating_action_button_content_description">SAVE</string>
+    <!-- endregion -->
+
+    <!-- region categories screen -->
+    <string name="finance_manager_screen_categories_appbar_title">Categories</string>
+    <string name="finance_manager_screen_categories_floating_action_button_content_description">Add Category</string>
+    <string name="finance_manager_screen_categories_set_default_category_failed">Set Default Category Failed 😕</string>
+    <string name="finance_manager_screen_categories_set_default_category_successful">Set Default Category Successful 🙂</string>
+    <!-- endregion -->
+
+    <!-- region edit category screen -->
+    <string name="finance_manager_screen_edit_category_appbar_title">Edit Category</string>
+    <string name="finance_manager_screen_edit_category_floating_action_button_content_description">UPDATE</string>
+    <!-- endregion -->
+
+    <!-- region home screen -->
+    <string name="finance_manager_screen_home_appbar_title">Finance Manager</string>
+    <string name="finance_manager_screen_home_appbar_settings">Settings</string>
+    <string name="finance_manager_screen_home_floating_action_button_content_description">Add Transaction</string>
+    <!-- endregion -->
+
+    <!-- region open source licenses screen -->
+    <string name="finance_manager_screen_open_source_licenses_appbar_title">Open Source Licenses</string>
+    <!-- endregion -->
+
+    <!-- region settings screen -->
+    <string name="finance_manager_screen_settings_appbar_title">Settings</string>
+    <string name="finance_manager_screen_settings_linear_progress_indicator_test_tag">settings_linear_progress_indicator</string>
+    <string name="finance_manager_screen_settings_data">Data</string>
+    <string name="finance_manager_screen_settings_categories">Categories</string>
+    <string name="finance_manager_screen_settings_accounts">Accounts</string>
+    <string name="finance_manager_screen_settings_transaction_for">Transaction For</string>
+    <string name="finance_manager_screen_settings_backup_and_restore">Backup &amp; Restore</string>
+    <string name="finance_manager_screen_settings_backup">Backup Data</string>
+    <string name="finance_manager_screen_settings_restore">Restore Data</string>
+    <string name="finance_manager_screen_settings_recalculate_total">Recalculate Total</string>
+    <string name="finance_manager_screen_settings_notifications">Notifications</string>
+    <string name="finance_manager_screen_settings_reminder">Reminder</string>
+    <string name="finance_manager_screen_settings_about">About</string>
+    <string name="finance_manager_screen_settings_credits">Credits</string>
+    <string name="finance_manager_screen_settings_open_source_licenses">Open Source Licenses</string>
+    <string name="finance_manager_screen_settings_app_version">Version - %1$s</string>
+    <string name="finance_manager_screen_settings_restore_data_failed">Error in Restoring Data 😕</string>
+    <string name="finance_manager_screen_settings_cancel_reminder_failed">Cancel Reminder Failed 😕</string>
+    <string name="finance_manager_screen_settings_cancel_reminder_successful">Cancel Reminder Successful 🙂</string>
+    <!-- endregion -->
+
+    <!-- region add or edit transaction for screen -->
+    <string name="finance_manager_screen_add_or_edit_transaction_for_title">Title</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_for_clear_title">Clear Title</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_for_error_exists">Already exists</string>
+    <!-- endregion -->
+
+    <!-- region add transaction for screen -->
+    <string name="finance_manager_screen_add_transaction_for_appbar_title">Enter Transaction For Details</string>
+    <string name="finance_manager_screen_add_transaction_for_floating_action_button_content_description">SAVE</string>
+    <!-- endregion -->
+
+    <!-- region edit transaction for screen -->
+    <string name="finance_manager_screen_edit_transaction_for_appbar_title">Edit Transaction For</string>
+    <string name="finance_manager_screen_edit_transaction_for_floating_action_button_content_description">UPDATE</string>
+    <!-- endregion -->
+
+    <!-- region transaction for values screen -->
+    <string name="finance_manager_screen_transaction_for_values_appbar_title">Transaction For</string>
+    <string name="finance_manager_screen_transaction_for_values_floating_action_button_content_description">
+        Add Transaction For
+    </string>
+    <!-- endregion -->
+
+    <!-- region add or edit transaction screen -->
+    <string name="finance_manager_screen_add_or_edit_transaction_amount">Amount</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_amount_error_text">Refund amount cannot be more than %1$s</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_clear_amount">Clear Amount</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_title">Title</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_clear_title">Clear Title</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_description">Description</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_clear_description">Clear Description</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_transaction_date">Transaction Date</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_transaction_time">Transaction Time</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_category">Category</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_account">Account</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_account_from">Account From</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_account_to">Account To</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_add_transaction_failed">Add Transaction Failed 😕</string>
+    <string name="finance_manager_screen_add_or_edit_transaction_add_transaction_successful">Add Transaction Successful 🙂</string>
+    <!-- endregion -->
+
+    <!-- region add transaction screen -->
+    <string name="finance_manager_screen_add_transaction_appbar_title">Enter Transaction Details</string>
+    <string name="finance_manager_screen_add_transaction_floating_action_button_content_description">SAVE</string>
+    <!-- endregion -->
+
+    <!-- region edit transaction screen -->
+    <string name="finance_manager_screen_edit_transaction_appbar_title">Edit Transaction Details</string>
+    <string name="finance_manager_screen_edit_transaction_floating_action_button_content_description">
+        UPDATE
+    </string>
+    <!-- endregion -->
+
+    <!-- region transactions screen -->
+    <string name="finance_manager_screen_transactions_appbar_title">Transactions</string>
+    <string name="finance_manager_screen_transactions_selection_mode_appbar_title">%1$d selected</string>
+    <string name="finance_manager_screen_transactions_selection_mode_appbar_menu_more_options">More Options</string>
+    <string name="finance_manager_screen_transactions_searchbar_placeholder">Search Transactions</string>
+    <string name="finance_manager_screen_transactions_floating_action_button_content_description">
+        Add Transaction
+    </string>
+    <string name="finance_manager_screen_transactions_search_button_content_description">Search</string>
+    <string name="finance_manager_screen_transactions_sort_button_content_description">Sort</string>
+    <string name="finance_manager_screen_transactions_filter_button_content_description">Filter</string>
+    <!-- endregion -->
+
+    <!-- region view transaction screen -->
+    <string name="finance_manager_screen_view_transaction_appbar_title">Transaction Details</string>
+    <string name="finance_manager_screen_view_transaction_refund_transactions">Refund Transactions</string>
+    <string name="finance_manager_screen_view_transaction_original_transaction">Original Transaction</string>
     <!-- endregion -->
 
 </resources>
