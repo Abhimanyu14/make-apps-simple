@@ -27,7 +27,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import com.makeappssimple.abhimanyu.barcodes.android.R
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
 import org.junit.Rule
 import org.junit.Test
@@ -51,7 +51,7 @@ internal class BarcodeDetailsScreenUITest {
     @Test
     fun barcodeDetailsScreenElementsAreDisplayed() {
         composeTestRule.setContent {
-            MyAppTheme {
+            BarcodesAppTheme {
                 BarcodeDetailsScreenUI(
                     uiState = uiState,
                 )

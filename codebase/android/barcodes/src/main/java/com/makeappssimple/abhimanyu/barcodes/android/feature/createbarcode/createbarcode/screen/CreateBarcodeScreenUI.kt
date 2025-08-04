@@ -45,7 +45,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.textfield.MyOutlinedTextField
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.icons.MyIcons
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -98,7 +98,7 @@ internal fun CreateBarcodeScreenUI(
                     tag = SCREEN_CONTENT_CREATE_BARCODE,
                 )
                 .background(
-                    color = MyAppTheme.colorScheme.background,
+                    color = BarcodesAppTheme.colorScheme.background,
                 )
                 .fillMaxSize()
                 .verticalScroll(

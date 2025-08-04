@@ -55,7 +55,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBarActionButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.icons.MyIcons
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -155,7 +155,7 @@ internal fun BarcodeDetailsScreenUI(
                     tag = SCREEN_CONTENT_BARCODE_DETAILS,
                 )
                 .background(
-                    color = MyAppTheme.colorScheme.background,
+                    color = BarcodesAppTheme.colorScheme.background,
                 )
                 .fillMaxSize()
                 .verticalScroll(
@@ -165,7 +165,7 @@ internal fun BarcodeDetailsScreenUI(
             uiState.barcodeName?.let { barcodeName ->
                 MyText(
                     textStringResourceId = R.string.barcodes_screen_barcode_details_barcode_name,
-                    style = MyAppTheme.typography.bodyMedium.copy(
+                    style = BarcodesAppTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                     ),
@@ -193,7 +193,7 @@ internal fun BarcodeDetailsScreenUI(
             uiState.formattedTimestampLabelId?.let {
                 MyText(
                     textStringResourceId = uiState.formattedTimestampLabelId,
-                    style = MyAppTheme.typography.bodyMedium.copy(
+                    style = BarcodesAppTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                     ),
@@ -220,7 +220,7 @@ internal fun BarcodeDetailsScreenUI(
             )
             MyText(
                 textStringResourceId = R.string.barcodes_screen_barcode_details_barcode_value,
-                style = MyAppTheme.typography.bodyMedium.copy(
+                style = BarcodesAppTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                 ),

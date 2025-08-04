@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.navigation
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.navigation.webViewNavGraph
 
 @Composable
-internal fun MyNavHost(
+internal fun BarcodesNavHost(
     navHostController: NavHostController,
 ) {
     NavHost(

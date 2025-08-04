@@ -23,7 +23,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-internal val myLightColorScheme = lightColorScheme(
+private val myLightColorScheme = lightColorScheme(
     primary = MyColor.PRIMARY.composeColor,
     onPrimary = MyColor.ON_PRIMARY.composeColor,
     primaryContainer = MyColor.PRIMARY_CONTAINER.composeColor,
@@ -52,7 +52,7 @@ internal val myLightColorScheme = lightColorScheme(
     outline = MyColor.OUTLINE.composeColor,
 )
 
-internal val myDarkColorScheme = darkColorScheme(
+private val myDarkColorScheme = darkColorScheme(
     primary = MyColor.PRIMARY.composeColor,
     onPrimary = MyColor.ON_PRIMARY.composeColor,
     primaryContainer = MyColor.PRIMARY_CONTAINER.composeColor,
@@ -82,7 +82,7 @@ internal val myDarkColorScheme = darkColorScheme(
 )
 
 @Composable
-internal fun Material3AppTheme(
+private fun Material3AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     darkColorScheme: ColorScheme,
     lightColorScheme: ColorScheme,
@@ -104,7 +104,7 @@ internal fun Material3AppTheme(
 }
 
 @Composable
-internal fun MyAppTheme(
+internal fun BarcodesAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     darkColorScheme: ColorScheme = myDarkColorScheme,
     lightColorScheme: ColorScheme = myLightColorScheme,
@@ -118,4 +118,4 @@ internal fun MyAppTheme(
     )
 }
 
-internal typealias MyAppTheme = MaterialTheme
+internal typealias BarcodesAppTheme = MaterialTheme

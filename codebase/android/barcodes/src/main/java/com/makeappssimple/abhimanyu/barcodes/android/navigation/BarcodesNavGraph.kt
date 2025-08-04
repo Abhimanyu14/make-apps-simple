@@ -23,20 +23,21 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.makeappssimple.abhimanyu.barcodes.android.app.BarcodesActivityViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Command
 
 @Composable
-internal fun MyNavGraph(
+internal fun BarcodesNavGraph(
     barcodesActivityViewModel: BarcodesActivityViewModel,
+    navHostController: NavHostController = rememberNavController(),
 ) {
     barcodesActivityViewModel.logKit.logError(
         message = "Inside MyNavGraph",
     )
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val keyboardController = LocalSoftwareKeyboardController.current
-    val navHostController = rememberNavController()
 
     LaunchedEffect(
         key1 = lifecycle,
@@ -82,7 +83,7 @@ internal fun MyNavGraph(
         }
     }
 
-    MyNavHost(
+    BarcodesNavHost(
         navHostController = navHostController,
     )
 }

@@ -36,7 +36,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.LinkTextData
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -74,7 +74,7 @@ internal fun CreditsScreenUI(
                     tag = SCREEN_CONTENT_CREDITS,
                 )
                 .background(
-                    color = MyAppTheme.colorScheme.background,
+                    color = BarcodesAppTheme.colorScheme.background,
                 )
                 .fillMaxSize()
                 .verticalScroll(
@@ -222,7 +222,7 @@ private fun TitleText(
 ) {
     MyText(
         textStringResourceId = titleTextStringResourceId,
-        style = MyAppTheme.typography.bodyMedium.copy(
+        style = BarcodesAppTheme.typography.bodyMedium.copy(
             fontWeight = FontWeight.Bold,
         ),
         modifier = Modifier

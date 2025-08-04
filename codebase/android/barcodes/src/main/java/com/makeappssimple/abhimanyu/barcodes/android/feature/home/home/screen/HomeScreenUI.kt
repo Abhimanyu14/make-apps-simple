@@ -54,7 +54,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.topappbar.MyTopAppBarActionButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.icons.MyIcons
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
@@ -308,9 +308,9 @@ private fun HomeScreenList(
         backgroundContent = { dismissState: MySwipeToDismissState ->
             val color by animateColorAsState(
                 when (dismissState.targetValue) {
-                    MySwipeToDismissValue.Default -> MyAppTheme.colorScheme.surfaceVariant
-                    MySwipeToDismissValue.DismissedToEnd -> MyAppTheme.colorScheme.error
-                    MySwipeToDismissValue.DismissedToStart -> MyAppTheme.colorScheme.background
+                    MySwipeToDismissValue.Default -> BarcodesAppTheme.colorScheme.surfaceVariant
+                    MySwipeToDismissValue.DismissedToEnd -> BarcodesAppTheme.colorScheme.error
+                    MySwipeToDismissValue.DismissedToStart -> BarcodesAppTheme.colorScheme.background
                 },
                 label = "swipe_to_dismiss_background_color",
             )
@@ -333,7 +333,7 @@ private fun HomeScreenList(
                 MyIcon(
                     imageVector = MyIcons.DeleteForever,
                     contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete,
-                    tint = MyAppTheme.colorScheme.onError,
+                    tint = BarcodesAppTheme.colorScheme.onError,
                     modifier = Modifier
                         .weight(
                             weight = 1F,

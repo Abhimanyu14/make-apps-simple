@@ -26,7 +26,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.screen.CreateBarcodeScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIState
 import org.junit.Before
@@ -282,7 +282,7 @@ internal class CreateBarcodeScreenUITest {
         barcodeValue: String = "",
     ) {
         composeTestRule.setContent {
-            MyAppTheme {
+            BarcodesAppTheme {
                 CreateBarcodeScreenUI(
                     uiState = CreateBarcodeScreenUIState(
                         isBarcodeValueEditable = isBarcodeValueEditable,
