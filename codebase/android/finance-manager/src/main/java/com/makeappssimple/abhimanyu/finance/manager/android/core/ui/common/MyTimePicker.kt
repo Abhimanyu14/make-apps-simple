@@ -50,7 +50,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.myDarkColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.myLightColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
@@ -250,7 +250,7 @@ private fun TimePickerDialog(
 private fun TimePickerTheme(
     content: ComposableContent,
 ) {
-    MyAppTheme(
+    FinanceManagerAppTheme(
         lightColorScheme = myLightColorScheme
             .copy(
                 outline = MaterialTheme.colorScheme.onSurfaceVariant,

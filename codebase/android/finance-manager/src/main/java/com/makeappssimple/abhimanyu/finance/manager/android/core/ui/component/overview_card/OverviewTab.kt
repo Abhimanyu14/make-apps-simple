@@ -58,7 +58,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.FinanceManagerAppTheme
 
 private val overviewTabMinimumWidth = 64.dp
 private val overviewTextHorizontalPadding = 12.dp
@@ -270,7 +270,7 @@ private fun OverviewSelectionPreview() {
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }
-    MyAppTheme {
+    FinanceManagerAppTheme {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier

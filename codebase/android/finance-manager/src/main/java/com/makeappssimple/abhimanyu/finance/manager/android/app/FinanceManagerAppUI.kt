@@ -19,14 +19,14 @@ package com.makeappssimple.abhimanyu.finance.manager.android.app
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.MyAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.navigation.FinanceManagerNavGraph
 
 @Composable
 internal fun FinanceManagerAppUI(
     financeManagerActivityViewModel: FinanceManagerActivityViewModel,
 ) {
-    MyAppTheme {
+    FinanceManagerAppTheme {
         // To remove overscroll effect globally
         CompositionLocalProvider(
             LocalOverscrollFactory provides null,

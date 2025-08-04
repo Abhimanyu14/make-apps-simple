@@ -24,7 +24,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
 
-public val myLightColorScheme: ColorScheme = lightColorScheme(
+internal val myLightColorScheme: ColorScheme = lightColorScheme(
     primary = Primary,
     onPrimary = OnPrimary,
     primaryContainer = PrimaryContainer,
@@ -53,7 +53,7 @@ public val myLightColorScheme: ColorScheme = lightColorScheme(
     outline = Outline,
 )
 
-public val myDarkColorScheme: ColorScheme = darkColorScheme(
+internal val myDarkColorScheme: ColorScheme = darkColorScheme(
     primary = Primary,
     onPrimary = OnPrimary,
     primaryContainer = PrimaryContainer,
@@ -83,7 +83,7 @@ public val myDarkColorScheme: ColorScheme = darkColorScheme(
 )
 
 @Composable
-public fun MyAppTheme(
+internal fun FinanceManagerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     darkColorScheme: ColorScheme = myDarkColorScheme,
     lightColorScheme: ColorScheme = myLightColorScheme,
