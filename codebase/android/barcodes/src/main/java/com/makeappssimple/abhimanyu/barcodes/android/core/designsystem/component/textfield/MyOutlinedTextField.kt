@@ -41,10 +41,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.extensions.shimmer
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.cosmosFontFamily
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
 @Composable
 internal fun MyOutlinedTextField(

@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.barcodes.android.app
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel

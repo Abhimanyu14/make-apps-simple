@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.viewinterop.AndroidView
 import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.TestTags
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNullOrBlank
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
 @Composable
 internal fun WebView(

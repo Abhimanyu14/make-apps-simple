@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder.StringEncoder
+import com.makeappssimple.abhimanyu.common.core.stringencoder.StringEncoder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow

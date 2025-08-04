@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.event
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.BARCODE_VALUE_CLIPBOARD_LABEL
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.constants.BARCODE_VALUE_CLIPBOARD_LABEL
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.createbarcode.viewmodel.CreateBarcodeScreenViewModel
 

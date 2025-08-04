@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.testing
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext

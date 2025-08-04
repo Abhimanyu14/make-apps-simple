@@ -16,66 +16,9 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProviderImpl
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import org.koin.core.annotation.Module
-import org.koin.core.annotation.Named
-import org.koin.core.annotation.Single
-
 private const val DISPATCHER_DEFAULT = "DISPATCHER_DEFAULT"
 private const val DISPATCHER_IO = "DISPATCHER_IO"
 private const val DISPATCHER_MAIN = "DISPATCHER_MAIN"
 private const val DISPATCHER_MAIN_IMMEDIATE = "DISPATCHER_MAIN_IMMEDIATE"
 private const val DISPATCHER_UNCONFINED = "DISPATCHER_UNCONFINED"
 
-@Module
-public class DispatcherProviderModule {
-    @Single
-    @Named(DISPATCHER_DEFAULT)
-    internal fun providesDefaultCoroutineDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Default
-    }
-
-    @Single
-    @Named(DISPATCHER_IO)
-    internal fun providesIoCoroutineDispatcher(): CoroutineDispatcher {
-        return Dispatchers.IO
-    }
-
-    @Single
-    @Named(DISPATCHER_MAIN)
-    internal fun providesMainCoroutineDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main
-    }
-
-    @Single
-    @Named(DISPATCHER_MAIN_IMMEDIATE)
-    internal fun providesMainImmediateCoroutineDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main.immediate
-    }
-
-    @Single
-    @Named(DISPATCHER_UNCONFINED)
-    internal fun providesUnconfinedCoroutineDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Unconfined
-    }
-
-    @Single
-    internal fun providesDispatcherProvider(
-        @Named(DISPATCHER_DEFAULT) defaultCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_IO) ioCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_MAIN) mainCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_MAIN_IMMEDIATE) mainImmediateCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_UNCONFINED) unconfinedCoroutineDispatcher: CoroutineDispatcher,
-    ): DispatcherProvider {
-        return DispatcherProviderImpl(
-            defaultCoroutineDispatcher = defaultCoroutineDispatcher,
-            ioCoroutineDispatcher = defaultCoroutineDispatcher,
-            mainCoroutineDispatcher = defaultCoroutineDispatcher,
-            mainImmediateCoroutineDispatcher = defaultCoroutineDispatcher,
-            unconfinedCoroutineDispatcher = defaultCoroutineDispatcher,
-        )
-    }
-}

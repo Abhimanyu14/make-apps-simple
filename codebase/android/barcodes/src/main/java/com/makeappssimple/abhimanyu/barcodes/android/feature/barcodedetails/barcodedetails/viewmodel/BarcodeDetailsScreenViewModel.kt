@@ -22,13 +22,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGenerator
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.BuildConfigKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.clipboard.ClipboardKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.MyColor
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -36,6 +31,11 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewMode
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.barcodedetails.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.navigation.BarcodeDetailsScreenArgs
+import com.makeappssimple.abhimanyu.common.core.buildconfig.BuildConfigKit
+import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
+import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKit
+import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

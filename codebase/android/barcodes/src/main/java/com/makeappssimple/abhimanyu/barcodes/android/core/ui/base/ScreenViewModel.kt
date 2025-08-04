@@ -18,9 +18,9 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.LogKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
+import com.makeappssimple.abhimanyu.common.logger.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 

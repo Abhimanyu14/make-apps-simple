@@ -21,12 +21,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.constants.DatabaseConstants
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.converters.BarcodeFormatConverter
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.migrations.manualDatabaseMigrations
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 
 @Database(
     version = DatabaseConstants.DATABASE_CURRENT_VERSION_NUMBER,

@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.data.repository
 
 import android.database.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.asEntity
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map

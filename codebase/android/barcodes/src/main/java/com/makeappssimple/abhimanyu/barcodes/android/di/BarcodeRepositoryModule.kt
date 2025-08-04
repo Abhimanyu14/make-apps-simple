@@ -16,10 +16,10 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepositoryImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

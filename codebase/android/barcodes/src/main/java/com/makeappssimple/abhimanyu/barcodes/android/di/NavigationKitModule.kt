@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder.StringEncoder
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKitImpl
+import com.makeappssimple.abhimanyu.common.core.stringencoder.StringEncoder
 import kotlinx.coroutines.CoroutineScope
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
