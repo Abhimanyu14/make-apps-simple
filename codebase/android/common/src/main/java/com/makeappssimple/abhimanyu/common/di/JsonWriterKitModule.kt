@@ -14,16 +14,22 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.di
 
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import android.content.Context
+import com.makeappssimple.abhimanyu.common.core.jsonwriter.JsonWriterKit
+import com.makeappssimple.abhimanyu.common.core.jsonwriter.JsonWriterKitImpl
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 
-public fun <T> SnapshotStateList<T>.addIfDoesNotContainItemElseRemove(
-    item: T,
-) {
-    if (this.contains(item)) {
-        this.remove(item)
-    } else {
-        this.add(item)
+@Module
+public class JsonWriterKitModule {
+    @Single
+    internal fun providesJsonWriter(
+        context: Context,
+    ): JsonWriterKit {
+        return JsonWriterKitImpl(
+            context = context,
+        )
     }
 }

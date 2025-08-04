@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.getSystemDefaultZoneId
+import com.makeappssimple.abhimanyu.common.core.datetime.getSystemDefaultZoneId
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -49,7 +49,7 @@ public fun Instant.atEndOfDay(
 /**
  * Sample format - 30 Mar, 2023.
  */
-internal fun Instant.formattedDate(
+public fun Instant.formattedDate(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -61,7 +61,7 @@ internal fun Instant.formattedDate(
 /**
  * Sample format - Monday.
  */
-internal fun Instant.formattedDayOfWeek(
+public fun Instant.formattedDayOfWeek(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -73,7 +73,7 @@ internal fun Instant.formattedDayOfWeek(
 /**
  * Sample format - 30 Mar.
  */
-internal fun Instant.formattedDay(
+public fun Instant.formattedDay(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -85,7 +85,7 @@ internal fun Instant.formattedDay(
 /**
  * Sample format - March, 2023.
  */
-internal fun Instant.formattedMonth(
+public fun Instant.formattedMonth(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -97,7 +97,7 @@ internal fun Instant.formattedMonth(
 /**
  * Sample format - 2023.
  */
-internal fun Instant.formattedYear(
+public fun Instant.formattedYear(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -109,7 +109,7 @@ internal fun Instant.formattedYear(
 /**
  * Sample format - 2023-Mar-30, 08-24 AM.
  */
-internal fun Instant.formattedDateAndTime(
+public fun Instant.formattedDateAndTime(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -123,7 +123,7 @@ internal fun Instant.formattedDateAndTime(
 /**
  * Sample format - 30 Mar, 2023 at 08:24 AM.
  */
-internal fun Instant.formattedReadableDateAndTime(
+public fun Instant.formattedReadableDateAndTime(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return "${formattedDate(zoneId)} at ${formattedTime(zoneId)}"
@@ -132,7 +132,7 @@ internal fun Instant.formattedReadableDateAndTime(
 /**
  * Sample format - 08:24 AM.
  */
-internal fun Instant.formattedTime(
+public fun Instant.formattedTime(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): String {
     return DateTimeFormatter
@@ -146,7 +146,7 @@ internal fun Instant.formattedTime(
 /**
  * [Instant] to [Instant].
  */
-internal fun Instant.atStartOfDay(
+public fun Instant.atStartOfDay(
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): Instant {
     return this

@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonreader
+package com.makeappssimple.abhimanyu.common.core.jsonwriter
 
 import android.net.Uri
 
-public interface JsonReaderKit {
-    public fun readJsonFromAssets(
-        fileName: String,
-    ): String?
-
-    public fun readJsonFromFile(
+public interface JsonWriterKit {
+    public fun writeJsonToFile(
+        jsonString: String,
         uri: Uri,
-    ): String?
+    ): Boolean
 }

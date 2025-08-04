@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import java.time.LocalDate
 
 public class Filter(

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
 public fun Long?.orZero(): Long {
     return this ?: 0L

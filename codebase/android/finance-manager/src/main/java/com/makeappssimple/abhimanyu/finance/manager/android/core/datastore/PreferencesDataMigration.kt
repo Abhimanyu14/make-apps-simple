@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.datastore
 import androidx.datastore.core.DataMigration
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.orZero
+import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.constants.DatastoreConstants
 
 public val preferencesDataMigrations: List<DataMigration<Preferences>> = listOf(

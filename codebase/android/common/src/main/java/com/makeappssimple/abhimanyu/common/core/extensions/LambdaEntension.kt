@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-public fun Int.isNotZero(): Boolean {
-    return this != 0
-}
-
-public fun Int?.orZero(): Int {
-    return if (this.isNull()) {
-        0
-    } else {
-        this
-    }
+public fun (() -> Unit)?.orEmpty(): () -> Unit {
+    return this ?: {}
 }

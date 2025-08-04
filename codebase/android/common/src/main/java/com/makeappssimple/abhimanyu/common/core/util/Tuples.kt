@@ -16,7 +16,7 @@
 
 @file:Suppress("MaxLineLength")
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.util
+package com.makeappssimple.abhimanyu.common.core.util
 
 import java.io.Serializable
 

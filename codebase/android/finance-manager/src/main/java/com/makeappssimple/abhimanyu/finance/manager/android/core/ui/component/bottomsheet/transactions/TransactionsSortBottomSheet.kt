@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.transactions
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.mapIndexed
+import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
 import kotlinx.collections.immutable.ImmutableList
 

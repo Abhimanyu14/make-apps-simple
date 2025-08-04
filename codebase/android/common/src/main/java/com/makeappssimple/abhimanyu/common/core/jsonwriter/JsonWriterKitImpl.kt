@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonwriter
+package com.makeappssimple.abhimanyu.common.core.jsonwriter
 
 import android.content.Context
 import android.net.Uri

@@ -20,7 +20,7 @@ import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 
 @Composable
 public fun getDismissState(

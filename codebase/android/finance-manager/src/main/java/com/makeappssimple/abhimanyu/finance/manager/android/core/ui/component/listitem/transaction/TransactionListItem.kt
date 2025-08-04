@@ -36,7 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons

@@ -21,7 +21,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.map
+import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.common.MyBottomSheetTitle

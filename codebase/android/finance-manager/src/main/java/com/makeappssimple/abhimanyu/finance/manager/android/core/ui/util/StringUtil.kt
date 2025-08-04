@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.equalsIgnoringCase
+import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 
 private object DefaultConstants {
     const val EXPENSE_CATEGORY = "Default"

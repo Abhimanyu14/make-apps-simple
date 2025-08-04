@@ -46,10 +46,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.addIfDoesNotContainItemElseRemove
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.formattedDate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.map
+import com.makeappssimple.abhimanyu.common.core.extensions.addIfDoesNotContainItemElseRemove
+import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.button.MyIconButton

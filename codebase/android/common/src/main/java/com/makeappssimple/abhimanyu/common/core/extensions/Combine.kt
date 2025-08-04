@@ -16,7 +16,7 @@
 
 @file:Suppress("UNCHECKED_CAST", "MethodOverloading")
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine

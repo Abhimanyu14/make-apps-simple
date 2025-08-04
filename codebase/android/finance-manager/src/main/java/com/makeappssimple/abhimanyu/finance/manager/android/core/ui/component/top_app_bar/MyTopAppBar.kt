@@ -26,7 +26,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.NullableComposableContent

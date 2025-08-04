@@ -22,7 +22,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.constants.DatabaseConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.converters.AmountConverter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.converters.CategoryConverter

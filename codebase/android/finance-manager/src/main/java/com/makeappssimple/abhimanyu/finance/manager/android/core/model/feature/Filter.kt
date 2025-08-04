@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate

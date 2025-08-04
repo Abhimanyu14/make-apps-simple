@@ -14,33 +14,35 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.getSystemDefaultZoneId
-import java.time.Instant
+import com.makeappssimple.abhimanyu.common.core.datetime.getSystemDefaultZoneId
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
-/**
- * [LocalDateTime] to [Long].
- */
-public fun LocalDateTime.toEpochMilli(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Long {
-    return this
-        .toInstant(
-            zoneId = zoneId,
-        )
-        .toEpochMilli()
+public fun LocalDate?.orMin(): LocalDate {
+    return this ?: LocalDate.MIN
 }
 
 /**
- * [LocalDateTime] to [Instant].
+ * [LocalDate] to [LocalDateTime].
+ * Time: 23:59:59
  */
-internal fun LocalDateTime.toInstant(
+public fun LocalDate.atEndOfDay(): LocalDateTime {
+    return this.atTime(LocalTime.MAX)
+}
+
+/**
+ * Sample format - 30 Mar, 2023.
+ */
+public fun LocalDate.formattedDate(
     zoneId: ZoneId = getSystemDefaultZoneId(),
-): Instant {
-    return this
-        .atZone(zoneId)
-        .toInstant()
+): String {
+    return DateTimeFormatter
+        .ofPattern("dd MMM, yyyy")
+        .withZone(zoneId)
+        .format(this)
 }

@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonwriter
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-import android.net.Uri
+import java.time.ZonedDateTime
 
-public interface JsonWriterKit {
-    public fun writeJsonToFile(
-        jsonString: String,
-        uri: Uri,
-    ): Boolean
+/**
+ * [ZonedDateTime] to [Long].
+ */
+public fun ZonedDateTime.toEpochMilli(): Long {
+    return this
+        .toInstant()
+        .toEpochMilli()
 }

@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-public fun Float.isNotZero(): Boolean {
-    return this.toInt() != 0
-}
+import androidx.compose.runtime.snapshots.SnapshotStateList
 
-public fun Float?.orZero(): Float {
-    return this ?: 0F
+public fun <T> SnapshotStateList<T>.addIfDoesNotContainItemElseRemove(
+    item: T,
+) {
+    if (this.contains(item)) {
+        this.remove(item)
+    } else {
+        this.add(item)
+    }
 }

@@ -25,7 +25,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons

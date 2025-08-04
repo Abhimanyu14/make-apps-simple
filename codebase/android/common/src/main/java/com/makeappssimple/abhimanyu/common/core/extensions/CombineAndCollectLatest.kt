@@ -16,22 +16,22 @@
 
 @file:Suppress("MethodOverloading")
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Decuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Duodecuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Nonuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Octuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Quadruple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Quattuordecuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Quindecuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Quintuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Septendecuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Septuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Sexdecuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Sextuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Tredecuple
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.Undecuple
+import com.makeappssimple.abhimanyu.common.core.util.Decuple
+import com.makeappssimple.abhimanyu.common.core.util.Duodecuple
+import com.makeappssimple.abhimanyu.common.core.util.Nonuple
+import com.makeappssimple.abhimanyu.common.core.util.Octuple
+import com.makeappssimple.abhimanyu.common.core.util.Quadruple
+import com.makeappssimple.abhimanyu.common.core.util.Quattuordecuple
+import com.makeappssimple.abhimanyu.common.core.util.Quindecuple
+import com.makeappssimple.abhimanyu.common.core.util.Quintuple
+import com.makeappssimple.abhimanyu.common.core.util.Septendecuple
+import com.makeappssimple.abhimanyu.common.core.util.Septuple
+import com.makeappssimple.abhimanyu.common.core.util.Sexdecuple
+import com.makeappssimple.abhimanyu.common.core.util.Sextuple
+import com.makeappssimple.abhimanyu.common.core.util.Tredecuple
+import com.makeappssimple.abhimanyu.common.core.util.Undecuple
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 

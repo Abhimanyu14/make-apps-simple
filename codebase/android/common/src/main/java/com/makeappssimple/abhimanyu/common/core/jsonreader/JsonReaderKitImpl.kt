@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonreader
+package com.makeappssimple.abhimanyu.common.core.jsonreader
 
 import android.content.Context
 import android.net.Uri
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import java.io.BufferedReader
 import java.io.FileNotFoundException
 import java.io.IOException

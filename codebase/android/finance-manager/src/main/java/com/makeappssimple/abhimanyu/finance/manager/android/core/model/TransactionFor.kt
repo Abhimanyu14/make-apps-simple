@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.capitalizeWords
+import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import kotlinx.serialization.Serializable
 
 @Serializable

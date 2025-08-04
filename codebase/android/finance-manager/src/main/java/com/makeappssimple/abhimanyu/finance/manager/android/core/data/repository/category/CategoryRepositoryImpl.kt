@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category
 
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.map
+import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity

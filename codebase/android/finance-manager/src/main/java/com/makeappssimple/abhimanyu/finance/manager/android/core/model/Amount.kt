@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.model
 
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.CurrencyCodeConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.currency.formattedCurrencyValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.serializer.CurrencySerializer
 import kotlinx.serialization.EncodeDefault

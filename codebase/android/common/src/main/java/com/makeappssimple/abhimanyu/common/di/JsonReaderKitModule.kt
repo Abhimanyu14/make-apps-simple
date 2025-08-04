@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.getSystemDefaultZoneId
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import android.content.Context
+import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKit
+import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKitImpl
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 
-/**
- * Sample format - 08:24 AM.
- */
-public fun LocalTime.formattedTime(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): String {
-    return DateTimeFormatter
-        .ofPattern("hh:mm a")
-        .withZone(zoneId)
-        .format(this)
-        .replace("am", "AM")
-        .replace("pm", "PM")
+@Module
+public class JsonReaderKitModule {
+    @Single
+    internal fun providesJsonReader(
+        context: Context,
+    ): JsonReaderKit {
+        return JsonReaderKitImpl(
+            context = context,
+        )
+    }
 }

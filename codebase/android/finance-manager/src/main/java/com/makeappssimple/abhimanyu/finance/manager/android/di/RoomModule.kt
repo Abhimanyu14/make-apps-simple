@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import android.content.Context
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonreader.JsonReaderKit
+import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.InitialDatabasePopulator
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.InitialDatabasePopulatorImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase

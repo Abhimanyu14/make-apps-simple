@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.converters
 
 import androidx.room.TypeConverter
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 

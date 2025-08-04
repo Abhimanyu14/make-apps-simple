@@ -21,6 +21,8 @@ import com.makeappssimple.abhimanyu.common.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.common.di.CoroutineScopeModule
 import com.makeappssimple.abhimanyu.common.di.DateTimeKitModule
 import com.makeappssimple.abhimanyu.common.di.DispatcherProviderModule
+import com.makeappssimple.abhimanyu.common.di.JsonReaderKitModule
+import com.makeappssimple.abhimanyu.common.di.JsonWriterKitModule
 import com.makeappssimple.abhimanyu.common.di.LogKitModule
 import com.makeappssimple.abhimanyu.common.di.StringDecoderModule
 import com.makeappssimple.abhimanyu.common.di.StringEncoderModule

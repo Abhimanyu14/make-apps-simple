@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions
 
 import androidx.compose.ui.text.input.TextFieldValue
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 
 public fun TextFieldValue?.orEmpty(): TextFieldValue {
     return if (this.isNull()) {

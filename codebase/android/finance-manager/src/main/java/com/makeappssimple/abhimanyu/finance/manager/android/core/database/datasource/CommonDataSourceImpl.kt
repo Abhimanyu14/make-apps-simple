@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource
 
 import androidx.room.withTransaction
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.orEmpty
+import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity

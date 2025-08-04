@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.di
+package com.makeappssimple.abhimanyu.common.core.jsonreader
 
-import android.content.Context
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonreader.JsonReaderKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonreader.JsonReaderKitImpl
-import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
+import android.net.Uri
 
-@Module
-public class JsonReaderKitModule {
-    @Single
-    internal fun providesJsonReader(
-        context: Context,
-    ): JsonReaderKit {
-        return JsonReaderKitImpl(
-            context = context,
-        )
-    }
+public interface JsonReaderKit {
+    public fun readJsonFromAssets(
+        fileName: String,
+    ): String?
+
+    public fun readJsonFromFile(
+        uri: Uri,
+    ): String?
 }

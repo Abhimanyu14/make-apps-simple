@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.b
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.composeemojipicker.ComposeEmojiPickerBottomSheetUI
 import com.makeappssimple.abhimanyu.composeemojipicker.Emoji
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.capitalizeWords
 
 @Composable
 public fun AddCategorySelectEmojiBottomSheet(

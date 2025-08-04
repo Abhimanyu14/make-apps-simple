@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.common
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.filterIsInstance
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.orZero
+import com.makeappssimple.abhimanyu.common.core.extensions.filterIsInstance
+import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account.UpdateAccountsUseCase

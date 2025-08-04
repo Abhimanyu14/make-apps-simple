@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.capitalizeWords
+import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.serialization.Serializable
 

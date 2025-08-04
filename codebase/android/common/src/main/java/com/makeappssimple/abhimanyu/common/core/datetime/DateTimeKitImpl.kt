@@ -56,3 +56,7 @@ internal class DateTimeKitImpl(
         return systemDefaultZoneId
     }
 }
+
+public fun getSystemDefaultZoneId(): ZoneId {
+    return ZoneId.systemDefault()
+}

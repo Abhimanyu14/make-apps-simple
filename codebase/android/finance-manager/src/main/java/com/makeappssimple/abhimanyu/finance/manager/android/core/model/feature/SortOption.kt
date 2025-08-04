@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 
 public enum class SortOption(
     public val title: String,

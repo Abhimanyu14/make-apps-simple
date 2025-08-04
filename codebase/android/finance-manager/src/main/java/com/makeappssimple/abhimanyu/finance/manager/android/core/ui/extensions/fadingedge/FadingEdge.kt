@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.extensions.isNotZero
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotZero
 
 private object FadingEdgeConstants {
     const val DEFAULT_PERCENTAGE = 0.1F

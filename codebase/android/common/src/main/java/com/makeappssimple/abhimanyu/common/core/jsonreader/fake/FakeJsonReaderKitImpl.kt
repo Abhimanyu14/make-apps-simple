@@ -14,17 +14,32 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonwriter.fake
+package com.makeappssimple.abhimanyu.common.core.jsonreader.fake
 
 import android.net.Uri
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.jsonwriter.JsonWriterKit
+import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKit
 
-public class FakeJsonWriterKitImpl : JsonWriterKit {
-    override fun writeJsonToFile(
-        jsonString: String,
+public class FakeJsonReaderKitImpl : JsonReaderKit {
+    private val assetsJson = """
+        {
+          "account": "assets"
+        }
+    """.trimIndent()
+    private val fileJson = """
+        {
+          "account": "assets"
+        }
+    """.trimIndent()
+
+    override fun readJsonFromAssets(
+        fileName: String,
+    ): String {
+        return assetsJson
+    }
+
+    override fun readJsonFromFile(
         uri: Uri,
-    ): Boolean {
-        // No action required
-        return false
+    ): String {
+        return fileJson
     }
 }
