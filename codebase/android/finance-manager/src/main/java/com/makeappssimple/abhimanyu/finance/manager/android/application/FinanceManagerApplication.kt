@@ -17,6 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.application
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import com.makeappssimple.abhimanyu.finance.manager.android.core.notification.NotificationConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
@@ -30,5 +33,19 @@ internal class FinanceManagerApplication : Application() {
                 )
             },
         )
+
+        initNotificationChannel()
+    }
+
+    private fun initNotificationChannel() {
+        val notificationChannel = NotificationChannel(
+            NotificationConstants.CHANNEL_ID_REMINDER,
+            NotificationConstants.CHANNEL_NAME_REMINDER,
+            NotificationManager.IMPORTANCE_HIGH,
+        )
+        val notificationManager =
+            (getSystemService(NOTIFICATION_SERVICE) as? NotificationManager)
+                ?: return
+        notificationManager.createNotificationChannel(notificationChannel)
     }
 }

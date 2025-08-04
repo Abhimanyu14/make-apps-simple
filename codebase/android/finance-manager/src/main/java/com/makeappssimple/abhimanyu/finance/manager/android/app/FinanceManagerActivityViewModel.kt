@@ -14,23 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.activity
+package com.makeappssimple.abhimanyu.finance.manager.android.app
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.finance.manager.android.app.FinanceManagerApp
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.logger.LogKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import org.koin.android.annotation.KoinViewModel
 
-public class FinanceManagerActivity : ComponentActivity() {
-    override fun onCreate(
-        savedInstanceState: Bundle?,
-    ) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        setContent {
-            FinanceManagerApp()
-        }
-    }
-}
+@KoinViewModel
+internal class FinanceManagerActivityViewModel(
+    val logKit: LogKit,
+    val navigationKit: NavigationKit,
+) : ViewModel()
