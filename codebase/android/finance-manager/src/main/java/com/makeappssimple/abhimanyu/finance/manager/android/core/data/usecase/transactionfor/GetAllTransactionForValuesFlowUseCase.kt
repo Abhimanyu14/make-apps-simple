@@ -20,9 +20,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-public class GetAllTransactionForValuesFlowUseCase @Inject constructor(
+public class GetAllTransactionForValuesFlowUseCase(
     private val transactionForRepository: TransactionForRepository,
 ) {
     public operator fun invoke(): Flow<ImmutableList<TransactionFor>> {

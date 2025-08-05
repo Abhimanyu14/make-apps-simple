@@ -19,17 +19,17 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.webview.navigation
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenArgs
-import com.makeappssimple.abhimanyu.common.core.stringdecoder.StringDecoder
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 
 internal class WebViewScreenArgs(
     val url: String?,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
-        stringDecoder: StringDecoder,
+        uriDecoder: UriDecoder,
     ) : this(
-        url = stringDecoder.decodeString(
-            encodedString = checkNotNull(
+        url = uriDecoder.decode(
+            string = checkNotNull(
                 value = savedStateHandle.get<String>(NavigationArguments.URL),
             ),
         ),

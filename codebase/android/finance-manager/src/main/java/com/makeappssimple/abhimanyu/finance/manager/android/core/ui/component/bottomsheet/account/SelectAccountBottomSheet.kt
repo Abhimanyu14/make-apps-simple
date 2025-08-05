@@ -34,7 +34,7 @@ public fun SelectAccountBottomSheet(
     SelectAccountBottomSheetUI(
         modifier = modifier,
         data = SelectAccountListItemBottomSheetUIData(
-            titleTextStringResourceId = R.string.bottom_sheet_select_account_title,
+            titleTextStringResourceId = R.string.finance_manager_bottom_sheet_select_account_title,
             data = data.accounts
                 .map { account ->
                     AccountsListItemContentDataAndEventHandler(

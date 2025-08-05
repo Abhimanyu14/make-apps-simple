@@ -37,7 +37,7 @@ public fun AccountsMenuBottomSheet(
             AccountsMenuBottomSheetItemData(
                 imageVector = MyIcons.Edit,
                 text = stringResource(
-                    id = R.string.bottom_sheet_accounts_menu_edit,
+                    id = R.string.finance_manager_bottom_sheet_accounts_menu_edit,
                 ),
                 onClick = onEditClick,
             )
@@ -48,7 +48,7 @@ public fun AccountsMenuBottomSheet(
             AccountsMenuBottomSheetItemData(
                 imageVector = MyIcons.CheckCircle,
                 text = stringResource(
-                    id = R.string.bottom_sheet_accounts_menu_set_as_default_account,
+                    id = R.string.finance_manager_bottom_sheet_accounts_menu_set_as_default_account,
                 ),
                 onClick = onSetAsDefaultClick,
             )
@@ -59,7 +59,7 @@ public fun AccountsMenuBottomSheet(
             AccountsMenuBottomSheetItemData(
                 imageVector = MyIcons.Delete,
                 text = stringResource(
-                    id = R.string.bottom_sheet_accounts_menu_delete,
+                    id = R.string.finance_manager_bottom_sheet_accounts_menu_delete,
                 ),
                 onClick = onDeleteClick,
             )

@@ -20,9 +20,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-public class GetTransactionsBetweenTimestampsFlowUseCase @Inject constructor(
+public class GetTransactionsBetweenTimestampsFlowUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public operator fun invoke(

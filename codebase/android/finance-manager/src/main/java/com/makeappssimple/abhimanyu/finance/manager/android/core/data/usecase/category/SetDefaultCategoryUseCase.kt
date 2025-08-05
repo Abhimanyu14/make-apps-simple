@@ -16,12 +16,11 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
-import javax.inject.Inject
 
-public class SetDefaultCategoryUseCase @Inject constructor(
-    private val myPreferencesRepository: MyPreferencesRepository,
+public class SetDefaultCategoryUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         defaultCategoryId: Int,
@@ -29,19 +28,19 @@ public class SetDefaultCategoryUseCase @Inject constructor(
     ): Boolean {
         return when (transactionType) {
             TransactionType.EXPENSE -> {
-                myPreferencesRepository.updateDefaultExpenseCategoryId(
+                financeManagerPreferencesRepository.updateDefaultExpenseCategoryId(
                     defaultExpenseCategoryId = defaultCategoryId,
                 )
             }
 
             TransactionType.INCOME -> {
-                myPreferencesRepository.updateDefaultIncomeCategoryId(
+                financeManagerPreferencesRepository.updateDefaultIncomeCategoryId(
                     defaultIncomeCategoryId = defaultCategoryId,
                 )
             }
 
             TransactionType.INVESTMENT -> {
-                myPreferencesRepository.updateDefaultInvestmentCategoryId(
+                financeManagerPreferencesRepository.updateDefaultInvestmentCategoryId(
                     defaultInvestmentCategoryId = defaultCategoryId,
                 )
             }

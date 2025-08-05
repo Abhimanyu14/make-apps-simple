@@ -19,13 +19,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 import com.makeappssimple.abhimanyu.common.di.AppVersionKitModule
 import com.makeappssimple.abhimanyu.common.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.common.di.CoroutineScopeModule
-import com.makeappssimple.abhimanyu.common.di.DateTimeKitModule
 import com.makeappssimple.abhimanyu.common.di.DispatcherProviderModule
 import com.makeappssimple.abhimanyu.common.di.JsonReaderKitModule
 import com.makeappssimple.abhimanyu.common.di.JsonWriterKitModule
 import com.makeappssimple.abhimanyu.common.di.LogKitModule
-import com.makeappssimple.abhimanyu.common.di.StringDecoderModule
-import com.makeappssimple.abhimanyu.common.di.StringEncoderModule
+import com.makeappssimple.abhimanyu.common.di.UriDecoderModule
+import com.makeappssimple.abhimanyu.common.di.UriEncoderModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
@@ -39,8 +38,10 @@ import org.koin.core.annotation.Module
         CoroutineScopeModule::class,
         DaosModule::class,
         DataSourceModule::class,
+        DataUseCaseModule::class,
         DateTimeKitModule::class,
         DispatcherProviderModule::class,
+        FeatureUseCaseModule::class,
         JsonReaderKitModule::class,
         JsonWriterKitModule::class,
         LogKitModule::class,
@@ -50,8 +51,8 @@ import org.koin.core.annotation.Module
         RepositoryModule::class,
         RoomModule::class,
         ScreenUICommonStateModule::class,
-        StringDecoderModule::class,
-        StringEncoderModule::class,
+        UriDecoderModule::class,
+        UriEncoderModule::class,
     ],
 )
 @ComponentScan("com.makeappssimple.abhimanyu.finance.manager.android")

@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder.StringEncoder
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder.fake.FakeStringEncoderImpl
+import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
+import com.makeappssimple.abhimanyu.common.core.uri_encoder.fake.FakeUriEncoderImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -33,15 +33,15 @@ internal class NavigationKitTest {
     private val testCoroutineScope = CoroutineScope(
         context = testCoroutineDispatcher,
     )
-    private lateinit var stringEncoder: StringEncoder
+    private lateinit var uriEncoder: UriEncoder
     private lateinit var navigationKit: NavigationKit
 
     @Before
     fun setUp() {
-        stringEncoder = FakeStringEncoderImpl()
+        uriEncoder = FakeUriEncoderImpl()
         navigationKit = NavigationKitImpl(
             coroutineScope = testCoroutineScope,
-            stringEncoder = stringEncoder,
+            uriEncoder = uriEncoder,
         )
     }
 

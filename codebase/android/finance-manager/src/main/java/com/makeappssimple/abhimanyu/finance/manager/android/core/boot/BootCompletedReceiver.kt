@@ -21,14 +21,14 @@ import android.content.Context
 import android.content.Intent
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 public class BootCompletedReceiver : BroadcastReceiver(), KoinComponent {
     public val alarmKit: AlarmKit by inject()
-    public val myPreferencesRepository: MyPreferencesRepository by inject()
+    public val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository by inject()
 
     override fun onReceive(
         context: Context?,
@@ -42,7 +42,8 @@ public class BootCompletedReceiver : BroadcastReceiver(), KoinComponent {
     }
 
     private suspend fun doWork() {
-        val reminder = myPreferencesRepository.getReminder() ?: return
+        val reminder =
+            financeManagerPreferencesRepository.getReminder() ?: return
         if (reminder.isEnabled.orFalse()) {
             alarmKit.scheduleReminderAlarm()
         }

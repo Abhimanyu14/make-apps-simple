@@ -194,7 +194,7 @@ private fun AccountsListItemContentUI(
             Icon(
                 imageVector = MyIcons.MoreVert,
                 contentDescription = stringResource(
-                    id = R.string.account_list_item_more_options_content_description,
+                    id = R.string.finance_manager_account_list_item_more_options_content_description,
                 ),
                 tint = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier

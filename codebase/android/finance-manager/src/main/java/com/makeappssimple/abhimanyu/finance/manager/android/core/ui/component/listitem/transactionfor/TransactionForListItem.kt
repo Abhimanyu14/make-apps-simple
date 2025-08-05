@@ -68,7 +68,7 @@ public fun TransactionForListItem(
             MyIconButton(
                 tint = MaterialTheme.colorScheme.onBackground,
                 imageVector = MyIcons.MoreVert,
-                contentDescriptionStringResourceId = R.string.transaction_for_list_item_more_options_content_description,
+                contentDescriptionStringResourceId = R.string.finance_manager_transaction_for_list_item_more_options_content_description,
                 onClick = {
                     handleEvent(TransactionForListItemEvent.OnMoreOptionsIconButtonClick)
                 },

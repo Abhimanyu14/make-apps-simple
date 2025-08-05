@@ -19,9 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class GetAllCategoriesUseCase @Inject constructor(
+public class GetAllCategoriesUseCase(
     private val categoryRepository: CategoryRepository,
 ) {
     public suspend operator fun invoke(): ImmutableList<Category> {

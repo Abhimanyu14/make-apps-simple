@@ -20,9 +20,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class CheckIfTransactionForValuesAreUsedInTransactionsUseCase @Inject constructor(
+public class CheckIfTransactionForValuesAreUsedInTransactionsUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(

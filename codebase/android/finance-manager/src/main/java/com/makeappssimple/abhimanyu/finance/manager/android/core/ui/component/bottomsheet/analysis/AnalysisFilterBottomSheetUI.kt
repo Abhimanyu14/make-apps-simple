@@ -132,7 +132,7 @@ public fun AnalysisFilterBottomSheetUI(
                 modifier = Modifier,
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_analysis_filter_clear,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_clear,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
@@ -157,7 +157,7 @@ public fun AnalysisFilterBottomSheetUI(
                     ),
                 data = MyReadOnlyTextFieldData(
                     value = data.fromDateText,
-                    labelTextStringResourceId = R.string.bottom_sheet_analysis_filter_from_date,
+                    labelTextStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_from_date,
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -177,7 +177,7 @@ public fun AnalysisFilterBottomSheetUI(
                     ),
                 data = MyReadOnlyTextFieldData(
                     value = data.toDateText,
-                    labelTextStringResourceId = R.string.bottom_sheet_analysis_filter_to_date,
+                    labelTextStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_to_date,
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -225,7 +225,7 @@ public fun AnalysisFilterBottomSheetUI(
                 onClick = onNegativeButtonClick,
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_analysis_filter_reset,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_reset,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
@@ -240,7 +240,7 @@ public fun AnalysisFilterBottomSheetUI(
                 onClick = onPositiveButtonClick,
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_analysis_filter_apply,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_apply,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }

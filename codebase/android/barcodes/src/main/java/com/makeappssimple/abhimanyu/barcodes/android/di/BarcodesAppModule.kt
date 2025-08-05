@@ -23,8 +23,8 @@ import com.makeappssimple.abhimanyu.common.di.CoroutineScopeModule
 import com.makeappssimple.abhimanyu.common.di.DateTimeKitModule
 import com.makeappssimple.abhimanyu.common.di.DispatcherProviderModule
 import com.makeappssimple.abhimanyu.common.di.LogKitModule
-import com.makeappssimple.abhimanyu.common.di.StringDecoderModule
-import com.makeappssimple.abhimanyu.common.di.StringEncoderModule
+import com.makeappssimple.abhimanyu.common.di.UriDecoderModule
+import com.makeappssimple.abhimanyu.common.di.UriEncoderModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
@@ -44,8 +44,8 @@ import org.koin.core.annotation.Module
         LogKitModule::class,
         NavigationKitModule::class,
         RoomModule::class,
-        StringDecoderModule::class,
-        StringEncoderModule::class,
+        UriDecoderModule::class,
+        UriEncoderModule::class,
     ],
 )
 @ComponentScan("com.makeappssimple.abhimanyu.barcodes.android")

@@ -52,7 +52,7 @@ public fun HomeRecentTransactions(
             )
             .conditionalClickable(
                 onClickLabel = stringResource(
-                    id = R.string.screen_home_view_all_transactions,
+                    id = R.string.finance_manager_screen_home_view_all_transactions,
                 ),
                 onClick = {
                     handleEvent(HomeRecentTransactionsEvent.OnClick)
@@ -70,7 +70,7 @@ public fun HomeRecentTransactions(
                 .weight(
                     weight = 1F,
                 ),
-            textStringResourceId = R.string.screen_home_recent_transactions,
+            textStringResourceId = R.string.finance_manager_screen_home_recent_transactions,
             style = MaterialTheme.typography.headlineLarge
                 .copy(
                     color = MaterialTheme.colorScheme.onBackground,
@@ -79,7 +79,7 @@ public fun HomeRecentTransactions(
         if (data.isTrailingTextVisible) {
             MyText(
                 modifier = Modifier,
-                textStringResourceId = R.string.screen_home_view_all_transactions,
+                textStringResourceId = R.string.finance_manager_screen_home_view_all_transactions,
                 style = MaterialTheme.typography.headlineMedium
                     .copy(
                         color = MaterialTheme.colorScheme.primary,

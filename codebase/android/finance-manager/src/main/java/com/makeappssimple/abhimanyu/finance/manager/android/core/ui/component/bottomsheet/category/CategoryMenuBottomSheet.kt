@@ -35,7 +35,7 @@ public fun CategoryMenuBottomSheet(
             CategoryMenuBottomSheetItemData(
                 imageVector = MyIcons.Edit,
                 text = stringResource(
-                    id = R.string.bottom_sheet_category_menu_edit,
+                    id = R.string.finance_manager_bottom_sheet_category_menu_edit,
                 ),
                 onClick = onEditClick,
             )
@@ -46,7 +46,7 @@ public fun CategoryMenuBottomSheet(
             CategoryMenuBottomSheetItemData(
                 imageVector = MyIcons.CheckCircle,
                 text = stringResource(
-                    id = R.string.bottom_sheet_category_menu_set_as_default_category,
+                    id = R.string.finance_manager_bottom_sheet_category_menu_set_as_default_category,
                 ),
                 onClick = onSetAsDefaultClick,
             )
@@ -57,7 +57,7 @@ public fun CategoryMenuBottomSheet(
             CategoryMenuBottomSheetItemData(
                 imageVector = MyIcons.Delete,
                 text = stringResource(
-                    id = R.string.bottom_sheet_category_menu_delete,
+                    id = R.string.finance_manager_bottom_sheet_category_menu_delete,
                 ),
                 onClick = onDeleteClick,
             )

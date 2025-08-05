@@ -26,10 +26,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 import kotlin.math.abs
 
-public class UpdateAccountUseCase @Inject constructor(
+public class UpdateAccountUseCase(
     private val dateTimeKit: DateTimeKit,
     private val insertTransactionsUseCase: InsertTransactionsUseCase,
     private val updateAccountsUseCase: UpdateAccountsUseCase,

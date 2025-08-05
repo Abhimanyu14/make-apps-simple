@@ -17,17 +17,16 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
-import javax.inject.Inject
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 
-public class DeleteAccountUseCase @Inject constructor(
-    private val myPreferencesRepository: MyPreferencesRepository,
+public class DeleteAccountUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val accountRepository: AccountRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
     ): Boolean {
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return accountRepository.deleteAccount(
             id = id,
         )

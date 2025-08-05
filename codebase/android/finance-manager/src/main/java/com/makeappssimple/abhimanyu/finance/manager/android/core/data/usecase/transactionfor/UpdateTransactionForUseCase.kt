@@ -16,13 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.transactionfor
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
-import javax.inject.Inject
 
-public class UpdateTransactionForUseCase @Inject constructor(
-    private val myPreferencesRepository: MyPreferencesRepository,
+public class UpdateTransactionForUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionForRepository: TransactionForRepository,
 ) {
     public suspend operator fun invoke(
@@ -36,7 +35,7 @@ public class UpdateTransactionForUseCase @Inject constructor(
             .copy(
                 title = title,
             )
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return transactionForRepository.updateTransactionForValues(
             updatedTransactionFor,
         )

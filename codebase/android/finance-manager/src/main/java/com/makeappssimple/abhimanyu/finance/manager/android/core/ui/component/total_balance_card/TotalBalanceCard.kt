@@ -117,7 +117,7 @@ private fun TotalBalanceCardUI(
             MyText(
                 modifier = Modifier
                     .fillMaxWidth(),
-                textStringResourceId = R.string.total_balance_card_title,
+                textStringResourceId = R.string.finance_manager_total_balance_card_title,
                 style = MaterialTheme.typography.displaySmall
                     .copy(
                         color = MaterialTheme.colorScheme.onTertiary,
@@ -170,7 +170,7 @@ private fun TotalBalanceCardUI(
                     borderColor = MaterialTheme.colorScheme.onTertiary,
                     textColor = MaterialTheme.colorScheme.onTertiary,
                     text = stringResource(
-                        id = R.string.total_balance_card_view_balance,
+                        id = R.string.finance_manager_total_balance_card_view_balance,
                     ),
                 ),
                 handleEvent = { event ->

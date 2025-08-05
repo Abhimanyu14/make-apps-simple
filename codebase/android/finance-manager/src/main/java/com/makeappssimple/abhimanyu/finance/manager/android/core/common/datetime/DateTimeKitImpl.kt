@@ -32,13 +32,12 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.YearMonth
 import java.time.ZoneId
-import javax.inject.Inject
 
 private object DateTimeUtilImplConstants {
     const val LAST_MONTH_OF_YEAR = 12
 }
 
-public class DateTimeKitImpl @Inject constructor() : DateTimeKit {
+public class DateTimeKitImpl() : DateTimeKit {
     override fun getCurrentLocalDate(): LocalDate {
         return LocalDate.now()
     }

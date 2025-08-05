@@ -17,16 +17,15 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.common
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-public class ShouldShowBackupCardUseCase @Inject constructor(
-    private val myPreferencesRepository: MyPreferencesRepository,
+public class ShouldShowBackupCardUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public operator fun invoke(): Flow<Boolean> {
-        return myPreferencesRepository.getDataTimestampFlow().map {
+        return financeManagerPreferencesRepository.getDataTimestampFlow().map {
             it.isNotNull() && (it.lastBackup < it.lastChange)
         }
     }

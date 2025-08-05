@@ -16,20 +16,19 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class InsertTransactionsUseCase @Inject constructor(
-    private val myPreferencesRepository: MyPreferencesRepository,
+public class InsertTransactionsUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
         vararg transactions: Transaction,
     ): ImmutableList<Long> {
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return transactionRepository.insertTransactions(
             transactions = transactions,
         )

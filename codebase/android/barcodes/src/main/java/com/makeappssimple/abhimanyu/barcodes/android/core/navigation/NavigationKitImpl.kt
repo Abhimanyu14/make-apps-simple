@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
-import com.makeappssimple.abhimanyu.common.core.stringencoder.StringEncoder
+import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 
 internal class NavigationKitImpl(
     private val coroutineScope: CoroutineScope,
-    private val stringEncoder: StringEncoder,
+    private val uriEncoder: UriEncoder,
 ) : NavigationKit {
     private val _command: MutableSharedFlow<NavigationCommand> =
         MutableSharedFlow()
@@ -86,7 +86,7 @@ internal class NavigationKitImpl(
     ): Job {
         return navigate(
             navigationCommand = BarcodesNavigationDirections.WebView(
-                url = stringEncoder.encodeString(
+                url = uriEncoder.encode(
                     string = url,
                 ),
             )

@@ -19,9 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class GetAllTransactionForValuesUseCase @Inject constructor(
+public class GetAllTransactionForValuesUseCase(
     private val transactionForRepository: TransactionForRepository,
 ) {
     public suspend operator fun invoke(): ImmutableList<TransactionFor> {

@@ -58,7 +58,7 @@ public fun MySelectionModeTopAppBarUI(
             MyIconButton(
                 tint = MaterialTheme.colorScheme.onBackground,
                 imageVector = MyIcons.Close,
-                contentDescriptionStringResourceId = R.string.navigation_close_button_navigation_icon_content_description,
+                contentDescriptionStringResourceId = R.string.finance_manager_navigation_close_button_navigation_icon_content_description,
                 onClick = navigationAction,
             )
         },

@@ -107,7 +107,7 @@ public fun MyDatePicker(
                     enabled = confirmEnabled.value,
                 ) {
                     MyText(
-                        textStringResourceId = R.string.date_picker_positive_button,
+                        textStringResourceId = R.string.finance_manager_date_picker_positive_button,
                     )
                 }
             },
@@ -118,7 +118,7 @@ public fun MyDatePicker(
                     },
                 ) {
                     MyText(
-                        textStringResourceId = R.string.date_picker_negative_button,
+                        textStringResourceId = R.string.finance_manager_date_picker_negative_button,
                     )
                 }
             }

@@ -17,17 +17,16 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.category
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
-import javax.inject.Inject
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 
-public class DeleteCategoryUseCase @Inject constructor(
+public class DeleteCategoryUseCase(
     private val categoryRepository: CategoryRepository,
-    private val myPreferencesRepository: MyPreferencesRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
     ): Boolean {
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return categoryRepository.deleteCategory(
             id = id,
         )

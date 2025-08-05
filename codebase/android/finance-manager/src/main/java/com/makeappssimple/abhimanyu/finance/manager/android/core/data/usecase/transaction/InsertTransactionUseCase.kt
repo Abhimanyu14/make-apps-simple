@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.t
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
@@ -27,11 +27,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import java.time.LocalDate
 import java.time.LocalTime
-import javax.inject.Inject
 
-public class InsertTransactionUseCase @Inject constructor(
+public class InsertTransactionUseCase(
     private val dateTimeKit: DateTimeKit,
-    private val myPreferencesRepository: MyPreferencesRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
@@ -101,7 +100,7 @@ public class InsertTransactionUseCase @Inject constructor(
         )
         val isTransactionInserted = id != -1L
         if (isTransactionInserted) {
-            myPreferencesRepository.updateLastDataChangeTimestamp()
+            financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         }
         return isTransactionInserted
     }

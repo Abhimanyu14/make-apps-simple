@@ -19,9 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class GetTransactionsBetweenTimestampsUseCase @Inject constructor(
+public class GetTransactionsBetweenTimestampsUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(

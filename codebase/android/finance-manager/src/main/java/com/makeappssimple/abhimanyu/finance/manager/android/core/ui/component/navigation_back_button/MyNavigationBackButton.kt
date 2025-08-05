@@ -33,7 +33,7 @@ public fun MyNavigationBackButton(
         modifier = modifier,
         imageVector = MyIcons.ArrowBack,
         contentDescription = stringResource(
-            id = R.string.navigation_back_button_navigation_icon_content_description,
+            id = R.string.finance_manager_navigation_back_button_navigation_icon_content_description,
         ),
         tint = MaterialTheme.colorScheme.primary,
         onClick = {

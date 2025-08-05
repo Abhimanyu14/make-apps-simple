@@ -23,7 +23,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
-internal class DateTimeKitImpl(
+public class DateTimeKitImpl(
     private val clock: Clock = Clock.System,
     private val systemDefaultZoneId: ZoneId = ZoneId.systemDefault(),
 ) : DateTimeKit {

@@ -17,14 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
-import javax.inject.Inject
 
-public class InsertAccountUseCase @Inject constructor(
-    private val myPreferencesRepository: MyPreferencesRepository,
+public class InsertAccountUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val accountRepository: AccountRepository,
 ) {
     public suspend operator fun invoke(
@@ -42,7 +41,7 @@ public class InsertAccountUseCase @Inject constructor(
         } else {
             null
         }
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return accountRepository.insertAccounts(
             Account(
                 type = accountType,

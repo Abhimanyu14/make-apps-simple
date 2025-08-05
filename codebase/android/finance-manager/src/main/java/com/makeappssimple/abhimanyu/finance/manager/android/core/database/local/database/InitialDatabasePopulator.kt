@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.AppConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.InitialDatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.util.sanitizeTransactions
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.MyPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.InitialDataVersionNumber
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +42,7 @@ public interface InitialDatabasePopulator {
 internal class InitialDatabasePopulatorImpl(
     private val dispatcherProvider: DispatcherProvider,
     private val jsonReaderKit: JsonReaderKit,
-    private val myPreferencesDataSource: MyPreferencesDataSource,
+    private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
 ) : InitialDatabasePopulator {
     override fun populateInitialDatabaseData(
         myRoomDatabase: MyRoomDatabase,
@@ -62,7 +62,7 @@ internal class InitialDatabasePopulatorImpl(
                             string = jsonString,
                         )
                     val initialDataVersionNumber: InitialDataVersionNumber? =
-                        myPreferencesDataSource.getInitialDataVersionNumber()
+                        financeManagerPreferencesDataSource.getInitialDataVersionNumber()
                             .first()
 
                     launch {
@@ -125,7 +125,7 @@ internal class InitialDatabasePopulatorImpl(
                         accounts = it.accountsData.toTypedArray(),
                     )
                 }
-            myPreferencesDataSource.updateAccountDataVersionNumber(
+            financeManagerPreferencesDataSource.updateAccountDataVersionNumber(
                 accountDataVersionNumber = initialDatabaseData.defaultAccounts.versionNumber,
             )
         }
@@ -147,7 +147,7 @@ internal class InitialDatabasePopulatorImpl(
                         categories = it.categoriesData.toTypedArray(),
                     )
                 }
-            myPreferencesDataSource.updateCategoryDataVersionNumber(
+            financeManagerPreferencesDataSource.updateCategoryDataVersionNumber(
                 categoryDataVersionNumber = initialDatabaseData.defaultCategories.versionNumber,
             )
         }
@@ -169,7 +169,7 @@ internal class InitialDatabasePopulatorImpl(
                         transactionForValues = it.transactionForValuesData.toTypedArray(),
                     )
                 }
-            myPreferencesDataSource.updateTransactionForDataVersionNumber(
+            financeManagerPreferencesDataSource.updateTransactionForDataVersionNumber(
                 transactionForDataVersionNumber = initialDatabaseData.defaultTransactionForValues.versionNumber,
             )
         }
@@ -190,7 +190,7 @@ internal class InitialDatabasePopulatorImpl(
                     transactions = transactions,
                 ).toTypedArray()
             )
-            myPreferencesDataSource.updateTransactionDataVersionNumber(
+            financeManagerPreferencesDataSource.updateTransactionDataVersionNumber(
                 transactionDataVersionNumber = currentTransactionsDataVersion,
             )
         }

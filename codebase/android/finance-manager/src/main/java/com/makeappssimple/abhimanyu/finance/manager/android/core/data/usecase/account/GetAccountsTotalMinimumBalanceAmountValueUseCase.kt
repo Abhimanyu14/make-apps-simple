@@ -20,9 +20,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-public class GetAccountsTotalMinimumBalanceAmountValueUseCase @Inject constructor(
+public class GetAccountsTotalMinimumBalanceAmountValueUseCase(
     private val accountRepository: AccountRepository,
 ) {
     public operator fun invoke(): Flow<Long> {

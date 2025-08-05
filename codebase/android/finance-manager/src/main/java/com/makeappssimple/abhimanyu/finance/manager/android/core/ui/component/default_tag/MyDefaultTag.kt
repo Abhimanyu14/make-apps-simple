@@ -50,7 +50,7 @@ public fun MyDefaultTag(
                 vertical = MyDefaultTagConstants.paddingVertical,
             ),
         text = stringResource(
-            id = R.string.default_tag,
+            id = R.string.finance_manager_default_tag,
         ),
         style = MaterialTheme.typography.labelSmall
             .copy(

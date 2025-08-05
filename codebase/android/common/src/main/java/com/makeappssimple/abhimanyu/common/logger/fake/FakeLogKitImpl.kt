@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.common.logger.fake
 import androidx.annotation.VisibleForTesting
 import com.makeappssimple.abhimanyu.common.logger.LogKit
 
-internal class FakeLogKitImpl : LogKit {
+public class FakeLogKitImpl : LogKit {
     // Pair<message, tag>
     @VisibleForTesting
     internal val loggedMessages = mutableListOf<Pair<String, String>>()

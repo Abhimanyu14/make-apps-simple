@@ -18,13 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.t
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
 private object GetTitleSuggestionsUseCaseConstants {
     const val DEFAULT_NUMBER_OF_TITLE_SUGGESTIONS = 5
 }
 
-public class GetTitleSuggestionsUseCase @Inject constructor(
+public class GetTitleSuggestionsUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(

@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.Back
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.DatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.DatastoreData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
@@ -39,12 +39,11 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
-import javax.inject.Inject
 
-public class RestoreDataUseCase @Inject constructor(
+public class RestoreDataUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val jsonReaderKit: JsonReaderKit,
     private val logKit: LogKit,
-    private val myPreferencesRepository: MyPreferencesRepository,
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
@@ -115,7 +114,7 @@ public class RestoreDataUseCase @Inject constructor(
     ): Boolean {
         return coroutineScope {
             with(
-                receiver = myPreferencesRepository,
+                receiver = financeManagerPreferencesRepository,
             ) {
                 awaitAll(
                     async {

@@ -58,7 +58,7 @@ public fun TransactionsSortBottomSheetUI(
     ) {
         MyBottomSheetTitle(
             data = MyBottomSheetTitleData(
-                textStringResourceId = R.string.bottom_sheet_transactions_sort_title,
+                textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_sort_title,
             )
         )
         data.forEach { listItem ->

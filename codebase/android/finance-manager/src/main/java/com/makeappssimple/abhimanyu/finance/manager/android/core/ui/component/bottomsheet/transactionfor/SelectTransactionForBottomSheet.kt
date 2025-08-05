@@ -46,7 +46,7 @@ public fun SelectTransactionForBottomSheet(
     SelectTransactionForBottomSheetUI(
         modifier = modifier,
         data = SelectTransactionForListItemBottomSheetUIData(
-            titleTextStringResourceId = R.string.bottom_sheet_select_transaction_for_title,
+            titleTextStringResourceId = R.string.finance_manager_bottom_sheet_select_transaction_for_title,
             data = data.transactionForValues
                 .map { transactionFor ->
                     TransactionForListItemDataAndEventHandler(

@@ -21,9 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.sortOrder
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import javax.inject.Inject
 
-public class GetAllAccountsUseCase @Inject constructor(
+public class GetAllAccountsUseCase(
     private val accountRepository: AccountRepository,
 ) {
     public suspend operator fun invoke(): ImmutableList<Account> {

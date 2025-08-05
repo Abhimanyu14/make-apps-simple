@@ -20,6 +20,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.Screen
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.navigation.accountsNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.navigation.analysisNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.navigation.categoriesNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.navigation.homeNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.navigation.settingsNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactionfor.navigation.transactionForNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.navigation.transactionsNavGraph
 
 @Composable
 internal fun FinanceManagerNavHost(
@@ -29,8 +36,6 @@ internal fun FinanceManagerNavHost(
         navController = navHostController,
         startDestination = Screen.Home.route,
     ) {
-        // TODO(Abhi): To Fix
-        /*
         accountsNavGraph()
         analysisNavGraph()
         categoriesNavGraph()
@@ -38,6 +43,5 @@ internal fun FinanceManagerNavHost(
         settingsNavGraph()
         transactionForNavGraph()
         transactionsNavGraph()
-        */
     }
 }

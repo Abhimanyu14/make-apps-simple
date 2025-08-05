@@ -33,7 +33,7 @@ public fun TransactionForValuesMenuBottomSheet(
         element = TransactionForValuesMenuBottomSheetItemData(
             imageVector = MyIcons.Edit,
             text = stringResource(
-                id = R.string.bottom_sheet_transaction_for_values_menu_edit,
+                id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_edit,
             ),
             onClick = onEditClick,
         ),
@@ -43,7 +43,7 @@ public fun TransactionForValuesMenuBottomSheet(
             element = TransactionForValuesMenuBottomSheetItemData(
                 imageVector = MyIcons.Delete,
                 text = stringResource(
-                    id = R.string.bottom_sheet_transaction_for_values_menu_delete,
+                    id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_delete,
                 ),
                 onClick = onDeleteClick,
             ),

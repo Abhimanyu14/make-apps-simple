@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.InitialDatabasePopulator
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.InitialDatabasePopulatorImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.MyPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -32,12 +32,12 @@ public class RoomModule {
     internal fun providesInitialDatabasePopulator(
         dispatcherProvider: DispatcherProvider,
         jsonReaderKit: JsonReaderKit,
-        myPreferencesDataSource: MyPreferencesDataSource,
+        financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
     ): InitialDatabasePopulator {
         return InitialDatabasePopulatorImpl(
             dispatcherProvider = dispatcherProvider,
             jsonReaderKit = jsonReaderKit,
-            myPreferencesDataSource = myPreferencesDataSource,
+            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
         )
     }
 

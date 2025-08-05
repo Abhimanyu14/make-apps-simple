@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewMode
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.navigation.WebViewScreenArgs
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.webview.state.WebViewScreenUIStateEvents
-import com.makeappssimple.abhimanyu.common.core.stringdecoder.StringDecoder
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.common.logger.LogKit
 import kotlinx.coroutines.CoroutineScope
@@ -41,7 +41,7 @@ internal class WebViewScreenViewModel(
     logKit: LogKit,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    stringDecoder: StringDecoder,
+    uriDecoder: UriDecoder,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
@@ -52,7 +52,7 @@ internal class WebViewScreenViewModel(
     // region screen args
     private val screenArgs = WebViewScreenArgs(
         savedStateHandle = savedStateHandle,
-        stringDecoder = stringDecoder,
+        uriDecoder = uriDecoder,
     )
     // endregion
 

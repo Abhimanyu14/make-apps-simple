@@ -27,7 +27,7 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            AppModule().module,
+            FinanceManagerAppModule().module,
             BarcodesAppModule().module,
         )
     }

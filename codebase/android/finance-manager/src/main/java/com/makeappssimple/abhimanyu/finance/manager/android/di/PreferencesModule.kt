@@ -25,7 +25,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.logger.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.MyPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.constants.DatastoreConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.preferencesDataMigrations
 import kotlinx.coroutines.CoroutineScope
@@ -62,8 +62,8 @@ public class PreferencesModule {
     internal fun providesMyPreferencesDataSource(
         dataStore: DataStore<Preferences>,
         logKit: LogKit,
-    ): MyPreferencesDataSource {
-        return MyPreferencesDataSource(
+    ): FinanceManagerPreferencesDataSource {
+        return FinanceManagerPreferencesDataSource(
             dataStore = dataStore,
             logKit = logKit,
         )

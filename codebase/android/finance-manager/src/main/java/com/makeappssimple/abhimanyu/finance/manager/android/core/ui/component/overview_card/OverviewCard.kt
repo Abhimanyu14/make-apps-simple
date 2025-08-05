@@ -184,7 +184,7 @@ private fun OverviewCardUI(
                 MyIconButton(
                     tint = MaterialTheme.colorScheme.primary,
                     imageVector = MyIcons.ChevronLeft,
-                    contentDescriptionStringResourceId = R.string.overview_card_previous_button_content_description,
+                    contentDescriptionStringResourceId = R.string.finance_manager_overview_card_previous_button_content_description,
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(
@@ -212,7 +212,7 @@ private fun OverviewCardUI(
                 MyIconButton(
                     tint = MaterialTheme.colorScheme.primary,
                     imageVector = MyIcons.ChevronRight,
-                    contentDescriptionStringResourceId = R.string.overview_card_next_button_content_description,
+                    contentDescriptionStringResourceId = R.string.finance_manager_overview_card_next_button_content_description,
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(

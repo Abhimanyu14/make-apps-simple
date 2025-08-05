@@ -32,7 +32,7 @@ public fun TransactionsMenuBottomSheet(
         TransactionsMenuBottomSheetItemData(
             imageVector = MyIcons.Edit,
             text = stringResource(
-                id = R.string.bottom_sheet_transactions_menu_update_transaction_for,
+                id = R.string.finance_manager_bottom_sheet_transactions_menu_update_transaction_for,
             ),
             onClick = {
                 handleEvent(TransactionsMenuBottomSheetEvent.OnUpdateTransactionForClick)
@@ -41,7 +41,7 @@ public fun TransactionsMenuBottomSheet(
         TransactionsMenuBottomSheetItemData(
             imageVector = MyIcons.Checklist,
             text = stringResource(
-                id = R.string.bottom_sheet_transactions_menu_select_all_transactions,
+                id = R.string.finance_manager_bottom_sheet_transactions_menu_select_all_transactions,
             ),
             onClick = {
                 handleEvent(TransactionsMenuBottomSheetEvent.OnSelectAllTransactionsClick)

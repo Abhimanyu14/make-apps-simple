@@ -149,7 +149,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 add(
                     TransactionsFiltersBottomSheetData(
                         data = TransactionFilterBottomSheetFilterGroupData(
-                            headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_expense_categories,
+                            headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_expense_categories,
                             items = expenseCategories.map { category ->
                                 ChipUIData(
                                     text = category.title,
@@ -171,7 +171,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 add(
                     TransactionsFiltersBottomSheetData(
                         data = TransactionFilterBottomSheetFilterGroupData(
-                            headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_income_categories,
+                            headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_income_categories,
                             items = incomeCategories.map { category ->
                                 ChipUIData(
                                     text = category.title,
@@ -193,7 +193,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 add(
                     TransactionsFiltersBottomSheetData(
                         data = TransactionFilterBottomSheetFilterGroupData(
-                            headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_investment_categories,
+                            headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_investment_categories,
                             items = investmentCategories.map { category ->
                                 ChipUIData(
                                     text = category.title,
@@ -215,7 +215,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 add(
                     TransactionsFiltersBottomSheetData(
                         data = TransactionFilterBottomSheetFilterGroupData(
-                            headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_accounts,
+                            headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_accounts,
                             items = accounts.map { account ->
                                 ChipUIData(
                                     text = account.name,
@@ -237,7 +237,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 add(
                     TransactionsFiltersBottomSheetData(
                         data = TransactionFilterBottomSheetFilterGroupData(
-                            headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_transaction_for_values,
+                            headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_transaction_for_values,
                             items = transactionForValues.map { transactionFor ->
                                 ChipUIData(
                                     text = transactionFor.titleToDisplay,
@@ -259,7 +259,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 add(
                     TransactionsFiltersBottomSheetData(
                         data = TransactionFilterBottomSheetFilterGroupData(
-                            headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_transaction_types,
+                            headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_transaction_types,
                             items = transactionTypes.map { transactionType ->
                                 ChipUIData(
                                     text = transactionType.title,
@@ -328,7 +328,7 @@ public fun TransactionsFiltersBottomSheetUI(
             item {
                 TransactionFilterBottomSheetDateFilter(
                     isExpanded = expandedItemsIndices[filters.lastIndex + 1],
-                    headingTextStringResourceId = R.string.bottom_sheet_transactions_filter_transaction_date,
+                    headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_transaction_date,
                     onClearButtonClick = {
                         fromDate = defaultMinDate
                         toDate = defaultMaxDate
@@ -375,7 +375,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 },
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_transactions_filter_reset,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_reset,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
@@ -413,7 +413,7 @@ public fun TransactionsFiltersBottomSheetUI(
                 },
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_transactions_filter_apply,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_apply,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
@@ -522,9 +522,9 @@ public fun TransactionFilterBottomSheetDateFilter(
                     tint = MaterialTheme.colorScheme.onBackground,
                     imageVector = MyIcons.ChevronRight,
                     contentDescriptionStringResourceId = if (isExpanded) {
-                        R.string.bottom_sheet_transactions_filter_collapse_group
+                        R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
                     } else {
-                        R.string.bottom_sheet_transactions_filter_expand_group
+                        R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
                     },
                     onClick = onExpandButtonClick,
                 )
@@ -550,7 +550,7 @@ public fun TransactionFilterBottomSheetDateFilter(
                     ),
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_transactions_filter_clear,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
@@ -574,7 +574,7 @@ public fun TransactionFilterBottomSheetDateFilter(
                         ),
                     data = MyReadOnlyTextFieldData(
                         value = fromDate.formattedDate(),
-                        labelTextStringResourceId = R.string.bottom_sheet_transactions_filter_from_date,
+                        labelTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_from_date,
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -594,7 +594,7 @@ public fun TransactionFilterBottomSheetDateFilter(
                         ),
                     data = MyReadOnlyTextFieldData(
                         value = toDate.formattedDate(),
-                        labelTextStringResourceId = R.string.bottom_sheet_transactions_filter_to_date,
+                        labelTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_to_date,
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -655,9 +655,9 @@ private fun TransactionFilterBottomSheetFilterGroup(
                     imageVector = MyIcons.ChevronRight,
                     tint = MaterialTheme.colorScheme.onBackground,
                     contentDescriptionStringResourceId = if (isExpanded) {
-                        R.string.bottom_sheet_transactions_filter_collapse_group
+                        R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
                     } else {
-                        R.string.bottom_sheet_transactions_filter_expand_group
+                        R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
                     },
                     modifier = Modifier
                         .graphicsLayer {
@@ -687,7 +687,7 @@ private fun TransactionFilterBottomSheetFilterGroup(
                     ),
             ) {
                 MyText(
-                    textStringResourceId = R.string.bottom_sheet_transactions_filter_clear,
+                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
                     style = MaterialTheme.typography.labelLarge,
                 )
             }

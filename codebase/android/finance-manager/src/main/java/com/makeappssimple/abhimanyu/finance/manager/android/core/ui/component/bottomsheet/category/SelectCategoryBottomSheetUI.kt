@@ -45,7 +45,7 @@ internal fun SelectCategoryBottomSheetUI(
     ) {
         MyBottomSheetTitle(
             data = MyBottomSheetTitleData(
-                textStringResourceId = R.string.bottom_sheet_select_category_title,
+                textStringResourceId = R.string.finance_manager_bottom_sheet_select_category_title,
             )
         )
         CategoriesGrid(

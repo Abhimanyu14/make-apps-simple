@@ -17,18 +17,17 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.category
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
-import javax.inject.Inject
 
-public class UpdateCategoriesUseCase @Inject constructor(
+public class UpdateCategoriesUseCase(
     private val categoryRepository: CategoryRepository,
-    private val myPreferencesRepository: MyPreferencesRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         vararg categories: Category,
     ): Boolean {
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return categoryRepository.updateCategories(
             categories = categories,
         )

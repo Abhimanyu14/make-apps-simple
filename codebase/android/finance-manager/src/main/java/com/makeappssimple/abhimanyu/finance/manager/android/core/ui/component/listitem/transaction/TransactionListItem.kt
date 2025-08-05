@@ -81,7 +81,7 @@ private fun TransactionListItemUI(
         data.accountToName.isNotNull()
     ) {
         stringResource(
-            id = R.string.transaction_list_item_account,
+            id = R.string.finance_manager_transaction_list_item_account,
             data.accountFromName,
             data.accountToName,
         )
@@ -287,7 +287,7 @@ private fun TransactionListItemUI(
                             isEnabled = true,
                             iconImageVector = MyIcons.Edit,
                             labelText = stringResource(
-                                id = R.string.transaction_list_item_edit,
+                                id = R.string.finance_manager_transaction_list_item_edit,
                             ),
                         ),
                         handleEvent = { event ->
@@ -310,7 +310,7 @@ private fun TransactionListItemUI(
                             isEnabled = true,
                             iconImageVector = MyIcons.CurrencyExchange,
                             labelText = stringResource(
-                                id = R.string.transaction_list_item_refund,
+                                id = R.string.finance_manager_transaction_list_item_refund,
                             ),
                         ),
                         handleEvent = { event ->
@@ -333,7 +333,7 @@ private fun TransactionListItemUI(
                             isEnabled = data.isDeleteButtonEnabled,
                             iconImageVector = MyIcons.Delete,
                             labelText = stringResource(
-                                id = R.string.transaction_list_item_delete,
+                                id = R.string.finance_manager_transaction_list_item_delete,
                             ),
                         ),
                         handleEvent = { event ->

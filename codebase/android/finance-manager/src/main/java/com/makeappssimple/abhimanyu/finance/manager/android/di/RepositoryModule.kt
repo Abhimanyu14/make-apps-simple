@@ -21,8 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor.TransactionForRepository
@@ -32,7 +32,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.Ca
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.MyPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -61,13 +61,13 @@ public class RepositoryModule {
     }
 
     @Single
-    internal fun providesMyPreferencesRepository(
+    internal fun providesFinanceManagerPreferencesRepository(
         dispatcherProvider: DispatcherProvider,
-        myPreferencesDataSource: MyPreferencesDataSource,
-    ): MyPreferencesRepository {
-        return MyPreferencesRepositoryImpl(
+        financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
+    ): FinanceManagerPreferencesRepository {
+        return FinanceManagerPreferencesRepositoryImpl(
             dispatcherProvider = dispatcherProvider,
-            myPreferencesDataSource = myPreferencesDataSource,
+            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
         )
     }
 

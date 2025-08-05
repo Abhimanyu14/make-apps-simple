@@ -25,7 +25,7 @@ import android.content.pm.PackageManager
 import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.boot.BootCompletedReceiver
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Reminder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.time.TimeChangedReceiver
 import java.time.LocalTime
@@ -34,7 +34,7 @@ public class AlarmKitImpl(
     private val context: Context,
     private val dateTimeKit: DateTimeKit,
     private val logKit: LogKit,
-    private val myPreferencesRepository: MyPreferencesRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) : AlarmKit {
     override suspend fun cancelReminderAlarm(): Boolean {
         var isAlarmCancelled = cancelAlarm()
@@ -57,7 +57,8 @@ public class AlarmKitImpl(
     }
 
     override suspend fun scheduleReminderAlarm(): Boolean {
-        val reminder = myPreferencesRepository.getReminder() ?: return false
+        val reminder =
+            financeManagerPreferencesRepository.getReminder() ?: return false
         val initialAlarmTimestamp = getInitialAlarmTimestamp(
             reminder = reminder,
         )
@@ -171,7 +172,7 @@ public class AlarmKitImpl(
     private suspend fun updateIsReminderEnabledInPreferences(
         isReminderEnabled: Boolean,
     ): Boolean {
-        return myPreferencesRepository.updateIsReminderEnabled(
+        return financeManagerPreferencesRepository.updateIsReminderEnabled(
             isReminderEnabled = isReminderEnabled,
         )
     }

@@ -30,16 +30,16 @@ public fun TransactionForValuesDeleteConfirmationBottomSheet(
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
             message = stringResource(
-                id = R.string.bottom_sheet_transaction_for_values_menu_message,
+                id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_message,
             ),
             negativeButtonText = stringResource(
-                id = R.string.bottom_sheet_transaction_for_values_menu_negative_button_text,
+                id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_negative_button_text,
             ),
             positiveButtonText = stringResource(
-                id = R.string.bottom_sheet_transaction_for_values_menu_positive_button_text,
+                id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_positive_button_text,
             ),
             title = stringResource(
-                id = R.string.bottom_sheet_transaction_for_values_menu_delete_title,
+                id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_delete_title,
             ),
         ),
         handleEvent = { event ->

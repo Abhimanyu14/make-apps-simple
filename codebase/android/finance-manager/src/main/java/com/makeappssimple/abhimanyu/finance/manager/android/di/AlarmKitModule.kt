@@ -21,7 +21,7 @@ import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -32,13 +32,13 @@ public class AlarmKitModule {
         context: Context,
         dateTimeKit: DateTimeKit,
         logKit: LogKit,
-        myPreferencesRepository: MyPreferencesRepository,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     ): AlarmKit {
         return AlarmKitImpl(
             context = context,
             dateTimeKit = dateTimeKit,
             logKit = logKit,
-            myPreferencesRepository = myPreferencesRepository,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     }
 }

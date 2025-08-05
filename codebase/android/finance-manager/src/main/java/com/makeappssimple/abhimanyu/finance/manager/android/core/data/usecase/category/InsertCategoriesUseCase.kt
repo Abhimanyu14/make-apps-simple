@@ -17,19 +17,18 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.category
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class InsertCategoriesUseCase @Inject constructor(
+public class InsertCategoriesUseCase(
     private val categoryRepository: CategoryRepository,
-    private val myPreferencesRepository: MyPreferencesRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         vararg categories: Category,
     ): ImmutableList<Long> {
-        myPreferencesRepository.updateLastDataChangeTimestamp()
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return categoryRepository.insertCategories(
             categories = categories,
         )

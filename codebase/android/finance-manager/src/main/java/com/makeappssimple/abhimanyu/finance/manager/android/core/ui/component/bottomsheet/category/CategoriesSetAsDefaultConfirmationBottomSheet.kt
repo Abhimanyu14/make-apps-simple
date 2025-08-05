@@ -47,17 +47,17 @@ public fun CategoriesSetAsDefaultConfirmationBottomSheet(
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
             message = stringResource(
-                id = R.string.screen_categories_bottom_sheet_set_as_default_message,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_message,
                 data.transactionType.title.lowercase(),
             ),
             negativeButtonText = stringResource(
-                id = R.string.screen_categories_bottom_sheet_set_as_default_negative_button_text,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_negative_button_text,
             ),
             positiveButtonText = stringResource(
-                id = R.string.screen_categories_bottom_sheet_set_as_default_positive_button_text,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_positive_button_text,
             ),
             title = stringResource(
-                id = R.string.screen_categories_bottom_sheet_set_as_default_title,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_title,
             ),
         ),
         handleEvent = { event ->

@@ -19,9 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-public class GetAccountsTotalBalanceAmountValueUseCase @Inject constructor(
+public class GetAccountsTotalBalanceAmountValueUseCase(
     private val accountRepository: AccountRepository,
 ) {
     public operator fun invoke(): Flow<Long> {

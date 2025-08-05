@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.c
 
 import com.makeappssimple.abhimanyu.common.core.extensions.filterIsInstance
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.transaction.GetAllTransactionDataUseCase
@@ -29,12 +29,11 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import javax.inject.Inject
 
-public class RecalculateTotalUseCase @Inject constructor(
+public class RecalculateTotalUseCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
-    private val myPreferencesRepository: MyPreferencesRepository,
     private val updateAccountsUseCase: UpdateAccountsUseCase,
 ) {
     public suspend operator fun invoke() {
@@ -53,7 +52,7 @@ public class RecalculateTotalUseCase @Inject constructor(
             val allTransactionData: ImmutableList<TransactionData> =
                 deferredList[1].filterIsInstance<TransactionData>()
 
-            myPreferencesRepository.updateLastDataChangeTimestamp()
+            financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
             val accountBalances = hashMapOf<Int, Long>()
             allTransactionData.forEach { transactionData ->
                 transactionData.accountFrom?.let {

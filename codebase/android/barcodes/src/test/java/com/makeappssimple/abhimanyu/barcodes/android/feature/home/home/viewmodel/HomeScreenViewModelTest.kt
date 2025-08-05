@@ -19,18 +19,19 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmode
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsKitImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.datetime.DateTimeKitImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.stringencoder.StringEncoderImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepositoryImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.asExternalModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.logger.fake.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.BarcodesNavigationDirections
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKitImpl
+import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
+import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
+import com.makeappssimple.abhimanyu.common.logger.fake.FakeLogKitImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -58,10 +59,10 @@ class HomeScreenViewModelTest {
         dispatcherProvider = testDispatcherProvider,
     )
     private val dateTimeKit = DateTimeKitImpl()
-    private val stringEncoder = StringEncoderImpl()
+    private val uriEncoder: UriEncoder = UriEncoderImpl()
     private val navigationKit = NavigationKitImpl(
         coroutineScope = testCoroutineScope,
-        stringEncoder = stringEncoder,
+        uriEncoder = uriEncoder,
     )
     private val fakeLogKit = FakeLogKitImpl()
 

@@ -20,9 +20,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-public class GetAllCategoriesFlowUseCase @Inject constructor(
+public class GetAllCategoriesFlowUseCase(
     private val categoryRepository: CategoryRepository,
 ) {
     public operator fun invoke(): Flow<ImmutableList<Category>> {

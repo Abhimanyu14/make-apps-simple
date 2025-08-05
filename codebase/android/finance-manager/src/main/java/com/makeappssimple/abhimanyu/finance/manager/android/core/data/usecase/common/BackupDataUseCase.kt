@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.BackupData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.DatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.DatastoreData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.MyPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.transaction.GetAllTransactionsUseCase
@@ -34,16 +34,15 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Reminder
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
-import javax.inject.Inject
 
-public class BackupDataUseCase @Inject constructor(
+public class BackupDataUseCase(
     private val dateTimeKit: DateTimeKit,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getAllTransactionsUseCase: GetAllTransactionsUseCase,
     private val jsonWriterKit: JsonWriterKit,
-    private val myPreferencesRepository: MyPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         uri: Uri,
@@ -57,7 +56,7 @@ public class BackupDataUseCase @Inject constructor(
         val jsonString = Json.encodeToString(
             value = backupData,
         )
-        myPreferencesRepository.updateLastDataBackupTimestamp()
+        financeManagerPreferencesRepository.updateLastDataBackupTimestamp()
         return jsonWriterKit.writeJsonToFile(
             uri = uri,
             jsonString = jsonString,
@@ -90,13 +89,14 @@ public class BackupDataUseCase @Inject constructor(
 
     private suspend fun getDatastoreData(): DatastoreData {
         return DatastoreData(
-            defaultDataId = myPreferencesRepository.getDefaultDataId()
+            defaultDataId = financeManagerPreferencesRepository.getDefaultDataId()
                 ?: DefaultDataId(),
-            initialDataVersionNumber = myPreferencesRepository.getInitialDataVersionNumber()
+            initialDataVersionNumber = financeManagerPreferencesRepository.getInitialDataVersionNumber()
                 ?: InitialDataVersionNumber(),
-            dataTimestamp = myPreferencesRepository.getDataTimestamp()
+            dataTimestamp = financeManagerPreferencesRepository.getDataTimestamp()
                 ?: DataTimestamp(),
-            reminder = myPreferencesRepository.getReminder() ?: Reminder(),
+            reminder = financeManagerPreferencesRepository.getReminder()
+                ?: Reminder(),
         )
     }
 }

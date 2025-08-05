@@ -20,13 +20,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 private object GetRecentTransactionDataFlowUseCaseConstants {
     const val DEFAULT_NUMBER_OF_RECENT_TRANSACTIONS = 10
 }
 
-public class GetRecentTransactionDataFlowUseCase @Inject constructor(
+public class GetRecentTransactionDataFlowUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public operator fun invoke(

@@ -21,9 +21,8 @@ import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-public class GetIsAccountsUsedInTransactionFlowUseCase @Inject constructor(
+public class GetIsAccountsUsedInTransactionFlowUseCase(
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
     private val checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,
 ) {

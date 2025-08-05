@@ -30,16 +30,16 @@ public fun CategoriesDeleteConfirmationBottomSheet(
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
             message = stringResource(
-                id = R.string.screen_categories_bottom_sheet_delete_message,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_message,
             ),
             negativeButtonText = stringResource(
-                id = R.string.screen_categories_bottom_sheet_delete_negative_button_text,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_negative_button_text,
             ),
             positiveButtonText = stringResource(
-                id = R.string.screen_categories_bottom_sheet_delete_positive_button_text,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_positive_button_text,
             ),
             title = stringResource(
-                id = R.string.screen_categories_bottom_sheet_delete_title,
+                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_title,
             ),
         ),
         handleEvent = { event ->

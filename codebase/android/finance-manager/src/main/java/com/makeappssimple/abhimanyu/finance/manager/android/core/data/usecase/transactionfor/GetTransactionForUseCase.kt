@@ -18,9 +18,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.usecase.t
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
-import javax.inject.Inject
 
-public class GetTransactionForUseCase @Inject constructor(
+public class GetTransactionForUseCase(
     private val transactionForRepository: TransactionForRepository,
 ) {
     public suspend operator fun invoke(

@@ -99,7 +99,7 @@ private fun BackupCardUI(
                         horizontal = 16.dp,
                     )
                     .fillMaxWidth(),
-                textStringResourceId = R.string.backup_card,
+                textStringResourceId = R.string.finance_manager_backup_card,
                 style = MaterialTheme.typography.bodyLarge
                     .copy(
                         color = MaterialTheme.colorScheme.onBackground,

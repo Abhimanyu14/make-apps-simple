@@ -21,9 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.plus
-import javax.inject.Inject
 
-public class GetMaxRefundAmountUseCase @Inject constructor(
+public class GetMaxRefundAmountUseCase(
     private val getTransactionDataUseCase: GetTransactionDataUseCase,
 ) {
     public suspend operator fun invoke(

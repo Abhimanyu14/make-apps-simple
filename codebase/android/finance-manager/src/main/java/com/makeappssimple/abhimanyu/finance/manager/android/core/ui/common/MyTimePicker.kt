@@ -94,9 +94,9 @@ public fun MyTimePicker(
             modifier = modifier,
             title = stringResource(
                 id = if (showingPicker.value) {
-                    R.string.time_picker_touch_input_title
+                    R.string.finance_manager_time_picker_touch_input_title
                 } else {
-                    R.string.time_picker_text_input_title
+                    R.string.finance_manager_time_picker_text_input_title
                 }
             ),
             onCancel = {
@@ -118,9 +118,9 @@ public fun MyTimePicker(
                             MyIcons.Schedule
                         },
                         contentDescriptionStringResourceId = if (showingPicker.value) {
-                            R.string.time_picker_touch_input_switch_icon_button_content_description
+                            R.string.finance_manager_time_picker_touch_input_switch_icon_button_content_description
                         } else {
-                            R.string.time_picker_text_input_switch_icon_button_content_description
+                            R.string.finance_manager_time_picker_text_input_switch_icon_button_content_description
                         },
                         onClick = {
                             showingPicker.value = !showingPicker.value
@@ -230,14 +230,14 @@ private fun TimePickerDialog(
                         onClick = onCancel,
                     ) {
                         MyText(
-                            textStringResourceId = R.string.time_picker_negative_button_text,
+                            textStringResourceId = R.string.finance_manager_time_picker_negative_button_text,
                         )
                     }
                     TextButton(
                         onClick = onConfirm,
                     ) {
                         MyText(
-                            textStringResourceId = R.string.time_picker_positive_button_text,
+                            textStringResourceId = R.string.finance_manager_time_picker_positive_button_text,
                         )
                     }
                 }

@@ -21,9 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionDataMappedByCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import kotlinx.collections.immutable.ImmutableList
-import javax.inject.Inject
 
-public class GetTransactionDataMappedByCategoryUseCase @Inject constructor(
+public class GetTransactionDataMappedByCategoryUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
