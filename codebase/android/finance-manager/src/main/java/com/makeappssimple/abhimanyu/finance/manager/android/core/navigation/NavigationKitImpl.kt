@@ -31,13 +31,13 @@ public class NavigationKitImpl(
 
     override fun navigateToAccountsScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Accounts,
+            navigationCommand = FinanceManagerNavigationDirections.Accounts,
         )
     }
 
     override fun navigateToAddAccountScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.AddAccount,
+            navigationCommand = FinanceManagerNavigationDirections.AddAccount,
         )
     }
 
@@ -45,7 +45,7 @@ public class NavigationKitImpl(
         transactionType: String,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.AddCategory(
+            navigationCommand = FinanceManagerNavigationDirections.AddCategory(
                 transactionType = transactionType,
             ),
         )
@@ -55,7 +55,7 @@ public class NavigationKitImpl(
         transactionId: Int?,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.AddTransaction(
+            navigationCommand = FinanceManagerNavigationDirections.AddTransaction(
                 transactionId = transactionId,
             ),
         )
@@ -63,19 +63,19 @@ public class NavigationKitImpl(
 
     override fun navigateToAddTransactionForScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.AddTransactionFor,
+            navigationCommand = FinanceManagerNavigationDirections.AddTransactionFor,
         )
     }
 
     override fun navigateToAnalysisScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Analysis,
+            navigationCommand = FinanceManagerNavigationDirections.Analysis,
         )
     }
 
     override fun navigateToCategoriesScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Categories,
+            navigationCommand = FinanceManagerNavigationDirections.Categories,
         )
     }
 
@@ -83,7 +83,7 @@ public class NavigationKitImpl(
         accountId: Int,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.EditAccount(
+            navigationCommand = FinanceManagerNavigationDirections.EditAccount(
                 accountId = accountId,
             ),
         )
@@ -93,7 +93,7 @@ public class NavigationKitImpl(
         categoryId: Int,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.EditCategory(
+            navigationCommand = FinanceManagerNavigationDirections.EditCategory(
                 categoryId = categoryId,
             ),
         )
@@ -103,7 +103,7 @@ public class NavigationKitImpl(
         transactionId: Int,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.EditTransaction(
+            navigationCommand = FinanceManagerNavigationDirections.EditTransaction(
                 transactionId = transactionId,
             ),
         )
@@ -113,7 +113,7 @@ public class NavigationKitImpl(
         transactionForId: Int,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.EditTransactionFor(
+            navigationCommand = FinanceManagerNavigationDirections.EditTransactionFor(
                 transactionForId = transactionForId,
             ),
         )
@@ -121,37 +121,37 @@ public class NavigationKitImpl(
 
     override fun navigateToHomeScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Home,
+            navigationCommand = FinanceManagerNavigationDirections.Home,
         )
     }
 
     override fun navigateToOpenSourceLicensesScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.OpenSourceLicenses,
+            navigationCommand = FinanceManagerNavigationDirections.OpenSourceLicenses,
         )
     }
 
     override fun navigateToSettingsScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Settings,
+            navigationCommand = FinanceManagerNavigationDirections.Settings,
         )
     }
 
     override fun navigateToTransactionForValuesScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.TransactionForValues,
+            navigationCommand = FinanceManagerNavigationDirections.TransactionForValues,
         )
     }
 
     override fun navigateToTransactionsScreen(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.Transactions,
+            navigationCommand = FinanceManagerNavigationDirections.Transactions,
         )
     }
 
     override fun navigateUp(): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.NavigateUp,
+            navigationCommand = FinanceManagerNavigationDirections.NavigateUp,
         )
     }
 
@@ -159,7 +159,7 @@ public class NavigationKitImpl(
         transactionId: Int,
     ): Job {
         return navigate(
-            navigationCommand = MyNavigationDirections.ViewTransaction(
+            navigationCommand = FinanceManagerNavigationDirections.ViewTransaction(
                 transactionId = transactionId,
             ),
         )

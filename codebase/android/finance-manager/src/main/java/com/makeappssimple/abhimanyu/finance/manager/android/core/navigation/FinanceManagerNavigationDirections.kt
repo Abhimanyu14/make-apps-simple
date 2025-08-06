@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.navigation
 
-public object MyNavigationDirections {
+public object FinanceManagerNavigationDirections {
     // Default
     public object Default : NavigationCommand {
         override val command: Command = Command.NOOP
