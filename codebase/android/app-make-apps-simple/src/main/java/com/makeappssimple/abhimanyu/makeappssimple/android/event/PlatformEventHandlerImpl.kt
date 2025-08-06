@@ -20,6 +20,7 @@ import android.app.Activity
 import android.content.Intent
 import com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity
+import com.makeappssimple.abhimanyu.finance.manager.android.activity.FinanceManagerActivity
 
 internal class PlatformEventHandlerImpl : PlatformEventHandler {
     override fun handlePlatformEvent(
@@ -27,6 +28,15 @@ internal class PlatformEventHandlerImpl : PlatformEventHandler {
         platformEvent: PlatformEvent,
     ) {
         when (platformEvent) {
+            PlatformEvent.NavigateToBarcodesActivity -> {
+                activity.startActivity(
+                    Intent(
+                        activity,
+                        BarcodesActivity::class.java,
+                    ),
+                )
+            }
+
             PlatformEvent.NavigateToCosmosDesignSystemCatalogActivity -> {
                 activity.startActivity(
                     Intent(
@@ -36,11 +46,11 @@ internal class PlatformEventHandlerImpl : PlatformEventHandler {
                 )
             }
 
-            PlatformEvent.NavigateToBarcodesActivity -> {
+            PlatformEvent.NavigateToFinanceManagerActivity -> {
                 activity.startActivity(
                     Intent(
                         activity,
-                        BarcodesActivity::class.java,
+                        FinanceManagerActivity::class.java,
                     ),
                 )
             }
