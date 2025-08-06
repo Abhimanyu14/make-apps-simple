@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.common.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKit
-import com.makeappssimple.abhimanyu.common.core.jsonreader.JsonReaderKitImpl
+import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
+import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

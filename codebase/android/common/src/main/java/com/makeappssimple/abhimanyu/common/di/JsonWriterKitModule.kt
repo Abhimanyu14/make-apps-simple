@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.common.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.jsonwriter.JsonWriterKit
-import com.makeappssimple.abhimanyu.common.core.jsonwriter.JsonWriterKitImpl
+import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
+import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

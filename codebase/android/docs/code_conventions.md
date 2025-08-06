@@ -13,6 +13,8 @@
 
    e.g. `finance_manager` vs `financemanager`.
 
+Refer `dictionary.md` for more details.
+
 ---
 
 # Dependency Injection

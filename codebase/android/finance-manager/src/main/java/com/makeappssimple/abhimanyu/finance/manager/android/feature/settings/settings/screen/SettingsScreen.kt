@@ -35,7 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.doc
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.viewmodel.SettingsScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.view_model.SettingsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

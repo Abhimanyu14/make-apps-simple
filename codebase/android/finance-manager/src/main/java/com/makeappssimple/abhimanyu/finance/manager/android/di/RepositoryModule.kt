@@ -25,8 +25,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor.TransactionForRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transactionfor.TransactionForRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao

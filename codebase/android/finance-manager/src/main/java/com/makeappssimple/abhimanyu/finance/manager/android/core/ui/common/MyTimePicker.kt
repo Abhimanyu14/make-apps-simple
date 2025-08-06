@@ -47,13 +47,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.FinanceManagerAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.myDarkColorScheme
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.myLightColorScheme
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.myDarkColorScheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.myLightColorScheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import java.time.LocalTime
 

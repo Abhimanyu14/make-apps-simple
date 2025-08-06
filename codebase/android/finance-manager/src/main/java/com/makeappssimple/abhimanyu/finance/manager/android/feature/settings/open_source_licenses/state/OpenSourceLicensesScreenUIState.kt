@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.op
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.bottomsheet.OpenSourceLicensesScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.bottom_sheet.OpenSourceLicensesScreenBottomSheetType
 
 @Stable
 internal data class OpenSourceLicensesScreenUIState(

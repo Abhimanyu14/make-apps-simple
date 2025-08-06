@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.event.EditAccountScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.viewmodel.EditAccountScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.view_model.EditAccountScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

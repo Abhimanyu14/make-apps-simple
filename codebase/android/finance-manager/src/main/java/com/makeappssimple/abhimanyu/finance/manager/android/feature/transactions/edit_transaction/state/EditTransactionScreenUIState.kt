@@ -23,10 +23,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.bottomsheet.EditTransactionScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.snackbar.EditTransactionScreenSnackbarType
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.viewmodel.EditTransactionScreenUiVisibilityState
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.view_model.EditTransactionScreenUiVisibilityState
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate

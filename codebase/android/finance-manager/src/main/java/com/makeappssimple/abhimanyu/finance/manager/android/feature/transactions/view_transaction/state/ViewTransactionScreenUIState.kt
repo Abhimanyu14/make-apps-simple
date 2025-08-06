@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottomsheet.ViewTransactionScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

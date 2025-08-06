@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.an
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottomsheet.AnalysisScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 
 @Stable
 internal class AnalysisScreenUIStateEvents(

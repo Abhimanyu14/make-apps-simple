@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEventHandler
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottomsheet.TransactionsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.state.TransactionsScreenUIStateEvents
 
 internal class TransactionsScreenUIEventHandler internal constructor(

@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.event.AddCategoryScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.AddCategoryScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.AddCategoryScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.viewmodel.AddCategoryScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.view_model.AddCategoryScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

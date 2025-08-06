@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.doc
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.event.HomeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.viewmodel.HomeScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model.HomeScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

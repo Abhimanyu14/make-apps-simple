@@ -20,7 +20,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BarcodesAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.navigation.BarcodesNavGraph
 
 @OptIn(ExperimentalFoundationApi::class)

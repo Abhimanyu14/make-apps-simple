@@ -31,15 +31,15 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_VIEW_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_VIEW_TRANSACTION
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyLinearProgressIndicator
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.navigationBarLandscapeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyLinearProgressIndicator
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.NavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.transactions.TransactionDeleteConfirmationBottomSheet
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottomsheet.transactions.TransactionDeleteConfirmationBottomSheetEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionDeleteConfirmationBottomSheet
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionDeleteConfirmationBottomSheetEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItem
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.scaffold.MyScaffold
@@ -47,7 +47,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.to
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.view_transaction_section_header.ViewTransactionSectionHeader
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.view_transaction_section_header.ViewTransactionSectionHeaderData
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottomsheet.ViewTransactionScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.event.ViewTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.state.ViewTransactionScreenUIState
 

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.common.logger
 
 import android.util.Log
-import com.makeappssimple.abhimanyu.common.core.buildconfig.BuildConfigKit
+import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 
 internal class LogKitImpl(
     private val buildConfigKit: BuildConfigKit,

@@ -37,14 +37,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.COMPONENT_TOTAL_BALANCE_CARD
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUI
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.matchrowsize.matchRowSize
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.match_row_size.matchRowSize
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 

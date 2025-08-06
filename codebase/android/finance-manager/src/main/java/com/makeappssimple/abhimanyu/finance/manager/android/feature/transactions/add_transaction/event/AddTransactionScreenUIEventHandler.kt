@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.bottomsheet.AddTransactionScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.bottom_sheet.AddTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state.AddTransactionScreenUIStateEvents
 
 internal class AddTransactionScreenUIEventHandler(

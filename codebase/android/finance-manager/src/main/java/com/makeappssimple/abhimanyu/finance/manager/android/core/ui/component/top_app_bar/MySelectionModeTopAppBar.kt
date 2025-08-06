@@ -24,10 +24,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.RowScopedComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.RowScopedComposableContent
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable

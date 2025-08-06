@@ -1,0 +1,50 @@
+/*
+ * Copyright 2025-2025 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.event
+
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIStateEvents
+
+internal class AddTransactionForScreenUIEventHandler internal constructor(
+    private val uiStateEvents: AddTransactionForScreenUIStateEvents,
+) : ScreenUIEventHandler<AddTransactionForScreenUIEvent> {
+    override fun handleUIEvent(
+        uiEvent: AddTransactionForScreenUIEvent,
+    ) {
+        when (uiEvent) {
+            is AddTransactionForScreenUIEvent.OnNavigationBackButtonClick -> {
+                uiStateEvents.resetScreenBottomSheetType()
+            }
+
+            is AddTransactionForScreenUIEvent.OnCtaButtonClick -> {
+                uiStateEvents.insertTransactionFor()
+            }
+
+            is AddTransactionForScreenUIEvent.OnClearTitleButtonClick -> {
+                uiStateEvents.clearTitle()
+            }
+
+            is AddTransactionForScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
+                uiStateEvents.navigateUp()
+            }
+
+            is AddTransactionForScreenUIEvent.OnTitleUpdated -> {
+                uiStateEvents.updateTitle(uiEvent.updatedTitle)
+            }
+        }
+    }
+}

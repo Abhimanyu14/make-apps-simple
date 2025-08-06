@@ -27,9 +27,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.NullableComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.NullableComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.navigation_back_button.MyNavigationBackButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.navigation_back_button.MyNavigationBackButtonEvents
 

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.logger
 
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.buildconfig.BuildConfigKitImpl
+import com.makeappssimple.abhimanyu.barcodes.android.core.common.build_config.BuildConfigKitImpl
 import org.junit.Test
 
 internal class LogKitTest {

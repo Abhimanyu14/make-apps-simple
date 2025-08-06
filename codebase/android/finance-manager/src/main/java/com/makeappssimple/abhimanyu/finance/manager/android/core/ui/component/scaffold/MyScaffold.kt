@@ -52,11 +52,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyScaffoldContentWrapper
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.BottomSheetExpandedShape
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.BottomSheetShape
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ColumnScopedComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyScaffoldContentWrapper
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.BottomSheetExpandedShape
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.BottomSheetShape
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ColumnScopedComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.BottomSheetBackHandler
 import kotlinx.coroutines.CoroutineScope
 

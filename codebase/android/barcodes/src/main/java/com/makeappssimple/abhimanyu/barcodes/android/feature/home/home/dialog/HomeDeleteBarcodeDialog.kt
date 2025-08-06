@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.dialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.dialog.DialogData
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.dialog.MyDialog
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.dialog.MyDialogEvent
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.DialogData
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.MyDialog
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.MyDialogEvent
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable

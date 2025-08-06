@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.typealiases.ColumnScopedComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ColumnScopedComposableContent
 
 @Composable
 public fun MyExpandableItemUIWrapper(

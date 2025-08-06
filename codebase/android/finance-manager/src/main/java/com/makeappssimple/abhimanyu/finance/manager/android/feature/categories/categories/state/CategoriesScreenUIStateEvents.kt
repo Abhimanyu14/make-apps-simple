@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottomsheet.CategoriesScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
 
 @Stable

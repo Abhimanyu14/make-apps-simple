@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.common.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.appversion.AppVersionKit
-import com.makeappssimple.abhimanyu.common.core.appversion.AppVersionKitImpl
+import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
+import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

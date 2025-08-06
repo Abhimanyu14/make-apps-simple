@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomsheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 
 @Stable
 internal class HomeScreenUIState(

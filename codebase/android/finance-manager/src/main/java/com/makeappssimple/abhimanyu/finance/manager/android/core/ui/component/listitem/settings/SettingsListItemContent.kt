@@ -26,9 +26,9 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 
 @Composable
 public fun SettingsListItemContent(

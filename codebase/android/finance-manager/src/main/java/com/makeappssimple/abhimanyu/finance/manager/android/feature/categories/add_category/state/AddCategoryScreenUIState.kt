@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottomsheet.AddCategoryScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ac
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottomsheet.AccountsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 
 @Immutable
 internal data class AccountsScreenUIStateEvents(

@@ -32,9 +32,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 

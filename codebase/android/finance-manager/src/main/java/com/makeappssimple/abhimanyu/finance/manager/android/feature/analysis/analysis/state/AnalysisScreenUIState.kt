@@ -21,7 +21,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.analysis.AnalysisListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottomsheet.AnalysisScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate

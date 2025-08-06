@@ -20,7 +20,7 @@ import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottomsheet.TransactionsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 
 @Stable
 internal class TransactionsScreenUIStateEvents(

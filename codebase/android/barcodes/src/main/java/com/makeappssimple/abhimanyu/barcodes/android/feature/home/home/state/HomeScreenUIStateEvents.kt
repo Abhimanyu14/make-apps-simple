@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state
 import androidx.annotation.Keep
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottomsheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 
 @Immutable
 @Keep

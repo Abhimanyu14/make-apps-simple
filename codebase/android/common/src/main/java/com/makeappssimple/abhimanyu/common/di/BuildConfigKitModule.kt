@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.common.core.buildconfig.BuildConfigKit
-import com.makeappssimple.abhimanyu.common.core.buildconfig.BuildConfigKitImpl
+import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
+import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

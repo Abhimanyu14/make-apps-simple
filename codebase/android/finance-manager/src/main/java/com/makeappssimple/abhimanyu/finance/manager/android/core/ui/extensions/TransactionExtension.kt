@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 

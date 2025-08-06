@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.tabrow.MyTabData
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.tab_row.MyTabData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.griditem.CategoriesGridItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottomsheet.CategoriesScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.grid_item.CategoriesGridItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottomsheet.EditCategoryScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 
 @Stable
 internal class EditCategoryScreenUIStateEvents(

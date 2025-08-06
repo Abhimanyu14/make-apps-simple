@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.se
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottomsheet.SettingsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottom_sheet.SettingsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 
 @Stable

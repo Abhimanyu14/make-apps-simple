@@ -152,7 +152,7 @@ kover {
 
                     // UI
                     "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
-                    "com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.*",
+                    "com.makeappssimple.abhimanyu.barcodes.android.core.design_system.*",
                 )
             }
             includes {

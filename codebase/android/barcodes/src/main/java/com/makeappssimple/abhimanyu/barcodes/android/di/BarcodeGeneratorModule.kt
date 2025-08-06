@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.di
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGenerator
-import com.makeappssimple.abhimanyu.barcodes.android.core.barcodegenerator.BarcodeGeneratorImpl
+import com.makeappssimple.abhimanyu.barcodes.android.core.barcode_generator.BarcodeGenerator
+import com.makeappssimple.abhimanyu.barcodes.android.core.barcode_generator.BarcodeGeneratorImpl
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

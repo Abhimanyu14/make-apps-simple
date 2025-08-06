@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 
 public val AccountType.icon: ImageVector

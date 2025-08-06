@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.s
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardAction
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.bottomsheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 
 @Stable
 internal class HomeScreenUIStateEvents(

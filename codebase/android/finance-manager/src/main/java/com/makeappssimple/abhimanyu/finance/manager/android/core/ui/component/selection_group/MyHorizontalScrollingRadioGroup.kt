@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUI
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.fadingedge.fadingEdge
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.fading_edge.fadingEdge
 
 @Composable
 public fun MyHorizontalScrollingRadioGroup(

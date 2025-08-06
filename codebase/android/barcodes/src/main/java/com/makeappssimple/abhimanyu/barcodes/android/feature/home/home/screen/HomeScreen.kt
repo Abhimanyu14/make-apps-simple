@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.event.HomeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.viewmodel.HomeScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.view_model.HomeScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

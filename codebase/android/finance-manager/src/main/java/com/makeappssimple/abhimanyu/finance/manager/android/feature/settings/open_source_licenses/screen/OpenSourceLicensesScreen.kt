@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.event.OpenSourceLicensesScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.viewmodel.OpenSourceLicensesScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.view_model.OpenSourceLicensesScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

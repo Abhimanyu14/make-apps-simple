@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.composepie.data.PieChartData
+import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
 
 @Immutable
 public data class OverviewCardData(

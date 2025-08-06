@@ -50,11 +50,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.component.scaffold.MyScaffoldContentWrapper
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BottomSheetExpandedShape
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.theme.BottomSheetShape
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.typealiases.ColumnScopedComposableContent
-import com.makeappssimple.abhimanyu.barcodes.android.core.designsystem.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.scaffold.MyScaffoldContentWrapper
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BottomSheetExpandedShape
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BottomSheetShape
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.typealiases.ColumnScopedComposableContent
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.BottomSheetBackHandler
 import kotlinx.coroutines.CoroutineScope
 

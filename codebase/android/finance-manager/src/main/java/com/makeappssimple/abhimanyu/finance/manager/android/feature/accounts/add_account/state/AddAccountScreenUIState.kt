@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountTy
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.bottomsheet.AddAccountScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.bottom_sheet.AddAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

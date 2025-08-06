@@ -20,12 +20,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
-import com.makeappssimple.abhimanyu.barcodes.android.feature.barcodedetails.navigation.barcodeDetailsNavGraph
-import com.makeappssimple.abhimanyu.barcodes.android.feature.createbarcode.navigation.createBarcodeNavGraph
+import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.navigation.barcodeDetailsNavGraph
+import com.makeappssimple.abhimanyu.barcodes.android.feature.create_barcode.navigation.createBarcodeNavGraph
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.navigation.homeNavGraph
-import com.makeappssimple.abhimanyu.barcodes.android.feature.scanbarcode.navigation.scanBarcodeNavGraph
+import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.navigation.scanBarcodeNavGraph
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.navigation.settingsNavGraph
-import com.makeappssimple.abhimanyu.barcodes.android.feature.webview.navigation.webViewNavGraph
+import com.makeappssimple.abhimanyu.barcodes.android.feature.web_view.navigation.webViewNavGraph
 
 @Composable
 internal fun BarcodesNavHost(

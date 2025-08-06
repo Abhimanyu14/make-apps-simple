@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.event
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEventHandler
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottomsheet.EditCategoryScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state.EditCategoryScreenUIStateEvents
 
 internal class EditCategoryScreenUIEventHandler internal constructor(

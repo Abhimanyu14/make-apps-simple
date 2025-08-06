@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.event
 
-import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.viewmodel.SettingsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.settings.view_model.SettingsScreenViewModel
 
 private object SettingsScreenUIEventHandlerConstants {
     const val PRIVACY_POLICY_URL =

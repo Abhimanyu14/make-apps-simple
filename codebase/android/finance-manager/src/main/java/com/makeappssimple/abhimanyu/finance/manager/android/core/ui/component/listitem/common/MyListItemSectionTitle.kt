@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 
 @Immutable
 public data class MyListItemSectionTitleDataAndEventHandler(

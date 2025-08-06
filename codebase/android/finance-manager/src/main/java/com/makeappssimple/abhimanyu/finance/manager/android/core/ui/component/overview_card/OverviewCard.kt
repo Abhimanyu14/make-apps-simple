@@ -35,13 +35,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.composepie.ComposePieChart
+import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.ComposePieChart
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.COMPONENT_OVERVIEW_CARD
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 

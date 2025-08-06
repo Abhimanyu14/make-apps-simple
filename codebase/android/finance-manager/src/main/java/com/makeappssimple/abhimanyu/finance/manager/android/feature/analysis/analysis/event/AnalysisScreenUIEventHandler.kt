@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.event
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEventHandler
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottomsheet.AnalysisScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.state.AnalysisScreenUIStateEvents
 
 internal class AnalysisScreenUIEventHandler internal constructor(

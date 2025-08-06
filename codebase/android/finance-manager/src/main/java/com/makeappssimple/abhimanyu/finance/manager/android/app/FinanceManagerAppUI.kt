@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.app
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.navigation.FinanceManagerNavGraph
 
 @Composable

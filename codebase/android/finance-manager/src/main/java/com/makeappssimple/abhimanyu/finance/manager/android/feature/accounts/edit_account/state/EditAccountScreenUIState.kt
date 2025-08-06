@@ -20,7 +20,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.bottomsheet.EditAccountScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.bottom_sheet.EditAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R

@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.event.CreditsScreenUIEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.viewmodel.CreditsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.view_model.CreditsScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

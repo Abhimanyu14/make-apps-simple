@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.nav
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.navigation.categoriesNavGraph
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.navigation.homeNavGraph
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.navigation.settingsNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactionfor.navigation.transactionForNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.navigation.transactionForNavGraph
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.navigation.transactionsNavGraph
 
 @Composable

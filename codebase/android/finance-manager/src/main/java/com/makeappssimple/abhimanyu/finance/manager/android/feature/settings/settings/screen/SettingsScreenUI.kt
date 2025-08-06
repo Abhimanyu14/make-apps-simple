@@ -39,10 +39,10 @@ import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_SETTINGS
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_SETTINGS
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.MyLinearProgressIndicator
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.core.designsystem.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyLinearProgressIndicator
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.NavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.settings.SettingsListItemAppVersion
@@ -56,7 +56,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.li
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.settings.SettingsListItemHeaderData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottomsheet.SettingsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottom_sheet.SettingsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.components.SettingsScreenListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.event.SettingsScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType

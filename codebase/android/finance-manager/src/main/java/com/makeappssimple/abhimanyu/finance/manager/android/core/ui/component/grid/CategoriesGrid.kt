@@ -24,8 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.griditem.CategoriesGridItem
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.griditem.CategoriesGridItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.grid_item.CategoriesGridItem
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.grid_item.CategoriesGridItemData
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable

@@ -20,7 +20,7 @@ import android.content.Context
 import com.makeappssimple.abhimanyu.common.logger.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.datetime.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
