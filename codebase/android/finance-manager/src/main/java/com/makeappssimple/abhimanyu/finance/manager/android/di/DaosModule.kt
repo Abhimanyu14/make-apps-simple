@@ -20,7 +20,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.Ac
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -28,29 +28,29 @@ import org.koin.core.annotation.Single
 public class DaosModule {
     @Single
     internal fun providesCategoryDao(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ): CategoryDao {
-        return myRoomDatabase.categoryDao()
+        return financeManagerRoomDatabase.categoryDao()
     }
 
     @Single
     internal fun providesAccountDao(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ): AccountDao {
-        return myRoomDatabase.accountDao()
+        return financeManagerRoomDatabase.accountDao()
     }
 
     @Single
     internal fun providesTransactionDao(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ): TransactionDao {
-        return myRoomDatabase.transactionDao()
+        return financeManagerRoomDatabase.transactionDao()
     }
 
     @Single
     internal fun providesTransactionForDao(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ): TransactionForDao {
-        return myRoomDatabase.transactionForDao()
+        return financeManagerRoomDatabase.transactionForDao()
     }
 }

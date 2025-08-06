@@ -54,7 +54,7 @@ import java.util.concurrent.Executors
     IntListConverter::class,
     CategoryConverter::class,
 )
-public abstract class MyRoomDatabase : RoomDatabase() {
+public abstract class FinanceManagerRoomDatabase : RoomDatabase() {
     public abstract fun categoryDao(): CategoryDao
     public abstract fun accountDao(): AccountDao
     public abstract fun transactionDao(): TransactionDao
@@ -62,7 +62,7 @@ public abstract class MyRoomDatabase : RoomDatabase() {
 
     public companion object {
         @Volatile
-        private var instance: MyRoomDatabase? = null
+        private var instance: FinanceManagerRoomDatabase? = null
 
         /**
          * Reference
@@ -71,8 +71,8 @@ public abstract class MyRoomDatabase : RoomDatabase() {
         public fun getDatabase(
             context: Context,
             initialDatabasePopulator: InitialDatabasePopulator? = null,
-        ): MyRoomDatabase {
-            val tempInstance: MyRoomDatabase? = instance
+        ): FinanceManagerRoomDatabase {
+            val tempInstance: FinanceManagerRoomDatabase? = instance
             if (tempInstance.isNotNull()) {
                 return tempInstance
             }
@@ -91,7 +91,7 @@ public abstract class MyRoomDatabase : RoomDatabase() {
         private fun buildDatabase(
             context: Context,
             initialDatabasePopulator: InitialDatabasePopulator?,
-        ): MyRoomDatabase {
+        ): FinanceManagerRoomDatabase {
             val roomDatabaseCallback: Callback = object : Callback() {
                 override fun onCreate(
                     db: SupportSQLiteDatabase,
@@ -121,7 +121,7 @@ public abstract class MyRoomDatabase : RoomDatabase() {
                                 context = context,
                             )
                             initialDatabasePopulator?.populateInitialDatabaseData(
-                                myRoomDatabase = myRoomDatabase,
+                                financeManagerRoomDatabase = myRoomDatabase,
                             )
                         }
                 }
@@ -130,7 +130,7 @@ public abstract class MyRoomDatabase : RoomDatabase() {
             return Room
                 .databaseBuilder(
                     context = context.applicationContext,
-                    klass = MyRoomDatabase::class.java,
+                    klass = FinanceManagerRoomDatabase::class.java,
                     name = DatabaseConstants.DATABASE_NAME,
                 )
                 .addMigrations(

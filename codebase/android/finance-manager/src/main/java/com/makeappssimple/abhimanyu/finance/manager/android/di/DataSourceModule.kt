@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSourceImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -26,10 +26,10 @@ import org.koin.core.annotation.Single
 public class DataSourceModule {
     @Single
     internal fun providesCommonDataSource(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ): CommonDataSource {
         return CommonDataSourceImpl(
-            myRoomDatabase = myRoomDatabase,
+            financeManagerRoomDatabase = financeManagerRoomDatabase,
         )
     }
 }

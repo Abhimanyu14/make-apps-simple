@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.database.datas
 
 import androidx.room.withTransaction
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
@@ -27,13 +27,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 
 public class CommonDataSourceImpl(
-    private val myRoomDatabase: MyRoomDatabase,
+    private val financeManagerRoomDatabase: FinanceManagerRoomDatabase,
 ) : CommonDataSource {
     override suspend fun deleteTransaction(
         id: Int,
     ): Boolean {
         return with(
-            receiver = myRoomDatabase,
+            receiver = financeManagerRoomDatabase,
         ) {
             withTransaction {
                 val transactionData = transactionDao().getTransactionData(
@@ -100,7 +100,7 @@ public class CommonDataSourceImpl(
         originalTransaction: TransactionEntity?,
     ): Long {
         return with(
-            receiver = myRoomDatabase,
+            receiver = financeManagerRoomDatabase,
         ) {
             withTransaction {
                 val id = transactionDao().insertTransaction(
@@ -147,7 +147,7 @@ public class CommonDataSourceImpl(
         transactionForValues: Array<TransactionForEntity>,
     ): Boolean {
         return with(
-            receiver = myRoomDatabase,
+            receiver = financeManagerRoomDatabase,
         ) {
             withTransaction {
                 categoryDao().deleteAllCategories()

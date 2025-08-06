@@ -35,7 +35,7 @@ import java.io.FileNotFoundException
 
 public interface InitialDatabasePopulator {
     public fun populateInitialDatabaseData(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     )
 }
 
@@ -45,11 +45,11 @@ internal class InitialDatabasePopulatorImpl(
     private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
 ) : InitialDatabasePopulator {
     override fun populateInitialDatabaseData(
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ) {
         // TODO(Abhi) - Change to use Work Manager
         // Reference - https://github.com/android/sunflower/blob/d7df7cb74b82a0c12064bca31acc2332e78c7c73/app/src/main/java/com/google/samples/apps/sunflower/data/AppDatabase.kt#L38
-        myRoomDatabase.runInTransaction {
+        financeManagerRoomDatabase.runInTransaction {
             CoroutineScope(
                 context = dispatcherProvider.io + SupervisorJob(),
             ).launch {
@@ -69,27 +69,27 @@ internal class InitialDatabasePopulatorImpl(
                         populateAccountsData(
                             initialDatabaseData = initialDatabaseData,
                             accountsInitialDataVersionNumber = initialDataVersionNumber?.account.orZero(),
-                            myRoomDatabase = myRoomDatabase,
+                            financeManagerRoomDatabase = financeManagerRoomDatabase,
                         )
                     }
                     launch {
                         populateCategoriesData(
                             initialDatabaseData = initialDatabaseData,
                             categoriesInitialDataVersionNumber = initialDataVersionNumber?.category.orZero(),
-                            myRoomDatabase = myRoomDatabase,
+                            financeManagerRoomDatabase = financeManagerRoomDatabase,
                         )
                     }
                     launch {
                         populateTransactionForValuesData(
                             initialDatabaseData = initialDatabaseData,
                             transactionForValuesInitialDataVersionNumber = initialDataVersionNumber?.transactionFor.orZero(),
-                            myRoomDatabase = myRoomDatabase,
+                            financeManagerRoomDatabase = financeManagerRoomDatabase,
                         )
                     }
                     launch {
                         transactionsCleanUpIfRequired(
                             transactionsInitialDataVersionNumber = initialDataVersionNumber?.transaction.orZero(),
-                            myRoomDatabase = myRoomDatabase,
+                            financeManagerRoomDatabase = financeManagerRoomDatabase,
                         )
                     }
                 } catch (
@@ -112,10 +112,10 @@ internal class InitialDatabasePopulatorImpl(
     private suspend fun populateAccountsData(
         initialDatabaseData: InitialDatabaseData,
         accountsInitialDataVersionNumber: Int,
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ) {
         if (accountsInitialDataVersionNumber < initialDatabaseData.defaultAccounts.versionNumber) {
-            val accountDao = myRoomDatabase.accountDao()
+            val accountDao = financeManagerRoomDatabase.accountDao()
             initialDatabaseData.defaultAccounts.versionedAccounts
                 .filter {
                     it.versionNumber > accountsInitialDataVersionNumber
@@ -134,10 +134,10 @@ internal class InitialDatabasePopulatorImpl(
     private suspend fun populateCategoriesData(
         initialDatabaseData: InitialDatabaseData,
         categoriesInitialDataVersionNumber: Int,
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ) {
         if (categoriesInitialDataVersionNumber < initialDatabaseData.defaultCategories.versionNumber) {
-            val categoryDao = myRoomDatabase.categoryDao()
+            val categoryDao = financeManagerRoomDatabase.categoryDao()
             initialDatabaseData.defaultCategories.versionedCategories
                 .filter {
                     it.versionNumber > categoriesInitialDataVersionNumber
@@ -156,10 +156,11 @@ internal class InitialDatabasePopulatorImpl(
     private suspend fun populateTransactionForValuesData(
         initialDatabaseData: InitialDatabaseData,
         transactionForValuesInitialDataVersionNumber: Int,
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ) {
         if (transactionForValuesInitialDataVersionNumber < initialDatabaseData.defaultTransactionForValues.versionNumber) {
-            val transactionForDao = myRoomDatabase.transactionForDao()
+            val transactionForDao =
+                financeManagerRoomDatabase.transactionForDao()
             initialDatabaseData.defaultTransactionForValues.versionedTransactionForValues
                 .filter {
                     it.versionNumber > transactionForValuesInitialDataVersionNumber
@@ -177,11 +178,11 @@ internal class InitialDatabasePopulatorImpl(
 
     private suspend fun transactionsCleanUpIfRequired(
         transactionsInitialDataVersionNumber: Int,
-        myRoomDatabase: MyRoomDatabase,
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ) {
         val currentTransactionsDataVersion = 1
         if (transactionsInitialDataVersionNumber < currentTransactionsDataVersion) {
-            val transactionDao = myRoomDatabase.transactionDao()
+            val transactionDao = financeManagerRoomDatabase.transactionDao()
             val transactions = transactionDao.getAllTransactionsFlow().first()
                 .toImmutableList()
             transactionDao.deleteAllTransactions()

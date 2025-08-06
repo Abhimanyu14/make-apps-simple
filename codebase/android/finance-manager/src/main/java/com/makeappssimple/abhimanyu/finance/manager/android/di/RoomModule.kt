@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 import android.content.Context
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.InitialDatabasePopulator
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.InitialDatabasePopulatorImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.MyRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
@@ -45,8 +45,8 @@ public class RoomModule {
     internal fun providesMyRoomDatabase(
         context: Context,
         initialDatabasePopulator: InitialDatabasePopulator,
-    ): MyRoomDatabase {
-        return MyRoomDatabase.getDatabase(
+    ): FinanceManagerRoomDatabase {
+        return FinanceManagerRoomDatabase.getDatabase(
             context = context,
             initialDatabasePopulator = initialDatabasePopulator,
         )
