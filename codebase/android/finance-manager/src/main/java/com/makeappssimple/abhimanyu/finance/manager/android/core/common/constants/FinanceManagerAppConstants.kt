@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants
 
-public object AppConstants {
+public object FinanceManagerAppConstants {
     public const val APP_NAME: String = "finance_manager"
     public const val INITIAL_DATA_FILE_NAME: String =
         "database/initial_data.json"

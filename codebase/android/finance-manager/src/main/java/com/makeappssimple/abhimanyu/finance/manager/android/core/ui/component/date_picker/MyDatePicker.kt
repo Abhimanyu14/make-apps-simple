@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.AppConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.FinanceManagerAppConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
@@ -49,7 +49,7 @@ public fun MyDatePicker(
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = getTimestamp(
                 localDate = data.selectedLocalDate ?: data.endLocalDate.orMin(),
-                zoneId = ZoneId.of(AppConstants.ZONE_ID_GMT),
+                zoneId = ZoneId.of(FinanceManagerAppConstants.ZONE_ID_GMT),
             ),
             selectableDates = object : SelectableDates {
                 override fun isSelectableDate(

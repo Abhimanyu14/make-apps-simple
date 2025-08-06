@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.database.local
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.AppConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.FinanceManagerAppConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.InitialDatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.util.sanitizeTransactions
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
@@ -55,7 +55,7 @@ internal class InitialDatabasePopulatorImpl(
             ).launch {
                 try {
                     val jsonString = jsonReaderKit.readJsonFromAssets(
-                        fileName = AppConstants.INITIAL_DATA_FILE_NAME,
+                        fileName = FinanceManagerAppConstants.INITIAL_DATA_FILE_NAME,
                     ) ?: throw FileNotFoundException()
                     val initialDatabaseData =
                         Json.decodeFromString<InitialDatabaseData>(
