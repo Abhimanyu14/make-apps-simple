@@ -30,10 +30,6 @@ plugins {
     alias(libs.plugins.plugin.maven.publish)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
     namespace =
         "com.makeappssimple.abhimanyu.library.cosmos.design.system.android"
@@ -41,12 +37,12 @@ android {
     ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "cosmos"
 
-    defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
+    // Screenshot testing
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        consumerProguardFiles("consumer-rules.pro")
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -64,13 +60,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        minSdk = libs.versions.min.sdk.get().toInt()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     lint {
@@ -79,8 +78,6 @@ android {
         baseline = file("lint-baseline.xml")
         disable += "AndroidGradlePluginVersion"
     }
-
-    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 composeCompiler {
@@ -104,22 +101,22 @@ dependencies {
 }
 
 mavenPublishing {
+    configure(
+        AndroidSingleVariantLibrary(
+            // whether to publish a javadoc jar
+            publishJavadocJar = true,
+            // whether to publish a sources jar
+            sourcesJar = true,
+            // the published variant
+            variant = "release",
+        )
+    )
+
     // Define coordinates for the published artifact
     coordinates(
         groupId = "io.github.abhimanyu14",
         artifactId = "cosmos-design-system",
         version = libs.versions.app.cosmos.design.system.catalog.version.name.get()
-    )
-
-    configure(
-        AndroidSingleVariantLibrary(
-            // the published variant
-            variant = "release",
-            // whether to publish a sources jar
-            sourcesJar = true,
-            // whether to publish a javadoc jar
-            publishJavadocJar = true,
-        )
     )
 
     // Configure POM metadata for the published artifact
@@ -129,20 +126,20 @@ mavenPublishing {
         inceptionYear.set("2025")
         url.set("https://github.com/Abhimanyu14/cosmos-design-system")
 
-        licenses {
-            license {
-                name.set("Apache License 2.0")
-                url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-            }
-        }
-
         // Specify developers information
         developers {
             developer {
                 id.set("Abhimanyu14")
                 name.set("Abhimanyu")
                 email.set("abhimanyu.n14@gmail.com")
+            }
+        }
+
+        licenses {
+            license {
+                name.set("Apache License 2.0")
+                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
             }
         }
 
@@ -157,4 +154,8 @@ mavenPublishing {
 
     // Enable GPG signing for all publications
     signAllPublications()
+}
+
+kotlin {
+    explicitApi()
 }

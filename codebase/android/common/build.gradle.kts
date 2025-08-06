@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.kotlin.android)
@@ -24,29 +26,17 @@ plugins {
     alias(libs.plugins.plugin.screenshot)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
     namespace = "com.makeappssimple.abhimanyu.common"
     compileSdk = libs.versions.compile.sdk.get().toInt()
     ndkVersion = libs.versions.ndk.get()
 
-    defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
+    // Screenshot testing
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // Room schema
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas".toString())
-            }
-        }
-
-        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
-        ndk.debugSymbolLevel = "FULL"
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -64,13 +54,24 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        minSdk = libs.versions.min.sdk.get().toInt()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Room schema
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas".toString())
+            }
+        }
+
+        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
+        ndk.debugSymbolLevel = "FULL"
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     lint {
@@ -79,9 +80,6 @@ android {
         baseline = file("lint-baseline.xml")
         disable += "AndroidGradlePluginVersion"
     }
-
-    // Screenshot testing
-    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -128,6 +126,10 @@ dependencies {
     screenshotTestImplementation(libs.screenshot.validation.api)
 
     testImplementation(libs.bundles.test)
+}
+
+kotlin {
+    explicitApi()
 }
 
 kover {

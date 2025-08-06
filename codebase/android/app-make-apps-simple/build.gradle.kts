@@ -27,10 +27,6 @@ plugins {
     alias(libs.plugins.plugin.ksp)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
     namespace = "com.makeappssimple.abhimanyu.makeappssimple.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
@@ -46,15 +42,9 @@ android {
         }
     }
 
-    defaultConfig {
-        applicationId = "com.makeappssimple.abhimanyu.makeappssimple.android"
-        minSdk = libs.versions.min.sdk.get().toInt()
-        targetSdk = libs.versions.target.sdk.get().toInt()
-        versionCode =
-            libs.versions.app.make.apps.simple.version.code.get().toInt()
-        versionName = libs.versions.app.make.apps.simple.version.name.get()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -85,13 +75,19 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        applicationId = "com.makeappssimple.abhimanyu.makeappssimple.android"
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.target.sdk.get().toInt()
+        versionCode =
+            libs.versions.app.make.apps.simple.version.code.get().toInt()
+        versionName = libs.versions.app.make.apps.simple.version.name.get()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     lint {
@@ -117,6 +113,10 @@ dependencies {
     implementation(platform(libs.koin.bom))
 
     ksp(libs.koin.ksp.compiler)
+}
+
+kotlin {
+    explicitApi()
 }
 
 ksp {

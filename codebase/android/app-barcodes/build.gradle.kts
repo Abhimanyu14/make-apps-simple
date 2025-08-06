@@ -26,10 +26,6 @@ plugins {
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
     namespace = "com.makeappssimple.abhimanyu.barcodes.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
@@ -45,14 +41,9 @@ android {
         }
     }
 
-    defaultConfig {
-        applicationId = "com.makeappssimple.abhimanyu.barcodes.android"
-        minSdk = libs.versions.min.sdk.get().toInt()
-        targetSdk = libs.versions.target.sdk.get().toInt()
-        versionCode = libs.versions.app.barcodes.version.code.get().toInt()
-        versionName = libs.versions.app.barcodes.version.name.get()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -83,13 +74,18 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        applicationId = "com.makeappssimple.abhimanyu.barcodes.android"
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.target.sdk.get().toInt()
+        versionCode = libs.versions.app.barcodes.version.code.get().toInt()
+        versionName = libs.versions.app.barcodes.version.name.get()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     lint {
@@ -102,4 +98,8 @@ android {
 
 dependencies {
     implementation(project(":barcodes"))
+}
+
+kotlin {
+    explicitApi()
 }

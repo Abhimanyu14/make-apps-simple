@@ -50,6 +50,7 @@ tasks.withType<Detekt>().configureEach {
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "1.8"
 }
+
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "1.8"
 }

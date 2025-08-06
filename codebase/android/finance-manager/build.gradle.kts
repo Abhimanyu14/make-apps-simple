@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.kotlin.android)

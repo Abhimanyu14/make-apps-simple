@@ -20,10 +20,6 @@ plugins {
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
     namespace =
         "com.makeappssimple.abhimanyu.library.cosmos.design.system.catalog.android"
@@ -31,10 +27,9 @@ android {
     ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "cosmos"
 
-    defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -48,13 +43,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        minSdk = libs.versions.min.sdk.get().toInt()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     lint {
@@ -72,4 +68,8 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
 
     implementation(platform(libs.androidx.compose.bom))
+}
+
+kotlin {
+    explicitApi()
 }

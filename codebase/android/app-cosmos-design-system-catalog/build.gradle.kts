@@ -26,10 +26,6 @@ plugins {
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
-kotlin {
-    explicitApi()
-}
-
 android {
     namespace =
         "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android"
@@ -46,18 +42,9 @@ android {
         }
     }
 
-    defaultConfig {
-        applicationId =
-            "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android"
-        minSdk = libs.versions.min.sdk.get().toInt()
-        targetSdk = libs.versions.target.sdk.get().toInt()
-        versionCode =
-            libs.versions.app.cosmos.design.system.catalog.version.code.get()
-                .toInt()
-        versionName =
-            libs.versions.app.cosmos.design.system.catalog.version.name.get()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -88,13 +75,22 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        applicationId =
+            "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android"
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.target.sdk.get().toInt()
+        versionCode =
+            libs.versions.app.cosmos.design.system.catalog.version.code.get()
+                .toInt()
+        versionName =
+            libs.versions.app.cosmos.design.system.catalog.version.name.get()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     lint {
@@ -107,4 +103,8 @@ android {
 
 dependencies {
     implementation(project(":cosmos-design-system-catalog"))
+}
+
+kotlin {
+    explicitApi()
 }
