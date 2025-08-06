@@ -192,6 +192,7 @@ plugin-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.bi
 plugin-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "plugin-kotlin-kover" }
 plugin-ksp = { id = "com.google.devtools.ksp", version.ref = "plugin-ksp" }
 plugin-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "plugin-maven-publish" }
+plugin-room = { id = "androidx.room", version.ref = "androidx-room" }
 plugin-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 
 [bundles]

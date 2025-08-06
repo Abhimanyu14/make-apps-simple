@@ -21,11 +21,8 @@ plugins {
     alias(libs.plugins.plugin.kotlin.serialization)
     alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp)
+    alias(libs.plugins.plugin.room)
     alias(libs.plugins.plugin.screenshot)
-}
-
-kotlin {
-    explicitApi()
 }
 
 android {
@@ -34,20 +31,12 @@ android {
     ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "finance_manager"
 
-    defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
+    // Screenshot testing
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // Room schema
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas".toString())
-            }
-        }
-
-        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
-        ndk.debugSymbolLevel = "FULL"
+    buildFeatures {
+        buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -65,13 +54,23 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    defaultConfig {
+        minSdk = libs.versions.min.sdk.get().toInt()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
+        ndk.debugSymbolLevel = "FULL"
     }
 
-    buildFeatures {
-        buildConfig = true
-        compose = true
+    kotlinOptions {
+        jvmTarget = "17"
+
+        // Room schema for testing
+        sourceSets {
+            // Adds exported schema location as test app assets.
+            getByName("androidTest").assets.srcDir("$projectDir/schemas")
+        }
     }
 
     lint {
@@ -80,9 +79,6 @@ android {
         baseline = file("lint-baseline.xml")
         disable += "AndroidGradlePluginVersion"
     }
-
-    // Screenshot testing
-    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -139,6 +135,10 @@ dependencies {
     testImplementation(libs.bundles.test)
 }
 
+kotlin {
+    explicitApi()
+}
+
 kover {
     currentProject {
         instrumentation {
@@ -175,7 +175,8 @@ ksp {
     // Koin
     arg("KOIN_CONFIG_CHECK", "true")
     arg("KOIN_DEFAULT_MODULE", "false")
+}
 
-    // Room
-    arg("room.schemaLocation", "$projectDir/schemas")
+room {
+    schemaDirectory("$projectDir/schemas")
 }
