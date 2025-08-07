@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake
 import androidx.annotation.VisibleForTesting
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.BarcodeEntity
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 internal class FakeBarcodeDao : BarcodeDao {
@@ -43,16 +44,12 @@ internal class FakeBarcodeDao : BarcodeDao {
         return sizeBeforeDeletion - fakeBarcodeEntities.size
     }
 
-    override fun getAllBarcodesFlow(
-    ) = flow {
-        emit(
-            value = fakeBarcodeEntities.toList(),
-        )
-    }
-
-    override suspend fun getAllBarcodes(
-    ): List<BarcodeEntity> {
-        return fakeBarcodeEntities.toList()
+    override fun getAllBarcodesFlow(): Flow<List<BarcodeEntity>> {
+        return flow {
+            emit(
+                value = fakeBarcodeEntities.toList(),
+            )
+        }
     }
 
     override suspend fun getBarcodeById(

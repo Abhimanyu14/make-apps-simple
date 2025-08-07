@@ -57,14 +57,6 @@ internal interface BarcodeDao {
     fun getAllBarcodesFlow(): Flow<List<BarcodeEntity>>
 
     /**
-     * Get all barcodes as a list.
-     * @return Returns all barcodes ordered by [BarcodeEntity.id]
-     * @throws [SQLiteException]
-     */
-    @Query("SELECT * from barcode_table ORDER BY id ASC")
-    suspend fun getAllBarcodes(): List<BarcodeEntity>
-
-    /**
      * Get a barcode by id.
      * @param id Required barcode id
      * @return Barcode with given [id] or returns null if no barcode has the given id.

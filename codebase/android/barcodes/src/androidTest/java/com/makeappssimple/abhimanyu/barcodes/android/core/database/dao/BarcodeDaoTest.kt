@@ -72,7 +72,7 @@ internal class BarcodeDaoTest {
         val insertedBarcodeIds = barcodeDao.insertBarcodes(
             barcodeEntity,
         )
-        val allBarcodes = barcodeDao.getAllBarcodes()
+        val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
         assertThat(insertedBarcodeIds.size).isEqualTo(1)
         assertThat(insertedBarcodeIds[0]).isEqualTo(1)
@@ -86,7 +86,7 @@ internal class BarcodeDaoTest {
         barcodeDao.insertBarcodes(
             barcodeEntity,
         )
-        val insertedBarcode = barcodeDao.getAllBarcodes().first()
+        val insertedBarcode = barcodeDao.getAllBarcodesFlow().first().first()
         val updatedBarcode = insertedBarcode.copy(
             name = "Updated Name",
         )
@@ -108,12 +108,12 @@ internal class BarcodeDaoTest {
         barcodeDao.insertBarcodes(
             barcodeEntity,
         )
-        val insertedBarcode = barcodeDao.getAllBarcodes().first()
+        val insertedBarcode = barcodeDao.getAllBarcodesFlow().first().first()
 
         val count = barcodeDao.deleteBarcodes(
             insertedBarcode,
         )
-        val allBarcodes = barcodeDao.getAllBarcodes()
+        val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
         assertThat(count).isEqualTo(1)
         assertThat(allBarcodes).isEmpty()
@@ -131,7 +131,7 @@ internal class BarcodeDaoTest {
         )
 
         val count = barcodeDao.deleteAllBarcodes()
-        val allBarcodes = barcodeDao.getAllBarcodes()
+        val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
         assertThat(count).isEqualTo(2)
         assertThat(allBarcodes).isEmpty()
