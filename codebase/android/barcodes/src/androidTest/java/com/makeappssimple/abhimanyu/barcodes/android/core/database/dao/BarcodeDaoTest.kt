@@ -64,63 +64,7 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun insertAndGetBarcode() = runTestWithTimeout {
-        val barcodeEntity = getBarcodeEntity(
-            id = 1,
-        )
-
-        val insertedBarcodeIds = barcodeDao.insertBarcodes(
-            barcodeEntity,
-        )
-        val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
-
-        assertThat(insertedBarcodeIds.size).isEqualTo(1)
-        assertThat(insertedBarcodeIds[0]).isEqualTo(1)
-        assertThat(allBarcodes.size).isEqualTo(1)
-        assertThat(allBarcodes[0]).isEqualTo(barcodeEntity)
-    }
-
-    @Test
-    fun updateBarcode() = runTestWithTimeout {
-        val barcodeEntity = getBarcodeEntity()
-        barcodeDao.insertBarcodes(
-            barcodeEntity,
-        )
-        val insertedBarcode = barcodeDao.getAllBarcodesFlow().first().first()
-        val updatedBarcode = insertedBarcode.copy(
-            name = "Updated Name",
-        )
-
-        val count = barcodeDao.updateBarcodes(
-            updatedBarcode,
-        )
-        val result = barcodeDao.getBarcodeById(
-            id = insertedBarcode.id,
-        )
-
-        assertThat(count).isEqualTo(1)
-        assertThat(result).isEqualTo(updatedBarcode)
-    }
-
-    @Test
-    fun deleteBarcode() = runTestWithTimeout {
-        val barcodeEntity = getBarcodeEntity()
-        barcodeDao.insertBarcodes(
-            barcodeEntity,
-        )
-        val insertedBarcode = barcodeDao.getAllBarcodesFlow().first().first()
-
-        val count = barcodeDao.deleteBarcodes(
-            insertedBarcode,
-        )
-        val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
-
-        assertThat(count).isEqualTo(1)
-        assertThat(allBarcodes).isEmpty()
-    }
-
-    @Test
-    fun deleteAllBarcodes() = runTestWithTimeout {
+    fun deleteAllBarcodes_returnsCountOfBarcodesDeleted() = runTestWithTimeout {
         barcodeDao.insertBarcodes(
             getBarcodeEntity(
                 value = "1",
@@ -138,7 +82,59 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun getAllBarcodesFlow() = runTestWithTimeout {
+    fun deleteBarcode_validBarcode_returnsCountOfBarcodesDeleted() =
+        runTestWithTimeout {
+            val barcodeEntity1 = getBarcodeEntity(
+                id = 1,
+            )
+            val barcodeEntity2 = getBarcodeEntity(
+                id = 2,
+            )
+            barcodeDao.insertBarcodes(
+                barcodeEntity1,
+                barcodeEntity2,
+            )
+
+            val count = barcodeDao.deleteBarcodes(
+                barcodeEntity2,
+            )
+            val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
+
+            assertThat(count).isEqualTo(1)
+            assertThat(allBarcodes.size).isEqualTo(1)
+            assertThat(allBarcodes.first()).isEqualTo(barcodeEntity1)
+        }
+
+    @Test
+    fun deleteBarcode_invalidBarcode_returnsCountOfBarcodesDeleted() =
+        runTestWithTimeout {
+            val barcodeEntity1 = getBarcodeEntity(
+                id = 1,
+            )
+            val barcodeEntity2 = getBarcodeEntity(
+                id = 2,
+            )
+            val barcodeEntity3 = getBarcodeEntity(
+                id = 3,
+            )
+            barcodeDao.insertBarcodes(
+                barcodeEntity1,
+                barcodeEntity2,
+            )
+
+            val count = barcodeDao.deleteBarcodes(
+                barcodeEntity3,
+            )
+            val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
+
+            assertThat(count).isEqualTo(0)
+            assertThat(allBarcodes.size).isEqualTo(2)
+            assertThat(allBarcodes.any { it == barcodeEntity1 }).isTrue()
+            assertThat(allBarcodes.any { it == barcodeEntity2 }).isTrue()
+        }
+
+    @Test
+    fun getAllBarcodesFlow_returnsAllBarcodesInFlow() = runTestWithTimeout {
         val barcodeEntity1 = getBarcodeEntity(
             id = 1,
             value = "1",
@@ -152,13 +148,133 @@ internal class BarcodeDaoTest {
             barcodeEntity2,
         )
 
-        val allBarcodesFlow = barcodeDao.getAllBarcodesFlow()
-        val allBarcodes = allBarcodesFlow.first()
+        val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
         assertThat(allBarcodes.size).isEqualTo(2)
         assertThat(allBarcodes.any { it == barcodeEntity1 }).isTrue()
         assertThat(allBarcodes.any { it == barcodeEntity2 }).isTrue()
     }
+
+    @Test
+    fun getBarcodeById_validId_returnsBarcode() = runTestWithTimeout {
+        val barcodeEntity1 = getBarcodeEntity(
+            id = 1,
+            value = "1",
+        )
+        val barcodeEntity2 = getBarcodeEntity(
+            id = 2,
+            value = "2",
+        )
+        barcodeDao.insertBarcodes(
+            barcodeEntity1,
+            barcodeEntity2,
+        )
+
+        val result = barcodeDao.getBarcodeById(
+            id = 1,
+        )
+
+        assertThat(result).isEqualTo(barcodeEntity1)
+    }
+
+    @Test
+    fun getBarcodeById_invalidId_returnsNull() = runTestWithTimeout {
+        val barcodeEntity1 = getBarcodeEntity(
+            id = 1,
+            value = "1",
+        )
+        val barcodeEntity2 = getBarcodeEntity(
+            id = 2,
+            value = "2",
+        )
+        barcodeDao.insertBarcodes(
+            barcodeEntity1,
+            barcodeEntity2,
+        )
+
+        val result = barcodeDao.getBarcodeById(
+            id = 3,
+        )
+
+        assertThat(result).isEqualTo(null)
+    }
+
+    @Test
+    fun insertBarcodes_returnsListOfIdsOfInsertedBarcodes() =
+        runTestWithTimeout {
+            val barcodeEntity1 = getBarcodeEntity(
+                id = 1,
+            )
+            val barcodeEntity2 = getBarcodeEntity(
+                id = 2,
+            )
+
+            val insertedBarcodeIds = barcodeDao.insertBarcodes(
+                barcodeEntity1,
+                barcodeEntity2,
+            )
+            val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
+
+            assertThat(insertedBarcodeIds.size).isEqualTo(2)
+            assertThat(insertedBarcodeIds.any { it == 1L }).isTrue()
+            assertThat(insertedBarcodeIds.any { it == 2L }).isTrue()
+            assertThat(allBarcodes.size).isEqualTo(2)
+            assertThat(allBarcodes.any { it == barcodeEntity1 }).isTrue()
+            assertThat(allBarcodes.any { it == barcodeEntity2 }).isTrue()
+        }
+
+    @Test
+    fun updateBarcodes_validBarcode_returnsCountOfBarcodesUpdated() =
+        runTestWithTimeout {
+            val barcodeEntity1 = getBarcodeEntity(
+                id = 1,
+            )
+            barcodeDao.insertBarcodes(
+                barcodeEntity1,
+            )
+            val insertedBarcode =
+                barcodeDao.getAllBarcodesFlow().first().first()
+            val updatedBarcode = insertedBarcode.copy(
+                name = "Updated Name",
+            )
+
+            val count = barcodeDao.updateBarcodes(
+                updatedBarcode,
+            )
+            val result = barcodeDao.getBarcodeById(
+                id = 1,
+            )
+
+            assertThat(count).isEqualTo(1)
+            assertThat(result).isEqualTo(updatedBarcode)
+        }
+
+    @Test
+    fun updateBarcodes_idUpdated_returnsCountOfBarcodesUpdated() =
+        runTestWithTimeout {
+            val barcodeEntity1 = getBarcodeEntity(
+                id = 1,
+            )
+            barcodeDao.insertBarcodes(
+                barcodeEntity1,
+            )
+            val insertedBarcode =
+                barcodeDao.getAllBarcodesFlow().first().first()
+            val updatedBarcode = insertedBarcode.copy(
+                id = 2,
+                name = "Updated Name",
+            )
+
+            val count = barcodeDao.updateBarcodes(
+                updatedBarcode,
+            )
+            val result = barcodeDao.getBarcodeById(
+                id = 1,
+            )
+
+            assertThat(count).isEqualTo(0)
+            assertThat(result).isEqualTo(barcodeEntity1)
+        }
 
     private fun getBarcodeEntity(
         id: Int = 0,
