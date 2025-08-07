@@ -34,8 +34,8 @@ import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
-import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -174,7 +174,7 @@ internal class CreateBarcodeScreenViewModel(
     private suspend fun fetchBarcode() {
         screenArgs.barcodeId?.let { barcodeId ->
             originalBarcode.update {
-                barcodeRepository.getBarcode(
+                barcodeRepository.getBarcodeById(
                     id = barcodeId,
                 )
             }

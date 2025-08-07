@@ -38,7 +38,7 @@ internal interface BarcodeRepository {
      * @param id Required barcode id
      * @return Barcode with given [id] or returns null if no barcode has the given id.
      */
-    suspend fun getBarcode(
+    suspend fun getBarcodeById(
         id: Int,
     ): Barcode?
 

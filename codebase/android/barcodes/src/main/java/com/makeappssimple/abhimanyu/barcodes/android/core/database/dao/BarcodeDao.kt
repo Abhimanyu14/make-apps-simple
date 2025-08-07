@@ -71,7 +71,7 @@ internal interface BarcodeDao {
      * @throws [SQLiteException]
      */
     @Query(value = "SELECT * from barcode_table WHERE id = :id")
-    suspend fun getBarcode(
+    suspend fun getBarcodeById(
         id: Int,
     ): BarcodeEntity?
 

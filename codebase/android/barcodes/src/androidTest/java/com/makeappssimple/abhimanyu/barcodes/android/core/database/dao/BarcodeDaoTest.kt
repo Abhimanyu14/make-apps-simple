@@ -94,7 +94,7 @@ internal class BarcodeDaoTest {
         val count = barcodeDao.updateBarcodes(
             updatedBarcode,
         )
-        val result = barcodeDao.getBarcode(
+        val result = barcodeDao.getBarcodeById(
             id = insertedBarcode.id,
         )
 

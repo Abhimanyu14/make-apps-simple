@@ -69,12 +69,12 @@ internal class BarcodeRepositoryImpl(
         }
     }
 
-    override suspend fun getBarcode(
+    override suspend fun getBarcodeById(
         id: Int,
     ): Barcode? {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.getBarcode(
+                barcodeDao.getBarcodeById(
                     id = id,
                 )?.asExternalModel()
             }

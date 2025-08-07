@@ -55,7 +55,7 @@ internal class FakeBarcodeDao : BarcodeDao {
         return fakeBarcodeEntities.toList()
     }
 
-    override suspend fun getBarcode(
+    override suspend fun getBarcodeById(
         id: Int,
     ): BarcodeEntity? {
         return fakeBarcodeEntities.find { it.id == id }

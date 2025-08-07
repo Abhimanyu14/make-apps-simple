@@ -84,7 +84,7 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun getBarcode_returnsCorrectBarcode() = runTest {
+    fun getBarcodeById_returnsCorrectBarcode() = runTest {
         val barcode = getBarcode(
             id = 1,
         )
@@ -92,7 +92,7 @@ internal class BarcodeRepositoryTest {
             barcode,
         )
 
-        val result = barcodeRepository.getBarcode(
+        val result = barcodeRepository.getBarcodeById(
             id = 1,
         )
 
@@ -115,7 +115,7 @@ internal class BarcodeRepositoryTest {
         val count = barcodeRepository.updateBarcodes(
             updatedBarcode,
         )
-        val result = barcodeRepository.getBarcode(
+        val result = barcodeRepository.getBarcodeById(
             id = 1,
         )
 
@@ -135,7 +135,7 @@ internal class BarcodeRepositoryTest {
         val count = barcodeRepository.deleteBarcodes(
             barcode,
         )
-        val result = barcodeRepository.getBarcode(
+        val result = barcodeRepository.getBarcodeById(
             id = 1,
         )
 
