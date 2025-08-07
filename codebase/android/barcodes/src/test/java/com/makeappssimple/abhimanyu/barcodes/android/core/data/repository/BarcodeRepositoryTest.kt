@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.data.repository
 
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.barcodes.android.core.common.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
