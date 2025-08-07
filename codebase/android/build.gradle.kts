@@ -63,3 +63,14 @@ kover {
         }
     }
 }
+
+allprojects {
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "com.google.guava" && requested.name == "guava") {
+                useVersion("33.2.0-jre") // Force a stable, recent version
+                because("Align Guava to prevent runtime errors.")
+            }
+        }
+    }
+}

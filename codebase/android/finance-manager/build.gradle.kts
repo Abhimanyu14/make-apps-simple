@@ -97,6 +97,7 @@ dependencies {
 
     implementation(libs.about.libraries.compose)
     implementation(libs.about.libraries.core)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.work.runtime)
     implementation(libs.bundles.camera)
