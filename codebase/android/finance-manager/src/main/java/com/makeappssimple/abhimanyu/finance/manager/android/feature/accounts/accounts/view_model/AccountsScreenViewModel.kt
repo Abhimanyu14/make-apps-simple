@@ -20,7 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -46,7 +46,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class AccountsScreenViewModel(
     coroutineScope: CoroutineScope,
-    private val deleteAccountUseCase: DeleteAccountUseCase,
+    private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
     private val getAccountsTotalMinimumBalanceAmountValueUseCase: GetAccountsTotalMinimumBalanceAmountValueUseCase,
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
@@ -60,7 +60,7 @@ internal class AccountsScreenViewModel(
     viewModelScope = coroutineScope,
 ), AccountsScreenUIStateDelegate by AccountsScreenUIStateDelegateImpl(
     coroutineScope = coroutineScope,
-    deleteAccountUseCase = deleteAccountUseCase,
+    deleteAccountByIdUseCase = deleteAccountByIdUseCase,
     financeManagerPreferencesRepository = financeManagerPreferencesRepository,
     navigationKit = navigationKit,
     screenUICommonState = screenUICommonState,

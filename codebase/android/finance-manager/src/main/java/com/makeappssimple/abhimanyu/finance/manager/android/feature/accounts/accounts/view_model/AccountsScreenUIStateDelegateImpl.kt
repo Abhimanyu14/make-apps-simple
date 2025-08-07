@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ac
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 internal class AccountsScreenUIStateDelegateImpl(
     private val coroutineScope: CoroutineScope,
-    private val deleteAccountUseCase: DeleteAccountUseCase,
+    private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
@@ -41,7 +41,7 @@ internal class AccountsScreenUIStateDelegateImpl(
     override fun deleteAccount() {
         coroutineScope.launch {
             clickedItemId?.let { id ->
-                deleteAccountUseCase(
+                deleteAccountByIdUseCase(
                     id = id,
                 )
             }

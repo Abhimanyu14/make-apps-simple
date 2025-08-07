@@ -58,7 +58,7 @@ public class FakeAccountDaoImpl : AccountDao {
         return 0
     }
 
-    override suspend fun deleteAccount(
+    override suspend fun deleteAccountById(
         id: Int,
     ): Int {
         return 0

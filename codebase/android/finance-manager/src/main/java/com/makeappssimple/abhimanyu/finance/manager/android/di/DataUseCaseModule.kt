@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
@@ -88,22 +88,22 @@ import org.koin.core.annotation.Single
 public class DataUseCaseModule {
     // region account
     @Single
-    internal fun providesDeleteAccountsUseCase(
+    internal fun providesDeleteAccountUseCase(
         financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
-    ): DeleteAccountsUseCase {
-        return DeleteAccountsUseCase(
+    ): DeleteAccountByIdUseCase {
+        return DeleteAccountByIdUseCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
         )
     }
 
     @Single
-    internal fun providesDeleteAccountUseCase(
+    internal fun providesDeleteAccountsUseCase(
         financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
-    ): DeleteAccountUseCase {
-        return DeleteAccountUseCase(
+    ): DeleteAccountsUseCase {
+        return DeleteAccountsUseCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
         )

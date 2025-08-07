@@ -47,7 +47,7 @@ public interface AccountRepository {
         vararg accounts: Account,
     ): Boolean
 
-    public suspend fun deleteAccount(
+    public suspend fun deleteAccountById(
         id: Int,
     ): Boolean
 

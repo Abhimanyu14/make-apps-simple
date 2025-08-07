@@ -26,16 +26,21 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.B
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 internal class BarcodeDaoTest {
+    private val testCoroutineDispatcher = StandardTestDispatcher()
+
     private lateinit var barcodesRoomDatabase: BarcodesRoomDatabase
     private lateinit var barcodeDao: BarcodeDao
 
@@ -59,7 +64,7 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun insertAndGetBarcode() = runTest {
+    fun insertAndGetBarcode() = runTestWithTimeout {
         val barcodeEntity = getBarcodeEntity(
             id = 1,
         )
@@ -76,7 +81,7 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun updateBarcode() = runTest {
+    fun updateBarcode() = runTestWithTimeout {
         val barcodeEntity = getBarcodeEntity()
         barcodeDao.insertBarcodes(
             barcodeEntity,
@@ -98,7 +103,7 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun deleteBarcode() = runTest {
+    fun deleteBarcode() = runTestWithTimeout {
         val barcodeEntity = getBarcodeEntity()
         barcodeDao.insertBarcodes(
             barcodeEntity,
@@ -115,7 +120,7 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun deleteAllBarcodes() = runTest {
+    fun deleteAllBarcodes() = runTestWithTimeout {
         barcodeDao.insertBarcodes(
             getBarcodeEntity(
                 value = "1",
@@ -133,7 +138,7 @@ internal class BarcodeDaoTest {
     }
 
     @Test
-    fun getAllBarcodesFlow() = runTest {
+    fun getAllBarcodesFlow() = runTestWithTimeout {
         val barcodeEntity1 = getBarcodeEntity(
             id = 1,
             value = "1",
@@ -167,5 +172,16 @@ internal class BarcodeDaoTest {
             name = "Test Barcode",
             value = value,
         )
+    }
+
+    private fun runTestWithTimeout(
+        testBody: suspend TestScope.() -> Unit,
+    ) {
+        runTest(
+            context = testCoroutineDispatcher,
+            timeout = 3.seconds,
+        ) {
+            testBody()
+        }
     }
 }

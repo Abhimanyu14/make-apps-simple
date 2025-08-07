@@ -33,6 +33,7 @@ internal class NavigationKitTest {
     private val testCoroutineScope = CoroutineScope(
         context = testCoroutineDispatcher,
     )
+
     private lateinit var uriEncoder: UriEncoder
     private lateinit var navigationKit: NavigationKit
 

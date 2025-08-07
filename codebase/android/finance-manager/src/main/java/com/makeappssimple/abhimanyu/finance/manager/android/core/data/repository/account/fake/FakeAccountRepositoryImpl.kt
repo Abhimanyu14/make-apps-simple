@@ -69,7 +69,7 @@ public class FakeAccountRepositoryImpl : AccountRepository {
         return false
     }
 
-    override suspend fun deleteAccount(
+    override suspend fun deleteAccountById(
         id: Int,
     ): Boolean {
         return false

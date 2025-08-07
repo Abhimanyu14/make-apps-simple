@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.model
 
 import androidx.room.ColumnInfo
@@ -22,6 +24,7 @@ import androidx.room.PrimaryKey
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

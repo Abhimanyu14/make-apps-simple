@@ -122,11 +122,11 @@ internal class AccountRepositoryImpl(
         }
     }
 
-    override suspend fun deleteAccount(
+    override suspend fun deleteAccountById(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.deleteAccount(
+            accountDao.deleteAccountById(
                 id = id,
             ) == 1
         }

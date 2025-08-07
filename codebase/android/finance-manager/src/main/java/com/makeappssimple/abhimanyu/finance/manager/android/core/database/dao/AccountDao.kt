@@ -27,14 +27,18 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 public interface AccountDao {
-    @Query(value = "SELECT * from account_table ORDER BY id ASC")
-    public fun getAllAccountsFlow(): Flow<List<AccountEntity>>
+    @Query(value = "DELETE FROM account_table WHERE id = :id")
+    public suspend fun deleteAccountById(
+        id: Int,
+    ): Int
 
-    @Query(value = "SELECT * from account_table ORDER BY id ASC")
-    public suspend fun getAllAccounts(): List<AccountEntity>
+    @Delete
+    public suspend fun deleteAccounts(
+        vararg accounts: AccountEntity,
+    ): Int
 
-    @Query(value = "SELECT COUNT(*) FROM account_table")
-    public suspend fun getAllAccountsCount(): Int
+    @Query(value = "DELETE FROM account_table")
+    public suspend fun deleteAllAccounts(): Int
 
     @Query(value = "SELECT * from account_table WHERE id = :id")
     public suspend fun getAccount(
@@ -46,6 +50,15 @@ public interface AccountDao {
         ids: List<Int>,
     ): List<AccountEntity>
 
+    @Query(value = "SELECT * from account_table ORDER BY id ASC")
+    public suspend fun getAllAccounts(): List<AccountEntity>
+
+    @Query(value = "SELECT COUNT(*) FROM account_table")
+    public suspend fun getAllAccountsCount(): Int
+
+    @Query(value = "SELECT * from account_table ORDER BY id ASC")
+    public fun getAllAccountsFlow(): Flow<List<AccountEntity>>
+
     // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     public suspend fun insertAccounts(
@@ -56,17 +69,4 @@ public interface AccountDao {
     public suspend fun updateAccounts(
         vararg accounts: AccountEntity,
     ): Int
-
-    @Query(value = "DELETE FROM account_table WHERE id = :id")
-    public suspend fun deleteAccount(
-        id: Int,
-    ): Int
-
-    @Delete
-    public suspend fun deleteAccounts(
-        vararg accounts: AccountEntity,
-    ): Int
-
-    @Query(value = "DELETE FROM account_table")
-    public suspend fun deleteAllAccounts(): Int
 }

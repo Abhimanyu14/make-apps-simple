@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 
-public class DeleteAccountUseCase(
+public class DeleteAccountByIdUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val accountRepository: AccountRepository,
 ) {
@@ -27,7 +27,7 @@ public class DeleteAccountUseCase(
         id: Int,
     ): Boolean {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-        return accountRepository.deleteAccount(
+        return accountRepository.deleteAccountById(
             id = id,
         )
     }
