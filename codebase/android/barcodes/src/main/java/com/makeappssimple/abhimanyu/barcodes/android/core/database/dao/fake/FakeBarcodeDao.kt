@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake
 
 import androidx.annotation.VisibleForTesting
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.BarcodeEntity
 import kotlinx.coroutines.flow.flow
 
 internal class FakeBarcodeDao : BarcodeDao {

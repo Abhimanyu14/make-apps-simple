@@ -14,37 +14,37 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.extensions
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-internal class IntExtensionTest {
+internal class AnyExtensionTest {
     @Test
-    fun isNotZero_returnsTrueForNonZero() {
-        val value = 42
-        
-        assertThat(value.isNotZero()).isTrue()
+    fun isNull_returnsTrueForNull() {
+        val value: Any? = null
+
+        assertThat(value.isNull()).isTrue()
     }
 
     @Test
-    fun isNotZero_returnsFalseForZero() {
-        val value = 0
+    fun isNull_returnsFalseForNonNull() {
+        val value: Any? = "not null"
 
-        assertThat(value.isNotZero()).isFalse()
+        assertThat(value.isNull()).isFalse()
     }
 
     @Test
-    fun orZero_returnsZeroForNull() {
-        val value: Int? = null
+    fun isNotNull_returnsTrueForNonNull() {
+        val value: Any? = 123
 
-        assertThat(value.orZero()).isEqualTo(0)
+        assertThat(value.isNotNull()).isTrue()
     }
 
     @Test
-    fun orZero_returnsValueForNonNull() {
-        val value: Int? = 7
+    fun isNotNull_returnsFalseForNull() {
+        val value: Any? = null
 
-        assertThat(value.orZero()).isEqualTo(7)
+        assertThat(value.isNotNull()).isFalse()
     }
 }

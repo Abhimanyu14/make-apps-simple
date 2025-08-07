@@ -14,37 +14,25 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.common.extensions
+package com.makeappssimple.abhimanyu.common.core.uri_decoder
 
+import android.net.Uri
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-internal class AnyExtensionTest {
+internal class UriDecoderTest {
     @Test
-    fun isNull_returnsTrueForNull() {
-        val value: Any? = null
+    fun decodeTest() {
+        val decoder = UriDecoderImpl(
+            uriDecode = { string ->
+                Uri.decode(string)
+            },
+        )
 
-        assertThat(value.isNull()).isTrue()
-    }
+        val result = decoder.decode(
+            string = "\"hello\"",
+        )
 
-    @Test
-    fun isNull_returnsFalseForNonNull() {
-        val value: Any? = "not null"
-
-        assertThat(value.isNull()).isFalse()
-    }
-
-    @Test
-    fun isNotNull_returnsTrueForNonNull() {
-        val value: Any? = 123
-
-        assertThat(value.isNotNull()).isTrue()
-    }
-
-    @Test
-    fun isNotNull_returnsFalseForNull() {
-        val value: Any? = null
-
-        assertThat(value.isNotNull()).isFalse()
+        assertThat(result).isEqualTo("hello")
     }
 }

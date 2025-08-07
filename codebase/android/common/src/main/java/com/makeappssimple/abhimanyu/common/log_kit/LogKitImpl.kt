@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.common.uri_decoder
+package com.makeappssimple.abhimanyu.common.log_kit
 
-import android.net.Uri
-import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoderImpl
-import org.junit.Test
+import android.util.Log
+import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 
-internal class UriDecoderTest {
-    @Test
-    fun decodeTest() {
-        val decoder = UriDecoderImpl(
-            uriDecode = { string ->
-                Uri.decode(string)
-            },
-        )
-
-        val result = decoder.decode(
-            string = "\"hello\"",
-        )
-
-        assertThat(result).isEqualTo("hello")
+internal class LogKitImpl(
+    private val buildConfigKit: BuildConfigKit,
+    private val logErrorMessage: (String, String) -> Unit = { tag, message ->
+        Log.e(tag, message)
+    },
+) : LogKit {
+    override fun logError(
+        message: String,
+        tag: String,
+    ) {
+        if (buildConfigKit.isDebugBuild()) {
+            logErrorMessage(tag, message)
+        }
     }
 }

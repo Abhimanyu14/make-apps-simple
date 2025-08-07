@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.common.build_config
+package com.makeappssimple.abhimanyu.common.core.build_config
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.alarm
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.makeappssimple.abhimanyu.common.logger.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.common.di
 
 import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
-import com.makeappssimple.abhimanyu.common.logger.LogKit
-import com.makeappssimple.abhimanyu.common.logger.LogKitImpl
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

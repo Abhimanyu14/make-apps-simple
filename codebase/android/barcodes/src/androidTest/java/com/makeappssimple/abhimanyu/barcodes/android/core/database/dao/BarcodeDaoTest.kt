@@ -22,7 +22,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.BarcodesRoomDatabase
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.BarcodeEntity
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first

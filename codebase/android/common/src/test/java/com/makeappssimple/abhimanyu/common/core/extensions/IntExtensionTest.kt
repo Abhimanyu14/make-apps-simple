@@ -14,26 +14,37 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.common.uri_encoder
+package com.makeappssimple.abhimanyu.common.core.extensions
 
-import android.net.Uri
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
 import org.junit.Test
 
-internal class UriEncoderTest {
+internal class IntExtensionTest {
     @Test
-    fun encodeTest() {
-        val encoder = UriEncoderImpl(
-            uriEncode = { string ->
-                Uri.encode(string)
-            },
-        )
+    fun isNotZero_returnsTrueForNonZero() {
+        val value = 42
 
-        val result = encoder.encode(
-            string = "hello",
-        )
+        assertThat(value.isNotZero()).isTrue()
+    }
 
-        assertThat(result).isEqualTo("\"hello\"")
+    @Test
+    fun isNotZero_returnsFalseForZero() {
+        val value = 0
+
+        assertThat(value.isNotZero()).isFalse()
+    }
+
+    @Test
+    fun orZero_returnsZeroForNull() {
+        val value: Int? = null
+
+        assertThat(value.orZero()).isEqualTo(0)
+    }
+
+    @Test
+    fun orZero_returnsValueForNonNull() {
+        val value: Int? = 7
+
+        assertThat(value.orZero()).isEqualTo(7)
     }
 }

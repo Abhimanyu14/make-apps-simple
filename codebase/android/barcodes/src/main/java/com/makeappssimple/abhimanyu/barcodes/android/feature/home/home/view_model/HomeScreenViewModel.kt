@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.Hom
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
-import com.makeappssimple.abhimanyu.common.logger.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow

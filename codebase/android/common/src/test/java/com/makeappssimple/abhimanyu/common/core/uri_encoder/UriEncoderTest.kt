@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.logger
+package com.makeappssimple.abhimanyu.common.core.uri_encoder
 
-private const val DEFAULT_LOGGER_TAG = "Abhi"
+import android.net.Uri
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
 
-public interface LogKit {
-    public fun logError(
-        message: String,
-        tag: String = DEFAULT_LOGGER_TAG,
-    )
+internal class UriEncoderTest {
+    @Test
+    fun encodeTest() {
+        val encoder = UriEncoderImpl(
+            uriEncode = { string ->
+                Uri.encode(string)
+            },
+        )
+
+        val result = encoder.encode(
+            string = "hello",
+        )
+
+        assertThat(result).isEqualTo("\"hello\"")
+    }
 }

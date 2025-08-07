@@ -26,9 +26,9 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import com.makeappssimple.abhimanyu.barcodes.android.R
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
@@ -44,7 +44,7 @@ internal class BarcodeDetailsScreenUITest {
         barcodeName = testBarcodeName,
         barcodeValue = testBarcodeValue,
         formattedTimestamp = formattedTimestamp,
-        formattedTimestampLabelId = R.string.screen_barcode_details_barcode_timestamp_created,
+        formattedTimestampLabelId = R.string.barcodes_screen_barcode_details_barcode_timestamp_created,
         barcodeImageBitmap = createRandomBitmap(),
     )
 

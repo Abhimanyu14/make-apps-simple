@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.constants.Dat
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.converters.BarcodeFormatConverter
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.BarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.migrations.manualDatabaseMigrations
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.BarcodeEntity
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.BarcodeEntity
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 
 @Database(

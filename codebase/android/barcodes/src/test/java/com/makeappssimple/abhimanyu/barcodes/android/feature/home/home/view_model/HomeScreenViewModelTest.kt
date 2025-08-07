@@ -21,7 +21,7 @@ import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepositoryImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
@@ -31,7 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcher
 import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
-import com.makeappssimple.abhimanyu.common.logger.fake.FakeLogKitImpl
+import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope

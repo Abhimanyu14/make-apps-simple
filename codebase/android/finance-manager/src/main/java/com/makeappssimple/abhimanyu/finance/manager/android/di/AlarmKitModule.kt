@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.common.logger.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit

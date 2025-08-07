@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.database.model
+package com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
