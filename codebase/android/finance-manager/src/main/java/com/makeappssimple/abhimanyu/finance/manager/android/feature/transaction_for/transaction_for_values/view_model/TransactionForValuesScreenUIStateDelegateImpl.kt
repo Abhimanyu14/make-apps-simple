@@ -78,8 +78,7 @@ internal class TransactionForValuesScreenUIStateDelegateImpl(
     // endregion
 
     // region state events
-    override fun deleteTransactionFor(
-    ) {
+    override fun deleteTransactionFor() {
         coroutineScope.launch {
             transactionForIdToDelete.value?.let { id ->
                 val isTransactionForDeleted = deleteTransactionForUseCase(
