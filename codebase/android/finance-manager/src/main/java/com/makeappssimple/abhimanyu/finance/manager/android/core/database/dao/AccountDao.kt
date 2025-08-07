@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -30,11 +29,6 @@ public interface AccountDao {
     @Query(value = "DELETE FROM account_table WHERE id = :id")
     public suspend fun deleteAccountById(
         id: Int,
-    ): Int
-
-    @Delete
-    public suspend fun deleteAccounts(
-        vararg accounts: AccountEntity,
     ): Int
 
     @Query(value = "DELETE FROM account_table")

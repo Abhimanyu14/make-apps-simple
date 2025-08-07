@@ -26,7 +26,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
@@ -93,17 +92,6 @@ public class DataUseCaseModule {
         accountRepository: AccountRepository,
     ): DeleteAccountByIdUseCase {
         return DeleteAccountByIdUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-            accountRepository = accountRepository,
-        )
-    }
-
-    @Single
-    internal fun providesDeleteAccountsUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
-        accountRepository: AccountRepository,
-    ): DeleteAccountsUseCase {
-        return DeleteAccountsUseCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
         )

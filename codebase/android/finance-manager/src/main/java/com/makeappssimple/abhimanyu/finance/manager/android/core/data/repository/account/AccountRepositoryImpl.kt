@@ -131,16 +131,4 @@ internal class AccountRepositoryImpl(
             ) == 1
         }
     }
-
-    override suspend fun deleteAccounts(
-        vararg accounts: Account,
-    ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.deleteAccounts(
-                accounts = accounts.map(
-                    transform = Account::asEntity,
-                ).toTypedArray(),
-            ) == accounts.size
-        }
-    }
 }

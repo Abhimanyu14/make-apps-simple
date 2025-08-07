@@ -103,34 +103,6 @@ internal class AccountDaoTest {
         }
 
     @Test
-    fun deleteAccounts() = runTestWithTimeout {
-        val accountEntity1 = getAccountEntity(
-            id = 1,
-        )
-        val accountEntity2 = getAccountEntity(
-            id = 2,
-        )
-        val accountEntity3 = getAccountEntity(
-            id = 3,
-        )
-        accountDao.insertAccounts(
-            accountEntity1,
-            accountEntity2,
-            accountEntity3,
-        )
-
-        val count = accountDao.deleteAccounts(
-            accountEntity1,
-            accountEntity3,
-        )
-        val allAccounts = accountDao.getAllAccounts()
-
-        assertThat(count).isEqualTo(2)
-        assertThat(allAccounts.size).isEqualTo(1)
-        assertThat(allAccounts.first()).isEqualTo(accountEntity2)
-    }
-
-    @Test
     fun deleteAllAccounts() = runTestWithTimeout {
         accountDao.insertAccounts(
             getAccountEntity(
