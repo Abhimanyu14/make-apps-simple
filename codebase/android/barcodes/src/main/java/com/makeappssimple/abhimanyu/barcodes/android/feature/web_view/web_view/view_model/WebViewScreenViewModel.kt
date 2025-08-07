@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.web_view.web_view.s
 import com.makeappssimple.abhimanyu.barcodes.android.feature.web_view.web_view.state.WebViewScreenUIStateEvents
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

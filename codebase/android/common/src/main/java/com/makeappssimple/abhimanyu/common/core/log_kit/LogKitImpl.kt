@@ -14,13 +14,23 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.log_kit
+package com.makeappssimple.abhimanyu.common.core.log_kit
 
-private const val DEFAULT_LOGGER_TAG = "Abhi"
+import android.util.Log
+import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 
-public interface LogKit {
-    public fun logError(
+internal class LogKitImpl(
+    private val buildConfigKit: BuildConfigKit,
+    private val logErrorMessage: (String, String) -> Unit = { tag, message ->
+        Log.e(tag, message)
+    },
+) : LogKit {
+    override fun logError(
         message: String,
-        tag: String = DEFAULT_LOGGER_TAG,
-    )
+        tag: String,
+    ) {
+        if (buildConfigKit.isDebugBuild()) {
+            logErrorMessage(tag, message)
+        }
+    }
 }

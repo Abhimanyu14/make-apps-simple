@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.app.AppKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.notification.NotificationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.notification.NotificationKitImpl

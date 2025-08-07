@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.log_kit.fake
+package com.makeappssimple.abhimanyu.common.core.log_kit.fake
 
 import androidx.annotation.VisibleForTesting
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 
 public class FakeLogKitImpl : LogKit {
     // Pair<message, tag>

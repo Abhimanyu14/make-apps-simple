@@ -31,7 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcher
 import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
-import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
+import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
