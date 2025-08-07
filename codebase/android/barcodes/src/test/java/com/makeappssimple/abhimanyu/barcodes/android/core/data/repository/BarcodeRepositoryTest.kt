@@ -25,11 +25,16 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcher
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import kotlin.time.Duration.Companion.seconds
 
 internal class BarcodeRepositoryTest {
+    private val testCoroutineDispatcher = StandardTestDispatcher()
+
     private lateinit var fakeBarcodeDao: FakeBarcodeDao
     private lateinit var barcodeRepository: BarcodeRepository
     private lateinit var dispatcherProvider: DispatcherProvider
@@ -47,7 +52,7 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun insertBarcodes_insertsAndReturnsIds() = runTest {
+    fun insertBarcodes_insertsAndReturnsIds() = runTestWithTimeout {
         val barcode = getBarcode(
             id = 1,
         )
@@ -64,7 +69,7 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun getAllBarcodesFlow_returnsAllBarcodes() = runTest {
+    fun getAllBarcodesFlow_returnsAllBarcodes() = runTestWithTimeout {
         val barcode1 = getBarcode(
             id = 1,
         )
@@ -84,7 +89,7 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun getBarcodeById_returnsCorrectBarcode() = runTest {
+    fun getBarcodeById_returnsCorrectBarcode() = runTestWithTimeout {
         val barcode = getBarcode(
             id = 1,
         )
@@ -100,7 +105,7 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun updateBarcodes_updatesExistingBarcode() = runTest {
+    fun updateBarcodes_updatesExistingBarcode() = runTestWithTimeout {
         val barcode = getBarcode(
             id = 1,
             value = "old",
@@ -124,7 +129,7 @@ internal class BarcodeRepositoryTest {
     }
 
     @Test
-    fun deleteBarcodes_deletesBarcode() = runTest {
+    fun deleteBarcodes_deletesBarcode() = runTestWithTimeout {
         val barcode = getBarcode(
             id = 1,
         )
@@ -155,5 +160,16 @@ internal class BarcodeRepositoryTest {
             source = BarcodeSource.SCANNED,
             timestamp = System.currentTimeMillis(),
         )
+    }
+
+    private fun runTestWithTimeout(
+        testBody: suspend TestScope.() -> Unit,
+    ) {
+        runTest(
+            context = testCoroutineDispatcher,
+            timeout = 3.seconds,
+        ) {
+            testBody()
+        }
     }
 }
