@@ -23,6 +23,7 @@ plugins {
     alias(libs.plugins.plugin.kotlin.serialization)
     alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp)
+    alias(libs.plugins.plugin.room)
     alias(libs.plugins.plugin.screenshot)
 }
 
@@ -59,19 +60,18 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Room schema
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas".toString())
-            }
-        }
-
         // Generate native debug symbols to allow Google Play to symbolicate our native crashes
         ndk.debugSymbolLevel = "FULL"
     }
 
     kotlinOptions {
         jvmTarget = "17"
+
+        // Room schema for testing
+        sourceSets {
+            // Adds exported schema location as test app assets.
+            getByName("androidTest").assets.srcDir("$projectDir/schemas")
+        }
     }
 
     lint {
@@ -169,7 +169,8 @@ ksp {
     // Koin
     arg("KOIN_CONFIG_CHECK", "true")
     arg("KOIN_DEFAULT_MODULE", "false")
+}
 
-    // Room
-    arg("room.schemaLocation", "$projectDir/schemas")
+room {
+    schemaDirectory("$projectDir/schemas")
 }
