@@ -63,7 +63,6 @@ internal class CategoriesScreenUIEventHandler internal constructor(
             is CategoriesScreenUIEvent.OnCategoriesSetAsDefaultConfirmationBottomSheet.PositiveButtonClick -> {
                 uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.updateDefaultCategoryIdInDataStore(uiEvent.selectedTabIndex)
-                uiStateEvents.updateClickedItemId(null)
             }
 
             is CategoriesScreenUIEvent.OnCategoryMenuBottomSheet.DeleteButtonClick -> {

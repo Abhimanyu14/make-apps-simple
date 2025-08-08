@@ -106,9 +106,9 @@ internal class CategoriesScreenUIStateDelegateImpl(
         selectedTabIndex: Int,
     ) {
         coroutineScope.launch {
-            clickedItemId?.let { clickedItemId ->
+            clickedItemId?.let {
                 val isSetDefaultCategorySuccessful = setDefaultCategoryUseCase(
-                    defaultCategoryId = clickedItemId,
+                    defaultCategoryId = it,
                     transactionType = validTransactionTypes[selectedTabIndex],
                 )
                 if (isSetDefaultCategorySuccessful) {
@@ -119,7 +119,10 @@ internal class CategoriesScreenUIStateDelegateImpl(
                     updateScreenSnackbarType(
                         updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategoryFailed,
                     )
+                    clickedItemId = null
                 }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
             }
         }
     }
