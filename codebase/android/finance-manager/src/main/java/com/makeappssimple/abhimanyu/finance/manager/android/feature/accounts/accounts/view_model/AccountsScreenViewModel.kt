@@ -47,11 +47,11 @@ import org.koin.android.annotation.KoinViewModel
 internal class AccountsScreenViewModel(
     coroutineScope: CoroutineScope,
     private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
     private val getAccountsTotalMinimumBalanceAmountValueUseCase: GetAccountsTotalMinimumBalanceAmountValueUseCase,
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
     private val getAllAccountsListItemDataListUseCase: GetAllAccountsListItemDataListUseCase,
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getDefaultAccountIdFlowUseCase: GetDefaultAccountIdFlowUseCase,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,

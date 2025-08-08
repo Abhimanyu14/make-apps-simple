@@ -37,8 +37,8 @@ public class AlarmKitModule {
         return AlarmKitImpl(
             context = context,
             dateTimeKit = dateTimeKit,
-            logKit = logKit,
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+            logKit = logKit,
         )
     }
 }

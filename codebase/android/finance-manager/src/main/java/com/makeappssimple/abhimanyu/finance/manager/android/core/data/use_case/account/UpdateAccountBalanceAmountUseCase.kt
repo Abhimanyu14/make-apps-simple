@@ -21,8 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import kotlinx.collections.immutable.ImmutableList
 
 public class UpdateAccountBalanceAmountUseCase(
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val accountRepository: AccountRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         accountsBalanceAmountChange: ImmutableList<Pair<Int, Long>>,

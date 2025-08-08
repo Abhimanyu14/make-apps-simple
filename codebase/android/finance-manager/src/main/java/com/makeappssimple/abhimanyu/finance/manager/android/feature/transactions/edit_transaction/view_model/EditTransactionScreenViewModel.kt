@@ -26,8 +26,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
@@ -78,13 +78,13 @@ internal class EditTransactionScreenViewModel(
     uriDecoder: UriDecoder,
     private val dateTimeKit: DateTimeKit,
     private val editTransactionScreenDataValidationUseCase: EditTransactionScreenDataValidationUseCase,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTitleSuggestionsUseCase: GetTitleSuggestionsUseCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val getMaxRefundAmountUseCase: GetMaxRefundAmountUseCase,
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val navigationKit: NavigationKit,
     private val updateAccountBalanceAmountUseCase: UpdateAccountBalanceAmountUseCase,
     private val updateTransactionUseCase: UpdateTransactionUseCase,

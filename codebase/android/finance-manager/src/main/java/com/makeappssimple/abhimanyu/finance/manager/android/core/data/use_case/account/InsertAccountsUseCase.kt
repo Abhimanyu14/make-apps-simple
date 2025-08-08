@@ -22,8 +22,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import kotlinx.collections.immutable.ImmutableList
 
 public class InsertAccountsUseCase(
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val accountRepository: AccountRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         vararg accounts: Account,

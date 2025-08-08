@@ -64,8 +64,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetSearchedTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTitleSuggestionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataMappedByCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataMappedByCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionUseCase
@@ -88,12 +88,12 @@ public class DataUseCaseModule {
     // region account
     @Single
     internal fun providesDeleteAccountUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     ): DeleteAccountByIdUseCase {
         return DeleteAccountByIdUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     }
 
@@ -164,45 +164,45 @@ public class DataUseCaseModule {
 
     @Single
     internal fun providesInsertAccountsUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     ): InsertAccountsUseCase {
         return InsertAccountsUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     }
 
     @Single
     internal fun providesInsertAccountUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     ): InsertAccountUseCase {
         return InsertAccountUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     }
 
     @Single
     internal fun providesUpdateAccountBalanceAmountUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     ): UpdateAccountBalanceAmountUseCase {
         return UpdateAccountBalanceAmountUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     }
 
     @Single
     internal fun providesUpdateAccountsUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         accountRepository: AccountRepository,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     ): UpdateAccountsUseCase {
         return UpdateAccountsUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             accountRepository = accountRepository,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     }
 

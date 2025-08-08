@@ -33,8 +33,8 @@ import java.time.LocalTime
 public class AlarmKitImpl(
     private val context: Context,
     private val dateTimeKit: DateTimeKit,
-    private val logKit: LogKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+    private val logKit: LogKit,
 ) : AlarmKit {
     override suspend fun cancelReminderAlarm(): Boolean {
         var isAlarmCancelled = cancelAlarm()

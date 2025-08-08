@@ -21,8 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 
 public class UpdateAccountsUseCase(
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val accountRepository: AccountRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         vararg accounts: Account,
