@@ -41,9 +41,18 @@ internal class AccountsScreenUIStateDelegateImpl(
     override fun deleteAccount() {
         coroutineScope.launch {
             clickedItemId?.let { id ->
-                deleteAccountByIdUseCase(
+                val isAccountDeleted = deleteAccountByIdUseCase(
                     id = id,
                 )
+                if (isAccountDeleted) {
+                    updateClickedItemId(
+                        updatedClickedItemId = null,
+                    )
+                } else {
+                    // TODO(Abhi): Handle this error scenario
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
             }
         }
     }

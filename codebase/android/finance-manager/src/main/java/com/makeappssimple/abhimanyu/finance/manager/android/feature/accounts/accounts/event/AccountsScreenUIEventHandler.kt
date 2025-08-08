@@ -33,9 +33,8 @@ internal class AccountsScreenUIEventHandler internal constructor(
             }
 
             is AccountsScreenUIEvent.OnAccountsDeleteConfirmationBottomSheet.PositiveButtonClick -> {
-                uiStateEvents.deleteAccount()
-                uiStateEvents.updateClickedItemId(null)
                 uiStateEvents.resetScreenBottomSheetType()
+                uiStateEvents.deleteAccount()
             }
 
             is AccountsScreenUIEvent.OnAccountsMenuBottomSheet.DeleteButtonClick -> {
@@ -61,9 +60,9 @@ internal class AccountsScreenUIEventHandler internal constructor(
             }
 
             is AccountsScreenUIEvent.OnAccountsSetAsDefaultConfirmationBottomSheet.PositiveButtonClick -> {
+                uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.updateDefaultAccountIdInDataStore()
                 uiStateEvents.updateClickedItemId(null)
-                uiStateEvents.resetScreenBottomSheetType()
             }
 
             is AccountsScreenUIEvent.OnAccountsListItemContent.Click -> {
