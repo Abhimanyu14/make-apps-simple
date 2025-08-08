@@ -30,11 +30,21 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 public interface TransactionForDao {
     /**
-     * Get all transaction for values as a Flow.
-     * @return Flow emitting the list of all transaction for values ordered by [TransactionForEntity.id]
+     * Delete all transaction for values from the table.
+     * @return Number of rows deleted
      */
-    @Query(value = "SELECT * from transaction_for_table ORDER BY id ASC")
-    public fun getAllTransactionForValuesFlow(): Flow<List<TransactionForEntity>>
+    @Query(value = "DELETE FROM transaction_for_table")
+    public suspend fun deleteAllTransactionForValues(): Int
+
+    /**
+     * Delete a transaction for value by id.
+     * @param id Required transaction for id
+     * @return Number of rows deleted (0 or 1)
+     */
+    @Query(value = "DELETE FROM transaction_for_table WHERE id = :id")
+    public suspend fun deleteTransactionFor(
+        id: Int,
+    ): Int
 
     /**
      * Get all transaction for values as a list.
@@ -44,11 +54,11 @@ public interface TransactionForDao {
     public suspend fun getAllTransactionForValues(): List<TransactionForEntity>
 
     /**
-     * Get the count of all transaction for values.
-     * @return Number of transaction for values in the table
+     * Get all transaction for values as a Flow.
+     * @return Flow emitting the list of all transaction for values ordered by [TransactionForEntity.id]
      */
-    @Query(value = "SELECT COUNT(*) FROM transaction_for_table")
-    public suspend fun getTransactionForValuesCount(): Int
+    @Query(value = "SELECT * from transaction_for_table ORDER BY id ASC")
+    public fun getAllTransactionForValuesFlow(): Flow<List<TransactionForEntity>>
 
     /**
      * Get a transaction for value by id.
@@ -59,6 +69,13 @@ public interface TransactionForDao {
     public suspend fun getTransactionFor(
         id: Int,
     ): TransactionForEntity?
+
+    /**
+     * Get the count of all transaction for values.
+     * @return Number of transaction for values in the table
+     */
+    @Query(value = "SELECT COUNT(*) FROM transaction_for_table")
+    public suspend fun getTransactionForValuesCount(): Int
 
     /**
      * Insert transaction for values into the table.
@@ -81,21 +98,4 @@ public interface TransactionForDao {
     public suspend fun updateTransactionForValues(
         vararg transactionForValues: TransactionForEntity,
     ): Int
-
-    /**
-     * Delete a transaction for value by id.
-     * @param id Required transaction for id
-     * @return Number of rows deleted (0 or 1)
-     */
-    @Query(value = "DELETE FROM transaction_for_table WHERE id = :id")
-    public suspend fun deleteTransactionFor(
-        id: Int,
-    ): Int
-
-    /**
-     * Delete all transaction for values from the table.
-     * @return Number of rows deleted
-     */
-    @Query(value = "DELETE FROM transaction_for_table")
-    public suspend fun deleteAllTransactionForValues(): Int
 }

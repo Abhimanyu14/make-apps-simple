@@ -31,34 +31,63 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 public interface TransactionDao {
     /**
-     * Get all transactions as a Flow, ordered by timestamp descending.
-     * @return Flow emitting the list of all transactions
+     * Check if an account is used in any transactions.
+     * @param accountId ID of the account to check
+     * @return true if the account is used in any transactions as source or destination, false otherwise
      */
     @Query(
-        value = "SELECT * from transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
+                "WHERE account_from_id = :accountId OR account_to_id = :accountId)"
     )
-    public fun getAllTransactionsFlow(): Flow<List<TransactionEntity>>
+    public suspend fun checkIfAccountIsUsedInTransactions(
+        accountId: Int,
+    ): Boolean
 
     /**
-     * Get all transactions as a list, ordered by timestamp descending.
-     * @return List of all transactions
+     * Check if a category is used in any transactions.
+     * @param categoryId ID of the category to check
+     * @return true if the category is used in any transactions, false otherwise
      */
     @Query(
-        value = "SELECT * from transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
+                "WHERE category_id = :categoryId)"
     )
-    public suspend fun getAllTransactions(): List<TransactionEntity>
+    public suspend fun checkIfCategoryIsUsedInTransactions(
+        categoryId: Int,
+    ): Boolean
 
     /**
-     * Get all transaction data as a Flow, ordered by timestamp descending.
-     * @return Flow emitting the list of all transaction data
+     * Check if a transaction for value is used in any transactions.
+     * @param transactionForId ID of the transaction for value to check
+     * @return true if the transaction for value is used in any transactions, false otherwise
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
+                "WHERE transaction_for_id = :transactionForId)"
     )
-    public fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
+    public suspend fun checkIfTransactionForIsUsedInTransactions(
+        transactionForId: Int,
+    ): Boolean
+
+    /**
+     * Delete all transactions from the table.
+     * @return Number of rows deleted
+     */
+    @Query(value = "DELETE FROM transaction_table")
+    public suspend fun deleteAllTransactions(): Int
+
+    /**
+     * Delete a transaction by id.
+     * @param id Required transaction id
+     * @return Number of rows deleted (0 or 1)
+     */
+    @Query(
+        value = "DELETE FROM transaction_table " +
+                "WHERE id = :id"
+    )
+    public suspend fun deleteTransaction(
+        id: Int,
+    ): Int
 
     /**
      * Get all transaction data as a list, ordered by timestamp descending.
@@ -71,51 +100,34 @@ public interface TransactionDao {
     public suspend fun getAllTransactionData(): List<TransactionDataEntity>
 
     /**
-     * TODO(Abhi): To search amount properly, JSON1 extension is required which is not available in Android.
-     * For more info - https://stackoverflow.com/a/65104396/9636037
-     *
-     * The current code is a hacky solution, which does a simple text search of the JSON string.
+     * Get all transaction data as a Flow, ordered by timestamp descending.
+     * @return Flow emitting the list of all transaction data
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
-                "WHERE instr(lower(title), lower(:searchText)) > 0 OR instr(lower(amount), lower(:searchText)) > 0 " +
                 "ORDER BY transaction_timestamp DESC"
     )
-    public suspend fun getSearchedTransactionData(
-        searchText: String,
-    ): List<TransactionDataEntity>
+    public fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
 
     /**
-     * Get transactions between two timestamps as a Flow.
-     * @param startingTimestamp Start timestamp (inclusive)
-     * @param endingTimestamp End timestamp (inclusive)
-     * @return Flow emitting transactions between the given timestamps
+     * Get all transactions as a list, ordered by timestamp descending.
+     * @return List of all transactions
      */
     @Query(
         value = "SELECT * from transaction_table " +
-                "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
                 "ORDER BY transaction_timestamp DESC"
     )
-    public fun getTransactionsBetweenTimestampsFlow(
-        startingTimestamp: Long,
-        endingTimestamp: Long,
-    ): Flow<List<TransactionEntity>>
+    public suspend fun getAllTransactions(): List<TransactionEntity>
 
     /**
-     * Get transactions between two timestamps.
-     * @param startingTimestamp Start timestamp (inclusive)
-     * @param endingTimestamp End timestamp (inclusive)
-     * @return List of transactions between the given timestamps
+     * Get all transactions as a Flow, ordered by timestamp descending.
+     * @return Flow emitting the list of all transactions
      */
     @Query(
         value = "SELECT * from transaction_table " +
-                "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
                 "ORDER BY transaction_timestamp DESC"
     )
-    public suspend fun getTransactionsBetweenTimestamps(
-        startingTimestamp: Long,
-        endingTimestamp: Long,
-    ): List<TransactionEntity>
+    public fun getAllTransactionsFlow(): Flow<List<TransactionEntity>>
 
     /**
      * Get recent transaction data as a Flow.
@@ -132,11 +144,20 @@ public interface TransactionDao {
     ): Flow<List<TransactionDataEntity>>
 
     /**
-     * Get the count of all transactions.
-     * @return Number of transactions in the table
+     * Get searched transaction data.
+     * TODO(Abhi): To search amount properly, JSON1 extension is required which is not available in Android.
+     * For more info - https://stackoverflow.com/a/65104396/9636037
+     *
+     * The current code is a hacky solution, which does a simple text search of the JSON string.
      */
-    @Query(value = "SELECT COUNT(*) FROM transaction_table")
-    public suspend fun getTransactionsCount(): Int
+    @Query(
+        value = "SELECT * FROM transaction_table " +
+                "WHERE instr(lower(title), lower(:searchText)) > 0 OR instr(lower(amount), lower(:searchText)) > 0 " +
+                "ORDER BY transaction_timestamp DESC"
+    )
+    public suspend fun getSearchedTransactionData(
+        searchText: String,
+    ): List<TransactionDataEntity>
 
     /**
      * Get title suggestions for a category based on existing transactions.
@@ -158,45 +179,6 @@ public interface TransactionDao {
         numberOfSuggestions: Int,
         enteredTitle: String,
     ): List<String>
-
-    /**
-     * Check if a category is used in any transactions.
-     * @param categoryId ID of the category to check
-     * @return true if the category is used in any transactions, false otherwise
-     */
-    @Query(
-        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
-                "WHERE category_id = :categoryId)"
-    )
-    public suspend fun checkIfCategoryIsUsedInTransactions(
-        categoryId: Int,
-    ): Boolean
-
-    /**
-     * Check if an account is used in any transactions.
-     * @param accountId ID of the account to check
-     * @return true if the account is used in any transactions as source or destination, false otherwise
-     */
-    @Query(
-        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
-                "WHERE account_from_id = :accountId OR account_to_id = :accountId)"
-    )
-    public suspend fun checkIfAccountIsUsedInTransactions(
-        accountId: Int,
-    ): Boolean
-
-    /**
-     * Check if a transaction for value is used in any transactions.
-     * @param transactionForId ID of the transaction for value to check
-     * @return true if the transaction for value is used in any transactions, false otherwise
-     */
-    @Query(
-        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
-                "WHERE transaction_for_id = :transactionForId)"
-    )
-    public suspend fun checkIfTransactionForIsUsedInTransactions(
-        transactionForId: Int,
-    ): Boolean
 
     /**
      * Get a transaction by id.
@@ -225,6 +207,45 @@ public interface TransactionDao {
     ): TransactionDataEntity?
 
     /**
+     * Get transactions between two timestamps as a list.
+     * @param startingTimestamp Start timestamp (inclusive)
+     * @param endingTimestamp End timestamp (inclusive)
+     * @return List of transactions between the given timestamps
+     */
+    @Query(
+        value = "SELECT * from transaction_table " +
+                "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
+                "ORDER BY transaction_timestamp DESC"
+    )
+    public suspend fun getTransactionsBetweenTimestamps(
+        startingTimestamp: Long,
+        endingTimestamp: Long,
+    ): List<TransactionEntity>
+
+    /**
+     * Get transactions between two timestamps as a Flow.
+     * @param startingTimestamp Start timestamp (inclusive)
+     * @param endingTimestamp End timestamp (inclusive)
+     * @return Flow emitting transactions between the given timestamps
+     */
+    @Query(
+        value = "SELECT * from transaction_table " +
+                "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
+                "ORDER BY transaction_timestamp DESC"
+    )
+    public fun getTransactionsBetweenTimestampsFlow(
+        startingTimestamp: Long,
+        endingTimestamp: Long,
+    ): Flow<List<TransactionEntity>>
+
+    /**
+     * Get the count of all transactions.
+     * @return Number of transactions in the table
+     */
+    @Query(value = "SELECT COUNT(*) FROM transaction_table")
+    public suspend fun getTransactionsCount(): Int
+
+    /**
      * Insert transactions into the table.
      * @param transactions Transactions to insert
      * @return List of row ids for inserted transactions. -1 if a conflict occurred for that item.
@@ -234,13 +255,6 @@ public interface TransactionDao {
     public suspend fun insertTransactions(
         vararg transactions: TransactionEntity,
     ): List<Long>
-
-    /**
-     * Delete all transactions from the table.
-     * @return Number of rows deleted
-     */
-    @Query(value = "DELETE FROM transaction_table")
-    public suspend fun deleteAllTransactions(): Int
 
     /**
      * Insert a single transaction into the table.
@@ -273,18 +287,5 @@ public interface TransactionDao {
     @Update
     public suspend fun updateTransactions(
         vararg transactions: TransactionEntity,
-    ): Int
-
-    /**
-     * Delete a transaction by id.
-     * @param id Required transaction id
-     * @return Number of rows deleted (0 or 1)
-     */
-    @Query(
-        value = "DELETE FROM transaction_table " +
-                "WHERE id = :id"
-    )
-    public suspend fun deleteTransaction(
-        id: Int,
     ): Int
 }

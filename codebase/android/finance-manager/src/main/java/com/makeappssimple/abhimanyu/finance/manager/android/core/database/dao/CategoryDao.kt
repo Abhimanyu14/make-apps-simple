@@ -31,11 +31,31 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 public interface CategoryDao {
     /**
-     * Get all categories as a Flow.
-     * @return Flow emitting the list of all categories ordered by [CategoryEntity.id]
+     * Delete all categories from the table.
+     * @return Number of rows deleted
      */
-    @Query(value = "SELECT * from category_table ORDER BY id ASC")
-    public fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
+    @Query(value = "DELETE FROM category_table")
+    public suspend fun deleteAllCategories(): Int
+
+    /**
+     * Delete categories from the table.
+     * @param categories Categories to delete
+     * @return Number of rows deleted
+     */
+    @Delete
+    public suspend fun deleteCategories(
+        vararg categories: CategoryEntity,
+    ): Int
+
+    /**
+     * Delete a category by id.
+     * @param id Required category id
+     * @return Number of rows deleted
+     */
+    @Query(value = "DELETE FROM category_table WHERE id = :id")
+    public suspend fun deleteCategory(
+        id: Int,
+    ): Int
 
     /**
      * Get all categories as a list.
@@ -50,6 +70,13 @@ public interface CategoryDao {
      */
     @Query(value = "SELECT COUNT(*) FROM category_table")
     public suspend fun getAllCategoriesCount(): Int
+
+    /**
+     * Get all categories as a Flow.
+     * @return Flow emitting the list of all categories ordered by [CategoryEntity.id]
+     */
+    @Query(value = "SELECT * from category_table ORDER BY id ASC")
+    public fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
 
     /**
      * Get a category by id.
@@ -82,31 +109,4 @@ public interface CategoryDao {
     public suspend fun updateCategories(
         vararg categories: CategoryEntity,
     ): Int
-
-    /**
-     * Delete a category by id.
-     * @param id Required category id
-     * @return Number of rows deleted
-     */
-    @Query(value = "DELETE FROM category_table WHERE id = :id")
-    public suspend fun deleteCategory(
-        id: Int,
-    ): Int
-
-    /**
-     * Delete categories from the table.
-     * @param categories Categories to delete
-     * @return Number of rows deleted
-     */
-    @Delete
-    public suspend fun deleteCategories(
-        vararg categories: CategoryEntity,
-    ): Int
-
-    /**
-     * Delete all categories from the table.
-     * @return Number of rows deleted
-     */
-    @Query(value = "DELETE FROM category_table")
-    public suspend fun deleteAllCategories(): Int
 }
