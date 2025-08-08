@@ -80,17 +80,17 @@ internal class ViewTransactionScreenUIStateDelegateImpl(
 
     // region state events
     override fun deleteTransaction() {
-        val id = transactionIdToDelete ?: return
+        val id = transactionIdToDelete
+            ?: return // TODO(Abhi): Handle this error scenario
         coroutineScope.launch {
             startLoading()
             val isTransactionDeleted = deleteTransactionUseCase(
                 id = id,
             )
-            transactionIdToDelete = null
             resetScreenBottomSheetType()
             if (isTransactionDeleted) {
                 // TODO(Abhi): Show success message
-                // TODO(Abhi): Change to navigate up only if the current transaction is deleted
+                transactionIdToDelete = null
                 navigateUp()
             } else {
                 // TODO(Abhi): Show error message
