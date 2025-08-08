@@ -40,17 +40,17 @@ internal class CategoriesScreenUIEventHandler internal constructor(
             }
 
             is CategoriesScreenUIEvent.OnCategoriesGridItemClick -> {
-                uiEvent.categoryId?.let {
+                uiEvent.categoryId?.let { categoryId ->
                     if (uiEvent.isEditVisible || uiEvent.isSetAsDefaultVisible || uiEvent.isDeleteVisible) {
+                        uiStateEvents.updateClickedItemId(categoryId)
                         uiStateEvents.updateScreenBottomSheetType(
                             CategoriesScreenBottomSheetType.Menu(
                                 isDeleteVisible = uiEvent.isDeleteVisible,
                                 isEditVisible = uiEvent.isEditVisible,
                                 isSetAsDefaultVisible = uiEvent.isSetAsDefaultVisible,
-                                categoryId = uiEvent.categoryId,
+                                categoryId = categoryId,
                             )
                         )
-                        uiStateEvents.updateClickedItemId(uiEvent.categoryId)
                     }
                 }
             }

@@ -45,9 +45,7 @@ internal class AccountsScreenUIStateDelegateImpl(
                     id = id,
                 )
                 if (isAccountDeleted) {
-                    updateClickedItemId(
-                        updatedClickedItemId = null,
-                    )
+                    clickedItemId = null
                 } else {
                     // TODO(Abhi): Handle this error scenario
                 }
@@ -98,9 +96,7 @@ internal class AccountsScreenUIStateDelegateImpl(
                     )
                 if (isDefaultAccountUpdated) {
                     // TODO(Abhi): Show snackbar for user feedback
-                    updateClickedItemId(
-                        updatedClickedItemId = null,
-                    )
+                    clickedItemId = null
                 } else {
                     // TODO(Abhi): Handle this error scenario
                 }

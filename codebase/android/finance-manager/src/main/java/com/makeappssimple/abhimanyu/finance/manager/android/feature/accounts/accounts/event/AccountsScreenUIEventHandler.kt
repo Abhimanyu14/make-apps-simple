@@ -65,8 +65,8 @@ internal class AccountsScreenUIEventHandler internal constructor(
             }
 
             is AccountsScreenUIEvent.OnAccountsListItemContent.Click -> {
-                uiStateEvents.updateClickedItemId(uiEvent.accountId)
                 uiEvent.accountId?.let { accountId ->
+                    uiStateEvents.updateClickedItemId(accountId)
                     uiStateEvents.updateScreenBottomSheetType(
                         AccountsScreenBottomSheetType.Menu(
                             isDeleteVisible = uiEvent.isDeleteEnabled,
