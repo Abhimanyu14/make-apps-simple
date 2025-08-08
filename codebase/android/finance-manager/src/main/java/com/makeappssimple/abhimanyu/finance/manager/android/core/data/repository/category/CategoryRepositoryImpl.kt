@@ -32,11 +32,25 @@ internal class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao,
     private val dispatcherProvider: DispatcherProvider,
 ) : CategoryRepository {
-    override fun getAllCategoriesFlow(): Flow<ImmutableList<Category>> {
-        return categoryDao.getAllCategoriesFlow().map {
-            it.map(
-                transform = CategoryEntity::asExternalModel,
-            )
+    override suspend fun deleteCategories(
+        vararg categories: Category,
+    ): Boolean {
+        return dispatcherProvider.executeOnIoDispatcher {
+            categoryDao.deleteCategories(
+                categories = categories.map(
+                    transform = Category::asEntity,
+                ).toTypedArray(),
+            ) == categories.size
+        }
+    }
+
+    override suspend fun deleteCategoryById(
+        id: Int,
+    ): Boolean {
+        return dispatcherProvider.executeOnIoDispatcher {
+            categoryDao.deleteCategoryById(
+                id = id,
+            ) == 1
         }
     }
 
@@ -51,6 +65,14 @@ internal class CategoryRepositoryImpl(
     override suspend fun getAllCategoriesCount(): Int {
         return dispatcherProvider.executeOnIoDispatcher {
             categoryDao.getAllCategoriesCount()
+        }
+    }
+
+    override fun getAllCategoriesFlow(): Flow<ImmutableList<Category>> {
+        return categoryDao.getAllCategoriesFlow().map {
+            it.map(
+                transform = CategoryEntity::asExternalModel,
+            )
         }
     }
 
@@ -81,28 +103,6 @@ internal class CategoryRepositoryImpl(
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
             categoryDao.updateCategories(
-                categories = categories.map(
-                    transform = Category::asEntity,
-                ).toTypedArray(),
-            ) == categories.size
-        }
-    }
-
-    override suspend fun deleteCategoryById(
-        id: Int,
-    ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.deleteCategoryById(
-                id = id,
-            ) == 1
-        }
-    }
-
-    override suspend fun deleteCategories(
-        vararg categories: Category,
-    ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.deleteCategories(
                 categories = categories.map(
                     transform = Category::asEntity,
                 ).toTypedArray(),

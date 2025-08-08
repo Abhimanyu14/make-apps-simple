@@ -21,11 +21,9 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 public interface AccountRepository {
-    public fun getAllAccountsFlow(): Flow<ImmutableList<Account>>
-
-    public suspend fun getAllAccounts(): ImmutableList<Account>
-
-    public suspend fun getAllAccountsCount(): Int
+    public suspend fun deleteAccountById(
+        id: Int,
+    ): Boolean
 
     public suspend fun getAccountById(
         id: Int,
@@ -34,6 +32,12 @@ public interface AccountRepository {
     public suspend fun getAccounts(
         ids: ImmutableList<Int>,
     ): ImmutableList<Account>?
+
+    public suspend fun getAllAccounts(): ImmutableList<Account>
+
+    public suspend fun getAllAccountsCount(): Int
+
+    public fun getAllAccountsFlow(): Flow<ImmutableList<Account>>
 
     public suspend fun insertAccounts(
         vararg accounts: Account,
@@ -45,9 +49,5 @@ public interface AccountRepository {
 
     public suspend fun updateAccounts(
         vararg accounts: Account,
-    ): Boolean
-
-    public suspend fun deleteAccountById(
-        id: Int,
     ): Boolean
 }

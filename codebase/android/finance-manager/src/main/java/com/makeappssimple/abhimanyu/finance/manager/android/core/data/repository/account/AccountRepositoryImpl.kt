@@ -33,25 +33,13 @@ internal class AccountRepositoryImpl(
     private val accountDao: AccountDao,
     private val dispatcherProvider: DispatcherProvider,
 ) : AccountRepository {
-    override fun getAllAccountsFlow(): Flow<ImmutableList<Account>> {
-        return accountDao.getAllAccountsFlow().map {
-            it.map(
-                transform = AccountEntity::asExternalModel,
-            )
-        }
-    }
-
-    override suspend fun getAllAccounts(): ImmutableList<Account> {
+    override suspend fun deleteAccountById(
+        id: Int,
+    ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAllAccounts().map(
-                transform = AccountEntity::asExternalModel,
-            )
-        }
-    }
-
-    override suspend fun getAllAccountsCount(): Int {
-        return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAllAccountsCount()
+            accountDao.deleteAccountById(
+                id = id,
+            ) == 1
         }
     }
 
@@ -72,6 +60,28 @@ internal class AccountRepositoryImpl(
             accountDao.getAccounts(
                 ids = ids,
             ).map(
+                transform = AccountEntity::asExternalModel,
+            )
+        }
+    }
+
+    override suspend fun getAllAccounts(): ImmutableList<Account> {
+        return dispatcherProvider.executeOnIoDispatcher {
+            accountDao.getAllAccounts().map(
+                transform = AccountEntity::asExternalModel,
+            )
+        }
+    }
+
+    override suspend fun getAllAccountsCount(): Int {
+        return dispatcherProvider.executeOnIoDispatcher {
+            accountDao.getAllAccountsCount()
+        }
+    }
+
+    override fun getAllAccountsFlow(): Flow<ImmutableList<Account>> {
+        return accountDao.getAllAccountsFlow().map {
+            it.map(
                 transform = AccountEntity::asExternalModel,
             )
         }
@@ -119,16 +129,6 @@ internal class AccountRepositoryImpl(
                     transform = Account::asEntity,
                 ).toTypedArray(),
             ) == accounts.size
-        }
-    }
-
-    override suspend fun deleteAccountById(
-        id: Int,
-    ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.deleteAccountById(
-                id = id,
-            ) == 1
         }
     }
 }

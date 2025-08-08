@@ -21,9 +21,13 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 public interface TransactionForRepository {
-    public fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>>
+    public suspend fun deleteTransactionForById(
+        id: Int,
+    ): Boolean
 
     public suspend fun getAllTransactionForValues(): ImmutableList<TransactionFor>
+
+    public fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>>
 
     public suspend fun getTransactionForById(
         id: Int,
@@ -35,9 +39,5 @@ public interface TransactionForRepository {
 
     public suspend fun updateTransactionForValues(
         vararg transactionForValues: TransactionFor,
-    ): Boolean
-
-    public suspend fun deleteTransactionForById(
-        id: Int,
     ): Boolean
 }

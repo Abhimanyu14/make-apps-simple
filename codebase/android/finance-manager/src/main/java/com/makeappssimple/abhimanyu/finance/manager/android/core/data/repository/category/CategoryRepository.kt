@@ -21,11 +21,19 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 public interface CategoryRepository {
-    public fun getAllCategoriesFlow(): Flow<ImmutableList<Category>>
+    public suspend fun deleteCategories(
+        vararg categories: Category,
+    ): Boolean
+
+    public suspend fun deleteCategoryById(
+        id: Int,
+    ): Boolean
 
     public suspend fun getAllCategories(): ImmutableList<Category>
 
     public suspend fun getAllCategoriesCount(): Int
+
+    public fun getAllCategoriesFlow(): Flow<ImmutableList<Category>>
 
     public suspend fun getCategoryById(
         id: Int,
@@ -36,14 +44,6 @@ public interface CategoryRepository {
     ): ImmutableList<Long>
 
     public suspend fun updateCategories(
-        vararg categories: Category,
-    ): Boolean
-
-    public suspend fun deleteCategoryById(
-        id: Int,
-    ): Boolean
-
-    public suspend fun deleteCategories(
         vararg categories: Category,
     ): Boolean
 }

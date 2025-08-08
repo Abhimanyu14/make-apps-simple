@@ -32,17 +32,27 @@ internal class TransactionForRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
     private val transactionForDao: TransactionForDao,
 ) : TransactionForRepository {
-    override fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>> {
-        return transactionForDao.getAllTransactionForValuesFlow().map {
-            it.map(
-                transform = TransactionForEntity::asExternalModel,
-            )
+    override suspend fun deleteTransactionForById(
+        id: Int,
+    ): Boolean {
+        return dispatcherProvider.executeOnIoDispatcher {
+            transactionForDao.deleteTransactionForById(
+                id = id,
+            ) == 1
         }
     }
 
     override suspend fun getAllTransactionForValues(): ImmutableList<TransactionFor> {
         return dispatcherProvider.executeOnIoDispatcher {
             transactionForDao.getAllTransactionForValues().map(
+                transform = TransactionForEntity::asExternalModel,
+            )
+        }
+    }
+
+    override fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>> {
+        return transactionForDao.getAllTransactionForValuesFlow().map {
+            it.map(
                 transform = TransactionForEntity::asExternalModel,
             )
         }
@@ -79,16 +89,6 @@ internal class TransactionForRepositoryImpl(
                     transform = TransactionFor::asEntity,
                 ).toTypedArray(),
             ) == transactionForValues.size
-        }
-    }
-
-    override suspend fun deleteTransactionForById(
-        id: Int,
-    ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
-            transactionForDao.deleteTransactionForById(
-                id = id,
-            ) == 1
         }
     }
 }
