@@ -74,10 +74,4 @@ public class FakeAccountRepositoryImpl : AccountRepository {
     ): Boolean {
         return false
     }
-
-    override suspend fun deleteAccounts(
-        vararg accounts: Account,
-    ): Boolean {
-        return false
-    }
 }

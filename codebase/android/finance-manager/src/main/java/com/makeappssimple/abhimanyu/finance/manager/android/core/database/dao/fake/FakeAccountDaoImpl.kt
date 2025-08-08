@@ -64,12 +64,6 @@ public class FakeAccountDaoImpl : AccountDao {
         return 0
     }
 
-    override suspend fun deleteAccounts(
-        vararg accounts: AccountEntity,
-    ): Int {
-        return 0
-    }
-
     override suspend fun deleteAllAccounts(): Int {
         return 0
     }
