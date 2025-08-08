@@ -34,7 +34,7 @@ public class FakeCategoryDaoImpl : CategoryDao {
         return 0
     }
 
-    override suspend fun getCategory(
+    override suspend fun getCategoryById(
         id: Int,
     ): CategoryEntity? {
         return null
@@ -52,7 +52,7 @@ public class FakeCategoryDaoImpl : CategoryDao {
         return 0
     }
 
-    override suspend fun deleteCategory(
+    override suspend fun deleteCategoryById(
         id: Int,
     ): Int {
         return 0

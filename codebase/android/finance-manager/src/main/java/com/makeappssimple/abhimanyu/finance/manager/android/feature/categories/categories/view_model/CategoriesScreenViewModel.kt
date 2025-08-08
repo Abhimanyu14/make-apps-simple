@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.SetDefaultCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
@@ -57,7 +57,7 @@ import org.koin.android.annotation.KoinViewModel
 internal class CategoriesScreenViewModel(
     coroutineScope: CoroutineScope,
     private val checkIfCategoryIsUsedInTransactionsUseCase: CheckIfCategoryIsUsedInTransactionsUseCase,
-    private val deleteCategoryUseCase: DeleteCategoryUseCase,
+    private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
     private val getAllCategoriesFlowUseCase: GetAllCategoriesFlowUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
@@ -67,7 +67,7 @@ internal class CategoriesScreenViewModel(
     viewModelScope = coroutineScope,
 ), CategoriesScreenUIStateDelegate by CategoriesScreenUIStateDelegateImpl(
     coroutineScope = coroutineScope,
-    deleteCategoryUseCase = deleteCategoryUseCase,
+    deleteCategoryByIdUseCase = deleteCategoryByIdUseCase,
     setDefaultCategoryUseCase = setDefaultCategoryUseCase,
     navigationKit = navigationKit,
 ) {

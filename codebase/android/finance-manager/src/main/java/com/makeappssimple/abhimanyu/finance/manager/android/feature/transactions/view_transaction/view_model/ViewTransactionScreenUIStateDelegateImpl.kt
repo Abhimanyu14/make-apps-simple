@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.view_model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 internal class ViewTransactionScreenUIStateDelegateImpl(
     private val coroutineScope: CoroutineScope,
-    private val deleteTransactionUseCase: DeleteTransactionUseCase,
+    private val deleteTransactionUseByIdCase: DeleteTransactionUseByIdCase,
     private val navigationKit: NavigationKit,
 ) : ViewTransactionScreenUIStateDelegate {
     // region initial data
@@ -84,7 +84,7 @@ internal class ViewTransactionScreenUIStateDelegateImpl(
             ?: return // TODO(Abhi): Handle this error scenario
         coroutineScope.launch {
             startLoading()
-            val isTransactionDeleted = deleteTransactionUseCase(
+            val isTransactionDeleted = deleteTransactionUseByIdCase(
                 id = id,
             )
             resetScreenBottomSheetType()

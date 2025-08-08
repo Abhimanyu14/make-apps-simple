@@ -19,13 +19,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 
-public class GetTransactionDataUseCase(
+public class GetTransactionDataByIdUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
     ): TransactionData? {
-        return transactionRepository.getTransactionData(
+        return transactionRepository.getTransactionDataById(
             id = id,
         )
     }

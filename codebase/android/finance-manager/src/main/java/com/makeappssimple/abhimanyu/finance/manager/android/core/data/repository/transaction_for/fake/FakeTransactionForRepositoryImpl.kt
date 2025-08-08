@@ -34,7 +34,7 @@ public class FakeTransactionForRepositoryImpl : TransactionForRepository {
         return persistentListOf()
     }
 
-    override suspend fun getTransactionFor(
+    override suspend fun getTransactionForById(
         id: Int,
     ): TransactionFor? {
         return null
@@ -52,7 +52,7 @@ public class FakeTransactionForRepositoryImpl : TransactionForRepository {
         return false
     }
 
-    override suspend fun deleteTransactionFor(
+    override suspend fun deleteTransactionForById(
         id: Int,
     ): Boolean {
         return false

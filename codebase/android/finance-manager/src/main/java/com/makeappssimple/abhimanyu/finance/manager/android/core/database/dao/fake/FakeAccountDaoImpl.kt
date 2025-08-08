@@ -34,7 +34,7 @@ public class FakeAccountDaoImpl : AccountDao {
         return 0
     }
 
-    override suspend fun getAccount(
+    override suspend fun getAccountById(
         id: Int,
     ): AccountEntity? {
         return null

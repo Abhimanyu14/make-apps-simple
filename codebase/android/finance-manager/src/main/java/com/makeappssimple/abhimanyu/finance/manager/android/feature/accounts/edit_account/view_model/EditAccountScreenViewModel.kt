@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonState
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
@@ -55,7 +55,7 @@ internal class EditAccountScreenViewModel(
     savedStateHandle: SavedStateHandle,
     private val editAccountScreenDataValidationUseCase: EditAccountScreenDataValidationUseCase,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
-    private val getAccountUseCase: GetAccountUseCase,
+    private val getAccountByIdUseCase: GetAccountByIdUseCase,
     private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
     private val updateAccountUseCase: UpdateAccountUseCase,
@@ -135,7 +135,7 @@ internal class EditAccountScreenViewModel(
             throw IllegalStateException("Current account id is null")
         }
 
-        val currentAccountValue = getAccountUseCase(
+        val currentAccountValue = getAccountByIdUseCase(
             id = currentAccountId,
         ) ?: throw IllegalStateException("Current account not found")
         currentAccount = currentAccountValue

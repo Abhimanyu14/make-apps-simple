@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.view_model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 internal class TransactionForValuesScreenUIStateDelegateImpl(
     private val coroutineScope: CoroutineScope,
-    private val deleteTransactionForUseCase: DeleteTransactionForUseCase,
+    private val deleteTransactionForByIdUseCase: DeleteTransactionForByIdUseCase,
     private val navigationKit: NavigationKit,
 ) : TransactionForValuesScreenUIStateDelegate {
     // region UI state
@@ -78,7 +78,7 @@ internal class TransactionForValuesScreenUIStateDelegateImpl(
     override fun deleteTransactionFor() {
         coroutineScope.launch {
             transactionForIdToDelete?.let { id ->
-                val isTransactionForDeleted = deleteTransactionForUseCase(
+                val isTransactionForDeleted = deleteTransactionForByIdUseCase(
                     id = id,
                 )
                 if (isTransactionForDeleted) {

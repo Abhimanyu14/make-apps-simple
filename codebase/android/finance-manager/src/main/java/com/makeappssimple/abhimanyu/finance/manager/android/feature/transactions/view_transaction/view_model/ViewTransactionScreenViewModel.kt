@@ -20,11 +20,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -50,8 +50,8 @@ internal class ViewTransactionScreenViewModel(
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val dateTimeKit: DateTimeKit,
-    private val deleteTransactionUseCase: DeleteTransactionUseCase,
-    private val getTransactionDataUseCase: GetTransactionDataUseCase,
+    private val deleteTransactionUseByIdCase: DeleteTransactionUseByIdCase,
+    private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -59,7 +59,7 @@ internal class ViewTransactionScreenViewModel(
 ),
     ViewTransactionScreenUIStateDelegate by ViewTransactionScreenUIStateDelegateImpl(
         coroutineScope = coroutineScope,
-        deleteTransactionUseCase = deleteTransactionUseCase,
+        deleteTransactionUseByIdCase = deleteTransactionUseByIdCase,
         navigationKit = navigationKit,
     ) {
     // region screen args
@@ -118,7 +118,7 @@ internal class ViewTransactionScreenViewModel(
     // region getCurrentTransactionData
     private suspend fun getCurrentTransactionData() {
         val currentTransactionId = screenArgs.transactionId ?: return
-        val transactionData = getTransactionDataUseCase(
+        val transactionData = getTransactionDataByIdUseCase(
             id = currentTransactionId,
         ) ?: return // TODO(Abhi): Show error message
         currentTransactionListItemData = getTransactionListItemData(
@@ -139,7 +139,7 @@ internal class ViewTransactionScreenViewModel(
     private suspend fun getOriginalTransactionData(
         transactionId: Int,
     ) {
-        val transactionData = getTransactionDataUseCase(
+        val transactionData = getTransactionDataByIdUseCase(
             id = transactionId,
         ) ?: return // TODO(Abhi): Show error message
         originalTransactionListItemData = getTransactionListItemData(
@@ -152,7 +152,7 @@ internal class ViewTransactionScreenViewModel(
     ) {
         refundTransactionsListItemData =
             transactionIds.mapNotNull { transactionId ->
-                getTransactionDataUseCase(
+                getTransactionDataByIdUseCase(
                     id = transactionId,
                 )?.let { transactionData ->
                     getTransactionListItemData(

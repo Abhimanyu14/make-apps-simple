@@ -54,11 +54,11 @@ internal class CategoryRepositoryImpl(
         }
     }
 
-    override suspend fun getCategory(
+    override suspend fun getCategoryById(
         id: Int,
     ): Category? {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.getCategory(
+            categoryDao.getCategoryById(
                 id = id,
             )?.asExternalModel()
         }
@@ -88,11 +88,11 @@ internal class CategoryRepositoryImpl(
         }
     }
 
-    override suspend fun deleteCategory(
+    override suspend fun deleteCategoryById(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.deleteCategory(
+            categoryDao.deleteCategoryById(
                 id = id,
             ) == 1
         }

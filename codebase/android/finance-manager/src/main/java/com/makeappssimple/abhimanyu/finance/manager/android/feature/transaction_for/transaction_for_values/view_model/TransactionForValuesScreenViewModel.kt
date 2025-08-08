@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -47,7 +47,7 @@ internal class TransactionForValuesScreenViewModel(
     coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
     private val checkIfTransactionForValuesAreUsedInTransactionsUseCase: CheckIfTransactionForValuesAreUsedInTransactionsUseCase,
-    private val deleteTransactionForUseCase: DeleteTransactionForUseCase,
+    private val deleteTransactionForByIdUseCase: DeleteTransactionForByIdUseCase,
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -55,7 +55,7 @@ internal class TransactionForValuesScreenViewModel(
 ),
     TransactionForValuesScreenUIStateDelegate by TransactionForValuesScreenUIStateDelegateImpl(
         coroutineScope = coroutineScope,
-        deleteTransactionForUseCase = deleteTransactionForUseCase,
+        deleteTransactionForByIdUseCase = deleteTransactionForByIdUseCase,
         navigationKit = navigationKit,
     ) {
     // region initial data

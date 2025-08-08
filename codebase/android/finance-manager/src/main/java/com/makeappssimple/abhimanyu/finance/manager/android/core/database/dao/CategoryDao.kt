@@ -53,7 +53,7 @@ public interface CategoryDao {
      * @return Number of rows deleted
      */
     @Query(value = "DELETE FROM category_table WHERE id = :id")
-    public suspend fun deleteCategory(
+    public suspend fun deleteCategoryById(
         id: Int,
     ): Int
 
@@ -84,7 +84,7 @@ public interface CategoryDao {
      * @return Category with given [id] or null if not found
      */
     @Query(value = "SELECT * from category_table WHERE id = :id")
-    public suspend fun getCategory(
+    public suspend fun getCategoryById(
         id: Int,
     ): CategoryEntity?
 

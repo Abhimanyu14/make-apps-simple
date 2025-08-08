@@ -32,7 +32,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetMaxRefundAmountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTitleSuggestionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
@@ -78,7 +78,7 @@ internal class AddTransactionScreenViewModel(
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTitleSuggestionsUseCase: GetTitleSuggestionsUseCase,
-    private val getTransactionDataUseCase: GetTransactionDataUseCase,
+    private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val getMaxRefundAmountUseCase: GetMaxRefundAmountUseCase,
     private val insertTransactionUseCase: InsertTransactionUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
@@ -298,7 +298,7 @@ internal class AddTransactionScreenViewModel(
 
     private suspend fun updateOriginalTransactionData() {
         val originalTransactionId = getOriginalTransactionId() ?: return
-        originalTransactionData = getTransactionDataUseCase(
+        originalTransactionData = getTransactionDataByIdUseCase(
             id = originalTransactionId,
         )
     }

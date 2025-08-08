@@ -29,14 +29,14 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 public class CommonDataSourceImpl(
     private val financeManagerRoomDatabase: FinanceManagerRoomDatabase,
 ) : CommonDataSource {
-    override suspend fun deleteTransaction(
+    override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
         return with(
             receiver = financeManagerRoomDatabase,
         ) {
             withTransaction {
-                val transactionData = transactionDao().getTransactionData(
+                val transactionData = transactionDao().getTransactionDataById(
                     id = id,
                 )
 
@@ -58,7 +58,7 @@ public class CommonDataSourceImpl(
 
                 if (transactionData?.transaction?.transactionType == TransactionType.REFUND) {
                     transactionData.transaction.originalTransactionId?.let { originalTransactionId ->
-                        transactionDao().getTransaction(
+                        transactionDao().getTransactionById(
                             id = originalTransactionId,
                         )?.let { originalTransaction ->
                             val originalTransactionRefundTransactionIds =
@@ -82,7 +82,7 @@ public class CommonDataSourceImpl(
                         }
                     }
                 }
-                transactionDao().deleteTransaction(
+                transactionDao().deleteTransactionById(
                     id = id,
                 )
                 accountDao().updateAccounts(

@@ -42,7 +42,7 @@ public interface TransactionForDao {
      * @return Number of rows deleted (0 or 1)
      */
     @Query(value = "DELETE FROM transaction_for_table WHERE id = :id")
-    public suspend fun deleteTransactionFor(
+    public suspend fun deleteTransactionForById(
         id: Int,
     ): Int
 
@@ -66,7 +66,7 @@ public interface TransactionForDao {
      * @return TransactionFor with given [id] or null if not found
      */
     @Query(value = "SELECT * from transaction_for_table WHERE id = :id")
-    public suspend fun getTransactionFor(
+    public suspend fun getTransactionForById(
         id: Int,
     ): TransactionForEntity?
 

@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 
-public class GetTransactionUseCase(
-    private val transactionRepository: TransactionRepository,
+public class GetCategoryByIdUseCase(
+    private val categoryRepository: CategoryRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
-    ): Transaction? {
-        return transactionRepository.getTransaction(
+    ): Category? {
+        return categoryRepository.getCategoryById(
             id = id,
         )
     }

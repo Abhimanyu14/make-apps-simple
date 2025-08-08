@@ -27,7 +27,7 @@ public interface AccountRepository {
 
     public suspend fun getAllAccountsCount(): Int
 
-    public suspend fun getAccount(
+    public suspend fun getAccountById(
         id: Int,
     ): Account?
 

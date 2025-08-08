@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.view_model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.SetDefaultCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 internal class CategoriesScreenUIStateDelegateImpl(
     private val coroutineScope: CoroutineScope,
-    private val deleteCategoryUseCase: DeleteCategoryUseCase,
+    private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
     private val navigationKit: NavigationKit,
 ) : CategoriesScreenUIStateDelegate, ScreenUIStateDelegateImpl() {
@@ -56,7 +56,7 @@ internal class CategoriesScreenUIStateDelegateImpl(
     override fun deleteCategory() {
         coroutineScope.launch {
             categoryIdToDelete?.let { id ->
-                val isCategoryDeleted = deleteCategoryUseCase(
+                val isCategoryDeleted = deleteCategoryByIdUseCase(
                     id = id,
                 )
                 if (isCategoryDeleted) {

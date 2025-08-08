@@ -124,7 +124,7 @@ internal class AccountDaoTest {
     }
 
     @Test
-    fun getAccount_validId() = runTestWithTimeout {
+    fun getAccountById_validId() = runTestWithTimeout {
         val accountEntity1 = getAccountEntity(
             id = 1,
         )
@@ -136,7 +136,7 @@ internal class AccountDaoTest {
             accountEntity2,
         )
 
-        val result = accountDao.getAccount(
+        val result = accountDao.getAccountById(
             id = 1,
         )
 
@@ -144,7 +144,7 @@ internal class AccountDaoTest {
     }
 
     @Test
-    fun getAccount_invalidId() = runTestWithTimeout {
+    fun getAccountById_invalidId() = runTestWithTimeout {
         val accountEntity1 = getAccountEntity(
             id = 1,
         )
@@ -156,7 +156,7 @@ internal class AccountDaoTest {
             accountEntity2,
         )
 
-        val result = accountDao.getAccount(
+        val result = accountDao.getAccountById(
             id = 3,
         )
 
@@ -282,7 +282,7 @@ internal class AccountDaoTest {
         val count = accountDao.updateAccounts(
             updatedAccount,
         )
-        val result = accountDao.getAccount(
+        val result = accountDao.getAccountById(
             id = insertedAccount.id,
         )
 

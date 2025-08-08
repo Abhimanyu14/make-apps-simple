@@ -52,7 +52,7 @@ public interface AccountDao {
      * @return Account with given [id] or null if not found
      */
     @Query(value = "SELECT * from account_table WHERE id = :id")
-    public suspend fun getAccount(
+    public suspend fun getAccountById(
         id: Int,
     ): AccountEntity?
 

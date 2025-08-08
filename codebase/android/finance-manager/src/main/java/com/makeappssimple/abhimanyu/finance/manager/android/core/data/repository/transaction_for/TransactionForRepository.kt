@@ -25,7 +25,7 @@ public interface TransactionForRepository {
 
     public suspend fun getAllTransactionForValues(): ImmutableList<TransactionFor>
 
-    public suspend fun getTransactionFor(
+    public suspend fun getTransactionForById(
         id: Int,
     ): TransactionFor?
 
@@ -37,7 +37,7 @@ public interface TransactionForRepository {
         vararg transactionForValues: TransactionFor,
     ): Boolean
 
-    public suspend fun deleteTransactionFor(
+    public suspend fun deleteTransactionForById(
         id: Int,
     ): Boolean
 }

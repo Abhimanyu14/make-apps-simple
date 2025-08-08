@@ -23,10 +23,10 @@ import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLate
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
@@ -57,7 +57,7 @@ internal class EditCategoryScreenViewModel(
     uriDecoder: UriDecoder,
     private val editCategoryScreenDataValidationUseCase: EditCategoryScreenDataValidationUseCase,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
-    private val getCategoryUseCase: GetCategoryUseCase,
+    private val getCategoryByIdUseCase: GetCategoryByIdUseCase,
     private val navigationKit: NavigationKit,
     private val updateCategoriesUseCase: UpdateCategoriesUseCase,
     internal val logKit: LogKit,
@@ -146,7 +146,7 @@ internal class EditCategoryScreenViewModel(
         screenArgs.categoryId?.let { id ->
             viewModelScope.launch {
                 category.update {
-                    getCategoryUseCase(
+                    getCategoryByIdUseCase(
                         id = id,
                     )
                 }

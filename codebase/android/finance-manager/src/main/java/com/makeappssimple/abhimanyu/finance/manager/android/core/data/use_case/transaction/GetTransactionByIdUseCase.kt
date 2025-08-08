@@ -16,18 +16,16 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 
-public class DeleteTransactionUseCase(
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+public class GetTransactionByIdUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
-    ): Boolean {
-        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-        return transactionRepository.deleteTransaction(
+    ): Transaction? {
+        return transactionRepository.getTransactionById(
             id = id,
         )
     }

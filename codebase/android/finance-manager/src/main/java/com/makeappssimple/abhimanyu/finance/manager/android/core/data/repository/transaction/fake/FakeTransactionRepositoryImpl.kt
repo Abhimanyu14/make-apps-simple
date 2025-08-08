@@ -102,13 +102,13 @@ public class FakeTransactionRepositoryImpl : TransactionRepository {
         return false
     }
 
-    override suspend fun getTransaction(
+    override suspend fun getTransactionById(
         id: Int,
     ): Transaction? {
         return null
     }
 
-    override suspend fun getTransactionData(
+    override suspend fun getTransactionDataById(
         id: Int,
     ): TransactionData? {
         return null
@@ -141,7 +141,7 @@ public class FakeTransactionRepositoryImpl : TransactionRepository {
         return false
     }
 
-    override suspend fun deleteTransaction(
+    override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
         return false

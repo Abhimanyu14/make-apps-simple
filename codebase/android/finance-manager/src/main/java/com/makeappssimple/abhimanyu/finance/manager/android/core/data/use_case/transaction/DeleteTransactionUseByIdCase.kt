@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 
-public class GetAccountUseCase(
-    private val accountRepository: AccountRepository,
+public class DeleteTransactionUseByIdCase(
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+    private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
-    ): Account? {
-        return accountRepository.getAccount(
+    ): Boolean {
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
+        return transactionRepository.deleteTransactionById(
             id = id,
         )
     }

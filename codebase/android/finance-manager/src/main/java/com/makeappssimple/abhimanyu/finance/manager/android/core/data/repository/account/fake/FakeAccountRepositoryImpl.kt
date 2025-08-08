@@ -38,7 +38,7 @@ public class FakeAccountRepositoryImpl : AccountRepository {
         return 0
     }
 
-    override suspend fun getAccount(
+    override suspend fun getAccountById(
         id: Int,
     ): Account? {
         return null

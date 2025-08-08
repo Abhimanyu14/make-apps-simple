@@ -165,21 +165,21 @@ internal class TransactionRepositoryImpl(
         }
     }
 
-    override suspend fun getTransaction(
+    override suspend fun getTransactionById(
         id: Int,
     ): Transaction? {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTransaction(
+            transactionDao.getTransactionById(
                 id = id,
             )?.asExternalModel()
         }
     }
 
-    override suspend fun getTransactionData(
+    override suspend fun getTransactionDataById(
         id: Int,
     ): TransactionData? {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTransactionData(
+            transactionDao.getTransactionDataById(
                 id = id,
             )?.asExternalModel()
         }
@@ -235,11 +235,11 @@ internal class TransactionRepositoryImpl(
         }
     }
 
-    override suspend fun deleteTransaction(
+    override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            commonDataSource.deleteTransaction(
+            commonDataSource.deleteTransactionById(
                 id = id,
             )
         }

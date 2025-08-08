@@ -85,7 +85,7 @@ public interface TransactionDao {
         value = "DELETE FROM transaction_table " +
                 "WHERE id = :id"
     )
-    public suspend fun deleteTransaction(
+    public suspend fun deleteTransactionById(
         id: Int,
     ): Int
 
@@ -189,7 +189,7 @@ public interface TransactionDao {
         value = "SELECT * FROM transaction_table " +
                 "WHERE id = :id"
     )
-    public suspend fun getTransaction(
+    public suspend fun getTransactionById(
         id: Int,
     ): TransactionEntity?
 
@@ -202,7 +202,7 @@ public interface TransactionDao {
         value = "SELECT * FROM transaction_table " +
                 "WHERE id = :id"
     )
-    public suspend fun getTransactionData(
+    public suspend fun getTransactionDataById(
         id: Int,
     ): TransactionDataEntity?
 

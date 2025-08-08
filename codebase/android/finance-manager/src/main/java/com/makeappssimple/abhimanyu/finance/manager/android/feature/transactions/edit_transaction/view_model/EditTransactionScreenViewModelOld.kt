@@ -44,7 +44,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountBalanceAmountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTitleSuggestionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
@@ -92,7 +92,7 @@ public class EditTransactionScreenViewModelOld(
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTitleSuggestionsUseCase: GetTitleSuggestionsUseCase,
-    private val getTransactionDataUseCase: GetTransactionDataUseCase,
+    private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val navigationKit: NavigationKit,
     private val updateAccountBalanceAmountUseCase: UpdateAccountBalanceAmountUseCase,
@@ -837,7 +837,7 @@ public class EditTransactionScreenViewModelOld(
 
     private suspend fun getTransactionDataForAddingRefundTransactionOrEditingAnyTransaction() {
         screenArgs.transactionId?.let { id ->
-            editingTransactionData = getTransactionDataUseCase(
+            editingTransactionData = getTransactionDataByIdUseCase(
                 id = id,
             )
             editingTransactionData?.let { originalTransactionData ->
@@ -856,7 +856,7 @@ public class EditTransactionScreenViewModelOld(
     private suspend fun calculateMaxRefundAmount() {
         var transactionDataToRefund: TransactionData? = null
         editingTransactionData?.transaction?.originalTransactionId?.let {
-            transactionDataToRefund = getTransactionDataUseCase(
+            transactionDataToRefund = getTransactionDataByIdUseCase(
                 id = it,
             )
         }
@@ -867,7 +867,7 @@ public class EditTransactionScreenViewModelOld(
         var refundedAmountCalculated: Amount? = null
         transactionDataToRefund?.transaction?.refundTransactionIds?.forEach {
             if (it != screenArgs.transactionId) {
-                getTransactionDataUseCase(
+                getTransactionDataByIdUseCase(
                     id = it,
                 )?.transaction?.amount?.let { prevRefundedTransactionAmount ->
                     refundedAmountCalculated = refundedAmountCalculated?.run {

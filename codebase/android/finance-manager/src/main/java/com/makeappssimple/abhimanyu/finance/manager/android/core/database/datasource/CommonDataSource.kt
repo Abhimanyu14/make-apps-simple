@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
 
 public interface CommonDataSource {
-    public suspend fun deleteTransaction(
+    public suspend fun deleteTransactionById(
         id: Int,
     ): Boolean
 

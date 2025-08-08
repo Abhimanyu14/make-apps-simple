@@ -30,7 +30,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.BackupDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.ShouldShowBackupCardUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
@@ -67,8 +67,8 @@ internal class HomeScreenViewModel(
     private val backupDataUseCase: BackupDataUseCase,
     private val dateTimeKit: DateTimeKit,
     private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase,
+    private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val getTransactionsBetweenTimestampsUseCase: GetTransactionsBetweenTimestampsUseCase,
-    private val getTransactionUseCase: GetTransactionUseCase,
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -324,7 +324,7 @@ internal class HomeScreenViewModel(
             expenseTransactionsWithRefund.add(expenseTransaction)
             expenseTransaction.refundTransactionIds?.let { refundTransactionIds ->
                 refundTransactionIds.forEach { id ->
-                    getTransactionUseCase(id)?.let {
+                    getTransactionByIdUseCase(id)?.let {
                         expenseTransactionsWithRefund.add(it)
                     }
                 }

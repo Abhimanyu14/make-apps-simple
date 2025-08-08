@@ -48,11 +48,11 @@ internal class TransactionForRepositoryImpl(
         }
     }
 
-    override suspend fun getTransactionFor(
+    override suspend fun getTransactionForById(
         id: Int,
     ): TransactionFor? {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionForDao.getTransactionFor(
+            transactionForDao.getTransactionForById(
                 id = id,
             )?.asExternalModel()
         }
@@ -82,11 +82,11 @@ internal class TransactionForRepositoryImpl(
         }
     }
 
-    override suspend fun deleteTransactionFor(
+    override suspend fun deleteTransactionForById(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionForDao.deleteTransactionFor(
+            transactionForDao.deleteTransactionForById(
                 id = id,
             ) == 1
         }

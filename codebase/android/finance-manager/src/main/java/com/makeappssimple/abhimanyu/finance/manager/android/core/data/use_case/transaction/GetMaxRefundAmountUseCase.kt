@@ -23,13 +23,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.plus
 
 public class GetMaxRefundAmountUseCase(
-    private val getTransactionDataUseCase: GetTransactionDataUseCase,
+    private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
 ) {
     public suspend operator fun invoke(
         id: Int,
     ): Amount? {
         val originalTransactionData: TransactionData =
-            getTransactionDataUseCase(
+            getTransactionDataByIdUseCase(
                 id = id,
             ) ?: return null
 
@@ -56,7 +56,7 @@ public class GetMaxRefundAmountUseCase(
     ): Amount? {
         var refundedAmountCalculated: Amount? = null
         for (refundTransactionId in refundTransactionIds) {
-            val refundTransactionData = getTransactionDataUseCase(
+            val refundTransactionData = getTransactionDataByIdUseCase(
                 id = refundTransactionId,
             ) ?: continue
             val refundTransactionAmount =

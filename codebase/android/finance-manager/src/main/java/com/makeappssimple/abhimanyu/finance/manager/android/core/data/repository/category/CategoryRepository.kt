@@ -27,7 +27,7 @@ public interface CategoryRepository {
 
     public suspend fun getAllCategoriesCount(): Int
 
-    public suspend fun getCategory(
+    public suspend fun getCategoryById(
         id: Int,
     ): Category?
 
@@ -39,7 +39,7 @@ public interface CategoryRepository {
         vararg categories: Category,
     ): Boolean
 
-    public suspend fun deleteCategory(
+    public suspend fun deleteCategoryById(
         id: Int,
     ): Boolean
 

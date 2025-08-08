@@ -55,11 +55,11 @@ internal class AccountRepositoryImpl(
         }
     }
 
-    override suspend fun getAccount(
+    override suspend fun getAccountById(
         id: Int,
     ): Account? {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAccount(
+            accountDao.getAccountById(
                 id = id,
             )?.asExternalModel()
         }

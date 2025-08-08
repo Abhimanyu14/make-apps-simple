@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLate
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -48,7 +48,7 @@ internal class EditTransactionForScreenViewModel(
     uriDecoder: UriDecoder,
     private val editTransactionForScreenDataValidationUseCase: EditTransactionForScreenDataValidationUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
-    private val getTransactionForUseCase: GetTransactionForUseCase,
+    private val getTransactionForByIdUseCase: GetTransactionForByIdUseCase,
     private val navigationKit: NavigationKit,
     private val updateTransactionForUseCase: UpdateTransactionForUseCase,
     internal val logKit: LogKit,
@@ -122,7 +122,7 @@ internal class EditTransactionForScreenViewModel(
     // region getOriginalTransactionFor
     private suspend fun getCurrentTransactionFor() {
         val transactionForId = screenArgs.transactionForId ?: return
-        currentTransactionFor = getTransactionForUseCase(
+        currentTransactionFor = getTransactionForByIdUseCase(
             id = transactionForId,
         )
     }

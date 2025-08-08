@@ -38,7 +38,7 @@ public class FakeCategoryRepositoryImpl : CategoryRepository {
         return 0
     }
 
-    override suspend fun getCategory(
+    override suspend fun getCategoryById(
         id: Int,
     ): Category? {
         return null
@@ -56,7 +56,7 @@ public class FakeCategoryRepositoryImpl : CategoryRepository {
         return false
     }
 
-    override suspend fun deleteCategory(
+    override suspend fun deleteCategoryById(
         id: Int,
     ): Boolean {
         return false

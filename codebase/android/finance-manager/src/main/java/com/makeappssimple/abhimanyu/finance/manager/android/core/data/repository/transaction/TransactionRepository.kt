@@ -69,11 +69,11 @@ public interface TransactionRepository {
         transactionForId: Int,
     ): Boolean
 
-    public suspend fun getTransaction(
+    public suspend fun getTransactionById(
         id: Int,
     ): Transaction?
 
-    public suspend fun getTransactionData(
+    public suspend fun getTransactionDataById(
         id: Int,
     ): TransactionData?
 
@@ -96,7 +96,7 @@ public interface TransactionRepository {
         vararg transactions: Transaction,
     ): Boolean
 
-    public suspend fun deleteTransaction(
+    public suspend fun deleteTransactionById(
         id: Int,
     ): Boolean
 

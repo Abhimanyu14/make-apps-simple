@@ -34,7 +34,7 @@ public class FakeTransactionForDaoImpl : TransactionForDao {
         return 0
     }
 
-    override suspend fun getTransactionFor(id: Int): TransactionForEntity? {
+    override suspend fun getTransactionForById(id: Int): TransactionForEntity? {
         return null
     }
 
@@ -50,7 +50,7 @@ public class FakeTransactionForDaoImpl : TransactionForDao {
         return 0
     }
 
-    override suspend fun deleteTransactionFor(
+    override suspend fun deleteTransactionForById(
         id: Int,
     ): Int {
         return 0

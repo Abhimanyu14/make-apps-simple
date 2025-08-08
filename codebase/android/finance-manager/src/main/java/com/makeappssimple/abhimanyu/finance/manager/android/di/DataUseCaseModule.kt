@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsCountUseCase
@@ -39,11 +39,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesCountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.InsertCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.SetDefaultCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoriesUseCase
@@ -55,7 +55,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteAllTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionsUseCase
@@ -63,19 +63,19 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetSearchedTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTitleSuggestionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataMappedByCategoryUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
@@ -116,10 +116,10 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesGetAccountUseCase(
+    internal fun providesGetAccountByIdUseCase(
         accountRepository: AccountRepository,
-    ): GetAccountUseCase {
-        return GetAccountUseCase(
+    ): GetAccountByIdUseCase {
+        return GetAccountByIdUseCase(
             accountRepository = accountRepository,
         )
     }
@@ -233,11 +233,11 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesDeleteCategoryUseCase(
+    internal fun providesDeleteCategoryByIdUseCase(
         categoryRepository: CategoryRepository,
         financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
-    ): DeleteCategoryUseCase {
-        return DeleteCategoryUseCase(
+    ): DeleteCategoryByIdUseCase {
+        return DeleteCategoryByIdUseCase(
             categoryRepository = categoryRepository,
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
@@ -271,10 +271,10 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesGetCategoryUseCase(
+    internal fun providesGetCategoryByIdUseCase(
         categoryRepository: CategoryRepository,
-    ): GetCategoryUseCase {
-        return GetCategoryUseCase(
+    ): GetCategoryByIdUseCase {
+        return GetCategoryByIdUseCase(
             categoryRepository = categoryRepository,
         )
     }
@@ -413,11 +413,11 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesDeleteTransactionUseCase(
+    internal fun providesDeleteTransactionUseByIdCase(
         financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         transactionRepository: TransactionRepository,
-    ): DeleteTransactionUseCase {
-        return DeleteTransactionUseCase(
+    ): DeleteTransactionUseByIdCase {
+        return DeleteTransactionUseByIdCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             transactionRepository = transactionRepository,
         )
@@ -452,10 +452,10 @@ public class DataUseCaseModule {
 
     @Single
     internal fun providesGetMaxRefundAmountUseCase(
-        getTransactionDataUseCase: GetTransactionDataUseCase,
+        getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     ): GetMaxRefundAmountUseCase {
         return GetMaxRefundAmountUseCase(
-            getTransactionDataUseCase = getTransactionDataUseCase,
+            getTransactionDataByIdUseCase = getTransactionDataByIdUseCase,
         )
     }
 
@@ -496,10 +496,10 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesGetTransactionDataUseCase(
+    internal fun providesGetTransactionDataByIdUseCase(
         transactionRepository: TransactionRepository,
-    ): GetTransactionDataUseCase {
-        return GetTransactionDataUseCase(
+    ): GetTransactionDataByIdUseCase {
+        return GetTransactionDataByIdUseCase(
             transactionRepository = transactionRepository,
         )
     }
@@ -523,10 +523,10 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesGetTransactionUseCase(
+    internal fun providesGetTransactionByIdUseCase(
         transactionRepository: TransactionRepository,
-    ): GetTransactionUseCase {
-        return GetTransactionUseCase(
+    ): GetTransactionByIdUseCase {
+        return GetTransactionByIdUseCase(
             transactionRepository = transactionRepository,
         )
     }
@@ -580,11 +580,11 @@ public class DataUseCaseModule {
 
     // region transaction for
     @Single
-    internal fun providesDeleteTransactionForUseCase(
+    internal fun providesDeleteTransactionForByIdUseCase(
         financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
         transactionForRepository: TransactionForRepository,
-    ): DeleteTransactionForUseCase {
-        return DeleteTransactionForUseCase(
+    ): DeleteTransactionForByIdUseCase {
+        return DeleteTransactionForByIdUseCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             transactionForRepository = transactionForRepository,
         )
@@ -609,10 +609,10 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesGetTransactionForUseCase(
+    internal fun providesGetTransactionForByIdUseCase(
         transactionForRepository: TransactionForRepository,
-    ): GetTransactionForUseCase {
-        return GetTransactionForUseCase(
+    ): GetTransactionForByIdUseCase {
+        return GetTransactionForByIdUseCase(
             transactionForRepository = transactionForRepository,
         )
     }

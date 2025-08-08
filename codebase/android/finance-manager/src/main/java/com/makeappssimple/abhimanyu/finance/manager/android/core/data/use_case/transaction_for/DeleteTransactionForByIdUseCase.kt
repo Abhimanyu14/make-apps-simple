@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category
+package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 
-public class DeleteCategoryUseCase(
-    private val categoryRepository: CategoryRepository,
+public class DeleteTransactionForByIdUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+    private val transactionForRepository: TransactionForRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
     ): Boolean {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-        return categoryRepository.deleteCategory(
+        return transactionForRepository.deleteTransactionForById(
             id = id,
         )
     }

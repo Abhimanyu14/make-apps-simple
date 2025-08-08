@@ -17,15 +17,17 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 
-public class GetCategoryUseCase(
+public class DeleteCategoryByIdUseCase(
     private val categoryRepository: CategoryRepository,
+    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
         id: Int,
-    ): Category? {
-        return categoryRepository.getCategory(
+    ): Boolean {
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
+        return categoryRepository.deleteCategoryById(
             id = id,
         )
     }
