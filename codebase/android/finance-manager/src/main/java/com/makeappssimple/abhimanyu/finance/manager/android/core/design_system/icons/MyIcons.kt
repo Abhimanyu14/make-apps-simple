@@ -52,6 +52,6 @@ public object MyIcons {
     public val Schedule: ImageVector = Icons.Outlined.Schedule
     public val Search: ImageVector = Icons.Rounded.Search
     public val Settings: ImageVector = Icons.Rounded.Settings
-    public val SwapVert: ImageVector = Icons.Rounded.SwapVert
+    public val SwapVert: ImageVector = Swap_vert
     public val TextSnippet: ImageVector = Icons.AutoMirrored.Rounded.TextSnippet
 }
