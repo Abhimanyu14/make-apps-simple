@@ -65,6 +65,7 @@ internal class AccountsScreenUIEventHandler internal constructor(
             }
 
             is AccountsScreenUIEvent.OnAccountsListItemContent.Click -> {
+                uiStateEvents.updateClickedItemId(uiEvent.accountId)
                 uiEvent.accountId?.let { accountId ->
                     uiStateEvents.updateScreenBottomSheetType(
                         AccountsScreenBottomSheetType.Menu(
@@ -75,7 +76,6 @@ internal class AccountsScreenUIEventHandler internal constructor(
                         )
                     )
                 }
-                uiStateEvents.updateClickedItemId(uiEvent.accountId)
             }
 
             is AccountsScreenUIEvent.OnFloatingActionButtonClick -> {

@@ -56,14 +56,14 @@ internal class CategoriesScreenUIEventHandler internal constructor(
             }
 
             is CategoriesScreenUIEvent.OnCategoriesSetAsDefaultConfirmationBottomSheet.NegativeButtonClick -> {
-                uiStateEvents.updateClickedItemId(null)
                 uiStateEvents.resetScreenBottomSheetType()
+                uiStateEvents.updateClickedItemId(null)
             }
 
             is CategoriesScreenUIEvent.OnCategoriesSetAsDefaultConfirmationBottomSheet.PositiveButtonClick -> {
+                uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.updateDefaultCategoryIdInDataStore(uiEvent.selectedTabIndex)
                 uiStateEvents.updateClickedItemId(null)
-                uiStateEvents.resetScreenBottomSheetType()
             }
 
             is CategoriesScreenUIEvent.OnCategoryMenuBottomSheet.DeleteButtonClick -> {
@@ -90,14 +90,14 @@ internal class CategoriesScreenUIEventHandler internal constructor(
             }
 
             is CategoriesScreenUIEvent.OnCategoriesDeleteConfirmationBottomSheet.NegativeButtonClick -> {
-                uiStateEvents.updateCategoryIdToDelete(null)
                 uiStateEvents.resetScreenBottomSheetType()
+                uiStateEvents.updateCategoryIdToDelete(null)
             }
 
             is CategoriesScreenUIEvent.OnCategoriesDeleteConfirmationBottomSheet.PositiveButtonClick -> {
+                uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.deleteCategory()
                 uiStateEvents.updateCategoryIdToDelete(null)
-                uiStateEvents.resetScreenBottomSheetType()
             }
         }
     }
