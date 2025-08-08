@@ -84,9 +84,16 @@ internal class TransactionForValuesScreenUIStateDelegateImpl(
                 val isTransactionForDeleted = deleteTransactionForUseCase(
                     id = id,
                 )
-                if (!isTransactionForDeleted) {
-                    // TODO(Abhi): Show error
+                if (isTransactionForDeleted) {
+                    // TODO(Abhi): Show snackbar
+                    transactionForIdToDelete.update {
+                        null
+                    }
+                } else {
+                    // TODO(Abhi): Handle this error scenario
                 }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
             }
         }
     }
