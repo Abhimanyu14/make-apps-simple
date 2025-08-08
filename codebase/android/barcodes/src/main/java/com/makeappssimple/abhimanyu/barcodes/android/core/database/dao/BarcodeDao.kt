@@ -58,7 +58,7 @@ internal interface BarcodeDao {
 
     /**
      * Get a barcode by id.
-     * @param id Required barcode id
+     * @param id Barcode id
      * @return Barcode with given [id] or returns null if no barcode has the given id.
      * @throws [SQLiteException]
      */

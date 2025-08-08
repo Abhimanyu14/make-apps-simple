@@ -24,41 +24,86 @@ import androidx.room.Update
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data Access Object for account_table.
+ */
 @Dao
 public interface AccountDao {
+    /**
+     * Delete an account by id.
+     * @param id Account id
+     * @return Number of rows deleted
+     */
     @Query(value = "DELETE FROM account_table WHERE id = :id")
     public suspend fun deleteAccountById(
         id: Int,
     ): Int
 
+    /**
+     * Delete all accounts from the table.
+     * @return Number of rows deleted
+     */
     @Query(value = "DELETE FROM account_table")
     public suspend fun deleteAllAccounts(): Int
 
+    /**
+     * Get an account by id.
+     * @param id Account id
+     * @return Account with given [id] or null if not found
+     */
     @Query(value = "SELECT * from account_table WHERE id = :id")
     public suspend fun getAccount(
         id: Int,
     ): AccountEntity?
 
+    /**
+     * Get accounts by a list of ids.
+     * @param ids List of account ids
+     * @return List of accounts with the given ids
+     */
     @Query(value = "SELECT * from account_table WHERE id IN (:ids)")
     public suspend fun getAccounts(
         ids: List<Int>,
     ): List<AccountEntity>
 
+    /**
+     * Get all accounts as a list.
+     * @return Returns all accounts ordered by [AccountEntity.id]
+     */
     @Query(value = "SELECT * from account_table ORDER BY id ASC")
     public suspend fun getAllAccounts(): List<AccountEntity>
 
+    /**
+     * Get the count of all accounts.
+     * @return Number of accounts in the table
+     */
     @Query(value = "SELECT COUNT(*) FROM account_table")
     public suspend fun getAllAccountsCount(): Int
 
+    /**
+     * Get all accounts as a Flow.
+     * @return Flow emitting the list of all accounts ordered by [AccountEntity.id]
+     */
     @Query(value = "SELECT * from account_table ORDER BY id ASC")
     public fun getAllAccountsFlow(): Flow<List<AccountEntity>>
 
+    /**
+     * Insert accounts into the table.
+     * @param accounts Accounts to insert
+     * @return List of row ids for inserted accounts. -1 if a conflict occurred for that item.
+     */
     // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     public suspend fun insertAccounts(
         vararg accounts: AccountEntity,
     ): List<Long>
 
+    /**
+     * Update accounts in the table.
+     * Only updates the existing rows using the primary key
+     * @param accounts Accounts to update
+     * @return Number of rows updated
+     */
     @Update
     public suspend fun updateAccounts(
         vararg accounts: AccountEntity,

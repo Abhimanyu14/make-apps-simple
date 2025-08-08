@@ -25,43 +25,88 @@ import androidx.room.Update
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data Access Object for category_table.
+ */
 @Dao
 public interface CategoryDao {
+    /**
+     * Get all categories as a Flow.
+     * @return Flow emitting the list of all categories ordered by [CategoryEntity.id]
+     */
     @Query(value = "SELECT * from category_table ORDER BY id ASC")
     public fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
 
+    /**
+     * Get all categories as a list.
+     * @return Returns all categories ordered by [CategoryEntity.id]
+     */
     @Query(value = "SELECT * from category_table ORDER BY id ASC")
     public suspend fun getAllCategories(): List<CategoryEntity>
 
+    /**
+     * Get the count of all categories.
+     * @return Number of categories in the table
+     */
     @Query(value = "SELECT COUNT(*) FROM category_table")
     public suspend fun getAllCategoriesCount(): Int
 
+    /**
+     * Get a category by id.
+     * @param id Required category id
+     * @return Category with given [id] or null if not found
+     */
     @Query(value = "SELECT * from category_table WHERE id = :id")
     public suspend fun getCategory(
         id: Int,
     ): CategoryEntity?
 
+    /**
+     * Insert categories into the table.
+     * @param categories Categories to insert
+     * @return List of row ids for inserted categories. -1 if a conflict occurred for that item.
+     */
     // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     public suspend fun insertCategories(
         vararg categories: CategoryEntity,
     ): List<Long>
 
+    /**
+     * Update categories in the table.
+     * Only updates the existing rows using the primary key
+     * @param categories Categories to update
+     * @return Number of rows updated
+     */
     @Update
     public suspend fun updateCategories(
         vararg categories: CategoryEntity,
     ): Int
 
+    /**
+     * Delete a category by id.
+     * @param id Required category id
+     * @return Number of rows deleted
+     */
     @Query(value = "DELETE FROM category_table WHERE id = :id")
     public suspend fun deleteCategory(
         id: Int,
     ): Int
 
+    /**
+     * Delete categories from the table.
+     * @param categories Categories to delete
+     * @return Number of rows deleted
+     */
     @Delete
     public suspend fun deleteCategories(
         vararg categories: CategoryEntity,
     ): Int
 
+    /**
+     * Delete all categories from the table.
+     * @return Number of rows deleted
+     */
     @Query(value = "DELETE FROM category_table")
     public suspend fun deleteAllCategories(): Int
 }
