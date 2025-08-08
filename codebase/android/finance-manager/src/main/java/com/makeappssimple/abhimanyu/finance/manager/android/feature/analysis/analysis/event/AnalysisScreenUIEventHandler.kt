@@ -42,8 +42,8 @@ internal class AnalysisScreenUIEventHandler internal constructor(
             }
 
             is AnalysisScreenUIEvent.OnAnalysisFilterBottomSheet.PositiveButtonClick -> {
-                uiStateEvents.updateSelectedFilter(uiEvent.updatedSelectedFilter)
                 uiStateEvents.resetScreenBottomSheetType()
+                uiStateEvents.updateSelectedFilter(uiEvent.updatedSelectedFilter)
             }
 
             is AnalysisScreenUIEvent.OnTransactionTypeChange -> {

@@ -42,13 +42,13 @@ internal class HomeScreenUIEventHandler internal constructor(
             is HomeScreenUIEvent.OnHomeMenuBottomSheetEvent -> {
                 when (uiEvent.event) {
                     HomeMenuBottomSheetEvent.OnCreateBarcodeButtonClick -> {
-                        screenViewModel.navigateToCreateBarcodeScreen()
                         uiStateEvents.resetScreenBottomSheetType()
+                        screenViewModel.navigateToCreateBarcodeScreen()
                     }
 
                     HomeMenuBottomSheetEvent.OnScanBarcodeButtonClick -> {
-                        screenViewModel.navigateToScanBarcodeScreen()
                         uiStateEvents.resetScreenBottomSheetType()
+                        screenViewModel.navigateToScanBarcodeScreen()
                     }
                 }
             }

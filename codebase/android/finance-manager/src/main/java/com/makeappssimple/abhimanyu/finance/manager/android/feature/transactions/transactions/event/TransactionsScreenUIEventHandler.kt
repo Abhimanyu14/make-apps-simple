@@ -56,11 +56,11 @@ internal class TransactionsScreenUIEventHandler internal constructor(
             }
 
             is TransactionsScreenUIEvent.OnNavigationBackButtonClick -> {
+                uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.updateSearchText("")
                 uiStateEvents.updateSelectedFilter(Filter())
                 uiStateEvents.updateIsInSelectionMode(false)
                 uiStateEvents.clearSelectedTransactions()
-                uiStateEvents.resetScreenBottomSheetType()
             }
 
             is TransactionsScreenUIEvent.OnTransactionListItem.Click -> {
@@ -120,8 +120,8 @@ internal class TransactionsScreenUIEventHandler internal constructor(
             }
 
             is TransactionsScreenUIEvent.OnSelectTransactionForBottomSheet.ItemClick -> {
-                uiStateEvents.updateIsInSelectionMode(false)
                 uiStateEvents.resetScreenBottomSheetType()
+                uiStateEvents.updateIsInSelectionMode(false)
                 uiStateEvents.updateTransactionForValuesInTransactions(
                     uiEvent.updatedTransactionForValues,
                 )
