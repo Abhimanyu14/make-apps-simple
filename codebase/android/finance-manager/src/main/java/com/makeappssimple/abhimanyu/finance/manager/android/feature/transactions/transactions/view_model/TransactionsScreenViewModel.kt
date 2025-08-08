@@ -17,9 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.view_model
 
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.Firebase
-import com.google.firebase.perf.metrics.Trace
-import com.google.firebase.perf.performance
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
@@ -82,7 +79,8 @@ internal class TransactionsScreenViewModel(
 ) {
     // region initial data
     private var isInitialDataFetchCompleted = false
-    private var performanceScreenInitTrace: Trace? = null
+    // TODO(Abhi): Firebase tracking
+    // private var performanceScreenInitTrace: Trace? = null
 
     private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
         mapOf()
@@ -491,13 +489,17 @@ internal class TransactionsScreenViewModel(
 
     // region performance tracking
     private fun startTrackingScreenInit() {
+        /*
         performanceScreenInitTrace =
             Firebase.performance.newTrace("screen_transactions_init")
         performanceScreenInitTrace?.start()
+        */
     }
 
     private fun stopTrackingScreenInit() {
+        /*
         performanceScreenInitTrace?.stop()
+        */
     }
     // endregion
 }
