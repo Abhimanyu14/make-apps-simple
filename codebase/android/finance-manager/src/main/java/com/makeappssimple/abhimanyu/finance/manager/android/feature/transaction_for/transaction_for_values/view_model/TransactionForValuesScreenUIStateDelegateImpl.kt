@@ -33,10 +33,7 @@ internal class TransactionForValuesScreenUIStateDelegateImpl(
     override val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    override val transactionForIdToDelete: MutableStateFlow<Int?> =
-        MutableStateFlow(
-            value = null,
-        )
+    override var transactionForIdToDelete: Int? = null
     override val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType> =
         MutableStateFlow(
             value = TransactionForValuesScreenBottomSheetType.None,
@@ -80,15 +77,13 @@ internal class TransactionForValuesScreenUIStateDelegateImpl(
     // region state events
     override fun deleteTransactionFor() {
         coroutineScope.launch {
-            transactionForIdToDelete.value?.let { id ->
+            transactionForIdToDelete?.let { id ->
                 val isTransactionForDeleted = deleteTransactionForUseCase(
                     id = id,
                 )
                 if (isTransactionForDeleted) {
                     // TODO(Abhi): Show snackbar
-                    transactionForIdToDelete.update {
-                        null
-                    }
+                    transactionForIdToDelete = null
                 } else {
                     // TODO(Abhi): Handle this error scenario
                 }
@@ -131,9 +126,7 @@ internal class TransactionForValuesScreenUIStateDelegateImpl(
     override fun updateTransactionForIdToDelete(
         updatedTransactionForIdToDelete: Int?,
     ) {
-        transactionForIdToDelete.update {
-            updatedTransactionForIdToDelete
-        }
+        transactionForIdToDelete = updatedTransactionForIdToDelete
     }
     // endregion
 }

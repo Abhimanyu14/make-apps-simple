@@ -35,7 +35,6 @@ internal class TransactionForValuesScreenUIEventHandler internal constructor(
             is TransactionForValuesScreenUIEvent.OnTransactionForValuesDeleteConfirmationBottomSheet.PositiveButtonClick -> {
                 uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.deleteTransactionFor()
-                uiStateEvents.updateTransactionForIdToDelete(null)
             }
 
             is TransactionForValuesScreenUIEvent.OnNavigationBackButtonClick -> {

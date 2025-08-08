@@ -100,19 +100,16 @@ internal class TransactionForValuesScreenViewModel(
             combineAndCollectLatest(
                 isLoading,
                 screenBottomSheetType,
-                transactionForIdToDelete,
             ) {
                     (
                         isLoading,
                         screenBottomSheetType,
-                        transactionForIdToDelete,
                     ),
                 ->
                 uiState.update {
                     TransactionForValuesScreenUIState(
                         isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
                         isLoading = isLoading,
-                        transactionForIdToDelete = transactionForIdToDelete,
                         transactionForListItemDataList = transactionForListItemDataList,
                         screenBottomSheetType = screenBottomSheetType,
                     )

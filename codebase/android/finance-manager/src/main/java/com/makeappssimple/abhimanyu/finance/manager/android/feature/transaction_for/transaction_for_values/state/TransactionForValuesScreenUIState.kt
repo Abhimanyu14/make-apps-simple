@@ -27,7 +27,6 @@ import kotlinx.collections.immutable.persistentListOf
 internal data class TransactionForValuesScreenUIState(
     val isBottomSheetVisible: Boolean = false,
     val isLoading: Boolean = true,
-    val transactionForIdToDelete: Int? = null,
     val transactionForListItemDataList: ImmutableList<TransactionForListItemData> = persistentListOf(),
     val screenBottomSheetType: TransactionForValuesScreenBottomSheetType = TransactionForValuesScreenBottomSheetType.None,
 ) : ScreenUIState

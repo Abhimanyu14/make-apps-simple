@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 internal interface TransactionForValuesScreenUIStateDelegate {
     // region UI state
     val isLoading: MutableStateFlow<Boolean>
-    val transactionForIdToDelete: MutableStateFlow<Int?>
+    val transactionForIdToDelete: Int?
     val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType>
     // endregion
 
