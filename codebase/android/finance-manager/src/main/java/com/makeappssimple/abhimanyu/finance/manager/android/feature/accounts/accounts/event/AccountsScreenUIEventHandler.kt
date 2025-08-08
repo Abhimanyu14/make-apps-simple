@@ -62,7 +62,6 @@ internal class AccountsScreenUIEventHandler internal constructor(
             is AccountsScreenUIEvent.OnAccountsSetAsDefaultConfirmationBottomSheet.PositiveButtonClick -> {
                 uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.updateDefaultAccountIdInDataStore()
-                uiStateEvents.updateClickedItemId(null)
             }
 
             is AccountsScreenUIEvent.OnAccountsListItemContent.Click -> {

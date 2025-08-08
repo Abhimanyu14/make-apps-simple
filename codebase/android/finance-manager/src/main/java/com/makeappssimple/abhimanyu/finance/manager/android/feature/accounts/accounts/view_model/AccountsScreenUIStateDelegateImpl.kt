@@ -96,9 +96,16 @@ internal class AccountsScreenUIStateDelegateImpl(
                     financeManagerPreferencesRepository.updateDefaultAccountId(
                         accountId = accountId,
                     )
-                if (!isDefaultAccountUpdated) {
-                    // TODO(Abhi): Use the result to show snackbar
+                if (isDefaultAccountUpdated) {
+                    // TODO(Abhi): Show snackbar for user feedback
+                    updateClickedItemId(
+                        updatedClickedItemId = null,
+                    )
+                } else {
+                    // TODO(Abhi): Handle this error scenario
                 }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
             }
         }
     }
