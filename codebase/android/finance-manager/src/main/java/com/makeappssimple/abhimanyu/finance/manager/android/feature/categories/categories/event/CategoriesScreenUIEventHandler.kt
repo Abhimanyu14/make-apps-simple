@@ -97,7 +97,6 @@ internal class CategoriesScreenUIEventHandler internal constructor(
             is CategoriesScreenUIEvent.OnCategoriesDeleteConfirmationBottomSheet.PositiveButtonClick -> {
                 uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.deleteCategory()
-                uiStateEvents.updateCategoryIdToDelete(null)
             }
         }
     }

@@ -56,9 +56,16 @@ internal class CategoriesScreenUIStateDelegateImpl(
     override fun deleteCategory() {
         coroutineScope.launch {
             categoryIdToDelete?.let { id ->
-                deleteCategoryUseCase(
+                val isCategoryDeleted = deleteCategoryUseCase(
                     id = id,
                 )
+                if (isCategoryDeleted) {
+                    categoryIdToDelete = null
+                } else {
+                    // TODO(Abhi): Handle this error scenario
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
             }
         }
     }
