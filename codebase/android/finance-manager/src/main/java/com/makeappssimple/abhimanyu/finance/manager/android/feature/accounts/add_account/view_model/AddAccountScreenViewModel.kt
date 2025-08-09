@@ -17,14 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.view_model
 
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
@@ -38,9 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.use_case.AddAccountScreenDataValidationUseCase
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -52,7 +47,6 @@ internal class AddAccountScreenViewModel(
     screenUIStateDelegate: ScreenUIStateDelegate,
     private val addAccountScreenDataValidationUseCase: AddAccountScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
-    private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val insertAccountUseCase: InsertAccountUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -62,7 +56,6 @@ internal class AddAccountScreenViewModel(
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
-    private var allAccounts: ImmutableList<Account> = persistentListOf()
     val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
             it != AccountType.CASH
@@ -106,44 +99,38 @@ internal class AddAccountScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val validationState = addAccountScreenDataValidationUseCase(
-            allAccounts = allAccounts,
-            enteredName = name.text.trim(),
-        )
-        val selectedAccountType = validAccountTypesForNewAccount.getOrNull(
-            index = selectedAccountTypeIndex,
-        )
-        uiState.update {
-            AddAccountScreenUIState(
-                selectedAccountType = selectedAccountType,
-                nameError = validationState.nameError,
-                screenSnackbarType = screenSnackbarType,
-                visibilityData = AddAccountScreenUIVisibilityData(
-                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
-                    nameTextFieldErrorText = validationState.nameError != AddAccountScreenNameError.None,
-                ),
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                isLoading = isLoading,
-                selectedAccountTypeIndex = selectedAccountTypeIndex,
-                accountTypesChipUIDataList = validAccountTypesForNewAccount
-                    .map { accountType ->
-                        ChipUIData(
-                            text = accountType.title,
-                            icon = accountType.icon,
-                        )
-                    },
-                minimumAccountBalanceTextFieldValue = minimumAccountBalanceAmountValue,
-                nameTextFieldValue = name,
-            )
-        }
-    }
-    // endregion
-
-    // region fetchData
-    override fun fetchData(): Job {
-        return viewModelScope.launch {
-            getAllAccounts()
-            completeLoading()
+        coroutineScope.launch {
+            val addAccountScreenDataValidationState: AddAccountScreenDataValidationState =
+                addAccountScreenDataValidationUseCase(
+                    enteredName = name.text.trim(),
+                )
+            val selectedAccountType: AccountType =
+                validAccountTypesForNewAccount.get(
+                    index = selectedAccountTypeIndex,
+                )
+            uiState.update {
+                AddAccountScreenUIState(
+                    selectedAccountType = selectedAccountType,
+                    nameError = addAccountScreenDataValidationState.nameError,
+                    screenSnackbarType = screenSnackbarType,
+                    visibilityData = AddAccountScreenUIVisibilityData(
+                        minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                        nameTextFieldErrorText = addAccountScreenDataValidationState.nameError != AddAccountScreenNameError.None,
+                    ),
+                    isCtaButtonEnabled = addAccountScreenDataValidationState.isCtaButtonEnabled,
+                    isLoading = isLoading,
+                    selectedAccountTypeIndex = selectedAccountTypeIndex,
+                    accountTypesChipUIDataList = validAccountTypesForNewAccount
+                        .map { accountType ->
+                            ChipUIData(
+                                text = accountType.title,
+                                icon = accountType.icon,
+                            )
+                        },
+                    minimumAccountBalanceTextFieldValue = minimumAccountBalanceAmountValue,
+                    nameTextFieldValue = name,
+                )
+            }
         }
     }
     // endregion
@@ -181,8 +168,8 @@ internal class AddAccountScreenViewModel(
                 accountType = uiState.selectedAccountType,
                 minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text.toLongOrZero(),
                 name = name.text,
-            )
-            if (isAccountInserted == -1L) {
+            ) == -1L
+            if (isAccountInserted) {
                 // TODO(Abhi): Show error
             } else {
                 navigateUp()
@@ -236,12 +223,6 @@ internal class AddAccountScreenViewModel(
         if (shouldRefresh) {
             refresh()
         }
-    }
-    // endregion
-
-    // region getAllAccounts
-    private suspend fun getAllAccounts() {
-        allAccounts = getAllAccountsUseCase()
     }
     // endregion
 }

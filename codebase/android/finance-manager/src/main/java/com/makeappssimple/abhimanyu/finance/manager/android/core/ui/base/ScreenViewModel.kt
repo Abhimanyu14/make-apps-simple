@@ -45,6 +45,13 @@ public abstract class ScreenViewModel(
     }
 
     /**
+     * Updates the UI state and state events.
+     * This method should be implemented by subclasses to define how the UI state
+     * and state events are updated based on the current data.
+     */
+    public abstract fun updateUiStateAndStateEvents()
+
+    /**
      * Fetches initial data required for the screen.
      */
     public open fun fetchData(): Job {
@@ -59,13 +66,6 @@ public abstract class ScreenViewModel(
      * By default, it does nothing.
      */
     public open fun observeData() {}
-
-    /**
-     * Updates the UI state and state events.
-     * This method should be implemented by subclasses to define how the UI state
-     * and state events are updated based on the current data.
-     */
-    public abstract fun updateUiStateAndStateEvents()
 
     private fun observeForRefreshSignal(): Job {
         return coroutineScope.launch {

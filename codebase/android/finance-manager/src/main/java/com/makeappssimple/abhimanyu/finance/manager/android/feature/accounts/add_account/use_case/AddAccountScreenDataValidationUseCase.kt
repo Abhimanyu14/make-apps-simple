@@ -18,42 +18,46 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ad
 
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultAccount
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.view_model.AddAccountScreenDataValidationState
-import kotlinx.collections.immutable.ImmutableList
 
-public class AddAccountScreenDataValidationUseCase() {
-    public operator fun invoke(
-        allAccounts: ImmutableList<Account>,
+public class AddAccountScreenDataValidationUseCase(
+    private val getAllAccountsUseCase: GetAllAccountsUseCase,
+) {
+    public suspend operator fun invoke(
         enteredName: String,
     ): AddAccountScreenDataValidationState {
-        val state = AddAccountScreenDataValidationState()
+        val allAccounts = getAllAccountsUseCase()
+        val addAccountScreenDataValidationState =
+            AddAccountScreenDataValidationState()
         if (enteredName.isBlank()) {
-            return state
+            return addAccountScreenDataValidationState
         }
-        if (isDefaultAccount(
-                account = enteredName,
-            )
-        ) {
-            return state
+        val isDefaultAccount = isDefaultAccount(
+            account = enteredName,
+        )
+        if (isDefaultAccount) {
+            return addAccountScreenDataValidationState
                 .copy(
                     nameError = AddAccountScreenNameError.AccountExists,
                 )
         }
         val isAccountNameAlreadyUsed: Boolean = allAccounts.find {
-            it.name.trim().equalsIgnoringCase(
-                other = enteredName,
-            )
+            it.name
+                .trim()
+                .equalsIgnoringCase(
+                    other = enteredName,
+                )
         }.isNotNull()
         if (isAccountNameAlreadyUsed) {
-            return state
+            return addAccountScreenDataValidationState
                 .copy(
                     nameError = AddAccountScreenNameError.AccountExists,
                 )
         }
-        return state
+        return addAccountScreenDataValidationState
             .copy(
                 isCtaButtonEnabled = true,
             )

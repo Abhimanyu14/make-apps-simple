@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalMinimumBalanceAmountValueUseCase
@@ -75,8 +76,12 @@ public class FeatureUseCaseModule {
     }
 
     @Single
-    internal fun providesAddAccountScreenDataValidationUseCase(): AddAccountScreenDataValidationUseCase {
-        return AddAccountScreenDataValidationUseCase()
+    internal fun providesAddAccountScreenDataValidationUseCase(
+        getAllAccountsUseCase: GetAllAccountsUseCase,
+    ): AddAccountScreenDataValidationUseCase {
+        return AddAccountScreenDataValidationUseCase(
+            getAllAccountsUseCase = getAllAccountsUseCase,
+        )
     }
 
     @Single
