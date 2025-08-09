@@ -27,11 +27,11 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.BarcodesNavigationDirections
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKitImpl
+import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope

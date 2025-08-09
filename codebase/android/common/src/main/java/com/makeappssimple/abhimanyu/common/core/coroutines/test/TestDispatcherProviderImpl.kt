@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.testing
+package com.makeappssimple.abhimanyu.common.core.coroutines.test
 
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 
-internal class TestDispatcherProviderImpl(
+public class TestDispatcherProviderImpl(
     testDispatcher: CoroutineDispatcher,
 ) : DispatcherProvider {
     override val default: CoroutineDispatcher = testDispatcher

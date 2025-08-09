@@ -21,8 +21,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.Fake
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.barcodes.android.core.testing.TestDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
