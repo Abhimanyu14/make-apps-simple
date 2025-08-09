@@ -46,9 +46,9 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class ViewTransactionScreenViewModel(
-    coroutineScope: CoroutineScope,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
+    private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val deleteTransactionUseByIdCase: DeleteTransactionUseByIdCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
@@ -56,12 +56,7 @@ internal class ViewTransactionScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-),
-    ViewTransactionScreenUIStateDelegate by ViewTransactionScreenUIStateDelegateImpl(
-        coroutineScope = coroutineScope,
-        deleteTransactionUseByIdCase = deleteTransactionUseByIdCase,
-        navigationKit = navigationKit,
-    ) {
+) {
     // region screen args
     private val screenArgs = ViewTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -74,6 +69,21 @@ internal class ViewTransactionScreenViewModel(
     private var originalTransactionListItemData: TransactionListItemData? = null
     private var refundTransactionsListItemData: ImmutableList<TransactionListItemData> =
         persistentListOf()
+    // endregion
+
+    // region initial data
+    private var transactionIdToDelete: Int? = null
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+
+    val screenBottomSheetType: MutableStateFlow<ViewTransactionScreenBottomSheetType> =
+        MutableStateFlow(
+            value = ViewTransactionScreenBottomSheetType.None,
+        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -112,6 +122,104 @@ internal class ViewTransactionScreenViewModel(
 
     private fun observeData() {
         observeForUiStateAndStateEvents()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun deleteTransaction() {
+        val id = transactionIdToDelete
+            ?: return // TODO(Abhi): Handle this error scenario
+        coroutineScope.launch {
+            startLoading()
+            val isTransactionDeleted = deleteTransactionUseByIdCase(
+                id = id,
+            )
+            resetScreenBottomSheetType()
+            if (isTransactionDeleted) {
+                // TODO(Abhi): Show success message
+                transactionIdToDelete = null
+                navigateUp()
+            } else {
+                // TODO(Abhi): Show error message
+            }
+            completeLoading()
+        }
+    }
+
+    fun onRefundButtonClick(
+        transactionId: Int,
+    ) {
+        navigationKit.navigateToAddTransactionScreen(
+            transactionId = transactionId,
+        )
+    }
+
+    fun navigateToEditTransactionScreen(
+        transactionId: Int,
+    ) {
+        navigationKit.navigateToEditTransactionScreen(
+            transactionId = transactionId,
+        )
+    }
+
+    fun navigateToViewTransactionScreen(
+        transactionId: Int,
+    ) {
+        navigationKit.navigateToViewTransactionScreen(
+            transactionId = transactionId,
+        )
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedViewTransactionScreenBottomSheetType = ViewTransactionScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedViewTransactionScreenBottomSheetType: ViewTransactionScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedViewTransactionScreenBottomSheetType
+        }
     }
     // endregion
 

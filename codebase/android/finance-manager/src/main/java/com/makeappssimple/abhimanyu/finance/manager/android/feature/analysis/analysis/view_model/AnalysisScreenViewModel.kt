@@ -62,8 +62,6 @@ internal class AnalysisScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), AnalysisScreenUIStateDelegate by AnalysisScreenUIStateDelegateImpl(
-    navigationKit = navigationKit,
 ) {
     // region initial data
     private val validTransactionTypes: ImmutableList<TransactionType> =
@@ -86,6 +84,23 @@ internal class AnalysisScreenViewModel(
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
     private var oldestTransactionLocalDate: LocalDate? = null
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
+        value = Filter(),
+    )
+    val screenBottomSheetType: MutableStateFlow<AnalysisScreenBottomSheetType> =
+        MutableStateFlow(
+            value = AnalysisScreenBottomSheetType.None,
+        )
+    val selectedTransactionTypeIndex: MutableStateFlow<Int> =
+        MutableStateFlow(
+            value = 0,
+        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -121,6 +136,76 @@ internal class AnalysisScreenViewModel(
     private fun observeData() {
         observeForUiStateAndStateEvents()
         observeForTransactionDataMappedByCategory()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedAnalysisScreenBottomSheetType = AnalysisScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedAnalysisScreenBottomSheetType: AnalysisScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedAnalysisScreenBottomSheetType
+        }
+    }
+
+    fun updateSelectedFilter(
+        updatedSelectedFilter: Filter,
+    ) {
+        selectedFilter.update {
+            updatedSelectedFilter
+        }
+    }
+
+    fun updateSelectedTransactionTypeIndex(
+        updatedSelectedTransactionTypeIndex: Int,
+    ) {
+        selectedTransactionTypeIndex.update {
+            updatedSelectedTransactionTypeIndex
+        }
     }
     // endregion
 

@@ -16,16 +16,19 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.view_model
 
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.InsertCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
@@ -45,21 +48,18 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddCategoryScreenViewModel(
-    coroutineScope: CoroutineScope,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addCategoryScreenDataValidationUseCase: AddCategoryScreenDataValidationUseCase,
+    private val coroutineScope: CoroutineScope,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val insertCategoriesUseCase: InsertCategoriesUseCase,
     private val navigationKit: NavigationKit,
+    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), AddCategoryScreenUIStateDelegate by AddCategoryScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    insertCategoriesUseCase = insertCategoriesUseCase,
-    navigationKit = navigationKit,
-) {
+), ScreenUIStateDelegate by screenUIStateDelegate {
     // region screen args
     private val screenArgs = AddCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -70,6 +70,27 @@ internal class AddCategoryScreenViewModel(
     // region initial data
     private val transactionType: String? = screenArgs.transactionType
     private var categories: ImmutableList<Category> = persistentListOf()
+    // endregion
+
+    // region initial data
+    val validTransactionTypes: ImmutableList<TransactionType> =
+        persistentListOf(
+            TransactionType.INCOME,
+            TransactionType.EXPENSE,
+            TransactionType.INVESTMENT,
+        )
+    // endregion
+
+    // region UI state
+    var title = TextFieldValue()
+    var searchText = ""
+    var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
+    var selectedTransactionTypeIndex = validTransactionTypes
+        .indexOf(
+            element = TransactionType.EXPENSE,
+        )
+    var screenBottomSheetType: AddCategoryScreenBottomSheetType =
+        AddCategoryScreenBottomSheetType.None
     // endregion
 
     // region uiStateAndStateEvents
@@ -116,6 +137,100 @@ internal class AddCategoryScreenViewModel(
 
     private fun observeData() {
         observeForUiStateAndStateEvents()
+    }
+    // endregion
+
+    // region state events
+    fun clearSearchText(
+        refresh: Boolean = false,
+    ) {
+        searchText = ""
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun clearTitle(
+        refresh: Boolean = false,
+    ) {
+        title = title.copy(
+            text = "",
+        )
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun insertCategory() {
+        val category = Category(
+            emoji = emoji,
+            title = title.text,
+            transactionType = validTransactionTypes[selectedTransactionTypeIndex],
+        )
+        coroutineScope.launch {
+            insertCategoriesUseCase(category)
+            navigationKit.navigateUp()
+        }
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedAddCategoryScreenBottomSheetType = AddCategoryScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateEmoji(
+        updatedEmoji: String,
+        refresh: Boolean = false,
+    ) {
+        emoji = updatedEmoji
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedAddCategoryScreenBottomSheetType: AddCategoryScreenBottomSheetType,
+        refresh: Boolean = false,
+    ) {
+        screenBottomSheetType = updatedAddCategoryScreenBottomSheetType
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateSearchText(
+        updatedSearchText: String,
+        refresh: Boolean = false,
+    ) {
+        searchText = updatedSearchText
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateSelectedTransactionTypeIndex(
+        updatedSelectedTransactionTypeIndex: Int,
+        refresh: Boolean = false,
+    ) {
+        selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateTitle(
+        updatedTitle: TextFieldValue,
+        refresh: Boolean = false,
+    ) {
+        title = updatedTitle
+        if (refresh) {
+            refresh()
+        }
     }
     // endregion
 

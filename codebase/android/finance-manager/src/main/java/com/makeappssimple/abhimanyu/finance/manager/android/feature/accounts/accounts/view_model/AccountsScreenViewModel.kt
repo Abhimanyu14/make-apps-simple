@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ac
 
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.accounts.AccountsListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
@@ -45,7 +45,7 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AccountsScreenViewModel(
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
@@ -54,17 +54,11 @@ internal class AccountsScreenViewModel(
     private val getAllAccountsListItemDataListUseCase: GetAllAccountsListItemDataListUseCase,
     private val getDefaultAccountIdFlowUseCase: GetDefaultAccountIdFlowUseCase,
     private val navigationKit: NavigationKit,
-    private val screenUICommonState: ScreenUICommonState,
+    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), AccountsScreenUIStateDelegate by AccountsScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    deleteAccountByIdUseCase = deleteAccountByIdUseCase,
-    financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-    navigationKit = navigationKit,
-    screenUICommonState = screenUICommonState,
-) {
+), ScreenUIStateDelegate by screenUIStateDelegate {
     // region initial data
     private var allAccounts: ImmutableList<Account> = persistentListOf()
     private var defaultAccountId: Int? = null
@@ -72,6 +66,12 @@ internal class AccountsScreenViewModel(
     private var allAccountsTotalMinimumBalanceAmountValue: Long = 0L
     private var allAccountsListItemDataList: ImmutableList<AccountsListItemData> =
         persistentListOf()
+    // endregion
+
+    // region UI state
+    var screenBottomSheetType: AccountsScreenBottomSheetType =
+        AccountsScreenBottomSheetType.None
+    var clickedItemId: Int? = null
     // endregion
 
     // region uiState and uiStateEvents
@@ -112,6 +112,86 @@ internal class AccountsScreenViewModel(
     private fun observeData() {
         observeForAllAccounts()
         observeForDefaultAccountId()
+    }
+    // endregion
+
+    // region state events
+    fun deleteAccount() {
+        coroutineScope.launch {
+            clickedItemId?.let { id ->
+                val isAccountDeleted = deleteAccountByIdUseCase(
+                    id = id,
+                )
+                if (isAccountDeleted) {
+                    clickedItemId = null
+                } else {
+                    // TODO(Abhi): Handle this error scenario
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    fun navigateToAddAccountScreen() {
+        navigationKit.navigateToAddAccountScreen()
+    }
+
+    fun navigateToEditAccountScreen(
+        accountId: Int,
+    ) {
+        navigationKit.navigateToEditAccountScreen(
+            accountId = accountId,
+        )
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedAccountsScreenBottomSheetType = AccountsScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateClickedItemId(
+        updatedClickedItemId: Int?,
+        shouldRefresh: Boolean = false,
+    ) {
+        clickedItemId = updatedClickedItemId
+        if (shouldRefresh) {
+            refresh()
+        }
+    }
+
+    fun updateDefaultAccountIdInDataStore() {
+        coroutineScope.launch {
+            clickedItemId?.let { accountId ->
+                val isDefaultAccountUpdated =
+                    financeManagerPreferencesRepository.updateDefaultAccountId(
+                        accountId = accountId,
+                    )
+                if (isDefaultAccountUpdated) {
+                    // TODO(Abhi): Show snackbar for user feedback
+                    clickedItemId = null
+                } else {
+                    // TODO(Abhi): Handle this error scenario
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedAccountsScreenBottomSheetType: AccountsScreenBottomSheetType,
+        shouldRefresh: Boolean = false,
+    ) {
+        screenBottomSheetType = updatedAccountsScreenBottomSheetType
+        if (shouldRefresh) {
+            refresh()
+        }
     }
     // endregion
 

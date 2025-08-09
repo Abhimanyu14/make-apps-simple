@@ -32,16 +32,20 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.grid_item.CategoriesGridItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultInvestmentCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.state.CategoriesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.state.CategoriesScreenUIStateEvents
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -55,27 +59,41 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class CategoriesScreenViewModel(
-    coroutineScope: CoroutineScope,
     private val checkIfCategoryIsUsedInTransactionsUseCase: CheckIfCategoryIsUsedInTransactionsUseCase,
+    private val coroutineScope: CoroutineScope,
     private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesFlowUseCase: GetAllCategoriesFlowUseCase,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
     private val navigationKit: NavigationKit,
+    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), CategoriesScreenUIStateDelegate by CategoriesScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    deleteCategoryByIdUseCase = deleteCategoryByIdUseCase,
-    setDefaultCategoryUseCase = setDefaultCategoryUseCase,
-    navigationKit = navigationKit,
-) {
+), ScreenUIStateDelegate by screenUIStateDelegate {
     // region initial data
     private val categoriesGridItemDataMap: MutableStateFlow<ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>>> =
         MutableStateFlow(
             value = persistentMapOf(),
         )
+    // endregion
+
+    // region initial data
+    val validTransactionTypes: PersistentList<TransactionType> =
+        persistentListOf(
+            TransactionType.EXPENSE,
+            TransactionType.INCOME,
+            TransactionType.INVESTMENT,
+        )
+    // endregion
+
+    // region UI state
+    var screenBottomSheetType: CategoriesScreenBottomSheetType =
+        CategoriesScreenBottomSheetType.None
+    var screenSnackbarType: CategoriesScreenSnackbarType =
+        CategoriesScreenSnackbarType.None
+    var categoryIdToDelete: Int? = null
+    var clickedItemId: Int? = null
     // endregion
 
     // region uiStateAndStateEvents
@@ -249,6 +267,122 @@ internal class CategoriesScreenViewModel(
             isSelected = isDefault,
             category = category,
         )
+    }
+    // endregion
+
+    // region state events
+    fun deleteCategory() {
+        coroutineScope.launch {
+            categoryIdToDelete?.let { id ->
+                val isCategoryDeleted = deleteCategoryByIdUseCase(
+                    id = id,
+                )
+                if (isCategoryDeleted) {
+                    categoryIdToDelete = null
+                } else {
+                    // TODO(Abhi): Handle this error scenario
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    fun navigateToAddCategoryScreen(
+        transactionType: String,
+    ) {
+        navigationKit.navigateToAddCategoryScreen(
+            transactionType = transactionType,
+        )
+    }
+
+    fun navigateToEditCategoryScreen(
+        categoryId: Int,
+    ) {
+        navigationKit.navigateToEditCategoryScreen(
+            categoryId = categoryId,
+        )
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedCategoriesScreenBottomSheetType = CategoriesScreenBottomSheetType.None,
+        )
+    }
+
+    fun resetScreenSnackbarType() {
+        updateScreenSnackbarType(
+            updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.None,
+        )
+    }
+
+    fun updateDefaultCategoryIdInDataStore(
+        selectedTabIndex: Int,
+    ) {
+        coroutineScope.launch {
+            clickedItemId?.let {
+                val isSetDefaultCategorySuccessful = setDefaultCategoryUseCase(
+                    defaultCategoryId = it,
+                    transactionType = validTransactionTypes[selectedTabIndex],
+                )
+                if (isSetDefaultCategorySuccessful) {
+                    updateScreenSnackbarType(
+                        updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategorySuccessful,
+                    )
+                } else {
+                    updateScreenSnackbarType(
+                        updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategoryFailed,
+                    )
+                    clickedItemId = null
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    fun updateCategoryIdToDelete(
+        updatedCategoryIdToDelete: Int?,
+        refresh: Boolean = false,
+    ) {
+        categoryIdToDelete = updatedCategoryIdToDelete
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateClickedItemId(
+        updatedClickedItemId: Int?,
+        refresh: Boolean = false,
+    ) {
+        clickedItemId = updatedClickedItemId
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedCategoriesScreenBottomSheetType: CategoriesScreenBottomSheetType,
+        refresh: Boolean = false,
+    ) {
+        screenBottomSheetType = updatedCategoriesScreenBottomSheetType
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateScreenSnackbarType(
+        updatedCategoriesScreenSnackbarType: CategoriesScreenSnackbarType,
+        refresh: Boolean = false,
+    ) {
+        screenSnackbarType = updatedCategoriesScreenSnackbarType
+        if (refresh) {
+            refresh()
+        }
     }
     // endregion
 

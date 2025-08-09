@@ -20,6 +20,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -33,7 +34,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.Navi
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.bottom_sheet.EditAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIStateEvents
@@ -51,8 +54,8 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditAccountScreenViewModel(
-    coroutineScope: CoroutineScope,
     savedStateHandle: SavedStateHandle,
+    private val coroutineScope: CoroutineScope,
     private val editAccountScreenDataValidationUseCase: EditAccountScreenDataValidationUseCase,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAccountByIdUseCase: GetAccountByIdUseCase,
@@ -62,12 +65,7 @@ internal class EditAccountScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), EditAccountScreenUIStateDelegate by EditAccountScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    navigationKit = navigationKit,
-    screenUICommonState = screenUICommonState,
-    updateAccountUseCase = updateAccountUseCase,
-) {
+), ScreenUICommonState by screenUICommonState {
     // region screen args
     private val screenArgs = EditAccountScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -76,6 +74,30 @@ internal class EditAccountScreenViewModel(
 
     // region initial data
     private var allAccounts: ImmutableList<Account> = persistentListOf()
+    // endregion
+
+    // region initial data
+    var currentAccount: Account? = null
+    val validAccountTypesForNewAccount: ImmutableList<AccountType> =
+        AccountType.entries.filter {
+            it != AccountType.CASH
+        }
+    // endregion
+
+    // region UI state
+    //  var isLoading: Boolean = true
+    var minimumAccountBalanceAmountValue: TextFieldValue =
+        TextFieldValue()
+    var name = TextFieldValue()
+    var balanceAmountValue = TextFieldValue()
+    var screenBottomSheetType: EditAccountScreenBottomSheetType =
+        EditAccountScreenBottomSheetType.None
+    var screenSnackbarType: EditAccountScreenSnackbarType =
+        EditAccountScreenSnackbarType.None
+    var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
+        .indexOf(
+            element = AccountType.BANK,
+        )
     // endregion
 
     // region uiState and uiStateEvents
@@ -120,6 +142,133 @@ internal class EditAccountScreenViewModel(
     }
 
     private fun observeData() {}
+    // endregion
+
+    // region state events
+    fun clearBalanceAmountValue(): Job? {
+        return updateBalanceAmountValue(
+            updatedBalanceAmountValue = balanceAmountValue
+                .copy(
+                    text = "",
+                ),
+        )
+    }
+
+    fun clearMinimumAccountBalanceAmountValue(): Job? {
+        return updateMinimumAccountBalanceAmountValue(
+            updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue
+                .copy(
+                    text = "",
+                ),
+        )
+    }
+
+    fun clearName(): Job? {
+        return updateName(
+            updatedName = name
+                .copy(
+                    text = "",
+                ),
+        )
+    }
+
+    fun navigateUp(): Job {
+        return navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType(): Job? {
+        return updateScreenBottomSheetType(
+            updatedEditAccountScreenBottomSheetType = EditAccountScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateAccount(): Job {
+        return coroutineScope.launch {
+            startLoading()
+
+            val isAccountUpdated = updateAccountUseCase(
+                currentAccount = currentAccount,
+                validAccountTypesForNewAccount = validAccountTypesForNewAccount,
+                selectedAccountTypeIndex = selectedAccountTypeIndex,
+                balanceAmountValue = balanceAmountValue.text,
+                minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text,
+                name = name.text,
+            )
+            if (isAccountUpdated) {
+                navigationKit.navigateUp()
+            } else {
+                completeLoading()
+                // TODO: Show Error
+            }
+        }
+    }
+
+    fun updateBalanceAmountValue(
+        updatedBalanceAmountValue: TextFieldValue,
+        shouldRefresh: Boolean = false,
+    ): Job? {
+        balanceAmountValue = updatedBalanceAmountValue
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return null
+    }
+
+    fun updateMinimumAccountBalanceAmountValue(
+        updatedMinimumAccountBalanceAmountValue: TextFieldValue,
+        shouldRefresh: Boolean = false,
+    ): Job? {
+        minimumAccountBalanceAmountValue =
+            updatedMinimumAccountBalanceAmountValue
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return null
+    }
+
+    fun updateName(
+        updatedName: TextFieldValue,
+        shouldRefresh: Boolean = false,
+    ): Job? {
+        name = updatedName
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return null
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedEditAccountScreenBottomSheetType: EditAccountScreenBottomSheetType,
+        shouldRefresh: Boolean = false,
+    ): Job? {
+        screenBottomSheetType = updatedEditAccountScreenBottomSheetType
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return null
+    }
+
+    fun updateScreenSnackbarType(
+        updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
+        shouldRefresh: Boolean = false,
+    ): Job? {
+        screenSnackbarType = updatedEditAccountScreenSnackbarType
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return null
+    }
+
+    fun updateSelectedAccountTypeIndex(
+        updatedSelectedAccountTypeIndex: Int,
+        shouldRefresh: Boolean = false,
+    ): Job? {
+        selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return null
+    }
     // endregion
 
     // region getAllAccounts

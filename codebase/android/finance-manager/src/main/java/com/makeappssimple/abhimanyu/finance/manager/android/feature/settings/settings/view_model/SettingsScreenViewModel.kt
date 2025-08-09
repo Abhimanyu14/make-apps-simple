@@ -43,10 +43,10 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class SettingsScreenViewModel(
-    coroutineScope: CoroutineScope,
     private val alarmKit: AlarmKit,
     private val appVersionKit: AppVersionKit,
     private val backupDataUseCase: BackupDataUseCase,
+    private val coroutineScope: CoroutineScope,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val recalculateTotalUseCase: RecalculateTotalUseCase,
     private val restoreDataUseCase: RestoreDataUseCase,
@@ -54,17 +54,26 @@ internal class SettingsScreenViewModel(
     @VisibleForTesting internal val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), SettingsScreenUIStateDelegate by SettingsScreenUIStateDelegateImpl(
-    alarmKit = alarmKit,
-    coroutineScope = coroutineScope,
-    navigationKit = navigationKit,
-    recalculateTotalUseCase = recalculateTotalUseCase,
 ) {
     // region initial data
     private var appVersion: String = ""
     private val isReminderEnabled: MutableStateFlow<Boolean> = MutableStateFlow(
         value = false,
     )
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val screenBottomSheetType: MutableStateFlow<SettingsScreenBottomSheetType> =
+        MutableStateFlow(
+            value = SettingsScreenBottomSheetType.None,
+        )
+    val screenSnackbarType: MutableStateFlow<SettingsScreenSnackbarType> =
+        MutableStateFlow(
+            value = SettingsScreenSnackbarType.None,
+        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -102,6 +111,118 @@ internal class SettingsScreenViewModel(
     private fun observeData() {
         observeForUiStateAndStateEvents()
         observeForReminder()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun disableReminder() {
+        coroutineScope.launch {
+            if (alarmKit.cancelReminderAlarm()) {
+                updateScreenSnackbarType(
+                    updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.CancelReminderSuccessful,
+                )
+            } else {
+                updateScreenSnackbarType(
+                    updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.CancelReminderFailed,
+                )
+            }
+        }
+    }
+
+    fun enableReminder() {
+        coroutineScope.launch {
+            alarmKit.scheduleReminderAlarm()
+        }
+    }
+
+    fun navigateToAccountsScreen() {
+        navigationKit.navigateToAccountsScreen()
+    }
+
+    fun navigateToCategoriesScreen() {
+        navigationKit.navigateToCategoriesScreen()
+    }
+
+    fun navigateToOpenSourceLicensesScreen() {
+        navigationKit.navigateToOpenSourceLicensesScreen()
+    }
+
+    fun navigateToTransactionForValuesScreen() {
+        navigationKit.navigateToTransactionForValuesScreen()
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun recalculateTotal() {
+        coroutineScope.launch {
+            startLoading()
+            recalculateTotalUseCase()
+            navigationKit.navigateUp()
+        }
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedSettingsScreenBottomSheetType = SettingsScreenBottomSheetType.None,
+        )
+    }
+
+    fun resetScreenSnackbarType() {
+        updateScreenSnackbarType(
+            updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedSettingsScreenBottomSheetType: SettingsScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedSettingsScreenBottomSheetType
+        }
+    }
+
+    fun updateScreenSnackbarType(
+        updatedSettingsScreenSnackbarType: SettingsScreenSnackbarType,
+    ) {
+        screenSnackbarType.update {
+            updatedSettingsScreenSnackbarType
+        }
     }
     // endregion
 

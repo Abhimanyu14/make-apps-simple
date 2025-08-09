@@ -51,6 +51,7 @@ import org.koin.core.annotation.Module
         RepositoryModule::class,
         RoomModule::class,
         ScreenUICommonStateModule::class,
+        ScreenUIStateDelegateModule::class,
         UriDecoderModule::class,
         UriEncoderModule::class,
     ],

@@ -36,12 +36,14 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.state.TransactionsScreenUIState
@@ -62,7 +64,7 @@ import java.time.LocalDate
 
 @KoinViewModel
 internal class TransactionsScreenViewModel(
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     private val dispatcherProvider: DispatcherProvider,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
@@ -72,10 +74,6 @@ internal class TransactionsScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), TransactionsScreenUIStateDelegate by TransactionsScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    navigationKit = navigationKit,
-    updateTransactionsUseCase = updateTransactionsUseCase,
 ) {
     // region initial data
     private var isInitialDataFetchCompleted = false
@@ -94,6 +92,45 @@ internal class TransactionsScreenViewModel(
     private val sortOptions: ImmutableList<SortOption> =
         SortOption.entries.toImmutableList()
     private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
+    // endregion
+
+    // region initial data
+    val allTransactionData: MutableStateFlow<ImmutableList<TransactionData>> =
+        MutableStateFlow(
+            value = persistentListOf(),
+        )
+    val selectedTransactionIndices: MutableStateFlow<ImmutableList<Int>> =
+        MutableStateFlow(
+            value = persistentListOf(),
+        )
+    val transactionDetailsListItemViewData: MutableStateFlow<Map<String, ImmutableList<TransactionListItemData>>> =
+        MutableStateFlow(
+            value = mutableMapOf(),
+        )
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val isInSelectionMode: MutableStateFlow<Boolean> =
+        MutableStateFlow(
+            value = false,
+        )
+    val searchText: MutableStateFlow<String> = MutableStateFlow(
+        value = "",
+    )
+    val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
+        value = Filter(),
+    )
+    val selectedSortOption: MutableStateFlow<SortOption> =
+        MutableStateFlow(
+            value = SortOption.LATEST_FIRST,
+        )
+    val screenBottomSheetType: MutableStateFlow<TransactionsScreenBottomSheetType> =
+        MutableStateFlow(
+            value = TransactionsScreenBottomSheetType.None,
+        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -139,6 +176,164 @@ internal class TransactionsScreenViewModel(
         observeForUiStateAndStateEvents()
         observeForTransactionDetailsListItemViewData()
         observeForAllTransactionData()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun addToSelectedTransactions(
+        transactionId: Int,
+    ) {
+        selectedTransactionIndices.update {
+            it.toMutableList().apply {
+                add(transactionId)
+            }.toImmutableList()
+        }
+    }
+
+    fun clearSelectedTransactions() {
+        selectedTransactionIndices.update {
+            persistentListOf()
+        }
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun removeFromSelectedTransactions(
+        transactionId: Int,
+    ) {
+        selectedTransactionIndices.update {
+            it.toMutableList().apply {
+                remove(transactionId)
+            }.toImmutableList()
+        }
+    }
+
+    fun navigateToAddTransactionScreen() {
+        navigationKit.navigateToAddTransactionScreen()
+    }
+
+    fun navigateToViewTransactionScreen(
+        transactionId: Int,
+    ) {
+        navigationKit.navigateToViewTransactionScreen(
+            transactionId = transactionId,
+        )
+    }
+
+    fun selectAllTransactions() {
+        selectedTransactionIndices.update {
+            transactionDetailsListItemViewData.value.values.flatMap {
+                it.map { transactionListItemData ->
+                    transactionListItemData.transactionId
+                }
+            }.toImmutableList()
+        }
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedTransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedTransactionsScreenBottomSheetType: TransactionsScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedTransactionsScreenBottomSheetType
+        }
+    }
+
+    fun updateIsInSelectionMode(
+        updatedIsInSelectionMode: Boolean,
+    ) {
+        isInSelectionMode.update {
+            updatedIsInSelectionMode
+        }
+    }
+
+    fun updateSearchText(
+        updatedSearchText: String,
+    ) {
+        searchText.update {
+            updatedSearchText
+        }
+    }
+
+    fun updateSelectedFilter(
+        updatedSelectedFilter: Filter,
+    ) {
+        selectedFilter.update {
+            updatedSelectedFilter
+        }
+    }
+
+    fun updateSelectedSortOption(
+        updatedSelectedSortOption: SortOption,
+    ) {
+        selectedSortOption.update {
+            updatedSelectedSortOption
+        }
+    }
+
+    fun updateTransactionForValuesInTransactions(
+        transactionForId: Int,
+    ) {
+        val selectedTransactions: ImmutableList<Int> =
+            selectedTransactionIndices.value
+        coroutineScope.launch {
+            val updatedTransactions =
+                allTransactionData.value.map { transactionData ->
+                    transactionData.transaction
+                }.filter {
+                    it.transactionType == TransactionType.EXPENSE &&
+                            selectedTransactions.contains(it.id)
+                }.map {
+                    it
+                        .copy(
+                            transactionForId = transactionForId,
+                        )
+                }
+            updateTransactionsUseCase(
+                transactions = updatedTransactions.toTypedArray(),
+            )
+        }
     }
     // endregion
 

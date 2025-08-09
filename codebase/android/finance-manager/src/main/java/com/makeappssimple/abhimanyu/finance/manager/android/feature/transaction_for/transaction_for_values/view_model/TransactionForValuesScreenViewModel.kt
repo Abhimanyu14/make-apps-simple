@@ -44,7 +44,7 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class TransactionForValuesScreenViewModel(
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
     private val checkIfTransactionForValuesAreUsedInTransactionsUseCase: CheckIfTransactionForValuesAreUsedInTransactionsUseCase,
     private val deleteTransactionForByIdUseCase: DeleteTransactionForByIdUseCase,
@@ -52,15 +52,21 @@ internal class TransactionForValuesScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-),
-    TransactionForValuesScreenUIStateDelegate by TransactionForValuesScreenUIStateDelegateImpl(
-        coroutineScope = coroutineScope,
-        deleteTransactionForByIdUseCase = deleteTransactionForByIdUseCase,
-        navigationKit = navigationKit,
-    ) {
+) {
     // region initial data
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
         persistentListOf()
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    var transactionForIdToDelete: Int? = null
+    val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType> =
+        MutableStateFlow(
+            value = TransactionForValuesScreenBottomSheetType.None,
+        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -91,6 +97,96 @@ internal class TransactionForValuesScreenViewModel(
     private fun observeData() {
         observeForUiStateAndStateEvents()
         observeForTransactionForListItemDataList()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun deleteTransactionFor() {
+        coroutineScope.launch {
+            transactionForIdToDelete?.let { id ->
+                val isTransactionForDeleted = deleteTransactionForByIdUseCase(
+                    id = id,
+                )
+                if (isTransactionForDeleted) {
+                    // TODO(Abhi): Show snackbar
+                    transactionForIdToDelete = null
+                } else {
+                    // TODO(Abhi): Handle this error scenario
+                }
+            } ?: run {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    fun navigateToAddTransactionForScreen() {
+        navigationKit.navigateToAddTransactionForScreen()
+    }
+
+    fun navigateToEditTransactionForScreen(
+        transactionForId: Int,
+    ) {
+        navigationKit.navigateToEditTransactionForScreen(
+            transactionForId = transactionForId,
+        )
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedTransactionForValuesScreenBottomSheetType = TransactionForValuesScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedTransactionForValuesScreenBottomSheetType: TransactionForValuesScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedTransactionForValuesScreenBottomSheetType
+        }
+    }
+
+    fun updateTransactionForIdToDelete(
+        updatedTransactionForIdToDelete: Int?,
+    ) {
+        transactionForIdToDelete = updatedTransactionForIdToDelete
     }
     // endregion
 

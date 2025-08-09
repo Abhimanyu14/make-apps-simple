@@ -16,14 +16,17 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.view_model
 
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
+import com.makeappssimple.abhimanyu.common.core.extensions.filterDigits
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
+import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
@@ -40,6 +43,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -50,6 +54,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefau
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultInvestmentCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.bottom_sheet.AddTransactionScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.snackbar.AddTransactionScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state.AccountFromText
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state.AccountToText
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state.AddTransactionScreenUIState
@@ -66,13 +71,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
+import java.time.LocalDate
+import java.time.LocalTime
 
 @KoinViewModel
 internal class AddTransactionScreenViewModel(
-    coroutineScope: CoroutineScope,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addTransactionScreenDataValidationUseCase: AddTransactionScreenDataValidationUseCase,
+    private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
@@ -86,13 +93,7 @@ internal class AddTransactionScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-),
-    AddTransactionScreenUIStateDelegate by AddTransactionScreenUIStateDelegateImpl(
-        dateTimeKit = dateTimeKit,
-        coroutineScope = coroutineScope,
-        insertTransactionUseCase = insertTransactionUseCase,
-        navigationKit = navigationKit,
-    ) {
+) {
     // region screen args
     private val screenArgs = AddTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -118,10 +119,75 @@ internal class AddTransactionScreenViewModel(
     private var filteredCategories: ImmutableList<Category> = persistentListOf()
     // endregion
 
+    // region initial data
+    var originalTransactionData: TransactionData? = null
+    var transactionForValues: ImmutableList<TransactionFor> =
+        persistentListOf()
+    var selectedTransactionType: TransactionType? = null
+    // endregion
+
     // region observables
     private val titleSuggestions: MutableStateFlow<ImmutableList<String>> =
         MutableStateFlow(
             value = persistentListOf(),
+        )
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val screenBottomSheetType: MutableStateFlow<AddTransactionScreenBottomSheetType> =
+        MutableStateFlow(
+            value = AddTransactionScreenBottomSheetType.None,
+        )
+    val screenSnackbarType: MutableStateFlow<AddTransactionScreenSnackbarType> =
+        MutableStateFlow(
+            value = AddTransactionScreenSnackbarType.None,
+        )
+    val selectedTransactionTypeIndex: MutableStateFlow<Int> =
+        MutableStateFlow(
+            value = 0,
+        )
+    val amount: MutableStateFlow<TextFieldValue> =
+        MutableStateFlow(
+            value = TextFieldValue(),
+        )
+    val category: MutableStateFlow<Category?> =
+        MutableStateFlow(
+            value = null,
+        )
+    val title: MutableStateFlow<TextFieldValue> =
+        MutableStateFlow(
+            value = TextFieldValue(),
+        )
+    val selectedTransactionForIndex: MutableStateFlow<Int> =
+        MutableStateFlow(
+            value = 0,
+        )
+    val accountFrom: MutableStateFlow<Account?> =
+        MutableStateFlow(
+            value = null,
+        )
+    val accountTo: MutableStateFlow<Account?> =
+        MutableStateFlow(
+            value = null,
+        )
+    val transactionDate: MutableStateFlow<LocalDate> =
+        MutableStateFlow(
+            value = dateTimeKit.getCurrentLocalDate(),
+        )
+    val transactionTime: MutableStateFlow<LocalTime> =
+        MutableStateFlow(
+            value = dateTimeKit.getCurrentLocalTime(),
+        )
+    val isTransactionDatePickerDialogVisible: MutableStateFlow<Boolean> =
+        MutableStateFlow(
+            value = false,
+        )
+    val isTransactionTimePickerDialogVisible: MutableStateFlow<Boolean> =
+        MutableStateFlow(
+            value = false,
         )
     // endregion
 
@@ -185,6 +251,229 @@ internal class AddTransactionScreenViewModel(
         observeForUiStateAndStateEvents()
         observeForTitleSuggestions()
         observeForSelectedTransactionType()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun clearAmount() {
+        amount.update {
+            it.copy(
+                text = "",
+            )
+        }
+    }
+
+    fun clearTitle() {
+        title.update {
+            it.copy(
+                text = "",
+            )
+        }
+    }
+
+    fun insertTransaction() {
+        val selectedAccountFrom = accountFrom.value
+        val selectedAccountTo = accountTo.value
+        val selectedCategoryId = category.value?.id
+        val selectedTransactionForId =
+            if (selectedTransactionForIndex.value != -1) {
+                transactionForValues[selectedTransactionForIndex.value].id
+            } else {
+                -1
+            }
+        val selectedTransactionDate = transactionDate.value
+        val selectedTransactionTime = transactionTime.value
+        val enteredAmountValue = amount.value.text.toLongOrZero()
+        val enteredTitle = title.value.text
+        val selectedTransactionType = this.selectedTransactionType ?: return
+        val originalTransaction = originalTransactionData?.transaction
+
+        coroutineScope.launch {
+            val isTransactionInserted = insertTransactionUseCase(
+                selectedAccountFrom = selectedAccountFrom,
+                selectedAccountTo = selectedAccountTo,
+                selectedCategoryId = selectedCategoryId,
+                selectedTransactionForId = selectedTransactionForId,
+                selectedTransactionDate = selectedTransactionDate,
+                selectedTransactionTime = selectedTransactionTime,
+                enteredAmountValue = enteredAmountValue,
+                enteredTitle = enteredTitle,
+                selectedTransactionType = selectedTransactionType,
+                originalTransaction = originalTransaction,
+            )
+            if (isTransactionInserted) {
+                updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionSuccessful)
+                navigationKit.navigateUp()
+            } else {
+                updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionFailed)
+            }
+        }
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedAddTransactionScreenBottomSheetType = AddTransactionScreenBottomSheetType.None,
+        )
+    }
+
+    fun resetScreenSnackbarType() {
+        updateScreenSnackbarType(
+            updatedAddTransactionScreenSnackbarType = AddTransactionScreenSnackbarType.None,
+        )
+    }
+
+    fun updateAccountFrom(
+        updatedAccountFrom: Account?,
+    ) {
+        accountFrom.update {
+            updatedAccountFrom
+        }
+    }
+
+    fun updateAccountTo(
+        updatedAccountTo: Account?,
+    ) {
+        accountTo.update {
+            updatedAccountTo
+        }
+    }
+
+    fun updateAmount(
+        updatedAmount: TextFieldValue,
+    ) {
+        amount.update {
+            updatedAmount.copy(
+                text = updatedAmount.text.filterDigits(),
+            )
+        }
+    }
+
+    fun updateAmount(
+        updatedAmount: String,
+    ) {
+        amount.update {
+            it.copy(
+                text = updatedAmount.filterDigits(),
+            )
+        }
+    }
+
+    fun updateCategory(
+        updatedCategory: Category?,
+    ) {
+        category.update {
+            updatedCategory
+        }
+    }
+
+    fun updateIsTransactionDatePickerDialogVisible(
+        updatedIsTransactionDatePickerDialogVisible: Boolean,
+    ) {
+        isTransactionDatePickerDialogVisible.update {
+            updatedIsTransactionDatePickerDialogVisible
+        }
+    }
+
+    fun updateIsTransactionTimePickerDialogVisible(
+        updatedIsTransactionTimePickerDialogVisible: Boolean,
+    ) {
+        isTransactionTimePickerDialogVisible.update {
+            updatedIsTransactionTimePickerDialogVisible
+        }
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedAddTransactionScreenBottomSheetType: AddTransactionScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedAddTransactionScreenBottomSheetType
+        }
+    }
+
+    fun updateScreenSnackbarType(
+        updatedAddTransactionScreenSnackbarType: AddTransactionScreenSnackbarType,
+    ) {
+        screenSnackbarType.update {
+            updatedAddTransactionScreenSnackbarType
+        }
+    }
+
+    fun updateSelectedTransactionForIndex(
+        updatedSelectedTransactionForIndex: Int,
+    ) {
+        selectedTransactionForIndex.update {
+            updatedSelectedTransactionForIndex
+        }
+    }
+
+    fun updateSelectedTransactionTypeIndex(
+        updatedSelectedTransactionTypeIndex: Int,
+    ) {
+        selectedTransactionTypeIndex.update {
+            updatedSelectedTransactionTypeIndex
+        }
+    }
+
+    fun updateTitle(
+        updatedTitle: TextFieldValue,
+    ) {
+        title.update {
+            updatedTitle
+        }
+    }
+
+    fun updateTransactionDate(
+        updatedTransactionDate: LocalDate,
+    ) {
+        transactionDate.update {
+            updatedTransactionDate
+        }
+    }
+
+    fun updateTransactionTime(
+        updatedTransactionTime: LocalTime,
+    ) {
+        transactionTime.update {
+            updatedTransactionTime
+        }
     }
     // endregion
 

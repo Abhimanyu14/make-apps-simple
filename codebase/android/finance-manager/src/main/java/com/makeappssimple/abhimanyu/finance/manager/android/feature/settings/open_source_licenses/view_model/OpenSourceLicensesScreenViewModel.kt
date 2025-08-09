@@ -38,10 +38,17 @@ internal class OpenSourceLicensesScreenViewModel(
     @VisibleForTesting internal val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-),
-    OpenSourceLicensesScreenUIStateDelegate by OpenSourceLicensesScreenUIStateDelegateImpl(
-        navigationKit = navigationKit,
-    ) {
+) {
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val screenBottomSheetType: MutableStateFlow<OpenSourceLicensesScreenBottomSheetType> =
+        MutableStateFlow(
+            value = OpenSourceLicensesScreenBottomSheetType.None,
+        )
+    // endregion
+
     // region uiStateAndStateEvents
     internal val uiState: MutableStateFlow<OpenSourceLicensesScreenUIState> =
         MutableStateFlow(
@@ -65,6 +72,60 @@ internal class OpenSourceLicensesScreenViewModel(
 
     private fun observeData() {
         observeForUiStateAndStateEvents()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedOpenSourceLicensesScreenBottomSheetType = OpenSourceLicensesScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedOpenSourceLicensesScreenBottomSheetType: OpenSourceLicensesScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedOpenSourceLicensesScreenBottomSheetType
+        }
     }
     // endregion
 

@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.view_model
 
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
@@ -25,6 +26,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoriesUseCase
@@ -52,9 +54,9 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditCategoryScreenViewModel(
-    coroutineScope: CoroutineScope,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
+    private val coroutineScope: CoroutineScope,
     private val editCategoryScreenDataValidationUseCase: EditCategoryScreenDataValidationUseCase,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getCategoryByIdUseCase: GetCategoryByIdUseCase,
@@ -63,10 +65,6 @@ internal class EditCategoryScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), EditCategoryScreenUIStateDelegate by EditCategoryScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    navigationKit = navigationKit,
-    updateCategoriesUseCase = updateCategoriesUseCase,
 ) {
     // region screen args
     private val screenArgs = EditCategoryScreenArgs(
@@ -81,6 +79,43 @@ internal class EditCategoryScreenViewModel(
             value = persistentListOf(),
         )
     private val transactionType: String? = screenArgs.transactionType
+    // endregion
+
+    // region initial data
+    val category: MutableStateFlow<Category?> = MutableStateFlow(
+        value = null,
+    )
+    val validTransactionTypes: ImmutableList<TransactionType> =
+        persistentListOf(
+            TransactionType.INCOME,
+            TransactionType.EXPENSE,
+            TransactionType.INVESTMENT,
+        )
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
+        value = TextFieldValue(),
+    )
+    val searchText: MutableStateFlow<String> = MutableStateFlow(
+        value = "",
+    )
+    val emoji: MutableStateFlow<String> = MutableStateFlow(
+        value = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES,
+    )
+    val selectedTransactionTypeIndex: MutableStateFlow<Int> =
+        MutableStateFlow(
+            value = validTransactionTypes.indexOf(
+                element = TransactionType.EXPENSE,
+            ),
+        )
+    val screenBottomSheetType: MutableStateFlow<EditCategoryScreenBottomSheetType> =
+        MutableStateFlow(
+            value = EditCategoryScreenBottomSheetType.None,
+        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -128,6 +163,113 @@ internal class EditCategoryScreenViewModel(
 
     private fun observeData() {
         observeForUiStateAndStateEvents()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun clearTitle() {
+        title.update {
+            title.value.copy(
+                text = "",
+            )
+        }
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedEditCategoryScreenBottomSheetType = EditCategoryScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateEmoji(
+        updatedEmoji: String,
+    ) {
+        emoji.update {
+            updatedEmoji
+        }
+    }
+
+    fun updateTitle(
+        updatedTitle: TextFieldValue,
+    ) {
+        title.update {
+            updatedTitle
+        }
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedEditCategoryScreenBottomSheetType
+        }
+    }
+
+    fun updateSearchText(
+        updatedSearchText: String,
+    ) {
+        searchText.update {
+            updatedSearchText
+        }
+    }
+
+    fun updateSelectedTransactionTypeIndex(
+        updatedSelectedTransactionTypeIndex: Int,
+    ) {
+        selectedTransactionTypeIndex.update {
+            updatedSelectedTransactionTypeIndex
+        }
+    }
+
+    fun updateCategory() {
+        category.value?.copy(
+            emoji = emoji.value,
+            title = title.value.text,
+            transactionType = validTransactionTypes[selectedTransactionTypeIndex.value],
+        )?.let { category ->
+            coroutineScope.launch {
+                updateCategoriesUseCase(category)
+                navigationKit.navigateUp()
+            }
+        }
     }
     // endregion
 

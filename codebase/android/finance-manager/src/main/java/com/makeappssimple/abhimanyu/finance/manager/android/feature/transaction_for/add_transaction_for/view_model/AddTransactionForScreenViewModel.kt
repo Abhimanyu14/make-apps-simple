@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.view_model
 
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -38,23 +39,31 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddTransactionForScreenViewModel(
-    coroutineScope: CoroutineScope,
     private val addTransactionForScreenDataValidationUseCase: AddTransactionForScreenDataValidationUseCase,
+    private val coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val insertTransactionForUseCase: InsertTransactionForUseCase,
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-),
-    AddTransactionForScreenUIStateDelegate by AddTransactionForScreenUIStateDelegateImpl(
-        coroutineScope = coroutineScope,
-        insertTransactionForUseCase = insertTransactionForUseCase,
-        navigationKit = navigationKit,
-    ) {
+) {
     // region initial data
     private var allTransactionForValues: ImmutableList<TransactionFor> =
         persistentListOf()
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val screenBottomSheetType: MutableStateFlow<AddTransactionForScreenBottomSheetType> =
+        MutableStateFlow(
+            value = AddTransactionForScreenBottomSheetType.None,
+        )
+    val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
+        value = TextFieldValue(),
+    )
     // endregion
 
     // region uiStateAndStateEvents
@@ -92,6 +101,91 @@ internal class AddTransactionForScreenViewModel(
 
     private fun observeData() {
         observeForUiStateAndStateEvents()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun clearTitle() {
+        title.update {
+            title.value.copy(
+                text = "",
+            )
+        }
+    }
+
+    fun insertTransactionFor(
+        uiState: AddTransactionForScreenUIState,
+    ) {
+        coroutineScope.launch {
+            val isTransactionForInserted = insertTransactionForUseCase(
+                title = uiState.title?.text.orEmpty(),
+            )
+            if (isTransactionForInserted == -1L) {
+                // TODO(Abhi): Show error
+            } else {
+                navigationKit.navigateUp()
+            }
+        }
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedAddTransactionForScreenBottomSheetType = AddTransactionForScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedAddTransactionForScreenBottomSheetType: AddTransactionForScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedAddTransactionForScreenBottomSheetType
+        }
+    }
+
+    fun updateTitle(
+        updatedTitle: TextFieldValue,
+    ) {
+        title.update {
+            updatedTitle
+        }
     }
     // endregion
 

@@ -17,11 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.view_model
 
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
@@ -43,7 +44,7 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditTransactionForScreenViewModel(
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val editTransactionForScreenDataValidationUseCase: EditTransactionForScreenDataValidationUseCase,
@@ -54,12 +55,7 @@ internal class EditTransactionForScreenViewModel(
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-),
-    EditTransactionForScreenUIStateDelegate by EditTransactionForScreenUIStateDelegateImpl(
-        coroutineScope = coroutineScope,
-        navigationKit = navigationKit,
-        updateTransactionForUseCase = updateTransactionForUseCase,
-    ) {
+) {
     // region screen args
     private val screenArgs = EditTransactionForScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -70,6 +66,23 @@ internal class EditTransactionForScreenViewModel(
     // region initial data
     private var allTransactionForValues: ImmutableList<TransactionFor> =
         persistentListOf()
+    // endregion
+
+    // region initial data
+    var currentTransactionFor: TransactionFor? = null
+    // endregion
+
+    // region UI state
+    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+        value = true,
+    )
+    val screenBottomSheetType: MutableStateFlow<EditTransactionForScreenBottomSheetType> =
+        MutableStateFlow(
+            value = EditTransactionForScreenBottomSheetType.None,
+        )
+    val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
+        value = TextFieldValue(),
+    )
     // endregion
 
     // region uiStateAndStateEvents
@@ -110,6 +123,93 @@ internal class EditTransactionForScreenViewModel(
 
     private fun observeData() {
         observeForUiStateAndStateEvents()
+    }
+    // endregion
+
+    // region loading
+    fun startLoading() {
+        isLoading.update {
+            true
+        }
+    }
+
+    fun completeLoading() {
+        isLoading.update {
+            false
+        }
+    }
+
+    fun <T> withLoading(
+        block: () -> T,
+    ): T {
+        startLoading()
+        val result = block()
+        completeLoading()
+        return result
+    }
+
+    suspend fun <T> withLoadingSuspend(
+        block: suspend () -> T,
+    ): T {
+        startLoading()
+        try {
+            return block()
+        } finally {
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region state events
+    fun clearTitle() {
+        title.update {
+            title.value.copy(
+                text = "",
+            )
+        }
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedEditTransactionForScreenBottomSheetType = EditTransactionForScreenBottomSheetType.None,
+        )
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedEditTransactionForScreenBottomSheetType: EditTransactionForScreenBottomSheetType,
+    ) {
+        screenBottomSheetType.update {
+            updatedEditTransactionForScreenBottomSheetType
+        }
+    }
+
+    fun updateTitle(
+        updatedTitle: TextFieldValue,
+    ) {
+        title.update {
+            updatedTitle
+        }
+    }
+
+    fun updateTransactionFor(
+        uiState: EditTransactionForScreenUIState,
+    ) {
+        val currentTransactionForValue = currentTransactionFor ?: return
+        coroutineScope.launch {
+            val isTransactionForUpdated = updateTransactionForUseCase(
+                currentTransactionFor = currentTransactionForValue,
+                title = uiState.title.text,
+            )
+            if (isTransactionForUpdated) {
+                navigationKit.navigateUp()
+            } else {
+                // TODO(Abhi): Show error
+            }
+        }
     }
     // endregion
 

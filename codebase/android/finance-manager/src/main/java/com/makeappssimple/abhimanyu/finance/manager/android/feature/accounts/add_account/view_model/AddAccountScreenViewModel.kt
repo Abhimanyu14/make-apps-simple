@@ -16,17 +16,23 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.view_model
 
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewModelScope
+import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.bottom_sheet.AddAccountScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIStateEvents
@@ -43,21 +49,38 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddAccountScreenViewModel(
-    coroutineScope: CoroutineScope,
     private val addAccountScreenDataValidationUseCase: AddAccountScreenDataValidationUseCase,
+    private val coroutineScope: CoroutineScope,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val insertAccountUseCase: InsertAccountUseCase,
     private val navigationKit: NavigationKit,
+    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     viewModelScope = coroutineScope,
-), AddAccountScreenUIStateDelegate by AddAccountScreenUIStateDelegateImpl(
-    coroutineScope = coroutineScope,
-    insertAccountUseCase = insertAccountUseCase,
-    navigationKit = navigationKit,
-) {
+), ScreenUIStateDelegate by screenUIStateDelegate {
     // region initial data
     private var allAccounts: ImmutableList<Account> = persistentListOf()
+    // endregion
+
+    // region initial data
+    val validAccountTypesForNewAccount: ImmutableList<AccountType> =
+        AccountType.entries.filter {
+            it != AccountType.CASH
+        }
+    // endregion
+
+    // region UI state
+    var screenBottomSheetType: AddAccountScreenBottomSheetType =
+        AddAccountScreenBottomSheetType.None
+    var screenSnackbarType: AddAccountScreenSnackbarType =
+        AddAccountScreenSnackbarType.None
+    var selectedAccountTypeIndex = validAccountTypesForNewAccount
+        .indexOf(
+            element = AccountType.BANK,
+        )
+    var name = TextFieldValue()
+    var minimumAccountBalanceAmountValue = TextFieldValue()
     // endregion
 
     // region uiState and uiStateEvents
@@ -101,6 +124,117 @@ internal class AddAccountScreenViewModel(
 
     private fun observeData() {
         observeForRefreshSignal()
+    }
+    // endregion
+
+    // region state events
+    fun clearMinimumAccountBalanceAmountValue(
+        refresh: Boolean = false,
+    ) {
+        minimumAccountBalanceAmountValue =
+            minimumAccountBalanceAmountValue.copy(
+                text = "",
+            )
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun clearName(
+        refresh: Boolean = false,
+    ) {
+        name = name.copy(
+            text = "",
+        )
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun insertAccount(
+        uiState: AddAccountScreenUIState,
+    ) {
+        startLoading()
+        coroutineScope.launch {
+            val isAccountInserted = insertAccountUseCase(
+                accountType = uiState.selectedAccountType,
+                minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text.toLongOrZero(),
+                name = name.text,
+            )
+            if (isAccountInserted == -1L) {
+                // TODO(Abhi): Show error
+            } else {
+                navigateUp()
+            }
+        }
+        completeLoading()
+    }
+
+    fun navigateUp() {
+        navigationKit.navigateUp()
+    }
+
+    fun resetScreenBottomSheetType() {
+        updateScreenBottomSheetType(
+            updatedAddAccountScreenBottomSheetType = AddAccountScreenBottomSheetType.None,
+        )
+    }
+
+    fun resetScreenSnackbarType() {
+        updateScreenSnackbarType(
+            updatedAddAccountScreenSnackbarType = AddAccountScreenSnackbarType.None,
+        )
+    }
+
+    fun updateMinimumAccountBalanceAmountValue(
+        updatedMinimumAccountBalanceAmountValue: TextFieldValue,
+        refresh: Boolean = false,
+    ) {
+        minimumAccountBalanceAmountValue =
+            updatedMinimumAccountBalanceAmountValue
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateName(
+        updatedName: TextFieldValue,
+        refresh: Boolean = false,
+    ) {
+        name = updatedName
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateScreenBottomSheetType(
+        updatedAddAccountScreenBottomSheetType: AddAccountScreenBottomSheetType,
+        refresh: Boolean = false,
+    ) {
+        screenBottomSheetType = updatedAddAccountScreenBottomSheetType
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateScreenSnackbarType(
+        updatedAddAccountScreenSnackbarType: AddAccountScreenSnackbarType,
+        refresh: Boolean = false,
+    ) {
+        screenSnackbarType = updatedAddAccountScreenSnackbarType
+        if (refresh) {
+            refresh()
+        }
+    }
+
+    fun updateSelectedAccountTypeIndex(
+        updatedSelectedAccountTypeIndex: Int,
+        refresh: Boolean = false,
+    ) {
+        selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
+        if (refresh) {
+            refresh()
+        }
     }
     // endregion
 
