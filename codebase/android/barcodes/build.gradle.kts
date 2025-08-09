@@ -59,7 +59,8 @@ android {
     defaultConfig {
         minSdk = libs.versions.min.sdk.get().toInt()
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner =
+            "com.makeappssimple.abhimanyu.barcodes.android.test.InstrumentationTestRunner"
 
         // Generate native debug symbols to allow Google Play to symbolicate our native crashes
         ndk.debugSymbolLevel = "FULL"
@@ -81,6 +82,14 @@ android {
         baseline = file("lint-baseline.xml")
         disable += "AndroidGradlePluginVersion"
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -89,6 +98,7 @@ dependencies {
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.bundles.koin.test)
     androidTestImplementation(libs.bundles.test)
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)

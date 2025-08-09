@@ -229,6 +229,10 @@ koin = [
     "koin-compose-viewmodel-navigation",
     "koin-core",
 ]
+koin-test = [
+    "koin-test",
+    "koin-test-junit5",
+]
 lifecycle = [
     "lifecycle-runtime-compose",
     "lifecycle-viewmodel",
