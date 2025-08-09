@@ -97,39 +97,39 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region initial data
-    val allTransactionData: MutableStateFlow<ImmutableList<TransactionData>> =
+    private val allTransactionData: MutableStateFlow<ImmutableList<TransactionData>> =
         MutableStateFlow(
             value = persistentListOf(),
         )
-    val selectedTransactionIndices: MutableStateFlow<ImmutableList<Int>> =
+    private val selectedTransactionIndices: MutableStateFlow<ImmutableList<Int>> =
         MutableStateFlow(
             value = persistentListOf(),
         )
-    val transactionDetailsListItemViewData: MutableStateFlow<Map<String, ImmutableList<TransactionListItemData>>> =
+    private val transactionDetailsListItemViewData: MutableStateFlow<Map<String, ImmutableList<TransactionListItemData>>> =
         MutableStateFlow(
             value = mutableMapOf(),
         )
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val isInSelectionMode: MutableStateFlow<Boolean> =
+    private val isInSelectionMode: MutableStateFlow<Boolean> =
         MutableStateFlow(
             value = false,
         )
-    val searchText: MutableStateFlow<String> = MutableStateFlow(
+    private val searchText: MutableStateFlow<String> = MutableStateFlow(
         value = "",
     )
-    val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
+    private val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
         value = Filter(),
     )
-    val selectedSortOption: MutableStateFlow<SortOption> =
+    private val selectedSortOption: MutableStateFlow<SortOption> =
         MutableStateFlow(
             value = SortOption.LATEST_FIRST,
         )
-    val screenBottomSheetType: MutableStateFlow<TransactionsScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<TransactionsScreenBottomSheetType> =
         MutableStateFlow(
             value = TransactionsScreenBottomSheetType.None,
         )
@@ -216,7 +216,7 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region state events
-    fun addToSelectedTransactions(
+    private fun addToSelectedTransactions(
         transactionId: Int,
     ) {
         selectedTransactionIndices.update {
@@ -226,13 +226,13 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun clearSelectedTransactions() {
+    private fun clearSelectedTransactions() {
         selectedTransactionIndices.update {
             persistentListOf()
         }
     }
 
-    fun removeFromSelectedTransactions(
+    private fun removeFromSelectedTransactions(
         transactionId: Int,
     ) {
         selectedTransactionIndices.update {
@@ -242,7 +242,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun selectAllTransactions() {
+    private fun selectAllTransactions() {
         selectedTransactionIndices.update {
             transactionDetailsListItemViewData.value.values.flatMap {
                 it.map { transactionListItemData ->
@@ -252,13 +252,13 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedTransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedTransactionsScreenBottomSheetType: TransactionsScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -266,7 +266,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun updateIsInSelectionMode(
+    private fun updateIsInSelectionMode(
         updatedIsInSelectionMode: Boolean,
     ) {
         isInSelectionMode.update {
@@ -274,7 +274,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun updateSearchText(
+    private fun updateSearchText(
         updatedSearchText: String,
     ) {
         searchText.update {
@@ -282,7 +282,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun updateSelectedFilter(
+    private fun updateSelectedFilter(
         updatedSelectedFilter: Filter,
     ) {
         selectedFilter.update {
@@ -290,7 +290,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun updateSelectedSortOption(
+    private fun updateSelectedSortOption(
         updatedSelectedSortOption: SortOption,
     ) {
         selectedSortOption.update {
@@ -298,7 +298,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun updateTransactionForValuesInTransactions(
+    private fun updateTransactionForValuesInTransactions(
         transactionForId: Int,
     ) {
         val selectedTransactions: ImmutableList<Int> =

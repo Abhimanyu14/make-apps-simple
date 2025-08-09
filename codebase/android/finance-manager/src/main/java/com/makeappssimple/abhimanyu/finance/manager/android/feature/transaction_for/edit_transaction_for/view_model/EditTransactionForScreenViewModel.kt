@@ -71,18 +71,18 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region initial data
-    var currentTransactionFor: TransactionFor? = null
+    private var currentTransactionFor: TransactionFor? = null
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val screenBottomSheetType: MutableStateFlow<EditTransactionForScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<EditTransactionForScreenBottomSheetType> =
         MutableStateFlow(
             value = EditTransactionForScreenBottomSheetType.None,
         )
-    val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
+    private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
         value = TextFieldValue(),
     )
     // endregion
@@ -163,7 +163,7 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region state events
-    fun clearTitle() {
+    private fun clearTitle() {
         title.update {
             title.value.copy(
                 text = "",
@@ -171,13 +171,13 @@ internal class EditTransactionForScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedEditTransactionForScreenBottomSheetType = EditTransactionForScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedEditTransactionForScreenBottomSheetType: EditTransactionForScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -185,7 +185,7 @@ internal class EditTransactionForScreenViewModel(
         }
     }
 
-    fun updateTitle(
+    private fun updateTitle(
         updatedTitle: TextFieldValue,
     ) {
         title.update {
@@ -193,7 +193,7 @@ internal class EditTransactionForScreenViewModel(
         }
     }
 
-    fun updateTransactionFor(
+    private fun updateTransactionFor(
         uiState: EditTransactionForScreenUIState,
     ) {
         val currentTransactionForValue = currentTransactionFor ?: return

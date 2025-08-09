@@ -75,7 +75,7 @@ internal class AddCategoryScreenViewModel(
     // endregion
 
     // region initial data
-    val validTransactionTypes: ImmutableList<TransactionType> =
+    private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
             TransactionType.EXPENSE,
@@ -84,14 +84,14 @@ internal class AddCategoryScreenViewModel(
     // endregion
 
     // region UI state
-    var title = TextFieldValue()
-    var searchText = ""
-    var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
-    var selectedTransactionTypeIndex = validTransactionTypes
+    private var title = TextFieldValue()
+    private var searchText = ""
+    private var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
+    private var selectedTransactionTypeIndex = validTransactionTypes
         .indexOf(
             element = TransactionType.EXPENSE,
         )
-    var screenBottomSheetType: AddCategoryScreenBottomSheetType =
+    private var screenBottomSheetType: AddCategoryScreenBottomSheetType =
         AddCategoryScreenBottomSheetType.None
     // endregion
 
@@ -143,7 +143,7 @@ internal class AddCategoryScreenViewModel(
     // endregion
 
     // region state events
-    fun clearSearchText(
+    private fun clearSearchText(
         shouldRefresh: Boolean = true,
     ) {
         searchText = ""
@@ -152,7 +152,7 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun clearTitle(
+    private fun clearTitle(
         shouldRefresh: Boolean = true,
     ) {
         title = title.copy(
@@ -163,7 +163,7 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun insertCategory() {
+    private fun insertCategory() {
         val category = Category(
             emoji = emoji,
             title = title.text,
@@ -175,13 +175,13 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedAddCategoryScreenBottomSheetType = AddCategoryScreenBottomSheetType.None,
         )
     }
 
-    fun updateEmoji(
+    private fun updateEmoji(
         updatedEmoji: String,
         shouldRefresh: Boolean = true,
     ) {
@@ -191,7 +191,7 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedAddCategoryScreenBottomSheetType: AddCategoryScreenBottomSheetType,
         shouldRefresh: Boolean = true,
     ) {
@@ -201,7 +201,7 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun updateSearchText(
+    private fun updateSearchText(
         updatedSearchText: String,
         shouldRefresh: Boolean = true,
     ) {
@@ -211,7 +211,7 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun updateSelectedTransactionTypeIndex(
+    private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
         shouldRefresh: Boolean = true,
     ) {
@@ -221,7 +221,7 @@ internal class AddCategoryScreenViewModel(
         }
     }
 
-    fun updateTitle(
+    private fun updateTitle(
         updatedTitle: TextFieldValue,
         shouldRefresh: Boolean = true,
     ) {

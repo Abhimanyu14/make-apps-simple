@@ -81,7 +81,7 @@ internal class CategoriesScreenViewModel(
     // endregion
 
     // region initial data
-    val validTransactionTypes: PersistentList<TransactionType> =
+    private val validTransactionTypes: PersistentList<TransactionType> =
         persistentListOf(
             TransactionType.EXPENSE,
             TransactionType.INCOME,
@@ -90,12 +90,12 @@ internal class CategoriesScreenViewModel(
     // endregion
 
     // region UI state
-    var screenBottomSheetType: CategoriesScreenBottomSheetType =
+    private var screenBottomSheetType: CategoriesScreenBottomSheetType =
         CategoriesScreenBottomSheetType.None
-    var screenSnackbarType: CategoriesScreenSnackbarType =
+    private var screenSnackbarType: CategoriesScreenSnackbarType =
         CategoriesScreenSnackbarType.None
-    var categoryIdToDelete: Int? = null
-    var clickedItemId: Int? = null
+    private var categoryIdToDelete: Int? = null
+    private var clickedItemId: Int? = null
     // endregion
 
     // region uiStateAndStateEvents
@@ -273,7 +273,7 @@ internal class CategoriesScreenViewModel(
     // endregion
 
     // region state events
-    fun deleteCategory() {
+    private fun deleteCategory() {
         coroutineScope.launch {
             categoryIdToDelete?.let { id ->
                 val isCategoryDeleted = deleteCategoryByIdUseCase(
@@ -290,19 +290,19 @@ internal class CategoriesScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedCategoriesScreenBottomSheetType = CategoriesScreenBottomSheetType.None,
         )
     }
 
-    fun resetScreenSnackbarType() {
+    private fun resetScreenSnackbarType() {
         updateScreenSnackbarType(
             updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.None,
         )
     }
 
-    fun updateDefaultCategoryIdInDataStore(
+    private fun updateDefaultCategoryIdInDataStore(
         selectedTabIndex: Int,
     ) {
         coroutineScope.launch {
@@ -327,7 +327,7 @@ internal class CategoriesScreenViewModel(
         }
     }
 
-    fun updateCategoryIdToDelete(
+    private fun updateCategoryIdToDelete(
         updatedCategoryIdToDelete: Int?,
         shouldRefresh: Boolean = true,
     ) {
@@ -337,7 +337,7 @@ internal class CategoriesScreenViewModel(
         }
     }
 
-    fun updateClickedItemId(
+    private fun updateClickedItemId(
         updatedClickedItemId: Int?,
         shouldRefresh: Boolean = true,
     ) {
@@ -347,7 +347,7 @@ internal class CategoriesScreenViewModel(
         }
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedCategoriesScreenBottomSheetType: CategoriesScreenBottomSheetType,
         shouldRefresh: Boolean = true,
     ) {
@@ -357,7 +357,7 @@ internal class CategoriesScreenViewModel(
         }
     }
 
-    fun updateScreenSnackbarType(
+    private fun updateScreenSnackbarType(
         updatedCategoriesScreenSnackbarType: CategoriesScreenSnackbarType,
         shouldRefresh: Boolean = true,
     ) {

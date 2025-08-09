@@ -78,8 +78,8 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region initial data
-    var currentAccount: Account? = null
-    val validAccountTypesForNewAccount: ImmutableList<AccountType> =
+    private var currentAccount: Account? = null
+    private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
             it != AccountType.CASH
         }
@@ -142,7 +142,7 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region state events
-    fun clearBalanceAmountValue(): Job? {
+    private fun clearBalanceAmountValue(): Job? {
         return updateBalanceAmountValue(
             updatedBalanceAmountValue = balanceAmountValue
                 .copy(
@@ -151,7 +151,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    fun clearMinimumAccountBalanceAmountValue(): Job? {
+    private fun clearMinimumAccountBalanceAmountValue(): Job? {
         return updateMinimumAccountBalanceAmountValue(
             updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue
                 .copy(
@@ -160,7 +160,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    fun clearName(): Job? {
+    private fun clearName(): Job? {
         return updateName(
             updatedName = name
                 .copy(
@@ -169,7 +169,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    fun updateAccount(): Job {
+    private fun updateAccount(): Job {
         return coroutineScope.launch {
             startLoading()
 
@@ -190,7 +190,7 @@ internal class EditAccountScreenViewModel(
         }
     }
 
-    fun updateBalanceAmountValue(
+    private fun updateBalanceAmountValue(
         updatedBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
     ): Job? {
@@ -201,7 +201,7 @@ internal class EditAccountScreenViewModel(
         return null
     }
 
-    fun updateMinimumAccountBalanceAmountValue(
+    private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
     ): Job? {
@@ -213,7 +213,7 @@ internal class EditAccountScreenViewModel(
         return null
     }
 
-    fun updateName(
+    private fun updateName(
         updatedName: TextFieldValue,
         shouldRefresh: Boolean = true,
     ): Job? {
@@ -224,7 +224,7 @@ internal class EditAccountScreenViewModel(
         return null
     }
 
-    fun updateScreenSnackbarType(
+    private fun updateScreenSnackbarType(
         updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
         shouldRefresh: Boolean = true,
     ): Job? {
@@ -235,7 +235,7 @@ internal class EditAccountScreenViewModel(
         return null
     }
 
-    fun updateSelectedAccountTypeIndex(
+    private fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
         shouldRefresh: Boolean = true,
     ): Job? {

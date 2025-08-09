@@ -41,10 +41,10 @@ internal class OpenSourceLicensesScreenViewModel(
     navigationKit = navigationKit,
 ) {
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val screenBottomSheetType: MutableStateFlow<OpenSourceLicensesScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<OpenSourceLicensesScreenBottomSheetType> =
         MutableStateFlow(
             value = OpenSourceLicensesScreenBottomSheetType.None,
         )
@@ -111,13 +111,13 @@ internal class OpenSourceLicensesScreenViewModel(
     // endregion
 
     // region state events
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedOpenSourceLicensesScreenBottomSheetType = OpenSourceLicensesScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedOpenSourceLicensesScreenBottomSheetType: OpenSourceLicensesScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {

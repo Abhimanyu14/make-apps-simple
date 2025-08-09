@@ -61,11 +61,11 @@ internal class TransactionForValuesScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    var transactionForIdToDelete: Int? = null
-    val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType> =
+    private var transactionForIdToDelete: Int? = null
+    private val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType> =
         MutableStateFlow(
             value = TransactionForValuesScreenBottomSheetType.None,
         )
@@ -137,7 +137,7 @@ internal class TransactionForValuesScreenViewModel(
     // endregion
 
     // region state events
-    fun deleteTransactionFor() {
+    private fun deleteTransactionFor() {
         coroutineScope.launch {
             transactionForIdToDelete?.let { id ->
                 val isTransactionForDeleted = deleteTransactionForByIdUseCase(
@@ -155,13 +155,13 @@ internal class TransactionForValuesScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedTransactionForValuesScreenBottomSheetType = TransactionForValuesScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedTransactionForValuesScreenBottomSheetType: TransactionForValuesScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -169,7 +169,7 @@ internal class TransactionForValuesScreenViewModel(
         }
     }
 
-    fun updateTransactionForIdToDelete(
+    private fun updateTransactionForIdToDelete(
         updatedTransactionForIdToDelete: Int?,
     ) {
         transactionForIdToDelete = updatedTransactionForIdToDelete

@@ -78,11 +78,11 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
 
-    val screenBottomSheetType: MutableStateFlow<ViewTransactionScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<ViewTransactionScreenBottomSheetType> =
         MutableStateFlow(
             value = ViewTransactionScreenBottomSheetType.None,
         )
@@ -162,7 +162,7 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region state events
-    fun deleteTransaction() {
+    private fun deleteTransaction() {
         val id = transactionIdToDelete
             ?: return // TODO(Abhi): Handle this error scenario
         coroutineScope.launch {
@@ -182,7 +182,7 @@ internal class ViewTransactionScreenViewModel(
         }
     }
 
-    fun onRefundButtonClick(
+    private fun onRefundButtonClick(
         transactionId: Int,
     ) {
         navigateToAddTransactionScreen(
@@ -190,13 +190,13 @@ internal class ViewTransactionScreenViewModel(
         )
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedViewTransactionScreenBottomSheetType = ViewTransactionScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedViewTransactionScreenBottomSheetType: ViewTransactionScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {

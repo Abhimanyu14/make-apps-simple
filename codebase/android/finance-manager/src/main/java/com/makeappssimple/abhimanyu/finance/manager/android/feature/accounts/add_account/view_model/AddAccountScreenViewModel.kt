@@ -72,14 +72,14 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region UI state
-    var screenSnackbarType: AddAccountScreenSnackbarType =
+    private var screenSnackbarType: AddAccountScreenSnackbarType =
         AddAccountScreenSnackbarType.None
-    var selectedAccountTypeIndex = validAccountTypesForNewAccount
+    private var selectedAccountTypeIndex = validAccountTypesForNewAccount
         .indexOf(
             element = AccountType.BANK,
         )
-    var name = TextFieldValue()
-    var minimumAccountBalanceAmountValue = TextFieldValue()
+    private var name = TextFieldValue()
+    private var minimumAccountBalanceAmountValue = TextFieldValue()
     // endregion
 
     // region uiState and uiStateEvents
@@ -125,7 +125,7 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region state events
-    fun clearMinimumAccountBalanceAmountValue(
+    private fun clearMinimumAccountBalanceAmountValue(
         shouldRefresh: Boolean = true,
     ) {
         minimumAccountBalanceAmountValue =
@@ -137,7 +137,7 @@ internal class AddAccountScreenViewModel(
         }
     }
 
-    fun clearName(
+    private fun clearName(
         shouldRefresh: Boolean = true,
     ) {
         name = name.copy(
@@ -148,7 +148,7 @@ internal class AddAccountScreenViewModel(
         }
     }
 
-    fun insertAccount(
+    private fun insertAccount(
         uiState: AddAccountScreenUIState,
     ) {
         startLoading()
@@ -167,13 +167,13 @@ internal class AddAccountScreenViewModel(
         completeLoading()
     }
 
-    fun resetScreenSnackbarType() {
+    private fun resetScreenSnackbarType() {
         updateScreenSnackbarType(
             updatedAddAccountScreenSnackbarType = AddAccountScreenSnackbarType.None,
         )
     }
 
-    fun updateMinimumAccountBalanceAmountValue(
+    private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
     ) {
@@ -184,7 +184,7 @@ internal class AddAccountScreenViewModel(
         }
     }
 
-    fun updateName(
+    private fun updateName(
         updatedName: TextFieldValue,
         shouldRefresh: Boolean = true,
     ) {
@@ -194,7 +194,7 @@ internal class AddAccountScreenViewModel(
         }
     }
 
-    fun updateScreenSnackbarType(
+    private fun updateScreenSnackbarType(
         updatedAddAccountScreenSnackbarType: AddAccountScreenSnackbarType,
         shouldRefresh: Boolean = true,
     ) {
@@ -204,7 +204,7 @@ internal class AddAccountScreenViewModel(
         }
     }
 
-    fun updateSelectedAccountTypeIndex(
+    private fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
         shouldRefresh: Boolean = true,
     ) {

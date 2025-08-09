@@ -84,10 +84,10 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region initial data
-    val category: MutableStateFlow<Category?> = MutableStateFlow(
+    private val category: MutableStateFlow<Category?> = MutableStateFlow(
         value = null,
     )
-    val validTransactionTypes: ImmutableList<TransactionType> =
+    private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
             TransactionType.EXPENSE,
@@ -96,25 +96,25 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
+    private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
         value = TextFieldValue(),
     )
-    val searchText: MutableStateFlow<String> = MutableStateFlow(
+    private val searchText: MutableStateFlow<String> = MutableStateFlow(
         value = "",
     )
-    val emoji: MutableStateFlow<String> = MutableStateFlow(
+    private val emoji: MutableStateFlow<String> = MutableStateFlow(
         value = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES,
     )
-    val selectedTransactionTypeIndex: MutableStateFlow<Int> =
+    private val selectedTransactionTypeIndex: MutableStateFlow<Int> =
         MutableStateFlow(
             value = validTransactionTypes.indexOf(
                 element = TransactionType.EXPENSE,
             ),
         )
-    val screenBottomSheetType: MutableStateFlow<EditCategoryScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<EditCategoryScreenBottomSheetType> =
         MutableStateFlow(
             value = EditCategoryScreenBottomSheetType.None,
         )
@@ -203,7 +203,7 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region state events
-    fun clearTitle() {
+    private fun clearTitle() {
         title.update {
             title.value.copy(
                 text = "",
@@ -211,13 +211,13 @@ internal class EditCategoryScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedEditCategoryScreenBottomSheetType = EditCategoryScreenBottomSheetType.None,
         )
     }
 
-    fun updateEmoji(
+    private fun updateEmoji(
         updatedEmoji: String,
     ) {
         emoji.update {
@@ -225,7 +225,7 @@ internal class EditCategoryScreenViewModel(
         }
     }
 
-    fun updateTitle(
+    private fun updateTitle(
         updatedTitle: TextFieldValue,
     ) {
         title.update {
@@ -233,7 +233,7 @@ internal class EditCategoryScreenViewModel(
         }
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -241,7 +241,7 @@ internal class EditCategoryScreenViewModel(
         }
     }
 
-    fun updateSearchText(
+    private fun updateSearchText(
         updatedSearchText: String,
     ) {
         searchText.update {
@@ -249,7 +249,7 @@ internal class EditCategoryScreenViewModel(
         }
     }
 
-    fun updateSelectedTransactionTypeIndex(
+    private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
     ) {
         selectedTransactionTypeIndex.update {
@@ -257,7 +257,7 @@ internal class EditCategoryScreenViewModel(
         }
     }
 
-    fun updateCategory() {
+    private fun updateCategory() {
         category.value?.copy(
             emoji = emoji.value,
             title = title.value.text,

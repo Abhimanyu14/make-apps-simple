@@ -89,17 +89,17 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
+    private val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
         value = Filter(),
     )
-    val screenBottomSheetType: MutableStateFlow<AnalysisScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<AnalysisScreenBottomSheetType> =
         MutableStateFlow(
             value = AnalysisScreenBottomSheetType.None,
         )
-    val selectedTransactionTypeIndex: MutableStateFlow<Int> =
+    private val selectedTransactionTypeIndex: MutableStateFlow<Int> =
         MutableStateFlow(
             value = 0,
         )
@@ -176,13 +176,13 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region state events
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedAnalysisScreenBottomSheetType = AnalysisScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedAnalysisScreenBottomSheetType: AnalysisScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -190,7 +190,7 @@ internal class AnalysisScreenViewModel(
         }
     }
 
-    fun updateSelectedFilter(
+    private fun updateSelectedFilter(
         updatedSelectedFilter: Filter,
     ) {
         selectedFilter.update {
@@ -198,7 +198,7 @@ internal class AnalysisScreenViewModel(
         }
     }
 
-    fun updateSelectedTransactionTypeIndex(
+    private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
     ) {
         selectedTransactionTypeIndex.update {

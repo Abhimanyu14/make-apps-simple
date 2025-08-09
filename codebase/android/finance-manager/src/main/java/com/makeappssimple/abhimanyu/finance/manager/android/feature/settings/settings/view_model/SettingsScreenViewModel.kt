@@ -63,10 +63,10 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val screenSnackbarType: MutableStateFlow<SettingsScreenSnackbarType> =
+    private val screenSnackbarType: MutableStateFlow<SettingsScreenSnackbarType> =
         MutableStateFlow(
             value = SettingsScreenSnackbarType.None,
         )
@@ -143,7 +143,7 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region state events
-    fun disableReminder() {
+    private fun disableReminder() {
         coroutineScope.launch {
             if (alarmKit.cancelReminderAlarm()) {
                 updateScreenSnackbarType(
@@ -157,13 +157,13 @@ internal class SettingsScreenViewModel(
         }
     }
 
-    fun enableReminder() {
+    private fun enableReminder() {
         coroutineScope.launch {
             alarmKit.scheduleReminderAlarm()
         }
     }
 
-    fun recalculateTotal() {
+    private fun recalculateTotal() {
         coroutineScope.launch {
             startLoading()
             recalculateTotalUseCase()
@@ -171,13 +171,13 @@ internal class SettingsScreenViewModel(
         }
     }
 
-    fun resetScreenSnackbarType() {
+    private fun resetScreenSnackbarType() {
         updateScreenSnackbarType(
             updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.None,
         )
     }
 
-    fun updateScreenSnackbarType(
+    private fun updateScreenSnackbarType(
         updatedSettingsScreenSnackbarType: SettingsScreenSnackbarType,
     ) {
         screenSnackbarType.update {

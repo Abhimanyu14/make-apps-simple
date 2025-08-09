@@ -71,9 +71,9 @@ internal class AccountsScreenViewModel(
     // endregion
 
     // region UI state
-    var screenBottomSheetType: AccountsScreenBottomSheetType =
+    private var screenBottomSheetType: AccountsScreenBottomSheetType =
         AccountsScreenBottomSheetType.None
-    var clickedItemId: Int? = null
+    private var clickedItemId: Int? = null
     // endregion
 
     // region uiState and uiStateEvents
@@ -118,7 +118,7 @@ internal class AccountsScreenViewModel(
     // endregion
 
     // region state events
-    fun deleteAccount() {
+    private fun deleteAccount() {
         coroutineScope.launch {
             clickedItemId?.let { id ->
                 val isAccountDeleted = deleteAccountByIdUseCase(
@@ -135,13 +135,13 @@ internal class AccountsScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedAccountsScreenBottomSheetType = AccountsScreenBottomSheetType.None,
         )
     }
 
-    fun updateClickedItemId(
+    private fun updateClickedItemId(
         updatedClickedItemId: Int?,
         shouldRefresh: Boolean = true,
     ) {
@@ -151,7 +151,7 @@ internal class AccountsScreenViewModel(
         }
     }
 
-    fun updateDefaultAccountIdInDataStore() {
+    private fun updateDefaultAccountIdInDataStore() {
         coroutineScope.launch {
             clickedItemId?.let { accountId ->
                 val isDefaultAccountUpdated =
@@ -170,7 +170,7 @@ internal class AccountsScreenViewModel(
         }
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedAccountsScreenBottomSheetType: AccountsScreenBottomSheetType,
         shouldRefresh: Boolean = true,
     ) {

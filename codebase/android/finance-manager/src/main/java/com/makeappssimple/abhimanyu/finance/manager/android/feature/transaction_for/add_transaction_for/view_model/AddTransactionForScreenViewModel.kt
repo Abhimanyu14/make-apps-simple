@@ -56,14 +56,14 @@ internal class AddTransactionForScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val screenBottomSheetType: MutableStateFlow<AddTransactionForScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<AddTransactionForScreenBottomSheetType> =
         MutableStateFlow(
             value = AddTransactionForScreenBottomSheetType.None,
         )
-    val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
+    private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
         value = TextFieldValue(),
     )
     // endregion
@@ -141,7 +141,7 @@ internal class AddTransactionForScreenViewModel(
     // endregion
 
     // region state events
-    fun clearTitle() {
+    private fun clearTitle() {
         title.update {
             title.value.copy(
                 text = "",
@@ -149,7 +149,7 @@ internal class AddTransactionForScreenViewModel(
         }
     }
 
-    fun insertTransactionFor(
+    private fun insertTransactionFor(
         uiState: AddTransactionForScreenUIState,
     ) {
         coroutineScope.launch {
@@ -164,13 +164,13 @@ internal class AddTransactionForScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedAddTransactionForScreenBottomSheetType = AddTransactionForScreenBottomSheetType.None,
         )
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedAddTransactionForScreenBottomSheetType: AddTransactionForScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -178,7 +178,7 @@ internal class AddTransactionForScreenViewModel(
         }
     }
 
-    fun updateTitle(
+    private fun updateTitle(
         updatedTitle: TextFieldValue,
     ) {
         title.update {

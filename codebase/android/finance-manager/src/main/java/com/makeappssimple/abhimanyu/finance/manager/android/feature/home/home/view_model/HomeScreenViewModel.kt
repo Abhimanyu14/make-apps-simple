@@ -92,24 +92,24 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val isBalanceVisible: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isBalanceVisible: MutableStateFlow<Boolean> = MutableStateFlow(
         value = false,
     )
-    val homeListItemViewData: MutableStateFlow<ImmutableList<TransactionListItemData>> =
+    private val homeListItemViewData: MutableStateFlow<ImmutableList<TransactionListItemData>> =
         MutableStateFlow(
             value = persistentListOf(),
         )
-    val overviewTabSelectionIndex: MutableStateFlow<Int> =
+    private val overviewTabSelectionIndex: MutableStateFlow<Int> =
         MutableStateFlow(
             value = DEFAULT_OVERVIEW_TAB_SELECTION,
         )
-    val selectedTimestamp: MutableStateFlow<Long> = MutableStateFlow(
+    private val selectedTimestamp: MutableStateFlow<Long> = MutableStateFlow(
         value = dateTimeKit.getCurrentTimeMillis(),
     )
-    val overviewCardData: MutableStateFlow<OverviewCardViewModelData?> =
+    private val overviewCardData: MutableStateFlow<OverviewCardViewModelData?> =
         MutableStateFlow(
             value = null,
         )
@@ -184,7 +184,7 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region state events
-    fun handleOverviewCardAction(
+    private fun handleOverviewCardAction(
         overviewCardAction: OverviewCardAction,
     ) {
         val overviewTabOption =
@@ -248,7 +248,7 @@ internal class HomeScreenViewModel(
         }
     }
 
-    fun updateIsBalanceVisible(
+    private fun updateIsBalanceVisible(
         updatedIsBalanceVisible: Boolean,
     ) {
         isBalanceVisible.update {
@@ -256,7 +256,7 @@ internal class HomeScreenViewModel(
         }
     }
 
-    fun updateOverviewTabSelectionIndex(
+    private fun updateOverviewTabSelectionIndex(
         updatedOverviewTabSelectionIndex: Int,
     ) {
         overviewTabSelectionIndex.value = updatedOverviewTabSelectionIndex

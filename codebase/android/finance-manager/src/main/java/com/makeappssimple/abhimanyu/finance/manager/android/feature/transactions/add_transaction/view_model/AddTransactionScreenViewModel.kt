@@ -122,10 +122,10 @@ internal class AddTransactionScreenViewModel(
     // endregion
 
     // region initial data
-    var originalTransactionData: TransactionData? = null
-    var transactionForValues: ImmutableList<TransactionFor> =
+    private var originalTransactionData: TransactionData? = null
+    private var transactionForValues: ImmutableList<TransactionFor> =
         persistentListOf()
-    var selectedTransactionType: TransactionType? = null
+    private var selectedTransactionType: TransactionType? = null
     // endregion
 
     // region observables
@@ -136,58 +136,58 @@ internal class AddTransactionScreenViewModel(
     // endregion
 
     // region UI state
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val screenBottomSheetType: MutableStateFlow<AddTransactionScreenBottomSheetType> =
+    private val screenBottomSheetType: MutableStateFlow<AddTransactionScreenBottomSheetType> =
         MutableStateFlow(
             value = AddTransactionScreenBottomSheetType.None,
         )
-    val screenSnackbarType: MutableStateFlow<AddTransactionScreenSnackbarType> =
+    private val screenSnackbarType: MutableStateFlow<AddTransactionScreenSnackbarType> =
         MutableStateFlow(
             value = AddTransactionScreenSnackbarType.None,
         )
-    val selectedTransactionTypeIndex: MutableStateFlow<Int> =
+    private val selectedTransactionTypeIndex: MutableStateFlow<Int> =
         MutableStateFlow(
             value = 0,
         )
-    val amount: MutableStateFlow<TextFieldValue> =
+    private val amount: MutableStateFlow<TextFieldValue> =
         MutableStateFlow(
             value = TextFieldValue(),
         )
-    val category: MutableStateFlow<Category?> =
+    private val category: MutableStateFlow<Category?> =
         MutableStateFlow(
             value = null,
         )
-    val title: MutableStateFlow<TextFieldValue> =
+    private val title: MutableStateFlow<TextFieldValue> =
         MutableStateFlow(
             value = TextFieldValue(),
         )
-    val selectedTransactionForIndex: MutableStateFlow<Int> =
+    private val selectedTransactionForIndex: MutableStateFlow<Int> =
         MutableStateFlow(
             value = 0,
         )
-    val accountFrom: MutableStateFlow<Account?> =
+    private val accountFrom: MutableStateFlow<Account?> =
         MutableStateFlow(
             value = null,
         )
-    val accountTo: MutableStateFlow<Account?> =
+    private val accountTo: MutableStateFlow<Account?> =
         MutableStateFlow(
             value = null,
         )
-    val transactionDate: MutableStateFlow<LocalDate> =
+    private val transactionDate: MutableStateFlow<LocalDate> =
         MutableStateFlow(
             value = dateTimeKit.getCurrentLocalDate(),
         )
-    val transactionTime: MutableStateFlow<LocalTime> =
+    private val transactionTime: MutableStateFlow<LocalTime> =
         MutableStateFlow(
             value = dateTimeKit.getCurrentLocalTime(),
         )
-    val isTransactionDatePickerDialogVisible: MutableStateFlow<Boolean> =
+    private val isTransactionDatePickerDialogVisible: MutableStateFlow<Boolean> =
         MutableStateFlow(
             value = false,
         )
-    val isTransactionTimePickerDialogVisible: MutableStateFlow<Boolean> =
+    private val isTransactionTimePickerDialogVisible: MutableStateFlow<Boolean> =
         MutableStateFlow(
             value = false,
         )
@@ -291,7 +291,7 @@ internal class AddTransactionScreenViewModel(
     // endregion
 
     // region state events
-    fun clearAmount() {
+    private fun clearAmount() {
         amount.update {
             it.copy(
                 text = "",
@@ -299,7 +299,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun clearTitle() {
+    private fun clearTitle() {
         title.update {
             it.copy(
                 text = "",
@@ -307,7 +307,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun insertTransaction() {
+    private fun insertTransaction() {
         val selectedAccountFrom = accountFrom.value
         val selectedAccountTo = accountTo.value
         val selectedCategoryId = category.value?.id
@@ -346,19 +346,19 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
+    private fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedAddTransactionScreenBottomSheetType = AddTransactionScreenBottomSheetType.None,
         )
     }
 
-    fun resetScreenSnackbarType() {
+    private fun resetScreenSnackbarType() {
         updateScreenSnackbarType(
             updatedAddTransactionScreenSnackbarType = AddTransactionScreenSnackbarType.None,
         )
     }
 
-    fun updateAccountFrom(
+    private fun updateAccountFrom(
         updatedAccountFrom: Account?,
     ) {
         accountFrom.update {
@@ -366,7 +366,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateAccountTo(
+    private fun updateAccountTo(
         updatedAccountTo: Account?,
     ) {
         accountTo.update {
@@ -374,7 +374,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateAmount(
+    private fun updateAmount(
         updatedAmount: TextFieldValue,
     ) {
         amount.update {
@@ -384,7 +384,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateAmount(
+    private fun updateAmount(
         updatedAmount: String,
     ) {
         amount.update {
@@ -394,7 +394,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateCategory(
+    private fun updateCategory(
         updatedCategory: Category?,
     ) {
         category.update {
@@ -402,7 +402,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateIsTransactionDatePickerDialogVisible(
+    private fun updateIsTransactionDatePickerDialogVisible(
         updatedIsTransactionDatePickerDialogVisible: Boolean,
     ) {
         isTransactionDatePickerDialogVisible.update {
@@ -410,7 +410,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateIsTransactionTimePickerDialogVisible(
+    private fun updateIsTransactionTimePickerDialogVisible(
         updatedIsTransactionTimePickerDialogVisible: Boolean,
     ) {
         isTransactionTimePickerDialogVisible.update {
@@ -418,7 +418,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateScreenBottomSheetType(
+    private fun updateScreenBottomSheetType(
         updatedAddTransactionScreenBottomSheetType: AddTransactionScreenBottomSheetType,
     ) {
         screenBottomSheetType.update {
@@ -426,7 +426,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateScreenSnackbarType(
+    private fun updateScreenSnackbarType(
         updatedAddTransactionScreenSnackbarType: AddTransactionScreenSnackbarType,
     ) {
         screenSnackbarType.update {
@@ -434,7 +434,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateSelectedTransactionForIndex(
+    private fun updateSelectedTransactionForIndex(
         updatedSelectedTransactionForIndex: Int,
     ) {
         selectedTransactionForIndex.update {
@@ -442,7 +442,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateSelectedTransactionTypeIndex(
+    private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
     ) {
         selectedTransactionTypeIndex.update {
@@ -450,7 +450,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateTitle(
+    private fun updateTitle(
         updatedTitle: TextFieldValue,
     ) {
         title.update {
@@ -458,7 +458,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateTransactionDate(
+    private fun updateTransactionDate(
         updatedTransactionDate: LocalDate,
     ) {
         transactionDate.update {
@@ -466,7 +466,7 @@ internal class AddTransactionScreenViewModel(
         }
     }
 
-    fun updateTransactionTime(
+    private fun updateTransactionTime(
         updatedTransactionTime: LocalTime,
     ) {
         transactionTime.update {
