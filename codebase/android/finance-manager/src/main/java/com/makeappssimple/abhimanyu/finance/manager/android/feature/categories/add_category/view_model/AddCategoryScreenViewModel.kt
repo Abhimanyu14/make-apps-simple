@@ -144,21 +144,21 @@ internal class AddCategoryScreenViewModel(
 
     // region state events
     fun clearSearchText(
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         searchText = ""
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun clearTitle(
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         title = title.copy(
             text = "",
         )
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
@@ -183,50 +183,50 @@ internal class AddCategoryScreenViewModel(
 
     fun updateEmoji(
         updatedEmoji: String,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         emoji = updatedEmoji
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateScreenBottomSheetType(
         updatedAddCategoryScreenBottomSheetType: AddCategoryScreenBottomSheetType,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         screenBottomSheetType = updatedAddCategoryScreenBottomSheetType
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateSearchText(
         updatedSearchText: String,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         searchText = updatedSearchText
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateTitle(
         updatedTitle: TextFieldValue,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         title = updatedTitle
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }

@@ -329,40 +329,40 @@ internal class CategoriesScreenViewModel(
 
     fun updateCategoryIdToDelete(
         updatedCategoryIdToDelete: Int?,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         categoryIdToDelete = updatedCategoryIdToDelete
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateClickedItemId(
         updatedClickedItemId: Int?,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         clickedItemId = updatedClickedItemId
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateScreenBottomSheetType(
         updatedCategoriesScreenBottomSheetType: CategoriesScreenBottomSheetType,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         screenBottomSheetType = updatedCategoriesScreenBottomSheetType
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateScreenSnackbarType(
         updatedCategoriesScreenSnackbarType: CategoriesScreenSnackbarType,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         screenSnackbarType = updatedCategoriesScreenSnackbarType
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }

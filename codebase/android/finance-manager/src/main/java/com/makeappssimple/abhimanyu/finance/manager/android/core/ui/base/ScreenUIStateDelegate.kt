@@ -23,13 +23,13 @@ public interface ScreenUIStateDelegate {
     public val refreshSignal: MutableSharedFlow<Unit>
 
     public fun completeLoading(
-        refresh: Boolean = true,
+        shouldRefresh: Boolean = true,
     )
 
     public fun refresh()
 
     public fun startLoading(
-        refresh: Boolean = true,
+        shouldRefresh: Boolean = true,
     )
 
     public fun <T> withLoading(

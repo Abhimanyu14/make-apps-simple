@@ -30,19 +30,19 @@ public open class ScreenUIStateDelegateImpl : ScreenUIStateDelegate {
     }
 
     override fun completeLoading(
-        refresh: Boolean,
+        shouldRefresh: Boolean,
     ) {
         isLoading = false
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     override fun startLoading(
-        refresh: Boolean,
+        shouldRefresh: Boolean,
     ) {
         isLoading = true
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }

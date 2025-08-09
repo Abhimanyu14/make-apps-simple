@@ -203,7 +203,7 @@ internal class EditAccountScreenViewModel(
 
     fun updateBalanceAmountValue(
         updatedBalanceAmountValue: TextFieldValue,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ): Job? {
         balanceAmountValue = updatedBalanceAmountValue
         if (shouldRefresh) {
@@ -214,7 +214,7 @@ internal class EditAccountScreenViewModel(
 
     fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ): Job? {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
@@ -226,7 +226,7 @@ internal class EditAccountScreenViewModel(
 
     fun updateName(
         updatedName: TextFieldValue,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ): Job? {
         name = updatedName
         if (shouldRefresh) {
@@ -237,7 +237,7 @@ internal class EditAccountScreenViewModel(
 
     fun updateScreenBottomSheetType(
         updatedEditAccountScreenBottomSheetType: EditAccountScreenBottomSheetType,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ): Job? {
         screenBottomSheetType = updatedEditAccountScreenBottomSheetType
         if (shouldRefresh) {
@@ -248,7 +248,7 @@ internal class EditAccountScreenViewModel(
 
     fun updateScreenSnackbarType(
         updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ): Job? {
         screenSnackbarType = updatedEditAccountScreenSnackbarType
         if (shouldRefresh) {
@@ -259,7 +259,7 @@ internal class EditAccountScreenViewModel(
 
     fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ): Job? {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
         if (shouldRefresh) {

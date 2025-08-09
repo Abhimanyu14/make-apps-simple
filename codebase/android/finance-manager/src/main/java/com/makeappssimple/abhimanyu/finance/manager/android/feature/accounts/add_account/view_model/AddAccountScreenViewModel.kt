@@ -131,24 +131,24 @@ internal class AddAccountScreenViewModel(
 
     // region state events
     fun clearMinimumAccountBalanceAmountValue(
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         minimumAccountBalanceAmountValue =
             minimumAccountBalanceAmountValue.copy(
                 text = "",
             )
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun clearName(
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         name = name.copy(
             text = "",
         )
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
@@ -186,51 +186,51 @@ internal class AddAccountScreenViewModel(
 
     fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateName(
         updatedName: TextFieldValue,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         name = updatedName
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateScreenBottomSheetType(
         updatedAddAccountScreenBottomSheetType: AddAccountScreenBottomSheetType,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         screenBottomSheetType = updatedAddAccountScreenBottomSheetType
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateScreenSnackbarType(
         updatedAddAccountScreenSnackbarType: AddAccountScreenSnackbarType,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         screenSnackbarType = updatedAddAccountScreenSnackbarType
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }
 
     fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
-        refresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
-        if (refresh) {
+        if (shouldRefresh) {
             refresh()
         }
     }

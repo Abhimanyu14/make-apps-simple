@@ -143,7 +143,7 @@ internal class AccountsScreenViewModel(
 
     fun updateClickedItemId(
         updatedClickedItemId: Int?,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         clickedItemId = updatedClickedItemId
         if (shouldRefresh) {
@@ -172,7 +172,7 @@ internal class AccountsScreenViewModel(
 
     fun updateScreenBottomSheetType(
         updatedAccountsScreenBottomSheetType: AccountsScreenBottomSheetType,
-        shouldRefresh: Boolean = false,
+        shouldRefresh: Boolean = true,
     ) {
         screenBottomSheetType = updatedAccountsScreenBottomSheetType
         if (shouldRefresh) {
