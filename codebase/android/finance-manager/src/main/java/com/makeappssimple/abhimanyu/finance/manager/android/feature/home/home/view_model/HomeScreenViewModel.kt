@@ -70,13 +70,13 @@ internal class HomeScreenViewModel(
     coroutineScope: CoroutineScope,
     getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
     getAccountsTotalMinimumBalanceAmountValueUseCase: GetAccountsTotalMinimumBalanceAmountValueUseCase,
+    navigationKit: NavigationKit,
     shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
     private val backupDataUseCase: BackupDataUseCase,
     private val dateTimeKit: DateTimeKit,
     private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val getTransactionsBetweenTimestampsUseCase: GetTransactionsBetweenTimestampsUseCase,
-    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
@@ -295,7 +295,7 @@ internal class HomeScreenViewModel(
                     uri = uri,
                 )
             }
-            navigationKit.navigateUp()
+            navigateUp()
         }
     }
     // endregion

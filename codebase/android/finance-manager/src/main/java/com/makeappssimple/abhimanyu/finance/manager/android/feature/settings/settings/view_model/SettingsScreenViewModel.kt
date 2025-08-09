@@ -38,11 +38,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jetbrains.annotations.VisibleForTesting
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class SettingsScreenViewModel(
+    navigationKit: NavigationKit,
     private val alarmKit: AlarmKit,
     private val appVersionKit: AppVersionKit,
     private val backupDataUseCase: BackupDataUseCase,
@@ -51,7 +51,6 @@ internal class SettingsScreenViewModel(
     private val recalculateTotalUseCase: RecalculateTotalUseCase,
     private val restoreDataUseCase: RestoreDataUseCase,
     internal val logKit: LogKit,
-    @VisibleForTesting internal val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
@@ -175,7 +174,7 @@ internal class SettingsScreenViewModel(
         coroutineScope.launch {
             startLoading()
             recalculateTotalUseCase()
-            navigationKit.navigateUp()
+            navigateUp()
         }
     }
 
@@ -218,7 +217,7 @@ internal class SettingsScreenViewModel(
                 uri = uri,
             )
             if (isBackupSuccessful) {
-                navigationKit.navigateUp()
+                navigateUp()
             } else {
                 // TODO(Abhi): use the result to show snackbar to the user
             }
@@ -236,7 +235,7 @@ internal class SettingsScreenViewModel(
                     uri = uri,
                 )
             ) {
-                navigationKit.navigateUp()
+                navigateUp()
             } else {
                 completeLoading()
                 updateScreenSnackbarType(

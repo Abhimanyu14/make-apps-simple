@@ -44,13 +44,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditTransactionForScreenViewModel(
-    private val coroutineScope: CoroutineScope,
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
+    private val coroutineScope: CoroutineScope,
     private val editTransactionForScreenDataValidationUseCase: EditTransactionForScreenDataValidationUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTransactionForByIdUseCase: GetTransactionForByIdUseCase,
-    private val navigationKit: NavigationKit,
     private val updateTransactionForUseCase: UpdateTransactionForUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -203,7 +203,7 @@ internal class EditTransactionForScreenViewModel(
                 title = uiState.title.text,
             )
             if (isTransactionForUpdated) {
-                navigationKit.navigateUp()
+                navigateUp()
             } else {
                 // TODO(Abhi): Show error
             }

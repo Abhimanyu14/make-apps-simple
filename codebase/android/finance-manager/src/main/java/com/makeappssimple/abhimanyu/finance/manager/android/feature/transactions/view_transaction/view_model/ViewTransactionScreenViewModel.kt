@@ -46,13 +46,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class ViewTransactionScreenViewModel(
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val deleteTransactionUseByIdCase: DeleteTransactionUseByIdCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
-    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
@@ -185,7 +185,7 @@ internal class ViewTransactionScreenViewModel(
     fun onRefundButtonClick(
         transactionId: Int,
     ) {
-        navigationKit.navigateToAddTransactionScreen(
+        navigateToAddTransactionScreen(
             transactionId = transactionId,
         )
     }

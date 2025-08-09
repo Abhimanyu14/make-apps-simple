@@ -28,14 +28,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jetbrains.annotations.VisibleForTesting
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class OpenSourceLicensesScreenViewModel(
     coroutineScope: CoroutineScope,
+    navigationKit: NavigationKit,
     internal val logKit: LogKit,
-    @VisibleForTesting internal val navigationKit: NavigationKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,

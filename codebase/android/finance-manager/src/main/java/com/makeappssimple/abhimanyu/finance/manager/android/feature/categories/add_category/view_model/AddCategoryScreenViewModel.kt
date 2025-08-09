@@ -48,13 +48,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddCategoryScreenViewModel(
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addCategoryScreenDataValidationUseCase: AddCategoryScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val insertCategoriesUseCase: InsertCategoriesUseCase,
-    private val navigationKit: NavigationKit,
     private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -171,7 +171,7 @@ internal class AddCategoryScreenViewModel(
         )
         coroutineScope.launch {
             insertCategoriesUseCase(category)
-            navigationKit.navigateUp()
+            navigateUp()
         }
     }
 

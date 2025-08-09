@@ -44,11 +44,11 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class TransactionForValuesScreenViewModel(
+    navigationKit: NavigationKit,
     private val coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
     private val checkIfTransactionForValuesAreUsedInTransactionsUseCase: CheckIfTransactionForValuesAreUsedInTransactionsUseCase,
     private val deleteTransactionForByIdUseCase: DeleteTransactionForByIdUseCase,
-    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,

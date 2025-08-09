@@ -39,11 +39,11 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddTransactionForScreenViewModel(
+    navigationKit: NavigationKit,
     private val addTransactionForScreenDataValidationUseCase: AddTransactionForScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val insertTransactionForUseCase: InsertTransactionForUseCase,
-    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
@@ -159,7 +159,7 @@ internal class AddTransactionForScreenViewModel(
             if (isTransactionForInserted == -1L) {
                 // TODO(Abhi): Show error
             } else {
-                navigationKit.navigateUp()
+                navigateUp()
             }
         }
     }

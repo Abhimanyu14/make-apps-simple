@@ -59,13 +59,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class CategoriesScreenViewModel(
+    navigationKit: NavigationKit,
     private val checkIfCategoryIsUsedInTransactionsUseCase: CheckIfCategoryIsUsedInTransactionsUseCase,
     private val coroutineScope: CoroutineScope,
     private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesFlowUseCase: GetAllCategoriesFlowUseCase,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
-    private val navigationKit: NavigationKit,
     private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(

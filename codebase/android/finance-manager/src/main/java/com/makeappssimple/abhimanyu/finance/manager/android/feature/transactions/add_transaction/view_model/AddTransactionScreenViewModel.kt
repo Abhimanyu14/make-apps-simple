@@ -76,6 +76,7 @@ import java.time.LocalTime
 
 @KoinViewModel
 internal class AddTransactionScreenViewModel(
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addTransactionScreenDataValidationUseCase: AddTransactionScreenDataValidationUseCase,
@@ -89,7 +90,6 @@ internal class AddTransactionScreenViewModel(
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val getMaxRefundAmountUseCase: GetMaxRefundAmountUseCase,
     private val insertTransactionUseCase: InsertTransactionUseCase,
-    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
@@ -339,7 +339,7 @@ internal class AddTransactionScreenViewModel(
             )
             if (isTransactionInserted) {
                 updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionSuccessful)
-                navigationKit.navigateUp()
+                navigateUp()
             } else {
                 updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionFailed)
             }

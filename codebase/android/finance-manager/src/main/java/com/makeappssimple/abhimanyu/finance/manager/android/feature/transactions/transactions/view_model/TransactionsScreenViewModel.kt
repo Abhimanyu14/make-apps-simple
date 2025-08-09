@@ -64,12 +64,12 @@ import java.time.LocalDate
 
 @KoinViewModel
 internal class TransactionsScreenViewModel(
+    navigationKit: NavigationKit,
     private val coroutineScope: CoroutineScope,
     private val dispatcherProvider: DispatcherProvider,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
-    private val navigationKit: NavigationKit,
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(

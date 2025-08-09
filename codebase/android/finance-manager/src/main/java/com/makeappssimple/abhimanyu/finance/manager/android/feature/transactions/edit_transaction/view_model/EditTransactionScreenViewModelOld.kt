@@ -85,6 +85,7 @@ import kotlin.math.abs
 
 public class EditTransactionScreenViewModelOld(
     coroutineScope: CoroutineScope,
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val dateTimeKit: DateTimeKit,
@@ -94,7 +95,6 @@ public class EditTransactionScreenViewModelOld(
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTitleSuggestionsUseCase: GetTitleSuggestionsUseCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
-    private val navigationKit: NavigationKit,
     private val updateAccountBalanceAmountUseCase: UpdateAccountBalanceAmountUseCase,
     private val updateTransactionUseCase: UpdateTransactionUseCase,
     internal val logKit: LogKit,
@@ -500,7 +500,7 @@ public class EditTransactionScreenViewModelOld(
                     // endregion
                 }
             }
-            navigationKit.navigateUp()
+            navigateUp()
         }
     }
 

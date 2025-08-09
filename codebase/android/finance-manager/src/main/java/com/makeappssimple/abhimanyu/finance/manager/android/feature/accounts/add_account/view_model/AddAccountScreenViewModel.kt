@@ -49,11 +49,11 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddAccountScreenViewModel(
+    navigationKit: NavigationKit,
     private val addAccountScreenDataValidationUseCase: AddAccountScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val insertAccountUseCase: InsertAccountUseCase,
-    private val navigationKit: NavigationKit,
     private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(

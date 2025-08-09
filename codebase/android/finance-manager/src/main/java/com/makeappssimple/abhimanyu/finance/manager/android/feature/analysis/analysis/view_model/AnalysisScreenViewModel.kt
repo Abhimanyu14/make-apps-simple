@@ -56,9 +56,9 @@ private object AnalysisScreenViewModelConstants {
 @KoinViewModel
 internal class AnalysisScreenViewModel(
     coroutineScope: CoroutineScope,
+    navigationKit: NavigationKit,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
-    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,

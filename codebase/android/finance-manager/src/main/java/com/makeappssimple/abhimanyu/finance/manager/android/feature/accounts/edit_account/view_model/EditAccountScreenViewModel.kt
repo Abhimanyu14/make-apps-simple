@@ -54,12 +54,12 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditAccountScreenViewModel(
+    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     private val coroutineScope: CoroutineScope,
     private val editAccountScreenDataValidationUseCase: EditAccountScreenDataValidationUseCase,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAccountByIdUseCase: GetAccountByIdUseCase,
-    private val navigationKit: NavigationKit,
     private val screenUICommonState: ScreenUICommonState,
     private val updateAccountUseCase: UpdateAccountUseCase,
     internal val logKit: LogKit,
@@ -193,7 +193,7 @@ internal class EditAccountScreenViewModel(
                 name = name.text,
             )
             if (isAccountUpdated) {
-                navigationKit.navigateUp()
+                navigateUp()
             } else {
                 completeLoading()
                 // TODO: Show Error
