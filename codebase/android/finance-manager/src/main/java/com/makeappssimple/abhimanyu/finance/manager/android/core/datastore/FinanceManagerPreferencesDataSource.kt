@@ -240,7 +240,7 @@ public class FinanceManagerPreferencesDataSource(
             block()
             true
         } catch (
-            ioException: IOException,
+            _: IOException,
         ) {
             false
         }
