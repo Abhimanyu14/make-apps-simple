@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base
 
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 
 public interface ScreenUIStateDelegate {
@@ -24,13 +25,13 @@ public interface ScreenUIStateDelegate {
 
     public fun completeLoading(
         shouldRefresh: Boolean = true,
-    )
+    ): Job
 
-    public fun refresh(): Boolean
+    public fun refresh(): Job
 
     public fun startLoading(
         shouldRefresh: Boolean = true,
-    )
+    ): Job
 
     public fun <T> withLoading(
         block: () -> T,

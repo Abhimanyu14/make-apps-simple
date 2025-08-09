@@ -16,233 +16,67 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.datastore
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
-import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.InitialDataVersionNumber
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Reminder
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.ReminderConstants
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import java.io.IOException
 
-private object FinanceManagerPreferencesDataSourceConstants {
-    const val DEFAULT_ID = -1
-    const val DEFAULT_TIMESTAMP = -1L
-}
+public interface FinanceManagerPreferencesDataSource {
+    public fun getDataTimestamp(): Flow<DataTimestamp?>
 
-public class FinanceManagerPreferencesDataSource(
-    private val dataStore: DataStore<Preferences>,
-    private val logKit: LogKit,
-) {
-    private val preferences: Flow<Preferences> = dataStore.data
-        .catch { exception ->
-            logKit.logError(
-                message = "Error reading preferences. ${exception.localizedMessage}",
-            )
-            emit(
-                value = emptyPreferences(),
-            )
-        }
+    public fun getDefaultDataId(): Flow<DefaultDataId?>
 
-    public fun getDataTimestamp(): Flow<DataTimestamp?> {
-        return preferences.map {
-            DataTimestamp(
-                lastBackup = it[DataStoreConstants.DataTimestamp.LAST_DATA_BACKUP]
-                    ?: FinanceManagerPreferencesDataSourceConstants.DEFAULT_TIMESTAMP,
-                lastChange = it[DataStoreConstants.DataTimestamp.LAST_DATA_CHANGE]
-                    ?: FinanceManagerPreferencesDataSourceConstants.DEFAULT_TIMESTAMP,
-            )
-        }
-    }
+    public fun getInitialDataVersionNumber(): Flow<InitialDataVersionNumber?>
 
-    public fun getDefaultDataId(): Flow<DefaultDataId?> {
-        return preferences.map {
-            DefaultDataId(
-                expenseCategory = it[DataStoreConstants.DefaultId.EXPENSE_CATEGORY]
-                    ?: FinanceManagerPreferencesDataSourceConstants.DEFAULT_ID,
-                incomeCategory = it[DataStoreConstants.DefaultId.INCOME_CATEGORY]
-                    ?: FinanceManagerPreferencesDataSourceConstants.DEFAULT_ID,
-                investmentCategory = it[DataStoreConstants.DefaultId.INVESTMENT_CATEGORY]
-                    ?: FinanceManagerPreferencesDataSourceConstants.DEFAULT_ID,
-                account = it[DataStoreConstants.DefaultId.ACCOUNT]
-                    ?: FinanceManagerPreferencesDataSourceConstants.DEFAULT_ID,
-            )
-        }
-    }
-
-    public fun getInitialDataVersionNumber(): Flow<InitialDataVersionNumber?> {
-        return preferences.map {
-            InitialDataVersionNumber(
-                account = it[DataStoreConstants.InitialDataVersionNumber.ACCOUNT].orZero(),
-                category = it[DataStoreConstants.InitialDataVersionNumber.CATEGORY].orZero(),
-                transaction = it[DataStoreConstants.InitialDataVersionNumber.TRANSACTION].orZero(),
-                transactionFor = it[DataStoreConstants.InitialDataVersionNumber.TRANSACTION_FOR].orZero(),
-            )
-        }
-    }
-
-    public fun getReminder(): Flow<Reminder?> {
-        return preferences.map {
-            Reminder(
-                isEnabled = it[DataStoreConstants.Reminder.IS_REMINDER_ENABLED].orFalse(),
-                hour = it[DataStoreConstants.Reminder.HOUR]
-                    ?: ReminderConstants.DEFAULT_REMINDER_HOUR,
-                min = it[DataStoreConstants.Reminder.MIN]
-                    ?: ReminderConstants.DEFAULT_REMINDER_MIN,
-            )
-        }
-    }
+    public fun getReminder(): Flow<Reminder?>
 
     public suspend fun updateAccountDataVersionNumber(
         accountDataVersionNumber: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.InitialDataVersionNumber.ACCOUNT] =
-                    accountDataVersionNumber
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateCategoryDataVersionNumber(
         categoryDataVersionNumber: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.InitialDataVersionNumber.CATEGORY] =
-                    categoryDataVersionNumber
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateDefaultExpenseCategoryId(
         defaultExpenseCategoryId: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.DefaultId.EXPENSE_CATEGORY] =
-                    defaultExpenseCategoryId
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateDefaultIncomeCategoryId(
         defaultIncomeCategoryId: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.DefaultId.INCOME_CATEGORY] =
-                    defaultIncomeCategoryId
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateDefaultInvestmentCategoryId(
         defaultInvestmentCategoryId: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.DefaultId.INVESTMENT_CATEGORY] =
-                    defaultInvestmentCategoryId
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateDefaultAccountId(
         defaultAccountId: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.DefaultId.ACCOUNT] = defaultAccountId
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateIsReminderEnabled(
         isReminderEnabled: Boolean,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.Reminder.IS_REMINDER_ENABLED] =
-                    isReminderEnabled
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateLastDataBackupTimestamp(
         lastDataBackupTimestamp: Long,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.DataTimestamp.LAST_DATA_BACKUP] =
-                    lastDataBackupTimestamp
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateLastDataChangeTimestamp(
         lastDataChangeTimestamp: Long,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.DataTimestamp.LAST_DATA_CHANGE] =
-                    lastDataChangeTimestamp
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateReminderTime(
         hour: Int,
         min: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.Reminder.HOUR] = hour
-                it[DataStoreConstants.Reminder.MIN] = min
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateTransactionDataVersionNumber(
         transactionDataVersionNumber: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.InitialDataVersionNumber.TRANSACTION] =
-                    transactionDataVersionNumber
-            }
-        }
-    }
+    ): Boolean
 
     public suspend fun updateTransactionForDataVersionNumber(
         transactionForDataVersionNumber: Int,
-    ): Boolean {
-        return tryDataStoreEdit {
-            dataStore.edit {
-                it[DataStoreConstants.InitialDataVersionNumber.TRANSACTION_FOR] =
-                    transactionForDataVersionNumber
-            }
-        }
-    }
-
-    private suspend fun tryDataStoreEdit(
-        block: suspend () -> Unit,
-    ): Boolean {
-        return try {
-            block()
-            true
-        } catch (
-            _: IOException,
-        ) {
-            false
-        }
-    }
+    ): Boolean
 }

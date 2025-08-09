@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.filterDigits
@@ -292,7 +291,7 @@ internal class AddTransactionScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             startLoading()
             joinAll(
                 launch {
@@ -676,7 +675,7 @@ internal class AddTransactionScreenViewModel(
 
     // region observeForTitleSuggestions
     private fun observeForTitleSuggestions() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 flow = title,
                 flow2 = category
@@ -696,7 +695,7 @@ internal class AddTransactionScreenViewModel(
 
     // region observeForSelectedTransactionType
     private fun observeForSelectedTransactionType() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             selectedTransactionTypeIndex.collectLatest { selectedTransactionTypeIndex ->
                 startLoading()
                 val updatedSelectedTransactionType =

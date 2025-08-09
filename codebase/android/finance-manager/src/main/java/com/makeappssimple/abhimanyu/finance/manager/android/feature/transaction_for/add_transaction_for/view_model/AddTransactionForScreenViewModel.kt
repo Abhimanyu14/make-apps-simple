@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.view_model
 
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForUseCase
@@ -109,7 +108,7 @@ internal class AddTransactionForScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             withLoadingSuspend {
                 getAllTransactionForValues()
             }

@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.view_model
 
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.groupBy
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
@@ -156,7 +155,7 @@ internal class CategoriesScreenViewModel(
                     }
                 }
 
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 defaultDataId,
                 categoriesTransactionTypeMap
@@ -383,7 +382,7 @@ internal class CategoriesScreenViewModel(
     // endregion
 
     private fun observeForCategoriesGridItemDataMap() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             categoriesGridItemDataMap.collectLatest { categoriesGridItemDataMap ->
                 // TODO(Abhi): To Fix
                 updateUiStateAndStateEvents(

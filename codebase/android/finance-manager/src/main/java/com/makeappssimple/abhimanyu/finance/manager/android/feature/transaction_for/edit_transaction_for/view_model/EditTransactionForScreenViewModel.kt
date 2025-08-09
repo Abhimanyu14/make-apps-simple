@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
@@ -127,7 +126,7 @@ internal class EditTransactionForScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             withLoadingSuspend {
                 getAllTransactionForValues()
                 getCurrentTransactionFor()

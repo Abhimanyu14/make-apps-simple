@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.view_model
 
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
@@ -148,7 +147,7 @@ internal class TransactionForValuesScreenViewModel(
 
     // region observeForTransactionForListItemDataList
     private fun observeForTransactionForListItemDataList() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             getAllTransactionForValuesFlowUseCase().collectLatest { updatedAllTransactionForValues ->
                 startLoading()
                 val transactionForValuesIsUsedInTransactions =

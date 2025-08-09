@@ -86,11 +86,11 @@ import java.time.LocalTime
 import kotlin.math.abs
 
 public class EditTransactionScreenViewModelOld(
-    coroutineScope: CoroutineScope,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     screenUIStateDelegate: ScreenUIStateDelegate,
     uriDecoder: UriDecoder,
+    private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
@@ -280,7 +280,7 @@ public class EditTransactionScreenViewModelOld(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             awaitAll(
                 async {
                     defaultDataIdFromDataStore =
@@ -334,7 +334,7 @@ public class EditTransactionScreenViewModelOld(
     // endregion
 
     internal fun updateTransaction() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             val selectedTransactionTypeValue = selectedTransactionType.value
             val uiStateValue = uiState.value
             selectedTransactionTypeValue?.let {
@@ -670,7 +670,7 @@ public class EditTransactionScreenViewModelOld(
     // endregion
 
     private fun observeSelectedTransactionType() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             selectedTransactionType.collectLatest { transactionType ->
                 transactionType?.let {
                     handleTransactionTypeChange(
@@ -798,7 +798,7 @@ public class EditTransactionScreenViewModelOld(
     }
 
     private fun observeSelectedCategory() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 flow = selectedCategoryId,
                 flow2 = uiState,

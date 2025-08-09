@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -192,7 +191,7 @@ internal class EditCategoryScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             withLoadingSuspend {
                 getAllCategories()
                 getOriginalCategory()
@@ -281,7 +280,7 @@ internal class EditCategoryScreenViewModel(
 
     // region getAllCategories
     private fun getAllCategories() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             categories.update {
                 getAllCategoriesUseCase()
             }
@@ -292,7 +291,7 @@ internal class EditCategoryScreenViewModel(
     // region getOriginalCategory
     private fun getOriginalCategory() {
         screenArgs.categoryId?.let { id ->
-            viewModelScope.launch {
+            coroutineScope.launch {
                 category.update {
                     getCategoryByIdUseCase(
                         id = id,

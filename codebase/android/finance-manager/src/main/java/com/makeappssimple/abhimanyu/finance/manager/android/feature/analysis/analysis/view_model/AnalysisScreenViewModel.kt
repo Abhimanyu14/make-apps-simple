@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.view_model
 
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
@@ -57,9 +56,9 @@ private object AnalysisScreenViewModelConstants {
 
 @KoinViewModel
 internal class AnalysisScreenViewModel(
-    coroutineScope: CoroutineScope,
     navigationKit: NavigationKit,
     screenUIStateDelegate: ScreenUIStateDelegate,
+    private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
     internal val logKit: LogKit,
@@ -143,7 +142,7 @@ internal class AnalysisScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             allTransactionData = getAllTransactionDataUseCase()
             oldestTransactionLocalDate = getOldestTransactionLocalDate()
         }
@@ -200,7 +199,7 @@ internal class AnalysisScreenViewModel(
 
     // region observeForTransactionDataMappedByCategory
     private fun observeForTransactionDataMappedByCategory() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 selectedTransactionTypeIndex,
                 selectedFilter,

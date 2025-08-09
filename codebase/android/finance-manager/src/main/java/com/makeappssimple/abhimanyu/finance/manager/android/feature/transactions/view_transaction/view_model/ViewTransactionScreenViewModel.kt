@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.view_model
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
@@ -122,7 +121,7 @@ internal class ViewTransactionScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             withLoadingSuspend {
                 getCurrentTransactionData()
             }

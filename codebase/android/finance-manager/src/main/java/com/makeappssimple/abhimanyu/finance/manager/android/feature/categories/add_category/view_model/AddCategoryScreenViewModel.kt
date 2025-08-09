@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
@@ -143,7 +142,7 @@ internal class AddCategoryScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             fetchCategories()
             transactionType?.let { originalTransactionType ->
                 updateSelectedTransactionTypeIndex(

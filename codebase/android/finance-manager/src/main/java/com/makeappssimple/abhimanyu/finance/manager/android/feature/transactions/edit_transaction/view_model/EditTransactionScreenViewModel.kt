@@ -20,7 +20,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
@@ -302,7 +301,7 @@ internal class EditTransactionScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             startLoading()
             joinAll(
                 launch {
@@ -628,7 +627,7 @@ internal class EditTransactionScreenViewModel(
             transactionType = uiState.selectedTransactionType,
         )
 
-        viewModelScope.launch {
+        coroutineScope.launch {
             currentTransactionData?.transaction?.let { originalTransaction ->
                 updateTransactionUseCase(
                     originalTransaction = originalTransaction,
@@ -811,7 +810,7 @@ internal class EditTransactionScreenViewModel(
 
     // region observeForTitleSuggestions
     private fun observeForTitleSuggestions() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 flow = title,
                 flow2 = category
@@ -831,7 +830,7 @@ internal class EditTransactionScreenViewModel(
 
     // region observeForSelectedTransactionType
     private fun observeForSelectedTransactionType() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             selectedTransactionTypeIndex.collectLatest { selectedTransactionTypeIndex ->
                 startLoading()
                 val updatedSelectedTransactionType =

@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.view_model
 
 import android.net.Uri
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -124,7 +123,7 @@ internal class SettingsScreenViewModel(
     internal fun backupDataToDocument(
         uri: Uri,
     ) {
-        viewModelScope.launch {
+        coroutineScope.launch {
             startLoading()
             val isBackupSuccessful = backupDataUseCase(
                 uri = uri,
@@ -142,7 +141,7 @@ internal class SettingsScreenViewModel(
     internal fun restoreDataFromDocument(
         uri: Uri,
     ) {
-        viewModelScope.launch {
+        coroutineScope.launch {
             startLoading()
             if (restoreDataUseCase(
                     uri = uri,
@@ -211,7 +210,7 @@ internal class SettingsScreenViewModel(
 
     // region observeForReminder
     private fun observeForReminder() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             financeManagerPreferencesRepository.getReminderFlow()
                 .collectLatest { updatedReminder ->
                     startLoading()

@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model
 
 import android.net.Uri
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
@@ -270,7 +269,7 @@ internal class HomeScreenViewModel(
     internal fun backupDataToDocument(
         uri: Uri,
     ) {
-        viewModelScope.launch {
+        coroutineScope.launch {
             // TODO(Abhi): Change this logic to ensure that this coroutine lives till the backup is completed.
             launch {
                 backupDataUseCase(
@@ -284,7 +283,7 @@ internal class HomeScreenViewModel(
 
     // region observeForHomeListItemViewData
     private fun observeForHomeListItemViewData() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             getRecentTransactionDataFlowUseCase().collectLatest { transactionDataList ->
                 startLoading()
                 homeListItemViewData.update {
@@ -302,7 +301,7 @@ internal class HomeScreenViewModel(
 
     // region observeForOverviewCardData
     private fun observeForOverviewCardData() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 overviewTabSelectionIndex,
                 selectedTimestamp,

@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ed
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
@@ -158,7 +157,7 @@ internal class EditAccountScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             getAllAccounts()
             getCurrentAccount()
         }
@@ -166,7 +165,7 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region state events
-    private fun clearBalanceAmountValue(): Boolean {
+    private fun clearBalanceAmountValue() {
         return updateBalanceAmountValue(
             updatedBalanceAmountValue = balanceAmountValue
                 .copy(
@@ -175,7 +174,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    private fun clearMinimumAccountBalanceAmountValue(): Boolean {
+    private fun clearMinimumAccountBalanceAmountValue() {
         return updateMinimumAccountBalanceAmountValue(
             updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue
                 .copy(
@@ -184,8 +183,8 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    private fun clearName(): Boolean {
-        return updateName(
+    private fun clearName() {
+        updateName(
             updatedName = name
                 .copy(
                     text = "",
@@ -196,7 +195,6 @@ internal class EditAccountScreenViewModel(
     private fun updateAccount(): Job {
         return coroutineScope.launch {
             startLoading()
-
             val isAccountUpdated = updateAccountUseCase(
                 currentAccount = currentAccount,
                 validAccountTypesForNewAccount = validAccountTypesForNewAccount,
@@ -217,57 +215,52 @@ internal class EditAccountScreenViewModel(
     private fun updateBalanceAmountValue(
         updatedBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ): Boolean {
+    ) {
         balanceAmountValue = updatedBalanceAmountValue
         if (shouldRefresh) {
-            return refresh()
+            refresh()
         }
-        return true
     }
 
     private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ): Boolean {
+    ) {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
         if (shouldRefresh) {
-            return refresh()
+            refresh()
         }
-        return true
     }
 
     private fun updateName(
         updatedName: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ): Boolean {
+    ) {
         name = updatedName
         if (shouldRefresh) {
-            return refresh()
+            refresh()
         }
-        return true
     }
 
     private fun updateScreenSnackbarType(
         updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
         shouldRefresh: Boolean = true,
-    ): Boolean {
+    ) {
         screenSnackbarType = updatedEditAccountScreenSnackbarType
         if (shouldRefresh) {
-            return refresh()
+            refresh()
         }
-        return true
     }
 
     private fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
         shouldRefresh: Boolean = true,
-    ): Boolean {
+    ) {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
         if (shouldRefresh) {
-            return refresh()
+            refresh()
         }
-        return true
     }
     // endregion
 

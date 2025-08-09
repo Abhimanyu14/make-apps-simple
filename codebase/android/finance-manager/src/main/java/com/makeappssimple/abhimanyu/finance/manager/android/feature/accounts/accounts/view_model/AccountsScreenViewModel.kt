@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.view_model
 
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
@@ -192,7 +191,7 @@ internal class AccountsScreenViewModel(
 
     // region observeForAllAccounts
     private fun observeForAllAccounts() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             println("getAllAccountsFlowUseCase launch")
             getAllAccountsFlowUseCase().collectLatest { updatedAllAccounts ->
                 println("getAllAccountsFlowUseCase().collectLatest")
@@ -225,7 +224,7 @@ internal class AccountsScreenViewModel(
 
     // region observeForDefaultAccountId
     private fun observeForDefaultAccountId() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             getDefaultAccountIdFlowUseCase().collectLatest { updatedDefaultAccountId ->
                 handleDefaultAccountIdUpdate(
                     updatedDefaultAccountId = updatedDefaultAccountId,

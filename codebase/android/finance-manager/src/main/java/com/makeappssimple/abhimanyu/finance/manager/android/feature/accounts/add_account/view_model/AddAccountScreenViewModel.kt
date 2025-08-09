@@ -36,7 +36,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.use_case.AddAccountScreenDataValidationUseCase
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -56,7 +59,7 @@ internal class AddAccountScreenViewModel(
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
-    val validAccountTypesForNewAccount: ImmutableList<AccountType> =
+    private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
             it != AccountType.CASH
         }
@@ -74,10 +77,12 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region uiState and uiStateEvents
-    internal val uiState: MutableStateFlow<AddAccountScreenUIState> =
+    private val _uiState: MutableStateFlow<AddAccountScreenUIState> =
         MutableStateFlow(
             value = AddAccountScreenUIState(),
         )
+    internal val uiState: StateFlow<AddAccountScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: AddAccountScreenUIStateEvents =
         AddAccountScreenUIStateEvents(
             clearMinimumAccountBalanceAmountValue = ::clearMinimumAccountBalanceAmountValue,
@@ -85,7 +90,7 @@ internal class AddAccountScreenViewModel(
             insertAccount = {
                 // TODO(Abhi): Change this to remove passing UI state from here
                 insertAccount(
-                    uiState = uiState.value,
+                    uiState = _uiState.value,
                 )
             },
             navigateUp = ::navigateUp,
@@ -108,7 +113,7 @@ internal class AddAccountScreenViewModel(
                 validAccountTypesForNewAccount.get(
                     index = selectedAccountTypeIndex,
                 )
-            uiState.update {
+            _uiState.update {
                 AddAccountScreenUIState(
                     selectedAccountType = selectedAccountType,
                     nameError = addAccountScreenDataValidationState.nameError,
@@ -138,48 +143,50 @@ internal class AddAccountScreenViewModel(
     // region state events
     private fun clearMinimumAccountBalanceAmountValue(
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         minimumAccountBalanceAmountValue =
             minimumAccountBalanceAmountValue.copy(
                 text = "",
             )
         if (shouldRefresh) {
-            refresh()
+            return refresh()
         }
+        return getCompletedJob()
     }
 
     private fun clearName(
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         name = name.copy(
             text = "",
         )
         if (shouldRefresh) {
-            refresh()
+            return refresh()
         }
+        return getCompletedJob()
     }
 
     private fun insertAccount(
         uiState: AddAccountScreenUIState,
-    ) {
-        startLoading()
-        coroutineScope.launch {
+    ): Job {
+        return coroutineScope.launch {
+            startLoading()
             val isAccountInserted = insertAccountUseCase(
                 accountType = uiState.selectedAccountType,
                 minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text.toLongOrZero(),
                 name = name.text,
-            ) == -1L
+            ) != -1L
             if (isAccountInserted) {
-                // TODO(Abhi): Show error
-            } else {
                 navigateUp()
+            } else {
+                completeLoading()
+                // TODO(Abhi): Show error
             }
         }
-        completeLoading()
     }
 
-    private fun resetScreenSnackbarType() {
-        updateScreenSnackbarType(
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
             updatedAddAccountScreenSnackbarType = AddAccountScreenSnackbarType.None,
         )
     }
@@ -187,41 +194,53 @@ internal class AddAccountScreenViewModel(
     private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
         if (shouldRefresh) {
-            refresh()
+            return refresh()
         }
+        return getCompletedJob()
     }
 
     private fun updateName(
         updatedName: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         name = updatedName
         if (shouldRefresh) {
-            refresh()
+            return refresh()
         }
+        return getCompletedJob()
     }
 
     private fun updateScreenSnackbarType(
         updatedAddAccountScreenSnackbarType: AddAccountScreenSnackbarType,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         screenSnackbarType = updatedAddAccountScreenSnackbarType
         if (shouldRefresh) {
-            refresh()
+            return refresh()
         }
+        return getCompletedJob()
     }
 
     private fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
         if (shouldRefresh) {
-            refresh()
+            return refresh()
+        }
+        return getCompletedJob()
+    }
+    // endregion
+
+    // region common
+    private fun getCompletedJob(): Job {
+        return Job().apply {
+            complete()
         }
     }
     // endregion

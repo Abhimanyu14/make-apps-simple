@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.view_model
 
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
@@ -206,7 +205,7 @@ internal class TransactionsScreenViewModel(
 
     // region fetchData
     override fun fetchData(): Job {
-        return viewModelScope.launch {
+        return coroutineScope.launch {
             withLoadingSuspend {
                 allTransactionForValues = getAllTransactionForValuesUseCase()
             }
@@ -331,7 +330,7 @@ internal class TransactionsScreenViewModel(
 
     // region observeForTransactionDetailsListItemViewData
     private fun observeForTransactionDetailsListItemViewData() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             combineAndCollectLatest(
                 searchText,
                 selectedFilter,
@@ -563,7 +562,7 @@ internal class TransactionsScreenViewModel(
 
     // region observeForAllTransactionData
     private fun observeForAllTransactionData() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             getAllTransactionDataFlowUseCase()
                 .flowOn(
                     context = dispatcherProvider.io,

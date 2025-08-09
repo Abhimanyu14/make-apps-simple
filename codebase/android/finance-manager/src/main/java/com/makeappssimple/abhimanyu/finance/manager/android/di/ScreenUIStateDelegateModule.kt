@@ -18,13 +18,18 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
+import kotlinx.coroutines.CoroutineScope
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
 public class ScreenUIStateDelegateModule {
     @Single
-    internal fun providesScreenUIStateDelegate(): ScreenUIStateDelegate {
-        return ScreenUIStateDelegateImpl()
+    internal fun providesScreenUIStateDelegate(
+        coroutineScope: CoroutineScope,
+    ): ScreenUIStateDelegate {
+        return ScreenUIStateDelegateImpl(
+            coroutineScope = coroutineScope,
+        )
     }
 }

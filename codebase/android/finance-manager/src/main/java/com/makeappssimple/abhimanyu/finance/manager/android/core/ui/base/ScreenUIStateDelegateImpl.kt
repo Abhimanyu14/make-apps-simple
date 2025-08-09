@@ -16,34 +16,49 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.launch
 
-public open class ScreenUIStateDelegateImpl : ScreenUIStateDelegate {
+public open class ScreenUIStateDelegateImpl(
+    private val coroutineScope: CoroutineScope,
+) : ScreenUIStateDelegate {
     override var isLoading: Boolean = true
     override val refreshSignal: MutableSharedFlow<Unit> = MutableSharedFlow(
         replay = 0,
-        extraBufferCapacity = 1,
+        extraBufferCapacity = 0,
     )
 
-    override fun refresh(): Boolean {
-        return refreshSignal.tryEmit(Unit)
+    override fun refresh(): Job {
+        return coroutineScope.launch {
+            refreshSignal.emit(
+                value = Unit,
+            )
+        }
     }
 
     override fun completeLoading(
         shouldRefresh: Boolean,
-    ) {
+    ): Job {
         isLoading = false
         if (shouldRefresh) {
-            refresh()
+            return refresh()
+        }
+        return Job().apply {
+            complete()
         }
     }
 
     override fun startLoading(
         shouldRefresh: Boolean,
-    ) {
+    ): Job {
         isLoading = true
         if (shouldRefresh) {
-            refresh()
+            return refresh()
+        }
+        return Job().apply {
+            complete()
         }
     }
 
