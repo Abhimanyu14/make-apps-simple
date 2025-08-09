@@ -173,5 +173,7 @@ ksp {
 }
 
 room {
-    schemaDirectory("$projectDir/schemas")
+    schemaDirectory(
+        path = "$projectDir/schemas",
+    )
 }
