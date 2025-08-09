@@ -11,6 +11,7 @@ app-make-apps-simple-version-name = "0.1.0"
 
 # SDK versions
 compile-sdk = "35"
+jvm = "17"
 min-sdk = "26"
 ndk = "27.0.12077973"
 target-sdk = "35"

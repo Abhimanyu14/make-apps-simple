@@ -90,7 +90,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = libs.versions.jvm.get()
     }
 
     lint {
