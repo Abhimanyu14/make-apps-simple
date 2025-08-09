@@ -41,6 +41,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.toNonSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
@@ -56,6 +57,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -66,12 +68,13 @@ private const val DEFAULT_OVERVIEW_TAB_SELECTION = 1
 
 @KoinViewModel
 internal class HomeScreenViewModel(
-    coroutineScope: CoroutineScope,
     getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
     getAccountsTotalMinimumBalanceAmountValueUseCase: GetAccountsTotalMinimumBalanceAmountValueUseCase,
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
     private val backupDataUseCase: BackupDataUseCase,
+    private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
@@ -81,6 +84,7 @@ internal class HomeScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
     private val isBackupCardVisible: Flow<Boolean> =
@@ -92,9 +96,6 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val isBalanceVisible: MutableStateFlow<Boolean> = MutableStateFlow(
         value = false,
     )
@@ -134,52 +135,54 @@ internal class HomeScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val totalIncomeAmount = Amount(
+            value = overviewCardData.value?.income?.toLong().orZero(),
+        )
+        val totalExpenseAmount = Amount(
+            value = overviewCardData.value?.expense?.toLong().orZero(),
+        )
 
-    private fun fetchData() {}
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-        observeForHomeListItemViewData()
-        observeForOverviewCardData()
+        coroutineScope.launch {
+            uiState.update {
+                HomeScreenUIState(
+                    isBackupCardVisible = isBackupCardVisible.first(),
+                    isBalanceVisible = isBalanceVisible.value,
+                    isLoading = isLoading,
+                    isRecentTransactionsTrailingTextVisible = homeListItemViewData.value
+                        .isNotEmpty(),
+                    overviewTabSelectionIndex = overviewTabSelectionIndex.value.orZero(),
+                    transactionListItemDataList = homeListItemViewData.value,
+                    accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.first()
+                        .orZero(),
+                    accountsTotalMinimumBalanceAmountValue = accountsTotalMinimumBalanceAmountValue.first()
+                        .orZero(),
+                    overviewCardData = overviewCardData.value.orDefault(),
+                    pieChartData = PieChartData(
+                        items = persistentListOf(
+                            PieChartItemData(
+                                value = overviewCardData.value?.income.orZero(),
+                                text = "Income : $totalIncomeAmount", // TODO(Abhi): Move to string resources
+                                color = MyColor.TERTIARY,
+                            ),
+                            PieChartItemData(
+                                value = overviewCardData.value?.expense.orZero(),
+                                text = "Expense : ${totalExpenseAmount.toNonSignedString()}", // TODO(Abhi): Move to string resources
+                                color = MyColor.ERROR,
+                            ),
+                        ),
+                    ),
+                )
+            }
+        }
     }
     // endregion
 
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
-        }
+    // region observeData
+    override fun observeData() {
+        observeForHomeListItemViewData()
+        observeForOverviewCardData()
     }
     // endregion
 
@@ -275,70 +278,6 @@ internal class HomeScreenViewModel(
                 )
             }
             navigateUp()
-        }
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                isBalanceVisible,
-                isBackupCardVisible,
-                overviewCardData,
-                homeListItemViewData,
-                overviewTabSelectionIndex,
-                accountsTotalBalanceAmountValue,
-                accountsTotalMinimumBalanceAmountValue,
-            ) {
-                    (
-                        isLoading,
-                        isBalanceVisible,
-                        isBackupCardVisible,
-                        overviewCardData,
-                        homeListItemViewData,
-                        overviewTabSelectionIndex,
-                        accountsTotalBalanceAmountValue,
-                        accountsTotalMinimumBalanceAmountValue,
-                    ),
-                ->
-                val totalIncomeAmount = Amount(
-                    value = overviewCardData?.income?.toLong().orZero(),
-                )
-                val totalExpenseAmount = Amount(
-                    value = overviewCardData?.expense?.toLong().orZero(),
-                )
-
-                uiState.update {
-                    HomeScreenUIState(
-                        isBackupCardVisible = isBackupCardVisible,
-                        isBalanceVisible = isBalanceVisible,
-                        isLoading = isLoading,
-                        isRecentTransactionsTrailingTextVisible = homeListItemViewData
-                            .isNotEmpty(),
-                        overviewTabSelectionIndex = overviewTabSelectionIndex.orZero(),
-                        transactionListItemDataList = homeListItemViewData,
-                        accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.orZero(),
-                        accountsTotalMinimumBalanceAmountValue = accountsTotalMinimumBalanceAmountValue.orZero(),
-                        overviewCardData = overviewCardData.orDefault(),
-                        pieChartData = PieChartData(
-                            items = persistentListOf(
-                                PieChartItemData(
-                                    value = overviewCardData?.income.orZero(),
-                                    text = "Income : $totalIncomeAmount", // TODO(Abhi): Move to string resources
-                                    color = MyColor.TERTIARY,
-                                ),
-                                PieChartItemData(
-                                    value = overviewCardData?.expense.orZero(),
-                                    text = "Expense : ${totalExpenseAmount.toNonSignedString()}", // TODO(Abhi): Move to string resources
-                                    color = MyColor.ERROR,
-                                ),
-                            ),
-                        ),
-                    )
-                }
-            }
         }
     }
     // endregion

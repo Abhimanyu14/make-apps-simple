@@ -24,13 +24,13 @@ import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.state.common.ScreenUICommonState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
@@ -46,7 +46,6 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -55,18 +54,19 @@ import org.koin.android.annotation.KoinViewModel
 internal class EditAccountScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val editAccountScreenDataValidationUseCase: EditAccountScreenDataValidationUseCase,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAccountByIdUseCase: GetAccountByIdUseCase,
-    private val screenUICommonState: ScreenUICommonState,
     private val updateAccountUseCase: UpdateAccountUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
-), ScreenUICommonState by screenUICommonState {
+    screenUIStateDelegate = screenUIStateDelegate,
+) {
     // region screen args
     private val screenArgs = EditAccountScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -75,9 +75,6 @@ internal class EditAccountScreenViewModel(
 
     // region initial data
     private var allAccounts: ImmutableList<Account> = persistentListOf()
-    // endregion
-
-    // region initial data
     private var currentAccount: Account? = null
     private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
@@ -120,29 +117,56 @@ internal class EditAccountScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeForRefreshSignal()
-        fetchData().invokeOnCompletion {
-            viewModelScope.launch {
-                completeLoading()
-            }
-        }
-        observeData()
-    }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val selectedAccountType = validAccountTypesForNewAccount.getOrNull(
+            selectedAccountTypeIndex
+        )
+        val validationState = editAccountScreenDataValidationUseCase(
+            allAccounts = allAccounts,
+            enteredName = name.text.trim(),
+            currentAccount = currentAccount,
+        )
 
-    private fun fetchData(): Job {
+        uiState.update {
+            EditAccountScreenUIState(
+                isLoading = isLoading,
+                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                nameError = validationState.nameError,
+                selectedAccountTypeIndex = selectedAccountTypeIndex.orZero(),
+                accountTypesChipUIDataList = validAccountTypesForNewAccount
+                    .map { accountType ->
+                        ChipUIData(
+                            text = accountType.title,
+                            icon = accountType.icon,
+                        )
+                    },
+                balanceAmountValue = balanceAmountValue,
+                minimumBalanceAmountValue = minimumAccountBalanceAmountValue,
+                name = name,
+                visibilityData = EditAccountScreenUIVisibilityData(
+                    balanceAmountTextField = true,
+                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                    nameTextField = validationState.isCashAccount.not(),
+                    nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
+                    accountTypesRadioGroup = validationState.isCashAccount.not(),
+                ),
+            )
+        }
+    }
+    // endregion
+
+    // region fetchData
+    override fun fetchData(): Job {
         return viewModelScope.launch {
             getAllAccounts()
             getCurrentAccount()
         }
     }
-
-    private fun observeData() {}
     // endregion
 
     // region state events
-    private fun clearBalanceAmountValue(): Job? {
+    private fun clearBalanceAmountValue(): Boolean {
         return updateBalanceAmountValue(
             updatedBalanceAmountValue = balanceAmountValue
                 .copy(
@@ -151,7 +175,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    private fun clearMinimumAccountBalanceAmountValue(): Job? {
+    private fun clearMinimumAccountBalanceAmountValue(): Boolean {
         return updateMinimumAccountBalanceAmountValue(
             updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue
                 .copy(
@@ -160,7 +184,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    private fun clearName(): Job? {
+    private fun clearName(): Boolean {
         return updateName(
             updatedName = name
                 .copy(
@@ -193,57 +217,57 @@ internal class EditAccountScreenViewModel(
     private fun updateBalanceAmountValue(
         updatedBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ): Job? {
+    ): Boolean {
         balanceAmountValue = updatedBalanceAmountValue
         if (shouldRefresh) {
             return refresh()
         }
-        return null
+        return true
     }
 
     private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ): Job? {
+    ): Boolean {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
         if (shouldRefresh) {
             return refresh()
         }
-        return null
+        return true
     }
 
     private fun updateName(
         updatedName: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ): Job? {
+    ): Boolean {
         name = updatedName
         if (shouldRefresh) {
             return refresh()
         }
-        return null
+        return true
     }
 
     private fun updateScreenSnackbarType(
         updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
         shouldRefresh: Boolean = true,
-    ): Job? {
+    ): Boolean {
         screenSnackbarType = updatedEditAccountScreenSnackbarType
         if (shouldRefresh) {
             return refresh()
         }
-        return null
+        return true
     }
 
     private fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
         shouldRefresh: Boolean = true,
-    ): Job? {
+    ): Boolean {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
         if (shouldRefresh) {
             return refresh()
         }
-        return null
+        return true
     }
     // endregion
 
@@ -291,55 +315,6 @@ internal class EditAccountScreenViewModel(
                     selection = TextRange(minimumAccountBalanceAmount.value.toString().length),
                 ),
                 shouldRefresh = false,
-            )
-        }
-    }
-    // endregion
-
-    // region observeForRefreshSignal
-    private fun observeForRefreshSignal() {
-        viewModelScope.launch {
-            refreshSignal.collectLatest {
-                updateUiStateAndStateEvents()
-            }
-        }
-    }
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    private fun updateUiStateAndStateEvents() {
-        val selectedAccountType = validAccountTypesForNewAccount.getOrNull(
-            selectedAccountTypeIndex
-        )
-        val validationState = editAccountScreenDataValidationUseCase(
-            allAccounts = allAccounts,
-            enteredName = name.text.trim(),
-            currentAccount = currentAccount,
-        )
-
-        uiState.update {
-            EditAccountScreenUIState(
-                isLoading = isLoading,
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                nameError = validationState.nameError,
-                selectedAccountTypeIndex = selectedAccountTypeIndex.orZero(),
-                accountTypesChipUIDataList = validAccountTypesForNewAccount
-                    .map { accountType ->
-                        ChipUIData(
-                            text = accountType.title,
-                            icon = accountType.icon,
-                        )
-                    },
-                balanceAmountValue = balanceAmountValue,
-                minimumBalanceAmountValue = minimumAccountBalanceAmountValue,
-                name = name,
-                visibilityData = EditAccountScreenUIVisibilityData(
-                    balanceAmountTextField = true,
-                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
-                    nameTextField = validationState.isCashAccount.not(),
-                    nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
-                    accountTypesRadioGroup = validationState.isCashAccount.not(),
-                ),
             )
         }
     }

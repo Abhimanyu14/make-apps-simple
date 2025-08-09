@@ -54,25 +54,25 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class CategoriesScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val checkIfCategoryIsUsedInTransactionsUseCase: CheckIfCategoryIsUsedInTransactionsUseCase,
     private val coroutineScope: CoroutineScope,
     private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesFlowUseCase: GetAllCategoriesFlowUseCase,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
-    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
-), ScreenUIStateDelegate by screenUIStateDelegate {
+    screenUIStateDelegate = screenUIStateDelegate,
+) {
     // region initial data
     private val categoriesGridItemDataMap: MutableStateFlow<ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>>> =
         MutableStateFlow(
@@ -119,13 +119,33 @@ internal class CategoriesScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val tabData = validTransactionTypes.map {
+            MyTabData(
+                title = it.title,
+            )
+        }
 
-    private fun fetchData() {
+        // TODO(Abhi): To Fix categoriesGridItemDataMap
+        uiState.update {
+            CategoriesScreenUIState(
+                isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
+                screenBottomSheetType = screenBottomSheetType,
+                screenSnackbarType = screenSnackbarType,
+                isLoading = isLoading,
+                categoryIdToDelete = categoryIdToDelete,
+                clickedItemId = clickedItemId,
+                tabData = tabData,
+                validTransactionTypes = validTransactionTypes,
+                categoriesGridItemDataMap = categoriesGridItemDataMap.value,
+            )
+        }
+    }
+    // endregion
+
+    // region observeData
+    override fun observeData() {
         val defaultDataId: Flow<DefaultDataId?> =
             financeManagerPreferencesRepository.getDefaultDataIdFlow()
         val categoriesTransactionTypeMap: Flow<Map<TransactionType, ImmutableList<Category>>> =
@@ -231,14 +251,8 @@ internal class CategoriesScreenViewModel(
                 }
             }
         }
-        viewModelScope.launch {
-            startLoading()
-            completeLoading()
-        }
-    }
 
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
+        observeForCategoriesGridItemDataMap()
     }
 
     private fun getCategoriesGridItemData(
@@ -368,54 +382,14 @@ internal class CategoriesScreenViewModel(
     }
     // endregion
 
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        observeForRefreshSignal()
-        observeForCategoriesGridItemDataMap()
-    }
-
-    private fun observeForRefreshSignal() {
-        viewModelScope.launch {
-            refreshSignal.collectLatest {
-                updateUiStateAndStateEvents(
-                    categoriesGridItemDataMap = categoriesGridItemDataMap.value,
-                )
-            }
-        }
-    }
-
     private fun observeForCategoriesGridItemDataMap() {
         viewModelScope.launch {
             categoriesGridItemDataMap.collectLatest { categoriesGridItemDataMap ->
+                // TODO(Abhi): To Fix
                 updateUiStateAndStateEvents(
-                    categoriesGridItemDataMap = categoriesGridItemDataMap,
+                    // categoriesGridItemDataMap = categoriesGridItemDataMap,
                 )
             }
         }
     }
-
-    private fun updateUiStateAndStateEvents(
-        categoriesGridItemDataMap: ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>>,
-    ) {
-        val tabData = validTransactionTypes.map {
-            MyTabData(
-                title = it.title,
-            )
-        }
-
-        uiState.update {
-            CategoriesScreenUIState(
-                isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
-                screenBottomSheetType = screenBottomSheetType,
-                screenSnackbarType = screenSnackbarType,
-                isLoading = isLoading,
-                categoryIdToDelete = categoryIdToDelete,
-                clickedItemId = clickedItemId,
-                tabData = tabData,
-                validTransactionTypes = validTransactionTypes,
-                categoriesGridItemDataMap = categoriesGridItemDataMap,
-            )
-        }
-    }
-    // endregion
 }

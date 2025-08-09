@@ -20,7 +20,6 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
@@ -28,6 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.bottom_sheet.EditTransactionForScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIState
@@ -37,6 +37,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -45,6 +46,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class EditTransactionForScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
@@ -57,6 +59,7 @@ internal class EditTransactionForScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region screen args
     private val screenArgs = EditTransactionForScreenArgs(
@@ -68,16 +71,10 @@ internal class EditTransactionForScreenViewModel(
     // region initial data
     private var allTransactionForValues: ImmutableList<TransactionFor> =
         persistentListOf()
-    // endregion
-
-    // region initial data
     private var currentTransactionFor: TransactionFor? = null
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val screenBottomSheetType: MutableStateFlow<EditTransactionForScreenBottomSheetType> =
         MutableStateFlow(
             value = EditTransactionForScreenBottomSheetType.None,
@@ -107,57 +104,35 @@ internal class EditTransactionForScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val validationState =
+            editTransactionForScreenDataValidationUseCase(
+                allTransactionForValues = allTransactionForValues,
+                currentTransactionFor = currentTransactionFor,
+                enteredTitle = title.value.text,
+            )
+        uiState.update {
+            EditTransactionForScreenUIState(
+                isBottomSheetVisible = screenBottomSheetType != EditTransactionForScreenBottomSheetType.None,
+                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                screenBottomSheetType = screenBottomSheetType.value,
+                titleError = validationState.titleError,
+                title = title.value,
+            )
+        }
     }
+    // endregion
 
-    private fun fetchData() {
-        viewModelScope.launch {
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
             withLoadingSuspend {
                 getAllTransactionForValues()
                 getCurrentTransactionFor()
                 processCurrentTransactionFor()
             }
-        }
-    }
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-    }
-    // endregion
-
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
         }
     }
     // endregion
@@ -238,41 +213,6 @@ internal class EditTransactionForScreenViewModel(
                     ),
                 ),
         )
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-                title,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                        title,
-                    ),
-                ->
-                val validationState =
-                    editTransactionForScreenDataValidationUseCase(
-                        allTransactionForValues = allTransactionForValues,
-                        currentTransactionFor = currentTransactionFor,
-                        enteredTitle = title.text,
-                    )
-                uiState.update {
-                    EditTransactionForScreenUIState(
-                        isBottomSheetVisible = screenBottomSheetType != EditTransactionForScreenBottomSheetType.None,
-                        isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                        isLoading = isLoading,
-                        screenBottomSheetType = screenBottomSheetType,
-                        titleError = validationState.titleError,
-                        title = title,
-                    )
-                }
-            }
-        }
     }
     // endregion
 }

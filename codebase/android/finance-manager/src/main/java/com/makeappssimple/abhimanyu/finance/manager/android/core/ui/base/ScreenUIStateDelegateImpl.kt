@@ -25,8 +25,8 @@ public open class ScreenUIStateDelegateImpl : ScreenUIStateDelegate {
         extraBufferCapacity = 1,
     )
 
-    override fun refresh() {
-        refreshSignal.tryEmit(Unit)
+    override fun refresh(): Boolean {
+        return refreshSignal.tryEmit(Unit)
     }
 
     override fun completeLoading(

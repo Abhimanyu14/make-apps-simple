@@ -42,6 +42,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
@@ -52,6 +53,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
@@ -65,6 +67,7 @@ import java.time.LocalDate
 @KoinViewModel
 internal class TransactionsScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val dispatcherProvider: DispatcherProvider,
     private val dateTimeKit: DateTimeKit,
@@ -76,6 +79,7 @@ internal class TransactionsScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
     private var isInitialDataFetchCompleted = false
@@ -112,9 +116,6 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val isInSelectionMode: MutableStateFlow<Boolean> =
         MutableStateFlow(
             value = false,
@@ -159,59 +160,64 @@ internal class TransactionsScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        startTrackingScreenInit()
-        observeData()
-        fetchData()
-    }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        if (!isInitialDataFetchCompleted && transactionDetailsListItemViewData.value.isNotEmpty()) {
+            isInitialDataFetchCompleted = true
+        }
 
-    private fun fetchData() {
-        viewModelScope.launch {
+        uiState.update {
+            TransactionsScreenUIState(
+                isBackHandlerEnabled = searchText.value.isNotEmpty() ||
+                        selectedFilter.value.orEmpty().areFiltersSelected() ||
+                        isInSelectionMode.value,
+                isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
+                isInSelectionMode = isInSelectionMode.value,
+                isLoading = isLoading,
+                isSearchSortAndFilterVisible = isInSelectionMode.value.not() && (
+                        transactionDetailsListItemViewData.value.isNotEmpty() ||
+                                searchText.value.isNotEmpty() ||
+                                selectedFilter.value.orEmpty()
+                                    .areFiltersSelected() ||
+                                isLoading
+                        ),
+                selectedFilter = selectedFilter.value.orEmpty(),
+                selectedTransactions = selectedTransactionIndices.value.toImmutableList(),
+                sortOptions = sortOptions.orEmpty(),
+                transactionForValues = allTransactionForValues.orEmpty(),
+                accounts = accounts.toImmutableList(),
+                expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
+                    .toImmutableList(),
+                incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
+                    .toImmutableList(),
+                investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
+                    .toImmutableList(),
+                transactionTypes = transactionTypes.orEmpty(),
+                currentLocalDate = currentLocalDate.orMin(),
+                oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
+                transactionDetailsListItemViewData = transactionDetailsListItemViewData.value,
+                selectedSortOption = selectedSortOption.value.orDefault(),
+                searchText = searchText.value,
+                screenBottomSheetType = screenBottomSheetType.value,
+            )
+        }
+    }
+    // endregion
+
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
             withLoadingSuspend {
                 allTransactionForValues = getAllTransactionForValuesUseCase()
             }
         }
     }
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-        observeForTransactionDetailsListItemViewData()
-        observeForAllTransactionData()
-    }
     // endregion
 
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
-        }
+    // region observeData
+    override fun observeData() {
+        observeForTransactionDetailsListItemViewData()
+        observeForAllTransactionData()
     }
     // endregion
 
@@ -319,75 +325,6 @@ internal class TransactionsScreenViewModel(
             updateTransactionsUseCase(
                 transactions = updatedTransactions.toTypedArray(),
             )
-        }
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-                isInSelectionMode,
-                searchText,
-                selectedFilter,
-                selectedSortOption,
-                selectedTransactionIndices,
-                transactionDetailsListItemViewData,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                        isInSelectionMode,
-                        searchText,
-                        selectedFilter,
-                        selectedSortOption,
-                        selectedTransactionIndices,
-                        transactionDetailsListItemViewData,
-                    ),
-                ->
-                if (!isInitialDataFetchCompleted && transactionDetailsListItemViewData.isNotEmpty()) {
-                    stopTrackingScreenInit()
-                    isInitialDataFetchCompleted = true
-                }
-
-                uiState.update {
-                    TransactionsScreenUIState(
-                        isBackHandlerEnabled = searchText.isNotEmpty() ||
-                                selectedFilter.orEmpty().areFiltersSelected() ||
-                                isInSelectionMode,
-                        isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
-                        isInSelectionMode = isInSelectionMode,
-                        isLoading = isLoading,
-                        isSearchSortAndFilterVisible = isInSelectionMode.not() && (
-                                transactionDetailsListItemViewData.isNotEmpty() ||
-                                        searchText.isNotEmpty() ||
-                                        selectedFilter.orEmpty()
-                                            .areFiltersSelected() ||
-                                        isLoading
-                                ),
-                        selectedFilter = selectedFilter.orEmpty(),
-                        selectedTransactions = selectedTransactionIndices.toImmutableList(),
-                        sortOptions = sortOptions.orEmpty(),
-                        transactionForValues = allTransactionForValues.orEmpty(),
-                        accounts = accounts.toImmutableList(),
-                        expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
-                            .toImmutableList(),
-                        incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
-                            .toImmutableList(),
-                        investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
-                            .toImmutableList(),
-                        transactionTypes = transactionTypes.orEmpty(),
-                        currentLocalDate = currentLocalDate.orMin(),
-                        oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
-                        transactionDetailsListItemViewData = transactionDetailsListItemViewData,
-                        selectedSortOption = selectedSortOption.orDefault(),
-                        searchText = searchText,
-                        screenBottomSheetType = screenBottomSheetType,
-                    )
-                }
-            }
         }
     }
     // endregion
@@ -665,22 +602,6 @@ internal class TransactionsScreenViewModel(
                     }
                 }
         }
-    }
-    // endregion
-
-    // region performance tracking
-    private fun startTrackingScreenInit() {
-        /*
-        performanceScreenInitTrace =
-            Firebase.performance.newTrace("screen_transactions_init")
-        performanceScreenInitTrace?.start()
-        */
-    }
-
-    private fun stopTrackingScreenInit() {
-        /*
-        performanceScreenInitTrace?.stop()
-        */
     }
     // endregion
 }

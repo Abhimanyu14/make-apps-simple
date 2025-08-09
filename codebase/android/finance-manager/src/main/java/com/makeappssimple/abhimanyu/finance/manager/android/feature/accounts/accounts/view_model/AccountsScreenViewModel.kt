@@ -46,6 +46,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class AccountsScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
@@ -54,13 +55,13 @@ internal class AccountsScreenViewModel(
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
     private val getAllAccountsListItemDataListUseCase: GetAllAccountsListItemDataListUseCase,
     private val getDefaultAccountIdFlowUseCase: GetDefaultAccountIdFlowUseCase,
-    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
-), ScreenUIStateDelegate by screenUIStateDelegate {
+    screenUIStateDelegate = screenUIStateDelegate,
+) {
     // region initial data
     private var allAccounts: ImmutableList<Account> = persistentListOf()
     private var defaultAccountId: Int? = null
@@ -94,24 +95,32 @@ internal class AccountsScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeForRefreshSignal()
-        fetchData().invokeOnCompletion {
-            viewModelScope.launch {
-                completeLoading()
-            }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        uiState.update {
+            AccountsScreenUIState(
+                screenBottomSheetType = screenBottomSheetType,
+                isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
+                clickedItemId = clickedItemId,
+                isLoading = isLoading,
+                accountsListItemDataList = allAccountsListItemDataList,
+                accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
+                accountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
+            )
         }
-        observeData()
     }
+    // endregion
 
-    private fun fetchData(): Job {
+    // region fetchData
+    override fun fetchData(): Job {
         return Job().apply {
             complete()
         }
     }
+    // endregion
 
-    private fun observeData() {
+    // region observeData
+    override fun observeData() {
         observeForAllAccounts()
         observeForDefaultAccountId()
     }
@@ -181,16 +190,6 @@ internal class AccountsScreenViewModel(
     }
     // endregion
 
-    // region observeForRefreshSignal
-    private fun observeForRefreshSignal() {
-        viewModelScope.launch {
-            refreshSignal.collectLatest {
-                updateUiStateAndStateEvents()
-            }
-        }
-    }
-    // endregion
-
     // region observeForAllAccounts
     private fun observeForAllAccounts() {
         viewModelScope.launch {
@@ -244,22 +243,6 @@ internal class AccountsScreenViewModel(
             defaultAccountId = defaultAccountId,
         )
         refresh()
-    }
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    private fun updateUiStateAndStateEvents() {
-        uiState.update {
-            AccountsScreenUIState(
-                screenBottomSheetType = screenBottomSheetType,
-                isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
-                clickedItemId = clickedItemId,
-                isLoading = isLoading,
-                accountsListItemDataList = allAccountsListItemDataList,
-                accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
-                accountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
-            )
-        }
     }
     // endregion
 }

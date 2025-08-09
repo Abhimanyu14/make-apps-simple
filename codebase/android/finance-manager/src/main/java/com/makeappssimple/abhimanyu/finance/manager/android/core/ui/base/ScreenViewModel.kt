@@ -20,11 +20,58 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 public abstract class ScreenViewModel(
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     private val logKit: LogKit,
     private val navigationKit: NavigationKit,
+    private val screenUIStateDelegate: ScreenUIStateDelegate,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), NavigationKit by navigationKit, LogKit by logKit
+), LogKit by logKit,
+    NavigationKit by navigationKit,
+    ScreenUIStateDelegate by screenUIStateDelegate {
+    internal fun initViewModel() {
+        observeForRefreshSignal()
+        fetchData().invokeOnCompletion {
+            coroutineScope.launch {
+                completeLoading()
+            }
+        }
+        observeData()
+    }
+
+    /**
+     * Fetches initial data required for the screen.
+     */
+    public open fun fetchData(): Job {
+        return Job().apply {
+            complete()
+        }
+    }
+
+    /**
+     * Observes data changes and updates the UI state accordingly.
+     * This method can be overridden to implement specific data observation logic.
+     * By default, it does nothing.
+     */
+    public open fun observeData() {}
+
+    /**
+     * Updates the UI state and state events.
+     * This method should be implemented by subclasses to define how the UI state
+     * and state events are updated based on the current data.
+     */
+    public abstract fun updateUiStateAndStateEvents()
+
+    private fun observeForRefreshSignal(): Job {
+        return coroutineScope.launch {
+            refreshSignal.collectLatest {
+                updateUiStateAndStateEvents()
+            }
+        }
+    }
+}

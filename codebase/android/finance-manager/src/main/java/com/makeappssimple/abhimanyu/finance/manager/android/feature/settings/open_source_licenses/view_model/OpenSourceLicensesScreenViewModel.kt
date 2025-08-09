@@ -18,31 +18,26 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.op
 
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class OpenSourceLicensesScreenViewModel(
     coroutineScope: CoroutineScope,
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
-    // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
-    // endregion
-
     // region uiStateAndStateEvents
     internal val uiState: MutableStateFlow<OpenSourceLicensesScreenUIState> =
         MutableStateFlow(
@@ -54,62 +49,12 @@ internal class OpenSourceLicensesScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
-
-    private fun fetchData() {}
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-    }
-    // endregion
-
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
-        }
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        isLoading.map { isLoading ->
-            uiState.update {
-                OpenSourceLicensesScreenUIState(
-                    isLoading = isLoading,
-                )
-            }
-        }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        // TODO(Abhi): Fix isLoading
+        OpenSourceLicensesScreenUIState(
+            isLoading = isLoading,
+        )
     }
     // endregion
 }

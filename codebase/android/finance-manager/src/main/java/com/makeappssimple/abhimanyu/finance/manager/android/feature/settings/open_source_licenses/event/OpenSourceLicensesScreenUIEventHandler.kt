@@ -26,9 +26,7 @@ internal class OpenSourceLicensesScreenUIEventHandler internal constructor(
         uiEvent: OpenSourceLicensesScreenUIEvent,
     ) {
         when (uiEvent) {
-            is OpenSourceLicensesScreenUIEvent.OnNavigationBackButtonClick -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
+            is OpenSourceLicensesScreenUIEvent.OnNavigationBackButtonClick -> {}
 
             is OpenSourceLicensesScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
                 uiStateEvents.navigateUp()

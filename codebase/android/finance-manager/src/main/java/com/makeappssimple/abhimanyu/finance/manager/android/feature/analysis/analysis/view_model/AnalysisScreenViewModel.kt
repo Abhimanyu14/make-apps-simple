@@ -34,6 +34,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.analysis.AnalysisListItemData
@@ -43,6 +44,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.ana
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -57,6 +59,7 @@ private object AnalysisScreenViewModelConstants {
 internal class AnalysisScreenViewModel(
     coroutineScope: CoroutineScope,
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
     internal val logKit: LogKit,
@@ -64,6 +67,7 @@ internal class AnalysisScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
     private val validTransactionTypes: ImmutableList<TransactionType> =
@@ -89,9 +93,6 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
         value = Filter(),
     )
@@ -120,58 +121,38 @@ internal class AnalysisScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
-
-    private fun fetchData() {
-        viewModelScope.launch {
-            withLoadingSuspend {
-                allTransactionData = getAllTransactionDataUseCase()
-                oldestTransactionLocalDate = getOldestTransactionLocalDate()
-            }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        uiState.update {
+            AnalysisScreenUIState(
+                screenBottomSheetType = screenBottomSheetType.value,
+                isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
+                isLoading = isLoading,
+                selectedFilter = selectedFilter.value.orEmpty(),
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
+                analysisListItemData = analysisListItemData.value,
+                transactionTypesChipUIData = validTransactionTypesChipUIData,
+                defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
+                defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
+                startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
+                startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
+            )
         }
-    }
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-        observeForTransactionDataMappedByCategory()
     }
     // endregion
 
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
+            allTransactionData = getAllTransactionDataUseCase()
+            oldestTransactionLocalDate = getOldestTransactionLocalDate()
         }
     }
+    // endregion
 
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
-        }
+    // region observeData
+    override fun observeData() {
+        observeForTransactionDataMappedByCategory()
     }
     // endregion
 
@@ -217,54 +198,14 @@ internal class AnalysisScreenViewModel(
     }
     // endregion
 
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-                selectedFilter,
-                selectedTransactionTypeIndex,
-                analysisListItemData,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                        selectedFilter,
-                        selectedTransactionTypeIndex,
-                        analysisListItemData,
-                    ),
-                ->
-                uiState.update {
-                    AnalysisScreenUIState(
-                        screenBottomSheetType = screenBottomSheetType,
-                        isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
-                        isLoading = isLoading,
-                        selectedFilter = selectedFilter.orEmpty(),
-                        selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                        analysisListItemData = analysisListItemData,
-                        transactionTypesChipUIData = validTransactionTypesChipUIData,
-                        defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
-                        defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
-                        startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
-                        startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
-                    )
-                }
-            }
-        }
-    }
-    // endregion
-
     // region observeForTransactionDataMappedByCategory
     private fun observeForTransactionDataMappedByCategory() {
         viewModelScope.launch {
             combineAndCollectLatest(
-                isLoading,
                 selectedTransactionTypeIndex,
                 selectedFilter,
             ) {
                     (
-                        isLoading,
                         selectedTransactionTypeIndex,
                         selectedFilter,
                     ),

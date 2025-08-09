@@ -40,8 +40,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.n
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -50,18 +50,19 @@ import org.koin.android.annotation.KoinViewModel
 internal class AddCategoryScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     uriDecoder: UriDecoder,
     private val addCategoryScreenDataValidationUseCase: AddCategoryScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val insertCategoriesUseCase: InsertCategoriesUseCase,
-    private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
-), ScreenUIStateDelegate by screenUIStateDelegate {
+    screenUIStateDelegate = screenUIStateDelegate,
+) {
     // region screen args
     private val screenArgs = AddCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -72,9 +73,6 @@ internal class AddCategoryScreenViewModel(
     // region initial data
     private val transactionType: String? = screenArgs.transactionType
     private var categories: ImmutableList<Category> = persistentListOf()
-    // endregion
-
-    // region initial data
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
@@ -115,14 +113,37 @@ internal class AddCategoryScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val validationState = addCategoryScreenDataValidationUseCase(
+            categories = categories,
+            enteredTitle = title.text.trim(),
+        )
+        uiState.update {
+            AddCategoryScreenUIState(
+                screenBottomSheetType = screenBottomSheetType,
+                isBottomSheetVisible = screenBottomSheetType != AddCategoryScreenBottomSheetType.None,
+                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                isSupportingTextVisible = validationState.titleError != AddCategoryScreenTitleError.None,
+                titleError = validationState.titleError,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
+                    ChipUIData(
+                        text = transactionType.title,
+                    )
+                },
+                emoji = emoji,
+                emojiSearchText = searchText,
+                title = title,
+            )
+        }
     }
+    // endregion
 
-    private fun fetchData() {
-        viewModelScope.launch {
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
             fetchCategories()
             transactionType?.let { originalTransactionType ->
                 updateSelectedTransactionTypeIndex(
@@ -135,10 +156,6 @@ internal class AddCategoryScreenViewModel(
             }
             completeLoading()
         }
-    }
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
     }
     // endregion
 
@@ -235,48 +252,6 @@ internal class AddCategoryScreenViewModel(
     // region fetchCategories
     private suspend fun fetchCategories() {
         categories = getAllCategoriesUseCase()
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        observeForRefreshSignal()
-    }
-
-    private fun observeForRefreshSignal() {
-        viewModelScope.launch {
-            refreshSignal.collectLatest {
-                updateUiStateAndStateEvents()
-            }
-        }
-    }
-
-    private fun updateUiStateAndStateEvents(
-        isLoading: Boolean = false,
-    ) {
-        val validationState = addCategoryScreenDataValidationUseCase(
-            categories = categories,
-            enteredTitle = title.text.trim(),
-        )
-        uiState.update {
-            AddCategoryScreenUIState(
-                screenBottomSheetType = screenBottomSheetType,
-                isBottomSheetVisible = screenBottomSheetType != AddCategoryScreenBottomSheetType.None,
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                isLoading = isLoading,
-                isSupportingTextVisible = validationState.titleError != AddCategoryScreenTitleError.None,
-                titleError = validationState.titleError,
-                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
-                    ChipUIData(
-                        text = transactionType.title,
-                    )
-                },
-                emoji = emoji,
-                emojiSearchText = searchText,
-                title = title,
-            )
-        }
     }
     // endregion
 }

@@ -59,6 +59,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.plus
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.sortOrder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultAccount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
@@ -69,6 +70,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
@@ -87,6 +89,7 @@ public class EditTransactionScreenViewModelOld(
     coroutineScope: CoroutineScope,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     uriDecoder: UriDecoder,
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
@@ -102,6 +105,7 @@ public class EditTransactionScreenViewModelOld(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
@@ -274,14 +278,9 @@ public class EditTransactionScreenViewModelOld(
             value = false,
         )
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
-
-    private fun fetchData() {
-        viewModelScope.launch {
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
             awaitAll(
                 async {
                     defaultDataIdFromDataStore =
@@ -321,10 +320,16 @@ public class EditTransactionScreenViewModelOld(
             }
         }
     }
+    // endregion
 
-    private fun observeData() {
+    // region observeData
+    override fun observeData() {
         observeSelectedTransactionType()
         observeSelectedCategory()
+    }
+
+    override fun updateUiStateAndStateEvents() {
+        // TODO(Abhi): Not Implemented
     }
     // endregion
 

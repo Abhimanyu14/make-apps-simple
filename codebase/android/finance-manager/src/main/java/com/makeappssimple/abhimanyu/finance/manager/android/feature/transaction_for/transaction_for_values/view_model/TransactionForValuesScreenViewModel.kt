@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -27,6 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction_for.TransactionForListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultTransactionFor
@@ -45,6 +45,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class TransactionForValuesScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
     private val checkIfTransactionForValuesAreUsedInTransactionsUseCase: CheckIfTransactionForValuesAreUsedInTransactionsUseCase,
@@ -54,6 +55,7 @@ internal class TransactionForValuesScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
@@ -61,9 +63,6 @@ internal class TransactionForValuesScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private var transactionForIdToDelete: Int? = null
     private val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType> =
         MutableStateFlow(
@@ -88,51 +87,22 @@ internal class TransactionForValuesScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
-
-    private fun fetchData() {}
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-        observeForTransactionForListItemDataList()
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        uiState.update {
+            TransactionForValuesScreenUIState(
+                isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
+                isLoading = isLoading,
+                transactionForListItemDataList = transactionForListItemDataList,
+                screenBottomSheetType = screenBottomSheetType.value,
+            )
+        }
     }
     // endregion
 
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
-        }
+    // region observeData
+    override fun observeData() {
+        observeForTransactionForListItemDataList()
     }
     // endregion
 
@@ -173,31 +143,6 @@ internal class TransactionForValuesScreenViewModel(
         updatedTransactionForIdToDelete: Int?,
     ) {
         transactionForIdToDelete = updatedTransactionForIdToDelete
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                    ),
-                ->
-                uiState.update {
-                    TransactionForValuesScreenUIState(
-                        isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
-                        isLoading = isLoading,
-                        transactionForListItemDataList = transactionForListItemDataList,
-                        screenBottomSheetType = screenBottomSheetType,
-                    )
-                }
-            }
-        }
     }
     // endregion
 

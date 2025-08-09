@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.se
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
@@ -28,11 +27,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RecalculateTotalUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RestoreDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
@@ -42,6 +43,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class SettingsScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     private val alarmKit: AlarmKit,
     private val appVersionKit: AppVersionKit,
     private val backupDataUseCase: BackupDataUseCase,
@@ -54,6 +56,7 @@ internal class SettingsScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
     private var appVersion: String = ""
@@ -63,9 +66,6 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val screenSnackbarType: MutableStateFlow<SettingsScreenSnackbarType> =
         MutableStateFlow(
             value = SettingsScreenSnackbarType.None,
@@ -92,52 +92,69 @@ internal class SettingsScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        // TODO(Abhi): Fix isLoading, isReminderEnabled and screenSnackbarType
+        uiState.update {
+            SettingsScreenUIState(
+                isLoading = isLoading,
+                isReminderEnabled = isReminderEnabled.value,
+                screenSnackbarType = screenSnackbarType.value,
+                appVersion = appVersion,
+            )
+        }
     }
+    // endregion
 
-    private fun fetchData() {
-        getAppVersion()
+    // region fetchData
+    override fun fetchData(): Job {
+        return coroutineScope.launch {
+            getAppVersion()
+        }
     }
+    // endregion
 
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
+    // region observeData
+    override fun observeData() {
         observeForReminder()
     }
     // endregion
 
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
+    // region backupDataToDocument
+    internal fun backupDataToDocument(
+        uri: Uri,
+    ) {
+        viewModelScope.launch {
+            startLoading()
+            val isBackupSuccessful = backupDataUseCase(
+                uri = uri,
+            )
+            if (isBackupSuccessful) {
+                navigateUp()
+            } else {
+                // TODO(Abhi): use the result to show snackbar to the user
+            }
         }
     }
+    // endregion
 
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
+    // region restoreDataFromDocument
+    internal fun restoreDataFromDocument(
+        uri: Uri,
+    ) {
+        viewModelScope.launch {
+            startLoading()
+            if (restoreDataUseCase(
+                    uri = uri,
+                )
+            ) {
+                navigateUp()
+            } else {
+                completeLoading()
+                updateScreenSnackbarType(
+                    updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.RestoreDataFailed,
+                )
+            }
         }
     }
     // endregion
@@ -186,75 +203,9 @@ internal class SettingsScreenViewModel(
     }
     // endregion
 
-    // region backupDataToDocument
-    internal fun backupDataToDocument(
-        uri: Uri,
-    ) {
-        viewModelScope.launch {
-            startLoading()
-            val isBackupSuccessful = backupDataUseCase(
-                uri = uri,
-            )
-            if (isBackupSuccessful) {
-                navigateUp()
-            } else {
-                // TODO(Abhi): use the result to show snackbar to the user
-            }
-        }
-    }
-    // endregion
-
-    // region restoreDataFromDocument
-    internal fun restoreDataFromDocument(
-        uri: Uri,
-    ) {
-        viewModelScope.launch {
-            startLoading()
-            if (restoreDataUseCase(
-                    uri = uri,
-                )
-            ) {
-                navigateUp()
-            } else {
-                completeLoading()
-                updateScreenSnackbarType(
-                    updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.RestoreDataFailed,
-                )
-            }
-        }
-    }
-    // endregion
-
     // region getAppVersion
     private fun getAppVersion() {
         appVersion = appVersionKit.getAppVersion()?.versionName.orEmpty()
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenSnackbarType,
-                isReminderEnabled,
-            ) {
-                    (
-                        isLoading,
-                        screenSnackbarType,
-                        isReminderEnabled,
-                    ),
-                ->
-                uiState.update {
-                    SettingsScreenUIState(
-                        isLoading = isLoading,
-                        isReminderEnabled = isReminderEnabled,
-                        screenSnackbarType = screenSnackbarType,
-                        appVersion = appVersion,
-                    )
-                }
-            }
-        }
     }
     // endregion
 

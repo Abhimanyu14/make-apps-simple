@@ -20,7 +20,6 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -33,6 +32,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
@@ -47,6 +47,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.n
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -56,6 +57,7 @@ import org.koin.android.annotation.KoinViewModel
 internal class EditCategoryScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
     private val editCategoryScreenDataValidationUseCase: EditCategoryScreenDataValidationUseCase,
@@ -67,6 +69,7 @@ internal class EditCategoryScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region screen args
     private val screenArgs = EditCategoryScreenArgs(
@@ -96,9 +99,6 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
         value = TextFieldValue(),
     )
@@ -139,14 +139,60 @@ internal class EditCategoryScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
-    }
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val validationState = editCategoryScreenDataValidationUseCase(
+            categories = categories.value,
+            enteredTitle = title.value.text.trim(),
+            currentCategory = category.value,
+        )
+        var titleError: EditCategoryScreenTitleError =
+            EditCategoryScreenTitleError.None
+        val isCtaButtonEnabled = if (title.value.text.isBlank()) {
+            false
+        } else if (isDefaultIncomeCategory(
+                category = title.value.text.trim(),
+            ) || isDefaultExpenseCategory(
+                category = title.value.text.trim(),
+            ) || isDefaultInvestmentCategory(
+                category = title.value.text.trim(),
+            ) || (title.value.text.trim() != category.value?.title?.trim() && categories.value.find {
+                it.title.equalsIgnoringCase(
+                    other = title.value.text.trim(),
+                )
+            }.isNotNull())
+        ) {
+            titleError = EditCategoryScreenTitleError.CategoryExists
+            false
+        } else {
+            true
+        }
 
-    private fun fetchData() {
-        viewModelScope.launch {
+        uiState.update {
+            EditCategoryScreenUIState(
+                screenBottomSheetType = screenBottomSheetType.value,
+                isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
+                isCtaButtonEnabled = isCtaButtonEnabled,
+                isLoading = isLoading,
+                isSupportingTextVisible = titleError != EditCategoryScreenTitleError.None,
+                titleError = titleError,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
+                transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
+                    ChipUIData(
+                        text = transactionType.title,
+                    )
+                },
+                emoji = emoji.value,
+                emojiSearchText = searchText.value,
+                title = title.value,
+            )
+        }
+    }
+    // endregion
+
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
             withLoadingSuspend {
                 getAllCategories()
                 getOriginalCategory()
@@ -160,44 +206,6 @@ internal class EditCategoryScreenViewModel(
                     )
                 }
             }
-        }
-    }
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-    }
-    // endregion
-
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
         }
     }
     // endregion
@@ -304,81 +312,6 @@ internal class EditCategoryScreenViewModel(
                         )
                     )
                     updateEmoji(category?.emoji.orEmpty())
-                }
-            }
-        }
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-                title,
-                categories,
-                selectedTransactionTypeIndex,
-                searchText,
-                emoji,
-                category,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                        title,
-                        categories,
-                        selectedTransactionTypeIndex,
-                        searchText,
-                        emoji,
-                        category,
-                    ),
-                ->
-                val validationState = editCategoryScreenDataValidationUseCase(
-                    categories = categories,
-                    enteredTitle = title.text.trim(),
-                    currentCategory = category,
-                )
-                var titleError: EditCategoryScreenTitleError =
-                    EditCategoryScreenTitleError.None
-                val isCtaButtonEnabled = if (title.text.isBlank()) {
-                    false
-                } else if (isDefaultIncomeCategory(
-                        category = title.text.trim(),
-                    ) || isDefaultExpenseCategory(
-                        category = title.text.trim(),
-                    ) || isDefaultInvestmentCategory(
-                        category = title.text.trim(),
-                    ) || (title.text.trim() != category?.title?.trim() && categories.find {
-                        it.title.equalsIgnoringCase(
-                            other = title.text.trim(),
-                        )
-                    }.isNotNull())
-                ) {
-                    titleError = EditCategoryScreenTitleError.CategoryExists
-                    false
-                } else {
-                    true
-                }
-
-                uiState.update {
-                    EditCategoryScreenUIState(
-                        screenBottomSheetType = screenBottomSheetType,
-                        isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
-                        isCtaButtonEnabled = isCtaButtonEnabled,
-                        isLoading = isLoading,
-                        isSupportingTextVisible = titleError != EditCategoryScreenTitleError.None,
-                        titleError = titleError,
-                        selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                        transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
-                            ChipUIData(
-                                text = transactionType.title,
-                            )
-                        },
-                        emoji = emoji,
-                        emojiSearchText = searchText,
-                        title = title,
-                    )
                 }
             }
         }

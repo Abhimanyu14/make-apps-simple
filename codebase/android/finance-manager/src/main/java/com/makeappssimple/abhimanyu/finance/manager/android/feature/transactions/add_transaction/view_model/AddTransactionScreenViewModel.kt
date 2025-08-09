@@ -47,6 +47,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultAccount
@@ -65,6 +66,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
@@ -77,6 +79,7 @@ import java.time.LocalTime
 @KoinViewModel
 internal class AddTransactionScreenViewModel(
     navigationKit: NavigationKit,
+    screenUIStateDelegate: ScreenUIStateDelegate,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addTransactionScreenDataValidationUseCase: AddTransactionScreenDataValidationUseCase,
@@ -95,6 +98,7 @@ internal class AddTransactionScreenViewModel(
     coroutineScope = coroutineScope,
     logKit = logKit,
     navigationKit = navigationKit,
+    screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region screen args
     private val screenArgs = AddTransactionScreenArgs(
@@ -136,9 +140,6 @@ internal class AddTransactionScreenViewModel(
     // endregion
 
     // region UI state
-    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = true,
-    )
     private val screenBottomSheetType: MutableStateFlow<AddTransactionScreenBottomSheetType> =
         MutableStateFlow(
             value = AddTransactionScreenBottomSheetType.None,
@@ -221,14 +222,77 @@ internal class AddTransactionScreenViewModel(
         )
     // endregion
 
-    // region initViewModel
-    internal fun initViewModel() {
-        observeData()
-        fetchData()
+    // region updateUiStateAndStateEvents
+    override fun updateUiStateAndStateEvents() {
+        val validationState = addTransactionScreenDataValidationUseCase(
+            accountFrom = accountFrom.value,
+            accountTo = accountTo.value,
+            maxRefundAmount = maxRefundAmount,
+            amount = amount.value.text,
+            title = title.value.text,
+            selectedTransactionType = selectedTransactionType,
+        )
+        uiState.update {
+            AddTransactionScreenUIState(
+                accountFrom = accountFrom.value,
+                accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                    AccountFromText.AccountFrom
+                } else {
+                    AccountFromText.Account
+                },
+                accountTo = accountTo.value,
+                accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                    AccountToText.AccountTo
+                } else {
+                    AccountToText.Account
+                },
+                screenBottomSheetType = screenBottomSheetType.value,
+                screenSnackbarType = screenSnackbarType.value,
+                uiVisibilityState = uiVisibilityState,
+                isBottomSheetVisible = screenBottomSheetType.value != AddTransactionScreenBottomSheetType.None,
+                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible.value,
+                isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible.value,
+                category = category.value,
+                selectedTransactionForIndex = selectedTransactionForIndex.value,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
+                accounts = accounts.orEmpty(),
+                filteredCategories = filteredCategories,
+                titleSuggestionsChipUIData = titleSuggestions.value
+                    .map { title ->
+                        ChipUIData(
+                            text = title,
+                        )
+                    },
+                transactionForValuesChipUIData = transactionForValues
+                    .map { transactionFor ->
+                        ChipUIData(
+                            text = transactionFor.titleToDisplay,
+                        )
+                    },
+                transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction
+                    .map { transactionType ->
+                        ChipUIData(
+                            text = transactionType.title,
+                        )
+                    },
+                titleSuggestions = titleSuggestions.value,
+                currentLocalDate = dateTimeKit.getCurrentLocalDate()
+                    .orMin(),
+                transactionDate = transactionDate.value,
+                transactionTime = transactionTime.value,
+                amountErrorText = validationState.amountErrorText,
+                amount = amount.value,
+                title = title.value,
+            )
+        }
     }
+    // endregion
 
-    private fun fetchData() {
-        viewModelScope.launch {
+    // region fetchData
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
             startLoading()
             joinAll(
                 launch {
@@ -248,45 +312,12 @@ internal class AddTransactionScreenViewModel(
             completeLoading()
         }
     }
-
-    private fun observeData() {
-        observeForUiStateAndStateEvents()
-        observeForTitleSuggestions()
-        observeForSelectedTransactionType()
-    }
     // endregion
 
-    // region loading
-    fun startLoading() {
-        isLoading.update {
-            true
-        }
-    }
-
-    fun completeLoading() {
-        isLoading.update {
-            false
-        }
-    }
-
-    fun <T> withLoading(
-        block: () -> T,
-    ): T {
-        startLoading()
-        val result = block()
-        completeLoading()
-        return result
-    }
-
-    suspend fun <T> withLoadingSuspend(
-        block: suspend () -> T,
-    ): T {
-        startLoading()
-        try {
-            return block()
-        } finally {
-            completeLoading()
-        }
+    // region observeData
+    override fun observeData() {
+        observeForTitleSuggestions()
+        observeForSelectedTransactionType()
     }
     // endregion
 
@@ -640,112 +671,6 @@ internal class AddTransactionScreenViewModel(
                 element = TransactionType.EXPENSE,
             )
         )
-    }
-    // endregion
-
-    // region observeForUiStateAndStateEvents
-    private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-                screenSnackbarType,
-                selectedTransactionTypeIndex,
-                amount,
-                title,
-                accountFrom,
-                accountTo,
-                isTransactionDatePickerDialogVisible,
-                isTransactionTimePickerDialogVisible,
-                category,
-                selectedTransactionForIndex,
-                transactionDate,
-                transactionTime,
-                titleSuggestions,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                        screenSnackbarType,
-                        selectedTransactionTypeIndex,
-                        amount,
-                        title,
-                        accountFrom,
-                        accountTo,
-                        isTransactionDatePickerDialogVisible,
-                        isTransactionTimePickerDialogVisible,
-                        category,
-                        selectedTransactionForIndex,
-                        transactionDate,
-                        transactionTime,
-                        titleSuggestions,
-                    ),
-                ->
-                val validationState = addTransactionScreenDataValidationUseCase(
-                    accountFrom = accountFrom,
-                    accountTo = accountTo,
-                    maxRefundAmount = maxRefundAmount,
-                    amount = amount.text,
-                    title = title.text,
-                    selectedTransactionType = selectedTransactionType,
-                )
-                uiState.update {
-                    AddTransactionScreenUIState(
-                        accountFrom = accountFrom,
-                        accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
-                            AccountFromText.AccountFrom
-                        } else {
-                            AccountFromText.Account
-                        },
-                        accountTo = accountTo,
-                        accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
-                            AccountToText.AccountTo
-                        } else {
-                            AccountToText.Account
-                        },
-                        screenBottomSheetType = screenBottomSheetType,
-                        screenSnackbarType = screenSnackbarType,
-                        uiVisibilityState = uiVisibilityState,
-                        isBottomSheetVisible = screenBottomSheetType != AddTransactionScreenBottomSheetType.None,
-                        isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                        isLoading = isLoading,
-                        isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible,
-                        isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible,
-                        category = category,
-                        selectedTransactionForIndex = selectedTransactionForIndex,
-                        selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                        accounts = accounts.orEmpty(),
-                        filteredCategories = filteredCategories,
-                        titleSuggestionsChipUIData = titleSuggestions
-                            .map { title ->
-                                ChipUIData(
-                                    text = title,
-                                )
-                            },
-                        transactionForValuesChipUIData = transactionForValues
-                            .map { transactionFor ->
-                                ChipUIData(
-                                    text = transactionFor.titleToDisplay,
-                                )
-                            },
-                        transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction
-                            .map { transactionType ->
-                                ChipUIData(
-                                    text = transactionType.title,
-                                )
-                            },
-                        titleSuggestions = titleSuggestions,
-                        currentLocalDate = dateTimeKit.getCurrentLocalDate()
-                            .orMin(),
-                        transactionDate = transactionDate,
-                        transactionTime = transactionTime,
-                        amountErrorText = validationState.amountErrorText,
-                        amount = amount,
-                        title = title,
-                    )
-                }
-            }
-        }
     }
     // endregion
 

@@ -26,7 +26,7 @@ public interface ScreenUIStateDelegate {
         shouldRefresh: Boolean = true,
     )
 
-    public fun refresh()
+    public fun refresh(): Boolean
 
     public fun startLoading(
         shouldRefresh: Boolean = true,
