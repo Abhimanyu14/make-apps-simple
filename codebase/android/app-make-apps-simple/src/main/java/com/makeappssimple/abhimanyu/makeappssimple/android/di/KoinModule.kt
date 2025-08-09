@@ -16,8 +16,6 @@
 
 package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
-import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodesAppModule
-import com.makeappssimple.abhimanyu.finance.manager.android.di.FinanceManagerAppModule
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.module
@@ -28,9 +26,7 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            BarcodesAppModule().module,
-            FinanceManagerAppModule().module,
-            MakeAppsSimpleAppModule().module,
+            modules = MakeAppsSimpleAppModule().module,
         )
     }
 }

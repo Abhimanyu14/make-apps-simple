@@ -16,11 +16,15 @@
 
 package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
+import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodesAppModule
+import com.makeappssimple.abhimanyu.finance.manager.android.di.FinanceManagerAppModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
 @Module(
     includes = [
+        BarcodesAppModule::class,
+        FinanceManagerAppModule::class,
         PlatformModule::class,
     ],
 )
