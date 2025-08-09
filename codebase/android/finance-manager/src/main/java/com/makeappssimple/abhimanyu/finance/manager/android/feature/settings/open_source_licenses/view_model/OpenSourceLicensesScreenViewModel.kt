@@ -16,18 +16,15 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.view_model
 
-import androidx.lifecycle.viewModelScope
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.bottom_sheet.OpenSourceLicensesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
@@ -44,10 +41,6 @@ internal class OpenSourceLicensesScreenViewModel(
     private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    private val screenBottomSheetType: MutableStateFlow<OpenSourceLicensesScreenBottomSheetType> =
-        MutableStateFlow(
-            value = OpenSourceLicensesScreenBottomSheetType.None,
-        )
     // endregion
 
     // region uiStateAndStateEvents
@@ -58,8 +51,6 @@ internal class OpenSourceLicensesScreenViewModel(
     internal val uiStateEvents: OpenSourceLicensesScreenUIStateEvents =
         OpenSourceLicensesScreenUIStateEvents(
             navigateUp = ::navigateUp,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
-            updateScreenBottomSheetType = ::updateScreenBottomSheetType,
         )
     // endregion
 
@@ -110,41 +101,13 @@ internal class OpenSourceLicensesScreenViewModel(
     }
     // endregion
 
-    // region state events
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
-            updatedOpenSourceLicensesScreenBottomSheetType = OpenSourceLicensesScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedOpenSourceLicensesScreenBottomSheetType: OpenSourceLicensesScreenBottomSheetType,
-    ) {
-        screenBottomSheetType.update {
-            updatedOpenSourceLicensesScreenBottomSheetType
-        }
-    }
-    // endregion
-
     // region observeForUiStateAndStateEvents
     private fun observeForUiStateAndStateEvents() {
-        viewModelScope.launch {
-            combineAndCollectLatest(
-                isLoading,
-                screenBottomSheetType,
-            ) {
-                    (
-                        isLoading,
-                        screenBottomSheetType,
-                    ),
-                ->
-                uiState.update {
-                    OpenSourceLicensesScreenUIState(
-                        isBottomSheetVisible = screenBottomSheetType != OpenSourceLicensesScreenBottomSheetType.None,
-                        isLoading = isLoading,
-                        screenBottomSheetType = screenBottomSheetType,
-                    )
-                }
+        isLoading.map { isLoading ->
+            uiState.update {
+                OpenSourceLicensesScreenUIState(
+                    isLoading = isLoading,
+                )
             }
         }
     }
