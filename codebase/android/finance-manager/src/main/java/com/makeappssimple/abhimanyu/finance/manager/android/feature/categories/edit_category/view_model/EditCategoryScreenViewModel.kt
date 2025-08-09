@@ -64,7 +64,9 @@ internal class EditCategoryScreenViewModel(
     private val updateCategoriesUseCase: UpdateCategoriesUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region screen args
     private val screenArgs = EditCategoryScreenArgs(
@@ -207,10 +209,6 @@ internal class EditCategoryScreenViewModel(
                 text = "",
             )
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

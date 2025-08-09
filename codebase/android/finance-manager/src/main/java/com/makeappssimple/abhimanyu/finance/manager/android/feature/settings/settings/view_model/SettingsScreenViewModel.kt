@@ -53,7 +53,9 @@ internal class SettingsScreenViewModel(
     internal val logKit: LogKit,
     @VisibleForTesting internal val navigationKit: NavigationKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region initial data
     private var appVersion: String = ""
@@ -167,26 +169,6 @@ internal class SettingsScreenViewModel(
         coroutineScope.launch {
             alarmKit.scheduleReminderAlarm()
         }
-    }
-
-    fun navigateToAccountsScreen() {
-        navigationKit.navigateToAccountsScreen()
-    }
-
-    fun navigateToCategoriesScreen() {
-        navigationKit.navigateToCategoriesScreen()
-    }
-
-    fun navigateToOpenSourceLicensesScreen() {
-        navigationKit.navigateToOpenSourceLicensesScreen()
-    }
-
-    fun navigateToTransactionForValuesScreen() {
-        navigationKit.navigateToTransactionForValuesScreen()
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun recalculateTotal() {

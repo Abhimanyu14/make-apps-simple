@@ -32,7 +32,7 @@ internal abstract class ScreenViewModel(
     private val screen: Screen,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), NavigationKit by navigationKit, LogKit by logKit {
+), LogKit by logKit, NavigationKit by navigationKit {
     open fun initViewModel() {
         trackScreen()
         fetchData()

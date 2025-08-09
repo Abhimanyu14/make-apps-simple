@@ -69,7 +69,9 @@ internal class CategoriesScreenViewModel(
     private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ), ScreenUIStateDelegate by screenUIStateDelegate {
     // region initial data
     private val categoriesGridItemDataMap: MutableStateFlow<ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>>> =
@@ -286,26 +288,6 @@ internal class CategoriesScreenViewModel(
                 // TODO(Abhi): Handle this error scenario
             }
         }
-    }
-
-    fun navigateToAddCategoryScreen(
-        transactionType: String,
-    ) {
-        navigationKit.navigateToAddCategoryScreen(
-            transactionType = transactionType,
-        )
-    }
-
-    fun navigateToEditCategoryScreen(
-        categoryId: Int,
-    ) {
-        navigationKit.navigateToEditCategoryScreen(
-            categoryId = categoryId,
-        )
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

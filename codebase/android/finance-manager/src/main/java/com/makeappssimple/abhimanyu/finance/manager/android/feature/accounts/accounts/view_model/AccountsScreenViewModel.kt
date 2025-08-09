@@ -57,7 +57,9 @@ internal class AccountsScreenViewModel(
     private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ), ScreenUIStateDelegate by screenUIStateDelegate {
     // region initial data
     private var allAccounts: ImmutableList<Account> = persistentListOf()
@@ -131,22 +133,6 @@ internal class AccountsScreenViewModel(
                 // TODO(Abhi): Handle this error scenario
             }
         }
-    }
-
-    fun navigateToAddAccountScreen() {
-        navigationKit.navigateToAddAccountScreen()
-    }
-
-    fun navigateToEditAccountScreen(
-        accountId: Int,
-    ) {
-        navigationKit.navigateToEditAccountScreen(
-            accountId = accountId,
-        )
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

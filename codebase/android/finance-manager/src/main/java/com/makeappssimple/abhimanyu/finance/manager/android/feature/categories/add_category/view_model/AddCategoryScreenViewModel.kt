@@ -58,7 +58,9 @@ internal class AddCategoryScreenViewModel(
     private val screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ), ScreenUIStateDelegate by screenUIStateDelegate {
     // region screen args
     private val screenArgs = AddCategoryScreenArgs(
@@ -171,10 +173,6 @@ internal class AddCategoryScreenViewModel(
             insertCategoriesUseCase(category)
             navigationKit.navigateUp()
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

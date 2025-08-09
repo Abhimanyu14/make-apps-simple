@@ -17,10 +17,14 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base
 
 import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import kotlinx.coroutines.CoroutineScope
 
 public abstract class ScreenViewModel(
-    viewModelScope: CoroutineScope,
+    coroutineScope: CoroutineScope,
+    private val logKit: LogKit,
+    private val navigationKit: NavigationKit,
 ) : ViewModel(
-    viewModelScope = viewModelScope,
-)
+    viewModelScope = coroutineScope,
+), NavigationKit by navigationKit, LogKit by logKit

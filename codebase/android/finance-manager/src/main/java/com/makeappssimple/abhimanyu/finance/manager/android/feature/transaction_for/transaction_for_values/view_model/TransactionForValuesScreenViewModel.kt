@@ -51,7 +51,9 @@ internal class TransactionForValuesScreenViewModel(
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region initial data
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
@@ -151,22 +153,6 @@ internal class TransactionForValuesScreenViewModel(
                 // TODO(Abhi): Handle this error scenario
             }
         }
-    }
-
-    fun navigateToAddTransactionForScreen() {
-        navigationKit.navigateToAddTransactionForScreen()
-    }
-
-    fun navigateToEditTransactionForScreen(
-        transactionForId: Int,
-    ) {
-        navigationKit.navigateToEditTransactionForScreen(
-            transactionForId = transactionForId,
-        )
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

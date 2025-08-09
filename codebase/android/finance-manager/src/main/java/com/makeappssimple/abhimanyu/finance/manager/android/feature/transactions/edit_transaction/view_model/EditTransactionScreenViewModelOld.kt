@@ -99,7 +99,9 @@ public class EditTransactionScreenViewModelOld(
     private val updateTransactionUseCase: UpdateTransactionUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
@@ -539,10 +541,6 @@ public class EditTransactionScreenViewModelOld(
                     text = "",
                 ),
         )
-    }
-
-    internal fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     private fun updateTitle(

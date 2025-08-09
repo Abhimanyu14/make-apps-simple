@@ -37,7 +37,9 @@ internal class OpenSourceLicensesScreenViewModel(
     internal val logKit: LogKit,
     @VisibleForTesting internal val navigationKit: NavigationKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region UI state
     val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
@@ -110,10 +112,6 @@ internal class OpenSourceLicensesScreenViewModel(
     // endregion
 
     // region state events
-    fun navigateUp() {
-        navigationKit.navigateUp()
-    }
-
     fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedOpenSourceLicensesScreenBottomSheetType = OpenSourceLicensesScreenBottomSheetType.None,

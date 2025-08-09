@@ -79,7 +79,9 @@ internal class HomeScreenViewModel(
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region initial data
     private val isBackupCardVisible: Flow<Boolean> =
@@ -251,34 +253,6 @@ internal class HomeScreenViewModel(
                 }
             }
         }
-    }
-
-    fun navigateToAccountsScreen() {
-        navigationKit.navigateToAccountsScreen()
-    }
-
-    fun navigateToAddTransactionScreen() {
-        navigationKit.navigateToAddTransactionScreen()
-    }
-
-    fun navigateToAnalysisScreen() {
-        navigationKit.navigateToAnalysisScreen()
-    }
-
-    fun navigateToSettingsScreen() {
-        navigationKit.navigateToSettingsScreen()
-    }
-
-    fun navigateToTransactionsScreen() {
-        navigationKit.navigateToTransactionsScreen()
-    }
-
-    fun navigateToViewTransactionScreen(
-        transactionId: Int,
-    ) {
-        navigationKit.navigateToViewTransactionScreen(
-            transactionId = transactionId,
-        )
     }
 
     fun resetScreenBottomSheetType() {

@@ -55,7 +55,9 @@ internal class ViewTransactionScreenViewModel(
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region screen args
     private val screenArgs = ViewTransactionScreenArgs(
@@ -186,26 +188,6 @@ internal class ViewTransactionScreenViewModel(
         navigationKit.navigateToAddTransactionScreen(
             transactionId = transactionId,
         )
-    }
-
-    fun navigateToEditTransactionScreen(
-        transactionId: Int,
-    ) {
-        navigationKit.navigateToEditTransactionScreen(
-            transactionId = transactionId,
-        )
-    }
-
-    fun navigateToViewTransactionScreen(
-        transactionId: Int,
-    ) {
-        navigationKit.navigateToViewTransactionScreen(
-            transactionId = transactionId,
-        )
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

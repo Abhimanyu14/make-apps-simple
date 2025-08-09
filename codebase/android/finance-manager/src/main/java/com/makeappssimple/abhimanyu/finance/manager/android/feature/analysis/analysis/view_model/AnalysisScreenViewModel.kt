@@ -61,7 +61,9 @@ internal class AnalysisScreenViewModel(
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region initial data
     private val validTransactionTypes: ImmutableList<TransactionType> =
@@ -174,10 +176,6 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region state events
-    fun navigateUp() {
-        navigationKit.navigateUp()
-    }
-
     fun resetScreenBottomSheetType() {
         updateScreenBottomSheetType(
             updatedAnalysisScreenBottomSheetType = AnalysisScreenBottomSheetType.None,

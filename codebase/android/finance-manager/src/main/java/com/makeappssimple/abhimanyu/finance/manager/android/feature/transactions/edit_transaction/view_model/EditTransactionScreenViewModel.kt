@@ -100,7 +100,9 @@ internal class EditTransactionScreenViewModel(
     private val updateTransactionUseCase: UpdateTransactionUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
@@ -315,10 +317,6 @@ internal class EditTransactionScreenViewModel(
                 text = "",
             )
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

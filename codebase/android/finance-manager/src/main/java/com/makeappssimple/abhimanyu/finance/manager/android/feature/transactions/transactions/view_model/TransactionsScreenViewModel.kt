@@ -73,7 +73,9 @@ internal class TransactionsScreenViewModel(
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region initial data
     private var isInitialDataFetchCompleted = false
@@ -230,10 +232,6 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    fun navigateUp() {
-        navigationKit.navigateUp()
-    }
-
     fun removeFromSelectedTransactions(
         transactionId: Int,
     ) {
@@ -242,18 +240,6 @@ internal class TransactionsScreenViewModel(
                 remove(transactionId)
             }.toImmutableList()
         }
-    }
-
-    fun navigateToAddTransactionScreen() {
-        navigationKit.navigateToAddTransactionScreen()
-    }
-
-    fun navigateToViewTransactionScreen(
-        transactionId: Int,
-    ) {
-        navigationKit.navigateToViewTransactionScreen(
-            transactionId = transactionId,
-        )
     }
 
     fun selectAllTransactions() {

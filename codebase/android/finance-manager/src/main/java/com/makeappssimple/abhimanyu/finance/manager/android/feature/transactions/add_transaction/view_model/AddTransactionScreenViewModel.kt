@@ -92,7 +92,9 @@ internal class AddTransactionScreenViewModel(
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region screen args
     private val screenArgs = AddTransactionScreenArgs(
@@ -342,10 +344,6 @@ internal class AddTransactionScreenViewModel(
                 updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionFailed)
             }
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

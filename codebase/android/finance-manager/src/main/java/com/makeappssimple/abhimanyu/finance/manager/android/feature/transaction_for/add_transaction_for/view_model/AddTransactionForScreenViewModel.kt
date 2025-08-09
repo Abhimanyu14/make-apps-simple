@@ -46,7 +46,9 @@ internal class AddTransactionForScreenViewModel(
     private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ) {
     // region initial data
     private var allTransactionForValues: ImmutableList<TransactionFor> =
@@ -160,10 +162,6 @@ internal class AddTransactionForScreenViewModel(
                 navigationKit.navigateUp()
             }
         }
-    }
-
-    fun navigateUp() {
-        navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType() {

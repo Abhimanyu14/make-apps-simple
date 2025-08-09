@@ -64,7 +64,9 @@ internal class EditAccountScreenViewModel(
     private val updateAccountUseCase: UpdateAccountUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
-    viewModelScope = coroutineScope,
+    coroutineScope = coroutineScope,
+    logKit = logKit,
+    navigationKit = navigationKit,
 ), ScreenUICommonState by screenUICommonState {
     // region screen args
     private val screenArgs = EditAccountScreenArgs(
@@ -170,10 +172,6 @@ internal class EditAccountScreenViewModel(
                     text = "",
                 ),
         )
-    }
-
-    fun navigateUp(): Job {
-        return navigationKit.navigateUp()
     }
 
     fun resetScreenBottomSheetType(): Job? {
