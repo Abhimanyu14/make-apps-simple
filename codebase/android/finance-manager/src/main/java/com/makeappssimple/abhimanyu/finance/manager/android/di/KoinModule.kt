@@ -27,7 +27,7 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            FinanceManagerAppModule().module,
+            modules = FinanceManagerAppModule().module,
         )
         workManagerFactory()
     }
