@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.AmountCommaVisualTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
@@ -61,7 +60,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.te
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.bottom_sheet.AddAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.event.AddAccountScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
@@ -101,13 +99,6 @@ internal fun AddAccountScreenUI(
                 tag = SCREEN_ADD_OR_EDIT_ACCOUNT,
             )
             .fillMaxSize(),
-        sheetContent = {
-            when (uiState.screenBottomSheetType) {
-                is AddAccountScreenBottomSheetType.None -> {
-                    VerticalSpacer()
-                }
-            }
-        },
         sheetState = state.modalBottomSheetState,
         snackbarHostState = state.snackbarHostState,
         topBar = {

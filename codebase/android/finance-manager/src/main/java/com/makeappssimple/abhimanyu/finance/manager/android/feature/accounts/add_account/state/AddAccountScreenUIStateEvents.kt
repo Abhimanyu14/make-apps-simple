@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ad
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.bottom_sheet.AddAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 
 @Stable
@@ -28,11 +27,9 @@ internal class AddAccountScreenUIStateEvents(
     val clearName: () -> Unit = {},
     val insertAccount: () -> Unit = {},
     val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
     val resetScreenSnackbarType: () -> Unit = {},
     val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Unit = {},
     val updateName: (updatedName: TextFieldValue) -> Unit = {},
-    val updateScreenBottomSheetType: (AddAccountScreenBottomSheetType) -> Unit = {},
     val updateScreenSnackbarType: (AddAccountScreenSnackbarType) -> Unit = {},
     val updateSelectedAccountTypeIndex: (updatedIndex: Int) -> Unit = {},
 ) : ScreenUIStateEvents

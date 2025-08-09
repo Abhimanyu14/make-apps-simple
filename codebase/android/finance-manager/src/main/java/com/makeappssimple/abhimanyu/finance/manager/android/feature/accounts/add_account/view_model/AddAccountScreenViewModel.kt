@@ -31,7 +31,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenU
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.bottom_sheet.AddAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
@@ -73,8 +72,6 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region UI state
-    var screenBottomSheetType: AddAccountScreenBottomSheetType =
-        AddAccountScreenBottomSheetType.None
     var screenSnackbarType: AddAccountScreenSnackbarType =
         AddAccountScreenSnackbarType.None
     var selectedAccountTypeIndex = validAccountTypesForNewAccount
@@ -101,11 +98,9 @@ internal class AddAccountScreenViewModel(
                 )
             },
             navigateUp = ::navigateUp,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
             updateName = ::updateName,
-            updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateScreenSnackbarType = ::updateScreenSnackbarType,
             updateSelectedAccountTypeIndex = ::updateSelectedAccountTypeIndex,
         )
@@ -172,12 +167,6 @@ internal class AddAccountScreenViewModel(
         completeLoading()
     }
 
-    fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
-            updatedAddAccountScreenBottomSheetType = AddAccountScreenBottomSheetType.None,
-        )
-    }
-
     fun resetScreenSnackbarType() {
         updateScreenSnackbarType(
             updatedAddAccountScreenSnackbarType = AddAccountScreenSnackbarType.None,
@@ -200,16 +189,6 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ) {
         name = updatedName
-        if (shouldRefresh) {
-            refresh()
-        }
-    }
-
-    fun updateScreenBottomSheetType(
-        updatedAddAccountScreenBottomSheetType: AddAccountScreenBottomSheetType,
-        shouldRefresh: Boolean = true,
-    ) {
-        screenBottomSheetType = updatedAddAccountScreenBottomSheetType
         if (shouldRefresh) {
             refresh()
         }
@@ -264,7 +243,6 @@ internal class AddAccountScreenViewModel(
         uiState.update {
             AddAccountScreenUIState(
                 selectedAccountType = selectedAccountType,
-                screenBottomSheetType = screenBottomSheetType,
                 nameError = validationState.nameError,
                 screenSnackbarType = screenSnackbarType,
                 visibilityData = AddAccountScreenUIVisibilityData(

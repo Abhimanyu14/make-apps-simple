@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ed
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.bottom_sheet.EditAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
 
 @Stable
@@ -28,12 +27,10 @@ internal class EditAccountScreenUIStateEvents(
     val clearMinimumAccountBalanceAmountValue: () -> Unit = {},
     val clearName: () -> Unit = {},
     val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
     val updateAccount: () -> Unit = {},
     val updateBalanceAmountValue: (updatedBalanceAmountValue: TextFieldValue) -> Unit = {},
     val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Unit = {},
     val updateName: (updatedName: TextFieldValue) -> Unit = {},
-    val updateScreenBottomSheetType: (EditAccountScreenBottomSheetType) -> Unit = {},
     val updateScreenSnackbarType: (EditAccountScreenSnackbarType) -> Unit = {},
     val updateSelectedAccountTypeIndex: (updatedSelectedAccountTypeIndex: Int) -> Unit = {},
 ) : ScreenUIStateEvents

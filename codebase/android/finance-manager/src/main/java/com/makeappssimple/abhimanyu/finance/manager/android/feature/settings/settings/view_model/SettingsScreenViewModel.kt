@@ -29,7 +29,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RestoreDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottom_sheet.SettingsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIStateEvents
@@ -67,10 +66,6 @@ internal class SettingsScreenViewModel(
     val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(
         value = true,
     )
-    val screenBottomSheetType: MutableStateFlow<SettingsScreenBottomSheetType> =
-        MutableStateFlow(
-            value = SettingsScreenBottomSheetType.None,
-        )
     val screenSnackbarType: MutableStateFlow<SettingsScreenSnackbarType> =
         MutableStateFlow(
             value = SettingsScreenSnackbarType.None,
@@ -92,9 +87,7 @@ internal class SettingsScreenViewModel(
             navigateToTransactionForValuesScreen = ::navigateToTransactionForValuesScreen,
             navigateUp = ::navigateUp,
             recalculateTotal = ::recalculateTotal,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
-            updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateScreenSnackbarType = ::updateScreenSnackbarType,
         )
     // endregion
@@ -178,24 +171,10 @@ internal class SettingsScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
-            updatedSettingsScreenBottomSheetType = SettingsScreenBottomSheetType.None,
-        )
-    }
-
     fun resetScreenSnackbarType() {
         updateScreenSnackbarType(
             updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.None,
         )
-    }
-
-    fun updateScreenBottomSheetType(
-        updatedSettingsScreenBottomSheetType: SettingsScreenBottomSheetType,
-    ) {
-        screenBottomSheetType.update {
-            updatedSettingsScreenBottomSheetType
-        }
     }
 
     fun updateScreenSnackbarType(
@@ -257,23 +236,19 @@ internal class SettingsScreenViewModel(
         viewModelScope.launch {
             combineAndCollectLatest(
                 isLoading,
-                screenBottomSheetType,
                 screenSnackbarType,
                 isReminderEnabled,
             ) {
                     (
                         isLoading,
-                        screenBottomSheetType,
                         screenSnackbarType,
                         isReminderEnabled,
                     ),
                 ->
                 uiState.update {
                     SettingsScreenUIState(
-                        isBottomSheetVisible = screenBottomSheetType != SettingsScreenBottomSheetType.None,
                         isLoading = isLoading,
                         isReminderEnabled = isReminderEnabled,
-                        screenBottomSheetType = screenBottomSheetType,
                         screenSnackbarType = screenSnackbarType,
                         appVersion = appVersion,
                     )

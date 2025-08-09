@@ -48,7 +48,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.ov
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardViewModelData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewTabOption
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.orDefault
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIStateEvents
 import kotlinx.collections.immutable.ImmutableList
@@ -99,10 +98,6 @@ internal class HomeScreenViewModel(
     val isBalanceVisible: MutableStateFlow<Boolean> = MutableStateFlow(
         value = false,
     )
-    val screenBottomSheetType: MutableStateFlow<HomeScreenBottomSheetType> =
-        MutableStateFlow(
-            value = HomeScreenBottomSheetType.None,
-        )
     val homeListItemViewData: MutableStateFlow<ImmutableList<TransactionListItemData>> =
         MutableStateFlow(
             value = persistentListOf(),
@@ -134,10 +129,8 @@ internal class HomeScreenViewModel(
             navigateToSettingsScreen = ::navigateToSettingsScreen,
             navigateToTransactionsScreen = ::navigateToTransactionsScreen,
             navigateToViewTransactionScreen = ::navigateToViewTransactionScreen,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateIsBalanceVisible = ::updateIsBalanceVisible,
             updateOverviewTabSelectionIndex = ::updateOverviewTabSelectionIndex,
-            updateScreenBottomSheetType = ::updateScreenBottomSheetType,
         )
     // endregion
 
@@ -255,12 +248,6 @@ internal class HomeScreenViewModel(
         }
     }
 
-    fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
-            updatedHomeScreenBottomSheetType = HomeScreenBottomSheetType.None,
-        )
-    }
-
     fun updateIsBalanceVisible(
         updatedIsBalanceVisible: Boolean,
     ) {
@@ -273,14 +260,6 @@ internal class HomeScreenViewModel(
         updatedOverviewTabSelectionIndex: Int,
     ) {
         overviewTabSelectionIndex.value = updatedOverviewTabSelectionIndex
-    }
-
-    fun updateScreenBottomSheetType(
-        updatedHomeScreenBottomSheetType: HomeScreenBottomSheetType,
-    ) {
-        screenBottomSheetType.update {
-            updatedHomeScreenBottomSheetType
-        }
     }
     // endregion
 
@@ -305,7 +284,6 @@ internal class HomeScreenViewModel(
         viewModelScope.launch {
             combineAndCollectLatest(
                 isLoading,
-                screenBottomSheetType,
                 isBalanceVisible,
                 isBackupCardVisible,
                 overviewCardData,
@@ -316,7 +294,6 @@ internal class HomeScreenViewModel(
             ) {
                     (
                         isLoading,
-                        screenBottomSheetType,
                         isBalanceVisible,
                         isBackupCardVisible,
                         overviewCardData,
@@ -335,13 +312,11 @@ internal class HomeScreenViewModel(
 
                 uiState.update {
                     HomeScreenUIState(
-                        isBottomSheetVisible = screenBottomSheetType != HomeScreenBottomSheetType.None,
                         isBackupCardVisible = isBackupCardVisible,
                         isBalanceVisible = isBalanceVisible,
                         isLoading = isLoading,
                         isRecentTransactionsTrailingTextVisible = homeListItemViewData
                             .isNotEmpty(),
-                        screenBottomSheetType = screenBottomSheetType,
                         overviewTabSelectionIndex = overviewTabSelectionIndex.orZero(),
                         transactionListItemDataList = homeListItemViewData,
                         accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.orZero(),

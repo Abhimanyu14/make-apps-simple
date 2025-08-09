@@ -18,15 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.se
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottom_sheet.SettingsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 
 @Stable
 internal data class SettingsScreenUIState(
-    val isBottomSheetVisible: Boolean = false,
     val isLoading: Boolean = true,
     val isReminderEnabled: Boolean? = null,
-    val screenBottomSheetType: SettingsScreenBottomSheetType = SettingsScreenBottomSheetType.None,
     val screenSnackbarType: SettingsScreenSnackbarType = SettingsScreenSnackbarType.None,
     val appVersion: String? = null,
 ) : ScreenUIState

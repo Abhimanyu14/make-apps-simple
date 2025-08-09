@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.se
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.bottom_sheet.SettingsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 
 @Immutable
@@ -31,8 +30,6 @@ internal data class SettingsScreenUIStateEvents(
     val navigateToTransactionForValuesScreen: () -> Unit = {},
     val navigateUp: () -> Unit = {},
     val recalculateTotal: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
     val resetScreenSnackbarType: () -> Unit = {},
-    val updateScreenBottomSheetType: (SettingsScreenBottomSheetType) -> Unit = {},
     val updateScreenSnackbarType: (SettingsScreenSnackbarType) -> Unit = {},
 ) : ScreenUIStateEvents

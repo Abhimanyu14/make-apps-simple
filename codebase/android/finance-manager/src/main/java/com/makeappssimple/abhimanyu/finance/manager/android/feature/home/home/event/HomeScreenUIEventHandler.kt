@@ -56,9 +56,7 @@ internal class HomeScreenUIEventHandler internal constructor(
                 uiStateEvents.navigateToTransactionsScreen()
             }
 
-            is HomeScreenUIEvent.OnNavigationBackButtonClick -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
+            is HomeScreenUIEvent.OnNavigationBackButtonClick -> {}
 
             is HomeScreenUIEvent.OnTransactionListItemClick -> {
                 uiStateEvents.navigateToViewTransactionScreen(uiEvent.transactionId)

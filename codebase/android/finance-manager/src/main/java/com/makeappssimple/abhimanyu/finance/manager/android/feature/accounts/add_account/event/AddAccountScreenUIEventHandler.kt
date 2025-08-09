@@ -30,9 +30,7 @@ internal class AddAccountScreenUIEventHandler internal constructor(
                 uiStateEvents.insertAccount()
             }
 
-            is AddAccountScreenUIEvent.OnNavigationBackButtonClick -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
+            is AddAccountScreenUIEvent.OnNavigationBackButtonClick -> {}
 
             is AddAccountScreenUIEvent.OnClearMinimumAccountBalanceAmountValueButtonClick -> {
                 uiStateEvents.clearMinimumAccountBalanceAmountValue()

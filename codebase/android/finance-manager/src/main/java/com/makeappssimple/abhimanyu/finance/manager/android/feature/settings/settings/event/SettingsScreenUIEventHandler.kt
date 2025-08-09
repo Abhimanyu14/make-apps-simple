@@ -46,9 +46,7 @@ internal class SettingsScreenUIEventHandler internal constructor(
                 uiStateEvents.navigateToCategoriesScreen()
             }
 
-            is SettingsScreenUIEvent.OnNavigationBackButtonClick -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
+            is SettingsScreenUIEvent.OnNavigationBackButtonClick -> {}
 
             is SettingsScreenUIEvent.OnOpenSourceLicensesListItemClick -> {
                 uiStateEvents.navigateToOpenSourceLicensesScreen()

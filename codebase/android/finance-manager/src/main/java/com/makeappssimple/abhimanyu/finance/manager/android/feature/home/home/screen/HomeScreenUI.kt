@@ -33,7 +33,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_HOME
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_HOME
-import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyFloatingActionButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.navigationBarLandscapeSpacer
@@ -57,7 +56,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.to
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCard
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCardData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCardEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.event.HomeScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -76,13 +74,6 @@ internal fun HomeScreenUI(
                 tag = SCREEN_HOME,
             )
             .fillMaxSize(),
-        sheetContent = {
-            when (uiState.screenBottomSheetType) {
-                is HomeScreenBottomSheetType.None -> {
-                    VerticalSpacer()
-                }
-            }
-        },
         sheetState = state.modalBottomSheetState,
         snackbarHostState = state.snackbarHostState,
         topBar = {

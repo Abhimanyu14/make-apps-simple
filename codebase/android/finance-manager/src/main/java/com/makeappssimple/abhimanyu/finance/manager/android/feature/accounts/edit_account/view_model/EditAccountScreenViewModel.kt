@@ -34,7 +34,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.Navi
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.bottom_sheet.EditAccountScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenNameError
@@ -92,8 +91,6 @@ internal class EditAccountScreenViewModel(
         TextFieldValue()
     var name = TextFieldValue()
     var balanceAmountValue = TextFieldValue()
-    var screenBottomSheetType: EditAccountScreenBottomSheetType =
-        EditAccountScreenBottomSheetType.None
     var screenSnackbarType: EditAccountScreenSnackbarType =
         EditAccountScreenSnackbarType.None
     var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
@@ -114,12 +111,10 @@ internal class EditAccountScreenViewModel(
             clearMinimumAccountBalanceAmountValue = ::clearMinimumAccountBalanceAmountValue,
             clearName = ::clearName,
             navigateUp = ::navigateUp,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateAccount = ::updateAccount,
             updateBalanceAmountValue = ::updateBalanceAmountValue,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
             updateName = ::updateName,
-            updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateScreenSnackbarType = ::updateScreenSnackbarType,
             updateSelectedAccountTypeIndex = ::updateSelectedAccountTypeIndex,
         )
@@ -174,12 +169,6 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    fun resetScreenBottomSheetType(): Job? {
-        return updateScreenBottomSheetType(
-            updatedEditAccountScreenBottomSheetType = EditAccountScreenBottomSheetType.None,
-        )
-    }
-
     fun updateAccount(): Job {
         return coroutineScope.launch {
             startLoading()
@@ -229,17 +218,6 @@ internal class EditAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job? {
         name = updatedName
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return null
-    }
-
-    fun updateScreenBottomSheetType(
-        updatedEditAccountScreenBottomSheetType: EditAccountScreenBottomSheetType,
-        shouldRefresh: Boolean = true,
-    ): Job? {
-        screenBottomSheetType = updatedEditAccountScreenBottomSheetType
         if (shouldRefresh) {
             return refresh()
         }
@@ -341,7 +319,6 @@ internal class EditAccountScreenViewModel(
 
         uiState.update {
             EditAccountScreenUIState(
-                screenBottomSheetType = screenBottomSheetType,
                 isLoading = isLoading,
                 isCtaButtonEnabled = validationState.isCtaButtonEnabled,
                 nameError = validationState.nameError,

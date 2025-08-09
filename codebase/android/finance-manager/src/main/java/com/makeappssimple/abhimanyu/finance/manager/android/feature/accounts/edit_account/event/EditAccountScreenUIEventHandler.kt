@@ -39,9 +39,7 @@ internal class EditAccountScreenUIEventHandler internal constructor(
                 )
             }
 
-            is EditAccountScreenUIEvent.OnNavigationBackButtonClick -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
+            is EditAccountScreenUIEvent.OnNavigationBackButtonClick -> {}
 
             is EditAccountScreenUIEvent.OnClearBalanceAmountValueButtonClick -> {
                 uiStateEvents.clearBalanceAmountValue()

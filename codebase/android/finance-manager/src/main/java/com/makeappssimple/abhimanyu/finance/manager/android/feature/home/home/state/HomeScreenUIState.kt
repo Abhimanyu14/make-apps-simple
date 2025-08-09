@@ -21,7 +21,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_p
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardViewModelData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -29,10 +28,8 @@ import kotlinx.collections.immutable.persistentListOf
 internal data class HomeScreenUIState(
     val isBackupCardVisible: Boolean = false,
     val isBalanceVisible: Boolean = false,
-    val isBottomSheetVisible: Boolean = false,
     val isLoading: Boolean = true,
     val isRecentTransactionsTrailingTextVisible: Boolean = false,
-    val screenBottomSheetType: HomeScreenBottomSheetType = HomeScreenBottomSheetType.None,
     val overviewTabSelectionIndex: Int = 0,
     val transactionListItemDataList: ImmutableList<TransactionListItemData> = persistentListOf(),
     val accountsTotalBalanceAmountValue: Long = 0L,
