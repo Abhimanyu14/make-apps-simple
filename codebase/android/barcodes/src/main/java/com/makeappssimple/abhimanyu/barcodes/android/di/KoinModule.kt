@@ -26,7 +26,7 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            BarcodesAppModule().module,
+            modules = BarcodesAppModule().module,
         )
     }
 }
