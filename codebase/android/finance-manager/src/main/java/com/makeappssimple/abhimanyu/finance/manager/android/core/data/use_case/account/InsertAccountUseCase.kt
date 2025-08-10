@@ -31,23 +31,29 @@ public class InsertAccountUseCase(
         minimumAccountBalanceAmountValue: Long,
         name: String,
     ): Long {
-        if (accountType == null) {
-            return -1
+        return try {
+            if (accountType == null) {
+                return -1
+            }
+            val minimumAccountBalanceAmount =
+                if (accountType == AccountType.BANK) {
+                    Amount(
+                        value = minimumAccountBalanceAmountValue,
+                    )
+                } else {
+                    null
+                }
+            financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
+            accountRepository.insertAccounts(
+                Account(
+                    type = accountType,
+                    minimumAccountBalanceAmount = minimumAccountBalanceAmount,
+                    name = name,
+                ),
+            ).first()
+        } catch (_: NoSuchElementException) {
+            // This exception is thrown when the list is empty, which means the insert failed.
+            -1L
         }
-        val minimumAccountBalanceAmount = if (accountType == AccountType.BANK) {
-            Amount(
-                value = minimumAccountBalanceAmountValue,
-            )
-        } else {
-            null
-        }
-        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-        return accountRepository.insertAccounts(
-            Account(
-                type = accountType,
-                minimumAccountBalanceAmount = minimumAccountBalanceAmount,
-                name = name,
-            ),
-        ).first()
     }
 }
