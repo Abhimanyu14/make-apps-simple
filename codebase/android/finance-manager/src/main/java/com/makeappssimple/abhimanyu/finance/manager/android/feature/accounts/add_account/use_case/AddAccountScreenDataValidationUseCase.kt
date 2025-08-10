@@ -29,7 +29,6 @@ public class AddAccountScreenDataValidationUseCase(
     public suspend operator fun invoke(
         enteredName: String,
     ): AddAccountScreenDataValidationState {
-        val allAccounts = getAllAccountsUseCase()
         val addAccountScreenDataValidationState =
             AddAccountScreenDataValidationState()
         if (enteredName.isBlank()) {
@@ -44,6 +43,7 @@ public class AddAccountScreenDataValidationUseCase(
                     nameError = AddAccountScreenNameError.AccountExists,
                 )
         }
+        val allAccounts = getAllAccountsUseCase()
         val isAccountNameAlreadyUsed: Boolean = allAccounts.find {
             it.name
                 .trim()

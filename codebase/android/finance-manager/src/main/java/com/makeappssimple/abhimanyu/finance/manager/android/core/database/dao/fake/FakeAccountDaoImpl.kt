@@ -19,52 +19,118 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.f
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 public class FakeAccountDaoImpl : AccountDao {
-    override fun getAllAccountsFlow(): Flow<List<AccountEntity>> {
-        return emptyFlow()
-    }
+    private val accounts = mutableListOf<AccountEntity>()
+    private val accountsFlow = MutableStateFlow<List<AccountEntity>>(
+        value = emptyList(),
+    )
+    private var nextId = 1
 
-    override suspend fun getAllAccounts(): List<AccountEntity> {
-        return emptyList()
-    }
-
-    override suspend fun getAllAccountsCount(): Int {
+    override suspend fun deleteAccountById(
+        id: Int,
+    ): Int {
+        val removed = accounts.removeIf {
+            it.id == id
+        }
+        if (removed) {
+            accountsFlow.value = accounts.sortedBy {
+                it.id
+            }
+            return 1
+        }
         return 0
+    }
+
+    override suspend fun deleteAllAccounts(): Int {
+        val count = accounts.size
+        accounts.clear()
+        accountsFlow.value = emptyList()
+        return count
     }
 
     override suspend fun getAccountById(
         id: Int,
     ): AccountEntity? {
-        return null
+        return accounts.find {
+            it.id == id
+        }
     }
 
     override suspend fun getAccounts(
         ids: List<Int>,
     ): List<AccountEntity> {
-        return emptyList()
+        return accounts.filter {
+            it.id in ids
+        }
+    }
+
+    override suspend fun getAllAccounts(): List<AccountEntity> {
+        return accounts.toList()
+    }
+
+    override suspend fun getAllAccountsCount(): Int {
+        return accounts.size
+    }
+
+    override fun getAllAccountsFlow(): Flow<List<AccountEntity>> {
+        return accountsFlow.asStateFlow()
     }
 
     override suspend fun insertAccounts(
-        vararg accounts: AccountEntity,
+        vararg newAccounts: AccountEntity,
     ): List<Long> {
-        return emptyList()
+        val result = mutableListOf<Long>()
+        for (account in newAccounts) {
+            // Simulate auto-increment if id is 0
+            val id = if (account.id == 0) {
+                nextId++
+            } else {
+                account.id
+            }
+            val accountExists = accounts.any {
+                it.id == id
+            }
+            if (accountExists) {
+                result.add(
+                    element = -1L,
+                )
+            } else {
+                val entity = account.copy(
+                    id = id,
+                )
+                accounts.add(
+                    element = entity,
+                )
+                result.add(
+                    element = id.toLong(),
+                )
+            }
+        }
+        accountsFlow.value = accounts.sortedBy {
+            it.id
+        }
+        return result
     }
 
     override suspend fun updateAccounts(
-        vararg accounts: AccountEntity,
+        vararg updatedAccounts: AccountEntity,
     ): Int {
-        return 0
-    }
-
-    override suspend fun deleteAccountById(
-        id: Int,
-    ): Int {
-        return 0
-    }
-
-    override suspend fun deleteAllAccounts(): Int {
-        return 0
+        var updatedCount = 0
+        for (account in updatedAccounts) {
+            val index = accounts.indexOfFirst {
+                it.id == account.id
+            }
+            if (index != -1) {
+                accounts[index] = account
+                updatedCount++
+            }
+        }
+        accountsFlow.value = accounts.sortedBy {
+            it.id
+        }
+        return updatedCount
     }
 }

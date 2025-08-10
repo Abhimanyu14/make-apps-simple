@@ -29,7 +29,7 @@ private object DefaultConstants {
 public fun isDefaultExpenseCategory(
     category: String,
 ): Boolean {
-    return category.equalsIgnoringCase(
+    return category.trim().equalsIgnoringCase(
         other = DefaultConstants.EXPENSE_CATEGORY,
     )
 }
@@ -37,7 +37,7 @@ public fun isDefaultExpenseCategory(
 public fun isDefaultIncomeCategory(
     category: String,
 ): Boolean {
-    return category.equalsIgnoringCase(
+    return category.trim().equalsIgnoringCase(
         other = DefaultConstants.INCOME_CATEGORY,
     )
 }
@@ -45,7 +45,7 @@ public fun isDefaultIncomeCategory(
 public fun isDefaultInvestmentCategory(
     category: String,
 ): Boolean {
-    return category.equalsIgnoringCase(
+    return category.trim().equalsIgnoringCase(
         other = DefaultConstants.INVESTMENT_CATEGORY,
     )
 }
@@ -53,7 +53,7 @@ public fun isDefaultInvestmentCategory(
 public fun isDefaultAccount(
     account: String,
 ): Boolean {
-    return account.equalsIgnoringCase(
+    return account.trim().equalsIgnoringCase(
         other = DefaultConstants.ACCOUNT,
     )
 }
@@ -61,7 +61,7 @@ public fun isDefaultAccount(
 public fun isDefaultTransactionFor(
     transactionFor: String,
 ): Boolean {
-    return transactionFor.equalsIgnoringCase(
+    return transactionFor.trim().equalsIgnoringCase(
         other = DefaultConstants.TRANSACTION_FOR,
     )
 }

@@ -27,14 +27,11 @@ public class InsertAccountUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
     public suspend operator fun invoke(
-        accountType: AccountType?,
+        accountType: AccountType,
         minimumAccountBalanceAmountValue: Long,
         name: String,
     ): Long {
         return try {
-            if (accountType == null) {
-                return -1
-            }
             val minimumAccountBalanceAmount =
                 if (accountType == AccountType.BANK) {
                     Amount(
@@ -43,14 +40,13 @@ public class InsertAccountUseCase(
                 } else {
                     null
                 }
+            val newAccount = Account(
+                type = accountType,
+                minimumAccountBalanceAmount = minimumAccountBalanceAmount,
+                name = name,
+            )
             financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-            accountRepository.insertAccounts(
-                Account(
-                    type = accountType,
-                    minimumAccountBalanceAmount = minimumAccountBalanceAmount,
-                    name = name,
-                ),
-            ).first()
+            accountRepository.insertAccounts(newAccount).first()
         } catch (_: NoSuchElementException) {
             // This exception is thrown when the list is empty, which means the insert failed.
             -1L

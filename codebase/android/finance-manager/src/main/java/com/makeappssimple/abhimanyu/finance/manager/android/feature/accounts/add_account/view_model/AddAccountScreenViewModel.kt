@@ -63,6 +63,13 @@ internal class AddAccountScreenViewModel(
         AccountType.entries.filter {
             it != AccountType.CASH
         }
+    private val accountTypesChipUIDataList = validAccountTypesForNewAccount
+        .map { accountType ->
+            ChipUIData(
+                text = accountType.title,
+                icon = accountType.icon,
+            )
+        }
     // endregion
 
     // region UI state
@@ -87,12 +94,7 @@ internal class AddAccountScreenViewModel(
         AddAccountScreenUIStateEvents(
             clearMinimumAccountBalanceAmountValue = ::clearMinimumAccountBalanceAmountValue,
             clearName = ::clearName,
-            insertAccount = {
-                // TODO(Abhi): Change this to remove passing UI state from here
-                insertAccount(
-                    uiState = _uiState.value,
-                )
-            },
+            insertAccount = ::insertAccount,
             navigateUp = ::navigateUp,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
@@ -109,10 +111,7 @@ internal class AddAccountScreenViewModel(
                 addAccountScreenDataValidationUseCase(
                     enteredName = name.text.trim(),
                 )
-            val selectedAccountType: AccountType =
-                validAccountTypesForNewAccount.get(
-                    index = selectedAccountTypeIndex,
-                )
+            val selectedAccountType: AccountType = getSelectedAccountType()
             _uiState.update {
                 AddAccountScreenUIState(
                     selectedAccountType = selectedAccountType,
@@ -125,13 +124,7 @@ internal class AddAccountScreenViewModel(
                     isCtaButtonEnabled = addAccountScreenDataValidationState.isCtaButtonEnabled,
                     isLoading = isLoading,
                     selectedAccountTypeIndex = selectedAccountTypeIndex,
-                    accountTypesChipUIDataList = validAccountTypesForNewAccount
-                        .map { accountType ->
-                            ChipUIData(
-                                text = accountType.title,
-                                icon = accountType.icon,
-                            )
-                        },
+                    accountTypesChipUIDataList = accountTypesChipUIDataList,
                     minimumAccountBalanceTextFieldValue = minimumAccountBalanceAmountValue,
                     nameTextFieldValue = name,
                 )
@@ -166,13 +159,11 @@ internal class AddAccountScreenViewModel(
         return getCompletedJob()
     }
 
-    private fun insertAccount(
-        uiState: AddAccountScreenUIState,
-    ): Job {
+    private fun insertAccount(): Job {
         return coroutineScope.launch {
             startLoading()
             val isAccountInserted = insertAccountUseCase(
-                accountType = uiState.selectedAccountType,
+                accountType = getSelectedAccountType(),
                 minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text.toLongOrZero(),
                 name = name.text,
             ) != -1L
@@ -238,6 +229,12 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region common
+    private fun getSelectedAccountType(): AccountType {
+        return validAccountTypesForNewAccount.get(
+            index = selectedAccountTypeIndex,
+        )
+    }
+
     private fun getCompletedJob(): Job {
         return Job().apply {
             complete()

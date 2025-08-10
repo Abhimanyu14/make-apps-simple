@@ -20,8 +20,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ad
 
 import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
+import app.cash.turbine.turbineScope
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
@@ -32,8 +34,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeAccountDaoImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
@@ -142,6 +149,121 @@ internal class AddAccountScreenViewModelTest {
     }
     // endregion
 
+    // region updateUiStateAndStateEvents
+    @Test
+    fun updateUiStateAndStateEvents_nameIsBlank_ctaIsDisabled() =
+        runTestWithTimeout {
+            val updatedName = "   "
+            val updatedValue = TextFieldValue(
+                text = updatedName,
+            )
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isFalse()
+                assertThat(result.nameError).isEqualTo(
+                    AddAccountScreenNameError.None
+                )
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_nameIsCash_ctaIsDisabled() =
+        runTestWithTimeout {
+            val updatedName = "Cash"
+            val updatedValue = TextFieldValue(
+                text = updatedName,
+            )
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isFalse()
+                assertThat(result.nameError).isEqualTo(
+                    AddAccountScreenNameError.AccountExists
+                )
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_nameIsCashWithSpaces_ctaIsDisabled() =
+        runTestWithTimeout {
+            val updatedName = "  Cash   "
+            val updatedValue = TextFieldValue(
+                text = updatedName,
+            )
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isFalse()
+                assertThat(result.nameError).isEqualTo(
+                    AddAccountScreenNameError.AccountExists
+                )
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_accountAlreadyExists_ctaIsEnabled() =
+        runTestWithTimeout {
+            val updatedName1 = "CUB"
+            val updatedValue1 = TextFieldValue(
+                text = updatedName1,
+            )
+            val updatedName2 = "IOB"
+            val updatedValue2 = TextFieldValue(
+                text = updatedName2,
+            )
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue1)
+                assertThat(awaitItem().nameTextFieldValue.text).isEqualTo(
+                    updatedName1
+                )
+                addAccountScreenViewModel.uiStateEvents.insertAccount().join()
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue2)
+                assertThat(awaitItem().nameTextFieldValue.text).isEqualTo(
+                    updatedName2
+                )
+
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue1)
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isFalse()
+                assertThat(result.nameError).isEqualTo(
+                    AddAccountScreenNameError.AccountExists
+                )
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_accountIsValid_ctaIsEnabled() =
+        runTestWithTimeout {
+            val updatedName = "CUB"
+            val updatedValue = TextFieldValue(
+                text = updatedName,
+            )
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isTrue()
+                assertThat(result.nameError).isEqualTo(
+                    AddAccountScreenNameError.None
+                )
+            }
+        }
+    // endregion
+
     // region state events
     @Test
     fun clearMinimumAccountBalanceAmountValue_shouldClearText() =
@@ -184,60 +306,118 @@ internal class AddAccountScreenViewModelTest {
         }
     }
 
-//    @Test
-//    fun insertAccount_withValidData_shouldInsertAndNavigateUp() =
-//        runTestWithTimeout {
-//            // Given
-//            val accountName = TextFieldValue("Test Account")
-//            val minimumBalance = TextFieldValue("1000")
-//            addAccountScreenViewModel.uiStateEvents.updateName(accountName)
-//            addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
-//                minimumBalance
-//            )
-//
-//            addAccountScreenViewModel.uiStateEvents.insertAccount()
-//
-//            // Navigation verification would go here if we had access to navigation events
-//            // For now, we can verify the account was attempted to be inserted by checking loading state
-//            val result = addAccountScreenViewModel.uiState.first()
-//            assertThat(result.isLoading).isFalse()
-//        }
-//
-//    @Test
-//    fun insertAccount_withInvalidData_shouldShowError() = runTestWithTimeout {
-//        // Given
-//        val accountName = TextFieldValue("")  // Invalid empty name
-//        addAccountScreenViewModel.uiStateEvents.updateName(accountName)
-//
-//
-//        addAccountScreenViewModel.uiStateEvents.insertAccount()
-//
-//
-//        val result = addAccountScreenViewModel.uiState.first()
-//        assertThat(result.isLoading).isFalse()
-//        assertThat(result.screenSnackbarType).isEqualTo(
-//            AddAccountScreenSnackbarType.SaveError
-//        )
-//    }
-//
-//    @Test
-//    fun insertAccount_withValidData_shouldUpdateLoadingStates() =
-//        runTestWithTimeout {
-//            // Given
-//            val accountName = TextFieldValue("Test Account")
-//            addAccountScreenViewModel.uiStateEvents.updateName(accountName)
-//
-//            -Get initial loading state
-//            val initialState = addAccountScreenViewModel.uiState.first()
-//            assertThat(initialState.isLoading).isTrue()
-//
-//            -Insert account
-//                    addAccountScreenViewModel.uiStateEvents.insertAccount()
-//
-//            -Check final loading state
-//            val finalState = addAccountScreenViewModel.uiState.first()
-//            assertThat(finalState.isLoading).isFalse()
-//        }
+    @Test
+    fun insertAccount_bank_shouldInsertAndNavigateUp() =
+        runTestWithTimeout {
+            turbineScope {
+                val navigationCommandTurbine = navigationKit.command.testIn(
+                    scope = backgroundScope,
+                )
+                val uiStateTurbine = addAccountScreenViewModel.uiState.testIn(
+                    scope = backgroundScope,
+                )
+                val lastChangeTimestamp =
+                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                        ?: -1L
+
+                val testAccountId = 1
+                val testAccountName = TextFieldValue("test-bank")
+                val testMinimumAccountBalanceAmount = TextFieldValue("1000")
+                val testAccountType = AccountType.BANK
+                val testAccount = Account(
+                    id = testAccountId,
+                    type = testAccountType,
+                    minimumAccountBalanceAmount = Amount(
+                        value = testMinimumAccountBalanceAmount.text.toLongOrZero(),
+                    ),
+                    name = testAccountName.text,
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                addAccountScreenViewModel.uiStateEvents.updateName(
+                    testAccountName
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
+                    testMinimumAccountBalanceAmount
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+
+                addAccountScreenViewModel.uiStateEvents.insertAccount()
+
+                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
+                assertThat(
+                    fakeAccountDao.getAllAccounts().first().asExternalModel()
+                ).isEqualTo(
+                    testAccount
+                )
+                assertThat(
+                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                        ?: -1L
+                ).isGreaterThan(lastChangeTimestamp)
+                assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
+                    FinanceManagerNavigationDirections.NavigateUp
+                )
+            }
+        }
+
+    @Test
+    fun insertAccount_eWallet_shouldInsertAndNavigateUp() =
+        runTestWithTimeout {
+            turbineScope {
+                val navigationCommandTurbine = navigationKit.command.testIn(
+                    scope = backgroundScope,
+                )
+                val uiStateTurbine = addAccountScreenViewModel.uiState.testIn(
+                    scope = backgroundScope,
+                )
+                val lastChangeTimestamp =
+                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                        ?: -1L
+
+                val testAccountId = 1
+                val testAccountName = TextFieldValue("test-wallet")
+                val testMinimumAccountBalanceAmount = TextFieldValue("1000")
+                val testAccountType = AccountType.E_WALLET
+                val testSelectedAccountTypeIndex = 1
+                val testAccount = Account(
+                    id = testAccountId,
+                    type = testAccountType,
+                    minimumAccountBalanceAmount = null,
+                    name = testAccountName.text,
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                addAccountScreenViewModel.uiStateEvents.updateName(
+                    testAccountName
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
+                    testMinimumAccountBalanceAmount
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                addAccountScreenViewModel.uiStateEvents.updateSelectedAccountTypeIndex(
+                    testSelectedAccountTypeIndex
+                )
+                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+
+                addAccountScreenViewModel.uiStateEvents.insertAccount()
+
+                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
+                assertThat(
+                    fakeAccountDao.getAllAccounts().first().asExternalModel()
+                ).isEqualTo(
+                    testAccount
+                )
+                assertThat(
+                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                        ?: -1L
+                ).isGreaterThan(lastChangeTimestamp)
+                assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
+                    FinanceManagerNavigationDirections.NavigateUp
+                )
+            }
+        }
 
     @Test
     fun resetScreenSnackbarType_shouldResetToNone() = runTestWithTimeout {
