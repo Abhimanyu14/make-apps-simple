@@ -34,23 +34,22 @@ public class UpdateAccountUseCase(
     private val updateAccountsUseCase: UpdateAccountsUseCase,
 ) {
     public suspend operator fun invoke(
-        currentAccount: Account?,
+        currentAccount: Account,
         validAccountTypesForNewAccount: ImmutableList<AccountType>,
         selectedAccountTypeIndex: Int,
         balanceAmountValue: String,
         minimumAccountBalanceAmountValue: String,
         name: String,
     ): Boolean {
-        val currentAccountValue = currentAccount ?: return false
         val amountChangeValue =
-            balanceAmountValue.toIntOrZero() - currentAccountValue.balanceAmount.value
-        val accountType = if (currentAccountValue.type != AccountType.CASH) {
+            balanceAmountValue.toIntOrZero() - currentAccount.balanceAmount.value
+        val accountType = if (currentAccount.type != AccountType.CASH) {
             validAccountTypesForNewAccount[selectedAccountTypeIndex]
         } else {
-            currentAccountValue.type
+            currentAccount.type
         }
         val minimumAccountBalanceAmount = if (accountType == AccountType.BANK) {
-            (currentAccountValue.minimumAccountBalanceAmount ?: Amount(
+            (currentAccount.minimumAccountBalanceAmount ?: Amount(
                 value = 0L,
             ))
                 .copy(
@@ -59,16 +58,16 @@ public class UpdateAccountUseCase(
         } else {
             null
         }
-        val updatedAccount = currentAccountValue
+        val updatedAccount = currentAccount
             .copy(
-                balanceAmount = currentAccountValue.balanceAmount
+                balanceAmount = currentAccount.balanceAmount
                     .copy(
                         value = balanceAmountValue.toLongOrZero(),
                     ),
                 type = accountType,
                 minimumAccountBalanceAmount = minimumAccountBalanceAmount,
                 name = name.ifBlank {
-                    currentAccountValue.name
+                    currentAccount.name
                 },
             )
         val accountFromId = if (amountChangeValue < 0L) {

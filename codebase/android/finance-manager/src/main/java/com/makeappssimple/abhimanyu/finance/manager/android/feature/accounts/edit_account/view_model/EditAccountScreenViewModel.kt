@@ -24,7 +24,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
@@ -41,10 +40,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edi
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.use_case.EditAccountScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.navigation.EditAccountScreenArgs
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -56,7 +56,6 @@ internal class EditAccountScreenViewModel(
     screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val editAccountScreenDataValidationUseCase: EditAccountScreenDataValidationUseCase,
-    private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAccountByIdUseCase: GetAccountByIdUseCase,
     private val updateAccountUseCase: UpdateAccountUseCase,
     internal val logKit: LogKit,
@@ -73,7 +72,6 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region initial data
-    private var allAccounts: ImmutableList<Account> = persistentListOf()
     private var currentAccount: Account? = null
     private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
@@ -97,10 +95,12 @@ internal class EditAccountScreenViewModel(
 
     // region uiState and uiStateEvents
     // TODO(Abhi): Change to StateFlow
-    internal val uiState: MutableStateFlow<EditAccountScreenUIState> =
+    private val _uiState: MutableStateFlow<EditAccountScreenUIState> =
         MutableStateFlow(
             value = EditAccountScreenUIState(),
         )
+    internal val uiState: StateFlow<EditAccountScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: EditAccountScreenUIStateEvents =
         EditAccountScreenUIStateEvents(
             clearBalanceAmountValue = ::clearBalanceAmountValue,
@@ -118,39 +118,39 @@ internal class EditAccountScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val selectedAccountType = validAccountTypesForNewAccount.getOrNull(
-            selectedAccountTypeIndex
-        )
-        val validationState = editAccountScreenDataValidationUseCase(
-            allAccounts = allAccounts,
-            enteredName = name.text.trim(),
-            currentAccount = currentAccount,
-        )
-
-        uiState.update {
-            EditAccountScreenUIState(
-                isLoading = isLoading,
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                nameError = validationState.nameError,
-                selectedAccountTypeIndex = selectedAccountTypeIndex.orZero(),
-                accountTypesChipUIDataList = validAccountTypesForNewAccount
-                    .map { accountType ->
-                        ChipUIData(
-                            text = accountType.title,
-                            icon = accountType.icon,
-                        )
-                    },
-                balanceAmountValue = balanceAmountValue,
-                minimumBalanceAmountValue = minimumAccountBalanceAmountValue,
-                name = name,
-                visibilityData = EditAccountScreenUIVisibilityData(
-                    balanceAmountTextField = true,
-                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
-                    nameTextField = validationState.isCashAccount.not(),
-                    nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
-                    accountTypesRadioGroup = validationState.isCashAccount.not(),
-                ),
+        coroutineScope.launch {
+            val selectedAccountType = validAccountTypesForNewAccount.getOrNull(
+                selectedAccountTypeIndex
             )
+            val validationState = editAccountScreenDataValidationUseCase(
+                enteredName = name.text.trim(),
+                currentAccount = currentAccount,
+            )
+            _uiState.update {
+                EditAccountScreenUIState(
+                    isLoading = isLoading,
+                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                    nameError = validationState.nameError,
+                    selectedAccountTypeIndex = selectedAccountTypeIndex.orZero(),
+                    accountTypesChipUIDataList = validAccountTypesForNewAccount
+                        .map { accountType ->
+                            ChipUIData(
+                                text = accountType.title,
+                                icon = accountType.icon,
+                            )
+                        },
+                    balanceAmountValue = balanceAmountValue,
+                    minimumBalanceAmountValue = minimumAccountBalanceAmountValue,
+                    name = name,
+                    visibilityData = EditAccountScreenUIVisibilityData(
+                        balanceAmountTextField = true,
+                        minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                        nameTextField = validationState.isCashAccount.not(),
+                        nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
+                        accountTypesRadioGroup = validationState.isCashAccount.not(),
+                    ),
+                )
+            }
         }
     }
     // endregion
@@ -158,7 +158,6 @@ internal class EditAccountScreenViewModel(
     // region fetchData
     override fun fetchData(): Job {
         return coroutineScope.launch {
-            getAllAccounts()
             getCurrentAccount()
         }
     }
@@ -195,6 +194,9 @@ internal class EditAccountScreenViewModel(
     private fun updateAccount(): Job {
         return coroutineScope.launch {
             startLoading()
+            val currentAccount = currentAccount ?: run {
+                throw IllegalStateException("Current account is null")
+            }
             val isAccountUpdated = updateAccountUseCase(
                 currentAccount = currentAccount,
                 validAccountTypesForNewAccount = validAccountTypesForNewAccount,
@@ -261,12 +263,6 @@ internal class EditAccountScreenViewModel(
         if (shouldRefresh) {
             refresh()
         }
-    }
-    // endregion
-
-    // region getAllAccounts
-    private suspend fun getAllAccounts() {
-        allAccounts = getAllAccountsUseCase()
     }
     // endregion
 
