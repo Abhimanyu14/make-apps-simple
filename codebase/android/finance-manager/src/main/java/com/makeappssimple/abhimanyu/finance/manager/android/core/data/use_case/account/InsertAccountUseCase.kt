@@ -22,11 +22,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 
-public class InsertAccountUseCase(
+internal class InsertAccountUseCase(
     private val accountRepository: AccountRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         accountType: AccountType,
         minimumAccountBalanceAmountValue: Long,
         name: String,

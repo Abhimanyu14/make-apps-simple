@@ -23,10 +23,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefau
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.view_model.AddAccountScreenDataValidationState
 
-public class AddAccountScreenDataValidationUseCase(
+internal class AddAccountScreenDataValidationUseCase(
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         enteredName: String,
     ): AddAccountScreenDataValidationState {
         val addAccountScreenDataValidationState =
