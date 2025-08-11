@@ -508,6 +508,7 @@ internal class AddAccountScreenViewModelTest {
         }
     // endregion
 
+    // region common
     private fun runTestWithTimeout(
         testBody: suspend TestScope.() -> Unit,
     ) {
@@ -517,4 +518,5 @@ internal class AddAccountScreenViewModelTest {
             testBody()
         }
     }
+    // endregion
 }
