@@ -20,124 +20,202 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.Tr
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flow
 
+/**
+ * In-memory fake implementation of [TransactionDao] for testing purposes.
+ */
 public class FakeTransactionDaoImpl : TransactionDao {
-    override fun getAllTransactionsFlow(): Flow<List<TransactionEntity>> {
-        return emptyFlow()
+    private val transactions = mutableListOf<TransactionEntity>()
+    private val transactionsFlow: MutableStateFlow<List<TransactionEntity>> =
+        MutableStateFlow(
+            value = emptyList(),
+        )
+    private var nextId = 1
+
+    override suspend fun checkIfAccountIsUsedInTransactions(
+        accountId: Int,
+    ): Boolean {
+        return transactions.any { transactionEntity ->
+            transactionEntity.accountFromId == accountId || transactionEntity.accountToId == accountId
+        }
     }
+
+    override suspend fun checkIfCategoryIsUsedInTransactions(
+        categoryId: Int,
+    ): Boolean {
+        return transactions.any { transactionEntity ->
+            transactionEntity.categoryId == categoryId
+        }
+    }
+
+    override suspend fun checkIfTransactionForIsUsedInTransactions(
+        transactionForId: Int,
+    ): Boolean {
+        return transactions.any { transactionEntity ->
+            transactionEntity.transactionForId == transactionForId
+        }
+    }
+
+    override suspend fun deleteAllTransactions(): Int {
+        val count = transactions.size
+        transactions.clear()
+        transactionsFlow.value = emptyList()
+        return count
+    }
+
+    override suspend fun deleteTransactionById(
+        id: Int,
+    ): Int {
+        val removed = transactions.removeIf { transactionEntity ->
+            transactionEntity.id == id
+        }
+        if (removed) {
+            transactionsFlow.value =
+                transactions.sortedBy { transactionEntity ->
+                    transactionEntity.id
+                }
+            return 1
+        }
+        return 0
+    }
+
+    override suspend fun getAllTransactionData(): List<TransactionDataEntity> =
+        emptyList()
+
+    override fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>> =
+        emptyFlow()
 
     override suspend fun getAllTransactions(): List<TransactionEntity> {
-        return emptyList()
+        return transactions.toList()
     }
 
-    override fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>> {
-        return emptyFlow()
+    override fun getAllTransactionsFlow(): Flow<List<TransactionEntity>> {
+        return transactionsFlow.asStateFlow()
     }
 
-    override suspend fun getAllTransactionData(): List<TransactionDataEntity> {
-        return emptyList()
-    }
+    override fun getRecentTransactionDataFlow(
+        numberOfTransactions: Int,
+    ): Flow<List<TransactionDataEntity>> = emptyFlow()
 
     override suspend fun getSearchedTransactionData(
         searchText: String,
-    ): List<TransactionDataEntity> {
-        return emptyList()
+    ): List<TransactionDataEntity> = emptyList()
+
+    override suspend fun getTitleSuggestions(
+        categoryId: Int,
+        numberOfSuggestions: Int,
+        enteredTitle: String,
+    ): List<String> = emptyList()
+
+    override suspend fun getTransactionById(
+        id: Int,
+    ): TransactionEntity? {
+        return transactions.find { transactionEntity ->
+            transactionEntity.id == id
+        }
+    }
+
+    override suspend fun getTransactionDataById(
+        id: Int,
+    ): TransactionDataEntity? = null
+
+    override suspend fun getTransactionsBetweenTimestamps(
+        startingTimestamp: Long,
+        endingTimestamp: Long,
+    ): List<TransactionEntity> {
+        return transactions.filter { transactionEntity ->
+            transactionEntity.transactionTimestamp in startingTimestamp..endingTimestamp
+        }
     }
 
     override fun getTransactionsBetweenTimestampsFlow(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): Flow<List<TransactionEntity>> {
-        return emptyFlow()
-    }
-
-    override suspend fun getTransactionsBetweenTimestamps(
-        startingTimestamp: Long,
-        endingTimestamp: Long,
-    ): List<TransactionEntity> {
-        return emptyList()
-    }
-
-    override fun getRecentTransactionDataFlow(
-        numberOfTransactions: Int,
-    ): Flow<List<TransactionDataEntity>> {
-        return emptyFlow()
+        return flow {
+            emit(
+                value = transactions.filter { transactionEntity ->
+                    transactionEntity.transactionTimestamp in startingTimestamp..endingTimestamp
+                },
+            )
+        }
     }
 
     override suspend fun getTransactionsCount(): Int {
-        return 0
-    }
-
-    override suspend fun getTitleSuggestions(
-        categoryId: Int,
-        numberOfSuggestions: Int,
-        enteredTitle: String,
-    ): List<String> {
-        return emptyList()
-    }
-
-    override suspend fun checkIfCategoryIsUsedInTransactions(
-        categoryId: Int,
-    ): Boolean {
-        return false
-    }
-
-    override suspend fun checkIfAccountIsUsedInTransactions(
-        accountId: Int,
-    ): Boolean {
-        return false
-    }
-
-    override suspend fun checkIfTransactionForIsUsedInTransactions(
-        transactionForId: Int,
-    ): Boolean {
-        return false
-    }
-
-    override suspend fun getTransactionById(
-        id: Int,
-    ): TransactionEntity? {
-        return null
-    }
-
-    override suspend fun getTransactionDataById(
-        id: Int,
-    ): TransactionDataEntity? {
-        return null
-    }
-
-    override suspend fun insertTransactions(
-        vararg transactions: TransactionEntity,
-    ): List<Long> {
-        return emptyList()
-    }
-
-    override suspend fun deleteAllTransactions(): Int {
-        return 0
+        return transactions.size
     }
 
     override suspend fun insertTransaction(
         transaction: TransactionEntity,
     ): Long {
-        return 0L
+        val id = if (transaction.id == 0) {
+            nextId++
+        } else {
+            transaction.id
+        }
+        val exists = transactions.any { transactionEntity ->
+            transactionEntity.id == id
+        }
+        return if (exists) {
+            -1L
+        } else {
+            val entity = transaction.copy(
+                id = id,
+            )
+            transactions.add(
+                element = entity,
+            )
+            transactionsFlow.value =
+                transactions.sortedBy { transactionEntity ->
+                    transactionEntity.id
+                }
+            id.toLong()
+        }
+    }
+
+    override suspend fun insertTransactions(
+        vararg newTransactions: TransactionEntity,
+    ): List<Long> {
+        val result = mutableListOf<Long>()
+        for (transaction in newTransactions) {
+            result.add(
+                element = insertTransaction(
+                    transaction = transaction,
+                ),
+            )
+        }
+        return result
     }
 
     override suspend fun updateTransaction(
         transaction: TransactionEntity,
     ): Int {
-        return 0
+        val index = transactions.indexOfFirst { transactionEntity ->
+            transactionEntity.id == transaction.id
+        }
+        return if (index != -1) {
+            transactions[index] = transaction
+            transactionsFlow.value =
+                transactions.sortedBy { transactionEntity ->
+                    transactionEntity.id
+                }
+            1
+        } else 0
     }
 
     override suspend fun updateTransactions(
-        vararg transactions: TransactionEntity,
+        vararg updatedTransactions: TransactionEntity,
     ): Int {
-        return 0
-    }
-
-    override suspend fun deleteTransactionById(
-        id: Int,
-    ): Int {
-        return 0
+        var updatedCount = 0
+        for (transaction in updatedTransactions) {
+            updatedCount += updateTransaction(
+                transaction = transaction,
+            )
+        }
+        return updatedCount
     }
 }

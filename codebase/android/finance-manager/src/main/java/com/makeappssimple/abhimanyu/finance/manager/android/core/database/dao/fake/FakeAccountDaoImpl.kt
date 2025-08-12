@@ -22,22 +22,26 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
+/**
+ * In-memory fake implementation of [AccountDao] for testing purposes.
+ */
 public class FakeAccountDaoImpl : AccountDao {
     private val accounts = mutableListOf<AccountEntity>()
-    private val accountsFlow = MutableStateFlow<List<AccountEntity>>(
-        value = emptyList(),
-    )
+    private val accountsFlow: MutableStateFlow<List<AccountEntity>> =
+        MutableStateFlow(
+            value = emptyList(),
+        )
     private var nextId = 1
 
     override suspend fun deleteAccountById(
         id: Int,
     ): Int {
-        val removed = accounts.removeIf {
-            it.id == id
+        val removed = accounts.removeIf { accountEntity ->
+            accountEntity.id == id
         }
         if (removed) {
-            accountsFlow.value = accounts.sortedBy {
-                it.id
+            accountsFlow.value = accounts.sortedBy { accountEntity ->
+                accountEntity.id
             }
             return 1
         }
@@ -51,19 +55,23 @@ public class FakeAccountDaoImpl : AccountDao {
         return count
     }
 
+    override fun getAllAccountsFlow(): Flow<List<AccountEntity>> {
+        return accountsFlow.asStateFlow()
+    }
+
     override suspend fun getAccountById(
         id: Int,
     ): AccountEntity? {
-        return accounts.find {
-            it.id == id
+        return accounts.find { accountEntity ->
+            accountEntity.id == id
         }
     }
 
     override suspend fun getAccounts(
         ids: List<Int>,
     ): List<AccountEntity> {
-        return accounts.filter {
-            it.id in ids
+        return accounts.filter { accountEntity ->
+            accountEntity.id in ids
         }
     }
 
@@ -75,25 +83,20 @@ public class FakeAccountDaoImpl : AccountDao {
         return accounts.size
     }
 
-    override fun getAllAccountsFlow(): Flow<List<AccountEntity>> {
-        return accountsFlow.asStateFlow()
-    }
-
     override suspend fun insertAccounts(
         vararg newAccounts: AccountEntity,
     ): List<Long> {
         val result = mutableListOf<Long>()
         for (account in newAccounts) {
-            // Simulate auto-increment if id is 0
             val id = if (account.id == 0) {
                 nextId++
             } else {
                 account.id
             }
-            val accountExists = accounts.any {
-                it.id == id
+            val exists = accounts.any { accountEntity ->
+                accountEntity.id == id
             }
-            if (accountExists) {
+            if (exists) {
                 result.add(
                     element = -1L,
                 )
@@ -109,8 +112,8 @@ public class FakeAccountDaoImpl : AccountDao {
                 )
             }
         }
-        accountsFlow.value = accounts.sortedBy {
-            it.id
+        accountsFlow.value = accounts.sortedBy { accountEntity ->
+            accountEntity.id
         }
         return result
     }
@@ -120,16 +123,16 @@ public class FakeAccountDaoImpl : AccountDao {
     ): Int {
         var updatedCount = 0
         for (account in updatedAccounts) {
-            val index = accounts.indexOfFirst {
-                it.id == account.id
+            val index = accounts.indexOfFirst { accountEntity ->
+                accountEntity.id == account.id
             }
             if (index != -1) {
                 accounts[index] = account
                 updatedCount++
             }
         }
-        accountsFlow.value = accounts.sortedBy {
-            it.id
+        accountsFlow.value = accounts.sortedBy { accountEntity ->
+            accountEntity.id
         }
         return updatedCount
     }
