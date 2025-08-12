@@ -20,6 +20,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
+import app.cash.turbine.turbineScope
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -169,6 +170,121 @@ internal class AddTransactionForScreenViewModelTest {
             addTransactionForScreenViewModel.uiStateEvents.clearTitle()
 
             assertThat(awaitItem().title.text).isEmpty()
+        }
+    }
+    // endregion
+
+    // region updateUiStateAndStateEvents
+    @Test
+    fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
+        runTestWithTimeout {
+            val updatedTitle = "   "
+            val updatedValue = TextFieldValue(
+                text = updatedTitle,
+            )
+            addTransactionForScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedValue
+                )
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isFalse()
+                assertThat(result.titleError).isEqualTo(
+                    AddTransactionForScreenTitleError.None,
+                )
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_titleAlreadyExists_ctaIsDisabled() =
+        runTestWithTimeout {
+            val updatedTitle = "TestTitle"
+            val updatedValue1 = TextFieldValue(
+                text = updatedTitle,
+            )
+            val updatedValue2 = TextFieldValue(
+                text = updatedTitle,
+            )
+            addTransactionForScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedValue1
+                )
+                assertThat(awaitItem().title.text).isEqualTo(updatedTitle)
+                addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
+                    .join()
+
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedValue2
+                )
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isFalse()
+                assertThat(result.titleError).isEqualTo(
+                    AddTransactionForScreenTitleError.TransactionForExists,
+                )
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
+        runTestWithTimeout {
+            val updatedTitle = "test-title"
+            val updatedValue = TextFieldValue(
+                text = updatedTitle,
+            )
+            addTransactionForScreenViewModel.uiState.test {
+                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedValue
+                )
+
+                val result = awaitItem()
+                assertThat(result.isCtaButtonEnabled).isTrue()
+                assertThat(result.titleError).isEqualTo(
+                    AddTransactionForScreenTitleError.None,
+                )
+            }
+        }
+    // endregion
+
+    // region insertTransactionFor
+    @Test
+    fun insertTransactionFor_shouldInsertAndNavigateUp() = runTestWithTimeout {
+        turbineScope {
+            val navigationCommandTurbine = navigationKit.command.testIn(
+                scope = backgroundScope,
+            )
+            val uiStateTurbine =
+                addTransactionForScreenViewModel.uiState.testIn(
+                    scope = backgroundScope,
+                )
+            val lastChangeTimestamp =
+                financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    ?: -1L
+
+            val testTitle = TextFieldValue("test-transaction-for")
+            assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
+            assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+            addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                testTitle
+            )
+            assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+
+            addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
+
+            assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
+            assertThat(
+                fakeTransactionForDao.getAllTransactionForValues().first().title
+            ).isEqualTo(testTitle.text)
+            assertThat(
+                financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    ?: -1L
+            ).isGreaterThan(lastChangeTimestamp)
+            assertThat(navigationCommandTurbine.awaitItem()).isNotNull()
         }
     }
     // endregion

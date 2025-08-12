@@ -27,9 +27,6 @@ public class InsertTransactionForUseCase(
     public suspend operator fun invoke(
         title: String,
     ): Long {
-        if (title.isBlank()) {
-            return -1
-        }
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return transactionForRepository.insertTransactionForValues(
             TransactionFor(

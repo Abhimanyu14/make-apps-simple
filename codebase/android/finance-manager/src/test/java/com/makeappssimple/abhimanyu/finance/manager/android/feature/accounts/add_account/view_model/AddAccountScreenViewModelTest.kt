@@ -487,7 +487,6 @@ internal class AddAccountScreenViewModelTest {
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun updateSelectedAccountTypeIndex_shouldUpdateIndex() =
         runTestWithTimeout {
