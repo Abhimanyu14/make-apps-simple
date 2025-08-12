@@ -71,13 +71,6 @@ public interface TransactionForDao {
     ): TransactionForEntity?
 
     /**
-     * Get the count of all transaction for values.
-     * @return Number of transaction for values in the table
-     */
-    @Query(value = "SELECT COUNT(*) FROM transaction_for_table")
-    public suspend fun getTransactionForValuesCount(): Int
-
-    /**
      * Insert transaction for values into the table.
      * @param transactionForValues Transaction for values to insert
      * @return List of row ids for inserted values. -1 if a conflict occurred for that item.
