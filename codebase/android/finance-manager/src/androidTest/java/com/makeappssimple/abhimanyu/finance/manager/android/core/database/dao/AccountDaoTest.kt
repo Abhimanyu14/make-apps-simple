@@ -205,24 +205,6 @@ internal class AccountDaoTest {
     }
 
     @Test
-    fun getAllAccountsCount() = runTestWithTimeout {
-        val accountEntity1 = getAccountEntity(
-            id = 1,
-        )
-        val accountEntity2 = getAccountEntity(
-            id = 2,
-        )
-        accountDao.insertAccounts(
-            accountEntity1,
-            accountEntity2,
-        )
-
-        val result = accountDao.getAllAccountsCount()
-
-        assertThat(result).isEqualTo(2)
-    }
-
-    @Test
     fun getAllAccountsFlow() = runTestWithTimeout {
         val accountEntity1 = getAccountEntity(
             id = 1,

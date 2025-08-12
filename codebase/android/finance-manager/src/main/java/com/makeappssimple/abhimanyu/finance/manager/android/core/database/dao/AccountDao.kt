@@ -74,13 +74,6 @@ public interface AccountDao {
     public suspend fun getAllAccounts(): List<AccountEntity>
 
     /**
-     * Get the count of all accounts.
-     * @return Number of accounts in the table
-     */
-    @Query(value = "SELECT COUNT(*) FROM account_table")
-    public suspend fun getAllAccountsCount(): Int
-
-    /**
      * Get all accounts as a Flow.
      * @return Flow emitting the list of all accounts ordered by [AccountEntity.id]
      */

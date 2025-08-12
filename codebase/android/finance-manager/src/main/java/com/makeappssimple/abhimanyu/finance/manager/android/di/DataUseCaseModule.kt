@@ -29,7 +29,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsCountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetIsAccountsUsedInTransactionFlowUseCase
@@ -120,15 +119,6 @@ public class DataUseCaseModule {
         accountRepository: AccountRepository,
     ): GetAccountByIdUseCase {
         return GetAccountByIdUseCase(
-            accountRepository = accountRepository,
-        )
-    }
-
-    @Single
-    internal fun providesGetAllAccountsCountUseCase(
-        accountRepository: AccountRepository,
-    ): GetAllAccountsCountUseCase {
-        return GetAllAccountsCountUseCase(
             accountRepository = accountRepository,
         )
     }

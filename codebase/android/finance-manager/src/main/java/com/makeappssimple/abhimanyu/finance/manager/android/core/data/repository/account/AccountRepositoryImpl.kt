@@ -73,12 +73,6 @@ internal class AccountRepositoryImpl(
         }
     }
 
-    override suspend fun getAllAccountsCount(): Int {
-        return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAllAccountsCount()
-        }
-    }
-
     override fun getAllAccountsFlow(): Flow<ImmutableList<Account>> {
         return accountDao.getAllAccountsFlow().map {
             it.map(

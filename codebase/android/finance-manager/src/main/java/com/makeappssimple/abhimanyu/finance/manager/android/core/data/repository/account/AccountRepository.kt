@@ -35,8 +35,6 @@ public interface AccountRepository {
 
     public suspend fun getAllAccounts(): ImmutableList<Account>
 
-    public suspend fun getAllAccountsCount(): Int
-
     public fun getAllAccountsFlow(): Flow<ImmutableList<Account>>
 
     public suspend fun insertAccounts(
