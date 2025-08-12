@@ -72,10 +72,6 @@ public class FakeTransactionForDaoImpl : TransactionForDao {
         }
     }
 
-    override suspend fun getTransactionForValuesCount(): Int {
-        return transactionForValues.size
-    }
-
     override suspend fun insertTransactionForValues(
         vararg newValues: TransactionForEntity,
     ): List<Long> {

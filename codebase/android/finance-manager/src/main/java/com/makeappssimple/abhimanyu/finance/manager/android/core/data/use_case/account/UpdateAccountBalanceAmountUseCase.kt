@@ -26,7 +26,7 @@ public class UpdateAccountBalanceAmountUseCase(
 ) {
     public suspend operator fun invoke(
         accountsBalanceAmountChange: ImmutableList<Pair<Int, Long>>,
-    ): Boolean {
+    ): Int {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return accountRepository.updateAccountBalanceAmount(
             accountsBalanceAmountChange = accountsBalanceAmountChange,

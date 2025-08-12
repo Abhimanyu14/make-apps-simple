@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
+import android.database.sqlite.SQLiteConstraintException
+import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -33,6 +35,7 @@ public interface AccountDao {
      * Delete an account by id.
      * @param id Account id
      * @return Number of rows deleted
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM account_table WHERE id = :id")
     public suspend fun deleteAccountById(
@@ -42,6 +45,7 @@ public interface AccountDao {
     /**
      * Delete all accounts from the table.
      * @return Number of rows deleted
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM account_table")
     public suspend fun deleteAllAccounts(): Int
@@ -50,6 +54,7 @@ public interface AccountDao {
      * Get an account by id.
      * @param id Account id
      * @return Account with given [id] or null if not found
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from account_table WHERE id = :id")
     public suspend fun getAccountById(
@@ -69,6 +74,7 @@ public interface AccountDao {
     /**
      * Get all accounts as a list.
      * @return Returns all accounts ordered by [AccountEntity.id]
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from account_table ORDER BY id ASC")
     public suspend fun getAllAccounts(): List<AccountEntity>
@@ -76,6 +82,7 @@ public interface AccountDao {
     /**
      * Get all accounts as a Flow.
      * @return Flow emitting the list of all accounts ordered by [AccountEntity.id]
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from account_table ORDER BY id ASC")
     public fun getAllAccountsFlow(): Flow<List<AccountEntity>>
@@ -84,9 +91,11 @@ public interface AccountDao {
      * Insert accounts into the table.
      * @param accounts Accounts to insert
      * @return List of row ids for inserted accounts. -1 if a conflict occurred for that item.
+     * @throws SQLiteConstraintException if a constraint is violated, such as a unique constraint
+     * @throws SQLiteException if there is a general SQLite error
      */
     // TODO(Abhi): Handle conflicts with error handling properly
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertAccounts(
         vararg accounts: AccountEntity,
     ): List<Long>
@@ -96,6 +105,7 @@ public interface AccountDao {
      * Only updates the existing rows using the primary key
      * @param accounts Accounts to update
      * @return Number of rows updated
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Update
     public suspend fun updateAccounts(

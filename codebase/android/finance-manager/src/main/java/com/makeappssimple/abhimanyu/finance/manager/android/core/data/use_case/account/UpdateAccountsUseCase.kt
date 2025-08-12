@@ -26,7 +26,7 @@ public class UpdateAccountsUseCase(
 ) {
     public suspend operator fun invoke(
         vararg accounts: Account,
-    ): Boolean {
+    ): Int {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return accountRepository.updateAccounts(
             accounts = accounts,

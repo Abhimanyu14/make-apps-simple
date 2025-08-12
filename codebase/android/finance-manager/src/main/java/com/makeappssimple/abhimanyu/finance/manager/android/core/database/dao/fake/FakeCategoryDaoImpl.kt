@@ -77,10 +77,6 @@ public class FakeCategoryDaoImpl : CategoryDao {
         return categories.toList()
     }
 
-    override suspend fun getAllCategoriesCount(): Int {
-        return categories.size
-    }
-
     override fun getAllCategoriesFlow(): Flow<List<CategoryEntity>> {
         return categoriesFlow.asStateFlow()
     }

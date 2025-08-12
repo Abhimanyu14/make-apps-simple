@@ -85,8 +85,12 @@ public class FeatureUseCaseModule {
     }
 
     @Single
-    internal fun providesEditAccountScreenDataValidationUseCase(): EditAccountScreenDataValidationUseCase {
-        return EditAccountScreenDataValidationUseCase()
+    internal fun providesEditAccountScreenDataValidationUseCase(
+        getAllAccountsUseCase: GetAllAccountsUseCase,
+    ): EditAccountScreenDataValidationUseCase {
+        return EditAccountScreenDataValidationUseCase(
+            getAllAccountsUseCase = getAllAccountsUseCase,
+        )
     }
     // endregion
 

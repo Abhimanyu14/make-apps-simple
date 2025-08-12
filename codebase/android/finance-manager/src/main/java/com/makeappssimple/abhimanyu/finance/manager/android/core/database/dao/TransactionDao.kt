@@ -250,7 +250,7 @@ public interface TransactionDao {
      * @param transaction Transaction to insert
      * @return Row id for inserted transaction. -1 if a conflict occurred.
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertTransaction(
         transaction: TransactionEntity,
     ): Long
@@ -261,7 +261,7 @@ public interface TransactionDao {
      * @return List of row ids for inserted transactions. -1 if a conflict occurred for that item.
      */
     // TODO(Abhi): Handle conflicts with error handling properly
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertTransactions(
         vararg transactions: TransactionEntity,
     ): List<Long>

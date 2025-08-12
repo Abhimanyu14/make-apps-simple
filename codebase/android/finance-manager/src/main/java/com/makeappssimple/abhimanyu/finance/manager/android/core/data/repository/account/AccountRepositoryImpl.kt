@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account
 
+import android.database.sqlite.SQLiteConstraintException
+import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
@@ -25,8 +27,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.updateBalanceAmount
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 internal class AccountRepositoryImpl(
@@ -37,9 +41,15 @@ internal class AccountRepositoryImpl(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.deleteAccountById(
-                id = id,
-            ) == 1
+            try {
+                accountDao.deleteAccountById(
+                    id = id,
+                ) == 1
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -47,9 +57,15 @@ internal class AccountRepositoryImpl(
         id: Int,
     ): Account? {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAccountById(
-                id = id,
-            )?.asExternalModel()
+            try {
+                accountDao.getAccountById(
+                    id = id,
+                )?.asExternalModel()
+            } catch (
+                _: SQLiteException,
+            ) {
+                null
+            }
         }
     }
 
@@ -57,27 +73,45 @@ internal class AccountRepositoryImpl(
         ids: ImmutableList<Int>,
     ): ImmutableList<Account> {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAccounts(
-                ids = ids,
-            ).map(
-                transform = AccountEntity::asExternalModel,
-            )
+            try {
+                accountDao.getAccounts(
+                    ids = ids,
+                ).map(
+                    transform = AccountEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
     override suspend fun getAllAccounts(): ImmutableList<Account> {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.getAllAccounts().map(
-                transform = AccountEntity::asExternalModel,
-            )
+            try {
+                accountDao.getAllAccounts().map(
+                    transform = AccountEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
     override fun getAllAccountsFlow(): Flow<ImmutableList<Account>> {
-        return accountDao.getAllAccountsFlow().map {
-            it.map(
-                transform = AccountEntity::asExternalModel,
-            )
+        return try {
+            accountDao.getAllAccountsFlow().map {
+                it.map(
+                    transform = AccountEntity::asExternalModel,
+                )
+            }
+        } catch (
+            _: SQLiteException,
+        ) {
+            emptyFlow()
         }
     }
 
@@ -85,17 +119,30 @@ internal class AccountRepositoryImpl(
         vararg accounts: Account,
     ): ImmutableList<Long> {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.insertAccounts(
-                accounts = accounts.map(
-                    transform = Account::asEntity,
-                ).toTypedArray(),
-            ).toImmutableList()
+            try {
+                accountDao.insertAccounts(
+                    accounts = accounts.map(
+                        transform = Account::asEntity,
+                    ).toTypedArray(),
+                ).toImmutableList()
+            } catch (
+                _: SQLiteConstraintException,
+            ) {
+                // TODO(Abhi): Check if this can be handled better
+                persistentListOf()
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
+    // TODO(Abhi): Revisit this method, either remove it or implement it properly.
+    //  This method is not used anywhere in the codebase.
     override suspend fun updateAccountBalanceAmount(
         accountsBalanceAmountChange: ImmutableList<Pair<Int, Long>>,
-    ): Boolean {
+    ): Int {
         return dispatcherProvider.executeOnIoDispatcher {
             val accountIds = accountsBalanceAmountChange.map {
                 it.first
@@ -116,13 +163,19 @@ internal class AccountRepositoryImpl(
 
     override suspend fun updateAccounts(
         vararg accounts: Account,
-    ): Boolean {
+    ): Int {
         return dispatcherProvider.executeOnIoDispatcher {
-            accountDao.updateAccounts(
-                accounts = accounts.map(
-                    transform = Account::asEntity,
-                ).toTypedArray(),
-            ) == accounts.size
+            try {
+                accountDao.updateAccounts(
+                    accounts = accounts.map(
+                        transform = Account::asEntity,
+                    ).toTypedArray(),
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                0
+            }
         }
     }
 }

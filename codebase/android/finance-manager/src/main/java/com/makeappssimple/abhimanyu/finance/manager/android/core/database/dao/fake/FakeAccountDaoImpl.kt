@@ -79,10 +79,6 @@ public class FakeAccountDaoImpl : AccountDao {
         return accounts.toList()
     }
 
-    override suspend fun getAllAccountsCount(): Int {
-        return accounts.size
-    }
-
     override suspend fun insertAccounts(
         vararg newAccounts: AccountEntity,
     ): List<Long> {

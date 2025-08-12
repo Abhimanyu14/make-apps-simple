@@ -244,6 +244,8 @@ test = [
     "androidx-test-ext-junit",
     "androidx-test-ext-truth",
     "junit",
+    "kotlin-test",
+    "kotlin-test-junit",
     "kotlinx-coroutines-test",
     "turbine",
 ]

@@ -87,7 +87,7 @@ public interface CategoryDao {
      * @return List of row ids for inserted categories. -1 if a conflict occurred for that item.
      */
     // TODO(Abhi): Handle conflicts with error handling properly
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertCategories(
         vararg categories: CategoryEntity,
     ): List<Long>

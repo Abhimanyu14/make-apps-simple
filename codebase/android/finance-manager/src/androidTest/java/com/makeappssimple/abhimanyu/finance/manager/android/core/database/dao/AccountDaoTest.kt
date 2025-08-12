@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -34,6 +35,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import kotlin.test.assertFailsWith
 import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -226,27 +228,55 @@ internal class AccountDaoTest {
     }
 
     @Test
-    fun insertAccounts() = runTestWithTimeout {
-        val accountEntity1 = getAccountEntity(
-            id = 1,
-        )
-        val accountEntity2 = getAccountEntity(
-            id = 2,
-        )
+    fun insertAccounts_validAccounts_accountsAreInserted() =
+        runTestWithTimeout {
+            val accountEntity1 = getAccountEntity(
+                id = 1,
+            )
+            val accountEntity2 = getAccountEntity(
+                id = 2,
+            )
 
-        val insertedAccountIds = accountDao.insertAccounts(
-            accountEntity1,
-            accountEntity2,
-        )
-        val allAccounts = accountDao.getAllAccounts()
+            val insertedAccountIds = accountDao.insertAccounts(
+                accountEntity1,
+                accountEntity2,
+            )
+            val allAccounts = accountDao.getAllAccounts()
 
-        assertThat(insertedAccountIds.size).isEqualTo(2)
-        assertThat(insertedAccountIds[0]).isEqualTo(1)
-        assertThat(insertedAccountIds[1]).isEqualTo(2)
-        assertThat(allAccounts.size).isEqualTo(2)
-        assertThat(allAccounts.any { it == accountEntity1 }).isTrue()
-        assertThat(allAccounts.any { it == accountEntity2 }).isTrue()
-    }
+            assertThat(insertedAccountIds.size).isEqualTo(2)
+            assertThat(insertedAccountIds[0]).isEqualTo(1)
+            assertThat(insertedAccountIds[1]).isEqualTo(2)
+            assertThat(allAccounts.size).isEqualTo(2)
+            assertThat(allAccounts.any { it == accountEntity1 }).isTrue()
+            assertThat(allAccounts.any { it == accountEntity2 }).isTrue()
+        }
+
+    @Test
+    fun insertAccounts_invalidAccounts_exceptionIsThrown() =
+        runTestWithTimeout {
+            val accountEntity1 = getAccountEntity(
+                id = 1,
+            )
+            val accountEntity2 = getAccountEntity(
+                id = 2,
+            )
+            val accountEntity3 = getAccountEntity(
+                id = 3,
+            )
+
+            accountDao.insertAccounts(
+                accountEntity1,
+                accountEntity2,
+            )
+            assertFailsWith(
+                exceptionClass = SQLiteConstraintException::class,
+            ) {
+                accountDao.insertAccounts(
+                    accountEntity2,
+                    accountEntity3,
+                )
+            }
+        }
 
     @Test
     fun updateAccounts() = runTestWithTimeout {

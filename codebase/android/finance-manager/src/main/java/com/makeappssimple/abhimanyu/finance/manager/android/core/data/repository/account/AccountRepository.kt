@@ -31,7 +31,7 @@ public interface AccountRepository {
 
     public suspend fun getAccounts(
         ids: ImmutableList<Int>,
-    ): ImmutableList<Account>?
+    ): ImmutableList<Account>
 
     public suspend fun getAllAccounts(): ImmutableList<Account>
 
@@ -43,9 +43,9 @@ public interface AccountRepository {
 
     public suspend fun updateAccountBalanceAmount(
         accountsBalanceAmountChange: ImmutableList<Pair<Int, Long>>,
-    ): Boolean
+    ): Int
 
     public suspend fun updateAccounts(
         vararg accounts: Account,
-    ): Boolean
+    ): Int
 }
