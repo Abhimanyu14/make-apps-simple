@@ -118,8 +118,12 @@ public class FeatureUseCaseModule {
     }
 
     @Single
-    internal fun providesEditTransactionForScreenDataValidationUseCase(): EditTransactionForScreenDataValidationUseCase {
-        return EditTransactionForScreenDataValidationUseCase()
+    internal fun providesEditTransactionForScreenDataValidationUseCase(
+        getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
+    ): EditTransactionForScreenDataValidationUseCase {
+        return EditTransactionForScreenDataValidationUseCase(
+            getAllTransactionForValuesUseCase = getAllTransactionForValuesUseCase,
+        )
     }
     // endregion
 

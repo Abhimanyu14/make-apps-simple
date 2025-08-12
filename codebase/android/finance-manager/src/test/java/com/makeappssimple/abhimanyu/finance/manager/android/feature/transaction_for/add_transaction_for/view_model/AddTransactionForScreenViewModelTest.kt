@@ -35,6 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.Tr
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionForDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
@@ -284,7 +285,9 @@ internal class AddTransactionForScreenViewModelTest {
                 financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                     ?: -1L
             ).isGreaterThan(lastChangeTimestamp)
-            assertThat(navigationCommandTurbine.awaitItem()).isNotNull()
+            assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
+                FinanceManagerNavigationDirections.NavigateUp
+            )
         }
     }
     // endregion

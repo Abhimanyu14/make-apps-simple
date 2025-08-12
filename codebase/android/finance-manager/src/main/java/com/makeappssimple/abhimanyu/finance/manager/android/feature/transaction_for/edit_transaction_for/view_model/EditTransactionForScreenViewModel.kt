@@ -20,21 +20,16 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.bottom_sheet.EditTransactionForScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.navigation.EditTransactionForScreenArgs
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,10 +42,8 @@ internal class EditTransactionForScreenViewModel(
     navigationKit: NavigationKit,
     screenUIStateDelegate: ScreenUIStateDelegate,
     savedStateHandle: SavedStateHandle,
-    uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
     private val editTransactionForScreenDataValidationUseCase: EditTransactionForScreenDataValidationUseCase,
-    private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTransactionForByIdUseCase: GetTransactionForByIdUseCase,
     private val updateTransactionForUseCase: UpdateTransactionForUseCase,
     internal val logKit: LogKit,
@@ -63,24 +56,15 @@ internal class EditTransactionForScreenViewModel(
     // region screen args
     private val screenArgs = EditTransactionForScreenArgs(
         savedStateHandle = savedStateHandle,
-        uriDecoder = uriDecoder,
     )
     // endregion
 
     // region initial data
-    private var allTransactionForValues: ImmutableList<TransactionFor> =
-        persistentListOf()
     private var currentTransactionFor: TransactionFor? = null
     // endregion
 
     // region UI state
-    private val screenBottomSheetType: MutableStateFlow<EditTransactionForScreenBottomSheetType> =
-        MutableStateFlow(
-            value = EditTransactionForScreenBottomSheetType.None,
-        )
-    private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
-        value = TextFieldValue(),
-    )
+    private var title = TextFieldValue()
     // endregion
 
     // region uiStateAndStateEvents
@@ -92,34 +76,27 @@ internal class EditTransactionForScreenViewModel(
         EditTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
             navigateUp = ::navigateUp,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
-            updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateTitle = ::updateTitle,
-            updateTransactionFor = {
-                updateTransactionFor(
-                    uiState = uiState.value
-                )
-            },
+            updateTransactionFor = ::updateTransactionFor,
         )
     // endregion
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val validationState =
-            editTransactionForScreenDataValidationUseCase(
-                allTransactionForValues = allTransactionForValues,
-                currentTransactionFor = currentTransactionFor,
-                enteredTitle = title.value.text,
-            )
-        uiState.update {
-            EditTransactionForScreenUIState(
-                isBottomSheetVisible = screenBottomSheetType != EditTransactionForScreenBottomSheetType.None,
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                isLoading = isLoading,
-                screenBottomSheetType = screenBottomSheetType.value,
-                titleError = validationState.titleError,
-                title = title.value,
-            )
+        coroutineScope.launch {
+            val validationState =
+                editTransactionForScreenDataValidationUseCase(
+                    currentTransactionFor = currentTransactionFor,
+                    enteredTitle = title.text,
+                )
+            uiState.update {
+                EditTransactionForScreenUIState(
+                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                    isLoading = isLoading,
+                    titleError = validationState.titleError,
+                    title = title,
+                )
+            }
         }
     }
     // endregion
@@ -127,91 +104,89 @@ internal class EditTransactionForScreenViewModel(
     // region fetchData
     override fun fetchData(): Job {
         return coroutineScope.launch {
-            withLoadingSuspend {
-                getAllTransactionForValues()
-                getCurrentTransactionFor()
-                processCurrentTransactionFor()
-            }
+            getCurrentTransactionFor()
         }
     }
     // endregion
 
     // region state events
-    private fun clearTitle() {
-        title.update {
-            title.value.copy(
+    private fun clearTitle(): Job {
+        return updateTitle(
+            updatedTitle = title.copy(
                 text = "",
             )
-        }
-    }
-
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
-            updatedEditTransactionForScreenBottomSheetType = EditTransactionForScreenBottomSheetType.None,
         )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedEditTransactionForScreenBottomSheetType: EditTransactionForScreenBottomSheetType,
-    ) {
-        screenBottomSheetType.update {
-            updatedEditTransactionForScreenBottomSheetType
-        }
     }
 
     private fun updateTitle(
         updatedTitle: TextFieldValue,
-    ) {
-        title.update {
-            updatedTitle
+        shouldRefresh: Boolean = true,
+    ): Job {
+        title = updatedTitle
+        if (shouldRefresh) {
+            return refresh()
         }
+        return getCompletedJob()
     }
 
-    private fun updateTransactionFor(
-        uiState: EditTransactionForScreenUIState,
-    ) {
-        val currentTransactionForValue = currentTransactionFor ?: return
-        coroutineScope.launch {
+    private fun updateTransactionFor(): Job {
+        val currentTransactionForValue = currentTransactionFor
+            ?: throw IllegalStateException("Current transaction for is null")
+        return coroutineScope.launch {
+            startLoading()
             val isTransactionForUpdated = updateTransactionForUseCase(
                 currentTransactionFor = currentTransactionForValue,
-                title = uiState.title.text,
+                title = title.text,
             )
             if (isTransactionForUpdated) {
                 navigateUp()
             } else {
+                completeLoading()
                 // TODO(Abhi): Show error
             }
         }
     }
     // endregion
 
-    // region getAllTransactionForValues
-    private suspend fun getAllTransactionForValues() {
-        allTransactionForValues = getAllTransactionForValuesUseCase()
-    }
-    // endregion
-
     // region getOriginalTransactionFor
-    private suspend fun getCurrentTransactionFor() {
-        val transactionForId = screenArgs.transactionForId ?: return
+    private suspend fun getCurrentTransactionFor(
+        shouldRefresh: Boolean = false,
+    ) {
+        val transactionForId = screenArgs.transactionForId
         currentTransactionFor = getTransactionForByIdUseCase(
             id = transactionForId,
+        ) ?: throw IllegalStateException(
+            "Transaction for with id $transactionForId not found"
+        )
+        processCurrentTransactionFor(
+            shouldRefresh = shouldRefresh,
         )
     }
-    // endregion
 
-    // region processCurrentTransactionFor
-    private fun processCurrentTransactionFor() {
-        val currentTransactionForValue = currentTransactionFor ?: return
+    private fun processCurrentTransactionFor(
+        shouldRefresh: Boolean = false,
+    ) {
+        val currentTransactionForValue =
+            currentTransactionFor
+                ?: return throw IllegalStateException("Current transaction for is null")
         updateTitle(
-            updatedTitle = title.value
+            updatedTitle = title
                 .copy(
                     text = currentTransactionForValue.title,
                     selection = TextRange(
                         index = currentTransactionForValue.title.length,
                     ),
                 ),
+            shouldRefresh = shouldRefresh,
         )
+    }
+    // endregion
+
+    // region common
+    private fun getCompletedJob(): Job {
+        return Job().apply {
+            complete()
+        }
     }
     // endregion
 }

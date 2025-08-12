@@ -30,10 +30,9 @@ internal data class AddTransactionForScreenUIState(
 ) : ScreenUIState
 
 public sealed class AddTransactionForScreenTitleError {
+    public data object None : AddTransactionForScreenTitleError()
     public data object TransactionForExists :
         AddTransactionForScreenTitleError()
-
-    public data object None : AddTransactionForScreenTitleError()
 }
 
 internal val AddTransactionForScreenTitleError.stringResourceId: Int?
