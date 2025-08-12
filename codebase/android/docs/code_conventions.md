@@ -25,7 +25,7 @@ References:
 
 # Kotlin Files
 
-## Brackets
+## Braces and Blocks
 
 1. Always use curly braces `{}` for blocks, even for single-line statements.
 
@@ -42,12 +42,15 @@ References:
     if (condition) doSomething()
     ```
 
+2. Use K&R style (opening brace on the same line).
+
 ## Function Expressions
 
 1. Avoid using function expressions.
 
    **Context:** Function expressions can lead to less readable code, especially when the function
-   body is complex or spans multiple lines. Use regular function declarations instead.
+   body is complex or spans multiple lines. Use regular function declarations instead. Follow this
+   even for small function body to maintain consistency.
    e.g.
    Use
    ```kotlin
@@ -60,9 +63,10 @@ References:
    val doSomething = { /* implementation */ }
    ```
 
-## New Lines
+## Line Breaks
 
-1. Always put a new line after the opening brace `{` and before the closing brace `}`.
+1. Brackets
+   Always put a new line after the opening brace `{` and before the closing brace `}`.
 
    **Context:** This improves readability and makes it easier to visually parse code blocks.
    e.g.
@@ -77,7 +81,8 @@ References:
    if (condition) { doSomething() }
    ```
 
-2. Place each named parameter on a separate line for every Kotlin method call.
+2. Named parameter
+   Place each named parameter on a separate line for every Kotlin method call.
 
    **Context:** This enhances readability, especially when dealing with functions that have multiple
    parameters.
@@ -93,7 +98,8 @@ References:
    ```kotlin
    someFunction(param1 = value1, param2 = value2)
    ```
-3. Always use new lines for lambda expressions.
+3. Lambda expressions
+   Always use new lines for lambda expressions.
 
    **Context:** This improves readability and makes it easier to understand the structure of the
    lambda.
@@ -108,7 +114,8 @@ References:
    ```kotlin
    list.filter { it.isValid() }
    ```
-4. Always put chained method calls on separate lines when there are at least 2 method calls chained.
+4. Chained method calls
+   Always put chained method calls on separate lines when there are at least 2 method calls chained.
 
    **Context:** This improves readability, especially when dealing with long chains of method calls.
    e.g.
@@ -123,6 +130,12 @@ References:
    ```kotlin
    someObject.methodOne().methodTwo().methodThree()
    ```
+
+5. Function parameters
+    - Put parameters in single line for Java method calls if they fit within a line, if not put
+      each parameter in a separate line.
+    - For every function declaration, always place each parameter in separate line. Do NOT add empty
+      lines when there are not parameters.
 
 ## Trailing Commas
 
@@ -188,35 +201,29 @@ References:
 - **Testing:**
     - Use the `@VisibleForTesting` annotation for internal functions that need to be tested.
 
-## Code Style
+## Indentation:
 
-- **Indentation:**
     - Use 4 spaces for indentation (not tabs).
-- **Line Length:**
+
+## Line Length:
+
     - Keep lines under 120 characters when possible.
     - Break long lines at logical points.
-- **Spacing:**
+
+## Spacing:
+
     - Use single spaces around operators and after commas.
     - Do not use spaces before colons in type declarations.
-- **Line Separator:**
-    - Put each named parameter in a separate line for every kotlin method calls.
-    - Put parameters in single line for Java method calls if they file within a line, if not put
-      each parameter in a separate line.
-    - For every function declaration, always place each parameter in separate line. Do NOT add empty
-      lines when there are not parameters.
-- **Functions:**
-- Do NOT use function expressions.
-- **Braces:**
-    - Use K&R style (opening brace on the same line).
-    - Always use braces for control structures, even for single-line blocks.
-- **Named Parameters:**
+
+## Named Parameters:
+
     - Always use named parameters when calling pure Kotlin functions except when the parameter has
       vararg.
     - Always put each named argument on a separate line even for a single named argument.
-    - Do not use named parameters for Java method calls.
-- **Trailing Commas:**
-    - Use trailing commas wherever applicable.
-- **End of files:**
+    - Do NOT use named parameters for Java method calls.
+
+## End of files:
+
     - Files should always end with an empty line.
 
 ## Function Design
