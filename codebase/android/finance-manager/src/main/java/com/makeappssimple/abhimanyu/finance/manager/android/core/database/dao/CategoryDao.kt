@@ -80,7 +80,7 @@ public interface CategoryDao {
 
     /**
      * Get a category by id.
-     * @param id Required category id
+     * @param id Category id
      * @return Category with given [id] or null if not found
      */
     @Query(value = "SELECT * from category_table WHERE id = :id")

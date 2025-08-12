@@ -207,13 +207,13 @@ public interface TransactionDao {
     ): TransactionDataEntity?
 
     /**
-     * Get transactions between two timestamps as a list.
+     * Get transactions between timestamps as a list.
      * @param startingTimestamp Start timestamp (inclusive)
      * @param endingTimestamp End timestamp (inclusive)
-     * @return List of transactions between the given timestamps
+     * @return List of transactions in the given range
      */
     @Query(
-        value = "SELECT * from transaction_table " +
+        value = "SELECT * FROM transaction_table " +
                 "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
                 "ORDER BY transaction_timestamp DESC"
     )
@@ -223,13 +223,13 @@ public interface TransactionDao {
     ): List<TransactionEntity>
 
     /**
-     * Get transactions between two timestamps as a Flow.
+     * Get transactions between timestamps as a Flow.
      * @param startingTimestamp Start timestamp (inclusive)
      * @param endingTimestamp End timestamp (inclusive)
-     * @return Flow emitting transactions between the given timestamps
+     * @return Flow emitting the list of transactions in the given range
      */
     @Query(
-        value = "SELECT * from transaction_table " +
+        value = "SELECT * FROM transaction_table " +
                 "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
                 "ORDER BY transaction_timestamp DESC"
     )
@@ -246,6 +246,16 @@ public interface TransactionDao {
     public suspend fun getTransactionsCount(): Int
 
     /**
+     * Insert a transaction into the table.
+     * @param transaction Transaction to insert
+     * @return Row id for inserted transaction. -1 if a conflict occurred.
+     */
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    public suspend fun insertTransaction(
+        transaction: TransactionEntity,
+    ): Long
+
+    /**
      * Insert transactions into the table.
      * @param transactions Transactions to insert
      * @return List of row ids for inserted transactions. -1 if a conflict occurred for that item.
@@ -257,21 +267,10 @@ public interface TransactionDao {
     ): List<Long>
 
     /**
-     * Insert a single transaction into the table.
-     * @param transaction Transaction to insert
-     * @return Row id of inserted transaction. -1 if a conflict occurred.
-     */
-    // TODO(Abhi): Handle conflicts with error handling properly
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public suspend fun insertTransaction(
-        transaction: TransactionEntity,
-    ): Long
-
-    /**
-     * Update a single transaction in the table.
-     * Only updates if the transaction exists using the primary key.
+     * Update a transaction in the table.
+     * Only updates the existing row using the primary key
      * @param transaction Transaction to update
-     * @return Number of rows updated (0 or 1)
+     * @return Number of rows updated
      */
     @Update
     public suspend fun updateTransaction(
@@ -279,8 +278,8 @@ public interface TransactionDao {
     ): Int
 
     /**
-     * Update multiple transactions in the table.
-     * Only updates the existing rows using the primary key.
+     * Update transactions in the table.
+     * Only updates the existing rows using the primary key
      * @param transactions Transactions to update
      * @return Number of rows updated
      */
