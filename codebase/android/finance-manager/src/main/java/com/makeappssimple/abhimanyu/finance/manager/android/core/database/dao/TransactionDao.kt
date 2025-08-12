@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
+import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -34,6 +35,7 @@ public interface TransactionDao {
      * Check if an account is used in any transactions.
      * @param accountId ID of the account to check
      * @return true if the account is used in any transactions as source or destination, false otherwise
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT EXISTS(SELECT * FROM transaction_table " +
@@ -47,6 +49,7 @@ public interface TransactionDao {
      * Check if a category is used in any transactions.
      * @param categoryId ID of the category to check
      * @return true if the category is used in any transactions, false otherwise
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT EXISTS(SELECT * FROM transaction_table " +
@@ -60,6 +63,7 @@ public interface TransactionDao {
      * Check if a transaction for value is used in any transactions.
      * @param transactionForId ID of the transaction for value to check
      * @return true if the transaction for value is used in any transactions, false otherwise
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT EXISTS(SELECT * FROM transaction_table " +
@@ -72,6 +76,7 @@ public interface TransactionDao {
     /**
      * Delete all transactions from the table.
      * @return Number of rows deleted
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM transaction_table")
     public suspend fun deleteAllTransactions(): Int
@@ -80,6 +85,7 @@ public interface TransactionDao {
      * Delete a transaction by id.
      * @param id Required transaction id
      * @return Number of rows deleted (0 or 1)
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "DELETE FROM transaction_table " +
@@ -92,6 +98,7 @@ public interface TransactionDao {
     /**
      * Get all transaction data as a list, ordered by timestamp descending.
      * @return List of all transaction data
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -102,6 +109,7 @@ public interface TransactionDao {
     /**
      * Get all transaction data as a Flow, ordered by timestamp descending.
      * @return Flow emitting the list of all transaction data
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -112,6 +120,7 @@ public interface TransactionDao {
     /**
      * Get all transactions as a list, ordered by timestamp descending.
      * @return List of all transactions
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * from transaction_table " +
@@ -122,6 +131,7 @@ public interface TransactionDao {
     /**
      * Get all transactions as a Flow, ordered by timestamp descending.
      * @return Flow emitting the list of all transactions
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * from transaction_table " +
@@ -133,6 +143,7 @@ public interface TransactionDao {
      * Get recent transaction data as a Flow.
      * @param numberOfTransactions Number of recent transactions to retrieve
      * @return Flow emitting the specified number of most recent transactions
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -149,6 +160,7 @@ public interface TransactionDao {
      * For more info - https://stackoverflow.com/a/65104396/9636037
      *
      * The current code is a hacky solution, which does a simple text search of the JSON string.
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -165,6 +177,7 @@ public interface TransactionDao {
      * @param numberOfSuggestions Maximum number of suggestions to return
      * @param enteredTitle Partial title to match against
      * @return List of suggested titles, ordered by frequency of use
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT title from transaction_table " +
@@ -184,6 +197,7 @@ public interface TransactionDao {
      * Get a transaction by id.
      * @param id Required transaction id
      * @return Transaction with given [id] or null if not found
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -197,6 +211,7 @@ public interface TransactionDao {
      * Get transaction data by id.
      * @param id Required transaction id
      * @return Transaction data with given [id] or null if not found
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -211,6 +226,7 @@ public interface TransactionDao {
      * @param startingTimestamp Start timestamp (inclusive)
      * @param endingTimestamp End timestamp (inclusive)
      * @return List of transactions in the given range
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -227,6 +243,7 @@ public interface TransactionDao {
      * @param startingTimestamp Start timestamp (inclusive)
      * @param endingTimestamp End timestamp (inclusive)
      * @return Flow emitting the list of transactions in the given range
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
         value = "SELECT * FROM transaction_table " +
@@ -241,6 +258,7 @@ public interface TransactionDao {
     /**
      * Get the count of all transactions.
      * @return Number of transactions in the table
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT COUNT(*) FROM transaction_table")
     public suspend fun getTransactionsCount(): Int
@@ -249,6 +267,7 @@ public interface TransactionDao {
      * Insert a transaction into the table.
      * @param transaction Transaction to insert
      * @return Row id for inserted transaction. -1 if a conflict occurred.
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertTransaction(
@@ -259,6 +278,7 @@ public interface TransactionDao {
      * Insert transactions into the table.
      * @param transactions Transactions to insert
      * @return List of row ids for inserted transactions. -1 if a conflict occurred for that item.
+     * @throws SQLiteException if there is a general SQLite error
      */
     // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -271,6 +291,7 @@ public interface TransactionDao {
      * Only updates the existing row using the primary key
      * @param transaction Transaction to update
      * @return Number of rows updated
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Update
     public suspend fun updateTransaction(
@@ -282,6 +303,7 @@ public interface TransactionDao {
      * Only updates the existing rows using the primary key
      * @param transactions Transactions to update
      * @return Number of rows updated
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Update
     public suspend fun updateTransactions(

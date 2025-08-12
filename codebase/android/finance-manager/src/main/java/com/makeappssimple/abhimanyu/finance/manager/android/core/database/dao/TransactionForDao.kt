@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
+import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -32,6 +33,7 @@ public interface TransactionForDao {
     /**
      * Delete all transaction for values from the table.
      * @return Number of rows deleted
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM transaction_for_table")
     public suspend fun deleteAllTransactionForValues(): Int
@@ -40,6 +42,7 @@ public interface TransactionForDao {
      * Delete a transaction for value by id.
      * @param id Required transaction for id
      * @return Number of rows deleted (0 or 1)
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM transaction_for_table WHERE id = :id")
     public suspend fun deleteTransactionForById(
@@ -49,6 +52,7 @@ public interface TransactionForDao {
     /**
      * Get all transaction for values as a list.
      * @return Returns all transaction for values ordered by [TransactionForEntity.id]
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from transaction_for_table ORDER BY id ASC")
     public suspend fun getAllTransactionForValues(): List<TransactionForEntity>
@@ -56,6 +60,7 @@ public interface TransactionForDao {
     /**
      * Get all transaction for values as a Flow.
      * @return Flow emitting the list of all transaction for values ordered by [TransactionForEntity.id]
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from transaction_for_table ORDER BY id ASC")
     public fun getAllTransactionForValuesFlow(): Flow<List<TransactionForEntity>>
@@ -64,6 +69,7 @@ public interface TransactionForDao {
      * Get a transaction for value by id.
      * @param id Required transaction for id
      * @return TransactionFor with given [id] or null if not found
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from transaction_for_table WHERE id = :id")
     public suspend fun getTransactionForById(
@@ -73,7 +79,8 @@ public interface TransactionForDao {
     /**
      * Insert transaction for values into the table.
      * @param transactionForValues Transaction for values to insert
-     * @return List of row ids for inserted values. -1 if a conflict occurred for that item.
+     * @return List of row ids for inserted transaction for values. -1 if a conflict occurred for that item.
+     * @throws SQLiteException if there is a general SQLite error
      */
     // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -86,6 +93,7 @@ public interface TransactionForDao {
      * Only updates the existing rows using the primary key
      * @param transactionForValues Transaction for values to update
      * @return Number of rows updated
+     * @throws SQLiteException if there is a general SQLite error
      */
     @Update
     public suspend fun updateTransactionForValues(
