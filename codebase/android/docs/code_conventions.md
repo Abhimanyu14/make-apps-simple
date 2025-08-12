@@ -93,6 +93,36 @@ References:
    ```kotlin
    someFunction(param1 = value1, param2 = value2)
    ```
+3. Always use new lines for lambda expressions.
+
+   **Context:** This improves readability and makes it easier to understand the structure of the
+   lambda.
+   e.g.
+   Use
+   ```kotlin
+   list.filter { 
+       it.isValid() 
+   }
+   ```
+   instead of
+   ```kotlin
+   list.filter { it.isValid() }
+   ```
+4. Always put chained method calls on separate lines when there are at least 2 method calls chained.
+
+   **Context:** This improves readability, especially when dealing with long chains of method calls.
+   e.g.
+   Use
+   ```kotlin
+   someObject
+       .methodOne()
+       .methodTwo()
+       .methodThree()
+   ```
+   instead of
+   ```kotlin
+   someObject.methodOne().methodTwo().methodThree()
+   ```
 
 ## Trailing Commas
 
