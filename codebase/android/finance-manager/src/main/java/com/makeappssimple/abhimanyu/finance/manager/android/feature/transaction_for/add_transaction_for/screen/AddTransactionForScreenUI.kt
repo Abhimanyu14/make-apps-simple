@@ -42,9 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION_FOR
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION_FOR
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.navigationBarLandscapeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.save_button.SaveButton
@@ -56,7 +54,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.te
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.orEmpty
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.bottom_sheet.AddTransactionForScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.event.AddTransactionForScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIState
@@ -79,36 +76,12 @@ internal fun AddTransactionForScreenUI(
         }
     }
 
-    BottomSheetHandler(
-        isBottomSheetVisible = uiState.isBottomSheetVisible,
-        screenBottomSheetType = uiState.screenBottomSheetType,
-        coroutineScope = state.coroutineScope,
-        modalBottomSheetState = state.modalBottomSheetState,
-        keyboardController = state.keyboardController,
-    )
-
     MyScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_ADD_OR_EDIT_TRANSACTION_FOR,
             )
             .fillMaxSize(),
-        sheetContent = {
-            when (uiState.screenBottomSheetType) {
-                is AddTransactionForScreenBottomSheetType.Delete -> {
-                    VerticalSpacer()
-                }
-
-                is AddTransactionForScreenBottomSheetType.Edit -> {
-                    VerticalSpacer()
-                }
-
-                is AddTransactionForScreenBottomSheetType.None -> {
-                    VerticalSpacer()
-                }
-            }
-        },
-        sheetState = state.modalBottomSheetState,
         snackbarHostState = state.snackbarHostState,
         topBar = {
             MyTopAppBar(
@@ -119,12 +92,7 @@ internal fun AddTransactionForScreenUI(
             )
         },
         onClick = state.focusManager::clearFocus,
-        isModalBottomSheetVisible = uiState.isBottomSheetVisible,
-        isBackHandlerEnabled = uiState.screenBottomSheetType != AddTransactionForScreenBottomSheetType.None,
         coroutineScope = state.coroutineScope,
-        onBottomSheetDismiss = {
-            handleUIEvent(AddTransactionForScreenUIEvent.OnNavigationBackButtonClick)
-        },
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

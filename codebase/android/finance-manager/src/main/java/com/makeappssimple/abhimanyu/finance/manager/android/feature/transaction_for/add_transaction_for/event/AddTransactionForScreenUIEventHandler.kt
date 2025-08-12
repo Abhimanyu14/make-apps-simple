@@ -26,9 +26,7 @@ internal class AddTransactionForScreenUIEventHandler internal constructor(
         uiEvent: AddTransactionForScreenUIEvent,
     ) {
         when (uiEvent) {
-            is AddTransactionForScreenUIEvent.OnNavigationBackButtonClick -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
+            is AddTransactionForScreenUIEvent.OnNavigationBackButtonClick -> {}
 
             is AddTransactionForScreenUIEvent.OnCtaButtonClick -> {
                 uiStateEvents.insertTransactionFor()

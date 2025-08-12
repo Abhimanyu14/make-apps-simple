@@ -137,26 +137,23 @@ internal class AddAccountScreenViewModel(
     private fun clearMinimumAccountBalanceAmountValue(
         shouldRefresh: Boolean = true,
     ): Job {
-        minimumAccountBalanceAmountValue =
-            minimumAccountBalanceAmountValue.copy(
+        return updateMinimumAccountBalanceAmountValue(
+            updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.copy(
                 text = "",
-            )
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+            ),
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun clearName(
         shouldRefresh: Boolean = true,
     ): Job {
-        name = name.copy(
-            text = "",
+        return updateName(
+            updatedName = name.copy(
+                text = "",
+            ),
+            shouldRefresh = shouldRefresh,
         )
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
     }
 
     private fun insertAccount(): Job {

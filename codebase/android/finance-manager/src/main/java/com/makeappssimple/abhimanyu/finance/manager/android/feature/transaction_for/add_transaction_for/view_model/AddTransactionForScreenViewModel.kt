@@ -18,18 +18,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.bottom_sheet.AddTransactionForScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.use_case.AddTransactionForScreenDataValidationUseCase
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,7 +38,6 @@ internal class AddTransactionForScreenViewModel(
     screenUIStateDelegate: ScreenUIStateDelegate,
     private val addTransactionForScreenDataValidationUseCase: AddTransactionForScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
-    private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val insertTransactionForUseCase: InsertTransactionForUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
@@ -52,19 +46,8 @@ internal class AddTransactionForScreenViewModel(
     navigationKit = navigationKit,
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
-    // region initial data
-    private var allTransactionForValues: ImmutableList<TransactionFor> =
-        persistentListOf()
-    // endregion
-
     // region UI state
-    private val screenBottomSheetType: MutableStateFlow<AddTransactionForScreenBottomSheetType> =
-        MutableStateFlow(
-            value = AddTransactionForScreenBottomSheetType.None,
-        )
-    private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
-        value = TextFieldValue(),
-    )
+    private var title = TextFieldValue()
     // endregion
 
     // region uiStateAndStateEvents
@@ -75,62 +58,43 @@ internal class AddTransactionForScreenViewModel(
     internal val uiStateEvents: AddTransactionForScreenUIStateEvents =
         AddTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
-            insertTransactionFor = {
-                insertTransactionFor(
-                    uiState = uiState.value,
-                )
-            },
+            insertTransactionFor = ::insertTransactionFor,
             navigateUp = ::navigateUp,
-            resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateTitle = ::updateTitle,
         )
     // endregion
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val validationState =
-            addTransactionForScreenDataValidationUseCase(
-                allTransactionForValues = allTransactionForValues,
-                enteredTitle = title.value.text,
+        coroutineScope.launch {
+            val validationState = addTransactionForScreenDataValidationUseCase(
+                enteredTitle = title.text,
             )
-        uiState.update {
-            AddTransactionForScreenUIState(
-                screenBottomSheetType = screenBottomSheetType.value,
-                titleError = validationState.titleError,
-                isBottomSheetVisible = screenBottomSheetType != AddTransactionForScreenBottomSheetType.None,
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                isLoading = isLoading,
-                title = title.value,
-            )
-        }
-    }
-    // endregion
-
-    // region fetchData
-    override fun fetchData(): Job {
-        return coroutineScope.launch {
-            withLoadingSuspend {
-                getAllTransactionForValues()
+            uiState.update {
+                AddTransactionForScreenUIState(
+                    titleError = validationState.titleError,
+                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                    isLoading = isLoading,
+                    title = title,
+                )
             }
         }
     }
     // endregion
 
     // region state events
-    private fun clearTitle() {
-        title.update {
-            title.value.copy(
+    private fun clearTitle(): Job {
+        return updateTitle(
+            updatedTitle = title.copy(
                 text = "",
-            )
-        }
+            ),
+        )
     }
 
-    private fun insertTransactionFor(
-        uiState: AddTransactionForScreenUIState,
-    ) {
-        coroutineScope.launch {
+    private fun insertTransactionFor(): Job {
+        return coroutineScope.launch {
             val isTransactionForInserted = insertTransactionForUseCase(
-                title = uiState.title?.text.orEmpty(),
+                title = title.text,
             )
             if (isTransactionForInserted == -1L) {
                 // TODO(Abhi): Show error
@@ -140,32 +104,23 @@ internal class AddTransactionForScreenViewModel(
         }
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
-            updatedAddTransactionForScreenBottomSheetType = AddTransactionForScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedAddTransactionForScreenBottomSheetType: AddTransactionForScreenBottomSheetType,
-    ) {
-        screenBottomSheetType.update {
-            updatedAddTransactionForScreenBottomSheetType
-        }
-    }
-
     private fun updateTitle(
         updatedTitle: TextFieldValue,
-    ) {
-        title.update {
-            updatedTitle
+        shouldRefresh: Boolean = true,
+    ): Job {
+        title = updatedTitle
+        if (shouldRefresh) {
+            return refresh()
         }
+        return getCompletedJob()
     }
     // endregion
 
-    // region getAllTransactionForValues
-    private suspend fun getAllTransactionForValues() {
-        allTransactionForValues = getAllTransactionForValuesUseCase()
+    // region common
+    private fun getCompletedJob(): Job {
+        return Job().apply {
+            complete()
+        }
     }
     // endregion
 }

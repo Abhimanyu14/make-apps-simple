@@ -83,11 +83,10 @@ internal class AddAccountScreenViewModelTest {
         accountDao = fakeAccountDao,
         dispatcherProvider = testDispatcherProvider,
     )
-    private val getAllAccountsUseCase: GetAllAccountsUseCase =
-        GetAllAccountsUseCase(
-            accountRepository = accountRepository,
-        )
-    private val addAccountScreenDataValidationUseCase: AddAccountScreenDataValidationUseCase =
+    private val getAllAccountsUseCase = GetAllAccountsUseCase(
+        accountRepository = accountRepository,
+    )
+    private val addAccountScreenDataValidationUseCase =
         AddAccountScreenDataValidationUseCase(
             getAllAccountsUseCase = getAllAccountsUseCase,
         )
@@ -98,11 +97,10 @@ internal class AddAccountScreenViewModelTest {
             dispatcherProvider = testDispatcherProvider,
             financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
         )
-    private val insertAccountUseCase: InsertAccountUseCase =
-        InsertAccountUseCase(
-            accountRepository = accountRepository,
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        )
+    private val insertAccountUseCase = InsertAccountUseCase(
+        accountRepository = accountRepository,
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+    )
     private val logKit: LogKit = FakeLogKitImpl()
     private lateinit var addAccountScreenViewModel: AddAccountScreenViewModel
 

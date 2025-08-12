@@ -20,16 +20,13 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.bottom_sheet.AddTransactionForScreenBottomSheetType
 
 @Stable
 internal data class AddTransactionForScreenUIState(
-    val screenBottomSheetType: AddTransactionForScreenBottomSheetType = AddTransactionForScreenBottomSheetType.None,
     val titleError: AddTransactionForScreenTitleError = AddTransactionForScreenTitleError.None,
-    val isBottomSheetVisible: Boolean = false,
     val isCtaButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,
-    val title: TextFieldValue? = null,
+    val title: TextFieldValue = TextFieldValue(),
 ) : ScreenUIState
 
 public sealed class AddTransactionForScreenTitleError {

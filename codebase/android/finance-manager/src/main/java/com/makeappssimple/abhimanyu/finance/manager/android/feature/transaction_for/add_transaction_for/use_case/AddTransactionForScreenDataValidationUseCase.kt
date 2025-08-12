@@ -18,16 +18,20 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.view_model.AddTransactionForScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList
 
-public class AddTransactionForScreenDataValidationUseCase() {
-    public operator fun invoke(
-        allTransactionForValues: ImmutableList<TransactionFor>,
+internal class AddTransactionForScreenDataValidationUseCase(
+    private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
+) {
+    suspend operator fun invoke(
         enteredTitle: String,
     ): AddTransactionForScreenDataValidationState {
+        val allTransactionForValues: ImmutableList<TransactionFor> =
+            getAllTransactionForValuesUseCase()
         val state = AddTransactionForScreenDataValidationState()
         if (enteredTitle.isBlank()) {
             return state
