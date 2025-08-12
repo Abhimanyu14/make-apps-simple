@@ -31,8 +31,6 @@ public interface CategoryRepository {
 
     public suspend fun getAllCategories(): ImmutableList<Category>
 
-    public suspend fun getAllCategoriesCount(): Int
-
     public fun getAllCategoriesFlow(): Flow<ImmutableList<Category>>
 
     public suspend fun getCategoryById(

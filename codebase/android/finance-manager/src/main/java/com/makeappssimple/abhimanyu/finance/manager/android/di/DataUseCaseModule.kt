@@ -39,7 +39,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesCountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryByIdUseCase
@@ -230,15 +229,6 @@ public class DataUseCaseModule {
         return DeleteCategoryByIdUseCase(
             categoryRepository = categoryRepository,
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        )
-    }
-
-    @Single
-    internal fun providesGetAllCategoriesCountUseCase(
-        categoryRepository: CategoryRepository,
-    ): GetAllCategoriesCountUseCase {
-        return GetAllCategoriesCountUseCase(
-            categoryRepository = categoryRepository,
         )
     }
 

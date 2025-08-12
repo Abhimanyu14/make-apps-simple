@@ -62,12 +62,6 @@ internal class CategoryRepositoryImpl(
         }
     }
 
-    override suspend fun getAllCategoriesCount(): Int {
-        return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.getAllCategoriesCount()
-        }
-    }
-
     override fun getAllCategoriesFlow(): Flow<ImmutableList<Category>> {
         return categoryDao.getAllCategoriesFlow().map {
             it.map(

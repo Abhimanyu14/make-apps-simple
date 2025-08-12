@@ -65,13 +65,6 @@ public interface CategoryDao {
     public suspend fun getAllCategories(): List<CategoryEntity>
 
     /**
-     * Get the count of all categories.
-     * @return Number of categories in the table
-     */
-    @Query(value = "SELECT COUNT(*) FROM category_table")
-    public suspend fun getAllCategoriesCount(): Int
-
-    /**
      * Get all categories as a Flow.
      * @return Flow emitting the list of all categories ordered by [CategoryEntity.id]
      */
