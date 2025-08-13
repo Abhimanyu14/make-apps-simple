@@ -75,7 +75,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForValuesUseCase
 import org.koin.core.annotation.Module
@@ -603,17 +602,6 @@ public class DataUseCaseModule {
         transactionForRepository: TransactionForRepository,
     ): InsertTransactionForUseCase {
         return InsertTransactionForUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-            transactionForRepository = transactionForRepository,
-        )
-    }
-
-    @Single
-    internal fun providesInsertTransactionForValuesUseCase(
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
-        transactionForRepository: TransactionForRepository,
-    ): InsertTransactionForValuesUseCase {
-        return InsertTransactionForValuesUseCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             transactionForRepository = transactionForRepository,
         )
