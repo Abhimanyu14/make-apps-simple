@@ -19,14 +19,15 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
+import kotlinx.coroutines.Job
 
 @Immutable
 internal class TransactionForValuesScreenUIStateEvents(
-    val deleteTransactionFor: () -> Unit = {},
-    val navigateToAddTransactionForScreen: () -> Unit = {},
-    val navigateToEditTransactionForScreen: (transactionForId: Int) -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val updateScreenBottomSheetType: (TransactionForValuesScreenBottomSheetType) -> Unit = {},
-    val updateTransactionForIdToDelete: (Int?) -> Unit = {},
+    val deleteTransactionFor: () -> Job,
+    val navigateToAddTransactionForScreen: () -> Job,
+    val navigateToEditTransactionForScreen: (transactionForId: Int) -> Job,
+    val navigateUp: () -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val updateScreenBottomSheetType: (TransactionForValuesScreenBottomSheetType) -> Job,
+    val updateTransactionForIdToDelete: (Int?) -> Job,
 ) : ScreenUIStateEvents

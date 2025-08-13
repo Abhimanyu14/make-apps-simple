@@ -35,6 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
@@ -63,10 +64,8 @@ internal class TransactionForValuesScreenViewModel(
 
     // region UI state
     private var transactionForIdToDelete: Int? = null
-    private val screenBottomSheetType: MutableStateFlow<TransactionForValuesScreenBottomSheetType> =
-        MutableStateFlow(
-            value = TransactionForValuesScreenBottomSheetType.None,
-        )
+    private var screenBottomSheetType: TransactionForValuesScreenBottomSheetType =
+        TransactionForValuesScreenBottomSheetType.None
     // endregion
 
     // region uiStateAndStateEvents
@@ -93,7 +92,7 @@ internal class TransactionForValuesScreenViewModel(
                 isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
                 isLoading = isLoading,
                 transactionForListItemDataList = transactionForListItemDataList,
-                screenBottomSheetType = screenBottomSheetType.value,
+                screenBottomSheetType = screenBottomSheetType,
             )
         }
     }
@@ -106,42 +105,48 @@ internal class TransactionForValuesScreenViewModel(
     // endregion
 
     // region state events
-    private fun deleteTransactionFor() {
-        coroutineScope.launch {
-            transactionForIdToDelete?.let { id ->
-                val isTransactionForDeleted = deleteTransactionForByIdUseCase(
-                    id = id,
-                )
-                if (isTransactionForDeleted) {
-                    // TODO(Abhi): Show snackbar
-                    transactionForIdToDelete = null
-                } else {
-                    // TODO(Abhi): Handle this error scenario
-                }
-            } ?: run {
-                // TODO(Abhi): Handle this error scenario
+    private fun deleteTransactionFor(): Job {
+        val id = transactionForIdToDelete
+            ?: throw IllegalStateException("transactionForIdToDelete should not be null")
+        return coroutineScope.launch {
+            val isTransactionForDeleted = deleteTransactionForByIdUseCase(
+                id = id,
+            )
+            if (isTransactionForDeleted) {
+                // TODO(Abhi): Show snackbar
+                transactionForIdToDelete = null
+            } else {
+                throw IllegalStateException("TransactionFor with id $id could not be deleted")
             }
         }
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedTransactionForValuesScreenBottomSheetType = TransactionForValuesScreenBottomSheetType.None,
         )
     }
 
     private fun updateScreenBottomSheetType(
         updatedTransactionForValuesScreenBottomSheetType: TransactionForValuesScreenBottomSheetType,
-    ) {
-        screenBottomSheetType.update {
-            updatedTransactionForValuesScreenBottomSheetType
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenBottomSheetType = updatedTransactionForValuesScreenBottomSheetType
+        if (shouldRefresh) {
+            return refresh()
         }
+        return getCompletedJob()
     }
 
     private fun updateTransactionForIdToDelete(
         updatedTransactionForIdToDelete: Int?,
-    ) {
+        shouldRefresh: Boolean = true,
+    ): Job {
         transactionForIdToDelete = updatedTransactionForIdToDelete
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return getCompletedJob()
     }
     // endregion
 
@@ -169,6 +174,14 @@ internal class TransactionForValuesScreenViewModel(
                     }
                 completeLoading()
             }
+        }
+    }
+    // endregion
+
+    // region common
+    private fun getCompletedJob(): Job {
+        return Job().apply {
+            complete()
         }
     }
     // endregion
