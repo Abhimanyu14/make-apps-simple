@@ -24,6 +24,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.ope
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
@@ -39,10 +41,12 @@ internal class OpenSourceLicensesScreenViewModel(
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<OpenSourceLicensesScreenUIState> =
+    private val _uiState: MutableStateFlow<OpenSourceLicensesScreenUIState> =
         MutableStateFlow(
             value = OpenSourceLicensesScreenUIState(),
         )
+    internal val uiState: StateFlow<OpenSourceLicensesScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: OpenSourceLicensesScreenUIStateEvents =
         OpenSourceLicensesScreenUIStateEvents(
             navigateUp = ::navigateUp,
@@ -51,7 +55,6 @@ internal class OpenSourceLicensesScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        // TODO(Abhi): Fix isLoading
         OpenSourceLicensesScreenUIState(
             isLoading = isLoading,
         )

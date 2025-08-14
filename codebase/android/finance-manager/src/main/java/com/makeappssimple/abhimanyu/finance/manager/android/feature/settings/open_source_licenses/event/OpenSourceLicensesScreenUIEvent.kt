@@ -21,7 +21,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenU
 
 @Immutable
 internal sealed class OpenSourceLicensesScreenUIEvent : ScreenUIEvent {
-    data object OnNavigationBackButtonClick : OpenSourceLicensesScreenUIEvent()
     data object OnTopAppBarNavigationButtonClick :
         OpenSourceLicensesScreenUIEvent()
 }

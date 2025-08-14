@@ -48,7 +48,6 @@ internal fun OpenSourceLicensesScreenUI(
                 tag = SCREEN_OPEN_SOURCE_LICENSES,
             )
             .fillMaxSize(),
-        sheetState = state.modalBottomSheetState,
         snackbarHostState = state.snackbarHostState,
         topBar = {
             MyTopAppBar(
@@ -60,9 +59,6 @@ internal fun OpenSourceLicensesScreenUI(
         },
         onClick = state.focusManager::clearFocus,
         coroutineScope = state.coroutineScope,
-        onBottomSheetDismiss = {
-            handleUIEvent(OpenSourceLicensesScreenUIEvent.OnNavigationBackButtonClick)
-        },
     ) {
         LibrariesContainer(
             modifier = Modifier
