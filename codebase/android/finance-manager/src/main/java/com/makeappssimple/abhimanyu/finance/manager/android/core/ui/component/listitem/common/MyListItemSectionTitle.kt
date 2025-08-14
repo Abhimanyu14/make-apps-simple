@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.l
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Immutable
 public data class MyListItemSectionTitleDataAndEventHandler(
@@ -49,9 +49,9 @@ public fun MyListItemSectionTitle(
             )
             .fillMaxWidth(),
         text = data.text,
-        style = MaterialTheme.typography.headlineMedium
+        style = FinanceManagerAppTheme.typography.headlineMedium
             .copy(
-                color = MaterialTheme.colorScheme.onBackground,
+                color = FinanceManagerAppTheme.colorScheme.onBackground,
             ),
     )
 }

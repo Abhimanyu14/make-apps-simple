@@ -22,13 +22,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 
 @Composable
@@ -64,8 +64,8 @@ private fun SaveButtonUI(
         enabled = data.isEnabled,
         colors = ButtonDefaults
             .buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
+                containerColor = FinanceManagerAppTheme.colorScheme.primary,
+                contentColor = FinanceManagerAppTheme.colorScheme.onPrimary,
             ),
     ) {
         MyText(
@@ -74,7 +74,7 @@ private fun SaveButtonUI(
                     minWidth = 80.dp,
                 ),
             textStringResourceId = data.textStringResourceId,
-            style = MaterialTheme.typography.labelLarge
+            style = FinanceManagerAppTheme.typography.labelLarge
                 .copy(
                     textAlign = TextAlign.Center,
                 ),

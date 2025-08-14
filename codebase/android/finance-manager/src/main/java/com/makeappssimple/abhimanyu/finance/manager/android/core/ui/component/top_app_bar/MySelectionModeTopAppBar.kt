@@ -19,13 +19,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.RowScopedComposableContent
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -56,7 +56,7 @@ public fun MySelectionModeTopAppBarUI(
         title = title,
         navigationIcon = {
             MyIconButton(
-                tint = MaterialTheme.colorScheme.onBackground,
+                tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 imageVector = MyIcons.Close,
                 contentDescriptionStringResourceId = R.string.finance_manager_navigation_close_button_navigation_icon_content_description,
                 onClick = navigationAction,
@@ -64,7 +64,7 @@ public fun MySelectionModeTopAppBarUI(
         },
         actions = appBarActions,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.background,
+            containerColor = FinanceManagerAppTheme.colorScheme.background,
         ),
         modifier = modifier,
     )

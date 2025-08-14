@@ -28,7 +28,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -46,6 +45,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constant
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.navigationBarLandscapeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.AmountCommaVisualTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.rememberCommonScreenUIState
@@ -171,8 +171,8 @@ internal fun AddAccountScreenUI(
                                 text = stringResource(
                                     id = nameTextFieldErrorTextStringResourceId,
                                 ),
-                                style = MaterialTheme.typography.bodySmall.copy(
-                                    color = MaterialTheme.colorScheme.error,
+                                style = FinanceManagerAppTheme.typography.bodySmall.copy(
+                                    color = FinanceManagerAppTheme.colorScheme.error,
                                 ),
                             )
                         }

@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.l
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 public fun SettingsListItemAppVersion(
@@ -40,9 +40,9 @@ public fun SettingsListItemAppVersion(
                 bottom = 8.dp,
             ),
         text = data.appVersionText,
-        style = MaterialTheme.typography.headlineLarge
+        style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
-                color = MaterialTheme.colorScheme.primary,
+                color = FinanceManagerAppTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
             ),
     )

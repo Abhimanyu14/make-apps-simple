@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.emoji_circle.MyEmojiCircleData
 
@@ -49,7 +49,7 @@ public fun AnalysisListItem(
         modifier = modifier
             .fillMaxWidth()
             .clip(
-                shape = MaterialTheme.shapes.large,
+                shape = FinanceManagerAppTheme.shapes.large,
             )
             .padding(
                 start = 16.dp,
@@ -60,7 +60,7 @@ public fun AnalysisListItem(
     ) {
         MyEmojiCircle(
             data = MyEmojiCircleData(
-                backgroundColor = MaterialTheme.colorScheme.outline,
+                backgroundColor = FinanceManagerAppTheme.colorScheme.outline,
                 emoji = data.emoji,
             ),
         )
@@ -93,9 +93,9 @@ public fun AnalysisListItem(
                         text = data.title,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = FinanceManagerAppTheme.typography.headlineMedium
                             .copy(
-                                color = MaterialTheme.colorScheme.onBackground,
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
                             ),
                     )
                     Spacer(
@@ -108,8 +108,8 @@ public fun AnalysisListItem(
                         progress = {
                             data.percentage
                         },
-                        color = MaterialTheme.colorScheme.primary,
-                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                        color = FinanceManagerAppTheme.colorScheme.primary,
+                        trackColor = FinanceManagerAppTheme.colorScheme.surfaceVariant,
                         strokeCap = StrokeCap.Round,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -137,7 +137,7 @@ public fun AnalysisListItem(
                     MyText(
                         modifier = Modifier,
                         text = data.amountText,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = FinanceManagerAppTheme.typography.headlineMedium
                             .copy(
                                 textAlign = TextAlign.End,
                             ),
@@ -151,9 +151,9 @@ public fun AnalysisListItem(
                     MyText(
                         modifier = Modifier,
                         text = data.percentageText,
-                        style = MaterialTheme.typography.bodySmall
+                        style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
-                                color = MaterialTheme.colorScheme.onBackground,
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
                                 textAlign = TextAlign.End,
                             ),
                     )

@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,6 +41,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 
 private object ChipUIConstants {
@@ -138,9 +138,9 @@ private fun ChipUIContainer(
                 color = if (data.borderColor.isNotNull()) {
                     data.borderColor
                 } else if (data.isSelected) {
-                    MaterialTheme.colorScheme.primary
+                    FinanceManagerAppTheme.colorScheme.primary
                 } else {
-                    MaterialTheme.colorScheme.outline
+                    FinanceManagerAppTheme.colorScheme.outline
                 },
                 shape = ChipUIConstants.shape,
             )
@@ -151,7 +151,7 @@ private fun ChipUIContainer(
             )
             .background(
                 if (data.isSelected) {
-                    MaterialTheme.colorScheme.primary
+                    FinanceManagerAppTheme.colorScheme.primary
                 } else {
                     Color.Transparent
                 }
@@ -176,9 +176,9 @@ private fun ChipUIIcon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = if (isSelected) {
-                    MaterialTheme.colorScheme.onPrimary
+                    FinanceManagerAppTheme.colorScheme.onPrimary
                 } else {
-                    MaterialTheme.colorScheme.primary
+                    FinanceManagerAppTheme.colorScheme.primary
                 },
                 modifier = Modifier
                     .scale(
@@ -213,14 +213,14 @@ private fun ChipUIText(
                 },
             ),
         text = data.text,
-        style = MaterialTheme.typography.labelMedium
+        style = FinanceManagerAppTheme.typography.labelMedium
             .copy(
                 color = if (data.textColor.isNotNull()) {
                     data.textColor
                 } else if (data.isSelected) {
-                    MaterialTheme.colorScheme.onPrimary
+                    FinanceManagerAppTheme.colorScheme.onPrimary
                 } else {
-                    MaterialTheme.colorScheme.onBackground
+                    FinanceManagerAppTheme.colorScheme.onBackground
                 },
             ),
     )

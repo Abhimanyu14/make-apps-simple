@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -69,7 +69,7 @@ private fun BackupCardUI(
                 vertical = 4.dp,
             )
             .clip(
-                MaterialTheme.shapes.medium,
+                FinanceManagerAppTheme.shapes.medium,
             )
             .conditionalClickable(
                 onClick = {
@@ -81,7 +81,7 @@ private fun BackupCardUI(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    color = FinanceManagerAppTheme.colorScheme.primaryContainer,
                 )
                 .padding(
                     all = 16.dp,
@@ -91,7 +91,7 @@ private fun BackupCardUI(
             Icon(
                 imageVector = MyIcons.Backup,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
+                tint = FinanceManagerAppTheme.colorScheme.onBackground,
             )
             MyText(
                 modifier = Modifier
@@ -100,9 +100,9 @@ private fun BackupCardUI(
                     )
                     .fillMaxWidth(),
                 textStringResourceId = R.string.finance_manager_backup_card,
-                style = MaterialTheme.typography.bodyLarge
+                style = FinanceManagerAppTheme.typography.bodyLarge
                     .copy(
-                        color = MaterialTheme.colorScheme.onBackground,
+                        color = FinanceManagerAppTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.Bold,
                     ),
             )
@@ -123,7 +123,7 @@ private fun BackupCardLoadingUI(
                 ),
             )
             .clip(
-                shape = MaterialTheme.shapes.medium,
+                shape = FinanceManagerAppTheme.shapes.medium,
             )
             .shimmer(),
     )

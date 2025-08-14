@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
@@ -29,6 +28,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 public fun SettingsListItemContent(
@@ -42,7 +42,7 @@ public fun SettingsListItemContent(
                 Icon(
                     imageVector = data.imageVector,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 )
             }
         },
@@ -51,9 +51,9 @@ public fun SettingsListItemContent(
                 modifier = Modifier
                     .fillMaxWidth(),
                 textStringResourceId = data.textStringResourceId,
-                style = MaterialTheme.typography.bodyLarge
+                style = FinanceManagerAppTheme.typography.bodyLarge
                     .copy(
-                        color = MaterialTheme.colorScheme.onBackground,
+                        color = FinanceManagerAppTheme.colorScheme.onBackground,
                     ),
             )
         },
@@ -79,7 +79,7 @@ public fun SettingsListItemContent(
                         null
                     },
                     colors = SwitchDefaults.colors(
-                        uncheckedThumbColor = MaterialTheme.colorScheme.background,
+                        uncheckedThumbColor = FinanceManagerAppTheme.colorScheme.background,
                     ),
                 )
             }

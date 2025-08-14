@@ -19,13 +19,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 public fun MyExpandableItemIconButton(
@@ -53,19 +53,19 @@ public fun MyExpandableItemIconButton(
             imageVector = data.iconImageVector,
             contentDescription = null,
             tint = if (data.isEnabled) {
-                MaterialTheme.colorScheme.onSurfaceVariant
+                FinanceManagerAppTheme.colorScheme.onSurfaceVariant
             } else {
-                MaterialTheme.colorScheme.surfaceVariant
+                FinanceManagerAppTheme.colorScheme.surfaceVariant
             },
         )
         MyText(
             text = data.labelText,
-            style = MaterialTheme.typography.labelMedium
+            style = FinanceManagerAppTheme.typography.labelMedium
                 .copy(
                     color = if (data.isEnabled) {
-                        MaterialTheme.colorScheme.onSurfaceVariant
+                        FinanceManagerAppTheme.colorScheme.onSurfaceVariant
                     } else {
-                        MaterialTheme.colorScheme.surfaceVariant
+                        FinanceManagerAppTheme.colorScheme.surfaceVariant
                     },
                 ),
         )

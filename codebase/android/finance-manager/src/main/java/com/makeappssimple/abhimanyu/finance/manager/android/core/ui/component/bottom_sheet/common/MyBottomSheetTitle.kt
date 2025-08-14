@@ -19,11 +19,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.b
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 public fun MyBottomSheetTitle(
@@ -34,15 +34,15 @@ public fun MyBottomSheetTitle(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.background,
+                color = FinanceManagerAppTheme.colorScheme.background,
             )
             .padding(
                 all = 16.dp,
             ),
         textStringResourceId = data.textStringResourceId,
-        style = MaterialTheme.typography.headlineLarge
+        style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
-                color = MaterialTheme.colorScheme.onBackground,
+                color = FinanceManagerAppTheme.colorScheme.onBackground,
             ),
     )
 }

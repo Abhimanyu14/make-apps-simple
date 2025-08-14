@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimeInput
@@ -130,18 +129,18 @@ public fun MyTimePicker(
             }
         ) {
             val colors = TimePickerDefaults.colors(
-                clockDialColor = MaterialTheme.colorScheme.background,
-                periodSelectorBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                clockDialColor = FinanceManagerAppTheme.colorScheme.background,
+                periodSelectorBorderColor = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
 
-                periodSelectorSelectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                periodSelectorUnselectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
-                periodSelectorSelectedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                periodSelectorUnselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                periodSelectorSelectedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                periodSelectorUnselectedContainerColor = FinanceManagerAppTheme.colorScheme.surfaceVariant,
+                periodSelectorSelectedContentColor = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                periodSelectorUnselectedContentColor = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
 
-                timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
-                timeSelectorSelectedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                timeSelectorUnselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                timeSelectorSelectedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                timeSelectorUnselectedContainerColor = FinanceManagerAppTheme.colorScheme.surfaceVariant,
+                timeSelectorSelectedContentColor = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                timeSelectorUnselectedContentColor = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
             )
 
             TimePickerTheme {
@@ -177,7 +176,7 @@ private fun TimePickerDialog(
         ),
     ) {
         Surface(
-            shape = MaterialTheme.shapes.extraLarge,
+            shape = FinanceManagerAppTheme.shapes.extraLarge,
             tonalElevation = 6.dp,
             modifier = modifier
                 .width(
@@ -187,8 +186,8 @@ private fun TimePickerDialog(
                     intrinsicSize = IntrinsicSize.Min,
                 )
                 .background(
-                    shape = MaterialTheme.shapes.extraLarge,
-                    color = MaterialTheme.colorScheme.surface,
+                    shape = FinanceManagerAppTheme.shapes.extraLarge,
+                    color = FinanceManagerAppTheme.colorScheme.surface,
                 ),
         ) {
             Column(
@@ -205,7 +204,7 @@ private fun TimePickerDialog(
                             bottom = 20.dp,
                         ),
                     text = title,
-                    style = MaterialTheme.typography.labelMedium
+                    style = FinanceManagerAppTheme.typography.labelMedium
                         .copy(
                             fontWeight = FontWeight.Bold,
                         ),
@@ -253,11 +252,11 @@ private fun TimePickerTheme(
     FinanceManagerAppTheme(
         lightColorScheme = myLightColorScheme
             .copy(
-                outline = MaterialTheme.colorScheme.onSurfaceVariant,
+                outline = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
             ),
         darkColorScheme = myDarkColorScheme
             .copy(
-                outline = MaterialTheme.colorScheme.onSurfaceVariant,
+                outline = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
             ),
         content = content,
     )

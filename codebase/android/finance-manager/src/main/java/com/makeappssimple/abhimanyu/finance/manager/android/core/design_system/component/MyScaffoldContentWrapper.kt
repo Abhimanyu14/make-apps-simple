@@ -22,11 +22,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ColumnScopedComposableContent
 
 @Composable
@@ -39,7 +39,7 @@ public fun MyScaffoldContentWrapper(
     Column(
         modifier = modifier
             .background(
-                color = MaterialTheme.colorScheme.background,
+                color = FinanceManagerAppTheme.colorScheme.background,
             )
             .fillMaxSize()
             .conditionalClickable(

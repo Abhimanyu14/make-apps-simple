@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,6 +40,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.ExpandedListItemShape
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.composeColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.MyExpandableItemIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.MyExpandableItemIconButtonData
@@ -105,7 +105,7 @@ private fun TransactionListItemUI(
                     shape = if (data.isExpanded) {
                         ExpandedListItemShape
                     } else {
-                        MaterialTheme.shapes.large
+                        FinanceManagerAppTheme.shapes.large
                     },
                 )
                 .conditionalClickable(
@@ -137,20 +137,20 @@ private fun TransactionListItemUI(
                         imageVector = MyIcons.CheckCircle,
                         // TODO(Abhi) - Add content description
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = FinanceManagerAppTheme.colorScheme.primary,
                     )
                 } else {
                     Icon(
                         imageVector = MyIcons.RadioButtonUnchecked,
                         // TODO(Abhi) - Add content description
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.outline,
+                        tint = FinanceManagerAppTheme.colorScheme.outline,
                     )
                 }
             } else {
                 MyEmojiCircle(
                     data = MyEmojiCircleData(
-                        backgroundColor = MaterialTheme.colorScheme.outline,
+                        backgroundColor = FinanceManagerAppTheme.colorScheme.outline,
                         emoji = data.emoji,
                     ),
                 )
@@ -175,9 +175,9 @@ private fun TransactionListItemUI(
                         text = data.title,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = FinanceManagerAppTheme.typography.headlineMedium
                             .copy(
-                                color = MaterialTheme.colorScheme.onBackground,
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
                             ),
                     )
                     MyText(
@@ -187,7 +187,7 @@ private fun TransactionListItemUI(
                                 weight = 1F,
                             ),
                         text = data.amountText,
-                        style = MaterialTheme.typography.headlineMedium
+                        style = FinanceManagerAppTheme.typography.headlineMedium
                             .copy(
                                 color = data.amountColor.composeColor,
                                 textAlign = TextAlign.End,
@@ -204,9 +204,9 @@ private fun TransactionListItemUI(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = data.transactionForText,
-                    style = MaterialTheme.typography.bodySmall
+                    style = FinanceManagerAppTheme.typography.bodySmall
                         .copy(
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = FinanceManagerAppTheme.colorScheme.onBackground,
                         ),
                 )
                 Spacer(
@@ -226,9 +226,9 @@ private fun TransactionListItemUI(
                                 weight = 1F,
                             ),
                         text = data.dateAndTimeText,
-                        style = MaterialTheme.typography.bodySmall
+                        style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
-                                color = MaterialTheme.colorScheme.onBackground,
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
                             ),
                     )
                     MyText(
@@ -238,9 +238,9 @@ private fun TransactionListItemUI(
                                 weight = 1F,
                             ),
                         text = accountText,
-                        style = MaterialTheme.typography.bodySmall
+                        style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
-                                color = MaterialTheme.colorScheme.onBackground,
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
                                 textAlign = TextAlign.End,
                             ),
                     )
@@ -256,7 +256,7 @@ private fun TransactionListItemUI(
                     visible = data.isExpanded.not() && data.isInSelectionMode.not(),
                 ) {
                     HorizontalDivider(
-                        color = MaterialTheme.colorScheme.outline,
+                        color = FinanceManagerAppTheme.colorScheme.outline,
                         thickness = 0.5.dp,
                     )
                 }
@@ -266,7 +266,7 @@ private fun TransactionListItemUI(
             visible = data.isExpanded,
         ) {
             HorizontalDivider(
-                color = MaterialTheme.colorScheme.outline,
+                color = FinanceManagerAppTheme.colorScheme.outline,
                 thickness = 0.5.dp,
             )
             Row(

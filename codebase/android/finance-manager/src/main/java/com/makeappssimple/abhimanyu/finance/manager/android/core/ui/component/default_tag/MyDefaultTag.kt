@@ -19,13 +19,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.d
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object MyDefaultTagConstants {
@@ -43,7 +43,7 @@ public fun MyDefaultTag(
                 shape = CircleShape,
             )
             .background(
-                color = MaterialTheme.colorScheme.primary,
+                color = FinanceManagerAppTheme.colorScheme.primary,
             )
             .padding(
                 horizontal = MyDefaultTagConstants.paddingHorizontal,
@@ -52,9 +52,9 @@ public fun MyDefaultTag(
         text = stringResource(
             id = R.string.finance_manager_default_tag,
         ),
-        style = MaterialTheme.typography.labelSmall
+        style = FinanceManagerAppTheme.typography.labelSmall
             .copy(
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = FinanceManagerAppTheme.colorScheme.onPrimary,
             ),
     )
 }

@@ -35,7 +35,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,6 +53,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.BottomSheetShape
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
@@ -226,7 +226,7 @@ internal fun TransactionsScreenUI(
                 MySelectionModeTopAppBar(
                     appBarActions = {
                         MyIconButton(
-                            tint = MaterialTheme.colorScheme.onBackground,
+                            tint = FinanceManagerAppTheme.colorScheme.onBackground,
                             imageVector = MyIcons.MoreVert,
                             contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_selection_mode_appbar_menu_more_options,
                             onClick = {
@@ -243,9 +243,9 @@ internal fun TransactionsScreenUI(
                                 id = R.string.finance_manager_screen_transactions_selection_mode_appbar_title,
                                 uiState.selectedTransactions.size,
                             ),
-                            style = MaterialTheme.typography.titleLarge
+                            style = FinanceManagerAppTheme.typography.titleLarge
                                 .copy(
-                                    color = MaterialTheme.colorScheme.onBackground,
+                                    color = FinanceManagerAppTheme.colorScheme.onBackground,
                                 ),
                         )
                     }
@@ -474,7 +474,7 @@ private fun StickyHeaderText(
     MyText(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.background,
+                color = FinanceManagerAppTheme.colorScheme.background,
             )
             .fillMaxWidth()
             .padding(
@@ -484,9 +484,9 @@ private fun StickyHeaderText(
                 top = TransactionsScreenUIConstants.stickyHeaderTextPaddingTop,
             ),
         text = text,
-        style = MaterialTheme.typography.headlineSmall
+        style = FinanceManagerAppTheme.typography.headlineSmall
             .copy(
-                color = MaterialTheme.colorScheme.onBackground,
+                color = FinanceManagerAppTheme.colorScheme.onBackground,
             ),
     )
 }

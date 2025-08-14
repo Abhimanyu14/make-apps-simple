@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.legend.Dot
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 
 private object ActionButtonConstants {
@@ -74,10 +74,10 @@ private fun ActionButtonUI(
                 contentDescription = stringResource(
                     id = data.contentDescriptionStringResourceId,
                 ),
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                tint = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier
                     .background(
-                        color = MaterialTheme.colorScheme.primaryContainer,
+                        color = FinanceManagerAppTheme.colorScheme.primaryContainer,
                     )
                     .padding(
                         all = 8.dp,
@@ -92,7 +92,7 @@ private fun ActionButtonUI(
                         .padding(
                             all = 8.dp,
                         ),
-                    color = MaterialTheme.colorScheme.error,
+                    color = FinanceManagerAppTheme.colorScheme.error,
                 )
             }
         }

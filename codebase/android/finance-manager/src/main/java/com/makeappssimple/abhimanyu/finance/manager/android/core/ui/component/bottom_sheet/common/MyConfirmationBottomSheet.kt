@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.NavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumBottomSheetHeight
 
 @Composable
@@ -56,9 +56,9 @@ public fun MyConfirmationBottomSheet(
                     all = 16.dp,
                 ),
             text = data.title,
-            style = MaterialTheme.typography.headlineLarge
+            style = FinanceManagerAppTheme.typography.headlineLarge
                 .copy(
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = FinanceManagerAppTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center,
                 ),
         )
@@ -69,9 +69,9 @@ public fun MyConfirmationBottomSheet(
                     all = 16.dp,
                 ),
             text = data.message,
-            style = MaterialTheme.typography.bodyMedium
+            style = FinanceManagerAppTheme.typography.bodyMedium
                 .copy(
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = FinanceManagerAppTheme.colorScheme.onBackground,
                 ),
         )
         Row(
@@ -93,7 +93,7 @@ public fun MyConfirmationBottomSheet(
             ) {
                 MyText(
                     text = data.negativeButtonText,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
             Button(
@@ -110,7 +110,7 @@ public fun MyConfirmationBottomSheet(
             ) {
                 MyText(
                     text = data.positiveButtonText,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
         }

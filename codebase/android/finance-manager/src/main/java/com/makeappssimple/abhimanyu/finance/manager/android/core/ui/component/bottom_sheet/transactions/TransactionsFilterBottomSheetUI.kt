@@ -31,7 +31,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -55,6 +54,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.statusBarSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
@@ -376,7 +376,7 @@ public fun TransactionsFiltersBottomSheetUI(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_reset,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
             Button(
@@ -414,7 +414,7 @@ public fun TransactionsFiltersBottomSheetUI(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_apply,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
         }
@@ -519,7 +519,7 @@ public fun TransactionFilterBottomSheetDateFilter(
                         .graphicsLayer {
                             rotationZ = chevronDegrees
                         },
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
                     imageVector = MyIcons.ChevronRight,
                     contentDescriptionStringResourceId = if (isExpanded) {
                         R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
@@ -534,9 +534,9 @@ public fun TransactionFilterBottomSheetDateFilter(
                             weight = 1F,
                         ),
                     textStringResourceId = headingTextStringResourceId,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = FinanceManagerAppTheme.typography.headlineLarge
                         .copy(
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = FinanceManagerAppTheme.colorScheme.onBackground,
                             textAlign = TextAlign.Start,
                         ),
                 )
@@ -551,7 +551,7 @@ public fun TransactionFilterBottomSheetDateFilter(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
         }
@@ -653,7 +653,7 @@ private fun TransactionFilterBottomSheetFilterGroup(
             ) {
                 MyIconButton(
                     imageVector = MyIcons.ChevronRight,
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
                     contentDescriptionStringResourceId = if (isExpanded) {
                         R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
                     } else {
@@ -671,9 +671,9 @@ private fun TransactionFilterBottomSheetFilterGroup(
                             weight = 1F,
                         ),
                     textStringResourceId = headingTextStringResourceId,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = FinanceManagerAppTheme.typography.headlineLarge
                         .copy(
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = FinanceManagerAppTheme.colorScheme.onBackground,
                             textAlign = TextAlign.Start,
                         ),
                 )
@@ -688,7 +688,7 @@ private fun TransactionFilterBottomSheetFilterGroup(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
         }

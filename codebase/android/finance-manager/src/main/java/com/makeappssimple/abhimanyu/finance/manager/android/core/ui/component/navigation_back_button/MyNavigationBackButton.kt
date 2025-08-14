@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.navigation_back_button
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -35,7 +35,7 @@ public fun MyNavigationBackButton(
         contentDescription = stringResource(
             id = R.string.finance_manager_navigation_back_button_navigation_icon_content_description,
         ),
-        tint = MaterialTheme.colorScheme.primary,
+        tint = FinanceManagerAppTheme.colorScheme.primary,
         onClick = {
             handleEvent(MyNavigationBackButtonEvents.OnClick)
         },

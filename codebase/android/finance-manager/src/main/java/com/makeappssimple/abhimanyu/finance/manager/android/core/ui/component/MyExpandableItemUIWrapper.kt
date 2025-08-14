@@ -21,11 +21,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ColumnScopedComposableContent
 
 @Composable
@@ -42,13 +42,13 @@ public fun MyExpandableItemUIWrapper(
                 horizontal = 8.dp,
             )
             .clip(
-                shape = MaterialTheme.shapes.large,
+                shape = FinanceManagerAppTheme.shapes.large,
             )
             .background(
                 color = if (isExpanded || isSelected) {
-                    MaterialTheme.colorScheme.primaryContainer
+                    FinanceManagerAppTheme.colorScheme.primaryContainer
                 } else {
-                    MaterialTheme.colorScheme.background
+                    FinanceManagerAppTheme.colorScheme.background
                 },
             )
             .animateContentSize(),

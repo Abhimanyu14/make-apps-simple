@@ -33,7 +33,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,6 +49,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 
 private object MySearchBarConstants {
@@ -124,9 +124,9 @@ private fun MySearchBarUI(
             .focusRequester(
                 focusRequester = focusRequester,
             ),
-        textStyle = MaterialTheme.typography.bodyLarge
+        textStyle = FinanceManagerAppTheme.typography.bodyLarge
             .copy(
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
             ),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search,
@@ -137,7 +137,7 @@ private fun MySearchBarUI(
             },
         ),
         singleLine = true,
-        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+        cursorBrush = SolidColor(FinanceManagerAppTheme.colorScheme.primary),
         decorationBox = {
             TextFieldDefaults.DecorationBox(
                 value = data.searchText,
@@ -151,9 +151,9 @@ private fun MySearchBarUI(
                 placeholder = {
                     MyText(
                         text = data.placeholderText,
-                        style = MaterialTheme.typography.headlineLarge
+                        style = FinanceManagerAppTheme.typography.headlineLarge
                             .copy(
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
                             ),
                     )
                 },
@@ -200,9 +200,9 @@ private fun MySearchBarUI(
                 },
                 shape = CircleShape,
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                    disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                    focusedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                    unfocusedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                    disabledContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
                     focusedIndicatorColor = Transparent,
                     unfocusedIndicatorColor = Transparent,
                 ),
@@ -222,7 +222,7 @@ private fun MySearchBarUI(
                                 shape = CircleShape,
                             )
                             .background(
-                                color = MaterialTheme.colorScheme.primaryContainer,
+                                color = FinanceManagerAppTheme.colorScheme.primaryContainer,
                             )
                     )
                 },

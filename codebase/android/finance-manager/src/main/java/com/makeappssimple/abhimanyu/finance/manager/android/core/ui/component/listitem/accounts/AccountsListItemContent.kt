@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.default_tag.MyDefaultTag
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumListItemHeight
@@ -109,7 +109,7 @@ public fun AccountsListItemContentLoadingUI(
                 vertical = AccountsListItemContentConstants.loadingUIVerticalPadding,
             )
             .clip(
-                shape = MaterialTheme.shapes.small,
+                shape = FinanceManagerAppTheme.shapes.small,
             )
             .shimmer(),
     )
@@ -142,7 +142,7 @@ private fun AccountsListItemContentUI(
             Icon(
                 imageVector = data.icon,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = FinanceManagerAppTheme.colorScheme.primary,
                 modifier = Modifier
                     .padding(
                         end = 8.dp,
@@ -155,12 +155,12 @@ private fun AccountsListItemContentUI(
                     end = 16.dp,
                 ),
             text = data.name,
-            style = MaterialTheme.typography.headlineLarge
+            style = FinanceManagerAppTheme.typography.headlineLarge
                 .copy(
                     color = if (data.isSelected) {
-                        MaterialTheme.colorScheme.primary
+                        FinanceManagerAppTheme.colorScheme.primary
                     } else {
-                        MaterialTheme.colorScheme.onBackground
+                        FinanceManagerAppTheme.colorScheme.onBackground
                     },
                 ),
         )
@@ -178,14 +178,14 @@ private fun AccountsListItemContentUI(
         data.balance?.let {
             MyText(
                 text = data.balance,
-                style = MaterialTheme.typography.headlineLarge
+                style = FinanceManagerAppTheme.typography.headlineLarge
                     .copy(
                         color = if (data.isSelected) {
-                            MaterialTheme.colorScheme.primary
+                            FinanceManagerAppTheme.colorScheme.primary
                         } else if (data.isLowBalance) {
-                            MaterialTheme.colorScheme.error
+                            FinanceManagerAppTheme.colorScheme.error
                         } else {
-                            MaterialTheme.colorScheme.onBackground
+                            FinanceManagerAppTheme.colorScheme.onBackground
                         },
                     ),
             )
@@ -196,7 +196,7 @@ private fun AccountsListItemContentUI(
                 contentDescription = stringResource(
                     id = R.string.finance_manager_account_list_item_more_options_content_description,
                 ),
-                tint = MaterialTheme.colorScheme.onBackground,
+                tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .padding(
                         start = 8.dp,

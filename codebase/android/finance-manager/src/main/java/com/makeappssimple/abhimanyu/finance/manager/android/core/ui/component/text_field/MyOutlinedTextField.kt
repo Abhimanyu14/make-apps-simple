@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -33,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 
 @Composable
@@ -60,7 +60,7 @@ public fun MyOutlinedTextField(
                     exit = fadeOut(),
                 ) {
                     MyIconButton(
-                        tint = MaterialTheme.colorScheme.onBackground,
+                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
                         imageVector = MyIcons.Clear,
                         contentDescriptionStringResourceId = data.trailingIconContentDescriptionTextStringResourceId,
                         onClick = {

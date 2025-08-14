@@ -19,13 +19,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.l
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Immutable
 public data class MyListItemDataAndEventHandler(
@@ -62,9 +62,9 @@ public fun MyListItem(
                 vertical = 8.dp,
             ),
         textStringResourceId = data.textStringResourceId,
-        style = MaterialTheme.typography.bodyLarge
+        style = FinanceManagerAppTheme.typography.bodyLarge
             .copy(
-                color = MaterialTheme.colorScheme.onBackground,
+                color = FinanceManagerAppTheme.colorScheme.onBackground,
             ),
     )
 }

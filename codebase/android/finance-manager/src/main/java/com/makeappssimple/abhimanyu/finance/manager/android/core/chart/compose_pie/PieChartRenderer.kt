@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.util.fastForEachIndexed
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.composeColor
 import kotlin.math.absoluteValue
@@ -50,7 +50,7 @@ internal fun PieChartRenderer(
     entryColors: List<MyColor>,
     animate: Boolean,
 ) {
-    val emptyChartColor = MaterialTheme.colorScheme.surfaceVariant
+    val emptyChartColor = FinanceManagerAppTheme.colorScheme.surfaceVariant
     var animationRan by rememberSaveable(fractions, animate) {
         mutableStateOf(
             value = false,

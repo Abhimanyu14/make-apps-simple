@@ -34,7 +34,6 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
@@ -55,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyScaffoldContentWrapper
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.BottomSheetShape
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ColumnScopedComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.BottomSheetBackHandler
@@ -74,7 +74,7 @@ public fun MyScaffold(
         skipPartiallyExpanded = true,
     ),
     sheetShape: Shape = BottomSheetShape,
-    sheetBackgroundColor: Color = MaterialTheme.colorScheme.surface,
+    sheetBackgroundColor: Color = FinanceManagerAppTheme.colorScheme.surface,
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
 
     // Scaffold
@@ -86,7 +86,7 @@ public fun MyScaffold(
     },
     floatingActionButton: ComposableContent = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
-    backgroundColor: Color = MaterialTheme.colorScheme.background,
+    backgroundColor: Color = FinanceManagerAppTheme.colorScheme.background,
     contentColor: Color = contentColorFor(backgroundColor),
 
     // MyScaffoldContentWrapper

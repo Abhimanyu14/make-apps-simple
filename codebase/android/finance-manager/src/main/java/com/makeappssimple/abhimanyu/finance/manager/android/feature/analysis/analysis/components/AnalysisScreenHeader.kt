@@ -20,21 +20,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.action_button.ActionButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.action_button.ActionButtonData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.action_button.ActionButtonEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyHorizontalScrollingRadioGroup
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyHorizontalScrollingRadioGroupData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyHorizontalScrollingRadioGroupEvent
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.event.AnalysisScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.state.AnalysisScreenUIState
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 internal fun AnalysisScreenHeader(
@@ -45,7 +45,7 @@ internal fun AnalysisScreenHeader(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.background,
+                color = FinanceManagerAppTheme.colorScheme.background,
             ),
     ) {
         MyHorizontalScrollingRadioGroup(

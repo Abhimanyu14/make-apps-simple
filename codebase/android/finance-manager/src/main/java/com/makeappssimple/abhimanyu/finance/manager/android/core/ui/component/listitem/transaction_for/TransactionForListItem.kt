@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumListItemHeight
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -59,14 +59,14 @@ public fun TransactionForListItem(
     ) {
         MyText(
             text = data.title,
-            style = MaterialTheme.typography.bodyLarge
+            style = FinanceManagerAppTheme.typography.bodyLarge
                 .copy(
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = FinanceManagerAppTheme.colorScheme.onBackground,
                 ),
         )
         if (data.isMoreOptionsIconButtonVisible) {
             MyIconButton(
-                tint = MaterialTheme.colorScheme.onBackground,
+                tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 imageVector = MyIcons.MoreVert,
                 contentDescriptionStringResourceId = R.string.finance_manager_transaction_for_list_item_more_options_content_description,
                 onClick = {

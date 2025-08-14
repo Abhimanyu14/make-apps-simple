@@ -21,13 +21,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.t
 import androidx.annotation.StringRes
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.typealiases.NullableComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.navigation_back_button.MyNavigationBackButton
@@ -78,9 +78,9 @@ public fun MyTopAppBarUI(
         title = {
             MyText(
                 text = titleText,
-                style = MaterialTheme.typography.titleLarge
+                style = FinanceManagerAppTheme.typography.titleLarge
                     .copy(
-                        color = MaterialTheme.colorScheme.primary,
+                        color = FinanceManagerAppTheme.colorScheme.primary,
                     ),
             )
         },
@@ -94,7 +94,7 @@ public fun MyTopAppBarUI(
         },
         colors = TopAppBarDefaults
             .centerAlignedTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = FinanceManagerAppTheme.colorScheme.background,
             ),
         modifier = modifier,
     )

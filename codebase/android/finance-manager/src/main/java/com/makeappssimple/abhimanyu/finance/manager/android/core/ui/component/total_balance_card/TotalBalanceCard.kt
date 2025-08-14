@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +39,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constant
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUI
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
@@ -95,10 +95,10 @@ private fun TotalBalanceCardUI(
                 vertical = 16.dp,
             )
             .clip(
-                MaterialTheme.shapes.medium,
+                FinanceManagerAppTheme.shapes.medium,
             )
             .background(
-                color = MaterialTheme.colorScheme.tertiary,
+                color = FinanceManagerAppTheme.colorScheme.tertiary,
             )
             .conditionalClickable(
                 onClick = if (data.isClickable) {
@@ -118,9 +118,9 @@ private fun TotalBalanceCardUI(
                 modifier = Modifier
                     .fillMaxWidth(),
                 textStringResourceId = R.string.finance_manager_total_balance_card_title,
-                style = MaterialTheme.typography.displaySmall
+                style = FinanceManagerAppTheme.typography.displaySmall
                     .copy(
-                        color = MaterialTheme.colorScheme.onTertiary,
+                        color = FinanceManagerAppTheme.colorScheme.onTertiary,
                         textAlign = TextAlign.Center,
                     ),
             )
@@ -130,9 +130,9 @@ private fun TotalBalanceCardUI(
                 text = Amount(
                     value = data.totalBalanceAmount,
                 ).toString(),
-                style = MaterialTheme.typography.displayLarge
+                style = FinanceManagerAppTheme.typography.displayLarge
                     .copy(
-                        color = MaterialTheme.colorScheme.onTertiary,
+                        color = FinanceManagerAppTheme.colorScheme.onTertiary,
                         textAlign = TextAlign.Center,
                     ),
             )
@@ -149,16 +149,16 @@ private fun TotalBalanceCardUI(
                         .matchRowSize(),
                     imageVector = MyIcons.Lock,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onTertiary,
+                    tint = FinanceManagerAppTheme.colorScheme.onTertiary,
                 )
                 MyText(
                     text = Amount(
                         value = data.totalMinimumBalanceAmount,
                     ).toString(),
-                    style = MaterialTheme.typography.bodySmall
+                    style = FinanceManagerAppTheme.typography.bodySmall
                         .copy(
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onTertiary,
+                            color = FinanceManagerAppTheme.colorScheme.onTertiary,
                             textAlign = TextAlign.End,
                         ),
                 )
@@ -167,8 +167,8 @@ private fun TotalBalanceCardUI(
             ChipUI(
                 modifier = Modifier,
                 data = ChipUIData(
-                    borderColor = MaterialTheme.colorScheme.onTertiary,
-                    textColor = MaterialTheme.colorScheme.onTertiary,
+                    borderColor = FinanceManagerAppTheme.colorScheme.onTertiary,
+                    textColor = FinanceManagerAppTheme.colorScheme.onTertiary,
                     text = stringResource(
                         id = R.string.finance_manager_total_balance_card_view_balance,
                     ),
@@ -200,7 +200,7 @@ private fun TotalBalanceCardLoadingUI(
                 vertical = TotalBalanceCardConstants.loadingUIVerticalPadding,
             )
             .clip(
-                shape = MaterialTheme.shapes.medium,
+                shape = FinanceManagerAppTheme.shapes.medium,
             )
             .shimmer(),
     )

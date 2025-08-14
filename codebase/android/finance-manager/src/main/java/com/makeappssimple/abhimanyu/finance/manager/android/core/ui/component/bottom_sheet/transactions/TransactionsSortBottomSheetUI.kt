@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.common.MyBottomSheetTitle
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.common.MyBottomSheetTitleData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.minimumBottomSheetHeight
@@ -101,12 +101,12 @@ private fun TransactionsSortBottomSheetItem(
                     vertical = 6.dp,
                 ),
             text = data.sortOption.title,
-            style = MaterialTheme.typography.headlineMedium
+            style = FinanceManagerAppTheme.typography.headlineMedium
                 .copy(
                     color = if (data.isSelected) {
-                        MaterialTheme.colorScheme.primary
+                        FinanceManagerAppTheme.colorScheme.primary
                     } else {
-                        MaterialTheme.colorScheme.onBackground
+                        FinanceManagerAppTheme.colorScheme.onBackground
                     },
                 ),
         )
@@ -120,7 +120,7 @@ private fun TransactionsSortBottomSheetItem(
             Icon(
                 imageVector = MyIcons.Done,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = FinanceManagerAppTheme.colorScheme.primary,
             )
         }
     }

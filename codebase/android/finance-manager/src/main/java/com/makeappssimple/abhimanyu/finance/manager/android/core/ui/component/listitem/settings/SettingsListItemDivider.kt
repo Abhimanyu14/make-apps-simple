@@ -18,10 +18,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.l
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 public fun SettingsListItemDivider(
@@ -33,7 +33,7 @@ public fun SettingsListItemDivider(
                 bottom = 24.dp,
                 start = 16.dp,
             ),
-        color = MaterialTheme.colorScheme.outline,
+        color = FinanceManagerAppTheme.colorScheme.outline,
         thickness = 1.dp,
     )
 }

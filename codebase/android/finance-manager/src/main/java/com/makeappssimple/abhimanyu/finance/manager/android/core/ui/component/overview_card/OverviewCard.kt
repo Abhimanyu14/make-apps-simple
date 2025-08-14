@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
@@ -42,6 +41,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -132,7 +132,7 @@ private fun OverviewCardUI(
                 vertical = 16.dp,
             )
             .clip(
-                shape = MaterialTheme.shapes.medium,
+                shape = FinanceManagerAppTheme.shapes.medium,
             )
             .conditionalClickable(
                 onClick = {
@@ -145,7 +145,7 @@ private fun OverviewCardUI(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    color = FinanceManagerAppTheme.colorScheme.primaryContainer,
                 )
                 .padding(
                     all = 12.dp,
@@ -182,7 +182,7 @@ private fun OverviewCardUI(
             ) {
                 // TODO(Abhi): Disable the buttons conditionally
                 MyIconButton(
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = FinanceManagerAppTheme.colorScheme.primary,
                     imageVector = MyIcons.ChevronLeft,
                     contentDescriptionStringResourceId = R.string.finance_manager_overview_card_previous_button_content_description,
                     onClick = {
@@ -203,14 +203,14 @@ private fun OverviewCardUI(
                             weight = 1F,
                         ),
                     text = data.title,
-                    style = MaterialTheme.typography.labelLarge
+                    style = FinanceManagerAppTheme.typography.labelLarge
                         .copy(
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = FinanceManagerAppTheme.colorScheme.onBackground,
                             textAlign = TextAlign.Center,
                         ),
                 )
                 MyIconButton(
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = FinanceManagerAppTheme.colorScheme.primary,
                     imageVector = MyIcons.ChevronRight,
                     contentDescriptionStringResourceId = R.string.finance_manager_overview_card_next_button_content_description,
                     onClick = {
@@ -249,7 +249,7 @@ private fun OverviewCardLoadingUI(
                 vertical = 16.dp,
             )
             .clip(
-                shape = MaterialTheme.shapes.medium,
+                shape = FinanceManagerAppTheme.shapes.medium,
             )
             .shimmer(),
     )

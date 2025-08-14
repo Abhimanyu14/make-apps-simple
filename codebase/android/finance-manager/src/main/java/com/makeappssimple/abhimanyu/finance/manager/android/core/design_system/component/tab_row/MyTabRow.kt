@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.tab_row
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -34,8 +34,8 @@ public fun MyTabRow(
     TabRow(
         selectedTabIndex = selectedTabIndex,
         modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.background,
-        contentColor = MaterialTheme.colorScheme.primary,
+        containerColor = FinanceManagerAppTheme.colorScheme.background,
+        contentColor = FinanceManagerAppTheme.colorScheme.primary,
     ) {
         tabDataList.mapIndexed { index, tabData ->
             val isSelected = selectedTabIndex == index
@@ -50,8 +50,8 @@ public fun MyTabRow(
                 onClick = {
                     updateSelectedTabIndex(index)
                 },
-                selectedContentColor = MaterialTheme.colorScheme.primary,
-                unselectedContentColor = MaterialTheme.colorScheme.primary,
+                selectedContentColor = FinanceManagerAppTheme.colorScheme.primary,
+                unselectedContentColor = FinanceManagerAppTheme.colorScheme.primary,
             )
         }
     }
@@ -64,12 +64,12 @@ private fun MyTabText(
 ) {
     MyText(
         text = title,
-        style = MaterialTheme.typography.headlineLarge
+        style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
                 color = if (isSelected) {
-                    MaterialTheme.colorScheme.primary
+                    FinanceManagerAppTheme.colorScheme.primary
                 } else {
-                    MaterialTheme.colorScheme.onBackground
+                    FinanceManagerAppTheme.colorScheme.onBackground
                 },
             ),
     )

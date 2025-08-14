@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -62,106 +61,106 @@ public val MyColor.composeColor: Color
     @Composable
     get() = when (this) {
         MyColor.PRIMARY -> {
-            MaterialTheme.colorScheme.primary
+            FinanceManagerAppTheme.colorScheme.primary
         }
 
         MyColor.ON_PRIMARY -> {
-            MaterialTheme.colorScheme.onPrimary
+            FinanceManagerAppTheme.colorScheme.onPrimary
         }
 
         MyColor.PRIMARY_CONTAINER -> {
-            MaterialTheme.colorScheme.primaryContainer
+            FinanceManagerAppTheme.colorScheme.primaryContainer
         }
 
         MyColor.ON_PRIMARY_CONTAINER -> {
-            MaterialTheme.colorScheme.onPrimaryContainer
+            FinanceManagerAppTheme.colorScheme.onPrimaryContainer
         }
 
         MyColor.INVERSE_PRIMARY -> {
-            MaterialTheme.colorScheme.inversePrimary
+            FinanceManagerAppTheme.colorScheme.inversePrimary
         }
 
         MyColor.SECONDARY -> {
-            MaterialTheme.colorScheme.secondary
+            FinanceManagerAppTheme.colorScheme.secondary
         }
 
         MyColor.ON_SECONDARY -> {
-            MaterialTheme.colorScheme.onSecondary
+            FinanceManagerAppTheme.colorScheme.onSecondary
         }
 
         MyColor.SECONDARY_CONTAINER -> {
-            MaterialTheme.colorScheme.secondaryContainer
+            FinanceManagerAppTheme.colorScheme.secondaryContainer
         }
 
         MyColor.ON_SECONDARY_CONTAINER -> {
-            MaterialTheme.colorScheme.onSecondaryContainer
+            FinanceManagerAppTheme.colorScheme.onSecondaryContainer
         }
 
         MyColor.TERTIARY -> {
-            MaterialTheme.colorScheme.tertiary
+            FinanceManagerAppTheme.colorScheme.tertiary
         }
 
         MyColor.ON_TERTIARY -> {
-            MaterialTheme.colorScheme.onTertiary
+            FinanceManagerAppTheme.colorScheme.onTertiary
         }
 
         MyColor.TERTIARY_CONTAINER -> {
-            MaterialTheme.colorScheme.tertiaryContainer
+            FinanceManagerAppTheme.colorScheme.tertiaryContainer
         }
 
         MyColor.ON_TERTIARY_CONTAINER -> {
-            MaterialTheme.colorScheme.onTertiaryContainer
+            FinanceManagerAppTheme.colorScheme.onTertiaryContainer
         }
 
         MyColor.BACKGROUND -> {
-            MaterialTheme.colorScheme.background
+            FinanceManagerAppTheme.colorScheme.background
         }
 
         MyColor.ON_BACKGROUND -> {
-            MaterialTheme.colorScheme.onBackground
+            FinanceManagerAppTheme.colorScheme.onBackground
         }
 
         MyColor.SURFACE -> {
-            MaterialTheme.colorScheme.surface
+            FinanceManagerAppTheme.colorScheme.surface
         }
 
         MyColor.ON_SURFACE -> {
-            MaterialTheme.colorScheme.onSurface
+            FinanceManagerAppTheme.colorScheme.onSurface
         }
 
         MyColor.SURFACE_VARIANT -> {
-            MaterialTheme.colorScheme.surfaceVariant
+            FinanceManagerAppTheme.colorScheme.surfaceVariant
         }
 
         MyColor.ON_SURFACE_VARIANT -> {
-            MaterialTheme.colorScheme.onSurfaceVariant
+            FinanceManagerAppTheme.colorScheme.onSurfaceVariant
         }
 
         MyColor.INVERSE_SURFACE -> {
-            MaterialTheme.colorScheme.inverseSurface
+            FinanceManagerAppTheme.colorScheme.inverseSurface
         }
 
         MyColor.INVERSE_ON_SURFACE -> {
-            MaterialTheme.colorScheme.inverseOnSurface
+            FinanceManagerAppTheme.colorScheme.inverseOnSurface
         }
 
         MyColor.ERROR -> {
-            MaterialTheme.colorScheme.error
+            FinanceManagerAppTheme.colorScheme.error
         }
 
         MyColor.ON_ERROR -> {
-            MaterialTheme.colorScheme.onError
+            FinanceManagerAppTheme.colorScheme.onError
         }
 
         MyColor.ERROR_CONTAINER -> {
-            MaterialTheme.colorScheme.errorContainer
+            FinanceManagerAppTheme.colorScheme.errorContainer
         }
 
         MyColor.ON_ERROR_CONTAINER -> {
-            MaterialTheme.colorScheme.onErrorContainer
+            FinanceManagerAppTheme.colorScheme.onErrorContainer
         }
 
         MyColor.OUTLINE -> {
-            MaterialTheme.colorScheme.outline
+            FinanceManagerAppTheme.colorScheme.outline
         }
     }

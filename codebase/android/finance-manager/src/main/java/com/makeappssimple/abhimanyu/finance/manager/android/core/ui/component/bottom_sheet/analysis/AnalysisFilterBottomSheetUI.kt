@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -32,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.NavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.date_picker.MyDatePicker
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.date_picker.MyDatePickerData
@@ -121,9 +121,9 @@ public fun AnalysisFilterBottomSheetUI(
                         weight = 1F,
                     ),
                 textStringResourceId = data.headingTextStringResourceId,
-                style = MaterialTheme.typography.headlineLarge
+                style = FinanceManagerAppTheme.typography.headlineLarge
                     .copy(
-                        color = MaterialTheme.colorScheme.onBackground,
+                        color = FinanceManagerAppTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Start,
                     ),
             )
@@ -133,7 +133,7 @@ public fun AnalysisFilterBottomSheetUI(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_clear,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
         }
@@ -226,7 +226,7 @@ public fun AnalysisFilterBottomSheetUI(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_reset,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
             Button(
@@ -241,7 +241,7 @@ public fun AnalysisFilterBottomSheetUI(
             ) {
                 MyText(
                     textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_apply,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
         }

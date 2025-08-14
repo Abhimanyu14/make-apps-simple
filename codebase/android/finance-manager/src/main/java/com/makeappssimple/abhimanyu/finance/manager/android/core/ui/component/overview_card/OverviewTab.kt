@@ -34,7 +34,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -70,7 +69,7 @@ public fun OverviewTab(
     data: OverviewTabData,
     handleEvent: (event: OverviewTabEvent) -> Unit = {},
 ) {
-    val textStyle = MaterialTheme.typography.labelLarge
+    val textStyle = FinanceManagerAppTheme.typography.labelLarge
 
     Box(
         modifier = modifier
@@ -78,7 +77,7 @@ public fun OverviewTab(
                 shape = CircleShape,
             )
             .background(
-                color = MaterialTheme.colorScheme.background,
+                color = FinanceManagerAppTheme.colorScheme.background,
             )
             .height(
                 intrinsicSize = IntrinsicSize.Min,
@@ -121,8 +120,8 @@ public fun OverviewTabText(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val defaultTextColor = MaterialTheme.colorScheme.onBackground
-    val selectedTextColor = MaterialTheme.colorScheme.onPrimary
+    val defaultTextColor = FinanceManagerAppTheme.colorScheme.onBackground
+    val selectedTextColor = FinanceManagerAppTheme.colorScheme.onPrimary
     val targetValue = remember(isSelected) {
         if (isSelected) {
             selectedTextColor
@@ -185,7 +184,7 @@ private fun OverviewTabIndicator(
 ) {
     val density = LocalDensity.current
     val textMeasurer = rememberTextMeasurer()
-    val indicatorColor = MaterialTheme.colorScheme.primary
+    val indicatorColor = FinanceManagerAppTheme.colorScheme.primary
 
     val tabWidths = remember(
         key1 = data.items,
@@ -275,7 +274,7 @@ private fun OverviewSelectionPreview() {
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .background(
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = FinanceManagerAppTheme.colorScheme.onBackground,
                 )
                 .fillMaxSize(),
         ) {

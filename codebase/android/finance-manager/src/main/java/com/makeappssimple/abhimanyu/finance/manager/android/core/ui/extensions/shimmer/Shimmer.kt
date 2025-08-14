@@ -22,7 +22,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
@@ -37,6 +36,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -90,19 +90,19 @@ public fun Modifier.shimmer(
 public fun rememberShimmerBrush(
     isShimmerVisible: Boolean = true,
     targetValue: Float,
-    backgroundColor: Color? = MaterialTheme.colorScheme.surfaceVariant,
-    shimmerColor: Color? = MaterialTheme.colorScheme.primaryContainer,
+    backgroundColor: Color? = FinanceManagerAppTheme.colorScheme.surfaceVariant,
+    shimmerColor: Color? = FinanceManagerAppTheme.colorScheme.primaryContainer,
 ): State<Brush> {
     val shimmerColors = listOf(
-        (backgroundColor ?: MaterialTheme.colorScheme.surfaceVariant)
+        (backgroundColor ?: FinanceManagerAppTheme.colorScheme.surfaceVariant)
             .copy(
                 alpha = 0.4F,
             ),
-        (shimmerColor ?: MaterialTheme.colorScheme.primaryContainer)
+        (shimmerColor ?: FinanceManagerAppTheme.colorScheme.primaryContainer)
             .copy(
                 alpha = 0.8F,
             ),
-        (backgroundColor ?: MaterialTheme.colorScheme.surfaceVariant)
+        (backgroundColor ?: FinanceManagerAppTheme.colorScheme.surfaceVariant)
             .copy(
                 alpha = 0.4F,
             ),

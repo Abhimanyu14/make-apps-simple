@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -71,18 +71,18 @@ public fun HomeRecentTransactions(
                     weight = 1F,
                 ),
             textStringResourceId = R.string.finance_manager_screen_home_recent_transactions,
-            style = MaterialTheme.typography.headlineLarge
+            style = FinanceManagerAppTheme.typography.headlineLarge
                 .copy(
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = FinanceManagerAppTheme.colorScheme.onBackground,
                 ),
         )
         if (data.isTrailingTextVisible) {
             MyText(
                 modifier = Modifier,
                 textStringResourceId = R.string.finance_manager_screen_home_view_all_transactions,
-                style = MaterialTheme.typography.headlineMedium
+                style = FinanceManagerAppTheme.typography.headlineMedium
                     .copy(
-                        color = MaterialTheme.colorScheme.primary,
+                        color = FinanceManagerAppTheme.colorScheme.primary,
                     ),
             )
         }
