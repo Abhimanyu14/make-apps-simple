@@ -56,6 +56,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -117,10 +119,11 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<HomeScreenUIState> =
+    private val _uiState: MutableStateFlow<HomeScreenUIState> =
         MutableStateFlow(
             value = HomeScreenUIState(),
         )
+    internal val uiState: StateFlow<HomeScreenUIState> = _uiState.asStateFlow()
     internal val uiStateEvents: HomeScreenUIStateEvents =
         HomeScreenUIStateEvents(
             handleOverviewCardAction = ::handleOverviewCardAction,
@@ -145,7 +148,7 @@ internal class HomeScreenViewModel(
         )
 
         coroutineScope.launch {
-            uiState.update {
+            _uiState.update {
                 HomeScreenUIState(
                     isBackupCardVisible = isBackupCardVisible.first(),
                     isBalanceVisible = isBalanceVisible.value,

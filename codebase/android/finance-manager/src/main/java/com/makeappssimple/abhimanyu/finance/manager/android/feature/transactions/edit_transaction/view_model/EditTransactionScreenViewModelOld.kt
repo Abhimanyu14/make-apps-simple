@@ -76,6 +76,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
@@ -159,7 +160,8 @@ public class EditTransactionScreenViewModelOld(
 
     internal val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
 
-    internal val uiState: MutableStateFlow<EditTransactionScreenUiStateData> =
+
+    private val _uiState: MutableStateFlow<EditTransactionScreenUiStateData> =
         MutableStateFlow(
             value = EditTransactionScreenUiStateData(
                 selectedTransactionTypeIndex = null,
@@ -174,6 +176,8 @@ public class EditTransactionScreenViewModelOld(
                 transactionTime = dateTimeKit.getCurrentLocalTime(),
             ),
         )
+    internal val uiState: StateFlow<EditTransactionScreenUiStateData> =
+        _uiState.asStateFlow()
     private val uiVisibilityState: MutableStateFlow<EditTransactionScreenUiVisibilityState> =
         MutableStateFlow(
             value = EditTransactionScreenUiVisibilityState.Expense,
@@ -657,7 +661,7 @@ public class EditTransactionScreenViewModelOld(
     private fun updateEditTransactionScreenUiState(
         updatedEditTransactionScreenUiStateData: EditTransactionScreenUiStateData,
     ) {
-        uiState.update {
+        _uiState.update {
             updatedEditTransactionScreenUiStateData
         }
     }

@@ -34,6 +34,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.set
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -72,10 +74,12 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<SettingsScreenUIState> =
+    private val _uiState: MutableStateFlow<SettingsScreenUIState> =
         MutableStateFlow(
             value = SettingsScreenUIState(),
         )
+    internal val uiState: StateFlow<SettingsScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: SettingsScreenUIStateEvents =
         SettingsScreenUIStateEvents(
             disableReminder = ::disableReminder,
@@ -94,7 +98,7 @@ internal class SettingsScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         // TODO(Abhi): Fix isLoading, isReminderEnabled and screenSnackbarType
-        uiState.update {
+        _uiState.update {
             SettingsScreenUIState(
                 isLoading = isLoading,
                 isReminderEnabled = isReminderEnabled.value,

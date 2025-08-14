@@ -50,6 +50,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
@@ -99,10 +101,12 @@ internal class CategoriesScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<CategoriesScreenUIState> =
+    private val _uiState: MutableStateFlow<CategoriesScreenUIState> =
         MutableStateFlow(
             value = CategoriesScreenUIState(),
         )
+    internal val uiState: StateFlow<CategoriesScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: CategoriesScreenUIStateEvents =
         CategoriesScreenUIStateEvents(
             deleteCategory = ::deleteCategory,
@@ -128,7 +132,7 @@ internal class CategoriesScreenViewModel(
         }
 
         // TODO(Abhi): To Fix categoriesGridItemDataMap
-        uiState.update {
+        _uiState.update {
             CategoriesScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
                 screenBottomSheetType = screenBottomSheetType,

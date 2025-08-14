@@ -37,6 +37,8 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -69,10 +71,12 @@ internal class TransactionForValuesScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<TransactionForValuesScreenUIState> =
+    private val _uiState: MutableStateFlow<TransactionForValuesScreenUIState> =
         MutableStateFlow(
             value = TransactionForValuesScreenUIState(),
         )
+    internal val uiState: StateFlow<TransactionForValuesScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: TransactionForValuesScreenUIStateEvents =
         TransactionForValuesScreenUIStateEvents(
             deleteTransactionFor = ::deleteTransactionFor,
@@ -87,7 +91,7 @@ internal class TransactionForValuesScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        uiState.update {
+        _uiState.update {
             TransactionForValuesScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
                 isLoading = isLoading,

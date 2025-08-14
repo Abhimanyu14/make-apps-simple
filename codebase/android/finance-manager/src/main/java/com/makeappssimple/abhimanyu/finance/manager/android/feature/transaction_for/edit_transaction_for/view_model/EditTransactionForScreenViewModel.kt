@@ -33,6 +33,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -68,10 +70,12 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<EditTransactionForScreenUIState> =
+    private val _uiState: MutableStateFlow<EditTransactionForScreenUIState> =
         MutableStateFlow(
             value = EditTransactionForScreenUIState(),
         )
+    internal val uiState: StateFlow<EditTransactionForScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: EditTransactionForScreenUIStateEvents =
         EditTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
@@ -89,7 +93,7 @@ internal class EditTransactionForScreenViewModel(
                     currentTransactionFor = currentTransactionFor,
                     enteredTitle = title.text,
                 )
-            uiState.update {
+            _uiState.update {
                 EditTransactionForScreenUIState(
                     isCtaButtonEnabled = validationState.isCtaButtonEnabled,
                     isLoading = isLoading,

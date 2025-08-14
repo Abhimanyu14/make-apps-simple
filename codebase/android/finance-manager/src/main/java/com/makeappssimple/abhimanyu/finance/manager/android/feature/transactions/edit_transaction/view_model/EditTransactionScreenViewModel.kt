@@ -73,6 +73,8 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
@@ -199,10 +201,12 @@ internal class EditTransactionScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<EditTransactionScreenUIState> =
+    private val _uiState: MutableStateFlow<EditTransactionScreenUIState> =
         MutableStateFlow(
             value = EditTransactionScreenUIState(),
         )
+    internal val uiState: StateFlow<EditTransactionScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: EditTransactionScreenUIStateEvents =
         EditTransactionScreenUIStateEvents(
             clearAmount = ::clearAmount,
@@ -241,7 +245,7 @@ internal class EditTransactionScreenViewModel(
                 title = title.value.text,
                 selectedTransactionType = selectedTransactionType,
             )
-        uiState.update {
+        _uiState.update {
             EditTransactionScreenUIState(
                 accountFrom = accountFrom.value,
                 accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {

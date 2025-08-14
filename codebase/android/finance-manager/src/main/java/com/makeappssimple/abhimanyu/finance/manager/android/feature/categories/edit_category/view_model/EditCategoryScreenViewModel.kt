@@ -48,6 +48,8 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -120,10 +122,12 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<EditCategoryScreenUIState> =
+    private val _uiState: MutableStateFlow<EditCategoryScreenUIState> =
         MutableStateFlow(
             value = EditCategoryScreenUIState(),
         )
+    internal val uiState: StateFlow<EditCategoryScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: EditCategoryScreenUIStateEvents =
         EditCategoryScreenUIStateEvents(
             clearTitle = ::clearTitle,
@@ -167,7 +171,7 @@ internal class EditCategoryScreenViewModel(
             true
         }
 
-        uiState.update {
+        _uiState.update {
             EditCategoryScreenUIState(
                 screenBottomSheetType = screenBottomSheetType.value,
                 isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,

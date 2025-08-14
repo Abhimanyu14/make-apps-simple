@@ -37,6 +37,8 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -77,10 +79,12 @@ internal class AccountsScreenViewModel(
     // endregion
 
     // region uiState and uiStateEvents
-    internal val uiState: MutableStateFlow<AccountsScreenUIState> =
+    private val _uiState: MutableStateFlow<AccountsScreenUIState> =
         MutableStateFlow(
             value = AccountsScreenUIState(),
         )
+    internal val uiState: StateFlow<AccountsScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: AccountsScreenUIStateEvents =
         AccountsScreenUIStateEvents(
             deleteAccount = ::deleteAccount,
@@ -96,7 +100,7 @@ internal class AccountsScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        uiState.update {
+        _uiState.update {
             AccountsScreenUIState(
                 screenBottomSheetType = screenBottomSheetType,
                 isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,

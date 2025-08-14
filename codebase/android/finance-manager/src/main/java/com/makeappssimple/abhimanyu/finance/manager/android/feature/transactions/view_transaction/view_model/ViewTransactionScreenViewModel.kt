@@ -40,6 +40,8 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -84,10 +86,12 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<ViewTransactionScreenUIState> =
+    private val _uiState: MutableStateFlow<ViewTransactionScreenUIState> =
         MutableStateFlow(
             value = ViewTransactionScreenUIState(),
         )
+    internal val uiState: StateFlow<ViewTransactionScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: ViewTransactionScreenUIStateEvents =
         ViewTransactionScreenUIStateEvents(
             deleteTransaction = ::deleteTransaction,
@@ -109,7 +113,7 @@ internal class ViewTransactionScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         // TODO(Abhi): Fix screenBottomSheetType
-        uiState.update {
+        _uiState.update {
             ViewTransactionScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
                 isLoading = isLoading,

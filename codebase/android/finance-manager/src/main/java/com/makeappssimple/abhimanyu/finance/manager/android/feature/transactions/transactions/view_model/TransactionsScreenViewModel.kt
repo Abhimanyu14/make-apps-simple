@@ -54,6 +54,8 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
@@ -136,10 +138,12 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<TransactionsScreenUIState> =
+    private val _uiState: MutableStateFlow<TransactionsScreenUIState> =
         MutableStateFlow(
             value = TransactionsScreenUIState(),
         )
+    internal val uiState: StateFlow<TransactionsScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: TransactionsScreenUIStateEvents =
         TransactionsScreenUIStateEvents(
             addToSelectedTransactions = ::addToSelectedTransactions,
@@ -165,7 +169,7 @@ internal class TransactionsScreenViewModel(
             isInitialDataFetchCompleted = true
         }
 
-        uiState.update {
+        _uiState.update {
             TransactionsScreenUIState(
                 isBackHandlerEnabled = searchText.value.isNotEmpty() ||
                         selectedFilter.value.orEmpty().areFiltersSelected() ||

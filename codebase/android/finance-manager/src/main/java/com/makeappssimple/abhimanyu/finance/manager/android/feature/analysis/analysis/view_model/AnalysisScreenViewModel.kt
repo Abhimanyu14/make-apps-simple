@@ -45,6 +45,8 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -106,10 +108,12 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<AnalysisScreenUIState> =
+    private val _uiState: MutableStateFlow<AnalysisScreenUIState> =
         MutableStateFlow(
             value = AnalysisScreenUIState(),
         )
+    internal val uiState: StateFlow<AnalysisScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: AnalysisScreenUIStateEvents =
         AnalysisScreenUIStateEvents(
             navigateUp = ::navigateUp,
@@ -122,7 +126,7 @@ internal class AnalysisScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        uiState.update {
+        _uiState.update {
             AnalysisScreenUIState(
                 screenBottomSheetType = screenBottomSheetType.value,
                 isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,

@@ -67,6 +67,8 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
@@ -194,10 +196,12 @@ internal class AddTransactionScreenViewModel(
     // endregion
 
     // region uiStateAndStateEvents
-    internal val uiState: MutableStateFlow<AddTransactionScreenUIState> =
+    private val _uiState: MutableStateFlow<AddTransactionScreenUIState> =
         MutableStateFlow(
             value = AddTransactionScreenUIState(),
         )
+    internal val uiState: StateFlow<AddTransactionScreenUIState> =
+        _uiState.asStateFlow()
     internal val uiStateEvents: AddTransactionScreenUIStateEvents =
         AddTransactionScreenUIStateEvents(
             clearAmount = ::clearAmount,
@@ -231,7 +235,7 @@ internal class AddTransactionScreenViewModel(
             title = title.value.text,
             selectedTransactionType = selectedTransactionType,
         )
-        uiState.update {
+        _uiState.update {
             AddTransactionScreenUIState(
                 accountFrom = accountFrom.value,
                 accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
