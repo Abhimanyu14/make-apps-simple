@@ -19,15 +19,16 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ac
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
+import kotlinx.coroutines.Job
 
 @Immutable
 internal data class AccountsScreenUIStateEvents(
-    val deleteAccount: () -> Unit = {},
-    val navigateToAddAccountScreen: () -> Unit = {},
-    val navigateToEditAccountScreen: (accountId: Int) -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val updateClickedItemId: (Int?) -> Unit = {},
-    val updateDefaultAccountIdInDataStore: () -> Unit = {},
-    val updateScreenBottomSheetType: (AccountsScreenBottomSheetType) -> Unit = {},
+    val deleteAccount: () -> Job,
+    val navigateToAddAccountScreen: () -> Job,
+    val navigateToEditAccountScreen: (accountId: Int) -> Job,
+    val navigateUp: () -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val updateClickedItemId: (Int?) -> Job,
+    val updateDefaultAccountIdInDataStore: () -> Job,
+    val updateScreenBottomSheetType: (AccountsScreenBottomSheetType) -> Job,
 ) : ScreenUIStateEvents

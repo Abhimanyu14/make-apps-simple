@@ -126,8 +126,8 @@ internal class AccountsScreenViewModel(
     // endregion
 
     // region state events
-    private fun deleteAccount() {
-        coroutineScope.launch {
+    private fun deleteAccount(): Job {
+        return coroutineScope.launch {
             clickedItemId?.let { id ->
                 val isAccountDeleted = deleteAccountByIdUseCase(
                     id = id,
@@ -143,8 +143,8 @@ internal class AccountsScreenViewModel(
         }
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedAccountsScreenBottomSheetType = AccountsScreenBottomSheetType.None,
         )
     }
@@ -152,15 +152,15 @@ internal class AccountsScreenViewModel(
     private fun updateClickedItemId(
         updatedClickedItemId: Int?,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         clickedItemId = updatedClickedItemId
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
-    private fun updateDefaultAccountIdInDataStore() {
-        coroutineScope.launch {
+    private fun updateDefaultAccountIdInDataStore(): Job {
+        return coroutineScope.launch {
             clickedItemId?.let { accountId ->
                 val isDefaultAccountUpdated =
                     financeManagerPreferencesRepository.updateDefaultAccountId(
@@ -181,11 +181,11 @@ internal class AccountsScreenViewModel(
     private fun updateScreenBottomSheetType(
         updatedAccountsScreenBottomSheetType: AccountsScreenBottomSheetType,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         screenBottomSheetType = updatedAccountsScreenBottomSheetType
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 
@@ -235,13 +235,15 @@ internal class AccountsScreenViewModel(
 
     private suspend fun handleDefaultAccountIdUpdate(
         updatedDefaultAccountId: Int?,
-    ) {
+    ): Job {
         defaultAccountId = updatedDefaultAccountId
         allAccountsListItemDataList = getAllAccountsListItemDataListUseCase(
             allAccounts = allAccounts,
             defaultAccountId = defaultAccountId,
         )
-        refresh()
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
     // endregion
 }

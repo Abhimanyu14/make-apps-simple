@@ -22,27 +22,28 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.bottom_sheet.AddTransactionScreenBottomSheetType
+import kotlinx.coroutines.Job
 import java.time.LocalDate
 import java.time.LocalTime
 
 @Stable
 internal class AddTransactionScreenUIStateEvents(
-    val clearAmount: () -> Unit = {},
-    val clearTitle: () -> Unit = {},
-    val insertTransaction: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val resetScreenSnackbarType: () -> Unit = {},
-    val updateAccountFrom: (updatedAccountFrom: Account?) -> Unit = {},
-    val updateAccountTo: (updatedAccountTo: Account?) -> Unit = {},
-    val updateAmount: (updatedAmount: TextFieldValue) -> Unit = {},
-    val updateCategory: (updatedCategory: Category?) -> Unit = {},
-    val updateIsTransactionDatePickerDialogVisible: (Boolean) -> Unit = {},
-    val updateIsTransactionTimePickerDialogVisible: (Boolean) -> Unit = {},
-    val updateScreenBottomSheetType: (AddTransactionScreenBottomSheetType) -> Unit = {},
-    val updateSelectedTransactionForIndex: (updatedSelectedTransactionForIndex: Int) -> Unit = {},
-    val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Unit = {},
-    val updateTitle: (updatedTitle: TextFieldValue) -> Unit = {},
-    val updateTransactionDate: (updatedTransactionDate: LocalDate) -> Unit = {},
-    val updateTransactionTime: (updatedTransactionTime: LocalTime) -> Unit = {},
+    val clearAmount: () -> Job,
+    val clearTitle: () -> Job,
+    val insertTransaction: () -> Job,
+    val navigateUp: () -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val resetScreenSnackbarType: () -> Job,
+    val updateAccountFrom: (updatedAccountFrom: Account?) -> Job,
+    val updateAccountTo: (updatedAccountTo: Account?) -> Job,
+    val updateAmount: (updatedAmount: TextFieldValue) -> Job,
+    val updateCategory: (updatedCategory: Category?) -> Job,
+    val updateIsTransactionDatePickerDialogVisible: (Boolean) -> Job,
+    val updateIsTransactionTimePickerDialogVisible: (Boolean) -> Job,
+    val updateScreenBottomSheetType: (AddTransactionScreenBottomSheetType) -> Job,
+    val updateSelectedTransactionForIndex: (updatedSelectedTransactionForIndex: Int) -> Job,
+    val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
+    val updateTitle: (updatedTitle: TextFieldValue) -> Job,
+    val updateTransactionDate: (updatedTransactionDate: LocalDate) -> Job,
+    val updateTransactionTime: (updatedTransactionTime: LocalTime) -> Job,
 ) : ScreenUIStateEvents

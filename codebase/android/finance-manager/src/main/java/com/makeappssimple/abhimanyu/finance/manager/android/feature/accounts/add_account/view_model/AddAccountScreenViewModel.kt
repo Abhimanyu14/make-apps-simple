@@ -185,10 +185,9 @@ internal class AddAccountScreenViewModel(
     ): Job {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateName(
@@ -196,10 +195,9 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         name = updatedName
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateScreenSnackbarType(
@@ -207,10 +205,12 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenSnackbarType = updatedAddAccountScreenSnackbarType
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateSelectedAccountTypeIndex(
@@ -218,10 +218,9 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 
@@ -230,12 +229,6 @@ internal class AddAccountScreenViewModel(
         return validAccountTypesForNewAccount.get(
             index = selectedAccountTypeIndex,
         )
-    }
-
-    private fun getCompletedJob(): Job {
-        return Job().apply {
-            complete()
-        }
     }
     // endregion
 }

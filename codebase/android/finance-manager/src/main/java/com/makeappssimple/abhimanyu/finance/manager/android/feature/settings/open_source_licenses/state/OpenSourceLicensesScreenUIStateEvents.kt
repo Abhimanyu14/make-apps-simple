@@ -18,8 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.op
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
+import kotlinx.coroutines.Job
 
 @Stable
 internal class OpenSourceLicensesScreenUIStateEvents(
-    val navigateUp: () -> Unit = {},
+    val navigateUp: () -> Job,
 ) : ScreenUIStateEvents

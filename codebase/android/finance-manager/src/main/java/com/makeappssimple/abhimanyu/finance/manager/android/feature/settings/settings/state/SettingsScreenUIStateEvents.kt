@@ -19,17 +19,18 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.se
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
+import kotlinx.coroutines.Job
 
 @Immutable
 internal data class SettingsScreenUIStateEvents(
-    val disableReminder: () -> Unit = {},
-    val enableReminder: () -> Unit = {},
-    val navigateToAccountsScreen: () -> Unit = {},
-    val navigateToCategoriesScreen: () -> Unit = {},
-    val navigateToOpenSourceLicensesScreen: () -> Unit = {},
-    val navigateToTransactionForValuesScreen: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val recalculateTotal: () -> Unit = {},
-    val resetScreenSnackbarType: () -> Unit = {},
-    val updateScreenSnackbarType: (SettingsScreenSnackbarType) -> Unit = {},
+    val disableReminder: () -> Job,
+    val enableReminder: () -> Job,
+    val navigateToAccountsScreen: () -> Job,
+    val navigateToCategoriesScreen: () -> Job,
+    val navigateToOpenSourceLicensesScreen: () -> Job,
+    val navigateToTransactionForValuesScreen: () -> Job,
+    val navigateUp: () -> Job,
+    val recalculateTotal: () -> Job,
+    val resetScreenSnackbarType: () -> Job,
+    val updateScreenSnackbarType: (SettingsScreenSnackbarType) -> Job,
 ) : ScreenUIStateEvents

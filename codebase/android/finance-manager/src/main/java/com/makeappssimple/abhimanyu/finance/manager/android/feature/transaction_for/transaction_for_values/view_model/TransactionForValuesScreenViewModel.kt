@@ -132,10 +132,9 @@ internal class TransactionForValuesScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedTransactionForValuesScreenBottomSheetType
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateTransactionForIdToDelete(
@@ -143,10 +142,9 @@ internal class TransactionForValuesScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         transactionForIdToDelete = updatedTransactionForIdToDelete
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 
@@ -174,14 +172,6 @@ internal class TransactionForValuesScreenViewModel(
                     }
                 completeLoading()
             }
-        }
-    }
-    // endregion
-
-    // region common
-    private fun getCompletedJob(): Job {
-        return Job().apply {
-            complete()
         }
     }
     // endregion

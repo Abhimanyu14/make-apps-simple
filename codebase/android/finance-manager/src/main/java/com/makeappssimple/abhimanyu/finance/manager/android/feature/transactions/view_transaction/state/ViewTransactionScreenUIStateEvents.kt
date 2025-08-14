@@ -19,15 +19,16 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
+import kotlinx.coroutines.Job
 
 @Stable
 internal class ViewTransactionScreenUIStateEvents(
-    val deleteTransaction: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val navigateToEditTransactionScreen: (transactionId: Int) -> Unit = {},
-    val navigateToViewTransactionScreen: (transactionId: Int) -> Unit = {},
-    val onRefundButtonClick: (transactionId: Int) -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val updateScreenBottomSheetType: (ViewTransactionScreenBottomSheetType) -> Unit = {},
-    val updateTransactionIdToDelete: (Int?) -> Unit = {},
+    val deleteTransaction: () -> Job,
+    val navigateUp: () -> Job,
+    val navigateToEditTransactionScreen: (transactionId: Int) -> Job,
+    val navigateToViewTransactionScreen: (transactionId: Int) -> Job,
+    val onRefundButtonClick: (transactionId: Int) -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val updateScreenBottomSheetType: (ViewTransactionScreenBottomSheetType) -> Job,
+    val updateTransactionIdToDelete: (Int?) -> Job,
 ) : ScreenUIStateEvents

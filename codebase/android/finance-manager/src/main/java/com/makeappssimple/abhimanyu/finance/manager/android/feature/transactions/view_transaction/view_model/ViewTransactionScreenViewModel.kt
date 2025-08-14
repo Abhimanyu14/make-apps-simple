@@ -99,6 +99,9 @@ internal class ViewTransactionScreenViewModel(
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateTransactionIdToDelete = {
                 transactionIdToDelete = it
+                refreshIfRequired(
+                    shouldRefresh = true,
+                )
             },
         )
     // endregion
@@ -130,10 +133,10 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region state events
-    private fun deleteTransaction() {
+    private fun deleteTransaction(): Job {
         val id = transactionIdToDelete
-            ?: return // TODO(Abhi): Handle this error scenario
-        coroutineScope.launch {
+            ?: throw IllegalStateException("Transaction ID to delete is null.")
+        return coroutineScope.launch {
             startLoading()
             val isTransactionDeleted = deleteTransactionUseByIdCase(
                 id = id,
@@ -152,24 +155,27 @@ internal class ViewTransactionScreenViewModel(
 
     private fun onRefundButtonClick(
         transactionId: Int,
-    ) {
-        navigateToAddTransactionScreen(
+    ): Job {
+        return navigateToAddTransactionScreen(
             transactionId = transactionId,
         )
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedViewTransactionScreenBottomSheetType = ViewTransactionScreenBottomSheetType.None,
         )
     }
 
     private fun updateScreenBottomSheetType(
         updatedViewTransactionScreenBottomSheetType: ViewTransactionScreenBottomSheetType,
-    ) {
+    ): Job {
         screenBottomSheetType.update {
             updatedViewTransactionScreenBottomSheetType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
     // endregion
 

@@ -20,12 +20,13 @@ import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
+import kotlinx.coroutines.Job
 
 @Stable
 internal class AnalysisScreenUIStateEvents(
-    val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val updateScreenBottomSheetType: (AnalysisScreenBottomSheetType) -> Unit = {},
-    val updateSelectedFilter: (updatedSelectedFilter: Filter) -> Unit = {},
-    val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Unit = {},
+    val navigateUp: () -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val updateScreenBottomSheetType: (AnalysisScreenBottomSheetType) -> Job,
+    val updateSelectedFilter: (updatedSelectedFilter: Filter) -> Job,
+    val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
 ) : ScreenUIStateEvents

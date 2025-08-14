@@ -47,6 +47,7 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -286,8 +287,8 @@ internal class CategoriesScreenViewModel(
     // endregion
 
     // region state events
-    private fun deleteCategory() {
-        coroutineScope.launch {
+    private fun deleteCategory(): Job {
+        return coroutineScope.launch {
             categoryIdToDelete?.let { id ->
                 val isCategoryDeleted = deleteCategoryByIdUseCase(
                     id = id,
@@ -303,22 +304,22 @@ internal class CategoriesScreenViewModel(
         }
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedCategoriesScreenBottomSheetType = CategoriesScreenBottomSheetType.None,
         )
     }
 
-    private fun resetScreenSnackbarType() {
-        updateScreenSnackbarType(
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
             updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.None,
         )
     }
 
     private fun updateDefaultCategoryIdInDataStore(
         selectedTabIndex: Int,
-    ) {
-        coroutineScope.launch {
+    ): Job {
+        return coroutineScope.launch {
             clickedItemId?.let {
                 val isSetDefaultCategorySuccessful = setDefaultCategoryUseCase(
                     defaultCategoryId = it,
@@ -343,41 +344,41 @@ internal class CategoriesScreenViewModel(
     private fun updateCategoryIdToDelete(
         updatedCategoryIdToDelete: Int?,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         categoryIdToDelete = updatedCategoryIdToDelete
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateClickedItemId(
         updatedClickedItemId: Int?,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         clickedItemId = updatedClickedItemId
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateScreenBottomSheetType(
         updatedCategoriesScreenBottomSheetType: CategoriesScreenBottomSheetType,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         screenBottomSheetType = updatedCategoriesScreenBottomSheetType
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateScreenSnackbarType(
         updatedCategoriesScreenSnackbarType: CategoriesScreenSnackbarType,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         screenSnackbarType = updatedCategoriesScreenSnackbarType
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 

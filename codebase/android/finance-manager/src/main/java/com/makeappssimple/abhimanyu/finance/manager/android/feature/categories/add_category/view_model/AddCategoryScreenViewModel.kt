@@ -161,38 +161,38 @@ internal class AddCategoryScreenViewModel(
     // region state events
     private fun clearSearchText(
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         searchText = ""
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun clearTitle(
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         title = title.copy(
             text = "",
         )
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
-    private fun insertCategory() {
+    private fun insertCategory(): Job {
         val category = Category(
             emoji = emoji,
             title = title.text,
             transactionType = validTransactionTypes[selectedTransactionTypeIndex],
         )
-        coroutineScope.launch {
+        return coroutineScope.launch {
             insertCategoriesUseCase(category)
             navigateUp()
         }
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedAddCategoryScreenBottomSheetType = AddCategoryScreenBottomSheetType.None,
         )
     }
@@ -200,51 +200,51 @@ internal class AddCategoryScreenViewModel(
     private fun updateEmoji(
         updatedEmoji: String,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         emoji = updatedEmoji
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateScreenBottomSheetType(
         updatedAddCategoryScreenBottomSheetType: AddCategoryScreenBottomSheetType,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         screenBottomSheetType = updatedAddCategoryScreenBottomSheetType
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateSearchText(
         updatedSearchText: String,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         searchText = updatedSearchText
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateTitle(
         updatedTitle: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         title = updatedTitle
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 

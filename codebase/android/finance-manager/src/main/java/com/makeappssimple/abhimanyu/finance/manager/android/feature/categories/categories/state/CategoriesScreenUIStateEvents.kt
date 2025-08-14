@@ -20,18 +20,19 @@ import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
+import kotlinx.coroutines.Job
 
 @Stable
 internal class CategoriesScreenUIStateEvents(
-    val deleteCategory: () -> Unit = {},
-    val navigateToAddCategoryScreen: (transactionType: String) -> Unit = {},
-    val navigateToEditCategoryScreen: (categoryId: Int) -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val resetScreenSnackbarType: () -> Unit = {},
-    val updateCategoryIdToDelete: (updatedCategoryIdToDelete: Int?) -> Unit = {},
-    val updateClickedItemId: (updatedClickedItemId: Int?) -> Unit = {},
-    val updateDefaultCategoryIdInDataStore: (selectedTabIndex: Int) -> Unit = {},
-    val updateScreenBottomSheetType: (updatedCategoriesBottomSheetType: CategoriesScreenBottomSheetType) -> Unit = {},
-    val updateScreenSnackbarType: (CategoriesScreenSnackbarType) -> Unit = {},
+    val deleteCategory: () -> Job,
+    val navigateToAddCategoryScreen: (transactionType: String) -> Job,
+    val navigateToEditCategoryScreen: (categoryId: Int) -> Job,
+    val navigateUp: () -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val resetScreenSnackbarType: () -> Job,
+    val updateCategoryIdToDelete: (updatedCategoryIdToDelete: Int?) -> Job,
+    val updateClickedItemId: (updatedClickedItemId: Int?) -> Job,
+    val updateDefaultCategoryIdInDataStore: (selectedTabIndex: Int) -> Job,
+    val updateScreenBottomSheetType: (updatedCategoriesBottomSheetType: CategoriesScreenBottomSheetType) -> Job,
+    val updateScreenSnackbarType: (CategoriesScreenSnackbarType) -> Job,
 ) : ScreenUIStateEvents

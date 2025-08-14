@@ -20,16 +20,17 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
+import kotlinx.coroutines.Job
 
 @Stable
 internal class EditCategoryScreenUIStateEvents(
-    val clearTitle: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val updateCategory: () -> Unit = {},
-    val updateEmoji: (updatedEmoji: String) -> Unit = {},
-    val updateScreenBottomSheetType: (EditCategoryScreenBottomSheetType) -> Unit = {},
-    val updateSearchText: (updatedSearchText: String) -> Unit = {},
-    val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Unit = {},
-    val updateTitle: (updatedTitle: TextFieldValue) -> Unit = {},
+    val clearTitle: () -> Job,
+    val navigateUp: () -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val updateCategory: () -> Job,
+    val updateEmoji: (updatedEmoji: String) -> Job,
+    val updateScreenBottomSheetType: (EditCategoryScreenBottomSheetType) -> Job,
+    val updateSearchText: (updatedSearchText: String) -> Job,
+    val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
+    val updateTitle: (updatedTitle: TextFieldValue) -> Job,
 ) : ScreenUIStateEvents

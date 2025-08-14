@@ -122,8 +122,8 @@ internal class SettingsScreenViewModel(
     // region backupDataToDocument
     internal fun backupDataToDocument(
         uri: Uri,
-    ) {
-        coroutineScope.launch {
+    ): Job {
+        return coroutineScope.launch {
             startLoading()
             val isBackupSuccessful = backupDataUseCase(
                 uri = uri,
@@ -140,8 +140,8 @@ internal class SettingsScreenViewModel(
     // region restoreDataFromDocument
     internal fun restoreDataFromDocument(
         uri: Uri,
-    ) {
-        coroutineScope.launch {
+    ): Job {
+        return coroutineScope.launch {
             startLoading()
             if (restoreDataUseCase(
                     uri = uri,
@@ -159,8 +159,8 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region state events
-    private fun disableReminder() {
-        coroutineScope.launch {
+    private fun disableReminder(): Job {
+        return coroutineScope.launch {
             if (alarmKit.cancelReminderAlarm()) {
                 updateScreenSnackbarType(
                     updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.CancelReminderSuccessful,
@@ -173,32 +173,35 @@ internal class SettingsScreenViewModel(
         }
     }
 
-    private fun enableReminder() {
-        coroutineScope.launch {
+    private fun enableReminder(): Job {
+        return coroutineScope.launch {
             alarmKit.scheduleReminderAlarm()
         }
     }
 
-    private fun recalculateTotal() {
-        coroutineScope.launch {
+    private fun recalculateTotal(): Job {
+        return coroutineScope.launch {
             startLoading()
             recalculateTotalUseCase()
             navigateUp()
         }
     }
 
-    private fun resetScreenSnackbarType() {
-        updateScreenSnackbarType(
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
             updatedSettingsScreenSnackbarType = SettingsScreenSnackbarType.None,
         )
     }
 
     private fun updateScreenSnackbarType(
         updatedSettingsScreenSnackbarType: SettingsScreenSnackbarType,
-    ) {
+    ): Job {
         screenSnackbarType.update {
             updatedSettingsScreenSnackbarType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
     // endregion
 

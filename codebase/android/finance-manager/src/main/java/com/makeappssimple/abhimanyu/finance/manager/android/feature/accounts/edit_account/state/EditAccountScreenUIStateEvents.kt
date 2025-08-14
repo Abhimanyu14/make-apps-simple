@@ -20,17 +20,18 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
+import kotlinx.coroutines.Job
 
 @Stable
 internal class EditAccountScreenUIStateEvents(
-    val clearBalanceAmountValue: () -> Unit = {},
-    val clearMinimumAccountBalanceAmountValue: () -> Unit = {},
-    val clearName: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val updateAccount: () -> Unit = {},
-    val updateBalanceAmountValue: (updatedBalanceAmountValue: TextFieldValue) -> Unit = {},
-    val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Unit = {},
-    val updateName: (updatedName: TextFieldValue) -> Unit = {},
-    val updateScreenSnackbarType: (EditAccountScreenSnackbarType) -> Unit = {},
-    val updateSelectedAccountTypeIndex: (updatedSelectedAccountTypeIndex: Int) -> Unit = {},
+    val clearBalanceAmountValue: () -> Job,
+    val clearMinimumAccountBalanceAmountValue: () -> Job,
+    val clearName: () -> Job,
+    val navigateUp: () -> Job,
+    val updateAccount: () -> Job,
+    val updateBalanceAmountValue: (updatedBalanceAmountValue: TextFieldValue) -> Job,
+    val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Job,
+    val updateName: (updatedName: TextFieldValue) -> Job,
+    val updateScreenSnackbarType: (EditAccountScreenSnackbarType) -> Job,
+    val updateSelectedAccountTypeIndex: (updatedSelectedAccountTypeIndex: Int) -> Job,
 ) : ScreenUIStateEvents

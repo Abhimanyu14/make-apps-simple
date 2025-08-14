@@ -74,4 +74,21 @@ public abstract class ScreenViewModel(
             }
         }
     }
+
+    // region common
+    internal fun getCompletedJob(): Job {
+        return Job().apply {
+            complete()
+        }
+    }
+
+    internal fun refreshIfRequired(
+        shouldRefresh: Boolean,
+    ): Job {
+        if (shouldRefresh) {
+            return refresh()
+        }
+        return getCompletedJob()
+    }
+    // endregion
 }

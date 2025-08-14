@@ -331,153 +331,201 @@ internal class EditTransactionScreenViewModel(
     // endregion
 
     // region state events
-    private fun clearAmount() {
+    private fun clearAmount(): Job {
         amount.update {
             it.copy(
                 text = "",
             )
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun clearTitle() {
+    private fun clearTitle(): Job {
         title.update {
             it.copy(
                 text = "",
             )
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedEditTransactionScreenBottomSheetType = EditTransactionScreenBottomSheetType.None,
         )
     }
 
-    private fun resetScreenSnackbarType() {
-        updateScreenSnackbarType(
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
             updatedEditTransactionScreenSnackbarType = EditTransactionScreenSnackbarType.None,
         )
     }
 
     private fun updateAccountFrom(
         updatedAccountFrom: Account?,
-    ) {
+    ): Job {
         accountFrom.update {
             updatedAccountFrom
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateAccountTo(
         updatedAccountTo: Account?,
-    ) {
+    ): Job {
         accountTo.update {
             updatedAccountTo
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateAmount(
         updatedAmount: TextFieldValue,
-    ) {
+    ): Job {
         amount.update {
             updatedAmount.copy(
                 text = updatedAmount.text.filterDigits(),
             )
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateAmount(
         updatedAmount: String,
-    ) {
+    ): Job {
         amount.update {
             it.copy(
                 text = updatedAmount.filterDigits(),
             )
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateCategory(
         updatedCategory: Category?,
-    ) {
+    ): Job {
         category.update {
             updatedCategory
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateIsTransactionDatePickerDialogVisible(
         updatedIsTransactionDatePickerDialogVisible: Boolean,
-    ) {
+    ): Job {
         isTransactionDatePickerDialogVisible.update {
             updatedIsTransactionDatePickerDialogVisible
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateIsTransactionTimePickerDialogVisible(
         updatedIsTransactionTimePickerDialogVisible: Boolean,
-    ) {
+    ): Job {
         isTransactionTimePickerDialogVisible.update {
             updatedIsTransactionTimePickerDialogVisible
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateScreenBottomSheetType(
         updatedEditTransactionScreenBottomSheetType: EditTransactionScreenBottomSheetType,
-    ) {
+    ): Job {
         screenBottomSheetType.update {
             updatedEditTransactionScreenBottomSheetType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateScreenSnackbarType(
         updatedEditTransactionScreenSnackbarType: EditTransactionScreenSnackbarType,
-    ) {
+    ): Job {
         screenSnackbarType.update {
             updatedEditTransactionScreenSnackbarType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedTransactionForIndex(
         updatedSelectedTransactionForIndex: Int,
-    ) {
+    ): Job {
         selectedTransactionForIndex.update {
             updatedSelectedTransactionForIndex
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
-    ) {
+    ): Job {
         selectedTransactionTypeIndex.update {
             updatedSelectedTransactionTypeIndex
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateTitle(
         updatedTitle: TextFieldValue,
-    ) {
+    ): Job {
         title.update {
             updatedTitle
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateTransactionDate(
         updatedTransactionDate: LocalDate,
-    ) {
+    ): Job {
         transactionDate.update {
             updatedTransactionDate
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateTransactionTime(
         updatedTransactionTime: LocalTime,
-    ) {
+    ): Job {
         transactionTime.update {
             updatedTransactionTime
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateTransaction(
         uiState: EditTransactionScreenUIState,
-    ) {
+    ): Job {
         // TODO(Abhi): Fix update transaction logic
         val enteredAmountValue = amount.value.text.toLongOrZero()
         val amount = Amount(
@@ -613,6 +661,9 @@ internal class EditTransactionScreenViewModel(
         } else {
             null
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
         /*
         val transaction = Transaction(
             amount = amount,

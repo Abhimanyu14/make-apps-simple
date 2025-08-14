@@ -210,61 +210,79 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region state events
-    private fun clearTitle() {
+    private fun clearTitle(): Job {
         title.update {
             title.value.copy(
                 text = "",
             )
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedEditCategoryScreenBottomSheetType = EditCategoryScreenBottomSheetType.None,
         )
     }
 
     private fun updateEmoji(
         updatedEmoji: String,
-    ) {
+    ): Job {
         emoji.update {
             updatedEmoji
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateTitle(
         updatedTitle: TextFieldValue,
-    ) {
+    ): Job {
         title.update {
             updatedTitle
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateScreenBottomSheetType(
         updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
-    ) {
+    ): Job {
         screenBottomSheetType.update {
             updatedEditCategoryScreenBottomSheetType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSearchText(
         updatedSearchText: String,
-    ) {
+    ): Job {
         searchText.update {
             updatedSearchText
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
-    ) {
+    ): Job {
         selectedTransactionTypeIndex.update {
             updatedSelectedTransactionTypeIndex
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun updateCategory() {
+    private fun updateCategory(): Job {
         category.value?.copy(
             emoji = emoji.value,
             title = title.value.text,
@@ -275,6 +293,9 @@ internal class EditCategoryScreenViewModel(
                 navigateUp()
             }
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
     // endregion
 

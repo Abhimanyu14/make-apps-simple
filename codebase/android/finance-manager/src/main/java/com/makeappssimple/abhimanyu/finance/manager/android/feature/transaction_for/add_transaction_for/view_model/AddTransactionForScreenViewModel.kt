@@ -111,18 +111,9 @@ internal class AddTransactionForScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         title = updatedTitle
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
-    }
-    // endregion
-
-    // region common
-    private fun getCompletedJob(): Job {
-        return Job().apply {
-            complete()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 }

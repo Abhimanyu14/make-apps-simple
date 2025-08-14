@@ -123,10 +123,9 @@ internal class EditTransactionForScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         title = updatedTitle
-        if (shouldRefresh) {
-            return refresh()
-        }
-        return getCompletedJob()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateTransactionFor(): Job {
@@ -179,14 +178,6 @@ internal class EditTransactionForScreenViewModel(
                 ),
             shouldRefresh = shouldRefresh,
         )
-    }
-    // endregion
-
-    // region common
-    private fun getCompletedJob(): Job {
-        return Job().apply {
-            complete()
-        }
     }
     // endregion
 }

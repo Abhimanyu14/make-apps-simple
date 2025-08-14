@@ -53,6 +53,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.st
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -188,7 +189,7 @@ internal class HomeScreenViewModel(
     // region state events
     private fun handleOverviewCardAction(
         overviewCardAction: OverviewCardAction,
-    ) {
+    ): Job {
         val overviewTabOption =
             OverviewTabOption.entries[overviewTabSelectionIndex.value]
         when (overviewCardAction) {
@@ -248,20 +249,29 @@ internal class HomeScreenViewModel(
                 }
             }
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateIsBalanceVisible(
         updatedIsBalanceVisible: Boolean,
-    ) {
+    ): Job {
         isBalanceVisible.update {
             updatedIsBalanceVisible
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateOverviewTabSelectionIndex(
         updatedOverviewTabSelectionIndex: Int,
-    ) {
+    ): Job {
         overviewTabSelectionIndex.value = updatedOverviewTabSelectionIndex
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
     // endregion
 

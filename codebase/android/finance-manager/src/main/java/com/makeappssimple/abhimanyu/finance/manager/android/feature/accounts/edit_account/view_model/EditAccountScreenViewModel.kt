@@ -164,7 +164,7 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region state events
-    private fun clearBalanceAmountValue() {
+    private fun clearBalanceAmountValue(): Job {
         return updateBalanceAmountValue(
             updatedBalanceAmountValue = balanceAmountValue
                 .copy(
@@ -173,7 +173,7 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    private fun clearMinimumAccountBalanceAmountValue() {
+    private fun clearMinimumAccountBalanceAmountValue(): Job {
         return updateMinimumAccountBalanceAmountValue(
             updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue
                 .copy(
@@ -182,8 +182,8 @@ internal class EditAccountScreenViewModel(
         )
     }
 
-    private fun clearName() {
-        updateName(
+    private fun clearName(): Job {
+        return updateName(
             updatedName = name
                 .copy(
                     text = "",
@@ -217,52 +217,52 @@ internal class EditAccountScreenViewModel(
     private fun updateBalanceAmountValue(
         updatedBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         balanceAmountValue = updatedBalanceAmountValue
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateName(
         updatedName: TextFieldValue,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         name = updatedName
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateScreenSnackbarType(
         updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         screenSnackbarType = updatedEditAccountScreenSnackbarType
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun updateSelectedAccountTypeIndex(
         updatedSelectedAccountTypeIndex: Int,
         shouldRefresh: Boolean = true,
-    ) {
+    ): Job {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
-        if (shouldRefresh) {
-            refresh()
-        }
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 

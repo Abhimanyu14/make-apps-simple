@@ -156,34 +156,43 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region state events
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedAnalysisScreenBottomSheetType = AnalysisScreenBottomSheetType.None,
         )
     }
 
     private fun updateScreenBottomSheetType(
         updatedAnalysisScreenBottomSheetType: AnalysisScreenBottomSheetType,
-    ) {
+    ): Job {
         screenBottomSheetType.update {
             updatedAnalysisScreenBottomSheetType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedFilter(
         updatedSelectedFilter: Filter,
-    ) {
+    ): Job {
         selectedFilter.update {
             updatedSelectedFilter
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
-    ) {
+    ): Job {
         selectedTransactionTypeIndex.update {
             updatedSelectedTransactionTypeIndex
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
     // endregion
 

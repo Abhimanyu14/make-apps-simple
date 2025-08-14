@@ -21,21 +21,22 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.F
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
+import kotlinx.coroutines.Job
 
 @Stable
 internal class TransactionsScreenUIStateEvents(
-    val addToSelectedTransactions: (transactionId: Int) -> Unit = {},
-    val clearSelectedTransactions: () -> Unit = {},
-    val navigateToAddTransactionScreen: () -> Unit = {},
-    val navigateToViewTransactionScreen: (transactionId: Int) -> Unit = {},
-    val navigateUp: () -> Unit = {},
-    val removeFromSelectedTransactions: (transactionId: Int) -> Unit = {},
-    val resetScreenBottomSheetType: () -> Unit = {},
-    val selectAllTransactions: () -> Unit = {},
-    val updateIsInSelectionMode: (Boolean) -> Unit = {},
-    val updateScreenBottomSheetType: (TransactionsScreenBottomSheetType) -> Unit = {},
-    val updateSearchText: (updatedSearchText: String) -> Unit = {},
-    val updateSelectedFilter: (updatedSelectedFilter: Filter) -> Unit = {},
-    val updateSelectedSortOption: (updatedSelectedSortOption: SortOption) -> Unit = {},
-    val updateTransactionForValuesInTransactions: (transactionForId: Int) -> Unit = {},
+    val addToSelectedTransactions: (transactionId: Int) -> Job,
+    val clearSelectedTransactions: () -> Job,
+    val navigateToAddTransactionScreen: () -> Job,
+    val navigateToViewTransactionScreen: (transactionId: Int) -> Job,
+    val navigateUp: () -> Job,
+    val removeFromSelectedTransactions: (transactionId: Int) -> Job,
+    val resetScreenBottomSheetType: () -> Job,
+    val selectAllTransactions: () -> Job,
+    val updateIsInSelectionMode: (Boolean) -> Job,
+    val updateScreenBottomSheetType: (TransactionsScreenBottomSheetType) -> Job,
+    val updateSearchText: (updatedSearchText: String) -> Job,
+    val updateSelectedFilter: (updatedSelectedFilter: Filter) -> Job,
+    val updateSelectedSortOption: (updatedSelectedSortOption: SortOption) -> Job,
+    val updateTransactionForValuesInTransactions: (transactionForId: Int) -> Job,
 ) : ScreenUIStateEvents

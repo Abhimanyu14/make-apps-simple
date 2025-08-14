@@ -223,31 +223,40 @@ internal class TransactionsScreenViewModel(
     // region state events
     private fun addToSelectedTransactions(
         transactionId: Int,
-    ) {
+    ): Job {
         selectedTransactionIndices.update {
             it.toMutableList().apply {
                 add(transactionId)
             }.toImmutableList()
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun clearSelectedTransactions() {
+    private fun clearSelectedTransactions(): Job {
         selectedTransactionIndices.update {
             persistentListOf()
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun removeFromSelectedTransactions(
         transactionId: Int,
-    ) {
+    ): Job {
         selectedTransactionIndices.update {
             it.toMutableList().apply {
                 remove(transactionId)
             }.toImmutableList()
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun selectAllTransactions() {
+    private fun selectAllTransactions(): Job {
         selectedTransactionIndices.update {
             transactionDetailsListItemViewData.value.values.flatMap {
                 it.map { transactionListItemData ->
@@ -255,60 +264,78 @@ internal class TransactionsScreenViewModel(
                 }
             }.toImmutableList()
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
-    private fun resetScreenBottomSheetType() {
-        updateScreenBottomSheetType(
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
             updatedTransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
         )
     }
 
     private fun updateScreenBottomSheetType(
         updatedTransactionsScreenBottomSheetType: TransactionsScreenBottomSheetType,
-    ) {
+    ): Job {
         screenBottomSheetType.update {
             updatedTransactionsScreenBottomSheetType
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateIsInSelectionMode(
         updatedIsInSelectionMode: Boolean,
-    ) {
+    ): Job {
         isInSelectionMode.update {
             updatedIsInSelectionMode
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSearchText(
         updatedSearchText: String,
-    ) {
+    ): Job {
         searchText.update {
             updatedSearchText
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedFilter(
         updatedSelectedFilter: Filter,
-    ) {
+    ): Job {
         selectedFilter.update {
             updatedSelectedFilter
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateSelectedSortOption(
         updatedSelectedSortOption: SortOption,
-    ) {
+    ): Job {
         selectedSortOption.update {
             updatedSelectedSortOption
         }
+        return refreshIfRequired(
+            shouldRefresh = true,
+        )
     }
 
     private fun updateTransactionForValuesInTransactions(
         transactionForId: Int,
-    ) {
+    ): Job {
         val selectedTransactions: ImmutableList<Int> =
             selectedTransactionIndices.value
-        coroutineScope.launch {
+        return coroutineScope.launch {
             val updatedTransactions =
                 allTransactionData.value.map { transactionData ->
                     transactionData.transaction

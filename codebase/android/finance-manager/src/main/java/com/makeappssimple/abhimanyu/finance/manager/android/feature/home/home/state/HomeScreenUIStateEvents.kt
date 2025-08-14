@@ -19,16 +19,17 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.s
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardAction
+import kotlinx.coroutines.Job
 
 @Stable
 internal class HomeScreenUIStateEvents(
-    val handleOverviewCardAction: (overviewCardAction: OverviewCardAction) -> Unit = {},
-    val navigateToAccountsScreen: () -> Unit = {},
-    val navigateToAddTransactionScreen: () -> Unit = {},
-    val navigateToAnalysisScreen: () -> Unit = {},
-    val navigateToSettingsScreen: () -> Unit = {},
-    val navigateToTransactionsScreen: () -> Unit = {},
-    val navigateToViewTransactionScreen: (transactionId: Int) -> Unit = {},
-    val updateIsBalanceVisible: (Boolean) -> Unit = {},
-    val updateOverviewTabSelectionIndex: (updatedOverviewTabSelectionIndex: Int) -> Unit = {},
+    val handleOverviewCardAction: (overviewCardAction: OverviewCardAction) -> Job,
+    val navigateToAccountsScreen: () -> Job,
+    val navigateToAddTransactionScreen: () -> Job,
+    val navigateToAnalysisScreen: () -> Job,
+    val navigateToSettingsScreen: () -> Job,
+    val navigateToTransactionsScreen: () -> Job,
+    val navigateToViewTransactionScreen: (transactionId: Int) -> Job,
+    val updateIsBalanceVisible: (Boolean) -> Job,
+    val updateOverviewTabSelectionIndex: (updatedOverviewTabSelectionIndex: Int) -> Job,
 ) : ScreenUIStateEvents
