@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction
 
+import android.database.sqlite.SQLiteConstraintException
+import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
@@ -30,8 +32,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 internal class TransactionRepositoryImpl(
@@ -43,9 +47,15 @@ internal class TransactionRepositoryImpl(
         accountId: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.checkIfAccountIsUsedInTransactions(
-                accountId = accountId,
-            )
+            try {
+                transactionDao.checkIfAccountIsUsedInTransactions(
+                    accountId = accountId,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -53,9 +63,15 @@ internal class TransactionRepositoryImpl(
         categoryId: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.checkIfCategoryIsUsedInTransactions(
-                categoryId = categoryId,
-            )
+            try {
+                transactionDao.checkIfCategoryIsUsedInTransactions(
+                    categoryId = categoryId,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -63,15 +79,27 @@ internal class TransactionRepositoryImpl(
         transactionForId: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.checkIfTransactionForIsUsedInTransactions(
-                transactionForId = transactionForId,
-            )
+            try {
+                transactionDao.checkIfTransactionForIsUsedInTransactions(
+                    transactionForId = transactionForId,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
     override suspend fun deleteAllTransactions(): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.deleteAllTransactions() > 0
+            try {
+                transactionDao.deleteAllTransactions() > 0
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -79,45 +107,75 @@ internal class TransactionRepositoryImpl(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            commonDataSource.deleteTransactionById(
-                id = id,
-            )
+            try {
+                commonDataSource.deleteTransactionById(
+                    id = id,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
     override suspend fun getAllTransactionData(): ImmutableList<TransactionData> {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getAllTransactionData().map(
-                transform = TransactionDataEntity::asExternalModel,
-            )
+            try {
+                transactionDao.getAllTransactionData().map(
+                    transform = TransactionDataEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
     override fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>> {
-        return transactionDao.getAllTransactionDataFlow().map {
-            it.map(
-                transform = TransactionDataEntity::asExternalModel,
-            )
+        return try {
+            transactionDao.getAllTransactionDataFlow().map {
+                it.map(
+                    transform = TransactionDataEntity::asExternalModel,
+                )
+            }
+        } catch (
+            _: SQLiteException,
+        ) {
+            emptyFlow()
         }
     }
 
     override suspend fun getAllTransactions(): ImmutableList<Transaction> {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getAllTransactions().map(
-                transform = TransactionEntity::asExternalModel,
-            )
+            try {
+                transactionDao.getAllTransactions().map(
+                    transform = TransactionEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
     override fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<ImmutableList<TransactionData>> {
-        return transactionDao.getRecentTransactionDataFlow(
-            numberOfTransactions = numberOfTransactions,
-        ).map {
-            it.map(
-                transform = TransactionDataEntity::asExternalModel,
-            )
+        return try {
+            transactionDao.getRecentTransactionDataFlow(
+                numberOfTransactions = numberOfTransactions,
+            ).map {
+                it.map(
+                    transform = TransactionDataEntity::asExternalModel,
+                )
+            }
+        } catch (
+            _: SQLiteException,
+        ) {
+            emptyFlow()
         }
     }
 
@@ -125,11 +183,17 @@ internal class TransactionRepositoryImpl(
         searchText: String,
     ): ImmutableList<TransactionData> {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getSearchedTransactionData(
-                searchText = searchText,
-            ).map(
-                transform = TransactionDataEntity::asExternalModel,
-            )
+            try {
+                transactionDao.getSearchedTransactionData(
+                    searchText = searchText,
+                ).map(
+                    transform = TransactionDataEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
@@ -139,11 +203,17 @@ internal class TransactionRepositoryImpl(
         enteredTitle: String,
     ): ImmutableList<String> {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTitleSuggestions(
-                categoryId = categoryId,
-                numberOfSuggestions = numberOfSuggestions,
-                enteredTitle = enteredTitle,
-            ).toImmutableList()
+            try {
+                transactionDao.getTitleSuggestions(
+                    categoryId = categoryId,
+                    numberOfSuggestions = numberOfSuggestions,
+                    enteredTitle = enteredTitle,
+                ).toImmutableList()
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
@@ -151,9 +221,15 @@ internal class TransactionRepositoryImpl(
         id: Int,
     ): Transaction? {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTransactionById(
-                id = id,
-            )?.asExternalModel()
+            try {
+                transactionDao.getTransactionById(
+                    id = id,
+                )?.asExternalModel()
+            } catch (
+                _: SQLiteException,
+            ) {
+                null
+            }
         }
     }
 
@@ -161,9 +237,15 @@ internal class TransactionRepositoryImpl(
         id: Int,
     ): TransactionData? {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTransactionDataById(
-                id = id,
-            )?.asExternalModel()
+            try {
+                transactionDao.getTransactionDataById(
+                    id = id,
+                )?.asExternalModel()
+            } catch (
+                _: SQLiteException,
+            ) {
+                null
+            }
         }
     }
 
@@ -172,12 +254,18 @@ internal class TransactionRepositoryImpl(
         endingTimestamp: Long,
     ): ImmutableList<Transaction> {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTransactionsBetweenTimestamps(
-                startingTimestamp = startingTimestamp,
-                endingTimestamp = endingTimestamp,
-            ).map(
-                transform = TransactionEntity::asExternalModel,
-            )
+            try {
+                transactionDao.getTransactionsBetweenTimestamps(
+                    startingTimestamp = startingTimestamp,
+                    endingTimestamp = endingTimestamp,
+                ).map(
+                    transform = TransactionEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
@@ -185,19 +273,31 @@ internal class TransactionRepositoryImpl(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): Flow<ImmutableList<Transaction>> {
-        return transactionDao.getTransactionsBetweenTimestampsFlow(
-            startingTimestamp = startingTimestamp,
-            endingTimestamp = endingTimestamp,
-        ).map {
-            it.map(
-                transform = TransactionEntity::asExternalModel,
-            )
+        return try {
+            transactionDao.getTransactionsBetweenTimestampsFlow(
+                startingTimestamp = startingTimestamp,
+                endingTimestamp = endingTimestamp,
+            ).map {
+                it.map(
+                    transform = TransactionEntity::asExternalModel,
+                )
+            }
+        } catch (
+            _: SQLiteException,
+        ) {
+            emptyFlow()
         }
     }
 
     override suspend fun getTransactionsCount(): Int {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.getTransactionsCount()
+            try {
+                transactionDao.getTransactionsCount()
+            } catch (
+                _: SQLiteException,
+            ) {
+                0
+            }
         }
     }
 
@@ -208,12 +308,23 @@ internal class TransactionRepositoryImpl(
         originalTransaction: Transaction?,
     ): Long {
         return dispatcherProvider.executeOnIoDispatcher {
-            commonDataSource.insertTransaction(
-                accountFrom = accountFrom?.asEntity(),
-                accountTo = accountTo?.asEntity(),
-                transaction = transaction.asEntity(),
-                originalTransaction = originalTransaction?.asEntity(),
-            )
+            try {
+                commonDataSource.insertTransaction(
+                    accountFrom = accountFrom?.asEntity(),
+                    accountTo = accountTo?.asEntity(),
+                    transaction = transaction.asEntity(),
+                    originalTransaction = originalTransaction?.asEntity(),
+                )
+            } catch (
+                _: SQLiteConstraintException,
+            ) {
+                // TODO(Abhi): Check if this needs additional handling
+                -1L
+            } catch (
+                _: SQLiteException,
+            ) {
+                -1L
+            }
         }
     }
 
@@ -221,11 +332,22 @@ internal class TransactionRepositoryImpl(
         vararg transactions: Transaction,
     ): ImmutableList<Long> {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.insertTransactions(
-                transactions = transactions.map(
-                    transform = Transaction::asEntity,
-                ).toTypedArray(),
-            ).toImmutableList()
+            try {
+                transactionDao.insertTransactions(
+                    transactions = transactions.map(
+                        transform = Transaction::asEntity,
+                    ).toTypedArray(),
+                ).toImmutableList()
+            } catch (
+                _: SQLiteConstraintException,
+            ) {
+                // TODO(Abhi): Check if this needs additional handling
+                persistentListOf()
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
@@ -236,20 +358,26 @@ internal class TransactionRepositoryImpl(
         transactionForValues: ImmutableList<TransactionFor>,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            commonDataSource.restoreData(
-                categories = categories.map(
-                    transform = Category::asEntity,
-                ).toTypedArray(),
-                accounts = accounts.map(
-                    transform = Account::asEntity,
-                ).toTypedArray(),
-                transactions = transactions.map(
-                    transform = Transaction::asEntity,
-                ).toTypedArray(),
-                transactionForValues = transactionForValues.map(
-                    transform = TransactionFor::asEntity,
-                ).toTypedArray(),
-            )
+            try {
+                commonDataSource.restoreData(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                    accounts = accounts.map(
+                        transform = Account::asEntity,
+                    ).toTypedArray(),
+                    transactions = transactions.map(
+                        transform = Transaction::asEntity,
+                    ).toTypedArray(),
+                    transactionForValues = transactionForValues.map(
+                        transform = TransactionFor::asEntity,
+                    ).toTypedArray(),
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -257,9 +385,15 @@ internal class TransactionRepositoryImpl(
         transaction: Transaction,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.updateTransaction(
-                transaction = transaction.asEntity(),
-            ) == 1
+            try {
+                transactionDao.updateTransaction(
+                    transaction = transaction.asEntity(),
+                ) == 1
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -267,11 +401,17 @@ internal class TransactionRepositoryImpl(
         vararg transactions: Transaction,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            transactionDao.updateTransactions(
-                transactions = transactions.map(
-                    transform = Transaction::asEntity,
-                ).toTypedArray(),
-            ) == transactions.size
+            try {
+                transactionDao.updateTransactions(
+                    transactions = transactions.map(
+                        transform = Transaction::asEntity,
+                    ).toTypedArray(),
+                ) == transactions.size
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 }

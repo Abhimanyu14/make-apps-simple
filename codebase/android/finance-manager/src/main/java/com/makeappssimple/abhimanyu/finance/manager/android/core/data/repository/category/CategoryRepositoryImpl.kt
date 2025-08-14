@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category
 
+import android.database.sqlite.SQLiteConstraintException
+import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
@@ -24,8 +26,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 internal class CategoryRepositoryImpl(
@@ -36,11 +40,17 @@ internal class CategoryRepositoryImpl(
         vararg categories: Category,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.deleteCategories(
-                categories = categories.map(
-                    transform = Category::asEntity,
-                ).toTypedArray(),
-            ) == categories.size
+            try {
+                categoryDao.deleteCategories(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                ) == categories.size
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
@@ -48,25 +58,43 @@ internal class CategoryRepositoryImpl(
         id: Int,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.deleteCategoryById(
-                id = id,
-            ) == 1
+            try {
+                categoryDao.deleteCategoryById(
+                    id = id,
+                ) == 1
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 
     override suspend fun getAllCategories(): ImmutableList<Category> {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.getAllCategories().map(
-                transform = CategoryEntity::asExternalModel,
-            )
+            try {
+                categoryDao.getAllCategories().map(
+                    transform = CategoryEntity::asExternalModel,
+                )
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
     override fun getAllCategoriesFlow(): Flow<ImmutableList<Category>> {
-        return categoryDao.getAllCategoriesFlow().map {
-            it.map(
-                transform = CategoryEntity::asExternalModel,
-            )
+        return try {
+            categoryDao.getAllCategoriesFlow().map {
+                it.map(
+                    transform = CategoryEntity::asExternalModel,
+                )
+            }
+        } catch (
+            _: SQLiteException,
+        ) {
+            emptyFlow()
         }
     }
 
@@ -74,9 +102,15 @@ internal class CategoryRepositoryImpl(
         id: Int,
     ): Category? {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.getCategoryById(
-                id = id,
-            )?.asExternalModel()
+            try {
+                categoryDao.getCategoryById(
+                    id = id,
+                )?.asExternalModel()
+            } catch (
+                _: SQLiteException,
+            ) {
+                null
+            }
         }
     }
 
@@ -84,11 +118,22 @@ internal class CategoryRepositoryImpl(
         vararg categories: Category,
     ): ImmutableList<Long> {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.insertCategories(
-                categories = categories.map(
-                    transform = Category::asEntity,
-                ).toTypedArray(),
-            ).toImmutableList()
+            try {
+                categoryDao.insertCategories(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                ).toImmutableList()
+            } catch (
+                _: SQLiteConstraintException,
+            ) {
+                // TODO(Abhi): Check if this needs additional handling
+                persistentListOf()
+            } catch (
+                _: SQLiteException,
+            ) {
+                persistentListOf()
+            }
         }
     }
 
@@ -96,11 +141,17 @@ internal class CategoryRepositoryImpl(
         vararg categories: Category,
     ): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
-            categoryDao.updateCategories(
-                categories = categories.map(
-                    transform = Category::asEntity,
-                ).toTypedArray(),
-            ) == categories.size
+            try {
+                categoryDao.updateCategories(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                ) == categories.size
+            } catch (
+                _: SQLiteException,
+            ) {
+                false
+            }
         }
     }
 }
