@@ -18,6 +18,7 @@
 
 plugins {
     alias(libs.plugins.plugin.android.library)
+    alias(libs.plugins.plugin.about.libraries)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.serialization)
@@ -96,7 +97,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
 
     implementation(libs.about.libraries.compose)
-    implementation(libs.about.libraries.core)
+    // implementation(libs.about.libraries.core)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.work.runtime)

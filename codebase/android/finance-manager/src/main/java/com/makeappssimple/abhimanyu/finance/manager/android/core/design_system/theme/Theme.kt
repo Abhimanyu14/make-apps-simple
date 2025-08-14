@@ -102,3 +102,5 @@ internal fun FinanceManagerAppTheme(
         content = content,
     )
 }
+
+internal typealias FinanceManagerAppTheme = MaterialTheme

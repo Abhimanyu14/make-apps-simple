@@ -17,7 +17,7 @@ ndk = "27.0.12077973"
 target-sdk = "35"
 
 # Library versions
-about-libraries = "11.1.3"
+about-libraries = "13.0.0-a02"
 androidx-activity-compose = "1.10.1"
 androidx-appcompat = "1.7.0"
 androidx-camera = "1.4.2"
@@ -88,8 +88,8 @@ plugin-ksp = "2.1.21-2.0.2"
 plugin-maven-publish = "0.31.0"
 
 [libraries]
-about-libraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "about-libraries" }
-about-libraries-compose = { group = "com.mikepenz", name = "aboutlibraries-compose", version.ref = "about-libraries" }
+about-libraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "about-libraries" }
+about-libraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "about-libraries" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-compose-animation = { module = "androidx.compose.animation:animation" }
@@ -127,7 +127,7 @@ androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "androidx-work" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
-compose-emoji-picker = { group = "com.github.Abhimanyu14", name = "compose-emoji-picker", version.ref = "compose-emoji-picker" }
+compose-emoji-picker = { module = "com.github.Abhimanyu14:compose-emoji-picker", version.ref = "compose-emoji-picker" }
 detekt-rules = { module = "com.github.Abhimanyu14:detekt-rules", version.ref = "detekt-rules" }
 detekt-rules-compose-nlopez = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-rules-compose-nlopez" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
@@ -178,6 +178,7 @@ ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.r
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
 
 [plugins]
+plugin-about-libraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "about-libraries" }
 plugin-android-application = { id = "com.android.application", version.ref = "plugin-android-gradle" }
 plugin-android-library = { id = "com.android.library", version.ref = "plugin-android-gradle" }
 plugin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "plugin-detekt" }

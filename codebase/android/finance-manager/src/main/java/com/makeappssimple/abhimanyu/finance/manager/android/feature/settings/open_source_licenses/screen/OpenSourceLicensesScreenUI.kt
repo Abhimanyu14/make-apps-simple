@@ -20,8 +20,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.op
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_OPEN_SOURCE_LICENSES
@@ -33,8 +33,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.to
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.event.OpenSourceLicensesScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import com.mikepenz.aboutlibraries.ui.compose.LibrariesContainer
-import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
+import com.mikepenz.aboutlibraries.ui.compose.android.rememberLibraries
+import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 
 @Composable
 internal fun OpenSourceLicensesScreenUI(
@@ -42,6 +42,10 @@ internal fun OpenSourceLicensesScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: OpenSourceLicensesScreenUIEvent) -> Unit = {},
 ) {
+    val libraries by rememberLibraries(
+        resId = R.raw.aboutlibraries,
+    )
+
     MyScaffold(
         modifier = Modifier
             .testTag(
@@ -61,18 +65,12 @@ internal fun OpenSourceLicensesScreenUI(
         coroutineScope = state.coroutineScope,
     ) {
         LibrariesContainer(
+            libraries = libraries,
             modifier = Modifier
                 .testTag(
                     tag = SCREEN_CONTENT_OPEN_SOURCE_LICENSES,
                 )
                 .fillMaxSize(),
-            showAuthor = true,
-            showVersion = true,
-            showLicenseBadges = true,
-            colors = LibraryDefaults
-                .libraryColors(
-                    backgroundColor = MaterialTheme.colorScheme.background,
-                ),
         )
     }
 }
