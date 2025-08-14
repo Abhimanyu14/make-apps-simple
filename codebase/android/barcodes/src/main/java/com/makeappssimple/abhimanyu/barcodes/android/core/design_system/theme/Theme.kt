@@ -93,8 +93,6 @@ private fun Material3AppTheme(
     } else {
         lightColorScheme
     }
-    MaterialTheme
-
     MaterialTheme(
         colorScheme = colors,
         shapes = Shapes,

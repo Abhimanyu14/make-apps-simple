@@ -31,7 +31,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,6 +42,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
@@ -96,7 +96,7 @@ internal fun MyOutlinedTextField(
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Clear,
-                                tint = MaterialTheme.colorScheme.onBackground,
+                                tint = BarcodesAppTheme.colorScheme.onBackground,
                                 contentDescription = stringResource(
                                     id = trailingIconContentDescriptionTextStringResourceId,
                                 ),
@@ -166,7 +166,7 @@ internal fun MyOutlinedTextField(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Clear,
-                            tint = MaterialTheme.colorScheme.onBackground,
+                            tint = BarcodesAppTheme.colorScheme.onBackground,
                             contentDescription = stringResource(
                                 id = trailingIconContentDescriptionTextStringResourceId,
                             ),

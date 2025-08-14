@@ -22,7 +22,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
@@ -37,6 +36,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -87,17 +87,17 @@ internal fun Modifier.shimmer(
 private fun rememberShimmerBrush(
     isShimmerVisible: Boolean = true,
     targetValue: Float,
-    backgroundColor: Color? = MaterialTheme.colorScheme.surfaceVariant,
-    shimmerColor: Color? = MaterialTheme.colorScheme.primaryContainer,
+    backgroundColor: Color? = BarcodesAppTheme.colorScheme.surfaceVariant,
+    shimmerColor: Color? = BarcodesAppTheme.colorScheme.primaryContainer,
 ): State<Brush> {
     val shimmerColors = listOf(
-        (backgroundColor ?: MaterialTheme.colorScheme.surfaceVariant).copy(
+        (backgroundColor ?: BarcodesAppTheme.colorScheme.surfaceVariant).copy(
             alpha = 0.4F,
         ),
-        (shimmerColor ?: MaterialTheme.colorScheme.primaryContainer).copy(
+        (shimmerColor ?: BarcodesAppTheme.colorScheme.primaryContainer).copy(
             alpha = 0.8F,
         ),
-        (backgroundColor ?: MaterialTheme.colorScheme.surfaceVariant).copy(
+        (backgroundColor ?: BarcodesAppTheme.colorScheme.surfaceVariant).copy(
             alpha = 0.4F,
         ),
     )

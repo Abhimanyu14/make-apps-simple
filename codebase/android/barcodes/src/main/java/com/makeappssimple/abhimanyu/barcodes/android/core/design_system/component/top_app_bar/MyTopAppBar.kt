@@ -22,7 +22,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -37,6 +36,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.COM
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
@@ -106,7 +106,7 @@ private fun MyTopAppBarUI(
                 text = titleText,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.titleLarge.copy(
+                style = BarcodesAppTheme.typography.titleLarge.copy(
                     fontFamily = cosmosFontFamily,
                 ),
                 modifier = modifier
@@ -125,7 +125,7 @@ private fun MyTopAppBarUI(
         },
         colors = TopAppBarDefaults
             .centerAlignedTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = BarcodesAppTheme.colorScheme.background,
             ),
         modifier = modifier
             .testTag(

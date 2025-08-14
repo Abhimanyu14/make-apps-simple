@@ -17,9 +17,9 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.divider
 
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Composable
 internal fun MyHorizontalDivider(
@@ -27,6 +27,6 @@ internal fun MyHorizontalDivider(
 ) {
     HorizontalDivider(
         modifier = modifier,
-        color = MaterialTheme.colorScheme.outline,
+        color = BarcodesAppTheme.colorScheme.outline,
     )
 }

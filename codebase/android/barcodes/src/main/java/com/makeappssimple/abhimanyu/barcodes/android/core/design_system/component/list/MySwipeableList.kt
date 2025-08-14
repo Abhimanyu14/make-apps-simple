@@ -21,13 +21,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.swipe_to_dismiss.MySwipeToDismissState
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Composable
 internal fun MySwipeableList(
@@ -93,7 +93,7 @@ internal fun MySwipeableList(
                         handleEvent = listItemsDataAndEventHandler.handleEvent,
                         modifier = Modifier
                             .background(
-                                color = MaterialTheme.colorScheme.background,
+                                color = BarcodesAppTheme.colorScheme.background,
                             ),
                     )
                 }

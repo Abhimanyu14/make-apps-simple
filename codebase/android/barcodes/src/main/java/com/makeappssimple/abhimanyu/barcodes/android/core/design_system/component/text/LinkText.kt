@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text
 
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
@@ -25,6 +24,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 
 // TODO(Abhi): Remove data class
@@ -46,7 +46,7 @@ internal fun LinkText(
 
     ClickableText(
         text = annotatedString,
-        style = MaterialTheme.typography.bodyMedium.copy(
+        style = BarcodesAppTheme.typography.bodyMedium.copy(
             fontFamily = cosmosFontFamily,
         ),
         onClick = { offset ->
@@ -81,7 +81,7 @@ private fun createAnnotatedString(
                 )
                 withStyle(
                     style = SpanStyle(
-                        color = MaterialTheme.colorScheme.primary,
+                        color = BarcodesAppTheme.colorScheme.primary,
                         textDecoration = TextDecoration.Underline,
                     ),
                 ) {

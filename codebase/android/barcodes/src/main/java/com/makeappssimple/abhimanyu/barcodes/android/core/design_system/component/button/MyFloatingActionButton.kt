@@ -18,11 +18,11 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.compone
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Composable
 internal fun MyFloatingActionButton(
@@ -32,14 +32,14 @@ internal fun MyFloatingActionButton(
     onClick: () -> Unit,
 ) {
     FloatingActionButton(
-        containerColor = MaterialTheme.colorScheme.primary,
+        containerColor = BarcodesAppTheme.colorScheme.primary,
         onClick = onClick,
         modifier = modifier,
     ) {
         MyIcon(
             imageVector = iconImageVector,
             contentDescriptionStringResourceId = contentDescriptionStringResourceId,
-            tint = MaterialTheme.colorScheme.onPrimary,
+            tint = BarcodesAppTheme.colorScheme.onPrimary,
         )
     }
 }

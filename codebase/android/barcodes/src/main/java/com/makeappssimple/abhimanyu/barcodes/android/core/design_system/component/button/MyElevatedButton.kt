@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 
 private object MyElevatedButtonConstants {
@@ -57,8 +57,8 @@ internal fun MyElevatedButton(
             enabled = isEnabled,
             colors = ButtonDefaults
                 .buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    containerColor = BarcodesAppTheme.colorScheme.primary,
+                    contentColor = BarcodesAppTheme.colorScheme.onPrimary,
                 ),
             modifier = modifier,
         ) {
@@ -68,7 +68,7 @@ internal fun MyElevatedButton(
                         minWidth = MyElevatedButtonConstants.contentMinimumWidth,
                     ),
                 textStringResourceId = textStringResourceId,
-                style = MaterialTheme.typography.labelLarge
+                style = BarcodesAppTheme.typography.labelLarge
                     .copy(
                         textAlign = TextAlign.Center,
                         fontFamily = cosmosFontFamily,

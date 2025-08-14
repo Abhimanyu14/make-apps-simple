@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
@@ -34,6 +33,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 
 @Immutable
@@ -87,14 +87,14 @@ internal fun MyListItem(
                 if (data.stringResourceId != null) {
                     MyText(
                         textStringResourceId = data.stringResourceId,
-                        style = MaterialTheme.typography.bodyMedium.copy(
+                        style = BarcodesAppTheme.typography.bodyMedium.copy(
                             fontFamily = cosmosFontFamily,
                         ),
                     )
                 } else {
                     MyText(
                         text = data.text.orEmpty(),
-                        style = MaterialTheme.typography.bodyMedium.copy(
+                        style = BarcodesAppTheme.typography.bodyMedium.copy(
                             fontFamily = cosmosFontFamily,
                         ),
                     )
@@ -142,7 +142,7 @@ internal fun MyListItem(
                 .fillMaxWidth(),
         )
         HorizontalDivider(
-            color = MaterialTheme.colorScheme.outline,
+            color = BarcodesAppTheme.colorScheme.outline,
         )
     }
 }
