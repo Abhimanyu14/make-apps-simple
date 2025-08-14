@@ -67,7 +67,7 @@ public class FakeAccountDaoImpl : AccountDao {
         }
     }
 
-    override suspend fun getAccounts(
+    override suspend fun getAccountsByIds(
         ids: List<Int>,
     ): List<AccountEntity> {
         return accounts.filter { accountEntity ->

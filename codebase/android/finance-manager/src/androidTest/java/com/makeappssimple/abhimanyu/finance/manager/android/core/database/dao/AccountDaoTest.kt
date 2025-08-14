@@ -166,7 +166,7 @@ internal class AccountDaoTest {
     }
 
     @Test
-    fun getAccounts() = runTestWithTimeout {
+    fun getAccountsByIds() = runTestWithTimeout {
         val accountEntity1 = getAccountEntity(
             id = 1,
         )
@@ -178,7 +178,7 @@ internal class AccountDaoTest {
             accountEntity2,
         )
 
-        val result = accountDao.getAccounts(
+        val result = accountDao.getAccountsByIds(
             listOf(1, 3),
         )
 

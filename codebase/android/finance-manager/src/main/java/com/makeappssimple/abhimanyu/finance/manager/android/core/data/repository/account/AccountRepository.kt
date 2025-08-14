@@ -29,7 +29,7 @@ public interface AccountRepository {
         id: Int,
     ): Account?
 
-    public suspend fun getAccounts(
+    public suspend fun getAccountsByIds(
         ids: ImmutableList<Int>,
     ): ImmutableList<Account>
 

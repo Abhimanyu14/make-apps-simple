@@ -69,12 +69,12 @@ internal class AccountRepositoryImpl(
         }
     }
 
-    override suspend fun getAccounts(
+    override suspend fun getAccountsByIds(
         ids: ImmutableList<Int>,
     ): ImmutableList<Account> {
         return dispatcherProvider.executeOnIoDispatcher {
             try {
-                accountDao.getAccounts(
+                accountDao.getAccountsByIds(
                     ids = ids,
                 ).map(
                     transform = AccountEntity::asExternalModel,
@@ -147,7 +147,7 @@ internal class AccountRepositoryImpl(
             val accountIds = accountsBalanceAmountChange.map {
                 it.first
             }
-            val accounts = getAccounts(
+            val accounts = getAccountsByIds(
                 ids = accountIds,
             )
             val updatedAccounts = accounts.mapIndexed { index, account ->

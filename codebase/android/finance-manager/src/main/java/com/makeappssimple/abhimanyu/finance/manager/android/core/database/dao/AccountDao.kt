@@ -67,7 +67,7 @@ public interface AccountDao {
      * @return List of accounts with the given ids
      */
     @Query(value = "SELECT * from account_table WHERE id IN (:ids)")
-    public suspend fun getAccounts(
+    public suspend fun getAccountsByIds(
         ids: List<Int>,
     ): List<AccountEntity>
 
