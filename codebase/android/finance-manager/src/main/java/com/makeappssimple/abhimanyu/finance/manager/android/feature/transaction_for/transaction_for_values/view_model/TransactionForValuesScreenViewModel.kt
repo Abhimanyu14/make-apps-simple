@@ -153,8 +153,8 @@ internal class TransactionForValuesScreenViewModel(
     // endregion
 
     // region observeForTransactionForListItemDataList
-    private fun observeForTransactionForListItemDataList() {
-        coroutineScope.launch {
+    private fun observeForTransactionForListItemDataList(): Job {
+        return coroutineScope.launch {
             getAllTransactionForValuesFlowUseCase().collectLatest { updatedAllTransactionForValues ->
                 startLoading()
                 val transactionForValuesIsUsedInTransactions =
