@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.combine
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
@@ -195,7 +194,7 @@ public class EditTransactionScreenViewModelOld(
                 category.transactionType == selectedTransactionType
             }
         }.defaultImmutableListStateIn(
-            scope = viewModelScope,
+            scope = coroutineScope,
         )
 
     private val selectedCategoryId: Flow<Int?> = uiState.map {
