@@ -94,7 +94,6 @@ public interface AccountDao {
      * @throws SQLiteConstraintException if a constraint is violated, such as a unique constraint
      * @throws SQLiteException if there is a general SQLite error
      */
-    // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertAccounts(
         vararg accounts: AccountEntity,

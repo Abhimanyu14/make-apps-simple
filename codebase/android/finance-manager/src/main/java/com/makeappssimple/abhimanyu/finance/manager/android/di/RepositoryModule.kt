@@ -25,11 +25,14 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
@@ -81,6 +84,19 @@ public class RepositoryModule {
             commonDataSource = commonDataSource,
             dispatcherProvider = dispatcherProvider,
             transactionDao = transactionDao,
+        )
+    }
+
+    @Single
+    internal fun providesTransactionDataRepository(
+        commonDataSource: CommonDataSource,
+        dispatcherProvider: DispatcherProvider,
+        transactionDataDao: TransactionDataDao,
+    ): TransactionDataRepository {
+        return TransactionDataRepositoryImpl(
+            commonDataSource = commonDataSource,
+            dispatcherProvider = dispatcherProvider,
+            transactionDataDao = transactionDataDao,
         )
     }
 

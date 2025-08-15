@@ -24,6 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
@@ -404,19 +405,19 @@ public class DataUseCaseModule {
 
     @Single
     internal fun providesGetAllTransactionDataFlowUseCase(
-        transactionRepository: TransactionRepository,
+        transactionDataRepository: TransactionDataRepository,
     ): GetAllTransactionDataFlowUseCase {
         return GetAllTransactionDataFlowUseCase(
-            transactionRepository = transactionRepository,
+            transactionDataRepository = transactionDataRepository,
         )
     }
 
     @Single
     internal fun providesGetAllTransactionDataUseCase(
-        transactionRepository: TransactionRepository,
+        transactionDataRepository: TransactionDataRepository,
     ): GetAllTransactionDataUseCase {
         return GetAllTransactionDataUseCase(
-            transactionRepository = transactionRepository,
+            transactionDataRepository = transactionDataRepository,
         )
     }
 
@@ -440,19 +441,19 @@ public class DataUseCaseModule {
 
     @Single
     internal fun providesGetRecentTransactionDataFlowUseCase(
-        transactionRepository: TransactionRepository,
+        transactionDataRepository: TransactionDataRepository,
     ): GetRecentTransactionDataFlowUseCase {
         return GetRecentTransactionDataFlowUseCase(
-            transactionRepository = transactionRepository,
+            transactionDataRepository = transactionDataRepository,
         )
     }
 
     @Single
     internal fun providesGetSearchedTransactionDataUseCase(
-        transactionRepository: TransactionRepository,
+        transactionDataRepository: TransactionDataRepository,
     ): GetSearchedTransactionDataUseCase {
         return GetSearchedTransactionDataUseCase(
-            transactionRepository = transactionRepository,
+            transactionDataRepository = transactionDataRepository,
         )
     }
 
@@ -467,19 +468,19 @@ public class DataUseCaseModule {
 
     @Single
     internal fun providesGetTransactionDataMappedByCategoryUseCase(
-        transactionRepository: TransactionRepository,
+        transactionDataRepository: TransactionDataRepository,
     ): GetTransactionDataMappedByCategoryUseCase {
         return GetTransactionDataMappedByCategoryUseCase(
-            transactionRepository = transactionRepository,
+            transactionDataRepository = transactionDataRepository,
         )
     }
 
     @Single
     internal fun providesGetTransactionDataByIdUseCase(
-        transactionRepository: TransactionRepository,
+        transactionDataRepository: TransactionDataRepository,
     ): GetTransactionDataByIdUseCase {
         return GetTransactionDataByIdUseCase(
-            transactionRepository = transactionRepository,
+            transactionDataRepository = transactionDataRepository,
         )
     }
 

@@ -30,6 +30,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.conver
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.migrations.manualDatabaseMigrations
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
@@ -58,6 +59,7 @@ public abstract class FinanceManagerRoomDatabase : RoomDatabase() {
     public abstract fun categoryDao(): CategoryDao
     public abstract fun accountDao(): AccountDao
     public abstract fun transactionDao(): TransactionDao
+    public abstract fun transactionDataDao(): TransactionDataDao
     public abstract fun transactionForDao(): TransactionForDao
 
     public companion object {

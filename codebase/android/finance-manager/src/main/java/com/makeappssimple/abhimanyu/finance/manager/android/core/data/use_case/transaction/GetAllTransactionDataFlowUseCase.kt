@@ -16,15 +16,15 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 public class GetAllTransactionDataFlowUseCase(
-    private val transactionRepository: TransactionRepository,
+    private val transactionDataRepository: TransactionDataRepository,
 ) {
     public operator fun invoke(): Flow<ImmutableList<TransactionData>> {
-        return transactionRepository.getAllTransactionDataFlow()
+        return transactionDataRepository.getAllTransactionDataFlow()
     }
 }

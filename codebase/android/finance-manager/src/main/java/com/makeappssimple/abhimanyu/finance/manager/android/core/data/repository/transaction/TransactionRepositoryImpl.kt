@@ -23,13 +23,11 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -119,75 +117,11 @@ internal class TransactionRepositoryImpl(
         }
     }
 
-    override suspend fun getAllTransactionData(): ImmutableList<TransactionData> {
-        return dispatcherProvider.executeOnIoDispatcher {
-            try {
-                transactionDao.getAllTransactionData().map(
-                    transform = TransactionDataEntity::asExternalModel,
-                )
-            } catch (
-                _: SQLiteException,
-            ) {
-                persistentListOf()
-            }
-        }
-    }
-
-    override fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>> {
-        return try {
-            transactionDao.getAllTransactionDataFlow().map {
-                it.map(
-                    transform = TransactionDataEntity::asExternalModel,
-                )
-            }
-        } catch (
-            _: SQLiteException,
-        ) {
-            emptyFlow()
-        }
-    }
-
     override suspend fun getAllTransactions(): ImmutableList<Transaction> {
         return dispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.getAllTransactions().map(
                     transform = TransactionEntity::asExternalModel,
-                )
-            } catch (
-                _: SQLiteException,
-            ) {
-                persistentListOf()
-            }
-        }
-    }
-
-    override fun getRecentTransactionDataFlow(
-        numberOfTransactions: Int,
-    ): Flow<ImmutableList<TransactionData>> {
-        return try {
-            transactionDao.getRecentTransactionDataFlow(
-                numberOfTransactions = numberOfTransactions,
-            ).map {
-                it.map(
-                    transform = TransactionDataEntity::asExternalModel,
-                )
-            }
-        } catch (
-            _: SQLiteException,
-        ) {
-            emptyFlow()
-        }
-    }
-
-    override suspend fun getSearchedTransactionData(
-        searchText: String,
-    ): ImmutableList<TransactionData> {
-        return dispatcherProvider.executeOnIoDispatcher {
-            try {
-                transactionDao.getSearchedTransactionData(
-                    searchText = searchText,
-                ).map(
-                    transform = TransactionDataEntity::asExternalModel,
                 )
             } catch (
                 _: SQLiteException,
@@ -223,22 +157,6 @@ internal class TransactionRepositoryImpl(
         return dispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.getTransactionById(
-                    id = id,
-                )?.asExternalModel()
-            } catch (
-                _: SQLiteException,
-            ) {
-                null
-            }
-        }
-    }
-
-    override suspend fun getTransactionDataById(
-        id: Int,
-    ): TransactionData? {
-        return dispatcherProvider.executeOnIoDispatcher {
-            try {
-                transactionDao.getTransactionDataById(
                     id = id,
                 )?.asExternalModel()
             } catch (

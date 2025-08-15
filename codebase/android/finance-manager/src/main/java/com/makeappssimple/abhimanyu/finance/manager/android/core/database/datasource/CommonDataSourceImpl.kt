@@ -36,9 +36,10 @@ public class CommonDataSourceImpl(
             receiver = financeManagerRoomDatabase,
         ) {
             withTransaction {
-                val transactionData = transactionDao().getTransactionDataById(
-                    id = id,
-                )
+                val transactionData =
+                    transactionDataDao().getTransactionDataById(
+                        id = id,
+                    )
 
                 val updatedAccounts = mutableListOf<AccountEntity>()
                 transactionData?.accountFrom?.let {

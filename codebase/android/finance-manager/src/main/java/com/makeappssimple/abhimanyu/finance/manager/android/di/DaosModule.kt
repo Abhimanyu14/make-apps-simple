@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import org.koin.core.annotation.Module
@@ -45,6 +46,13 @@ public class DaosModule {
         financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     ): TransactionDao {
         return financeManagerRoomDatabase.transactionDao()
+    }
+
+    @Single
+    internal fun providesTransactionDataDao(
+        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
+    ): TransactionDataDao {
+        return financeManagerRoomDatabase.transactionDataDao()
     }
 
     @Single

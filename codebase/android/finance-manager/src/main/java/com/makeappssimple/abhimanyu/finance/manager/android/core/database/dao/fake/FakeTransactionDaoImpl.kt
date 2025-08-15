@@ -17,12 +17,10 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 
 /**
@@ -83,12 +81,6 @@ public class FakeTransactionDaoImpl : TransactionDao {
         return 0
     }
 
-    override suspend fun getAllTransactionData(): List<TransactionDataEntity> =
-        emptyList()
-
-    override fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>> =
-        emptyFlow()
-
     override suspend fun getAllTransactions(): List<TransactionEntity> {
         return transactions.toList()
     }
@@ -96,14 +88,6 @@ public class FakeTransactionDaoImpl : TransactionDao {
     override fun getAllTransactionsFlow(): Flow<List<TransactionEntity>> {
         return transactionsFlow.asStateFlow()
     }
-
-    override fun getRecentTransactionDataFlow(
-        numberOfTransactions: Int,
-    ): Flow<List<TransactionDataEntity>> = emptyFlow()
-
-    override suspend fun getSearchedTransactionData(
-        searchText: String,
-    ): List<TransactionDataEntity> = emptyList()
 
     override suspend fun getTitleSuggestions(
         categoryId: Int,
@@ -118,10 +102,6 @@ public class FakeTransactionDaoImpl : TransactionDao {
             transactionEntity.id == id
         }
     }
-
-    override suspend fun getTransactionDataById(
-        id: Int,
-    ): TransactionDataEntity? = null
 
     override suspend fun getTransactionsBetweenTimestamps(
         startingTimestamp: Long,

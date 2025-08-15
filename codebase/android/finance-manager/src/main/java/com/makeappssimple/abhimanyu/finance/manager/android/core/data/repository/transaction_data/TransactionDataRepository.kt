@@ -14,57 +14,36 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public interface TransactionRepository {
-    public suspend fun checkIfAccountIsUsedInTransactions(
-        accountId: Int,
-    ): Boolean
-
-    public suspend fun checkIfCategoryIsUsedInTransactions(
-        categoryId: Int,
-    ): Boolean
-
-    public suspend fun checkIfTransactionForIsUsedInTransactions(
-        transactionForId: Int,
-    ): Boolean
-
-    public suspend fun deleteAllTransactions(): Boolean
-
+public interface TransactionDataRepository {
     public suspend fun deleteTransactionById(
         id: Int,
     ): Boolean
 
-    public suspend fun getAllTransactions(): ImmutableList<Transaction>
+    public suspend fun getAllTransactionData(): ImmutableList<TransactionData>
 
-    public suspend fun getTitleSuggestions(
-        categoryId: Int,
-        numberOfSuggestions: Int,
-        enteredTitle: String,
-    ): ImmutableList<String>
+    public fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>>
 
-    public suspend fun getTransactionById(
+    public fun getRecentTransactionDataFlow(
+        numberOfTransactions: Int,
+    ): Flow<ImmutableList<TransactionData>>
+
+    public suspend fun getSearchedTransactionData(
+        searchText: String,
+    ): ImmutableList<TransactionData>
+
+    public suspend fun getTransactionDataById(
         id: Int,
-    ): Transaction?
-
-    public suspend fun getTransactionsBetweenTimestamps(
-        startingTimestamp: Long,
-        endingTimestamp: Long,
-    ): ImmutableList<Transaction>
-
-    public fun getTransactionsBetweenTimestampsFlow(
-        startingTimestamp: Long,
-        endingTimestamp: Long,
-    ): Flow<ImmutableList<Transaction>>
-
-    public suspend fun getTransactionsCount(): Int
+    ): TransactionData?
 
     public suspend fun insertTransaction(
         accountFrom: Account?,
@@ -73,22 +52,10 @@ public interface TransactionRepository {
         originalTransaction: Transaction?,
     ): Long
 
-    public suspend fun insertTransactions(
-        vararg transactions: Transaction,
-    ): ImmutableList<Long>
-
     public suspend fun restoreData(
         categories: ImmutableList<Category>,
         accounts: ImmutableList<Account>,
         transactions: ImmutableList<Transaction>,
         transactionForValues: ImmutableList<TransactionFor>,
-    ): Boolean
-
-    public suspend fun updateTransaction(
-        transaction: Transaction,
-    ): Boolean
-
-    public suspend fun updateTransactions(
-        vararg transactions: Transaction,
     ): Boolean
 }

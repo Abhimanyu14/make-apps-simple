@@ -16,13 +16,13 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
+import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -38,8 +38,13 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
-                "WHERE account_from_id = :accountId OR account_to_id = :accountId)"
+        value = """
+            SELECT EXISTS(
+                SELECT * FROM transaction_table 
+                WHERE account_from_id = :accountId 
+                OR account_to_id = :accountId
+            )
+        """
     )
     public suspend fun checkIfAccountIsUsedInTransactions(
         accountId: Int,
@@ -96,28 +101,6 @@ public interface TransactionDao {
     ): Int
 
     /**
-     * Get all transaction data as a list, ordered by timestamp descending.
-     * @return List of all transaction data
-     * @throws SQLiteException if there is a general SQLite error
-     */
-    @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
-    )
-    public suspend fun getAllTransactionData(): List<TransactionDataEntity>
-
-    /**
-     * Get all transaction data as a Flow, ordered by timestamp descending.
-     * @return Flow emitting the list of all transaction data
-     * @throws SQLiteException if there is a general SQLite error
-     */
-    @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
-    )
-    public fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
-
-    /**
      * Get all transactions as a list, ordered by timestamp descending.
      * @return List of all transactions
      * @throws SQLiteException if there is a general SQLite error
@@ -138,38 +121,6 @@ public interface TransactionDao {
                 "ORDER BY transaction_timestamp DESC"
     )
     public fun getAllTransactionsFlow(): Flow<List<TransactionEntity>>
-
-    /**
-     * Get recent transaction data as a Flow.
-     * @param numberOfTransactions Number of recent transactions to retrieve
-     * @return Flow emitting the specified number of most recent transactions
-     * @throws SQLiteException if there is a general SQLite error
-     */
-    @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC " +
-                "LIMIT :numberOfTransactions"
-    )
-    public fun getRecentTransactionDataFlow(
-        numberOfTransactions: Int,
-    ): Flow<List<TransactionDataEntity>>
-
-    /**
-     * Get searched transaction data.
-     * TODO(Abhi): To search amount properly, JSON1 extension is required which is not available in Android.
-     * For more info - https://stackoverflow.com/a/65104396/9636037
-     *
-     * The current code is a hacky solution, which does a simple text search of the JSON string.
-     * @throws SQLiteException if there is a general SQLite error
-     */
-    @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE instr(lower(title), lower(:searchText)) > 0 OR instr(lower(amount), lower(:searchText)) > 0 " +
-                "ORDER BY transaction_timestamp DESC"
-    )
-    public suspend fun getSearchedTransactionData(
-        searchText: String,
-    ): List<TransactionDataEntity>
 
     /**
      * Get title suggestions for a category based on existing transactions.
@@ -206,20 +157,6 @@ public interface TransactionDao {
     public suspend fun getTransactionById(
         id: Int,
     ): TransactionEntity?
-
-    /**
-     * Get transaction data by id.
-     * @param id Required transaction id
-     * @return Transaction data with given [id] or null if not found
-     * @throws SQLiteException if there is a general SQLite error
-     */
-    @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE id = :id"
-    )
-    public suspend fun getTransactionDataById(
-        id: Int,
-    ): TransactionDataEntity?
 
     /**
      * Get transactions between timestamps as a list.
@@ -267,6 +204,7 @@ public interface TransactionDao {
      * Insert a transaction into the table.
      * @param transaction Transaction to insert
      * @return Row id for inserted transaction. -1 if a conflict occurred.
+     * @throws SQLiteConstraintException if a constraint is violated, such as a unique constraint
      * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -278,9 +216,9 @@ public interface TransactionDao {
      * Insert transactions into the table.
      * @param transactions Transactions to insert
      * @return List of row ids for inserted transactions. -1 if a conflict occurred for that item.
+     * @throws SQLiteConstraintException if a constraint is violated, such as a unique constraint
      * @throws SQLiteException if there is a general SQLite error
      */
-    // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertTransactions(
         vararg transactions: TransactionEntity,

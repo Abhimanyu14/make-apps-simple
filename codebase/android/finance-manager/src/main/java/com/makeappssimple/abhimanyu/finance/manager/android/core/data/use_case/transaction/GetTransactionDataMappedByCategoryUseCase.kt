@@ -17,19 +17,19 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionDataMappedByCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import kotlinx.collections.immutable.ImmutableList
 
 public class GetTransactionDataMappedByCategoryUseCase(
-    private val transactionRepository: TransactionRepository,
+    private val transactionDataRepository: TransactionDataRepository,
 ) {
     public suspend operator fun invoke(
         transactionType: TransactionType,
     ): ImmutableList<TransactionDataMappedByCategory> {
         // TODO(Abhi): To handle refunds
-        val result = transactionRepository.getAllTransactionData()
+        val result = transactionDataRepository.getAllTransactionData()
             .filter {
                 it.transaction.transactionType == transactionType
             }

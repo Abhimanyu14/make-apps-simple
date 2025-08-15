@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 
+import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Delete
@@ -92,9 +93,9 @@ public interface CategoryDao {
      * Insert categories into the table.
      * @param categories Categories to insert
      * @return List of row ids for inserted categories. -1 if a conflict occurred for that item.
+     * @throws SQLiteConstraintException if a constraint is violated, such as a unique constraint
      * @throws SQLiteException if there is a general SQLite error
      */
-    // TODO(Abhi): Handle conflicts with error handling properly
     @Insert(onConflict = OnConflictStrategy.ABORT)
     public suspend fun insertCategories(
         vararg categories: CategoryEntity,
