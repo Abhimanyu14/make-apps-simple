@@ -37,6 +37,7 @@ import org.koin.core.annotation.Module
         ConfigKitModule::class,
         CoroutineScopeModule::class,
         DaosModule::class,
+        DatabaseTransactionProviderModule::class,
         DataSourceModule::class,
         DataUseCaseModule::class,
         DateTimeKitModule::class,

@@ -16,108 +16,111 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource
 
-import androidx.room.withTransaction
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.updateBalanceAmount
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.DatabaseTransactionProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 
-public class CommonDataSourceImpl(
-    private val financeManagerRoomDatabase: FinanceManagerRoomDatabase,
+internal class CommonDataSourceImpl(
+    private val accountDao: AccountDao,
+    private val categoryDao: CategoryDao,
+    private val databaseTransactionProvider: DatabaseTransactionProvider,
+    private val transactionDao: TransactionDao,
+    private val transactionDataDao: TransactionDataDao,
+    private val transactionForDao: TransactionForDao,
 ) : CommonDataSource {
     override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
-        return with(
-            receiver = financeManagerRoomDatabase,
-        ) {
-            try {
-                withTransaction {
-                    val transactionData: TransactionDataEntity? =
-                        transactionDataDao()
-                            .getTransactionDataById(
-                                id = id,
-                            )
-                    requireNotNull(
-                        value = transactionData,
-                    ) {
-                        "Transaction data with ID $id not found."
-                    }
-
-                    val updatedAccounts: MutableList<AccountEntity> =
-                        mutableListOf()
-                    transactionData.accountFrom?.let { transactionAccountFrom ->
-                        updatedAccounts.add(
-                            transactionAccountFrom.updateBalanceAmount(
-                                updatedBalanceAmount = transactionAccountFrom.balanceAmount.value + transactionData.transaction.amount.value,
-                            )
-                        )
-                    }
-                    transactionData.accountTo?.let { transactionAccountTo ->
-                        updatedAccounts.add(
-                            transactionAccountTo.updateBalanceAmount(
-                                updatedBalanceAmount = transactionAccountTo.balanceAmount.value - transactionData.transaction.amount.value,
-                            )
-                        )
-                    }
-
-                    if (transactionData.transaction.transactionType == TransactionType.REFUND) {
-                        val originalTransactionId =
-                            transactionData.transaction.originalTransactionId
-                        requireNotNull(
-                            value = originalTransactionId,
-                        ) {
-                            "Original transaction ID must not be null for refund transactions."
-                        }
-                        val originalTransaction =
-                            transactionDao().getTransactionById(
-                                id = originalTransactionId,
-                            )
-                        requireNotNull(
-                            value = originalTransaction,
-                        ) {
-                            "Original transaction with ID $originalTransactionId not found."
-                        }
-                        val originalTransactionRefundTransactionIds =
-                            originalTransaction.refundTransactionIds?.toMutableList()
-                        requireNotNull(
-                            value = originalTransactionRefundTransactionIds,
-                        ) {
-                            "Original transaction refund transaction IDs must not be null."
-                        }
-                        originalTransactionRefundTransactionIds.remove(
-                            element = id,
-                        )
-                        val updatedRefundTransactionIds =
-                            if (originalTransactionRefundTransactionIds.isEmpty()) {
-                                null
-                            } else {
-                                originalTransactionRefundTransactionIds
-                            }
-                        transactionDao().updateTransaction(
-                            transaction = originalTransaction.copy(
-                                refundTransactionIds = updatedRefundTransactionIds,
-                            ),
-                        )
-                    }
-                    transactionDao().deleteTransactionById(
+        return try {
+            databaseTransactionProvider.runAsTransaction {
+                val transactionData: TransactionDataEntity? =
+                    transactionDataDao.getTransactionDataById(
                         id = id,
                     )
-                    accountDao().updateAccounts(
-                        accounts = updatedAccounts.toTypedArray(),
+                requireNotNull(
+                    value = transactionData,
+                ) {
+                    "Transaction data with ID $id not found."
+                }
+
+                val updatedAccounts: MutableList<AccountEntity> =
+                    mutableListOf()
+                transactionData.accountFrom?.let { transactionAccountFrom ->
+                    updatedAccounts.add(
+                        transactionAccountFrom.updateBalanceAmount(
+                            updatedBalanceAmount = transactionAccountFrom.balanceAmount.value + transactionData.transaction.amount.value,
+                        )
                     )
                 }
+                transactionData.accountTo?.let { transactionAccountTo ->
+                    updatedAccounts.add(
+                        transactionAccountTo.updateBalanceAmount(
+                            updatedBalanceAmount = transactionAccountTo.balanceAmount.value - transactionData.transaction.amount.value,
+                        )
+                    )
+                }
+
+                if (transactionData.transaction.transactionType == TransactionType.REFUND) {
+                    val originalTransactionId =
+                        transactionData.transaction.originalTransactionId
+                    requireNotNull(
+                        value = originalTransactionId,
+                    ) {
+                        "Original transaction ID must not be null for refund transactions."
+                    }
+                    val originalTransaction = transactionDao.getTransactionById(
+                        id = originalTransactionId,
+                    )
+                    requireNotNull(
+                        value = originalTransaction,
+                    ) {
+                        "Original transaction with ID $originalTransactionId not found."
+                    }
+                    val originalTransactionRefundTransactionIds =
+                        originalTransaction.refundTransactionIds?.toMutableList()
+                    requireNotNull(
+                        value = originalTransactionRefundTransactionIds,
+                    ) {
+                        "Original transaction refund transaction IDs must not be null."
+                    }
+                    originalTransactionRefundTransactionIds.remove(
+                        element = id,
+                    )
+                    val updatedRefundTransactionIds =
+                        if (originalTransactionRefundTransactionIds.isEmpty()) {
+                            null
+                        } else {
+                            originalTransactionRefundTransactionIds
+                        }
+                    transactionDao.updateTransaction(
+                        transaction = originalTransaction.copy(
+                            refundTransactionIds = updatedRefundTransactionIds,
+                        ),
+                    )
+                }
+                transactionDao.deleteTransactionById(
+                    id = id,
+                )
+                accountDao.updateAccounts(
+                    accounts = updatedAccounts.toTypedArray(),
+                )
                 true
-            } catch (
-                _: Exception,
-            ) {
-                false
             }
+        } catch (
+            _: Exception,
+        ) {
+            return false
         }
     }
 
@@ -127,11 +130,9 @@ public class CommonDataSourceImpl(
         transaction: TransactionEntity,
         originalTransaction: TransactionEntity?,
     ): Long {
-        return with(
-            receiver = financeManagerRoomDatabase,
-        ) {
-            withTransaction {
-                val insertedTransactionId = transactionDao().insertTransaction(
+        return try {
+            databaseTransactionProvider.runAsTransaction {
+                val insertedTransactionId = transactionDao.insertTransaction(
                     transaction = transaction,
                 )
                 val isTransactionInserted = insertedTransactionId != -1L
@@ -151,7 +152,7 @@ public class CommonDataSourceImpl(
                             ),
                         )
                     }
-                    accountDao().updateAccounts(
+                    accountDao.updateAccounts(
                         accounts = updatedAccounts.toTypedArray(),
                     )
 
@@ -161,7 +162,7 @@ public class CommonDataSourceImpl(
                             .orEmpty()
                             .toMutableList()
                         refundTransactionIds.add(insertedTransactionId.toInt())
-                        transactionDao().updateTransaction(
+                        transactionDao.updateTransaction(
                             transaction = originalTransaction
                                 .copy(
                                     refundTransactionIds = refundTransactionIds,
@@ -173,6 +174,10 @@ public class CommonDataSourceImpl(
                 }
                 insertedTransactionId
             }
+        } catch (
+            _: Exception,
+        ) {
+            return -1
         }
     }
 
@@ -182,29 +187,31 @@ public class CommonDataSourceImpl(
         transactions: Array<TransactionEntity>,
         transactionForValues: Array<TransactionForEntity>,
     ): Boolean {
-        return with(
-            receiver = financeManagerRoomDatabase,
-        ) {
-            withTransaction {
-                categoryDao().deleteAllCategories()
-                accountDao().deleteAllAccounts()
-                transactionDao().deleteAllTransactions()
-                transactionForDao().deleteAllTransactionForValues()
+        return try {
+            databaseTransactionProvider.runAsTransaction {
+                categoryDao.deleteAllCategories()
+                accountDao.deleteAllAccounts()
+                transactionDao.deleteAllTransactions()
+                transactionForDao.deleteAllTransactionForValues()
 
-                categoryDao().insertCategories(
+                categoryDao.insertCategories(
                     categories = categories,
                 )
-                accountDao().insertAccounts(
+                accountDao.insertAccounts(
                     accounts = accounts,
                 )
-                transactionDao().insertTransactions(
+                transactionDao.insertTransactions(
                     transactions = transactions,
                 )
-                transactionForDao().insertTransactionForValues(
+                transactionForDao.insertTransactionForValues(
                     transactionForValues = transactionForValues,
                 )
+                true
             }
-            true
+        } catch (
+            _: Exception,
+        ) {
+            return false
         }
     }
 }

@@ -16,9 +16,14 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSourceImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.DatabaseTransactionProvider
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -26,10 +31,20 @@ import org.koin.core.annotation.Single
 public class DataSourceModule {
     @Single
     internal fun providesCommonDataSource(
-        financeManagerRoomDatabase: FinanceManagerRoomDatabase,
+        accountDao: AccountDao,
+        categoryDao: CategoryDao,
+        databaseTransactionProvider: DatabaseTransactionProvider,
+        transactionDao: TransactionDao,
+        transactionDataDao: TransactionDataDao,
+        transactionForDao: TransactionForDao,
     ): CommonDataSource {
         return CommonDataSourceImpl(
-            financeManagerRoomDatabase = financeManagerRoomDatabase,
+            accountDao = accountDao,
+            categoryDao = categoryDao,
+            databaseTransactionProvider = databaseTransactionProvider,
+            transactionDao = transactionDao,
+            transactionDataDao = transactionDataDao,
+            transactionForDao = transactionForDao,
         )
     }
 }
