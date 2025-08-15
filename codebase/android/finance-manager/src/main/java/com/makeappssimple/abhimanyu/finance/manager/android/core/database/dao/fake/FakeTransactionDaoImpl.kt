@@ -180,7 +180,9 @@ public class FakeTransactionDaoImpl : TransactionDao {
                     transactionEntity.id
                 }
             1
-        } else 0
+        } else {
+            0
+        }
     }
 
     override suspend fun updateTransactions(
