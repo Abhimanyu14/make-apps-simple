@@ -14,25 +14,37 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
+import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "transaction_for_table")
 public data class TransactionForEntity(
+    @ColumnInfo(name = "id")
+    @EncodeDefault
     @PrimaryKey(autoGenerate = true)
+    @SerialName(value = "id")
     val id: Int = 0,
 
+    @ColumnInfo(name = "title")
+    @EncodeDefault
+    @SerialName(value = "title")
     val title: String,
-) {
-    val titleToDisplay: String
-        get() = title.capitalizeWords()
-}
+)
+
+public val TransactionForEntity.titleToDisplay: String
+    get() = title.capitalizeWords()
 
 public fun TransactionForEntity.asExternalModel(): TransactionFor {
     return TransactionFor(

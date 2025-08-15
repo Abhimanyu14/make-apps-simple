@@ -14,24 +14,33 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.model
 
+import androidx.room.ColumnInfo
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.CurrencyCodeConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.currency.formattedCurrencyValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.serializer.CurrencySerializer
 import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.Currency
 import kotlin.math.abs
 
 @Serializable
 public data class AmountEntity(
+    @ColumnInfo(name = "currency")
     @EncodeDefault
     @Serializable(CurrencySerializer::class)
+    @SerialName(value = "currency")
     public val currency: Currency = Currency.getInstance(CurrencyCodeConstants.INR),
 
+    @ColumnInfo(name = "value")
     @EncodeDefault
+    @SerialName(value = "value")
     public val value: Long = 0,
 ) {
     override fun toString(): String {

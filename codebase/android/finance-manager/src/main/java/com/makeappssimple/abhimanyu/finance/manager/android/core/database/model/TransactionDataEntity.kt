@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
+import kotlinx.serialization.ExperimentalSerializationApi
 
 public data class TransactionDataEntity(
     @Embedded

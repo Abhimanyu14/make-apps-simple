@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.model
 
 import androidx.room.ColumnInfo
@@ -24,6 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.conver
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
@@ -31,31 +34,44 @@ import kotlinx.serialization.json.JsonNames
 @Serializable
 @Entity(tableName = "category_table")
 public data class CategoryEntity(
+    @ColumnInfo(name = "id")
     @EncodeDefault
     @PrimaryKey(autoGenerate = true)
+    @SerialName(value = "id")
     val id: Int = 0,
 
     // TODO(Abhi): Fix parent category id column name
     @ColumnInfo(name = "parent_category")
+    @EncodeDefault
     @SerialName(value = "parent_category")
     val parentCategoryId: Int? = null,
 
     // TODO(Abhi): Fix sub category ids column name
     @ColumnInfo(name = "sub_categories")
+    @EncodeDefault
     @SerialName(value = "sub_categories")
     @TypeConverters(IntListConverter::class)
     val subCategoryIds: List<Int>? = null,
 
+    @ColumnInfo(name = "description")
     @EncodeDefault
+    @SerialName(value = "description")
     val description: String = "",
 
+    @ColumnInfo(name = "emoji")
+    @EncodeDefault
+    @SerialName(value = "emoji")
     val emoji: String,
 
+    @ColumnInfo(name = "title")
+    @EncodeDefault
+    @SerialName(value = "title")
     val title: String,
 
     @ColumnInfo(name = "transaction_type")
-    @SerialName(value = "transaction_type")
+    @EncodeDefault
     @JsonNames("transactionType")
+    @SerialName(value = "transaction_type")
     val transactionType: TransactionType,
 )
 

@@ -31,33 +31,36 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "account_table")
 @Serializable
 public data class AccountEntity(
-    @EncodeDefault
     @ColumnInfo(name = "balance_amount")
+    @EncodeDefault
     @SerialName(value = "balance_amount")
     val balanceAmount: AmountEntity = AmountEntity(
         value = 0,
     ),
 
-    @EncodeDefault
     @ColumnInfo(name = "is_archived", defaultValue = "0")
+    @EncodeDefault
     @SerialName(value = "is_archived")
     val isArchived: Boolean = false,
 
+    @ColumnInfo(name = "id")
     @EncodeDefault
     @PrimaryKey(autoGenerate = true)
+    @SerialName(value = "id")
     val id: Int = 0,
 
-    @EncodeDefault
     @ColumnInfo(name = "type")
+    @EncodeDefault
     @SerialName(value = "type")
     val type: AccountType = AccountType.CASH,
 
-    @EncodeDefault
     @ColumnInfo(name = "minimum_account_balance_amount")
+    @EncodeDefault
     @SerialName(value = "minimum_account_balance_amount")
     val minimumAccountBalanceAmount: AmountEntity? = null,
 
     @ColumnInfo(name = "name")
+    @EncodeDefault
     @SerialName(value = "name")
     val name: String,
 )
