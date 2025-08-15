@@ -40,9 +40,10 @@ public interface TransactionDao {
     @Query(
         value = """
             SELECT EXISTS(
-                SELECT * FROM transaction_table 
+                SELECT *
+                FROM transaction_table 
                 WHERE account_from_id = :accountId 
-                OR account_to_id = :accountId
+                    OR account_to_id = :accountId
             )
         """
     )
