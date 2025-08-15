@@ -36,7 +36,12 @@ public interface TransactionForDao {
      * @return Number of rows deleted
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "DELETE FROM transaction_for_table")
+    @Query(
+        value = """
+            DELETE 
+            FROM transaction_for_table
+        """
+    )
     public suspend fun deleteAllTransactionForValues(): Int
 
     /**
@@ -45,7 +50,13 @@ public interface TransactionForDao {
      * @return Number of rows deleted (0 or 1)
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "DELETE FROM transaction_for_table WHERE id = :id")
+    @Query(
+        value = """
+            DELETE 
+            FROM transaction_for_table
+            WHERE id = :id
+        """
+    )
     public suspend fun deleteTransactionForById(
         id: Int,
     ): Int
@@ -55,7 +66,13 @@ public interface TransactionForDao {
      * @return Returns all transaction for values ordered by [TransactionForEntity.id]
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT * from transaction_for_table ORDER BY id ASC")
+    @Query(
+        value = """
+            SELECT *
+            FROM transaction_for_table
+            ORDER BY id ASC
+        """
+    )
     public suspend fun getAllTransactionForValues(): List<TransactionForEntity>
 
     /**
@@ -63,7 +80,13 @@ public interface TransactionForDao {
      * @return Flow emitting the list of all transaction for values ordered by [TransactionForEntity.id]
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT * from transaction_for_table ORDER BY id ASC")
+    @Query(
+        value = """
+            SELECT *
+            FROM transaction_for_table
+            ORDER BY id ASC
+        """
+    )
     public fun getAllTransactionForValuesFlow(): Flow<List<TransactionForEntity>>
 
     /**
@@ -72,7 +95,13 @@ public interface TransactionForDao {
      * @return TransactionFor with given [id] or null if not found
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT * from transaction_for_table WHERE id = :id")
+    @Query(
+        value = """
+            SELECT *
+            FROM transaction_for_table
+            WHERE id = :id
+        """
+    )
     public suspend fun getTransactionForById(
         id: Int,
     ): TransactionForEntity?

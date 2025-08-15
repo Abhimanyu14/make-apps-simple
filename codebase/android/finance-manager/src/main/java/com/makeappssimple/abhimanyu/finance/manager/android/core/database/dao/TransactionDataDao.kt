@@ -33,8 +33,11 @@ public interface TransactionDataDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public suspend fun getAllTransactionData(): List<TransactionDataEntity>
 
@@ -44,8 +47,11 @@ public interface TransactionDataDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
 
@@ -56,9 +62,12 @@ public interface TransactionDataDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "ORDER BY transaction_timestamp DESC " +
-                "LIMIT :numberOfTransactions"
+        value = """
+            SELECT *
+            FROM transaction_table
+            ORDER BY transaction_timestamp DESC
+            LIMIT :numberOfTransactions
+        """
     )
     public fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
@@ -73,9 +82,13 @@ public interface TransactionDataDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE instr(lower(title), lower(:searchText)) > 0 OR instr(lower(amount), lower(:searchText)) > 0 " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            WHERE instr(lower(title), lower(:searchText)) > 0
+                OR instr(lower(amount), lower(:searchText)) > 0
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public suspend fun getSearchedTransactionData(
         searchText: String,
@@ -88,8 +101,11 @@ public interface TransactionDataDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE id = :id"
+        value = """
+            SELECT *
+            FROM transaction_table
+            WHERE id = :id
+        """
     )
     public suspend fun getTransactionDataById(
         id: Int,

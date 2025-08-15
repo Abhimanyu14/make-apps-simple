@@ -96,7 +96,8 @@ public interface TransactionDao {
      */
     @Query(
         value = """
-            DELETE FROM transaction_table
+            DELETE 
+            FROM transaction_table
         """
     )
     public suspend fun deleteAllTransactions(): Int
@@ -109,7 +110,8 @@ public interface TransactionDao {
      */
     @Query(
         value = """
-            DELETE FROM transaction_table
+            DELETE 
+            FROM transaction_table
             WHERE id = :id
         """
     )

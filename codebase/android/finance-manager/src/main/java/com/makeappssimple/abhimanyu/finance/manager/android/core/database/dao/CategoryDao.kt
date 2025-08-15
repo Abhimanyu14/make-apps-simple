@@ -37,7 +37,12 @@ public interface CategoryDao {
      * @return Number of rows deleted
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "DELETE FROM category_table")
+    @Query(
+        value = """
+            DELETE 
+            FROM category_table
+        """
+    )
     public suspend fun deleteAllCategories(): Int
 
     /**
@@ -57,7 +62,13 @@ public interface CategoryDao {
      * @return Number of rows deleted
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "DELETE FROM category_table WHERE id = :id")
+    @Query(
+        value = """
+            DELETE 
+            FROM category_table
+            WHERE id = :id
+        """
+    )
     public suspend fun deleteCategoryById(
         id: Int,
     ): Int
@@ -67,7 +78,13 @@ public interface CategoryDao {
      * @return Returns all categories ordered by [CategoryEntity.id]
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT * from category_table ORDER BY id ASC")
+    @Query(
+        value = """
+            SELECT *
+            FROM category_table
+            ORDER BY id ASC
+        """
+    )
     public suspend fun getAllCategories(): List<CategoryEntity>
 
     /**
@@ -75,7 +92,13 @@ public interface CategoryDao {
      * @return Flow emitting the list of all categories ordered by [CategoryEntity.id]
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT * from category_table ORDER BY id ASC")
+    @Query(
+        value = """
+            SELECT *
+            FROM category_table
+            ORDER BY id ASC
+        """
+    )
     public fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
 
     /**
@@ -84,7 +107,13 @@ public interface CategoryDao {
      * @return Category with given [id] or null if not found
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT * from category_table WHERE id = :id")
+    @Query(
+        value = """
+            SELECT *
+            FROM category_table
+            WHERE id = :id
+        """
+    )
     public suspend fun getCategoryById(
         id: Int,
     ): CategoryEntity?
