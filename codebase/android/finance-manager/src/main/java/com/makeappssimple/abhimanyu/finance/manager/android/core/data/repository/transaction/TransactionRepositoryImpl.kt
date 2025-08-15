@@ -207,18 +207,6 @@ internal class TransactionRepositoryImpl(
         }
     }
 
-    override suspend fun getTransactionsCount(): Int {
-        return dispatcherProvider.executeOnIoDispatcher {
-            try {
-                transactionDao.getTransactionsCount()
-            } catch (
-                _: SQLiteException,
-            ) {
-                0
-            }
-        }
-    }
-
     override suspend fun insertTransaction(
         accountFrom: Account?,
         accountTo: Account?,

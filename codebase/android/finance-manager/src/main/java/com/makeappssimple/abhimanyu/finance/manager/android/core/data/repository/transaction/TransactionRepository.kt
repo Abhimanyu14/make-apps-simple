@@ -64,8 +64,6 @@ public interface TransactionRepository {
         endingTimestamp: Long,
     ): Flow<ImmutableList<Transaction>>
 
-    public suspend fun getTransactionsCount(): Int
-
     public suspend fun insertTransaction(
         accountFrom: Account?,
         accountTo: Account?,

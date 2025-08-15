@@ -125,10 +125,6 @@ public class FakeTransactionDaoImpl : TransactionDao {
         }
     }
 
-    override suspend fun getTransactionsCount(): Int {
-        return transactions.size
-    }
-
     override suspend fun insertTransaction(
         transaction: TransactionEntity,
     ): Long {
@@ -158,10 +154,10 @@ public class FakeTransactionDaoImpl : TransactionDao {
     }
 
     override suspend fun insertTransactions(
-        vararg newTransactions: TransactionEntity,
+        vararg transactions: TransactionEntity,
     ): List<Long> {
         val result = mutableListOf<Long>()
-        for (transaction in newTransactions) {
+        for (transaction in transactions) {
             result.add(
                 element = insertTransaction(
                     transaction = transaction,
@@ -188,10 +184,10 @@ public class FakeTransactionDaoImpl : TransactionDao {
     }
 
     override suspend fun updateTransactions(
-        vararg updatedTransactions: TransactionEntity,
+        vararg transactions: TransactionEntity,
     ): Int {
         var updatedCount = 0
-        for (transaction in updatedTransactions) {
+        for (transaction in transactions) {
             updatedCount += updateTransaction(
                 transaction = transaction,
             )

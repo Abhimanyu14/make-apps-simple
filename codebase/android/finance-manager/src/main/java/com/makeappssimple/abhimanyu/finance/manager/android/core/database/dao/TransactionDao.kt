@@ -228,19 +228,6 @@ public interface TransactionDao {
     ): Flow<List<TransactionEntity>>
 
     /**
-     * Get the count of all transactions.
-     * @return Number of transactions in the table
-     * @throws SQLiteException if there is a general SQLite error
-     */
-    @Query(
-        value = """
-            SELECT COUNT(*)
-            FROM transaction_table
-        """
-    )
-    public suspend fun getTransactionsCount(): Int
-
-    /**
      * Insert a transaction into the table.
      * @param transaction Transaction to insert
      * @return Row id for inserted transaction. -1 if a conflict occurred.
