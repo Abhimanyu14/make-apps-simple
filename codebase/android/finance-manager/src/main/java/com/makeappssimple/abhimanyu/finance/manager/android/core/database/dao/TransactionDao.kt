@@ -58,8 +58,13 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
-                "WHERE category_id = :categoryId)"
+        value = """
+            SELECT EXISTS(
+                SELECT *
+                FROM transaction_table
+                WHERE category_id = :categoryId
+            )
+        """
     )
     public suspend fun checkIfCategoryIsUsedInTransactions(
         categoryId: Int,
@@ -72,8 +77,13 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT EXISTS(SELECT * FROM transaction_table " +
-                "WHERE transaction_for_id = :transactionForId)"
+        value = """
+            SELECT EXISTS(
+                SELECT *
+                FROM transaction_table
+                WHERE transaction_for_id = :transactionForId
+            )
+        """
     )
     public suspend fun checkIfTransactionForIsUsedInTransactions(
         transactionForId: Int,
@@ -84,7 +94,11 @@ public interface TransactionDao {
      * @return Number of rows deleted
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "DELETE FROM transaction_table")
+    @Query(
+        value = """
+            DELETE FROM transaction_table
+        """
+    )
     public suspend fun deleteAllTransactions(): Int
 
     /**
@@ -94,8 +108,10 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "DELETE FROM transaction_table " +
-                "WHERE id = :id"
+        value = """
+            DELETE FROM transaction_table
+            WHERE id = :id
+        """
     )
     public suspend fun deleteTransactionById(
         id: Int,
@@ -107,8 +123,11 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * from transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public suspend fun getAllTransactions(): List<TransactionEntity>
 
@@ -118,8 +137,11 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * from transaction_table " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public fun getAllTransactionsFlow(): Flow<List<TransactionEntity>>
 
@@ -132,12 +154,15 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT title from transaction_table " +
-                "WHERE category_id = :categoryId " +
-                "AND title LIKE '%' || :enteredTitle || '%' " +
-                "GROUP BY title " +
-                "ORDER BY COUNT(title) DESC " +
-                "LIMIT :numberOfSuggestions"
+        value = """
+            SELECT title
+            FROM transaction_table
+            WHERE category_id = :categoryId
+                AND title LIKE '%' || :enteredTitle || '%'
+            GROUP BY title
+            ORDER BY COUNT(title) DESC
+            LIMIT :numberOfSuggestions
+        """
     )
     public suspend fun getTitleSuggestions(
         categoryId: Int,
@@ -152,8 +177,11 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE id = :id"
+        value = """
+            SELECT *
+            FROM transaction_table
+            WHERE id = :id
+        """
     )
     public suspend fun getTransactionById(
         id: Int,
@@ -167,9 +195,12 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public suspend fun getTransactionsBetweenTimestamps(
         startingTimestamp: Long,
@@ -184,9 +215,12 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(
-        value = "SELECT * FROM transaction_table " +
-                "WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp " +
-                "ORDER BY transaction_timestamp DESC"
+        value = """
+            SELECT *
+            FROM transaction_table
+            WHERE transaction_timestamp BETWEEN :startingTimestamp AND :endingTimestamp
+            ORDER BY transaction_timestamp DESC
+        """
     )
     public fun getTransactionsBetweenTimestampsFlow(
         startingTimestamp: Long,
@@ -198,7 +232,12 @@ public interface TransactionDao {
      * @return Number of transactions in the table
      * @throws SQLiteException if there is a general SQLite error
      */
-    @Query(value = "SELECT COUNT(*) FROM transaction_table")
+    @Query(
+        value = """
+            SELECT COUNT(*)
+            FROM transaction_table
+        """
+    )
     public suspend fun getTransactionsCount(): Int
 
     /**
