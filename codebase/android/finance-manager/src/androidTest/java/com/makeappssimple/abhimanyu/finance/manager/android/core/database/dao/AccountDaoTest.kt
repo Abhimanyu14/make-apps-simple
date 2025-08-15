@@ -325,6 +325,7 @@ internal class AccountDaoTest {
         assertThat(allAccounts.first()).isEqualTo(accountEntity)
     }
 
+    // region common
     private fun getAccountEntity(
         id: Int = 0,
         name: String = "test-account",
@@ -347,4 +348,5 @@ internal class AccountDaoTest {
             testBody()
         }
     }
+    // endregion
 }
