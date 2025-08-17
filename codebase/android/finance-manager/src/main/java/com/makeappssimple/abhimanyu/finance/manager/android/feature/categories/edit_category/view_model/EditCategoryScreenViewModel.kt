@@ -110,10 +110,10 @@ internal class EditCategoryScreenViewModel(
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateCategory = ::updateCategory,
             updateEmoji = ::updateEmoji,
-            updateTitle = ::updateTitle,
             updateEmojiSearchText = ::updateEmojiSearchText,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateSelectedTransactionTypeIndex = ::updateSelectedTransactionTypeIndex,
+            updateTitle = ::updateTitle,
         )
     // endregion
 
@@ -150,97 +150,7 @@ internal class EditCategoryScreenViewModel(
             getCurrentCategory()
         }
     }
-    // endregion
 
-    // region state events
-    private fun clearTitle(): Job {
-        return updateTitle(
-            updatedTitle = title.copy(
-                text = "",
-            ),
-        )
-    }
-
-    private fun resetScreenBottomSheetType(): Job {
-        return updateScreenBottomSheetType(
-            updatedEditCategoryScreenBottomSheetType = EditCategoryScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateEmoji(
-        updatedEmoji: String,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        emoji = updatedEmoji
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateTitle(
-        updatedTitle: TextFieldValue,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        title = updatedTitle
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        screenBottomSheetType = updatedEditCategoryScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateEmojiSearchText(
-        updatedEmojiSearchText: String,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        emojiSearchText = updatedEmojiSearchText
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateSelectedTransactionTypeIndex(
-        updatedSelectedTransactionTypeIndex: Int,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateCategory(): Job {
-        return coroutineScope.launch {
-            val isCategoryUpdated = updateCategoryUseCase(
-                currentCategory = requireNotNull(
-                    value = currentCategory,
-                    lazyMessage = {
-                        "Current category is null. Cannot update category."
-                    },
-                ),
-                emoji = emoji,
-                title = title.text,
-                transactionType = validTransactionTypes[selectedTransactionTypeIndex],
-            ) == 1
-            if (isCategoryUpdated) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
-        }
-    }
-    // endregion
-
-    // region getCurrentCategory
     private fun getCurrentCategory(
         shouldRefresh: Boolean = false,
     ) {
@@ -282,6 +192,94 @@ internal class EditCategoryScreenViewModel(
         )
         updateEmoji(
             updatedEmoji = currentCategory.emoji,
+            shouldRefresh = shouldRefresh,
+        )
+    }
+    // endregion
+
+    // region state events
+    private fun clearTitle(): Job {
+        return updateTitle(
+            updatedTitle = title.copy(
+                text = "",
+            ),
+        )
+    }
+
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
+            updatedEditCategoryScreenBottomSheetType = EditCategoryScreenBottomSheetType.None,
+        )
+    }
+
+    private fun updateCategory(): Job {
+        return coroutineScope.launch {
+            val isCategoryUpdated = updateCategoryUseCase(
+                currentCategory = requireNotNull(
+                    value = currentCategory,
+                    lazyMessage = {
+                        "Current category is null. Cannot update category."
+                    },
+                ),
+                emoji = emoji,
+                title = title.text,
+                transactionType = validTransactionTypes[selectedTransactionTypeIndex],
+            ) == 1
+            if (isCategoryUpdated) {
+                navigateUp()
+            } else {
+                completeLoading()
+                // TODO(Abhi): Show error
+            }
+        }
+    }
+
+    private fun updateEmoji(
+        updatedEmoji: String,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        emoji = updatedEmoji
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateEmojiSearchText(
+        updatedEmojiSearchText: String,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        emojiSearchText = updatedEmojiSearchText
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateScreenBottomSheetType(
+        updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenBottomSheetType = updatedEditCategoryScreenBottomSheetType
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateSelectedTransactionTypeIndex(
+        updatedSelectedTransactionTypeIndex: Int,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateTitle(
+        updatedTitle: TextFieldValue,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        title = updatedTitle
+        return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
     }
