@@ -152,19 +152,27 @@ kover {
     reports {
         filters {
             excludes {
-                // exclusion rules - classes to exclude from report
-                // classes(
-                //      "com.example.Class2",
-                // )
-
+                classes(
+                    // Room generated files
+                    "com.makeappssimple.abhimanyu.finance.manager.android.*Dao_Impl",
+                )
                 packages(
                     // DI
                     "org.koin.ksp.generated",
-                    "com.makeappssimple.abhimanyu.barcodes.android.di.*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.di",
+
+                    // Fake
+                    "com.makeappssimple.abhimanyu.finance.manager.android.*.fake",
+
+                    // Room
+                    "com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database",
 
                     // UI
-                    "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
-                    "com.makeappssimple.abhimanyu.barcodes.android.core.design_system.*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.core.design_system*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.core.chart*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.feature.*.screen",
                 )
             }
             includes {
