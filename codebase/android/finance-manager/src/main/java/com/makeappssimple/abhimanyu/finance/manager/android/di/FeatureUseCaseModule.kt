@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalBalanceAmountValueUseCase
@@ -97,8 +98,12 @@ public class FeatureUseCaseModule {
 
     // region categories
     @Single
-    internal fun providesAddCategoryScreenDataValidationUseCase(): AddCategoryScreenDataValidationUseCase {
-        return AddCategoryScreenDataValidationUseCase()
+    internal fun providesAddCategoryScreenDataValidationUseCase(
+        getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    ): AddCategoryScreenDataValidationUseCase {
+        return AddCategoryScreenDataValidationUseCase(
+            getAllCategoriesUseCase = getAllCategoriesUseCase,
+        )
     }
 
     @Single

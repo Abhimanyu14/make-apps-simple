@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
@@ -26,21 +27,23 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.a
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.view_model.AddCategoryScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList
 
-public class AddCategoryScreenDataValidationUseCase() {
-    public operator fun invoke(
-        categories: ImmutableList<Category>,
+internal class AddCategoryScreenDataValidationUseCase(
+    private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+) {
+    suspend operator fun invoke(
         enteredTitle: String,
     ): AddCategoryScreenDataValidationState {
+        val categories: ImmutableList<Category> = getAllCategoriesUseCase()
         val state = AddCategoryScreenDataValidationState()
-        if (enteredTitle.isBlank()) {
+        if (enteredTitle.trim().isBlank()) {
             return state
         }
         if (isDefaultIncomeCategory(
-                category = enteredTitle,
+                category = enteredTitle.trim(),
             ) || isDefaultExpenseCategory(
-                category = enteredTitle,
+                category = enteredTitle.trim(),
             ) || isDefaultInvestmentCategory(
-                category = enteredTitle,
+                category = enteredTitle.trim(),
             )
         ) {
             return state

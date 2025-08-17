@@ -111,7 +111,6 @@ internal class AddTransactionForScreenViewModelTest {
             insertTransactionForUseCase = insertTransactionForUseCase,
             logKit = logKit,
         )
-
         addTransactionForScreenViewModel.initViewModel()
     }
 

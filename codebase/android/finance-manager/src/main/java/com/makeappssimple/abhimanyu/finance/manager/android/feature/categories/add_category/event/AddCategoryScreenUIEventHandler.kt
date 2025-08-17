@@ -29,7 +29,7 @@ internal class AddCategoryScreenUIEventHandler internal constructor(
         when (uiEvent) {
             is AddCategoryScreenUIEvent.OnBottomSheetDismissed -> {
                 uiStateEvents.resetScreenBottomSheetType()
-                uiStateEvents.clearSearchText()
+                uiStateEvents.clearEmojiSearchText()
             }
 
             is AddCategoryScreenUIEvent.OnNavigationBackButtonClick -> {
@@ -59,7 +59,7 @@ internal class AddCategoryScreenUIEventHandler internal constructor(
             }
 
             is AddCategoryScreenUIEvent.OnEmojiBottomSheetSearchTextUpdated -> {
-                uiStateEvents.updateSearchText(uiEvent.updatedSearchText)
+                uiStateEvents.updateEmojiSearchText(uiEvent.updatedSearchText)
             }
 
             is AddCategoryScreenUIEvent.OnSelectedTransactionTypeIndexUpdated -> {

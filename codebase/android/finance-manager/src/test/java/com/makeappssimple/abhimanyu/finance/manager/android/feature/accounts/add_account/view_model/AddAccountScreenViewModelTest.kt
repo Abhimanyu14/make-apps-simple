@@ -114,7 +114,6 @@ internal class AddAccountScreenViewModelTest {
             insertAccountUseCase = insertAccountUseCase,
             logKit = logKit,
         )
-
         addAccountScreenViewModel.initViewModel()
     }
 

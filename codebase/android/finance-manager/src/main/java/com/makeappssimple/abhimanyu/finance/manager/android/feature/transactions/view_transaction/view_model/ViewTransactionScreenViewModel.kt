@@ -129,9 +129,7 @@ internal class ViewTransactionScreenViewModel(
     // region fetchData
     override fun fetchData(): Job {
         return coroutineScope.launch {
-            withLoadingSuspend {
-                getCurrentTransactionData()
-            }
+            getCurrentTransactionData()
         }
     }
     // endregion

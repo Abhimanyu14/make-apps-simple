@@ -22,17 +22,24 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.cons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenArgs
 
 internal class AddCategoryScreenArgs(
-    val transactionType: String?,
+    val transactionType: String,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
         uriDecoder: UriDecoder,
     ) : this(
-        transactionType = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_TYPE)
-            ?.let {
-                uriDecoder.decode(
-                    string = it,
-                )
+        transactionType = requireNotNull(
+            value = uriDecoder.decode(
+                string = requireNotNull(
+                    value = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_TYPE),
+                    lazyMessage = {
+                        "Navigation argument '${NavigationArguments.TRANSACTION_TYPE}' is required and cannot be null."
+                    },
+                ),
+            ),
+            lazyMessage = {
+                "Decoded transaction type from argument '${NavigationArguments.TRANSACTION_TYPE}' cannot be null."
             },
+        )
     )
 }

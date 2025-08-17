@@ -137,7 +137,6 @@ internal class TransactionForValuesScreenViewModelTest {
                 deleteTransactionForByIdUseCase = deleteTransactionForByIdUseCase,
                 logKit = logKit,
             )
-
         transactionForValuesScreenViewModel.initViewModel()
     }
 
