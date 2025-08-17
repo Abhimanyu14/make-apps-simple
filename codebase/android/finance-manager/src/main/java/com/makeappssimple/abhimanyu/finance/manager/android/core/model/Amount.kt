@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.core.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
@@ -21,6 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constant
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.currency.formattedCurrencyValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.serializer.CurrencySerializer
 import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import java.util.Currency
 import kotlin.math.abs
