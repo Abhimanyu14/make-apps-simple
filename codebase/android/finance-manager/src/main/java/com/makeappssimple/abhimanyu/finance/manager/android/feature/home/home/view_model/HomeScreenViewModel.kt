@@ -420,9 +420,13 @@ internal class HomeScreenViewModel(
         }
         val expenseAmount = expenseTransactionsWithRefund.sumOf { transaction ->
             if (transaction.transactionType == TransactionType.EXPENSE) {
-                abs(transaction.amount.value)
+                abs(
+                    n = transaction.amount.value,
+                )
             } else {
-                -abs(transaction.amount.value)
+                -abs(
+                    n = transaction.amount.value,
+                )
             }
         }.toFloat()
         return expenseAmount

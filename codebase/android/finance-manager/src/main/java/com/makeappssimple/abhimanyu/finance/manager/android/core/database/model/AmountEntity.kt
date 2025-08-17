@@ -45,7 +45,9 @@ public data class AmountEntity(
 ) {
     override fun toString(): String {
         val formattedValue = formattedCurrencyValue(
-            value = abs(value),
+            value = abs(
+                n = value,
+            ),
         )
         return if (value >= 0) {
             "${currency.symbol}$formattedValue"
@@ -67,7 +69,9 @@ public fun AmountEntity.toSignedString(
     isNegative: Boolean = false,
 ): String {
     val formattedValue = formattedCurrencyValue(
-        value = abs(value),
+        value = abs(
+            n = value,
+        ),
     )
     if (isPositive) {
         return "+ ${currency.symbol}$formattedValue"

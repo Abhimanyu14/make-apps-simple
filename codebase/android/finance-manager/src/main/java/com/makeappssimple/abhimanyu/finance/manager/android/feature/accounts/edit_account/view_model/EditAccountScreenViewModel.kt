@@ -293,7 +293,9 @@ internal class EditAccountScreenViewModel(
         updateBalanceAmountValue(
             updatedBalanceAmountValue = TextFieldValue(
                 text = currentAccountValue.balanceAmount.value.toString(),
-                selection = TextRange(currentAccountValue.balanceAmount.value.toString().length),
+                selection = TextRange(
+                    index = currentAccountValue.balanceAmount.value.toString().length,
+                ),
             ),
             shouldRefresh = false,
         )
@@ -301,7 +303,9 @@ internal class EditAccountScreenViewModel(
             updateMinimumAccountBalanceAmountValue(
                 updatedMinimumAccountBalanceAmountValue = TextFieldValue(
                     text = minimumAccountBalanceAmount.value.toString(),
-                    selection = TextRange(minimumAccountBalanceAmount.value.toString().length),
+                    selection = TextRange(
+                        index = minimumAccountBalanceAmount.value.toString().length,
+                    ),
                 ),
                 shouldRefresh = false,
             )

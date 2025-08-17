@@ -76,29 +76,24 @@ internal class EditCategoryScreenViewModel(
             TransactionType.EXPENSE,
             TransactionType.INVESTMENT,
         )
+    private val transactionTypesChipUIData =
+        validTransactionTypes.map { transactionType ->
+            ChipUIData(
+                text = transactionType.title,
+            )
+        }
     private var currentCategory: Category? = null
     // endregion
 
     // region UI state
-    private val title: MutableStateFlow<TextFieldValue> = MutableStateFlow(
-        value = TextFieldValue(),
+    private var title = TextFieldValue()
+    private var searchText = ""
+    private var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
+    private var selectedTransactionTypeIndex = validTransactionTypes.indexOf(
+        element = TransactionType.EXPENSE,
     )
-    private val searchText: MutableStateFlow<String> = MutableStateFlow(
-        value = "",
-    )
-    private val emoji: MutableStateFlow<String> = MutableStateFlow(
-        value = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES,
-    )
-    private val selectedTransactionTypeIndex: MutableStateFlow<Int> =
-        MutableStateFlow(
-            value = validTransactionTypes.indexOf(
-                element = TransactionType.EXPENSE,
-            ),
-        )
-    private val screenBottomSheetType: MutableStateFlow<EditCategoryScreenBottomSheetType> =
-        MutableStateFlow(
-            value = EditCategoryScreenBottomSheetType.None,
-        )
+    private var screenBottomSheetType: EditCategoryScreenBottomSheetType =
+        EditCategoryScreenBottomSheetType.None
     // endregion
 
     // region uiStateAndStateEvents
@@ -127,26 +122,22 @@ internal class EditCategoryScreenViewModel(
         coroutineScope.launch {
             val editCategoryScreenDataValidationState =
                 editCategoryScreenDataValidationUseCase(
-                    enteredTitle = title.value.text.trim(),
+                    enteredTitle = title.text.trim(),
                     currentCategory = currentCategory,
                 )
             _uiState.update {
                 EditCategoryScreenUIState(
-                    screenBottomSheetType = screenBottomSheetType.value,
+                    screenBottomSheetType = screenBottomSheetType,
                     isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
                     isCtaButtonEnabled = editCategoryScreenDataValidationState.isCtaButtonEnabled,
                     isLoading = isLoading,
                     isSupportingTextVisible = editCategoryScreenDataValidationState.titleError != EditCategoryScreenTitleError.None,
                     titleError = editCategoryScreenDataValidationState.titleError,
-                    selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
-                    transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
-                        ChipUIData(
-                            text = transactionType.title,
-                        )
-                    },
-                    emoji = emoji.value,
-                    emojiSearchText = searchText.value,
-                    title = title.value,
+                    selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                    transactionTypesChipUIData = transactionTypesChipUIData,
+                    emoji = emoji,
+                    emojiSearchText = searchText,
+                    title = title,
                 )
             }
         }
@@ -164,7 +155,7 @@ internal class EditCategoryScreenViewModel(
     // region state events
     private fun clearTitle(): Job {
         return updateTitle(
-            updatedTitle = title.value.copy(
+            updatedTitle = title.copy(
                 text = "",
             ),
         )
@@ -180,9 +171,7 @@ internal class EditCategoryScreenViewModel(
         updatedEmoji: String,
         shouldRefresh: Boolean = true,
     ): Job {
-        emoji.update {
-            updatedEmoji
-        }
+        emoji = updatedEmoji
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -192,9 +181,7 @@ internal class EditCategoryScreenViewModel(
         updatedTitle: TextFieldValue,
         shouldRefresh: Boolean = true,
     ): Job {
-        title.update {
-            updatedTitle
-        }
+        title = updatedTitle
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -204,9 +191,7 @@ internal class EditCategoryScreenViewModel(
         updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
         shouldRefresh: Boolean = true,
     ): Job {
-        screenBottomSheetType.update {
-            updatedEditCategoryScreenBottomSheetType
-        }
+        screenBottomSheetType = updatedEditCategoryScreenBottomSheetType
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -216,9 +201,7 @@ internal class EditCategoryScreenViewModel(
         updatedSearchText: String,
         shouldRefresh: Boolean = true,
     ): Job {
-        searchText.update {
-            updatedSearchText
-        }
+        searchText = updatedSearchText
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -228,9 +211,7 @@ internal class EditCategoryScreenViewModel(
         updatedSelectedTransactionTypeIndex: Int,
         shouldRefresh: Boolean = true,
     ): Job {
-        selectedTransactionTypeIndex.update {
-            updatedSelectedTransactionTypeIndex
-        }
+        selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -245,9 +226,9 @@ internal class EditCategoryScreenViewModel(
                         "Current category is null. Cannot update category."
                     },
                 ),
-                emoji = emoji.value,
-                title = title.value.text,
-                transactionType = validTransactionTypes[selectedTransactionTypeIndex.value],
+                emoji = emoji,
+                title = title.text,
+                transactionType = validTransactionTypes[selectedTransactionTypeIndex],
             ) == 1
             if (isCategoryUpdated) {
                 navigateUp()
@@ -260,33 +241,49 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region getCurrentCategory
-    private fun getCurrentCategory() {
+    private fun getCurrentCategory(
+        shouldRefresh: Boolean = false,
+    ) {
         val currentCategoryId = getCurrentCategoryId()
         coroutineScope.launch {
-            val fetchedCurrentCategory = getCategoryByIdUseCase(
+            currentCategory = getCategoryByIdUseCase(
                 id = currentCategoryId,
             )
-            requireNotNull(
-                value = fetchedCurrentCategory,
-                lazyMessage = {
-                    "Category with ID $currentCategoryId not found."
-                },
+            processCurrentCategory(
+                currentCategory = requireNotNull(
+                    value = currentCategory,
+                    lazyMessage = {
+                        "Category with ID $currentCategoryId not found."
+                    },
+                ),
+                shouldRefresh = shouldRefresh,
             )
-            currentCategory = fetchedCurrentCategory
-
-            updateSelectedTransactionTypeIndex(
-                validTransactionTypes.indexOf(
-                    element = fetchedCurrentCategory.transactionType,
-                )
-            )
-            updateTitle(
-                title.value.copy(
-                    text = fetchedCurrentCategory.title.orEmpty(),
-                    selection = TextRange(fetchedCurrentCategory.title.length),
-                )
-            )
-            updateEmoji(fetchedCurrentCategory.emoji)
         }
+    }
+
+    private fun processCurrentCategory(
+        currentCategory: Category,
+        shouldRefresh: Boolean = false,
+    ) {
+        updateSelectedTransactionTypeIndex(
+            updatedSelectedTransactionTypeIndex = validTransactionTypes.indexOf(
+                element = currentCategory.transactionType,
+            ),
+            shouldRefresh = shouldRefresh,
+        )
+        updateTitle(
+            updatedTitle = title.copy(
+                text = currentCategory.title,
+                selection = TextRange(
+                    index = currentCategory.title.length,
+                ),
+            ),
+            shouldRefresh = shouldRefresh,
+        )
+        updateEmoji(
+            updatedEmoji = currentCategory.emoji,
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 

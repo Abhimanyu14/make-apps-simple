@@ -905,8 +905,14 @@ public class EditTransactionScreenViewModelOld(
                 ),
                 amount = uiState.value.amount
                     .copy(
-                        text = abs(originalTransaction.amount.value).toString(),
-                        selection = TextRange(abs(originalTransaction.amount.value).toString().length),
+                        text = abs(
+                            n = originalTransaction.amount.value,
+                        ).toString(),
+                        selection = TextRange(
+                            index = abs(
+                                n = originalTransaction.amount.value,
+                            ).toString().length,
+                        ),
                     ),
                 title = uiState.value.title
                     .copy(

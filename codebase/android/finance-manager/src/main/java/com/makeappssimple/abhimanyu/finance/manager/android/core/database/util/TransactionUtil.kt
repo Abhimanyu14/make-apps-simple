@@ -37,7 +37,9 @@ public fun sanitizeTransactions(
                 transaction.copy(
                     accountToId = null,
                     amount = transaction.amount.copy(
-                        value = abs(transaction.amount.value),
+                        value = abs(
+                            n = transaction.amount.value,
+                        ),
                     ),
                 )
             }
@@ -63,7 +65,9 @@ public fun sanitizeTransactions(
                         transaction.accountToId
                     },
                     amount = transaction.amount.copy(
-                        value = abs(transaction.amount.value),
+                        value = abs(
+                            n = transaction.amount.value,
+                        ),
                     ),
                 )
             }

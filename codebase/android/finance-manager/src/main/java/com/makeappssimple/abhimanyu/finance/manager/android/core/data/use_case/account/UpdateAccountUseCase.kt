@@ -85,7 +85,9 @@ public class UpdateAccountUseCase(
             insertTransactionsUseCase(
                 Transaction(
                     amount = Amount(
-                        value = abs(amountChangeValue),
+                        value = abs(
+                            n = amountChangeValue,
+                        ),
                     ),
                     categoryId = null,
                     accountFromId = accountFromId,
