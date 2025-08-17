@@ -29,9 +29,18 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeAccountDaoImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeCategoryDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionDaoImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionDataDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionForDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSourceImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.DatabaseTransactionProvider
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.fake.FakeDatabaseTransactionProviderImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
@@ -76,23 +85,22 @@ internal class TransactionForValuesScreenViewModelTest {
         GetAllTransactionForValuesFlowUseCase(
             transactionForRepository = transactionForRepository,
         )
-    private val fakeCommonDataSource = object : CommonDataSource {
-        override suspend fun deleteTransactionById(id: Int) = true
-        override suspend fun insertTransaction(
-            accountFrom: AccountEntity?,
-            accountTo: AccountEntity?,
-            transaction: TransactionEntity,
-            originalTransaction: TransactionEntity?
-        ) = 1L
 
-        override suspend fun restoreData(
-            categories: Array<CategoryEntity>,
-            accounts: Array<AccountEntity>,
-            transactions: Array<TransactionEntity>,
-            transactionForValues: Array<TransactionForEntity>
-        ) = true
-    }
+    private val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
+    private val fakeCategoryDao: CategoryDao = FakeCategoryDaoImpl()
+    private val fakeDatabaseTransactionProvider: DatabaseTransactionProvider =
+        FakeDatabaseTransactionProviderImpl()
     private val fakeTransactionDao = FakeTransactionDaoImpl()
+    private val fakeTransactionDataDao: TransactionDataDao =
+        FakeTransactionDataDaoImpl()
+    private val fakeCommonDataSource = CommonDataSourceImpl(
+        accountDao = fakeAccountDao,
+        categoryDao = fakeCategoryDao,
+        databaseTransactionProvider = fakeDatabaseTransactionProvider,
+        transactionDao = fakeTransactionDao,
+        transactionDataDao = fakeTransactionDataDao,
+        transactionForDao = fakeTransactionForDao,
+    )
     private val transactionRepository = TransactionRepositoryImpl(
         commonDataSource = fakeCommonDataSource,
         dispatcherProvider = testDispatcherProvider,
@@ -129,6 +137,8 @@ internal class TransactionForValuesScreenViewModelTest {
                 deleteTransactionForByIdUseCase = deleteTransactionForByIdUseCase,
                 logKit = logKit,
             )
+
+        transactionForValuesScreenViewModel.initViewModel()
     }
 
     @After
@@ -143,7 +153,7 @@ internal class TransactionForValuesScreenViewModelTest {
         transactionForValuesScreenViewModel.uiState.test {
             val result = awaitItem()
             assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isFalse()
+            assertThat(result.isLoading).isTrue()
             assertThat(result.transactionForListItemDataList).isEmpty()
             assertThat(result.screenBottomSheetType).isEqualTo(
                 TransactionForValuesScreenBottomSheetType.None
@@ -152,32 +162,81 @@ internal class TransactionForValuesScreenViewModelTest {
     }
     // endregion
 
+    // region uiStateAndStateEvents
+    @Test
+    fun updateUiStateAndStateEvents_screenBottomSheetTypeIsNone_isBottomSheetVisibleIsFalse() =
+        runTestWithTimeout {
+            transactionForValuesScreenViewModel.uiState.test {
+                val result = awaitItem()
+                assertThat(result.screenBottomSheetType).isEqualTo(
+                    TransactionForValuesScreenBottomSheetType.None
+                )
+                assertThat(result.isBottomSheetVisible).isFalse()
+            }
+        }
+
+    @Test
+    fun updateUiStateAndStateEvents_screenBottomSheetTypeIsDeleteConfirmation_isBottomSheetVisibleIsTrue() =
+        runTestWithTimeout {
+            transactionForValuesScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                assertThat(initialState.screenBottomSheetType).isEqualTo(
+                    TransactionForValuesScreenBottomSheetType.None
+                )
+
+                transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
+                    TransactionForValuesScreenBottomSheetType.DeleteConfirmation
+                )
+                val result = awaitItem()
+                assertThat(result.isLoading).isFalse()
+                assertThat(result.isBottomSheetVisible).isTrue()
+            }
+        }
+    // endregion
+
     // region state events
     @Test
-    fun updateScreenBottomSheetType_shouldUpdateValue() = runTestWithTimeout {
+    fun deleteTransactionFor_shouldDeleteAndResetId() = runTestWithTimeout {
+        val testTransactionForId = 123
+        fakeTransactionForDao.insertTransactionForValues(
+            TransactionForEntity(
+                id = testTransactionForId,
+                title = "test-transaction-for",
+            ),
+        )
         transactionForValuesScreenViewModel.uiState.test {
-            assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                TransactionForValuesScreenBottomSheetType.None
+            assertThat(awaitItem().isLoading).isTrue()
+            val postDataFetchCompletion = awaitItem()
+            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            assertThat(postDataFetchCompletion.transactionForListItemDataList.size).isEqualTo(
+                1
             )
-            transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
-                TransactionForValuesScreenBottomSheetType.Delete
+
+            transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(
+                testTransactionForId
             )
-            assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                TransactionForValuesScreenBottomSheetType.Delete
-            )
+            transactionForValuesScreenViewModel.uiStateEvents.deleteTransactionFor()
+            val result = awaitItem()
+            assertThat(result.isLoading).isFalse()
+            assertThat(result.transactionForListItemDataList.size).isEqualTo(0)
         }
     }
 
     @Test
     fun resetScreenBottomSheetType_shouldResetValue() = runTestWithTimeout {
         transactionForValuesScreenViewModel.uiState.test {
+            assertThat(awaitItem().screenBottomSheetType).isEqualTo(
+                TransactionForValuesScreenBottomSheetType.None
+            )
             transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
-                TransactionForValuesScreenBottomSheetType.Delete
+                TransactionForValuesScreenBottomSheetType.DeleteConfirmation
             )
             assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                TransactionForValuesScreenBottomSheetType.Delete
+                TransactionForValuesScreenBottomSheetType.DeleteConfirmation
             )
+
             transactionForValuesScreenViewModel.uiStateEvents.resetScreenBottomSheetType()
+
             assertThat(awaitItem().screenBottomSheetType).isEqualTo(
                 TransactionForValuesScreenBottomSheetType.None
             )
@@ -185,42 +244,18 @@ internal class TransactionForValuesScreenViewModelTest {
     }
 
     @Test
-    fun updateTransactionForIdToDelete_shouldUpdateValue() =
-        runTestWithTimeout {
-            transactionForValuesScreenViewModel.uiState.test {
-                transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(
-                    123
-                )
-                // No direct field in UI state, but can check for no error
-                assertThat(awaitItem().isLoading).isFalse()
-            }
-        }
-
-    @Test
-    fun deleteTransactionFor_shouldDeleteAndResetId() = runTestWithTimeout {
-        transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(
-            123
-        )
-        transactionForValuesScreenViewModel.uiStateEvents.deleteTransactionFor()
-            .join()
-        // No direct field in UI state, but can check for no error
+    fun updateScreenBottomSheetType_shouldUpdateValue() = runTestWithTimeout {
         transactionForValuesScreenViewModel.uiState.test {
-            assertThat(awaitItem().isLoading).isFalse()
-        }
-    }
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    @Test
-    fun updateUiStateAndStateEvents_shouldUpdateUiState() = runTestWithTimeout {
-        transactionForValuesScreenViewModel.updateUiStateAndStateEvents()
-        transactionForValuesScreenViewModel.uiState.test {
-            val result = awaitItem()
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isFalse()
-            assertThat(result.transactionForListItemDataList).isEmpty()
-            assertThat(result.screenBottomSheetType).isEqualTo(
+            assertThat(awaitItem().screenBottomSheetType).isEqualTo(
                 TransactionForValuesScreenBottomSheetType.None
+            )
+
+            transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
+                TransactionForValuesScreenBottomSheetType.DeleteConfirmation
+            )
+
+            assertThat(awaitItem().screenBottomSheetType).isEqualTo(
+                TransactionForValuesScreenBottomSheetType.DeleteConfirmation
             )
         }
     }

@@ -388,17 +388,16 @@ internal class EditTransactionForScreenViewModelTest {
     private fun setUpViewModel(
         savedStateHandle: SavedStateHandle = testSavedStateHandle,
     ) {
-        editTransactionForScreenViewModel =
-            EditTransactionForScreenViewModel(
-                navigationKit = navigationKit,
-                screenUIStateDelegate = screenUIStateDelegate,
-                savedStateHandle = savedStateHandle,
-                coroutineScope = testScope.backgroundScope,
-                editTransactionForScreenDataValidationUseCase = editTransactionForScreenDataValidationUseCase,
-                getTransactionForByIdUseCase = getTransactionForByIdUseCase,
-                updateTransactionForUseCase = updateTransactionForUseCase,
-                logKit = logKit,
-            )
+        editTransactionForScreenViewModel = EditTransactionForScreenViewModel(
+            navigationKit = navigationKit,
+            screenUIStateDelegate = screenUIStateDelegate,
+            savedStateHandle = savedStateHandle,
+            coroutineScope = testScope.backgroundScope,
+            editTransactionForScreenDataValidationUseCase = editTransactionForScreenDataValidationUseCase,
+            getTransactionForByIdUseCase = getTransactionForByIdUseCase,
+            updateTransactionForUseCase = updateTransactionForUseCase,
+            logKit = logKit,
+        )
     }
 
     private fun runTestWithTimeout(

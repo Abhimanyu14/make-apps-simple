@@ -80,16 +80,16 @@ public class FakeAccountDaoImpl : AccountDao {
     }
 
     override suspend fun insertAccounts(
-        vararg newAccounts: AccountEntity,
+        vararg accounts: AccountEntity,
     ): List<Long> {
         val result = mutableListOf<Long>()
-        for (account in newAccounts) {
+        for (account in accounts) {
             val id = if (account.id == 0) {
                 nextId++
             } else {
                 account.id
             }
-            val exists = accounts.any { accountEntity ->
+            val exists = this@FakeAccountDaoImpl.accounts.any { accountEntity ->
                 accountEntity.id == id
             }
             if (exists) {
@@ -100,7 +100,7 @@ public class FakeAccountDaoImpl : AccountDao {
                 val entity = account.copy(
                     id = id,
                 )
-                accounts.add(
+                this@FakeAccountDaoImpl.accounts.add(
                     element = entity,
                 )
                 result.add(
@@ -108,28 +108,31 @@ public class FakeAccountDaoImpl : AccountDao {
                 )
             }
         }
-        accountsFlow.value = accounts.sortedBy { accountEntity ->
-            accountEntity.id
-        }
+        accountsFlow.value =
+            this@FakeAccountDaoImpl.accounts.sortedBy { accountEntity ->
+                accountEntity.id
+            }
         return result
     }
 
     override suspend fun updateAccounts(
-        vararg updatedAccounts: AccountEntity,
+        vararg accounts: AccountEntity,
     ): Int {
         var updatedCount = 0
-        for (account in updatedAccounts) {
-            val index = accounts.indexOfFirst { accountEntity ->
-                accountEntity.id == account.id
-            }
+        for (account in accounts) {
+            val index =
+                this@FakeAccountDaoImpl.accounts.indexOfFirst { accountEntity ->
+                    accountEntity.id == account.id
+                }
             if (index != -1) {
-                accounts[index] = account
+                this@FakeAccountDaoImpl.accounts[index] = account
                 updatedCount++
             }
         }
-        accountsFlow.value = accounts.sortedBy { accountEntity ->
-            accountEntity.id
-        }
+        accountsFlow.value =
+            this@FakeAccountDaoImpl.accounts.sortedBy { accountEntity ->
+                accountEntity.id
+            }
         return updatedCount
     }
 }

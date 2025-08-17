@@ -73,18 +73,19 @@ public class FakeTransactionForDaoImpl : TransactionForDao {
     }
 
     override suspend fun insertTransactionForValues(
-        vararg newValues: TransactionForEntity,
+        vararg transactionForValues: TransactionForEntity,
     ): List<Long> {
         val result = mutableListOf<Long>()
-        for (value in newValues) {
+        for (value in transactionForValues) {
             val id = if (value.id == 0) {
                 nextId++
             } else {
                 value.id
             }
-            val exists = transactionForValues.any { transactionForEntity ->
-                transactionForEntity.id == id
-            }
+            val exists =
+                this@FakeTransactionForDaoImpl.transactionForValues.any { transactionForEntity ->
+                    transactionForEntity.id == id
+                }
             if (exists) {
                 result.add(
                     element = -1L,
@@ -93,7 +94,7 @@ public class FakeTransactionForDaoImpl : TransactionForDao {
                 val entity = value.copy(
                     id = id,
                 )
-                transactionForValues.add(
+                this@FakeTransactionForDaoImpl.transactionForValues.add(
                     element = entity,
                 )
                 result.add(
@@ -102,28 +103,29 @@ public class FakeTransactionForDaoImpl : TransactionForDao {
             }
         }
         transactionForValuesFlow.value =
-            transactionForValues.sortedBy { transactionForEntity ->
+            this@FakeTransactionForDaoImpl.transactionForValues.sortedBy { transactionForEntity ->
                 transactionForEntity.id
             }
         return result
     }
 
     override suspend fun updateTransactionForValues(
-        vararg updatedValues: TransactionForEntity,
+        vararg transactionForValues: TransactionForEntity,
     ): Int {
         var updatedCount = 0
-        for (value in updatedValues) {
+        for (value in transactionForValues) {
             val index =
-                transactionForValues.indexOfFirst { transactionForEntity ->
+                this@FakeTransactionForDaoImpl.transactionForValues.indexOfFirst { transactionForEntity ->
                     transactionForEntity.id == value.id
                 }
             if (index != -1) {
-                transactionForValues[index] = value
+                this@FakeTransactionForDaoImpl.transactionForValues[index] =
+                    value
                 updatedCount++
             }
         }
         transactionForValuesFlow.value =
-            transactionForValues.sortedBy { transactionForEntity ->
+            this@FakeTransactionForDaoImpl.transactionForValues.sortedBy { transactionForEntity ->
                 transactionForEntity.id
             }
         return updatedCount

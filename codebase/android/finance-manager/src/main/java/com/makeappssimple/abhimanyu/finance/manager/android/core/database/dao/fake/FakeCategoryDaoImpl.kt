@@ -90,18 +90,19 @@ public class FakeCategoryDaoImpl : CategoryDao {
     }
 
     override suspend fun insertCategories(
-        vararg newCategories: CategoryEntity,
+        vararg categories: CategoryEntity,
     ): List<Long> {
         val result = mutableListOf<Long>()
-        for (category in newCategories) {
+        for (category in categories) {
             val id = if (category.id == 0) {
                 nextId++
             } else {
                 category.id
             }
-            val exists = categories.any { categoryEntity ->
-                categoryEntity.id == id
-            }
+            val exists =
+                this@FakeCategoryDaoImpl.categories.any { categoryEntity ->
+                    categoryEntity.id == id
+                }
             if (exists) {
                 result.add(
                     element = -1L,
@@ -110,7 +111,7 @@ public class FakeCategoryDaoImpl : CategoryDao {
                 val entity = category.copy(
                     id = id,
                 )
-                categories.add(
+                this@FakeCategoryDaoImpl.categories.add(
                     element = entity,
                 )
                 result.add(
@@ -118,28 +119,31 @@ public class FakeCategoryDaoImpl : CategoryDao {
                 )
             }
         }
-        categoriesFlow.value = categories.sortedBy { categoryEntity ->
-            categoryEntity.id
-        }
+        categoriesFlow.value =
+            this@FakeCategoryDaoImpl.categories.sortedBy { categoryEntity ->
+                categoryEntity.id
+            }
         return result
     }
 
     override suspend fun updateCategories(
-        vararg updatedCategories: CategoryEntity,
+        vararg categories: CategoryEntity,
     ): Int {
         var updatedCount = 0
-        for (category in updatedCategories) {
-            val index = categories.indexOfFirst { categoryEntity ->
-                categoryEntity.id == category.id
-            }
+        for (category in categories) {
+            val index =
+                this@FakeCategoryDaoImpl.categories.indexOfFirst { categoryEntity ->
+                    categoryEntity.id == category.id
+                }
             if (index != -1) {
-                categories[index] = category
+                this@FakeCategoryDaoImpl.categories[index] = category
                 updatedCount++
             }
         }
-        categoriesFlow.value = categories.sortedBy { categoryEntity ->
-            categoryEntity.id
-        }
+        categoriesFlow.value =
+            this@FakeCategoryDaoImpl.categories.sortedBy { categoryEntity ->
+                categoryEntity.id
+            }
         return updatedCount
     }
 }

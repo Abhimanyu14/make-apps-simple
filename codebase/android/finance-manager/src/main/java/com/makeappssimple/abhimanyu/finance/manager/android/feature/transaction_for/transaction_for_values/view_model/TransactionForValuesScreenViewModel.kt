@@ -110,9 +110,13 @@ internal class TransactionForValuesScreenViewModel(
 
     // region state events
     private fun deleteTransactionFor(): Job {
-        val id = transactionForIdToDelete
-            ?: throw IllegalStateException("transactionForIdToDelete should not be null")
+        val id = requireNotNull(
+            value = transactionForIdToDelete,
+        ) {
+            "transactionForIdToDelete should not be null when deleting a transaction for"
+        }
         return coroutineScope.launch {
+            startLoading()
             val isTransactionForDeleted = deleteTransactionForByIdUseCase(
                 id = id,
             )
@@ -122,6 +126,7 @@ internal class TransactionForValuesScreenViewModel(
             } else {
                 throw IllegalStateException("TransactionFor with id $id could not be deleted")
             }
+            completeLoading()
         }
     }
 
@@ -143,7 +148,7 @@ internal class TransactionForValuesScreenViewModel(
 
     private fun updateTransactionForIdToDelete(
         updatedTransactionForIdToDelete: Int?,
-        shouldRefresh: Boolean = true,
+        shouldRefresh: Boolean = false,
     ): Job {
         transactionForIdToDelete = updatedTransactionForIdToDelete
         return refreshIfRequired(
