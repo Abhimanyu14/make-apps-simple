@@ -56,16 +56,16 @@ internal class CategoryRepositoryImpl(
 
     override suspend fun deleteCategoryById(
         id: Int,
-    ): Boolean {
+    ): Int {
         return dispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.deleteCategoryById(
                     id = id,
-                ) == 1
+                )
             } catch (
                 _: SQLiteException,
             ) {
-                false
+                0
             }
         }
     }

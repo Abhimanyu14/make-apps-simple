@@ -52,7 +52,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -76,19 +75,19 @@ internal class CategoriesScreenViewModel(
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
-    private val categoriesGridItemDataMap: MutableStateFlow<ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>>> =
-        MutableStateFlow(
-            value = persistentMapOf(),
-        )
-    // endregion
-
-    // region initial data
+    private var categoriesGridItemDataMap: ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>> =
+        persistentMapOf()
     private val validTransactionTypes: PersistentList<TransactionType> =
         persistentListOf(
             TransactionType.EXPENSE,
             TransactionType.INCOME,
             TransactionType.INVESTMENT,
         )
+    private val tabData = validTransactionTypes.map {
+        MyTabData(
+            title = it.title,
+        )
+    }
     // endregion
 
     // region UI state
@@ -125,13 +124,6 @@ internal class CategoriesScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val tabData = validTransactionTypes.map {
-            MyTabData(
-                title = it.title,
-            )
-        }
-
-        // TODO(Abhi): To Fix categoriesGridItemDataMap
         _uiState.update {
             CategoriesScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
@@ -142,7 +134,7 @@ internal class CategoriesScreenViewModel(
                 clickedItemId = clickedItemId,
                 tabData = tabData,
                 validTransactionTypes = validTransactionTypes,
-                categoriesGridItemDataMap = categoriesGridItemDataMap.value,
+                categoriesGridItemDataMap = categoriesGridItemDataMap,
             )
         }
     }
@@ -159,12 +151,14 @@ internal class CategoriesScreenViewModel(
                         category.transactionType
                     }
                 }
-
         coroutineScope.launch {
             combineAndCollectLatest(
-                defaultDataId,
-                categoriesTransactionTypeMap
-            ) { (defaultDataId, categoriesTransactionTypeMap) ->
+                flow = defaultDataId,
+                flow2 = categoriesTransactionTypeMap,
+            ) { (
+                    defaultDataId,
+                    categoriesTransactionTypeMap,
+                ) ->
                 val expenseCategoriesGridItemDataList =
                     categoriesTransactionTypeMap[TransactionType.EXPENSE]
                         ?.sortedBy {
@@ -246,17 +240,14 @@ internal class CategoriesScreenViewModel(
                                 category = category,
                             )
                         }
-                categoriesGridItemDataMap.update {
-                    persistentMapOf(
-                        TransactionType.EXPENSE to expenseCategoriesGridItemDataList,
-                        TransactionType.INCOME to incomeCategoriesGridItemDataList,
-                        TransactionType.INVESTMENT to investmentCategoriesGridItemDataList,
-                    )
-                }
+                categoriesGridItemDataMap = persistentMapOf(
+                    TransactionType.EXPENSE to expenseCategoriesGridItemDataList,
+                    TransactionType.INCOME to incomeCategoriesGridItemDataList,
+                    TransactionType.INVESTMENT to investmentCategoriesGridItemDataList,
+                )
+                refresh()
             }
         }
-
-        observeForCategoriesGridItemDataMap()
     }
 
     private fun getCategoriesGridItemData(
@@ -293,16 +284,18 @@ internal class CategoriesScreenViewModel(
     // region state events
     private fun deleteCategory(): Job {
         return coroutineScope.launch {
-            categoryIdToDelete?.let { id ->
-                val isCategoryDeleted = deleteCategoryByIdUseCase(
-                    id = id,
-                )
-                if (isCategoryDeleted) {
-                    categoryIdToDelete = null
-                } else {
-                    // TODO(Abhi): Handle this error scenario
-                }
-            } ?: run {
+            val id = requireNotNull(
+                value = categoryIdToDelete,
+                lazyMessage = {
+                    "Category ID to delete cannot be null."
+                },
+            )
+            val isCategoryDeleted = deleteCategoryByIdUseCase(
+                id = id,
+            ) == 1
+            if (isCategoryDeleted) {
+                categoryIdToDelete = null
+            } else {
                 // TODO(Abhi): Handle this error scenario
             }
         }
@@ -324,24 +317,26 @@ internal class CategoriesScreenViewModel(
         selectedTabIndex: Int,
     ): Job {
         return coroutineScope.launch {
-            clickedItemId?.let {
-                val isSetDefaultCategorySuccessful = setDefaultCategoryUseCase(
-                    defaultCategoryId = it,
-                    transactionType = validTransactionTypes[selectedTabIndex],
+            val id = requireNotNull(
+                value = clickedItemId,
+                lazyMessage = {
+                    "Clicked item ID cannot be null."
+                },
+            )
+            val isSetDefaultCategorySuccessful = setDefaultCategoryUseCase(
+                defaultCategoryId = id,
+                transactionType = validTransactionTypes[selectedTabIndex],
+            )
+            if (isSetDefaultCategorySuccessful) {
+                updateScreenSnackbarType(
+                    updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategorySuccessful,
                 )
-                if (isSetDefaultCategorySuccessful) {
-                    updateScreenSnackbarType(
-                        updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategorySuccessful,
-                    )
-                } else {
-                    updateScreenSnackbarType(
-                        updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategoryFailed,
-                    )
-                    clickedItemId = null
-                }
-            } ?: run {
-                // TODO(Abhi): Handle this error scenario
+            } else {
+                updateScreenSnackbarType(
+                    updatedCategoriesScreenSnackbarType = CategoriesScreenSnackbarType.SetDefaultCategoryFailed,
+                )
             }
+            clickedItemId = null
         }
     }
 
@@ -385,15 +380,4 @@ internal class CategoriesScreenViewModel(
         )
     }
     // endregion
-
-    private fun observeForCategoriesGridItemDataMap() {
-        coroutineScope.launch {
-            categoriesGridItemDataMap.collectLatest { categoriesGridItemDataMap ->
-                // TODO(Abhi): To Fix
-                updateUiStateAndStateEvents(
-                    // categoriesGridItemDataMap = categoriesGridItemDataMap,
-                )
-            }
-        }
-    }
 }

@@ -27,7 +27,7 @@ public interface CategoryRepository {
 
     public suspend fun deleteCategoryById(
         id: Int,
-    ): Boolean
+    ): Int
 
     public suspend fun getAllCategories(): ImmutableList<Category>
 

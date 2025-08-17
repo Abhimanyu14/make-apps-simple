@@ -25,7 +25,7 @@ public class DeleteCategoryByIdUseCase(
 ) {
     public suspend operator fun invoke(
         id: Int,
-    ): Boolean {
+    ): Int {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return categoryRepository.deleteCategoryById(
             id = id,
