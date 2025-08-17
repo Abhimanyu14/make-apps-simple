@@ -183,7 +183,7 @@ internal class ViewTransactionScreenViewModel(
 
     // region getCurrentTransactionData
     private suspend fun getCurrentTransactionData() {
-        val currentTransactionId = screenArgs.transactionId ?: return
+        val currentTransactionId = getCurrentTransactionId()
         val transactionData = getTransactionDataByIdUseCase(
             id = currentTransactionId,
         ) ?: return // TODO(Abhi): Show error message
@@ -242,6 +242,12 @@ internal class ViewTransactionScreenViewModel(
                 isExpanded = true,
                 isRefundButtonVisible = transaction.transactionType == TransactionType.EXPENSE,
             )
+    }
+    // endregion
+
+    // region common
+    private fun getCurrentTransactionId(): Int {
+        return screenArgs.currentTransactionId
     }
     // endregion
 }

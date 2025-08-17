@@ -22,13 +22,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.cons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenArgs
 
 internal class AddTransactionScreenArgs(
-    val transactionId: Int?,
+    val originalTransactionId: Int?,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
         uriDecoder: UriDecoder,
     ) : this(
-        transactionId = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_ID)
+        originalTransactionId = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_ID)
             ?.let {
                 uriDecoder.decode(
                     string = it,

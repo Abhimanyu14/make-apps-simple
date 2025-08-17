@@ -107,8 +107,12 @@ public class FeatureUseCaseModule {
     }
 
     @Single
-    internal fun providesEditCategoryScreenDataValidationUseCase(): EditCategoryScreenDataValidationUseCase {
-        return EditCategoryScreenDataValidationUseCase()
+    internal fun providesEditCategoryScreenDataValidationUseCase(
+        getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    ): EditCategoryScreenDataValidationUseCase {
+        return EditCategoryScreenDataValidationUseCase(
+            getAllCategoriesUseCase = getAllCategoriesUseCase,
+        )
     }
     // endregion
 

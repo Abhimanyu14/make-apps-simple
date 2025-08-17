@@ -21,17 +21,17 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.cons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenArgs
 
 internal class EditTransactionForScreenArgs(
-    val transactionForId: Int,
+    val currentTransactionForId: Int,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
     ) : this(
-        transactionForId = requireNotNull(
+        currentTransactionForId = requireNotNull(
             value = savedStateHandle.get<Int>(
                 key = NavigationArguments.TRANSACTION_FOR_ID,
             ),
             lazyMessage = {
-                "transactionForId must not be null"
+                "current transaction for id must not be null"
             },
         ),
     )

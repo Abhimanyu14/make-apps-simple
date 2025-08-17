@@ -21,11 +21,16 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.cons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenArgs
 
 internal class EditAccountScreenArgs(
-    val currentAccountId: Int?,
+    val currentAccountId: Int,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
     ) : this(
-        currentAccountId = savedStateHandle.get<Int>(NavigationArguments.ACCOUNT_ID),
+        currentAccountId = requireNotNull(
+            value = savedStateHandle.get<Int>(NavigationArguments.ACCOUNT_ID),
+            lazyMessage = {
+                "current account id must not be null"
+            },
+        ),
     )
 }

@@ -21,15 +21,15 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.cons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenArgs
 
 internal class EditCategoryScreenArgs(
-    val categoryId: Int,
+    val currentCategoryId: Int,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
     ) : this(
-        categoryId = requireNotNull(
+        currentCategoryId = requireNotNull(
             value = savedStateHandle.get<Int>(NavigationArguments.CATEGORY_ID),
             lazyMessage = {
-                "Navigation argument '${NavigationArguments.CATEGORY_ID}' is required and cannot be null."
+                "current category id must not be null"
             },
         ),
     )

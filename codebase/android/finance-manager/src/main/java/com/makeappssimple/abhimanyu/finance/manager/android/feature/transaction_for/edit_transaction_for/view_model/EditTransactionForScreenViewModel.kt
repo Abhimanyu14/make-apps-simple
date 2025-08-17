@@ -155,33 +155,41 @@ internal class EditTransactionForScreenViewModel(
     private suspend fun getCurrentTransactionFor(
         shouldRefresh: Boolean = false,
     ) {
-        val transactionForId = screenArgs.transactionForId
+        val currentTransactionForId = getCurrentTransactionForId()
         currentTransactionFor = getTransactionForByIdUseCase(
-            id = transactionForId,
-        ) ?: throw IllegalStateException(
-            "Transaction for with id $transactionForId not found"
+            id = currentTransactionForId,
         )
         processCurrentTransactionFor(
+            currentTransactionFor = requireNotNull(
+                value = currentTransactionFor,
+                lazyMessage = {
+                    "Transaction for with id $currentTransactionForId not found"
+                },
+            ),
             shouldRefresh = shouldRefresh,
         )
     }
 
     private fun processCurrentTransactionFor(
+        currentTransactionFor: TransactionFor,
         shouldRefresh: Boolean = false,
     ) {
-        val currentTransactionForValue =
-            currentTransactionFor
-                ?: return throw IllegalStateException("Current transaction for is null")
         updateTitle(
             updatedTitle = title
                 .copy(
-                    text = currentTransactionForValue.title,
+                    text = currentTransactionFor.title,
                     selection = TextRange(
-                        index = currentTransactionForValue.title.length,
+                        index = currentTransactionFor.title.length,
                     ),
                 ),
             shouldRefresh = shouldRefresh,
         )
+    }
+    // endregion
+
+    // region common
+    private fun getCurrentTransactionForId(): Int {
+        return screenArgs.currentTransactionForId
     }
     // endregion
 }

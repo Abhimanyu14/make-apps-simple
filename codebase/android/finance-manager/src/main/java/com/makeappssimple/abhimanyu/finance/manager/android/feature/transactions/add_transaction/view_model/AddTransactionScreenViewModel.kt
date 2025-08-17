@@ -882,7 +882,7 @@ internal class AddTransactionScreenViewModel(
 
     // region common
     private fun getOriginalTransactionId(): Int? {
-        return screenArgs.transactionId
+        return screenArgs.originalTransactionId
     }
     // endregion
 }

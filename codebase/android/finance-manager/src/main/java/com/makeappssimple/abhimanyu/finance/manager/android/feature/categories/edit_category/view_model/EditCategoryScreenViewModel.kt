@@ -261,7 +261,7 @@ internal class EditCategoryScreenViewModel(
 
     // region getCurrentCategory
     private fun getCurrentCategory() {
-        val currentCategoryId = screenArgs.categoryId
+        val currentCategoryId = getCurrentCategoryId()
         coroutineScope.launch {
             val fetchedCurrentCategory = getCategoryByIdUseCase(
                 id = currentCategoryId,
@@ -287,6 +287,12 @@ internal class EditCategoryScreenViewModel(
             )
             updateEmoji(fetchedCurrentCategory.emoji)
         }
+    }
+    // endregion
+
+    // region common
+    private fun getCurrentCategoryId(): Int {
+        return screenArgs.currentCategoryId
     }
     // endregion
 }

@@ -28,18 +28,13 @@ internal class AddCategoryScreenArgs(
         savedStateHandle: SavedStateHandle,
         uriDecoder: UriDecoder,
     ) : this(
-        transactionType = requireNotNull(
-            value = uriDecoder.decode(
-                string = requireNotNull(
-                    value = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_TYPE),
-                    lazyMessage = {
-                        "Navigation argument '${NavigationArguments.TRANSACTION_TYPE}' is required and cannot be null."
-                    },
-                ),
+        transactionType = uriDecoder.decode(
+            string = requireNotNull(
+                value = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_TYPE),
+                lazyMessage = {
+                    "transaction type must not be null"
+                },
             ),
-            lazyMessage = {
-                "Decoded transaction type from argument '${NavigationArguments.TRANSACTION_TYPE}' cannot be null."
-            },
-        )
+        ),
     )
 }

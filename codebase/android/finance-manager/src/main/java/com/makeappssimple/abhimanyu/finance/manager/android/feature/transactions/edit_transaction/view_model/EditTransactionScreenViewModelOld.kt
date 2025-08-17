@@ -842,7 +842,7 @@ public class EditTransactionScreenViewModelOld(
     }
 
     private suspend fun getTransactionDataForAddingRefundTransactionOrEditingAnyTransaction() {
-        screenArgs.transactionId?.let { id ->
+        screenArgs.currentTransactionId?.let { id ->
             editingTransactionData = getTransactionDataByIdUseCase(
                 id = id,
             )
@@ -872,7 +872,7 @@ public class EditTransactionScreenViewModelOld(
 
         var refundedAmountCalculated: Amount? = null
         transactionDataToRefund?.transaction?.refundTransactionIds?.forEach {
-            if (it != screenArgs.transactionId) {
+            if (it != screenArgs.currentTransactionId) {
                 getTransactionDataByIdUseCase(
                     id = it,
                 )?.transaction?.amount?.let { prevRefundedTransactionAmount ->
@@ -1002,6 +1002,6 @@ public class EditTransactionScreenViewModelOld(
     }
 
     private fun isAddingRefundTransactionOrEditingAnyTransaction(): Boolean {
-        return screenArgs.transactionId.isNotNull()
+        return screenArgs.currentTransactionId.isNotNull()
     }
 }

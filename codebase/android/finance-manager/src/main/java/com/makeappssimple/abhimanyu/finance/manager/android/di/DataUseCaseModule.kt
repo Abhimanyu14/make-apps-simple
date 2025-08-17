@@ -47,6 +47,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.InsertCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.SetDefaultCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.BackupDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RecalculateTotalUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RestoreDataUseCase
@@ -297,6 +298,15 @@ public class DataUseCaseModule {
         return UpdateCategoriesUseCase(
             categoryRepository = categoryRepository,
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+        )
+    }
+
+    @Single
+    internal fun providesUpdateCategoryUseCase(
+        updateCategoriesUseCase: UpdateCategoriesUseCase,
+    ): UpdateCategoryUseCase {
+        return UpdateCategoryUseCase(
+            updateCategoriesUseCase = updateCategoriesUseCase,
         )
     }
     // endregion
