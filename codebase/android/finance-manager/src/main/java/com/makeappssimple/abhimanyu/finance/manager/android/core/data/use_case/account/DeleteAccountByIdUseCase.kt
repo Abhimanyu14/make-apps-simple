@@ -25,7 +25,7 @@ public class DeleteAccountByIdUseCase(
 ) {
     public suspend operator fun invoke(
         id: Int,
-    ): Boolean {
+    ): Int {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return accountRepository.deleteAccountById(
             id = id,

@@ -104,7 +104,6 @@ internal class AccountsScreenViewModel(
             AccountsScreenUIState(
                 screenBottomSheetType = screenBottomSheetType,
                 isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
-                clickedItemId = clickedItemId,
                 isLoading = isLoading,
                 accountsListItemDataList = allAccountsListItemDataList,
                 accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
@@ -114,91 +113,15 @@ internal class AccountsScreenViewModel(
     }
     // endregion
 
-    // region fetchData
-    override fun fetchData(): Job {
-        return Job().apply {
-            complete()
-        }
-    }
-    // endregion
-
     // region observeData
     override fun observeData() {
         observeForAllAccounts()
         observeForDefaultAccountId()
     }
-    // endregion
 
-    // region state events
-    private fun deleteAccount(): Job {
-        return coroutineScope.launch {
-            clickedItemId?.let { id ->
-                val isAccountDeleted = deleteAccountByIdUseCase(
-                    id = id,
-                )
-                if (isAccountDeleted) {
-                    clickedItemId = null
-                } else {
-                    // TODO(Abhi): Handle this error scenario
-                }
-            } ?: run {
-                // TODO(Abhi): Handle this error scenario
-            }
-        }
-    }
-
-    private fun resetScreenBottomSheetType(): Job {
-        return updateScreenBottomSheetType(
-            updatedAccountsScreenBottomSheetType = AccountsScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateClickedItemId(
-        updatedClickedItemId: Int?,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        clickedItemId = updatedClickedItemId
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateDefaultAccountIdInDataStore(): Job {
-        return coroutineScope.launch {
-            clickedItemId?.let { accountId ->
-                val isDefaultAccountUpdated =
-                    financeManagerPreferencesRepository.updateDefaultAccountId(
-                        accountId = accountId,
-                    )
-                if (isDefaultAccountUpdated) {
-                    // TODO(Abhi): Show snackbar for user feedback
-                    clickedItemId = null
-                } else {
-                    // TODO(Abhi): Handle this error scenario
-                }
-            } ?: run {
-                // TODO(Abhi): Handle this error scenario
-            }
-        }
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedAccountsScreenBottomSheetType: AccountsScreenBottomSheetType,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        screenBottomSheetType = updatedAccountsScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-    // endregion
-
-    // region observeForAllAccounts
     private fun observeForAllAccounts() {
         coroutineScope.launch {
-            println("getAllAccountsFlowUseCase launch")
             getAllAccountsFlowUseCase().collectLatest { updatedAllAccounts ->
-                println("getAllAccountsFlowUseCase().collectLatest")
                 handleAllAccountsUpdate(
                     updatedAllAccounts = updatedAllAccounts,
                 )
@@ -224,9 +147,7 @@ internal class AccountsScreenViewModel(
         )
         refresh()
     }
-    // endregion
 
-    // region observeForDefaultAccountId
     private fun observeForDefaultAccountId() {
         coroutineScope.launch {
             getDefaultAccountIdFlowUseCase().collectLatest { updatedDefaultAccountId ->
@@ -245,8 +166,80 @@ internal class AccountsScreenViewModel(
             allAccounts = allAccounts,
             defaultAccountId = defaultAccountId,
         )
+        return refresh()
+    }
+    // endregion
+
+    // region state events
+    private fun deleteAccount(): Job {
+        val id = requireNotNull(
+            value = clickedItemId,
+            lazyMessage = {
+                "Clicked item ID should not be null when deleting an account."
+            },
+        )
+        return coroutineScope.launch {
+            val isAccountDeleted = deleteAccountByIdUseCase(
+                id = id,
+            ) == 1
+            if (isAccountDeleted) {
+                updateClickedItemId(
+                    updatedClickedItemId = null,
+                    shouldRefresh = false,
+                )
+            } else {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
+            updatedAccountsScreenBottomSheetType = AccountsScreenBottomSheetType.None,
+        )
+    }
+
+    private fun updateClickedItemId(
+        updatedClickedItemId: Int?,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        clickedItemId = updatedClickedItemId
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateDefaultAccountIdInDataStore(): Job {
+        val accountId = requireNotNull(
+            value = clickedItemId,
+            lazyMessage = {
+                "Clicked item ID should not be null when updating default account ID in data store."
+            },
+        )
+        return coroutineScope.launch {
+            val isDefaultAccountUpdated =
+                financeManagerPreferencesRepository.updateDefaultAccountId(
+                    accountId = accountId,
+                )
+            if (isDefaultAccountUpdated) {
+                // TODO(Abhi): Show snackbar for user feedback
+                updateClickedItemId(
+                    updatedClickedItemId = null,
+                    shouldRefresh = false,
+                )
+            } else {
+                // TODO(Abhi): Handle this error scenario
+            }
+        }
+    }
+
+    private fun updateScreenBottomSheetType(
+        updatedAccountsScreenBottomSheetType: AccountsScreenBottomSheetType,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenBottomSheetType = updatedAccountsScreenBottomSheetType
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
         )
     }
     // endregion

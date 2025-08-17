@@ -28,7 +28,6 @@ internal data class AccountsScreenUIState(
     val screenBottomSheetType: AccountsScreenBottomSheetType = AccountsScreenBottomSheetType.None,
     val isBottomSheetVisible: Boolean = false,
     val isLoading: Boolean = true,
-    val clickedItemId: Int? = null,
     val accountsListItemDataList: ImmutableList<AccountsListItemData> = persistentListOf(),
     val accountsTotalBalanceAmountValue: Long = 0L,
     val accountsTotalMinimumBalanceAmountValue: Long = 0L,

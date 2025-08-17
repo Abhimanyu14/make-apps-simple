@@ -39,16 +39,16 @@ internal class AccountRepositoryImpl(
 ) : AccountRepository {
     override suspend fun deleteAccountById(
         id: Int,
-    ): Boolean {
+    ): Int {
         return dispatcherProvider.executeOnIoDispatcher {
             try {
                 accountDao.deleteAccountById(
                     id = id,
-                ) == 1
+                )
             } catch (
                 _: SQLiteException,
             ) {
-                false
+                0
             }
         }
     }

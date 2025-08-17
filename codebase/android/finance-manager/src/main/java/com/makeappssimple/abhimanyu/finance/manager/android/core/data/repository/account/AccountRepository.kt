@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 public interface AccountRepository {
     public suspend fun deleteAccountById(
         id: Int,
-    ): Boolean
+    ): Int
 
     public suspend fun getAccountById(
         id: Int,
