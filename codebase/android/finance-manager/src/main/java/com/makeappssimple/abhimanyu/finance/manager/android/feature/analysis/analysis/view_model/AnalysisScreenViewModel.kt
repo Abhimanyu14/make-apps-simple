@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.view_model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
@@ -83,28 +82,18 @@ internal class AnalysisScreenViewModel(
                 text = it.title,
             )
         }
-    private val analysisListItemData: MutableStateFlow<ImmutableList<AnalysisListItemData>> =
-        MutableStateFlow(
-            value = persistentListOf(),
-        )
-
+    private var analysisListItemData: ImmutableList<AnalysisListItemData> =
+        persistentListOf()
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
     private var oldestTransactionLocalDate: LocalDate? = null
     // endregion
 
     // region UI state
-    private val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
-        value = Filter(),
-    )
-    private val screenBottomSheetType: MutableStateFlow<AnalysisScreenBottomSheetType> =
-        MutableStateFlow(
-            value = AnalysisScreenBottomSheetType.None,
-        )
-    private val selectedTransactionTypeIndex: MutableStateFlow<Int> =
-        MutableStateFlow(
-            value = 0,
-        )
+    private var selectedFilter: Filter = Filter()
+    private var screenBottomSheetType: AnalysisScreenBottomSheetType =
+        AnalysisScreenBottomSheetType.None
+    private var selectedTransactionTypeIndex: Int = 0
     // endregion
 
     // region uiStateAndStateEvents
@@ -127,109 +116,24 @@ internal class AnalysisScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         _uiState.update {
+            analysisListItemData = getAnalysisListItemData(
+                selectedFilterValue = selectedFilter,
+                selectedTransactionTypeIndexValue = selectedTransactionTypeIndex,
+                allTransactionDataValue = allTransactionData,
+            )
             AnalysisScreenUIState(
-                screenBottomSheetType = screenBottomSheetType.value,
+                screenBottomSheetType = screenBottomSheetType,
                 isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
                 isLoading = isLoading,
-                selectedFilter = selectedFilter.value.orEmpty(),
-                selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
-                analysisListItemData = analysisListItemData.value,
+                selectedFilter = selectedFilter.orEmpty(),
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                analysisListItemData = analysisListItemData,
                 transactionTypesChipUIData = validTransactionTypesChipUIData,
                 defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
                 defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
                 startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
                 startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
             )
-        }
-    }
-    // endregion
-
-    // region fetchData
-    override fun fetchData(): Job {
-        return coroutineScope.launch {
-            allTransactionData = getAllTransactionDataUseCase()
-            oldestTransactionLocalDate = getOldestTransactionLocalDate()
-        }
-    }
-    // endregion
-
-    // region observeData
-    override fun observeData() {
-        observeForTransactionDataMappedByCategory()
-    }
-    // endregion
-
-    // region state events
-    private fun resetScreenBottomSheetType(): Job {
-        return updateScreenBottomSheetType(
-            updatedAnalysisScreenBottomSheetType = AnalysisScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedAnalysisScreenBottomSheetType: AnalysisScreenBottomSheetType,
-    ): Job {
-        screenBottomSheetType.update {
-            updatedAnalysisScreenBottomSheetType
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateSelectedFilter(
-        updatedSelectedFilter: Filter,
-    ): Job {
-        selectedFilter.update {
-            updatedSelectedFilter
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateSelectedTransactionTypeIndex(
-        updatedSelectedTransactionTypeIndex: Int,
-    ): Job {
-        selectedTransactionTypeIndex.update {
-            updatedSelectedTransactionTypeIndex
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-    // endregion
-
-    // region getOldestTransactionLocalDate
-    private fun getOldestTransactionLocalDate(): LocalDate {
-        return dateTimeKit.getLocalDate(
-            timestamp = allTransactionData.minOfOrNull { transactionData ->
-                transactionData.transaction.transactionTimestamp
-            }.orZero(),
-        )
-    }
-    // endregion
-
-    // region observeForTransactionDataMappedByCategory
-    private fun observeForTransactionDataMappedByCategory() {
-        coroutineScope.launch {
-            combineAndCollectLatest(
-                selectedTransactionTypeIndex,
-                selectedFilter,
-            ) {
-                    (
-                        selectedTransactionTypeIndex,
-                        selectedFilter,
-                    ),
-                ->
-                analysisListItemData.update {
-                    getAnalysisListItemData(
-                        selectedFilterValue = selectedFilter,
-                        selectedTransactionTypeIndexValue = selectedTransactionTypeIndex,
-                        allTransactionDataValue = allTransactionData,
-                    )
-                }
-            }
         }
     }
 
@@ -300,6 +204,63 @@ internal class AnalysisScreenViewModel(
             .atEndOfDay()
             .toEpochMilli()
         return transactionData.transaction.transactionTimestamp in fromDateStartOfDayTimestamp until toDateStartOfDayTimestamp
+    }
+    // endregion
+
+    // region fetchData
+    override fun fetchData(): Job {
+        return coroutineScope.launch {
+            allTransactionData = getAllTransactionDataUseCase()
+            oldestTransactionLocalDate = getOldestTransactionLocalDate()
+        }
+    }
+    // endregion
+
+    // region state events
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
+            updatedAnalysisScreenBottomSheetType = AnalysisScreenBottomSheetType.None,
+        )
+    }
+
+    private fun updateScreenBottomSheetType(
+        updatedAnalysisScreenBottomSheetType: AnalysisScreenBottomSheetType,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenBottomSheetType = updatedAnalysisScreenBottomSheetType
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateSelectedFilter(
+        updatedSelectedFilter: Filter,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedFilter = updatedSelectedFilter
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateSelectedTransactionTypeIndex(
+        updatedSelectedTransactionTypeIndex: Int,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+    // endregion
+
+    // region getOldestTransactionLocalDate
+    private fun getOldestTransactionLocalDate(): LocalDate {
+        return dateTimeKit.getLocalDate(
+            timestamp = allTransactionData.minOfOrNull { transactionData ->
+                transactionData.transaction.transactionTimestamp
+            }.orZero(),
+        )
     }
     // endregion
 }
