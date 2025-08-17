@@ -1,5 +1,9 @@
 # Terminology
 
+## Current Category
+
+- The category being edited.
+
 ## Current Transaction
 
 ### In View Transaction Screen
