@@ -79,10 +79,8 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region UI state
-    private val screenBottomSheetType: MutableStateFlow<ViewTransactionScreenBottomSheetType> =
-        MutableStateFlow(
-            value = ViewTransactionScreenBottomSheetType.None,
-        )
+    private var screenBottomSheetType: ViewTransactionScreenBottomSheetType =
+        ViewTransactionScreenBottomSheetType.None
     // endregion
 
     // region uiStateAndStateEvents
@@ -98,21 +96,15 @@ internal class ViewTransactionScreenViewModel(
             navigateUp = ::navigateUp,
             navigateToEditTransactionScreen = ::navigateToEditTransactionScreen,
             navigateToViewTransactionScreen = ::navigateToViewTransactionScreen,
-            onRefundButtonClick = ::onRefundButtonClick,
+            onRefundButtonClick = ::navigateToAddTransactionScreen,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
-            updateTransactionIdToDelete = {
-                transactionIdToDelete = it
-                refreshIfRequired(
-                    shouldRefresh = true,
-                )
-            },
+            updateTransactionIdToDelete = ::updateTransactionIdToDelete,
         )
     // endregion
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        // TODO(Abhi): Fix screenBottomSheetType
         _uiState.update {
             ViewTransactionScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
@@ -120,7 +112,7 @@ internal class ViewTransactionScreenViewModel(
                 refundTransactionsListItemData = refundTransactionsListItemData.orEmpty(),
                 originalTransactionListItemData = originalTransactionListItemData,
                 transactionListItemData = currentTransactionListItemData,
-                screenBottomSheetType = screenBottomSheetType.value,
+                screenBottomSheetType = screenBottomSheetType,
             )
         }
     }
@@ -132,61 +124,18 @@ internal class ViewTransactionScreenViewModel(
             getCurrentTransactionData()
         }
     }
-    // endregion
 
-    // region state events
-    private fun deleteTransaction(): Job {
-        val id = transactionIdToDelete
-            ?: throw IllegalStateException("Transaction ID to delete is null.")
-        return coroutineScope.launch {
-            startLoading()
-            val isTransactionDeleted = deleteTransactionUseByIdCase(
-                id = id,
-            )
-            resetScreenBottomSheetType()
-            if (isTransactionDeleted) {
-                // TODO(Abhi): Show success message
-                transactionIdToDelete = null
-                navigateUp()
-            } else {
-                // TODO(Abhi): Show error message
-            }
-            completeLoading()
-        }
-    }
-
-    private fun onRefundButtonClick(
-        transactionId: Int,
-    ): Job {
-        return navigateToAddTransactionScreen(
-            transactionId = transactionId,
-        )
-    }
-
-    private fun resetScreenBottomSheetType(): Job {
-        return updateScreenBottomSheetType(
-            updatedViewTransactionScreenBottomSheetType = ViewTransactionScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedViewTransactionScreenBottomSheetType: ViewTransactionScreenBottomSheetType,
-    ): Job {
-        screenBottomSheetType.update {
-            updatedViewTransactionScreenBottomSheetType
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-    // endregion
-
-    // region getCurrentTransactionData
     private suspend fun getCurrentTransactionData() {
         val currentTransactionId = getCurrentTransactionId()
         val transactionData = getTransactionDataByIdUseCase(
             id = currentTransactionId,
-        ) ?: return // TODO(Abhi): Show error message
+        )
+        requireNotNull(
+            value = transactionData,
+            lazyMessage = {
+                "Transaction data for ID $currentTransactionId must not be null."
+            },
+        )
         currentTransactionListItemData = getTransactionListItemData(
             transactionData = transactionData,
         )
@@ -207,7 +156,13 @@ internal class ViewTransactionScreenViewModel(
     ) {
         val transactionData = getTransactionDataByIdUseCase(
             id = transactionId,
-        ) ?: return // TODO(Abhi): Show error message
+        )
+        requireNotNull(
+            value = transactionData,
+            lazyMessage = {
+                "Original transaction data for ID $transactionId must not be null."
+            },
+        )
         originalTransactionListItemData = getTransactionListItemData(
             transactionData = transactionData,
         )
@@ -216,25 +171,32 @@ internal class ViewTransactionScreenViewModel(
     private suspend fun getRefundTransactionsData(
         transactionIds: ImmutableList<Int>,
     ) {
-        refundTransactionsListItemData =
-            transactionIds.mapNotNull { transactionId ->
-                getTransactionDataByIdUseCase(
+        refundTransactionsListItemData = transactionIds
+            .map { transactionId ->
+                val transactionData = getTransactionDataByIdUseCase(
                     id = transactionId,
-                )?.let { transactionData ->
-                    getTransactionListItemData(
-                        transactionData = transactionData,
-                    ) // TODO(Abhi): Show error message
-                }
-            }.toImmutableList()
+                )
+                requireNotNull(
+                    value = transactionData,
+                    lazyMessage = {
+                        "Refund transaction data for ID $transactionId must not be null."
+                    },
+                )
+                getTransactionListItemData(
+                    transactionData = transactionData,
+                )
+            }
+            .toImmutableList()
     }
 
     private fun getTransactionListItemData(
         transactionData: TransactionData,
     ): TransactionListItemData {
         val transaction = transactionData.transaction
-        return transactionData.toTransactionListItemData(
-            dateTimeKit = dateTimeKit,
-        )
+        return transactionData
+            .toTransactionListItemData(
+                dateTimeKit = dateTimeKit,
+            )
             .copy(
                 isDeleteButtonEnabled = transaction.refundTransactionIds.isNullOrEmpty(),
                 isDeleteButtonVisible = true,
@@ -242,6 +204,61 @@ internal class ViewTransactionScreenViewModel(
                 isExpanded = true,
                 isRefundButtonVisible = transaction.transactionType == TransactionType.EXPENSE,
             )
+    }
+    // endregion
+
+    // region state events
+    private fun deleteTransaction(): Job {
+        val id = requireNotNull(
+            value = transactionIdToDelete,
+            lazyMessage = {
+                "Transaction ID to delete must not be null."
+            },
+        )
+        return coroutineScope.launch {
+            startLoading()
+            val isTransactionDeleted = deleteTransactionUseByIdCase(
+                id = id,
+            )
+            resetScreenBottomSheetType()
+            if (isTransactionDeleted) {
+                // TODO(Abhi): Show success message
+                navigateUp()
+            } else {
+                // TODO(Abhi): Show error message
+                completeLoading()
+                updateTransactionIdToDelete(
+                    updatedTransactionIdToDelete = null,
+                    shouldRefresh = false,
+                )
+            }
+        }
+    }
+
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
+            updatedViewTransactionScreenBottomSheetType = ViewTransactionScreenBottomSheetType.None,
+        )
+    }
+
+    private fun updateScreenBottomSheetType(
+        updatedViewTransactionScreenBottomSheetType: ViewTransactionScreenBottomSheetType,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenBottomSheetType = updatedViewTransactionScreenBottomSheetType
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateTransactionIdToDelete(
+        updatedTransactionIdToDelete: Int?,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        transactionIdToDelete = updatedTransactionIdToDelete
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
     }
     // endregion
 
