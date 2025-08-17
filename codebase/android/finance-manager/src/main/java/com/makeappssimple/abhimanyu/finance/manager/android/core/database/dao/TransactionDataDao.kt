@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
 import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -39,6 +40,7 @@ public interface TransactionDataDao {
             ORDER BY transaction_timestamp DESC
         """
     )
+    @Transaction
     public suspend fun getAllTransactionData(): List<TransactionDataEntity>
 
     /**
@@ -53,6 +55,7 @@ public interface TransactionDataDao {
             ORDER BY transaction_timestamp DESC
         """
     )
+    @Transaction
     public fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
 
     /**
@@ -69,6 +72,7 @@ public interface TransactionDataDao {
             LIMIT :numberOfTransactions
         """
     )
+    @Transaction
     public fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<List<TransactionDataEntity>>
@@ -90,6 +94,7 @@ public interface TransactionDataDao {
             ORDER BY transaction_timestamp DESC
         """
     )
+    @Transaction
     public suspend fun getSearchedTransactionData(
         searchText: String,
     ): List<TransactionDataEntity>
@@ -107,6 +112,7 @@ public interface TransactionDataDao {
             WHERE id = :id
         """
     )
+    @Transaction
     public suspend fun getTransactionDataById(
         id: Int,
     ): TransactionDataEntity?
