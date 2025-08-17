@@ -29,8 +29,8 @@ internal class EditCategoryScreenUIStateEvents(
     val resetScreenBottomSheetType: () -> Job,
     val updateCategory: () -> Job,
     val updateEmoji: (updatedEmoji: String) -> Job,
+    val updateEmojiSearchText: (updatedEmojiSearchText: String) -> Job,
     val updateScreenBottomSheetType: (EditCategoryScreenBottomSheetType) -> Job,
-    val updateSearchText: (updatedSearchText: String) -> Job,
     val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
     val updateTitle: (updatedTitle: TextFieldValue) -> Job,
 ) : ScreenUIStateEvents

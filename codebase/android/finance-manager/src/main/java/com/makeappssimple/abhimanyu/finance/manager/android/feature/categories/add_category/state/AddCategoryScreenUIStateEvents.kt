@@ -30,7 +30,7 @@ internal class AddCategoryScreenUIStateEvents(
     val navigateUp: () -> Job,
     val resetScreenBottomSheetType: () -> Job,
     val updateEmoji: (updatedEmoji: String) -> Job,
-    val updateEmojiSearchText: (updatedSearchText: String) -> Job,
+    val updateEmojiSearchText: (updatedEmojiSearchText: String) -> Job,
     val updateScreenBottomSheetType: (updatedAddCategoryScreenBottomSheetType: AddCategoryScreenBottomSheetType) -> Job,
     val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
     val updateTitle: (updatedTitle: TextFieldValue) -> Job,

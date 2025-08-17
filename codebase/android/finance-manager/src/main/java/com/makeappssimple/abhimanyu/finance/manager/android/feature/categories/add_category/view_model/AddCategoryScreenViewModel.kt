@@ -160,7 +160,7 @@ internal class AddCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         updateEmojiSearchText(
-            updatedSearchText = "",
+            updatedEmojiSearchText = "",
         )
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
@@ -213,10 +213,10 @@ internal class AddCategoryScreenViewModel(
     }
 
     private fun updateEmojiSearchText(
-        updatedSearchText: String,
+        updatedEmojiSearchText: String,
         shouldRefresh: Boolean = true,
     ): Job {
-        emojiSearchText = updatedSearchText
+        emojiSearchText = updatedEmojiSearchText
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
