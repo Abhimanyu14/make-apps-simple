@@ -154,7 +154,7 @@ internal class EditTransactionForScreenViewModelTest {
             )
         }
 
-        assertThat(exception.message).isEqualTo("transactionForId must not be null")
+        assertThat(exception.message).isEqualTo("current transaction for id must not be null")
     }
     // endregion
 
