@@ -6,25 +6,12 @@
 
 ## Current Transaction
 
-### In View Transaction Screen
-
-- The transaction being viewed is called "current transaction".
-
-### In Add Transaction Screen
-
-- NA
+- The transaction being edited/viewed.
 
 ## Original Transaction
 
-### In View Transaction Screen
-
 - If the current transaction is a refund transaction,
   then the transaction which was refunded is called "original transaction".
-
-### In Add Transaction Screen
-
-- If the current transaction is a refund transaction, the
-  transaction which was refunded is called "original transaction".
 
 ## Refund Transactions
 
