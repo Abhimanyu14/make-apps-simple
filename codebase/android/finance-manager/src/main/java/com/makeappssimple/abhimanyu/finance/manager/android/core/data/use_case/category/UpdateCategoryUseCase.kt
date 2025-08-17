@@ -16,20 +16,23 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 
-public class UpdateCategoriesUseCase(
-    private val categoryRepository: CategoryRepository,
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+public class UpdateCategoryUseCase(
+    private val updateCategoriesUseCase: UpdateCategoriesUseCase,
 ) {
     public suspend operator fun invoke(
-        vararg categories: Category,
+        currentCategory: Category,
+        emoji: String,
+        title: String,
+        transactionType: TransactionType,
     ): Int {
-        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-        return categoryRepository.updateCategories(
-            categories = categories,
+        val category = currentCategory.copy(
+            emoji = emoji,
+            title = title,
+            transactionType = transactionType,
         )
+        return updateCategoriesUseCase(category)
     }
 }

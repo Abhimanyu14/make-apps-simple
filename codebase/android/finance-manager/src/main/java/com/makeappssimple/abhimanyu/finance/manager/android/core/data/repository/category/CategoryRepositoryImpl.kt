@@ -139,18 +139,18 @@ internal class CategoryRepositoryImpl(
 
     override suspend fun updateCategories(
         vararg categories: Category,
-    ): Boolean {
+    ): Int {
         return dispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.updateCategories(
                     categories = categories.map(
                         transform = Category::asEntity,
                     ).toTypedArray(),
-                ) == categories.size
+                )
             } catch (
                 _: SQLiteException,
             ) {
-                false
+                0
             }
         }
     }

@@ -19,24 +19,17 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
-import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.EmojiConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetCategoryByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.UpdateCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultInvestmentCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state.EditCategoryScreenUIState
@@ -59,12 +52,10 @@ internal class EditCategoryScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     screenUIStateDelegate: ScreenUIStateDelegate,
-    uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
     private val editCategoryScreenDataValidationUseCase: EditCategoryScreenDataValidationUseCase,
-    private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getCategoryByIdUseCase: GetCategoryByIdUseCase,
-    private val updateCategoriesUseCase: UpdateCategoriesUseCase,
+    private val updateCategoryUseCase: UpdateCategoryUseCase,
     internal val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
@@ -75,28 +66,17 @@ internal class EditCategoryScreenViewModel(
     // region screen args
     private val screenArgs = EditCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
-        uriDecoder = uriDecoder,
     )
     // endregion
 
     // region initial data
-    private val categories: MutableStateFlow<ImmutableList<Category>> =
-        MutableStateFlow(
-            value = persistentListOf(),
-        )
-    private val transactionType: String? = screenArgs.transactionType
-    // endregion
-
-    // region initial data
-    private val category: MutableStateFlow<Category?> = MutableStateFlow(
-        value = null,
-    )
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
             TransactionType.EXPENSE,
             TransactionType.INVESTMENT,
         )
+    private var currentCategory: Category? = null
     // endregion
 
     // region UI state
@@ -144,51 +124,31 @@ internal class EditCategoryScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val validationState = editCategoryScreenDataValidationUseCase(
-            categories = categories.value,
-            enteredTitle = title.value.text.trim(),
-            currentCategory = category.value,
-        )
-        var titleError: EditCategoryScreenTitleError =
-            EditCategoryScreenTitleError.None
-        val isCtaButtonEnabled = if (title.value.text.isBlank()) {
-            false
-        } else if (isDefaultIncomeCategory(
-                category = title.value.text.trim(),
-            ) || isDefaultExpenseCategory(
-                category = title.value.text.trim(),
-            ) || isDefaultInvestmentCategory(
-                category = title.value.text.trim(),
-            ) || (title.value.text.trim() != category.value?.title?.trim() && categories.value.find {
-                it.title.equalsIgnoringCase(
-                    other = title.value.text.trim(),
+        coroutineScope.launch {
+            val editCategoryScreenDataValidationState =
+                editCategoryScreenDataValidationUseCase(
+                    enteredTitle = title.value.text.trim(),
+                    currentCategory = currentCategory,
                 )
-            }.isNotNull())
-        ) {
-            titleError = EditCategoryScreenTitleError.CategoryExists
-            false
-        } else {
-            true
-        }
-
-        _uiState.update {
-            EditCategoryScreenUIState(
-                screenBottomSheetType = screenBottomSheetType.value,
-                isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
-                isCtaButtonEnabled = isCtaButtonEnabled,
-                isLoading = isLoading,
-                isSupportingTextVisible = titleError != EditCategoryScreenTitleError.None,
-                titleError = titleError,
-                selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
-                transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
-                    ChipUIData(
-                        text = transactionType.title,
-                    )
-                },
-                emoji = emoji.value,
-                emojiSearchText = searchText.value,
-                title = title.value,
-            )
+            _uiState.update {
+                EditCategoryScreenUIState(
+                    screenBottomSheetType = screenBottomSheetType.value,
+                    isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
+                    isCtaButtonEnabled = editCategoryScreenDataValidationState.isCtaButtonEnabled,
+                    isLoading = isLoading,
+                    isSupportingTextVisible = editCategoryScreenDataValidationState.titleError != EditCategoryScreenTitleError.None,
+                    titleError = editCategoryScreenDataValidationState.titleError,
+                    selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
+                    transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
+                        ChipUIData(
+                            text = transactionType.title,
+                        )
+                    },
+                    emoji = emoji.value,
+                    emojiSearchText = searchText.value,
+                    title = title.value,
+                )
+            }
         }
     }
     // endregion
@@ -196,32 +156,17 @@ internal class EditCategoryScreenViewModel(
     // region fetchData
     override fun fetchData(): Job {
         return coroutineScope.launch {
-            withLoadingSuspend {
-                getAllCategories()
-                getOriginalCategory()
-                transactionType?.let { originalTransactionType ->
-                    updateSelectedTransactionTypeIndex(
-                        validTransactionTypes.indexOf(
-                            element = TransactionType.entries.find { transactionType ->
-                                transactionType.title == originalTransactionType
-                            },
-                        )
-                    )
-                }
-            }
+            getCurrentCategory()
         }
     }
     // endregion
 
     // region state events
     private fun clearTitle(): Job {
-        title.update {
-            title.value.copy(
+        return updateTitle(
+            updatedTitle = title.value.copy(
                 text = "",
-            )
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
+            ),
         )
     }
 
@@ -233,111 +178,114 @@ internal class EditCategoryScreenViewModel(
 
     private fun updateEmoji(
         updatedEmoji: String,
+        shouldRefresh: Boolean = true,
     ): Job {
         emoji.update {
             updatedEmoji
         }
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateTitle(
         updatedTitle: TextFieldValue,
+        shouldRefresh: Boolean = true,
     ): Job {
         title.update {
             updatedTitle
         }
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateScreenBottomSheetType(
         updatedEditCategoryScreenBottomSheetType: EditCategoryScreenBottomSheetType,
+        shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType.update {
             updatedEditCategoryScreenBottomSheetType
         }
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateSearchText(
         updatedSearchText: String,
+        shouldRefresh: Boolean = true,
     ): Job {
         searchText.update {
             updatedSearchText
         }
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
+        shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionTypeIndex.update {
             updatedSelectedTransactionTypeIndex
         }
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateCategory(): Job {
-        category.value?.copy(
-            emoji = emoji.value,
-            title = title.value.text,
-            transactionType = validTransactionTypes[selectedTransactionTypeIndex.value],
-        )?.let { category ->
-            coroutineScope.launch {
-                updateCategoriesUseCase(category)
+        return coroutineScope.launch {
+            val isCategoryUpdated = updateCategoryUseCase(
+                currentCategory = requireNotNull(
+                    value = currentCategory,
+                    lazyMessage = {
+                        "Current category is null. Cannot update category."
+                    },
+                ),
+                emoji = emoji.value,
+                title = title.value.text,
+                transactionType = validTransactionTypes[selectedTransactionTypeIndex.value],
+            ) == 1
+            if (isCategoryUpdated) {
                 navigateUp()
+            } else {
+                completeLoading()
+                // TODO(Abhi): Show error
             }
         }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
     }
     // endregion
 
-    // region getAllCategories
-    private fun getAllCategories() {
+    // region getCurrentCategory
+    private fun getCurrentCategory() {
+        val currentCategoryId = screenArgs.categoryId
         coroutineScope.launch {
-            categories.update {
-                getAllCategoriesUseCase()
-            }
-        }
-    }
-    // endregion
+            val fetchedCurrentCategory = getCategoryByIdUseCase(
+                id = currentCategoryId,
+            )
+            requireNotNull(
+                value = fetchedCurrentCategory,
+                lazyMessage = {
+                    "Category with ID $currentCategoryId not found."
+                },
+            )
+            currentCategory = fetchedCurrentCategory
 
-    // region getOriginalCategory
-    private fun getOriginalCategory() {
-        screenArgs.categoryId?.let { id ->
-            coroutineScope.launch {
-                category.update {
-                    getCategoryByIdUseCase(
-                        id = id,
-                    )
-                }
-
-                category.value.let { category ->
-                    updateSelectedTransactionTypeIndex(
-                        validTransactionTypes.indexOf(
-                            element = category?.transactionType,
-                        )
-                    )
-                    updateTitle(
-                        title.value.copy(
-                            text = category?.title.orEmpty(),
-                            selection = TextRange(category?.title.orEmpty().length),
-                        )
-                    )
-                    updateEmoji(category?.emoji.orEmpty())
-                }
-            }
+            updateSelectedTransactionTypeIndex(
+                validTransactionTypes.indexOf(
+                    element = fetchedCurrentCategory.transactionType,
+                )
+            )
+            updateTitle(
+                title.value.copy(
+                    text = fetchedCurrentCategory.title.orEmpty(),
+                    selection = TextRange(fetchedCurrentCategory.title.length),
+                )
+            )
+            updateEmoji(fetchedCurrentCategory.emoji)
         }
     }
     // endregion

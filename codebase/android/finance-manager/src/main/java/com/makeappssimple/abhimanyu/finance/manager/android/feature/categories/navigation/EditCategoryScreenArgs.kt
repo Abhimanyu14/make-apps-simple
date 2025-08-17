@@ -17,24 +17,20 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.navigation
 
 import androidx.lifecycle.SavedStateHandle
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenArgs
 
 internal class EditCategoryScreenArgs(
-    val categoryId: Int?,
-    val transactionType: String?,
+    val categoryId: Int,
 ) : ScreenArgs {
     constructor(
         savedStateHandle: SavedStateHandle,
-        uriDecoder: UriDecoder,
     ) : this(
-        categoryId = savedStateHandle.get<Int>(NavigationArguments.CATEGORY_ID),
-        transactionType = savedStateHandle.get<String>(NavigationArguments.TRANSACTION_TYPE)
-            ?.let {
-                uriDecoder.decode(
-                    string = it,
-                )
+        categoryId = requireNotNull(
+            value = savedStateHandle.get<Int>(NavigationArguments.CATEGORY_ID),
+            lazyMessage = {
+                "Navigation argument '${NavigationArguments.CATEGORY_ID}' is required and cannot be null."
             },
+        ),
     )
 }

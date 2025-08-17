@@ -43,5 +43,5 @@ public interface CategoryRepository {
 
     public suspend fun updateCategories(
         vararg categories: Category,
-    ): Boolean
+    ): Int
 }

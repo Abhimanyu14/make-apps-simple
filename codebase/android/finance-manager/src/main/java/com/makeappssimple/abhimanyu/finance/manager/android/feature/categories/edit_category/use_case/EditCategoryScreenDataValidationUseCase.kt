@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
@@ -26,41 +27,47 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.e
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.view_model.EditCategoryScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList
 
-public class EditCategoryScreenDataValidationUseCase() {
-    public operator fun invoke(
-        categories: ImmutableList<Category>,
+public class EditCategoryScreenDataValidationUseCase(
+    private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+) {
+    public suspend operator fun invoke(
         enteredTitle: String,
         currentCategory: Category?,
     ): EditCategoryScreenDataValidationState {
-        val state = EditCategoryScreenDataValidationState()
+        val editCategoryScreenDataValidationState =
+            EditCategoryScreenDataValidationState()
         if (enteredTitle.isBlank()) {
-            return state
+            return editCategoryScreenDataValidationState
         }
-        if (isDefaultIncomeCategory(
+        val isDefaultCategory =
+            isDefaultIncomeCategory(
                 category = enteredTitle,
             ) || isDefaultExpenseCategory(
                 category = enteredTitle,
             ) || isDefaultInvestmentCategory(
                 category = enteredTitle,
             )
-        ) {
-            return state
+        if (isDefaultCategory) {
+            return editCategoryScreenDataValidationState
                 .copy(
                     titleError = EditCategoryScreenTitleError.CategoryExists,
                 )
         }
+        val categories: ImmutableList<Category> = getAllCategoriesUseCase()
+        val isCategoryTitleChanged =
+            currentCategory?.title?.trim() != enteredTitle.trim()
         val isCategoryTitleAlreadyUsed = categories.find {
             it.title.equalsIgnoringCase(
                 other = enteredTitle.trim(),
             )
         }.isNotNull()
-        if (isCategoryTitleAlreadyUsed && enteredTitle != currentCategory?.title?.trim()) {
-            return state
+        if (isCategoryTitleChanged && isCategoryTitleAlreadyUsed) {
+            return editCategoryScreenDataValidationState
                 .copy(
                     titleError = EditCategoryScreenTitleError.CategoryExists,
                 )
         }
-        return state
+        return editCategoryScreenDataValidationState
             .copy(
                 isCtaButtonEnabled = true,
             )
