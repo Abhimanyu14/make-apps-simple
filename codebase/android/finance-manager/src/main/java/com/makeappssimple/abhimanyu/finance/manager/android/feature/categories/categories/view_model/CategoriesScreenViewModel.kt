@@ -130,8 +130,6 @@ internal class CategoriesScreenViewModel(
                 screenBottomSheetType = screenBottomSheetType,
                 screenSnackbarType = screenSnackbarType,
                 isLoading = isLoading,
-                categoryIdToDelete = categoryIdToDelete,
-                clickedItemId = clickedItemId,
                 tabData = tabData,
                 validTransactionTypes = validTransactionTypes,
                 categoriesGridItemDataMap = categoriesGridItemDataMap,
@@ -342,7 +340,7 @@ internal class CategoriesScreenViewModel(
 
     private fun updateCategoryIdToDelete(
         updatedCategoryIdToDelete: Int?,
-        shouldRefresh: Boolean = true,
+        shouldRefresh: Boolean = false,
     ): Job {
         categoryIdToDelete = updatedCategoryIdToDelete
         return refreshIfRequired(
@@ -352,7 +350,7 @@ internal class CategoriesScreenViewModel(
 
     private fun updateClickedItemId(
         updatedClickedItemId: Int?,
-        shouldRefresh: Boolean = true,
+        shouldRefresh: Boolean = false,
     ): Job {
         clickedItemId = updatedClickedItemId
         return refreshIfRequired(

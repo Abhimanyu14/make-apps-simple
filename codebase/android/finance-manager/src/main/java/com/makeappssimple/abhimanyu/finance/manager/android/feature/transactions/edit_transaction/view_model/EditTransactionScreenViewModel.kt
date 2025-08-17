@@ -532,10 +532,10 @@ internal class EditTransactionScreenViewModel(
     ): Job {
         // TODO(Abhi): Fix update transaction logic
         val enteredAmountValue = amount.value.text.toLongOrZero()
-        val amount = Amount(
+        Amount(
             value = enteredAmountValue,
         )
-        val categoryId = when (uiState.selectedTransactionType) {
+        when (uiState.selectedTransactionType) {
             TransactionType.INCOME -> {
                 uiState.category?.id
             }
@@ -610,7 +610,7 @@ internal class EditTransactionScreenViewModel(
                 uiState.accountTo?.id
             }
         }
-        val title = when (uiState.selectedTransactionType) {
+        when (uiState.selectedTransactionType) {
             TransactionType.TRANSFER -> {
                 TransactionType.TRANSFER.title
             }
@@ -623,44 +623,43 @@ internal class EditTransactionScreenViewModel(
                 uiState.title.text.capitalizeWords()
             }
         }
-        val transactionForId: Int =
-            when (uiState.selectedTransactionType) {
-                TransactionType.INCOME -> {
-                    1
-                }
-
-                TransactionType.EXPENSE -> {
-                    uiState.selectedTransactionForIndex
-                }
-
-                TransactionType.TRANSFER -> {
-                    1
-                }
-
-                TransactionType.ADJUSTMENT -> {
-                    1
-                }
-
-                TransactionType.INVESTMENT -> {
-                    1
-                }
-
-                TransactionType.REFUND -> {
-                    1
-                }
+        when (uiState.selectedTransactionType) {
+            TransactionType.INCOME -> {
+                1
             }
-        val transactionTimestamp = LocalDateTime.of(
+
+            TransactionType.EXPENSE -> {
+                uiState.selectedTransactionForIndex
+            }
+
+            TransactionType.TRANSFER -> {
+                1
+            }
+
+            TransactionType.ADJUSTMENT -> {
+                1
+            }
+
+            TransactionType.INVESTMENT -> {
+                1
+            }
+
+            TransactionType.REFUND -> {
+                1
+            }
+        }
+        LocalDateTime.of(
             uiState.transactionDate,
             uiState.transactionTime
         )
             .toEpochMilli()
 
-        val accountFrom = if (accountFromId.isNotNull()) {
+        if (accountFromId.isNotNull()) {
             uiState.accountFrom
         } else {
             null
         }
-        val accountTo = if (accountToId.isNotNull()) {
+        if (accountToId.isNotNull()) {
             uiState.accountTo
         } else {
             null

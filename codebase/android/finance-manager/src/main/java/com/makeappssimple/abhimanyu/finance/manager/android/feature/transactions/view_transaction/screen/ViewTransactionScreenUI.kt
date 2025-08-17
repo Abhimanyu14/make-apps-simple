@@ -46,10 +46,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.sc
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.view_transaction_section_header.ViewTransactionSectionHeader
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.view_transaction_section_header.ViewTransactionSectionHeaderData
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.event.ViewTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.state.ViewTransactionScreenUIState
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 internal fun ViewTransactionScreenUI(

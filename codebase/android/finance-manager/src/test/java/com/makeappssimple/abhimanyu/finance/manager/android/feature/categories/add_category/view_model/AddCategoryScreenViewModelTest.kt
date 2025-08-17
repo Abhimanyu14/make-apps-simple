@@ -294,56 +294,6 @@ internal class AddCategoryScreenViewModelTest {
         }
     }
 
-//    @Test
-//    fun insertCategory_validData_navigatesUp() = runTestWithTimeout {
-//        turbineScope {
-//            val navigationManagerTurbine =
-//                navigationManager.command.testIn(testScope)
-//            addCategoryScreenViewModel.uiStateEvents.updateTitle(
-//                TextFieldValue(
-//                    "New Category"
-//                )
-//            )
-//            addCategoryScreenViewModel.uiStateEvents.insertCategory()
-//
-//            // Skip initial state from viewmodel init
-//            navigationManagerTurbine.awaitItem() // This might be null or initial command
-//
-//            assertThat(navigationManagerTurbine.awaitItem()?.command).isEqualTo(
-//                "navigateUp"
-//            )
-//            navigationManagerTurbine.cancel()
-//        }
-//    }
-//
-//    @Test
-//    fun insertCategory_dataValidationError_doesNotNavigateUpAndShowsError() =
-//        runTestWithTimeout {
-//            turbineScope {
-//                val navigationManagerTurbine =
-//                    navigationManager.command.testIn(testScope)
-//                addCategoryScreenViewModel.uiStateEvents.updateTitle(
-//                    TextFieldValue(" ")
-//                ) // Invalid title
-//                addCategoryScreenViewModel.uiStateEvents.insertCategory() // Attempt insert
-//
-//                val uiState = addCategoryScreenViewModel.uiState.value
-//                assertThat(uiState.isCtaButtonEnabled).isFalse()
-//                // No navigation should occur, check that no "navigateUp" command was sent after initial
-//                // This requires a bit of care due to how initViewModel might interact with navigation.
-//                // For simplicity, we check that isLoading is false (completed without navigation)
-//                // and an error is potentially shown if the ViewModel logic was to set one.
-//                // Based on current ViewModel, it might just disable CTA and not navigate.
-//                assertThat(addCategoryScreenViewModel.isLoading.value).isFalse() // Assuming insertCategory handles loading state
-//
-//                // Check that no navigation command beyond initial (if any) was sent
-//                // This is tricky as ViewModel init might issue a command.
-//                // A more robust check might be needed if initViewModel clears or sets a specific nav command.
-//                navigationManagerTurbine.expectNoEvents() // Or check for a specific initial command then no more.
-//                navigationManagerTurbine.cancel()
-//            }
-//        }
-
     @Test
     fun resetScreenBottomSheetType_shouldSetBottomSheetTypeToNone() =
         runTestWithTimeout {

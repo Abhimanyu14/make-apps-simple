@@ -56,10 +56,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.sc
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCard
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCardData
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.event.AccountsScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.state.AccountsScreenUIState
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
 internal fun AccountsScreenUI(
