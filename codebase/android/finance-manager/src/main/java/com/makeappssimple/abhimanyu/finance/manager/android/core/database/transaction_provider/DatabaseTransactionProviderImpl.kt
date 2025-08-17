@@ -19,9 +19,24 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.database.trans
 import androidx.room.withTransaction
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 
+/**
+ * An implementation of [DatabaseTransactionProvider] that uses Room's `withTransaction`.
+ */
 internal class DatabaseTransactionProviderImpl(
     private val financeManagerRoomDatabase: FinanceManagerRoomDatabase,
 ) : DatabaseTransactionProvider {
+    /**
+     * Executes the given [block] of code within a database transaction.
+     *
+     * If the [block] completes successfully, the transaction is committed.
+     * If an exception occurs within the [block],
+     * the transaction is rolled back, and the exception is re-thrown.
+     *
+     * @param R The return type of the [block].
+     * @param block The suspendable block of code to be executed transactionally.
+     * @return The result of the [block] execution.
+     * @throws Exception if the [block] throws an exception.
+     */
     override suspend fun <R> runAsTransaction(
         block: suspend () -> R,
     ): R {
@@ -35,6 +50,7 @@ internal class DatabaseTransactionProviderImpl(
             } catch (
                 exception: Exception,
             ) {
+                // Re-throw the exception to ensure transaction rollback and propagate the error.
                 throw exception
             }
         }
