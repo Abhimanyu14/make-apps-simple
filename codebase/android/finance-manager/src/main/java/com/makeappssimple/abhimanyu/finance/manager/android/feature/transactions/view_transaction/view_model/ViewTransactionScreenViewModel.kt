@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.view_model
 
 import androidx.lifecycle.SavedStateHandle
-import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
@@ -71,14 +70,14 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region initial data
-    private var currentTransactionListItemData: TransactionListItemData? = null
-    private var originalTransactionListItemData: TransactionListItemData? = null
-    private var refundTransactionsListItemData: ImmutableList<TransactionListItemData> =
-        persistentListOf()
     private var transactionIdToDelete: Int? = null
     // endregion
 
     // region UI state
+    private var refundTransactionsListItemData: ImmutableList<TransactionListItemData> =
+        persistentListOf()
+    private var currentTransactionListItemData: TransactionListItemData? = null
+    private var originalTransactionListItemData: TransactionListItemData? = null
     private var screenBottomSheetType: ViewTransactionScreenBottomSheetType =
         ViewTransactionScreenBottomSheetType.None
     // endregion
@@ -109,7 +108,7 @@ internal class ViewTransactionScreenViewModel(
             ViewTransactionScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
                 isLoading = isLoading,
-                refundTransactionsListItemData = refundTransactionsListItemData.orEmpty(),
+                refundTransactionsListItemData = refundTransactionsListItemData,
                 originalTransactionListItemData = originalTransactionListItemData,
                 transactionListItemData = currentTransactionListItemData,
                 screenBottomSheetType = screenBottomSheetType,
@@ -127,66 +126,63 @@ internal class ViewTransactionScreenViewModel(
 
     private suspend fun getCurrentTransactionData() {
         val currentTransactionId = getCurrentTransactionId()
-        val transactionData = getTransactionDataByIdUseCase(
-            id = currentTransactionId,
-        )
-        requireNotNull(
-            value = transactionData,
-            lazyMessage = {
-                "Transaction data for ID $currentTransactionId must not be null."
-            },
+        val currentTransactionData = getTransactionData(
+            transactionId = currentTransactionId,
         )
         currentTransactionListItemData = getTransactionListItemData(
-            transactionData = transactionData,
+            transactionData = currentTransactionData,
         )
-        transactionData.transaction.originalTransactionId?.let { transactionId ->
+        currentTransactionData.transaction.originalTransactionId?.let { originalTransactionId ->
             getOriginalTransactionData(
-                transactionId = transactionId,
+                originalTransactionId = originalTransactionId,
             )
         }
-        transactionData.transaction.refundTransactionIds?.let { transactionIds ->
+        currentTransactionData.transaction.refundTransactionIds?.let { refundTransactionIds ->
             getRefundTransactionsData(
-                transactionIds = transactionIds.toImmutableList(),
+                refundTransactionIds = refundTransactionIds.toImmutableList(),
             )
         }
     }
 
     private suspend fun getOriginalTransactionData(
-        transactionId: Int,
+        originalTransactionId: Int,
     ) {
-        val transactionData = getTransactionDataByIdUseCase(
-            id = transactionId,
-        )
-        requireNotNull(
-            value = transactionData,
-            lazyMessage = {
-                "Original transaction data for ID $transactionId must not be null."
-            },
+        val originalTransactionData = getTransactionData(
+            transactionId = originalTransactionId,
         )
         originalTransactionListItemData = getTransactionListItemData(
-            transactionData = transactionData,
+            transactionData = originalTransactionData,
         )
     }
 
     private suspend fun getRefundTransactionsData(
-        transactionIds: ImmutableList<Int>,
+        refundTransactionIds: ImmutableList<Int>,
     ) {
-        refundTransactionsListItemData = transactionIds
-            .map { transactionId ->
-                val transactionData = getTransactionDataByIdUseCase(
-                    id = transactionId,
-                )
-                requireNotNull(
-                    value = transactionData,
-                    lazyMessage = {
-                        "Refund transaction data for ID $transactionId must not be null."
-                    },
+        refundTransactionsListItemData = refundTransactionIds
+            .map { refundTransactionId ->
+                val refundTransactionData = getTransactionData(
+                    transactionId = refundTransactionId,
                 )
                 getTransactionListItemData(
-                    transactionData = transactionData,
+                    transactionData = refundTransactionData,
                 )
             }
             .toImmutableList()
+    }
+
+    private suspend fun getTransactionData(
+        transactionId: Int,
+    ): TransactionData {
+        val transactionData = getTransactionDataByIdUseCase(
+            id = transactionId,
+        )
+        checkNotNull(
+            value = transactionData,
+            lazyMessage = {
+                "Transaction data for ID $transactionId must not be null."
+            },
+        )
+        return transactionData
     }
 
     private fun getTransactionListItemData(
@@ -195,7 +191,7 @@ internal class ViewTransactionScreenViewModel(
         val transaction = transactionData.transaction
         return transactionData
             .toTransactionListItemData(
-                dateTimeKit = dateTimeKit,
+                getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
             )
             .copy(
                 isDeleteButtonEnabled = transaction.refundTransactionIds.isNullOrEmpty(),
@@ -209,7 +205,7 @@ internal class ViewTransactionScreenViewModel(
 
     // region state events
     private fun deleteTransaction(): Job {
-        val id = requireNotNull(
+        val id = checkNotNull(
             value = transactionIdToDelete,
             lazyMessage = {
                 "Transaction ID to delete must not be null."
@@ -222,15 +218,14 @@ internal class ViewTransactionScreenViewModel(
             )
             resetScreenBottomSheetType()
             if (isTransactionDeleted) {
-                // TODO(Abhi): Show success message
                 navigateUp()
             } else {
-                // TODO(Abhi): Show error message
                 completeLoading()
                 updateTransactionIdToDelete(
                     updatedTransactionIdToDelete = null,
                     shouldRefresh = false,
                 )
+                // TODO(Abhi): Show error message
             }
         }
     }

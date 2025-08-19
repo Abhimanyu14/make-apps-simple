@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.l
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.EmojiConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
@@ -48,7 +47,9 @@ public data class TransactionListItemData(
 )
 
 public fun TransactionData.toTransactionListItemData(
-    dateTimeKit: DateTimeKit,
+    getReadableDateAndTime: (
+        timestamp: Long
+    ) -> String,
 ): TransactionListItemData {
     val amountText: String = when (transaction.transactionType) {
         TransactionType.INCOME,
@@ -66,8 +67,8 @@ public fun TransactionData.toTransactionListItemData(
             transaction.amount.toString()
         }
     }
-    val dateAndTimeText: String = dateTimeKit.getReadableDateAndTime(
-        timestamp = transaction.transactionTimestamp,
+    val dateAndTimeText: String = getReadableDateAndTime(
+        transaction.transactionTimestamp,
     )
     val emoji: String = when (transaction.transactionType) {
         TransactionType.TRANSFER -> {
