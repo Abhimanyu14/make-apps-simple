@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model
 
 import android.net.Uri
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
@@ -98,24 +97,12 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region UI state
-    private val isBalanceVisible: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = false,
-    )
-    private val homeListItemViewData: MutableStateFlow<ImmutableList<TransactionListItemData>> =
-        MutableStateFlow(
-            value = persistentListOf(),
-        )
-    private val overviewTabSelectionIndex: MutableStateFlow<Int> =
-        MutableStateFlow(
-            value = DEFAULT_OVERVIEW_TAB_SELECTION,
-        )
-    private val selectedTimestamp: MutableStateFlow<Long> = MutableStateFlow(
-        value = dateTimeKit.getCurrentTimeMillis(),
-    )
-    private val overviewCardData: MutableStateFlow<OverviewCardViewModelData?> =
-        MutableStateFlow(
-            value = null,
-        )
+    private var isBalanceVisible: Boolean = false
+    private var homeListItemViewData: ImmutableList<TransactionListItemData> =
+        persistentListOf()
+    private var overviewTabSelectionIndex: Int = DEFAULT_OVERVIEW_TAB_SELECTION
+    private var selectedTimestamp: Long = dateTimeKit.getCurrentTimeMillis()
+    private var overviewCardData: OverviewCardViewModelData? = null
     // endregion
 
     // region uiStateAndStateEvents
@@ -141,36 +128,36 @@ internal class HomeScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         val totalIncomeAmount = Amount(
-            value = overviewCardData.value?.income?.toLong().orZero(),
+            value = overviewCardData?.income?.toLong().orZero(),
         )
         val totalExpenseAmount = Amount(
-            value = overviewCardData.value?.expense?.toLong().orZero(),
+            value = overviewCardData?.expense?.toLong().orZero(),
         )
-
         coroutineScope.launch {
+            updateOverviewCardData()
             _uiState.update {
                 HomeScreenUIState(
                     isBackupCardVisible = isBackupCardVisible.first(),
-                    isBalanceVisible = isBalanceVisible.value,
+                    isBalanceVisible = isBalanceVisible,
                     isLoading = isLoading,
-                    isRecentTransactionsTrailingTextVisible = homeListItemViewData.value
+                    isRecentTransactionsTrailingTextVisible = homeListItemViewData
                         .isNotEmpty(),
-                    overviewTabSelectionIndex = overviewTabSelectionIndex.value.orZero(),
-                    transactionListItemDataList = homeListItemViewData.value,
+                    overviewTabSelectionIndex = overviewTabSelectionIndex.orZero(),
+                    transactionListItemDataList = homeListItemViewData,
                     accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.first()
                         .orZero(),
                     accountsTotalMinimumBalanceAmountValue = accountsTotalMinimumBalanceAmountValue.first()
                         .orZero(),
-                    overviewCardData = overviewCardData.value.orDefault(),
+                    overviewCardData = overviewCardData.orDefault(),
                     pieChartData = PieChartData(
                         items = persistentListOf(
                             PieChartItemData(
-                                value = overviewCardData.value?.income.orZero(),
+                                value = overviewCardData?.income.orZero(),
                                 text = "Income : $totalIncomeAmount", // TODO(Abhi): Move to string resources
                                 color = MyColor.TERTIARY,
                             ),
                             PieChartItemData(
-                                value = overviewCardData.value?.expense.orZero(),
+                                value = overviewCardData?.expense.orZero(),
                                 text = "Expense : ${totalExpenseAmount.toNonSignedString()}", // TODO(Abhi): Move to string resources
                                 color = MyColor.ERROR,
                             ),
@@ -185,38 +172,38 @@ internal class HomeScreenViewModel(
     // region observeData
     override fun observeData() {
         observeForHomeListItemViewData()
-        observeForOverviewCardData()
     }
     // endregion
 
     // region state events
     private fun handleOverviewCardAction(
         overviewCardAction: OverviewCardAction,
+        shouldRefresh: Boolean = true,
     ): Job {
         val overviewTabOption =
-            OverviewTabOption.entries[overviewTabSelectionIndex.value]
+            OverviewTabOption.entries[overviewTabSelectionIndex]
         when (overviewCardAction) {
             OverviewCardAction.NEXT -> {
                 when (overviewTabOption) {
                     OverviewTabOption.DAY -> {
-                        selectedTimestamp.value =
-                            Instant.ofEpochMilli(selectedTimestamp.value)
+                        selectedTimestamp =
+                            Instant.ofEpochMilli(selectedTimestamp)
                                 .toZonedDateTime()
                                 .plusDays(1)
                                 .toEpochMilli()
                     }
 
                     OverviewTabOption.MONTH -> {
-                        selectedTimestamp.value =
-                            Instant.ofEpochMilli(selectedTimestamp.value)
+                        selectedTimestamp =
+                            Instant.ofEpochMilli(selectedTimestamp)
                                 .toZonedDateTime()
                                 .plusMonths(1)
                                 .toEpochMilli()
                     }
 
                     OverviewTabOption.YEAR -> {
-                        selectedTimestamp.value =
-                            Instant.ofEpochMilli(selectedTimestamp.value)
+                        selectedTimestamp =
+                            Instant.ofEpochMilli(selectedTimestamp)
                                 .toZonedDateTime()
                                 .plusYears(1)
                                 .toEpochMilli()
@@ -227,24 +214,24 @@ internal class HomeScreenViewModel(
             OverviewCardAction.PREV -> {
                 when (overviewTabOption) {
                     OverviewTabOption.DAY -> {
-                        selectedTimestamp.value =
-                            Instant.ofEpochMilli(selectedTimestamp.value)
+                        selectedTimestamp =
+                            Instant.ofEpochMilli(selectedTimestamp)
                                 .toZonedDateTime()
                                 .minusDays(1)
                                 .toEpochMilli()
                     }
 
                     OverviewTabOption.MONTH -> {
-                        selectedTimestamp.value =
-                            Instant.ofEpochMilli(selectedTimestamp.value)
+                        selectedTimestamp =
+                            Instant.ofEpochMilli(selectedTimestamp)
                                 .toZonedDateTime()
                                 .minusMonths(1)
                                 .toEpochMilli()
                     }
 
                     OverviewTabOption.YEAR -> {
-                        selectedTimestamp.value =
-                            Instant.ofEpochMilli(selectedTimestamp.value)
+                        selectedTimestamp =
+                            Instant.ofEpochMilli(selectedTimestamp)
                                 .toZonedDateTime()
                                 .minusYears(1)
                                 .toEpochMilli()
@@ -253,27 +240,27 @@ internal class HomeScreenViewModel(
             }
         }
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateIsBalanceVisible(
         updatedIsBalanceVisible: Boolean,
+        shouldRefresh: Boolean = true,
     ): Job {
-        isBalanceVisible.update {
-            updatedIsBalanceVisible
-        }
+        isBalanceVisible = updatedIsBalanceVisible
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateOverviewTabSelectionIndex(
         updatedOverviewTabSelectionIndex: Int,
+        shouldRefresh: Boolean = true,
     ): Job {
-        overviewTabSelectionIndex.value = updatedOverviewTabSelectionIndex
+        overviewTabSelectionIndex = updatedOverviewTabSelectionIndex
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
     }
     // endregion
@@ -299,50 +286,40 @@ internal class HomeScreenViewModel(
         coroutineScope.launch {
             getRecentTransactionDataFlowUseCase().collectLatest { transactionDataList ->
                 startLoading()
-                homeListItemViewData.update {
-                    transactionDataList.map { transactionData: TransactionData ->
+                homeListItemViewData = transactionDataList
+                    .map { transactionData: TransactionData ->
                         transactionData.toTransactionListItemData(
                             dateTimeKit = dateTimeKit,
                         )
                     }
-                }
                 completeLoading()
             }
         }
     }
     // endregion
 
-    // region observeForOverviewCardData
-    private fun observeForOverviewCardData() {
-        coroutineScope.launch {
-            combineAndCollectLatest(
-                overviewTabSelectionIndex,
-                selectedTimestamp,
-            ) { (overviewTabSelectionIndex, timestamp) ->
-                val overviewTabOption =
-                    OverviewTabOption.entries[overviewTabSelectionIndex]
-                val transactionsInSelectedTimeRange =
-                    getTransactionsInSelectedTimeRange(
-                        overviewTabOption = overviewTabOption,
-                        timestamp = timestamp,
-                    )
+    // region updateOverviewCardData
+    private suspend fun updateOverviewCardData() {
+        val overviewTabOption =
+            OverviewTabOption.entries[overviewTabSelectionIndex]
+        val transactionsInSelectedTimeRange =
+            getTransactionsInSelectedTimeRange(
+                overviewTabOption = overviewTabOption,
+                timestamp = selectedTimestamp,
+            )
 
-                overviewCardData.update {
-                    OverviewCardViewModelData(
-                        income = getIncomeAmount(
-                            transactionsInSelectedTimeRange = transactionsInSelectedTimeRange,
-                        ),
-                        expense = getExpenseAmount(
-                            transactionsInSelectedTimeRange = transactionsInSelectedTimeRange,
-                        ),
-                        title = getTitle(
-                            overviewTabOption = overviewTabOption,
-                            timestamp = timestamp
-                        ),
-                    )
-                }
-            }
-        }
+        overviewCardData = OverviewCardViewModelData(
+            income = getIncomeAmount(
+                transactionsInSelectedTimeRange = transactionsInSelectedTimeRange,
+            ),
+            expense = getExpenseAmount(
+                transactionsInSelectedTimeRange = transactionsInSelectedTimeRange,
+            ),
+            title = getTitle(
+                overviewTabOption = overviewTabOption,
+                timestamp = selectedTimestamp
+            ),
+        )
     }
 
     private suspend fun getTransactionsInSelectedTimeRange(
