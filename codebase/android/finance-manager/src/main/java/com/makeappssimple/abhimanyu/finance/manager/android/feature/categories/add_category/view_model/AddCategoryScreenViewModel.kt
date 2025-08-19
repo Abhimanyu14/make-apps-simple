@@ -69,7 +69,7 @@ internal class AddCategoryScreenViewModel(
     // endregion
 
     // region initial data
-    private val transactionType: String = screenArgs.transactionType
+    private val transactionType: String = getTransactionType()
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
@@ -250,6 +250,12 @@ internal class AddCategoryScreenViewModel(
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
+    }
+    // endregion
+
+    // region screen args
+    private fun getTransactionType(): String {
+        return screenArgs.transactionType
     }
     // endregion
 }

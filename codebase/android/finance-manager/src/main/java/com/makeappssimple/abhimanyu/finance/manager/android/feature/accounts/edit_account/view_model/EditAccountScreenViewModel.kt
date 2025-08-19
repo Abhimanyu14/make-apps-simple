@@ -313,7 +313,9 @@ internal class EditAccountScreenViewModel(
     }
     // endregion
 
+    // region screen args
     private fun getCurrentAccountId(): Int? {
         return screenArgs.currentAccountId
     }
+    // endregion
 }

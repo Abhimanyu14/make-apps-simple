@@ -187,7 +187,7 @@ internal class EditTransactionForScreenViewModel(
     }
     // endregion
 
-    // region common
+    // region screen args
     private fun getCurrentTransactionForId(): Int {
         return screenArgs.currentTransactionForId
     }

@@ -285,7 +285,7 @@ internal class EditCategoryScreenViewModel(
     }
     // endregion
 
-    // region common
+    // region screen args
     private fun getCurrentCategoryId(): Int {
         return screenArgs.currentCategoryId
     }

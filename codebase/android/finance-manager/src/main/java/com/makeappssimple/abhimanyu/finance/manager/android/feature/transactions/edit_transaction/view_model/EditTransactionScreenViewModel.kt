@@ -765,7 +765,7 @@ internal class EditTransactionScreenViewModel(
 
     // region updateValidTransactionTypesForNewTransaction
     private fun updateValidTransactionTypesForNewTransaction() {
-        val originalTransactionId = screenArgs.currentTransactionId
+        val originalTransactionId = getOriginalTransactionId()
         val validTransactionTypes = when {
             originalTransactionId != null -> {
                 listOf(
@@ -1013,7 +1013,7 @@ internal class EditTransactionScreenViewModel(
     }
     // endregion
 
-    // region common
+    // region screen args
     private fun getOriginalTransactionId(): Int? {
         return screenArgs.currentTransactionId
     }
