@@ -257,6 +257,36 @@ internal class ViewTransactionScreenViewModelTest {
 
     // region state events
     @Test
+    fun resetScreenBottomSheetType_shouldSetBottomSheetTypeToNone() =
+        runTestWithTimeout {
+            viewTransactionScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                assertThat(initialState.isLoading).isTrue()
+                assertThat(initialState.screenBottomSheetType).isEqualTo(
+                    ViewTransactionScreenBottomSheetType.None
+                )
+                val postDataFetchCompletion = awaitItem()
+                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                assertThat(postDataFetchCompletion.screenBottomSheetType).isEqualTo(
+                    ViewTransactionScreenBottomSheetType.None
+                )
+                viewTransactionScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
+                    ViewTransactionScreenBottomSheetType.DeleteConfirmation
+                )
+                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
+                    ViewTransactionScreenBottomSheetType.DeleteConfirmation
+                )
+
+                viewTransactionScreenViewModel.uiStateEvents.resetScreenBottomSheetType()
+
+                val result = awaitItem()
+                assertThat(result.screenBottomSheetType).isEqualTo(
+                    ViewTransactionScreenBottomSheetType.None
+                )
+            }
+        }
+
+    @Test
     fun updateScreenBottomSheetType_shouldUpdateScreenBottomSheetType() =
         runTestWithTimeout {
             viewTransactionScreenViewModel.uiState.test {
@@ -277,7 +307,7 @@ internal class ViewTransactionScreenViewModelTest {
 
                 val result = awaitItem()
                 assertThat(result.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.None
+                    ViewTransactionScreenBottomSheetType.DeleteConfirmation
                 )
             }
         }
