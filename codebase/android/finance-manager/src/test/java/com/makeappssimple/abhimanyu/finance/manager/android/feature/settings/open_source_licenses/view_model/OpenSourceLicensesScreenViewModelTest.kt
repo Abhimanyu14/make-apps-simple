@@ -34,7 +34,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.time.Duration.Companion.seconds
 
-class OpenSourceLicensesScreenViewModelTest {
+internal class OpenSourceLicensesScreenViewModelTest {
     // region coroutines setup
     private val testCoroutineDispatcher = StandardTestDispatcher()
     private val testScope = TestScope(
