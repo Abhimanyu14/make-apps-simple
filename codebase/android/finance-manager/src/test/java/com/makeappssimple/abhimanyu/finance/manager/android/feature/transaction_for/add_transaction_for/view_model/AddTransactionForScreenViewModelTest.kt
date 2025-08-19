@@ -99,6 +99,7 @@ internal class AddTransactionForScreenViewModelTest {
         transactionForRepository = transactionForRepository,
     )
     private val logKit: LogKit = FakeLogKitImpl()
+
     private lateinit var addTransactionForScreenViewModel: AddTransactionForScreenViewModel
 
     @Before

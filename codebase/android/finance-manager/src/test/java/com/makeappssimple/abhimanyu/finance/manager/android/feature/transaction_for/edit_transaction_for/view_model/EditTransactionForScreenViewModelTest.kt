@@ -117,6 +117,7 @@ internal class EditTransactionForScreenViewModelTest {
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         )
     private val logKit: LogKit = FakeLogKitImpl()
+
     private lateinit var editTransactionForScreenViewModel: EditTransactionForScreenViewModel
 
     @Before

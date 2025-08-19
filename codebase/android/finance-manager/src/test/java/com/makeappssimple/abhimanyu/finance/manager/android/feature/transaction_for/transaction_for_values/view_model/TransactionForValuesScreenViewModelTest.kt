@@ -123,6 +123,7 @@ internal class TransactionForValuesScreenViewModelTest {
             transactionForRepository = transactionForRepository,
         )
     private val logKit: LogKit = FakeLogKitImpl()
+
     private lateinit var transactionForValuesScreenViewModel: TransactionForValuesScreenViewModel
 
     @Before

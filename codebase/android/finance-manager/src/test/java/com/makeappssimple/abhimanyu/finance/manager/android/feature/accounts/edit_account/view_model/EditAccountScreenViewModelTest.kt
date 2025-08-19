@@ -89,6 +89,7 @@ internal class EditAccountScreenViewModelTest {
         updateAccountsUseCase = updateAccountsUseCase,
     )
     private val logKit: LogKit = FakeLogKitImpl()
+
     private lateinit var viewModel: EditAccountScreenViewModel
 
     @Before

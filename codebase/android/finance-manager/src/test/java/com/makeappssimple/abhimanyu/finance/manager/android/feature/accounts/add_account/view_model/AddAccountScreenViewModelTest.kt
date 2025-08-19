@@ -102,6 +102,7 @@ internal class AddAccountScreenViewModelTest {
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
     )
     private val logKit: LogKit = FakeLogKitImpl()
+
     private lateinit var addAccountScreenViewModel: AddAccountScreenViewModel
 
     @Before
