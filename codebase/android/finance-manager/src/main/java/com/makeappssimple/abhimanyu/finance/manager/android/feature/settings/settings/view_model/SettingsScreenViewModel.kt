@@ -61,16 +61,12 @@ internal class SettingsScreenViewModel(
 ) {
     // region initial data
     private var appVersion: String = ""
-    private val isReminderEnabled: MutableStateFlow<Boolean> = MutableStateFlow(
-        value = false,
-    )
+    private var isReminderEnabled: Boolean = false
     // endregion
 
     // region UI state
-    private val screenSnackbarType: MutableStateFlow<SettingsScreenSnackbarType> =
-        MutableStateFlow(
-            value = SettingsScreenSnackbarType.None,
-        )
+    private var screenSnackbarType: SettingsScreenSnackbarType =
+        SettingsScreenSnackbarType.None
     // endregion
 
     // region uiStateAndStateEvents
@@ -97,12 +93,11 @@ internal class SettingsScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        // TODO(Abhi): Fix isLoading, isReminderEnabled and screenSnackbarType
         _uiState.update {
             SettingsScreenUIState(
                 isLoading = isLoading,
-                isReminderEnabled = isReminderEnabled.value,
-                screenSnackbarType = screenSnackbarType.value,
+                isReminderEnabled = isReminderEnabled,
+                screenSnackbarType = screenSnackbarType,
                 appVersion = appVersion,
             )
         }
@@ -115,11 +110,25 @@ internal class SettingsScreenViewModel(
             getAppVersion()
         }
     }
+
+    private fun getAppVersion() {
+        appVersion = appVersionKit.getAppVersion()?.versionName.orEmpty()
+    }
     // endregion
 
     // region observeData
     override fun observeData() {
         observeForReminder()
+    }
+
+    private fun observeForReminder() {
+        coroutineScope.launch {
+            financeManagerPreferencesRepository.getReminderFlow()
+                .collectLatest { updatedReminder ->
+                    isReminderEnabled = updatedReminder?.isEnabled.orFalse()
+                    refresh()
+                }
+        }
     }
     // endregion
 
@@ -135,6 +144,7 @@ internal class SettingsScreenViewModel(
             if (isBackupSuccessful) {
                 navigateUp()
             } else {
+                completeLoading()
                 // TODO(Abhi): use the result to show snackbar to the user
             }
         }
@@ -147,10 +157,10 @@ internal class SettingsScreenViewModel(
     ): Job {
         return coroutineScope.launch {
             startLoading()
-            if (restoreDataUseCase(
-                    uri = uri,
-                )
-            ) {
+            val isDataRestored = restoreDataUseCase(
+                uri = uri,
+            )
+            if (isDataRestored) {
                 navigateUp()
             } else {
                 completeLoading()
@@ -199,34 +209,12 @@ internal class SettingsScreenViewModel(
 
     private fun updateScreenSnackbarType(
         updatedSettingsScreenSnackbarType: SettingsScreenSnackbarType,
+        shouldRefresh: Boolean = true,
     ): Job {
-        screenSnackbarType.update {
-            updatedSettingsScreenSnackbarType
-        }
+        screenSnackbarType = updatedSettingsScreenSnackbarType
         return refreshIfRequired(
-            shouldRefresh = true,
+            shouldRefresh = shouldRefresh,
         )
-    }
-    // endregion
-
-    // region getAppVersion
-    private fun getAppVersion() {
-        appVersion = appVersionKit.getAppVersion()?.versionName.orEmpty()
-    }
-    // endregion
-
-    // region observeForReminder
-    private fun observeForReminder() {
-        coroutineScope.launch {
-            financeManagerPreferencesRepository.getReminderFlow()
-                .collectLatest { updatedReminder ->
-                    startLoading()
-                    isReminderEnabled.update {
-                        updatedReminder?.isEnabled.orFalse()
-                    }
-                    completeLoading()
-                }
-        }
     }
     // endregion
 }
