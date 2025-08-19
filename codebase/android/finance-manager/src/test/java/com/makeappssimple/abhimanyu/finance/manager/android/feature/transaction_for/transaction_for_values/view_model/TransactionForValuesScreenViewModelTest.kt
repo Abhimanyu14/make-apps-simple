@@ -92,7 +92,12 @@ internal class TransactionForValuesScreenViewModelTest {
         FakeDatabaseTransactionProviderImpl()
     private val fakeTransactionDao = FakeTransactionDaoImpl()
     private val fakeTransactionDataDao: TransactionDataDao =
-        FakeTransactionDataDaoImpl()
+        FakeTransactionDataDaoImpl(
+            accountDao = fakeAccountDao,
+            categoryDao = fakeCategoryDao,
+            transactionDao = fakeTransactionDao,
+            transactionForDao = fakeTransactionForDao,
+        )
     private val fakeCommonDataSource = CommonDataSourceImpl(
         accountDao = fakeAccountDao,
         categoryDao = fakeCategoryDao,

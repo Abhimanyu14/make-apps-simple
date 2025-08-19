@@ -111,10 +111,15 @@ internal class ViewTransactionScreenViewModelTest {
     private val fakeDatabaseTransactionProvider: DatabaseTransactionProvider =
         FakeDatabaseTransactionProviderImpl()
     private val fakeTransactionDao: TransactionDao = FakeTransactionDaoImpl()
-    private val fakeTransactionDataDao: TransactionDataDao =
-        FakeTransactionDataDaoImpl()
     private val fakeTransactionForDao: TransactionForDao =
         FakeTransactionForDaoImpl()
+    private val fakeTransactionDataDao: TransactionDataDao =
+        FakeTransactionDataDaoImpl(
+            accountDao = fakeAccountDao,
+            categoryDao = fakeCategoryDao,
+            transactionDao = fakeTransactionDao,
+            transactionForDao = fakeTransactionForDao,
+        )
     private val commonDataSource: CommonDataSource = CommonDataSourceImpl(
         accountDao = fakeAccountDao,
         categoryDao = fakeCategoryDao,

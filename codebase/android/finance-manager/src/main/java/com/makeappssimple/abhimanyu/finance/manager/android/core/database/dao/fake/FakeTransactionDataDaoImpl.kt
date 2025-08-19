@@ -16,52 +16,46 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake
 
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionDataEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 
 /**
- * In-memory fake implementation of [TransactionDataDao] for testing purposes.
+ * Fake implementation of [TransactionDataDao] for testing purposes,
+ * using other fake DAO implementations.
  */
-public class FakeTransactionDataDaoImpl : TransactionDataDao {
-    private val transactionDataListInternal =
-        mutableListOf<TransactionDataEntity>()
-    private val transactionDataListFlow: MutableStateFlow<List<TransactionDataEntity>> =
-        MutableStateFlow(
-            value = emptyList(),
-        )
-
-    public fun setData(
-        data: List<TransactionDataEntity>,
-    ) {
-        transactionDataListInternal.clear()
-        transactionDataListInternal.addAll(data)
-        transactionDataListFlow.value = transactionDataListInternal
-            .sortedByDescending {
-                it.transaction.transactionTimestamp
-            }
-            .toList()
-    }
-
+public class FakeTransactionDataDaoImpl(
+    private val accountDao: AccountDao,
+    private val categoryDao: CategoryDao,
+    private val transactionDao: TransactionDao,
+    private val transactionForDao: TransactionForDao,
+) : TransactionDataDao {
     override suspend fun getAllTransactionData(): List<TransactionDataEntity> {
-        return transactionDataListInternal
-            .sortedByDescending {
-                it.transaction.transactionTimestamp
-            }
-            .toList()
+        val transactions = transactionDao.getAllTransactions()
+        return getSortedTransactionDataEntity(
+            transactions = transactions,
+        )
     }
 
     override fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>> {
-        return transactionDataListFlow
+        return transactionDao.getAllTransactionsFlow().map { transactions ->
+            getSortedTransactionDataEntity(
+                transactions = transactions,
+            )
+        }
     }
 
     override fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<List<TransactionDataEntity>> {
-        return transactionDataListFlow.map {
-            it.take(
+        return getAllTransactionDataFlow().map { transactionDataList ->
+            transactionDataList.take(
                 n = numberOfTransactions,
             )
         }
@@ -70,29 +64,82 @@ public class FakeTransactionDataDaoImpl : TransactionDataDao {
     override suspend fun getSearchedTransactionData(
         searchText: String,
     ): List<TransactionDataEntity> {
-        val lowerSearchText = searchText.lowercase()
-        return transactionDataListInternal
-            .filter {
-                it.transaction.title
-                    .lowercase()
-                    .contains(
-                        other = lowerSearchText,
-                    ) || it.transaction.amount.value
-                    .toString()
-                    .lowercase()
-                    .contains(
-                        other = lowerSearchText,
-                    )
-            }.sortedByDescending {
-                it.transaction.transactionTimestamp
-            }.toList()
+        val allTransactionData = getAllTransactionData()
+        val lowercaseSearchText = searchText.lowercase()
+        return allTransactionData.filter { transactionData ->
+            val titleMatch = transactionData.transaction.title
+                .lowercase()
+                .contains(
+                    other = lowercaseSearchText,
+                )
+            val amountMatch = transactionData.transaction.amount.value
+                .toString()
+                .lowercase()
+                .contains(
+                    other = lowercaseSearchText,
+                )
+            titleMatch || amountMatch
+        }
     }
 
     override suspend fun getTransactionDataById(
         id: Int,
     ): TransactionDataEntity? {
-        return transactionDataListInternal.find {
-            it.transaction.id == id
+        val transaction = transactionDao.getTransactionById(
+            id = id,
+        )
+        return transaction?.let {
+            mapToTransactionDataEntity(it)
         }
+    }
+
+    private suspend fun getSortedTransactionDataEntity(
+        transactions: List<TransactionEntity>,
+    ): List<TransactionDataEntity> {
+        return transactions
+            .map { transaction ->
+                mapToTransactionDataEntity(
+                    transaction = transaction,
+                )
+            }
+            .sortedByDescending {
+                it.transaction.transactionTimestamp
+            }
+    }
+
+    private suspend fun mapToTransactionDataEntity(
+        transaction: TransactionEntity,
+    ): TransactionDataEntity {
+        val category = transaction.categoryId?.let {
+            categoryDao.getCategoryById(
+                id = it,
+            )
+        }
+        val accountFrom = transaction.accountFromId?.let {
+            accountDao.getAccountById(
+                id = it,
+            )
+        }
+        val accountTo = transaction.accountToId?.let {
+            accountDao.getAccountById(
+                id = it,
+            )
+        }
+        val transactionFor = transactionForDao.getTransactionForById(
+            id = transaction.transactionForId,
+        )
+        checkNotNull(
+            value = transactionFor,
+            lazyMessage = {
+                "TransactionForEntity with id ${transaction.transactionForId} not found for transaction ${transaction.id}"
+            },
+        )
+        return TransactionDataEntity(
+            transaction = transaction,
+            category = category,
+            accountFrom = accountFrom,
+            accountTo = accountTo,
+            transactionFor = transactionFor,
+        )
     }
 }
