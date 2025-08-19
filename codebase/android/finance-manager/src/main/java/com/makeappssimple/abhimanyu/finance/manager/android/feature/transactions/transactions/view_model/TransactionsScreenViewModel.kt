@@ -18,10 +18,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
@@ -39,7 +37,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.F
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orDefault
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
@@ -84,57 +81,32 @@ internal class TransactionsScreenViewModel(
 ) {
     // region initial data
     private var isInitialDataFetchCompleted = false
-    // TODO(Abhi): Firebase tracking
-    // private var performanceScreenInitTrace: Trace? = null
-
     private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
         mapOf()
     private var accounts: MutableSet<Account> = mutableSetOf()
     private var oldestTransactionLocalDate: LocalDate? = null
     private var allTransactionForValues: ImmutableList<TransactionFor> =
         persistentListOf()
-
     private val transactionTypes: ImmutableList<TransactionType> =
         TransactionType.entries.toImmutableList()
     private val sortOptions: ImmutableList<SortOption> =
         SortOption.entries.toImmutableList()
     private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
-    // endregion
-
-    // region initial data
-    private val allTransactionData: MutableStateFlow<ImmutableList<TransactionData>> =
-        MutableStateFlow(
-            value = persistentListOf(),
-        )
-    private val selectedTransactionIndices: MutableStateFlow<ImmutableList<Int>> =
-        MutableStateFlow(
-            value = persistentListOf(),
-        )
-    private val transactionDetailsListItemViewData: MutableStateFlow<Map<String, ImmutableList<TransactionListItemData>>> =
-        MutableStateFlow(
-            value = mutableMapOf(),
-        )
+    private var allTransactionData: ImmutableList<TransactionData> =
+        persistentListOf()
+    private var selectedTransactionIndices: ImmutableList<Int> =
+        persistentListOf()
+    private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
+        mutableMapOf()
     // endregion
 
     // region UI state
-    private val isInSelectionMode: MutableStateFlow<Boolean> =
-        MutableStateFlow(
-            value = false,
-        )
-    private val searchText: MutableStateFlow<String> = MutableStateFlow(
-        value = "",
-    )
-    private val selectedFilter: MutableStateFlow<Filter> = MutableStateFlow(
-        value = Filter(),
-    )
-    private val selectedSortOption: MutableStateFlow<SortOption> =
-        MutableStateFlow(
-            value = SortOption.LATEST_FIRST,
-        )
-    private val screenBottomSheetType: MutableStateFlow<TransactionsScreenBottomSheetType> =
-        MutableStateFlow(
-            value = TransactionsScreenBottomSheetType.None,
-        )
+    private var isInSelectionMode = false
+    private var searchText = ""
+    private var selectedFilter = Filter()
+    private var selectedSortOption: SortOption = SortOption.LATEST_FIRST
+    private var screenBottomSheetType: TransactionsScreenBottomSheetType =
+        TransactionsScreenBottomSheetType.None
     // endregion
 
     // region uiStateAndStateEvents
@@ -165,316 +137,145 @@ internal class TransactionsScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        if (!isInitialDataFetchCompleted && transactionDetailsListItemViewData.value.isNotEmpty()) {
+        if (!isInitialDataFetchCompleted && transactionDetailsListItemViewData.isNotEmpty()) {
             isInitialDataFetchCompleted = true
         }
-
-        _uiState.update {
-            TransactionsScreenUIState(
-                isBackHandlerEnabled = searchText.value.isNotEmpty() ||
-                        selectedFilter.value.orEmpty().areFiltersSelected() ||
-                        isInSelectionMode.value,
-                isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
-                isInSelectionMode = isInSelectionMode.value,
-                isLoading = isLoading,
-                isSearchSortAndFilterVisible = isInSelectionMode.value.not() && (
-                        transactionDetailsListItemViewData.value.isNotEmpty() ||
-                                searchText.value.isNotEmpty() ||
-                                selectedFilter.value.orEmpty()
-                                    .areFiltersSelected() ||
-                                isLoading
-                        ),
-                selectedFilter = selectedFilter.value.orEmpty(),
-                selectedTransactions = selectedTransactionIndices.value.toImmutableList(),
-                sortOptions = sortOptions.orEmpty(),
-                transactionForValues = allTransactionForValues.orEmpty(),
-                accounts = accounts.toImmutableList(),
-                expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
-                    .toImmutableList(),
-                incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
-                    .toImmutableList(),
-                investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
-                    .toImmutableList(),
-                transactionTypes = transactionTypes.orEmpty(),
-                currentLocalDate = currentLocalDate.orMin(),
-                oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
-                transactionDetailsListItemViewData = transactionDetailsListItemViewData.value,
-                selectedSortOption = selectedSortOption.value.orDefault(),
-                searchText = searchText.value,
-                screenBottomSheetType = screenBottomSheetType.value,
-            )
-        }
-    }
-    // endregion
-
-    // region fetchData
-    override fun fetchData(): Job {
-        return coroutineScope.launch {
-            withLoadingSuspend {
-                allTransactionForValues = getAllTransactionForValuesUseCase()
-            }
-        }
-    }
-    // endregion
-
-    // region observeData
-    override fun observeData() {
-        observeForTransactionDetailsListItemViewData()
-        observeForAllTransactionData()
-    }
-    // endregion
-
-    // region state events
-    private fun addToSelectedTransactions(
-        transactionId: Int,
-    ): Job {
-        selectedTransactionIndices.update {
-            it.toMutableList().apply {
-                add(transactionId)
-            }.toImmutableList()
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun clearSelectedTransactions(): Job {
-        selectedTransactionIndices.update {
-            persistentListOf()
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun removeFromSelectedTransactions(
-        transactionId: Int,
-    ): Job {
-        selectedTransactionIndices.update {
-            it.toMutableList().apply {
-                remove(transactionId)
-            }.toImmutableList()
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun selectAllTransactions(): Job {
-        selectedTransactionIndices.update {
-            transactionDetailsListItemViewData.value.values.flatMap {
-                it.map { transactionListItemData ->
-                    transactionListItemData.transactionId
-                }
-            }.toImmutableList()
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun resetScreenBottomSheetType(): Job {
-        return updateScreenBottomSheetType(
-            updatedTransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
-        )
-    }
-
-    private fun updateScreenBottomSheetType(
-        updatedTransactionsScreenBottomSheetType: TransactionsScreenBottomSheetType,
-    ): Job {
-        screenBottomSheetType.update {
-            updatedTransactionsScreenBottomSheetType
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateIsInSelectionMode(
-        updatedIsInSelectionMode: Boolean,
-    ): Job {
-        isInSelectionMode.update {
-            updatedIsInSelectionMode
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateSearchText(
-        updatedSearchText: String,
-    ): Job {
-        searchText.update {
-            updatedSearchText
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateSelectedFilter(
-        updatedSelectedFilter: Filter,
-    ): Job {
-        selectedFilter.update {
-            updatedSelectedFilter
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateSelectedSortOption(
-        updatedSelectedSortOption: SortOption,
-    ): Job {
-        selectedSortOption.update {
-            updatedSelectedSortOption
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-    }
-
-    private fun updateTransactionForValuesInTransactions(
-        transactionForId: Int,
-    ): Job {
-        val selectedTransactions: ImmutableList<Int> =
-            selectedTransactionIndices.value
-        return coroutineScope.launch {
-            val updatedTransactions =
-                allTransactionData.value.map { transactionData ->
-                    transactionData.transaction
-                }.filter {
-                    it.transactionType == TransactionType.EXPENSE &&
-                            selectedTransactions.contains(it.id)
-                }.map {
-                    it
-                        .copy(
-                            transactionForId = transactionForId,
-                        )
-                }
-            updateTransactionsUseCase(
-                transactions = updatedTransactions.toTypedArray(),
-            )
-        }
-    }
-    // endregion
-
-    // region observeForTransactionDetailsListItemViewData
-    private fun observeForTransactionDetailsListItemViewData() {
         coroutineScope.launch {
-            combineAndCollectLatest(
-                searchText,
-                selectedFilter,
-                selectedSortOption,
-                allTransactionData,
-            ) {
-                    (
-                        searchText,
-                        selectedFilter,
-                        selectedSortOption,
-                        allTransactionData,
-                    ),
-                ->
-                val updatedAllTransactionData = withContext(
-                    context = dispatcherProvider.default,
-                ) {
-                    allTransactionData
-                        .filter { transactionData ->
-                            isAvailableAfterSearch(
-                                searchTextValue = searchText,
-                                transactionData = transactionData,
-                            ) && isAvailableAfterDateFilter(
-                                fromDate = selectedFilter.fromDate,
-                                toDate = selectedFilter.toDate,
-                                transactionData = transactionData,
-                            ) && isAvailableAfterTransactionForFilter(
-                                selectedTransactionForValuesIndices = selectedFilter.selectedTransactionForValuesIndices,
-                                transactionData = transactionData,
-                                transactionForValuesValue = allTransactionForValues,
-                            ) && isAvailableAfterTransactionTypeFilter(
-                                transactionTypes = transactionTypes,
-                                selectedTransactionTypesIndicesValue = selectedFilter.selectedTransactionTypeIndices,
-                                transactionData = transactionData,
-                            ) && isAvailableAfterAccountFilter(
-                                selectedAccountsIndicesValue = selectedFilter.selectedAccountsIndices,
-                                accountsValue = accounts.toImmutableList(),
-                                transactionData = transactionData,
-                            ) && isAvailableAfterCategoryFilter(
-                                selectedExpenseCategoryIndicesValue = selectedFilter.selectedExpenseCategoryIndices,
-                                selectedIncomeCategoryIndicesValue = selectedFilter.selectedIncomeCategoryIndices,
-                                selectedInvestmentCategoryIndicesValue = selectedFilter.selectedInvestmentCategoryIndices,
-                                expenseCategoriesValue = categoriesMap[TransactionType.EXPENSE].orEmpty()
-                                    .toImmutableList(),
-                                transactionData = transactionData,
-                                incomeCategoriesValue = categoriesMap[TransactionType.INCOME].orEmpty()
-                                    .toImmutableList(),
-                                investmentCategoriesValue = categoriesMap[TransactionType.INVESTMENT].orEmpty()
-                                    .toImmutableList(),
-                            )
-                        }
-                        .sortedWith(compareBy {
-                            when (selectedSortOption) {
-                                SortOption.AMOUNT_ASC -> {
-                                    it.transaction.amount.value
-                                }
-
-                                SortOption.AMOUNT_DESC -> {
-                                    -1 * it.transaction.amount.value
-                                }
-
-                                SortOption.LATEST_FIRST -> {
-                                    -1 * it.transaction.transactionTimestamp
-                                }
-
-                                SortOption.OLDEST_FIRST -> {
-                                    it.transaction.transactionTimestamp
-                                }
-                            }
-                        })
-                        .groupBy {
-                            if (selectedSortOption == SortOption.LATEST_FIRST ||
-                                selectedSortOption == SortOption.OLDEST_FIRST
-                            ) {
-                                val dateTextBuilder = StringBuilder()
-                                dateTextBuilder.append(
-                                    dateTimeKit.getFormattedDate(
-                                        timestamp = it.transaction.transactionTimestamp,
-                                    )
-                                )
-                                dateTextBuilder.append(" (")
-                                dateTextBuilder.append(
-                                    dateTimeKit.getFormattedDayOfWeek(
-                                        timestamp = it.transaction.transactionTimestamp,
-                                    )
-                                )
-                                dateTextBuilder.append(")")
-                                dateTextBuilder.toString()
-                            } else {
-                                ""
-                            }
-                        }
-                        .mapValues {
-                            it.value.map { listItem ->
-                                listItem.toTransactionListItemData(
-                                    dateTimeKit = dateTimeKit,
-                                )
-                                    .copy(
-                                        isDeleteButtonEnabled = false,
-                                        isDeleteButtonVisible = true,
-                                        isEditButtonVisible = false,
-                                        isExpanded = false,
-                                        isRefundButtonVisible = false,
-                                    )
-                            }
-                        }
-                }
-                transactionDetailsListItemViewData.update {
-                    updatedAllTransactionData
-                }
-                if (allTransactionData.isNotEmpty()) {
-                    completeLoading()
-                }
+            updateTransactionDetailsListItemViewData()
+            _uiState.update {
+                TransactionsScreenUIState(
+                    isBackHandlerEnabled = searchText.isNotEmpty() ||
+                            selectedFilter.areFiltersSelected() ||
+                            isInSelectionMode,
+                    isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
+                    isInSelectionMode = isInSelectionMode,
+                    isLoading = isLoading,
+                    isSearchSortAndFilterVisible = isInSelectionMode.not() && (
+                            transactionDetailsListItemViewData.isNotEmpty() ||
+                                    searchText.isNotEmpty() ||
+                                    selectedFilter.areFiltersSelected() ||
+                                    isLoading
+                            ),
+                    selectedFilter = selectedFilter,
+                    selectedTransactions = selectedTransactionIndices.toImmutableList(),
+                    sortOptions = sortOptions,
+                    transactionForValues = allTransactionForValues,
+                    accounts = accounts.toImmutableList(),
+                    expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
+                        .toImmutableList(),
+                    incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
+                        .toImmutableList(),
+                    investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
+                        .toImmutableList(),
+                    transactionTypes = transactionTypes,
+                    currentLocalDate = currentLocalDate.orMin(),
+                    oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
+                    transactionDetailsListItemViewData = transactionDetailsListItemViewData,
+                    selectedSortOption = selectedSortOption.orDefault(),
+                    searchText = searchText,
+                    screenBottomSheetType = screenBottomSheetType,
+                )
             }
+        }
+    }
+
+    private suspend fun updateTransactionDetailsListItemViewData() {
+        val updatedAllTransactionData = withContext(
+            context = dispatcherProvider.default,
+        ) {
+            allTransactionData
+                .filter { transactionData ->
+                    isAvailableAfterSearch(
+                        searchTextValue = searchText,
+                        transactionData = transactionData,
+                    ) && isAvailableAfterDateFilter(
+                        fromDate = selectedFilter.fromDate,
+                        toDate = selectedFilter.toDate,
+                        transactionData = transactionData,
+                    ) && isAvailableAfterTransactionForFilter(
+                        selectedTransactionForValuesIndices = selectedFilter.selectedTransactionForValuesIndices,
+                        transactionData = transactionData,
+                        transactionForValuesValue = allTransactionForValues,
+                    ) && isAvailableAfterTransactionTypeFilter(
+                        transactionTypes = transactionTypes,
+                        selectedTransactionTypesIndicesValue = selectedFilter.selectedTransactionTypeIndices,
+                        transactionData = transactionData,
+                    ) && isAvailableAfterAccountFilter(
+                        selectedAccountsIndicesValue = selectedFilter.selectedAccountsIndices,
+                        accountsValue = accounts.toImmutableList(),
+                        transactionData = transactionData,
+                    ) && isAvailableAfterCategoryFilter(
+                        selectedExpenseCategoryIndicesValue = selectedFilter.selectedExpenseCategoryIndices,
+                        selectedIncomeCategoryIndicesValue = selectedFilter.selectedIncomeCategoryIndices,
+                        selectedInvestmentCategoryIndicesValue = selectedFilter.selectedInvestmentCategoryIndices,
+                        expenseCategoriesValue = categoriesMap[TransactionType.EXPENSE].orEmpty()
+                            .toImmutableList(),
+                        transactionData = transactionData,
+                        incomeCategoriesValue = categoriesMap[TransactionType.INCOME].orEmpty()
+                            .toImmutableList(),
+                        investmentCategoriesValue = categoriesMap[TransactionType.INVESTMENT].orEmpty()
+                            .toImmutableList(),
+                    )
+                }
+                .sortedWith(compareBy {
+                    when (selectedSortOption) {
+                        SortOption.AMOUNT_ASC -> {
+                            it.transaction.amount.value
+                        }
+
+                        SortOption.AMOUNT_DESC -> {
+                            -1 * it.transaction.amount.value
+                        }
+
+                        SortOption.LATEST_FIRST -> {
+                            -1 * it.transaction.transactionTimestamp
+                        }
+
+                        SortOption.OLDEST_FIRST -> {
+                            it.transaction.transactionTimestamp
+                        }
+                    }
+                })
+                .groupBy {
+                    if (selectedSortOption == SortOption.LATEST_FIRST ||
+                        selectedSortOption == SortOption.OLDEST_FIRST
+                    ) {
+                        val dateTextBuilder = StringBuilder()
+                        dateTextBuilder.append(
+                            dateTimeKit.getFormattedDate(
+                                timestamp = it.transaction.transactionTimestamp,
+                            )
+                        )
+                        dateTextBuilder.append(" (")
+                        dateTextBuilder.append(
+                            dateTimeKit.getFormattedDayOfWeek(
+                                timestamp = it.transaction.transactionTimestamp,
+                            )
+                        )
+                        dateTextBuilder.append(")")
+                        dateTextBuilder.toString()
+                    } else {
+                        ""
+                    }
+                }
+                .mapValues {
+                    it.value.map { listItem ->
+                        listItem.toTransactionListItemData(
+                            dateTimeKit = dateTimeKit,
+                        )
+                            .copy(
+                                isDeleteButtonEnabled = false,
+                                isDeleteButtonVisible = true,
+                                isEditButtonVisible = false,
+                                isExpanded = false,
+                                isRefundButtonVisible = false,
+                            )
+                    }
+                }
+        }
+        transactionDetailsListItemViewData = updatedAllTransactionData
+        if (allTransactionData.isNotEmpty()) {
+            completeLoading()
         }
     }
 
@@ -591,7 +392,19 @@ internal class TransactionsScreenViewModel(
     }
     // endregion
 
-    // region observeForAllTransactionData
+    // region fetchData
+    override fun fetchData(): Job {
+        return coroutineScope.launch {
+            allTransactionForValues = getAllTransactionForValuesUseCase()
+        }
+    }
+    // endregion
+
+    // region observeData
+    override fun observeData() {
+        observeForAllTransactionData()
+    }
+
     private fun observeForAllTransactionData() {
         coroutineScope.launch {
             getAllTransactionDataFlowUseCase()
@@ -603,13 +416,16 @@ internal class TransactionsScreenViewModel(
                     var oldestTransactionLocalDateValue = Long.MAX_VALUE
                     val categoriesInTransactionsMap =
                         mutableMapOf<TransactionType, MutableSet<Category>>()
-
                     updatedAllTransactionData.forEach { transactionData ->
                         transactionData.accountFrom?.let {
-                            accountsInTransactions.add(it)
+                            accountsInTransactions.add(
+                                element = it,
+                            )
                         }
                         transactionData.accountTo?.let {
-                            accountsInTransactions.add(it)
+                            accountsInTransactions.add(
+                                element = it,
+                            )
                         }
                         oldestTransactionLocalDateValue = min(
                             oldestTransactionLocalDateValue,
@@ -617,20 +433,159 @@ internal class TransactionsScreenViewModel(
                         )
                         transactionData.category?.let {
                             categoriesInTransactionsMap[it.transactionType]?.add(
-                                it
+                                element = it,
                             )
                         }
                     }
-
                     accounts = accountsInTransactions
                     oldestTransactionLocalDate = dateTimeKit.getLocalDate(
                         timestamp = oldestTransactionLocalDateValue.orZero(),
                     )
                     categoriesMap = categoriesInTransactionsMap.toMap()
-                    allTransactionData.update {
-                        updatedAllTransactionData
-                    }
+                    allTransactionData = updatedAllTransactionData
                 }
+        }
+    }
+    // endregion
+
+    // region state events
+    private fun addToSelectedTransactions(
+        transactionId: Int,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedTransactionIndices = selectedTransactionIndices
+            .toMutableList()
+            .apply {
+                add(
+                    element = transactionId,
+                )
+            }
+            .toImmutableList()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun clearSelectedTransactions(
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedTransactionIndices = persistentListOf()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun removeFromSelectedTransactions(
+        transactionId: Int,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedTransactionIndices = selectedTransactionIndices
+            .toMutableList()
+            .apply {
+                remove(
+                    element = transactionId,
+                )
+            }
+            .toImmutableList()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun selectAllTransactions(
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedTransactionIndices = transactionDetailsListItemViewData.values
+            .flatMap {
+                it.map { transactionListItemData ->
+                    transactionListItemData.transactionId
+                }
+            }
+            .toImmutableList()
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun resetScreenBottomSheetType(): Job {
+        return updateScreenBottomSheetType(
+            updatedTransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
+        )
+    }
+
+    private fun updateScreenBottomSheetType(
+        updatedTransactionsScreenBottomSheetType: TransactionsScreenBottomSheetType,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenBottomSheetType = updatedTransactionsScreenBottomSheetType
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateIsInSelectionMode(
+        updatedIsInSelectionMode: Boolean,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        isInSelectionMode = updatedIsInSelectionMode
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateSearchText(
+        updatedSearchText: String,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        searchText = updatedSearchText
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateSelectedFilter(
+        updatedSelectedFilter: Filter,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedFilter = updatedSelectedFilter
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateSelectedSortOption(
+        updatedSelectedSortOption: SortOption,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        selectedSortOption = updatedSelectedSortOption
+        return refreshIfRequired(
+            shouldRefresh = shouldRefresh,
+        )
+    }
+
+    private fun updateTransactionForValuesInTransactions(
+        transactionForId: Int,
+    ): Job {
+        val selectedTransactions: ImmutableList<Int> =
+            selectedTransactionIndices
+        return coroutineScope.launch {
+            val updatedTransactions = allTransactionData
+                .map { transactionData ->
+                    transactionData.transaction
+                }
+                .filter {
+                    it.transactionType == TransactionType.EXPENSE &&
+                            selectedTransactions.contains(it.id)
+                }
+                .map {
+                    it
+                        .copy(
+                            transactionForId = transactionForId,
+                        )
+                }
+            updateTransactionsUseCase(
+                transactions = updatedTransactions.toTypedArray(),
+            )
         }
     }
     // endregion
