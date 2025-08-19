@@ -220,11 +220,11 @@ internal class ViewTransactionScreenViewModel(
             if (isTransactionDeleted) {
                 navigateUp()
             } else {
-                completeLoading()
                 updateTransactionIdToDelete(
                     updatedTransactionIdToDelete = null,
                     shouldRefresh = false,
                 )
+                completeLoading()
                 // TODO(Abhi): Show error message
             }
         }
@@ -248,7 +248,7 @@ internal class ViewTransactionScreenViewModel(
 
     private fun updateTransactionIdToDelete(
         updatedTransactionIdToDelete: Int?,
-        shouldRefresh: Boolean = true,
+        shouldRefresh: Boolean = false,
     ): Job {
         transactionIdToDelete = updatedTransactionIdToDelete
         return refreshIfRequired(

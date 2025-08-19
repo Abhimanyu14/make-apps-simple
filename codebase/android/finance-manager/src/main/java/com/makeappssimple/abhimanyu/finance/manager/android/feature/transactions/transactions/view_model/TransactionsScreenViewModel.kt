@@ -260,9 +260,10 @@ internal class TransactionsScreenViewModel(
                 }
                 .mapValues {
                     it.value.map { listItem ->
-                        listItem.toTransactionListItemData(
-                            dateTimeKit = dateTimeKit,
-                        )
+                        listItem
+                            .toTransactionListItemData(
+                                getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
+                            )
                             .copy(
                                 isDeleteButtonEnabled = false,
                                 isDeleteButtonVisible = true,

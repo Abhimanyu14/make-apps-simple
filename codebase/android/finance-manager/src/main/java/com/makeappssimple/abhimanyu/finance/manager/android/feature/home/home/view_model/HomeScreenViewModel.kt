@@ -289,7 +289,7 @@ internal class HomeScreenViewModel(
                 homeListItemViewData = transactionDataList
                     .map { transactionData: TransactionData ->
                         transactionData.toTransactionListItemData(
-                            dateTimeKit = dateTimeKit,
+                            getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
                         )
                     }
                 completeLoading()
