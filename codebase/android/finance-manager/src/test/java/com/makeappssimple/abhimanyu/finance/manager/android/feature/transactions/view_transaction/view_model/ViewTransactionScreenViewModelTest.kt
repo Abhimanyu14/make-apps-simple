@@ -19,142 +19,37 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.fake.FakeUriDecoderImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction.TransactionRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionDataDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeAccountDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeCategoryDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionDataDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionForDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSourceImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AmountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.DatabaseTransactionProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.fake.FakeDatabaseTransactionProviderImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.time.Duration.Companion.seconds
 
 internal class ViewTransactionScreenViewModelTest {
-    // region coroutines setup
-    private val testCoroutineDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(
-        context = testCoroutineDispatcher + Job(),
-    )
-    private val testDispatcherProvider = TestDispatcherProviderImpl(
-        testDispatcher = testCoroutineDispatcher,
-    )
-    // endregion
-
     // region test setup
-    private val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
-    private val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
     private val savedStateHandle: SavedStateHandle = SavedStateHandle(
         initialState = mapOf(
             "transactionId" to "123",
         ),
     )
-    private val uriDecoder: UriDecoder = FakeUriDecoderImpl()
-    private val dateTimeKit: DateTimeKit = DateTimeKitImpl()
-    private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource =
-        FakeFinanceManagerPreferencesDataSource()
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
-        FinanceManagerPreferencesRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
-            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
-        )
-    private val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
-    private val fakeCategoryDao: CategoryDao = FakeCategoryDaoImpl()
-    private val fakeDatabaseTransactionProvider: DatabaseTransactionProvider =
-        FakeDatabaseTransactionProviderImpl()
-    private val fakeTransactionDao: TransactionDao = FakeTransactionDaoImpl()
-    private val fakeTransactionForDao: TransactionForDao =
-        FakeTransactionForDaoImpl()
-    private val fakeTransactionDataDao: TransactionDataDao =
-        FakeTransactionDataDaoImpl(
-            accountDao = fakeAccountDao,
-            categoryDao = fakeCategoryDao,
-            transactionDao = fakeTransactionDao,
-            transactionForDao = fakeTransactionForDao,
-        )
-    private val commonDataSource: CommonDataSource = CommonDataSourceImpl(
-        accountDao = fakeAccountDao,
-        categoryDao = fakeCategoryDao,
-        databaseTransactionProvider = fakeDatabaseTransactionProvider,
-        transactionDao = fakeTransactionDao,
-        transactionDataDao = fakeTransactionDataDao,
-        transactionForDao = fakeTransactionForDao,
-    )
-    private val transactionRepository: TransactionRepository =
-        TransactionRepositoryImpl(
-            commonDataSource = commonDataSource,
-            dispatcherProvider = testDispatcherProvider,
-            transactionDao = fakeTransactionDao,
-        )
-    private val deleteTransactionUseByIdCase = DeleteTransactionUseByIdCase(
-        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        transactionRepository = transactionRepository,
-    )
-    private val transactionDataRepository: TransactionDataRepository =
-        TransactionDataRepositoryImpl(
-            commonDataSource = commonDataSource,
-            dispatcherProvider = testDispatcherProvider,
-            transactionDataDao = fakeTransactionDataDao,
-        )
-    private val getTransactionDataByIdUseCase = GetTransactionDataByIdUseCase(
-        transactionDataRepository = transactionDataRepository,
-    )
-    private val logKit: LogKit = FakeLogKitImpl()
 
+    private lateinit var testDependencies: TestDependencies
     private lateinit var viewTransactionScreenViewModel: ViewTransactionScreenViewModel
 
     @Before
     fun setUp() {
-        testScope.launch {
-            fakeAccountDao.insertAccounts(
+        testDependencies = TestDependencies()
+        testDependencies.testScope.launch {
+            testDependencies.fakeAccountDao.insertAccounts(
                 AccountEntity(
                     balanceAmount = AmountEntity(
                         value = 1000,
@@ -164,7 +59,7 @@ internal class ViewTransactionScreenViewModelTest {
                     name = "test-account",
                 ),
             )
-            fakeCategoryDao.insertCategories(
+            testDependencies.fakeCategoryDao.insertCategories(
                 CategoryEntity(
                     id = 1,
                     emoji = "💳",
@@ -172,13 +67,13 @@ internal class ViewTransactionScreenViewModelTest {
                     transactionType = TransactionType.EXPENSE,
                 ),
             )
-            fakeTransactionForDao.insertTransactionForValues(
+            testDependencies.fakeTransactionForDao.insertTransactionForValues(
                 TransactionForEntity(
                     id = 1,
                     title = "test-transaction-for",
                 ),
             )
-            fakeTransactionDao.insertTransaction(
+            testDependencies.fakeTransactionDao.insertTransaction(
                 TransactionEntity(
                     amount = AmountEntity(
                         value = 100,
@@ -194,28 +89,28 @@ internal class ViewTransactionScreenViewModelTest {
             )
         }
         viewTransactionScreenViewModel = ViewTransactionScreenViewModel(
-            navigationKit = navigationKit,
-            screenUIStateDelegate = screenUIStateDelegate,
+            navigationKit = testDependencies.navigationKit,
+            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             savedStateHandle = savedStateHandle,
-            uriDecoder = uriDecoder,
-            coroutineScope = testScope.backgroundScope,
-            dateTimeKit = dateTimeKit,
-            deleteTransactionUseByIdCase = deleteTransactionUseByIdCase,
-            getTransactionDataByIdUseCase = getTransactionDataByIdUseCase,
-            logKit = logKit,
+            uriDecoder = testDependencies.uriDecoder,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            dateTimeKit = testDependencies.dateTimeKit,
+            deleteTransactionUseByIdCase = testDependencies.deleteTransactionUseByIdCase,
+            getTransactionDataByIdUseCase = testDependencies.getTransactionDataByIdUseCase,
+            logKit = testDependencies.logKit,
         )
         viewTransactionScreenViewModel.initViewModel()
     }
 
     @After
     fun tearDown() {
-        testScope.cancel()
+        testDependencies.testScope.cancel()
     }
     // endregion
 
     // region initial state
     @Test
-    fun uiState_initialState() = runTestWithTimeout {
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
         viewTransactionScreenViewModel.uiState.test {
             val result = awaitItem()
 
@@ -234,7 +129,7 @@ internal class ViewTransactionScreenViewModelTest {
     // region updateUiStateAndStateEvents
 //    @Test
 //    fun updateUiStateAndStateEvents_nameIsBlank_ctaIsDisabled() =
-//        runTestWithTimeout {
+//        testDependencies.runTestWithTimeout {
 //            val updatedName = "   "
 //            val updatedValue = TextFieldValue(
 //                text = updatedName,
@@ -258,7 +153,7 @@ internal class ViewTransactionScreenViewModelTest {
     // region state events
     @Test
     fun resetScreenBottomSheetType_shouldSetBottomSheetTypeToNone() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             viewTransactionScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
@@ -288,7 +183,7 @@ internal class ViewTransactionScreenViewModelTest {
 
     @Test
     fun updateScreenBottomSheetType_shouldUpdateScreenBottomSheetType() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             viewTransactionScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
@@ -311,17 +206,5 @@ internal class ViewTransactionScreenViewModelTest {
                 )
             }
         }
-    // endregion
-
-    // region common
-    private fun runTestWithTimeout(
-        testBody: suspend TestScope.() -> Unit,
-    ) {
-        testScope.runTest(
-            timeout = 3.seconds,
-        ) {
-            testBody()
-        }
-    }
     // endregion
 }

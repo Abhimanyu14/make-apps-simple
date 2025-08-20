@@ -18,79 +18,43 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.op
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
-import kotlinx.coroutines.Job
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.time.Duration.Companion.seconds
 
 internal class OpenSourceLicensesScreenViewModelTest {
-    // region coroutines setup
-    private val testCoroutineDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(
-        context = testCoroutineDispatcher + Job(),
-    )
-    // endregion
-
     // region test setup
-    private val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
-    private val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
-    private val logKit: LogKit = FakeLogKitImpl()
-
+    private lateinit var testDependencies: TestDependencies
     private lateinit var openSourceLicensesScreenViewModel: OpenSourceLicensesScreenViewModel
 
     @Before
     fun setUp() {
+        testDependencies = TestDependencies()
         openSourceLicensesScreenViewModel = OpenSourceLicensesScreenViewModel(
-            coroutineScope = testScope.backgroundScope,
-            navigationKit = navigationKit,
-            screenUIStateDelegate = screenUIStateDelegate,
-            logKit = logKit,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            navigationKit = testDependencies.navigationKit,
+            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
+            logKit = testDependencies.logKit,
         )
         openSourceLicensesScreenViewModel.initViewModel()
     }
 
     @After
     fun tearDown() {
-        testScope.cancel()
+        testDependencies.testScope.cancel()
     }
     // endregion
 
     // region initial state
     @Test
-    fun uiState_initialState() = runTestWithTimeout {
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
         openSourceLicensesScreenViewModel.uiState.test {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             val postDataFetchCompletion = awaitItem()
             assertThat(postDataFetchCompletion.isLoading).isFalse()
-        }
-    }
-    // endregion
-
-    // region common
-    private fun runTestWithTimeout(
-        testBody: suspend TestScope.() -> Unit,
-    ) {
-        testScope.runTest(
-            timeout = 10.seconds,
-        ) {
-            testBody()
         }
     }
     // endregion

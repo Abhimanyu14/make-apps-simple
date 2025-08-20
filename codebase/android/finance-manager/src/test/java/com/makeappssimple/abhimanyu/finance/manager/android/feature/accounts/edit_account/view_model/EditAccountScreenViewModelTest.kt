@@ -18,105 +18,54 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.view_model
 
+import androidx.lifecycle.SavedStateHandle
+import app.cash.turbine.test
+import com.google.common.truth.Truth.assertThat
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenNameError
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import org.junit.After
+import org.junit.Before
+import kotlin.test.Test
 
-/*
 internal class EditAccountScreenViewModelTest {
-    // region coroutines setup
-    private val testCoroutineDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(
-        context = testCoroutineDispatcher + Job(),
-    )
-    private val testDispatcherProvider = TestDispatcherProviderImpl(
-        testDispatcher = testCoroutineDispatcher,
-    )
-    // endregion
-
     // region test setup
-    private val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
-    private val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
-    private val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
-    private val accountRepository: AccountRepository = AccountRepositoryImpl(
-        accountDao = fakeAccountDao,
-        dispatcherProvider = testDispatcherProvider,
-    )
-    private val getAllAccountsUseCase: GetAllAccountsUseCase =
-        GetAllAccountsUseCase(
-            accountRepository = accountRepository,
-        )
-    private val editAccountScreenDataValidationUseCase =
-        EditAccountScreenDataValidationUseCase(
-            getAllAccountsUseCase = getAllAccountsUseCase,
-        )
-    private val getAccountByIdUseCase = GetAccountByIdUseCase(
-        accountRepository = accountRepository,
+    private val savedStateHandle: SavedStateHandle = SavedStateHandle(
+        initialState = mapOf(
+            "accountId" to 1,
+        ),
     )
 
-    private val dateTimeKit: DateTimeKit = DateTimeKitImpl()
-    private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource =
-        FakeFinanceManagerPreferencesDataSource()
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
-        FinanceManagerPreferencesRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
-            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
-        )
-    private val commonDataSource: CommonDataSource = CommonDataSourceImpl()
-    private val transactionDao: TransactionDao = FakeTransactionDaoImpl()
-    private val transactionRepository: TransactionRepository =
-        TransactionRepositoryImpl(
-            commonDataSource = commonDataSource,
-            dispatcherProvider = testDispatcherProvider,
-            transactionDao = transactionDao,
-        )
-    private val insertTransactionsUseCase: InsertTransactionsUseCase =
-        InsertTransactionsUseCase(
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-            transactionRepository = transactionRepository,
-        )
-    private val updateAccountsUseCase: UpdateAccountsUseCase =
-        UpdateAccountsUseCase(
-            accountRepository = accountRepository,
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        )
-    private val updateAccountUseCase = UpdateAccountUseCase(
-        dateTimeKit = dateTimeKit,
-        insertTransactionsUseCase = insertTransactionsUseCase,
-        updateAccountsUseCase = updateAccountsUseCase,
-    )
-    private val logKit: LogKit = FakeLogKitImpl()
-
+    private lateinit var testDependencies: TestDependencies
     private lateinit var viewModel: EditAccountScreenViewModel
 
     @Before
     fun setUp() {
+        testDependencies = TestDependencies()
         viewModel = EditAccountScreenViewModel(
-            navigationKit = navigationKit,
-            savedStateHandle = null, // Provide a mock or fake if needed
-            screenUIStateDelegate = screenUIStateDelegate,
-            coroutineScope = testScope.backgroundScope,
-            editAccountScreenDataValidationUseCase = editAccountScreenDataValidationUseCase,
-            getAccountByIdUseCase = getAccountByIdUseCase,
-            updateAccountUseCase = updateAccountUseCase,
-            logKit = logKit,
+            navigationKit = testDependencies.navigationKit,
+            savedStateHandle = savedStateHandle,
+            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            editAccountScreenDataValidationUseCase = testDependencies.editAccountScreenDataValidationUseCase,
+            getAccountByIdUseCase = testDependencies.getAccountByIdUseCase,
+            updateAccountUseCase = testDependencies.updateAccountUseCase,
+            logKit = testDependencies.logKit,
         )
     }
 
     @After
     fun tearDown() {
-        testScope.cancel()
+        testDependencies.testScope.cancel()
     }
     // endregion
 
     @Test
-    fun uiState_initialState() = runTest {
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
         viewModel.uiState.test {
             val result = awaitItem()
-            assertThat(result.selectedAccountTypeIndex).isAtLeast(0)
+            assertThat(result.selectedAccountTypeIndex).isEqualTo(-1)
             assertThat(result.nameError).isEqualTo(EditAccountScreenNameError.None)
             assertThat(result.isCtaButtonEnabled).isFalse()
             assertThat(result.isLoading).isTrue()
@@ -124,17 +73,4 @@ internal class EditAccountScreenViewModelTest {
             assertThat(result.name.text).isEmpty()
         }
     }
-
-    // region common
-    private fun runTestWithTimeout(
-        testBody: suspend TestScope.() -> Unit,
-    ) {
-        testScope.runTest(
-            timeout = 3.seconds,
-        ) {
-            testBody()
-        }
-    }
-    // endregion
 }
-*/

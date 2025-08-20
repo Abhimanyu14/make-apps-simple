@@ -23,59 +23,19 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.TransactionForDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionForDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertFailsWith
-import kotlin.time.Duration.Companion.seconds
 
 internal class EditTransactionForScreenViewModelTest {
-    // region coroutines setup
-    private val testCoroutineDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(
-        context = testCoroutineDispatcher + Job(),
-    )
-    private val testDispatcherProvider = TestDispatcherProviderImpl(
-        testDispatcher = testCoroutineDispatcher,
-    )
-    // endregion
-
     // region test setup
-    private val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
-    private val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
     private val testTransactionForId1 = 1
     private val testTransactionForTitle1 = "test-transaction-for-title-1"
     private val testTransactionForId2 = 2
@@ -85,45 +45,15 @@ internal class EditTransactionForScreenViewModelTest {
             pair = "transactionForId" to testTransactionForId1,
         ),
     )
-    private val fakeTransactionForDao: TransactionForDao =
-        FakeTransactionForDaoImpl()
-    private val transactionForRepository: TransactionForRepository =
-        TransactionForRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
-            transactionForDao = fakeTransactionForDao,
-        )
-    private val getAllTransactionForValuesUseCase =
-        GetAllTransactionForValuesUseCase(
-            transactionForRepository = transactionForRepository,
-        )
-    private val editTransactionForScreenDataValidationUseCase =
-        EditTransactionForScreenDataValidationUseCase(
-            getAllTransactionForValuesUseCase = getAllTransactionForValuesUseCase,
-        )
-    private val getTransactionForByIdUseCase =
-        GetTransactionForByIdUseCase(
-            transactionForRepository = transactionForRepository,
-        )
-    private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource =
-        FakeFinanceManagerPreferencesDataSource()
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
-        FinanceManagerPreferencesRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
-            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
-        )
-    private val updateTransactionForUseCase =
-        UpdateTransactionForUseCase(
-            transactionForRepository = transactionForRepository,
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        )
-    private val logKit: LogKit = FakeLogKitImpl()
 
+    private lateinit var testDependencies: TestDependencies
     private lateinit var editTransactionForScreenViewModel: EditTransactionForScreenViewModel
 
     @Before
     fun setUp() {
-        testScope.launch {
-            fakeTransactionForDao.insertTransactionForValues(
+        testDependencies = TestDependencies()
+        testDependencies.testScope.launch {
+            testDependencies.fakeTransactionForDao.insertTransactionForValues(
                 TransactionForEntity(
                     id = testTransactionForId1,
                     title = testTransactionForTitle1,
@@ -138,30 +68,31 @@ internal class EditTransactionForScreenViewModelTest {
 
     @After
     fun tearDown() {
-        testScope.cancel()
+        testDependencies.testScope.cancel()
     }
     // endregion
 
     // region screen args
     @Test
-    fun screenArgs_transactionForIdIsNull() = runTestWithTimeout {
-        val emptySavedStateHandle = SavedStateHandle()
+    fun screenArgs_transactionForIdIsNull() =
+        testDependencies.runTestWithTimeout {
+            val emptySavedStateHandle = SavedStateHandle()
 
-        val exception = assertFailsWith(
-            exceptionClass = IllegalArgumentException::class,
-        ) {
-            setUpViewModel(
-                savedStateHandle = emptySavedStateHandle,
-            )
+            val exception = assertFailsWith(
+                exceptionClass = IllegalArgumentException::class,
+            ) {
+                setUpViewModel(
+                    savedStateHandle = emptySavedStateHandle,
+                )
+            }
+
+            assertThat(exception.message).isEqualTo("current transaction for id must not be null")
         }
-
-        assertThat(exception.message).isEqualTo("current transaction for id must not be null")
-    }
     // endregion
 
     // region initial state
     @Test
-    fun uiState_initialState() = runTestWithTimeout {
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
         setUpViewModel()
         editTransactionForScreenViewModel.uiState.test {
             val result = awaitItem()
@@ -179,7 +110,7 @@ internal class EditTransactionForScreenViewModelTest {
     // region updateUiStateAndStateEvents
     @Test
     fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedTitle = "   "
             val updatedValue = TextFieldValue(
                 text = updatedTitle,
@@ -208,7 +139,7 @@ internal class EditTransactionForScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_titleAlreadyExists_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedTitle = testTransactionForTitle2
             val updatedValue = TextFieldValue(
                 text = updatedTitle,
@@ -237,7 +168,7 @@ internal class EditTransactionForScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedTitle = "updated-title"
             val updatedValue = TextFieldValue(
                 text = updatedTitle,
@@ -267,7 +198,7 @@ internal class EditTransactionForScreenViewModelTest {
 
     // region fetchData
     @Test
-    fun fetchData_updatesUiState() = runTestWithTimeout {
+    fun fetchData_updatesUiState() = testDependencies.runTestWithTimeout {
         setUpViewModel()
         editTransactionForScreenViewModel.uiState.test {
             val initialState = awaitItem()
@@ -287,7 +218,7 @@ internal class EditTransactionForScreenViewModelTest {
 
     // region state events
     @Test
-    fun updateTitle_shouldUpdateValue() = runTestWithTimeout {
+    fun updateTitle_shouldUpdateValue() = testDependencies.runTestWithTimeout {
         val updatedTitle = "updated-title"
         val updatedValue = TextFieldValue(
             text = updatedTitle,
@@ -312,7 +243,7 @@ internal class EditTransactionForScreenViewModelTest {
     }
 
     @Test
-    fun clearTitle_shouldClearText() = runTestWithTimeout {
+    fun clearTitle_shouldClearText() = testDependencies.runTestWithTimeout {
         setUpViewModel()
         editTransactionForScreenViewModel.uiState.test {
             val initialState = awaitItem()
@@ -333,56 +264,58 @@ internal class EditTransactionForScreenViewModelTest {
 
     // region updateTransactionFor
     @Test
-    fun updateTransactionFor_shouldUpdateAndNavigateUp() = runTestWithTimeout {
-        val updatedTitle = "updated-title"
-        val updatedValue = TextFieldValue(
-            text = updatedTitle,
-        )
-        setUpViewModel()
-        turbineScope {
-            val navigationCommandTurbine = navigationKit.command.testIn(
-                scope = backgroundScope,
+    fun updateTransactionFor_shouldUpdateAndNavigateUp() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = "updated-title"
+            val updatedValue = TextFieldValue(
+                text = updatedTitle,
             )
-            val uiStateTurbine =
-                editTransactionForScreenViewModel.uiState.testIn(
-                    scope = backgroundScope,
+            setUpViewModel()
+            turbineScope {
+                val navigationCommandTurbine =
+                    testDependencies.navigationKit.command.testIn(
+                        scope = backgroundScope,
+                    )
+                val uiStateTurbine =
+                    editTransactionForScreenViewModel.uiState.testIn(
+                        scope = backgroundScope,
+                    )
+                val lastChangeTimestamp =
+                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                        ?: -1L
+
+                val initialState = uiStateTurbine.awaitItem()
+                assertThat(initialState.title.text).isEmpty()
+                editTransactionForScreenViewModel.initViewModel()
+                val postDataFetchCompletion = uiStateTurbine.awaitItem()
+                assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                    testTransactionForTitle1
                 )
-            val lastChangeTimestamp =
-                financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
-                    ?: -1L
 
-            val initialState = uiStateTurbine.awaitItem()
-            assertThat(initialState.title.text).isEmpty()
-            editTransactionForScreenViewModel.initViewModel()
-            val postDataFetchCompletion = uiStateTurbine.awaitItem()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                testTransactionForTitle1
-            )
+                editTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedValue
+                )
+                assertThat(uiStateTurbine.awaitItem().title.text).isEqualTo(
+                    updatedTitle
+                )
+                editTransactionForScreenViewModel.uiStateEvents.updateTransactionFor()
 
-            editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                updatedValue
-            )
-            assertThat(uiStateTurbine.awaitItem().title.text).isEqualTo(
-                updatedTitle
-            )
-            editTransactionForScreenViewModel.uiStateEvents.updateTransactionFor()
-
-            val result = uiStateTurbine.awaitItem()
-            assertThat(result.isLoading).isTrue()
-            assertThat(
-                fakeTransactionForDao.getTransactionForById(
-                    testTransactionForId1
-                )?.title
-            ).isEqualTo(updatedTitle)
-            assertThat(
-                financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
-                    ?: -1L
-            ).isGreaterThan(lastChangeTimestamp)
-            assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
-                FinanceManagerNavigationDirections.NavigateUp
-            )
+                val result = uiStateTurbine.awaitItem()
+                assertThat(result.isLoading).isTrue()
+                assertThat(
+                    testDependencies.fakeTransactionForDao.getTransactionForById(
+                        testTransactionForId1
+                    )?.title
+                ).isEqualTo(updatedTitle)
+                assertThat(
+                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                        ?: -1L
+                ).isGreaterThan(lastChangeTimestamp)
+                assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
+                    FinanceManagerNavigationDirections.NavigateUp
+                )
+            }
         }
-    }
     // endregion
 
     // region common
@@ -390,25 +323,15 @@ internal class EditTransactionForScreenViewModelTest {
         savedStateHandle: SavedStateHandle = testSavedStateHandle,
     ) {
         editTransactionForScreenViewModel = EditTransactionForScreenViewModel(
-            navigationKit = navigationKit,
-            screenUIStateDelegate = screenUIStateDelegate,
+            navigationKit = testDependencies.navigationKit,
+            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             savedStateHandle = savedStateHandle,
-            coroutineScope = testScope.backgroundScope,
-            editTransactionForScreenDataValidationUseCase = editTransactionForScreenDataValidationUseCase,
-            getTransactionForByIdUseCase = getTransactionForByIdUseCase,
-            updateTransactionForUseCase = updateTransactionForUseCase,
-            logKit = logKit,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            editTransactionForScreenDataValidationUseCase = testDependencies.editTransactionForScreenDataValidationUseCase,
+            getTransactionForByIdUseCase = testDependencies.getTransactionForByIdUseCase,
+            updateTransactionForUseCase = testDependencies.updateTransactionForUseCase,
+            logKit = testDependencies.logKit,
         )
-    }
-
-    private fun runTestWithTimeout(
-        testBody: suspend TestScope.() -> Unit,
-    ) {
-        testScope.runTest(
-            timeout = 3.seconds,
-        ) {
-            testBody()
-        }
     }
     // endregion
 }

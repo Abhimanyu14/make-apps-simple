@@ -22,121 +22,52 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.fake.FakeUriDecoderImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.InsertCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.InsertCategoryUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeCategoryDaoImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.AddCategoryScreenTitleError
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.use_case.AddCategoryScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.time.Duration.Companion.seconds
 
 internal class AddCategoryScreenViewModelTest {
-    // region coroutines setup
-    private val testCoroutineDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(
-        context = testCoroutineDispatcher + Job(),
-    )
-    private val testDispatcherProvider = TestDispatcherProviderImpl(
-        testDispatcher = testCoroutineDispatcher,
-    )
-    // endregion
-
     // region test setup
-    private val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
     private val savedStateHandle: SavedStateHandle = SavedStateHandle(
         initialState = mapOf(
             "transactionType" to TransactionType.EXPENSE.title,
         ),
     )
-    private val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
-    private val uriDecoder: UriDecoder = FakeUriDecoderImpl()
-    private val fakeCategoryDao: CategoryDao = FakeCategoryDaoImpl()
-    private val categoryRepository: CategoryRepository = CategoryRepositoryImpl(
-        categoryDao = fakeCategoryDao,
-        dispatcherProvider = testDispatcherProvider,
-    )
-    private val getAllCategoriesUseCase = GetAllCategoriesUseCase(
-        categoryRepository = categoryRepository,
-    )
-    private val addCategoryScreenDataValidationUseCase =
-        AddCategoryScreenDataValidationUseCase(
-            getAllCategoriesUseCase = getAllCategoriesUseCase,
-        )
-    private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource =
-        FakeFinanceManagerPreferencesDataSource()
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
-        FinanceManagerPreferencesRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
-            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
-        )
-    private val insertCategoriesUseCase: InsertCategoriesUseCase =
-        InsertCategoriesUseCase(
-            categoryRepository = categoryRepository,
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        )
-    private val insertCategoryUseCase = InsertCategoryUseCase(
-        insertCategoriesUseCase = insertCategoriesUseCase,
-    )
-    private val logKit: LogKit = FakeLogKitImpl()
 
+    private lateinit var testDependencies: TestDependencies
     private lateinit var addCategoryScreenViewModel: AddCategoryScreenViewModel
 
     @Before
     fun setUp() {
+        testDependencies = TestDependencies()
         addCategoryScreenViewModel = AddCategoryScreenViewModel(
-            navigationKit = navigationKit,
+            navigationKit = testDependencies.navigationKit,
             savedStateHandle = savedStateHandle,
-            screenUIStateDelegate = screenUIStateDelegate,
-            uriDecoder = uriDecoder,
-            addCategoryScreenDataValidationUseCase = addCategoryScreenDataValidationUseCase,
-            coroutineScope = testScope.backgroundScope,
-            insertCategoryUseCase = insertCategoryUseCase,
-            logKit = logKit,
+            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
+            uriDecoder = testDependencies.uriDecoder,
+            addCategoryScreenDataValidationUseCase = testDependencies.addCategoryScreenDataValidationUseCase,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            insertCategoryUseCase = testDependencies.insertCategoryUseCase,
+            logKit = testDependencies.logKit,
         )
         addCategoryScreenViewModel.initViewModel()
     }
 
     @After
     fun tearDown() {
-        testScope.cancel()
+        testDependencies.testScope.cancel()
     }
     // endregion
 
     // region initial state
     @Test
-    fun uiState_initialState() = runTestWithTimeout {
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
         addCategoryScreenViewModel.uiState.test {
             val result = awaitItem()
 
@@ -160,7 +91,7 @@ internal class AddCategoryScreenViewModelTest {
     // region updateUiStateAndStateEvents
     @Test
     fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
@@ -181,7 +112,7 @@ internal class AddCategoryScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
@@ -202,9 +133,9 @@ internal class AddCategoryScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_categoryAlreadyExists_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val testTitle = "test-title"
-            insertCategoryUseCase(
+            testDependencies.insertCategoryUseCase(
                 emoji = "💰",
                 title = testTitle,
                 transactionType = TransactionType.INCOME,
@@ -232,7 +163,7 @@ internal class AddCategoryScreenViewModelTest {
     // region fetchData
     @Test
     fun fetchData_shouldUpdateSelectedTransactionTypeIndex() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
@@ -249,30 +180,31 @@ internal class AddCategoryScreenViewModelTest {
 
     // region state events
     @Test
-    fun clearEmojiSearchText_shouldClearEmojiSearchText() = runTestWithTimeout {
-        val testEmojiSearchText = "test-emoji-search-text"
-        addCategoryScreenViewModel.uiState.test {
-            val initialState = awaitItem()
-            assertThat(initialState.isLoading).isTrue()
-            assertThat(initialState.emojiSearchText).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
-            addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
-                testEmojiSearchText
-            )
-            assertThat(awaitItem().emojiSearchText).isEqualTo(
-                testEmojiSearchText
-            )
+    fun clearEmojiSearchText_shouldClearEmojiSearchText() =
+        testDependencies.runTestWithTimeout {
+            val testEmojiSearchText = "test-emoji-search-text"
+            addCategoryScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                assertThat(initialState.isLoading).isTrue()
+                assertThat(initialState.emojiSearchText).isEmpty()
+                val postDataFetchCompletion = awaitItem()
+                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
+                    testEmojiSearchText
+                )
+                assertThat(awaitItem().emojiSearchText).isEqualTo(
+                    testEmojiSearchText
+                )
 
-            addCategoryScreenViewModel.uiStateEvents.clearEmojiSearchText()
+                addCategoryScreenViewModel.uiStateEvents.clearEmojiSearchText()
 
-            val result = awaitItem()
-            assertThat(result.emojiSearchText).isEmpty()
+                val result = awaitItem()
+                assertThat(result.emojiSearchText).isEmpty()
+            }
         }
-    }
 
     @Test
-    fun clearTitle_shouldClearTitle() = runTestWithTimeout {
+    fun clearTitle_shouldClearTitle() = testDependencies.runTestWithTimeout {
         val testTitle = "test-title"
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
@@ -296,7 +228,7 @@ internal class AddCategoryScreenViewModelTest {
 
     @Test
     fun resetScreenBottomSheetType_shouldSetBottomSheetTypeToNone() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val testScreenBottomSheetType =
                 AddCategoryScreenBottomSheetType.SelectEmoji
             addCategoryScreenViewModel.uiState.test {
@@ -324,7 +256,7 @@ internal class AddCategoryScreenViewModelTest {
         }
 
     @Test
-    fun updateEmoji_shouldUpdateEmoji() = runTestWithTimeout {
+    fun updateEmoji_shouldUpdateEmoji() = testDependencies.runTestWithTimeout {
         val testEmoji = "🤔"
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
@@ -342,7 +274,7 @@ internal class AddCategoryScreenViewModelTest {
 
     @Test
     fun updateEmojiSearchText_shouldUpdateEmojiSearchText() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val testEmojiSearchText = "test-emoji-search-text"
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
@@ -362,7 +294,7 @@ internal class AddCategoryScreenViewModelTest {
 
     @Test
     fun updateScreenBottomSheetType_shouldUpdateBottomSheetType() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val testScreenBottomSheetType =
                 AddCategoryScreenBottomSheetType.SelectEmoji
             addCategoryScreenViewModel.uiState.test {
@@ -387,7 +319,7 @@ internal class AddCategoryScreenViewModelTest {
 
     @Test
     fun updateSelectedTransactionTypeIndex_shouldUpdateSelectedTransactionTypeIndex() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val testSelectedTransactionTypeIndex = 2
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
@@ -411,7 +343,7 @@ internal class AddCategoryScreenViewModelTest {
         }
 
     @Test
-    fun updateTitle_shouldUpdateTitle() = runTestWithTimeout {
+    fun updateTitle_shouldUpdateTitle() = testDependencies.runTestWithTimeout {
         val testTitle = "test-title"
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
@@ -428,18 +360,6 @@ internal class AddCategoryScreenViewModelTest {
 
             val result = awaitItem()
             assertThat(result.title.text).isEqualTo(testTitle)
-        }
-    }
-    // endregion
-
-    // region common
-    private fun runTestWithTimeout(
-        testBody: suspend TestScope.() -> Unit,
-    ) {
-        testScope.runTest(
-            timeout = 3.seconds,
-        ) {
-            testBody()
         }
     }
     // endregion

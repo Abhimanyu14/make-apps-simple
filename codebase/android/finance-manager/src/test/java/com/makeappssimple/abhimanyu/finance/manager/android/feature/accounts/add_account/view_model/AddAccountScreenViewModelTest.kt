@@ -22,111 +22,49 @@ import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeAccountDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.use_case.AddAccountScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.time.Duration.Companion.seconds
 
 internal class AddAccountScreenViewModelTest {
-    // region coroutines setup
-    private val testCoroutineDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(
-        context = testCoroutineDispatcher + Job(),
-    )
-    private val testDispatcherProvider = TestDispatcherProviderImpl(
-        testDispatcher = testCoroutineDispatcher,
-    )
-    // endregion
-
     // region test setup
-    private val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
-    private val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
-    private val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
-    private val accountRepository: AccountRepository = AccountRepositoryImpl(
-        accountDao = fakeAccountDao,
-        dispatcherProvider = testDispatcherProvider,
-    )
-    private val getAllAccountsUseCase = GetAllAccountsUseCase(
-        accountRepository = accountRepository,
-    )
-    private val addAccountScreenDataValidationUseCase =
-        AddAccountScreenDataValidationUseCase(
-            getAllAccountsUseCase = getAllAccountsUseCase,
-        )
-    private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource =
-        FakeFinanceManagerPreferencesDataSource()
-    private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
-        FinanceManagerPreferencesRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
-            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
-        )
-    private val insertAccountUseCase = InsertAccountUseCase(
-        accountRepository = accountRepository,
-        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-    )
-    private val logKit: LogKit = FakeLogKitImpl()
-
+    private lateinit var testDependencies: TestDependencies
     private lateinit var addAccountScreenViewModel: AddAccountScreenViewModel
 
     @Before
     fun setUp() {
+        testDependencies = TestDependencies()
         addAccountScreenViewModel = AddAccountScreenViewModel(
-            navigationKit = navigationKit,
-            screenUIStateDelegate = screenUIStateDelegate,
-            addAccountScreenDataValidationUseCase = addAccountScreenDataValidationUseCase,
-            coroutineScope = testScope.backgroundScope,
-            insertAccountUseCase = insertAccountUseCase,
-            logKit = logKit,
+            navigationKit = testDependencies.navigationKit,
+            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
+            addAccountScreenDataValidationUseCase = testDependencies.addAccountScreenDataValidationUseCase,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            insertAccountUseCase = testDependencies.insertAccountUseCase,
+            logKit = testDependencies.logKit,
         )
         addAccountScreenViewModel.initViewModel()
     }
 
     @After
     fun tearDown() {
-        testScope.cancel()
+        testDependencies.testScope.cancel()
     }
     // endregion
 
     // region initial state
     @Test
-    fun uiState_initialState() = runTestWithTimeout {
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
         addAccountScreenViewModel.uiState.test {
             val result = awaitItem()
 
@@ -150,7 +88,7 @@ internal class AddAccountScreenViewModelTest {
     // region updateUiStateAndStateEvents
     @Test
     fun updateUiStateAndStateEvents_nameIsBlank_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedName = "   "
             val updatedValue = TextFieldValue(
                 text = updatedName,
@@ -170,7 +108,7 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_nameIsCash_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedName = "Cash"
             val updatedValue = TextFieldValue(
                 text = updatedName,
@@ -190,7 +128,7 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_nameIsCashWithSpaces_ctaIsDisabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedName = "  Cash   "
             val updatedValue = TextFieldValue(
                 text = updatedName,
@@ -210,7 +148,7 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_accountAlreadyExists_ctaIsEnabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedName1 = "CUB"
             val updatedValue1 = TextFieldValue(
                 text = updatedName1,
@@ -243,7 +181,7 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     fun updateUiStateAndStateEvents_accountIsValid_ctaIsEnabled() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedName = "CUB"
             val updatedValue = TextFieldValue(
                 text = updatedName,
@@ -265,7 +203,7 @@ internal class AddAccountScreenViewModelTest {
     // region state events
     @Test
     fun clearMinimumAccountBalanceAmountValue_shouldClearText() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
             val updatedValue = TextFieldValue(
                 text = updatedMinimumAccountBalanceAmountValue,
@@ -286,7 +224,7 @@ internal class AddAccountScreenViewModelTest {
         }
 
     @Test
-    fun clearName_shouldClearText() = runTestWithTimeout {
+    fun clearName_shouldClearText() = testDependencies.runTestWithTimeout {
         val updatedName = "test-account"
         val updatedValue = TextFieldValue(
             text = updatedName,
@@ -306,16 +244,17 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     fun insertAccount_bank_shouldInsertAndNavigateUp() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             turbineScope {
-                val navigationCommandTurbine = navigationKit.command.testIn(
-                    scope = backgroundScope,
-                )
+                val navigationCommandTurbine =
+                    testDependencies.navigationKit.command.testIn(
+                        scope = backgroundScope,
+                    )
                 val uiStateTurbine = addAccountScreenViewModel.uiState.testIn(
                     scope = backgroundScope,
                 )
                 val lastChangeTimestamp =
-                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
 
                 val testAccountId = 1
@@ -345,12 +284,13 @@ internal class AddAccountScreenViewModelTest {
 
                 assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
                 assertThat(
-                    fakeAccountDao.getAllAccounts().first().asExternalModel()
+                    testDependencies.fakeAccountDao.getAllAccounts().first()
+                        .asExternalModel()
                 ).isEqualTo(
                     testAccount
                 )
                 assertThat(
-                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
                 ).isGreaterThan(lastChangeTimestamp)
                 assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
@@ -361,16 +301,17 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     fun insertAccount_eWallet_shouldInsertAndNavigateUp() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             turbineScope {
-                val navigationCommandTurbine = navigationKit.command.testIn(
-                    scope = backgroundScope,
-                )
+                val navigationCommandTurbine =
+                    testDependencies.navigationKit.command.testIn(
+                        scope = backgroundScope,
+                    )
                 val uiStateTurbine = addAccountScreenViewModel.uiState.testIn(
                     scope = backgroundScope,
                 )
                 val lastChangeTimestamp =
-                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
 
                 val testAccountId = 1
@@ -403,12 +344,13 @@ internal class AddAccountScreenViewModelTest {
 
                 assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
                 assertThat(
-                    fakeAccountDao.getAllAccounts().first().asExternalModel()
+                    testDependencies.fakeAccountDao.getAllAccounts().first()
+                        .asExternalModel()
                 ).isEqualTo(
                     testAccount
                 )
                 assertThat(
-                    financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
                 ).isGreaterThan(lastChangeTimestamp)
                 assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
@@ -418,23 +360,24 @@ internal class AddAccountScreenViewModelTest {
         }
 
     @Test
-    fun resetScreenSnackbarType_shouldResetToNone() = runTestWithTimeout {
-        addAccountScreenViewModel.uiState.test {
-            assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                AddAccountScreenSnackbarType.None
-            )
+    fun resetScreenSnackbarType_shouldResetToNone() =
+        testDependencies.runTestWithTimeout {
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().screenSnackbarType).isEqualTo(
+                    AddAccountScreenSnackbarType.None
+                )
 
-            addAccountScreenViewModel.uiStateEvents.resetScreenSnackbarType()
+                addAccountScreenViewModel.uiStateEvents.resetScreenSnackbarType()
 
-            assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                AddAccountScreenSnackbarType.None
-            )
+                assertThat(awaitItem().screenSnackbarType).isEqualTo(
+                    AddAccountScreenSnackbarType.None
+                )
+            }
         }
-    }
 
     @Test
     fun updateMinimumAccountBalanceAmountValue_shouldUpdateValue() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
             val updatedValue = TextFieldValue(
                 text = updatedMinimumAccountBalanceAmountValue,
@@ -453,7 +396,7 @@ internal class AddAccountScreenViewModelTest {
         }
 
     @Test
-    fun updateName_shouldUpdateValue() = runTestWithTimeout {
+    fun updateName_shouldUpdateValue() = testDependencies.runTestWithTimeout {
         val updatedName = "test-account"
         val updatedValue = TextFieldValue(
             text = updatedName,
@@ -470,26 +413,27 @@ internal class AddAccountScreenViewModelTest {
     }
 
     @Test
-    fun updateScreenSnackbarType_shouldUpdateType() = runTestWithTimeout {
-        val updatedType = AddAccountScreenSnackbarType.None
-        addAccountScreenViewModel.uiState.test {
-            assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                AddAccountScreenSnackbarType.None
-            )
+    fun updateScreenSnackbarType_shouldUpdateType() =
+        testDependencies.runTestWithTimeout {
+            val updatedType = AddAccountScreenSnackbarType.None
+            addAccountScreenViewModel.uiState.test {
+                assertThat(awaitItem().screenSnackbarType).isEqualTo(
+                    AddAccountScreenSnackbarType.None
+                )
 
-            addAccountScreenViewModel.uiStateEvents.updateScreenSnackbarType(
-                updatedType
-            )
+                addAccountScreenViewModel.uiStateEvents.updateScreenSnackbarType(
+                    updatedType
+                )
 
-            assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                updatedType
-            )
+                assertThat(awaitItem().screenSnackbarType).isEqualTo(
+                    updatedType
+                )
+            }
         }
-    }
 
     @Test
     fun updateSelectedAccountTypeIndex_shouldUpdateIndex() =
-        runTestWithTimeout {
+        testDependencies.runTestWithTimeout {
             val updatedIndex = 1
             addAccountScreenViewModel.uiState.test {
                 assertThat(awaitItem().selectedAccountTypeIndex).isEqualTo(0)
@@ -503,17 +447,5 @@ internal class AddAccountScreenViewModelTest {
                 )
             }
         }
-    // endregion
-
-    // region common
-    private fun runTestWithTimeout(
-        testBody: suspend TestScope.() -> Unit,
-    ) {
-        testScope.runTest(
-            timeout = 3.seconds,
-        ) {
-            testBody()
-        }
-    }
     // endregion
 }
