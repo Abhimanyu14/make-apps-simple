@@ -38,8 +38,8 @@ internal class HomeScreenViewModelTest {
     fun setUp() {
         testDependencies = TestDependencies()
         homeScreenViewModel = HomeScreenViewModel(
-            getAccountsTotalBalanceAmountValueUseCase = testDependencies.getAccountsTotalBalanceAmountValueUseCase,
-            getAccountsTotalMinimumBalanceAmountValueUseCase = testDependencies.getAccountsTotalMinimumBalanceAmountValueUseCase,
+            getAllAccountsTotalBalanceAmountValueUseCase = testDependencies.getAllAccountsTotalBalanceAmountValueUseCase,
+            getAllAccountsTotalMinimumBalanceAmountValueUseCase = testDependencies.getAllAccountsTotalMinimumBalanceAmountValueUseCase,
             navigationKit = testDependencies.navigationKit,
             screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             shouldShowBackupCardUseCase = testDependencies.shouldShowBackupCardUseCase,
@@ -73,7 +73,7 @@ internal class HomeScreenViewModelTest {
             assertThat(result.overviewTabSelectionIndex).isEqualTo(0)
             assertThat(result.transactionListItemDataList).isEmpty()
             assertThat(result.accountsTotalBalanceAmountValue).isEqualTo(0)
-            assertThat(result.accountsTotalMinimumBalanceAmountValue).isEqualTo(
+            assertThat(result.allAccountsTotalMinimumBalanceAmountValue).isEqualTo(
                 0
             )
             assertThat(result.overviewCardData).isEqualTo(

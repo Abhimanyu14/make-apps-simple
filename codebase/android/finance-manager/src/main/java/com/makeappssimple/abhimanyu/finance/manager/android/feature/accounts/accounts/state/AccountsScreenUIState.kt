@@ -30,5 +30,5 @@ internal data class AccountsScreenUIState(
     val isLoading: Boolean = true,
     val accountsListItemDataList: ImmutableList<AccountsListItemData> = persistentListOf(),
     val accountsTotalBalanceAmountValue: Long = 0L,
-    val accountsTotalMinimumBalanceAmountValue: Long = 0L,
+    val allAccountsTotalMinimumBalanceAmountValue: Long = 0L,
 ) : ScreenUIState

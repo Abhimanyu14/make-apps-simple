@@ -33,7 +33,7 @@ internal data class HomeScreenUIState(
     val overviewTabSelectionIndex: Int = 0,
     val transactionListItemDataList: ImmutableList<TransactionListItemData> = persistentListOf(),
     val accountsTotalBalanceAmountValue: Long = 0L,
-    val accountsTotalMinimumBalanceAmountValue: Long = 0L,
+    val allAccountsTotalMinimumBalanceAmountValue: Long = 0L,
     val overviewCardData: OverviewCardViewModelData = OverviewCardViewModelData(),
     val pieChartData: PieChartData = PieChartData(),
 ) : ScreenUIState

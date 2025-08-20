@@ -25,8 +25,8 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.BackupDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.ShouldShowBackupCardUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
@@ -69,8 +69,8 @@ private const val DEFAULT_OVERVIEW_TAB_SELECTION = 1
 
 @KoinViewModel
 internal class HomeScreenViewModel(
-    getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
-    getAccountsTotalMinimumBalanceAmountValueUseCase: GetAccountsTotalMinimumBalanceAmountValueUseCase,
+    getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
+    getAllAccountsTotalMinimumBalanceAmountValueUseCase: GetAllAccountsTotalMinimumBalanceAmountValueUseCase,
     navigationKit: NavigationKit,
     screenUIStateDelegate: ScreenUIStateDelegate,
     shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
@@ -91,9 +91,9 @@ internal class HomeScreenViewModel(
     private val isBackupCardVisible: Flow<Boolean> =
         shouldShowBackupCardUseCase()
     private val accountsTotalBalanceAmountValue: Flow<Long> =
-        getAccountsTotalBalanceAmountValueUseCase()
-    private val accountsTotalMinimumBalanceAmountValue: Flow<Long> =
-        getAccountsTotalMinimumBalanceAmountValueUseCase()
+        getAllAccountsTotalBalanceAmountValueUseCase()
+    private val allAccountsTotalMinimumBalanceAmountValue: Flow<Long> =
+        getAllAccountsTotalMinimumBalanceAmountValueUseCase()
     // endregion
 
     // region UI state
@@ -146,7 +146,7 @@ internal class HomeScreenViewModel(
                     transactionListItemDataList = homeListItemViewData,
                     accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.first()
                         .orZero(),
-                    accountsTotalMinimumBalanceAmountValue = accountsTotalMinimumBalanceAmountValue.first()
+                    allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue.first()
                         .orZero(),
                     overviewCardData = overviewCardData.orDefault(),
                     pieChartData = PieChartData(

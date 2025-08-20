@@ -16,17 +16,18 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account
 
+import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-public class GetAccountsTotalBalanceAmountValueUseCase(
+public class GetAllAccountsTotalMinimumBalanceAmountValueUseCase(
     private val accountRepository: AccountRepository,
 ) {
     public operator fun invoke(): Flow<Long> {
         return accountRepository.getAllAccountsFlow().map {
             it.sumOf { account ->
-                account.balanceAmount.value
+                account.minimumAccountBalanceAmount?.value.orZero()
             }
         }
     }

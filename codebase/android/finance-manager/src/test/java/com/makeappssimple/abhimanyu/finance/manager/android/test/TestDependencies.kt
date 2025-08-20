@@ -43,9 +43,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountUseCase
@@ -63,6 +65,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RecalculateTotalUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RestoreDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.ShouldShowBackupCardUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
@@ -106,6 +109,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.Navi
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAllAccountsListItemDataListUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetDefaultAccountIdFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.use_case.AddAccountScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.use_case.EditAccountScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.use_case.AddCategoryScreenDataValidationUseCase
@@ -243,12 +248,12 @@ internal class TestDependencies {
         accountRepository = accountRepository,
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
     )
-    val getAccountsTotalBalanceAmountValueUseCase =
-        GetAccountsTotalBalanceAmountValueUseCase(
+    val getAllAccountsTotalBalanceAmountValueUseCase =
+        GetAllAccountsTotalBalanceAmountValueUseCase(
             accountRepository = accountRepository,
         )
-    val getAccountsTotalMinimumBalanceAmountValueUseCase =
-        GetAccountsTotalMinimumBalanceAmountValueUseCase(
+    val getAllAccountsTotalMinimumBalanceAmountValueUseCase =
+        GetAllAccountsTotalMinimumBalanceAmountValueUseCase(
             accountRepository = accountRepository,
         )
     val updateAccountsUseCase = UpdateAccountsUseCase(
@@ -266,6 +271,25 @@ internal class TestDependencies {
         dateTimeKit = dateTimeKit,
         insertTransactionsUseCase = insertTransactionsUseCase,
         updateAccountsUseCase = updateAccountsUseCase,
+    )
+
+    val deleteAccountByIdUseCase = DeleteAccountByIdUseCase(
+        accountRepository = accountRepository,
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+    )
+    val getAllAccountsFlowUseCase = GetAllAccountsFlowUseCase(
+        accountRepository = accountRepository,
+    )
+    val checkIfAccountIsUsedInTransactionsUseCase =
+        CheckIfAccountIsUsedInTransactionsUseCase(
+            transactionRepository = transactionRepository,
+        )
+    val getAllAccountsListItemDataListUseCase =
+        GetAllAccountsListItemDataListUseCase(
+            checkIfAccountIsUsedInTransactionsUseCase = checkIfAccountIsUsedInTransactionsUseCase,
+        )
+    val getDefaultAccountIdFlowUseCase = GetDefaultAccountIdFlowUseCase(
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
     )
     // endregion
 

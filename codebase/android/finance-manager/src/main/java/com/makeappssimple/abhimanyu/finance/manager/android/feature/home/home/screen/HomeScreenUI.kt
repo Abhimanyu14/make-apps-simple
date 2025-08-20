@@ -127,7 +127,7 @@ internal fun HomeScreenUI(
                     isClickable = true,
                     isLoading = uiState.isLoading,
                     totalBalanceAmount = uiState.accountsTotalBalanceAmountValue,
-                    totalMinimumBalanceAmount = uiState.accountsTotalMinimumBalanceAmountValue,
+                    totalMinimumBalanceAmount = uiState.allAccountsTotalMinimumBalanceAmountValue,
                 ),
                 handleEvent = { event ->
                     when (event) {

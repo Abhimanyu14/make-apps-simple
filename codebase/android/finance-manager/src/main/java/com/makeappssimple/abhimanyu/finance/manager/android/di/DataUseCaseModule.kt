@@ -28,9 +28,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetIsAccountsUsedInTransactionFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
@@ -98,19 +98,19 @@ public class DataUseCaseModule {
     }
 
     @Single
-    internal fun providesGetAccountsTotalBalanceAmountValueUseCase(
+    internal fun providesGetAllAccountsTotalBalanceAmountValueUseCase(
         accountRepository: AccountRepository,
-    ): GetAccountsTotalBalanceAmountValueUseCase {
-        return GetAccountsTotalBalanceAmountValueUseCase(
+    ): GetAllAccountsTotalBalanceAmountValueUseCase {
+        return GetAllAccountsTotalBalanceAmountValueUseCase(
             accountRepository = accountRepository,
         )
     }
 
     @Single
-    internal fun providesGetAccountsTotalMinimumBalanceAmountValueUseCase(
+    internal fun providesGetAllAccountsTotalMinimumBalanceAmountValueUseCase(
         accountRepository: AccountRepository,
-    ): GetAccountsTotalMinimumBalanceAmountValueUseCase {
-        return GetAccountsTotalMinimumBalanceAmountValueUseCase(
+    ): GetAllAccountsTotalMinimumBalanceAmountValueUseCase {
+        return GetAllAccountsTotalMinimumBalanceAmountValueUseCase(
             accountRepository = accountRepository,
         )
     }

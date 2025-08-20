@@ -20,6 +20,8 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
@@ -28,8 +30,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.li
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.state.AccountsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.state.AccountsScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalBalanceAmountValueUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAllAccountsListItemDataListUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetDefaultAccountIdFlowUseCase
 import kotlinx.collections.immutable.ImmutableList
@@ -40,6 +40,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -51,8 +52,8 @@ internal class AccountsScreenViewModel(
     private val coroutineScope: CoroutineScope,
     private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
-    private val getAccountsTotalBalanceAmountValueUseCase: GetAccountsTotalBalanceAmountValueUseCase,
-    private val getAccountsTotalMinimumBalanceAmountValueUseCase: GetAccountsTotalMinimumBalanceAmountValueUseCase,
+    private val getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
+    private val getAllAccountsTotalMinimumBalanceAmountValueUseCase: GetAllAccountsTotalMinimumBalanceAmountValueUseCase,
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
     private val getAllAccountsListItemDataListUseCase: GetAllAccountsListItemDataListUseCase,
     private val getDefaultAccountIdFlowUseCase: GetDefaultAccountIdFlowUseCase,
@@ -107,7 +108,7 @@ internal class AccountsScreenViewModel(
                 isLoading = isLoading,
                 accountsListItemDataList = allAccountsListItemDataList,
                 accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
-                accountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
+                allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
             )
         }
     }
@@ -134,13 +135,9 @@ internal class AccountsScreenViewModel(
     ) {
         allAccounts = updatedAllAccounts
         allAccountsTotalBalanceAmountValue =
-            getAccountsTotalBalanceAmountValueUseCase(
-                allAccounts = updatedAllAccounts
-            )
+            getAllAccountsTotalBalanceAmountValueUseCase().first()
         allAccountsTotalMinimumBalanceAmountValue =
-            getAccountsTotalMinimumBalanceAmountValueUseCase(
-                allAccounts = updatedAllAccounts
-            )
+            getAllAccountsTotalMinimumBalanceAmountValueUseCase().first()
         allAccountsListItemDataList = getAllAccountsListItemDataListUseCase(
             allAccounts = allAccounts,
             defaultAccountId = defaultAccountId,

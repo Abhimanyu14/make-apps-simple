@@ -21,8 +21,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalBalanceAmountValueUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetAllAccountsListItemDataListUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetDefaultAccountIdFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.use_case.GetIsAccountsUsedInTransactionFlowUseCase
@@ -40,16 +38,6 @@ import org.koin.core.annotation.Single
 @Module
 public class FeatureUseCaseModule {
     // region accounts
-    @Single
-    internal fun providesGetAccountsTotalBalanceAmountValueUseCase(): GetAccountsTotalBalanceAmountValueUseCase {
-        return GetAccountsTotalBalanceAmountValueUseCase()
-    }
-
-    @Single
-    internal fun providesGetAccountsTotalMinimumBalanceAmountValueUseCase(): GetAccountsTotalMinimumBalanceAmountValueUseCase {
-        return GetAccountsTotalMinimumBalanceAmountValueUseCase()
-    }
-
     @Single
     internal fun providesGetAllAccountsListItemDataListUseCase(
         checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,

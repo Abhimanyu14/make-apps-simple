@@ -198,7 +198,7 @@ internal fun AccountsScreenUI(
                         isBalanceVisible = true,
                         isLoading = uiState.isLoading,
                         totalBalanceAmount = uiState.accountsTotalBalanceAmountValue,
-                        totalMinimumBalanceAmount = uiState.accountsTotalMinimumBalanceAmountValue,
+                        totalMinimumBalanceAmount = uiState.allAccountsTotalMinimumBalanceAmountValue,
                     ),
                 )
             }
