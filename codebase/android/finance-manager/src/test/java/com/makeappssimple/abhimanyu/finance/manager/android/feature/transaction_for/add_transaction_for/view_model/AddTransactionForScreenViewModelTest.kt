@@ -203,9 +203,13 @@ internal class AddTransactionForScreenViewModelTest {
                     testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
 
-                val testTitle = TextFieldValue("test-transaction-for")
-                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                val testTitle = TextFieldValue(
+                    text = "test-transaction-for",
+                )
+                val initialState = uiStateTurbine.awaitItem()
+                assertThat(initialState.isLoading).isTrue()
+                val postDataFetchCompletion = uiStateTurbine.awaitItem()
+                assertThat(postDataFetchCompletion.isLoading).isFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     testTitle
                 )
@@ -216,7 +220,10 @@ internal class AddTransactionForScreenViewModelTest {
                 assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
                 assertThat(
                     testDependencies.fakeTransactionForDao.getAllTransactionForValues()
-                        .first().title
+                        .find {
+                            it.id == 1
+                        }
+                        ?.title
                 ).isEqualTo(testTitle.text)
                 assertThat(
                     testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange

@@ -20,7 +20,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.cancel
@@ -106,13 +105,6 @@ internal class TransactionForValuesScreenViewModelTest {
     @Test
     fun deleteTransactionFor_shouldDeleteAndResetId() =
         testDependencies.runTestWithTimeout {
-            val testTransactionForId = 123
-            testDependencies.fakeTransactionForDao.insertTransactionForValues(
-                TransactionForEntity(
-                    id = testTransactionForId,
-                    title = "test-transaction-for",
-                ),
-            )
             transactionForValuesScreenViewModel.uiState.test {
                 assertThat(awaitItem().isLoading).isTrue()
                 val postDataFetchCompletion = awaitItem()
@@ -122,7 +114,7 @@ internal class TransactionForValuesScreenViewModelTest {
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(
-                    testTransactionForId
+                    testDependencies.testTransactionForId1
                 )
                 transactionForValuesScreenViewModel.uiStateEvents.deleteTransactionFor()
                 val result = awaitItem()

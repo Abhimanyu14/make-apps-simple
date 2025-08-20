@@ -108,8 +108,8 @@ public class FakeAccountDaoImpl : AccountDao {
                 )
             }
         }
-        accountsFlow.value =
-            this@FakeAccountDaoImpl.accounts.sortedBy { accountEntity ->
+        accountsFlow.value = this@FakeAccountDaoImpl.accounts
+            .sortedBy { accountEntity ->
                 accountEntity.id
             }
         return result

@@ -91,10 +91,17 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fa
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionForDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSourceImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AmountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.DatabaseTransactionProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.fake.FakeDatabaseTransactionProviderImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
@@ -106,6 +113,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.e
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.use_case.AddTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
@@ -383,6 +391,64 @@ internal class TestDependencies {
         getAllTransactionDataUseCase = getAllTransactionDataUseCase,
         updateAccountsUseCase = updateAccountsUseCase,
     )
+    // endregion
+
+    // region pre-populate test data
+    val testAccountId1 = 100
+    val testAccountName1 = "test-account-100"
+    val testAccountEntity1 = AccountEntity(
+        balanceAmount = AmountEntity(
+            value = 100000,
+        ),
+        id = testAccountId1,
+        type = AccountType.E_WALLET,
+        name = testAccountName1,
+    )
+    val testCategoryId1 = 100
+    val testCategoryTitle1 = "test-category-100"
+    val testCategoryEntity1 = CategoryEntity(
+        id = testCategoryId1,
+        emoji = "💳",
+        title = testCategoryTitle1,
+        transactionType = TransactionType.EXPENSE,
+    )
+    val testTransactionForId1 = 100
+    val testTransactionForTitle1 = "test-transaction-for-100"
+    val testTransactionForEntity1 = TransactionForEntity(
+        id = testTransactionForId1,
+        title = testTransactionForTitle1,
+    )
+    val testTransactionId1 = 100
+    val testTransactionTitle1 = "test-transaction-100"
+    val testTransactionEntity1 = TransactionEntity(
+        amount = AmountEntity(
+            value = 1000,
+        ),
+        categoryId = testCategoryId1,
+        id = testTransactionId1,
+        accountFromId = testAccountId1,
+        transactionForId = testTransactionForId1,
+        creationTimestamp = 1000000L,
+        transactionTimestamp = 1000000L,
+        title = testTransactionTitle1,
+    )
+
+    init {
+        testScope.launch {
+            fakeAccountDao.insertAccounts(
+                testAccountEntity1,
+            )
+            fakeCategoryDao.insertCategories(
+                testCategoryEntity1,
+            )
+            fakeTransactionForDao.insertTransactionForValues(
+                testTransactionForEntity1,
+            )
+            fakeTransactionDao.insertTransaction(
+                testTransactionEntity1,
+            )
+        }
+    }
     // endregion
 
     // region runTestWithTimeout

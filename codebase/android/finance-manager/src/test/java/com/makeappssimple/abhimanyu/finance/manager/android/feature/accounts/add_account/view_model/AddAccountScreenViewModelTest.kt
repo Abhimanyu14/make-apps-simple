@@ -149,29 +149,22 @@ internal class AddAccountScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_accountAlreadyExists_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
-            val updatedName1 = "CUB"
-            val updatedValue1 = TextFieldValue(
-                text = updatedName1,
-            )
-            val updatedName2 = "IOB"
-            val updatedValue2 = TextFieldValue(
-                text = updatedName2,
-            )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue1)
-                assertThat(awaitItem().nameTextFieldValue.text).isEqualTo(
-                    updatedName1
-                )
-                addAccountScreenViewModel.uiStateEvents.insertAccount().join()
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue2)
-                assertThat(awaitItem().nameTextFieldValue.text).isEqualTo(
-                    updatedName2
-                )
+                val initialState = awaitItem()
+                assertThat(initialState.isLoading).isTrue()
+                val postDataFetchCompletion = awaitItem()
+                assertThat(postDataFetchCompletion.isLoading).isFalse()
 
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue1)
+                addAccountScreenViewModel.uiStateEvents.updateName(
+                    addAccountScreenViewModel.uiState.value.nameTextFieldValue.copy(
+                        text = testDependencies.testAccountName1,
+                    )
+                )
 
                 val result = awaitItem()
+                assertThat(result.nameTextFieldValue.text).isEqualTo(
+                    testDependencies.testAccountName1
+                )
                 assertThat(result.isCtaButtonEnabled).isFalse()
                 assertThat(result.nameError).isEqualTo(
                     AddAccountScreenNameError.AccountExists
@@ -258,8 +251,12 @@ internal class AddAccountScreenViewModelTest {
                         ?: -1L
 
                 val testAccountId = 1
-                val testAccountName = TextFieldValue("test-bank")
-                val testMinimumAccountBalanceAmount = TextFieldValue("1000")
+                val testAccountName = TextFieldValue(
+                    text = "test-bank",
+                )
+                val testMinimumAccountBalanceAmount = TextFieldValue(
+                    text = "1000",
+                )
                 val testAccountType = AccountType.BANK
                 val testAccount = Account(
                     id = testAccountId,
@@ -284,8 +281,11 @@ internal class AddAccountScreenViewModelTest {
 
                 assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
                 assertThat(
-                    testDependencies.fakeAccountDao.getAllAccounts().first()
-                        .asExternalModel()
+                    testDependencies.fakeAccountDao.getAllAccounts()
+                        .find {
+                            it.id == testAccountId
+                        }
+                        ?.asExternalModel()
                 ).isEqualTo(
                     testAccount
                 )
@@ -315,8 +315,12 @@ internal class AddAccountScreenViewModelTest {
                         ?: -1L
 
                 val testAccountId = 1
-                val testAccountName = TextFieldValue("test-wallet")
-                val testMinimumAccountBalanceAmount = TextFieldValue("1000")
+                val testAccountName = TextFieldValue(
+                    text = "test-wallet",
+                )
+                val testMinimumAccountBalanceAmount = TextFieldValue(
+                    text = "1000",
+                )
                 val testAccountType = AccountType.E_WALLET
                 val testSelectedAccountTypeIndex = 1
                 val testAccount = Account(
@@ -344,8 +348,11 @@ internal class AddAccountScreenViewModelTest {
 
                 assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
                 assertThat(
-                    testDependencies.fakeAccountDao.getAllAccounts().first()
-                        .asExternalModel()
+                    testDependencies.fakeAccountDao.getAllAccounts()
+                        .find {
+                            it.id == 1
+                        }
+                        ?.asExternalModel()
                 ).isEqualTo(
                     testAccount
                 )
