@@ -190,7 +190,6 @@ internal class AnalysisScreenViewModelTest {
             )
             assertThat(result.isBottomSheetVisible).isFalse()
             assertThat(result.isLoading).isTrue()
-            assertThat(result.selectedFilter as Filter).isEqualTo(Filter())
             assertThat(result.selectedFilter).isEqualTo(Filter())
             assertThat(result.analysisListItemData).isEmpty()
             assertThat(result.transactionTypesChipUIData).isEmpty()

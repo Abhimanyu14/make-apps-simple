@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.BarcodesNavigationDirections
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKitImpl
+import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl

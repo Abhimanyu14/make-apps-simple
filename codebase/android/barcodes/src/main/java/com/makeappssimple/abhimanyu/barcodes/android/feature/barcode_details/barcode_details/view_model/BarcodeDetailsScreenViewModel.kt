@@ -33,7 +33,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.bar
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.navigation.BarcodeDetailsScreenArgs
 import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
-import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKit
+import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import kotlinx.coroutines.CoroutineScope

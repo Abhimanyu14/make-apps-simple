@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.navigation.ScanBarcodeScreenArgs
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.scan_barcode.state.ScanBarcodeScreenUIState
-import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKit
+import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import kotlinx.coroutines.CoroutineScope

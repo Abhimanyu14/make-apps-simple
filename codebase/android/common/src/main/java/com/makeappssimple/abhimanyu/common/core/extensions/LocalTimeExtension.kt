@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.makeappssimple.abhimanyu.common.core.datetime.getSystemDefaultZoneId
+import com.makeappssimple.abhimanyu.common.core.date_time.getSystemDefaultZoneId
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

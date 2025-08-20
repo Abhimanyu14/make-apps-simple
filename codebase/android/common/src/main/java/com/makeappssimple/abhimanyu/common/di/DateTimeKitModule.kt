@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKit
-import com.makeappssimple.abhimanyu.common.core.datetime.DateTimeKitImpl
+import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import kotlin.time.ExperimentalTime

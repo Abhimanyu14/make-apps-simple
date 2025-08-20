@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.core.datetime
+package com.makeappssimple.abhimanyu.common.core.date_time
 
 import java.time.ZoneId
 
