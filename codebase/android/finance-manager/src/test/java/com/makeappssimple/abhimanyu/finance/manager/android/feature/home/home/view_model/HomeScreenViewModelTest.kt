@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.view_model
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
+package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.core.app_version.fake.FakeAppVersionKitImpl
 import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.common.core.json_reader.fake.FakeJsonReaderKitImpl
 import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
 import com.makeappssimple.abhimanyu.common.core.json_writer.fake.FakeJsonWriterKitImpl
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.fake.FakeAlarmKitImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
@@ -43,14 +40,16 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data.TransactionDataRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_for.TransactionForRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalBalanceAmountValueUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.BackupDataUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RecalculateTotalUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RestoreDataUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.ShouldShowBackupCardUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.CategoryDao
@@ -64,25 +63,18 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fa
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao.fake.FakeTransactionForDaoImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.datasource.CommonDataSourceImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AmountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.DatabaseTransactionProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.transaction_provider.fake.FakeDatabaseTransactionProviderImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.fake.FakeFinanceManagerPreferencesDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegateImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardViewModelData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
@@ -91,7 +83,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.time.Duration.Companion.seconds
 
-internal class SettingsScreenViewModelTest {
+internal class HomeScreenViewModelTest {
     // region coroutines setup
     private val testCoroutineDispatcher = StandardTestDispatcher()
     private val testScope = TestScope(
@@ -103,6 +95,19 @@ internal class SettingsScreenViewModelTest {
     // endregion
 
     // region test setup
+    private val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
+    private val accountRepository: AccountRepository = AccountRepositoryImpl(
+        accountDao = fakeAccountDao,
+        dispatcherProvider = testDispatcherProvider,
+    )
+    private val getAccountsTotalBalanceAmountValueUseCase =
+        GetAccountsTotalBalanceAmountValueUseCase(
+            accountRepository = accountRepository,
+        )
+    private val getAccountsTotalMinimumBalanceAmountValueUseCase =
+        GetAccountsTotalMinimumBalanceAmountValueUseCase(
+            accountRepository = accountRepository,
+        )
     private val navigationKit: NavigationKit = NavigationKitImpl(
         coroutineScope = testScope.backgroundScope,
     )
@@ -110,9 +115,6 @@ internal class SettingsScreenViewModelTest {
         ScreenUIStateDelegateImpl(
             coroutineScope = testScope.backgroundScope,
         )
-    private val alarmKit: AlarmKit = FakeAlarmKitImpl()
-    private val appVersionKit: AppVersionKit = FakeAppVersionKitImpl()
-    private val dateTimeKit: DateTimeKit = DateTimeKitImpl()
     private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource =
         FakeFinanceManagerPreferencesDataSource()
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
@@ -120,6 +122,11 @@ internal class SettingsScreenViewModelTest {
             dispatcherProvider = testDispatcherProvider,
             financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
         )
+    private val shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase =
+        ShouldShowBackupCardUseCase(
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+        )
+    private val dateTimeKit: DateTimeKit = DateTimeKitImpl()
     private val fakeCategoryDao: CategoryDao = FakeCategoryDaoImpl()
     private val categoryRepository: CategoryRepository = CategoryRepositoryImpl(
         categoryDao = fakeCategoryDao,
@@ -128,12 +135,6 @@ internal class SettingsScreenViewModelTest {
     private val getAllCategoriesUseCase = GetAllCategoriesUseCase(
         categoryRepository = categoryRepository,
     )
-    private val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
-    private val accountRepository: AccountRepository =
-        AccountRepositoryImpl(
-            accountDao = fakeAccountDao,
-            dispatcherProvider = testDispatcherProvider,
-        )
     private val getAllAccountsUseCase = GetAllAccountsUseCase(
         accountRepository = accountRepository,
     )
@@ -148,7 +149,7 @@ internal class SettingsScreenViewModelTest {
         GetAllTransactionForValuesUseCase(
             transactionForRepository = transactionForRepository,
         )
-    private val fakeDatabaseTransactionProvider: DatabaseTransactionProvider =
+    private val databaseTransactionProvider: DatabaseTransactionProvider =
         FakeDatabaseTransactionProviderImpl()
     private val fakeTransactionDao: TransactionDao = FakeTransactionDaoImpl()
     private val fakeTransactionDataDao: TransactionDataDao =
@@ -161,7 +162,7 @@ internal class SettingsScreenViewModelTest {
     private val commonDataSource: CommonDataSource = CommonDataSourceImpl(
         accountDao = fakeAccountDao,
         categoryDao = fakeCategoryDao,
-        databaseTransactionProvider = fakeDatabaseTransactionProvider,
+        databaseTransactionProvider = databaseTransactionProvider,
         transactionDao = fakeTransactionDao,
         transactionDataDao = fakeTransactionDataDao,
         transactionForDao = fakeTransactionForDao,
@@ -176,7 +177,7 @@ internal class SettingsScreenViewModelTest {
         transactionRepository = transactionRepository,
     )
     private val jsonWriterKit: JsonWriterKit = FakeJsonWriterKitImpl()
-    private val backupDataUseCase = BackupDataUseCase(
+    private val backupDataUseCase: BackupDataUseCase = BackupDataUseCase(
         dateTimeKit = dateTimeKit,
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         getAllCategoriesUseCase = getAllCategoriesUseCase,
@@ -191,85 +192,39 @@ internal class SettingsScreenViewModelTest {
             dispatcherProvider = testDispatcherProvider,
             transactionDataDao = fakeTransactionDataDao,
         )
-    private val getAllTransactionDataUseCase = GetAllTransactionDataUseCase(
-        transactionDataRepository = transactionDataRepository,
-    )
-    private val updateAccountsUseCase = UpdateAccountsUseCase(
-        accountRepository = accountRepository,
-        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-    )
-    private val recalculateTotalUseCase = RecalculateTotalUseCase(
-        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        getAllAccountsUseCase = getAllAccountsUseCase,
-        getAllTransactionDataUseCase = getAllTransactionDataUseCase,
-        updateAccountsUseCase = updateAccountsUseCase,
-    )
-    private val jsonReaderKit: JsonReaderKit = FakeJsonReaderKitImpl()
+    private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase =
+        GetRecentTransactionDataFlowUseCase(
+            transactionDataRepository = transactionDataRepository,
+        )
+    private val getTransactionByIdUseCase: GetTransactionByIdUseCase =
+        GetTransactionByIdUseCase(
+            transactionRepository = transactionRepository,
+        )
+    private val getTransactionsBetweenTimestampsUseCase =
+        GetTransactionsBetweenTimestampsUseCase(
+            transactionRepository = transactionRepository,
+        )
     private val logKit: LogKit = FakeLogKitImpl()
-    private val restoreDataUseCase = RestoreDataUseCase(
-        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-        jsonReaderKit = jsonReaderKit,
-        logKit = logKit,
-        transactionRepository = transactionRepository,
-    )
 
-    private lateinit var settingsScreenViewModel: SettingsScreenViewModel
+    private lateinit var homeScreenViewModel: HomeScreenViewModel
 
     @Before
     fun setUp() {
-        testScope.launch {
-            fakeAccountDao.insertAccounts(
-                AccountEntity(
-                    balanceAmount = AmountEntity(
-                        value = 1000,
-                    ),
-                    id = 1,
-                    type = AccountType.E_WALLET,
-                    name = "test-account",
-                ),
-            )
-            fakeCategoryDao.insertCategories(
-                CategoryEntity(
-                    id = 1,
-                    emoji = "💳",
-                    title = "test-category",
-                    transactionType = TransactionType.EXPENSE,
-                ),
-            )
-            fakeTransactionForDao.insertTransactionForValues(
-                TransactionForEntity(
-                    id = 1,
-                    title = "test-transaction-for",
-                ),
-            )
-            fakeTransactionDao.insertTransaction(
-                TransactionEntity(
-                    amount = AmountEntity(
-                        value = 100,
-                    ),
-                    categoryId = 1,
-                    id = 123,
-                    accountFromId = 1,
-                    transactionForId = 1,
-                    creationTimestamp = 100L,
-                    transactionTimestamp = 100L,
-                    title = "test-transaction",
-                ),
-            )
-        }
-        settingsScreenViewModel = SettingsScreenViewModel(
+        homeScreenViewModel = HomeScreenViewModel(
+            getAccountsTotalBalanceAmountValueUseCase = getAccountsTotalBalanceAmountValueUseCase,
+            getAccountsTotalMinimumBalanceAmountValueUseCase = getAccountsTotalMinimumBalanceAmountValueUseCase,
             navigationKit = navigationKit,
             screenUIStateDelegate = screenUIStateDelegate,
-            alarmKit = alarmKit,
-            appVersionKit = appVersionKit,
+            shouldShowBackupCardUseCase = shouldShowBackupCardUseCase,
             backupDataUseCase = backupDataUseCase,
             coroutineScope = testScope.backgroundScope,
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
-            recalculateTotalUseCase = recalculateTotalUseCase,
-            restoreDataUseCase = restoreDataUseCase,
+            dateTimeKit = dateTimeKit,
+            getRecentTransactionDataFlowUseCase = getRecentTransactionDataFlowUseCase,
+            getTransactionByIdUseCase = getTransactionByIdUseCase,
+            getTransactionsBetweenTimestampsUseCase = getTransactionsBetweenTimestampsUseCase,
             logKit = logKit,
         )
-        settingsScreenViewModel.initViewModel()
+        homeScreenViewModel.initViewModel()
     }
 
     @After
@@ -281,77 +236,25 @@ internal class SettingsScreenViewModelTest {
     // region initial state
     @Test
     fun uiState_initialState() = runTestWithTimeout {
-        settingsScreenViewModel.uiState.test {
+        homeScreenViewModel.uiState.test {
             val result = awaitItem()
 
+            assertThat(result.isBackupCardVisible).isFalse()
+            assertThat(result.isBalanceVisible).isFalse()
             assertThat(result.isLoading).isTrue()
-            assertThat(result.isReminderEnabled).isNull()
-            assertThat(result.screenSnackbarType).isEqualTo(
-                SettingsScreenSnackbarType.None
+            assertThat(result.isRecentTransactionsTrailingTextVisible).isFalse()
+            assertThat(result.overviewTabSelectionIndex).isEqualTo(0)
+            assertThat(result.transactionListItemDataList).isEmpty()
+            assertThat(result.accountsTotalBalanceAmountValue).isEqualTo(0)
+            assertThat(result.accountsTotalMinimumBalanceAmountValue).isEqualTo(
+                0
             )
-            assertThat(result.appVersion).isNull()
+            assertThat(result.overviewCardData).isEqualTo(
+                OverviewCardViewModelData()
+            )
+            assertThat(result.pieChartData).isEqualTo(PieChartData())
         }
     }
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    // endregion
-
-    // region state events
-    @Test
-    fun resetScreenSnackbarType_shouldSetSnackbarTypeToNone() =
-        runTestWithTimeout {
-            settingsScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
-                )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
-                )
-                settingsScreenViewModel.uiStateEvents.updateScreenSnackbarType(
-                    SettingsScreenSnackbarType.CancelReminderSuccessful
-                )
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.CancelReminderSuccessful
-                )
-
-                settingsScreenViewModel.uiStateEvents.resetScreenSnackbarType()
-
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
-                )
-            }
-        }
-
-    @Test
-    fun updateScreenSnackbarType_shouldUpdateScreenSnackbarType() =
-        runTestWithTimeout {
-            settingsScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
-                )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
-                )
-
-                settingsScreenViewModel.uiStateEvents.updateScreenSnackbarType(
-                    SettingsScreenSnackbarType.CancelReminderSuccessful
-                )
-
-                val result = awaitItem()
-                assertThat(result.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.CancelReminderSuccessful
-                )
-            }
-        }
     // endregion
 
     // region common
