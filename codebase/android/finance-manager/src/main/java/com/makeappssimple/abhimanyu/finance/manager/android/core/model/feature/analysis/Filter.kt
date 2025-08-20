@@ -20,7 +20,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import java.time.LocalDate
 
-public class Filter(
+public data class Filter(
     private val selectedExpenseCategoryIndices: List<Int> = emptyList(),
     private val selectedIncomeCategoryIndices: List<Int> = emptyList(),
     private val selectedInvestmentCategoryIndices: List<Int> = emptyList(),
