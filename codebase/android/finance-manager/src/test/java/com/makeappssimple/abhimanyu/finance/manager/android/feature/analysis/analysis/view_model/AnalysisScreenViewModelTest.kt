@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountTy
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
+import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import org.junit.After

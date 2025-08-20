@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.feature.test
+package com.makeappssimple.abhimanyu.finance.manager.android.test
 
 import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
 import com.makeappssimple.abhimanyu.common.core.app_version.fake.FakeAppVersionKitImpl

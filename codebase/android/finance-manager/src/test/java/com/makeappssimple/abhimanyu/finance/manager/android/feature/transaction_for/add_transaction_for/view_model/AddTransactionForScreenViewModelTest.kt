@@ -23,8 +23,8 @@ import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenTitleError
+import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before

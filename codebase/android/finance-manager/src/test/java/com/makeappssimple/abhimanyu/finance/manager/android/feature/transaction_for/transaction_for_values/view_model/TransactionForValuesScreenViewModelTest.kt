@@ -21,8 +21,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.test.TestDependencies
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
