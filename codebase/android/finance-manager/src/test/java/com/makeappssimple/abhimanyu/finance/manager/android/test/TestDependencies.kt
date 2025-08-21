@@ -71,10 +71,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetMaxRefundAmountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTitleSuggestionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionDataByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
@@ -117,6 +120,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.a
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.use_case.EditCategoryScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.use_case.AddTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.use_case.AddTransactionScreenDataValidationUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -215,6 +219,19 @@ internal class TestDependencies {
     val uriDecoder: UriDecoder = FakeUriDecoderImpl()
     // endregion
 
+    // region transaction data use cases
+    val getRecentTransactionDataFlowUseCase =
+        GetRecentTransactionDataFlowUseCase(
+            transactionDataRepository = transactionDataRepository,
+        )
+    val getAllTransactionDataUseCase = GetAllTransactionDataUseCase(
+        transactionDataRepository = transactionDataRepository,
+    )
+    val getTransactionDataByIdUseCase = GetTransactionDataByIdUseCase(
+        transactionDataRepository = transactionDataRepository,
+    )
+    // endregion
+
     // region transaction use cases
     val insertTransactionsUseCase = InsertTransactionsUseCase(
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
@@ -231,6 +248,17 @@ internal class TestDependencies {
             transactionRepository = transactionRepository,
         )
     val deleteTransactionUseByIdCase = DeleteTransactionUseByIdCase(
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+        transactionRepository = transactionRepository,
+    )
+    val getTitleSuggestionsUseCase = GetTitleSuggestionsUseCase(
+        transactionRepository = transactionRepository,
+    )
+    val getMaxRefundAmountUseCase = GetMaxRefundAmountUseCase(
+        getTransactionDataByIdUseCase = getTransactionDataByIdUseCase,
+    )
+    val insertTransactionUseCase = InsertTransactionUseCase(
+        dateTimeKit = dateTimeKit,
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         transactionRepository = transactionRepository,
     )
@@ -377,19 +405,6 @@ internal class TestDependencies {
     )
     // endregion
 
-    // region transaction data use cases
-    val getRecentTransactionDataFlowUseCase =
-        GetRecentTransactionDataFlowUseCase(
-            transactionDataRepository = transactionDataRepository,
-        )
-    val getAllTransactionDataUseCase = GetAllTransactionDataUseCase(
-        transactionDataRepository = transactionDataRepository,
-    )
-    val getTransactionDataByIdUseCase = GetTransactionDataByIdUseCase(
-        transactionDataRepository = transactionDataRepository,
-    )
-    // endregion
-
     // region common use cases
     val shouldShowBackupCardUseCase = ShouldShowBackupCardUseCase(
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
@@ -415,6 +430,11 @@ internal class TestDependencies {
         getAllTransactionDataUseCase = getAllTransactionDataUseCase,
         updateAccountsUseCase = updateAccountsUseCase,
     )
+    // endregion
+
+    // region feature use cases
+    val addTransactionScreenDataValidationUseCase =
+        AddTransactionScreenDataValidationUseCase()
     // endregion
 
     // region pre-populate test data
