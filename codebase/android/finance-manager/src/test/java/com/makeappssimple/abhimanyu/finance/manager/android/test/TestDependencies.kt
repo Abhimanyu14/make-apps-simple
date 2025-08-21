@@ -69,6 +69,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetMaxRefundAmountUseCase
@@ -79,6 +80,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
@@ -230,6 +232,9 @@ internal class TestDependencies {
     val getTransactionDataByIdUseCase = GetTransactionDataByIdUseCase(
         transactionDataRepository = transactionDataRepository,
     )
+    val getAllTransactionDataFlowUseCase = GetAllTransactionDataFlowUseCase(
+        transactionDataRepository = transactionDataRepository,
+    )
     // endregion
 
     // region transaction use cases
@@ -259,6 +264,10 @@ internal class TestDependencies {
     )
     val insertTransactionUseCase = InsertTransactionUseCase(
         dateTimeKit = dateTimeKit,
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+        transactionRepository = transactionRepository,
+    )
+    val updateTransactionsUseCase = UpdateTransactionsUseCase(
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         transactionRepository = transactionRepository,
     )
