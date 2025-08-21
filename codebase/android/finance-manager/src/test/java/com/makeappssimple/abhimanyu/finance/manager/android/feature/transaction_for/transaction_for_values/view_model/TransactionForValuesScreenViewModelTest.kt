@@ -110,7 +110,7 @@ internal class TransactionForValuesScreenViewModelTest {
                 val postDataFetchCompletion = awaitItem()
                 assertThat(postDataFetchCompletion.isLoading).isFalse()
                 assertThat(postDataFetchCompletion.transactionForListItemDataList.size).isEqualTo(
-                    1
+                    2
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(
@@ -120,7 +120,7 @@ internal class TransactionForValuesScreenViewModelTest {
                 val result = awaitItem()
                 assertThat(result.isLoading).isFalse()
                 assertThat(result.transactionForListItemDataList.size).isEqualTo(
-                    0
+                    1
                 )
             }
         }

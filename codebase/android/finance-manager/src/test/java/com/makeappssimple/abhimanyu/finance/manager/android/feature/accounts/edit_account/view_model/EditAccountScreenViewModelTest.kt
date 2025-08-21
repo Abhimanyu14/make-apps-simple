@@ -31,18 +31,18 @@ import kotlin.test.Test
 
 internal class EditAccountScreenViewModelTest {
     // region test setup
-    private val savedStateHandle: SavedStateHandle = SavedStateHandle(
-        initialState = mapOf(
-            "accountId" to 1,
-        ),
-    )
-
-    private lateinit var testDependencies: TestDependencies
     private lateinit var viewModel: EditAccountScreenViewModel
+    private lateinit var savedStateHandle: SavedStateHandle
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
+        savedStateHandle = SavedStateHandle(
+            initialState = mapOf(
+                "accountId" to testDependencies.testAccountId1,
+            ),
+        )
         viewModel = EditAccountScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             savedStateHandle = savedStateHandle,

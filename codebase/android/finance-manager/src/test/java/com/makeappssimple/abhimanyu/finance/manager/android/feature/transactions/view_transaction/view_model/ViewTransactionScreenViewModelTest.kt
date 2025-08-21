@@ -19,75 +19,27 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AmountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 internal class ViewTransactionScreenViewModelTest {
     // region test setup
-    private val savedStateHandle: SavedStateHandle = SavedStateHandle(
-        initialState = mapOf(
-            "transactionId" to "123",
-        ),
-    )
-
+    private lateinit var savedStateHandle: SavedStateHandle
     private lateinit var testDependencies: TestDependencies
     private lateinit var viewTransactionScreenViewModel: ViewTransactionScreenViewModel
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
-        testDependencies.testScope.launch {
-            testDependencies.fakeAccountDao.insertAccounts(
-                AccountEntity(
-                    balanceAmount = AmountEntity(
-                        value = 1000,
-                    ),
-                    id = 1,
-                    type = AccountType.E_WALLET,
-                    name = "test-account",
-                ),
-            )
-            testDependencies.fakeCategoryDao.insertCategories(
-                CategoryEntity(
-                    id = 1,
-                    emoji = "💳",
-                    title = "test-category",
-                    transactionType = TransactionType.EXPENSE,
-                ),
-            )
-            testDependencies.fakeTransactionForDao.insertTransactionForValues(
-                TransactionForEntity(
-                    id = 1,
-                    title = "test-transaction-for",
-                ),
-            )
-            testDependencies.fakeTransactionDao.insertTransaction(
-                TransactionEntity(
-                    amount = AmountEntity(
-                        value = 100,
-                    ),
-                    categoryId = 1,
-                    id = 123,
-                    accountFromId = 1,
-                    transactionForId = 1,
-                    creationTimestamp = 100L,
-                    transactionTimestamp = 100L,
-                    title = "test-transaction",
-                ),
-            )
-        }
+        savedStateHandle = SavedStateHandle(
+            initialState = mapOf(
+                "transactionId" to testDependencies.testTransactionForId1.toString(),
+            ),
+        )
         viewTransactionScreenViewModel = ViewTransactionScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             screenUIStateDelegate = testDependencies.screenUIStateDelegate,

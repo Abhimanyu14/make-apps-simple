@@ -34,18 +34,18 @@ import org.junit.Test
 
 internal class AddCategoryScreenViewModelTest {
     // region test setup
-    private val savedStateHandle: SavedStateHandle = SavedStateHandle(
-        initialState = mapOf(
-            "transactionType" to TransactionType.EXPENSE.title,
-        ),
-    )
-
-    private lateinit var testDependencies: TestDependencies
     private lateinit var addCategoryScreenViewModel: AddCategoryScreenViewModel
+    private lateinit var savedStateHandle: SavedStateHandle
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
+        savedStateHandle = SavedStateHandle(
+            initialState = mapOf(
+                "transactionType" to TransactionType.EXPENSE.title,
+            ),
+        )
         addCategoryScreenViewModel = AddCategoryScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             savedStateHandle = savedStateHandle,

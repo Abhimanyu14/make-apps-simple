@@ -31,8 +31,8 @@ import org.junit.Test
 
 internal class HomeScreenViewModelTest {
     // region test setup
-    private lateinit var testDependencies: TestDependencies
     private lateinit var homeScreenViewModel: HomeScreenViewModel
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {

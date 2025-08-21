@@ -26,8 +26,8 @@ import org.junit.Test
 
 internal class OpenSourceLicensesScreenViewModelTest {
     // region test setup
-    private lateinit var testDependencies: TestDependencies
     private lateinit var openSourceLicensesScreenViewModel: OpenSourceLicensesScreenViewModel
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {

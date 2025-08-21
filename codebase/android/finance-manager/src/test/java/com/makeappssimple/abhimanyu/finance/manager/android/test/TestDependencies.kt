@@ -438,8 +438,8 @@ internal class TestDependencies {
     // endregion
 
     // region pre-populate test data
-    val testAccountId1 = 100
-    val testAccountName1 = "test-account-100"
+    val testAccountId1 = 101
+    val testAccountName1 = "test-account-101"
     val testAccountEntity1 = AccountEntity(
         balanceAmount = AmountEntity(
             value = 100000,
@@ -448,22 +448,46 @@ internal class TestDependencies {
         type = AccountType.E_WALLET,
         name = testAccountName1,
     )
-    val testCategoryId1 = 100
-    val testCategoryTitle1 = "test-category-100"
+    val testAccountId2 = 102
+    val testAccountName2 = "test-account-102"
+    val testAccountEntity2 = AccountEntity(
+        balanceAmount = AmountEntity(
+            value = 100000,
+        ),
+        id = testAccountId2,
+        type = AccountType.BANK,
+        name = testAccountName2,
+    )
+    val testCategoryId1 = 101
+    val testCategoryTitle1 = "test-category-101"
     val testCategoryEntity1 = CategoryEntity(
         id = testCategoryId1,
         emoji = "💳",
         title = testCategoryTitle1,
         transactionType = TransactionType.EXPENSE,
     )
-    val testTransactionForId1 = 100
-    val testTransactionForTitle1 = "test-transaction-for-100"
+    val testCategoryId2 = 102
+    val testCategoryTitle2 = "test-category-102"
+    val testCategoryEntity2 = CategoryEntity(
+        id = testCategoryId2,
+        emoji = "💳",
+        title = testCategoryTitle2,
+        transactionType = TransactionType.INCOME,
+    )
+    val testTransactionForId1 = 101
+    val testTransactionForTitle1 = "test-transaction-for-101"
     val testTransactionForEntity1 = TransactionForEntity(
         id = testTransactionForId1,
         title = testTransactionForTitle1,
     )
-    val testTransactionId1 = 100
-    val testTransactionTitle1 = "test-transaction-100"
+    val testTransactionForId2 = 102
+    val testTransactionForTitle2 = "test-transaction-for-102"
+    val testTransactionForEntity2 = TransactionForEntity(
+        id = testTransactionForId2,
+        title = testTransactionForTitle2,
+    )
+    val testTransactionId1 = 101
+    val testTransactionTitle1 = "test-transaction-101"
     val testTransactionEntity1 = TransactionEntity(
         amount = AmountEntity(
             value = 1000,
@@ -476,20 +500,38 @@ internal class TestDependencies {
         transactionTimestamp = 1000000L,
         title = testTransactionTitle1,
     )
+    val testTransactionId2 = 102
+    val testTransactionTitle2 = "test-transaction-102"
+    val testTransactionEntity2 = TransactionEntity(
+        amount = AmountEntity(
+            value = 1000,
+        ),
+        categoryId = testCategoryId2,
+        id = testTransactionId2,
+        accountFromId = testAccountId2,
+        transactionForId = testTransactionForId2,
+        creationTimestamp = 1000000L,
+        transactionTimestamp = 1000000L,
+        title = testTransactionTitle2,
+    )
 
     init {
         testScope.launch {
             fakeAccountDao.insertAccounts(
                 testAccountEntity1,
+                testAccountEntity2,
             )
             fakeCategoryDao.insertCategories(
                 testCategoryEntity1,
+                testCategoryEntity2,
             )
             fakeTransactionForDao.insertTransactionForValues(
                 testTransactionForEntity1,
+                testTransactionForEntity2,
             )
-            fakeTransactionDao.insertTransaction(
+            fakeTransactionDao.insertTransactions(
                 testTransactionEntity1,
+                testTransactionEntity2,
             )
         }
     }

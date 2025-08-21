@@ -21,58 +21,29 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 internal class EditCategoryScreenViewModelTest {
     // region test setup
-    private val testCategoryId1 = 1
-    private val testEmoji1 = "💰"
-    private val testTitle1 = "test-title-1"
-    private val testTransactionType1 = TransactionType.EXPENSE
-    private val testCategory1 = CategoryEntity(
-        id = testCategoryId1,
-        emoji = testEmoji1,
-        title = testTitle1,
-        transactionType = testTransactionType1,
-    )
-    private val testCategoryId2 = 2
-    private val testEmoji2 = "💳"
-    private val testTitle2 = "test-title-2"
-    private val testTransactionType2 = TransactionType.INCOME
-    private val testCategory2 = CategoryEntity(
-        id = testCategoryId2,
-        emoji = testEmoji2,
-        title = testTitle2,
-        transactionType = testTransactionType2,
-    )
-    private val savedStateHandle: SavedStateHandle = SavedStateHandle(
-        initialState = mapOf(
-            "categoryId" to testCategoryId1,
-        ),
-    )
-
-    private lateinit var testDependencies: TestDependencies
     private lateinit var editCategoryScreenViewModel: EditCategoryScreenViewModel
+    private lateinit var savedStateHandle: SavedStateHandle
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
-        testDependencies.testScope.launch {
-            testDependencies.fakeCategoryDao.insertCategories(
-                testCategory1,
-                testCategory2,
-            )
-        }
+        savedStateHandle = SavedStateHandle(
+            initialState = mapOf(
+                "categoryId" to testDependencies.testCategoryId1,
+            ),
+        )
         editCategoryScreenViewModel = EditCategoryScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             savedStateHandle = savedStateHandle,
@@ -168,12 +139,13 @@ internal class EditCategoryScreenViewModelTest {
             editCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
+                assertThat(initialState.isLoading).isTrue()
                 val postDataFetchCompletion = awaitItem()
                 assertThat(postDataFetchCompletion.isLoading).isFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
                     postDataFetchCompletion.title.copy(
-                        text = testTitle2,
+                        text = testDependencies.testCategoryTitle2,
                     )
                 )
 
@@ -198,8 +170,8 @@ internal class EditCategoryScreenViewModelTest {
                 val result = awaitItem()
                 assertThat(result.isLoading).isFalse()
                 assertThat(result.selectedTransactionTypeIndex).isEqualTo(1)
-                assertThat(result.emoji).isEqualTo(testEmoji1)
-                assertThat(result.title.text).isEqualTo(testTitle1)
+                assertThat(result.emoji).isEqualTo(testDependencies.testCategoryEntity1.emoji)
+                assertThat(result.title.text).isEqualTo(testDependencies.testCategoryTitle1)
             }
         }
     // endregion
@@ -213,7 +185,9 @@ internal class EditCategoryScreenViewModelTest {
             assertThat(initialState.title.text).isEmpty()
             val postDataFetchCompletion = awaitItem()
             assertThat(postDataFetchCompletion.isLoading).isFalse()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(testTitle1)
+            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                testDependencies.testCategoryTitle1
+            )
 
             editCategoryScreenViewModel.uiStateEvents.clearTitle()
 
@@ -347,7 +321,9 @@ internal class EditCategoryScreenViewModelTest {
             assertThat(initialState.title.text).isEmpty()
             val postDataFetchCompletion = awaitItem()
             assertThat(postDataFetchCompletion.isLoading).isFalse()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(testTitle1)
+            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                testDependencies.testCategoryTitle1
+            )
 
             editCategoryScreenViewModel.uiStateEvents.updateTitle(
                 postDataFetchCompletion.title.copy(

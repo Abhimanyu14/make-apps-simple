@@ -32,8 +32,8 @@ import org.junit.Test
 
 internal class AddTransactionForScreenViewModelTest {
     // region test setup
-    private lateinit var testDependencies: TestDependencies
     private lateinit var addTransactionForScreenViewModel: AddTransactionForScreenViewModel
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {

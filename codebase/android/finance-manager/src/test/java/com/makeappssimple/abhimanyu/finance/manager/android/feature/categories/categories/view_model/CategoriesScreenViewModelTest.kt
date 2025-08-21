@@ -31,8 +31,8 @@ import org.junit.Test
 
 internal class CategoriesScreenViewModelTest {
     // region test setup
-    private lateinit var testDependencies: TestDependencies
     private lateinit var categoriesScreenViewModel: CategoriesScreenViewModel
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {

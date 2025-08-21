@@ -23,12 +23,10 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.google.common.truth.Truth.assertThat
-import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -36,34 +34,18 @@ import kotlin.test.assertFailsWith
 
 internal class EditTransactionForScreenViewModelTest {
     // region test setup
-    private val testTransactionForId1 = 1
-    private val testTransactionForTitle1 = "test-transaction-for-title-1"
-    private val testTransactionForId2 = 2
-    private val testTransactionForTitle2 = "test-transaction-for-title-2"
-    private val testSavedStateHandle = SavedStateHandle(
-        initialState = mapOf(
-            pair = "transactionForId" to testTransactionForId1,
-        ),
-    )
-
-    private lateinit var testDependencies: TestDependencies
     private lateinit var editTransactionForScreenViewModel: EditTransactionForScreenViewModel
+    private lateinit var testSavedStateHandle: SavedStateHandle
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
-        testDependencies.testScope.launch {
-            testDependencies.fakeTransactionForDao.insertTransactionForValues(
-                TransactionForEntity(
-                    id = testTransactionForId1,
-                    title = testTransactionForTitle1,
-                ),
-                TransactionForEntity(
-                    id = testTransactionForId2,
-                    title = testTransactionForTitle2,
-                ),
-            )
-        }
+        testSavedStateHandle = SavedStateHandle(
+            initialState = mapOf(
+                pair = "transactionForId" to testDependencies.testTransactionForId1,
+            ),
+        )
     }
 
     @After
@@ -86,7 +68,9 @@ internal class EditTransactionForScreenViewModelTest {
                 )
             }
 
-            assertThat(exception.message).isEqualTo("current transaction for id must not be null")
+            assertThat(exception.message).isEqualTo(
+                "current transaction for id must not be null",
+            )
         }
     // endregion
 
@@ -122,7 +106,7 @@ internal class EditTransactionForScreenViewModelTest {
                 editTransactionForScreenViewModel.initViewModel()
                 val postDataFetchCompletion = awaitItem()
                 assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                    testTransactionForTitle1
+                    testDependencies.testTransactionForTitle1
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
@@ -140,10 +124,7 @@ internal class EditTransactionForScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_titleAlreadyExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
-            val updatedTitle = testTransactionForTitle2
-            val updatedValue = TextFieldValue(
-                text = updatedTitle,
-            )
+            val updatedTitle = testDependencies.testTransactionForTitle2
             setUpViewModel()
             editTransactionForScreenViewModel.uiState.test {
                 val initialState = awaitItem()
@@ -151,11 +132,13 @@ internal class EditTransactionForScreenViewModelTest {
                 editTransactionForScreenViewModel.initViewModel()
                 val postDataFetchCompletion = awaitItem()
                 assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                    testTransactionForTitle1
+                    testDependencies.testTransactionForTitle1
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue
+                    editTransactionForScreenViewModel.uiState.value.title.copy(
+                        text = updatedTitle,
+                    )
                 )
 
                 val result = awaitItem()
@@ -180,7 +163,7 @@ internal class EditTransactionForScreenViewModelTest {
                 editTransactionForScreenViewModel.initViewModel()
                 val postDataFetchCompletion = awaitItem()
                 assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                    testTransactionForTitle1
+                    testDependencies.testTransactionForTitle1
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
@@ -209,7 +192,7 @@ internal class EditTransactionForScreenViewModelTest {
 
             val postDataFetchCompletion = awaitItem()
             assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                testTransactionForTitle1
+                testDependencies.testTransactionForTitle1
             )
             assertThat(postDataFetchCompletion.isLoading).isFalse()
         }
@@ -230,7 +213,7 @@ internal class EditTransactionForScreenViewModelTest {
             editTransactionForScreenViewModel.initViewModel()
             val postDataFetchCompletion = awaitItem()
             assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                testTransactionForTitle1
+                testDependencies.testTransactionForTitle1
             )
 
             editTransactionForScreenViewModel.uiStateEvents.updateTitle(
@@ -251,7 +234,7 @@ internal class EditTransactionForScreenViewModelTest {
             editTransactionForScreenViewModel.initViewModel()
             val postDataFetchCompletion = awaitItem()
             assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                testTransactionForTitle1
+                testDependencies.testTransactionForTitle1
             )
 
             editTransactionForScreenViewModel.uiStateEvents.clearTitle()
@@ -289,7 +272,7 @@ internal class EditTransactionForScreenViewModelTest {
                 editTransactionForScreenViewModel.initViewModel()
                 val postDataFetchCompletion = uiStateTurbine.awaitItem()
                 assertThat(postDataFetchCompletion.title.text).isEqualTo(
-                    testTransactionForTitle1
+                    testDependencies.testTransactionForTitle1
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
@@ -304,7 +287,7 @@ internal class EditTransactionForScreenViewModelTest {
                 assertThat(result.isLoading).isTrue()
                 assertThat(
                     testDependencies.fakeTransactionForDao.getTransactionForById(
-                        testTransactionForId1
+                        testDependencies.testTransactionForId1
                     )?.title
                 ).isEqualTo(updatedTitle)
                 assertThat(

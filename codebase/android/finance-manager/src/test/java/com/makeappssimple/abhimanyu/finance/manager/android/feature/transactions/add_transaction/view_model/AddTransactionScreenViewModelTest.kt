@@ -34,14 +34,14 @@ import java.time.LocalTime
 
 internal class AddTransactionScreenViewModelTest {
     // region test setup
-    private val savedStateHandle: SavedStateHandle = SavedStateHandle()
-
-    private lateinit var testDependencies: TestDependencies
     private lateinit var addTransactionScreenViewModel: AddTransactionScreenViewModel
+    private lateinit var savedStateHandle: SavedStateHandle
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
+        savedStateHandle = SavedStateHandle()
         addTransactionScreenViewModel = AddTransactionScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             screenUIStateDelegate = testDependencies.screenUIStateDelegate,

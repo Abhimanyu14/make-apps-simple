@@ -39,8 +39,8 @@ import org.junit.Test
 
 internal class AddAccountScreenViewModelTest {
     // region test setup
-    private lateinit var testDependencies: TestDependencies
     private lateinit var addAccountScreenViewModel: AddAccountScreenViewModel
+    private lateinit var testDependencies: TestDependencies
 
     @Before
     fun setUp() {
