@@ -80,7 +80,6 @@ internal class TransactionsScreenViewModel(
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region initial data
-    private var isInitialDataFetchCompleted = false
     private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
         mapOf()
     private var accounts: MutableSet<Account> = mutableSetOf()
@@ -137,9 +136,6 @@ internal class TransactionsScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        if (!isInitialDataFetchCompleted && transactionDetailsListItemViewData.isNotEmpty()) {
-            isInitialDataFetchCompleted = true
-        }
         coroutineScope.launch {
             updateTransactionDetailsListItemViewData()
             _uiState.update {
