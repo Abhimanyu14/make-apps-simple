@@ -54,7 +54,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -405,9 +404,6 @@ internal class TransactionsScreenViewModel(
     private fun observeForAllTransactionData() {
         coroutineScope.launch {
             getAllTransactionDataFlowUseCase()
-                .flowOn(
-                    context = dispatcherProvider.io,
-                )
                 .collectLatest { updatedAllTransactionData ->
                     val accountsInTransactions = mutableSetOf<Account>()
                     var oldestTransactionLocalDateValue = Long.MAX_VALUE
@@ -426,7 +422,7 @@ internal class TransactionsScreenViewModel(
                         }
                         oldestTransactionLocalDateValue = min(
                             oldestTransactionLocalDateValue,
-                            transactionData.transaction.transactionTimestamp
+                            transactionData.transaction.transactionTimestamp,
                         )
                         transactionData.category?.let {
                             categoriesInTransactionsMap[it.transactionType]?.add(
