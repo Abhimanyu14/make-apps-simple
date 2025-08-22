@@ -50,6 +50,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.InsertAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountBalanceAmountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.DeleteCategoryByIdUseCase
@@ -80,6 +81,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.InsertTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.DeleteTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
@@ -123,6 +125,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.e
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.use_case.AddTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.use_case.AddTransactionScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.use_case.EditTransactionScreenDataValidationUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -271,6 +274,10 @@ internal class TestDependencies {
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         transactionRepository = transactionRepository,
     )
+    val updateTransactionUseCase = UpdateTransactionUseCase(
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+        transactionRepository = transactionRepository,
+    )
     // endregion
 
     // region account use cases
@@ -326,6 +333,10 @@ internal class TestDependencies {
             checkIfAccountIsUsedInTransactionsUseCase = checkIfAccountIsUsedInTransactionsUseCase,
         )
     val getDefaultAccountIdFlowUseCase = GetDefaultAccountIdFlowUseCase(
+        financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+    )
+    val updateAccountBalanceAmountUseCase = UpdateAccountBalanceAmountUseCase(
+        accountRepository = accountRepository,
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
     )
     // endregion
@@ -444,6 +455,8 @@ internal class TestDependencies {
     // region feature use cases
     val addTransactionScreenDataValidationUseCase =
         AddTransactionScreenDataValidationUseCase()
+    val editTransactionScreenDataValidationUseCase =
+        EditTransactionScreenDataValidationUseCase()
     // endregion
 
     // region pre-populate test data
