@@ -20,10 +20,13 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -145,52 +148,52 @@ internal class TransactionsScreenViewModelTest {
                 assertThat(result.transactionDetailsListItemViewData["20 May, 2024 (Monday)"]?.size).isEqualTo(
                     1
                 )
-//                assertThat(result.transactionDetailsListItemViewData).isEqualTo(
-//                    mapOf(
-//                        "23 Aug, 2025 (Saturday)" to listOf(
-//                            TransactionListItemData(
-//                                isDeleteButtonEnabled = false,
-//                                isDeleteButtonVisible = true,
-//                                isEditButtonVisible = false,
-//                                isExpanded = false,
-//                                isInSelectionMode = false,
-//                                isLoading = false,
-//                                isRefundButtonVisible = false,
-//                                isSelected = false,
-//                                transactionId = 101,
-//                                amountColor = MyColor.ERROR,
-//                                amountText = "- ₹1,000",
-//                                dateAndTimeText = "01 Jan, 1970 at 05:46 AM",
-//                                emoji = "💳",
-//                                accountFromName = "test-account-101",
-//                                accountToName = null,
-//                                title = "test-transaction-101",
-//                                transactionForText = "Test-transaction-for-101",
-//                            ),
-//                        ),
-//                        "20 May, 2024 (Monday)" to listOf(
-//                            TransactionListItemData(
-//                                isDeleteButtonEnabled = false,
-//                                isDeleteButtonVisible = true,
-//                                isEditButtonVisible = false,
-//                                isExpanded = false,
-//                                isInSelectionMode = false,
-//                                isLoading = false,
-//                                isRefundButtonVisible = false,
-//                                isSelected = false,
-//                                transactionId = 102,
-//                                amountColor = MyColor.ERROR,
-//                                amountText = "- ₹1,000",
-//                                dateAndTimeText = "01 Jan, 1970 at 05:46 AM",
-//                                emoji = "💰",
-//                                accountFromName = "test-account-102",
-//                                accountToName = null,
-//                                title = "test-transaction-102",
-//                                transactionForText = "Test-transaction-for-102",
-//                            ),
-//                        )
-//                    ),
-//                )
+                result.transactionDetailsListItemViewData.shouldBe(
+                    mapOf(
+                        "23 Aug, 2025 (Saturday)" to listOf(
+                            TransactionListItemData(
+                                isDeleteButtonEnabled = false,
+                                isDeleteButtonVisible = true,
+                                isEditButtonVisible = false,
+                                isExpanded = false,
+                                isInSelectionMode = false,
+                                isLoading = false,
+                                isRefundButtonVisible = false,
+                                isSelected = false,
+                                transactionId = 102,
+                                amountColor = MyColor.ERROR,
+                                amountText = "- ₹1,000",
+                                dateAndTimeText = "23 Aug, 2025 at 08:29 AM",
+                                emoji = "💰",
+                                accountFromName = "test-account-102",
+                                accountToName = null,
+                                title = "test-transaction-102",
+                                transactionForText = "Test-transaction-for-102",
+                            ),
+                        ),
+                        "20 May, 2024 (Monday)" to listOf(
+                            TransactionListItemData(
+                                isDeleteButtonEnabled = false,
+                                isDeleteButtonVisible = true,
+                                isEditButtonVisible = false,
+                                isExpanded = false,
+                                isInSelectionMode = false,
+                                isLoading = false,
+                                isRefundButtonVisible = false,
+                                isSelected = false,
+                                transactionId = 101,
+                                amountColor = MyColor.ERROR,
+                                amountText = "- ₹1,000",
+                                dateAndTimeText = "20 May, 2024 at 08:29 AM",
+                                emoji = "💳",
+                                accountFromName = "test-account-101",
+                                accountToName = null,
+                                title = "test-transaction-101",
+                                transactionForText = "Test-transaction-for-101",
+                            ),
+                        ),
+                    ),
+                )
             }
         }
     // endregion
