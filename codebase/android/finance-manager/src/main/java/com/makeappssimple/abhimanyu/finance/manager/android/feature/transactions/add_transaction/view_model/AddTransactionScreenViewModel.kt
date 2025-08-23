@@ -126,9 +126,6 @@ internal class AddTransactionScreenViewModel(
     private var transactionForValues: ImmutableList<TransactionFor> =
         persistentListOf()
     private var selectedTransactionType: TransactionType? = null
-    // endregion
-
-    // region observables
     private var titleSuggestions: ImmutableList<String> = persistentListOf()
     // endregion
 
