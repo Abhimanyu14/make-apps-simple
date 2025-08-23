@@ -136,7 +136,6 @@ internal class TransactionsScreenViewModelTest {
                 assertThat(result.oldestTransactionLocalDate).isEqualTo(
                     LocalDate.of(2024, 5, 20)
                 )
-                assertThat(result.transactionDetailsListItemViewData).isNotEmpty()
                 assertThat(result.transactionDetailsListItemViewData.size).isEqualTo(
                     2
                 )
