@@ -17,8 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -52,9 +53,9 @@ internal class OpenSourceLicensesScreenViewModelTest {
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         openSourceLicensesScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            assertThat(initialState.isLoading).isTrue()
+            initialState.isLoading.shouldBeTrue()
             val fetchDataCompletedState = awaitItem()
-            assertThat(fetchDataCompletedState.isLoading).isFalse()
+            fetchDataCompletedState.isLoading.shouldBeFalse()
         }
     }
     // endregion

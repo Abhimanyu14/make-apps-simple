@@ -20,9 +20,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ed
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import org.junit.After
@@ -65,12 +69,16 @@ internal class EditAccountScreenViewModelTest {
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         viewModel.uiState.test {
             val result = awaitItem()
-            assertThat(result.selectedAccountTypeIndex).isEqualTo(-1)
-            assertThat(result.nameError).isEqualTo(EditAccountScreenNameError.None)
-            assertThat(result.isCtaButtonEnabled).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.accountTypesChipUIDataList).isNotNull()
-            assertThat(result.name.text).isEmpty()
+            result.selectedAccountTypeIndex.shouldBe(
+                expected = -1,
+            )
+            result.nameError.shouldBe(
+                expected = EditAccountScreenNameError.None,
+            )
+            result.isCtaButtonEnabled.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.accountTypesChipUIDataList.shouldNotBeNull()
+            result.name.text.shouldBeEmpty()
         }
     }
 }

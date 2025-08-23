@@ -17,10 +17,14 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -58,19 +62,29 @@ internal class AnalysisScreenViewModelTest {
         analysisScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                AnalysisScreenBottomSheetType.None
+            result.screenBottomSheetType.shouldBe(
+                expected = AnalysisScreenBottomSheetType.None,
             )
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.selectedFilter).isEqualTo(Filter())
-            assertThat(result.analysisListItemData).isEmpty()
-            assertThat(result.transactionTypesChipUIData).isEmpty()
-            assertThat(result.selectedTransactionTypeIndex).isEqualTo(0)
-            assertThat(result.defaultStartLocalDate).isEqualTo(LocalDate.MIN)
-            assertThat(result.defaultEndLocalDate).isEqualTo(LocalDate.MIN)
-            assertThat(result.startOfCurrentMonthLocalDate).isEqualTo(LocalDate.MIN)
-            assertThat(result.startOfCurrentYearLocalDate).isEqualTo(LocalDate.MIN)
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.selectedFilter.shouldBe(
+                expected = Filter(),
+            )
+            result.analysisListItemData.shouldBeEmpty()
+            result.transactionTypesChipUIData.shouldBeEmpty()
+            result.selectedTransactionTypeIndex.shouldBeZero()
+            result.defaultStartLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            result.defaultEndLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            result.startOfCurrentMonthLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            result.startOfCurrentYearLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
         }
     }
     // endregion

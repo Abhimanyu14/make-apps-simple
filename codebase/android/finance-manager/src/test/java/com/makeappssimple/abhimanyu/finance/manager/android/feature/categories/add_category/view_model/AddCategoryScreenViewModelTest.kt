@@ -21,11 +21,16 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.AddCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import org.junit.After
@@ -71,19 +76,21 @@ internal class AddCategoryScreenViewModelTest {
         addCategoryScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                AddCategoryScreenBottomSheetType.None
+            result.screenBottomSheetType.shouldBe(
+                expected = AddCategoryScreenBottomSheetType.None,
             )
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isCtaButtonEnabled).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.isSupportingTextVisible).isFalse()
-            assertThat(result.titleError).isEqualTo(AddCategoryScreenTitleError.None)
-            assertThat(result.selectedTransactionTypeIndex).isNull()
-            assertThat(result.transactionTypesChipUIData).isEmpty()
-            assertThat(result.emoji).isEmpty()
-            assertThat(result.emojiSearchText).isEmpty()
-            assertThat(result.title.text).isEmpty()
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isCtaButtonEnabled.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.isSupportingTextVisible.shouldBeFalse()
+            result.titleError.shouldBe(
+                expected = AddCategoryScreenTitleError.None,
+            )
+            result.selectedTransactionTypeIndex.shouldBeNull()
+            result.transactionTypesChipUIData.shouldBeEmpty()
+            result.emoji.shouldBeEmpty()
+            result.emojiSearchText.shouldBeEmpty()
+            result.title.text.shouldBeEmpty()
         }
     }
     // endregion
@@ -94,7 +101,7 @@ internal class AddCategoryScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.title.text).isEmpty()
+                initialState.title.text.shouldBeEmpty()
 
                 addCategoryScreenViewModel.uiStateEvents.updateTitle(
                     TextFieldValue(
@@ -103,9 +110,9 @@ internal class AddCategoryScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.titleError).isEqualTo(
-                    AddCategoryScreenTitleError.None
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleError.shouldBe(
+                    expected = AddCategoryScreenTitleError.None,
                 )
             }
         }
@@ -115,7 +122,7 @@ internal class AddCategoryScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.title.text).isEmpty()
+                initialState.title.text.shouldBeEmpty()
 
                 addCategoryScreenViewModel.uiStateEvents.updateTitle(
                     TextFieldValue(
@@ -124,9 +131,9 @@ internal class AddCategoryScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isTrue()
-                assertThat(result.titleError).isEqualTo(
-                    AddCategoryScreenTitleError.None
+                result.isCtaButtonEnabled.shouldBeTrue()
+                result.titleError.shouldBe(
+                    expected = AddCategoryScreenTitleError.None,
                 )
             }
         }
@@ -143,7 +150,7 @@ internal class AddCategoryScreenViewModelTest {
 
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.title.text).isEmpty()
+                initialState.title.text.shouldBeEmpty()
 
                 addCategoryScreenViewModel.uiStateEvents.updateTitle(
                     TextFieldValue(
@@ -152,9 +159,9 @@ internal class AddCategoryScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.titleError).isEqualTo(
-                    AddCategoryScreenTitleError.CategoryExists
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleError.shouldBe(
+                    expected = AddCategoryScreenTitleError.CategoryExists,
                 )
             }
         }
@@ -166,13 +173,13 @@ internal class AddCategoryScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.selectedTransactionTypeIndex).isNull()
+                initialState.isLoading.shouldBeTrue()
+                initialState.selectedTransactionTypeIndex.shouldBeNull()
 
                 val result = awaitItem()
-                assertThat(result.isLoading).isFalse()
-                assertThat(result.selectedTransactionTypeIndex).isEqualTo(
-                    1
+                result.isLoading.shouldBeFalse()
+                result.selectedTransactionTypeIndex.shouldBe(
+                    expected = 1,
                 )
             }
         }
@@ -185,21 +192,21 @@ internal class AddCategoryScreenViewModelTest {
             val testEmojiSearchText = "test-emoji-search-text"
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.emojiSearchText).isEmpty()
+                initialState.isLoading.shouldBeTrue()
+                initialState.emojiSearchText.shouldBeEmpty()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
                 addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
                     testEmojiSearchText
                 )
-                assertThat(awaitItem().emojiSearchText).isEqualTo(
-                    testEmojiSearchText
+                awaitItem().emojiSearchText.shouldBe(
+                    expected = testEmojiSearchText,
                 )
 
                 addCategoryScreenViewModel.uiStateEvents.clearEmojiSearchText()
 
                 val result = awaitItem()
-                assertThat(result.emojiSearchText).isEmpty()
+                result.emojiSearchText.shouldBeEmpty()
             }
         }
 
@@ -208,21 +215,23 @@ internal class AddCategoryScreenViewModelTest {
         val testTitle = "test-title"
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            assertThat(initialState.isLoading).isTrue()
-            assertThat(initialState.title.text).isEmpty()
+            initialState.isLoading.shouldBeTrue()
+            initialState.title.text.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
-            assertThat(fetchDataCompletedState.isLoading).isFalse()
+            fetchDataCompletedState.isLoading.shouldBeFalse()
             addCategoryScreenViewModel.uiStateEvents.updateTitle(
                 TextFieldValue(
                     text = testTitle,
                 )
             )
-            assertThat(awaitItem().title.text).isEqualTo(testTitle)
+            awaitItem().title.text.shouldBe(
+                expected = testTitle,
+            )
 
             addCategoryScreenViewModel.uiStateEvents.clearTitle()
 
             val result = awaitItem()
-            assertThat(result.title.text).isEmpty()
+            result.title.text.shouldBeEmpty()
         }
     }
 
@@ -233,24 +242,24 @@ internal class AddCategoryScreenViewModelTest {
                 AddCategoryScreenBottomSheetType.SelectEmoji
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenBottomSheetType).isEqualTo(
-                    AddCategoryScreenBottomSheetType.None
+                initialState.isLoading.shouldBeTrue()
+                initialState.screenBottomSheetType.shouldBe(
+                    expected = AddCategoryScreenBottomSheetType.None,
                 )
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
                 addCategoryScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     testScreenBottomSheetType
                 )
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    testScreenBottomSheetType
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = testScreenBottomSheetType,
                 )
 
                 addCategoryScreenViewModel.uiStateEvents.resetScreenBottomSheetType()
 
                 val result = awaitItem()
-                assertThat(result.screenBottomSheetType).isEqualTo(
-                    AddCategoryScreenBottomSheetType.None
+                result.screenBottomSheetType.shouldBe(
+                    expected = AddCategoryScreenBottomSheetType.None,
                 )
             }
         }
@@ -260,15 +269,17 @@ internal class AddCategoryScreenViewModelTest {
         val testEmoji = "🤔"
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            assertThat(initialState.isLoading).isTrue()
-            assertThat(initialState.emoji).isEmpty()
+            initialState.isLoading.shouldBeTrue()
+            initialState.emoji.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
-            assertThat(fetchDataCompletedState.isLoading).isFalse()
+            fetchDataCompletedState.isLoading.shouldBeFalse()
 
             addCategoryScreenViewModel.uiStateEvents.updateEmoji(testEmoji)
 
             val result = awaitItem()
-            assertThat(result.emoji).isEqualTo(testEmoji)
+            result.emoji.shouldBe(
+                expected = testEmoji,
+            )
         }
     }
 
@@ -278,17 +289,19 @@ internal class AddCategoryScreenViewModelTest {
             val testEmojiSearchText = "test-emoji-search-text"
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.emojiSearchText).isEmpty()
+                initialState.isLoading.shouldBeTrue()
+                initialState.emojiSearchText.shouldBeEmpty()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
                     testEmojiSearchText
                 )
 
                 val result = awaitItem()
-                assertThat(result.emojiSearchText).isEqualTo(testEmojiSearchText)
+                result.emojiSearchText.shouldBe(
+                    expected = testEmojiSearchText,
+                )
             }
         }
 
@@ -299,20 +312,20 @@ internal class AddCategoryScreenViewModelTest {
                 AddCategoryScreenBottomSheetType.SelectEmoji
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenBottomSheetType).isEqualTo(
-                    AddCategoryScreenBottomSheetType.None
+                initialState.isLoading.shouldBeTrue()
+                initialState.screenBottomSheetType.shouldBe(
+                    expected = AddCategoryScreenBottomSheetType.None,
                 )
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 addCategoryScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     testScreenBottomSheetType
                 )
 
                 val result = awaitItem()
-                assertThat(result.screenBottomSheetType).isEqualTo(
-                    testScreenBottomSheetType
+                result.screenBottomSheetType.shouldBe(
+                    expected = testScreenBottomSheetType,
                 )
             }
         }
@@ -323,12 +336,12 @@ internal class AddCategoryScreenViewModelTest {
             val testSelectedTransactionTypeIndex = 2
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.selectedTransactionTypeIndex).isNull()
+                initialState.isLoading.shouldBeTrue()
+                initialState.selectedTransactionTypeIndex.shouldBeNull()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.selectedTransactionTypeIndex).isEqualTo(
-                    1
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.selectedTransactionTypeIndex.shouldBe(
+                    expected = 1,
                 )
 
                 addCategoryScreenViewModel.uiStateEvents.updateSelectedTransactionTypeIndex(
@@ -336,8 +349,8 @@ internal class AddCategoryScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.selectedTransactionTypeIndex).isEqualTo(
-                    testSelectedTransactionTypeIndex,
+                result.selectedTransactionTypeIndex.shouldBe(
+                    expected = testSelectedTransactionTypeIndex,
                 )
             }
         }
@@ -347,10 +360,10 @@ internal class AddCategoryScreenViewModelTest {
         val testTitle = "test-title"
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            assertThat(initialState.isLoading).isTrue()
-            assertThat(initialState.title.text).isEmpty()
+            initialState.isLoading.shouldBeTrue()
+            initialState.title.text.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
-            assertThat(fetchDataCompletedState.isLoading).isFalse()
+            fetchDataCompletedState.isLoading.shouldBeFalse()
 
             addCategoryScreenViewModel.uiStateEvents.updateTitle(
                 TextFieldValue(
@@ -359,7 +372,9 @@ internal class AddCategoryScreenViewModelTest {
             )
 
             val result = awaitItem()
-            assertThat(result.title.text).isEqualTo(testTitle)
+            result.title.text.shouldBe(
+                expected = testTitle,
+            )
         }
     }
     // endregion

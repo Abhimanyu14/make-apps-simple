@@ -19,10 +19,14 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.maps.shouldBeEmpty
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import org.junit.After
@@ -62,17 +66,17 @@ internal class CategoriesScreenViewModelTest {
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         categoriesScreenViewModel.uiState.test {
             val result = awaitItem()
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                CategoriesScreenBottomSheetType.None
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.screenBottomSheetType.shouldBe(
+                expected = CategoriesScreenBottomSheetType.None,
             )
-            assertThat(result.screenSnackbarType).isEqualTo(
-                CategoriesScreenSnackbarType.None
+            result.screenSnackbarType.shouldBe(
+                expected = CategoriesScreenSnackbarType.None,
             )
-            assertThat(result.tabData).isEmpty()
-            assertThat(result.validTransactionTypes).isEmpty()
-            assertThat(result.categoriesGridItemDataMap).isEmpty()
+            result.tabData.shouldBeEmpty()
+            result.validTransactionTypes.shouldBeEmpty()
+            result.categoriesGridItemDataMap.shouldBeEmpty()
         }
     }
     // endregion
@@ -86,23 +90,23 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
-                    CategoriesScreenBottomSheetType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                    expected = CategoriesScreenBottomSheetType.None,
                 )
                 categoriesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     CategoriesScreenBottomSheetType.DeleteConfirmation
                 )
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    CategoriesScreenBottomSheetType.DeleteConfirmation
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = CategoriesScreenBottomSheetType.DeleteConfirmation,
                 )
 
                 categoriesScreenViewModel.uiStateEvents.resetScreenBottomSheetType()
 
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    CategoriesScreenBottomSheetType.None
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = CategoriesScreenBottomSheetType.None,
                 )
             }
         }
@@ -112,23 +116,23 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
-                    CategoriesScreenSnackbarType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenSnackbarType.shouldBe(
+                    expected = CategoriesScreenSnackbarType.None,
                 )
                 categoriesScreenViewModel.uiStateEvents.updateScreenSnackbarType(
                     CategoriesScreenSnackbarType.SetDefaultCategorySuccessful
                 )
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    CategoriesScreenSnackbarType.SetDefaultCategorySuccessful
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = CategoriesScreenSnackbarType.SetDefaultCategorySuccessful,
                 )
 
                 categoriesScreenViewModel.uiStateEvents.resetScreenSnackbarType()
 
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    CategoriesScreenSnackbarType.None
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = CategoriesScreenSnackbarType.None,
                 )
             }
         }
@@ -138,19 +142,19 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
-                    CategoriesScreenBottomSheetType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                    expected = CategoriesScreenBottomSheetType.None,
                 )
 
                 categoriesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     CategoriesScreenBottomSheetType.DeleteConfirmation
                 )
                 val result = awaitItem()
-                assertThat(result.screenBottomSheetType).isEqualTo(
-                    CategoriesScreenBottomSheetType.DeleteConfirmation
+                result.screenBottomSheetType.shouldBe(
+                    expected = CategoriesScreenBottomSheetType.DeleteConfirmation,
                 )
             }
         }
@@ -160,19 +164,19 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
-                    CategoriesScreenSnackbarType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenSnackbarType.shouldBe(
+                    expected = CategoriesScreenSnackbarType.None,
                 )
 
                 categoriesScreenViewModel.uiStateEvents.updateScreenSnackbarType(
                     CategoriesScreenSnackbarType.SetDefaultCategorySuccessful
                 )
                 val result = awaitItem()
-                assertThat(result.screenSnackbarType).isEqualTo(
-                    CategoriesScreenSnackbarType.SetDefaultCategorySuccessful
+                result.screenSnackbarType.shouldBe(
+                    expected = CategoriesScreenSnackbarType.SetDefaultCategorySuccessful,
                 )
             }
         }

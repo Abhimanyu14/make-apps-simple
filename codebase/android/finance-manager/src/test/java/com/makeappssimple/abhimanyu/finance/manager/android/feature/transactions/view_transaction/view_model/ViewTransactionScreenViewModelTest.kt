@@ -18,9 +18,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -66,13 +70,13 @@ internal class ViewTransactionScreenViewModelTest {
         viewTransactionScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.refundTransactionsListItemData).isEmpty()
-            assertThat(result.originalTransactionListItemData).isNull()
-            assertThat(result.transactionListItemData).isNull()
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                ViewTransactionScreenBottomSheetType.None
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.refundTransactionsListItemData.shouldBeEmpty()
+            result.originalTransactionListItemData.shouldBeNull()
+            result.transactionListItemData.shouldBeNull()
+            result.screenBottomSheetType.shouldBe(
+                expected = ViewTransactionScreenBottomSheetType.None,
             )
         }
     }
@@ -108,27 +112,27 @@ internal class ViewTransactionScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             viewTransactionScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.None
+                initialState.isLoading.shouldBeTrue()
+                initialState.screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.None,
                 )
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.None,
                 )
                 viewTransactionScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     ViewTransactionScreenBottomSheetType.DeleteConfirmation
                 )
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.DeleteConfirmation
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.DeleteConfirmation,
                 )
 
                 viewTransactionScreenViewModel.uiStateEvents.resetScreenBottomSheetType()
 
                 val result = awaitItem()
-                assertThat(result.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.None
+                result.screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.None,
                 )
             }
         }
@@ -138,14 +142,14 @@ internal class ViewTransactionScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             viewTransactionScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.None
+                initialState.isLoading.shouldBeTrue()
+                initialState.screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.None,
                 )
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.None,
                 )
 
                 viewTransactionScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
@@ -153,8 +157,8 @@ internal class ViewTransactionScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.screenBottomSheetType).isEqualTo(
-                    ViewTransactionScreenBottomSheetType.DeleteConfirmation
+                result.screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.DeleteConfirmation,
                 )
             }
         }

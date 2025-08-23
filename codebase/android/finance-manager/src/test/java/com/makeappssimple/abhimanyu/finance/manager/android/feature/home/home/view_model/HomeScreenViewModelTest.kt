@@ -19,10 +19,15 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardViewModelData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.longs.shouldBeZero
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import org.junit.After
@@ -66,20 +71,20 @@ internal class HomeScreenViewModelTest {
         homeScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.isBackupCardVisible).isFalse()
-            assertThat(result.isBalanceVisible).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.isRecentTransactionsTrailingTextVisible).isFalse()
-            assertThat(result.overviewTabSelectionIndex).isEqualTo(0)
-            assertThat(result.transactionListItemDataList).isEmpty()
-            assertThat(result.accountsTotalBalanceAmountValue).isEqualTo(0)
-            assertThat(result.allAccountsTotalMinimumBalanceAmountValue).isEqualTo(
-                0
+            result.isBackupCardVisible.shouldBeFalse()
+            result.isBalanceVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.isRecentTransactionsTrailingTextVisible.shouldBeFalse()
+            result.overviewTabSelectionIndex.shouldBeZero()
+            result.transactionListItemDataList.shouldBeEmpty()
+            result.accountsTotalBalanceAmountValue.shouldBeZero()
+            result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()
+            result.overviewCardData.shouldBe(
+                expected = OverviewCardViewModelData(),
             )
-            assertThat(result.overviewCardData).isEqualTo(
-                OverviewCardViewModelData()
+            result.pieChartData.shouldBe(
+                expected = PieChartData(),
             )
-            assertThat(result.pieChartData).isEqualTo(PieChartData())
         }
     }
     // endregion

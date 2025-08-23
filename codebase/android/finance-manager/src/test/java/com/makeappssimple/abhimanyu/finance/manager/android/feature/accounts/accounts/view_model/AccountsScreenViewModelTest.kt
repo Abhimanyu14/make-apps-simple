@@ -17,9 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.longs.shouldBeZero
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -61,16 +65,14 @@ internal class AccountsScreenViewModelTest {
         accountsScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                AccountsScreenBottomSheetType.None
+            result.screenBottomSheetType.shouldBe(
+                expected = AccountsScreenBottomSheetType.None,
             )
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.accountsListItemDataList).isEmpty()
-            assertThat(result.accountsTotalBalanceAmountValue).isEqualTo(0L)
-            assertThat(result.allAccountsTotalMinimumBalanceAmountValue).isEqualTo(
-                0L
-            )
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.accountsListItemDataList.shouldBeEmpty()
+            result.accountsTotalBalanceAmountValue.shouldBeZero()
+            result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()
         }
     }
     // endregion

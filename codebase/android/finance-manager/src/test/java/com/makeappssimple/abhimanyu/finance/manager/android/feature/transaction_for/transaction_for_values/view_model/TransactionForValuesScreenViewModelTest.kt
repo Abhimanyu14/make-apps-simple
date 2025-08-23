@@ -19,9 +19,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -59,11 +62,11 @@ internal class TransactionForValuesScreenViewModelTest {
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         transactionForValuesScreenViewModel.uiState.test {
             val result = awaitItem()
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.transactionForListItemDataList).isEmpty()
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                TransactionForValuesScreenBottomSheetType.None
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.transactionForListItemDataList.shouldBeEmpty()
+            result.screenBottomSheetType.shouldBe(
+                expected = TransactionForValuesScreenBottomSheetType.None,
             )
         }
     }
@@ -75,10 +78,10 @@ internal class TransactionForValuesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
                 val result = awaitItem()
-                assertThat(result.screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.None
+                result.screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.None,
                 )
-                assertThat(result.isBottomSheetVisible).isFalse()
+                result.isBottomSheetVisible.shouldBeFalse()
             }
         }
 
@@ -87,16 +90,16 @@ internal class TransactionForValuesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.None
+                initialState.screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.None,
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     TransactionForValuesScreenBottomSheetType.DeleteConfirmation
                 )
                 val result = awaitItem()
-                assertThat(result.isLoading).isFalse()
-                assertThat(result.isBottomSheetVisible).isTrue()
+                result.isLoading.shouldBeFalse()
+                result.isBottomSheetVisible.shouldBeTrue()
             }
         }
     // endregion
@@ -106,14 +109,14 @@ internal class TransactionForValuesScreenViewModelTest {
     fun deleteTransactionFor_shouldDeleteAndResetId() =
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
-                assertThat(awaitItem().isLoading).isTrue()
+                awaitItem().isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.transactionForListItemDataList).isEmpty()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.transactionForListItemDataList.shouldBeEmpty()
                 val observeDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(observeDataCompletedState.transactionForListItemDataList.size).isEqualTo(
-                    2
+                fetchDataCompletedState.isLoading.shouldBeFalse() // TODO(Abhi): This seems to be a bug, should be observeDataCompletedState.isLoading
+                observeDataCompletedState.transactionForListItemDataList.size.shouldBe(
+                    expected = 2,
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(
@@ -122,9 +125,9 @@ internal class TransactionForValuesScreenViewModelTest {
                 transactionForValuesScreenViewModel.uiStateEvents.deleteTransactionFor()
 
                 val result = awaitItem()
-                assertThat(result.isLoading).isFalse()
-                assertThat(result.transactionForListItemDataList.size).isEqualTo(
-                    1
+                result.isLoading.shouldBeFalse()
+                result.transactionForListItemDataList.size.shouldBe(
+                    expected = 1,
                 )
             }
         }
@@ -133,20 +136,20 @@ internal class TransactionForValuesScreenViewModelTest {
     fun resetScreenBottomSheetType_shouldResetValue() =
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.None
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.None,
                 )
                 transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     TransactionForValuesScreenBottomSheetType.DeleteConfirmation
                 )
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.DeleteConfirmation
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.DeleteConfirmation,
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.resetScreenBottomSheetType()
 
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.None
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.None,
                 )
             }
         }
@@ -155,16 +158,16 @@ internal class TransactionForValuesScreenViewModelTest {
     fun updateScreenBottomSheetType_shouldUpdateValue() =
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.None
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.None,
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     TransactionForValuesScreenBottomSheetType.DeleteConfirmation
                 )
 
-                assertThat(awaitItem().screenBottomSheetType).isEqualTo(
-                    TransactionForValuesScreenBottomSheetType.DeleteConfirmation
+                awaitItem().screenBottomSheetType.shouldBe(
+                    expected = TransactionForValuesScreenBottomSheetType.DeleteConfirmation,
                 )
             }
         }
@@ -177,7 +180,7 @@ internal class TransactionForValuesScreenViewModelTest {
             transactionForValuesScreenViewModel.observeData()
             transactionForValuesScreenViewModel.uiState.test {
                 val result = awaitItem()
-                assertThat(result.transactionForListItemDataList).isEmpty()
+                result.transactionForListItemDataList.shouldBeEmpty()
             }
         }
     // endregion

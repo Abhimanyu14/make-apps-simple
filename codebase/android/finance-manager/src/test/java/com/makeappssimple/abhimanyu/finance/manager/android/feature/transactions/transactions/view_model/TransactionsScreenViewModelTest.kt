@@ -25,6 +25,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.S
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.maps.shouldBeEmpty
 import io.kotest.matchers.shouldBe
@@ -71,21 +73,11 @@ internal class TransactionsScreenViewModelTest {
         transactionsScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            result.isBackHandlerEnabled.shouldBe(
-                expected = false,
-            )
-            result.isBottomSheetVisible.shouldBe(
-                expected = false,
-            )
-            result.isInSelectionMode.shouldBe(
-                expected = false,
-            )
-            result.isLoading.shouldBe(
-                expected = true,
-            )
-            result.isSearchSortAndFilterVisible.shouldBe(
-                expected = false,
-            )
+            result.isBackHandlerEnabled.shouldBeFalse()
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isInSelectionMode.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.isSearchSortAndFilterVisible.shouldBeFalse()
             result.selectedFilter.shouldBe(
                 expected = Filter(),
             )
@@ -121,14 +113,10 @@ internal class TransactionsScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             transactionsScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBe(
-                    expected = true,
-                )
+                initialState.isLoading.shouldBeTrue()
 
                 val result = awaitItem()
-                result.isLoading.shouldBe(
-                    expected = false,
-                )
+                result.isLoading.shouldBeFalse()
                 result.transactionForValues.size.shouldBe(
                     expected = 2,
                 )
@@ -148,13 +136,9 @@ internal class TransactionsScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             transactionsScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBe(
-                    expected = true,
-                )
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBe(
-                    expected = false,
-                )
+                fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 val result = awaitItem()
                 result.accounts.shouldBe(

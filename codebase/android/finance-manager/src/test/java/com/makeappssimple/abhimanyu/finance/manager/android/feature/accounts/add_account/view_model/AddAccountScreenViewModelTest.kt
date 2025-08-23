@@ -21,7 +21,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ad
 import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
@@ -31,6 +30,14 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.Fina
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.comparables.shouldBeGreaterThan
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import org.junit.After
@@ -68,19 +75,21 @@ internal class AddAccountScreenViewModelTest {
         addAccountScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.selectedAccountType).isNull()
-            assertThat(result.nameError).isEqualTo(AddAccountScreenNameError.None)
-            assertThat(result.screenSnackbarType).isEqualTo(
-                AddAccountScreenSnackbarType.None
+            result.selectedAccountType.shouldBeNull()
+            result.nameError.shouldBe(
+                expected = AddAccountScreenNameError.None,
             )
-            assertThat(result.visibilityData.minimumBalanceAmountTextField).isFalse()
-            assertThat(result.visibilityData.nameTextFieldErrorText).isFalse()
-            assertThat(result.isCtaButtonEnabled).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.selectedAccountTypeIndex).isEqualTo(0)
-            assertThat(result.accountTypesChipUIDataList).isEmpty()
-            assertThat(result.minimumAccountBalanceTextFieldValue.text).isEmpty()
-            assertThat(result.nameTextFieldValue.text).isEmpty()
+            result.screenSnackbarType.shouldBe(
+                expected = AddAccountScreenSnackbarType.None,
+            )
+            result.visibilityData.minimumBalanceAmountTextField.shouldBeFalse()
+            result.visibilityData.nameTextFieldErrorText.shouldBeFalse()
+            result.isCtaButtonEnabled.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.selectedAccountTypeIndex.shouldBeZero()
+            result.accountTypesChipUIDataList.shouldBeEmpty()
+            result.minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
+            result.nameTextFieldValue.text.shouldBeEmpty()
         }
     }
     // endregion
@@ -94,14 +103,14 @@ internal class AddAccountScreenViewModelTest {
                 text = updatedName,
             )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.nameError).isEqualTo(
-                    AddAccountScreenNameError.None
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBe(
+                    expected = AddAccountScreenNameError.None,
                 )
             }
         }
@@ -114,14 +123,14 @@ internal class AddAccountScreenViewModelTest {
                 text = updatedName,
             )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.nameError).isEqualTo(
-                    AddAccountScreenNameError.AccountExists
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBe(
+                    expected = AddAccountScreenNameError.AccountExists,
                 )
             }
         }
@@ -134,14 +143,14 @@ internal class AddAccountScreenViewModelTest {
                 text = updatedName,
             )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.nameError).isEqualTo(
-                    AddAccountScreenNameError.AccountExists
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBe(
+                    expected = AddAccountScreenNameError.AccountExists,
                 )
             }
         }
@@ -151,9 +160,9 @@ internal class AddAccountScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(
                     addAccountScreenViewModel.uiState.value.nameTextFieldValue.copy(
@@ -162,12 +171,12 @@ internal class AddAccountScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.nameTextFieldValue.text).isEqualTo(
-                    testDependencies.testAccountName1
+                result.nameTextFieldValue.text.shouldBe(
+                    expected = testDependencies.testAccountName1,
                 )
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.nameError).isEqualTo(
-                    AddAccountScreenNameError.AccountExists
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBe(
+                    expected = AddAccountScreenNameError.AccountExists,
                 )
             }
         }
@@ -180,14 +189,14 @@ internal class AddAccountScreenViewModelTest {
                 text = updatedName,
             )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isTrue()
-                assertThat(result.nameError).isEqualTo(
-                    AddAccountScreenNameError.None
+                result.isCtaButtonEnabled.shouldBeTrue()
+                result.nameError.shouldBe(
+                    expected = AddAccountScreenNameError.None,
                 )
             }
         }
@@ -202,17 +211,17 @@ internal class AddAccountScreenViewModelTest {
                 text = updatedMinimumAccountBalanceAmountValue,
             )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().minimumAccountBalanceTextFieldValue.text).isEmpty()
+                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
                 addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
                     updatedValue
                 )
-                assertThat(awaitItem().minimumAccountBalanceTextFieldValue.text).isEqualTo(
-                    updatedMinimumAccountBalanceAmountValue
+                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBe(
+                    expected = updatedMinimumAccountBalanceAmountValue,
                 )
 
                 addAccountScreenViewModel.uiStateEvents.clearMinimumAccountBalanceAmountValue()
 
-                assertThat(awaitItem().minimumAccountBalanceTextFieldValue.text).isEmpty()
+                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
             }
         }
 
@@ -223,15 +232,15 @@ internal class AddAccountScreenViewModelTest {
             text = updatedName,
         )
         addAccountScreenViewModel.uiState.test {
-            assertThat(awaitItem().nameTextFieldValue.text).isEmpty()
+            awaitItem().nameTextFieldValue.text.shouldBeEmpty()
             addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
-            assertThat(awaitItem().nameTextFieldValue.text).isEqualTo(
-                updatedName
+            awaitItem().nameTextFieldValue.text.shouldBe(
+                expected = updatedName,
             )
 
             addAccountScreenViewModel.uiStateEvents.clearName()
 
-            assertThat(awaitItem().nameTextFieldValue.text).isEmpty()
+            awaitItem().nameTextFieldValue.text.shouldBeEmpty()
         }
     }
 
@@ -266,35 +275,33 @@ internal class AddAccountScreenViewModelTest {
                     ),
                     name = testAccountName.text,
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateName(
                     testAccountName
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
                     testMinimumAccountBalanceAmount
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.insertAccount()
 
-                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
-                assertThat(
-                    testDependencies.fakeAccountDao.getAllAccounts()
-                        .find {
-                            it.id == testAccountId
-                        }
-                        ?.asExternalModel()
-                ).isEqualTo(
-                    testAccount
+                uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
+                testDependencies.fakeAccountDao.getAllAccounts()
+                    .find {
+                        it.id == testAccountId
+                    }
+                    ?.asExternalModel().shouldBe(
+                        expected = testAccount,
+                    )
+                (testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    ?: -1L).shouldBeGreaterThan(
+                    other = lastChangeTimestamp,
                 )
-                assertThat(
-                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
-                        ?: -1L
-                ).isGreaterThan(lastChangeTimestamp)
-                assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
-                    FinanceManagerNavigationDirections.NavigateUp
+                navigationCommandTurbine.awaitItem().shouldBe(
+                    expected = FinanceManagerNavigationDirections.NavigateUp,
                 )
             }
         }
@@ -329,39 +336,37 @@ internal class AddAccountScreenViewModelTest {
                     minimumAccountBalanceAmount = null,
                     name = testAccountName.text,
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateName(
                     testAccountName
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
                     testMinimumAccountBalanceAmount
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateSelectedAccountTypeIndex(
                     testSelectedAccountTypeIndex
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.insertAccount()
 
-                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
-                assertThat(
-                    testDependencies.fakeAccountDao.getAllAccounts()
-                        .find {
-                            it.id == 1
-                        }
-                        ?.asExternalModel()
-                ).isEqualTo(
-                    testAccount
+                uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
+                testDependencies.fakeAccountDao.getAllAccounts()
+                    .find {
+                        it.id == 1
+                    }
+                    ?.asExternalModel().shouldBe(
+                        expected = testAccount,
+                    )
+                (testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    ?: -1L).shouldBeGreaterThan(
+                    other = lastChangeTimestamp,
                 )
-                assertThat(
-                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
-                        ?: -1L
-                ).isGreaterThan(lastChangeTimestamp)
-                assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
-                    FinanceManagerNavigationDirections.NavigateUp
+                navigationCommandTurbine.awaitItem().shouldBe(
+                    expected = FinanceManagerNavigationDirections.NavigateUp,
                 )
             }
         }
@@ -370,14 +375,14 @@ internal class AddAccountScreenViewModelTest {
     fun resetScreenSnackbarType_shouldResetToNone() =
         testDependencies.runTestWithTimeout {
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    AddAccountScreenSnackbarType.None
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = AddAccountScreenSnackbarType.None,
                 )
 
                 addAccountScreenViewModel.uiStateEvents.resetScreenSnackbarType()
 
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    AddAccountScreenSnackbarType.None
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = AddAccountScreenSnackbarType.None,
                 )
             }
         }
@@ -390,14 +395,14 @@ internal class AddAccountScreenViewModelTest {
                 text = updatedMinimumAccountBalanceAmountValue,
             )
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().minimumAccountBalanceTextFieldValue.text).isEmpty()
+                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
                     updatedValue
                 )
 
-                assertThat(awaitItem().minimumAccountBalanceTextFieldValue.text).isEqualTo(
-                    updatedMinimumAccountBalanceAmountValue
+                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBe(
+                    expected = updatedMinimumAccountBalanceAmountValue,
                 )
             }
         }
@@ -409,12 +414,12 @@ internal class AddAccountScreenViewModelTest {
             text = updatedName,
         )
         addAccountScreenViewModel.uiState.test {
-            assertThat(awaitItem().nameTextFieldValue.text).isEmpty()
+            awaitItem().nameTextFieldValue.text.shouldBeEmpty()
 
             addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
 
-            assertThat(awaitItem().nameTextFieldValue.text).isEqualTo(
-                updatedName
+            awaitItem().nameTextFieldValue.text.shouldBe(
+                expected = updatedName,
             )
         }
     }
@@ -424,16 +429,16 @@ internal class AddAccountScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val updatedType = AddAccountScreenSnackbarType.None
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    AddAccountScreenSnackbarType.None
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = AddAccountScreenSnackbarType.None,
                 )
 
                 addAccountScreenViewModel.uiStateEvents.updateScreenSnackbarType(
                     updatedType
                 )
 
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    updatedType
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = updatedType,
                 )
             }
         }
@@ -443,14 +448,16 @@ internal class AddAccountScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val updatedIndex = 1
             addAccountScreenViewModel.uiState.test {
-                assertThat(awaitItem().selectedAccountTypeIndex).isEqualTo(0)
+                awaitItem().selectedAccountTypeIndex.shouldBe(
+                    expected = 0,
+                )
 
                 addAccountScreenViewModel.uiStateEvents.updateSelectedAccountTypeIndex(
                     updatedIndex
                 )
 
-                assertThat(awaitItem().selectedAccountTypeIndex).isEqualTo(
-                    updatedIndex
+                awaitItem().selectedAccountTypeIndex.shouldBe(
+                    expected = updatedIndex,
                 )
             }
         }

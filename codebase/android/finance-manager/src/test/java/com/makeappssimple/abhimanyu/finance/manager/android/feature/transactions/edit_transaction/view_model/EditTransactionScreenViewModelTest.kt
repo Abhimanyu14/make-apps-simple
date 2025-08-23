@@ -18,13 +18,19 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.snackbar.EditTransactionScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.state.AccountFromText
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.state.AccountToText
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -80,41 +86,51 @@ internal class EditTransactionScreenViewModelTest {
         editTransactionScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.accountFrom).isNull()
-            assertThat(result.accountFromText).isEqualTo(AccountFromText.Account)
-            assertThat(result.accountTo).isNull()
-            assertThat(result.accountToText).isEqualTo(AccountToText.Account)
-            assertThat(result.screenBottomSheetType).isEqualTo(
-                EditTransactionScreenBottomSheetType.None
+            result.accountFrom.shouldBeNull()
+            result.accountFromText.shouldBe(
+                expected = AccountFromText.Account,
             )
-            assertThat(result.screenSnackbarType).isEqualTo(
-                EditTransactionScreenSnackbarType.None
+            result.accountTo.shouldBeNull()
+            result.accountToText.shouldBe(
+                expected = AccountToText.Account,
             )
-            assertThat(result.uiVisibilityState).isEqualTo(
-                EditTransactionScreenUiVisibilityState.Expense
+            result.screenBottomSheetType.shouldBe(
+                expected = EditTransactionScreenBottomSheetType.None,
             )
-            assertThat(result.isBottomSheetVisible).isFalse()
-            assertThat(result.isCtaButtonEnabled).isFalse()
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.isTransactionDatePickerDialogVisible).isFalse()
-            assertThat(result.isTransactionTimePickerDialogVisible).isFalse()
-            assertThat(result.category).isNull()
-            assertThat(result.selectedTransactionForIndex).isEqualTo(0)
-            assertThat(result.selectedTransactionTypeIndex).isNull()
-            assertThat(result.accounts).isEmpty()
-            assertThat(result.filteredCategories).isEmpty()
-            assertThat(result.titleSuggestionsChipUIData).isEmpty()
-            assertThat(result.transactionForValuesChipUIData).isEmpty()
-            assertThat(result.transactionTypesForNewTransactionChipUIData).isEmpty()
-            assertThat(result.titleSuggestions).isEmpty()
-            assertThat(result.currentLocalDate).isEqualTo(LocalDate.MIN)
-            assertThat(result.transactionDate).isEqualTo(LocalDate.MIN)
-            assertThat(result.transactionTime).isEqualTo(LocalTime.MIN)
-            assertThat(result.amountErrorText).isNull()
-            assertThat(result.amount.text).isEmpty()
-            assertThat(result.title.text).isEmpty()
-            assertThat(result.selectedTransactionType).isEqualTo(
-                TransactionType.EXPENSE
+            result.screenSnackbarType.shouldBe(
+                expected = EditTransactionScreenSnackbarType.None,
+            )
+            result.uiVisibilityState.shouldBe(
+                expected = EditTransactionScreenUiVisibilityState.Expense,
+            )
+            result.isBottomSheetVisible.shouldBeFalse()
+            result.isCtaButtonEnabled.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.isTransactionDatePickerDialogVisible.shouldBeFalse()
+            result.isTransactionTimePickerDialogVisible.shouldBeFalse()
+            result.category.shouldBeNull()
+            result.selectedTransactionForIndex.shouldBeZero()
+            result.selectedTransactionTypeIndex.shouldBeNull()
+            result.accounts.shouldBeEmpty()
+            result.filteredCategories.shouldBeEmpty()
+            result.titleSuggestionsChipUIData.shouldBeEmpty()
+            result.transactionForValuesChipUIData.shouldBeEmpty()
+            result.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
+            result.titleSuggestions.shouldBeEmpty()
+            result.currentLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            result.transactionDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            result.transactionTime.shouldBe(
+                expected = LocalTime.MIN,
+            )
+            result.amountErrorText.shouldBeNull()
+            result.amount.text.shouldBeEmpty()
+            result.title.text.shouldBeEmpty()
+            result.selectedTransactionType.shouldBe(
+                expected = TransactionType.EXPENSE,
             )
         }
     }

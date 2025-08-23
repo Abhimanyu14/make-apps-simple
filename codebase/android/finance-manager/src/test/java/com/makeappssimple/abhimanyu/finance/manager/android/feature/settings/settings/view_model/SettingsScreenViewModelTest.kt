@@ -17,9 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -60,12 +63,12 @@ internal class SettingsScreenViewModelTest {
         settingsScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.isLoading).isTrue()
-            assertThat(result.isReminderEnabled).isNull()
-            assertThat(result.screenSnackbarType).isEqualTo(
-                SettingsScreenSnackbarType.None
+            result.isLoading.shouldBeTrue()
+            result.isReminderEnabled.shouldBeNull()
+            result.screenSnackbarType.shouldBe(
+                expected = SettingsScreenSnackbarType.None,
             )
-            assertThat(result.appVersion).isNull()
+            result.appVersion.shouldBeNull()
         }
     }
     // endregion
@@ -79,26 +82,26 @@ internal class SettingsScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             settingsScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
+                initialState.isLoading.shouldBeTrue()
+                initialState.screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.None,
                 )
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.None,
                 )
                 settingsScreenViewModel.uiStateEvents.updateScreenSnackbarType(
                     SettingsScreenSnackbarType.CancelReminderSuccessful
                 )
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.CancelReminderSuccessful
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.CancelReminderSuccessful,
                 )
 
                 settingsScreenViewModel.uiStateEvents.resetScreenSnackbarType()
 
-                assertThat(awaitItem().screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
+                awaitItem().screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.None,
                 )
             }
         }
@@ -108,14 +111,14 @@ internal class SettingsScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             settingsScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                assertThat(initialState.isLoading).isTrue()
-                assertThat(initialState.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
+                initialState.isLoading.shouldBeTrue()
+                initialState.screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.None,
                 )
                 val fetchDataCompletedState = awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
-                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.None
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.None,
                 )
 
                 settingsScreenViewModel.uiStateEvents.updateScreenSnackbarType(
@@ -123,8 +126,8 @@ internal class SettingsScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.screenSnackbarType).isEqualTo(
-                    SettingsScreenSnackbarType.CancelReminderSuccessful
+                result.screenSnackbarType.shouldBe(
+                    expected = SettingsScreenSnackbarType.CancelReminderSuccessful,
                 )
             }
         }

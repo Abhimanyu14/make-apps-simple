@@ -21,10 +21,14 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.comparables.shouldBeGreaterThan
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -61,12 +65,12 @@ internal class AddTransactionForScreenViewModelTest {
         addTransactionForScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            assertThat(result.title.text).isEmpty()
-            assertThat(result.titleError).isEqualTo(
-                AddTransactionForScreenTitleError.None
+            result.title.text.shouldBeEmpty()
+            result.titleError.shouldBe(
+                expected = AddTransactionForScreenTitleError.None,
             )
-            assertThat(result.isCtaButtonEnabled).isFalse()
-            assertThat(result.isLoading).isTrue()
+            result.isCtaButtonEnabled.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
         }
     }
     // endregion
@@ -79,13 +83,15 @@ internal class AddTransactionForScreenViewModelTest {
             text = updatedTitle,
         )
         addTransactionForScreenViewModel.uiState.test {
-            assertThat(awaitItem().title.text).isEmpty()
+            awaitItem().title.text.shouldBeEmpty()
 
             addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                 updatedValue
             )
 
-            assertThat(awaitItem().title.text).isEqualTo(updatedTitle)
+            awaitItem().title.text.shouldBe(
+                expected = updatedTitle,
+            )
         }
     }
 
@@ -96,15 +102,17 @@ internal class AddTransactionForScreenViewModelTest {
             text = updatedTitle,
         )
         addTransactionForScreenViewModel.uiState.test {
-            assertThat(awaitItem().title.text).isEmpty()
+            awaitItem().title.text.shouldBeEmpty()
             addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                 updatedValue
             )
-            assertThat(awaitItem().title.text).isEqualTo(updatedTitle)
+            awaitItem().title.text.shouldBe(
+                expected = updatedTitle,
+            )
 
             addTransactionForScreenViewModel.uiStateEvents.clearTitle()
 
-            assertThat(awaitItem().title.text).isEmpty()
+            awaitItem().title.text.shouldBeEmpty()
         }
     }
     // endregion
@@ -118,16 +126,16 @@ internal class AddTransactionForScreenViewModelTest {
                 text = updatedTitle,
             )
             addTransactionForScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     updatedValue
                 )
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.titleError).isEqualTo(
-                    AddTransactionForScreenTitleError.None,
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleError.shouldBe(
+                    expected = AddTransactionForScreenTitleError.None,
                 )
             }
         }
@@ -143,11 +151,13 @@ internal class AddTransactionForScreenViewModelTest {
                 text = updatedTitle,
             )
             addTransactionForScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     updatedValue1
                 )
-                assertThat(awaitItem().title.text).isEqualTo(updatedTitle)
+                awaitItem().title.text.shouldBe(
+                    expected = updatedTitle,
+                )
                 addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
                     .join()
 
@@ -156,9 +166,9 @@ internal class AddTransactionForScreenViewModelTest {
                 )
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isFalse()
-                assertThat(result.titleError).isEqualTo(
-                    AddTransactionForScreenTitleError.TransactionForExists,
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleError.shouldBe(
+                    expected = AddTransactionForScreenTitleError.TransactionForExists,
                 )
             }
         }
@@ -171,16 +181,16 @@ internal class AddTransactionForScreenViewModelTest {
                 text = updatedTitle,
             )
             addTransactionForScreenViewModel.uiState.test {
-                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
+                awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     updatedValue
                 )
 
                 val result = awaitItem()
-                assertThat(result.isCtaButtonEnabled).isTrue()
-                assertThat(result.titleError).isEqualTo(
-                    AddTransactionForScreenTitleError.None,
+                result.isCtaButtonEnabled.shouldBeTrue()
+                result.titleError.shouldBe(
+                    expected = AddTransactionForScreenTitleError.None,
                 )
             }
         }
@@ -207,30 +217,30 @@ internal class AddTransactionForScreenViewModelTest {
                     text = "test-transaction-for",
                 )
                 val initialState = uiStateTurbine.awaitItem()
-                assertThat(initialState.isLoading).isTrue()
+                initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = uiStateTurbine.awaitItem()
-                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     testTitle
                 )
-                assertThat(uiStateTurbine.awaitItem().isLoading).isFalse()
+                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
 
                 addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
 
-                assertThat(uiStateTurbine.awaitItem().isLoading).isTrue()
-                assertThat(
-                    testDependencies.fakeTransactionForDao.getAllTransactionForValues()
-                        .find {
-                            it.id == 1
-                        }
-                        ?.title
-                ).isEqualTo(testTitle.text)
-                assertThat(
-                    testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
-                        ?: -1L
-                ).isGreaterThan(lastChangeTimestamp)
-                assertThat(navigationCommandTurbine.awaitItem()).isEqualTo(
-                    FinanceManagerNavigationDirections.NavigateUp
+                uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
+                testDependencies.fakeTransactionForDao.getAllTransactionForValues()
+                    .find {
+                        it.id == 1
+                    }
+                    ?.title.shouldBe(
+                        expected = testTitle.text,
+                    )
+                (testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
+                    ?: -1L).shouldBeGreaterThan(
+                    other = lastChangeTimestamp,
+                )
+                navigationCommandTurbine.awaitItem().shouldBe(
+                    expected = FinanceManagerNavigationDirections.NavigateUp,
                 )
             }
         }
