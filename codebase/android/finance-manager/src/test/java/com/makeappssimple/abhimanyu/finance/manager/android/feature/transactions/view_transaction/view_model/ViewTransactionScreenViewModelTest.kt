@@ -18,8 +18,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import app.cash.turbine.turbineScope
+import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty
@@ -41,7 +44,7 @@ internal class ViewTransactionScreenViewModelTest {
         testDependencies = TestDependencies()
         savedStateHandle = SavedStateHandle(
             initialState = mapOf(
-                "transactionId" to testDependencies.testTransactionForId1.toString(),
+                "transactionId" to testDependencies.testTransactionId1.toString(),
             ),
         )
         viewTransactionScreenViewModel = ViewTransactionScreenViewModel(
@@ -82,31 +85,60 @@ internal class ViewTransactionScreenViewModelTest {
     }
     // endregion
 
-    // region updateUiStateAndStateEvents
-//    @Test
-//    fun updateUiStateAndStateEvents_nameIsBlank_ctaIsDisabled() =
-//        testDependencies.runTestWithTimeout {
-//            val updatedName = "   "
-//            val updatedValue = TextFieldValue(
-//                text = updatedName,
-//            )
-//            viewTransactionScreenViewModel.uiState.test {
-//                assertThat(awaitItem().isCtaButtonEnabled).isFalse()
-//
-//                viewTransactionScreenViewModel.uiStateEvents.updateName(
-//                    updatedValue
-//                )
-//
-//                val result = awaitItem()
-//                assertThat(result.isCtaButtonEnabled).isFalse()
-//                assertThat(result.nameError).isEqualTo(
-//                    AddAccountScreenNameError.None
-//                )
-//            }
-//        }
-    // endregion
-
     // region state events
+    @Test
+    fun deleteTransaction_transactionIdToDeleteIsNull_shouldThrowException() =
+        testDependencies.runTestWithTimeout {
+            viewTransactionScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                val fetchDataCompletedState = awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+
+                val exception = shouldThrow<IllegalStateException> {
+                    viewTransactionScreenViewModel.uiStateEvents.deleteTransaction()
+                }
+                exception.message.shouldBe(
+                    expected = "Transaction ID to delete must not be null.",
+                )
+            }
+        }
+
+    @Test
+    fun deleteTransaction_shouldDeleteTransaction() =
+        testDependencies.runTestWithTimeout {
+            turbineScope {
+                val navigationCommandTurbine =
+                    testDependencies.navigationKit.command.testIn(
+                        scope = backgroundScope,
+                    )
+                val uiStateTurbine =
+                    viewTransactionScreenViewModel.uiState.testIn(
+                        scope = backgroundScope,
+                    )
+                val initialState = uiStateTurbine.awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                val fetchDataCompletedState = uiStateTurbine.awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                viewTransactionScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
+                    ViewTransactionScreenBottomSheetType.DeleteConfirmation
+                )
+                uiStateTurbine.awaitItem().screenBottomSheetType.shouldBe(
+                    expected = ViewTransactionScreenBottomSheetType.DeleteConfirmation,
+                )
+                viewTransactionScreenViewModel.uiStateEvents.updateTransactionIdToDelete(
+                    testDependencies.testTransactionId1,
+                )
+
+                viewTransactionScreenViewModel.uiStateEvents.deleteTransaction()
+
+                uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
+                navigationCommandTurbine.awaitItem().shouldBe(
+                    expected = FinanceManagerNavigationDirections.NavigateUp,
+                )
+            }
+        }
+
     @Test
     fun resetScreenBottomSheetType_shouldSetBottomSheetTypeToNone() =
         testDependencies.runTestWithTimeout {

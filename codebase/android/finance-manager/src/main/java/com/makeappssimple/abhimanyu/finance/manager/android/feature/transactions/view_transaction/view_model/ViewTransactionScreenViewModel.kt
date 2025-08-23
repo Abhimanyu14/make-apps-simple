@@ -216,10 +216,10 @@ internal class ViewTransactionScreenViewModel(
             val isTransactionDeleted = deleteTransactionUseByIdCase(
                 id = id,
             )
-            resetScreenBottomSheetType()
             if (isTransactionDeleted) {
                 navigateUp()
             } else {
+                resetScreenBottomSheetType()
                 updateTransactionIdToDelete(
                     updatedTransactionIdToDelete = null,
                     shouldRefresh = false,
