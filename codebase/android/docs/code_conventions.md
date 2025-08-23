@@ -152,10 +152,10 @@
    ```
 
 5. Function parameters
-   - Put parameters in single line for Java method calls if they fit within a line, if not put
-     each parameter in a separate line.
-   - For every function declaration, always place each parameter in separate line. Do NOT add empty
-     lines when there are not parameters.
+    - Put parameters in single line for Java method calls if they fit within a line, if not put
+      each parameter in a separate line.
+    - For every function declaration, always place each parameter in separate line. Do NOT add empty
+      lines when there are not parameters.
 
 ## Trailing Commas
 
@@ -188,45 +188,45 @@
 
 1. **Classes and Objects:**
 
-   - Use PascalCase for class and object names (e.g., `MainActivity`, `UserRepository`).
-   - Use descriptive names that clearly indicate their purpose.
+    - Use PascalCase for class and object names (e.g., `MainActivity`, `UserRepository`).
+    - Use descriptive names that clearly indicate their purpose.
 
 2. **Functions and Variables:**
 
-   - Use camelCase for function and variable names (e.g., `getUserData()`, `userName`).
-   - Use descriptive names that explain what the function does or what the variable contains.
+    - Use camelCase for function and variable names (e.g., `getUserData()`, `userName`).
+    - Use descriptive names that explain what the function does or what the variable contains.
 
 3. **Constants:**
-   - Use UPPER_SNAKE_CASE for constants (e.g., `MAX_RETRY_COUNT`, `DEFAULT_TIMEOUT`).
+    - Use UPPER_SNAKE_CASE for constants (e.g., `MAX_RETRY_COUNT`, `DEFAULT_TIMEOUT`).
 4. **Package Names:**
-   - Use lowercase with dots as separators (e.g., `com.makeappssimple.abhimanyu.app`).
+    - Use lowercase with dots as separators (e.g., `com.makeappssimple.abhimanyu.app`).
 5. **File Names:**
-   - Use PascalCase for file names, matching the primary class name (e.g., `MainActivity.kt`).
+    - Use PascalCase for file names, matching the primary class name (e.g., `MainActivity.kt`).
 
 ## Code Organization
 
 1. **File Structure:**
-   1. Package declaration
-   2. Import statements (alphabetically ordered)
-   3. Class/object declaration
-   4. Properties
-   5. Constructor
-   6. Functions – public first, then internal, followed by private. Order the methods
-      alphabetically within each visibility modifier section.
-   7. Companion object (if any)
+    1. Package declaration
+    2. Import statements (alphabetically ordered)
+    3. Class/object declaration
+    4. Properties
+    5. Constructor
+    6. Functions – public first, then internal, followed by private. Order the methods
+       alphabetically within each visibility modifier section.
+    7. Companion object (if any)
 2. **Import Organization:**
-   - Group imports: standard library, third-party libraries, project-specific imports.
-   - Use explicit imports instead of wildcard imports.
-   - Remove unused imports.
+    - Group imports: standard library, third-party libraries, project-specific imports.
+    - Use explicit imports instead of wildcard imports.
+    - Remove unused imports.
 
 ## Visibility Modifiers
 
 1. **Default to Private:**
-   - Use `private` as the default visibility modifier.
-   - Use `internal` for module-level visibility when needed.
-   - Use `public` only when the API is intentionally exposed.
+    - Use `private` as the default visibility modifier.
+    - Use `internal` for module-level visibility when needed.
+    - Use `public` only when the API is intentionally exposed.
 2. **Testing:**
-   - Use the `@VisibleForTesting` annotation for internal functions that need to be tested.
+    - Use the `@VisibleForTesting` annotation for internal functions that need to be tested.
 
 ## Indentation:
 
@@ -260,78 +260,76 @@
 ## Method Ordering
 
 1. **Order of Methods:**
-   - Public methods first, followed by internal methods, and then private methods.
-   - Within each visibility modifier, order methods alphabetically.
+    - Public methods first, followed by internal methods, and then private methods.
+    - Within each visibility modifier, order methods alphabetically.
 
 ## Function Design
 
 1. **Single Responsibility:**
-   - Each function should have a single, clear purpose.
-   - Keep functions small and focused.
+    - Each function should have a single, clear purpose.
+    - Keep functions small and focused.
 2. **Parameters:**
-   - Use meaningful parameter names.
-   - Consider using data classes for multiple related parameters.
+    - Use meaningful parameter names.
+    - Consider using data classes for multiple related parameters.
 3. **Return Types:**
-   - Always specify return types for public functions.
-   - Use nullable types (`Type?`) when the function can return null.
+    - Always specify return types for public functions.
+    - Use nullable types (`Type?`) when the function can return null.
 
 ## Error Handling
 
 1. **Exceptions:**
-   - Use specific exception types rather than generic `Exception`.
-   - Always document exceptions that can be thrown by any function.
+    - Use specific exception types rather than generic `Exception`.
+    - Always document exceptions that can be thrown by any function.
 2. **Null Safety:**
-   - Prefer non-nullable types when possible.
-   - Always use the safe call operator (`?.`) and Elvis operator (`?:`) appropriately.
-   - Never use `!!`.
-   - Always use safe type casting (`as?`).
-   - Never use forced casting (`as`).
+    - Prefer non-nullable types when possible.
+    - Always use the safe call operator (`?.`) and Elvis operator (`?:`) appropriately.
+    - Never use `!!`.
+    - Always use safe type casting (`as?`).
+    - Never use forced casting (`as`).
 
 ## Documentation
 
 1. **KDoc Comments:**
-   - Use KDoc for public APIs and complex functions.
-   - Include `@param`, `@return`, and `@throws` tags where appropriate.
+    - Use KDoc for public APIs and complex functions.
+    - Include `@param`, `@return`, and `@throws` tags where appropriate.
 2. **Inline Comments:**
-   - Use comments to explain "why," not "what."
-   - Keep comments up to date with code changes.
+    - Use comments to explain "why," not "what."
+    - Keep comments up to date with code changes.
 
 ## Testing
 
 1. **Test Naming:**
-   - Name test classes with the suffix `Test` (e.g., `UserRepositoryTest`).
-   - Name test functions in the format `functionUnderTest_condition_expectedResult` (e.g.,
-     `login_withInvalidCredentials_returnsError`).
-   - Use backticks for descriptive test names (e.g., `fun `login fails with invalid credentials``).
+    - Name test classes with the suffix `Test` (e.g., `UserRepositoryTest`).
+    - Name test functions in the format `functionUnderTest_condition_expectedResult` (e.g.,
+      `login_withInvalidCredentials_returnsError`).
+    - Use backticks for descriptive test names (e.g., `fun `login fails with invalid credentials``).
 2. **Test File Location:**
-   - Place unit tests in the corresponding `test/` directory, mirroring the main source structure.
-   - Place instrumented tests in the `androidTest/` directory.
+    - Place unit tests in the corresponding `test/` directory, mirroring the main source structure.
+    - Place instrumented tests in the `androidTest/` directory.
 3. **Test Structure:**
-   - Use the Arrange-Act-Assert (AAA) pattern for organizing test logic.
-   - Use `@Before` and `@After` for setup and teardown logic.
+    - Use the Arrange-Act-Assert (AAA) pattern for organizing test logic.
+    - Use `@Before` and `@After` for setup and teardown logic.
 4. **Spacing:**
-   - Within each test method, separate arrange, act, and assert sections with empty lines.
-   - Do not add unnecessary comments in tests to segregate arrange, act and assert sections.
+    - Within each test method, separate arrange, act, and assert sections with empty lines.
+    - Do not add unnecessary comments in tests to segregate arrange, act and assert sections.
 5. **Visibility and Annotations:**
-   - Use `@Test` for test methods.
-   - Use `@VisibleForTesting` for internal members that need to be accessed in tests.
-   - Prefer `internal` or `private` visibility for test helpers within test files.
-   - Use `private` or `internal` for test classes.
+    - Use `@Test` for test methods.
+    - Use `@VisibleForTesting` for internal members that need to be accessed in tests.
+    - Prefer `internal` or `private` visibility for test helpers within test files.
+    - Use `private` or `internal` for test classes.
 6. **Mocking and Dependency Injection:**
-   - Use dependency injection to provide test doubles (mocks, fakes, stubs).
-   - Prefer using fakes over mocks.
-   - Use mock libraries for mocking dependencies only when required, such as at the last level of
-     application interaction (e.g., database, files, network, etc.).
+    - Use dependency injection to provide test doubles (mocks, fakes, stubs).
+    - Prefer using fakes over mocks.
+    - Use mock libraries for mocking dependencies only when required, such as at the last level of
+      application interaction (e.g., database, files, network, etc.).
 7. **Best Practices:**
-   - Each test should verify a single behavior or outcome.
-   - Avoid shared state between tests; use setup methods to initialize state.
-   - Use constants for test data to avoid magic values.
-   - Keep tests fast and isolated from external dependencies.
-   - Prefer using test-specific coroutine dispatchers for coroutine-based code.
+    - Each test should verify a single behavior or outcome.
+    - Avoid shared state between tests; use setup methods to initialize state.
+    - Use constants for test data to avoid magic values.
+    - Keep tests fast and isolated from external dependencies.
+    - Prefer using test-specific coroutine dispatchers for coroutine-based code.
 8. **Assertions:**
-   - Use expressive assertion libraries (e.g., Truth, AssertJ, JUnit assertions).
-   - Prefer `assertThat` over `assertEquals` for readability.
-   - Always use `com.google.common.truth.Truth.assertThat` for assertions.
+    - Use Kotest for assertions.
 
 ---
 
@@ -346,34 +344,34 @@
 ## Naming Conventions
 
 1. **Section Names:**
-   - Use `[versions]`, `[libraries]`, `[plugins]`, and `[bundles]` as top-level sections.
+    - Use `[versions]`, `[libraries]`, `[plugins]`, and `[bundles]` as top-level sections.
 2. **Version Keys:**
-   - Use lowercase, hyphen-separated keys (e.g., `compile-sdk`, `kotlinx-coroutines-swing`).
-   - For app versions, use the format: `app-<module>-version-code` and `app-<module>-version-name`.
-   - For plugin versions, use the format: `plugin-<plugin-name>`.
+    - Use lowercase, hyphen-separated keys (e.g., `compile-sdk`, `kotlinx-coroutines-swing`).
+    - For app versions, use the format: `app-<module>-version-code` and `app-<module>-version-name`.
+    - For plugin versions, use the format: `plugin-<plugin-name>`.
 3. **Library Keys:**
-   - Use the format `<group>-<artifact>` (e.g., `androidx-activity-compose`,
-     `kotlinx-coroutines-core`).
-   - For bundles, use a single word representing the group (e.g., `camera`, `compose`).
-   - For test libraries, prefix with `test-` (e.g., `test-ext-junit`).
+    - Use the format `<group>-<artifact>` (e.g., `androidx-activity-compose`,
+      `kotlinx-coroutines-core`).
+    - For bundles, use a single word representing the group (e.g., `camera`, `compose`).
+    - For test libraries, prefix with `test-` (e.g., `test-ext-junit`).
 4. **Reference Keys:**
-   - Use `module` for specifying the full Maven coordinate.
-   - Use `version.ref` for referencing version keys (e.g., `version.ref = "kotlinx-coroutines"`).
+    - Use `module` for specifying the full Maven coordinate.
+    - Use `version.ref` for referencing version keys (e.g., `version.ref = "kotlinx-coroutines"`).
 
 ## Ordering Conventions
 
 1. **Section Order:**
-   - `[versions]` (app, SDK, library, and plugin versions)
-   - `[libraries]` (dependencies)
-   - `[plugins]` (plugin definitions)
-   - `[bundles]` (dependency bundles)
+    - `[versions]` (app, SDK, library, and plugin versions)
+    - `[libraries]` (dependencies)
+    - `[plugins]` (plugin definitions)
+    - `[bundles]` (dependency bundles)
 2. **Within Sections:**
 
-   - Alphabetize keys within each section for readability and consistency.
-   - Group related items (e.g., all `androidx-` libraries together, all `koin-` libraries
-     together).
-   - For bundles, list dependencies in logical or usage order (e.g., camera-related libraries
-     together).
+    - Alphabetize keys within each section for readability and consistency.
+    - Group related items (e.g., all `androidx-` libraries together, all `koin-` libraries
+      together).
+    - For bundles, list dependencies in logical or usage order (e.g., camera-related libraries
+      together).
 
    **Example:**
 
