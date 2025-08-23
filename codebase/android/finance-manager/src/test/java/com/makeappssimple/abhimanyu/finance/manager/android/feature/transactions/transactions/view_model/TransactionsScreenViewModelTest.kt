@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
@@ -89,5 +90,108 @@ internal class TransactionsScreenViewModelTest {
             )
         }
     }
+    // endregion
+
+    // region fetchData
+    @Test
+    fun fetchData_initialState_dataFetched() =
+        testDependencies.runTestWithTimeout {
+            transactionsScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                assertThat(initialState.isLoading).isTrue()
+
+                val result = awaitItem()
+                assertThat(result.isLoading).isFalse()
+                assertThat(result.transactionForValues.size).isEqualTo(2)
+                assertThat(result.transactionForValues).isEqualTo(
+                    listOf(
+                        testDependencies.testTransactionForEntity1.asExternalModel(),
+                        testDependencies.testTransactionForEntity2.asExternalModel(),
+                    ),
+                )
+            }
+        }
+    // endregion
+
+    // region observeData
+    @Test
+    fun observeData_initialState_dataObserved() =
+        testDependencies.runTestWithTimeout {
+            transactionsScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                assertThat(initialState.isLoading).isTrue()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+
+                val result = awaitItem()
+                assertThat(result.accounts).isEqualTo(
+                    listOf(
+                        testDependencies.testAccountEntity2.asExternalModel(),
+                        testDependencies.testAccountEntity1.asExternalModel(),
+                    ),
+                )
+                assertThat(result.expenseCategories).isEmpty()
+                assertThat(result.incomeCategories).isEmpty()
+                assertThat(result.investmentCategories).isEmpty()
+                assertThat(result.oldestTransactionLocalDate).isEqualTo(
+                    LocalDate.of(2024, 5, 20)
+                )
+                assertThat(result.transactionDetailsListItemViewData.size).isEqualTo(
+                    2
+                )
+                assertThat(result.transactionDetailsListItemViewData["23 Aug, 2025 (Saturday)"]?.size).isEqualTo(
+                    1
+                )
+                assertThat(result.transactionDetailsListItemViewData["20 May, 2024 (Monday)"]?.size).isEqualTo(
+                    1
+                )
+//                assertThat(result.transactionDetailsListItemViewData).isEqualTo(
+//                    mapOf(
+//                        "23 Aug, 2025 (Saturday)" to listOf(
+//                            TransactionListItemData(
+//                                isDeleteButtonEnabled = false,
+//                                isDeleteButtonVisible = true,
+//                                isEditButtonVisible = false,
+//                                isExpanded = false,
+//                                isInSelectionMode = false,
+//                                isLoading = false,
+//                                isRefundButtonVisible = false,
+//                                isSelected = false,
+//                                transactionId = 101,
+//                                amountColor = MyColor.ERROR,
+//                                amountText = "- ₹1,000",
+//                                dateAndTimeText = "01 Jan, 1970 at 05:46 AM",
+//                                emoji = "💳",
+//                                accountFromName = "test-account-101",
+//                                accountToName = null,
+//                                title = "test-transaction-101",
+//                                transactionForText = "Test-transaction-for-101",
+//                            ),
+//                        ),
+//                        "20 May, 2024 (Monday)" to listOf(
+//                            TransactionListItemData(
+//                                isDeleteButtonEnabled = false,
+//                                isDeleteButtonVisible = true,
+//                                isEditButtonVisible = false,
+//                                isExpanded = false,
+//                                isInSelectionMode = false,
+//                                isLoading = false,
+//                                isRefundButtonVisible = false,
+//                                isSelected = false,
+//                                transactionId = 102,
+//                                amountColor = MyColor.ERROR,
+//                                amountText = "- ₹1,000",
+//                                dateAndTimeText = "01 Jan, 1970 at 05:46 AM",
+//                                emoji = "💰",
+//                                accountFromName = "test-account-102",
+//                                accountToName = null,
+//                                title = "test-transaction-102",
+//                                transactionForText = "Test-transaction-for-102",
+//                            ),
+//                        )
+//                    ),
+//                )
+            }
+        }
     // endregion
 }

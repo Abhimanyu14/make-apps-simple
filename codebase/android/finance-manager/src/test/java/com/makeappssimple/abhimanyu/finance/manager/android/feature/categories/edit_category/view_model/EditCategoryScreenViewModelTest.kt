@@ -93,11 +93,11 @@ internal class EditCategoryScreenViewModelTest {
             editCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    postDataFetchCompletion.title.copy(
+                    fetchDataCompletedState.title.copy(
                         text = "   ",
                     )
                 )
@@ -116,11 +116,11 @@ internal class EditCategoryScreenViewModelTest {
             editCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    postDataFetchCompletion.title.copy(
+                    fetchDataCompletedState.title.copy(
                         text = "test-title",
                     )
                 )
@@ -140,11 +140,11 @@ internal class EditCategoryScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
                 assertThat(initialState.isLoading).isTrue()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    postDataFetchCompletion.title.copy(
+                    fetchDataCompletedState.title.copy(
                         text = testDependencies.testCategoryTitle2,
                     )
                 )
@@ -183,9 +183,9 @@ internal class EditCategoryScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             assertThat(initialState.title.text).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
+            assertThat(fetchDataCompletedState.title.text).isEqualTo(
                 testDependencies.testCategoryTitle1
             )
 
@@ -207,8 +207,8 @@ internal class EditCategoryScreenViewModelTest {
                 assertThat(initialState.screenBottomSheetType).isEqualTo(
                     EditCategoryScreenBottomSheetType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
                 editCategoryScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     testScreenBottomSheetType
                 )
@@ -232,8 +232,8 @@ internal class EditCategoryScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             assertThat(initialState.emoji).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
 
             editCategoryScreenViewModel.uiStateEvents.updateEmoji(testEmoji)
 
@@ -250,8 +250,8 @@ internal class EditCategoryScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
                 assertThat(initialState.emojiSearchText).isEmpty()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
                     testEmojiSearchText
@@ -273,8 +273,8 @@ internal class EditCategoryScreenViewModelTest {
                 assertThat(initialState.screenBottomSheetType).isEqualTo(
                     EditCategoryScreenBottomSheetType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     testScreenBottomSheetType
@@ -295,9 +295,9 @@ internal class EditCategoryScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
                 assertThat(initialState.selectedTransactionTypeIndex).isNull()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.selectedTransactionTypeIndex).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.selectedTransactionTypeIndex).isEqualTo(
                     1
                 )
 
@@ -319,14 +319,14 @@ internal class EditCategoryScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             assertThat(initialState.title.text).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
+            assertThat(fetchDataCompletedState.title.text).isEqualTo(
                 testDependencies.testCategoryTitle1
             )
 
             editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                postDataFetchCompletion.title.copy(
+                fetchDataCompletedState.title.copy(
                     text = updatedTestTitle,
                 )
             )

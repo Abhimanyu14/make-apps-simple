@@ -104,8 +104,8 @@ internal class EditTransactionForScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
                 editTransactionForScreenViewModel.initViewModel()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.title.text).isEqualTo(
                     testDependencies.testTransactionForTitle1
                 )
 
@@ -130,8 +130,8 @@ internal class EditTransactionForScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
                 editTransactionForScreenViewModel.initViewModel()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.title.text).isEqualTo(
                     testDependencies.testTransactionForTitle1
                 )
 
@@ -161,8 +161,8 @@ internal class EditTransactionForScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.title.text).isEmpty()
                 editTransactionForScreenViewModel.initViewModel()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.title.text).isEqualTo(
                     testDependencies.testTransactionForTitle1
                 )
 
@@ -190,11 +190,11 @@ internal class EditTransactionForScreenViewModelTest {
 
             editTransactionForScreenViewModel.initViewModel()
 
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.title.text).isEqualTo(
                 testDependencies.testTransactionForTitle1
             )
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
         }
     }
     // endregion
@@ -211,8 +211,8 @@ internal class EditTransactionForScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.title.text).isEmpty()
             editTransactionForScreenViewModel.initViewModel()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.title.text).isEqualTo(
                 testDependencies.testTransactionForTitle1
             )
 
@@ -232,8 +232,8 @@ internal class EditTransactionForScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.title.text).isEmpty()
             editTransactionForScreenViewModel.initViewModel()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.title.text).isEqualTo(
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.title.text).isEqualTo(
                 testDependencies.testTransactionForTitle1
             )
 
@@ -270,8 +270,8 @@ internal class EditTransactionForScreenViewModelTest {
                 val initialState = uiStateTurbine.awaitItem()
                 assertThat(initialState.title.text).isEmpty()
                 editTransactionForScreenViewModel.initViewModel()
-                val postDataFetchCompletion = uiStateTurbine.awaitItem()
-                assertThat(postDataFetchCompletion.title.text).isEqualTo(
+                val fetchDataCompletedState = uiStateTurbine.awaitItem()
+                assertThat(fetchDataCompletedState.title.text).isEqualTo(
                     testDependencies.testTransactionForTitle1
                 )
 

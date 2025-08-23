@@ -107,9 +107,12 @@ internal class TransactionForValuesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
                 assertThat(awaitItem().isLoading).isTrue()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.transactionForListItemDataList.size).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.transactionForListItemDataList).isEmpty()
+                val observeDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(observeDataCompletedState.transactionForListItemDataList.size).isEqualTo(
                     2
                 )
 
@@ -117,6 +120,7 @@ internal class TransactionForValuesScreenViewModelTest {
                     testDependencies.testTransactionForId1
                 )
                 transactionForValuesScreenViewModel.uiStateEvents.deleteTransactionFor()
+
                 val result = awaitItem()
                 assertThat(result.isLoading).isFalse()
                 assertThat(result.transactionForListItemDataList.size).isEqualTo(

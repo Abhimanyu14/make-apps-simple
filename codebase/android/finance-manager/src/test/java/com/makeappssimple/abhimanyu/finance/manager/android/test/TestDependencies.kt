@@ -492,7 +492,7 @@ internal class TestDependencies {
     val testCategoryTitle2 = "test-category-102"
     val testCategoryEntity2 = CategoryEntity(
         id = testCategoryId2,
-        emoji = "💳",
+        emoji = "💰",
         title = testCategoryTitle2,
         transactionType = TransactionType.INCOME,
     )
@@ -518,8 +518,8 @@ internal class TestDependencies {
         id = testTransactionId1,
         accountFromId = testAccountId1,
         transactionForId = testTransactionForId1,
-        creationTimestamp = 1000000L,
-        transactionTimestamp = 1000000L,
+        creationTimestamp = 1716173974000L,
+        transactionTimestamp = 1716173974000L,
         title = testTransactionTitle1,
     )
     val testTransactionId2 = 102
@@ -532,8 +532,8 @@ internal class TestDependencies {
         id = testTransactionId2,
         accountFromId = testAccountId2,
         transactionForId = testTransactionForId2,
-        creationTimestamp = 1000000L,
-        transactionTimestamp = 1000000L,
+        creationTimestamp = 1755917974000L,
+        transactionTimestamp = 1755917974000L,
         title = testTransactionTitle2,
     )
 

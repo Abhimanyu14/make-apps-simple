@@ -271,7 +271,9 @@ internal class TransactionsScreenViewModel(
         }
         transactionDetailsListItemViewData = updatedAllTransactionData
         if (allTransactionData.isNotEmpty()) {
-            completeLoading()
+            completeLoading(
+                shouldRefresh = false,
+            )
         }
     }
 
@@ -436,6 +438,7 @@ internal class TransactionsScreenViewModel(
                     )
                     categoriesMap = categoriesInTransactionsMap.toMap()
                     allTransactionData = updatedAllTransactionData
+                    refresh()
                 }
         }
     }

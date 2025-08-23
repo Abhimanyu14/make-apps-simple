@@ -112,9 +112,9 @@ internal class ViewTransactionScreenViewModelTest {
                 assertThat(initialState.screenBottomSheetType).isEqualTo(
                     ViewTransactionScreenBottomSheetType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenBottomSheetType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
                     ViewTransactionScreenBottomSheetType.None
                 )
                 viewTransactionScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
@@ -142,9 +142,9 @@ internal class ViewTransactionScreenViewModelTest {
                 assertThat(initialState.screenBottomSheetType).isEqualTo(
                     ViewTransactionScreenBottomSheetType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenBottomSheetType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
                     ViewTransactionScreenBottomSheetType.None
                 )
 

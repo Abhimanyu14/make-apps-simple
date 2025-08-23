@@ -87,9 +87,9 @@ internal class CategoriesScreenViewModelTest {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenBottomSheetType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
                     CategoriesScreenBottomSheetType.None
                 )
                 categoriesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
@@ -113,9 +113,9 @@ internal class CategoriesScreenViewModelTest {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenSnackbarType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
                     CategoriesScreenSnackbarType.None
                 )
                 categoriesScreenViewModel.uiStateEvents.updateScreenSnackbarType(
@@ -139,9 +139,9 @@ internal class CategoriesScreenViewModelTest {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenBottomSheetType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenBottomSheetType).isEqualTo(
                     CategoriesScreenBottomSheetType.None
                 )
 
@@ -161,9 +161,9 @@ internal class CategoriesScreenViewModelTest {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenSnackbarType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
                     CategoriesScreenSnackbarType.None
                 )
 

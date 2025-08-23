@@ -161,7 +161,6 @@ internal class TransactionForValuesScreenViewModel(
     private fun observeForTransactionForListItemDataList(): Job {
         return coroutineScope.launch {
             getAllTransactionForValuesFlowUseCase().collectLatest { updatedAllTransactionForValues ->
-                startLoading()
                 val transactionForValuesIsUsedInTransactions =
                     checkIfTransactionForValuesAreUsedInTransactionsUseCase(
                         transactionForValues = updatedAllTransactionForValues,
@@ -179,7 +178,7 @@ internal class TransactionForValuesScreenViewModel(
                             title = transactionFor.title.capitalizeWords(),
                         )
                     }
-                completeLoading()
+                refresh()
             }
         }
     }

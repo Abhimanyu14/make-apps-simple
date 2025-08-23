@@ -36,12 +36,11 @@ public abstract class ScreenViewModel(
     ScreenUIStateDelegate by screenUIStateDelegate {
     internal fun initViewModel() {
         observeForRefreshSignal()
-        fetchData().invokeOnCompletion {
-            coroutineScope.launch {
-                completeLoading()
-            }
+        coroutineScope.launch {
+            fetchData().join()
+            completeLoading().join()
+            observeData()
         }
-        observeData()
     }
 
     /**

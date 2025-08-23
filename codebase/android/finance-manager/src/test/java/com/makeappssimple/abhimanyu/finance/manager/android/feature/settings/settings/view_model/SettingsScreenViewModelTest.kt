@@ -83,9 +83,9 @@ internal class SettingsScreenViewModelTest {
                 assertThat(initialState.screenSnackbarType).isEqualTo(
                     SettingsScreenSnackbarType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenSnackbarType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
                     SettingsScreenSnackbarType.None
                 )
                 settingsScreenViewModel.uiStateEvents.updateScreenSnackbarType(
@@ -112,9 +112,9 @@ internal class SettingsScreenViewModelTest {
                 assertThat(initialState.screenSnackbarType).isEqualTo(
                     SettingsScreenSnackbarType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.screenSnackbarType).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.screenSnackbarType).isEqualTo(
                     SettingsScreenSnackbarType.None
                 )
 

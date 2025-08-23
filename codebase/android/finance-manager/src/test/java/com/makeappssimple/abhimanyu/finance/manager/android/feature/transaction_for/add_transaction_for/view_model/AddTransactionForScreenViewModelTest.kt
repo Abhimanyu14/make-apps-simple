@@ -208,8 +208,8 @@ internal class AddTransactionForScreenViewModelTest {
                 )
                 val initialState = uiStateTurbine.awaitItem()
                 assertThat(initialState.isLoading).isTrue()
-                val postDataFetchCompletion = uiStateTurbine.awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = uiStateTurbine.awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     testTitle
                 )

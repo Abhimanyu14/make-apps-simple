@@ -53,8 +53,8 @@ internal class OpenSourceLicensesScreenViewModelTest {
         openSourceLicensesScreenViewModel.uiState.test {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
         }
     }
     // endregion

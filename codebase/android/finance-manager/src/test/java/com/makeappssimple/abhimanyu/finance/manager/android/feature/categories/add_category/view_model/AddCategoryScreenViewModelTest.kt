@@ -187,8 +187,8 @@ internal class AddCategoryScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
                 assertThat(initialState.emojiSearchText).isEmpty()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
                 addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
                     testEmojiSearchText
                 )
@@ -210,8 +210,8 @@ internal class AddCategoryScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             assertThat(initialState.title.text).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
             addCategoryScreenViewModel.uiStateEvents.updateTitle(
                 TextFieldValue(
                     text = testTitle,
@@ -237,8 +237,8 @@ internal class AddCategoryScreenViewModelTest {
                 assertThat(initialState.screenBottomSheetType).isEqualTo(
                     AddCategoryScreenBottomSheetType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
                 addCategoryScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     testScreenBottomSheetType
                 )
@@ -262,8 +262,8 @@ internal class AddCategoryScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             assertThat(initialState.emoji).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
 
             addCategoryScreenViewModel.uiStateEvents.updateEmoji(testEmoji)
 
@@ -280,8 +280,8 @@ internal class AddCategoryScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
                 assertThat(initialState.emojiSearchText).isEmpty()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
                     testEmojiSearchText
@@ -303,8 +303,8 @@ internal class AddCategoryScreenViewModelTest {
                 assertThat(initialState.screenBottomSheetType).isEqualTo(
                     AddCategoryScreenBottomSheetType.None
                 )
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
 
                 addCategoryScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
                     testScreenBottomSheetType
@@ -325,9 +325,9 @@ internal class AddCategoryScreenViewModelTest {
                 val initialState = awaitItem()
                 assertThat(initialState.isLoading).isTrue()
                 assertThat(initialState.selectedTransactionTypeIndex).isNull()
-                val postDataFetchCompletion = awaitItem()
-                assertThat(postDataFetchCompletion.isLoading).isFalse()
-                assertThat(postDataFetchCompletion.selectedTransactionTypeIndex).isEqualTo(
+                val fetchDataCompletedState = awaitItem()
+                assertThat(fetchDataCompletedState.isLoading).isFalse()
+                assertThat(fetchDataCompletedState.selectedTransactionTypeIndex).isEqualTo(
                     1
                 )
 
@@ -349,8 +349,8 @@ internal class AddCategoryScreenViewModelTest {
             val initialState = awaitItem()
             assertThat(initialState.isLoading).isTrue()
             assertThat(initialState.title.text).isEmpty()
-            val postDataFetchCompletion = awaitItem()
-            assertThat(postDataFetchCompletion.isLoading).isFalse()
+            val fetchDataCompletedState = awaitItem()
+            assertThat(fetchDataCompletedState.isLoading).isFalse()
 
             addCategoryScreenViewModel.uiStateEvents.updateTitle(
                 TextFieldValue(
