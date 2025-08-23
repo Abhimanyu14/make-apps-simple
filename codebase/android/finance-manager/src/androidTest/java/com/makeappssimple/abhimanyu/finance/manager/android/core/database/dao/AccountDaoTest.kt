@@ -21,10 +21,15 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.AmountEntity
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -81,8 +86,10 @@ internal class AccountDaoTest {
             )
             val allAccounts = accountDao.getAllAccounts()
 
-            assertThat(count).isEqualTo(1)
-            assertThat(allAccounts).isEmpty()
+            count.shouldBe(
+                expected = 1,
+            )
+            allAccounts.shouldBeEmpty()
         }
 
     @Test
@@ -100,8 +107,10 @@ internal class AccountDaoTest {
             )
             val allAccounts = accountDao.getAllAccounts()
 
-            assertThat(count).isEqualTo(0)
-            assertThat(allAccounts.size).isEqualTo(1)
+            count.shouldBeZero()
+            allAccounts.size.shouldBe(
+                expected = 1,
+            )
         }
 
     @Test
@@ -121,8 +130,10 @@ internal class AccountDaoTest {
         val count = accountDao.deleteAllAccounts()
         val allAccounts = accountDao.getAllAccounts()
 
-        assertThat(count).isEqualTo(3)
-        assertThat(allAccounts).isEmpty()
+        count.shouldBe(
+            expected = 3,
+        )
+        allAccounts.shouldBeEmpty()
     }
 
     @Test
@@ -142,7 +153,9 @@ internal class AccountDaoTest {
             id = 1,
         )
 
-        assertThat(result).isEqualTo(accountEntity1)
+        result.shouldBe(
+            expected = accountEntity1,
+        )
     }
 
     @Test
@@ -162,7 +175,7 @@ internal class AccountDaoTest {
             id = 3,
         )
 
-        assertThat(result).isEqualTo(null)
+        result.shouldBeNull()
     }
 
     @Test
@@ -182,8 +195,12 @@ internal class AccountDaoTest {
             listOf(1, 3),
         )
 
-        assertThat(result.size).isEqualTo(1)
-        assertThat(result.first()).isEqualTo(accountEntity1)
+        result.size.shouldBe(
+            expected = 1,
+        )
+        result.first().shouldBe(
+            expected = accountEntity1,
+        )
     }
 
     @Test
@@ -201,9 +218,11 @@ internal class AccountDaoTest {
 
         val result = accountDao.getAllAccounts()
 
-        assertThat(result.size).isEqualTo(2)
-        assertThat(result.any { it == accountEntity1 }).isTrue()
-        assertThat(result.any { it == accountEntity2 }).isTrue()
+        result.size.shouldBe(
+            expected = 2,
+        )
+        result.any { it == accountEntity1 }.shouldBeTrue()
+        result.any { it == accountEntity2 }.shouldBeTrue()
     }
 
     @Test
@@ -222,9 +241,11 @@ internal class AccountDaoTest {
         val allAccountsFlow = accountDao.getAllAccountsFlow()
         val allAccounts = allAccountsFlow.first()
 
-        assertThat(allAccounts.size).isEqualTo(2)
-        assertThat(allAccounts.any { it == accountEntity1 }).isTrue()
-        assertThat(allAccounts.any { it == accountEntity2 }).isTrue()
+        allAccounts.size.shouldBe(
+            expected = 2,
+        )
+        allAccounts.any { it == accountEntity1 }.shouldBeTrue()
+        allAccounts.any { it == accountEntity2 }.shouldBeTrue()
     }
 
     @Test
@@ -243,12 +264,20 @@ internal class AccountDaoTest {
             )
             val allAccounts = accountDao.getAllAccounts()
 
-            assertThat(insertedAccountIds.size).isEqualTo(2)
-            assertThat(insertedAccountIds[0]).isEqualTo(1)
-            assertThat(insertedAccountIds[1]).isEqualTo(2)
-            assertThat(allAccounts.size).isEqualTo(2)
-            assertThat(allAccounts.any { it == accountEntity1 }).isTrue()
-            assertThat(allAccounts.any { it == accountEntity2 }).isTrue()
+            insertedAccountIds.size.shouldBe(
+                expected = 2,
+            )
+            insertedAccountIds[0].shouldBe(
+                expected = 1,
+            )
+            insertedAccountIds[1].shouldBe(
+                expected = 2,
+            )
+            allAccounts.size.shouldBe(
+                expected = 2,
+            )
+            allAccounts.any { it == accountEntity1 }.shouldBeTrue()
+            allAccounts.any { it == accountEntity2 }.shouldBeTrue()
         }
 
     @Test
@@ -298,8 +327,12 @@ internal class AccountDaoTest {
             id = insertedAccount.id,
         )
 
-        assertThat(count).isEqualTo(1)
-        assertThat(result).isEqualTo(updatedAccount)
+        count.shouldBe(
+            expected = 1,
+        )
+        result.shouldBe(
+            expected = updatedAccount,
+        )
     }
 
     @Test
@@ -320,9 +353,15 @@ internal class AccountDaoTest {
         )
         val allAccounts = accountDao.getAllAccounts()
 
-        assertThat(count).isEqualTo(0)
-        assertThat(allAccounts.size).isEqualTo(1)
-        assertThat(allAccounts.first()).isEqualTo(accountEntity)
+        count.shouldBe(
+            expected = 0,
+        )
+        allAccounts.size.shouldBe(
+            expected = 1,
+        )
+        allAccounts.first().shouldBe(
+            expected = accountEntity,
+        )
     }
 
     // region common

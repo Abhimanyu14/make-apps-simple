@@ -21,10 +21,14 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database.FinanceManagerRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -81,8 +85,10 @@ internal class CategoryDaoTest {
             )
             val allCategories = categoryDao.getAllCategories()
 
-            assertThat(count).isEqualTo(1)
-            assertThat(allCategories).isEmpty()
+            count.shouldBe(
+                expected = 1,
+            )
+            allCategories.shouldBeEmpty()
         }
 
     @Test
@@ -100,8 +106,10 @@ internal class CategoryDaoTest {
             )
             val allCategories = categoryDao.getAllCategories()
 
-            assertThat(count).isEqualTo(0)
-            assertThat(allCategories.size).isEqualTo(1)
+            count.shouldBeZero()
+            allCategories.size.shouldBe(
+                expected = 1,
+            )
         }
 
     @Test
@@ -127,9 +135,15 @@ internal class CategoryDaoTest {
         )
         val allCategories = categoryDao.getAllCategories()
 
-        assertThat(count).isEqualTo(2)
-        assertThat(allCategories.size).isEqualTo(1)
-        assertThat(allCategories.first()).isEqualTo(categoryEntity2)
+        count.shouldBe(
+            expected = 2,
+        )
+        allCategories.size.shouldBe(
+            expected = 1,
+        )
+        allCategories.first().shouldBe(
+            expected = categoryEntity2,
+        )
     }
 
     @Test
@@ -149,8 +163,10 @@ internal class CategoryDaoTest {
         val count = categoryDao.deleteAllCategories()
         val allCategories = categoryDao.getAllCategories()
 
-        assertThat(count).isEqualTo(3)
-        assertThat(allCategories).isEmpty()
+        count.shouldBe(
+            expected = 3,
+        )
+        allCategories.shouldBeEmpty()
     }
 
     @Test
@@ -170,7 +186,9 @@ internal class CategoryDaoTest {
             id = 1,
         )
 
-        assertThat(result).isEqualTo(categoryEntity1)
+        result.shouldBe(
+            expected = categoryEntity1,
+        )
     }
 
     @Test
@@ -190,7 +208,7 @@ internal class CategoryDaoTest {
             id = 3,
         )
 
-        assertThat(result).isEqualTo(null)
+        result.shouldBeNull()
     }
 
     @Test
@@ -208,9 +226,11 @@ internal class CategoryDaoTest {
 
         val result = categoryDao.getAllCategories()
 
-        assertThat(result.size).isEqualTo(2)
-        assertThat(result.any { it == categoryEntity1 }).isTrue()
-        assertThat(result.any { it == categoryEntity2 }).isTrue()
+        result.size.shouldBe(
+            expected = 2,
+        )
+        result.any { it == categoryEntity1 }.shouldBeTrue()
+        result.any { it == categoryEntity2 }.shouldBeTrue()
     }
 
     @Test
@@ -229,9 +249,11 @@ internal class CategoryDaoTest {
         val allCategoriesFlow = categoryDao.getAllCategoriesFlow()
         val allCategories = allCategoriesFlow.first()
 
-        assertThat(allCategories.size).isEqualTo(2)
-        assertThat(allCategories.any { it == categoryEntity1 }).isTrue()
-        assertThat(allCategories.any { it == categoryEntity2 }).isTrue()
+        allCategories.size.shouldBe(
+            expected = 2,
+        )
+        allCategories.any { it == categoryEntity1 }.shouldBeTrue()
+        allCategories.any { it == categoryEntity2 }.shouldBeTrue()
     }
 
     @Test
@@ -250,12 +272,20 @@ internal class CategoryDaoTest {
             )
             val allCategories = categoryDao.getAllCategories()
 
-            assertThat(insertedCategoryIds.size).isEqualTo(2)
-            assertThat(insertedCategoryIds[0]).isEqualTo(1)
-            assertThat(insertedCategoryIds[1]).isEqualTo(2)
-            assertThat(allCategories.size).isEqualTo(2)
-            assertThat(allCategories.any { it == categoryEntity1 }).isTrue()
-            assertThat(allCategories.any { it == categoryEntity2 }).isTrue()
+            insertedCategoryIds.size.shouldBe(
+                expected = 2,
+            )
+            insertedCategoryIds[0].shouldBe(
+                expected = 1,
+            )
+            insertedCategoryIds[1].shouldBe(
+                expected = 2,
+            )
+            allCategories.size.shouldBe(
+                expected = 2,
+            )
+            allCategories.any { it == categoryEntity1 }.shouldBeTrue()
+            allCategories.any { it == categoryEntity2 }.shouldBeTrue()
         }
 
     @Test
@@ -305,8 +335,12 @@ internal class CategoryDaoTest {
             id = insertedCategory.id,
         )
 
-        assertThat(count).isEqualTo(1)
-        assertThat(result).isEqualTo(updatedCategory)
+        count.shouldBe(
+            expected = 1,
+        )
+        result.shouldBe(
+            expected = updatedCategory,
+        )
     }
 
     @Test
@@ -327,9 +361,13 @@ internal class CategoryDaoTest {
         )
         val allCategories = categoryDao.getAllCategories()
 
-        assertThat(count).isEqualTo(0)
-        assertThat(allCategories.size).isEqualTo(1)
-        assertThat(allCategories.first()).isEqualTo(categoryEntity)
+        count.shouldBeZero()
+        allCategories.size.shouldBe(
+            expected = 1,
+        )
+        allCategories.first().shouldBe(
+            expected = categoryEntity,
+        )
     }
 
     // region common
