@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.common.core.date_time
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.shouldBe
 import org.junit.Before
 import org.junit.Test
 import java.time.ZoneId
@@ -49,7 +49,9 @@ internal class DateTimeKitTest {
     fun getCurrentTimeMillis_returnsFixedTime() {
         val result = dateTimeKit.getCurrentTimeMillis()
 
-        assertThat(result).isEqualTo(testEpochMilliseconds)
+        result.shouldBe(
+            expected = testEpochMilliseconds,
+        )
     }
 
     @Test
@@ -58,7 +60,9 @@ internal class DateTimeKitTest {
             timestamp = testEpochMilliseconds,
         )
 
-        assertThat(formatted).isEqualTo("2023-Mar-30, 11:14 AM")
+        formatted.shouldBe(
+            expected = "2023-Mar-30, 11:14 AM",
+        )
     }
 
     @Test
@@ -70,7 +74,9 @@ internal class DateTimeKitTest {
             zoneId = utcZoneId,
         )
 
-        assertThat(formatted).isEqualTo("2023-Mar-30, 05:44 AM")
+        formatted.shouldBe(
+            expected = "2023-Mar-30, 05:44 AM",
+        )
     }
 
     @Test
@@ -82,13 +88,17 @@ internal class DateTimeKitTest {
             zoneId = tokyoZoneId,
         )
 
-        assertThat(formatted).isEqualTo("2023-Mar-30, 02:44 PM")
+        formatted.shouldBe(
+            expected = "2023-Mar-30, 02:44 PM",
+        )
     }
 
     @Test
     fun getSystemDefaultZoneId_returnsInjectedZoneId() {
         val result = dateTimeKit.getSystemDefaultZoneId()
 
-        assertThat(result).isEqualTo(testZoneId)
+        result.shouldBe(
+            expected = testZoneId,
+        )
     }
 }

@@ -16,7 +16,9 @@
 
 package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.shouldBe
 import org.junit.Test
 
 internal class FloatExtensionTest {
@@ -24,27 +26,31 @@ internal class FloatExtensionTest {
     fun isNotZero_returnsTrueForNonZero() {
         val value = 1.23F
 
-        assertThat(value.isNotZero()).isTrue()
+        value.isNotZero().shouldBeTrue()
     }
 
     @Test
     fun isNotZero_returnsFalseForZero() {
         val value = 0F
 
-        assertThat(value.isNotZero()).isFalse()
+        value.isNotZero().shouldBeFalse()
     }
 
     @Test
     fun orZero_returnsZeroForNull() {
         val value: Float? = null
 
-        assertThat(value.orZero()).isEqualTo(0F)
+        value.orZero().shouldBe(
+            expected = 0F,
+        )
     }
 
     @Test
     fun orZero_returnsValueForNonNull() {
         val value: Float? = 2.5F
 
-        assertThat(value.orZero()).isEqualTo(2.5F)
+        value.orZero().shouldBe(
+            expected = 2.5F,
+        )
     }
 }

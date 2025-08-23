@@ -16,13 +16,14 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.data.repository
 
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -61,10 +62,14 @@ internal class BarcodeRepositoryTest {
             barcode,
         )
 
-        assertThat(insertedBarcodeIds.size).isEqualTo(1)
-        assertThat(insertedBarcodeIds[0]).isEqualTo(1)
-        assertThat(fakeBarcodeDao.fakeBarcodeEntities[0].asExternalModel()).isEqualTo(
-            barcode
+        insertedBarcodeIds.size.shouldBe(
+            expected = 1,
+        )
+        insertedBarcodeIds[0].shouldBe(
+            expected = 1,
+        )
+        fakeBarcodeDao.fakeBarcodeEntities[0].asExternalModel().shouldBe(
+            expected = barcode,
         )
     }
 
@@ -83,9 +88,15 @@ internal class BarcodeRepositoryTest {
 
         val result = barcodeRepository.getAllBarcodesFlow().first()
 
-        assertThat(result.size).isEqualTo(2)
-        assertThat(result[0]).isEqualTo(barcode1)
-        assertThat(result[1]).isEqualTo(barcode2)
+        result.size.shouldBe(
+            expected = 2,
+        )
+        result[0].shouldBe(
+            expected = barcode1,
+        )
+        result[1].shouldBe(
+            expected = barcode2,
+        )
     }
 
     @Test
@@ -101,7 +112,9 @@ internal class BarcodeRepositoryTest {
             id = 1,
         )
 
-        assertThat(result).isEqualTo(barcode)
+        result.shouldBe(
+            expected = barcode,
+        )
     }
 
     @Test
@@ -124,8 +137,12 @@ internal class BarcodeRepositoryTest {
             id = 1,
         )
 
-        assertThat(count).isEqualTo(1)
-        assertThat(result).isEqualTo(updatedBarcode)
+        count.shouldBe(
+            expected = 1,
+        )
+        result.shouldBe(
+            expected = updatedBarcode,
+        )
     }
 
     @Test
@@ -144,8 +161,10 @@ internal class BarcodeRepositoryTest {
             id = 1,
         )
 
-        assertThat(count).isEqualTo(1)
-        assertThat(result).isNull()
+        count.shouldBe(
+            expected = 1,
+        )
+        result.shouldBeNull()
     }
 
     private fun getBarcode(

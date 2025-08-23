@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.database.converters
 
-import com.google.common.truth.Truth.assertThat
 import com.google.zxing.BarcodeFormat
+import io.kotest.matchers.shouldBe
 import kotlinx.serialization.json.Json
 import org.junit.Before
 import org.junit.Test
@@ -41,7 +41,9 @@ internal class BarcodeFormatConverterTest {
             value = string,
         )
 
-        assertThat(result).isEqualTo(barcodeFormat)
+        result.shouldBe(
+            expected = barcodeFormat,
+        )
     }
 
     @Test
@@ -55,7 +57,9 @@ internal class BarcodeFormatConverterTest {
             value = string,
         )
 
-        assertThat(result).isEqualTo(barcodeFormat)
+        result.shouldBe(
+            expected = barcodeFormat,
+        )
     }
 
     @Test
@@ -69,6 +73,8 @@ internal class BarcodeFormatConverterTest {
             value = barcodeFormat,
         )
 
-        assertThat(result).isEqualTo(expected)
+        result.shouldBe(
+            expected = expected,
+        )
     }
 } 

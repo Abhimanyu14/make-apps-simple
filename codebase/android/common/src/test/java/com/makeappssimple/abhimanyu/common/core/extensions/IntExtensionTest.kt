@@ -16,7 +16,9 @@
 
 package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.shouldBe
 import org.junit.Test
 
 internal class IntExtensionTest {
@@ -24,27 +26,31 @@ internal class IntExtensionTest {
     fun isNotZero_returnsTrueForNonZero() {
         val value = 42
 
-        assertThat(value.isNotZero()).isTrue()
+        value.isNotZero().shouldBeTrue()
     }
 
     @Test
     fun isNotZero_returnsFalseForZero() {
         val value = 0
 
-        assertThat(value.isNotZero()).isFalse()
+        value.isNotZero().shouldBeFalse()
     }
 
     @Test
     fun orZero_returnsZeroForNull() {
         val value: Int? = null
 
-        assertThat(value.orZero()).isEqualTo(0)
+        value.orZero().shouldBe(
+            expected = 0,
+        )
     }
 
     @Test
     fun orZero_returnsValueForNonNull() {
         val value: Int? = 7
 
-        assertThat(value.orZero()).isEqualTo(7)
+        value.orZero().shouldBe(
+            expected = 7,
+        )
     }
 }

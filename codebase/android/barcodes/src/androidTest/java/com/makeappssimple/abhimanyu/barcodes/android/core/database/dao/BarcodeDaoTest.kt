@@ -20,10 +20,14 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.BarcodesRoomDatabase
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.BarcodeEntity
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -77,8 +81,10 @@ internal class BarcodeDaoTest {
         val count = barcodeDao.deleteAllBarcodes()
         val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
-        assertThat(count).isEqualTo(2)
-        assertThat(allBarcodes).isEmpty()
+        count.shouldBe(
+            expected = 2,
+        )
+        allBarcodes.shouldBeEmpty()
     }
 
     @Test
@@ -100,9 +106,15 @@ internal class BarcodeDaoTest {
             )
             val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
-            assertThat(count).isEqualTo(1)
-            assertThat(allBarcodes.size).isEqualTo(1)
-            assertThat(allBarcodes.first()).isEqualTo(barcodeEntity1)
+            count.shouldBe(
+                expected = 1,
+            )
+            allBarcodes.size.shouldBe(
+                expected = 1,
+            )
+            allBarcodes.first().shouldBe(
+                expected = barcodeEntity1,
+            )
         }
 
     @Test
@@ -127,10 +139,12 @@ internal class BarcodeDaoTest {
             )
             val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
-            assertThat(count).isEqualTo(0)
-            assertThat(allBarcodes.size).isEqualTo(2)
-            assertThat(allBarcodes.any { it == barcodeEntity1 }).isTrue()
-            assertThat(allBarcodes.any { it == barcodeEntity2 }).isTrue()
+            count.shouldBeZero()
+            allBarcodes.size.shouldBe(
+                expected = 2,
+            )
+            allBarcodes.any { it == barcodeEntity1 }.shouldBeTrue()
+            allBarcodes.any { it == barcodeEntity2 }.shouldBeTrue()
         }
 
     @Test
@@ -150,9 +164,11 @@ internal class BarcodeDaoTest {
 
         val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
-        assertThat(allBarcodes.size).isEqualTo(2)
-        assertThat(allBarcodes.any { it == barcodeEntity1 }).isTrue()
-        assertThat(allBarcodes.any { it == barcodeEntity2 }).isTrue()
+        allBarcodes.size.shouldBe(
+            expected = 2,
+        )
+        allBarcodes.any { it == barcodeEntity1 }.shouldBeTrue()
+        allBarcodes.any { it == barcodeEntity2 }.shouldBeTrue()
     }
 
     @Test
@@ -174,7 +190,9 @@ internal class BarcodeDaoTest {
             id = 1,
         )
 
-        assertThat(result).isEqualTo(barcodeEntity1)
+        result.shouldBe(
+            expected = barcodeEntity1,
+        )
     }
 
     @Test
@@ -196,7 +214,7 @@ internal class BarcodeDaoTest {
             id = 3,
         )
 
-        assertThat(result).isEqualTo(null)
+        result.shouldBeNull()
     }
 
     @Test
@@ -215,12 +233,16 @@ internal class BarcodeDaoTest {
             )
             val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
-            assertThat(insertedBarcodeIds.size).isEqualTo(2)
-            assertThat(insertedBarcodeIds.any { it == 1L }).isTrue()
-            assertThat(insertedBarcodeIds.any { it == 2L }).isTrue()
-            assertThat(allBarcodes.size).isEqualTo(2)
-            assertThat(allBarcodes.any { it == barcodeEntity1 }).isTrue()
-            assertThat(allBarcodes.any { it == barcodeEntity2 }).isTrue()
+            insertedBarcodeIds.size.shouldBe(
+                expected = 2,
+            )
+            insertedBarcodeIds.any { it == 1L }.shouldBeTrue()
+            insertedBarcodeIds.any { it == 2L }.shouldBeTrue()
+            allBarcodes.size.shouldBe(
+                expected = 2,
+            )
+            allBarcodes.any { it == barcodeEntity1 }.shouldBeTrue()
+            allBarcodes.any { it == barcodeEntity2 }.shouldBeTrue()
         }
 
     @Test
@@ -245,8 +267,12 @@ internal class BarcodeDaoTest {
                 id = 1,
             )
 
-            assertThat(count).isEqualTo(1)
-            assertThat(result).isEqualTo(updatedBarcode)
+            count.shouldBe(
+                expected = 1,
+            )
+            result.shouldBe(
+                expected = updatedBarcode,
+            )
         }
 
     @Test
@@ -272,8 +298,10 @@ internal class BarcodeDaoTest {
                 id = 1,
             )
 
-            assertThat(count).isEqualTo(0)
-            assertThat(result).isEqualTo(barcodeEntity1)
+            count.shouldBeZero()
+            result.shouldBe(
+                expected = barcodeEntity1,
+            )
         }
 
     private fun getBarcodeEntity(

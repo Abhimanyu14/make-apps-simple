@@ -16,7 +16,8 @@
 
 package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import org.junit.Test
 
 internal class BooleanExtensionTest {
@@ -24,7 +25,7 @@ internal class BooleanExtensionTest {
     fun isTrue_returnsTrueForTrue() {
         val value: Boolean? = true
 
-        assertThat(value.isTrue()).isTrue()
+        value.isTrue().shouldBeTrue()
     }
 
     @Test
@@ -32,15 +33,15 @@ internal class BooleanExtensionTest {
         val valueFalse: Boolean? = false
         val valueNull: Boolean? = null
 
-        assertThat(valueFalse.isTrue()).isFalse()
-        assertThat(valueNull.isTrue()).isFalse()
+        valueFalse.isTrue().shouldBeFalse()
+        valueNull.isTrue().shouldBeFalse()
     }
 
     @Test
     fun isFalse_returnsTrueForFalse() {
         val value: Boolean? = false
 
-        assertThat(value.isFalse()).isTrue()
+        value.isFalse().shouldBeTrue()
     }
 
     @Test
@@ -48,8 +49,8 @@ internal class BooleanExtensionTest {
         val valueTrue: Boolean? = true
         val valueNull: Boolean? = null
 
-        assertThat(valueTrue.isFalse()).isFalse()
-        assertThat(valueNull.isFalse()).isFalse()
+        valueTrue.isFalse().shouldBeFalse()
+        valueNull.isFalse().shouldBeFalse()
     }
 
     @Test
@@ -57,14 +58,14 @@ internal class BooleanExtensionTest {
         val valueNull: Boolean? = null
         val valueFalse: Boolean? = false
 
-        assertThat(valueNull.orFalse()).isFalse()
-        assertThat(valueFalse.orFalse()).isFalse()
+        valueNull.orFalse().shouldBeFalse()
+        valueFalse.orFalse().shouldBeFalse()
     }
 
     @Test
     fun orFalse_returnsTrueForTrue() {
         val value: Boolean? = true
 
-        assertThat(value.orFalse()).isTrue()
+        value.orFalse().shouldBeTrue()
     }
 }

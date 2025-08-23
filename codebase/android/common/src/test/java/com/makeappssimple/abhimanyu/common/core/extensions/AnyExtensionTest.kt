@@ -16,7 +16,8 @@
 
 package com.makeappssimple.abhimanyu.common.core.extensions
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import org.junit.Test
 
 internal class AnyExtensionTest {
@@ -24,27 +25,27 @@ internal class AnyExtensionTest {
     fun isNull_returnsTrueForNull() {
         val value: Any? = null
 
-        assertThat(value.isNull()).isTrue()
+        value.isNull().shouldBeTrue()
     }
 
     @Test
     fun isNull_returnsFalseForNonNull() {
         val value: Any? = "not null"
 
-        assertThat(value.isNull()).isFalse()
+        value.isNull().shouldBeFalse()
     }
 
     @Test
     fun isNotNull_returnsTrueForNonNull() {
         val value: Any? = 123
 
-        assertThat(value.isNotNull()).isTrue()
+        value.isNotNull().shouldBeTrue()
     }
 
     @Test
     fun isNotNull_returnsFalseForNull() {
         val value: Any? = null
 
-        assertThat(value.isNotNull()).isFalse()
+        value.isNotNull().shouldBeFalse()
     }
 }

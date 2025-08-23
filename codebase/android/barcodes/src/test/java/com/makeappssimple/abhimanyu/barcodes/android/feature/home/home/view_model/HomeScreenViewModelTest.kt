@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.view_model
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepositoryImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
@@ -32,11 +31,12 @@ import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import kotlin.time.Duration.Companion.seconds
@@ -86,9 +86,8 @@ class HomeScreenViewModelTest {
         navigationKit.command.test {
             homeScreenViewModel.navigateToCreateBarcodeScreen()
 
-            Assert.assertEquals(
-                awaitItem(),
-                BarcodesNavigationDirections.CreateBarcode(
+            awaitItem().shouldBe(
+                expected = BarcodesNavigationDirections.CreateBarcode(
                     barcodeId = null,
                 ),
             )
@@ -100,9 +99,8 @@ class HomeScreenViewModelTest {
         navigationKit.command.test {
             homeScreenViewModel.navigateToScanBarcodeScreen()
 
-            Assert.assertEquals(
-                awaitItem(),
-                BarcodesNavigationDirections.ScanBarcode,
+            awaitItem().shouldBe(
+                expected = BarcodesNavigationDirections.ScanBarcode,
             )
         }
     }
@@ -112,9 +110,8 @@ class HomeScreenViewModelTest {
         navigationKit.command.test {
             homeScreenViewModel.navigateToSettingsScreen()
 
-            Assert.assertEquals(
-                awaitItem(),
-                BarcodesNavigationDirections.Settings,
+            awaitItem().shouldBe(
+                expected = BarcodesNavigationDirections.Settings,
             )
         }
     }
@@ -127,9 +124,8 @@ class HomeScreenViewModelTest {
                 barcodeId = barcodeId,
             )
 
-            Assert.assertEquals(
-                awaitItem(),
-                BarcodesNavigationDirections.BarcodeDetails(
+            awaitItem().shouldBe(
+                expected = BarcodesNavigationDirections.BarcodeDetails(
                     barcodeId = barcodeId,
                 ),
             )
@@ -151,8 +147,8 @@ class HomeScreenViewModelTest {
             barcode = barcode,
         ).join()
 
-        assertThat(fakeBarcodeDao.fakeBarcodeEntities[0].asExternalModel()).isEqualTo(
-            barcode
+        fakeBarcodeDao.fakeBarcodeEntities[0].asExternalModel().shouldBe(
+            expected = barcode,
         )
     }
 
@@ -186,7 +182,7 @@ class HomeScreenViewModelTest {
             barcodes = barcodes,
         ).join()
 
-        assertThat(fakeBarcodeDao.fakeBarcodeEntities.size).isEqualTo(0)
+        fakeBarcodeDao.fakeBarcodeEntities.size.shouldBeZero()
     }
 
     private fun runTestWithTimeout(
