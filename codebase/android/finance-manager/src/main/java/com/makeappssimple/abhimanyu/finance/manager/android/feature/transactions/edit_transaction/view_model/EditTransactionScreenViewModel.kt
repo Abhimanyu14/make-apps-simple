@@ -21,7 +21,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
-import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.filterDigits
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
@@ -75,7 +74,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
@@ -136,68 +134,25 @@ internal class EditTransactionScreenViewModel(
         EditTransactionScreenUiVisibilityState.Expense
     private var filteredCategories: ImmutableList<Category> = persistentListOf()
     private var selectedTransactionType: TransactionType? = null
-    // endregion
-
-    // region observables
-    private val titleSuggestions: MutableStateFlow<ImmutableList<String>> =
-        MutableStateFlow(
-            value = persistentListOf(),
-        )
+    private var titleSuggestions: ImmutableList<String> = persistentListOf()
     // endregion
 
     // region UI state
-    private val screenBottomSheetType: MutableStateFlow<EditTransactionScreenBottomSheetType> =
-        MutableStateFlow(
-            value = EditTransactionScreenBottomSheetType.None,
-        )
-    private val screenSnackbarType: MutableStateFlow<EditTransactionScreenSnackbarType> =
-        MutableStateFlow(
-            value = EditTransactionScreenSnackbarType.None,
-        )
-    private val selectedTransactionTypeIndex: MutableStateFlow<Int> =
-        MutableStateFlow(
-            value = 0,
-        )
-    private val amount: MutableStateFlow<TextFieldValue> =
-        MutableStateFlow(
-            value = TextFieldValue(),
-        )
-    private val category: MutableStateFlow<Category?> =
-        MutableStateFlow(
-            value = null,
-        )
-    private val title: MutableStateFlow<TextFieldValue> =
-        MutableStateFlow(
-            value = TextFieldValue(),
-        )
-    private val selectedTransactionForIndex: MutableStateFlow<Int> =
-        MutableStateFlow(
-            value = 0,
-        )
-    private val accountFrom: MutableStateFlow<Account?> =
-        MutableStateFlow(
-            value = null,
-        )
-    private val accountTo: MutableStateFlow<Account?> =
-        MutableStateFlow(
-            value = null,
-        )
-    private val transactionDate: MutableStateFlow<LocalDate> =
-        MutableStateFlow(
-            value = dateTimeKit.getCurrentLocalDate(),
-        )
-    private val transactionTime: MutableStateFlow<LocalTime> =
-        MutableStateFlow(
-            value = dateTimeKit.getCurrentLocalTime(),
-        )
-    private val isTransactionDatePickerDialogVisible: MutableStateFlow<Boolean> =
-        MutableStateFlow(
-            value = false,
-        )
-    private val isTransactionTimePickerDialogVisible: MutableStateFlow<Boolean> =
-        MutableStateFlow(
-            value = false,
-        )
+    private var screenBottomSheetType: EditTransactionScreenBottomSheetType =
+        EditTransactionScreenBottomSheetType.None
+    private var screenSnackbarType: EditTransactionScreenSnackbarType =
+        EditTransactionScreenSnackbarType.None
+    private var selectedTransactionTypeIndex: Int = 0
+    private var amount: TextFieldValue = TextFieldValue()
+    private var category: Category? = null
+    private var title: TextFieldValue = TextFieldValue()
+    private var selectedTransactionForIndex: Int = 0
+    private var accountFrom: Account? = null
+    private var accountTo: Account? = null
+    private var transactionDate: LocalDate = dateTimeKit.getCurrentLocalDate()
+    private var transactionTime: LocalTime = dateTimeKit.getCurrentLocalTime()
+    private var isTransactionDatePickerDialogVisible: Boolean = false
+    private var isTransactionTimePickerDialogVisible: Boolean = false
     // endregion
 
     // region uiStateAndStateEvents
@@ -224,11 +179,7 @@ internal class EditTransactionScreenViewModel(
             updateSelectedTransactionForIndex = ::updateSelectedTransactionForIndex,
             updateSelectedTransactionTypeIndex = ::updateSelectedTransactionTypeIndex,
             updateTitle = ::updateTitle,
-            updateTransaction = {
-                updateTransaction(
-                    uiState = uiState.value,
-                )
-            },
+            updateTransaction = ::updateTransaction,
             updateTransactionDate = ::updateTransactionDate,
             updateTransactionTime = ::updateTransactionTime,
         )
@@ -238,41 +189,41 @@ internal class EditTransactionScreenViewModel(
     override fun updateUiStateAndStateEvents() {
         val validationState =
             editTransactionScreenDataValidationUseCase(
-                accountFrom = accountFrom.value,
-                accountTo = accountTo.value,
+                accountFrom = accountFrom,
+                accountTo = accountTo,
                 maxRefundAmount = maxRefundAmount,
-                amount = amount.value.text,
-                title = title.value.text,
+                amount = amount.text,
+                title = title.text,
                 selectedTransactionType = selectedTransactionType,
             )
         _uiState.update {
             EditTransactionScreenUIState(
-                accountFrom = accountFrom.value,
+                accountFrom = accountFrom,
                 accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
                     AccountFromText.AccountFrom
                 } else {
                     AccountFromText.Account
                 },
-                accountTo = accountTo.value,
+                accountTo = accountTo,
                 accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
                     AccountToText.AccountTo
                 } else {
                     AccountToText.Account
                 },
-                screenBottomSheetType = screenBottomSheetType.value,
-                screenSnackbarType = screenSnackbarType.value,
+                screenBottomSheetType = screenBottomSheetType,
+                screenSnackbarType = screenSnackbarType,
                 uiVisibilityState = uiVisibilityState,
                 isBottomSheetVisible = screenBottomSheetType != EditTransactionScreenBottomSheetType.None,
                 isCtaButtonEnabled = validationState.isCtaButtonEnabled,
                 isLoading = isLoading,
-                isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible.value,
-                isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible.value,
-                category = category.value,
-                selectedTransactionForIndex = selectedTransactionForIndex.value,
-                selectedTransactionTypeIndex = selectedTransactionTypeIndex.value,
+                isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible,
+                isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible,
+                category = category,
+                selectedTransactionForIndex = selectedTransactionForIndex,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
                 accounts = accounts.orEmpty(),
                 filteredCategories = filteredCategories,
-                titleSuggestionsChipUIData = titleSuggestions.value
+                titleSuggestionsChipUIData = titleSuggestions
                     .map { title ->
                         ChipUIData(
                             text = title,
@@ -290,14 +241,14 @@ internal class EditTransactionScreenViewModel(
                             text = transactionType.title,
                         )
                     },
-                titleSuggestions = titleSuggestions.value,
+                titleSuggestions = titleSuggestions,
                 currentLocalDate = dateTimeKit.getCurrentLocalDate()
                     .orMin(),
-                transactionDate = transactionDate.value,
-                transactionTime = transactionTime.value,
+                transactionDate = transactionDate,
+                transactionTime = transactionTime,
                 amountErrorText = validationState.amountErrorText,
-                amount = amount.value,
-                title = title.value,
+                amount = amount,
+                title = title,
             )
         }
     }
@@ -322,38 +273,24 @@ internal class EditTransactionScreenViewModel(
             updateValidTransactionTypesForNewTransaction()
             updateDataForRefundTransaction()
             processInitialData()
-            // completeLoading()
         }
-    }
-    // endregion
-
-    // region observeData
-    override fun observeData() {
-        observeForTitleSuggestions()
-        observeForSelectedTransactionType()
     }
     // endregion
 
     // region state events
     private fun clearAmount(): Job {
-        amount.update {
-            it.copy(
+        return updateAmount(
+            updatedAmount = uiState.value.amount.copy(
                 text = "",
-            )
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
+            ),
         )
     }
 
     private fun clearTitle(): Job {
-        title.update {
-            it.copy(
+        return updateTitle(
+            updatedTitle = uiState.value.title.copy(
                 text = "",
-            )
-        }
-        return refreshIfRequired(
-            shouldRefresh = true,
+            ),
         )
     }
 
@@ -372,9 +309,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateAccountFrom(
         updatedAccountFrom: Account?,
     ): Job {
-        accountFrom.update {
-            updatedAccountFrom
-        }
+        accountFrom = updatedAccountFrom
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -383,9 +318,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateAccountTo(
         updatedAccountTo: Account?,
     ): Job {
-        accountTo.update {
-            updatedAccountTo
-        }
+        accountTo = updatedAccountTo
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -394,11 +327,9 @@ internal class EditTransactionScreenViewModel(
     private fun updateAmount(
         updatedAmount: TextFieldValue,
     ): Job {
-        amount.update {
-            updatedAmount.copy(
-                text = updatedAmount.text.filterDigits(),
-            )
-        }
+        amount = updatedAmount.copy(
+            text = updatedAmount.text.filterDigits(),
+        )
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -407,11 +338,9 @@ internal class EditTransactionScreenViewModel(
     private fun updateAmount(
         updatedAmount: String,
     ): Job {
-        amount.update {
-            it.copy(
-                text = updatedAmount.filterDigits(),
-            )
-        }
+        amount = uiState.value.amount.copy(
+            text = updatedAmount.filterDigits(),
+        )
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -420,9 +349,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateCategory(
         updatedCategory: Category?,
     ): Job {
-        category.update {
-            updatedCategory
-        }
+        category = updatedCategory
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -431,9 +358,8 @@ internal class EditTransactionScreenViewModel(
     private fun updateIsTransactionDatePickerDialogVisible(
         updatedIsTransactionDatePickerDialogVisible: Boolean,
     ): Job {
-        isTransactionDatePickerDialogVisible.update {
+        isTransactionDatePickerDialogVisible =
             updatedIsTransactionDatePickerDialogVisible
-        }
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -442,9 +368,8 @@ internal class EditTransactionScreenViewModel(
     private fun updateIsTransactionTimePickerDialogVisible(
         updatedIsTransactionTimePickerDialogVisible: Boolean,
     ): Job {
-        isTransactionTimePickerDialogVisible.update {
+        isTransactionTimePickerDialogVisible =
             updatedIsTransactionTimePickerDialogVisible
-        }
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -453,9 +378,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateScreenBottomSheetType(
         updatedEditTransactionScreenBottomSheetType: EditTransactionScreenBottomSheetType,
     ): Job {
-        screenBottomSheetType.update {
-            updatedEditTransactionScreenBottomSheetType
-        }
+        screenBottomSheetType = updatedEditTransactionScreenBottomSheetType
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -464,9 +387,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateScreenSnackbarType(
         updatedEditTransactionScreenSnackbarType: EditTransactionScreenSnackbarType,
     ): Job {
-        screenSnackbarType.update {
-            updatedEditTransactionScreenSnackbarType
-        }
+        screenSnackbarType = updatedEditTransactionScreenSnackbarType
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -475,9 +396,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateSelectedTransactionForIndex(
         updatedSelectedTransactionForIndex: Int,
     ): Job {
-        selectedTransactionForIndex.update {
-            updatedSelectedTransactionForIndex
-        }
+        selectedTransactionForIndex = updatedSelectedTransactionForIndex
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -486,20 +405,31 @@ internal class EditTransactionScreenViewModel(
     private fun updateSelectedTransactionTypeIndex(
         updatedSelectedTransactionTypeIndex: Int,
     ): Job {
-        selectedTransactionTypeIndex.update {
-            updatedSelectedTransactionTypeIndex
-        }
+        selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
+        handleUpdatedSelectedTransactionTypeIndex()
         return refreshIfRequired(
             shouldRefresh = true,
         )
     }
 
+    private fun handleUpdatedSelectedTransactionTypeIndex() {
+        startLoading()
+        val updatedSelectedTransactionType =
+            validTransactionTypesForNewTransaction.getOrNull(
+                index = selectedTransactionTypeIndex,
+            )
+        if (updatedSelectedTransactionType != null) {
+            handleSelectedTransactionTypeChange(
+                updatedSelectedTransactionType = updatedSelectedTransactionType,
+            )
+        }
+    }
+
     private fun updateTitle(
         updatedTitle: TextFieldValue,
     ): Job {
-        title.update {
-            updatedTitle
-        }
+        title = updatedTitle
+        updateTitleSuggestions()
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -508,9 +438,7 @@ internal class EditTransactionScreenViewModel(
     private fun updateTransactionDate(
         updatedTransactionDate: LocalDate,
     ): Job {
-        transactionDate.update {
-            updatedTransactionDate
-        }
+        transactionDate = updatedTransactionDate
         return refreshIfRequired(
             shouldRefresh = true,
         )
@@ -519,29 +447,24 @@ internal class EditTransactionScreenViewModel(
     private fun updateTransactionTime(
         updatedTransactionTime: LocalTime,
     ): Job {
-        transactionTime.update {
-            updatedTransactionTime
-        }
+        transactionTime = updatedTransactionTime
         return refreshIfRequired(
             shouldRefresh = true,
         )
     }
 
-    private fun updateTransaction(
-        uiState: EditTransactionScreenUIState,
-    ): Job {
-        // TODO(Abhi): Fix update transaction logic
-        val enteredAmountValue = amount.value.text.toLongOrZero()
-        Amount(
+    private fun updateTransaction(): Job {
+        val enteredAmountValue = amount.text.toLongOrZero()
+        val amount = Amount(
             value = enteredAmountValue,
         )
-        when (uiState.selectedTransactionType) {
+        val categoryId = when (uiState.value.selectedTransactionType) {
             TransactionType.INCOME -> {
-                uiState.category?.id
+                uiState.value.category?.id
             }
 
             TransactionType.EXPENSE -> {
-                uiState.category?.id
+                uiState.value.category?.id
             }
 
             TransactionType.TRANSFER -> {
@@ -553,24 +476,24 @@ internal class EditTransactionScreenViewModel(
             }
 
             TransactionType.INVESTMENT -> {
-                uiState.category?.id
+                uiState.value.category?.id
             }
 
             TransactionType.REFUND -> {
-                uiState.category?.id
+                uiState.value.category?.id
             }
         }
-        val accountFromId = when (uiState.selectedTransactionType) {
+        val accountFromId = when (uiState.value.selectedTransactionType) {
             TransactionType.INCOME -> {
                 null
             }
 
             TransactionType.EXPENSE -> {
-                uiState.accountFrom?.id
+                uiState.value.accountFrom?.id
             }
 
             TransactionType.TRANSFER -> {
-                uiState.accountFrom?.id
+                uiState.value.accountFrom?.id
             }
 
             TransactionType.ADJUSTMENT -> {
@@ -578,16 +501,16 @@ internal class EditTransactionScreenViewModel(
             }
 
             TransactionType.INVESTMENT -> {
-                uiState.accountFrom?.id
+                uiState.value.accountFrom?.id
             }
 
             TransactionType.REFUND -> {
                 null
             }
         }
-        val accountToId = when (uiState.selectedTransactionType) {
+        val accountToId = when (uiState.value.selectedTransactionType) {
             TransactionType.INCOME -> {
-                uiState.accountTo?.id
+                uiState.value.accountTo?.id
             }
 
             TransactionType.EXPENSE -> {
@@ -595,7 +518,7 @@ internal class EditTransactionScreenViewModel(
             }
 
             TransactionType.TRANSFER -> {
-                uiState.accountTo?.id
+                uiState.value.accountTo?.id
             }
 
             TransactionType.ADJUSTMENT -> {
@@ -607,10 +530,10 @@ internal class EditTransactionScreenViewModel(
             }
 
             TransactionType.REFUND -> {
-                uiState.accountTo?.id
+                uiState.value.accountTo?.id
             }
         }
-        when (uiState.selectedTransactionType) {
+        val title = when (uiState.value.selectedTransactionType) {
             TransactionType.TRANSFER -> {
                 TransactionType.TRANSFER.title
             }
@@ -620,16 +543,16 @@ internal class EditTransactionScreenViewModel(
             }
 
             else -> {
-                uiState.title.text.capitalizeWords()
+                uiState.value.title.text.capitalizeWords()
             }
         }
-        when (uiState.selectedTransactionType) {
+        when (uiState.value.selectedTransactionType) {
             TransactionType.INCOME -> {
                 1
             }
 
             TransactionType.EXPENSE -> {
-                uiState.selectedTransactionForIndex
+                uiState.value.selectedTransactionForIndex
             }
 
             TransactionType.TRANSFER -> {
@@ -648,49 +571,42 @@ internal class EditTransactionScreenViewModel(
                 1
             }
         }
-        LocalDateTime.of(
-            uiState.transactionDate,
-            uiState.transactionTime
-        )
-            .toEpochMilli()
+        val transactionTimestamp = LocalDateTime.of(
+            uiState.value.transactionDate,
+            uiState.value.transactionTime
+        ).toEpochMilli()
 
         if (accountFromId.isNotNull()) {
-            uiState.accountFrom
+            uiState.value.accountFrom
         } else {
             null
         }
         if (accountToId.isNotNull()) {
-            uiState.accountTo
+            uiState.value.accountTo
         } else {
             null
         }
-        return refreshIfRequired(
-            shouldRefresh = true,
-        )
-        /*
-        val transaction = Transaction(
-            amount = amount,
-            categoryId = categoryId,
-            originalTransactionId = currentTransactionData?.transaction?.id,
-            accountFromId = accountFromId,
-            accountToId = accountToId,
-            title = title,
-            creationTimestamp = dateTimeUtil.getCurrentTimeMillis(),
-            transactionTimestamp = transactionTimestamp,
-            transactionForId = transactionForId,
-            transactionType = uiState.selectedTransactionType,
-        )
-
-        coroutineScope.launch {
-            currentTransactionData?.transaction?.let { originalTransaction ->
-                updateTransactionUseCase(
-                    originalTransaction = originalTransaction,
-                    updatedTransaction = transaction,
-                )
-            }
-            navigator.navigateUp()
+//        val transaction = Transaction(
+//            amount = amount,
+//            categoryId = categoryId,
+//            originalTransactionId = currentTransactionData?.transaction?.id,
+//            accountFromId = accountFromId,
+//            accountToId = accountToId,
+//            title = title,
+//            creationTimestamp = dateTimeUtil.getCurrentTimeMillis(),
+//            transactionTimestamp = transactionTimestamp,
+//            transactionForId = transactionForId,
+//            transactionType = uiState.selectedTransactionType,
+//        )
+        return coroutineScope.launch {
+//            currentTransactionData?.transaction?.let { originalTransaction ->
+//                updateTransactionUseCase(
+//                    originalTransaction = originalTransaction,
+//                    updatedTransaction = transaction,
+//                )
+//            }
+            navigateUp()
         }
-        */
     }
     // endregion
 
@@ -862,45 +778,20 @@ internal class EditTransactionScreenViewModel(
     }
     // endregion
 
-    // region observeForTitleSuggestions
-    private fun observeForTitleSuggestions() {
+    // region updateTitleSuggestions
+    private fun updateTitleSuggestions() {
         coroutineScope.launch {
-            combineAndCollectLatest(
-                flow = title,
-                flow2 = category
-            ) { (title, category) ->
-                titleSuggestions.update {
-                    category?.id?.let { categoryId ->
-                        getTitleSuggestionsUseCase(
-                            categoryId = categoryId,
-                            enteredTitle = title.text,
-                        )
-                    } ?: persistentListOf()
-                }
-            }
+            titleSuggestions = category?.id?.let { categoryId ->
+                getTitleSuggestionsUseCase(
+                    categoryId = categoryId,
+                    enteredTitle = title.text,
+                )
+            } ?: persistentListOf()
         }
     }
     // endregion
 
     // region observeForSelectedTransactionType
-    private fun observeForSelectedTransactionType() {
-        coroutineScope.launch {
-            selectedTransactionTypeIndex.collectLatest { selectedTransactionTypeIndex ->
-                startLoading()
-                val updatedSelectedTransactionType =
-                    validTransactionTypesForNewTransaction.getOrNull(
-                        index = selectedTransactionTypeIndex,
-                    )
-                if (updatedSelectedTransactionType != null) {
-                    handleSelectedTransactionTypeChange(
-                        updatedSelectedTransactionType = updatedSelectedTransactionType,
-                    )
-                }
-                // completeLoading()
-            }
-        }
-    }
-
     private fun handleSelectedTransactionTypeChange(
         updatedSelectedTransactionType: TransactionType,
     ) {
