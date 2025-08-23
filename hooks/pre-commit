@@ -1,19 +1,79 @@
 #!/bin/bash
 
-# Navigate to the Android codebase directory and run tests before pushing.
-cd codebase/android
+# Navigate to the Android codebase directory
+cd codebase/android || exit 1 # Exit if cd fails
 
 # Check if we actually have commits to push
-commits=`git log @{u}..`
-if [ -z "$commits" ]; then
- exit 0
+# This check is more relevant for a pre-push hook.
+# For a pre-commit hook, we check staged files.
+if ! git diff --cached --quiet; then
+    echo "Staged changes detected. Running tests..."
+else
+    echo "No staged changes to commit. Skipping tests."
+    exit 0
 fi
 
-CMD="./gradlew testDebugUnitTest"
+# Get the list of staged files
+staged_files=$(git diff --cached --name-only --diff-filter=ACM "*.kt" "*.java") # Filter for Kotlin/Java files
+
+if [ -z "$staged_files" ]; then
+    echo "No Kotlin or Java files staged. Skipping tests."
+    exit 0
+fi
+
+# Determine the unique set of Gradle modules for the staged files
+declare -A modules_to_test
+for file in $staged_files; do
+    # Assuming your module structure is like 'moduleName/src/main/java/...'
+    # or 'moduleName/src/test/java/...'
+    # Adjust the regex if your project structure is different.
+    if [[ "$file" =~ ^([^/]+)/src/ ]]; then
+        module_name="${BASH_REMATCH[1]}"
+        # Convert module directory name to Gradle task path if needed
+        # e.g., my-module -> :my-module
+        # This simple conversion assumes module directory name directly maps to gradle project name.
+        # For more complex mappings, you might need a more sophisticated approach.
+        if [[ "$module_name" == "app" ]]; then # Common case for the main app module
+            modules_to_test[":app"]="1"
+        else
+            modules_to_test[":$module_name"]="1"
+        fi
+    fi
+done
+
+if [ ${#modules_to_test[@]} -eq 0 ]; then
+    echo "Could not determine modules for staged files. Skipping tests."
+    exit 0
+fi
+
+echo "Modules to test:"
+for module in "${!modules_to_test[@]}"; do
+    echo "- $module"
+done
+
+# Construct the Gradle command
+test_commands=""
+for module in "${!modules_to_test[@]}"; do
+    # Assuming standard test task names like testDebugUnitTest
+    # Adjust if your test task names are different (e.g., testReleaseUnitTest)
+    test_commands+="${module}:testDebugUnitTest "
+done
+
+if [ -z "$test_commands" ]; then
+    echo "No test commands to run."
+    exit 0
+fi
+
+CMD="./gradlew $test_commands"
+echo "Executing: $CMD"
 $CMD
 RESULT=$?
+
 if [ $RESULT -ne 0 ]; then
- echo "failed $CMD"
- exit 1
+    echo "Tests failed for one or more modules."
+    echo "Command: $CMD"
+    exit 1
 fi
+
+echo "All tests passed for affected modules."
 exit 0
