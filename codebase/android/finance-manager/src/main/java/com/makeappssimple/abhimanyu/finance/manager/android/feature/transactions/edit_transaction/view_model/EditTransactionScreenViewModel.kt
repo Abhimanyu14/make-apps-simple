@@ -257,7 +257,6 @@ internal class EditTransactionScreenViewModel(
     // region fetchData
     override fun fetchData(): Job {
         return coroutineScope.launch {
-            startLoading()
             joinAll(
                 launch {
                     accounts = getAllAccountsUseCase()

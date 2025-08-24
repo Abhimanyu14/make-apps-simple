@@ -285,14 +285,13 @@ internal class HomeScreenViewModel(
     private fun observeForHomeListItemViewData() {
         coroutineScope.launch {
             getRecentTransactionDataFlowUseCase().collectLatest { transactionDataList ->
-                startLoading()
                 homeListItemViewData = transactionDataList
                     .map { transactionData: TransactionData ->
                         transactionData.toTransactionListItemData(
                             getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
                         )
                     }
-                completeLoading()
+                refresh()
             }
         }
     }

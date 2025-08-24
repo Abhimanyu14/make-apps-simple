@@ -251,7 +251,6 @@ internal class AddTransactionScreenViewModel(
     // region fetchData
     override fun fetchData(): Job {
         return coroutineScope.launch {
-            startLoading()
             joinAll(
                 launch {
                     accounts = getAllAccountsUseCase()
@@ -267,7 +266,6 @@ internal class AddTransactionScreenViewModel(
             updateValidTransactionTypesForNewTransaction()
             updateDataForRefundTransaction()
             processInitialData()
-            completeLoading()
         }
     }
     // endregion
