@@ -25,12 +25,14 @@ public class UpdateTransactionUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
     public suspend operator fun invoke(
-        @Suppress("UNUSED_PARAMETER") originalTransaction: Transaction,
         updatedTransaction: Transaction,
-    ) {
+    ): Boolean {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-        transactionRepository.updateTransaction(
+        val isTransactionUpdated = transactionRepository.updateTransaction(
             transaction = updatedTransaction,
         )
+        // TODO(Abhi): Fix this
+        // recalculateTotalUseCase()
+        return isTransactionUpdated
     }
 }

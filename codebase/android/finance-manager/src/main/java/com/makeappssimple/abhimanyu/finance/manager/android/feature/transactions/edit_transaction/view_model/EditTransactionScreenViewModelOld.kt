@@ -468,7 +468,6 @@ public class EditTransactionScreenViewModelOld(
                         )
                         .toEpochMilli()
                     updateTransactionUseCase(
-                        originalTransaction = transaction,
                         updatedTransaction = transaction
                             .copy(
                                 amount = amount,

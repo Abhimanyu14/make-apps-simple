@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.snackbar.EditTransactionScreenSnackbarType
@@ -67,7 +68,6 @@ internal class EditTransactionScreenViewModelTest {
             getTitleSuggestionsUseCase = testDependencies.getTitleSuggestionsUseCase,
             getTransactionDataByIdUseCase = testDependencies.getTransactionDataByIdUseCase,
             getMaxRefundAmountUseCase = testDependencies.getMaxRefundAmountUseCase,
-            updateAccountBalanceAmountUseCase = testDependencies.updateAccountBalanceAmountUseCase,
             updateTransactionUseCase = testDependencies.updateTransactionUseCase,
             logKit = testDependencies.logKit,
         )
@@ -130,6 +130,116 @@ internal class EditTransactionScreenViewModelTest {
             result.amount.text.shouldBeEmpty()
             result.title.text.shouldBeEmpty()
             result.selectedTransactionType.shouldBe(
+                expected = TransactionType.EXPENSE,
+            )
+        }
+    }
+    // endregion
+
+    // region fetchData
+    @Test
+    fun fetchData_shouldUpdateUiState() = testDependencies.runTestWithTimeout {
+        editTransactionScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.accountFrom.shouldBeNull()
+            initialState.accountFromText.shouldBe(
+                expected = AccountFromText.Account,
+            )
+            initialState.accountTo.shouldBeNull()
+            initialState.accountToText.shouldBe(
+                expected = AccountToText.Account,
+            )
+            initialState.screenBottomSheetType.shouldBe(
+                expected = EditTransactionScreenBottomSheetType.None,
+            )
+            initialState.screenSnackbarType.shouldBe(
+                expected = EditTransactionScreenSnackbarType.None,
+            )
+            initialState.uiVisibilityState.shouldBe(
+                expected = EditTransactionScreenUiVisibilityState.Expense,
+            )
+            initialState.isBottomSheetVisible.shouldBeFalse()
+            initialState.isCtaButtonEnabled.shouldBeFalse()
+            initialState.isLoading.shouldBeTrue()
+            initialState.isTransactionDatePickerDialogVisible.shouldBeFalse()
+            initialState.isTransactionTimePickerDialogVisible.shouldBeFalse()
+            initialState.category.shouldBeNull()
+            initialState.selectedTransactionForIndex.shouldBeZero()
+            initialState.selectedTransactionTypeIndex.shouldBeNull()
+            initialState.accounts.shouldBeEmpty()
+            initialState.filteredCategories.shouldBeEmpty()
+            initialState.titleSuggestionsChipUIData.shouldBeEmpty()
+            initialState.transactionForValuesChipUIData.shouldBeEmpty()
+            initialState.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
+            initialState.titleSuggestions.shouldBeEmpty()
+            initialState.currentLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            initialState.transactionDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            initialState.transactionTime.shouldBe(
+                expected = LocalTime.MIN,
+            )
+            initialState.amountErrorText.shouldBeNull()
+            initialState.amount.text.shouldBeEmpty()
+            initialState.title.text.shouldBeEmpty()
+            initialState.selectedTransactionType.shouldBe(
+                expected = TransactionType.EXPENSE,
+            )
+
+            val fetchDataCompletedState = awaitItem()
+            fetchDataCompletedState.accountFrom.shouldBeNull()
+            fetchDataCompletedState.accountFromText.shouldBe(
+                expected = AccountFromText.Account,
+            )
+            fetchDataCompletedState.accountTo.shouldBeNull()
+            fetchDataCompletedState.accountToText.shouldBe(
+                expected = AccountToText.Account,
+            )
+            fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                expected = EditTransactionScreenBottomSheetType.None,
+            )
+            fetchDataCompletedState.screenSnackbarType.shouldBe(
+                expected = EditTransactionScreenSnackbarType.None,
+            )
+            fetchDataCompletedState.uiVisibilityState.shouldBe(
+                expected = EditTransactionScreenUiVisibilityState.Expense,
+            )
+            fetchDataCompletedState.isBottomSheetVisible.shouldBeFalse()
+            fetchDataCompletedState.isCtaButtonEnabled.shouldBeFalse()
+            fetchDataCompletedState.isLoading.shouldBeFalse()
+            fetchDataCompletedState.isTransactionDatePickerDialogVisible.shouldBeFalse()
+            fetchDataCompletedState.isTransactionTimePickerDialogVisible.shouldBeFalse()
+            fetchDataCompletedState.category.shouldBeNull()
+            fetchDataCompletedState.selectedTransactionForIndex.shouldBeZero()
+            fetchDataCompletedState.selectedTransactionTypeIndex.shouldBe(
+                expected = 1,
+            )
+            fetchDataCompletedState.accounts.shouldBe(
+                expected = listOf(
+                    testDependencies.testAccountEntity2.asExternalModel(),
+                    testDependencies.testAccountEntity1.asExternalModel(),
+                )
+            )
+            fetchDataCompletedState.filteredCategories.shouldBeEmpty()
+            fetchDataCompletedState.titleSuggestionsChipUIData.shouldBeEmpty()
+            fetchDataCompletedState.transactionForValuesChipUIData.shouldBeEmpty()
+            fetchDataCompletedState.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
+            fetchDataCompletedState.titleSuggestions.shouldBeEmpty()
+            fetchDataCompletedState.currentLocalDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            fetchDataCompletedState.transactionDate.shouldBe(
+                expected = LocalDate.MIN,
+            )
+            fetchDataCompletedState.transactionTime.shouldBe(
+                expected = LocalTime.MIN,
+            )
+            fetchDataCompletedState.amountErrorText.shouldBeNull()
+            fetchDataCompletedState.amount.text.shouldBeEmpty()
+            fetchDataCompletedState.title.text.shouldBeEmpty()
+            fetchDataCompletedState.selectedTransactionType.shouldBe(
                 expected = TransactionType.EXPENSE,
             )
         }

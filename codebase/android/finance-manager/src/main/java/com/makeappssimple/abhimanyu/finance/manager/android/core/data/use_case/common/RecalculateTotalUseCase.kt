@@ -37,7 +37,7 @@ public class RecalculateTotalUseCase(
     private val updateAccountsUseCase: UpdateAccountsUseCase,
 ) {
     public suspend operator fun invoke() {
-        coroutineScope {
+        return coroutineScope {
             val deferredList = awaitAll(
                 async {
                     getAllAccountsUseCase()
