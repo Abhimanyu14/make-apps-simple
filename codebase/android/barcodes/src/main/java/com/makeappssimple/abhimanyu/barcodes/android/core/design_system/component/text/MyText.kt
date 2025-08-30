@@ -27,7 +27,6 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 
 @Composable
 internal fun MyText(
@@ -48,7 +47,6 @@ internal fun MyText(
         fontSize = TextUnit.Unspecified,
         fontStyle = null,
         fontWeight = null,
-        fontFamily = cosmosFontFamily,
         letterSpacing = TextUnit.Unspecified,
         textDecoration = null,
         textAlign = null,
@@ -80,7 +78,6 @@ internal fun MyText(
         fontSize = TextUnit.Unspecified,
         fontStyle = null,
         fontWeight = null,
-        fontFamily = cosmosFontFamily,
         letterSpacing = TextUnit.Unspecified,
         textDecoration = null,
         textAlign = null,

@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
 @Composable
@@ -179,9 +178,7 @@ internal fun MyOutlinedTextField(
             isError = isError,
             enabled = enabled,
             readOnly = readOnly,
-            textStyle = LocalTextStyle.current.copy(
-                fontFamily = cosmosFontFamily,
-            ),
+            textStyle = LocalTextStyle.current,
             visualTransformation = visualTransformation,
             keyboardActions = keyboardActions,
             keyboardOptions = keyboardOptions,

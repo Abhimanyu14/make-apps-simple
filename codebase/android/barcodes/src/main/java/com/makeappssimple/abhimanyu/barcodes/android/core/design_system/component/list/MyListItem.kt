@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 
 @Immutable
 internal data class MyListItemDataEventDataAndEventHandler(
@@ -87,16 +86,12 @@ internal fun MyListItem(
                 if (data.stringResourceId != null) {
                     MyText(
                         textStringResourceId = data.stringResourceId,
-                        style = BarcodesAppTheme.typography.bodyMedium.copy(
-                            fontFamily = cosmosFontFamily,
-                        ),
+                        style = BarcodesAppTheme.typography.bodyMedium,
                     )
                 } else {
                     MyText(
                         text = data.text.orEmpty(),
-                        style = BarcodesAppTheme.typography.bodyMedium.copy(
-                            fontFamily = cosmosFontFamily,
-                        ),
+                        style = BarcodesAppTheme.typography.bodyMedium,
                     )
                 }
             },

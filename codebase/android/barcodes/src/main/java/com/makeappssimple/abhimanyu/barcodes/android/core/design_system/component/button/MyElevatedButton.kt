@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 
 private object MyElevatedButtonConstants {
     val defaultHeight = 40.dp
@@ -71,7 +70,6 @@ internal fun MyElevatedButton(
                 style = BarcodesAppTheme.typography.labelLarge
                     .copy(
                         textAlign = TextAlign.Center,
-                        fontFamily = cosmosFontFamily,
                     ),
             )
         }

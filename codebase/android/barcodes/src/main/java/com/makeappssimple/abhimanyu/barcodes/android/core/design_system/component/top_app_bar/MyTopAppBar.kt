@@ -37,7 +37,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.cosmosFontFamily
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
@@ -106,9 +105,7 @@ private fun MyTopAppBarUI(
                 text = titleText,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = BarcodesAppTheme.typography.titleLarge.copy(
-                    fontFamily = cosmosFontFamily,
-                ),
+                style = BarcodesAppTheme.typography.titleLarge,
                 modifier = modifier
                     .testTag(
                         tag = COMPONENT_MY_TOP_APP_BAR_TITLE_TEXT,
