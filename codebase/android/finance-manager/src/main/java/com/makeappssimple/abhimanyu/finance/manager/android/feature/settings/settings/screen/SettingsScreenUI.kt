@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("StringLiteralDuplication")
 @file:OptIn(ExperimentalMaterial3Api::class)
-// TODO(Abhi): To Fix - StringLiteralDuplication
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.screen
 
