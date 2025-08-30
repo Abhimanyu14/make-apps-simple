@@ -179,14 +179,15 @@ internal class EditTransactionScreenViewModel(
 
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
-        val validationState = editTransactionScreenDataValidationUseCase(
-            accountFrom = accountFrom,
-            accountTo = accountTo,
-            maxRefundAmount = maxRefundAmount,
-            amount = amount.text,
-            title = title.text,
-            selectedTransactionType = selectedTransactionType,
-        )
+        val editTransactionScreenDataValidationState =
+            editTransactionScreenDataValidationUseCase(
+                accountFrom = accountFrom,
+                accountTo = accountTo,
+                maxRefundAmount = maxRefundAmount,
+                amount = amount.text,
+                title = title.text,
+                selectedTransactionType = selectedTransactionType,
+            )
         _uiState.update {
             EditTransactionScreenUIState(
                 accountFrom = accountFrom,
@@ -205,7 +206,7 @@ internal class EditTransactionScreenViewModel(
                 screenSnackbarType = screenSnackbarType,
                 uiVisibilityState = uiVisibilityState,
                 isBottomSheetVisible = screenBottomSheetType != EditTransactionScreenBottomSheetType.None,
-                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                isCtaButtonEnabled = editTransactionScreenDataValidationState.isCtaButtonEnabled,
                 isLoading = isLoading,
                 isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible,
                 isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible,
@@ -237,7 +238,7 @@ internal class EditTransactionScreenViewModel(
                     .orMin(),
                 transactionDate = transactionDate,
                 transactionTime = transactionTime,
-                amountErrorText = validationState.amountErrorText,
+                amountErrorText = editTransactionScreenDataValidationState.amountErrorText,
                 amount = amount,
                 title = title,
             )

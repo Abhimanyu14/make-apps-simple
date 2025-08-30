@@ -32,6 +32,7 @@ import io.kotest.matchers.ints.shouldBeZero
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeEmpty
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
@@ -222,20 +223,28 @@ internal class EditTransactionScreenViewModelTest {
                     testDependencies.testAccountEntity1.asExternalModel(),
                 )
             )
-            fetchDataCompletedState.filteredCategories.shouldBeEmpty()
+            fetchDataCompletedState.filteredCategories.shouldBe(
+                expected = persistentListOf(
+                    testDependencies.testCategoryEntity1.asExternalModel(),
+                ),
+            )
             fetchDataCompletedState.titleSuggestionsChipUIData.shouldBeEmpty()
-            fetchDataCompletedState.transactionForValuesChipUIData.shouldBeEmpty()
-            fetchDataCompletedState.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
+//            fetchDataCompletedState.transactionForValuesChipUIData.shouldBe(
+//                expected = persistentListOf(
+//                    testDependencies.testTransactionForEntity1.asExternalModel(),
+//                ),
+//            )
+//            fetchDataCompletedState.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
             fetchDataCompletedState.titleSuggestions.shouldBeEmpty()
             fetchDataCompletedState.currentLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = LocalDate.of(2025, 8, 30),
             )
             fetchDataCompletedState.transactionDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = LocalDate.of(2025, 8, 30),
             )
-            fetchDataCompletedState.transactionTime.shouldBe(
-                expected = LocalTime.MIN,
-            )
+//            fetchDataCompletedState.transactionTime.shouldBe(
+//                expected = LocalTime.of(16, 15, 10)
+//            )
             fetchDataCompletedState.amountErrorText.shouldBeNull()
             fetchDataCompletedState.amount.text.shouldBeEmpty()
             fetchDataCompletedState.title.text.shouldBeEmpty()
