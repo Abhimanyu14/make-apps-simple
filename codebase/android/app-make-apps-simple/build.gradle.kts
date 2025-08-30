@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -86,10 +87,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    kotlinOptions {
-        jvmTarget = libs.versions.jvm.get()
-    }
-
     lint {
         checkAllWarnings = true
         warningsAsErrors = true
@@ -117,6 +114,10 @@ dependencies {
 
 kotlin {
     explicitApi()
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
 }
 
 ksp {

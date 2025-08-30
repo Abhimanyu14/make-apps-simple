@@ -18,6 +18,7 @@
 
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.plugin.android.library)
@@ -68,10 +69,6 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    kotlinOptions {
-        jvmTarget = libs.versions.jvm.get()
-    }
-
     lint {
         checkAllWarnings = true
         warningsAsErrors = true
@@ -100,6 +97,14 @@ dependencies {
 
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
     screenshotTestImplementation(libs.screenshot.validation.api)
+}
+
+kotlin {
+    explicitApi()
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
 }
 
 mavenPublishing {
@@ -156,8 +161,4 @@ mavenPublishing {
 
     // Enable GPG signing for all publications
     signAllPublications()
-}
-
-kotlin {
-    explicitApi()
 }

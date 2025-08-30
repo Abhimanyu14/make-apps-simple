@@ -16,6 +16,9 @@
 
 @file:Suppress("UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.about.libraries)
@@ -67,8 +70,6 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = libs.versions.jvm.get()
-
         // Room schema for testing
         sourceSets {
             // Adds exported schema location as test app assets.
@@ -141,6 +142,10 @@ dependencies {
 
 kotlin {
     explicitApi()
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
 }
 
 kover {
