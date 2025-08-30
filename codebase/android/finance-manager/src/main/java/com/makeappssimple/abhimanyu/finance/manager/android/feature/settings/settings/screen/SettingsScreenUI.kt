@@ -146,7 +146,7 @@ internal fun SettingsScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_settings_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(SettingsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

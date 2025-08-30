@@ -34,13 +34,13 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 public fun MySelectionModeTopAppBar(
     modifier: Modifier = Modifier,
     appBarActions: RowScopedComposableContent = {},
-    navigationAction: () -> Unit = {},
+    onNavigationButtonClick: () -> Unit = {},
     title: ComposableContent = {},
 ) {
     MySelectionModeTopAppBarUI(
         modifier = modifier,
         appBarActions = appBarActions,
-        navigationAction = navigationAction,
+        onNavigationButtonClick = onNavigationButtonClick,
         title = title,
     )
 }
@@ -49,7 +49,7 @@ public fun MySelectionModeTopAppBar(
 public fun MySelectionModeTopAppBarUI(
     modifier: Modifier = Modifier,
     appBarActions: RowScopedComposableContent,
-    navigationAction: () -> Unit,
+    onNavigationButtonClick: () -> Unit,
     title: ComposableContent,
 ) {
     TopAppBar(
@@ -59,7 +59,7 @@ public fun MySelectionModeTopAppBarUI(
                 tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 imageVector = MyIcons.Close,
                 contentDescriptionStringResourceId = R.string.finance_manager_navigation_close_button_navigation_icon_content_description,
-                onClick = navigationAction,
+                onClick = onNavigationButtonClick,
             )
         },
         actions = appBarActions,

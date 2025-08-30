@@ -56,7 +56,7 @@ internal fun OpenSourceLicensesScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_open_source_licenses_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(OpenSourceLicensesScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

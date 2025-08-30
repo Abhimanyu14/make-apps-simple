@@ -252,7 +252,7 @@ internal fun AddTransactionScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_add_transaction_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(AddTransactionScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

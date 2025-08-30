@@ -148,7 +148,7 @@ internal fun AddCategoryScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_add_category_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(AddCategoryScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

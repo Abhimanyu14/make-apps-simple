@@ -221,7 +221,7 @@ internal fun CategoriesScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_categories_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(CategoriesScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

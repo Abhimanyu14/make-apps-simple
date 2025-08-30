@@ -112,7 +112,7 @@ internal fun EditAccountScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_edit_account_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(EditAccountScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

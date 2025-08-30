@@ -234,7 +234,7 @@ internal fun TransactionsScreenUI(
                             },
                         )
                     },
-                    navigationAction = {
+                    onNavigationButtonClick = {
                         handleUIEvent(TransactionsScreenUIEvent.OnSelectionModeTopAppBarNavigationButtonClick)
                     },
                     title = {
@@ -253,7 +253,7 @@ internal fun TransactionsScreenUI(
             } else {
                 MyTopAppBar(
                     titleTextStringResourceId = R.string.finance_manager_screen_transactions_appbar_title,
-                    navigationAction = {
+                    onNavigationButtonClick = {
                         handleUIEvent(TransactionsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                     },
                 )

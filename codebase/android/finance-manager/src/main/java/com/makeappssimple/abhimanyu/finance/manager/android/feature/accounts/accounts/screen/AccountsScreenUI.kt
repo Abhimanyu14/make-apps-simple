@@ -156,7 +156,7 @@ internal fun AccountsScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_accounts_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(AccountsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

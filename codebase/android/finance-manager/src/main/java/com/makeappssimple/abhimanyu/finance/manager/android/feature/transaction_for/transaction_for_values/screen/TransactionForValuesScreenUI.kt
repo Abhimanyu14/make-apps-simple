@@ -122,7 +122,7 @@ internal fun TransactionForValuesScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_transaction_for_values_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(TransactionForValuesScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

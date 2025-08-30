@@ -99,7 +99,7 @@ internal fun ViewTransactionScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_view_transaction_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(ViewTransactionScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

@@ -85,7 +85,7 @@ internal fun EditTransactionForScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_edit_transaction_for_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(EditTransactionForScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

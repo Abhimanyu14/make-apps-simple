@@ -99,7 +99,7 @@ internal fun AddAccountScreenUI(
         topBar = {
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_add_account_appbar_title,
-                navigationAction = {
+                onNavigationButtonClick = {
                     handleUIEvent(AddAccountScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
             )

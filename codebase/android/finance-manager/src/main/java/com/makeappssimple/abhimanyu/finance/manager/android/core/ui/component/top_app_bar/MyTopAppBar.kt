@@ -23,6 +23,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
@@ -37,42 +38,43 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.na
 public fun MyTopAppBar(
     modifier: Modifier = Modifier,
     @StringRes titleTextStringResourceId: Int,
-    navigationAction: (() -> Unit)? = null,
+    onNavigationButtonClick: (() -> Unit)? = null,
     appBarActions: NullableComposableContent = null,
 ) {
-    // TODO(Abhi): Fix this properly later
-    if (titleTextStringResourceId == -1) {
-        return
+    val isNavigationButtonVisible = remember(
+        key1 = onNavigationButtonClick,
+    ) {
+        onNavigationButtonClick.isNotNull()
     }
 
     MyTopAppBarUI(
-        isNavigationIconVisible = navigationAction.isNotNull(),
         titleText = stringResource(
             id = titleTextStringResourceId,
         ),
         modifier = modifier,
         appBarActions = appBarActions,
-        navigationBackButton = {
-            MyNavigationBackButton(
-                handleEvent = { events ->
-                    when (events) {
-                        is MyNavigationBackButtonEvents.OnClick -> {
-                            navigationAction?.invoke()
+        navigationButton = {
+            if (isNavigationButtonVisible) {
+                MyNavigationBackButton(
+                    handleEvent = { events ->
+                        when (events) {
+                            is MyNavigationBackButtonEvents.OnClick -> {
+                                onNavigationButtonClick?.invoke()
+                            }
                         }
-                    }
-                },
-            )
+                    },
+                )
+            }
         },
     )
 }
 
 @Composable
-public fun MyTopAppBarUI(
+private fun MyTopAppBarUI(
     modifier: Modifier = Modifier,
-    isNavigationIconVisible: Boolean,
     titleText: String,
     appBarActions: NullableComposableContent,
-    navigationBackButton: ComposableContent,
+    navigationButton: ComposableContent,
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -85,9 +87,7 @@ public fun MyTopAppBarUI(
             )
         },
         navigationIcon = {
-            if (isNavigationIconVisible) {
-                navigationBackButton()
-            }
+            navigationButton()
         },
         actions = {
             appBarActions?.invoke()
