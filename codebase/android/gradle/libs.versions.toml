@@ -81,7 +81,7 @@ plugin-kotlin = "2.2.10"
 plugin-kotlin-serialization = "2.2.10"
 plugin-kotlinx-binary-compatibility-validator = "0.18.1"
 plugin-kotlin-kover = "0.9.1"
-plugin-ksp = "2.1.21-2.0.2"
+plugin-ksp = "2.2.10-2.0.2"
 plugin-maven-publish = "0.31.0"
 
 [libraries]
