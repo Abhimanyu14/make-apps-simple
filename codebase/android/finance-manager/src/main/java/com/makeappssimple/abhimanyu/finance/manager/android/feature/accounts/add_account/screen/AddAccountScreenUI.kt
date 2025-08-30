@@ -61,7 +61,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.te
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.event.AddAccountScreenUIEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -86,14 +85,6 @@ internal fun AddAccountScreenUI(
             } else {
                 // TODO(Abhi): Log focus request error
             }
-        }
-    }
-
-    LaunchedEffect(
-        key1 = uiState.screenSnackbarType,
-    ) {
-        when (uiState.screenSnackbarType) {
-            AddAccountScreenSnackbarType.None -> {}
         }
     }
 

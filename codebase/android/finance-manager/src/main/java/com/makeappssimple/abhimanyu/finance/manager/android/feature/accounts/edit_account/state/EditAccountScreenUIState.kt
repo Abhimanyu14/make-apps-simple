@@ -21,14 +21,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 @Stable
 internal data class EditAccountScreenUIState(
-    val screenSnackbarType: EditAccountScreenSnackbarType = EditAccountScreenSnackbarType.None,
     val visibilityData: EditAccountScreenUIVisibilityData = EditAccountScreenUIVisibilityData(),
     val isCtaButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,

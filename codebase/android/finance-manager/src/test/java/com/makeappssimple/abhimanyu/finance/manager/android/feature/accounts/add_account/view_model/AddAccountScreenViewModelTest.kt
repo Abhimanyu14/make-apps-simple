@@ -27,7 +27,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
@@ -78,9 +77,6 @@ internal class AddAccountScreenViewModelTest {
             result.selectedAccountType.shouldBeNull()
             result.nameError.shouldBe(
                 expected = AddAccountScreenNameError.None,
-            )
-            result.screenSnackbarType.shouldBe(
-                expected = AddAccountScreenSnackbarType.None,
             )
             result.visibilityData.minimumBalanceAmountTextField.shouldBeFalse()
             result.visibilityData.nameTextFieldErrorText.shouldBeFalse()
@@ -372,22 +368,6 @@ internal class AddAccountScreenViewModelTest {
         }
 
     @Test
-    fun resetScreenSnackbarType_shouldResetToNone() =
-        testDependencies.runTestWithTimeout {
-            addAccountScreenViewModel.uiState.test {
-                awaitItem().screenSnackbarType.shouldBe(
-                    expected = AddAccountScreenSnackbarType.None,
-                )
-
-                addAccountScreenViewModel.uiStateEvents.resetScreenSnackbarType()
-
-                awaitItem().screenSnackbarType.shouldBe(
-                    expected = AddAccountScreenSnackbarType.None,
-                )
-            }
-        }
-
-    @Test
     fun updateMinimumAccountBalanceAmountValue_shouldUpdateValue() =
         testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
@@ -423,25 +403,6 @@ internal class AddAccountScreenViewModelTest {
             )
         }
     }
-
-    @Test
-    fun updateScreenSnackbarType_shouldUpdateType() =
-        testDependencies.runTestWithTimeout {
-            val updatedType = AddAccountScreenSnackbarType.None
-            addAccountScreenViewModel.uiState.test {
-                awaitItem().screenSnackbarType.shouldBe(
-                    expected = AddAccountScreenSnackbarType.None,
-                )
-
-                addAccountScreenViewModel.uiStateEvents.updateScreenSnackbarType(
-                    updatedType
-                )
-
-                awaitItem().screenSnackbarType.shouldBe(
-                    expected = updatedType,
-                )
-            }
-        }
 
     @Test
     fun updateSelectedAccountTypeIndex_shouldUpdateIndex() =

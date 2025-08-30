@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.ad
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import kotlinx.coroutines.Job
 
 @Stable
@@ -28,9 +27,7 @@ internal class AddAccountScreenUIStateEvents(
     val clearName: () -> Job,
     val insertAccount: () -> Job,
     val navigateUp: () -> Job,
-    val resetScreenSnackbarType: () -> Job,
     val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Job,
     val updateName: (updatedName: TextFieldValue) -> Job,
-    val updateScreenSnackbarType: (AddAccountScreenSnackbarType) -> Job,
     val updateSelectedAccountTypeIndex: (updatedIndex: Int) -> Job,
 ) : ScreenUIStateEvents

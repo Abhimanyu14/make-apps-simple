@@ -33,7 +33,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenV
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.snackbar.EditAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIStateEvents
@@ -85,8 +84,6 @@ internal class EditAccountScreenViewModel(
         TextFieldValue()
     var name = TextFieldValue()
     var balanceAmountValue = TextFieldValue()
-    var screenSnackbarType: EditAccountScreenSnackbarType =
-        EditAccountScreenSnackbarType.None
     var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
         .indexOf(
             element = AccountType.BANK,
@@ -111,7 +108,6 @@ internal class EditAccountScreenViewModel(
             updateBalanceAmountValue = ::updateBalanceAmountValue,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
             updateName = ::updateName,
-            updateScreenSnackbarType = ::updateScreenSnackbarType,
             updateSelectedAccountTypeIndex = ::updateSelectedAccountTypeIndex,
         )
     // endregion
@@ -240,16 +236,6 @@ internal class EditAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         name = updatedName
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateScreenSnackbarType(
-        updatedEditAccountScreenSnackbarType: EditAccountScreenSnackbarType,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        screenSnackbarType = updatedEditAccountScreenSnackbarType
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )

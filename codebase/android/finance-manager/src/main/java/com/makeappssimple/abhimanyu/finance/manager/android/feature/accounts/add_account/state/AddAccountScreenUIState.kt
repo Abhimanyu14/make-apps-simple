@@ -21,7 +21,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -30,7 +29,6 @@ import kotlinx.collections.immutable.persistentListOf
 internal data class AddAccountScreenUIState(
     val selectedAccountType: AccountType? = null,
     val nameError: AddAccountScreenNameError = AddAccountScreenNameError.None,
-    val screenSnackbarType: AddAccountScreenSnackbarType = AddAccountScreenSnackbarType.None,
     val visibilityData: AddAccountScreenUIVisibilityData = AddAccountScreenUIVisibilityData(),
     val isCtaButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,

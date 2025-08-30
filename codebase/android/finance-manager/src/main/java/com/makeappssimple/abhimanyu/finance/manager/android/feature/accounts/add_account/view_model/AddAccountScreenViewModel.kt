@@ -28,7 +28,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenU
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.icon
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.snackbar.AddAccountScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIStateEvents
@@ -73,8 +72,6 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region UI state
-    private var screenSnackbarType: AddAccountScreenSnackbarType =
-        AddAccountScreenSnackbarType.None
     private var selectedAccountTypeIndex = validAccountTypesForNewAccount
         .indexOf(
             element = AccountType.BANK,
@@ -96,10 +93,8 @@ internal class AddAccountScreenViewModel(
             clearName = ::clearName,
             insertAccount = ::insertAccount,
             navigateUp = ::navigateUp,
-            resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
             updateName = ::updateName,
-            updateScreenSnackbarType = ::updateScreenSnackbarType,
             updateSelectedAccountTypeIndex = ::updateSelectedAccountTypeIndex,
         )
     // endregion
@@ -116,7 +111,6 @@ internal class AddAccountScreenViewModel(
                 AddAccountScreenUIState(
                     selectedAccountType = selectedAccountType,
                     nameError = addAccountScreenDataValidationState.nameError,
-                    screenSnackbarType = screenSnackbarType,
                     visibilityData = AddAccountScreenUIVisibilityData(
                         minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
                         nameTextFieldErrorText = addAccountScreenDataValidationState.nameError != AddAccountScreenNameError.None,
@@ -173,12 +167,6 @@ internal class AddAccountScreenViewModel(
         }
     }
 
-    private fun resetScreenSnackbarType(): Job {
-        return updateScreenSnackbarType(
-            updatedAddAccountScreenSnackbarType = AddAccountScreenSnackbarType.None,
-        )
-    }
-
     private fun updateMinimumAccountBalanceAmountValue(
         updatedMinimumAccountBalanceAmountValue: TextFieldValue,
         shouldRefresh: Boolean = true,
@@ -195,19 +183,6 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         name = updatedName
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateScreenSnackbarType(
-        updatedAddAccountScreenSnackbarType: AddAccountScreenSnackbarType,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        screenSnackbarType = updatedAddAccountScreenSnackbarType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
