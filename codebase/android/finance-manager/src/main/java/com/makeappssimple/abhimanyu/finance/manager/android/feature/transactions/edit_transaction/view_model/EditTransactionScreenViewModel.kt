@@ -268,19 +268,25 @@ internal class EditTransactionScreenViewModel(
     // endregion
 
     // region state events
-    private fun clearAmount(): Job {
+    private fun clearAmount(
+        shouldRefresh: Boolean = true,
+    ): Job {
         return updateAmount(
             updatedAmount = uiState.value.amount.copy(
                 text = "",
             ),
+            shouldRefresh = shouldRefresh,
         )
     }
 
-    private fun clearTitle(): Job {
+    private fun clearTitle(
+        shouldRefresh: Boolean = true,
+    ): Job {
         return updateTitle(
             updatedTitle = uiState.value.title.copy(
                 text = "",
             ),
+            shouldRefresh = shouldRefresh,
         )
     }
 
@@ -408,14 +414,20 @@ internal class EditTransactionScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        handleUpdatedSelectedTransactionTypeIndex()
+        handleUpdatedSelectedTransactionTypeIndex(
+            shouldRefresh = shouldRefresh,
+        )
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
     }
 
-    private fun handleUpdatedSelectedTransactionTypeIndex() {
-        startLoading()
+    private fun handleUpdatedSelectedTransactionTypeIndex(
+        shouldRefresh: Boolean = true,
+    ) {
+        if (shouldRefresh) {
+            startLoading()
+        }
         val updatedSelectedTransactionType =
             validTransactionTypesForNewTransaction.getOrNull(
                 index = selectedTransactionTypeIndex,
@@ -423,6 +435,7 @@ internal class EditTransactionScreenViewModel(
         if (updatedSelectedTransactionType != null) {
             handleSelectedTransactionTypeChange(
                 updatedSelectedTransactionType = updatedSelectedTransactionType,
+                shouldRefresh = shouldRefresh,
             )
         }
     }
@@ -655,9 +668,10 @@ internal class EditTransactionScreenViewModel(
     // region updateCurrentTransactionData
     private suspend fun updateCurrentTransactionData() {
         val currentTransactionId = getCurrentTransactionId()
-        val fetchedCurrentTransactionData = getTransactionDataByIdUseCase(
-            id = currentTransactionId,
-        )
+        val fetchedCurrentTransactionData: TransactionData? =
+            getTransactionDataByIdUseCase(
+                id = currentTransactionId,
+            )
         checkNotNull(
             value = fetchedCurrentTransactionData,
             lazyMessage = {
@@ -685,15 +699,19 @@ internal class EditTransactionScreenViewModel(
                 TransactionType.REFUND,
             )
             processInitialDataForRefundTransaction(
+                currentTransactionData = fetchedCurrentTransactionData,
                 originalTransactionData = fetchedOriginalTransactionData,
             )
         } else {
             updateValidTransactionTypesForNonRefundTransaction()
-            processInitialDataForNonRefundTransaction()
+            processInitialDataForNonRefundTransaction(
+                currentTransactionData = fetchedCurrentTransactionData,
+            )
         }
     }
 
     private fun processInitialDataForRefundTransaction(
+        currentTransactionData: TransactionData,
         originalTransactionData: TransactionData,
     ) {
         updateSelectedTransactionTypeIndex(
@@ -749,23 +767,61 @@ internal class EditTransactionScreenViewModel(
         }
     }
 
-    private fun processInitialDataForNonRefundTransaction() {
+    private fun processInitialDataForNonRefundTransaction(
+        currentTransactionData: TransactionData,
+    ) {
         updateSelectedTransactionTypeIndex(
             updatedSelectedTransactionTypeIndex = validTransactionTypesForNewTransaction.indexOf(
-                element = TransactionType.EXPENSE,
+                element = currentTransactionData.transaction.transactionType,
+            ),
+            shouldRefresh = false,
+        )
+        updateAmount(
+            updatedAmount = currentTransactionData.transaction.amount.value.toString(),
+            shouldRefresh = false,
+        )
+        updateCategory(
+            updatedCategory = allCategories.firstOrNull { category ->
+                category.id == currentTransactionData.transaction.categoryId
+            },
+            shouldRefresh = false,
+        )
+        updateTitle(
+            updatedTitle = uiState.value.title.copy(
+                text = currentTransactionData.transaction.title,
+            ),
+            shouldRefresh = false,
+        )
+        updateSelectedTransactionForIndex(
+            updatedSelectedTransactionForIndex = allTransactionForValues.indexOf(
+                element = allTransactionForValues.firstOrNull { transactionFor ->
+                    transactionFor.id == currentTransactionData.transaction.transactionForId
+                },
             ),
             shouldRefresh = false,
         )
         updateAccountFrom(
-            updatedAccountFrom = defaultAccount,
+            updatedAccountFrom = allAccounts.firstOrNull { account ->
+                account.id == currentTransactionData.transaction.accountFromId
+            },
             shouldRefresh = false,
         )
         updateAccountTo(
-            updatedAccountTo = defaultAccount,
+            updatedAccountTo = allAccounts.firstOrNull { account ->
+                account.id == currentTransactionData.transaction.accountToId
+            },
             shouldRefresh = false,
         )
-        updateCategory(
-            updatedCategory = defaultExpenseCategory,
+        updateTransactionDate(
+            updatedTransactionDate = dateTimeKit.getLocalDate(
+                timestamp = currentTransactionData.transaction.transactionTimestamp,
+            ),
+            shouldRefresh = false,
+        )
+        updateTransactionTime(
+            updatedTransactionTime = dateTimeKit.getLocalTime(
+                timestamp = currentTransactionData.transaction.transactionTimestamp,
+            ),
             shouldRefresh = false,
         )
     }
@@ -789,31 +845,42 @@ internal class EditTransactionScreenViewModel(
     // region handleSelectedTransactionTypeChange
     private fun handleSelectedTransactionTypeChange(
         updatedSelectedTransactionType: TransactionType,
+        shouldRefresh: Boolean = true,
     ) {
         updateFilteredCategories(
             updatedSelectedTransactionType = updatedSelectedTransactionType,
         )
         when (updatedSelectedTransactionType) {
             TransactionType.INCOME -> {
-                handleSelectedTransactionTypeChangeToIncome()
+                handleSelectedTransactionTypeChangeToIncome(
+                    shouldRefresh = shouldRefresh,
+                )
             }
 
             TransactionType.EXPENSE -> {
-                handleSelectedTransactionTypeChangeToExpense()
+                handleSelectedTransactionTypeChangeToExpense(
+                    shouldRefresh = shouldRefresh,
+                )
             }
 
             TransactionType.TRANSFER -> {
-                handleSelectedTransactionTypeChangeToTransfer()
+                handleSelectedTransactionTypeChangeToTransfer(
+                    shouldRefresh = shouldRefresh,
+                )
             }
 
             TransactionType.ADJUSTMENT -> {}
 
             TransactionType.INVESTMENT -> {
-                handleSelectedTransactionTypeChangeToInvestment()
+                handleSelectedTransactionTypeChangeToInvestment(
+                    shouldRefresh = shouldRefresh,
+                )
             }
 
             TransactionType.REFUND -> {
-                handleSelectedTransactionTypeChangeToRefund()
+                handleSelectedTransactionTypeChangeToRefund(
+                    shouldRefresh = shouldRefresh,
+                )
             }
         }
 
@@ -828,67 +895,132 @@ internal class EditTransactionScreenViewModel(
         }
     }
 
-    private fun handleSelectedTransactionTypeChangeToIncome() {
-        updateUiVisibilityState(EditTransactionScreenUiVisibilityState.Income)
+    private fun handleSelectedTransactionTypeChangeToIncome(
+        shouldRefresh: Boolean = true,
+    ) {
+        updateUiVisibilityState(
+            updatedUiVisibilityState = EditTransactionScreenUiVisibilityState.Income,
+        )
 
         updateCategory(
-            currentTransactionData?.category ?: defaultIncomeCategory
+            updatedCategory = currentTransactionData?.category
+                ?: defaultIncomeCategory,
+            shouldRefresh = shouldRefresh,
         )
-        clearTitle()
-        updateAccountFrom(null)
-        updateAccountTo(currentTransactionData?.accountTo ?: defaultAccount)
+        clearTitle(
+            shouldRefresh = shouldRefresh,
+        )
+        updateAccountFrom(
+            updatedAccountFrom = null,
+            shouldRefresh = shouldRefresh,
+        )
+        updateAccountTo(
+            updatedAccountTo = currentTransactionData?.accountTo
+                ?: defaultAccount,
+            shouldRefresh = shouldRefresh,
+        )
     }
 
-    private fun handleSelectedTransactionTypeChangeToExpense() {
-        updateUiVisibilityState(EditTransactionScreenUiVisibilityState.Expense)
+    private fun handleSelectedTransactionTypeChangeToExpense(
+        shouldRefresh: Boolean = true,
+    ) {
+        updateUiVisibilityState(
+            updatedUiVisibilityState = EditTransactionScreenUiVisibilityState.Expense,
+        )
 
         updateCategory(
-            currentTransactionData?.category ?: defaultExpenseCategory
+            updatedCategory = currentTransactionData?.category
+                ?: defaultExpenseCategory,
+            shouldRefresh = shouldRefresh,
         )
-        clearTitle()
+        clearTitle(
+            shouldRefresh = shouldRefresh,
+        )
         updateAccountFrom(
-            currentTransactionData?.accountFrom ?: defaultAccount
+            updatedAccountFrom = currentTransactionData?.accountFrom
+                ?: defaultAccount,
+            shouldRefresh = shouldRefresh,
         )
-        updateAccountTo(null)
+        updateAccountTo(
+            updatedAccountTo = null,
+            shouldRefresh = shouldRefresh,
+        )
     }
 
-    private fun handleSelectedTransactionTypeChangeToTransfer() {
-        updateUiVisibilityState(EditTransactionScreenUiVisibilityState.Transfer)
-
-        clearTitle()
-        updateAccountFrom(
-            currentTransactionData?.accountFrom ?: defaultAccount
+    private fun handleSelectedTransactionTypeChangeToTransfer(
+        shouldRefresh: Boolean = true,
+    ) {
+        updateUiVisibilityState(
+            updatedUiVisibilityState = EditTransactionScreenUiVisibilityState.Transfer,
         )
-        updateAccountTo(currentTransactionData?.accountTo ?: defaultAccount)
+
+        clearTitle(
+            shouldRefresh = shouldRefresh,
+        )
+        updateAccountFrom(
+            updatedAccountFrom = currentTransactionData?.accountFrom
+                ?: defaultAccount,
+            shouldRefresh = shouldRefresh,
+        )
+        updateAccountTo(
+            updatedAccountTo = currentTransactionData?.accountTo
+                ?: defaultAccount,
+            shouldRefresh = shouldRefresh,
+        )
     }
 
-    private fun handleSelectedTransactionTypeChangeToInvestment() {
-        updateUiVisibilityState(EditTransactionScreenUiVisibilityState.Investment)
+    private fun handleSelectedTransactionTypeChangeToInvestment(
+        shouldRefresh: Boolean = true,
+    ) {
+        updateUiVisibilityState(
+            updatedUiVisibilityState = EditTransactionScreenUiVisibilityState.Investment,
+        )
 
         updateCategory(
-            currentTransactionData?.category ?: defaultInvestmentCategory
+            updatedCategory = currentTransactionData?.category
+                ?: defaultInvestmentCategory,
+            shouldRefresh = shouldRefresh,
         )
-        clearTitle()
+        clearTitle(
+            shouldRefresh = shouldRefresh,
+        )
         updateAccountFrom(
-            currentTransactionData?.accountFrom ?: defaultAccount
+            updatedAccountFrom = currentTransactionData?.accountFrom
+                ?: defaultAccount,
+            shouldRefresh = shouldRefresh,
         )
-        updateAccountTo(null)
+        updateAccountTo(
+            updatedAccountTo = null,
+            shouldRefresh = shouldRefresh,
+        )
     }
 
-    private fun handleSelectedTransactionTypeChangeToRefund() {
-        updateUiVisibilityState(EditTransactionScreenUiVisibilityState.Refund)
+    private fun handleSelectedTransactionTypeChangeToRefund(
+        shouldRefresh: Boolean = true,
+    ) {
+        updateUiVisibilityState(
+            updatedUiVisibilityState = EditTransactionScreenUiVisibilityState.Refund,
+        )
 
-        updateAmount(maxRefundAmount.orEmpty().value.toString())
-        updateAccountTo(currentTransactionData?.accountFrom)
+        updateAmount(
+            updatedAmount = maxRefundAmount.orEmpty().value.toString(),
+            shouldRefresh = shouldRefresh,
+        )
+        updateAccountTo(
+            updatedAccountTo = currentTransactionData?.accountFrom,
+            shouldRefresh = shouldRefresh,
+        )
         updateTransactionDate(
             updatedTransactionDate = dateTimeKit.getLocalDate(
                 timestamp = currentTransactionData?.transaction?.transactionTimestamp.orZero(),
             ),
+            shouldRefresh = shouldRefresh,
         )
         updateTransactionTime(
             updatedTransactionTime = dateTimeKit.getLocalTime(
                 timestamp = currentTransactionData?.transaction?.transactionTimestamp.orZero(),
             ),
+            shouldRefresh = shouldRefresh,
         )
     }
 
