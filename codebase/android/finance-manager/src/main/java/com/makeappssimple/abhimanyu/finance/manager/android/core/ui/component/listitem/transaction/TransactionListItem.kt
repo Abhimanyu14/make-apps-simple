@@ -280,6 +280,9 @@ private fun TransactionListItemUI(
                         bottom = 8.dp,
                     ),
             ) {
+                // TODO(Abhi): Disable edit transaction feature
+                //  Fix this later.
+                /*
                 if (data.isEditButtonVisible) {
                     MyExpandableItemIconButton(
                         data = MyExpandableItemIconButtonData(
@@ -303,6 +306,7 @@ private fun TransactionListItemUI(
                             ),
                     )
                 }
+                */
                 if (data.isRefundButtonVisible) {
                     MyExpandableItemIconButton(
                         data = MyExpandableItemIconButtonData(
