@@ -18,23 +18,34 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
 
+private val cosmosFontFamily: FontFamily = FontFamily(
+    Font(
+        resId = R.font.lexend,
+    )
+)
 public val Typography: Typography = Typography(
     displayLarge = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.6.sp,
         lineHeight = 40.sp,
     ),
     displayMedium = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
         lineHeight = 32.sp,
     ),
     displaySmall = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
@@ -42,18 +53,21 @@ public val Typography: Typography = Typography(
     ),
 
     headlineLarge = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
         lineHeight = 24.sp,
     ),
     headlineMedium = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 14.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
         lineHeight = 22.sp,
     ),
     headlineSmall = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 12.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
@@ -64,18 +78,21 @@ public val Typography: Typography = Typography(
      * Usage - CenterAlignedTopAppBar
      */
     titleLarge = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 20.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.sp,
         lineHeight = 28.sp,
     ),
     titleMedium = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.2.sp,
         lineHeight = 22.sp,
     ),
     titleSmall = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.1.sp,
@@ -86,18 +103,21 @@ public val Typography: Typography = Typography(
      * Usage - OutlinedTextField
      */
     bodyLarge = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 16.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.5.sp,
         lineHeight = 24.sp,
     ),
     bodyMedium = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.2.sp,
         lineHeight = 22.sp,
     ),
     bodySmall = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.4.sp,
@@ -105,18 +125,21 @@ public val Typography: Typography = Typography(
     ),
 
     labelLarge = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 14.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.5.sp,
         lineHeight = 22.sp,
     ),
     labelMedium = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.5.sp,
         lineHeight = 22.sp,
     ),
     labelSmall = TextStyle(
+        fontFamily = cosmosFontFamily,
         fontSize = 10.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 1.2.sp,
