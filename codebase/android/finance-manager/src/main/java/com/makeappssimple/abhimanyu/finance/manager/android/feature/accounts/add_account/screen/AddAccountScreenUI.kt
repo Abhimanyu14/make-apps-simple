@@ -80,8 +80,12 @@ internal fun AddAccountScreenUI(
         LaunchedEffect(
             key1 = Unit,
         ) {
-            nameTextFieldFocusRequester.requestFocus()
-            state.keyboardController?.show()
+            val isFocusRequested = nameTextFieldFocusRequester.requestFocus()
+            if (isFocusRequested) {
+                state.keyboardController?.show()
+            } else {
+                // TODO(Abhi): Log focus request error
+            }
         }
     }
 
