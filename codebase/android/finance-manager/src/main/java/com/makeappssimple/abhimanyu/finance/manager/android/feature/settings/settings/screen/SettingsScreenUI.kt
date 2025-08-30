@@ -208,10 +208,7 @@ private fun SettingsScreenContent(
             is SettingsListItemAppVersionData -> {
                 SettingsListItemAppVersion(
                     data = SettingsListItemAppVersionData(
-                        appVersionText = stringResource(
-                            id = R.string.finance_manager_screen_settings_app_version,
-                            listItemData.data.appVersionText,
-                        ),
+                        appVersionText = listItemData.data.appVersionText,
                     ),
                 )
             }
