@@ -87,6 +87,7 @@
     <!-- endregion -->
 
     <!-- region bottom sheet transactions menu -->
+    <string name="finance_manager_bottom_sheet_transactions_menu_duplicate_transaction">Duplicate Transaction</string>
     <string name="finance_manager_bottom_sheet_transactions_menu_update_transaction_for">Update Transaction For</string>
     <string name="finance_manager_bottom_sheet_transactions_menu_select_all_transactions">Select All Transactions</string>
     <!-- endregion -->

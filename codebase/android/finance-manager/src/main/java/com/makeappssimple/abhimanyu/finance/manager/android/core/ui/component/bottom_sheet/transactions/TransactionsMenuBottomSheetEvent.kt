@@ -20,6 +20,9 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 public sealed class TransactionsMenuBottomSheetEvent {
+    public data object OnDuplicateTransactionClick :
+        TransactionsMenuBottomSheetEvent()
+
     public data object OnSelectAllTransactionsClick :
         TransactionsMenuBottomSheetEvent()
 

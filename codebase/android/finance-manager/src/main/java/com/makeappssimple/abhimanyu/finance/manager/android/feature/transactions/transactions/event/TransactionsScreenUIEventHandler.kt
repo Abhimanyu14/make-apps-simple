@@ -96,6 +96,11 @@ internal class TransactionsScreenUIEventHandler internal constructor(
                 uiStateEvents.navigateUp()
             }
 
+            is TransactionsScreenUIEvent.OnTransactionsMenuBottomSheet.DuplicateTransactionButtonClick -> {
+                uiStateEvents.resetScreenBottomSheetType()
+                uiStateEvents.duplicateTransaction()
+            }
+
             is TransactionsScreenUIEvent.OnTransactionsMenuBottomSheet.SelectAllTransactionsButtonClick -> {
                 uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.selectAllTransactions()

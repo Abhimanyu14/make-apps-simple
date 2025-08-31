@@ -34,6 +34,7 @@ import java.time.LocalDate
 internal data class TransactionsScreenUIState(
     val isBackHandlerEnabled: Boolean = false,
     val isBottomSheetVisible: Boolean = false,
+    val isDuplicateTransactionMenuOptionVisible: Boolean = false,
     val isInSelectionMode: Boolean = false,
     val isLoading: Boolean = true,
     val isSearchSortAndFilterVisible: Boolean = false,

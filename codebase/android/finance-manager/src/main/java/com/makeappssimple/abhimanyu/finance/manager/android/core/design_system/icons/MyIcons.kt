@@ -36,6 +36,7 @@ public object MyIcons {
     public val ChevronRight: ImageVector = Icons.Rounded.ChevronRight
     public val Clear: ImageVector = Icons.Rounded.Clear
     public val Close: ImageVector = Icons.Rounded.Close
+    public val Copy: ImageVector = Icons.Rounded.ContentCopy
     public val CurrencyExchange: ImageVector = Icons.Rounded.CurrencyExchange
     public val Delete: ImageVector = Icons.Rounded.Delete
     public val Done: ImageVector = Icons.Rounded.Done

@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DuplicateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
@@ -68,6 +69,7 @@ internal class TransactionsScreenViewModel(
     private val coroutineScope: CoroutineScope,
     private val dispatcherProvider: DispatcherProvider,
     private val dateTimeKit: DateTimeKit,
+    private val duplicateTransactionUseCase: DuplicateTransactionUseCase,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
@@ -92,6 +94,8 @@ internal class TransactionsScreenViewModel(
     private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
+
+    // TODO(Abhi): Rename to selected transaction ids
     private var selectedTransactionIndices: ImmutableList<Int> =
         persistentListOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
@@ -118,6 +122,7 @@ internal class TransactionsScreenViewModel(
         TransactionsScreenUIStateEvents(
             addToSelectedTransactions = ::addToSelectedTransactions,
             clearSelectedTransactions = ::clearSelectedTransactions,
+            duplicateTransaction = ::duplicateTransaction,
             navigateToAddTransactionScreen = ::navigateToAddTransactionScreen,
             navigateToViewTransactionScreen = ::navigateToViewTransactionScreen,
             navigateUp = ::navigateUp,
@@ -143,6 +148,7 @@ internal class TransactionsScreenViewModel(
                             selectedFilter.areFiltersSelected() ||
                             isInSelectionMode,
                     isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
+                    isDuplicateTransactionMenuOptionVisible = selectedTransactionIndices.size == 1,
                     isInSelectionMode = isInSelectionMode,
                     isLoading = isLoading,
                     isSearchSortAndFilterVisible = isInSelectionMode.not() && (
@@ -469,6 +475,21 @@ internal class TransactionsScreenViewModel(
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
+    }
+
+    private fun duplicateTransaction(): Job {
+        val transactionId = selectedTransactionIndices.first()
+        checkNotNull(
+            value = transactionId,
+            lazyMessage = {
+                "transaction id must not be null"
+            },
+        )
+        return coroutineScope.launch {
+            duplicateTransactionUseCase(
+                transactionId = transactionId,
+            )
+        }
     }
 
     private fun removeFromSelectedTransactions(

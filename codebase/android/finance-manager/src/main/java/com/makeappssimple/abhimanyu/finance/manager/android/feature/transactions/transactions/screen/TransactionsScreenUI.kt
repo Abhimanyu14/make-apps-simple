@@ -66,6 +66,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bo
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transaction_for.SelectTransactionForBottomSheetEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionsFilterBottomSheet
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionsMenuBottomSheet
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionsMenuBottomSheetData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionsMenuBottomSheetEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions.TransactionsSortBottomSheet
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItem
@@ -149,8 +150,15 @@ internal fun TransactionsScreenUI(
 
                 TransactionsScreenBottomSheetType.Menu -> {
                     TransactionsMenuBottomSheet(
+                        data = TransactionsMenuBottomSheetData(
+                            isDuplicateTransactionMenuOptionVisible = uiState.isDuplicateTransactionMenuOptionVisible,
+                        ),
                         handleEvent = { event ->
                             when (event) {
+                                is TransactionsMenuBottomSheetEvent.OnDuplicateTransactionClick -> {
+                                    handleUIEvent(TransactionsScreenUIEvent.OnTransactionsMenuBottomSheet.DuplicateTransactionButtonClick)
+                                }
+
                                 is TransactionsMenuBottomSheetEvent.OnSelectAllTransactionsClick -> {
                                     handleUIEvent(TransactionsScreenUIEvent.OnTransactionsMenuBottomSheet.SelectAllTransactionsButtonClick)
                                 }

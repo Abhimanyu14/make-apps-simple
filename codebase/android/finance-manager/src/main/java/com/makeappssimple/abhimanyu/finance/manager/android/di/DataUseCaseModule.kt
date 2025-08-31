@@ -57,6 +57,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteAllTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DuplicateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionsUseCase
@@ -420,6 +421,19 @@ public class DataUseCaseModule {
         return DeleteTransactionUseByIdCase(
             financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             transactionRepository = transactionRepository,
+        )
+    }
+
+    @Single
+    internal fun providesDuplicateTransactionUseCase(
+        dateTimeKit: DateTimeKit,
+        getTransactionByIdUseCase: GetTransactionByIdUseCase,
+        insertTransactionsUseCase: InsertTransactionsUseCase,
+    ): DuplicateTransactionUseCase {
+        return DuplicateTransactionUseCase(
+            dateTimeKit = dateTimeKit,
+            getTransactionByIdUseCase = getTransactionByIdUseCase,
+            insertTransactionsUseCase = insertTransactionsUseCase,
         )
     }
 

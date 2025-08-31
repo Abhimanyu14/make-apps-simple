@@ -27,6 +27,7 @@ import kotlinx.coroutines.Job
 internal class TransactionsScreenUIStateEvents(
     val addToSelectedTransactions: (transactionId: Int) -> Job,
     val clearSelectedTransactions: () -> Job,
+    val duplicateTransaction: () -> Job,
     val navigateToAddTransactionScreen: () -> Job,
     val navigateToViewTransactionScreen: (transactionId: Int) -> Job,
     val navigateUp: () -> Job,

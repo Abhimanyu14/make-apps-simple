@@ -69,6 +69,9 @@ internal sealed class TransactionsScreenUIEvent : ScreenUIEvent {
     }
 
     sealed class OnTransactionsMenuBottomSheet {
+        data object DuplicateTransactionButtonClick :
+            TransactionsScreenUIEvent()
+
         data object SelectAllTransactionsButtonClick :
             TransactionsScreenUIEvent()
 

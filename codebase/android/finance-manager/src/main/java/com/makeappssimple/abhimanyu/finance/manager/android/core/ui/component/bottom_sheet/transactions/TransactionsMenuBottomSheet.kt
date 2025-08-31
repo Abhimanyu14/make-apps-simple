@@ -17,19 +17,40 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.bottom_sheet.transactions
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
+
+@Immutable
+public data class TransactionsMenuBottomSheetData(
+    val isDuplicateTransactionMenuOptionVisible: Boolean = false,
+)
 
 @Composable
 public fun TransactionsMenuBottomSheet(
     modifier: Modifier = Modifier,
+    data: TransactionsMenuBottomSheetData,
     handleEvent: (event: TransactionsMenuBottomSheetEvent) -> Unit = {},
 ) {
-    val items = persistentListOf(
-        TransactionsMenuBottomSheetItemData(
+    val menuItems = mutableListOf<TransactionsMenuBottomSheetItemData>()
+    if (data.isDuplicateTransactionMenuOptionVisible) {
+        menuItems.add(
+            element = TransactionsMenuBottomSheetItemData(
+                imageVector = MyIcons.Copy,
+                text = stringResource(
+                    id = R.string.finance_manager_bottom_sheet_transactions_menu_duplicate_transaction,
+                ),
+                onClick = {
+                    handleEvent(TransactionsMenuBottomSheetEvent.OnDuplicateTransactionClick)
+                },
+            ),
+        )
+    }
+    menuItems.add(
+        element = TransactionsMenuBottomSheetItemData(
             imageVector = MyIcons.Edit,
             text = stringResource(
                 id = R.string.finance_manager_bottom_sheet_transactions_menu_update_transaction_for,
@@ -38,7 +59,9 @@ public fun TransactionsMenuBottomSheet(
                 handleEvent(TransactionsMenuBottomSheetEvent.OnUpdateTransactionForClick)
             },
         ),
-        TransactionsMenuBottomSheetItemData(
+    )
+    menuItems.add(
+        element = TransactionsMenuBottomSheetItemData(
             imageVector = MyIcons.Checklist,
             text = stringResource(
                 id = R.string.finance_manager_bottom_sheet_transactions_menu_select_all_transactions,
@@ -46,11 +69,11 @@ public fun TransactionsMenuBottomSheet(
             onClick = {
                 handleEvent(TransactionsMenuBottomSheetEvent.OnSelectAllTransactionsClick)
             },
-        )
+        ),
     )
 
     TransactionsMenuBottomSheetUI(
         modifier = modifier,
-        items = items,
+        items = menuItems.toImmutableList(),
     )
 }
