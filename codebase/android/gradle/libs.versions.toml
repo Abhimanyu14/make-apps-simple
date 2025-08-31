@@ -75,6 +75,7 @@ plugin-android-gradle = "8.10.1"
 plugin-detekt = "1.23.8"
 plugin-dokka = "2.0.0"
 plugin-firebase-crashlytics = "3.0.6"
+plugin-google-services = "4.4.3"
 plugin-kotlin = "2.2.10"
 plugin-kotlin-serialization = "2.2.10"
 plugin-kotlinx-binary-compatibility-validator = "0.18.1"
@@ -177,6 +178,7 @@ plugin-android-library = { id = "com.android.library", version.ref = "plugin-and
 plugin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "plugin-detekt" }
 plugin-dokka = { id = "org.jetbrains.dokka", version.ref = "plugin-dokka" }
 plugin-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "plugin-firebase-crashlytics" }
+plugin-google-services = { id = "com.google.gms.google-services", version.ref = "plugin-google-services" }
 plugin-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
 plugin-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugin-kotlin" }
 plugin-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "plugin-kotlin-serialization" }

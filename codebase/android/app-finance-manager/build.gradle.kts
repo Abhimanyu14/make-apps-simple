@@ -23,6 +23,8 @@ keystoreProperties.load(FileInputStream(rootProject.file("key.properties")))
 
 plugins {
     alias(libs.plugins.plugin.android.application)
+    alias(libs.plugins.plugin.firebase.crashlytics)
+    alias(libs.plugins.plugin.google.services)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
 }

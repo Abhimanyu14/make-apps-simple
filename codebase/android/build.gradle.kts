@@ -22,6 +22,8 @@ plugins {
     alias(libs.plugins.plugin.android.library) apply false
     alias(libs.plugins.plugin.detekt)
     alias(libs.plugins.plugin.dokka)
+    alias(libs.plugins.plugin.firebase.crashlytics) apply false
+    alias(libs.plugins.plugin.google.services) apply false
     alias(libs.plugins.plugin.kotlin.android) apply false
     alias(libs.plugins.plugin.kotlin.compose) apply false
     alias(libs.plugins.plugin.kotlinx.kover)

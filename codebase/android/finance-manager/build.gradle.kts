@@ -18,7 +18,6 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.about.libraries)
