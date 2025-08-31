@@ -146,3 +146,8 @@
 #-keep class **.*ComposerKt { *; }
 #-keep class **.*$Companion { *; }
 # endregion
+
+# region missing_rules
+-dontwarn com.google.android.gms.common.annotation.NoNullnessRewrite
+-dontwarn com.google.j2objc.annotations.RetainedWith
+# endregion

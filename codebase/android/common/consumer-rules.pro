@@ -146,3 +146,12 @@
 #-keep class **.*ComposerKt { *; }
 #-keep class **.*$Companion { *; }
 # endregion
+
+# region missing_rules
+-dontwarn com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
+-dontwarn com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+-dontwarn com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
+-dontwarn com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
+-dontwarn com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+-dontwarn com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+# endregion
