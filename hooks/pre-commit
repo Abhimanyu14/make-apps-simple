@@ -41,26 +41,24 @@ for file in $staged_files; do
     fi
 done
 
+test_commands=""
 if [ ${#modules_to_test[@]} -eq 0 ]; then
-    echo "Could not determine modules for staged files. Skipping tests."
-    exit 0
+    echo "Could not determine modules for staged files. Running all tests..."
+    # If no specific modules are found, run all testDebugUnitTest tasks.
+    # This command will be executed from the codebase/android directory.
+    test_commands="testDebugUnitTest"
+else
+    echo "Modules to test:"
+    for module in "${!modules_to_test[@]}"; do
+        echo "- $module"
+        # Assuming standard test task names like testDebugUnitTest
+        # Adjust if your test task names are different (e.g., testReleaseUnitTest)
+        test_commands+="${module}:testDebugUnitTest "
+    done
 fi
 
-echo "Modules to test:"
-for module in "${!modules_to_test[@]}"; do
-    echo "- $module"
-done
-
-# Construct the Gradle command
-test_commands=""
-for module in "${!modules_to_test[@]}"; do
-    # Assuming standard test task names like testDebugUnitTest
-    # Adjust if your test task names are different (e.g., testReleaseUnitTest)
-    test_commands+="${module}:testDebugUnitTest "
-done
-
 if [ -z "$test_commands" ]; then
-    echo "No test commands to run."
+    echo "No test commands to run." # This should ideally not be hit with the new logic
     exit 0
 fi
 
@@ -70,10 +68,10 @@ $CMD
 RESULT=$?
 
 if [ $RESULT -ne 0 ]; then
-    echo "Tests failed for one or more modules."
+    echo "Tests failed."
     echo "Command: $CMD"
     exit 1
 fi
 
-echo "All tests passed for affected modules."
+echo "All specified tests passed."
 exit 0
