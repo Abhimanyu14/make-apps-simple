@@ -4,8 +4,6 @@
 cd codebase/android || exit 1 # Exit if cd fails
 
 # Check if we actually have commits to push
-# This check is more relevant for a pre-push hook.
-# For a pre-commit hook, we check staged files.
 if ! git diff --cached --quiet; then
     echo "Staged changes detected. Running tests..."
 else
@@ -21,44 +19,64 @@ if [ -z "$staged_files" ]; then
     exit 0
 fi
 
-# Determine the unique set of Gradle modules for the staged files
-declare -A modules_to_test
+# Initialize a string to hold all identified module paths (potentially with duplicates)
+# Each module path will be on a new line for easier processing with sort -u
+raw_module_list=""
+
+echo "Identifying modules from staged files:"
 for file in $staged_files; do
-    # Assuming your module structure is like 'moduleName/src/main/java/...'
-    # or 'moduleName/src/test/java/...'
-    # Adjust the regex if your project structure is different.
-    if [[ "$file" =~ ^([^/]+)/src/ ]]; then
+    echo "Processing file: $file"
+    # Regex to capture the module name (the directory after codebase/android/ and before /src/)
+    if [[ "$file" =~ ^codebase/android/([^/]+)/src/ ]]; then
         module_name="${BASH_REMATCH[1]}"
-        # Convert module directory name to Gradle task path if needed
-        # e.g., my-module -> :my-module
-        # This simple conversion assumes module directory name directly maps to gradle project name.
-        # For more complex mappings, you might need a more sophisticated approach.
+
+        # Convert module directory name to Gradle task path
+        gradle_module_path=""
         if [[ "$module_name" == "app" ]]; then # Common case for the main app module
-            modules_to_test[":app"]="1"
+            gradle_module_path=":app"
         else
-            modules_to_test[":$module_name"]="1"
+            gradle_module_path=":$module_name"
         fi
+
+        if [ -n "$gradle_module_path" ]; then
+            echo "Found module: $gradle_module_path for file $file"
+            # Append the gradle module path followed by a newline
+            raw_module_list+="${gradle_module_path}\n"
+        fi
+    else
+        echo "No module pattern matched for file: $file"
     fi
 done
 
+# Process the raw list to get unique, sorted module paths into an array
+final_unique_modules_array=()
+if [ -n "$raw_module_list" ]; then
+    # Use 'printf' for portability and 'mapfile' to read directly into the array.
+    # 1. 'printf "%b"' reliably processes the '\n' characters as newlines.
+    # 2. 'sed' removes any blank lines.
+    # 3. 'sort -u' finds the unique module lines.
+    # 4. 'mapfile -t' reads each resulting line into the array, trimming the trailing newline.
+    while IFS= read -r module; do
+        final_unique_modules_array+=("$module")
+    done < <(printf "%b" "$raw_module_list" | sed '/^$/d' | sort -u)
+fi
+
 test_commands=""
-if [ ${#modules_to_test[@]} -eq 0 ]; then
+if [ ${#final_unique_modules_array[@]} -eq 0 ]; then
     echo "Could not determine modules for staged files. Running all tests..."
-    # If no specific modules are found, run all testDebugUnitTest tasks.
-    # This command will be executed from the codebase/android directory.
     test_commands="testDebugUnitTest"
 else
-    echo "Modules to test:"
-    for module in "${!modules_to_test[@]}"; do
+    echo "Unique modules to test:"
+    for module in "${final_unique_modules_array[@]}"; do
         echo "- $module"
-        # Assuming standard test task names like testDebugUnitTest
-        # Adjust if your test task names are different (e.g., testReleaseUnitTest)
         test_commands+="${module}:testDebugUnitTest "
     done
+    # Remove trailing space from test_commands
+    test_commands=$(echo "$test_commands" | sed 's/ *$//')
 fi
 
 if [ -z "$test_commands" ]; then
-    echo "No test commands to run." # This should ideally not be hit with the new logic
+    echo "No test commands to run."
     exit 0
 fi
 

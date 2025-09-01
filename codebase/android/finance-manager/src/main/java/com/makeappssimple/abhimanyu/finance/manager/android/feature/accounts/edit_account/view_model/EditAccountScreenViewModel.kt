@@ -90,7 +90,6 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region uiState and uiStateEvents
-    // TODO(Abhi): Change to StateFlow
     private val _uiState: MutableStateFlow<EditAccountScreenUIState> =
         MutableStateFlow(
             value = EditAccountScreenUIState(),
@@ -160,6 +159,41 @@ internal class EditAccountScreenViewModel(
             getCurrentAccount()
         }
     }
+
+    private suspend fun getCurrentAccount() {
+        val currentAccountId = getCurrentAccountId()
+        val currentAccountValue = getAccountByIdUseCase(
+            id = currentAccountId,
+        )
+        requireNotNull(
+            value = currentAccountValue,
+            lazyMessage = {
+                "account with id $currentAccountId not found."
+            },
+        )
+        currentAccount = currentAccountValue
+
+        updateSelectedAccountTypeIndex(
+            updatedSelectedAccountTypeIndex = validAccountTypesForNewAccount.indexOf(
+                element = currentAccountValue.type,
+            ),
+            shouldRefresh = false,
+        )
+        updateName(
+            updatedName = currentAccountValue.name,
+            shouldRefresh = false,
+        )
+        updateBalanceAmountValue(
+            updatedBalanceAmountValue = currentAccountValue.balanceAmount.value.toString(),
+            shouldRefresh = false,
+        )
+        currentAccountValue.minimumAccountBalanceAmount?.let { minimumAccountBalanceAmount ->
+            updateMinimumAccountBalanceAmountValue(
+                updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmount.value.toString(),
+                shouldRefresh = false,
+            )
+        }
+    }
     // endregion
 
     // region state events
@@ -209,7 +243,9 @@ internal class EditAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         balanceAmountValue = updatedBalanceAmountValue
-        updateUiState()
+        if (shouldRefresh) {
+            updateUiState()
+        }
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -221,7 +257,9 @@ internal class EditAccountScreenViewModel(
     ): Job {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
-        updateUiState()
+        if (shouldRefresh) {
+            updateUiState()
+        }
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -232,7 +270,9 @@ internal class EditAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         name = updatedName
-        updateUiState()
+        if (shouldRefresh) {
+            updateUiState()
+        }
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -249,43 +289,8 @@ internal class EditAccountScreenViewModel(
     }
     // endregion
 
-    // region getCurrentAccount
-    private suspend fun getCurrentAccount() {
-        val currentAccountId = getCurrentAccountId()
-        if (currentAccountId == null) {
-            throw IllegalStateException("Current account id is null")
-        }
-
-        val currentAccountValue = getAccountByIdUseCase(
-            id = currentAccountId,
-        ) ?: throw IllegalStateException("Current account not found")
-        currentAccount = currentAccountValue
-
-        updateSelectedAccountTypeIndex(
-            updatedSelectedAccountTypeIndex = validAccountTypesForNewAccount.indexOf(
-                element = currentAccountValue.type,
-            ),
-            shouldRefresh = false,
-        )
-        updateName(
-            updatedName = currentAccountValue.name,
-            shouldRefresh = false,
-        )
-        updateBalanceAmountValue(
-            updatedBalanceAmountValue = currentAccountValue.balanceAmount.value.toString(),
-            shouldRefresh = false,
-        )
-        currentAccountValue.minimumAccountBalanceAmount?.let { minimumAccountBalanceAmount ->
-            updateMinimumAccountBalanceAmountValue(
-                updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmount.value.toString(),
-                shouldRefresh = false,
-            )
-        }
-    }
-    // endregion
-
     // region screen args
-    private fun getCurrentAccountId(): Int? {
+    private fun getCurrentAccountId(): Int {
         return screenArgs.currentAccountId
     }
     // endregion
