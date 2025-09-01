@@ -18,7 +18,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
@@ -90,7 +89,7 @@ internal class AddCategoryScreenViewModelTest {
             result.transactionTypesChipUIData.shouldBeEmpty()
             result.emoji.shouldBeEmpty()
             result.emojiSearchText.shouldBeEmpty()
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
         }
     }
     // endregion
@@ -99,14 +98,17 @@ internal class AddCategoryScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
+            val updatedTitle = "   "
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
 
                 addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    TextFieldValue(
-                        text = "   ",
-                    )
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -120,14 +122,17 @@ internal class AddCategoryScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
+            val updatedTitle = "test-title"
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
 
                 addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    TextFieldValue(
-                        text = "test-title",
-                    )
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -141,21 +146,23 @@ internal class AddCategoryScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_categoryAlreadyExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
-            val testTitle = "test-title"
+            val updatedTitle = "test-title"
             testDependencies.insertCategoryUseCase(
                 emoji = "💰",
-                title = testTitle,
+                title = updatedTitle,
                 transactionType = TransactionType.INCOME,
             )
 
             addCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
 
                 addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    TextFieldValue(
-                        text = testTitle,
-                    )
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -216,22 +223,18 @@ internal class AddCategoryScreenViewModelTest {
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
             fetchDataCompletedState.isLoading.shouldBeFalse()
-            addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                TextFieldValue(
-                    text = testTitle,
-                )
-            )
-            awaitItem().title.text.shouldBe(
+            addCategoryScreenViewModel.uiStateEvents.updateTitle(testTitle)
+            awaitItem().title.shouldBe(
                 expected = testTitle,
             )
 
             addCategoryScreenViewModel.uiStateEvents.clearTitle()
 
             val result = awaitItem()
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
         }
     }
 
@@ -361,18 +364,14 @@ internal class AddCategoryScreenViewModelTest {
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
             fetchDataCompletedState.isLoading.shouldBeFalse()
 
-            addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                TextFieldValue(
-                    text = testTitle,
-                )
-            )
+            addCategoryScreenViewModel.uiStateEvents.updateTitle(testTitle)
 
             val result = awaitItem()
-            result.title.text.shouldBe(
+            result.title.shouldBe(
                 expected = testTitle,
             )
         }

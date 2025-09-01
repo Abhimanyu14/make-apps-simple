@@ -78,7 +78,7 @@ internal class EditAccountScreenViewModelTest {
             result.isCtaButtonEnabled.shouldBeFalse()
             result.isLoading.shouldBeTrue()
             result.accountTypesChipUIDataList.shouldNotBeNull()
-            result.name.text.shouldBeEmpty()
+            result.name.shouldBeEmpty()
         }
     }
 }

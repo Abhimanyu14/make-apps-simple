@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import kotlinx.coroutines.Job
@@ -32,5 +31,5 @@ internal class EditCategoryScreenUIStateEvents(
     val updateEmojiSearchText: (updatedEmojiSearchText: String) -> Job,
     val updateScreenBottomSheetType: (EditCategoryScreenBottomSheetType) -> Job,
     val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
-    val updateTitle: (updatedTitle: TextFieldValue) -> Job,
+    val updateTitle: (updatedTitle: String) -> Job,
 ) : ScreenUIStateEvents

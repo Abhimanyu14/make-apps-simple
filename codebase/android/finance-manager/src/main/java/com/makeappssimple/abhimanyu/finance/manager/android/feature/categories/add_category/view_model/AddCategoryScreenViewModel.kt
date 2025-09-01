@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -79,7 +78,9 @@ internal class AddCategoryScreenViewModel(
     // endregion
 
     // region UI state
-    private var title = TextFieldValue()
+    private var addCategoryScreenDataValidationState: AddCategoryScreenDataValidationState =
+        AddCategoryScreenDataValidationState()
+    private var title: String = ""
     private var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
     private var emojiSearchText = ""
     private var selectedTransactionTypeIndex = validTransactionTypes
@@ -115,28 +116,33 @@ internal class AddCategoryScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         coroutineScope.launch {
-            val validationState = addCategoryScreenDataValidationUseCase(
-                enteredTitle = title.text,
-            )
-            _uiState.update {
-                AddCategoryScreenUIState(
-                    screenBottomSheetType = screenBottomSheetType,
-                    isBottomSheetVisible = screenBottomSheetType != AddCategoryScreenBottomSheetType.None,
-                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                    isLoading = isLoading,
-                    isSupportingTextVisible = validationState.titleError != AddCategoryScreenTitleError.None,
-                    titleError = validationState.titleError,
-                    selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                    transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
-                        ChipUIData(
-                            text = transactionType.title,
-                        )
-                    },
-                    emoji = emoji,
-                    emojiSearchText = emojiSearchText,
-                    title = title,
+            addCategoryScreenDataValidationState =
+                addCategoryScreenDataValidationUseCase(
+                    enteredTitle = title,
                 )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            AddCategoryScreenUIState(
+                screenBottomSheetType = screenBottomSheetType,
+                isBottomSheetVisible = screenBottomSheetType != AddCategoryScreenBottomSheetType.None,
+                isCtaButtonEnabled = addCategoryScreenDataValidationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                isSupportingTextVisible = addCategoryScreenDataValidationState.titleError != AddCategoryScreenTitleError.None,
+                titleError = addCategoryScreenDataValidationState.titleError,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
+                    ChipUIData(
+                        text = transactionType.title,
+                    )
+                },
+                emoji = emoji,
+                emojiSearchText = emojiSearchText,
+                title = title,
+            )
         }
     }
     // endregion
@@ -171,9 +177,7 @@ internal class AddCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         updateTitle(
-            updatedTitle = title.copy(
-                text = "",
-            ),
+            updatedTitle = "",
         )
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
@@ -184,7 +188,7 @@ internal class AddCategoryScreenViewModel(
         return coroutineScope.launch {
             val isCategoryInserted = insertCategoryUseCase(
                 emoji = emoji,
-                title = title.text,
+                title = title,
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
             ) != -1L
             if (isCategoryInserted) {
@@ -243,10 +247,11 @@ internal class AddCategoryScreenViewModel(
     }
 
     private fun updateTitle(
-        updatedTitle: TextFieldValue,
+        updatedTitle: String,
         shouldRefresh: Boolean = true,
     ): Job {
         title = updatedTitle
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )

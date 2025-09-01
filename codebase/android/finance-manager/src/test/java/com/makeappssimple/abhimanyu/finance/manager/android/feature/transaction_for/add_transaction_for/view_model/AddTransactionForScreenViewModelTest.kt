@@ -18,7 +18,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
@@ -65,7 +64,7 @@ internal class AddTransactionForScreenViewModelTest {
         addTransactionForScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
             result.titleError.shouldBe(
                 expected = AddTransactionForScreenTitleError.None,
             )
@@ -78,18 +77,15 @@ internal class AddTransactionForScreenViewModelTest {
     // region state events
     @Test
     fun updateTitle_shouldUpdateValue() = testDependencies.runTestWithTimeout {
-        val updatedTitle = "Test Title"
-        val updatedValue = TextFieldValue(
-            text = updatedTitle,
-        )
+        val updatedTitle = "test-title"
         addTransactionForScreenViewModel.uiState.test {
-            awaitItem().title.text.shouldBeEmpty()
+            awaitItem().title.shouldBeEmpty()
 
             addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                updatedValue
+                updatedTitle
             )
 
-            awaitItem().title.text.shouldBe(
+            awaitItem().title.shouldBe(
                 expected = updatedTitle,
             )
         }
@@ -97,22 +93,19 @@ internal class AddTransactionForScreenViewModelTest {
 
     @Test
     fun clearTitle_shouldClearText() = testDependencies.runTestWithTimeout {
-        val updatedTitle = "Test Title"
-        val updatedValue = TextFieldValue(
-            text = updatedTitle,
-        )
+        val updatedTitle = "test-title"
         addTransactionForScreenViewModel.uiState.test {
-            awaitItem().title.text.shouldBeEmpty()
+            awaitItem().title.shouldBeEmpty()
             addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                updatedValue
+                updatedTitle
             )
-            awaitItem().title.text.shouldBe(
+            awaitItem().title.shouldBe(
                 expected = updatedTitle,
             )
 
             addTransactionForScreenViewModel.uiStateEvents.clearTitle()
 
-            awaitItem().title.text.shouldBeEmpty()
+            awaitItem().title.shouldBeEmpty()
         }
     }
     // endregion
@@ -122,14 +115,11 @@ internal class AddTransactionForScreenViewModelTest {
     fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "   "
-            val updatedValue = TextFieldValue(
-                text = updatedTitle,
-            )
             addTransactionForScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue
+                    updatedTitle
                 )
 
                 val result = awaitItem()
@@ -144,25 +134,23 @@ internal class AddTransactionForScreenViewModelTest {
     fun updateUiStateAndStateEvents_titleAlreadyExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "TestTitle"
-            val updatedValue1 = TextFieldValue(
-                text = updatedTitle,
-            )
-            val updatedValue2 = TextFieldValue(
-                text = updatedTitle,
-            )
             addTransactionForScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue1
+                    updatedTitle
                 )
-                awaitItem().title.text.shouldBe(
+                awaitItem().title.shouldBe(
                     expected = updatedTitle,
                 )
                 addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
                     .join()
 
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue2
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -177,14 +165,15 @@ internal class AddTransactionForScreenViewModelTest {
     fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "test-title"
-            val updatedValue = TextFieldValue(
-                text = updatedTitle,
-            )
             addTransactionForScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -213,9 +202,7 @@ internal class AddTransactionForScreenViewModelTest {
                     testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
 
-                val testTitle = TextFieldValue(
-                    text = "test-transaction-for",
-                )
+                val testTitle = "test-transaction-for"
                 val initialState = uiStateTurbine.awaitItem()
                 initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = uiStateTurbine.awaitItem()
@@ -233,7 +220,7 @@ internal class AddTransactionForScreenViewModelTest {
                         it.id == 1
                     }
                     ?.title.shouldBe(
-                        expected = testTitle.text,
+                        expected = testTitle,
                     )
                 (testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                     ?: -1L).shouldBeGreaterThan(

@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import kotlinx.coroutines.Job
 
@@ -28,8 +27,8 @@ internal class EditAccountScreenUIStateEvents(
     val clearName: () -> Job,
     val navigateUp: () -> Job,
     val updateAccount: () -> Job,
-    val updateBalanceAmountValue: (updatedBalanceAmountValue: TextFieldValue) -> Job,
-    val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Job,
-    val updateName: (updatedName: TextFieldValue) -> Job,
+    val updateBalanceAmountValue: (updatedBalanceAmountValue: String) -> Job,
+    val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: String) -> Job,
+    val updateName: (updatedName: String) -> Job,
     val updateSelectedAccountTypeIndex: (updatedSelectedAccountTypeIndex: Int) -> Job,
 ) : ScreenUIStateEvents

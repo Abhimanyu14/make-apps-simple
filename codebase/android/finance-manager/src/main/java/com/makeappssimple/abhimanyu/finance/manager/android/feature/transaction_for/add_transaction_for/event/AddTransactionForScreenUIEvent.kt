@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.event
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEvent
 
 @Immutable
@@ -29,6 +28,6 @@ internal sealed class AddTransactionForScreenUIEvent : ScreenUIEvent {
         AddTransactionForScreenUIEvent()
 
     data class OnTitleUpdated(
-        val updatedTitle: TextFieldValue,
+        val updatedTitle: String,
     ) : AddTransactionForScreenUIEvent()
 }

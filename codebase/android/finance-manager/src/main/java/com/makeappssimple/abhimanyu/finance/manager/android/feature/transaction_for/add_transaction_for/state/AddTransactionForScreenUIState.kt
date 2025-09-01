@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -26,7 +25,7 @@ internal data class AddTransactionForScreenUIState(
     val titleError: AddTransactionForScreenTitleError = AddTransactionForScreenTitleError.None,
     val isCtaButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,
-    val title: TextFieldValue = TextFieldValue(),
+    val title: String = "",
 ) : ScreenUIState
 
 public sealed class AddTransactionForScreenTitleError {

@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.bottom_sheet.AddTransactionScreenBottomSheetType
@@ -122,10 +121,10 @@ internal class AddTransactionScreenViewModelTest {
             )
             result.amountErrorText.shouldBeNull()
             result.amount.shouldBe(
-                expected = TextFieldValue(),
+                expected = "",
             )
             result.title.shouldBe(
-                expected = TextFieldValue(),
+                expected = "",
             )
         }
     }

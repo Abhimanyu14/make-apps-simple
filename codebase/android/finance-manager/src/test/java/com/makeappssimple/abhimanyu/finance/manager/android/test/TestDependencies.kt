@@ -70,6 +70,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DeleteTransactionUseByIdCase
+import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.DuplicateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetAllTransactionsUseCase
@@ -255,6 +256,11 @@ internal class TestDependencies {
         GetTransactionsBetweenTimestampsUseCase(
             transactionRepository = transactionRepository,
         )
+    val duplicateTransactionUseCase = DuplicateTransactionUseCase(
+        dateTimeKit = dateTimeKit,
+        getTransactionByIdUseCase = getTransactionByIdUseCase,
+        insertTransactionsUseCase = insertTransactionsUseCase,
+    )
     val deleteTransactionUseByIdCase = DeleteTransactionUseByIdCase(
         financeManagerPreferencesRepository = financeManagerPreferencesRepository,
         transactionRepository = transactionRepository,

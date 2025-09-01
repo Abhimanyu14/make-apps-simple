@@ -16,8 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.view_model
 
-import androidx.compose.ui.text.TextRange
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -79,12 +77,13 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region UI state
-    //  var isLoading: Boolean = true
-    var minimumAccountBalanceAmountValue: TextFieldValue =
-        TextFieldValue()
-    var name = TextFieldValue()
-    var balanceAmountValue = TextFieldValue()
-    var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
+    private var selectedAccountType: AccountType? = null
+    private var validationState: EditAccountScreenDataValidationState =
+        EditAccountScreenDataValidationState()
+    private var minimumAccountBalanceAmountValue: String = ""
+    private var name: String = ""
+    private var balanceAmountValue: String = ""
+    private var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
         .indexOf(
             element = AccountType.BANK,
         )
@@ -115,38 +114,42 @@ internal class EditAccountScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         coroutineScope.launch {
-            val selectedAccountType = validAccountTypesForNewAccount.getOrNull(
+            selectedAccountType = validAccountTypesForNewAccount.getOrNull(
                 selectedAccountTypeIndex
             )
-            val validationState = editAccountScreenDataValidationUseCase(
-                enteredName = name.text.trim(),
+            validationState = editAccountScreenDataValidationUseCase(
+                enteredName = name.trim(),
                 currentAccount = currentAccount,
             )
-            _uiState.update {
-                EditAccountScreenUIState(
-                    isLoading = isLoading,
-                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                    nameError = validationState.nameError,
-                    selectedAccountTypeIndex = selectedAccountTypeIndex.orZero(),
-                    accountTypesChipUIDataList = validAccountTypesForNewAccount
-                        .map { accountType ->
-                            ChipUIData(
-                                text = accountType.title,
-                                icon = accountType.icon,
-                            )
-                        },
-                    balanceAmountValue = balanceAmountValue,
-                    minimumBalanceAmountValue = minimumAccountBalanceAmountValue,
-                    name = name,
-                    visibilityData = EditAccountScreenUIVisibilityData(
-                        balanceAmountTextField = true,
-                        minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
-                        nameTextField = validationState.isCashAccount.not(),
-                        nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
-                        accountTypesRadioGroup = validationState.isCashAccount.not(),
-                    ),
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            EditAccountScreenUIState(
+                isLoading = isLoading,
+                isCtaButtonEnabled = validationState.isCtaButtonEnabled,
+                nameError = validationState.nameError,
+                selectedAccountTypeIndex = selectedAccountTypeIndex.orZero(),
+                accountTypesChipUIDataList = validAccountTypesForNewAccount
+                    .map { accountType ->
+                        ChipUIData(
+                            text = accountType.title,
+                            icon = accountType.icon,
+                        )
+                    },
+                balanceAmountValue = balanceAmountValue,
+                minimumBalanceAmountValue = minimumAccountBalanceAmountValue,
+                name = name,
+                visibilityData = EditAccountScreenUIVisibilityData(
+                    balanceAmountTextField = true,
+                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                    nameTextField = validationState.isCashAccount.not(),
+                    nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
+                    accountTypesRadioGroup = validationState.isCashAccount.not(),
+                ),
+            )
         }
     }
     // endregion
@@ -162,28 +165,19 @@ internal class EditAccountScreenViewModel(
     // region state events
     private fun clearBalanceAmountValue(): Job {
         return updateBalanceAmountValue(
-            updatedBalanceAmountValue = balanceAmountValue
-                .copy(
-                    text = "",
-                ),
+            updatedBalanceAmountValue = "",
         )
     }
 
     private fun clearMinimumAccountBalanceAmountValue(): Job {
         return updateMinimumAccountBalanceAmountValue(
-            updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue
-                .copy(
-                    text = "",
-                ),
+            updatedMinimumAccountBalanceAmountValue = "",
         )
     }
 
     private fun clearName(): Job {
         return updateName(
-            updatedName = name
-                .copy(
-                    text = "",
-                ),
+            updatedName = "",
         )
     }
 
@@ -197,9 +191,9 @@ internal class EditAccountScreenViewModel(
                 currentAccount = currentAccount,
                 validAccountTypesForNewAccount = validAccountTypesForNewAccount,
                 selectedAccountTypeIndex = selectedAccountTypeIndex,
-                balanceAmountValue = balanceAmountValue.text,
-                minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text,
-                name = name.text,
+                balanceAmountValue = balanceAmountValue,
+                minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue,
+                name = name,
             )
             if (isAccountUpdated) {
                 navigateUp()
@@ -211,31 +205,34 @@ internal class EditAccountScreenViewModel(
     }
 
     private fun updateBalanceAmountValue(
-        updatedBalanceAmountValue: TextFieldValue,
+        updatedBalanceAmountValue: String,
         shouldRefresh: Boolean = true,
     ): Job {
         balanceAmountValue = updatedBalanceAmountValue
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateMinimumAccountBalanceAmountValue(
-        updatedMinimumAccountBalanceAmountValue: TextFieldValue,
+        updatedMinimumAccountBalanceAmountValue: String,
         shouldRefresh: Boolean = true,
     ): Job {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateName(
-        updatedName: TextFieldValue,
+        updatedName: String,
         shouldRefresh: Boolean = true,
     ): Job {
         name = updatedName
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -271,28 +268,16 @@ internal class EditAccountScreenViewModel(
             shouldRefresh = false,
         )
         updateName(
-            updatedName = name.copy(
-                text = currentAccountValue.name,
-            ),
+            updatedName = currentAccountValue.name,
             shouldRefresh = false,
         )
         updateBalanceAmountValue(
-            updatedBalanceAmountValue = TextFieldValue(
-                text = currentAccountValue.balanceAmount.value.toString(),
-                selection = TextRange(
-                    index = currentAccountValue.balanceAmount.value.toString().length,
-                ),
-            ),
+            updatedBalanceAmountValue = currentAccountValue.balanceAmount.value.toString(),
             shouldRefresh = false,
         )
         currentAccountValue.minimumAccountBalanceAmount?.let { minimumAccountBalanceAmount ->
             updateMinimumAccountBalanceAmountValue(
-                updatedMinimumAccountBalanceAmountValue = TextFieldValue(
-                    text = minimumAccountBalanceAmount.value.toString(),
-                    selection = TextRange(
-                        index = minimumAccountBalanceAmount.value.toString().length,
-                    ),
-                ),
+                updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmount.value.toString(),
                 shouldRefresh = false,
             )
         }

@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.event
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEvent
 
 @Immutable
@@ -42,6 +41,6 @@ internal sealed class AddCategoryScreenUIEvent : ScreenUIEvent {
     ) : AddCategoryScreenUIEvent()
 
     data class OnTitleUpdated(
-        val updatedTitle: TextFieldValue,
+        val updatedTitle: String,
     ) : AddCategoryScreenUIEvent()
 }

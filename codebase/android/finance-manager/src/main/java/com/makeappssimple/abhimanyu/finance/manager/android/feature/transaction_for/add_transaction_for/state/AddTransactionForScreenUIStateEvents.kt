@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import kotlinx.coroutines.Job
 
@@ -26,5 +25,5 @@ internal class AddTransactionForScreenUIStateEvents(
     val clearTitle: () -> Job,
     val insertTransactionFor: () -> Job,
     val navigateUp: () -> Job,
-    val updateTitle: (updatedTitle: TextFieldValue) -> Job,
+    val updateTitle: (updatedTitle: String) -> Job,
 ) : ScreenUIStateEvents

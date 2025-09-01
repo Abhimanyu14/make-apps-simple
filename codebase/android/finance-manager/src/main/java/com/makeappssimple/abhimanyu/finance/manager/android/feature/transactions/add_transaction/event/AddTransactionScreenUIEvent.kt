@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.event
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEvent
@@ -42,7 +41,7 @@ internal sealed class AddTransactionScreenUIEvent : ScreenUIEvent {
     data object OnSnackbarDismissed : AddTransactionScreenUIEvent()
 
     data class OnAmountUpdated(
-        val updatedAmount: TextFieldValue,
+        val updatedAmount: String,
     ) : AddTransactionScreenUIEvent()
 
     data class OnCategoryUpdated(
@@ -66,7 +65,7 @@ internal sealed class AddTransactionScreenUIEvent : ScreenUIEvent {
     ) : AddTransactionScreenUIEvent()
 
     data class OnTitleUpdated(
-        val updatedTitle: TextFieldValue,
+        val updatedTitle: String,
     ) : AddTransactionScreenUIEvent()
 
     data class OnTransactionDateUpdated(

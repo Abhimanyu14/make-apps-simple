@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
@@ -72,12 +71,15 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region UI state
+    private var addAccountScreenDataValidationState: AddAccountScreenDataValidationState =
+        AddAccountScreenDataValidationState()
+    private var selectedAccountType: AccountType = getSelectedAccountType()
     private var selectedAccountTypeIndex = validAccountTypesForNewAccount
         .indexOf(
             element = AccountType.BANK,
         )
-    private var name = TextFieldValue()
-    private var minimumAccountBalanceAmountValue = TextFieldValue()
+    private var name: String = ""
+    private var minimumAccountBalanceAmountValue: String = ""
     // endregion
 
     // region uiState and uiStateEvents
@@ -102,27 +104,31 @@ internal class AddAccountScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         coroutineScope.launch {
-            val addAccountScreenDataValidationState: AddAccountScreenDataValidationState =
+            addAccountScreenDataValidationState =
                 addAccountScreenDataValidationUseCase(
-                    enteredName = name.text.trim(),
+                    enteredName = name.trim(),
                 )
-            val selectedAccountType: AccountType = getSelectedAccountType()
-            _uiState.update {
-                AddAccountScreenUIState(
-                    selectedAccountType = selectedAccountType,
-                    nameError = addAccountScreenDataValidationState.nameError,
-                    visibilityData = AddAccountScreenUIVisibilityData(
-                        minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
-                        nameTextFieldErrorText = addAccountScreenDataValidationState.nameError != AddAccountScreenNameError.None,
-                    ),
-                    isCtaButtonEnabled = addAccountScreenDataValidationState.isCtaButtonEnabled,
-                    isLoading = isLoading,
-                    selectedAccountTypeIndex = selectedAccountTypeIndex,
-                    accountTypesChipUIDataList = accountTypesChipUIDataList,
-                    minimumAccountBalanceTextFieldValue = minimumAccountBalanceAmountValue,
-                    nameTextFieldValue = name,
-                )
-            }
+            selectedAccountType = getSelectedAccountType()
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            AddAccountScreenUIState(
+                selectedAccountType = selectedAccountType,
+                nameError = addAccountScreenDataValidationState.nameError,
+                visibilityData = AddAccountScreenUIVisibilityData(
+                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                    nameTextFieldErrorText = addAccountScreenDataValidationState.nameError != AddAccountScreenNameError.None,
+                ),
+                isCtaButtonEnabled = addAccountScreenDataValidationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                selectedAccountTypeIndex = selectedAccountTypeIndex,
+                accountTypesChipUIDataList = accountTypesChipUIDataList,
+                minimumAccountBalanceTextFieldValue = minimumAccountBalanceAmountValue,
+                nameTextFieldValue = name,
+            )
         }
     }
     // endregion
@@ -132,9 +138,7 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         return updateMinimumAccountBalanceAmountValue(
-            updatedMinimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.copy(
-                text = "",
-            ),
+            updatedMinimumAccountBalanceAmountValue = "",
             shouldRefresh = shouldRefresh,
         )
     }
@@ -143,9 +147,7 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         return updateName(
-            updatedName = name.copy(
-                text = "",
-            ),
+            updatedName = "",
             shouldRefresh = shouldRefresh,
         )
     }
@@ -155,8 +157,8 @@ internal class AddAccountScreenViewModel(
             startLoading()
             val isAccountInserted = insertAccountUseCase(
                 accountType = getSelectedAccountType(),
-                minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.text.toLongOrZero(),
-                name = name.text,
+                minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValue.toLongOrZero(),
+                name = name,
             ) != -1L
             if (isAccountInserted) {
                 navigateUp()
@@ -168,21 +170,23 @@ internal class AddAccountScreenViewModel(
     }
 
     private fun updateMinimumAccountBalanceAmountValue(
-        updatedMinimumAccountBalanceAmountValue: TextFieldValue,
+        updatedMinimumAccountBalanceAmountValue: String,
         shouldRefresh: Boolean = true,
     ): Job {
         minimumAccountBalanceAmountValue =
             updatedMinimumAccountBalanceAmountValue
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateName(
-        updatedName: TextFieldValue,
+        updatedName: String,
         shouldRefresh: Boolean = true,
     ): Job {
         name = updatedName
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )

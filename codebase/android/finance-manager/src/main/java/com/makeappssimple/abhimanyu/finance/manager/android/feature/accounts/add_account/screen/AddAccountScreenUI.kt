@@ -24,16 +24,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.clearText
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
@@ -56,14 +57,15 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.sc
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroup
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroupData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroupEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextField
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldDataV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEventV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.event.AddAccountScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun AddAccountScreenUI(
@@ -73,6 +75,40 @@ internal fun AddAccountScreenUI(
 ) {
     val nameTextFieldFocusRequester = remember {
         FocusRequester()
+    }
+    val nameTextFieldState = rememberTextFieldState(
+        initialText = uiState.nameTextFieldValue,
+    )
+    val minimumBalanceAmountTextFieldState = rememberTextFieldState(
+        initialText = uiState.minimumAccountBalanceTextFieldValue,
+    )
+
+    LaunchedEffect(
+        key1 = nameTextFieldState,
+    ) {
+        snapshotFlow {
+            nameTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                AddAccountScreenUIEvent.OnNameUpdated(
+                    updatedName = it,
+                )
+            )
+        }
+    }
+
+    LaunchedEffect(
+        key1 = minimumBalanceAmountTextFieldState,
+    ) {
+        snapshotFlow {
+            minimumBalanceAmountTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                AddAccountScreenUIEvent.OnMinimumAccountBalanceAmountValueUpdated(
+                    updatedMinimumAccountBalanceAmountValue = it,
+                )
+            )
+        }
     }
 
     if (!uiState.isLoading) {
@@ -144,7 +180,7 @@ internal fun AddAccountScreenUI(
                     }
                 },
             )
-            MyOutlinedTextField(
+            MyOutlinedTextFieldV2(
                 modifier = Modifier
                     .focusRequester(
                         focusRequester = nameTextFieldFocusRequester,
@@ -154,10 +190,10 @@ internal fun AddAccountScreenUI(
                         horizontal = 16.dp,
                         vertical = 4.dp,
                     ),
-                data = MyOutlinedTextFieldData(
+                data = MyOutlinedTextFieldDataV2(
                     isError = uiState.visibilityData.nameTextFieldErrorText,
                     isLoading = uiState.isLoading,
-                    textFieldValue = uiState.nameTextFieldValue,
+                    textFieldState = nameTextFieldState,
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_name,
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_name,
                     supportingText = {
@@ -172,16 +208,9 @@ internal fun AddAccountScreenUI(
                             )
                         }
                     },
-                    keyboardActions = KeyboardActions(
-                        onNext = {
-                            state.focusManager.moveFocus(
-                                focusDirection = FocusDirection.Down,
-                            )
-                        },
-                        onDone = {
-                            state.focusManager.clearFocus()
-                        },
-                    ),
+                    keyboardActions = {
+                        state.focusManager.clearFocus()
+                    },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done,
@@ -189,16 +218,8 @@ internal fun AddAccountScreenUI(
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
-                            handleUIEvent(AddAccountScreenUIEvent.OnClearNameButtonClick)
-                        }
-
-                        is MyOutlinedTextFieldEvent.OnValueChange -> {
-                            handleUIEvent(
-                                AddAccountScreenUIEvent.OnNameUpdated(
-                                    updatedName = event.updatedValue,
-                                )
-                            )
+                        is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
+                            nameTextFieldState.clearText()
                         }
                     }
                 },
@@ -206,24 +227,22 @@ internal fun AddAccountScreenUI(
             AnimatedVisibility(
                 visible = uiState.visibilityData.minimumBalanceAmountTextField,
             ) {
-                MyOutlinedTextField(
+                MyOutlinedTextFieldV2(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyOutlinedTextFieldData(
+                    data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldValue = uiState.minimumAccountBalanceTextFieldValue,
+                        textFieldState = minimumBalanceAmountTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value,
                         visualTransformation = AmountCommaVisualTransformation(),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                state.focusManager.clearFocus()
-                            },
-                        ),
+                        keyboardActions = {
+                            state.focusManager.clearFocus()
+                        },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.NumberPassword,
                             imeAction = ImeAction.Done,
@@ -231,16 +250,8 @@ internal fun AddAccountScreenUI(
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
-                                handleUIEvent(AddAccountScreenUIEvent.OnClearMinimumAccountBalanceAmountValueButtonClick)
-                            }
-
-                            is MyOutlinedTextFieldEvent.OnValueChange -> {
-                                handleUIEvent(
-                                    AddAccountScreenUIEvent.OnMinimumAccountBalanceAmountValueUpdated(
-                                        updatedMinimumAccountBalanceAmountValue = event.updatedValue,
-                                    )
-                                )
+                            is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
+                                minimumBalanceAmountTextFieldState.clearText()
                             }
                         }
                     },

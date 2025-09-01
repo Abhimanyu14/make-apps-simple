@@ -16,8 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.view_model
 
-import androidx.compose.ui.text.TextRange
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
@@ -66,7 +64,9 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region UI state
-    private var title = TextFieldValue()
+    private var editTransactionForScreenDataValidationState: EditTransactionForScreenDataValidationState =
+        EditTransactionForScreenDataValidationState()
+    private var title = ""
     // endregion
 
     // region uiStateAndStateEvents
@@ -88,19 +88,23 @@ internal class EditTransactionForScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         coroutineScope.launch {
-            val validationState =
+            editTransactionForScreenDataValidationState =
                 editTransactionForScreenDataValidationUseCase(
                     currentTransactionFor = currentTransactionFor,
-                    enteredTitle = title.text,
+                    enteredTitle = title,
                 )
-            _uiState.update {
-                EditTransactionForScreenUIState(
-                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                    isLoading = isLoading,
-                    titleError = validationState.titleError,
-                    title = title,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            EditTransactionForScreenUIState(
+                isCtaButtonEnabled = editTransactionForScreenDataValidationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                titleError = editTransactionForScreenDataValidationState.titleError,
+                title = title,
+            )
         }
     }
     // endregion
@@ -114,19 +118,21 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region state events
-    private fun clearTitle(): Job {
+    private fun clearTitle(
+        shouldRefresh: Boolean = true,
+    ): Job {
         return updateTitle(
-            updatedTitle = title.copy(
-                text = "",
-            )
+            updatedTitle = "",
+            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun updateTitle(
-        updatedTitle: TextFieldValue,
+        updatedTitle: String,
         shouldRefresh: Boolean = true,
     ): Job {
         title = updatedTitle
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )
@@ -139,7 +145,7 @@ internal class EditTransactionForScreenViewModel(
             startLoading()
             val isTransactionForUpdated = updateTransactionForUseCase(
                 currentTransactionFor = currentTransactionForValue,
-                title = title.text,
+                title = title,
             )
             if (isTransactionForUpdated) {
                 navigateUp()
@@ -152,9 +158,7 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region getOriginalTransactionFor
-    private suspend fun getCurrentTransactionFor(
-        shouldRefresh: Boolean = false,
-    ) {
+    private suspend fun getCurrentTransactionFor() {
         val currentTransactionForId = getCurrentTransactionForId()
         currentTransactionFor = getTransactionForByIdUseCase(
             id = currentTransactionForId,
@@ -166,24 +170,13 @@ internal class EditTransactionForScreenViewModel(
                     "Transaction for with id $currentTransactionForId not found"
                 },
             ),
-            shouldRefresh = shouldRefresh,
         )
     }
 
     private fun processCurrentTransactionFor(
         currentTransactionFor: TransactionFor,
-        shouldRefresh: Boolean = false,
     ) {
-        updateTitle(
-            updatedTitle = title
-                .copy(
-                    text = currentTransactionFor.title,
-                    selection = TextRange(
-                        index = currentTransactionFor.title.length,
-                    ),
-                ),
-            shouldRefresh = shouldRefresh,
-        )
+        title = currentTransactionFor.title
     }
     // endregion
 

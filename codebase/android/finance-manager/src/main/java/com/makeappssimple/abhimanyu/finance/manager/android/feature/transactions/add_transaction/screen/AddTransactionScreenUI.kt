@@ -24,13 +24,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
@@ -76,9 +77,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.se
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyHorizontalScrollingSelectionGroup
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyHorizontalScrollingSelectionGroupData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyHorizontalScrollingSelectionGroupEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextField
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldDataV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEventV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyReadOnlyTextField
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyReadOnlyTextFieldData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyReadOnlyTextFieldEvent
@@ -90,6 +91,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
@@ -107,6 +109,42 @@ internal fun AddTransactionScreenUI(
     val addTransactionSuccessfulSnackbarText = stringResource(
         id = R.string.finance_manager_screen_add_or_edit_transaction_add_transaction_successful,
     )
+
+
+    val amountTextFieldState = rememberTextFieldState(
+        initialText = uiState.amount,
+    )
+    val titleTextFieldState = rememberTextFieldState(
+        initialText = uiState.title,
+    )
+
+    LaunchedEffect(
+        key1 = amountTextFieldState,
+    ) {
+        snapshotFlow {
+            amountTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                AddTransactionScreenUIEvent.OnAmountUpdated(
+                    updatedAmount = it,
+                )
+            )
+        }
+    }
+
+    LaunchedEffect(
+        key1 = titleTextFieldState,
+    ) {
+        snapshotFlow {
+            titleTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                AddTransactionScreenUIEvent.OnTitleUpdated(
+                    updatedTitle = it,
+                ),
+            )
+        }
+    }
 
     if (!uiState.isLoading) {
         LaunchedEffect(
@@ -347,7 +385,7 @@ internal fun AddTransactionScreenUI(
                     },
                 )
             }
-            MyOutlinedTextField(
+            MyOutlinedTextFieldV2(
                 modifier = Modifier
                     .fillMaxWidth()
                     .focusRequester(
@@ -357,9 +395,9 @@ internal fun AddTransactionScreenUI(
                         horizontal = 16.dp,
                         vertical = 4.dp,
                     ),
-                data = MyOutlinedTextFieldData(
+                data = MyOutlinedTextFieldDataV2(
                     isLoading = uiState.isLoading,
-                    textFieldValue = uiState.amount,
+                    textFieldState = amountTextFieldState,
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_amount,
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_clear_amount,
                     supportingText = if (uiState.amountErrorText.isNotNullOrBlank()) {
@@ -383,11 +421,9 @@ internal fun AddTransactionScreenUI(
                     },
                     isError = uiState.amountErrorText.isNotNull(),
                     visualTransformation = AmountCommaVisualTransformation(),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            clearFocus()
-                        },
-                    ),
+                    keyboardActions = {
+                        clearFocus()
+                    },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.NumberPassword,
                         imeAction = ImeAction.Done,
@@ -395,16 +431,8 @@ internal fun AddTransactionScreenUI(
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                        is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                             handleUIEvent(AddTransactionScreenUIEvent.OnClearAmountButtonClick)
-                        }
-
-                        is MyOutlinedTextFieldEvent.OnValueChange -> {
-                            handleUIEvent(
-                                AddTransactionScreenUIEvent.OnAmountUpdated(
-                                    updatedAmount = event.updatedValue,
-                                )
-                            )
                         }
                     }
                 },
@@ -437,23 +465,21 @@ internal fun AddTransactionScreenUI(
             AnimatedVisibility(
                 visible = uiState.uiVisibilityState.isTitleTextFieldVisible,
             ) {
-                MyOutlinedTextField(
+                MyOutlinedTextFieldV2(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyOutlinedTextFieldData(
+                    data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldValue = uiState.title,
+                        textFieldState = titleTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_title,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_clear_title,
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                clearFocus()
-                            },
-                        ),
+                        keyboardActions = {
+                            clearFocus()
+                        },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Done,
@@ -461,16 +487,8 @@ internal fun AddTransactionScreenUI(
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                            is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                                 handleUIEvent(AddTransactionScreenUIEvent.OnClearTitleButtonClick)
-                            }
-
-                            is MyOutlinedTextFieldEvent.OnValueChange -> {
-                                handleUIEvent(
-                                    AddTransactionScreenUIEvent.OnTitleUpdated(
-                                        updatedTitle = event.updatedValue,
-                                    ),
-                                )
                             }
                         }
                     },
@@ -497,9 +515,7 @@ internal fun AddTransactionScreenUI(
                                 clearFocus()
                                 handleUIEvent(
                                     AddTransactionScreenUIEvent.OnTitleUpdated(
-                                        updatedTitle = uiState.title.copy(
-                                            text = uiState.titleSuggestions[event.index],
-                                        ),
+                                        updatedTitle = uiState.titleSuggestions[event.index],
                                     ),
                                 )
                             }

@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -86,6 +87,56 @@ public fun MyOutlinedTextField(
             keyboardActions = data.keyboardActions,
             keyboardOptions = data.keyboardOptions,
             singleLine = true,
+            modifier = modifier,
+        )
+    }
+}
+
+@Composable
+public fun MyOutlinedTextFieldV2(
+    modifier: Modifier = Modifier,
+    data: MyOutlinedTextFieldDataV2,
+    handleEvent: (event: MyOutlinedTextFieldEventV2) -> Unit = {},
+) {
+    if (data.isLoading) {
+        MyOutlinedTextFieldLoadingUI(
+            modifier = modifier,
+        )
+    } else {
+        OutlinedTextField(
+            state = data.textFieldState,
+            label = {
+                MyOutlinedTextFieldLabelText(
+                    textStringResourceId = data.labelTextStringResourceId,
+                )
+            },
+            trailingIcon = {
+                AnimatedVisibility(
+                    visible = data.textFieldState.text.toString()
+                        .isNotNullOrBlank(),
+                    enter = fadeIn(),
+                    exit = fadeOut(),
+                ) {
+                    MyIconButton(
+                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                        imageVector = MyIcons.Clear,
+                        contentDescriptionStringResourceId = data.trailingIconContentDescriptionTextStringResourceId,
+                        onClick = {
+                            handleEvent(MyOutlinedTextFieldEventV2.OnClickTrailingIcon)
+                        },
+                        modifier = Modifier
+                            .padding(
+                                end = 4.dp,
+                            ),
+                    )
+                }
+            },
+            supportingText = data.supportingText,
+            isError = data.isError,
+            // visualTransformation = data.visualTransformation,
+            onKeyboardAction = data.keyboardActions,
+            keyboardOptions = data.keyboardOptions,
+            lineLimits = TextFieldLineLimits.SingleLine,
             modifier = modifier,
         )
     }

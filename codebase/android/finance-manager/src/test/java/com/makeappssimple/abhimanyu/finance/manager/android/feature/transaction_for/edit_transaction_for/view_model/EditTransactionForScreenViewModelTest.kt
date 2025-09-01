@@ -18,7 +18,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
@@ -90,7 +89,7 @@ internal class EditTransactionForScreenViewModelTest {
             result.titleError.shouldBe(
                 expected = EditTransactionForScreenTitleError.None,
             )
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
         }
     }
     // endregion
@@ -100,21 +99,22 @@ internal class EditTransactionForScreenViewModelTest {
     fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "   "
-            val updatedValue = TextFieldValue(
-                text = updatedTitle,
-            )
             setUpViewModel()
             editTransactionForScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 editTransactionForScreenViewModel.initViewModel()
                 val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.title.text.shouldBe(
+                fetchDataCompletedState.title.shouldBe(
                     expected = testDependencies.testTransactionForTitle1,
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -132,17 +132,19 @@ internal class EditTransactionForScreenViewModelTest {
             setUpViewModel()
             editTransactionForScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 editTransactionForScreenViewModel.initViewModel()
                 val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.title.text.shouldBe(
+                fetchDataCompletedState.title.shouldBe(
                     expected = testDependencies.testTransactionForTitle1,
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    editTransactionForScreenViewModel.uiState.value.title.copy(
-                        text = updatedTitle,
-                    )
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -157,24 +159,24 @@ internal class EditTransactionForScreenViewModelTest {
     fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "updated-title"
-            val updatedValue = TextFieldValue(
-                text = updatedTitle,
-            )
             setUpViewModel()
             editTransactionForScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 editTransactionForScreenViewModel.initViewModel()
                 val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.title.text.shouldBe(
+                fetchDataCompletedState.title.shouldBe(
                     expected = testDependencies.testTransactionForTitle1,
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue
+                    updatedTitle
                 )
 
                 val result = awaitItem()
+                result.title.shouldBe(
+                    expected = updatedTitle,
+                )
                 result.isCtaButtonEnabled.shouldBeTrue()
                 result.titleError.shouldBe(
                     expected = EditTransactionForScreenTitleError.None,
@@ -189,13 +191,13 @@ internal class EditTransactionForScreenViewModelTest {
         setUpViewModel()
         editTransactionForScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             initialState.isLoading.shouldBeTrue()
 
             editTransactionForScreenViewModel.initViewModel()
 
             val fetchDataCompletedState = awaitItem()
-            fetchDataCompletedState.title.text.shouldBe(
+            fetchDataCompletedState.title.shouldBe(
                 expected = testDependencies.testTransactionForTitle1,
             )
             fetchDataCompletedState.isLoading.shouldBeFalse()
@@ -207,25 +209,22 @@ internal class EditTransactionForScreenViewModelTest {
     @Test
     fun updateTitle_shouldUpdateValue() = testDependencies.runTestWithTimeout {
         val updatedTitle = "updated-title"
-        val updatedValue = TextFieldValue(
-            text = updatedTitle,
-        )
         setUpViewModel()
         editTransactionForScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             editTransactionForScreenViewModel.initViewModel()
             val fetchDataCompletedState = awaitItem()
-            fetchDataCompletedState.title.text.shouldBe(
+            fetchDataCompletedState.title.shouldBe(
                 expected = testDependencies.testTransactionForTitle1,
             )
 
             editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                updatedValue
+                updatedTitle
             )
 
             val result = awaitItem()
-            result.title.text.shouldBe(
+            result.title.shouldBe(
                 expected = updatedTitle,
             )
         }
@@ -236,17 +235,17 @@ internal class EditTransactionForScreenViewModelTest {
         setUpViewModel()
         editTransactionForScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             editTransactionForScreenViewModel.initViewModel()
             val fetchDataCompletedState = awaitItem()
-            fetchDataCompletedState.title.text.shouldBe(
+            fetchDataCompletedState.title.shouldBe(
                 expected = testDependencies.testTransactionForTitle1,
             )
 
             editTransactionForScreenViewModel.uiStateEvents.clearTitle()
 
             val result = awaitItem()
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
         }
     }
     // endregion
@@ -256,9 +255,6 @@ internal class EditTransactionForScreenViewModelTest {
     fun updateTransactionFor_shouldUpdateAndNavigateUp() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "updated-title"
-            val updatedValue = TextFieldValue(
-                text = updatedTitle,
-            )
             setUpViewModel()
             turbineScope {
                 val navigationCommandTurbine =
@@ -274,17 +270,17 @@ internal class EditTransactionForScreenViewModelTest {
                         ?: -1L
 
                 val initialState = uiStateTurbine.awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 editTransactionForScreenViewModel.initViewModel()
                 val fetchDataCompletedState = uiStateTurbine.awaitItem()
-                fetchDataCompletedState.title.text.shouldBe(
+                fetchDataCompletedState.title.shouldBe(
                     expected = testDependencies.testTransactionForTitle1,
                 )
 
                 editTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedValue
+                    updatedTitle
                 )
-                uiStateTurbine.awaitItem().title.text.shouldBe(
+                uiStateTurbine.awaitItem().title.shouldBe(
                     expected = updatedTitle,
                 )
                 editTransactionForScreenViewModel.uiStateEvents.updateTransactionFor()

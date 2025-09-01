@@ -88,7 +88,7 @@ internal class EditCategoryScreenViewModelTest {
             result.transactionTypesChipUIData.shouldBeEmpty()
             result.emoji.shouldBeEmpty()
             result.emojiSearchText.shouldBeEmpty()
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
         }
     }
     // endregion
@@ -97,16 +97,19 @@ internal class EditCategoryScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
+            val updatedTitle = "   "
             editCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    fetchDataCompletedState.title.copy(
-                        text = "   ",
-                    )
+                    updatedTitle
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -120,19 +123,20 @@ internal class EditCategoryScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
+            val updatedTitle = "test-title"
             editCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    fetchDataCompletedState.title.copy(
-                        text = "test-title",
-                    )
+                    updatedTitle
                 )
-
                 val result = awaitItem()
+                result.title.shouldBe(
+                    expected = updatedTitle,
+                )
                 result.isCtaButtonEnabled.shouldBeTrue()
                 result.titleError.shouldBe(
                     expected = EditCategoryScreenTitleError.None,
@@ -143,17 +147,20 @@ internal class EditCategoryScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_categoryAlreadyExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
+            val updatedTitle = testDependencies.testCategoryTitle2
             editCategoryScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.title.text.shouldBeEmpty()
+                initialState.title.shouldBeEmpty()
                 initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
                 editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    fetchDataCompletedState.title.copy(
-                        text = testDependencies.testCategoryTitle2,
-                    )
+                    updatedTitle,
+                )
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.title.shouldBe(
+                    expected = updatedTitle,
                 )
 
                 val result = awaitItem()
@@ -182,7 +189,7 @@ internal class EditCategoryScreenViewModelTest {
                 result.emoji.shouldBe(
                     expected = testDependencies.testCategoryEntity1.emoji,
                 )
-                result.title.text.shouldBe(
+                result.title.shouldBe(
                     expected = testDependencies.testCategoryTitle1,
                 )
             }
@@ -195,17 +202,17 @@ internal class EditCategoryScreenViewModelTest {
         editCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
             fetchDataCompletedState.isLoading.shouldBeFalse()
-            fetchDataCompletedState.title.text.shouldBe(
+            fetchDataCompletedState.title.shouldBe(
                 expected = testDependencies.testCategoryTitle1,
             )
 
             editCategoryScreenViewModel.uiStateEvents.clearTitle()
 
             val result = awaitItem()
-            result.title.text.shouldBeEmpty()
+            result.title.shouldBeEmpty()
         }
     }
 
@@ -335,21 +342,19 @@ internal class EditCategoryScreenViewModelTest {
         editCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            initialState.title.text.shouldBeEmpty()
+            initialState.title.shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
             fetchDataCompletedState.isLoading.shouldBeFalse()
-            fetchDataCompletedState.title.text.shouldBe(
+            fetchDataCompletedState.title.shouldBe(
                 expected = testDependencies.testCategoryTitle1,
             )
 
             editCategoryScreenViewModel.uiStateEvents.updateTitle(
-                fetchDataCompletedState.title.copy(
-                    text = updatedTestTitle,
-                )
+                updatedTestTitle
             )
 
             val result = awaitItem()
-            result.title.text.shouldBe(
+            result.title.shouldBe(
                 expected = updatedTestTitle,
             )
         }

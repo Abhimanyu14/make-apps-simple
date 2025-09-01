@@ -190,7 +190,9 @@ internal class EditTransactionScreenViewModelTest {
             )
 
             val fetchDataCompletedState = awaitItem()
-            fetchDataCompletedState.accountFrom.shouldBeNull()
+            fetchDataCompletedState.accountFrom.shouldBe(
+                expected = testDependencies.testAccountEntity1.asExternalModel(),
+            )
             fetchDataCompletedState.accountFromText.shouldBe(
                 expected = AccountFromText.Account,
             )
@@ -208,11 +210,13 @@ internal class EditTransactionScreenViewModelTest {
                 expected = EditTransactionScreenUiVisibilityState.Expense,
             )
             fetchDataCompletedState.isBottomSheetVisible.shouldBeFalse()
-            fetchDataCompletedState.isCtaButtonEnabled.shouldBeFalse()
+            fetchDataCompletedState.isCtaButtonEnabled.shouldBeTrue()
             fetchDataCompletedState.isLoading.shouldBeFalse()
             fetchDataCompletedState.isTransactionDatePickerDialogVisible.shouldBeFalse()
             fetchDataCompletedState.isTransactionTimePickerDialogVisible.shouldBeFalse()
-            fetchDataCompletedState.category.shouldBeNull()
+            fetchDataCompletedState.category.shouldBe(
+                expected = testDependencies.testCategoryEntity1.asExternalModel(),
+            )
             fetchDataCompletedState.selectedTransactionForIndex.shouldBeZero()
             fetchDataCompletedState.selectedTransactionTypeIndex.shouldBe(
                 expected = 1,
@@ -237,21 +241,26 @@ internal class EditTransactionScreenViewModelTest {
 //            fetchDataCompletedState.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
             fetchDataCompletedState.titleSuggestions.shouldBeEmpty()
             fetchDataCompletedState.currentLocalDate.shouldBe(
-                expected = LocalDate.of(2025, 8, 30),
+                expected = LocalDate.of(2025, 9, 1),
             )
             fetchDataCompletedState.transactionDate.shouldBe(
-                expected = LocalDate.of(2025, 8, 30),
+                expected = LocalDate.of(2024, 5, 20),
             )
 //            fetchDataCompletedState.transactionTime.shouldBe(
 //                expected = LocalTime.of(16, 15, 10)
 //            )
             fetchDataCompletedState.amountErrorText.shouldBeNull()
-            fetchDataCompletedState.amount.text.shouldBeEmpty()
-            fetchDataCompletedState.title.text.shouldBeEmpty()
+            fetchDataCompletedState.amount.text.shouldBe(
+                expected = testDependencies.testTransactionEntity1.amount.asExternalModel().value.toString(),
+            )
+            fetchDataCompletedState.title.text.shouldBe(
+                expected = testDependencies.testTransactionEntity1.asExternalModel().title,
+            )
             fetchDataCompletedState.selectedTransactionType.shouldBe(
                 expected = TransactionType.EXPENSE,
             )
         }
+        
     }
     // endregion
 }

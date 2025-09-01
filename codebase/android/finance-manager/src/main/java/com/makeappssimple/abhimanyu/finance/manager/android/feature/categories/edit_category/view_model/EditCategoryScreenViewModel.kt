@@ -16,8 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.view_model
 
-import androidx.compose.ui.text.TextRange
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -86,7 +84,9 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region UI state
-    private var title = TextFieldValue()
+    private var editCategoryScreenDataValidationState: EditCategoryScreenDataValidationState =
+        EditCategoryScreenDataValidationState()
+    private var title: String = ""
     private var emojiSearchText = ""
     private var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
     private var selectedTransactionTypeIndex = validTransactionTypes.indexOf(
@@ -120,26 +120,30 @@ internal class EditCategoryScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         coroutineScope.launch {
-            val editCategoryScreenDataValidationState =
+            editCategoryScreenDataValidationState =
                 editCategoryScreenDataValidationUseCase(
-                    enteredTitle = title.text.trim(),
+                    enteredTitle = title.trim(),
                     currentCategory = currentCategory,
                 )
-            _uiState.update {
-                EditCategoryScreenUIState(
-                    screenBottomSheetType = screenBottomSheetType,
-                    isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
-                    isCtaButtonEnabled = editCategoryScreenDataValidationState.isCtaButtonEnabled,
-                    isLoading = isLoading,
-                    isSupportingTextVisible = editCategoryScreenDataValidationState.titleError != EditCategoryScreenTitleError.None,
-                    titleError = editCategoryScreenDataValidationState.titleError,
-                    selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                    transactionTypesChipUIData = transactionTypesChipUIData,
-                    emoji = emoji,
-                    emojiSearchText = emojiSearchText,
-                    title = title,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            EditCategoryScreenUIState(
+                screenBottomSheetType = screenBottomSheetType,
+                isBottomSheetVisible = screenBottomSheetType != EditCategoryScreenBottomSheetType.None,
+                isCtaButtonEnabled = editCategoryScreenDataValidationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                isSupportingTextVisible = editCategoryScreenDataValidationState.titleError != EditCategoryScreenTitleError.None,
+                titleError = editCategoryScreenDataValidationState.titleError,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                transactionTypesChipUIData = transactionTypesChipUIData,
+                emoji = emoji,
+                emojiSearchText = emojiSearchText,
+                title = title,
+            )
         }
     }
     // endregion
@@ -182,12 +186,7 @@ internal class EditCategoryScreenViewModel(
             shouldRefresh = shouldRefresh,
         )
         updateTitle(
-            updatedTitle = title.copy(
-                text = currentCategory.title,
-                selection = TextRange(
-                    index = currentCategory.title.length,
-                ),
-            ),
+            updatedTitle = currentCategory.title,
             shouldRefresh = shouldRefresh,
         )
         updateEmoji(
@@ -200,9 +199,7 @@ internal class EditCategoryScreenViewModel(
     // region state events
     private fun clearTitle(): Job {
         return updateTitle(
-            updatedTitle = title.copy(
-                text = "",
-            ),
+            updatedTitle = "",
         )
     }
 
@@ -222,7 +219,7 @@ internal class EditCategoryScreenViewModel(
                     },
                 ),
                 emoji = emoji,
-                title = title.text,
+                title = title,
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
             ) == 1
             if (isCategoryUpdated) {
@@ -275,10 +272,13 @@ internal class EditCategoryScreenViewModel(
     }
 
     private fun updateTitle(
-        updatedTitle: TextFieldValue,
+        updatedTitle: String,
         shouldRefresh: Boolean = true,
     ): Job {
         title = updatedTitle
+        if (shouldRefresh) {
+            updateUiState()
+        }
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )

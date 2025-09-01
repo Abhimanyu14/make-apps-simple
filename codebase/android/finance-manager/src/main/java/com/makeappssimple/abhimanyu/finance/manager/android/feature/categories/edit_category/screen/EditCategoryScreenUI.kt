@@ -24,15 +24,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -64,9 +64,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.sc
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroup
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroupData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroupEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextField
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldDataV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEventV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.event.EditCategoryScreenUIEvent
@@ -74,6 +74,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.e
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun EditCategoryScreenUI(
@@ -81,6 +82,24 @@ internal fun EditCategoryScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: EditCategoryScreenUIEvent) -> Unit = {},
 ) {
+    val titleTextFieldState = rememberTextFieldState(
+        initialText = uiState.title,
+    )
+
+    LaunchedEffect(
+        key1 = titleTextFieldState,
+    ) {
+        snapshotFlow {
+            titleTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                EditCategoryScreenUIEvent.OnTitleUpdated(
+                    updatedTitle = it,
+                )
+            )
+        }
+    }
+
     if (!uiState.isLoading) {
         LaunchedEffect(
             key1 = Unit,
@@ -219,7 +238,7 @@ internal fun EditCategoryScreenUI(
                         }
                     },
                 )
-                MyOutlinedTextField(
+                MyOutlinedTextFieldV2(
                     modifier = Modifier
                         .fillMaxWidth()
                         .focusRequester(
@@ -228,9 +247,9 @@ internal fun EditCategoryScreenUI(
                         .padding(
                             start = 8.dp,
                         ),
-                    data = MyOutlinedTextFieldData(
+                    data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldValue = uiState.title,
+                        textFieldState = titleTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_category_title,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_category_clear_title,
                         supportingText = if (uiState.isSupportingTextVisible) {
@@ -249,16 +268,9 @@ internal fun EditCategoryScreenUI(
                         } else {
                             null
                         },
-                        keyboardActions = KeyboardActions(
-                            onNext = {
-                                state.focusManager.moveFocus(
-                                    focusDirection = FocusDirection.Down,
-                                )
-                            },
-                            onDone = {
-                                state.focusManager.clearFocus()
-                            },
-                        ),
+                        keyboardActions = {
+                            state.focusManager.clearFocus()
+                        },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Done,
@@ -266,16 +278,8 @@ internal fun EditCategoryScreenUI(
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                            is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                                 handleUIEvent(EditCategoryScreenUIEvent.OnClearTitleButtonClick)
-                            }
-
-                            is MyOutlinedTextFieldEvent.OnValueChange -> {
-                                handleUIEvent(
-                                    EditCategoryScreenUIEvent.OnTitleUpdated(
-                                        updatedTitle = event.updatedValue,
-                                    )
-                                )
                             }
                         }
                     },

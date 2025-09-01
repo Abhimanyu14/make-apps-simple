@@ -32,11 +32,7 @@ internal class EditAccountScreenUIEventHandler internal constructor(
             }
 
             is EditAccountScreenUIEvent.OnBalanceAmountValueUpdated -> {
-                uiStateEvents.updateBalanceAmountValue(
-                    uiEvent.updatedBalanceAmountValue.copy(
-                        text = uiEvent.updatedBalanceAmountValue.text.filterDigits(),
-                    )
-                )
+                uiStateEvents.updateBalanceAmountValue(uiEvent.updatedBalanceAmountValue.filterDigits())
             }
 
             is EditAccountScreenUIEvent.OnNavigationBackButtonClick -> {}

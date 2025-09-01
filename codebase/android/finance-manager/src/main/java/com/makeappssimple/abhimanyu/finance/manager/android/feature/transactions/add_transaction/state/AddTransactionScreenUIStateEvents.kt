@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
@@ -36,14 +35,14 @@ internal class AddTransactionScreenUIStateEvents(
     val resetScreenSnackbarType: () -> Job,
     val updateAccountFrom: (updatedAccountFrom: Account?) -> Job,
     val updateAccountTo: (updatedAccountTo: Account?) -> Job,
-    val updateAmount: (updatedAmount: TextFieldValue) -> Job,
+    val updateAmount: (updatedAmount: String) -> Job,
     val updateCategory: (updatedCategory: Category?) -> Job,
     val updateIsTransactionDatePickerDialogVisible: (Boolean) -> Job,
     val updateIsTransactionTimePickerDialogVisible: (Boolean) -> Job,
     val updateScreenBottomSheetType: (AddTransactionScreenBottomSheetType) -> Job,
     val updateSelectedTransactionForIndex: (updatedSelectedTransactionForIndex: Int) -> Job,
     val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
-    val updateTitle: (updatedTitle: TextFieldValue) -> Job,
+    val updateTitle: (updatedTitle: String) -> Job,
     val updateTransactionDate: (updatedTransactionDate: LocalDate) -> Job,
     val updateTransactionTime: (updatedTransactionTime: LocalTime) -> Job,
 ) : ScreenUIStateEvents

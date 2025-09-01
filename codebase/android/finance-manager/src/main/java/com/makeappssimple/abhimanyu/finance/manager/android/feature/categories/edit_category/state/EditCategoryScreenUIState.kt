@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
@@ -37,7 +36,7 @@ internal data class EditCategoryScreenUIState(
     val transactionTypesChipUIData: ImmutableList<ChipUIData> = persistentListOf(),
     val emoji: String = "",
     val emojiSearchText: String = "",
-    val title: TextFieldValue = TextFieldValue(),
+    val title: String = "",
 ) : ScreenUIState
 
 public sealed class EditCategoryScreenTitleError {

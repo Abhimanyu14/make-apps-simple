@@ -26,3 +26,8 @@ public sealed class MyOutlinedTextFieldEvent {
         val updatedValue: TextFieldValue,
     ) : MyOutlinedTextFieldEvent()
 }
+
+@Immutable
+public sealed class MyOutlinedTextFieldEventV2 {
+    public data object OnClickTrailingIcon : MyOutlinedTextFieldEventV2()
+}

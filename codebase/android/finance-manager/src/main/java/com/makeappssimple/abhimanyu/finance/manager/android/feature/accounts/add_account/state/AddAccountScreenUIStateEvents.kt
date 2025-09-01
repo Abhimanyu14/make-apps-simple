@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
 import kotlinx.coroutines.Job
 
@@ -27,7 +26,7 @@ internal class AddAccountScreenUIStateEvents(
     val clearName: () -> Job,
     val insertAccount: () -> Job,
     val navigateUp: () -> Job,
-    val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: TextFieldValue) -> Job,
-    val updateName: (updatedName: TextFieldValue) -> Job,
+    val updateMinimumAccountBalanceAmountValue: (updatedMinimumAccountBalanceAmountValue: String) -> Job,
+    val updateName: (updatedName: String) -> Job,
     val updateSelectedAccountTypeIndex: (updatedIndex: Int) -> Job,
 ) : ScreenUIStateEvents

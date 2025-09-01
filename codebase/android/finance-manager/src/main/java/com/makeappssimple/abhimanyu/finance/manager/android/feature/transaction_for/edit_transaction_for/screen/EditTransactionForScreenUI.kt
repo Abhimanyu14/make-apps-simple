@@ -23,12 +23,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
@@ -49,16 +50,16 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.sa
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.save_button.SaveButtonData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.save_button.SaveButtonEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.scaffold.MyScaffold
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextField
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldDataV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEventV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.extensions.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.event.EditTransactionForScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun EditTransactionForScreenUI(
@@ -66,6 +67,24 @@ internal fun EditTransactionForScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: EditTransactionForScreenUIEvent) -> Unit = {},
 ) {
+    val titleTextFieldState = rememberTextFieldState(
+        initialText = uiState.title,
+    )
+
+    LaunchedEffect(
+        key1 = titleTextFieldState,
+    ) {
+        snapshotFlow {
+            titleTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                EditTransactionForScreenUIEvent.OnTitleUpdated(
+                    updatedTitle = it,
+                )
+            )
+        }
+    }
+
     if (!uiState.isLoading) {
         LaunchedEffect(
             key1 = Unit,
@@ -105,10 +124,10 @@ internal fun EditTransactionForScreenUI(
                     state = rememberScrollState(),
                 ),
         ) {
-            MyOutlinedTextField(
-                data = MyOutlinedTextFieldData(
+            MyOutlinedTextFieldV2(
+                data = MyOutlinedTextFieldDataV2(
                     isLoading = uiState.isLoading,
-                    textFieldValue = uiState.title.orEmpty(),
+                    textFieldState = titleTextFieldState,
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_title,
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_clear_title,
                     supportingText = {
@@ -124,12 +143,10 @@ internal fun EditTransactionForScreenUI(
                             )
                         }
                     },
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            state.focusManager.clearFocus()
-                            handleUIEvent(EditTransactionForScreenUIEvent.OnCtaButtonClick)
-                        },
-                    ),
+                    keyboardActions = {
+                        state.focusManager.clearFocus()
+                        handleUIEvent(EditTransactionForScreenUIEvent.OnCtaButtonClick)
+                    },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done,
@@ -137,16 +154,8 @@ internal fun EditTransactionForScreenUI(
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                        is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                             handleUIEvent(EditTransactionForScreenUIEvent.OnClearTitleButtonClick)
-                        }
-
-                        is MyOutlinedTextFieldEvent.OnValueChange -> {
-                            handleUIEvent(
-                                EditTransactionForScreenUIEvent.OnTitleUpdated(
-                                    updatedTitle = event.updatedValue,
-                                )
-                            )
                         }
                     }
                 },

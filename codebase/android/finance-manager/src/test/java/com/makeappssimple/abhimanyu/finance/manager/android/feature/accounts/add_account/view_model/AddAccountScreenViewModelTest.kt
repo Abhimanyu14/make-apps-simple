@@ -18,7 +18,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
@@ -84,8 +83,8 @@ internal class AddAccountScreenViewModelTest {
             result.isLoading.shouldBeTrue()
             result.selectedAccountTypeIndex.shouldBeZero()
             result.accountTypesChipUIDataList.shouldBeEmpty()
-            result.minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
-            result.nameTextFieldValue.text.shouldBeEmpty()
+            result.minimumAccountBalanceTextFieldValue.shouldBeEmpty()
+            result.nameTextFieldValue.shouldBeEmpty()
         }
     }
     // endregion
@@ -95,13 +94,10 @@ internal class AddAccountScreenViewModelTest {
     fun updateUiStateAndStateEvents_nameIsBlank_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedName = "   "
-            val updatedValue = TextFieldValue(
-                text = updatedName,
-            )
             addAccountScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
 
                 val result = awaitItem()
                 result.isCtaButtonEnabled.shouldBeFalse()
@@ -115,13 +111,14 @@ internal class AddAccountScreenViewModelTest {
     fun updateUiStateAndStateEvents_nameIsCash_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedName = "Cash"
-            val updatedValue = TextFieldValue(
-                text = updatedName,
-            )
             addAccountScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.nameTextFieldValue.shouldBe(
+                    expected = updatedName,
+                )
 
                 val result = awaitItem()
                 result.isCtaButtonEnabled.shouldBeFalse()
@@ -135,13 +132,14 @@ internal class AddAccountScreenViewModelTest {
     fun updateUiStateAndStateEvents_nameIsCashWithSpaces_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedName = "  Cash   "
-            val updatedValue = TextFieldValue(
-                text = updatedName,
-            )
             addAccountScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.nameTextFieldValue.shouldBe(
+                    expected = updatedName,
+                )
 
                 val result = awaitItem()
                 result.isCtaButtonEnabled.shouldBeFalse()
@@ -154,20 +152,21 @@ internal class AddAccountScreenViewModelTest {
     @Test
     fun updateUiStateAndStateEvents_accountAlreadyExists_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
+            val updatedName = testDependencies.testAccountName1
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
-                addAccountScreenViewModel.uiStateEvents.updateName(
-                    addAccountScreenViewModel.uiState.value.nameTextFieldValue.copy(
-                        text = testDependencies.testAccountName1,
-                    )
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.nameTextFieldValue.shouldBe(
+                    expected = updatedName,
                 )
 
                 val result = awaitItem()
-                result.nameTextFieldValue.text.shouldBe(
+                result.nameTextFieldValue.shouldBe(
                     expected = testDependencies.testAccountName1,
                 )
                 result.isCtaButtonEnabled.shouldBeFalse()
@@ -181,13 +180,14 @@ internal class AddAccountScreenViewModelTest {
     fun updateUiStateAndStateEvents_accountIsValid_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
             val updatedName = "CUB"
-            val updatedValue = TextFieldValue(
-                text = updatedName,
-            )
             addAccountScreenViewModel.uiState.test {
                 awaitItem().isCtaButtonEnabled.shouldBeFalse()
 
-                addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+                addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
+                val textFieldStateUpdate = awaitItem()
+                textFieldStateUpdate.nameTextFieldValue.shouldBe(
+                    expected = updatedName,
+                )
 
                 val result = awaitItem()
                 result.isCtaButtonEnabled.shouldBeTrue()
@@ -203,40 +203,34 @@ internal class AddAccountScreenViewModelTest {
     fun clearMinimumAccountBalanceAmountValue_shouldClearText() =
         testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
-            val updatedValue = TextFieldValue(
-                text = updatedMinimumAccountBalanceAmountValue,
-            )
             addAccountScreenViewModel.uiState.test {
-                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
+                awaitItem().minimumAccountBalanceTextFieldValue.shouldBeEmpty()
                 addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
-                    updatedValue
+                    updatedMinimumAccountBalanceAmountValue
                 )
-                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBe(
+                awaitItem().minimumAccountBalanceTextFieldValue.shouldBe(
                     expected = updatedMinimumAccountBalanceAmountValue,
                 )
 
                 addAccountScreenViewModel.uiStateEvents.clearMinimumAccountBalanceAmountValue()
 
-                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
+                awaitItem().minimumAccountBalanceTextFieldValue.shouldBeEmpty()
             }
         }
 
     @Test
     fun clearName_shouldClearText() = testDependencies.runTestWithTimeout {
         val updatedName = "test-account"
-        val updatedValue = TextFieldValue(
-            text = updatedName,
-        )
         addAccountScreenViewModel.uiState.test {
-            awaitItem().nameTextFieldValue.text.shouldBeEmpty()
-            addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
-            awaitItem().nameTextFieldValue.text.shouldBe(
+            awaitItem().nameTextFieldValue.shouldBeEmpty()
+            addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
+            awaitItem().nameTextFieldValue.shouldBe(
                 expected = updatedName,
             )
 
             addAccountScreenViewModel.uiStateEvents.clearName()
 
-            awaitItem().nameTextFieldValue.text.shouldBeEmpty()
+            awaitItem().nameTextFieldValue.shouldBeEmpty()
         }
     }
 
@@ -256,20 +250,16 @@ internal class AddAccountScreenViewModelTest {
                         ?: -1L
 
                 val testAccountId = 1
-                val testAccountName = TextFieldValue(
-                    text = "test-bank",
-                )
-                val testMinimumAccountBalanceAmount = TextFieldValue(
-                    text = "1000",
-                )
+                val testAccountName = "test-bank"
+                val testMinimumAccountBalanceAmount = "1000"
                 val testAccountType = AccountType.BANK
                 val testAccount = Account(
                     id = testAccountId,
                     type = testAccountType,
                     minimumAccountBalanceAmount = Amount(
-                        value = testMinimumAccountBalanceAmount.text.toLongOrZero(),
+                        value = testMinimumAccountBalanceAmount.toLongOrZero(),
                     ),
-                    name = testAccountName.text,
+                    name = testAccountName,
                 )
                 uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
                 uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
@@ -318,19 +308,15 @@ internal class AddAccountScreenViewModelTest {
                         ?: -1L
 
                 val testAccountId = 1
-                val testAccountName = TextFieldValue(
-                    text = "test-wallet",
-                )
-                val testMinimumAccountBalanceAmount = TextFieldValue(
-                    text = "1000",
-                )
+                val testAccountName = "test-wallet"
+                val testMinimumAccountBalanceAmount = "1000"
                 val testAccountType = AccountType.E_WALLET
                 val testSelectedAccountTypeIndex = 1
                 val testAccount = Account(
                     id = testAccountId,
                     type = testAccountType,
                     minimumAccountBalanceAmount = null,
-                    name = testAccountName.text,
+                    name = testAccountName,
                 )
                 uiStateTurbine.awaitItem().isLoading.shouldBeTrue()
                 uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
@@ -371,17 +357,14 @@ internal class AddAccountScreenViewModelTest {
     fun updateMinimumAccountBalanceAmountValue_shouldUpdateValue() =
         testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
-            val updatedValue = TextFieldValue(
-                text = updatedMinimumAccountBalanceAmountValue,
-            )
             addAccountScreenViewModel.uiState.test {
-                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBeEmpty()
+                awaitItem().minimumAccountBalanceTextFieldValue.shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
-                    updatedValue
+                    updatedMinimumAccountBalanceAmountValue
                 )
 
-                awaitItem().minimumAccountBalanceTextFieldValue.text.shouldBe(
+                awaitItem().minimumAccountBalanceTextFieldValue.shouldBe(
                     expected = updatedMinimumAccountBalanceAmountValue,
                 )
             }
@@ -390,15 +373,12 @@ internal class AddAccountScreenViewModelTest {
     @Test
     fun updateName_shouldUpdateValue() = testDependencies.runTestWithTimeout {
         val updatedName = "test-account"
-        val updatedValue = TextFieldValue(
-            text = updatedName,
-        )
         addAccountScreenViewModel.uiState.test {
-            awaitItem().nameTextFieldValue.text.shouldBeEmpty()
+            awaitItem().nameTextFieldValue.shouldBeEmpty()
 
-            addAccountScreenViewModel.uiStateEvents.updateName(updatedValue)
+            addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
 
-            awaitItem().nameTextFieldValue.text.shouldBe(
+            awaitItem().nameTextFieldValue.shouldBe(
                 expected = updatedName,
             )
         }

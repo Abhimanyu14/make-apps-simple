@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.view_model
 
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
@@ -49,7 +48,9 @@ internal class AddTransactionForScreenViewModel(
     screenUIStateDelegate = screenUIStateDelegate,
 ) {
     // region UI state
-    private var title = TextFieldValue()
+    private var addTransactionForScreenDataValidationState: AddTransactionForScreenDataValidationState =
+        AddTransactionForScreenDataValidationState()
+    private var title: String = ""
     // endregion
 
     // region uiStateAndStateEvents
@@ -71,17 +72,22 @@ internal class AddTransactionForScreenViewModel(
     // region updateUiStateAndStateEvents
     override fun updateUiStateAndStateEvents() {
         coroutineScope.launch {
-            val validationState = addTransactionForScreenDataValidationUseCase(
-                enteredTitle = title.text,
-            )
-            _uiState.update {
-                AddTransactionForScreenUIState(
-                    titleError = validationState.titleError,
-                    isCtaButtonEnabled = validationState.isCtaButtonEnabled,
-                    isLoading = isLoading,
-                    title = title,
+            addTransactionForScreenDataValidationState =
+                addTransactionForScreenDataValidationUseCase(
+                    enteredTitle = title,
                 )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            AddTransactionForScreenUIState(
+                titleError = addTransactionForScreenDataValidationState.titleError,
+                isCtaButtonEnabled = addTransactionForScreenDataValidationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                title = title,
+            )
         }
     }
     // endregion
@@ -89,9 +95,7 @@ internal class AddTransactionForScreenViewModel(
     // region state events
     private fun clearTitle(): Job {
         return updateTitle(
-            updatedTitle = title.copy(
-                text = "",
-            ),
+            updatedTitle = "",
         )
     }
 
@@ -99,7 +103,7 @@ internal class AddTransactionForScreenViewModel(
         return coroutineScope.launch {
             startLoading()
             val isTransactionForInserted = insertTransactionForUseCase(
-                title = title.text,
+                title = title,
             ) != -1L
             if (isTransactionForInserted) {
                 navigateUp()
@@ -111,10 +115,11 @@ internal class AddTransactionForScreenViewModel(
     }
 
     private fun updateTitle(
-        updatedTitle: TextFieldValue,
+        updatedTitle: String,
         shouldRefresh: Boolean = true,
     ): Job {
         title = updatedTitle
+        updateUiState()
         return refreshIfRequired(
             shouldRefresh = shouldRefresh,
         )

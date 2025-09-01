@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.event
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIEvent
 
 @Immutable
@@ -32,15 +31,15 @@ internal sealed class AddAccountScreenUIEvent : ScreenUIEvent {
     data object OnTopAppBarNavigationButtonClick : AddAccountScreenUIEvent()
 
     data class OnBalanceAmountValueUpdated(
-        val updatedBalanceAmountValue: TextFieldValue,
+        val updatedBalanceAmountValue: String,
     ) : AddAccountScreenUIEvent()
 
     data class OnMinimumAccountBalanceAmountValueUpdated(
-        val updatedMinimumAccountBalanceAmountValue: TextFieldValue,
+        val updatedMinimumAccountBalanceAmountValue: String,
     ) : AddAccountScreenUIEvent()
 
     data class OnNameUpdated(
-        val updatedName: TextFieldValue,
+        val updatedName: String,
     ) : AddAccountScreenUIEvent()
 
     data class OnSelectedAccountTypeIndexUpdated(

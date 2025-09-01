@@ -23,14 +23,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -56,14 +57,15 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.sc
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroup
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroupData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.selection_group.MyRadioGroupEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextField
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldDataV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldEventV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.event.EditAccountScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import kotlinx.coroutines.flow.collectLatest
 
 @Immutable
 internal data class EditAccountScreenUIVisibilityData(
@@ -85,6 +87,57 @@ internal fun EditAccountScreenUI(
     }
     val balanceAmountTextFieldFocusRequester = remember {
         FocusRequester()
+    }
+    val nameTextFieldState = rememberTextFieldState(
+        initialText = uiState.name,
+    )
+    val balanceAmountTextFieldState = rememberTextFieldState(
+        initialText = uiState.balanceAmountValue,
+    )
+    val minimumBalanceAmountTextFieldState = rememberTextFieldState(
+        initialText = uiState.minimumBalanceAmountValue,
+    )
+
+    LaunchedEffect(
+        key1 = nameTextFieldState,
+    ) {
+        snapshotFlow {
+            nameTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                EditAccountScreenUIEvent.OnNameUpdated(
+                    updatedName = it,
+                )
+            )
+        }
+    }
+
+    LaunchedEffect(
+        key1 = balanceAmountTextFieldState,
+    ) {
+        snapshotFlow {
+            balanceAmountTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                EditAccountScreenUIEvent.OnBalanceAmountValueUpdated(
+                    updatedBalanceAmountValue = it,
+                )
+            )
+        }
+    }
+
+    LaunchedEffect(
+        key1 = minimumBalanceAmountTextFieldState,
+    ) {
+        snapshotFlow {
+            minimumBalanceAmountTextFieldState.text.toString()
+        }.collectLatest {
+            handleUIEvent(
+                EditAccountScreenUIEvent.OnMinimumAccountBalanceAmountValueUpdated(
+                    updatedMinimumAccountBalanceAmountValue = it,
+                )
+            )
+        }
     }
 
     if (!uiState.isLoading) {
@@ -160,7 +213,7 @@ internal fun EditAccountScreenUI(
                 )
             }
             if (uiState.visibilityData.nameTextField) {
-                MyOutlinedTextField(
+                MyOutlinedTextFieldV2(
                     modifier = Modifier
                         .focusRequester(
                             focusRequester = nameTextFieldFocusRequester,
@@ -170,10 +223,10 @@ internal fun EditAccountScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyOutlinedTextFieldData(
+                    data = MyOutlinedTextFieldDataV2(
                         isError = uiState.visibilityData.nameTextFieldErrorText,
                         isLoading = uiState.isLoading,
-                        textFieldValue = uiState.name,
+                        textFieldState = nameTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_name,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_name,
                         supportingText = if (uiState.visibilityData.nameTextFieldErrorText) {
@@ -193,16 +246,15 @@ internal fun EditAccountScreenUI(
                         } else {
                             null
                         },
-                        keyboardActions = KeyboardActions(
-                            onNext = {
+                        keyboardActions = {
+                            if (uiState.visibilityData.balanceAmountTextField) {
                                 state.focusManager.moveFocus(
                                     focusDirection = FocusDirection.Down,
                                 )
-                            },
-                            onDone = {
+                            } else {
                                 state.focusManager.clearFocus()
-                            },
-                        ),
+                            }
+                        },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = if (uiState.visibilityData.balanceAmountTextField) {
@@ -214,23 +266,15 @@ internal fun EditAccountScreenUI(
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                            is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                                 handleUIEvent(EditAccountScreenUIEvent.OnClearNameButtonClick)
-                            }
-
-                            is MyOutlinedTextFieldEvent.OnValueChange -> {
-                                handleUIEvent(
-                                    EditAccountScreenUIEvent.OnNameUpdated(
-                                        updatedName = event.updatedValue,
-                                    )
-                                )
                             }
                         }
                     },
                 )
             }
             if (uiState.visibilityData.balanceAmountTextField) {
-                MyOutlinedTextField(
+                MyOutlinedTextFieldV2(
                     modifier = Modifier
                         .fillMaxWidth()
                         .focusRequester(
@@ -240,22 +284,15 @@ internal fun EditAccountScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyOutlinedTextFieldData(
+                    data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldValue = uiState.balanceAmountValue,
+                        textFieldState = balanceAmountTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_balance_amount_value,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_balance_amount_value,
                         visualTransformation = AmountCommaVisualTransformation(),
-                        keyboardActions = KeyboardActions(
-                            onNext = {
-                                state.focusManager.moveFocus(
-                                    focusDirection = FocusDirection.Down,
-                                )
-                            },
-                            onDone = {
-                                state.focusManager.clearFocus()
-                            },
-                        ),
+                        keyboardActions = {
+                            state.focusManager.clearFocus()
+                        },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.NumberPassword,
                             imeAction = ImeAction.Done,
@@ -263,40 +300,30 @@ internal fun EditAccountScreenUI(
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                            is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                                 handleUIEvent(EditAccountScreenUIEvent.OnClearBalanceAmountValueButtonClick)
-                            }
-
-                            is MyOutlinedTextFieldEvent.OnValueChange -> {
-                                handleUIEvent(
-                                    EditAccountScreenUIEvent.OnBalanceAmountValueUpdated(
-                                        updatedBalanceAmountValue = event.updatedValue,
-                                    )
-                                )
                             }
                         }
                     },
                 )
             }
             if (uiState.visibilityData.minimumBalanceAmountTextField) {
-                MyOutlinedTextField(
+                MyOutlinedTextFieldV2(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyOutlinedTextFieldData(
+                    data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldValue = uiState.minimumBalanceAmountValue,
+                        textFieldState = minimumBalanceAmountTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value,
                         visualTransformation = AmountCommaVisualTransformation(),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                state.focusManager.clearFocus()
-                            },
-                        ),
+                        keyboardActions = {
+                            state.focusManager.clearFocus()
+                        },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.NumberPassword,
                             imeAction = ImeAction.Done,
@@ -304,16 +331,8 @@ internal fun EditAccountScreenUI(
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyOutlinedTextFieldEvent.OnClickTrailingIcon -> {
+                            is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
                                 handleUIEvent(EditAccountScreenUIEvent.OnClearMinimumAccountBalanceAmountValueButtonClick)
-                            }
-
-                            is MyOutlinedTextFieldEvent.OnValueChange -> {
-                                handleUIEvent(
-                                    EditAccountScreenUIEvent.OnMinimumAccountBalanceAmountValueUpdated(
-                                        updatedMinimumAccountBalanceAmountValue = event.updatedValue,
-                                    )
-                                )
                             }
                         }
                     },

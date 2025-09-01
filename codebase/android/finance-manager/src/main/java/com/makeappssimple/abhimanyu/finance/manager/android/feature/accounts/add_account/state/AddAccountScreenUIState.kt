@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
@@ -34,8 +33,8 @@ internal data class AddAccountScreenUIState(
     val isLoading: Boolean = true,
     val selectedAccountTypeIndex: Int = 0,
     val accountTypesChipUIDataList: ImmutableList<ChipUIData> = persistentListOf(),
-    val minimumAccountBalanceTextFieldValue: TextFieldValue = TextFieldValue(),
-    val nameTextFieldValue: TextFieldValue = TextFieldValue(),
+    val minimumAccountBalanceTextFieldValue: String = "",
+    val nameTextFieldValue: String = "",
 ) : ScreenUIState
 
 public sealed class AddAccountScreenNameError {
