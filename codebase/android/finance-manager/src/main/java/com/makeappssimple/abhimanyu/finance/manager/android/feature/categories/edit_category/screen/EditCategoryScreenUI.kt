@@ -104,7 +104,9 @@ internal fun EditCategoryScreenUI(
         LaunchedEffect(
             key1 = Unit,
         ) {
-            delay(300) // Source - https://stackoverflow.com/a/72783456/9636037
+            delay(
+                timeMillis = 300,
+            ) // Source - https://stackoverflow.com/a/72783456/9636037
             state.focusRequester.requestFocus()
         }
     }
