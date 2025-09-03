@@ -69,7 +69,9 @@ internal class BarcodeAnalyser(
                 }
                 .addOnCompleteListener {
                     CoroutineScope(Dispatchers.IO).launch { // TODO(Abhi) - Inject this dispatcher
-                        delay(1000 - (getCurrentTimeMillis() - currentTimestamp))
+                        delay(
+                            timeMillis = 1000 - (getCurrentTimeMillis() - currentTimestamp),
+                        )
                         imageProxy.close()
                     }
                 }

@@ -68,7 +68,9 @@ internal fun CreateBarcodeScreenUI(
     LaunchedEffect(
         key1 = Unit,
     ) {
-        delay(REQUEST_FOCUS_DELAY) // Source - https://stackoverflow.com/a/72783456/9636037
+        delay(
+            timeMillis = REQUEST_FOCUS_DELAY,
+        ) // Source - https://stackoverflow.com/a/72783456/9636037
         state.focusRequester.requestFocus()
     }
 
