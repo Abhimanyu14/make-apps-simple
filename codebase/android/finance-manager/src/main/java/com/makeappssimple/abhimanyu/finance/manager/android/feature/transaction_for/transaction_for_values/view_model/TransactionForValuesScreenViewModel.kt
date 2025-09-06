@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.view_model
 
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
@@ -25,8 +27,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetAllTransactionForValuesFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction_for.TransactionForListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultTransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
@@ -47,36 +47,34 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class TransactionForValuesScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
     private val checkIfTransactionForValuesAreUsedInTransactionsUseCase: CheckIfTransactionForValuesAreUsedInTransactionsUseCase,
     private val deleteTransactionForByIdUseCase: DeleteTransactionForByIdUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region initial data
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region data
+    private var isLoading: Boolean = false
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
         persistentListOf()
-    // endregion
-
-    // region UI state
     private var transactionForIdToDelete: Int? = null
     private var screenBottomSheetType: TransactionForValuesScreenBottomSheetType =
         TransactionForValuesScreenBottomSheetType.None
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<TransactionForValuesScreenUIState> =
         MutableStateFlow(
             value = TransactionForValuesScreenUIState(),
         )
     internal val uiState: StateFlow<TransactionForValuesScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: TransactionForValuesScreenUIStateEvents =
         TransactionForValuesScreenUIStateEvents(
             deleteTransactionFor = ::deleteTransactionFor,
@@ -89,21 +87,32 @@ internal class TransactionForValuesScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            TransactionForValuesScreenUIState(
-                isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
-                isLoading = isLoading,
-                transactionForListItemDataList = transactionForListItemDataList,
-                screenBottomSheetType = screenBottomSheetType,
-            )
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            observeData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            _uiState.update {
+                TransactionForValuesScreenUIState(
+                    isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
+                    isLoading = isLoading,
+                    transactionForListItemDataList = transactionForListItemDataList,
+                    screenBottomSheetType = screenBottomSheetType,
+                )
+            }
         }
     }
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         observeForTransactionForListItemDataList()
     }
     // endregion
@@ -141,9 +150,11 @@ internal class TransactionForValuesScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedTransactionForValuesScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateTransactionForIdToDelete(
@@ -151,9 +162,11 @@ internal class TransactionForValuesScreenViewModel(
         shouldRefresh: Boolean = false,
     ): Job {
         transactionForIdToDelete = updatedTransactionForIdToDelete
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
     // endregion
 
@@ -178,9 +191,21 @@ internal class TransactionForValuesScreenViewModel(
                             title = transactionFor.title.capitalizeWords(),
                         )
                     }
-                refresh()
+                refreshUiState()
             }
         }
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

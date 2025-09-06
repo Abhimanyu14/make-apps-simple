@@ -46,7 +46,6 @@ internal class HomeScreenViewModelTest {
             getAllAccountsTotalBalanceAmountValueUseCase = testDependencies.getAllAccountsTotalBalanceAmountValueUseCase,
             getAllAccountsTotalMinimumBalanceAmountValueUseCase = testDependencies.getAllAccountsTotalMinimumBalanceAmountValueUseCase,
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             shouldShowBackupCardUseCase = testDependencies.shouldShowBackupCardUseCase,
             backupDataUseCase = testDependencies.backupDataUseCase,
             coroutineScope = testDependencies.testScope.backgroundScope,

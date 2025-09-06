@@ -21,12 +21,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.AddCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeEmpty
@@ -53,7 +53,6 @@ internal class AddCategoryScreenViewModelTest {
         addCategoryScreenViewModel = AddCategoryScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             savedStateHandle = savedStateHandle,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             uriDecoder = testDependencies.uriDecoder,
             addCategoryScreenDataValidationUseCase = testDependencies.addCategoryScreenDataValidationUseCase,
             coroutineScope = testDependencies.testScope.backgroundScope,
@@ -73,6 +72,10 @@ internal class AddCategoryScreenViewModelTest {
     @Test
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         addCategoryScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeTrue()
+            initialState.selectedTransactionTypeIndex.shouldBeNull()
+
             val result = awaitItem()
 
             result.screenBottomSheetType.shouldBe(
@@ -80,116 +83,35 @@ internal class AddCategoryScreenViewModelTest {
             )
             result.isBottomSheetVisible.shouldBeFalse()
             result.isCtaButtonEnabled.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
+            result.isLoading.shouldBeFalse()
             result.isSupportingTextVisible.shouldBeFalse()
             result.titleError.shouldBe(
                 expected = AddCategoryScreenTitleError.None,
             )
-            result.selectedTransactionTypeIndex.shouldBeNull()
-            result.transactionTypesChipUIData.shouldBeEmpty()
-            result.emoji.shouldBeEmpty()
+            result.selectedTransactionTypeIndex.shouldBe(
+                expected = 1,
+            )
+            result.transactionTypesChipUIData.shouldBe(
+                expected = listOf(
+                    ChipUIData(
+                        text = "Income",
+                    ),
+                    ChipUIData(
+                        text = "Expense",
+                    ),
+                    ChipUIData(
+                        text = "Investment",
+                    ),
+                )
+            )
+            result.emoji.shouldBe(
+                expected = "😃",
+            )
             result.emojiSearchText.shouldBeEmpty()
-            result.title.shouldBeEmpty()
+            result.titleTextFieldState.text.toString().shouldBeEmpty()
+            result.isLoading.shouldBeFalse()
         }
     }
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    @Test
-    fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
-        testDependencies.runTestWithTimeout {
-            val updatedTitle = "   "
-            addCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.title.shouldBeEmpty()
-
-                addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    updatedTitle
-                )
-                val textFieldStateUpdate = awaitItem()
-                textFieldStateUpdate.title.shouldBe(
-                    expected = updatedTitle,
-                )
-
-                val result = awaitItem()
-                result.isCtaButtonEnabled.shouldBeFalse()
-                result.titleError.shouldBe(
-                    expected = AddCategoryScreenTitleError.None,
-                )
-            }
-        }
-
-    @Test
-    fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
-        testDependencies.runTestWithTimeout {
-            val updatedTitle = "test-title"
-            addCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.title.shouldBeEmpty()
-
-                addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    updatedTitle
-                )
-                val textFieldStateUpdate = awaitItem()
-                textFieldStateUpdate.title.shouldBe(
-                    expected = updatedTitle,
-                )
-
-                val result = awaitItem()
-                result.isCtaButtonEnabled.shouldBeTrue()
-                result.titleError.shouldBe(
-                    expected = AddCategoryScreenTitleError.None,
-                )
-            }
-        }
-
-    @Test
-    fun updateUiStateAndStateEvents_categoryAlreadyExists_ctaIsDisabled() =
-        testDependencies.runTestWithTimeout {
-            val updatedTitle = "test-title"
-            testDependencies.insertCategoryUseCase(
-                emoji = "💰",
-                title = updatedTitle,
-                transactionType = TransactionType.INCOME,
-            )
-
-            addCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.title.shouldBeEmpty()
-
-                addCategoryScreenViewModel.uiStateEvents.updateTitle(
-                    updatedTitle
-                )
-                val textFieldStateUpdate = awaitItem()
-                textFieldStateUpdate.title.shouldBe(
-                    expected = updatedTitle,
-                )
-
-                val result = awaitItem()
-                result.isCtaButtonEnabled.shouldBeFalse()
-                result.titleError.shouldBe(
-                    expected = AddCategoryScreenTitleError.CategoryExists,
-                )
-            }
-        }
-    // endregion
-
-    // region fetchData
-    @Test
-    fun fetchData_shouldUpdateSelectedTransactionTypeIndex() =
-        testDependencies.runTestWithTimeout {
-            addCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                initialState.selectedTransactionTypeIndex.shouldBeNull()
-
-                val result = awaitItem()
-                result.isLoading.shouldBeFalse()
-                result.selectedTransactionTypeIndex.shouldBe(
-                    expected = 1,
-                )
-            }
-        }
     // endregion
 
     // region state events
@@ -223,18 +145,18 @@ internal class AddCategoryScreenViewModelTest {
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            initialState.title.shouldBeEmpty()
+            initialState.titleTextFieldState.text.toString().shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
             fetchDataCompletedState.isLoading.shouldBeFalse()
             addCategoryScreenViewModel.uiStateEvents.updateTitle(testTitle)
-            awaitItem().title.shouldBe(
+            awaitItem().titleTextFieldState.text.toString().shouldBe(
                 expected = testTitle,
             )
 
             addCategoryScreenViewModel.uiStateEvents.clearTitle()
 
             val result = awaitItem()
-            result.title.shouldBeEmpty()
+            result.titleTextFieldState.text.toString().shouldBeEmpty()
         }
     }
 
@@ -364,17 +286,92 @@ internal class AddCategoryScreenViewModelTest {
         addCategoryScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            initialState.title.shouldBeEmpty()
+            initialState.titleTextFieldState.text.toString().shouldBeEmpty()
             val fetchDataCompletedState = awaitItem()
             fetchDataCompletedState.isLoading.shouldBeFalse()
 
             addCategoryScreenViewModel.uiStateEvents.updateTitle(testTitle)
 
             val result = awaitItem()
-            result.title.shouldBe(
+            result.titleTextFieldState.text.toString().shouldBe(
                 expected = testTitle,
             )
         }
     }
+
+    @Test
+    fun updateTitle_titleIsBlank_ctaIsDisabled() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = "   "
+            addCategoryScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.titleTextFieldState.text.toString().shouldBeEmpty()
+
+                addCategoryScreenViewModel.uiStateEvents.updateTitle(
+                    updatedTitle
+                )
+                val result = awaitItem()
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleError.shouldBe(
+                    expected = AddCategoryScreenTitleError.None,
+                )
+            }
+        }
+
+    @Test
+    fun updateTitle_titleIsValid_ctaIsEnabled() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = "test-title"
+            addCategoryScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.titleTextFieldState.text.toString().shouldBeEmpty()
+
+                addCategoryScreenViewModel.uiStateEvents.updateTitle(
+                    updatedTitle
+                )
+                val result = awaitItem()
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
+                result.isCtaButtonEnabled.shouldBeTrue()
+                result.titleError.shouldBe(
+                    expected = AddCategoryScreenTitleError.None,
+                )
+            }
+        }
+
+    @Test
+    fun updateTitle_categoryAlreadyExists_ctaIsDisabled() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = "test-title"
+            testDependencies.insertCategoryUseCase(
+                emoji = "💰",
+                title = updatedTitle,
+                transactionType = TransactionType.INCOME,
+            )
+
+            addCategoryScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.titleTextFieldState.text.toString().shouldBeEmpty()
+
+                addCategoryScreenViewModel.uiStateEvents.updateTitle(
+                    updatedTitle
+                )
+                val result = awaitItem()
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleError.shouldBe(
+                    expected = AddCategoryScreenTitleError.CategoryExists,
+                )
+            }
+        }
     // endregion
 }

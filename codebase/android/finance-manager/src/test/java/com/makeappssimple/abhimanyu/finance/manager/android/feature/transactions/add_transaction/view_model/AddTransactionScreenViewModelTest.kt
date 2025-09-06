@@ -48,7 +48,6 @@ internal class AddTransactionScreenViewModelTest {
         savedStateHandle = SavedStateHandle()
         addTransactionScreenViewModel = AddTransactionScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             savedStateHandle = savedStateHandle,
             uriDecoder = testDependencies.uriDecoder,
             addTransactionScreenDataValidationUseCase = testDependencies.addTransactionScreenDataValidationUseCase,
@@ -120,10 +119,10 @@ internal class AddTransactionScreenViewModelTest {
                 expected = LocalTime.MIN,
             )
             result.amountErrorText.shouldBeNull()
-            result.amount.shouldBe(
+            result.amountTextFieldState.text.toString().shouldBe(
                 expected = "",
             )
-            result.title.shouldBe(
+            result.titleTextFieldState.text.toString().shouldBe(
                 expected = "",
             )
         }

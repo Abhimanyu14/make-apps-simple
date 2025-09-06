@@ -50,7 +50,6 @@ internal class EditAccountScreenViewModelTest {
         viewModel = EditAccountScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             savedStateHandle = savedStateHandle,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             coroutineScope = testDependencies.testScope.backgroundScope,
             editAccountScreenDataValidationUseCase = testDependencies.editAccountScreenDataValidationUseCase,
             getAccountByIdUseCase = testDependencies.getAccountByIdUseCase,
@@ -78,7 +77,7 @@ internal class EditAccountScreenViewModelTest {
             result.isCtaButtonEnabled.shouldBeFalse()
             result.isLoading.shouldBeTrue()
             result.accountTypesChipUIDataList.shouldNotBeNull()
-            result.name.shouldBeEmpty()
+            result.nameTextFieldState.text.toString().shouldBeEmpty()
         }
     }
 }

@@ -38,7 +38,6 @@ internal class SettingsScreenViewModelTest {
         testDependencies = TestDependencies()
         settingsScreenViewModel = SettingsScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             alarmKit = testDependencies.alarmKit,
             appVersionKit = testDependencies.appVersionKit,
             backupDataUseCase = testDependencies.backupDataUseCase,

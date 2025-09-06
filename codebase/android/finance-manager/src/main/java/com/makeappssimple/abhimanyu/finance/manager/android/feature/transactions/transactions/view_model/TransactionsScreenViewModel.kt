@@ -16,7 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.view_model
 
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -39,8 +41,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.S
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
@@ -65,7 +65,6 @@ import java.time.LocalDate
 @KoinViewModel
 internal class TransactionsScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val dispatcherProvider: DispatcherProvider,
     private val dateTimeKit: DateTimeKit,
@@ -74,13 +73,12 @@ internal class TransactionsScreenViewModel(
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region initial data
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region data
+    private var isLoading: Boolean = false
     private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
         mapOf()
     private var accounts: MutableSet<Account> = mutableSetOf()
@@ -100,9 +98,6 @@ internal class TransactionsScreenViewModel(
         persistentListOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
         mutableMapOf()
-    // endregion
-
-    // region UI state
     private var isInSelectionMode = false
     private var searchText = ""
     private var selectedFilter = Filter()
@@ -111,13 +106,16 @@ internal class TransactionsScreenViewModel(
         TransactionsScreenBottomSheetType.None
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<TransactionsScreenUIState> =
         MutableStateFlow(
             value = TransactionsScreenUIState(),
         )
     internal val uiState: StateFlow<TransactionsScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: TransactionsScreenUIStateEvents =
         TransactionsScreenUIStateEvents(
             addToSelectedTransactions = ::addToSelectedTransactions,
@@ -138,9 +136,19 @@ internal class TransactionsScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
+    // region initViewModel
+    internal fun initViewModel() {
         coroutineScope.launch {
+            observeData()
+            fetchData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
             updateTransactionDetailsListItemViewData()
             _uiState.update {
                 TransactionsScreenUIState(
@@ -277,9 +285,7 @@ internal class TransactionsScreenViewModel(
         }
         transactionDetailsListItemViewData = updatedAllTransactionData
         if (allTransactionData.isNotEmpty()) {
-            completeLoading(
-                shouldRefresh = false,
-            )
+            completeLoading()
         }
     }
 
@@ -397,7 +403,7 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region fetchData
-    override fun fetchData(): Job {
+    private fun fetchData(): Job {
         return coroutineScope.launch {
             allTransactionForValues = getAllTransactionForValuesUseCase()
         }
@@ -405,7 +411,7 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         observeForAllTransactionData()
     }
 
@@ -444,7 +450,7 @@ internal class TransactionsScreenViewModel(
                     )
                     categoriesMap = categoriesInTransactionsMap.toMap()
                     allTransactionData = updatedAllTransactionData
-                    refresh()
+                    refreshUiState()
                 }
         }
     }
@@ -463,18 +469,22 @@ internal class TransactionsScreenViewModel(
                 )
             }
             .toImmutableList()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun clearSelectedTransactions(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionIndices = persistentListOf()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun duplicateTransaction(): Job {
@@ -504,9 +514,11 @@ internal class TransactionsScreenViewModel(
                 )
             }
             .toImmutableList()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun selectAllTransactions(
@@ -519,9 +531,11 @@ internal class TransactionsScreenViewModel(
                 }
             }
             .toImmutableList()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun resetScreenBottomSheetType(): Job {
@@ -535,9 +549,11 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedTransactionsScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateIsInSelectionMode(
@@ -545,9 +561,11 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         isInSelectionMode = updatedIsInSelectionMode
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSearchText(
@@ -555,9 +573,11 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         searchText = updatedSearchText
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSelectedFilter(
@@ -565,9 +585,11 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedFilter = updatedSelectedFilter
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSelectedSortOption(
@@ -575,9 +597,11 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedSortOption = updatedSelectedSortOption
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateTransactionForValuesInTransactions(
@@ -604,6 +628,18 @@ internal class TransactionsScreenViewModel(
                 transactions = updatedTransactions.toTypedArray(),
             )
         }
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

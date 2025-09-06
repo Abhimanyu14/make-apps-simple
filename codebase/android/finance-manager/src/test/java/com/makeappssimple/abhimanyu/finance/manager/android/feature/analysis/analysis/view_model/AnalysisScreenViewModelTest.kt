@@ -41,7 +41,6 @@ internal class AnalysisScreenViewModelTest {
         testDependencies = TestDependencies()
         analysisScreenViewModel = AnalysisScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             coroutineScope = testDependencies.testScope.backgroundScope,
             dateTimeKit = testDependencies.dateTimeKit,
             getAllTransactionDataUseCase = testDependencies.getAllTransactionDataUseCase,

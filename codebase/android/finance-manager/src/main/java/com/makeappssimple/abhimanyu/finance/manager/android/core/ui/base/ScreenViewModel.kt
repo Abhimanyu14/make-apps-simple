@@ -54,9 +54,7 @@ public abstract class ScreenViewModel(
      * Fetches initial data required for the screen.
      */
     public open fun fetchData(): Job {
-        return Job().apply {
-            complete()
-        }
+        return getCompletedJob()
     }
 
     /**
@@ -75,12 +73,6 @@ public abstract class ScreenViewModel(
     }
 
     // region common
-    internal fun getCompletedJob(): Job {
-        return Job().apply {
-            complete()
-        }
-    }
-
     internal fun refreshIfRequired(
         shouldRefresh: Boolean,
     ): Job {

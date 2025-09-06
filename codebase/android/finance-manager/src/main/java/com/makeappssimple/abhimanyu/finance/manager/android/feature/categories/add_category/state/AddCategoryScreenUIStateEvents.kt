@@ -24,7 +24,7 @@ import kotlinx.coroutines.Job
 @Stable
 internal class AddCategoryScreenUIStateEvents(
     val clearEmojiSearchText: () -> Job,
-    val clearTitle: () -> Job,
+    val clearTitle: () -> Unit,
     val insertCategory: () -> Job,
     val navigateUp: () -> Job,
     val resetScreenBottomSheetType: () -> Job,
@@ -32,5 +32,5 @@ internal class AddCategoryScreenUIStateEvents(
     val updateEmojiSearchText: (updatedEmojiSearchText: String) -> Job,
     val updateScreenBottomSheetType: (updatedAddCategoryScreenBottomSheetType: AddCategoryScreenBottomSheetType) -> Job,
     val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
-    val updateTitle: (updatedTitle: String) -> Job,
+    val updateTitle: (updatedTitle: String) -> Unit,
 ) : ScreenUIStateEvents

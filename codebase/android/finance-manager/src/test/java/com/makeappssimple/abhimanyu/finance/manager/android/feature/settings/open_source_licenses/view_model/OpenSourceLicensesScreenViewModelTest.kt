@@ -16,14 +16,10 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.view_model
 
-import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
-import org.junit.Test
 
 internal class OpenSourceLicensesScreenViewModelTest {
     // region test setup
@@ -36,27 +32,13 @@ internal class OpenSourceLicensesScreenViewModelTest {
         openSourceLicensesScreenViewModel = OpenSourceLicensesScreenViewModel(
             coroutineScope = testDependencies.testScope.backgroundScope,
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             logKit = testDependencies.logKit,
         )
-        openSourceLicensesScreenViewModel.initViewModel()
     }
 
     @After
     fun tearDown() {
         testDependencies.testScope.cancel()
-    }
-    // endregion
-
-    // region initial state
-    @Test
-    fun uiState_initialState() = testDependencies.runTestWithTimeout {
-        openSourceLicensesScreenViewModel.uiState.test {
-            val initialState = awaitItem()
-            initialState.isLoading.shouldBeTrue()
-            val fetchDataCompletedState = awaitItem()
-            fetchDataCompletedState.isLoading.shouldBeFalse()
-        }
     }
     // endregion
 }

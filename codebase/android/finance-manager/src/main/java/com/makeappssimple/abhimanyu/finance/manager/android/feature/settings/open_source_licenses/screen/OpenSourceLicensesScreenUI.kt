@@ -31,14 +31,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.event.OpenSourceLicensesScreenUIEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import com.mikepenz.aboutlibraries.ui.compose.android.rememberLibraries
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 
 @Composable
 internal fun OpenSourceLicensesScreenUI(
-    uiState: OpenSourceLicensesScreenUIState,
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: OpenSourceLicensesScreenUIEvent) -> Unit = {},
 ) {

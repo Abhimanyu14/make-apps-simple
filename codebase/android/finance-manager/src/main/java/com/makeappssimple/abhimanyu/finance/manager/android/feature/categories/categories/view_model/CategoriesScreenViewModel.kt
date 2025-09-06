@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.categories.view_model
 
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.core.extensions.groupBy
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
@@ -31,8 +33,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.grid_item.CategoriesGridItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
@@ -60,7 +60,6 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class CategoriesScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val checkIfCategoryIsUsedInTransactionsUseCase: CheckIfCategoryIsUsedInTransactionsUseCase,
     private val coroutineScope: CoroutineScope,
     private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
@@ -68,13 +67,12 @@ internal class CategoriesScreenViewModel(
     private val getAllCategoriesFlowUseCase: GetAllCategoriesFlowUseCase,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region initial data
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region data
+    private var isLoading: Boolean = false
     private var categoriesGridItemDataMap: ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>> =
         persistentMapOf()
     private val validTransactionTypes: PersistentList<TransactionType> =
@@ -88,9 +86,6 @@ internal class CategoriesScreenViewModel(
             title = it.title,
         )
     }
-    // endregion
-
-    // region UI state
     private var screenBottomSheetType: CategoriesScreenBottomSheetType =
         CategoriesScreenBottomSheetType.None
     private var screenSnackbarType: CategoriesScreenSnackbarType =
@@ -99,13 +94,16 @@ internal class CategoriesScreenViewModel(
     private var clickedItemId: Int? = null
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<CategoriesScreenUIState> =
         MutableStateFlow(
             value = CategoriesScreenUIState(),
         )
     internal val uiState: StateFlow<CategoriesScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: CategoriesScreenUIStateEvents =
         CategoriesScreenUIStateEvents(
             deleteCategory = ::deleteCategory,
@@ -122,24 +120,35 @@ internal class CategoriesScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            CategoriesScreenUIState(
-                isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
-                screenBottomSheetType = screenBottomSheetType,
-                screenSnackbarType = screenSnackbarType,
-                isLoading = isLoading,
-                tabData = tabData,
-                validTransactionTypes = validTransactionTypes,
-                categoriesGridItemDataMap = categoriesGridItemDataMap,
-            )
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            observeData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            _uiState.update {
+                CategoriesScreenUIState(
+                    isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
+                    screenBottomSheetType = screenBottomSheetType,
+                    screenSnackbarType = screenSnackbarType,
+                    isLoading = isLoading,
+                    tabData = tabData,
+                    validTransactionTypes = validTransactionTypes,
+                    categoriesGridItemDataMap = categoriesGridItemDataMap,
+                )
+            }
         }
     }
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         val defaultDataId: Flow<DefaultDataId?> =
             financeManagerPreferencesRepository.getDefaultDataIdFlow()
         val categoriesTransactionTypeMap: Flow<Map<TransactionType, ImmutableList<Category>>> =
@@ -243,7 +252,7 @@ internal class CategoriesScreenViewModel(
                     TransactionType.INCOME to incomeCategoriesGridItemDataList,
                     TransactionType.INVESTMENT to investmentCategoriesGridItemDataList,
                 )
-                refresh()
+                refreshUiState()
             }
         }
     }
@@ -343,9 +352,11 @@ internal class CategoriesScreenViewModel(
         shouldRefresh: Boolean = false,
     ): Job {
         categoryIdToDelete = updatedCategoryIdToDelete
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateClickedItemId(
@@ -353,9 +364,11 @@ internal class CategoriesScreenViewModel(
         shouldRefresh: Boolean = false,
     ): Job {
         clickedItemId = updatedClickedItemId
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateScreenBottomSheetType(
@@ -363,9 +376,11 @@ internal class CategoriesScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedCategoriesScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateScreenSnackbarType(
@@ -373,9 +388,23 @@ internal class CategoriesScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenSnackbarType = updatedCategoriesScreenSnackbarType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

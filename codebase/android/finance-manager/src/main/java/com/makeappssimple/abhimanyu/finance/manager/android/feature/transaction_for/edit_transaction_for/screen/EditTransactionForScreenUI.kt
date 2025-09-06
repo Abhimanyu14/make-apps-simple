@@ -24,12 +24,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
@@ -59,7 +57,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun EditTransactionForScreenUI(
@@ -67,29 +64,13 @@ internal fun EditTransactionForScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: EditTransactionForScreenUIEvent) -> Unit = {},
 ) {
-    val titleTextFieldState = rememberTextFieldState(
-        initialText = uiState.title,
-    )
-
-    LaunchedEffect(
-        key1 = titleTextFieldState,
-    ) {
-        snapshotFlow {
-            titleTextFieldState.text.toString()
-        }.collectLatest {
-            handleUIEvent(
-                EditTransactionForScreenUIEvent.OnTitleUpdated(
-                    updatedTitle = it,
-                )
-            )
-        }
-    }
-
     if (!uiState.isLoading) {
         LaunchedEffect(
             key1 = Unit,
         ) {
-            delay(300) // Source - https://stackoverflow.com/a/72783456/9636037
+            delay(
+                timeMillis = 300,
+            ) // Source - https://stackoverflow.com/a/72783456/9636037
             state.focusRequester.requestFocus()
         }
     }
@@ -127,7 +108,7 @@ internal fun EditTransactionForScreenUI(
             MyOutlinedTextFieldV2(
                 data = MyOutlinedTextFieldDataV2(
                     isLoading = uiState.isLoading,
-                    textFieldState = titleTextFieldState,
+                    textFieldState = uiState.titleTextFieldState,
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_title,
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_clear_title,
                     supportingText = {

@@ -16,7 +16,11 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.view_model
 
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
@@ -24,8 +28,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constant
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.category.InsertCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.AddCategoryScreenTitleError
@@ -40,6 +42,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -48,18 +51,15 @@ import org.koin.android.annotation.KoinViewModel
 internal class AddCategoryScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     uriDecoder: UriDecoder,
     private val addCategoryScreenDataValidationUseCase: AddCategoryScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val insertCategoryUseCase: InsertCategoryUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region screen args
     private val screenArgs = AddCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -67,37 +67,38 @@ internal class AddCategoryScreenViewModel(
     )
     // endregion
 
-    // region initial data
-    private val transactionType: String = getTransactionType()
+    // region data
+    private var screenBottomSheetType: AddCategoryScreenBottomSheetType =
+        AddCategoryScreenBottomSheetType.None
+    private var addCategoryScreenDataValidationState: AddCategoryScreenDataValidationState =
+        AddCategoryScreenDataValidationState()
+    private var isLoading: Boolean = false
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
             TransactionType.EXPENSE,
             TransactionType.INVESTMENT,
         )
-    // endregion
-
-    // region UI state
-    private var addCategoryScreenDataValidationState: AddCategoryScreenDataValidationState =
-        AddCategoryScreenDataValidationState()
-    private var title: String = ""
-    private var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
-    private var emojiSearchText = ""
-    private var selectedTransactionTypeIndex = validTransactionTypes
+    private var selectedTransactionTypeIndex: Int = validTransactionTypes
         .indexOf(
             element = TransactionType.EXPENSE,
         )
-    private var screenBottomSheetType: AddCategoryScreenBottomSheetType =
-        AddCategoryScreenBottomSheetType.None
+    private var emoji: String = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
+    private var emojiSearchText: String = ""
+    private val transactionType: String = getTransactionType()
+    private var titleTextFieldState: TextFieldState = TextFieldState()
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<AddCategoryScreenUIState> =
         MutableStateFlow(
             value = AddCategoryScreenUIState(),
         )
     internal val uiState: StateFlow<AddCategoryScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: AddCategoryScreenUIStateEvents =
         AddCategoryScreenUIStateEvents(
             clearEmojiSearchText = ::clearEmojiSearchText,
@@ -113,12 +114,22 @@ internal class AddCategoryScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
+    // region initViewModel
+    internal fun initViewModel() {
         coroutineScope.launch {
+            observeData()
+            fetchData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
             addCategoryScreenDataValidationState =
                 addCategoryScreenDataValidationUseCase(
-                    enteredTitle = title,
+                    enteredTitle = titleTextFieldState.text.toString(),
                 )
             updateUiState()
         }
@@ -141,46 +152,46 @@ internal class AddCategoryScreenViewModel(
                 },
                 emoji = emoji,
                 emojiSearchText = emojiSearchText,
-                title = title,
+                titleTextFieldState = titleTextFieldState,
             )
+        }
+    }
+    // endregion
+
+    // region observeData
+    private fun observeData() {
+        coroutineScope.launch {
+            snapshotFlow {
+                titleTextFieldState.text.toString()
+            }.collectLatest {
+                refreshUiState()
+            }
         }
     }
     // endregion
 
     // region fetchData
-    override fun fetchData(): Job {
-        return coroutineScope.launch {
-            updateSelectedTransactionTypeIndex(
-                updatedSelectedTransactionTypeIndex = validTransactionTypes.indexOf(
-                    element = TransactionType.entries.find {
-                        it.title == transactionType
-                    },
-                ),
-            )
-        }
+    private fun fetchData() {
+        updateSelectedTransactionTypeIndex(
+            updatedSelectedTransactionTypeIndex = validTransactionTypes.indexOf(
+                element = TransactionType.entries.find {
+                    it.title == transactionType
+                },
+            ),
+        )
     }
     // endregion
 
     // region state events
-    private fun clearEmojiSearchText(
-        shouldRefresh: Boolean = true,
-    ): Job {
-        updateEmojiSearchText(
+    private fun clearEmojiSearchText(): Job {
+        return updateEmojiSearchText(
             updatedEmojiSearchText = "",
-        )
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
         )
     }
 
-    private fun clearTitle(
-        shouldRefresh: Boolean = true,
-    ): Job {
+    private fun clearTitle() {
         updateTitle(
             updatedTitle = "",
-        )
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
         )
     }
 
@@ -188,7 +199,7 @@ internal class AddCategoryScreenViewModel(
         return coroutineScope.launch {
             val isCategoryInserted = insertCategoryUseCase(
                 emoji = emoji,
-                title = title,
+                title = titleTextFieldState.text.toString(),
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
             ) != -1L
             if (isCategoryInserted) {
@@ -208,22 +219,16 @@ internal class AddCategoryScreenViewModel(
 
     private fun updateEmoji(
         updatedEmoji: String,
-        shouldRefresh: Boolean = true,
     ): Job {
         emoji = updatedEmoji
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return refreshUiState()
     }
 
     private fun updateEmojiSearchText(
         updatedEmojiSearchText: String,
-        shouldRefresh: Boolean = true,
     ): Job {
         emojiSearchText = updatedEmojiSearchText
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return refreshUiState()
     }
 
     private fun updateScreenBottomSheetType(
@@ -231,9 +236,7 @@ internal class AddCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedAddCategoryScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return refreshUiState()
     }
 
     private fun updateSelectedTransactionTypeIndex(
@@ -241,26 +244,35 @@ internal class AddCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return refreshUiState()
     }
 
     private fun updateTitle(
         updatedTitle: String,
         shouldRefresh: Boolean = true,
     ): Job {
-        title = updatedTitle
-        updateUiState()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
+        titleTextFieldState.setTextAndPlaceCursorAtEnd(
+            text = updatedTitle,
         )
+        return refreshUiState()
     }
     // endregion
 
     // region screen args
     private fun getTransactionType(): String {
         return screenArgs.transactionType
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

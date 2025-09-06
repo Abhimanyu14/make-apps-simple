@@ -17,6 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model
 
 import android.net.Uri
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
@@ -39,8 +41,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.toNonSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardAction
@@ -72,7 +72,6 @@ internal class HomeScreenViewModel(
     getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
     getAllAccountsTotalMinimumBalanceAmountValueUseCase: GetAllAccountsTotalMinimumBalanceAmountValueUseCase,
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
     private val backupDataUseCase: BackupDataUseCase,
     private val coroutineScope: CoroutineScope,
@@ -81,22 +80,18 @@ internal class HomeScreenViewModel(
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val getTransactionsBetweenTimestampsUseCase: GetTransactionsBetweenTimestampsUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region initial data
+    private var isLoading: Boolean = false
     private val isBackupCardVisible: Flow<Boolean> =
         shouldShowBackupCardUseCase()
     private val accountsTotalBalanceAmountValue: Flow<Long> =
         getAllAccountsTotalBalanceAmountValueUseCase()
     private val allAccountsTotalMinimumBalanceAmountValue: Flow<Long> =
         getAllAccountsTotalMinimumBalanceAmountValueUseCase()
-    // endregion
-
-    // region UI state
     private var isBalanceVisible: Boolean = false
     private var homeListItemViewData: ImmutableList<TransactionListItemData> =
         persistentListOf()
@@ -105,12 +100,15 @@ internal class HomeScreenViewModel(
     private var overviewCardData: OverviewCardViewModelData? = null
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<HomeScreenUIState> =
         MutableStateFlow(
             value = HomeScreenUIState(),
         )
     internal val uiState: StateFlow<HomeScreenUIState> = _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: HomeScreenUIStateEvents =
         HomeScreenUIStateEvents(
             handleOverviewCardAction = ::handleOverviewCardAction,
@@ -125,15 +123,24 @@ internal class HomeScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            observeData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
         val totalIncomeAmount = Amount(
             value = overviewCardData?.income?.toLong().orZero(),
         )
         val totalExpenseAmount = Amount(
             value = overviewCardData?.expense?.toLong().orZero(),
         )
-        coroutineScope.launch {
+        return coroutineScope.launch {
             updateOverviewCardData()
             _uiState.update {
                 HomeScreenUIState(
@@ -170,7 +177,7 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         observeForHomeListItemViewData()
     }
     // endregion
@@ -239,9 +246,11 @@ internal class HomeScreenViewModel(
                 }
             }
         }
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateIsBalanceVisible(
@@ -249,9 +258,11 @@ internal class HomeScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         isBalanceVisible = updatedIsBalanceVisible
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateOverviewTabSelectionIndex(
@@ -259,9 +270,11 @@ internal class HomeScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         overviewTabSelectionIndex = updatedOverviewTabSelectionIndex
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
     // endregion
 
@@ -291,7 +304,7 @@ internal class HomeScreenViewModel(
                             getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
                         )
                     }
-                refresh()
+                refreshUiState()
             }
         }
     }
@@ -425,6 +438,18 @@ internal class HomeScreenViewModel(
                 dateTimeKit.getFormattedYear(timestamp).uppercase()
             }
         }
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

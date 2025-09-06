@@ -43,7 +43,6 @@ internal class CategoriesScreenViewModelTest {
         testDependencies = TestDependencies()
         categoriesScreenViewModel = CategoriesScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             checkIfCategoryIsUsedInTransactionsUseCase = testDependencies.checkIfCategoryIsUsedInTransactionsUseCase,
             coroutineScope = testDependencies.testScope.backgroundScope,
             deleteCategoryByIdUseCase = testDependencies.deleteCategoryByIdUseCase,

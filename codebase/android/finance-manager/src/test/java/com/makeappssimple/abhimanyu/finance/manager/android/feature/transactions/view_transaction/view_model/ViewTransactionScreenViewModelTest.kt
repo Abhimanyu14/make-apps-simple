@@ -49,7 +49,6 @@ internal class ViewTransactionScreenViewModelTest {
         )
         viewTransactionScreenViewModel = ViewTransactionScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             savedStateHandle = savedStateHandle,
             uriDecoder = testDependencies.uriDecoder,
             coroutineScope = testDependencies.testScope.backgroundScope,

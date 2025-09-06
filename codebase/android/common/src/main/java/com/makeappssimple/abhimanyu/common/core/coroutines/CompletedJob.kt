@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state
+package com.makeappssimple.abhimanyu.common.core.coroutines
 
-import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateEvents
+import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.Job
 
-@Stable
-internal class EditTransactionForScreenUIStateEvents(
-    val clearTitle: () -> Unit,
-    val navigateUp: () -> Job,
-    val updateTitle: (updatedTitle: String) -> Unit,
-    val updateTransactionFor: () -> Job,
-) : ScreenUIStateEvents
+public fun getCompletedJob(): CompletableJob {
+    return Job().apply {
+        complete()
+    }
+}

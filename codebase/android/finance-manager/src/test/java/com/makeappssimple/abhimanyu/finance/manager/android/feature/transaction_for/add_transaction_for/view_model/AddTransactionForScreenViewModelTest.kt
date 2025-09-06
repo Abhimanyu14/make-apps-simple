@@ -43,7 +43,6 @@ internal class AddTransactionForScreenViewModelTest {
         testDependencies = TestDependencies()
         addTransactionForScreenViewModel = AddTransactionForScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             addTransactionForScreenDataValidationUseCase = testDependencies.addTransactionForScreenDataValidationUseCase,
             coroutineScope = testDependencies.testScope.backgroundScope,
             insertTransactionForUseCase = testDependencies.insertTransactionForUseCase,
@@ -64,131 +63,42 @@ internal class AddTransactionForScreenViewModelTest {
         addTransactionForScreenViewModel.uiState.test {
             val result = awaitItem()
 
-            result.title.shouldBeEmpty()
             result.titleError.shouldBe(
                 expected = AddTransactionForScreenTitleError.None,
             )
             result.isCtaButtonEnabled.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
+            result.isLoading.shouldBeFalse()
+            result.titleTextFieldState.text.toString().shouldBeEmpty()
         }
     }
     // endregion
 
     // region state events
     @Test
-    fun updateTitle_shouldUpdateValue() = testDependencies.runTestWithTimeout {
-        val updatedTitle = "test-title"
-        addTransactionForScreenViewModel.uiState.test {
-            awaitItem().title.shouldBeEmpty()
-
-            addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                updatedTitle
-            )
-
-            awaitItem().title.shouldBe(
-                expected = updatedTitle,
-            )
-        }
-    }
-
-    @Test
-    fun clearTitle_shouldClearText() = testDependencies.runTestWithTimeout {
-        val updatedTitle = "test-title"
-        addTransactionForScreenViewModel.uiState.test {
-            awaitItem().title.shouldBeEmpty()
-            addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                updatedTitle
-            )
-            awaitItem().title.shouldBe(
-                expected = updatedTitle,
-            )
-
-            addTransactionForScreenViewModel.uiStateEvents.clearTitle()
-
-            awaitItem().title.shouldBeEmpty()
-        }
-    }
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    @Test
-    fun updateUiStateAndStateEvents_titleIsBlank_ctaIsDisabled() =
+    fun clearTitle_shouldClearText() =
         testDependencies.runTestWithTimeout {
-            val updatedTitle = "   "
+            val updatedTitle = testDependencies.testTransactionForTitle1
             addTransactionForScreenViewModel.uiState.test {
-                awaitItem().isCtaButtonEnabled.shouldBeFalse()
-
+                val fetchDataCompleted = awaitItem()
+                fetchDataCompleted.isLoading.shouldBeFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     updatedTitle
                 )
-
                 val result = awaitItem()
-                result.isCtaButtonEnabled.shouldBeFalse()
-                result.titleError.shouldBe(
-                    expected = AddTransactionForScreenTitleError.None,
-                )
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
+
+                addTransactionForScreenViewModel.uiStateEvents.clearTitle()
+                result.titleTextFieldState.text.toString().shouldBeEmpty()
             }
         }
 
-    @Test
-    fun updateUiStateAndStateEvents_titleAlreadyExists_ctaIsDisabled() =
-        testDependencies.runTestWithTimeout {
-            val updatedTitle = "TestTitle"
-            addTransactionForScreenViewModel.uiState.test {
-                awaitItem().isCtaButtonEnabled.shouldBeFalse()
-                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedTitle
-                )
-                awaitItem().title.shouldBe(
-                    expected = updatedTitle,
-                )
-                addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
-                    .join()
-
-                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedTitle
-                )
-                val textFieldStateUpdate = awaitItem()
-                textFieldStateUpdate.title.shouldBe(
-                    expected = updatedTitle,
-                )
-
-                val result = awaitItem()
-                result.isCtaButtonEnabled.shouldBeFalse()
-                result.titleError.shouldBe(
-                    expected = AddTransactionForScreenTitleError.TransactionForExists,
-                )
-            }
-        }
-
-    @Test
-    fun updateUiStateAndStateEvents_titleIsValid_ctaIsEnabled() =
-        testDependencies.runTestWithTimeout {
-            val updatedTitle = "test-title"
-            addTransactionForScreenViewModel.uiState.test {
-                awaitItem().isCtaButtonEnabled.shouldBeFalse()
-
-                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    updatedTitle
-                )
-                val textFieldStateUpdate = awaitItem()
-                textFieldStateUpdate.title.shouldBe(
-                    expected = updatedTitle,
-                )
-
-                val result = awaitItem()
-                result.isCtaButtonEnabled.shouldBeTrue()
-                result.titleError.shouldBe(
-                    expected = AddTransactionForScreenTitleError.None,
-                )
-            }
-        }
-    // endregion
-
-    // region insertTransactionFor
     @Test
     fun insertTransactionFor_shouldInsertAndNavigateUp() =
         testDependencies.runTestWithTimeout {
+            val updatedTitle = "test-title"
             turbineScope {
                 val navigationCommandTurbine =
                     testDependencies.navigationKit.command.testIn(
@@ -201,16 +111,16 @@ internal class AddTransactionForScreenViewModelTest {
                 val lastChangeTimestamp =
                     testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                         ?: -1L
-
-                val testTitle = "test-transaction-for"
-                val initialState = uiStateTurbine.awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompletedState = uiStateTurbine.awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
+                val fetchDataCompleted = uiStateTurbine.awaitItem()
+                fetchDataCompleted.isLoading.shouldBeFalse()
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
-                    testTitle
+                    updatedTitle
                 )
-                uiStateTurbine.awaitItem().isLoading.shouldBeFalse()
+                val textFieldStateUpdateCompleted = uiStateTurbine.awaitItem()
+                textFieldStateUpdateCompleted.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
 
                 addTransactionForScreenViewModel.uiStateEvents.insertTransactionFor()
 
@@ -220,7 +130,7 @@ internal class AddTransactionForScreenViewModelTest {
                         it.id == 1
                     }
                     ?.title.shouldBe(
-                        expected = testTitle,
+                        expected = updatedTitle,
                     )
                 (testDependencies.financeManagerPreferencesRepository.getDataTimestamp()?.lastChange
                     ?: -1L).shouldBeGreaterThan(
@@ -229,6 +139,78 @@ internal class AddTransactionForScreenViewModelTest {
                 navigationCommandTurbine.awaitItem().shouldBe(
                     expected = FinanceManagerNavigationDirections.NavigateUp,
                 )
+            }
+        }
+
+    @Test
+    fun updateTitle_titleAlreadyExists_ctaIsDisabled() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = testDependencies.testTransactionForTitle1
+            addTransactionForScreenViewModel.uiState.test {
+                val fetchDataCompleted = awaitItem()
+                fetchDataCompleted.isLoading.shouldBeFalse()
+
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedTitle
+                )
+
+                val result = awaitItem()
+                result.titleError.shouldBe(
+                    expected = AddTransactionForScreenTitleError.TransactionForExists,
+                )
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
+            }
+        }
+
+    @Test
+    fun updateTitle_titleIsBlank_ctaIsDisabled() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = "   "
+            addTransactionForScreenViewModel.uiState.test {
+                val fetchDataCompleted = awaitItem()
+                fetchDataCompleted.isLoading.shouldBeFalse()
+
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedTitle
+                )
+
+                val result = awaitItem()
+                result.titleError.shouldBe(
+                    expected = AddTransactionForScreenTitleError.None,
+                )
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
+            }
+        }
+
+    @Test
+    fun updateTitle_titleIsValid_ctaIsEnabled() =
+        testDependencies.runTestWithTimeout {
+            val updatedTitle = "test-title"
+            addTransactionForScreenViewModel.uiState.test {
+                val fetchDataCompleted = awaitItem()
+                fetchDataCompleted.isLoading.shouldBeFalse()
+
+                addTransactionForScreenViewModel.uiStateEvents.updateTitle(
+                    updatedTitle
+                )
+
+                val result = awaitItem()
+                result.titleError.shouldBe(
+                    expected = AddTransactionForScreenTitleError.None,
+                )
+                result.isCtaButtonEnabled.shouldBeTrue()
+                result.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedTitle,
+                    )
             }
         }
     // endregion

@@ -17,6 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.view_model
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
@@ -25,8 +27,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.t
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.navigation.ViewTransactionScreenArgs
@@ -48,7 +48,6 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class ViewTransactionScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
@@ -56,12 +55,10 @@ internal class ViewTransactionScreenViewModel(
     private val deleteTransactionUseByIdCase: DeleteTransactionUseByIdCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region screen args
     private val screenArgs = ViewTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -69,11 +66,9 @@ internal class ViewTransactionScreenViewModel(
     )
     // endregion
 
-    // region initial data
+    // region data
+    private var isLoading: Boolean = false
     private var transactionIdToDelete: Int? = null
-    // endregion
-
-    // region UI state
     private var refundTransactionsListItemData: ImmutableList<TransactionListItemData> =
         persistentListOf()
     private var currentTransactionListItemData: TransactionListItemData? = null
@@ -82,13 +77,16 @@ internal class ViewTransactionScreenViewModel(
         ViewTransactionScreenBottomSheetType.None
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<ViewTransactionScreenUIState> =
         MutableStateFlow(
             value = ViewTransactionScreenUIState(),
         )
     internal val uiState: StateFlow<ViewTransactionScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: ViewTransactionScreenUIStateEvents =
         ViewTransactionScreenUIStateEvents(
             deleteTransaction = ::deleteTransaction,
@@ -102,23 +100,34 @@ internal class ViewTransactionScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            ViewTransactionScreenUIState(
-                isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
-                isLoading = isLoading,
-                refundTransactionsListItemData = refundTransactionsListItemData,
-                originalTransactionListItemData = originalTransactionListItemData,
-                transactionListItemData = currentTransactionListItemData,
-                screenBottomSheetType = screenBottomSheetType,
-            )
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            fetchData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            _uiState.update {
+                ViewTransactionScreenUIState(
+                    isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
+                    isLoading = isLoading,
+                    refundTransactionsListItemData = refundTransactionsListItemData,
+                    originalTransactionListItemData = originalTransactionListItemData,
+                    transactionListItemData = currentTransactionListItemData,
+                    screenBottomSheetType = screenBottomSheetType,
+                )
+            }
         }
     }
     // endregion
 
     // region fetchData
-    override fun fetchData(): Job {
+    private fun fetchData(): Job {
         return coroutineScope.launch {
             getCurrentTransactionData()
         }
@@ -241,9 +250,11 @@ internal class ViewTransactionScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedViewTransactionScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateTransactionIdToDelete(
@@ -251,15 +262,29 @@ internal class ViewTransactionScreenViewModel(
         shouldRefresh: Boolean = false,
     ): Job {
         transactionIdToDelete = updatedTransactionIdToDelete
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
     // endregion
 
     // region screen args
     private fun getCurrentTransactionId(): Int {
         return screenArgs.currentTransactionId
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

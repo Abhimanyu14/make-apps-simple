@@ -133,7 +133,6 @@ public fun MyOutlinedTextFieldV2(
             },
             supportingText = data.supportingText,
             isError = data.isError,
-            // visualTransformation = data.visualTransformation,
             onKeyboardAction = data.keyboardActions,
             keyboardOptions = data.keyboardOptions,
             lineLimits = TextFieldLineLimits.SingleLine,

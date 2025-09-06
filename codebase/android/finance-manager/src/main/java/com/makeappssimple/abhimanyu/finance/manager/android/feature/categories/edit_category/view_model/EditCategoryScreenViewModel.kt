@@ -16,7 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.view_model
 
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.EmojiConstants
@@ -25,8 +30,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.edit_category.state.EditCategoryScreenTitleError
@@ -41,6 +44,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -49,60 +53,59 @@ import org.koin.android.annotation.KoinViewModel
 internal class EditCategoryScreenViewModel(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val editCategoryScreenDataValidationUseCase: EditCategoryScreenDataValidationUseCase,
     private val getCategoryByIdUseCase: GetCategoryByIdUseCase,
     private val updateCategoryUseCase: UpdateCategoryUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region screen args
     private val screenArgs = EditCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
     )
     // endregion
 
-    // region initial data
+    // region data
+    private var isLoading: Boolean = false
+    private var currentCategory: Category? = null
+    private var screenBottomSheetType: EditCategoryScreenBottomSheetType =
+        EditCategoryScreenBottomSheetType.None
+    private var editCategoryScreenDataValidationState: EditCategoryScreenDataValidationState =
+        EditCategoryScreenDataValidationState()
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,
             TransactionType.EXPENSE,
             TransactionType.INVESTMENT,
         )
-    private val transactionTypesChipUIData =
+    private val transactionTypesChipUIData: ImmutableList<ChipUIData> =
         validTransactionTypes.map { transactionType ->
             ChipUIData(
                 text = transactionType.title,
             )
         }
-    private var currentCategory: Category? = null
+    private var selectedTransactionTypeIndex: Int =
+        validTransactionTypes.indexOf(
+            element = TransactionType.EXPENSE,
+        )
+    private var emoji: String = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
+    private var emojiSearchText: String = ""
+    private var titleTextFieldState: TextFieldState = TextFieldState()
     // endregion
 
-    // region UI state
-    private var editCategoryScreenDataValidationState: EditCategoryScreenDataValidationState =
-        EditCategoryScreenDataValidationState()
-    private var title: String = ""
-    private var emojiSearchText = ""
-    private var emoji = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
-    private var selectedTransactionTypeIndex = validTransactionTypes.indexOf(
-        element = TransactionType.EXPENSE,
-    )
-    private var screenBottomSheetType: EditCategoryScreenBottomSheetType =
-        EditCategoryScreenBottomSheetType.None
-    // endregion
-
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<EditCategoryScreenUIState> =
         MutableStateFlow(
             value = EditCategoryScreenUIState(),
         )
     internal val uiState: StateFlow<EditCategoryScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: EditCategoryScreenUIStateEvents =
         EditCategoryScreenUIStateEvents(
             clearTitle = ::clearTitle,
@@ -117,12 +120,22 @@ internal class EditCategoryScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
+    // region initViewModel
+    internal fun initViewModel() {
         coroutineScope.launch {
+            observeData()
+            fetchData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
             editCategoryScreenDataValidationState =
                 editCategoryScreenDataValidationUseCase(
-                    enteredTitle = title.trim(),
+                    enteredTitle = titleTextFieldState.text.toString().trim(),
                     currentCategory = currentCategory,
                 )
             updateUiState()
@@ -142,37 +155,45 @@ internal class EditCategoryScreenViewModel(
                 transactionTypesChipUIData = transactionTypesChipUIData,
                 emoji = emoji,
                 emojiSearchText = emojiSearchText,
-                title = title,
+                titleTextFieldState = titleTextFieldState,
             )
         }
     }
     // endregion
 
-    // region fetchData
-    override fun fetchData(): Job {
-        return coroutineScope.launch {
-            getCurrentCategory()
+    // region observeData
+    private fun observeData() {
+        coroutineScope.launch {
+            snapshotFlow {
+                titleTextFieldState.text.toString()
+            }.collectLatest {
+                refreshUiState()
+            }
         }
     }
+    // endregion
 
-    private fun getCurrentCategory(
+    // region fetchData
+    private suspend fun fetchData() {
+        getCurrentCategory()
+    }
+
+    private suspend fun getCurrentCategory(
         shouldRefresh: Boolean = false,
     ) {
         val currentCategoryId = getCurrentCategoryId()
-        coroutineScope.launch {
-            currentCategory = getCategoryByIdUseCase(
-                id = currentCategoryId,
-            )
-            processCurrentCategory(
-                currentCategory = requireNotNull(
-                    value = currentCategory,
-                    lazyMessage = {
-                        "Category with ID $currentCategoryId not found."
-                    },
-                ),
-                shouldRefresh = shouldRefresh,
-            )
-        }
+        currentCategory = getCategoryByIdUseCase(
+            id = currentCategoryId,
+        )
+        processCurrentCategory(
+            currentCategory = requireNotNull(
+                value = currentCategory,
+                lazyMessage = {
+                    "Category with ID $currentCategoryId not found."
+                },
+            ),
+            shouldRefresh = shouldRefresh,
+        )
     }
 
     private fun processCurrentCategory(
@@ -219,7 +240,7 @@ internal class EditCategoryScreenViewModel(
                     },
                 ),
                 emoji = emoji,
-                title = title,
+                title = titleTextFieldState.text.toString(),
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
             ) == 1
             if (isCategoryUpdated) {
@@ -236,9 +257,11 @@ internal class EditCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         emoji = updatedEmoji
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateEmojiSearchText(
@@ -246,9 +269,11 @@ internal class EditCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         emojiSearchText = updatedEmojiSearchText
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateScreenBottomSheetType(
@@ -256,9 +281,11 @@ internal class EditCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedEditCategoryScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSelectedTransactionTypeIndex(
@@ -266,28 +293,43 @@ internal class EditCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateTitle(
         updatedTitle: String,
         shouldRefresh: Boolean = true,
     ): Job {
-        title = updatedTitle
-        if (shouldRefresh) {
-            updateUiState()
-        }
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
+        titleTextFieldState.setTextAndPlaceCursorAtEnd(
+            text = updatedTitle,
         )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
     // endregion
 
     // region screen args
     private fun getCurrentCategoryId(): Int {
         return screenArgs.currentCategoryId
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

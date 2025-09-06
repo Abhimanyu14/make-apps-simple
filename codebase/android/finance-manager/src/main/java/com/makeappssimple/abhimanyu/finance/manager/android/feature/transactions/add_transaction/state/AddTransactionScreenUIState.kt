@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.add_transaction.state
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
@@ -57,8 +58,8 @@ internal data class AddTransactionScreenUIState(
     val transactionDate: LocalDate = LocalDate.MIN,
     val transactionTime: LocalTime = LocalTime.MIN,
     val amountErrorText: String? = null,
-    val amount: String = "",
-    val title: String = "",
+    val amountTextFieldState: TextFieldState = TextFieldState(),
+    val titleTextFieldState: TextFieldState = TextFieldState(),
 ) : ScreenUIState
 
 internal sealed class AccountFromText {

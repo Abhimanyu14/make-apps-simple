@@ -25,12 +25,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
@@ -74,7 +72,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.a
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun AddCategoryScreenUI(
@@ -82,24 +79,6 @@ internal fun AddCategoryScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: AddCategoryScreenUIEvent) -> Unit = {},
 ) {
-    val titleTextFieldState = rememberTextFieldState(
-        initialText = uiState.title,
-    )
-
-    LaunchedEffect(
-        key1 = titleTextFieldState,
-    ) {
-        snapshotFlow {
-            titleTextFieldState.text.toString()
-        }.collectLatest {
-            handleUIEvent(
-                AddCategoryScreenUIEvent.OnTitleUpdated(
-                    updatedTitle = it,
-                )
-            )
-        }
-    }
-
     if (!uiState.isLoading) {
         LaunchedEffect(
             key1 = Unit,
@@ -251,7 +230,7 @@ internal fun AddCategoryScreenUI(
                         ),
                     data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldState = titleTextFieldState,
+                        textFieldState = uiState.titleTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_category_title,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_category_clear_title,
                         supportingText = if (uiState.isSupportingTextVisible) {

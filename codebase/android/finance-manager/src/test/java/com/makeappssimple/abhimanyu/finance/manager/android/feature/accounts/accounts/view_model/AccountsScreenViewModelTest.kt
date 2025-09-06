@@ -39,7 +39,6 @@ internal class AccountsScreenViewModelTest {
         testDependencies = TestDependencies()
         accountsScreenViewModel = AccountsScreenViewModel(
             navigationKit = testDependencies.navigationKit,
-            screenUIStateDelegate = testDependencies.screenUIStateDelegate,
             coroutineScope = testDependencies.testScope.backgroundScope,
             deleteAccountByIdUseCase = testDependencies.deleteAccountByIdUseCase,
             financeManagerPreferencesRepository = testDependencies.financeManagerPreferencesRepository,

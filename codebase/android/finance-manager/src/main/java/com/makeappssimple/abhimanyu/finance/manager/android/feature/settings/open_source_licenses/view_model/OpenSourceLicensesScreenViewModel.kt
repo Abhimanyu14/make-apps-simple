@@ -16,51 +16,26 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.view_model
 
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class OpenSourceLicensesScreenViewModel(
     coroutineScope: CoroutineScope,
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region uiStateAndStateEvents
-    private val _uiState: MutableStateFlow<OpenSourceLicensesScreenUIState> =
-        MutableStateFlow(
-            value = OpenSourceLicensesScreenUIState(),
-        )
-    internal val uiState: StateFlow<OpenSourceLicensesScreenUIState> =
-        _uiState.asStateFlow()
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region uiState
     internal val uiStateEvents: OpenSourceLicensesScreenUIStateEvents =
         OpenSourceLicensesScreenUIStateEvents(
             navigateUp = ::navigateUp,
         )
-    // endregion
-
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            OpenSourceLicensesScreenUIState(
-                isLoading = isLoading,
-            )
-        }
-    }
     // endregion
 }

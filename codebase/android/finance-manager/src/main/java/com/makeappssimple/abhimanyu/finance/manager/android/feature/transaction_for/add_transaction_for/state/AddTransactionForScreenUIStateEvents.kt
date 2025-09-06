@@ -22,8 +22,8 @@ import kotlinx.coroutines.Job
 
 @Stable
 internal class AddTransactionForScreenUIStateEvents(
-    val clearTitle: () -> Job,
+    val clearTitle: () -> Unit,
     val insertTransactionFor: () -> Job,
     val navigateUp: () -> Job,
-    val updateTitle: (updatedTitle: String) -> Job,
+    val updateTitle: (updatedTitle: String) -> Unit,
 ) : ScreenUIStateEvents

@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.combine
 import com.makeappssimple.abhimanyu.common.core.extensions.combineAndCollectLatest
@@ -58,8 +59,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.plus
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.sortOrder
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultAccount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.util.isDefaultIncomeCategory
@@ -88,7 +87,6 @@ import kotlin.math.abs
 public class EditTransactionScreenViewModelOld(
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
@@ -101,12 +99,10 @@ public class EditTransactionScreenViewModelOld(
     private val updateAccountBalanceAmountUseCase: UpdateAccountBalanceAmountUseCase,
     private val updateTransactionUseCase: UpdateTransactionUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -115,6 +111,7 @@ public class EditTransactionScreenViewModelOld(
     // endregion
 
     // region Transaction data
+    private var isLoading: Boolean = false
     private var editingTransactionData: TransactionData? = null
     private var maxRefundAmount: Amount? = null
     // endregion
@@ -282,7 +279,7 @@ public class EditTransactionScreenViewModelOld(
         )
 
     // region fetchData
-    override fun fetchData(): Job {
+    private fun fetchData(): Job {
         return coroutineScope.launch {
             awaitAll(
                 async {
@@ -326,12 +323,12 @@ public class EditTransactionScreenViewModelOld(
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         observeSelectedTransactionType()
         observeSelectedCategory()
     }
 
-    override fun updateUiStateAndStateEvents() {
+    private fun refreshUiState() {
         // TODO(Abhi): Not Implemented
     }
     // endregion
@@ -1009,4 +1006,16 @@ public class EditTransactionScreenViewModelOld(
     private fun isAddingRefundTransactionOrEditingAnyTransaction(): Boolean {
         return screenArgs.currentTransactionId.isNotNull()
     }
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
+    }
+    // endregion
 }

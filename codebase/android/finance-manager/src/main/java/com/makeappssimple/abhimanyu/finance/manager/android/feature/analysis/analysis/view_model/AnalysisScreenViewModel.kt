@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.view_model
 
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -32,8 +34,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.feature.analysis.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.analysis.AnalysisListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
@@ -58,18 +58,16 @@ private object AnalysisScreenViewModelConstants {
 @KoinViewModel
 internal class AnalysisScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region initial data
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region data
+    private var isLoading: Boolean = false
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.EXPENSE,
@@ -87,22 +85,22 @@ internal class AnalysisScreenViewModel(
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
     private var oldestTransactionLocalDate: LocalDate? = null
-    // endregion
-
-    // region UI state
     private var selectedFilter: Filter = Filter()
     private var screenBottomSheetType: AnalysisScreenBottomSheetType =
         AnalysisScreenBottomSheetType.None
     private var selectedTransactionTypeIndex: Int = 0
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<AnalysisScreenUIState> =
         MutableStateFlow(
             value = AnalysisScreenUIState(),
         )
     internal val uiState: StateFlow<AnalysisScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: AnalysisScreenUIStateEvents =
         AnalysisScreenUIStateEvents(
             navigateUp = ::navigateUp,
@@ -113,27 +111,38 @@ internal class AnalysisScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            analysisListItemData = getAnalysisListItemData(
-                selectedFilterValue = selectedFilter,
-                selectedTransactionTypeIndexValue = selectedTransactionTypeIndex,
-                allTransactionDataValue = allTransactionData,
-            )
-            AnalysisScreenUIState(
-                screenBottomSheetType = screenBottomSheetType,
-                isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
-                isLoading = isLoading,
-                selectedFilter = selectedFilter.orEmpty(),
-                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                analysisListItemData = analysisListItemData,
-                transactionTypesChipUIData = validTransactionTypesChipUIData,
-                defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
-                defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
-                startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
-                startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
-            )
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            fetchData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            _uiState.update {
+                analysisListItemData = getAnalysisListItemData(
+                    selectedFilterValue = selectedFilter,
+                    selectedTransactionTypeIndexValue = selectedTransactionTypeIndex,
+                    allTransactionDataValue = allTransactionData,
+                )
+                AnalysisScreenUIState(
+                    screenBottomSheetType = screenBottomSheetType,
+                    isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
+                    isLoading = isLoading,
+                    selectedFilter = selectedFilter.orEmpty(),
+                    selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                    analysisListItemData = analysisListItemData,
+                    transactionTypesChipUIData = validTransactionTypesChipUIData,
+                    defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
+                    defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
+                    startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
+                    startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
+                )
+            }
         }
     }
 
@@ -208,7 +217,7 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region fetchData
-    override fun fetchData(): Job {
+    private fun fetchData(): Job {
         return coroutineScope.launch {
             allTransactionData = getAllTransactionDataUseCase()
             oldestTransactionLocalDate = getOldestTransactionLocalDate()
@@ -228,9 +237,11 @@ internal class AnalysisScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedAnalysisScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSelectedFilter(
@@ -238,9 +249,11 @@ internal class AnalysisScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedFilter = updatedSelectedFilter
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSelectedTransactionTypeIndex(
@@ -248,9 +261,11 @@ internal class AnalysisScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
     // endregion
 
@@ -261,6 +276,18 @@ internal class AnalysisScreenViewModel(
                 transactionData.transaction.transactionTimestamp
             }.orZero(),
         )
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

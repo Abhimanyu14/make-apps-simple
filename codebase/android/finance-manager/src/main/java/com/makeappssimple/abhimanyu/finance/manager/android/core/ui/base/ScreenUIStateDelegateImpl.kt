@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base
 
+import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -45,6 +46,10 @@ public open class ScreenUIStateDelegateImpl(
         if (shouldRefresh) {
             return refresh()
         }
+        return getCompletedJob()
+    }
+
+    override fun getCompletedJob(): CompletableJob {
         return Job().apply {
             complete()
         }
@@ -57,9 +62,7 @@ public open class ScreenUIStateDelegateImpl(
         if (shouldRefresh) {
             return refresh()
         }
-        return Job().apply {
-            complete()
-        }
+        return getCompletedJob()
     }
 
     override fun <T> withLoading(

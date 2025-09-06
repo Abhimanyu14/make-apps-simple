@@ -16,11 +16,13 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.view_model
 
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
+import androidx.compose.runtime.snapshotFlow
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.InsertTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.add_transaction_for.use_case.AddTransactionForScreenDataValidationUseCase
@@ -29,6 +31,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -36,30 +39,33 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class AddTransactionForScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val addTransactionForScreenDataValidationUseCase: AddTransactionForScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val insertTransactionForUseCase: InsertTransactionForUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region UI state
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region data
     private var addTransactionForScreenDataValidationState: AddTransactionForScreenDataValidationState =
         AddTransactionForScreenDataValidationState()
-    private var title: String = ""
+    private var isLoading: Boolean = false
+    private var titleTextFieldState: TextFieldState = TextFieldState()
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<AddTransactionForScreenUIState> =
         MutableStateFlow(
-            value = AddTransactionForScreenUIState(),
+            value = AddTransactionForScreenUIState(
+                isLoading = false,
+            ),
         )
     internal val uiState: StateFlow<AddTransactionForScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: AddTransactionForScreenUIStateEvents =
         AddTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
@@ -69,15 +75,21 @@ internal class AddTransactionForScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
+    // region initViewModel
+    internal fun initViewModel() {
         coroutineScope.launch {
-            addTransactionForScreenDataValidationState =
-                addTransactionForScreenDataValidationUseCase(
-                    enteredTitle = title,
-                )
-            updateUiState()
+            observeData()
         }
+    }
+    // endregion
+
+    // region refreshUiState
+    private suspend fun refreshUiState() {
+        addTransactionForScreenDataValidationState =
+            addTransactionForScreenDataValidationUseCase(
+                enteredTitle = titleTextFieldState.text.toString(),
+            )
+        updateUiState()
     }
 
     private fun updateUiState() {
@@ -86,15 +98,25 @@ internal class AddTransactionForScreenViewModel(
                 titleError = addTransactionForScreenDataValidationState.titleError,
                 isCtaButtonEnabled = addTransactionForScreenDataValidationState.isCtaButtonEnabled,
                 isLoading = isLoading,
-                title = title,
+                titleTextFieldState = titleTextFieldState,
             )
         }
     }
     // endregion
 
+    // region observeData
+    private suspend fun observeData() {
+        snapshotFlow {
+            titleTextFieldState.text.toString()
+        }.collectLatest {
+            refreshUiState()
+        }
+    }
+    // endregion
+
     // region state events
-    private fun clearTitle(): Job {
-        return updateTitle(
+    private fun clearTitle() {
+        updateTitle(
             updatedTitle = "",
         )
     }
@@ -103,7 +125,7 @@ internal class AddTransactionForScreenViewModel(
         return coroutineScope.launch {
             startLoading()
             val isTransactionForInserted = insertTransactionForUseCase(
-                title = title,
+                title = titleTextFieldState.text.toString(),
             ) != -1L
             if (isTransactionForInserted) {
                 navigateUp()
@@ -116,13 +138,22 @@ internal class AddTransactionForScreenViewModel(
 
     private fun updateTitle(
         updatedTitle: String,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        title = updatedTitle
-        updateUiState()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
+    ) {
+        titleTextFieldState.setTextAndPlaceCursorAtEnd(
+            text = updatedTitle,
         )
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

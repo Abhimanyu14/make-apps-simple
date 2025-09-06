@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edit_account.state
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
@@ -32,9 +33,9 @@ internal data class EditAccountScreenUIState(
     val nameError: EditAccountScreenNameError = EditAccountScreenNameError.None,
     val selectedAccountTypeIndex: Int = -1,
     val accountTypesChipUIDataList: ImmutableList<ChipUIData> = persistentListOf(),
-    val balanceAmountValue: String = "",
-    val minimumBalanceAmountValue: String = "",
-    val name: String = "",
+    val balanceAmountValueTextFieldState: TextFieldState = TextFieldState(),
+    val minimumBalanceAmountValueTextFieldState: TextFieldState = TextFieldState(),
+    val nameTextFieldState: TextFieldState = TextFieldState(),
 ) : ScreenUIState
 
 public sealed class EditAccountScreenNameError {

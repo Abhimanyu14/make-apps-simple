@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.edit_transaction.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -45,12 +44,6 @@ internal fun EditTransactionScreen(
         EditTransactionScreenUIEventHandler(
             uiStateEvents = uiStateEvents,
         )
-    }
-
-    LaunchedEffect(
-        key1 = Unit,
-    ) {
-        screenViewModel.initViewModel()
     }
 
     EditTransactionScreenUI(

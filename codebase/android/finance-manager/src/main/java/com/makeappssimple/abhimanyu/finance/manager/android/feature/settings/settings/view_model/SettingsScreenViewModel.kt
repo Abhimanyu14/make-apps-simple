@@ -17,7 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.view_model
 
 import android.net.Uri
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
@@ -26,8 +28,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RecalculateTotalUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RestoreDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.settings.state.SettingsScreenUIStateEvents
@@ -44,7 +44,6 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class SettingsScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val alarmKit: AlarmKit,
     private val appVersionKit: AppVersionKit,
     private val backupDataUseCase: BackupDataUseCase,
@@ -53,29 +52,28 @@ internal class SettingsScreenViewModel(
     private val recalculateTotalUseCase: RecalculateTotalUseCase,
     private val restoreDataUseCase: RestoreDataUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region initial data
+    private var isLoading: Boolean = false
     private var appVersion: String = ""
     private var isReminderEnabled: Boolean = false
-    // endregion
-
-    // region UI state
     private var screenSnackbarType: SettingsScreenSnackbarType =
         SettingsScreenSnackbarType.None
     // endregion
 
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<SettingsScreenUIState> =
         MutableStateFlow(
             value = SettingsScreenUIState(),
         )
     internal val uiState: StateFlow<SettingsScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: SettingsScreenUIStateEvents =
         SettingsScreenUIStateEvents(
             disableReminder = ::disableReminder,
@@ -91,21 +89,33 @@ internal class SettingsScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            SettingsScreenUIState(
-                isLoading = isLoading,
-                isReminderEnabled = isReminderEnabled,
-                screenSnackbarType = screenSnackbarType,
-                appVersion = appVersion,
-            )
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            observeData()
+            fetchData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            _uiState.update {
+                SettingsScreenUIState(
+                    isLoading = isLoading,
+                    isReminderEnabled = isReminderEnabled,
+                    screenSnackbarType = screenSnackbarType,
+                    appVersion = appVersion,
+                )
+            }
         }
     }
     // endregion
 
     // region fetchData
-    override fun fetchData(): Job {
+    private fun fetchData(): Job {
         return coroutineScope.launch {
             getAppVersion()
         }
@@ -117,7 +127,7 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         observeForReminder()
     }
 
@@ -126,7 +136,7 @@ internal class SettingsScreenViewModel(
             financeManagerPreferencesRepository.getReminderFlow()
                 .collectLatest { updatedReminder ->
                     isReminderEnabled = updatedReminder?.isEnabled.orFalse()
-                    refresh()
+                    refreshUiState()
                 }
         }
     }
@@ -212,9 +222,23 @@ internal class SettingsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenSnackbarType = updatedSettingsScreenSnackbarType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

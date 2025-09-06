@@ -570,7 +570,7 @@ internal class TestDependencies {
         testBody: suspend TestScope.() -> Unit,
     ) {
         testScope.runTest(
-            timeout = 10.seconds,
+            timeout = 3.seconds,
         ) {
             testBody()
         }

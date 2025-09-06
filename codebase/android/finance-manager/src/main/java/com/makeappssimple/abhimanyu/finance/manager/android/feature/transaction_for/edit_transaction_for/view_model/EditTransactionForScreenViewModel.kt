@@ -16,14 +16,16 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.view_model
 
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.GetTransactionForByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
@@ -33,6 +35,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -40,42 +43,40 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class EditTransactionForScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     savedStateHandle: SavedStateHandle,
     private val coroutineScope: CoroutineScope,
     private val editTransactionForScreenDataValidationUseCase: EditTransactionForScreenDataValidationUseCase,
     private val getTransactionForByIdUseCase: GetTransactionForByIdUseCase,
     private val updateTransactionForUseCase: UpdateTransactionForUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
     // region screen args
     private val screenArgs = EditTransactionForScreenArgs(
         savedStateHandle = savedStateHandle,
     )
     // endregion
 
-    // region initial data
+    // region data
+    private var isLoading: Boolean = false
+    private var editTransactionForScreenDataValidationState: EditTransactionForScreenDataValidationState =
+        EditTransactionForScreenDataValidationState()
+    private val titleTextFieldState: TextFieldState = TextFieldState()
     private var currentTransactionFor: TransactionFor? = null
     // endregion
 
-    // region UI state
-    private var editTransactionForScreenDataValidationState: EditTransactionForScreenDataValidationState =
-        EditTransactionForScreenDataValidationState()
-    private var title = ""
-    // endregion
-
-    // region uiStateAndStateEvents
+    // region uiState
     private val _uiState: MutableStateFlow<EditTransactionForScreenUIState> =
         MutableStateFlow(
             value = EditTransactionForScreenUIState(),
         )
     internal val uiState: StateFlow<EditTransactionForScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: EditTransactionForScreenUIStateEvents =
         EditTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
@@ -85,16 +86,24 @@ internal class EditTransactionForScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
+    // region initViewModel
+    internal fun initViewModel() {
         coroutineScope.launch {
-            editTransactionForScreenDataValidationState =
-                editTransactionForScreenDataValidationUseCase(
-                    currentTransactionFor = currentTransactionFor,
-                    enteredTitle = title,
-                )
-            updateUiState()
+            observeData()
+            fetchData()
+            completeLoading()
         }
+    }
+    // endregion
+
+    // region refreshUiState
+    private suspend fun refreshUiState() {
+        editTransactionForScreenDataValidationState =
+            editTransactionForScreenDataValidationUseCase(
+                currentTransactionFor = currentTransactionFor,
+                enteredTitle = titleTextFieldState.text.toString(),
+            )
+        updateUiState()
     }
 
     private fun updateUiState() {
@@ -103,61 +112,17 @@ internal class EditTransactionForScreenViewModel(
                 isCtaButtonEnabled = editTransactionForScreenDataValidationState.isCtaButtonEnabled,
                 isLoading = isLoading,
                 titleError = editTransactionForScreenDataValidationState.titleError,
-                title = title,
+                titleTextFieldState = titleTextFieldState,
             )
         }
     }
     // endregion
 
     // region fetchData
-    override fun fetchData(): Job {
-        return coroutineScope.launch {
-            getCurrentTransactionFor()
-        }
-    }
-    // endregion
-
-    // region state events
-    private fun clearTitle(
-        shouldRefresh: Boolean = true,
-    ): Job {
-        return updateTitle(
-            updatedTitle = "",
-            shouldRefresh = shouldRefresh,
-        )
+    private suspend fun fetchData() {
+        getCurrentTransactionFor()
     }
 
-    private fun updateTitle(
-        updatedTitle: String,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        title = updatedTitle
-        updateUiState()
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
-    }
-
-    private fun updateTransactionFor(): Job {
-        val currentTransactionForValue = currentTransactionFor
-            ?: throw IllegalStateException("Current transaction for is null")
-        return coroutineScope.launch {
-            startLoading()
-            val isTransactionForUpdated = updateTransactionForUseCase(
-                currentTransactionFor = currentTransactionForValue,
-                title = title,
-            )
-            if (isTransactionForUpdated) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
-        }
-    }
-    // endregion
-
-    // region getOriginalTransactionFor
     private suspend fun getCurrentTransactionFor() {
         val currentTransactionForId = getCurrentTransactionForId()
         currentTransactionFor = getTransactionForByIdUseCase(
@@ -176,13 +141,73 @@ internal class EditTransactionForScreenViewModel(
     private fun processCurrentTransactionFor(
         currentTransactionFor: TransactionFor,
     ) {
-        title = currentTransactionFor.title
+        updateTitle(
+            updatedTitle = currentTransactionFor.title,
+        )
+    }
+    // endregion
+
+    // region observeData
+    private fun observeData() {
+        coroutineScope.launch {
+            snapshotFlow {
+                titleTextFieldState.text.toString()
+            }.collectLatest {
+                refreshUiState()
+            }
+        }
+    }
+    // endregion
+
+    // region state events
+    private fun clearTitle() {
+        updateTitle(
+            updatedTitle = "",
+        )
+    }
+
+    private fun updateTitle(
+        updatedTitle: String,
+    ) {
+        titleTextFieldState.setTextAndPlaceCursorAtEnd(
+            text = updatedTitle,
+        )
+    }
+
+    private fun updateTransactionFor(): Job {
+        val currentTransactionForValue = currentTransactionFor
+            ?: throw IllegalStateException("Current transaction for is null")
+        return coroutineScope.launch {
+            startLoading()
+            val isTransactionForUpdated = updateTransactionForUseCase(
+                currentTransactionFor = currentTransactionForValue,
+                title = titleTextFieldState.text.toString(),
+            )
+            if (isTransactionForUpdated) {
+                navigateUp()
+            } else {
+                completeLoading()
+                // TODO(Abhi): Show error
+            }
+        }
     }
     // endregion
 
     // region screen args
     private fun getCurrentTransactionForId(): Int {
         return screenArgs.currentTransactionForId
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

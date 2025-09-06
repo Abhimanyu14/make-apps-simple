@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.categories.add_category.state
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.chip.ChipUIData
@@ -36,7 +37,7 @@ internal data class AddCategoryScreenUIState(
     val transactionTypesChipUIData: ImmutableList<ChipUIData> = persistentListOf(),
     val emoji: String = "",
     val emojiSearchText: String = "",
-    val title: String = "",
+    val titleTextFieldState: TextFieldState = TextFieldState(),
 ) : ScreenUIState
 
 public sealed class AddCategoryScreenTitleError {

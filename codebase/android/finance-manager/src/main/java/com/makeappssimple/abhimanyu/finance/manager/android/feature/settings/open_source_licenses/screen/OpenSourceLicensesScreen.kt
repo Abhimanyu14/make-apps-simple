@@ -17,12 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.event.OpenSourceLicensesScreenUIEventHandler
-import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.settings.open_source_licenses.view_model.OpenSourceLicensesScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -35,7 +31,6 @@ internal fun OpenSourceLicensesScreen(
         message = "Inside OpenSourceLicensesScreen",
     )
 
-    val uiState: OpenSourceLicensesScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
     val uiStateEvents: OpenSourceLicensesScreenUIStateEvents =
         screenViewModel.uiStateEvents
 
@@ -47,14 +42,7 @@ internal fun OpenSourceLicensesScreen(
         )
     }
 
-    LaunchedEffect(
-        key1 = Unit,
-    ) {
-        screenViewModel.initViewModel()
-    }
-
     OpenSourceLicensesScreenUI(
-        uiState = uiState,
         handleUIEvent = screenUIEventHandler::handleUIEvent,
     )
 }

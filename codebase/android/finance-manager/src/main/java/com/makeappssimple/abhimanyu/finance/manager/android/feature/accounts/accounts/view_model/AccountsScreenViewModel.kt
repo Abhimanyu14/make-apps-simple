@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.view_model
 
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.DeleteAccountByIdUseCase
@@ -24,8 +26,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.a
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.accounts.AccountsListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.accounts.state.AccountsScreenUIState
@@ -48,7 +48,6 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class AccountsScreenViewModel(
     navigationKit: NavigationKit,
-    screenUIStateDelegate: ScreenUIStateDelegate,
     private val coroutineScope: CoroutineScope,
     private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
@@ -58,22 +57,18 @@ internal class AccountsScreenViewModel(
     private val getAllAccountsListItemDataListUseCase: GetAllAccountsListItemDataListUseCase,
     private val getDefaultAccountIdFlowUseCase: GetDefaultAccountIdFlowUseCase,
     internal val logKit: LogKit,
-) : ScreenViewModel(
-    coroutineScope = coroutineScope,
-    logKit = logKit,
-    navigationKit = navigationKit,
-    screenUIStateDelegate = screenUIStateDelegate,
-) {
-    // region initial data
+) : ViewModel(
+    viewModelScope = coroutineScope,
+), LogKit by logKit,
+    NavigationKit by navigationKit {
+    // region data
+    private var isLoading: Boolean = false
     private var allAccounts: ImmutableList<Account> = persistentListOf()
     private var defaultAccountId: Int? = null
     private var allAccountsTotalBalanceAmountValue: Long = 0L
     private var allAccountsTotalMinimumBalanceAmountValue: Long = 0L
     private var allAccountsListItemDataList: ImmutableList<AccountsListItemData> =
         persistentListOf()
-    // endregion
-
-    // region UI state
     private var screenBottomSheetType: AccountsScreenBottomSheetType =
         AccountsScreenBottomSheetType.None
     private var clickedItemId: Int? = null
@@ -86,6 +81,9 @@ internal class AccountsScreenViewModel(
         )
     internal val uiState: StateFlow<AccountsScreenUIState> =
         _uiState.asStateFlow()
+    // endregion
+
+    // region uiStateEvents
     internal val uiStateEvents: AccountsScreenUIStateEvents =
         AccountsScreenUIStateEvents(
             deleteAccount = ::deleteAccount,
@@ -99,23 +97,34 @@ internal class AccountsScreenViewModel(
         )
     // endregion
 
-    // region updateUiStateAndStateEvents
-    override fun updateUiStateAndStateEvents() {
-        _uiState.update {
-            AccountsScreenUIState(
-                screenBottomSheetType = screenBottomSheetType,
-                isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
-                isLoading = isLoading,
-                accountsListItemDataList = allAccountsListItemDataList,
-                accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
-                allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
-            )
+    // region initViewModel
+    internal fun initViewModel() {
+        coroutineScope.launch {
+            observeData()
+            completeLoading()
+        }
+    }
+    // endregion
+
+    // region refreshUiState
+    private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            _uiState.update {
+                AccountsScreenUIState(
+                    screenBottomSheetType = screenBottomSheetType,
+                    isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
+                    isLoading = isLoading,
+                    accountsListItemDataList = allAccountsListItemDataList,
+                    accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
+                    allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
+                )
+            }
         }
     }
     // endregion
 
     // region observeData
-    override fun observeData() {
+    private fun observeData() {
         observeForAllAccounts()
         observeForDefaultAccountId()
     }
@@ -142,7 +151,7 @@ internal class AccountsScreenViewModel(
             allAccounts = allAccounts,
             defaultAccountId = defaultAccountId,
         )
-        refresh()
+        refreshUiState()
     }
 
     private fun observeForDefaultAccountId() {
@@ -163,7 +172,7 @@ internal class AccountsScreenViewModel(
             allAccounts = allAccounts,
             defaultAccountId = defaultAccountId,
         )
-        return refresh()
+        return refreshUiState()
     }
     // endregion
 
@@ -201,9 +210,11 @@ internal class AccountsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         clickedItemId = updatedClickedItemId
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateDefaultAccountIdInDataStore(): Job {
@@ -235,9 +246,23 @@ internal class AccountsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedAccountsScreenBottomSheetType
-        return refreshIfRequired(
-            shouldRefresh = shouldRefresh,
-        )
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
+    }
+    // endregion
+
+    // region loading
+    private suspend fun completeLoading() {
+        isLoading = false
+        refreshUiState()
+    }
+
+    private suspend fun startLoading() {
+        isLoading = true
+        refreshUiState()
     }
     // endregion
 }

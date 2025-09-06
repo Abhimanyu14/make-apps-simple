@@ -25,14 +25,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.clearText
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -65,7 +62,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.add_account.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun AddAccountScreenUI(
@@ -75,40 +71,6 @@ internal fun AddAccountScreenUI(
 ) {
     val nameTextFieldFocusRequester = remember {
         FocusRequester()
-    }
-    val nameTextFieldState = rememberTextFieldState(
-        initialText = uiState.nameTextFieldValue,
-    )
-    val minimumBalanceAmountTextFieldState = rememberTextFieldState(
-        initialText = uiState.minimumAccountBalanceTextFieldValue,
-    )
-
-    LaunchedEffect(
-        key1 = nameTextFieldState,
-    ) {
-        snapshotFlow {
-            nameTextFieldState.text.toString()
-        }.collectLatest {
-            handleUIEvent(
-                AddAccountScreenUIEvent.OnNameUpdated(
-                    updatedName = it,
-                )
-            )
-        }
-    }
-
-    LaunchedEffect(
-        key1 = minimumBalanceAmountTextFieldState,
-    ) {
-        snapshotFlow {
-            minimumBalanceAmountTextFieldState.text.toString()
-        }.collectLatest {
-            handleUIEvent(
-                AddAccountScreenUIEvent.OnMinimumAccountBalanceAmountValueUpdated(
-                    updatedMinimumAccountBalanceAmountValue = it,
-                )
-            )
-        }
     }
 
     if (!uiState.isLoading) {
@@ -193,7 +155,7 @@ internal fun AddAccountScreenUI(
                 data = MyOutlinedTextFieldDataV2(
                     isError = uiState.visibilityData.nameTextFieldErrorText,
                     isLoading = uiState.isLoading,
-                    textFieldState = nameTextFieldState,
+                    textFieldState = uiState.nameTextFieldState,
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_name,
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_name,
                     supportingText = {
@@ -219,7 +181,7 @@ internal fun AddAccountScreenUI(
                 handleEvent = { event ->
                     when (event) {
                         is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
-                            nameTextFieldState.clearText()
+                            handleUIEvent(AddAccountScreenUIEvent.OnClearNameButtonClick)
                         }
                     }
                 },
@@ -236,7 +198,7 @@ internal fun AddAccountScreenUI(
                         ),
                     data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
-                        textFieldState = minimumBalanceAmountTextFieldState,
+                        textFieldState = uiState.minimumAccountBalanceTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value,
                         visualTransformation = AmountCommaVisualTransformation(),
@@ -251,7 +213,7 @@ internal fun AddAccountScreenUI(
                     handleEvent = { event ->
                         when (event) {
                             is MyOutlinedTextFieldEventV2.OnClickTrailingIcon -> {
-                                minimumBalanceAmountTextFieldState.clearText()
+                                handleUIEvent(AddAccountScreenUIEvent.OnClearMinimumAccountBalanceAmountValueButtonClick)
                             }
                         }
                     },
