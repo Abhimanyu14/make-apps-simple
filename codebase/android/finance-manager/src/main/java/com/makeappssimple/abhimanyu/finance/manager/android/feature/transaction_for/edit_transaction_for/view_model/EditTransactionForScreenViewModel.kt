@@ -97,13 +97,15 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region refreshUiState
-    private suspend fun refreshUiState() {
-        editTransactionForScreenDataValidationState =
-            editTransactionForScreenDataValidationUseCase(
-                currentTransactionFor = currentTransactionFor,
-                enteredTitle = titleTextFieldState.text.toString(),
-            )
-        updateUiState()
+    private fun refreshUiState() {
+        coroutineScope.launch {
+            editTransactionForScreenDataValidationState =
+                editTransactionForScreenDataValidationUseCase(
+                    currentTransactionFor = currentTransactionFor,
+                    enteredTitle = titleTextFieldState.text.toString(),
+                )
+            updateUiState()
+        }
     }
 
     private fun updateUiState() {
@@ -200,12 +202,12 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region loading
-    private suspend fun completeLoading() {
+    private fun completeLoading() {
         isLoading = false
         refreshUiState()
     }
 
-    private suspend fun startLoading() {
+    private fun startLoading() {
         isLoading = true
         refreshUiState()
     }

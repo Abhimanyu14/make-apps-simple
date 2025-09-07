@@ -442,12 +442,12 @@ internal class HomeScreenViewModel(
     // endregion
 
     // region loading
-    private suspend fun completeLoading() {
+    private fun completeLoading() {
         isLoading = false
         refreshUiState()
     }
 
-    private suspend fun startLoading() {
+    private fun startLoading() {
         isLoading = true
         refreshUiState()
     }

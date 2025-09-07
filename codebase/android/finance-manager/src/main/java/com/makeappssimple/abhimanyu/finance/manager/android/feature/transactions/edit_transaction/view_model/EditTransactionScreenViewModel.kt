@@ -1066,7 +1066,7 @@ internal class EditTransactionScreenViewModel(
     // endregion
 
     // region loading
-    private suspend fun completeLoading() {
+    private fun completeLoading() {
         isLoading = false
         refreshUiState()
     }

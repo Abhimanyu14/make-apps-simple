@@ -121,7 +121,6 @@ internal class AddAccountScreenViewModel(
                 addAccountScreenDataValidationUseCase(
                     enteredName = nameTextFieldState.text.toString().trim(),
                 )
-            selectedAccountType = getSelectedAccountType()
             updateUiState()
         }
     }
@@ -209,9 +208,6 @@ internal class AddAccountScreenViewModel(
         minimumAccountBalanceAmountValueTextFieldState.setTextAndPlaceCursorAtEnd(
             text = updatedMinimumAccountBalanceAmountValue,
         )
-        if (shouldRefresh) {
-            updateUiState()
-        }
         return if (shouldRefresh) {
             refreshUiState()
         } else {
@@ -238,6 +234,7 @@ internal class AddAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
+        updateSelectedAccountType()
         return if (shouldRefresh) {
             refreshUiState()
         } else {
@@ -247,6 +244,10 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region common
+    private fun updateSelectedAccountType() {
+        selectedAccountType = getSelectedAccountType()
+    }
+
     private fun getSelectedAccountType(): AccountType {
         return validAccountTypesForNewAccount.get(
             index = selectedAccountTypeIndex,
@@ -255,12 +256,12 @@ internal class AddAccountScreenViewModel(
     // endregion
 
     // region loading
-    private suspend fun completeLoading() {
+    private fun completeLoading() {
         isLoading = false
         refreshUiState()
     }
 
-    private suspend fun startLoading() {
+    private fun startLoading() {
         isLoading = true
         refreshUiState()
     }
