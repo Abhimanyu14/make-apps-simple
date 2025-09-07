@@ -470,7 +470,7 @@ internal class TestDependencies {
     val testAccountName1 = "test-account-101"
     val testAccountEntity1 = AccountEntity(
         balanceAmount = AmountEntity(
-            value = 100000,
+            value = 1000,
         ),
         id = testAccountId1,
         type = AccountType.E_WALLET,
@@ -484,6 +484,9 @@ internal class TestDependencies {
         ),
         id = testAccountId2,
         type = AccountType.BANK,
+        minimumAccountBalanceAmount = AmountEntity(
+            value = 2000,
+        ),
         name = testAccountName2,
     )
     val testCategoryId1 = 101

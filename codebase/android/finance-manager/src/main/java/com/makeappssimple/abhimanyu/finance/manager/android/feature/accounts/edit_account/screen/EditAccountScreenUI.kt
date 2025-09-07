@@ -66,11 +66,11 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable
 internal data class EditAccountScreenUIVisibilityData(
+    val accountTypesRadioGroup: Boolean = false,
     val balanceAmountTextField: Boolean = false,
     val minimumBalanceAmountTextField: Boolean = false,
     val nameTextField: Boolean = false,
     val nameTextFieldErrorText: Boolean = false,
-    val accountTypesRadioGroup: Boolean = false,
 )
 
 @Composable

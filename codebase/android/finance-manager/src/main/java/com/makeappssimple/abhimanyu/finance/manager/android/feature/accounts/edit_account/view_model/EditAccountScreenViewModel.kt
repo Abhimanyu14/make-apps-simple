@@ -75,7 +75,6 @@ internal class EditAccountScreenViewModel(
         AccountType.entries.filter {
             it != AccountType.CASH
         }
-    private var selectedAccountType: AccountType? = null
     private var validationState: EditAccountScreenDataValidationState =
         EditAccountScreenDataValidationState()
     private var minimumAccountBalanceAmountValueTextFieldState: TextFieldState =
@@ -87,6 +86,7 @@ internal class EditAccountScreenViewModel(
         .indexOf(
             element = AccountType.BANK,
         )
+    private var selectedAccountType: AccountType = getSelectedAccountType()
     private var isLoading: Boolean = false
     // endregion
 
@@ -127,9 +127,6 @@ internal class EditAccountScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            selectedAccountType = validAccountTypesForNewAccount.getOrNull(
-                selectedAccountTypeIndex
-            )
             validationState = editAccountScreenDataValidationUseCase(
                 enteredName = nameTextFieldState.text.toString().trim(),
                 currentAccount = currentAccount,
@@ -156,11 +153,11 @@ internal class EditAccountScreenViewModel(
                 minimumBalanceAmountValueTextFieldState = minimumAccountBalanceAmountValueTextFieldState,
                 nameTextFieldState = nameTextFieldState,
                 visibilityData = EditAccountScreenUIVisibilityData(
+                    accountTypesRadioGroup = validationState.isCashAccount.not(),
                     balanceAmountTextField = true,
                     minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
                     nameTextField = validationState.isCashAccount.not(),
                     nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
-                    accountTypesRadioGroup = validationState.isCashAccount.not(),
                 ),
             )
         }
@@ -194,10 +191,8 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            getCurrentAccount()
-        }
+    private suspend fun fetchData() {
+        getCurrentAccount()
     }
 
     private suspend fun getCurrentAccount() {
@@ -285,9 +280,6 @@ internal class EditAccountScreenViewModel(
         balanceAmountValueTextFieldState.setTextAndPlaceCursorAtEnd(
             text = updatedBalanceAmountValue,
         )
-        if (shouldRefresh) {
-            updateUiState()
-        }
         return if (shouldRefresh) {
             refreshUiState()
         } else {
@@ -302,9 +294,6 @@ internal class EditAccountScreenViewModel(
         minimumAccountBalanceAmountValueTextFieldState.setTextAndPlaceCursorAtEnd(
             text = updatedMinimumAccountBalanceAmountValue,
         )
-        if (shouldRefresh) {
-            updateUiState()
-        }
         return if (shouldRefresh) {
             refreshUiState()
         } else {
@@ -319,9 +308,6 @@ internal class EditAccountScreenViewModel(
         nameTextFieldState.setTextAndPlaceCursorAtEnd(
             text = updatedName,
         )
-        if (shouldRefresh) {
-            updateUiState()
-        }
         return if (shouldRefresh) {
             refreshUiState()
         } else {
@@ -334,11 +320,25 @@ internal class EditAccountScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedAccountTypeIndex = updatedSelectedAccountTypeIndex
+        selectedAccountType = getSelectedAccountType()
         return if (shouldRefresh) {
             refreshUiState()
         } else {
             getCompletedJob()
         }
+    }
+    // endregion
+
+    // region common
+    private fun getSelectedAccountType(): AccountType {
+        return checkNotNull(
+            value = validAccountTypesForNewAccount.getOrNull(
+                selectedAccountTypeIndex
+            ),
+            lazyMessage = {
+                "No account type found for index $selectedAccountTypeIndex"
+            },
+        )
     }
     // endregion
 
