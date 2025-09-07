@@ -20,6 +20,7 @@ import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 
+// TODO(Abhi): To delete
 public interface ScreenUIStateDelegate {
     public val isLoading: Boolean
     public val refreshSignal: MutableSharedFlow<Unit>
