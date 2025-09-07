@@ -338,7 +338,9 @@ internal fun TransactionsScreenUI(
                             },
                         ) { _, listItem ->
                             val isSelected =
-                                uiState.selectedTransactions.contains(listItem.transactionId)
+                                uiState.selectedTransactions.contains(
+                                    element = listItem.transactionId,
+                                )
                             TransactionListItem(
                                 data = listItem
                                     .copy(
