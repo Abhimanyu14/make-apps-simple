@@ -51,7 +51,7 @@ public fun SelectTransactionForBottomSheet(
                 .map { transactionFor ->
                     TransactionForListItemDataAndEventHandler(
                         data = TransactionForListItemData(
-                            title = transactionFor.titleToDisplay,
+                            title = transactionFor.title,
                         ),
                         handleEvent = { event ->
                             when (event) {

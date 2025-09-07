@@ -230,7 +230,7 @@ internal class EditTransactionScreenViewModel(
                 transactionForValuesChipUIData = allTransactionForValues
                     .map { transactionFor ->
                         ChipUIData(
-                            text = transactionFor.titleToDisplay,
+                            text = transactionFor.title,
                         )
                     },
                 transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction

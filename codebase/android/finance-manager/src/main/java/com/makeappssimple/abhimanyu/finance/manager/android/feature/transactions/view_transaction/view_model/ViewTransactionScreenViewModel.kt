@@ -131,10 +131,8 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            getCurrentTransactionData()
-        }
+    private suspend fun fetchData() {
+        getCurrentTransactionData()
     }
 
     private suspend fun getCurrentTransactionData() {
@@ -146,18 +144,18 @@ internal class ViewTransactionScreenViewModel(
             transactionData = currentTransactionData,
         )
         currentTransactionData.transaction.originalTransactionId?.let { originalTransactionId ->
-            getOriginalTransactionData(
+            updateOriginalTransactionData(
                 originalTransactionId = originalTransactionId,
             )
         }
         currentTransactionData.transaction.refundTransactionIds?.let { refundTransactionIds ->
-            getRefundTransactionsData(
+            updateRefundTransactionsData(
                 refundTransactionIds = refundTransactionIds.toImmutableList(),
             )
         }
     }
 
-    private suspend fun getOriginalTransactionData(
+    private suspend fun updateOriginalTransactionData(
         originalTransactionId: Int,
     ) {
         val originalTransactionData = getTransactionData(
@@ -168,7 +166,7 @@ internal class ViewTransactionScreenViewModel(
         )
     }
 
-    private suspend fun getRefundTransactionsData(
+    private suspend fun updateRefundTransactionsData(
         refundTransactionIds: ImmutableList<Int>,
     ) {
         refundTransactionsListItemData = refundTransactionIds

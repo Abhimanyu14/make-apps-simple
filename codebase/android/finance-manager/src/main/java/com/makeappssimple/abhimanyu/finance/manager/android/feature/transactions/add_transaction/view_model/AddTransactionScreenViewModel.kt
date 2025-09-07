@@ -245,7 +245,7 @@ internal class AddTransactionScreenViewModel(
                 transactionForValuesChipUIData = transactionForValues
                     .map { transactionFor ->
                         ChipUIData(
-                            text = transactionFor.titleToDisplay,
+                            text = transactionFor.title,
                         )
                     },
                 transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction

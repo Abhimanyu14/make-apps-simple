@@ -184,7 +184,7 @@ internal class TransactionsScreenViewModelTest {
                                 accountFromName = "test-account-102",
                                 accountToName = null,
                                 title = "test-transaction-102",
-                                transactionForText = "Test-transaction-for-102",
+                                transactionForText = "test-transaction-for-102",
                             ),
                         ),
                         "20 May, 2024 (Monday)" to listOf(
@@ -205,7 +205,7 @@ internal class TransactionsScreenViewModelTest {
                                 accountFromName = "test-account-101",
                                 accountToName = null,
                                 title = "test-transaction-101",
-                                transactionForText = "Test-transaction-for-101",
+                                transactionForText = "test-transaction-for-101",
                             ),
                         ),
                     ),

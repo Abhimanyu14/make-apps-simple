@@ -240,7 +240,7 @@ public fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_transaction_for_values,
                             items = transactionForValues.map { transactionFor ->
                                 ChipUIData(
-                                    text = transactionFor.titleToDisplay,
+                                    text = transactionFor.title,
                                 )
                             },
                             selectedItemsIndices = selectedTransactionForValuesIndicesValue,

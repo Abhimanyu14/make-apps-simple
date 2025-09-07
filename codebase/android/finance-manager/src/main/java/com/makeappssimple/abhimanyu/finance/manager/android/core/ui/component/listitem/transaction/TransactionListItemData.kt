@@ -92,6 +92,6 @@ public fun TransactionData.toTransactionListItemData(
         accountFromName = accountFrom?.name,
         accountToName = accountTo?.name,
         title = transaction.title,
-        transactionForText = transactionFor.titleToDisplay,
+        transactionForText = transactionFor.title,
     )
 }

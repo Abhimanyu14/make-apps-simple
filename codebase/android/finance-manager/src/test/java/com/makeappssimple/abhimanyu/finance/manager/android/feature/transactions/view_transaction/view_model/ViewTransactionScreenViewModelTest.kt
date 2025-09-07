@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.feature.transaction
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.FinanceManagerNavigationDirections
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.assertions.throwables.shouldThrow
@@ -70,13 +72,35 @@ internal class ViewTransactionScreenViewModelTest {
     @Test
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         viewTransactionScreenViewModel.uiState.test {
-            val result = awaitItem()
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeTrue()
 
+            val result = awaitItem()
             result.isBottomSheetVisible.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
+            result.isLoading.shouldBeFalse()
             result.refundTransactionsListItemData.shouldBeEmpty()
             result.originalTransactionListItemData.shouldBeNull()
-            result.transactionListItemData.shouldBeNull()
+            result.transactionListItemData.shouldBe(
+                expected = TransactionListItemData(
+                    isDeleteButtonEnabled = true,
+                    isDeleteButtonVisible = true,
+                    isEditButtonVisible = true,
+                    isExpanded = true,
+                    isInSelectionMode = false,
+                    isLoading = false,
+                    isRefundButtonVisible = true,
+                    isSelected = false,
+                    transactionId = testDependencies.testTransactionId1,
+                    amountColor = MyColor.ERROR,
+                    amountText = "- ₹1,000",
+                    dateAndTimeText = "20 May, 2024 at 08:29 AM",
+                    emoji = "💳",
+                    accountFromName = testDependencies.testAccountName1,
+                    accountToName = null,
+                    title = testDependencies.testTransactionEntity1.title,
+                    transactionForText = testDependencies.testTransactionForTitle1,
+                ),
+            )
             result.screenBottomSheetType.shouldBe(
                 expected = ViewTransactionScreenBottomSheetType.None,
             )
