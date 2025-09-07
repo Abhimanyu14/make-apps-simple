@@ -441,7 +441,11 @@ internal class TransactionsScreenViewModel(
                             transactionData.transaction.transactionTimestamp,
                         )
                         transactionData.category?.let {
-                            categoriesInTransactionsMap[it.transactionType]?.add(
+                            categoriesInTransactionsMap.computeIfAbsent(
+                                it.transactionType,
+                            ) {
+                                mutableSetOf()
+                            }.add(
                                 element = it,
                             )
                         }

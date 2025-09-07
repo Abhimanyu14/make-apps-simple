@@ -146,8 +146,16 @@ internal class TransactionsScreenViewModelTest {
                         testDependencies.testAccountEntity1.asExternalModel(),
                     ),
                 )
-                result.expenseCategories.shouldBeEmpty()
-                result.incomeCategories.shouldBeEmpty()
+                result.expenseCategories.shouldBe(
+                    expected = listOf(
+                        testDependencies.testCategoryEntity1.asExternalModel(),
+                    ),
+                )
+                result.incomeCategories.shouldBe(
+                    expected = listOf(
+                        testDependencies.testCategoryEntity2.asExternalModel(),
+                    ),
+                )
                 result.investmentCategories.shouldBeEmpty()
                 result.oldestTransactionLocalDate.shouldBe(
                     expected = LocalDate.of(2024, 5, 20),
@@ -280,8 +288,16 @@ internal class TransactionsScreenViewModelTest {
                     testDependencies.testAccountEntity1.asExternalModel(),
                 ),
             )
-            result.expenseCategories.shouldBeEmpty()
-            result.incomeCategories.shouldBeEmpty()
+            result.expenseCategories.shouldBe(
+                expected = listOf(
+                    testDependencies.testCategoryEntity1.asExternalModel(),
+                ),
+            )
+            result.incomeCategories.shouldBe(
+                expected = listOf(
+                    testDependencies.testCategoryEntity2.asExternalModel(),
+                ),
+            )
             result.investmentCategories.shouldBeEmpty()
             result.oldestTransactionLocalDate.shouldBe(
                 expected = LocalDate.of(2024, 5, 20),
