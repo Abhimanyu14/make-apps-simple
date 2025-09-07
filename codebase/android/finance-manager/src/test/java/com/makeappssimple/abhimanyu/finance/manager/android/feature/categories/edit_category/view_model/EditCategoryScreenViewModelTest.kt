@@ -169,7 +169,7 @@ internal class EditCategoryScreenViewModelTest {
 
     @Test
     @Ignore("To Fix")
-    fun refreshUiState_categoryAlreadyExists_ctaIsDisabled() =
+    fun refreshUiState_categoryExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = testDependencies.testCategoryTitle2
             editCategoryScreenViewModel.uiState.test {

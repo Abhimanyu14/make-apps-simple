@@ -346,7 +346,7 @@ internal class AddCategoryScreenViewModelTest {
         }
 
     @Test
-    fun updateTitle_categoryAlreadyExists_ctaIsDisabled() =
+    fun updateTitle_categoryExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             val updatedTitle = "test-title"
             testDependencies.insertCategoryUseCase(

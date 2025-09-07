@@ -27,6 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.feature.accounts.edi
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,7 +47,7 @@ internal class EditAccountScreenViewModelTest {
         testDependencies = TestDependencies()
         testSavedStateHandle = SavedStateHandle(
             initialState = mapOf(
-                "accountId" to testDependencies.testAccountId1,
+                "accountId" to testDependencies.testAccountId2,
             ),
         )
     }
@@ -57,8 +58,14 @@ internal class EditAccountScreenViewModelTest {
     }
     // endregion
 
+    // region initial state
     @Test
     fun uiState_initialState_eWallet() = testDependencies.runTestWithTimeout {
+        testSavedStateHandle = SavedStateHandle(
+            initialState = mapOf(
+                "accountId" to testDependencies.testAccountId1,
+            ),
+        )
         setUpViewModel()
         editAccountScreenViewModel.uiState.test {
             val initialState = awaitItem()
@@ -162,6 +169,225 @@ internal class EditAccountScreenViewModelTest {
             )
         }
     }
+    // endregion
+
+    // region state events
+    @Test
+    fun clearBalanceAmountValue() = testDependencies.runTestWithTimeout {
+        setUpViewModel()
+        editAccountScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeTrue()
+            editAccountScreenViewModel.initViewModel()
+            val previousResult = awaitItem()
+            previousResult.isLoading.shouldBeFalse()
+
+            editAccountScreenViewModel.uiStateEvents.clearBalanceAmountValue()
+            previousResult.balanceAmountValueTextFieldState.text.toString()
+                .shouldBeEmpty()
+        }
+    }
+
+    @Test
+    fun clearMinimumAccountBalanceAmountValue() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val previousResult = awaitItem()
+                previousResult.isLoading.shouldBeFalse()
+
+                editAccountScreenViewModel.uiStateEvents.clearMinimumAccountBalanceAmountValue()
+
+                previousResult.minimumBalanceAmountValueTextFieldState.text.toString()
+                    .shouldBeEmpty()
+            }
+        }
+
+    @Test
+    fun clearName() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val fetchDataCompletedState = awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+
+                editAccountScreenViewModel.uiStateEvents.clearName()
+                fetchDataCompletedState.nameTextFieldState.text.toString()
+                    .shouldBeEmpty()
+
+                val result = awaitItem()
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBeEqual(
+                    expected = EditAccountScreenNameError.None,
+                )
+                result.nameTextFieldState.text.toString().shouldBeEmpty()
+            }
+        }
+
+    @Test
+    fun updateBalanceAmountValue() = testDependencies.runTestWithTimeout {
+        setUpViewModel()
+        val updatedBalanceAmountValue = "2000"
+        editAccountScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeTrue()
+            editAccountScreenViewModel.initViewModel()
+            val previousResult = awaitItem()
+            previousResult.isLoading.shouldBeFalse()
+
+            editAccountScreenViewModel.uiStateEvents.updateBalanceAmountValue(
+                updatedBalanceAmountValue,
+            )
+            previousResult.balanceAmountValueTextFieldState.text.toString()
+                .shouldBe(
+                    expected = updatedBalanceAmountValue,
+                )
+        }
+    }
+
+    @Test
+    fun updateMinimumAccountBalanceAmountValue() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            val updatedMinimumAccountBalanceAmountValue = "2000"
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val previousResult = awaitItem()
+                previousResult.isLoading.shouldBeFalse()
+
+                editAccountScreenViewModel.uiStateEvents.updateMinimumAccountBalanceAmountValue(
+                    updatedMinimumAccountBalanceAmountValue,
+                )
+
+                previousResult.minimumBalanceAmountValueTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedMinimumAccountBalanceAmountValue,
+                    )
+            }
+        }
+
+    @Test
+    fun updateName_accountExists_ctaIsDisabled() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            val updatedName = testDependencies.testAccountName1
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val fetchDataCompletedState = awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+
+                editAccountScreenViewModel.uiStateEvents.updateName(
+                    updatedName,
+                )
+                fetchDataCompletedState.nameTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedName,
+                    )
+
+                val result = awaitItem()
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBeEqual(
+                    expected = EditAccountScreenNameError.AccountExists,
+                )
+                result.nameTextFieldState.text.toString().shouldBe(
+                    expected = updatedName,
+                )
+            }
+        }
+
+    @Test
+    fun updateName_nameIsBlank_ctaIsDisabled() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            val updatedName = "    "
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val fetchDataCompletedState = awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+
+                editAccountScreenViewModel.uiStateEvents.updateName(
+                    updatedName,
+                )
+                fetchDataCompletedState.nameTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = updatedName,
+                    )
+
+                val result = awaitItem()
+                result.isCtaButtonEnabled.shouldBeFalse()
+                result.nameError.shouldBeEqual(
+                    expected = EditAccountScreenNameError.None,
+                )
+                result.nameTextFieldState.text.toString().shouldBe(
+                    expected = updatedName,
+                )
+            }
+        }
+
+    @Test
+    fun updateName_nameIsValid_ctaIsEnabled() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            val updatedName = "test-account-name"
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val previousResult = awaitItem()
+                previousResult.isLoading.shouldBeFalse()
+
+                editAccountScreenViewModel.uiStateEvents.updateName(
+                    updatedName,
+                )
+
+                previousResult.isCtaButtonEnabled.shouldBeTrue()
+                previousResult.nameError.shouldBeEqual(
+                    expected = EditAccountScreenNameError.None,
+                )
+                previousResult.nameTextFieldState.text.toString().shouldBe(
+                    expected = updatedName,
+                )
+            }
+        }
+
+    @Test
+    fun updateSelectedAccountTypeIndex() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            val updatedSelectedAccountTypeIndex = 1
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel()
+                val fetchDataCompletedState = awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.selectedAccountTypeIndex.shouldBe(
+                    expected = 0,
+                )
+
+                editAccountScreenViewModel.uiStateEvents.updateSelectedAccountTypeIndex(
+                    updatedSelectedAccountTypeIndex,
+                )
+
+                val result = awaitItem()
+                result.selectedAccountTypeIndex.shouldBe(
+                    expected = updatedSelectedAccountTypeIndex,
+                )
+            }
+        }
+    // endregion
 
     // region common
     private fun setUpViewModel(

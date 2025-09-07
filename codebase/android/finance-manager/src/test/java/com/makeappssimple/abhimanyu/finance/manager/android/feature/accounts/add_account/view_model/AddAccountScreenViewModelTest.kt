@@ -150,7 +150,7 @@ internal class AddAccountScreenViewModelTest {
 
     @Test
     @Ignore("To Fix")
-    fun refreshUiState_accountAlreadyExists_ctaIsEnabled() =
+    fun refreshUiState_accountExists_ctaIsEnabled() =
         testDependencies.runTestWithTimeout {
             val updatedName = testDependencies.testAccountName1
             addAccountScreenViewModel.uiState.test {

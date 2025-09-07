@@ -166,23 +166,23 @@ internal class EditAccountScreenViewModel(
 
     // region observeData
     private fun observeData() {
+        observeTextFieldState(
+            textFieldState = balanceAmountValueTextFieldState,
+        )
+        observeTextFieldState(
+            textFieldState = minimumAccountBalanceAmountValueTextFieldState,
+        )
+        observeTextFieldState(
+            textFieldState = nameTextFieldState,
+        )
+    }
+
+    private fun observeTextFieldState(
+        textFieldState: TextFieldState,
+    ) {
         coroutineScope.launch {
             snapshotFlow {
-                minimumAccountBalanceAmountValueTextFieldState.text.toString()
-            }.collectLatest {
-                refreshUiState()
-            }
-        }
-        coroutineScope.launch {
-            snapshotFlow {
-                nameTextFieldState.text.toString()
-            }.collectLatest {
-                refreshUiState()
-            }
-        }
-        coroutineScope.launch {
-            snapshotFlow {
-                balanceAmountValueTextFieldState.text.toString()
+                textFieldState.text.toString()
             }.collectLatest {
                 refreshUiState()
             }
@@ -253,9 +253,12 @@ internal class EditAccountScreenViewModel(
     private fun updateAccount(): Job {
         return coroutineScope.launch {
             startLoading()
-            val currentAccount = currentAccount ?: run {
-                throw IllegalStateException("Current account is null")
-            }
+            val currentAccount = checkNotNull(
+                value = currentAccount,
+                lazyMessage = {
+                    "Current account is null"
+                },
+            )
             val isAccountUpdated = updateAccountUseCase(
                 currentAccount = currentAccount,
                 validAccountTypesForNewAccount = validAccountTypesForNewAccount,

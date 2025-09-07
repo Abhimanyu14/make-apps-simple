@@ -125,7 +125,7 @@ internal class EditTransactionForScreenViewModelTest {
 
     @Test
     @Ignore("To Fix")
-    fun updateTitle_titleAlreadyExists_ctaIsDisabled() =
+    fun updateTitle_titleExists_ctaIsDisabled() =
         testDependencies.runTestWithTimeout {
             setUpViewModel()
             val updatedTitle = testDependencies.testTransactionForTitle2
