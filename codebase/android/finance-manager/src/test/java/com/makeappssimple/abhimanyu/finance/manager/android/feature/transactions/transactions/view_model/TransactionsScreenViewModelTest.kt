@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.view_model
 
-import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
@@ -40,14 +39,12 @@ import java.time.LocalDate
 
 internal class TransactionsScreenViewModelTest {
     // region test setup
-    private lateinit var savedStateHandle: SavedStateHandle
     private lateinit var testDependencies: TestDependencies
     private lateinit var transactionsScreenViewModel: TransactionsScreenViewModel
 
     @Before
     fun setUp() {
         testDependencies = TestDependencies()
-        savedStateHandle = SavedStateHandle()
         transactionsScreenViewModel = TransactionsScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             coroutineScope = testDependencies.testScope.backgroundScope,
@@ -212,5 +209,158 @@ internal class TransactionsScreenViewModelTest {
                 )
             }
         }
+    // endregion
+
+    // region state events
+    @Test
+    fun duplicateTransaction() = testDependencies.runTestWithTimeout {
+        transactionsScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeTrue()
+            val fetchDataCompletedState = awaitItem()
+            fetchDataCompletedState.isLoading.shouldBeFalse()
+            val observeDataCompletedState = awaitItem()
+            observeDataCompletedState.transactionDetailsListItemViewData.shouldBe(
+                expected = mapOf(
+                    "23 Aug, 2025 (Saturday)" to listOf(
+                        TransactionListItemData(
+                            isDeleteButtonEnabled = false,
+                            isDeleteButtonVisible = true,
+                            isEditButtonVisible = false,
+                            isExpanded = false,
+                            isInSelectionMode = false,
+                            isLoading = false,
+                            isRefundButtonVisible = false,
+                            isSelected = false,
+                            transactionId = 102,
+                            amountColor = MyColor.ERROR,
+                            amountText = "- ₹1,000",
+                            dateAndTimeText = "23 Aug, 2025 at 08:29 AM",
+                            emoji = "💰",
+                            accountFromName = "test-account-102",
+                            accountToName = null,
+                            title = "test-transaction-102",
+                            transactionForText = "test-transaction-for-102",
+                        ),
+                    ),
+                    "20 May, 2024 (Monday)" to listOf(
+                        TransactionListItemData(
+                            isDeleteButtonEnabled = false,
+                            isDeleteButtonVisible = true,
+                            isEditButtonVisible = false,
+                            isExpanded = false,
+                            isInSelectionMode = false,
+                            isLoading = false,
+                            isRefundButtonVisible = false,
+                            isSelected = false,
+                            transactionId = 101,
+                            amountColor = MyColor.ERROR,
+                            amountText = "- ₹1,000",
+                            dateAndTimeText = "20 May, 2024 at 08:29 AM",
+                            emoji = "💳",
+                            accountFromName = "test-account-101",
+                            accountToName = null,
+                            title = "test-transaction-101",
+                            transactionForText = "test-transaction-for-101",
+                        ),
+                    ),
+                ),
+            )
+
+            transactionsScreenViewModel.uiStateEvents.addToSelectedTransactions(
+                testDependencies.testTransactionId1,
+            )
+            transactionsScreenViewModel.uiStateEvents.duplicateTransaction()
+
+            val updateScreenBottomSheetTypeCompletedState = awaitItem()
+            val result = awaitItem()
+            result.accounts.shouldBe(
+                expected = listOf(
+                    testDependencies.testAccountEntity2.asExternalModel(),
+                    testDependencies.testAccountEntity1.asExternalModel(),
+                ),
+            )
+            result.expenseCategories.shouldBeEmpty()
+            result.incomeCategories.shouldBeEmpty()
+            result.investmentCategories.shouldBeEmpty()
+            result.oldestTransactionLocalDate.shouldBe(
+                expected = LocalDate.of(2024, 5, 20),
+            )
+            result.transactionDetailsListItemViewData.size.shouldBe(
+                expected = 2,
+            )
+            result.transactionDetailsListItemViewData["23 Aug, 2025 (Saturday)"]?.size.shouldBe(
+                expected = 1,
+            )
+            result.transactionDetailsListItemViewData["20 May, 2024 (Monday)"]?.size.shouldBe(
+                expected = 2,
+            )
+            result.transactionDetailsListItemViewData.shouldBe(
+                expected = mapOf(
+                    "23 Aug, 2025 (Saturday)" to listOf(
+                        TransactionListItemData(
+                            isDeleteButtonEnabled = false,
+                            isDeleteButtonVisible = true,
+                            isEditButtonVisible = false,
+                            isExpanded = false,
+                            isInSelectionMode = false,
+                            isLoading = false,
+                            isRefundButtonVisible = false,
+                            isSelected = false,
+                            transactionId = 102,
+                            amountColor = MyColor.ERROR,
+                            amountText = "- ₹1,000",
+                            dateAndTimeText = "23 Aug, 2025 at 08:29 AM",
+                            emoji = "💰",
+                            accountFromName = "test-account-102",
+                            accountToName = null,
+                            title = "test-transaction-102",
+                            transactionForText = "test-transaction-for-102",
+                        ),
+                    ),
+                    "20 May, 2024 (Monday)" to listOf(
+                        TransactionListItemData(
+                            isDeleteButtonEnabled = false,
+                            isDeleteButtonVisible = true,
+                            isEditButtonVisible = false,
+                            isExpanded = false,
+                            isInSelectionMode = false,
+                            isLoading = false,
+                            isRefundButtonVisible = false,
+                            isSelected = false,
+                            transactionId = 1,
+                            amountColor = MyColor.ERROR,
+                            amountText = "- ₹1,000",
+                            dateAndTimeText = "20 May, 2024 at 08:29 AM",
+                            emoji = "💳",
+                            accountFromName = "test-account-101",
+                            accountToName = null,
+                            title = "test-transaction-101",
+                            transactionForText = "test-transaction-for-101",
+                        ),
+                        TransactionListItemData(
+                            isDeleteButtonEnabled = false,
+                            isDeleteButtonVisible = true,
+                            isEditButtonVisible = false,
+                            isExpanded = false,
+                            isInSelectionMode = false,
+                            isLoading = false,
+                            isRefundButtonVisible = false,
+                            isSelected = false,
+                            transactionId = 101,
+                            amountColor = MyColor.ERROR,
+                            amountText = "- ₹1,000",
+                            dateAndTimeText = "20 May, 2024 at 08:29 AM",
+                            emoji = "💳",
+                            accountFromName = "test-account-101",
+                            accountToName = null,
+                            title = "test-transaction-101",
+                            transactionForText = "test-transaction-for-101",
+                        ),
+                    ),
+                ),
+            )
+        }
+    }
     // endregion
 }
