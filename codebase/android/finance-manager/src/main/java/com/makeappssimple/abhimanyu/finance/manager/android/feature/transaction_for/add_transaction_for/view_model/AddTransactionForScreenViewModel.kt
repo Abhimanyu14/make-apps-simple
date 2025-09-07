@@ -107,11 +107,21 @@ internal class AddTransactionForScreenViewModel(
     // endregion
 
     // region observeData
-    private suspend fun observeData() {
-        snapshotFlow {
-            titleTextFieldState.text.toString()
-        }.collectLatest {
-            refreshUiState()
+    private fun observeData() {
+        observeTextFieldState(
+            textFieldState = titleTextFieldState,
+        )
+    }
+
+    private fun observeTextFieldState(
+        textFieldState: TextFieldState,
+    ) {
+        coroutineScope.launch {
+            snapshotFlow {
+                textFieldState.text.toString()
+            }.collectLatest {
+                refreshUiState()
+            }
         }
     }
     // endregion

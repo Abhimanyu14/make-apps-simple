@@ -151,9 +151,17 @@ internal class EditTransactionForScreenViewModel(
 
     // region observeData
     private fun observeData() {
+        observeTextFieldState(
+            textFieldState = titleTextFieldState,
+        )
+    }
+
+    private fun observeTextFieldState(
+        textFieldState: TextFieldState,
+    ) {
         coroutineScope.launch {
             snapshotFlow {
-                titleTextFieldState.text.toString()
+                textFieldState.text.toString()
             }.collectLatest {
                 refreshUiState()
             }

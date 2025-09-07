@@ -269,16 +269,20 @@ internal class AddTransactionScreenViewModel(
 
     // region observeData
     private fun observeData() {
+        observeTextFieldState(
+            textFieldState = amountTextFieldState,
+        )
+        observeTextFieldState(
+            textFieldState = titleTextFieldState,
+        )
+    }
+
+    private fun observeTextFieldState(
+        textFieldState: TextFieldState,
+    ) {
         coroutineScope.launch {
             snapshotFlow {
-                amountTextFieldState.text.toString()
-            }.collectLatest {
-                refreshUiState()
-            }
-        }
-        coroutineScope.launch {
-            snapshotFlow {
-                titleTextFieldState.text.toString()
+                textFieldState.text.toString()
             }.collectLatest {
                 refreshUiState()
             }

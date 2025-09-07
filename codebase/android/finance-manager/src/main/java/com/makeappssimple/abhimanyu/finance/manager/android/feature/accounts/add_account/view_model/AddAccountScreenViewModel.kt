@@ -147,16 +147,20 @@ internal class AddAccountScreenViewModel(
 
     // region observeData
     private fun observeData() {
+        observeTextFieldState(
+            textFieldState = nameTextFieldState,
+        )
+        observeTextFieldState(
+            textFieldState = minimumAccountBalanceAmountValueTextFieldState,
+        )
+    }
+
+    private fun observeTextFieldState(
+        textFieldState: TextFieldState,
+    ) {
         coroutineScope.launch {
             snapshotFlow {
-                nameTextFieldState.text.toString()
-            }.collectLatest {
-                refreshUiState()
-            }
-        }
-        coroutineScope.launch {
-            snapshotFlow {
-                minimumAccountBalanceAmountValueTextFieldState.text.toString()
+                textFieldState.text.toString()
             }.collectLatest {
                 refreshUiState()
             }
