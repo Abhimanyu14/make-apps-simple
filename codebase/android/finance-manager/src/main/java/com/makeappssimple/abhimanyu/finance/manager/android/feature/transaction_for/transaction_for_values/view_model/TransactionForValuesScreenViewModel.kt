@@ -99,14 +99,18 @@ internal class TransactionForValuesScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            _uiState.update {
-                TransactionForValuesScreenUIState(
-                    isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
-                    isLoading = isLoading,
-                    transactionForListItemDataList = transactionForListItemDataList,
-                    screenBottomSheetType = screenBottomSheetType,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            TransactionForValuesScreenUIState(
+                isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,
+                isLoading = isLoading,
+                transactionForListItemDataList = transactionForListItemDataList,
+                screenBottomSheetType = screenBottomSheetType,
+            )
         }
     }
     // endregion

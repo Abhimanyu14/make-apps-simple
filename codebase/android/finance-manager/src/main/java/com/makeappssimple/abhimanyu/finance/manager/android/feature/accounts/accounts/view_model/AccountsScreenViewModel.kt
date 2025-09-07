@@ -109,16 +109,20 @@ internal class AccountsScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            _uiState.update {
-                AccountsScreenUIState(
-                    screenBottomSheetType = screenBottomSheetType,
-                    isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
-                    isLoading = isLoading,
-                    accountsListItemDataList = allAccountsListItemDataList,
-                    accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
-                    allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            AccountsScreenUIState(
+                screenBottomSheetType = screenBottomSheetType,
+                isBottomSheetVisible = screenBottomSheetType != AccountsScreenBottomSheetType.None,
+                isLoading = isLoading,
+                accountsListItemDataList = allAccountsListItemDataList,
+                accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
+                allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
+            )
         }
     }
     // endregion

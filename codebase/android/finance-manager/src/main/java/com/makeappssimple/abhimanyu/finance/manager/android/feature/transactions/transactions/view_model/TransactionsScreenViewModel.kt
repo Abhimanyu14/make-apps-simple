@@ -150,41 +150,45 @@ internal class TransactionsScreenViewModel(
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
             updateTransactionDetailsListItemViewData()
-            _uiState.update {
-                TransactionsScreenUIState(
-                    isBackHandlerEnabled = searchText.isNotEmpty() ||
-                            selectedFilter.areFiltersSelected() ||
-                            isInSelectionMode,
-                    isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
-                    isDuplicateTransactionMenuOptionVisible = selectedTransactionIndices.size == 1,
-                    isInSelectionMode = isInSelectionMode,
-                    isLoading = isLoading,
-                    isSearchSortAndFilterVisible = isInSelectionMode.not() && (
-                            transactionDetailsListItemViewData.isNotEmpty() ||
-                                    searchText.isNotEmpty() ||
-                                    selectedFilter.areFiltersSelected() ||
-                                    isLoading
-                            ),
-                    selectedFilter = selectedFilter,
-                    selectedTransactions = selectedTransactionIndices.toImmutableList(),
-                    sortOptions = sortOptions,
-                    transactionForValues = allTransactionForValues,
-                    accounts = accounts.toImmutableList(),
-                    expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
-                        .toImmutableList(),
-                    incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
-                        .toImmutableList(),
-                    investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
-                        .toImmutableList(),
-                    transactionTypes = transactionTypes,
-                    currentLocalDate = currentLocalDate.orMin(),
-                    oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
-                    transactionDetailsListItemViewData = transactionDetailsListItemViewData,
-                    selectedSortOption = selectedSortOption.orDefault(),
-                    searchText = searchText,
-                    screenBottomSheetType = screenBottomSheetType,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            TransactionsScreenUIState(
+                isBackHandlerEnabled = searchText.isNotEmpty() ||
+                        selectedFilter.areFiltersSelected() ||
+                        isInSelectionMode,
+                isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
+                isDuplicateTransactionMenuOptionVisible = selectedTransactionIndices.size == 1,
+                isInSelectionMode = isInSelectionMode,
+                isLoading = isLoading,
+                isSearchSortAndFilterVisible = isInSelectionMode.not() && (
+                        transactionDetailsListItemViewData.isNotEmpty() ||
+                                searchText.isNotEmpty() ||
+                                selectedFilter.areFiltersSelected() ||
+                                isLoading
+                        ),
+                selectedFilter = selectedFilter,
+                selectedTransactions = selectedTransactionIndices.toImmutableList(),
+                sortOptions = sortOptions,
+                transactionForValues = allTransactionForValues,
+                accounts = accounts.toImmutableList(),
+                expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
+                    .toImmutableList(),
+                incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
+                    .toImmutableList(),
+                investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
+                    .toImmutableList(),
+                transactionTypes = transactionTypes,
+                currentLocalDate = currentLocalDate.orMin(),
+                oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
+                transactionDetailsListItemViewData = transactionDetailsListItemViewData,
+                selectedSortOption = selectedSortOption.orDefault(),
+                searchText = searchText,
+                screenBottomSheetType = screenBottomSheetType,
+            )
         }
     }
 

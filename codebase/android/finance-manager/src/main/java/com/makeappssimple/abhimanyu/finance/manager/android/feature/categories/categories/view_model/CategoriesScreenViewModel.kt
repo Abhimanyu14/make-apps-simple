@@ -132,17 +132,21 @@ internal class CategoriesScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            _uiState.update {
-                CategoriesScreenUIState(
-                    isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
-                    screenBottomSheetType = screenBottomSheetType,
-                    screenSnackbarType = screenSnackbarType,
-                    isLoading = isLoading,
-                    tabData = tabData,
-                    validTransactionTypes = validTransactionTypes,
-                    categoriesGridItemDataMap = categoriesGridItemDataMap,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            CategoriesScreenUIState(
+                isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,
+                screenBottomSheetType = screenBottomSheetType,
+                screenSnackbarType = screenSnackbarType,
+                isLoading = isLoading,
+                tabData = tabData,
+                validTransactionTypes = validTransactionTypes,
+                categoriesGridItemDataMap = categoriesGridItemDataMap,
+            )
         }
     }
     // endregion

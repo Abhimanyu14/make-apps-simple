@@ -112,16 +112,20 @@ internal class ViewTransactionScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            _uiState.update {
-                ViewTransactionScreenUIState(
-                    isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
-                    isLoading = isLoading,
-                    refundTransactionsListItemData = refundTransactionsListItemData,
-                    originalTransactionListItemData = originalTransactionListItemData,
-                    transactionListItemData = currentTransactionListItemData,
-                    screenBottomSheetType = screenBottomSheetType,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            ViewTransactionScreenUIState(
+                isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,
+                isLoading = isLoading,
+                refundTransactionsListItemData = refundTransactionsListItemData,
+                originalTransactionListItemData = originalTransactionListItemData,
+                transactionListItemData = currentTransactionListItemData,
+                screenBottomSheetType = screenBottomSheetType,
+            )
         }
     }
     // endregion

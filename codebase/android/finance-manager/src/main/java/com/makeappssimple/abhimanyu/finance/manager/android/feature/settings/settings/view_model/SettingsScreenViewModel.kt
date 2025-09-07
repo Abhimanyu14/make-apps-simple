@@ -102,14 +102,18 @@ internal class SettingsScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            _uiState.update {
-                SettingsScreenUIState(
-                    isLoading = isLoading,
-                    isReminderEnabled = isReminderEnabled,
-                    screenSnackbarType = screenSnackbarType,
-                    appVersion = appVersion,
-                )
-            }
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            SettingsScreenUIState(
+                isLoading = isLoading,
+                isReminderEnabled = isReminderEnabled,
+                screenSnackbarType = screenSnackbarType,
+                appVersion = appVersion,
+            )
         }
     }
     // endregion

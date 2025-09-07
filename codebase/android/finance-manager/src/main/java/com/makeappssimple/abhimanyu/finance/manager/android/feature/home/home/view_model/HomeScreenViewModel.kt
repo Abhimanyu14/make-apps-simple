@@ -134,44 +134,49 @@ internal class HomeScreenViewModel(
 
     // region refreshUiState
     private fun refreshUiState(): Job {
+        return coroutineScope.launch {
+            updateOverviewCardData()
+            updateUiState()
+        }
+    }
+
+    private suspend fun updateUiState() {
         val totalIncomeAmount = Amount(
             value = overviewCardData?.income?.toLong().orZero(),
         )
         val totalExpenseAmount = Amount(
             value = overviewCardData?.expense?.toLong().orZero(),
         )
-        return coroutineScope.launch {
-            updateOverviewCardData()
-            _uiState.update {
-                HomeScreenUIState(
-                    isBackupCardVisible = isBackupCardVisible.first(),
-                    isBalanceVisible = isBalanceVisible,
-                    isLoading = isLoading,
-                    isRecentTransactionsTrailingTextVisible = homeListItemViewData
-                        .isNotEmpty(),
-                    overviewTabSelectionIndex = overviewTabSelectionIndex.orZero(),
-                    transactionListItemDataList = homeListItemViewData,
-                    accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.first()
-                        .orZero(),
-                    allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue.first()
-                        .orZero(),
-                    overviewCardData = overviewCardData.orDefault(),
-                    pieChartData = PieChartData(
-                        items = persistentListOf(
-                            PieChartItemData(
-                                value = overviewCardData?.income.orZero(),
-                                text = "Income : $totalIncomeAmount", // TODO(Abhi): Move to string resources
-                                color = MyColor.TERTIARY,
-                            ),
-                            PieChartItemData(
-                                value = overviewCardData?.expense.orZero(),
-                                text = "Expense : ${totalExpenseAmount.toNonSignedString()}", // TODO(Abhi): Move to string resources
-                                color = MyColor.ERROR,
-                            ),
+
+        _uiState.update {
+            HomeScreenUIState(
+                isBackupCardVisible = isBackupCardVisible.first(),
+                isBalanceVisible = isBalanceVisible,
+                isLoading = isLoading,
+                isRecentTransactionsTrailingTextVisible = homeListItemViewData
+                    .isNotEmpty(),
+                overviewTabSelectionIndex = overviewTabSelectionIndex.orZero(),
+                transactionListItemDataList = homeListItemViewData,
+                accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.first()
+                    .orZero(),
+                allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue.first()
+                    .orZero(),
+                overviewCardData = overviewCardData.orDefault(),
+                pieChartData = PieChartData(
+                    items = persistentListOf(
+                        PieChartItemData(
+                            value = overviewCardData?.income.orZero(),
+                            text = "Income : $totalIncomeAmount", // TODO(Abhi): Move to string resources
+                            color = MyColor.TERTIARY,
+                        ),
+                        PieChartItemData(
+                            value = overviewCardData?.expense.orZero(),
+                            text = "Expense : ${totalExpenseAmount.toNonSignedString()}", // TODO(Abhi): Move to string resources
+                            color = MyColor.ERROR,
                         ),
                     ),
-                )
-            }
+                ),
+            )
         }
     }
     // endregion

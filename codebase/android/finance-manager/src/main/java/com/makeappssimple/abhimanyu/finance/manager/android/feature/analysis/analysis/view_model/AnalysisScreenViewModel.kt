@@ -123,26 +123,30 @@ internal class AnalysisScreenViewModel(
     // region refreshUiState
     private fun refreshUiState(): Job {
         return coroutineScope.launch {
-            _uiState.update {
-                analysisListItemData = getAnalysisListItemData(
-                    selectedFilterValue = selectedFilter,
-                    selectedTransactionTypeIndexValue = selectedTransactionTypeIndex,
-                    allTransactionDataValue = allTransactionData,
-                )
-                AnalysisScreenUIState(
-                    screenBottomSheetType = screenBottomSheetType,
-                    isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
-                    isLoading = isLoading,
-                    selectedFilter = selectedFilter.orEmpty(),
-                    selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                    analysisListItemData = analysisListItemData,
-                    transactionTypesChipUIData = validTransactionTypesChipUIData,
-                    defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
-                    defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
-                    startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
-                    startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
-                )
-            }
+            analysisListItemData = getAnalysisListItemData(
+                selectedFilterValue = selectedFilter,
+                selectedTransactionTypeIndexValue = selectedTransactionTypeIndex,
+                allTransactionDataValue = allTransactionData,
+            )
+            updateUiState()
+        }
+    }
+
+    private fun updateUiState() {
+        _uiState.update {
+            AnalysisScreenUIState(
+                screenBottomSheetType = screenBottomSheetType,
+                isBottomSheetVisible = screenBottomSheetType != AnalysisScreenBottomSheetType.None,
+                isLoading = isLoading,
+                selectedFilter = selectedFilter.orEmpty(),
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                analysisListItemData = analysisListItemData,
+                transactionTypesChipUIData = validTransactionTypesChipUIData,
+                defaultStartLocalDate = oldestTransactionLocalDate.orMin(),
+                defaultEndLocalDate = dateTimeKit.getCurrentLocalDate(),
+                startOfCurrentMonthLocalDate = dateTimeKit.getStartOfMonthLocalDate(),
+                startOfCurrentYearLocalDate = dateTimeKit.getStartOfYearLocalDate(),
+            )
         }
     }
 

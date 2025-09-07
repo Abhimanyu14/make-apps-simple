@@ -187,61 +187,67 @@ internal class EditTransactionScreenViewModel(
                 selectedTransactionType = selectedTransactionType,
             )
         return coroutineScope.launch {
-            _uiState.update {
-                EditTransactionScreenUIState(
-                    accountFrom = accountFrom,
-                    accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
-                        AccountFromText.AccountFrom
-                    } else {
-                        AccountFromText.Account
+            updateUiState(editTransactionScreenDataValidationState)
+        }
+    }
+
+    private fun updateUiState(
+        editTransactionScreenDataValidationState: EditTransactionScreenDataValidationState,
+    ) {
+        _uiState.update {
+            EditTransactionScreenUIState(
+                accountFrom = accountFrom,
+                accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                    AccountFromText.AccountFrom
+                } else {
+                    AccountFromText.Account
+                },
+                accountTo = accountTo,
+                accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                    AccountToText.AccountTo
+                } else {
+                    AccountToText.Account
+                },
+                screenBottomSheetType = screenBottomSheetType,
+                screenSnackbarType = screenSnackbarType,
+                uiVisibilityState = uiVisibilityState,
+                isBottomSheetVisible = screenBottomSheetType != EditTransactionScreenBottomSheetType.None,
+                isCtaButtonEnabled = editTransactionScreenDataValidationState.isCtaButtonEnabled,
+                isLoading = isLoading,
+                isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible,
+                isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible,
+                category = category,
+                selectedTransactionForIndex = selectedTransactionForIndex,
+                selectedTransactionTypeIndex = selectedTransactionTypeIndex,
+                accounts = allAccounts.orEmpty(),
+                filteredCategories = filteredCategories,
+                titleSuggestionsChipUIData = titleSuggestions
+                    .map { title ->
+                        ChipUIData(
+                            text = title,
+                        )
                     },
-                    accountTo = accountTo,
-                    accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
-                        AccountToText.AccountTo
-                    } else {
-                        AccountToText.Account
+                transactionForValuesChipUIData = allTransactionForValues
+                    .map { transactionFor ->
+                        ChipUIData(
+                            text = transactionFor.titleToDisplay,
+                        )
                     },
-                    screenBottomSheetType = screenBottomSheetType,
-                    screenSnackbarType = screenSnackbarType,
-                    uiVisibilityState = uiVisibilityState,
-                    isBottomSheetVisible = screenBottomSheetType != EditTransactionScreenBottomSheetType.None,
-                    isCtaButtonEnabled = editTransactionScreenDataValidationState.isCtaButtonEnabled,
-                    isLoading = isLoading,
-                    isTransactionDatePickerDialogVisible = isTransactionDatePickerDialogVisible,
-                    isTransactionTimePickerDialogVisible = isTransactionTimePickerDialogVisible,
-                    category = category,
-                    selectedTransactionForIndex = selectedTransactionForIndex,
-                    selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                    accounts = allAccounts.orEmpty(),
-                    filteredCategories = filteredCategories,
-                    titleSuggestionsChipUIData = titleSuggestions
-                        .map { title ->
-                            ChipUIData(
-                                text = title,
-                            )
-                        },
-                    transactionForValuesChipUIData = allTransactionForValues
-                        .map { transactionFor ->
-                            ChipUIData(
-                                text = transactionFor.titleToDisplay,
-                            )
-                        },
-                    transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction
-                        .map { transactionType ->
-                            ChipUIData(
-                                text = transactionType.title,
-                            )
-                        },
-                    titleSuggestions = titleSuggestions,
-                    currentLocalDate = dateTimeKit.getCurrentLocalDate()
-                        .orMin(),
-                    transactionDate = transactionDate,
-                    transactionTime = transactionTime,
-                    amountErrorText = editTransactionScreenDataValidationState.amountErrorText,
-                    amount = amount,
-                    title = title,
-                )
-            }
+                transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction
+                    .map { transactionType ->
+                        ChipUIData(
+                            text = transactionType.title,
+                        )
+                    },
+                titleSuggestions = titleSuggestions,
+                currentLocalDate = dateTimeKit.getCurrentLocalDate()
+                    .orMin(),
+                transactionDate = transactionDate,
+                transactionTime = transactionTime,
+                amountErrorText = editTransactionScreenDataValidationState.amountErrorText,
+                amount = amount,
+                title = title,
+            )
         }
     }
     // endregion
