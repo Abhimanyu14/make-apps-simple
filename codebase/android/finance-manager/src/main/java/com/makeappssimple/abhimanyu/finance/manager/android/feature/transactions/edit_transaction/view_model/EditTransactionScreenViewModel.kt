@@ -253,23 +253,21 @@ internal class EditTransactionScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            joinAll(
-                launch {
-                    allAccounts = getAllAccountsUseCase()
-                },
-                launch {
-                    allCategories = getAllCategoriesUseCase()
-                },
-                launch {
-                    allTransactionForValues =
-                        getAllTransactionForValuesUseCase()
-                },
-            )
-            updateDefaultData()
-            updateCurrentTransactionData()
-        }
+    private suspend fun fetchData() {
+        joinAll(
+            coroutineScope.launch {
+                allAccounts = getAllAccountsUseCase()
+            },
+            coroutineScope.launch {
+                allCategories = getAllCategoriesUseCase()
+            },
+            coroutineScope.launch {
+                allTransactionForValues =
+                    getAllTransactionForValuesUseCase()
+            },
+        )
+        updateDefaultData()
+        updateCurrentTransactionData()
     }
     // endregion
 

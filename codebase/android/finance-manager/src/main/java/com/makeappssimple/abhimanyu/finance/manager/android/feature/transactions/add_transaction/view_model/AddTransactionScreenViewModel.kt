@@ -287,24 +287,22 @@ internal class AddTransactionScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            joinAll(
-                launch {
-                    accounts = getAllAccountsUseCase()
-                },
-                launch {
-                    categories = getAllCategoriesUseCase()
-                },
-                launch {
-                    transactionForValues = getAllTransactionForValuesUseCase()
-                },
-            )
-            updateDefaultData()
-            updateValidTransactionTypesForNewTransaction()
-            updateDataForRefundTransaction()
-            processInitialData()
-        }
+    private suspend fun fetchData() {
+        joinAll(
+            coroutineScope.launch {
+                accounts = getAllAccountsUseCase()
+            },
+            coroutineScope.launch {
+                categories = getAllCategoriesUseCase()
+            },
+            coroutineScope.launch {
+                transactionForValues = getAllTransactionForValuesUseCase()
+            },
+        )
+        updateDefaultData()
+        updateValidTransactionTypesForNewTransaction()
+        updateDataForRefundTransaction()
+        processInitialData()
     }
     // endregion
 

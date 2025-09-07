@@ -221,11 +221,9 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            allTransactionData = getAllTransactionDataUseCase()
-            oldestTransactionLocalDate = getOldestTransactionLocalDate()
-        }
+    private suspend fun fetchData() {
+        allTransactionData = getAllTransactionDataUseCase()
+        oldestTransactionLocalDate = getOldestTransactionLocalDate()
     }
     // endregion
 

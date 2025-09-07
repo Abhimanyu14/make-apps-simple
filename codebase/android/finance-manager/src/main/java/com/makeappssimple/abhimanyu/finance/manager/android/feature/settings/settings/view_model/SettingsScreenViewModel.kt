@@ -119,10 +119,8 @@ internal class SettingsScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            getAppVersion()
-        }
+    private fun fetchData() {
+        getAppVersion()
     }
 
     private fun getAppVersion() {

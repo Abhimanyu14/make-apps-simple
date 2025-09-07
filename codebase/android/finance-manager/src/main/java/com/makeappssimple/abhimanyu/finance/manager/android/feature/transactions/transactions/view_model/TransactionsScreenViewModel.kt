@@ -407,10 +407,8 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            allTransactionForValues = getAllTransactionForValuesUseCase()
-        }
+    private suspend fun fetchData() {
+        allTransactionForValues = getAllTransactionForValuesUseCase()
     }
     // endregion
 

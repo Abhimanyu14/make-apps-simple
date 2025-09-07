@@ -68,7 +68,6 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
@@ -279,45 +278,43 @@ public class EditTransactionScreenViewModelOld(
         )
 
     // region fetchData
-    private fun fetchData(): Job {
-        return coroutineScope.launch {
-            awaitAll(
-                async {
-                    defaultDataIdFromDataStore =
-                        financeManagerPreferencesRepository.getDefaultDataId()
-                },
-                async {
-                    categories = getAllCategoriesUseCase()
-                },
-                async {
-                    accounts.update {
-                        getAllAccountsUseCase()
-                            .sortedWith(
-                                comparator = compareBy<Account> {
-                                    it.type.sortOrder
-                                }.thenByDescending {
-                                    it.balanceAmount.value
-                                }
-                            )
-                    }
-                },
-                async {
-                    transactionForValues.update {
-                        getAllTransactionForValuesUseCase()
-                    }
-                },
-            )
-            calculateValidTransactionTypesForNewTransaction()
-            updateDefaultCategory()
-            updateDefaultAccount()
-            if (isAddingRefundTransactionOrEditingAnyTransaction()) {
-                getTransactionDataForAddingRefundTransactionOrEditingAnyTransaction() // TODO(Abhi): Better naming
-            } else {
-                updateInitialSelectedTransactionType()
-            }
-            isDataFetchCompleted.update {
-                true
-            }
+    private suspend fun fetchData() {
+        awaitAll(
+            coroutineScope.async {
+                defaultDataIdFromDataStore =
+                    financeManagerPreferencesRepository.getDefaultDataId()
+            },
+            coroutineScope.async {
+                categories = getAllCategoriesUseCase()
+            },
+            coroutineScope.async {
+                accounts.update {
+                    getAllAccountsUseCase()
+                        .sortedWith(
+                            comparator = compareBy<Account> {
+                                it.type.sortOrder
+                            }.thenByDescending {
+                                it.balanceAmount.value
+                            }
+                        )
+                }
+            },
+            coroutineScope.async {
+                transactionForValues.update {
+                    getAllTransactionForValuesUseCase()
+                }
+            },
+        )
+        calculateValidTransactionTypesForNewTransaction()
+        updateDefaultCategory()
+        updateDefaultAccount()
+        if (isAddingRefundTransactionOrEditingAnyTransaction()) {
+            getTransactionDataForAddingRefundTransactionOrEditingAnyTransaction() // TODO(Abhi): Better naming
+        } else {
+            updateInitialSelectedTransactionType()
+        }
+        isDataFetchCompleted.update {
+            true
         }
     }
     // endregion
