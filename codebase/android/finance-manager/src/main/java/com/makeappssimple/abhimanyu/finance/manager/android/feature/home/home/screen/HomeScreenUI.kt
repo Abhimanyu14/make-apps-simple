@@ -53,9 +53,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.ov
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCard
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCardData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.total_balance_card.TotalBalanceCardEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.event.HomeScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -121,6 +118,8 @@ internal fun HomeScreenUI(
                     bottom = bottomContentPadding,
                 ),
         ) {
+            // TODO(Abhi): View Balance Feature
+            /*
             TotalBalanceCard(
                 data = TotalBalanceCardData(
                     isBalanceVisible = uiState.isBalanceVisible,
@@ -141,6 +140,7 @@ internal fun HomeScreenUI(
                     }
                 },
             )
+            */
             AnimatedVisibility(
                 visible = uiState.isBackupCardVisible,
             ) {

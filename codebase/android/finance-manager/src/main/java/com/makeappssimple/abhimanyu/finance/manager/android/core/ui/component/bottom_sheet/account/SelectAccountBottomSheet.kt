@@ -43,7 +43,8 @@ public fun SelectAccountBottomSheet(
                             isSelected = account.id == data.selectedAccountId,
                             icon = account.type.icon,
                             accountId = account.id,
-                            balance = account.balanceAmount.toString(),
+                            // TODO(Abhi): View Balance Feature
+                            // balance = account.balanceAmount.toString(),
                             name = account.name,
                         ),
                         handleEvent = { event ->
