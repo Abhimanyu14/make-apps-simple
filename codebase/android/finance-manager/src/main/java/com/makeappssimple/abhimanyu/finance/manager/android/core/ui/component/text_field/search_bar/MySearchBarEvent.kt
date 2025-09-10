@@ -25,3 +25,8 @@ public sealed class MySearchBarEvent {
         val updatedSearchText: String,
     ) : MySearchBarEvent()
 }
+
+@Immutable
+public sealed class MySearchBarEventV2 {
+    public data object OnSearch : MySearchBarEventV2()
+}

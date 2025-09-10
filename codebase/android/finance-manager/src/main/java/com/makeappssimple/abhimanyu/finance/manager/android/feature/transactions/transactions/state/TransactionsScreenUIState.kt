@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.state
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Category
@@ -51,6 +52,6 @@ internal data class TransactionsScreenUIState(
     val oldestTransactionLocalDate: LocalDate = LocalDate.MIN,
     val transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> = emptyMap(),
     val selectedSortOption: SortOption = SortOption.LATEST_FIRST,
-    val searchText: String = "",
+    val searchTextFieldState: TextFieldState = TextFieldState(),
     val screenBottomSheetType: TransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
 ) : ScreenUIState

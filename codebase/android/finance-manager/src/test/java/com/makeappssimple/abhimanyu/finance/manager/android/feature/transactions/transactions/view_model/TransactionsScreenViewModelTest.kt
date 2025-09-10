@@ -97,7 +97,7 @@ internal class TransactionsScreenViewModelTest {
             result.selectedSortOption.shouldBe(
                 expected = SortOption.LATEST_FIRST,
             )
-            result.searchText.shouldBeEmpty()
+            result.searchTextFieldState.text.toString().shouldBeEmpty()
             result.screenBottomSheetType.shouldBe(
                 expected = TransactionsScreenBottomSheetType.None,
             )

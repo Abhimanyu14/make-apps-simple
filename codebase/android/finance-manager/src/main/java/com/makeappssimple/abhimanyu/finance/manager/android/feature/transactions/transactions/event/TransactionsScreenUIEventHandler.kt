@@ -112,10 +112,6 @@ internal class TransactionsScreenUIEventHandler internal constructor(
                 )
             }
 
-            is TransactionsScreenUIEvent.OnSearchTextUpdated -> {
-                uiStateEvents.updateSearchText(uiEvent.updatedSearchText)
-            }
-
             is TransactionsScreenUIEvent.OnSelectedFilterUpdated -> {
                 uiStateEvents.updateSelectedFilter(uiEvent.updatedSelectedFilter)
             }

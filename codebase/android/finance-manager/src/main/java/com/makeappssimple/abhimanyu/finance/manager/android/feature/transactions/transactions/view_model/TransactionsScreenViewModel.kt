@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.view_model
 
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
@@ -78,30 +80,28 @@ internal class TransactionsScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region data
+    private var isInSelectionMode: Boolean = false
     private var isLoading: Boolean = false
-    private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
-        mapOf()
-    private var accounts: MutableSet<Account> = mutableSetOf()
-    private var oldestTransactionLocalDate: LocalDate? = null
-    private var allTransactionForValues: ImmutableList<TransactionFor> =
-        persistentListOf()
-    private val transactionTypes: ImmutableList<TransactionType> =
-        TransactionType.entries.toImmutableList()
-    private val sortOptions: ImmutableList<SortOption> =
-        SortOption.entries.toImmutableList()
-    private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
+    private var selectedFilter = Filter()
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
-
-    // TODO(Abhi): Rename to selected transaction ids
+    private var allTransactionForValues: ImmutableList<TransactionFor> =
+        persistentListOf()
     private var selectedTransactionIndices: ImmutableList<Int> =
         persistentListOf()
+    private val sortOptions: ImmutableList<SortOption> =
+        SortOption.entries.toImmutableList()
+    private val transactionTypes: ImmutableList<TransactionType> =
+        TransactionType.entries.toImmutableList()
+    private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
+    private var oldestTransactionLocalDate: LocalDate? = null
+    private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
+        mapOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
         mutableMapOf()
-    private var isInSelectionMode = false
-    private var searchText = ""
-    private var selectedFilter = Filter()
+    private var accounts: MutableSet<Account> = mutableSetOf()
     private var selectedSortOption: SortOption = SortOption.LATEST_FIRST
+    private var searchTextFieldState: TextFieldState = TextFieldState()
     private var screenBottomSheetType: TransactionsScreenBottomSheetType =
         TransactionsScreenBottomSheetType.None
     // endregion
@@ -157,7 +157,7 @@ internal class TransactionsScreenViewModel(
     private fun updateUiState() {
         _uiState.update {
             TransactionsScreenUIState(
-                isBackHandlerEnabled = searchText.isNotEmpty() ||
+                isBackHandlerEnabled = searchTextFieldState.text.isNotEmpty() ||
                         selectedFilter.areFiltersSelected() ||
                         isInSelectionMode,
                 isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
@@ -166,7 +166,7 @@ internal class TransactionsScreenViewModel(
                 isLoading = isLoading,
                 isSearchSortAndFilterVisible = isInSelectionMode.not() && (
                         transactionDetailsListItemViewData.isNotEmpty() ||
-                                searchText.isNotEmpty() ||
+                                searchTextFieldState.text.isNotEmpty() ||
                                 selectedFilter.areFiltersSelected() ||
                                 isLoading
                         ),
@@ -186,7 +186,7 @@ internal class TransactionsScreenViewModel(
                 oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
                 transactionDetailsListItemViewData = transactionDetailsListItemViewData,
                 selectedSortOption = selectedSortOption.orDefault(),
-                searchText = searchText,
+                searchTextFieldState = searchTextFieldState,
                 screenBottomSheetType = screenBottomSheetType,
             )
         }
@@ -199,7 +199,7 @@ internal class TransactionsScreenViewModel(
             allTransactionData
                 .filter { transactionData ->
                     isAvailableAfterSearch(
-                        searchTextValue = searchText,
+                        searchTextValue = searchTextFieldState.text.toString(),
                         transactionData = transactionData,
                     ) && isAvailableAfterDateFilter(
                         fromDate = selectedFilter.fromDate,
@@ -578,7 +578,9 @@ internal class TransactionsScreenViewModel(
         updatedSearchText: String,
         shouldRefresh: Boolean = true,
     ): Job {
-        searchText = updatedSearchText
+        searchTextFieldState.setTextAndPlaceCursorAtEnd(
+            text = updatedSearchText,
+        )
         return if (shouldRefresh) {
             refreshUiState()
         } else {

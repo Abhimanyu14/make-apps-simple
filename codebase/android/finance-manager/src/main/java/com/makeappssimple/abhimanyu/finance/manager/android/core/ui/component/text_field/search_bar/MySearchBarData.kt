@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Immutable
 
 @Immutable
@@ -24,4 +25,12 @@ public data class MySearchBarData(
     val isLoading: Boolean = false,
     val placeholderText: String = "",
     val searchText: String = "",
+)
+
+@Immutable
+public data class MySearchBarDataV2(
+    val autoFocus: Boolean = true,
+    val isLoading: Boolean = false,
+    val placeholderText: String = "",
+    val searchTextFieldState: TextFieldState = TextFieldState(),
 )

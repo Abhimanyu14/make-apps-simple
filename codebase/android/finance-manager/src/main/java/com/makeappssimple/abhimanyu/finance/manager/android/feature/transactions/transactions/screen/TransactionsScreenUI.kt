@@ -73,9 +73,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.li
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.scaffold.MyScaffold
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar.MySearchBar
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar.MySearchBarData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar.MySearchBarEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar.MySearchBarDataV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar.MySearchBarEventV2
+import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.text_field.search_bar.MySearchBarV2
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MySelectionModeTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
@@ -418,27 +418,19 @@ private fun SearchSortAndFilterBar(
                         weight = 1F,
                     )
             ) {
-                MySearchBar(
-                    data = MySearchBarData(
+                MySearchBarV2(
+                    data = MySearchBarDataV2(
                         autoFocus = false,
                         isLoading = uiState.isLoading,
                         placeholderText = stringResource(
                             id = R.string.finance_manager_screen_transactions_searchbar_placeholder,
                         ),
-                        searchText = uiState.searchText,
+                        searchTextFieldState = uiState.searchTextFieldState,
                     ),
                     handleEvent = { events ->
                         when (events) {
-                            is MySearchBarEvent.OnSearch -> {
+                            is MySearchBarEventV2.OnSearch -> {
                                 state.focusManager.clearFocus()
-                            }
-
-                            is MySearchBarEvent.OnSearchTextChange -> {
-                                handleUIEvent(
-                                    TransactionsScreenUIEvent.OnSearchTextUpdated(
-                                        updatedSearchText = events.updatedSearchText,
-                                    )
-                                )
                             }
                         }
                     },

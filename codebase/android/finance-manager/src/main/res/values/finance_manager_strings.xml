@@ -139,6 +139,11 @@
     <string name="finance_manager_screen_home_view_all_transactions">VIEW ALL</string>
     <!-- endregion -->
 
+    <!-- region search bar -->
+    <string name="finance_manager_search_bar_keyboard_type_text">ABC</string>
+    <string name="finance_manager_search_bar_keyboard_type_number">123</string>
+    <!-- endregion -->
+
     <!-- region time picker -->
     <string name="finance_manager_time_picker_negative_button_text">Cancel</string>
     <string name="finance_manager_time_picker_positive_button_text">OK</string>
@@ -354,7 +359,7 @@
     <string name="finance_manager_screen_transactions_appbar_title">Transactions</string>
     <string name="finance_manager_screen_transactions_selection_mode_appbar_title">%1$d selected</string>
     <string name="finance_manager_screen_transactions_selection_mode_appbar_menu_more_options">More Options</string>
-    <string name="finance_manager_screen_transactions_searchbar_placeholder">Search Transactions</string>
+    <string name="finance_manager_screen_transactions_searchbar_placeholder">Search</string>
     <string name="finance_manager_screen_transactions_floating_action_button_content_description">
         Add Transaction
     </string>

@@ -36,10 +36,6 @@ internal sealed class TransactionsScreenUIEvent : ScreenUIEvent {
     data object OnSortActionButtonClick : TransactionsScreenUIEvent()
     data object OnFilterActionButtonClick : TransactionsScreenUIEvent()
 
-    data class OnSearchTextUpdated(
-        val updatedSearchText: String,
-    ) : TransactionsScreenUIEvent()
-
     data class OnSelectedFilterUpdated(
         val updatedSelectedFilter: Filter,
     ) : TransactionsScreenUIEvent()
