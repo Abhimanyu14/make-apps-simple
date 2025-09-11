@@ -72,7 +72,7 @@ internal class CategoriesScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var categoriesGridItemDataMap: ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>> =
         persistentMapOf()
     private val validTransactionTypes: PersistentList<TransactionType> =

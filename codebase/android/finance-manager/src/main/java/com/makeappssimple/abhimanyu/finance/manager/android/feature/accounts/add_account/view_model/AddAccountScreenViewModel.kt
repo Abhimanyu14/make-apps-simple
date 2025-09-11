@@ -60,7 +60,7 @@ internal class AddAccountScreenViewModel(
     // region data
     private var addAccountScreenDataValidationState: AddAccountScreenDataValidationState =
         AddAccountScreenDataValidationState()
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
             it != AccountType.CASH

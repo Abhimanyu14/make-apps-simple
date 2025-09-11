@@ -67,7 +67,7 @@ internal class ViewTransactionScreenViewModel(
     // endregion
 
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var transactionIdToDelete: Int? = null
     private var refundTransactionsListItemData: ImmutableList<TransactionListItemData> =
         persistentListOf()

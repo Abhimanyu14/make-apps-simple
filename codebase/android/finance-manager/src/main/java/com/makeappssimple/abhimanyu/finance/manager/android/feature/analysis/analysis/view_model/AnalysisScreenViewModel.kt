@@ -67,7 +67,7 @@ internal class AnalysisScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.EXPENSE,

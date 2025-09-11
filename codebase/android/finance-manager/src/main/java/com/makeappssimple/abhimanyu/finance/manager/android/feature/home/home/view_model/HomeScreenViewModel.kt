@@ -85,7 +85,7 @@ internal class HomeScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region initial data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var isBackupCardVisible: Boolean = false
 
     // TODO(Abhi): Remove flow

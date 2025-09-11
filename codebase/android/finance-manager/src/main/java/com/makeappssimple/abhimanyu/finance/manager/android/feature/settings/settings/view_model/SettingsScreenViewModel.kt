@@ -57,7 +57,7 @@ internal class SettingsScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region initial data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var appVersion: String = ""
     private var isReminderEnabled: Boolean = false
     private var screenSnackbarType: SettingsScreenSnackbarType =

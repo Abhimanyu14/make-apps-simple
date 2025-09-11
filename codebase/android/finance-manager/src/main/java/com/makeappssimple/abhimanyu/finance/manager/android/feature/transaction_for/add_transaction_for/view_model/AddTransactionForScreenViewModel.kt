@@ -50,7 +50,7 @@ internal class AddTransactionForScreenViewModel(
     // region data
     private var addTransactionForScreenDataValidationState: AddTransactionForScreenDataValidationState =
         AddTransactionForScreenDataValidationState()
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var titleTextFieldState: TextFieldState = TextFieldState()
     // endregion
 

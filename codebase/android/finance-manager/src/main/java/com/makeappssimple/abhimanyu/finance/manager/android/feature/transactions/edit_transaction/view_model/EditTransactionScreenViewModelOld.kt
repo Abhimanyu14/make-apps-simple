@@ -110,7 +110,7 @@ public class EditTransactionScreenViewModelOld(
     // endregion
 
     // region Transaction data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var editingTransactionData: TransactionData? = null
     private var maxRefundAmount: Amount? = null
     // endregion

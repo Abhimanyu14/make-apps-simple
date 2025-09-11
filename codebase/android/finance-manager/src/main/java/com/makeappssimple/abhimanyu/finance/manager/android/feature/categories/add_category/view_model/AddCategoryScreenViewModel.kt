@@ -72,7 +72,7 @@ internal class AddCategoryScreenViewModel(
         AddCategoryScreenBottomSheetType.None
     private var addCategoryScreenDataValidationState: AddCategoryScreenDataValidationState =
         AddCategoryScreenDataValidationState()
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
             TransactionType.INCOME,

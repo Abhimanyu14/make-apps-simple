@@ -69,7 +69,7 @@ internal class EditCategoryScreenViewModel(
     // endregion
 
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var currentCategory: Category? = null
     private var screenBottomSheetType: EditCategoryScreenBottomSheetType =
         EditCategoryScreenBottomSheetType.None

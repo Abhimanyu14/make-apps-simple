@@ -60,7 +60,7 @@ internal class EditTransactionForScreenViewModel(
     // endregion
 
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var editTransactionForScreenDataValidationState: EditTransactionForScreenDataValidationState =
         EditTransactionForScreenDataValidationState()
     private val titleTextFieldState: TextFieldState = TextFieldState()

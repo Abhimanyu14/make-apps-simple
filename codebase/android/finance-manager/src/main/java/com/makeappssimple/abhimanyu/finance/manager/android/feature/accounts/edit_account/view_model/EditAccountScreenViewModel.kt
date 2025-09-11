@@ -87,7 +87,7 @@ internal class EditAccountScreenViewModel(
             element = AccountType.BANK,
         )
     private var selectedAccountType: AccountType = getSelectedAccountType()
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     // endregion
 
     // region uiState

@@ -62,7 +62,7 @@ internal class AccountsScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var allAccounts: ImmutableList<Account> = persistentListOf()
     private var defaultAccountId: Int? = null
     private var allAccountsTotalBalanceAmountValue: Long = 0L

@@ -145,7 +145,7 @@ internal class AddTransactionScreenViewModel(
     private var transactionTime: LocalTime = dateTimeKit.getCurrentLocalTime()
     private var isTransactionDatePickerDialogVisible: Boolean = false
     private var isTransactionTimePickerDialogVisible: Boolean = false
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     // endregion
 
     // region uiState

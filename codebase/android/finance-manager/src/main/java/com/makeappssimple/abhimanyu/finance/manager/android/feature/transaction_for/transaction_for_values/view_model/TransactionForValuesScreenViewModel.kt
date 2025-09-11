@@ -57,7 +57,7 @@ internal class TransactionForValuesScreenViewModel(
 ), LogKit by logKit,
     NavigationKit by navigationKit {
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
         persistentListOf()
     private var transactionForIdToDelete: Int? = null

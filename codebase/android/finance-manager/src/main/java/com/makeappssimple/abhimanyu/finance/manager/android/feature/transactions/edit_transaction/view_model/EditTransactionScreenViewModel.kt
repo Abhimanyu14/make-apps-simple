@@ -109,7 +109,7 @@ internal class EditTransactionScreenViewModel(
     // endregion
 
     // region data
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var accountFrom: Account? = null
     private var accountTo: Account? = null
     private var defaultAccount: Account? = null

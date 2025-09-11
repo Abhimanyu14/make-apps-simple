@@ -81,7 +81,7 @@ internal class TransactionsScreenViewModel(
     NavigationKit by navigationKit {
     // region data
     private var isInSelectionMode: Boolean = false
-    private var isLoading: Boolean = false
+    private var isLoading: Boolean = true
     private var selectedFilter = Filter()
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
