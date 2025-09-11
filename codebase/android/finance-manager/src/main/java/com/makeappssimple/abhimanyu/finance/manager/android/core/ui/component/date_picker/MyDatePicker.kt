@@ -19,6 +19,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.date_picker
 
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
@@ -35,6 +36,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constant
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import java.time.LocalDate
 import java.time.ZoneId
@@ -121,10 +123,16 @@ public fun MyDatePicker(
                         textStringResourceId = R.string.finance_manager_date_picker_negative_button,
                     )
                 }
-            }
+            },
+            colors = DatePickerDefaults.colors(
+                containerColor = FinanceManagerAppTheme.colorScheme.background,
+            ),
         ) {
             DatePicker(
                 state = datePickerState,
+                colors = DatePickerDefaults.colors(
+                    containerColor = FinanceManagerAppTheme.colorScheme.background,
+                ),
             )
         }
     }
