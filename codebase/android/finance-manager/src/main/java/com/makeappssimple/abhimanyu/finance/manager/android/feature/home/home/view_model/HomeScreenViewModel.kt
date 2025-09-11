@@ -72,13 +72,13 @@ internal class HomeScreenViewModel(
     getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
     getAllAccountsTotalMinimumBalanceAmountValueUseCase: GetAllAccountsTotalMinimumBalanceAmountValueUseCase,
     navigationKit: NavigationKit,
-    shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
     private val backupDataUseCase: BackupDataUseCase,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val getTransactionsBetweenTimestampsUseCase: GetTransactionsBetweenTimestampsUseCase,
+    private val shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
@@ -86,10 +86,13 @@ internal class HomeScreenViewModel(
     NavigationKit by navigationKit {
     // region initial data
     private var isLoading: Boolean = false
-    private val isBackupCardVisible: Flow<Boolean> =
-        shouldShowBackupCardUseCase()
+    private var isBackupCardVisible: Boolean = false
+
+    // TODO(Abhi): Remove flow
     private val accountsTotalBalanceAmountValue: Flow<Long> =
         getAllAccountsTotalBalanceAmountValueUseCase()
+
+    // TODO(Abhi): Remove flow
     private val allAccountsTotalMinimumBalanceAmountValue: Flow<Long> =
         getAllAccountsTotalMinimumBalanceAmountValueUseCase()
     private var isBalanceVisible: Boolean = false
@@ -150,7 +153,7 @@ internal class HomeScreenViewModel(
 
         _uiState.update {
             HomeScreenUIState(
-                isBackupCardVisible = isBackupCardVisible.first(),
+                isBackupCardVisible = isBackupCardVisible,
                 isBalanceVisible = isBalanceVisible,
                 isLoading = isLoading,
                 isRecentTransactionsTrailingTextVisible = homeListItemViewData
@@ -184,6 +187,31 @@ internal class HomeScreenViewModel(
     // region observeData
     private fun observeData() {
         observeForHomeListItemViewData()
+        observeIsBackupCardVisible()
+    }
+
+    private fun observeForHomeListItemViewData() {
+        coroutineScope.launch {
+            getRecentTransactionDataFlowUseCase().collectLatest { transactionDataList ->
+                homeListItemViewData = transactionDataList
+                    .map { transactionData: TransactionData ->
+                        transactionData.toTransactionListItemData(
+                            getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
+                        )
+                    }
+                refreshUiState()
+            }
+        }
+    }
+
+    private fun observeIsBackupCardVisible() {
+        coroutineScope.launch {
+            shouldShowBackupCardUseCase().collectLatest {
+                isBackupCardVisible = it
+                refreshUiState()
+            }
+        }
+        isBackupCardVisible
     }
     // endregion
 
@@ -295,22 +323,6 @@ internal class HomeScreenViewModel(
                 )
             }
             navigateUp()
-        }
-    }
-    // endregion
-
-    // region observeForHomeListItemViewData
-    private fun observeForHomeListItemViewData() {
-        coroutineScope.launch {
-            getRecentTransactionDataFlowUseCase().collectLatest { transactionDataList ->
-                homeListItemViewData = transactionDataList
-                    .map { transactionData: TransactionData ->
-                        transactionData.toTransactionListItemData(
-                            getReadableDateAndTime = dateTimeKit::getReadableDateAndTime,
-                        )
-                    }
-                refreshUiState()
-            }
         }
     }
     // endregion
