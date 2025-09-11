@@ -691,31 +691,55 @@ internal class AddTransactionScreenViewModel(
         originalTransactionData: TransactionData,
     ) {
         updateSelectedTransactionTypeIndex(
-            validTransactionTypesForNewTransaction.indexOf(
+            updatedSelectedTransactionTypeIndex = validTransactionTypesForNewTransaction.indexOf(
                 element = TransactionType.REFUND,
-            )
+            ),
+            shouldRefresh = false,
         )
-        updateAmount(maxRefundAmount.orEmpty().value.toString())
-        updateCategory(originalTransactionData.category)
-        updateAccountFrom(null)
-        updateAccountTo(originalTransactionData.accountFrom)
+        updateAmount(
+            updatedAmount = maxRefundAmount.orEmpty().value.toString(),
+            shouldRefresh = false,
+        )
+        updateCategory(
+            updatedCategory = originalTransactionData.category,
+            shouldRefresh = false,
+        )
+        updateAccountFrom(
+            updatedAccountFrom = null,
+            shouldRefresh = false,
+        )
+        updateAccountTo(
+            updatedAccountTo = originalTransactionData.accountFrom,
+            shouldRefresh = false,
+        )
         updateSelectedTransactionForIndex(
-            transactionForValues.indexOf(
+            updatedSelectedTransactionForIndex = transactionForValues.indexOf(
                 element = transactionForValues.firstOrNull {
                     it.id == originalTransactionData.transaction.id
                 },
-            )
+            ),
+            shouldRefresh = false,
         )
     }
 
     private fun processInitialDataForOtherTransactions() {
-        updateCategory(defaultExpenseCategory)
-        updateAccountFrom(defaultAccount)
-        updateAccountTo(defaultAccount)
         updateSelectedTransactionTypeIndex(
-            validTransactionTypesForNewTransaction.indexOf(
+            updatedSelectedTransactionTypeIndex = validTransactionTypesForNewTransaction.indexOf(
                 element = TransactionType.EXPENSE,
-            )
+            ),
+            shouldRefresh = false,
+        )
+        updateCategory(
+            updatedCategory = defaultExpenseCategory,
+            shouldRefresh = false,
+        )
+        updateAccountFrom(
+            updatedAccountFrom = defaultAccount,
+            shouldRefresh = false,
+        )
+        updateAccountTo(
+            updatedAccountTo = defaultAccount,
+            shouldRefresh = false,
         )
     }
     // endregion
