@@ -53,12 +53,10 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -69,12 +67,12 @@ private const val DEFAULT_OVERVIEW_TAB_SELECTION = 1
 
 @KoinViewModel
 internal class HomeScreenViewModel(
-    getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
-    getAllAccountsTotalMinimumBalanceAmountValueUseCase: GetAllAccountsTotalMinimumBalanceAmountValueUseCase,
     navigationKit: NavigationKit,
     private val backupDataUseCase: BackupDataUseCase,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
+    private val getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
+    private val getAllAccountsTotalMinimumBalanceAmountValueUseCase: GetAllAccountsTotalMinimumBalanceAmountValueUseCase,
     private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val getTransactionsBetweenTimestampsUseCase: GetTransactionsBetweenTimestampsUseCase,
@@ -87,14 +85,8 @@ internal class HomeScreenViewModel(
     // region initial data
     private var isLoading: Boolean = true
     private var isBackupCardVisible: Boolean = false
-
-    // TODO(Abhi): Remove flow
-    private val accountsTotalBalanceAmountValue: Flow<Long> =
-        getAllAccountsTotalBalanceAmountValueUseCase()
-
-    // TODO(Abhi): Remove flow
-    private val allAccountsTotalMinimumBalanceAmountValue: Flow<Long> =
-        getAllAccountsTotalMinimumBalanceAmountValueUseCase()
+    private var allAccountsTotalBalanceAmountValue: Long = 0L
+    private var allAccountsTotalMinimumBalanceAmountValue = 0L
     private var isBalanceVisible: Boolean = false
     private var homeListItemViewData: ImmutableList<TransactionListItemData> =
         persistentListOf()
@@ -143,7 +135,7 @@ internal class HomeScreenViewModel(
         }
     }
 
-    private suspend fun updateUiState() {
+    private fun updateUiState() {
         val totalIncomeAmount = Amount(
             value = overviewCardData?.income?.toLong().orZero(),
         )
@@ -160,10 +152,8 @@ internal class HomeScreenViewModel(
                     .isNotEmpty(),
                 overviewTabSelectionIndex = overviewTabSelectionIndex.orZero(),
                 transactionListItemDataList = homeListItemViewData,
-                accountsTotalBalanceAmountValue = accountsTotalBalanceAmountValue.first()
-                    .orZero(),
-                allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue.first()
-                    .orZero(),
+                accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
+                allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
                 overviewCardData = overviewCardData.orDefault(),
                 pieChartData = PieChartData(
                     items = persistentListOf(
@@ -188,6 +178,8 @@ internal class HomeScreenViewModel(
     private fun observeData() {
         observeForHomeListItemViewData()
         observeIsBackupCardVisible()
+        observeAllAccountsTotalBalanceAmountValue()
+        observeAllAccountsTotalMinimumBalanceAmountValueUseCase()
     }
 
     private fun observeForHomeListItemViewData() {
@@ -211,7 +203,24 @@ internal class HomeScreenViewModel(
                 refreshUiState()
             }
         }
-        isBackupCardVisible
+    }
+
+    private fun observeAllAccountsTotalBalanceAmountValue() {
+        coroutineScope.launch {
+            getAllAccountsTotalBalanceAmountValueUseCase().collectLatest {
+                allAccountsTotalBalanceAmountValue = it
+                refreshUiState()
+            }
+        }
+    }
+
+    private fun observeAllAccountsTotalMinimumBalanceAmountValueUseCase() {
+        coroutineScope.launch {
+            getAllAccountsTotalMinimumBalanceAmountValueUseCase().collectLatest {
+                allAccountsTotalMinimumBalanceAmountValue = it
+                refreshUiState()
+            }
+        }
     }
     // endregion
 
