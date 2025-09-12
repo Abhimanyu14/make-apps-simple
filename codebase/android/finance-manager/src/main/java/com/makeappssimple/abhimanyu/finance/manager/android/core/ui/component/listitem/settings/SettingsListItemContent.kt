@@ -17,17 +17,14 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.settings
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.toggle.Toggle
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 
 @Composable
@@ -59,28 +56,11 @@ public fun SettingsListItemContent(
         },
         trailingContent = if (data.hasToggle) {
             {
-                // TODO(Abhi): Create a wrapper for this M3 component
-                Switch(
-                    checked = data.isChecked.orFalse(),
+                Toggle(
+                    isChecked = data.isChecked.orFalse(),
                     onCheckedChange = {
-                        handleEvent(
-                            SettingsListItemContentEvent.OnCheckedChange
-                        )
+                        handleEvent(SettingsListItemContentEvent.OnCheckedChange)
                     },
-                    thumbContent = if (data.isChecked.orFalse()) {
-                        {
-                            Icon(
-                                imageVector = MyIcons.Check,
-                                contentDescription = null,
-                                modifier = Modifier.size(SwitchDefaults.IconSize),
-                            )
-                        }
-                    } else {
-                        null
-                    },
-                    colors = SwitchDefaults.colors(
-                        uncheckedThumbColor = FinanceManagerAppTheme.colorScheme.background,
-                    ),
                 )
             }
         } else {
