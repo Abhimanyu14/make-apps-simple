@@ -153,16 +153,16 @@ internal class CategoriesScreenViewModel(
 
     // region observeData
     private fun observeData() {
-        val defaultDataId: Flow<DefaultDataId?> =
-            financeManagerPreferencesRepository.getDefaultDataIdFlow()
-        val categoriesTransactionTypeMap: Flow<Map<TransactionType, ImmutableList<Category>>> =
-            getAllCategoriesFlowUseCase()
-                .map { categories ->
-                    categories.groupBy { category ->
-                        category.transactionType
-                    }
-                }
         coroutineScope.launch {
+            val defaultDataId: Flow<DefaultDataId?> =
+                financeManagerPreferencesRepository.getDefaultDataIdFlow()
+            val categoriesTransactionTypeMap: Flow<Map<TransactionType, ImmutableList<Category>>> =
+                getAllCategoriesFlowUseCase()
+                    .map { categories ->
+                        categories.groupBy { category ->
+                            category.transactionType
+                        }
+                    }
             combineAndCollectLatest(
                 flow = defaultDataId,
                 flow2 = categoriesTransactionTypeMap,
