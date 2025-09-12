@@ -21,7 +21,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDa
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.InitialDataVersionNumber
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Reminder
 import kotlinx.coroutines.flow.Flow
-import java.time.Instant
 
 public interface FinanceManagerPreferencesRepository {
     public fun getDataTimestampFlow(): Flow<DataTimestamp?>
@@ -64,13 +63,9 @@ public interface FinanceManagerPreferencesRepository {
         isReminderEnabled: Boolean,
     ): Boolean
 
-    public suspend fun updateLastDataBackupTimestamp(
-        lastDataBackupTimestamp: Long = getCurrentTimeMillis(),
-    ): Boolean
+    public suspend fun updateLastDataBackupTimestamp(): Boolean
 
-    public suspend fun updateLastDataChangeTimestamp(
-        lastDataChangeTimestamp: Long = getCurrentTimeMillis(),
-    ): Boolean
+    public suspend fun updateLastDataChangeTimestamp(): Boolean
 
     public suspend fun updateTransactionsDataVersionNumber(
         transactionsDataVersionNumber: Int,
@@ -80,9 +75,4 @@ public interface FinanceManagerPreferencesRepository {
         hour: Int,
         min: Int,
     ): Boolean
-
-    // TODO(Abhi): Figure out how to inject this
-    private fun getCurrentTimeMillis(): Long {
-        return Instant.now().toEpochMilli()
-    }
 }

@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences
 
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.DefaultDataId
@@ -26,6 +27,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 
 internal class FinanceManagerPreferencesRepositoryImpl(
+    private val dateTimeKit: DateTimeKit,
     private val dispatcherProvider: DispatcherProvider,
     private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
 ) : FinanceManagerPreferencesRepository {
@@ -130,22 +132,18 @@ internal class FinanceManagerPreferencesRepositoryImpl(
         }
     }
 
-    override suspend fun updateLastDataBackupTimestamp(
-        lastDataBackupTimestamp: Long,
-    ): Boolean {
+    override suspend fun updateLastDataBackupTimestamp(): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateLastDataBackupTimestamp(
-                lastDataBackupTimestamp = lastDataBackupTimestamp,
+                lastDataBackupTimestamp = dateTimeKit.getCurrentTimeMillis(),
             )
         }
     }
 
-    override suspend fun updateLastDataChangeTimestamp(
-        lastDataChangeTimestamp: Long,
-    ): Boolean {
+    override suspend fun updateLastDataChangeTimestamp(): Boolean {
         return dispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateLastDataChangeTimestamp(
-                lastDataChangeTimestamp = lastDataChangeTimestamp,
+                lastDataChangeTimestamp = dateTimeKit.getCurrentTimeMillis(),
             )
         }
     }

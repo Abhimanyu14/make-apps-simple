@@ -145,6 +145,23 @@ internal class TestDependencies {
     )
     // endregion
 
+    // region core dependencies
+    val alarmKit: AlarmKit = FakeAlarmKitImpl()
+    val appVersionKit: AppVersionKit = FakeAppVersionKitImpl()
+    val dateTimeKit: DateTimeKit = DateTimeKitImpl()
+    val jsonReaderKit: JsonReaderKit = FakeJsonReaderKitImpl()
+    val jsonWriterKit: JsonWriterKit = FakeJsonWriterKitImpl()
+    val logKit: LogKit = FakeLogKitImpl()
+    val navigationKit: NavigationKit = NavigationKitImpl(
+        coroutineScope = testScope.backgroundScope,
+    )
+    val screenUIStateDelegate: ScreenUIStateDelegate =
+        ScreenUIStateDelegateImpl(
+            coroutineScope = testScope.backgroundScope,
+        )
+    val uriDecoder: UriDecoder = FakeUriDecoderImpl()
+    // endregion
+
     // region database
     val fakeAccountDao: AccountDao = FakeAccountDaoImpl()
     val fakeCategoryDao: CategoryDao = FakeCategoryDaoImpl()
@@ -186,6 +203,7 @@ internal class TestDependencies {
     )
     val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
         FinanceManagerPreferencesRepositoryImpl(
+            dateTimeKit = dateTimeKit,
             dispatcherProvider = testDispatcherProvider,
             financeManagerPreferencesDataSource = fakeFinanceManagerPreferencesDataSource,
         )
@@ -206,23 +224,6 @@ internal class TestDependencies {
             dispatcherProvider = testDispatcherProvider,
             transactionForDao = fakeTransactionForDao,
         )
-    // endregion
-
-    // region core dependencies
-    val alarmKit: AlarmKit = FakeAlarmKitImpl()
-    val appVersionKit: AppVersionKit = FakeAppVersionKitImpl()
-    val dateTimeKit: DateTimeKit = DateTimeKitImpl()
-    val jsonReaderKit: JsonReaderKit = FakeJsonReaderKitImpl()
-    val jsonWriterKit: JsonWriterKit = FakeJsonWriterKitImpl()
-    val logKit: LogKit = FakeLogKitImpl()
-    val navigationKit: NavigationKit = NavigationKitImpl(
-        coroutineScope = testScope.backgroundScope,
-    )
-    val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
-    val uriDecoder: UriDecoder = FakeUriDecoderImpl()
     // endregion
 
     // region transaction data use cases

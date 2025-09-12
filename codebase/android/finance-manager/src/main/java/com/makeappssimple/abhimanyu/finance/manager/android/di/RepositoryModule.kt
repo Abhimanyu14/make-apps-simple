@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.di
 
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account.AccountRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.category.CategoryRepository
@@ -65,10 +66,12 @@ public class RepositoryModule {
 
     @Single
     internal fun providesFinanceManagerPreferencesRepository(
+        dateTimeKit: DateTimeKit,
         dispatcherProvider: DispatcherProvider,
         financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
     ): FinanceManagerPreferencesRepository {
         return FinanceManagerPreferencesRepositoryImpl(
+            dateTimeKit = dateTimeKit,
             dispatcherProvider = dispatcherProvider,
             financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
         )
