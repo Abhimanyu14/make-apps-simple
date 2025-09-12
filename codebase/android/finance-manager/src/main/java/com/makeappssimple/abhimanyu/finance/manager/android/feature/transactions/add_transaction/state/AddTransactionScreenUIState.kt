@@ -39,7 +39,7 @@ internal data class AddTransactionScreenUIState(
     val accountToText: AccountToText = AccountToText.Account,
     val screenBottomSheetType: AddTransactionScreenBottomSheetType = AddTransactionScreenBottomSheetType.None,
     val screenSnackbarType: AddTransactionScreenSnackbarType = AddTransactionScreenSnackbarType.None,
-    val uiVisibilityState: AddTransactionScreenUiVisibilityState = AddTransactionScreenUiVisibilityState.Expense,
+    val uiVisibilityState: AddTransactionScreenUiVisibilityState = AddTransactionScreenUiVisibilityState.Expense(),
     val isBottomSheetVisible: Boolean = false,
     val isCtaButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,

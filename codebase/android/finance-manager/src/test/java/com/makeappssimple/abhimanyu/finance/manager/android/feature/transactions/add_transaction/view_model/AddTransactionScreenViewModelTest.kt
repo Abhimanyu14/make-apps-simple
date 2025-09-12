@@ -93,7 +93,7 @@ internal class AddTransactionScreenViewModelTest {
                 expected = AddTransactionScreenSnackbarType.None,
             )
             result.uiVisibilityState.shouldBe(
-                expected = AddTransactionScreenUiVisibilityState.Expense,
+                expected = AddTransactionScreenUiVisibilityState.Expense(),
             )
             result.isBottomSheetVisible.shouldBeFalse()
             result.isCtaButtonEnabled.shouldBeFalse()

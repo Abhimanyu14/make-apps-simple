@@ -120,7 +120,7 @@ internal class AddTransactionScreenViewModel(
         persistentListOf()
 
     private var uiVisibilityState: AddTransactionScreenUiVisibilityState =
-        AddTransactionScreenUiVisibilityState.Expense
+        AddTransactionScreenUiVisibilityState.Expense()
     private var filteredCategories: ImmutableList<Category> = persistentListOf()
     private var originalTransactionData: TransactionData? = null
     private var transactionForValues: ImmutableList<TransactionFor> =
@@ -204,6 +204,7 @@ internal class AddTransactionScreenViewModel(
                     selectedTransactionType = selectedTransactionType,
                 )
             updateTitleSuggestions()
+            updateUiVisibilityState()
             updateUiState()
         }
     }
@@ -798,57 +799,69 @@ internal class AddTransactionScreenViewModel(
     }
 
     private fun handleSelectedTransactionTypeChangeToIncome() {
-        updateUiVisibilityState(AddTransactionScreenUiVisibilityState.Income)
-
         updateCategory(
-            originalTransactionData?.category ?: defaultIncomeCategory
+            updatedCategory = originalTransactionData?.category
+                ?: defaultIncomeCategory,
         )
         clearTitle()
-        updateAccountFrom(null)
-        updateAccountTo(originalTransactionData?.accountTo ?: defaultAccount)
+        updateAccountFrom(
+            updatedAccountFrom = null,
+        )
+        updateAccountTo(
+            updatedAccountTo = originalTransactionData?.accountTo
+                ?: defaultAccount,
+        )
     }
 
     private fun handleSelectedTransactionTypeChangeToExpense() {
-        updateUiVisibilityState(AddTransactionScreenUiVisibilityState.Expense)
-
         updateCategory(
-            originalTransactionData?.category ?: defaultExpenseCategory
+            updatedCategory = originalTransactionData?.category
+                ?: defaultExpenseCategory,
         )
         clearTitle()
         updateAccountFrom(
-            originalTransactionData?.accountFrom ?: defaultAccount
+            updatedAccountFrom = originalTransactionData?.accountFrom
+                ?: defaultAccount,
         )
-        updateAccountTo(null)
+        updateAccountTo(
+            updatedAccountTo = null,
+        )
     }
 
     private fun handleSelectedTransactionTypeChangeToTransfer() {
-        updateUiVisibilityState(AddTransactionScreenUiVisibilityState.Transfer)
-
         clearTitle()
         updateAccountFrom(
-            originalTransactionData?.accountFrom ?: defaultAccount
+            updatedAccountFrom = originalTransactionData?.accountFrom
+                ?: defaultAccount,
         )
-        updateAccountTo(originalTransactionData?.accountTo ?: defaultAccount)
+        updateAccountTo(
+            updatedAccountTo = originalTransactionData?.accountTo
+                ?: defaultAccount,
+        )
     }
 
     private fun handleSelectedTransactionTypeChangeToInvestment() {
-        updateUiVisibilityState(AddTransactionScreenUiVisibilityState.Investment)
-
         updateCategory(
-            originalTransactionData?.category ?: defaultInvestmentCategory
+            updatedCategory = originalTransactionData?.category
+                ?: defaultInvestmentCategory,
         )
         clearTitle()
         updateAccountFrom(
-            originalTransactionData?.accountFrom ?: defaultAccount
+            updatedAccountFrom = originalTransactionData?.accountFrom
+                ?: defaultAccount,
         )
-        updateAccountTo(null)
+        updateAccountTo(
+            updatedAccountTo = null,
+        )
     }
 
     private fun handleSelectedTransactionTypeChangeToRefund() {
-        updateUiVisibilityState(AddTransactionScreenUiVisibilityState.Refund)
-
-        updateAmount(maxRefundAmount.orEmpty().value.toString())
-        updateAccountTo(originalTransactionData?.accountFrom)
+        updateAmount(
+            updatedAmount = maxRefundAmount.orEmpty().value.toString(),
+        )
+        updateAccountTo(
+            updatedAccountTo = originalTransactionData?.accountFrom,
+        )
         updateTransactionDate(
             updatedTransactionDate = dateTimeKit.getLocalDate(
                 timestamp = originalTransactionData?.transaction?.transactionTimestamp.orZero(),
@@ -861,10 +874,43 @@ internal class AddTransactionScreenViewModel(
         )
     }
 
-    private fun updateUiVisibilityState(
-        updatedUiVisibilityState: AddTransactionScreenUiVisibilityState,
-    ) {
-        uiVisibilityState = updatedUiVisibilityState
+    private fun updateUiVisibilityState() {
+        when (selectedTransactionType) {
+            TransactionType.INCOME -> {
+                uiVisibilityState =
+                    AddTransactionScreenUiVisibilityState.Income(
+                        isTitleSuggestionsVisible = titleSuggestions.isNotEmpty(),
+                    )
+            }
+
+            TransactionType.EXPENSE -> {
+                uiVisibilityState =
+                    AddTransactionScreenUiVisibilityState.Expense(
+                        isTitleSuggestionsVisible = titleSuggestions.isNotEmpty(),
+                    )
+            }
+
+            TransactionType.TRANSFER -> {
+                uiVisibilityState =
+                    AddTransactionScreenUiVisibilityState.Transfer()
+            }
+
+            TransactionType.ADJUSTMENT -> {}
+
+            TransactionType.INVESTMENT -> {
+                uiVisibilityState =
+                    AddTransactionScreenUiVisibilityState.Investment(
+                        isTitleSuggestionsVisible = titleSuggestions.isNotEmpty(),
+                    )
+            }
+
+            TransactionType.REFUND -> {
+                uiVisibilityState =
+                    AddTransactionScreenUiVisibilityState.Refund()
+            }
+
+            null -> {}
+        }
     }
     // endregion
 

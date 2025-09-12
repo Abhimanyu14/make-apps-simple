@@ -20,61 +20,61 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 internal sealed class AddTransactionScreenUiVisibilityState(
-    val isTitleTextFieldVisible: Boolean = false,
-    val isCategoryTextFieldVisible: Boolean = false,
-    val isTransactionForRadioGroupVisible: Boolean = false,
-    val isTransactionTypesRadioGroupVisible: Boolean = false,
-    val isAccountFromTextFieldVisible: Boolean = false,
-    val isAccountToTextFieldVisible: Boolean = false,
-    val isTitleSuggestionsVisible: Boolean = false,
+    open val isTitleTextFieldVisible: Boolean = false,
+    open val isCategoryTextFieldVisible: Boolean = false,
+    open val isTransactionForRadioGroupVisible: Boolean = false,
+    open val isTransactionTypesRadioGroupVisible: Boolean = false,
+    open val isAccountFromTextFieldVisible: Boolean = false,
+    open val isAccountToTextFieldVisible: Boolean = false,
+    open val isTitleSuggestionsVisible: Boolean = false,
 ) {
-    data object Expense : AddTransactionScreenUiVisibilityState(
-        isTitleTextFieldVisible = true,
-        isCategoryTextFieldVisible = true,
-        isTransactionForRadioGroupVisible = true,
-        isTransactionTypesRadioGroupVisible = true,
-        isAccountFromTextFieldVisible = true,
-        isAccountToTextFieldVisible = false,
-        isTitleSuggestionsVisible = true,
-    )
+    data class Expense(
+        override val isTitleTextFieldVisible: Boolean = true,
+        override val isCategoryTextFieldVisible: Boolean = true,
+        override val isTransactionForRadioGroupVisible: Boolean = true,
+        override val isTransactionTypesRadioGroupVisible: Boolean = true,
+        override val isAccountFromTextFieldVisible: Boolean = true,
+        override val isAccountToTextFieldVisible: Boolean = false,
+        override val isTitleSuggestionsVisible: Boolean = true,
+    ) : AddTransactionScreenUiVisibilityState()
 
-    data object Income : AddTransactionScreenUiVisibilityState(
-        isTitleTextFieldVisible = true,
-        isCategoryTextFieldVisible = true,
-        isTransactionForRadioGroupVisible = false,
-        isTransactionTypesRadioGroupVisible = true,
-        isAccountFromTextFieldVisible = false,
-        isAccountToTextFieldVisible = true,
-        isTitleSuggestionsVisible = true,
-    )
+    data class Income(
+        override val isTitleTextFieldVisible: Boolean = true,
+        override val isCategoryTextFieldVisible: Boolean = true,
+        override val isTransactionForRadioGroupVisible: Boolean = false,
+        override val isTransactionTypesRadioGroupVisible: Boolean = true,
+        override val isAccountFromTextFieldVisible: Boolean = false,
+        override val isAccountToTextFieldVisible: Boolean = true,
+        override val isTitleSuggestionsVisible: Boolean = true,
+    ) : AddTransactionScreenUiVisibilityState()
 
-    data object Investment : AddTransactionScreenUiVisibilityState(
-        isTitleTextFieldVisible = true,
-        isCategoryTextFieldVisible = true,
-        isTransactionForRadioGroupVisible = false,
-        isTransactionTypesRadioGroupVisible = true,
-        isAccountFromTextFieldVisible = true,
-        isAccountToTextFieldVisible = false,
-        isTitleSuggestionsVisible = true,
-    )
+    data class Investment(
+        override val isTitleTextFieldVisible: Boolean = true,
+        override val isCategoryTextFieldVisible: Boolean = true,
+        override val isTransactionForRadioGroupVisible: Boolean = false,
+        override val isTransactionTypesRadioGroupVisible: Boolean = true,
+        override val isAccountFromTextFieldVisible: Boolean = true,
+        override val isAccountToTextFieldVisible: Boolean = false,
+        override val isTitleSuggestionsVisible: Boolean = true,
+    ) : AddTransactionScreenUiVisibilityState()
 
-    data object Refund : AddTransactionScreenUiVisibilityState(
-        isTitleTextFieldVisible = false,
-        isCategoryTextFieldVisible = false,
-        isTransactionForRadioGroupVisible = false,
-        isTransactionTypesRadioGroupVisible = false,
-        isAccountFromTextFieldVisible = false,
-        isAccountToTextFieldVisible = true,
-        isTitleSuggestionsVisible = false,
-    )
+    data class Refund(
+        override val isTitleTextFieldVisible: Boolean = false,
+        override val isCategoryTextFieldVisible: Boolean = false,
+        override val isTransactionForRadioGroupVisible: Boolean = false,
+        override val isTransactionTypesRadioGroupVisible: Boolean = false,
+        override val isAccountFromTextFieldVisible: Boolean = false,
+        override val isAccountToTextFieldVisible: Boolean = true,
+        override val isTitleSuggestionsVisible: Boolean = false,
+    ) : AddTransactionScreenUiVisibilityState()
 
-    data object Transfer : AddTransactionScreenUiVisibilityState(
-        isTitleTextFieldVisible = false,
-        isCategoryTextFieldVisible = false,
-        isTransactionForRadioGroupVisible = false,
-        isTransactionTypesRadioGroupVisible = true,
-        isAccountFromTextFieldVisible = true,
-        isAccountToTextFieldVisible = true,
-        isTitleSuggestionsVisible = false,
-    )
+    data class Transfer(
+        override val isTitleTextFieldVisible: Boolean = false,
+        override val isCategoryTextFieldVisible: Boolean = false,
+        override val isTransactionForRadioGroupVisible: Boolean = false,
+        override val isTransactionTypesRadioGroupVisible: Boolean = true,
+        override val isAccountFromTextFieldVisible: Boolean = true,
+        override val isAccountToTextFieldVisible: Boolean = true,
+        override val isTitleSuggestionsVisible: Boolean = false,
+    ) : AddTransactionScreenUiVisibilityState()
 }

@@ -458,8 +458,7 @@ internal fun AddTransactionScreenUI(
                 )
             }
             AnimatedVisibility(
-                // TODO(Abhi): Move logic to UI state
-                visible = uiState.uiVisibilityState.isTitleSuggestionsVisible && uiState.titleSuggestionsChipUIData.isNotEmpty(),
+                visible = uiState.uiVisibilityState.isTitleSuggestionsVisible,
             ) {
                 MyHorizontalScrollingSelectionGroup(
                     modifier = Modifier
