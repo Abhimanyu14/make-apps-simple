@@ -130,15 +130,10 @@ internal class TransactionForValuesScreenViewModel(
         }
         return coroutineScope.launch {
             startLoading()
-            val isTransactionForDeleted = deleteTransactionForByIdUseCase(
+            deleteTransactionForByIdUseCase(
                 id = id,
             )
-            if (isTransactionForDeleted) {
-                // TODO(Abhi): Show snackbar
-                transactionForIdToDelete = null
-            } else {
-                throw IllegalStateException("TransactionFor with id $id could not be deleted")
-            }
+            transactionForIdToDelete = null
             completeLoading()
         }
     }
