@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TimePickerDefaults
@@ -48,6 +47,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.myDarkColorScheme
@@ -224,15 +224,14 @@ private fun TimePickerDialog(
                                 weight = 1F,
                             ),
                     )
-                    // TODO(Abhi): Create a wrapper for [TextButton]
-                    TextButton(
+                    MyTextButton(
                         onClick = onCancel,
                     ) {
                         MyText(
                             textStringResourceId = R.string.finance_manager_time_picker_negative_button_text,
                         )
                     }
-                    TextButton(
+                    MyTextButton(
                         onClick = onConfirm,
                     ) {
                         MyText(

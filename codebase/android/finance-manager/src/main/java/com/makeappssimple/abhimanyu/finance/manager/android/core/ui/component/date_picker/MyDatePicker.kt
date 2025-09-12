@@ -23,7 +23,6 @@ import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -36,6 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constant
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import java.time.LocalDate
@@ -95,7 +95,7 @@ public fun MyDatePicker(
                 handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
             },
             confirmButton = {
-                TextButton(
+                MyTextButton(
                     onClick = {
                         val startOfDayTimestamp: LocalDate = getLocalDate(
                             timestamp = datePickerState.selectedDateMillis.orZero(),
@@ -114,7 +114,7 @@ public fun MyDatePicker(
                 }
             },
             dismissButton = {
-                TextButton(
+                MyTextButton(
                     onClick = {
                         handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
                     },

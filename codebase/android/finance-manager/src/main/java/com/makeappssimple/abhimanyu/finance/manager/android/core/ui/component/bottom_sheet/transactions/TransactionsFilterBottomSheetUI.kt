@@ -32,7 +32,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -52,6 +51,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyIconButton
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.statusBarSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
@@ -541,7 +541,7 @@ public fun TransactionFilterBottomSheetDateFilter(
                         ),
                 )
             }
-            TextButton(
+            MyTextButton(
                 onClick = onClearButtonClick,
                 modifier = Modifier
                     .padding(
@@ -678,7 +678,7 @@ private fun TransactionFilterBottomSheetFilterGroup(
                         ),
                 )
             }
-            TextButton(
+            MyTextButton(
                 onClick = onClearButtonClick,
                 modifier = Modifier
                     .padding(
