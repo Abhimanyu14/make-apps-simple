@@ -408,9 +408,6 @@ internal class AddTransactionScreenViewModel(
         amountTextFieldState.setTextAndPlaceCursorAtEnd(
             text = updatedAmount.filterDigits(),
         )
-        if (shouldRefresh) {
-            updateUiState()
-        }
         return if (shouldRefresh) {
             refreshUiState()
         } else {
