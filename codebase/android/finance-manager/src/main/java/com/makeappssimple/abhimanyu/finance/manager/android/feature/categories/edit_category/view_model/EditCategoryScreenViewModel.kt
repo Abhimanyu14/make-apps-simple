@@ -240,7 +240,7 @@ internal class EditCategoryScreenViewModel(
 
     private fun updateCategory(): Job {
         return coroutineScope.launch {
-            val isCategoryUpdated = updateCategoryUseCase(
+            updateCategoryUseCase(
                 currentCategory = requireNotNull(
                     value = currentCategory,
                     lazyMessage = {
@@ -250,13 +250,8 @@ internal class EditCategoryScreenViewModel(
                 emoji = emoji,
                 title = titleTextFieldState.text.toString(),
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
-            ) == 1
-            if (isCategoryUpdated) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
+            )
+            navigateUp()
         }
     }
 

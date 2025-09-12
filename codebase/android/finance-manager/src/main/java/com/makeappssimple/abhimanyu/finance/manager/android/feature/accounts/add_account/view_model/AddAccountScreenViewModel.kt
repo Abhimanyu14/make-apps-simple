@@ -190,18 +190,13 @@ internal class AddAccountScreenViewModel(
     private fun insertAccount(): Job {
         return coroutineScope.launch {
             startLoading()
-            val isAccountInserted = insertAccountUseCase(
+            insertAccountUseCase(
                 accountType = getSelectedAccountType(),
                 minimumAccountBalanceAmountValue = minimumAccountBalanceAmountValueTextFieldState.text.toString()
                     .toLongOrZero(),
                 name = nameTextFieldState.text.toString(),
-            ) != -1L
-            if (isAccountInserted) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
+            )
+            navigateUp()
         }
     }
 

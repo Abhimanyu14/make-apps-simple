@@ -31,25 +31,20 @@ internal class InsertAccountUseCase(
         minimumAccountBalanceAmountValue: Long,
         name: String,
     ): Long {
-        return try {
-            val minimumAccountBalanceAmount =
-                if (accountType == AccountType.BANK) {
-                    Amount(
-                        value = minimumAccountBalanceAmountValue,
-                    )
-                } else {
-                    null
-                }
-            val newAccount = Account(
-                type = accountType,
-                minimumAccountBalanceAmount = minimumAccountBalanceAmount,
-                name = name,
-            )
-            financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
-            accountRepository.insertAccounts(newAccount).first()
-        } catch (_: NoSuchElementException) {
-            // This exception is thrown when the list is empty, which means the insert failed.
-            -1L
-        }
+        val minimumAccountBalanceAmount =
+            if (accountType == AccountType.BANK) {
+                Amount(
+                    value = minimumAccountBalanceAmountValue,
+                )
+            } else {
+                null
+            }
+        val newAccount = Account(
+            type = accountType,
+            minimumAccountBalanceAmount = minimumAccountBalanceAmount,
+            name = name,
+        )
+        financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
+        return accountRepository.insertAccounts(newAccount).first()
     }
 }

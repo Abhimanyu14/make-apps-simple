@@ -301,14 +301,10 @@ internal class CategoriesScreenViewModel(
                     "Category ID to delete cannot be null."
                 },
             )
-            val isCategoryDeleted = deleteCategoryByIdUseCase(
+            deleteCategoryByIdUseCase(
                 id = id,
-            ) == 1
-            if (isCategoryDeleted) {
-                categoryIdToDelete = null
-            } else {
-                // TODO(Abhi): Handle this error scenario
-            }
+            )
+            categoryIdToDelete = null
         }
     }
 

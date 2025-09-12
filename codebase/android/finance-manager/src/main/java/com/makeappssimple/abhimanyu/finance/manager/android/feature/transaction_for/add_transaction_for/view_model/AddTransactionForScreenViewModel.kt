@@ -136,15 +136,10 @@ internal class AddTransactionForScreenViewModel(
     private fun insertTransactionFor(): Job {
         return coroutineScope.launch {
             startLoading()
-            val isTransactionForInserted = insertTransactionForUseCase(
+            insertTransactionForUseCase(
                 title = titleTextFieldState.text.toString(),
-            ) != -1L
-            if (isTransactionForInserted) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
+            )
+            navigateUp()
         }
     }
 

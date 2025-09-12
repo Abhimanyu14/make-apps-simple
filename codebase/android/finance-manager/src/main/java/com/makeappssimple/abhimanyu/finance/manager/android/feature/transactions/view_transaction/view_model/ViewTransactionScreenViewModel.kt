@@ -224,20 +224,10 @@ internal class ViewTransactionScreenViewModel(
         )
         return coroutineScope.launch {
             startLoading()
-            val isTransactionDeleted = deleteTransactionUseByIdCase(
+            deleteTransactionUseByIdCase(
                 id = id,
             )
-            if (isTransactionDeleted) {
-                navigateUp()
-            } else {
-                resetScreenBottomSheetType()
-                updateTransactionIdToDelete(
-                    updatedTransactionIdToDelete = null,
-                    shouldRefresh = false,
-                )
-                completeLoading()
-                // TODO(Abhi): Show error message
-            }
+            navigateUp()
         }
     }
 

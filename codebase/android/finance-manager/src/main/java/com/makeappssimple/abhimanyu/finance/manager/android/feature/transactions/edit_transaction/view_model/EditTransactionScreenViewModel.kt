@@ -617,15 +617,12 @@ internal class EditTransactionScreenViewModel(
             transactionType = transactionType,
         )
         return coroutineScope.launch {
-            val isTransactionUpdated = false
-//                updateTransactionUseCase(
-//                updatedTransaction = transaction,
-//            )
-            if (isTransactionUpdated) {
-                navigateUp()
-            } else {
-                // TODO(Abhi): Show error
-            }
+            /*
+            updateTransactionUseCase(
+                updatedTransaction = transaction,
+            )
+            */
+            navigateUp()
         }
     }
     // endregion

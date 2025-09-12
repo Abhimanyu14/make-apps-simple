@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.account
 
-import android.database.sqlite.SQLiteConstraintException
 import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -27,10 +26,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.database.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.updateBalanceAmount
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 internal class AccountRepositoryImpl(
@@ -46,9 +43,11 @@ internal class AccountRepositoryImpl(
                     id = id,
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                0
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -62,9 +61,11 @@ internal class AccountRepositoryImpl(
                     id = id,
                 )?.asExternalModel()
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                null
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -80,9 +81,11 @@ internal class AccountRepositoryImpl(
                     transform = AccountEntity::asExternalModel,
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                persistentListOf()
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -94,9 +97,11 @@ internal class AccountRepositoryImpl(
                     transform = AccountEntity::asExternalModel,
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                persistentListOf()
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -109,9 +114,11 @@ internal class AccountRepositoryImpl(
                 )
             }
         } catch (
-            _: SQLiteException,
+            sqliteException: SQLiteException,
         ) {
-            emptyFlow()
+            error(
+                message = "Database Error: ${sqliteException.localizedMessage}",
+            )
         }
     }
 
@@ -126,14 +133,11 @@ internal class AccountRepositoryImpl(
                     ).toTypedArray(),
                 ).toImmutableList()
             } catch (
-                _: SQLiteConstraintException,
+                sqliteException: SQLiteException,
             ) {
-                // TODO(Abhi): Check if this can be handled better
-                persistentListOf()
-            } catch (
-                _: SQLiteException,
-            ) {
-                persistentListOf()
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -172,9 +176,11 @@ internal class AccountRepositoryImpl(
                     ).toTypedArray(),
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                0
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }

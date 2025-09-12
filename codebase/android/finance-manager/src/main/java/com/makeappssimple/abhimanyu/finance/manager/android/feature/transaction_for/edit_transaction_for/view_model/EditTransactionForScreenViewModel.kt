@@ -189,16 +189,11 @@ internal class EditTransactionForScreenViewModel(
             ?: throw IllegalStateException("Current transaction for is null")
         return coroutineScope.launch {
             startLoading()
-            val isTransactionForUpdated = updateTransactionForUseCase(
+            updateTransactionForUseCase(
                 currentTransactionFor = currentTransactionForValue,
                 title = titleTextFieldState.text.toString(),
             )
-            if (isTransactionForUpdated) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
+            navigateUp()
         }
     }
     // endregion

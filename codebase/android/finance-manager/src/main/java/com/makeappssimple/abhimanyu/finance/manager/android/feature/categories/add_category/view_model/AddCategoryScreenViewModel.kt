@@ -205,17 +205,12 @@ internal class AddCategoryScreenViewModel(
 
     private fun insertCategory(): Job {
         return coroutineScope.launch {
-            val isCategoryInserted = insertCategoryUseCase(
+            insertCategoryUseCase(
                 emoji = emoji,
                 title = titleTextFieldState.text.toString(),
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
-            ) != -1L
-            if (isCategoryInserted) {
-                navigateUp()
-            } else {
-                completeLoading()
-                // TODO(Abhi): Show error
-            }
+            )
+            navigateUp()
         }
     }
 

@@ -189,17 +189,13 @@ internal class AccountsScreenViewModel(
             },
         )
         return coroutineScope.launch {
-            val isAccountDeleted = deleteAccountByIdUseCase(
+            deleteAccountByIdUseCase(
                 id = id,
-            ) == 1
-            if (isAccountDeleted) {
-                updateClickedItemId(
-                    updatedClickedItemId = null,
-                    shouldRefresh = false,
-                )
-            } else {
-                // TODO(Abhi): Handle this error scenario
-            }
+            )
+            updateClickedItemId(
+                updatedClickedItemId = null,
+                shouldRefresh = false,
+            )
         }
     }
 
@@ -229,19 +225,13 @@ internal class AccountsScreenViewModel(
             },
         )
         return coroutineScope.launch {
-            val isDefaultAccountUpdated =
-                financeManagerPreferencesRepository.updateDefaultAccountId(
-                    accountId = accountId,
-                )
-            if (isDefaultAccountUpdated) {
-                // TODO(Abhi): Show snackbar for user feedback
-                updateClickedItemId(
-                    updatedClickedItemId = null,
-                    shouldRefresh = false,
-                )
-            } else {
-                // TODO(Abhi): Handle this error scenario
-            }
+            financeManagerPreferencesRepository.updateDefaultAccountId(
+                accountId = accountId,
+            )
+            updateClickedItemId(
+                updatedClickedItemId = null,
+                shouldRefresh = false,
+            )
         }
     }
 

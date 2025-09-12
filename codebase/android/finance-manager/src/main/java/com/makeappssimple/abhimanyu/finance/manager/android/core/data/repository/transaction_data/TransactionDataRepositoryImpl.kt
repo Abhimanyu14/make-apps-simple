@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.transaction_data
 
-import android.database.sqlite.SQLiteConstraintException
 import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
@@ -31,9 +30,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transacti
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 internal class TransactionDataRepositoryImpl(
@@ -50,9 +47,11 @@ internal class TransactionDataRepositoryImpl(
                     id = id,
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                false
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -64,9 +63,11 @@ internal class TransactionDataRepositoryImpl(
                     transform = TransactionDataEntity::asExternalModel,
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                persistentListOf()
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -79,9 +80,11 @@ internal class TransactionDataRepositoryImpl(
                 )
             }
         } catch (
-            _: SQLiteException,
+            sqliteException: SQLiteException,
         ) {
-            emptyFlow()
+            error(
+                message = "Database Error: ${sqliteException.localizedMessage}",
+            )
         }
     }
 
@@ -97,9 +100,11 @@ internal class TransactionDataRepositoryImpl(
                 )
             }
         } catch (
-            _: SQLiteException,
+            sqliteException: SQLiteException,
         ) {
-            emptyFlow()
+            error(
+                message = "Database Error: ${sqliteException.localizedMessage}",
+            )
         }
     }
 
@@ -114,9 +119,11 @@ internal class TransactionDataRepositoryImpl(
                     transform = TransactionDataEntity::asExternalModel,
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                persistentListOf()
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -130,9 +137,11 @@ internal class TransactionDataRepositoryImpl(
                     id = id,
                 )?.asExternalModel()
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                null
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -152,14 +161,11 @@ internal class TransactionDataRepositoryImpl(
                     originalTransaction = originalTransaction?.asEntity(),
                 )
             } catch (
-                _: SQLiteConstraintException,
+                sqliteException: SQLiteException,
             ) {
-                // TODO(Abhi): Check if this needs additional handling
-                -1L
-            } catch (
-                _: SQLiteException,
-            ) {
-                -1L
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
@@ -187,9 +193,11 @@ internal class TransactionDataRepositoryImpl(
                     ).toTypedArray(),
                 )
             } catch (
-                _: SQLiteException,
+                sqliteException: SQLiteException,
             ) {
-                false
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
             }
         }
     }
