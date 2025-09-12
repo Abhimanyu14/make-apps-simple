@@ -38,6 +38,10 @@ private object DateTimeUtilImplConstants {
 }
 
 public class DateTimeKitImpl() : DateTimeKit {
+    override fun getCurrentFormattedDateAndTime(): String {
+        return getFormattedDateAndTime()
+    }
+
     override fun getCurrentLocalDate(): LocalDate {
         return LocalDate.now()
     }

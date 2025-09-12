@@ -48,7 +48,9 @@ internal fun HomeScreen(
     }
     val createDocumentResultLauncher: ManagedActivityResultLauncher<String, Uri?> =
         rememberLauncherForActivityResult(
-            contract = CreateJsonDocument(),
+            contract = CreateJsonDocument(
+                getCurrentFormattedDateAndTime = screenViewModel.dateTimeKit::getCurrentFormattedDateAndTime,
+            ),
             onResult = onDocumentCreated,
         )
 

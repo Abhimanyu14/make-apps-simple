@@ -23,6 +23,7 @@ import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.alarm.AlarmKit
+import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.BackupDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.common.RecalculateTotalUseCase
@@ -51,6 +52,7 @@ internal class SettingsScreenViewModel(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val recalculateTotalUseCase: RecalculateTotalUseCase,
     private val restoreDataUseCase: RestoreDataUseCase,
+    internal val dateTimeKit: DateTimeKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,

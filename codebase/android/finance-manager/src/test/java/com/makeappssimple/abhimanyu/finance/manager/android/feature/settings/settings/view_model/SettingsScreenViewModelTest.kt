@@ -45,6 +45,7 @@ internal class SettingsScreenViewModelTest {
             financeManagerPreferencesRepository = testDependencies.financeManagerPreferencesRepository,
             recalculateTotalUseCase = testDependencies.recalculateTotalUseCase,
             restoreDataUseCase = testDependencies.restoreDataUseCase,
+            dateTimeKit = testDependencies.dateTimeKit,
             logKit = testDependencies.logKit,
         )
         settingsScreenViewModel.initViewModel()

@@ -19,13 +19,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.core.common.util.do
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedDateAndTime
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.MimeTypeConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.getSystemDefaultZoneId
-import java.time.Instant
-import java.time.ZoneId
 
-public class CreateJsonDocument : ActivityResultContracts.CreateDocument(
+public class CreateJsonDocument(
+    private val getCurrentFormattedDateAndTime: () -> String,
+) : ActivityResultContracts.CreateDocument(
     mimeType = MimeTypeConstants.JSON,
 ) {
     override fun createIntent(
@@ -38,20 +36,8 @@ public class CreateJsonDocument : ActivityResultContracts.CreateDocument(
         ).apply {
             putExtra(
                 Intent.EXTRA_TITLE,
-                getFormattedDateAndTime(),
+                getCurrentFormattedDateAndTime(),
             )
         }
     }
-}
-
-// TODO(Abhi): To inject this method
-private fun getFormattedDateAndTime(
-    timestamp: Long = Instant.now().toEpochMilli(),
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): String {
-    return Instant
-        .ofEpochMilli(timestamp)
-        .formattedDateAndTime(
-            zoneId = zoneId,
-        )
 }

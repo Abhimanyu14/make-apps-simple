@@ -23,6 +23,8 @@ import java.time.LocalTime
 import java.time.ZoneId
 
 public interface DateTimeKit : DateKit, TimeKit {
+    public fun getCurrentFormattedDateAndTime(): String
+
     public fun getCurrentLocalDateTime(): LocalDateTime
 
     public fun getCurrentInstant(): Instant
