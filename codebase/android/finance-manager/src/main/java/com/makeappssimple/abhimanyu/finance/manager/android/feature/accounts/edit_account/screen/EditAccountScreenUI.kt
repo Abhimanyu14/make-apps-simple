@@ -91,12 +91,17 @@ internal fun EditAccountScreenUI(
             key1 = uiState.visibilityData.balanceAmountTextField,
             key2 = uiState.visibilityData.nameTextField,
         ) {
-            if (uiState.visibilityData.balanceAmountTextField) {
-                balanceAmountTextFieldFocusRequester.requestFocus()
-            } else if (uiState.visibilityData.nameTextField) {
-                nameTextFieldFocusRequester.requestFocus()
+            val isFocusRequested =
+                if (uiState.visibilityData.balanceAmountTextField) {
+                    balanceAmountTextFieldFocusRequester.requestFocus()
+                } else if (uiState.visibilityData.nameTextField) {
+                    nameTextFieldFocusRequester.requestFocus()
+                } else {
+                    false
+                }
+            if (isFocusRequested) {
+                state.keyboardController?.show()
             }
-            state.keyboardController?.show()
         }
     }
 

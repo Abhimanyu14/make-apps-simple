@@ -80,8 +80,6 @@ internal fun AddAccountScreenUI(
             val isFocusRequested = nameTextFieldFocusRequester.requestFocus()
             if (isFocusRequested) {
                 state.keyboardController?.show()
-            } else {
-                // TODO(Abhi): Log focus request error
             }
         }
     }
