@@ -33,6 +33,6 @@ internal data class CategoriesScreenUIState(
     val screenBottomSheetType: CategoriesScreenBottomSheetType = CategoriesScreenBottomSheetType.None,
     val screenSnackbarType: CategoriesScreenSnackbarType = CategoriesScreenSnackbarType.None,
     val tabData: ImmutableList<MyTabData> = persistentListOf(),
-    val validTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
+    val transactionTypeTabs: ImmutableList<TransactionType> = persistentListOf(),
     val categoriesGridItemDataMap: Map<TransactionType, ImmutableList<CategoriesGridItemData>> = emptyMap(),
 ) : ScreenUIState

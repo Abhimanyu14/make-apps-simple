@@ -74,7 +74,7 @@ internal class CategoriesScreenViewModelTest {
                 expected = CategoriesScreenSnackbarType.None,
             )
             result.tabData.shouldBeEmpty()
-            result.validTransactionTypes.shouldBeEmpty()
+            result.transactionTypeTabs.shouldBeEmpty()
             result.categoriesGridItemDataMap.shouldBeEmpty()
         }
     }

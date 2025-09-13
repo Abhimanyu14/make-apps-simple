@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
+import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CATEGORIES
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_CATEGORIES
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.VerticalSpacer
@@ -164,7 +165,7 @@ internal fun CategoriesScreenUI(
                 is CategoriesScreenBottomSheetType.SetAsDefaultConfirmation -> {
                     CategoriesSetAsDefaultConfirmationBottomSheet(
                         data = CategoriesSetAsDefaultConfirmationBottomSheetData(
-                            transactionType = uiState.validTransactionTypes[pagerState.settledPage],
+                            transactionType = uiState.transactionTypeTabs[pagerState.settledPage],
                         ),
                         handleEvent = { event ->
                             when (event) {
@@ -287,42 +288,28 @@ internal fun CategoriesScreenUI(
                     .weight(
                         weight = 1F,
                     ),
-            ) { page ->
-                uiState.validTransactionTypes.getOrNull(page)
-                    ?.let { transactionType ->
-                        val categoriesGridItemDataList: ImmutableList<CategoriesGridItemData> =
-                            uiState.categoriesGridItemDataMap[transactionType].orEmpty()
-
-                        CategoriesGrid(
-                            bottomPadding = 80.dp,
-                            topPadding = 8.dp,
-                            categoriesGridItemDataList = categoriesGridItemDataList,
-                            onItemClick = { index ->
-
-                                // TODO(Abhi): Move this logic outside the UI composable
-                                val isDeleteVisible =
-                                    categoriesGridItemDataList[index].isDeleteVisible
-                                        ?: false
-                                val isEditVisible =
-                                    categoriesGridItemDataList[index].isEditVisible
-                                        ?: false
-                                val isSetAsDefaultVisible =
-                                    categoriesGridItemDataList[index].isSetAsDefaultVisible
-                                        ?: false
-                                val categoryId =
-                                    categoriesGridItemDataList[index].category.id
-
-                                handleUIEvent(
-                                    CategoriesScreenUIEvent.OnCategoriesGridItemClick(
-                                        isDeleteVisible = isDeleteVisible,
-                                        isEditVisible = isEditVisible,
-                                        isSetAsDefaultVisible = isSetAsDefaultVisible,
-                                        categoryId = categoryId,
-                                    )
+            ) { pageIndex ->
+                uiState.transactionTypeTabs.getOrNull(
+                    index = pageIndex,
+                )?.let { transactionType ->
+                    val categoriesGridItemDataList: ImmutableList<CategoriesGridItemData> =
+                        uiState.categoriesGridItemDataMap[transactionType].orEmpty()
+                    CategoriesGrid(
+                        bottomPadding = 80.dp,
+                        topPadding = 8.dp,
+                        categoriesGridItemDataList = categoriesGridItemDataList,
+                        onItemClick = { index ->
+                            handleUIEvent(
+                                CategoriesScreenUIEvent.OnCategoriesGridItemClick(
+                                    isDeleteVisible = categoriesGridItemDataList[index].isDeleteVisible.orFalse(),
+                                    isEditVisible = categoriesGridItemDataList[index].isEditVisible.orFalse(),
+                                    isSetAsDefaultVisible = categoriesGridItemDataList[index].isSetAsDefaultVisible.orFalse(),
+                                    categoryId = categoriesGridItemDataList[index].category.id,
                                 )
-                            },
-                        )
-                    }
+                            )
+                        },
+                    )
+                }
             }
         }
     }

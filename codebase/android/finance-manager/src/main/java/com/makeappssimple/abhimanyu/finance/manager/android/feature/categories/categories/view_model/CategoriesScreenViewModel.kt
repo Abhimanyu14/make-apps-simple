@@ -144,7 +144,7 @@ internal class CategoriesScreenViewModel(
                 screenSnackbarType = screenSnackbarType,
                 isLoading = isLoading,
                 tabData = tabData,
-                validTransactionTypes = validTransactionTypes,
+                transactionTypeTabs = validTransactionTypes,
                 categoriesGridItemDataMap = categoriesGridItemDataMap,
             )
         }
