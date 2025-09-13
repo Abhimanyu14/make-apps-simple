@@ -30,6 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
+import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_CONTENT_HOME
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.constants.TestTags.SCREEN_HOME
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.button.MyFloatingActionButton
@@ -38,6 +40,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.component.navigationBarsSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.core.model.toNonSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.backup_card.BackupCard
@@ -56,6 +61,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.to
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.event.HomeScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import kotlinx.collections.immutable.persistentListOf
 
 private val bottomContentPadding = 100.dp
 
@@ -161,7 +167,30 @@ internal fun HomeScreenUI(
                 data = OverviewCardData(
                     isLoading = uiState.isLoading,
                     overviewTabSelectionIndex = uiState.overviewTabSelectionIndex,
-                    pieChartData = uiState.pieChartData,
+                    pieChartData = PieChartData(
+                        items = persistentListOf(
+                            PieChartItemData(
+                                value = uiState.overviewCardData.income,
+                                text = stringResource(
+                                    id = R.string.finance_manager_screen_home_overview_card_income,
+                                    Amount(
+                                        value = uiState.overviewCardData.income.toLong(),
+                                    ),
+                                ),
+                                color = MyColor.TERTIARY,
+                            ),
+                            PieChartItemData(
+                                value = uiState.overviewCardData.expense,
+                                text = stringResource(
+                                    id = R.string.finance_manager_screen_home_overview_card_expense,
+                                    Amount(
+                                        value = uiState.overviewCardData.expense.toLong(),
+                                    ).toNonSignedString(),
+                                ),
+                                color = MyColor.ERROR,
+                            ),
+                        ),
+                    ),
                     title = uiState.overviewCardData.title,
                 ),
                 handleEvent = { event ->

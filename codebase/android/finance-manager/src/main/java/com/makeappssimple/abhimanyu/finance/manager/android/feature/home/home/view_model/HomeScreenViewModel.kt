@@ -24,8 +24,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
-import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
@@ -34,12 +32,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.c
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.core.model.toNonSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.toTransactionListItemData
@@ -155,20 +151,6 @@ internal class HomeScreenViewModel(
                 accountsTotalBalanceAmountValue = allAccountsTotalBalanceAmountValue,
                 allAccountsTotalMinimumBalanceAmountValue = allAccountsTotalMinimumBalanceAmountValue,
                 overviewCardData = overviewCardData.orDefault(),
-                pieChartData = PieChartData(
-                    items = persistentListOf(
-                        PieChartItemData(
-                            value = overviewCardData?.income.orZero(),
-                            text = "Income : $totalIncomeAmount", // TODO(Abhi): Move to string resources
-                            color = MyColor.TERTIARY,
-                        ),
-                        PieChartItemData(
-                            value = overviewCardData?.expense.orZero(),
-                            text = "Expense : ${totalExpenseAmount.toNonSignedString()}", // TODO(Abhi): Move to string resources
-                            color = MyColor.ERROR,
-                        ),
-                    ),
-                ),
             )
         }
     }

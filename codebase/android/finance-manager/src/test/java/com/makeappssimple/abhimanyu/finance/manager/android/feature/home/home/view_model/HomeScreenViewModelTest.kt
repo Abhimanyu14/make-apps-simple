@@ -19,7 +19,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.view_model
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardViewModelData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
@@ -80,9 +79,6 @@ internal class HomeScreenViewModelTest {
             result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()
             result.overviewCardData.shouldBe(
                 expected = OverviewCardViewModelData(),
-            )
-            result.pieChartData.shouldBe(
-                expected = PieChartData(),
             )
         }
     }

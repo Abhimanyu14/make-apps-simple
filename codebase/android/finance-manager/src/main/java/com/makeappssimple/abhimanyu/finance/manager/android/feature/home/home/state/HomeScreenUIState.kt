@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.feature.home.home.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.core.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component.overview_card.OverviewCardViewModelData
@@ -35,5 +34,4 @@ internal data class HomeScreenUIState(
     val accountsTotalBalanceAmountValue: Long = 0L,
     val allAccountsTotalMinimumBalanceAmountValue: Long = 0L,
     val overviewCardData: OverviewCardViewModelData = OverviewCardViewModelData(),
-    val pieChartData: PieChartData = PieChartData(),
 ) : ScreenUIState
