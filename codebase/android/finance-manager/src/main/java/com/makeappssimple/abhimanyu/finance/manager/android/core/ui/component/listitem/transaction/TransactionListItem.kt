@@ -135,14 +135,12 @@ private fun TransactionListItemUI(
                 if (data.isSelected) {
                     Icon(
                         imageVector = MyIcons.CheckCircle,
-                        // TODO(Abhi) - Add content description
                         contentDescription = null,
                         tint = FinanceManagerAppTheme.colorScheme.primary,
                     )
                 } else {
                     Icon(
                         imageVector = MyIcons.RadioButtonUnchecked,
-                        // TODO(Abhi) - Add content description
                         contentDescription = null,
                         tint = FinanceManagerAppTheme.colorScheme.outline,
                     )
@@ -194,12 +192,6 @@ private fun TransactionListItemUI(
                             ),
                     )
                 }
-                Spacer(
-                    modifier = Modifier
-                        .height(
-                            height = 0.dp,
-                        ),
-                )
                 MyText(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -207,12 +199,6 @@ private fun TransactionListItemUI(
                     style = FinanceManagerAppTheme.typography.bodySmall
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onBackground,
-                        ),
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(
-                            height = 0.dp,
                         ),
                 )
                 Row(
@@ -252,8 +238,7 @@ private fun TransactionListItemUI(
                         ),
                 )
                 AnimatedVisibility(
-                    // TODO(Abhi): Move logic to UI state
-                    visible = data.isExpanded.not() && data.isInSelectionMode.not(),
+                    visible = data.isExpanded.not(),
                 ) {
                     HorizontalDivider(
                         color = FinanceManagerAppTheme.colorScheme.outline,
