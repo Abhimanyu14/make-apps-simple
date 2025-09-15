@@ -1,0 +1,59 @@
+/*
+ * Copyright 2025-2025 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transaction_for.transaction_for_values.event
+
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEvent
+
+@Immutable
+internal sealed class TransactionForValuesScreenUIEvent : ScreenUIEvent {
+    data object OnFloatingActionButtonClick :
+        TransactionForValuesScreenUIEvent()
+
+    data object OnNavigationBackButtonClick :
+        TransactionForValuesScreenUIEvent()
+
+    data object OnTopAppBarNavigationButtonClick :
+        TransactionForValuesScreenUIEvent()
+
+    sealed class OnTransactionForValuesDeleteConfirmationBottomSheet {
+        data object NegativeButtonClick : TransactionForValuesScreenUIEvent()
+        data object PositiveButtonClick : TransactionForValuesScreenUIEvent()
+    }
+
+    sealed class OnTransactionForValuesMenuBottomSheet {
+        data class DeleteButtonClick(
+            val transactionForId: Int,
+        ) : TransactionForValuesScreenUIEvent()
+
+        data class EditButtonClick(
+            val transactionForId: Int,
+        ) : TransactionForValuesScreenUIEvent()
+    }
+
+    sealed class OnTransactionForListItem {
+        data class Click(
+            val isDeleteVisible: Boolean,
+            val transactionForId: Int,
+        ) : TransactionForValuesScreenUIEvent()
+
+        data class MoreOptionsIconButtonClick(
+            val isDeleteVisible: Boolean,
+            val transactionForId: Int,
+        ) : TransactionForValuesScreenUIEvent()
+    }
+}

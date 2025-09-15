@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name="com.makeappssimple.abhimanyu.finance.manager.android.application.FinanceManagerApplication"
+        android:name="com.makeappssimple.abhimanyu.finance.manager.android.platform.application.FinanceManagerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/finance_manager_ic_launcher"
         android:label="@string/finance_manager_app_name"
@@ -28,7 +28,7 @@
         android:theme="@style/FinanceManagerTheme">
 
         <activity
-            android:name="com.makeappssimple.abhimanyu.finance.manager.android.activity.FinanceManagerActivity"
+            android:name="com.makeappssimple.abhimanyu.finance.manager.android.platform.activity.FinanceManagerActivity"
             android:configChanges="allKnown"
             android:exported="true"
             android:theme="@style/FinanceManagerTheme"

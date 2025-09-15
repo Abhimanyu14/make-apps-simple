@@ -20,7 +20,7 @@ import android.app.Activity
 import android.content.Intent
 import com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity
-import com.makeappssimple.abhimanyu.finance.manager.android.activity.FinanceManagerActivity
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.activity.FinanceManagerActivity
 
 internal class PlatformEventHandlerImpl : PlatformEventHandler {
     override fun handlePlatformEvent(

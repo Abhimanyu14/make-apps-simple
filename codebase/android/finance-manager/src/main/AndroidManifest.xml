@@ -21,7 +21,7 @@
     <application>
 
         <activity
-            android:name="com.makeappssimple.abhimanyu.finance.manager.android.activity.FinanceManagerActivity"
+            android:name="com.makeappssimple.abhimanyu.finance.manager.android.platform.activity.FinanceManagerActivity"
             android:configChanges="allKnown"
             android:exported="false" />
 

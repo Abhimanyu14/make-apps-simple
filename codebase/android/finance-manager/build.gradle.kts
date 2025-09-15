@@ -159,25 +159,25 @@ kover {
             excludes {
                 classes(
                     // Room generated files
-                    "com.makeappssimple.abhimanyu.finance.manager.android.*Dao_Impl",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.*Dao_Impl",
                 )
                 packages(
                     // DI
                     "org.koin.ksp.generated",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.di",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.di",
 
                     // Fake
-                    "com.makeappssimple.abhimanyu.finance.manager.android.*.fake",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.*.fake",
 
                     // Room
-                    "com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.core.database.local.database",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database",
 
                     // UI
-                    "com.makeappssimple.abhimanyu.finance.manager.android.core.design_system*",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.core.chart*",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.core.ui.component*",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.feature.*.screen",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.feature.*.screen",
                 )
             }
             includes {

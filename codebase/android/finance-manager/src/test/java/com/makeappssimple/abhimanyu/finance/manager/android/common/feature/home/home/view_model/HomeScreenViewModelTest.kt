@@ -1,0 +1,86 @@
+/*
+ * Copyright 2025-2025 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.feature.home.home.view_model
+
+import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.overview_card.OverviewCardViewModelData
+import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.ints.shouldBeZero
+import io.kotest.matchers.longs.shouldBeZero
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+
+internal class HomeScreenViewModelTest {
+    // region test setup
+    private lateinit var homeScreenViewModel: HomeScreenViewModel
+    private lateinit var testDependencies: TestDependencies
+
+    @Before
+    fun setUp() {
+        testDependencies = TestDependencies()
+        homeScreenViewModel = HomeScreenViewModel(
+            getAllAccountsTotalBalanceAmountValueUseCase = testDependencies.getAllAccountsTotalBalanceAmountValueUseCase,
+            getAllAccountsTotalMinimumBalanceAmountValueUseCase = testDependencies.getAllAccountsTotalMinimumBalanceAmountValueUseCase,
+            navigationKit = testDependencies.navigationKit,
+            shouldShowBackupCardUseCase = testDependencies.shouldShowBackupCardUseCase,
+            backupDataUseCase = testDependencies.backupDataUseCase,
+            coroutineScope = testDependencies.testScope.backgroundScope,
+            dateTimeKit = testDependencies.dateTimeKit,
+            getRecentTransactionDataFlowUseCase = testDependencies.getRecentTransactionDataFlowUseCase,
+            getTransactionByIdUseCase = testDependencies.getTransactionByIdUseCase,
+            getTransactionsBetweenTimestampsUseCase = testDependencies.getTransactionsBetweenTimestampsUseCase,
+            logKit = testDependencies.logKit,
+        )
+        homeScreenViewModel.initViewModel()
+    }
+
+    @After
+    fun tearDown() {
+        testDependencies.testScope.cancel()
+    }
+    // endregion
+
+    // region initial state
+    @Test
+    fun uiState_initialState() = testDependencies.runTestWithTimeout {
+        homeScreenViewModel.uiState.test {
+            val result = awaitItem()
+
+            result.isBackupCardVisible.shouldBeFalse()
+            result.isBalanceVisible.shouldBeFalse()
+            result.isLoading.shouldBeTrue()
+            result.isRecentTransactionsTrailingTextVisible.shouldBeFalse()
+            result.overviewTabSelectionIndex.shouldBeZero()
+            result.transactionListItemDataList.shouldBeEmpty()
+            result.accountsTotalBalanceAmountValue.shouldBeZero()
+            result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()
+            result.overviewCardData.shouldBe(
+                expected = OverviewCardViewModelData(),
+            )
+        }
+    }
+    // endregion
+}
