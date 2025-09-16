@@ -115,8 +115,8 @@ internal class EditAccountScreenViewModel(
     // endregion
 
     // region initViewModel
-    internal fun initViewModel() {
-        coroutineScope.launch {
+    internal fun initViewModel(): Job {
+        return coroutineScope.launch {
             observeData()
             fetchData()
             completeLoading()

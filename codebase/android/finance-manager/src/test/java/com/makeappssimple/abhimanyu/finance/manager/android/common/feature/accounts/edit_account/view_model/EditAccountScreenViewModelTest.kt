@@ -34,13 +34,20 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
+import org.junit.rules.ExpectedException
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 
 internal class EditAccountScreenViewModelTest {
     // region test setup
     private lateinit var editAccountScreenViewModel: EditAccountScreenViewModel
     private lateinit var testSavedStateHandle: SavedStateHandle
     private lateinit var testDependencies: TestDependencies
+
+    @Rule
+    @JvmField
+    val expectedException: ExpectedException = ExpectedException.none()
 
     @Before
     fun setUp() {
@@ -60,6 +67,34 @@ internal class EditAccountScreenViewModelTest {
 
     // region initial state
     @Test
+    fun uiState_accountIdIsInvalid_throwsException() =
+        testDependencies.runTestWithTimeout {
+            val testAccountId = 100
+            testSavedStateHandle = SavedStateHandle(
+                initialState = mapOf(
+                    "accountId" to testAccountId,
+                ),
+            )
+            setUpViewModel()
+            expectedException.expect(IllegalArgumentException::class.java)
+            expectedException.expectMessage("account with id $testAccountId not found.")
+
+            editAccountScreenViewModel.initViewModel().join()
+
+            // TODO(Abhi): This does not work
+            /*
+            val exception = assertFailsWith(
+                exceptionClass = IllegalArgumentException::class,
+            ) {
+                editAccountScreenViewModel.initViewModel().join()
+            }
+            exception.message.shouldBe(
+                expected = "account with id $testAccountId not found.",
+            )
+            */
+        }
+
+    @Test
     fun uiState_initialState_eWallet() = testDependencies.runTestWithTimeout {
         testSavedStateHandle = SavedStateHandle(
             initialState = mapOf(
@@ -70,7 +105,7 @@ internal class EditAccountScreenViewModelTest {
         editAccountScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            editAccountScreenViewModel.initViewModel()
+            editAccountScreenViewModel.initViewModel().join()
 
             val result = awaitItem()
             result.visibilityData.shouldBe(
@@ -124,7 +159,7 @@ internal class EditAccountScreenViewModelTest {
         editAccountScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            editAccountScreenViewModel.initViewModel()
+            editAccountScreenViewModel.initViewModel().join()
 
             val result = awaitItem()
             result.visibilityData.shouldBe(
@@ -178,7 +213,7 @@ internal class EditAccountScreenViewModelTest {
         editAccountScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            editAccountScreenViewModel.initViewModel()
+            editAccountScreenViewModel.initViewModel().join()
             val previousResult = awaitItem()
             previousResult.isLoading.shouldBeFalse()
 
@@ -195,7 +230,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val previousResult = awaitItem()
                 previousResult.isLoading.shouldBeFalse()
 
@@ -213,7 +248,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
@@ -237,7 +272,7 @@ internal class EditAccountScreenViewModelTest {
         editAccountScreenViewModel.uiState.test {
             val initialState = awaitItem()
             initialState.isLoading.shouldBeTrue()
-            editAccountScreenViewModel.initViewModel()
+            editAccountScreenViewModel.initViewModel().join()
             val previousResult = awaitItem()
             previousResult.isLoading.shouldBeFalse()
 
@@ -259,7 +294,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val previousResult = awaitItem()
                 previousResult.isLoading.shouldBeFalse()
 
@@ -282,7 +317,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
@@ -313,7 +348,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
 
@@ -344,7 +379,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val previousResult = awaitItem()
                 previousResult.isLoading.shouldBeFalse()
 
@@ -370,7 +405,7 @@ internal class EditAccountScreenViewModelTest {
             editAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
                 initialState.isLoading.shouldBeTrue()
-                editAccountScreenViewModel.initViewModel()
+                editAccountScreenViewModel.initViewModel().join()
                 val fetchDataCompletedState = awaitItem()
                 fetchDataCompletedState.isLoading.shouldBeFalse()
                 fetchDataCompletedState.selectedAccountTypeIndex.shouldBe(
@@ -384,6 +419,35 @@ internal class EditAccountScreenViewModelTest {
                 val result = awaitItem()
                 result.selectedAccountTypeIndex.shouldBe(
                     expected = updatedSelectedAccountTypeIndex,
+                )
+            }
+        }
+
+    @Test
+    fun updateSelectedAccountTypeIndex_invalidIndex_throwsException() =
+        testDependencies.runTestWithTimeout {
+            setUpViewModel()
+            val updatedSelectedAccountTypeIndex = 100
+            editAccountScreenViewModel.uiState.test {
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                editAccountScreenViewModel.initViewModel().join()
+                val fetchDataCompletedState = awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                fetchDataCompletedState.selectedAccountTypeIndex.shouldBe(
+                    expected = 0,
+                )
+
+                val exception = assertFailsWith(
+                    exceptionClass = IllegalStateException::class,
+                ) {
+                    editAccountScreenViewModel.uiStateEvents.updateSelectedAccountTypeIndex(
+                        updatedSelectedAccountTypeIndex,
+                    )
+                }
+
+                exception.message.shouldBe(
+                    expected = "No account type found for index $updatedSelectedAccountTypeIndex",
                 )
             }
         }
