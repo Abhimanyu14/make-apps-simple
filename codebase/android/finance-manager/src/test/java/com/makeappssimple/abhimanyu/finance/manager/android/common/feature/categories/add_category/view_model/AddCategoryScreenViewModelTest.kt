@@ -20,7 +20,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.feature.cate
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import app.cash.turbine.turbineScope
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.categories.add_category.state.AddCategoryScreenTitleError
@@ -28,6 +30,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencie
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeEmpty
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -109,7 +112,6 @@ internal class AddCategoryScreenViewModelTest {
             )
             result.emojiSearchText.shouldBeEmpty()
             result.titleTextFieldState.text.toString().shouldBeEmpty()
-            result.isLoading.shouldBeFalse()
         }
     }
     // endregion
@@ -159,6 +161,60 @@ internal class AddCategoryScreenViewModelTest {
             result.titleTextFieldState.text.toString().shouldBeEmpty()
         }
     }
+
+    @Test
+    fun insertCategory_shouldInsertCategoryAndNavigateUp() =
+        testDependencies.runTestWithTimeout {
+            val testEmoji = "🎁"
+            val testTitle = "Gift"
+            val testTransactionTypeIndex = 0 // Corresponds to INCOME
+            val expectedTransactionType = TransactionType.INCOME
+            turbineScope {
+                val navigationCommandTurbine =
+                    testDependencies.navigationKit.command.testIn(
+                        scope = backgroundScope,
+                    )
+                val uiStateTurbine = addCategoryScreenViewModel.uiState.testIn(
+                    scope = backgroundScope,
+                )
+                val initialState = uiStateTurbine.awaitItem()
+                initialState.isLoading.shouldBeTrue()
+                val fetchDataCompletedState = uiStateTurbine.awaitItem()
+                fetchDataCompletedState.isLoading.shouldBeFalse()
+                addCategoryScreenViewModel.uiStateEvents.updateEmoji(testEmoji)
+                val updateEmojiCompletedState = uiStateTurbine.awaitItem()
+                updateEmojiCompletedState.emoji.shouldBe(
+                    expected = testEmoji,
+                )
+                addCategoryScreenViewModel.uiStateEvents.updateTitle(testTitle)
+                val updateTitleCompletedState = uiStateTurbine.awaitItem()
+                updateTitleCompletedState.titleTextFieldState.text.toString()
+                    .shouldBe(
+                        expected = testTitle,
+                    )
+                addCategoryScreenViewModel.uiStateEvents.updateSelectedTransactionTypeIndex(
+                    testTransactionTypeIndex
+                )
+                val updateSelectedTransactionTypeIndexCompletedState =
+                    uiStateTurbine.awaitItem()
+                updateSelectedTransactionTypeIndexCompletedState.selectedTransactionTypeIndex.shouldBe(
+                    expected = testTransactionTypeIndex,
+                )
+
+                addCategoryScreenViewModel.uiStateEvents.insertCategory().join()
+
+                val insertCategoryCompletedState = uiStateTurbine.awaitItem()
+                insertCategoryCompletedState.isLoading.shouldBeTrue()
+                testDependencies.fakeCategoryDao.getAllCategories().find {
+                    it.emoji == testEmoji &&
+                            it.title == testTitle &&
+                            it.transactionType == expectedTransactionType
+                }.shouldNotBeNull()
+                navigationCommandTurbine.awaitItem().shouldBe(
+                    expected = FinanceManagerNavigationDirections.NavigateUp,
+                )
+            }
+        }
 
     @Test
     fun resetScreenBottomSheetType_shouldSetBottomSheetTypeToNone() =

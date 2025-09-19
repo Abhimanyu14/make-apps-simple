@@ -21,6 +21,7 @@ import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
@@ -205,6 +206,7 @@ internal class AddCategoryScreenViewModel(
 
     private fun insertCategory(): Job {
         return coroutineScope.launch {
+            startLoading()
             insertCategoryUseCase(
                 emoji = emoji,
                 title = titleTextFieldState.text.toString(),
@@ -222,16 +224,26 @@ internal class AddCategoryScreenViewModel(
 
     private fun updateEmoji(
         updatedEmoji: String,
+        shouldRefresh: Boolean = true,
     ): Job {
         emoji = updatedEmoji
-        return refreshUiState()
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateEmojiSearchText(
         updatedEmojiSearchText: String,
+        shouldRefresh: Boolean = true,
     ): Job {
         emojiSearchText = updatedEmojiSearchText
-        return refreshUiState()
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateScreenBottomSheetType(
@@ -239,7 +251,11 @@ internal class AddCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedAddCategoryScreenBottomSheetType
-        return refreshUiState()
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateSelectedTransactionTypeIndex(
@@ -247,7 +263,11 @@ internal class AddCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionTypeIndex = updatedSelectedTransactionTypeIndex
-        return refreshUiState()
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
 
     private fun updateTitle(
@@ -257,7 +277,11 @@ internal class AddCategoryScreenViewModel(
         titleTextFieldState.setTextAndPlaceCursorAtEnd(
             text = updatedTitle,
         )
-        return refreshUiState()
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
     }
     // endregion
 
