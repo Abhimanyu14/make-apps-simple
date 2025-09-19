@@ -162,6 +162,9 @@ kover {
                     "com.makeappssimple.abhimanyu.finance.manager.android.common.*Dao_Impl",
                 )
                 packages(
+                    // Android
+                    "com.makeappssimple.abhimanyu.finance.manager.android.platform.*",
+
                     // DI
                     "org.koin.ksp.generated",
                     "com.makeappssimple.abhimanyu.finance.manager.android.common.di",
