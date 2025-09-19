@@ -23,11 +23,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.boot.BootCompletedReceiver
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Reminder
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.time.TimeChangedReceiver
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.alarm.AlarmReceiver
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.boot.BootCompletedReceiver
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.time.TimeChangedReceiver
 import java.time.LocalTime
 
 public class AlarmKitImpl(
@@ -139,7 +140,7 @@ public class AlarmKitImpl(
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context, BootCompletedReceiver::class.java),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
@@ -147,7 +148,7 @@ public class AlarmKitImpl(
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context, BootCompletedReceiver::class.java),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
@@ -155,7 +156,7 @@ public class AlarmKitImpl(
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context, TimeChangedReceiver::class.java),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
@@ -163,7 +164,7 @@ public class AlarmKitImpl(
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context, TimeChangedReceiver::class.java),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
     // endregion

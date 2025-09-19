@@ -22,8 +22,8 @@ import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
 public class FakeAppVersionKitImpl : AppVersionKit {
     override fun getAppVersion(): AppVersion {
         return AppVersion(
-            versionName = "versionName",
-            versionNumber = 12L,
+            versionName = "1.2.3",
+            versionNumber = 123L,
         )
     }
 }

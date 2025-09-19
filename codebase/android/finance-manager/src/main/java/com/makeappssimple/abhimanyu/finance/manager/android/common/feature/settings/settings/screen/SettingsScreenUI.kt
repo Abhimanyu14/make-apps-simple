@@ -34,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.SCREEN_CONTENT_SETTINGS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.SCREEN_SETTINGS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.MyLinearProgressIndicator
@@ -382,7 +381,7 @@ private fun getSettingsListItemData(
         ),
         SettingsScreenListItemData(
             data = SettingsListItemContentData(
-                isChecked = uiState.isReminderEnabled.orFalse(),
+                isChecked = uiState.isReminderEnabled,
                 isEnabled = !uiState.isLoading,
                 hasToggle = true,
                 imageVector = MyIcons.Notifications,
@@ -391,18 +390,18 @@ private fun getSettingsListItemData(
             handleEvent = { event ->
                 when (event) {
                     is SettingsListItemContentEvent.OnCheckedChange -> {
-                        if (uiState.isReminderEnabled.orFalse()) {
+                        if (uiState.isReminderEnabled) {
                             handleUIEvent(SettingsScreenUIEvent.OnReminderEnabled)
                         } else {
-                            handleUIEvent(SettingsScreenUIEvent.OnReminderEnabled)
+                            handleUIEvent(SettingsScreenUIEvent.OnReminderDisabled)
                         }
                     }
 
                     is SettingsListItemContentEvent.OnClick -> {
-                        if (uiState.isReminderEnabled.orFalse()) {
+                        if (uiState.isReminderEnabled) {
                             handleUIEvent(SettingsScreenUIEvent.OnReminderEnabled)
                         } else {
-                            handleUIEvent(SettingsScreenUIEvent.OnReminderEnabled)
+                            handleUIEvent(SettingsScreenUIEvent.OnReminderDisabled)
                         }
                     }
                 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.alarm
 
 import android.content.BroadcastReceiver
 import android.content.Context

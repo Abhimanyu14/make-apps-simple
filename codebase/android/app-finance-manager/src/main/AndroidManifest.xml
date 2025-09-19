@@ -19,6 +19,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- region permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- endregion -->
+
     <application
         android:name="com.makeappssimple.abhimanyu.finance.manager.android.platform.application.FinanceManagerApplication"
         android:allowBackup="true"
@@ -41,6 +47,26 @@
             </intent-filter>
 
         </activity>
+
+        <!-- region Broadcast receivers -->
+        <receiver
+            android:name="com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.boot.BootCompletedReceiver"
+            android:enabled="false"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.time.TimeChangedReceiver"
+            android:enabled="false"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+        </receiver>
+        <!-- endregion -->
 
     </application>
 

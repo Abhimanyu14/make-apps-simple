@@ -52,31 +52,31 @@ internal fun SettingsScreen(
     val uiStateEvents: SettingsScreenUIStateEvents =
         screenViewModel.uiStateEvents
 
-    val onDocumentCreated: (Uri?) -> Unit = { uri: Uri? ->
+    val backupDataToDocument: (Uri?) -> Unit = { uri: Uri? ->
         uri?.let {
             screenViewModel.backupDataToDocument(
                 uri = uri,
             )
         }
     }
-    val createDocumentResultLauncher: ManagedActivityResultLauncher<String, Uri?> =
+    val backupDataResultLauncher: ManagedActivityResultLauncher<String, Uri?> =
         rememberLauncherForActivityResult(
             contract = CreateJsonDocument(
                 getCurrentFormattedDateAndTime = screenViewModel.dateTimeKit::getCurrentFormattedDateAndTime,
             ),
-            onResult = onDocumentCreated,
+            onResult = backupDataToDocument,
         )
-    val onDocumentOpened = { uri: Uri ->
+    val restoreDataFromDocument = { uri: Uri ->
         screenViewModel.restoreDataFromDocument(
             uri = uri,
         )
     }
-    val openDocumentResultLauncher: ManagedActivityResultLauncher<Array<String>, Uri?> =
+    val restoreDataResultLauncher: ManagedActivityResultLauncher<Array<String>, Uri?> =
         rememberLauncherForActivityResult(
             contract = ActivityResultContracts.OpenDocument(),
         ) { uri ->
             uri?.let {
-                onDocumentOpened(it)
+                restoreDataFromDocument(it)
             }
         }
     val onNotificationPermissionRequestResult =
@@ -107,16 +107,22 @@ internal fun SettingsScreen(
         SettingsScreenUIEventHandler(
             hasNotificationPermission = hasNotificationPermission,
             uiStateEvents = uiStateEvents,
-            createDocument = { handler: (uri: Uri?) -> Unit ->
-                createDocumentResultLauncher.launch(MimeTypeConstants.JSON)
-            },
-            openDocument = {
-                openDocumentResultLauncher.launch(arrayOf(MimeTypeConstants.JSON))
+            backupData = { handler: (uri: Uri?) -> Unit ->
+                backupDataResultLauncher.launch(
+                    input = MimeTypeConstants.JSON,
+                )
             },
             requestNotificationsPermission = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    notificationsPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    notificationsPermissionLauncher.launch(
+                        input = Manifest.permission.POST_NOTIFICATIONS,
+                    )
                 }
+            },
+            restoreData = {
+                restoreDataResultLauncher.launch(
+                    input = arrayOf(MimeTypeConstants.JSON),
+                )
             },
         )
     }

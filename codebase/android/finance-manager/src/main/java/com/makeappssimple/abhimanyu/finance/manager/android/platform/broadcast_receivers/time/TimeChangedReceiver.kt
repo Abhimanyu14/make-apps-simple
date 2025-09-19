@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.boot
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.time
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -26,7 +26,9 @@ import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-public class BootCompletedReceiver : BroadcastReceiver(), KoinComponent {
+private const val timeSetAction = "android.intent.action.TIME_SET"
+
+public class TimeChangedReceiver : BroadcastReceiver(), KoinComponent {
     public val alarmKit: AlarmKit by inject()
     public val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository by inject()
 
@@ -34,7 +36,7 @@ public class BootCompletedReceiver : BroadcastReceiver(), KoinComponent {
         context: Context?,
         intent: Intent?,
     ) {
-        if (intent?.action == "android.intent.action.BOOT_COMPLETED") {
+        if (intent?.action == timeSetAction) {
             runBlocking {
                 doWork()
             }

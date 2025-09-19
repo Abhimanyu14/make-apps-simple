@@ -24,9 +24,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.setti
 internal class SettingsScreenUIEventHandler internal constructor(
     private val hasNotificationPermission: Boolean,
     private val uiStateEvents: SettingsScreenUIStateEvents,
-    private val createDocument: ((uri: Uri?) -> Unit) -> Unit,
-    private val openDocument: () -> Unit,
+    private val backupData: ((uri: Uri?) -> Unit) -> Unit,
     private val requestNotificationsPermission: () -> Unit,
+    private val restoreData: () -> Unit,
 ) : ScreenUIEventHandler<SettingsScreenUIEvent> {
     override fun handleUIEvent(
         uiEvent: SettingsScreenUIEvent,
@@ -37,9 +37,7 @@ internal class SettingsScreenUIEventHandler internal constructor(
             }
 
             is SettingsScreenUIEvent.OnBackupDataListItemClick -> {
-                createDocument {
-
-                }
+                backupData {}
             }
 
             is SettingsScreenUIEvent.OnCategoriesListItemClick -> {
@@ -57,7 +55,7 @@ internal class SettingsScreenUIEventHandler internal constructor(
             }
 
             is SettingsScreenUIEvent.OnRestoreDataListItemClick -> {
-                openDocument()
+                restoreData()
             }
 
             is SettingsScreenUIEvent.OnSnackbarDismissed -> {

@@ -21,7 +21,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.setti
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.cancel
 import org.junit.After
@@ -61,14 +60,19 @@ internal class SettingsScreenViewModelTest {
     @Test
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         settingsScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeTrue()
+
             val result = awaitItem()
 
-            result.isLoading.shouldBeTrue()
-            result.isReminderEnabled.shouldBeNull()
+            result.isLoading.shouldBeFalse()
+            result.isReminderEnabled.shouldBeFalse()
             result.screenSnackbarType.shouldBe(
                 expected = SettingsScreenSnackbarType.None,
             )
-            result.appVersion.shouldBeNull()
+            result.appVersion.shouldBe(
+                expected = "1.2.3",
+            )
         }
     }
     // endregion

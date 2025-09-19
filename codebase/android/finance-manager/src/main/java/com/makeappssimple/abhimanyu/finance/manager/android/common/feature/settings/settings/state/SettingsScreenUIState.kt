@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.setti
 @Stable
 internal data class SettingsScreenUIState(
     val isLoading: Boolean = true,
-    val isReminderEnabled: Boolean? = null,
+    val isReminderEnabled: Boolean = false,
     val screenSnackbarType: SettingsScreenSnackbarType = SettingsScreenSnackbarType.None,
     val appVersion: String? = null,
 ) : ScreenUIState
