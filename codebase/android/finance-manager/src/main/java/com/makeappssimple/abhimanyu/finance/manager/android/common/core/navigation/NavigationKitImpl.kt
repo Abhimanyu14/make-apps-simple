@@ -26,7 +26,10 @@ public class NavigationKitImpl(
     private val coroutineScope: CoroutineScope,
 ) : NavigationKit {
     private val _command: MutableSharedFlow<NavigationCommand> =
-        MutableSharedFlow()
+        MutableSharedFlow(
+            replay = 0,
+            extraBufferCapacity = 1,
+        )
     override val command: SharedFlow<NavigationCommand> = _command
 
     override fun navigateToAccountsScreen(): Job {
