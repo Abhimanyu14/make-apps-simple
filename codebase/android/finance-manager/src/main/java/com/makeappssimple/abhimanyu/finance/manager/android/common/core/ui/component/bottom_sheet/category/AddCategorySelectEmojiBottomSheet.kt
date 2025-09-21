@@ -17,6 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.bottom_sheet.category
 
 import android.widget.Toast
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
@@ -25,17 +27,17 @@ import com.makeappssimple.abhimanyu.composeemojipicker.Emoji
 
 @Composable
 public fun AddCategorySelectEmojiBottomSheet(
-    searchText: String,
+    searchTextFieldState: TextFieldState = TextFieldState(),
     resetBottomSheetType: () -> Unit,
     updateEmoji: (updatedEmoji: String) -> Unit,
-    updateSearchText: (updatedSearchText: String) -> Unit,
 ) {
     val context = LocalContext.current
     ComposeEmojiPickerBottomSheetUI(
-        searchText = searchText,
+        searchTextFieldState = searchTextFieldState,
         onEmojiClick = { emoji: Emoji ->
-            resetBottomSheetType()
             updateEmoji(emoji.character)
+            resetBottomSheetType()
+            searchTextFieldState.clearText()
         },
         onEmojiLongClick = { emoji: Emoji ->
             Toast.makeText(
@@ -44,8 +46,5 @@ public fun AddCategorySelectEmojiBottomSheet(
                 Toast.LENGTH_SHORT,
             ).show()
         },
-        updateSearchText = { updatedSearchText ->
-            updateSearchText(updatedSearchText)
-        }
     )
 }

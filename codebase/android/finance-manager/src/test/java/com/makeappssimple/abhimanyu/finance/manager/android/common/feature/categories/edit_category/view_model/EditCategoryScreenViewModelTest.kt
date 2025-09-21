@@ -105,7 +105,6 @@ internal class EditCategoryScreenViewModelTest {
             result.emoji.shouldBe(
                 expected = testDependencies.testCategoryEntity1.emoji,
             )
-            result.emojiSearchText.shouldBeEmpty()
             result.titleTextFieldState.text.toString().shouldBe(
                 expected = testDependencies.testCategoryTitle1,
             )
@@ -265,28 +264,6 @@ internal class EditCategoryScreenViewModelTest {
             )
         }
     }
-
-    @Test
-    fun updateEmojiSearchText_shouldUpdateEmojiSearchText() =
-        testDependencies.runTestWithTimeout {
-            val testEmojiSearchText = "test-emoji-search-text"
-            editCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                initialState.emojiSearchText.shouldBeEmpty()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-
-                editCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
-                    testEmojiSearchText
-                )
-
-                val result = awaitItem()
-                result.emojiSearchText.shouldBe(
-                    expected = testEmojiSearchText,
-                )
-            }
-        }
 
     @Test
     fun updateScreenBottomSheetType_shouldUpdateBottomSheetType() =

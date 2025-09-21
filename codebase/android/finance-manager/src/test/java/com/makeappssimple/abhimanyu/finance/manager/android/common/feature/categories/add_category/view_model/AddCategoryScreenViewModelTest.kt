@@ -110,37 +110,12 @@ internal class AddCategoryScreenViewModelTest {
             result.emoji.shouldBe(
                 expected = "😃",
             )
-            result.emojiSearchText.shouldBeEmpty()
             result.titleTextFieldState.text.toString().shouldBeEmpty()
         }
     }
     // endregion
 
     // region state events
-    @Test
-    fun clearEmojiSearchText_shouldClearEmojiSearchText() =
-        testDependencies.runTestWithTimeout {
-            val testEmojiSearchText = "test-emoji-search-text"
-            addCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                initialState.emojiSearchText.shouldBeEmpty()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-                addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
-                    testEmojiSearchText
-                )
-                awaitItem().emojiSearchText.shouldBe(
-                    expected = testEmojiSearchText,
-                )
-
-                addCategoryScreenViewModel.uiStateEvents.clearEmojiSearchText()
-
-                val result = awaitItem()
-                result.emojiSearchText.shouldBeEmpty()
-            }
-        }
-
     @Test
     fun clearTitle_shouldClearTitle() = testDependencies.runTestWithTimeout {
         val testTitle = "test-title"
@@ -263,28 +238,6 @@ internal class AddCategoryScreenViewModelTest {
             )
         }
     }
-
-    @Test
-    fun updateEmojiSearchText_shouldUpdateEmojiSearchText() =
-        testDependencies.runTestWithTimeout {
-            val testEmojiSearchText = "test-emoji-search-text"
-            addCategoryScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                initialState.emojiSearchText.shouldBeEmpty()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-
-                addCategoryScreenViewModel.uiStateEvents.updateEmojiSearchText(
-                    testEmojiSearchText
-                )
-
-                val result = awaitItem()
-                result.emojiSearchText.shouldBe(
-                    expected = testEmojiSearchText,
-                )
-            }
-        }
 
     @Test
     fun updateScreenBottomSheetType_shouldUpdateBottomSheetType() =

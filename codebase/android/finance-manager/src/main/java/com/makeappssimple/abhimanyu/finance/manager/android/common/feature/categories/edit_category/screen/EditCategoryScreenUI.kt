@@ -112,7 +112,6 @@ internal fun EditCategoryScreenUI(
 
                 EditCategoryScreenBottomSheetType.SelectEmoji -> {
                     EditCategorySelectEmojiBottomSheet(
-                        searchText = uiState.emojiSearchText,
                         resetBottomSheetType = {
                             handleUIEvent(EditCategoryScreenUIEvent.OnBottomSheetDismissed)
                         },
@@ -120,13 +119,6 @@ internal fun EditCategoryScreenUI(
                             handleUIEvent(
                                 EditCategoryScreenUIEvent.OnEmojiUpdated(
                                     updatedEmoji = updatedEmoji,
-                                )
-                            )
-                        },
-                        updateSearchText = { updatedSearchText ->
-                            handleUIEvent(
-                                EditCategoryScreenUIEvent.OnEmojiBottomSheetSearchTextUpdated(
-                                    updatedSearchText = updatedSearchText,
                                 )
                             )
                         },

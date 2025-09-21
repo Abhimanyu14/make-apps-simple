@@ -36,7 +36,6 @@ internal data class AddCategoryScreenUIState(
     val selectedTransactionTypeIndex: Int? = null,
     val transactionTypesChipUIData: ImmutableList<ChipUIData> = persistentListOf(),
     val emoji: String = "",
-    val emojiSearchText: String = "",
     val titleTextFieldState: TextFieldState = TextFieldState(),
 ) : ScreenUIState
 

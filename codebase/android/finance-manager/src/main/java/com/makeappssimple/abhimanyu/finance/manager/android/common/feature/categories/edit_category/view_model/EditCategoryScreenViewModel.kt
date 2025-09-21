@@ -92,7 +92,6 @@ internal class EditCategoryScreenViewModel(
             element = TransactionType.EXPENSE,
         )
     private var emoji: String = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
-    private var emojiSearchText: String = ""
     private var titleTextFieldState: TextFieldState = TextFieldState()
     // endregion
 
@@ -113,7 +112,6 @@ internal class EditCategoryScreenViewModel(
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateCategory = ::updateCategory,
             updateEmoji = ::updateEmoji,
-            updateEmojiSearchText = ::updateEmojiSearchText,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateSelectedTransactionTypeIndex = ::updateSelectedTransactionTypeIndex,
             updateTitle = ::updateTitle,
@@ -154,7 +152,6 @@ internal class EditCategoryScreenViewModel(
                 selectedTransactionTypeIndex = selectedTransactionTypeIndex,
                 transactionTypesChipUIData = transactionTypesChipUIData,
                 emoji = emoji,
-                emojiSearchText = emojiSearchText,
                 titleTextFieldState = titleTextFieldState,
             )
         }
@@ -260,18 +257,6 @@ internal class EditCategoryScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         emoji = updatedEmoji
-        return if (shouldRefresh) {
-            refreshUiState()
-        } else {
-            getCompletedJob()
-        }
-    }
-
-    private fun updateEmojiSearchText(
-        updatedEmojiSearchText: String,
-        shouldRefresh: Boolean = true,
-    ): Job {
-        emojiSearchText = updatedEmojiSearchText
         return if (shouldRefresh) {
             refreshUiState()
         } else {

@@ -28,10 +28,6 @@ internal sealed class EditCategoryScreenUIEvent : ScreenUIEvent {
     data object OnTopAppBarNavigationButtonClick : EditCategoryScreenUIEvent()
     data object OnEmojiCircleClick : EditCategoryScreenUIEvent()
 
-    data class OnEmojiBottomSheetSearchTextUpdated(
-        val updatedSearchText: String,
-    ) : EditCategoryScreenUIEvent()
-
     data class OnEmojiUpdated(
         val updatedEmoji: String,
     ) : EditCategoryScreenUIEvent()
