@@ -48,15 +48,14 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddAccountScreenViewModel(
-    navigationKit: NavigationKit,
     private val addAccountScreenDataValidationUseCase: AddAccountScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val insertAccountUseCase: InsertAccountUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var addAccountScreenDataValidationState: AddAccountScreenDataValidationState =
         AddAccountScreenDataValidationState()
@@ -98,7 +97,7 @@ internal class AddAccountScreenViewModel(
             clearMinimumAccountBalanceAmountValue = ::clearMinimumAccountBalanceAmountValue,
             clearName = ::clearName,
             insertAccount = ::insertAccount,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
             updateName = ::updateName,
             updateSelectedAccountTypeIndex = ::updateSelectedAccountTypeIndex,
@@ -196,7 +195,7 @@ internal class AddAccountScreenViewModel(
                     .toLongOrZero(),
                 name = nameTextFieldState.text.toString(),
             )
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
 

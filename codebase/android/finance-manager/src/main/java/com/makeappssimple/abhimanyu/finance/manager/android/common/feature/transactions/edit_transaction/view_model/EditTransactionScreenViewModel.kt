@@ -82,7 +82,6 @@ import java.time.LocalTime
 
 @KoinViewModel
 internal class EditTransactionScreenViewModel(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
@@ -95,12 +94,12 @@ internal class EditTransactionScreenViewModel(
     private val getTitleSuggestionsUseCase: GetTitleSuggestionsUseCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val getMaxRefundAmountUseCase: GetMaxRefundAmountUseCase,
+    private val navigationKit: NavigationKit,
     private val updateTransactionUseCase: UpdateTransactionUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -156,7 +155,7 @@ internal class EditTransactionScreenViewModel(
         EditTransactionScreenUIStateEvents(
             clearAmount = ::clearAmount,
             clearTitle = ::clearTitle,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateAccountFrom = ::updateAccountFrom,
@@ -622,7 +621,7 @@ internal class EditTransactionScreenViewModel(
                 updatedTransaction = transaction,
             )
             */
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
     // endregion

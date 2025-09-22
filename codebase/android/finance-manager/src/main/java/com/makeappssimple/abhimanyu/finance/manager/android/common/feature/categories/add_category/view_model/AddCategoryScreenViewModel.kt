@@ -50,17 +50,16 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddCategoryScreenViewModel(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addCategoryScreenDataValidationUseCase: AddCategoryScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val insertCategoryUseCase: InsertCategoryUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = AddCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -103,7 +102,7 @@ internal class AddCategoryScreenViewModel(
         AddCategoryScreenUIStateEvents(
             clearTitle = ::clearTitle,
             insertCategory = ::insertCategory,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateEmoji = ::updateEmoji,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
@@ -202,7 +201,7 @@ internal class AddCategoryScreenViewModel(
                 title = titleTextFieldState.text.toString(),
                 transactionType = validTransactionTypes[selectedTransactionTypeIndex],
             )
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
 

@@ -63,7 +63,6 @@ private const val DEFAULT_OVERVIEW_TAB_SELECTION = 1
 
 @KoinViewModel
 internal class HomeScreenViewModel(
-    navigationKit: NavigationKit,
     private val backupDataUseCase: BackupDataUseCase,
     private val coroutineScope: CoroutineScope,
     private val getAllAccountsTotalBalanceAmountValueUseCase: GetAllAccountsTotalBalanceAmountValueUseCase,
@@ -71,13 +70,13 @@ internal class HomeScreenViewModel(
     private val getRecentTransactionDataFlowUseCase: GetRecentTransactionDataFlowUseCase,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val getTransactionsBetweenTimestampsUseCase: GetTransactionsBetweenTimestampsUseCase,
+    private val navigationKit: NavigationKit,
     private val shouldShowBackupCardUseCase: ShouldShowBackupCardUseCase,
     internal val dateTimeKit: DateTimeKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region initial data
     private var isLoading: Boolean = true
     private var isBackupCardVisible: Boolean = false
@@ -103,12 +102,12 @@ internal class HomeScreenViewModel(
     internal val uiStateEvents: HomeScreenUIStateEvents =
         HomeScreenUIStateEvents(
             handleOverviewCardAction = ::handleOverviewCardAction,
-            navigateToAccountsScreen = ::navigateToAccountsScreen,
-            navigateToAddTransactionScreen = ::navigateToAddTransactionScreen,
-            navigateToAnalysisScreen = ::navigateToAnalysisScreen,
-            navigateToSettingsScreen = ::navigateToSettingsScreen,
-            navigateToTransactionsScreen = ::navigateToTransactionsScreen,
-            navigateToViewTransactionScreen = ::navigateToViewTransactionScreen,
+            navigateToAccountsScreen = navigationKit::navigateToAccountsScreen,
+            navigateToAddTransactionScreen = navigationKit::navigateToAddTransactionScreen,
+            navigateToAnalysisScreen = navigationKit::navigateToAnalysisScreen,
+            navigateToSettingsScreen = navigationKit::navigateToSettingsScreen,
+            navigateToTransactionsScreen = navigationKit::navigateToTransactionsScreen,
+            navigateToViewTransactionScreen = navigationKit::navigateToViewTransactionScreen,
             updateIsBalanceVisible = ::updateIsBalanceVisible,
             updateOverviewTabSelectionIndex = ::updateOverviewTabSelectionIndex,
         )
@@ -313,7 +312,7 @@ internal class HomeScreenViewModel(
                     uri = uri,
                 )
             }
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
     // endregion

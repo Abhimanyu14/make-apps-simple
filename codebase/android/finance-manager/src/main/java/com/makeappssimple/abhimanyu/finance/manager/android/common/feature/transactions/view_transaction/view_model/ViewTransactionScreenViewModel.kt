@@ -47,18 +47,17 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class ViewTransactionScreenViewModel(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val deleteTransactionUseByIdCase: DeleteTransactionUseByIdCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = ViewTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -90,10 +89,10 @@ internal class ViewTransactionScreenViewModel(
     internal val uiStateEvents: ViewTransactionScreenUIStateEvents =
         ViewTransactionScreenUIStateEvents(
             deleteTransaction = ::deleteTransaction,
-            navigateUp = ::navigateUp,
-            navigateToEditTransactionScreen = ::navigateToEditTransactionScreen,
-            navigateToViewTransactionScreen = ::navigateToViewTransactionScreen,
-            onRefundButtonClick = ::navigateToAddTransactionScreen,
+            navigateUp = navigationKit::navigateUp,
+            navigateToEditTransactionScreen = navigationKit::navigateToEditTransactionScreen,
+            navigateToViewTransactionScreen = navigationKit::navigateToViewTransactionScreen,
+            onRefundButtonClick = navigationKit::navigateToAddTransactionScreen,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateTransactionIdToDelete = ::updateTransactionIdToDelete,
@@ -227,7 +226,7 @@ internal class ViewTransactionScreenViewModel(
             deleteTransactionUseByIdCase(
                 id = id,
             )
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
 

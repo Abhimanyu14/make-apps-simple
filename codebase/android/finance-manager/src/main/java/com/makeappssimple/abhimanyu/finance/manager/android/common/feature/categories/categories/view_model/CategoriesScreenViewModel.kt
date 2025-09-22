@@ -59,18 +59,17 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class CategoriesScreenViewModel(
-    navigationKit: NavigationKit,
     private val checkIfCategoryIsUsedInTransactionsUseCase: CheckIfCategoryIsUsedInTransactionsUseCase,
     private val coroutineScope: CoroutineScope,
     private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesFlowUseCase: GetAllCategoriesFlowUseCase,
+    private val navigationKit: NavigationKit,
     private val setDefaultCategoryUseCase: SetDefaultCategoryUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var isLoading: Boolean = true
     private var categoriesGridItemDataMap: ImmutableMap<TransactionType, ImmutableList<CategoriesGridItemData>> =
@@ -107,9 +106,9 @@ internal class CategoriesScreenViewModel(
     internal val uiStateEvents: CategoriesScreenUIStateEvents =
         CategoriesScreenUIStateEvents(
             deleteCategory = ::deleteCategory,
-            navigateToAddCategoryScreen = ::navigateToAddCategoryScreen,
-            navigateToEditCategoryScreen = ::navigateToEditCategoryScreen,
-            navigateUp = ::navigateUp,
+            navigateToAddCategoryScreen = navigationKit::navigateToAddCategoryScreen,
+            navigateToEditCategoryScreen = navigationKit::navigateToEditCategoryScreen,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateCategoryIdToDelete = ::updateCategoryIdToDelete,

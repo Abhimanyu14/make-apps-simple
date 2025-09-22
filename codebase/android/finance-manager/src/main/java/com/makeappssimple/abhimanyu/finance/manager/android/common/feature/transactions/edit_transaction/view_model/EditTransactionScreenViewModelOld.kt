@@ -84,7 +84,6 @@ import java.time.LocalTime
 import kotlin.math.abs
 
 public class EditTransactionScreenViewModelOld(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,
@@ -95,13 +94,13 @@ public class EditTransactionScreenViewModelOld(
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getTitleSuggestionsUseCase: GetTitleSuggestionsUseCase,
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
+    private val navigationKit: NavigationKit,
     private val updateAccountBalanceAmountUseCase: UpdateAccountBalanceAmountUseCase,
     private val updateTransactionUseCase: UpdateTransactionUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -501,7 +500,7 @@ public class EditTransactionScreenViewModelOld(
                     // endregion
                 }
             }
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
 

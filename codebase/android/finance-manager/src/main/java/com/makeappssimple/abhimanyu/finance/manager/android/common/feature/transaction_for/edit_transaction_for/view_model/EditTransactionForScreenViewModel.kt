@@ -42,17 +42,16 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditTransactionForScreenViewModel(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     private val coroutineScope: CoroutineScope,
     private val editTransactionForScreenDataValidationUseCase: EditTransactionForScreenDataValidationUseCase,
     private val getTransactionForByIdUseCase: GetTransactionForByIdUseCase,
+    private val navigationKit: NavigationKit,
     private val updateTransactionForUseCase: UpdateTransactionForUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = EditTransactionForScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -80,7 +79,7 @@ internal class EditTransactionForScreenViewModel(
     internal val uiStateEvents: EditTransactionForScreenUIStateEvents =
         EditTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             updateTitle = ::updateTitle,
             updateTransactionFor = ::updateTransactionFor,
         )
@@ -193,7 +192,7 @@ internal class EditTransactionForScreenViewModel(
                 currentTransactionFor = currentTransactionForValue,
                 title = titleTextFieldState.text.toString(),
             )
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
     // endregion

@@ -38,15 +38,14 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddTransactionForScreenViewModel(
-    navigationKit: NavigationKit,
     private val addTransactionForScreenDataValidationUseCase: AddTransactionForScreenDataValidationUseCase,
     private val coroutineScope: CoroutineScope,
     private val insertTransactionForUseCase: InsertTransactionForUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var addTransactionForScreenDataValidationState: AddTransactionForScreenDataValidationState =
         AddTransactionForScreenDataValidationState()
@@ -70,7 +69,7 @@ internal class AddTransactionForScreenViewModel(
         AddTransactionForScreenUIStateEvents(
             clearTitle = ::clearTitle,
             insertTransactionFor = ::insertTransactionFor,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             updateTitle = ::updateTitle,
         )
     // endregion
@@ -139,7 +138,7 @@ internal class AddTransactionForScreenViewModel(
             insertTransactionForUseCase(
                 title = titleTextFieldState.text.toString(),
             )
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
 

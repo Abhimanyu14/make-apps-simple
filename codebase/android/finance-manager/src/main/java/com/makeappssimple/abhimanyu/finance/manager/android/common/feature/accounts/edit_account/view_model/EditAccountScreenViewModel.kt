@@ -52,17 +52,16 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditAccountScreenViewModel(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     private val coroutineScope: CoroutineScope,
     private val editAccountScreenDataValidationUseCase: EditAccountScreenDataValidationUseCase,
     private val getAccountByIdUseCase: GetAccountByIdUseCase,
+    private val navigationKit: NavigationKit,
     private val updateAccountUseCase: UpdateAccountUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = EditAccountScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -105,7 +104,7 @@ internal class EditAccountScreenViewModel(
             clearBalanceAmountValue = ::clearBalanceAmountValue,
             clearMinimumAccountBalanceAmountValue = ::clearMinimumAccountBalanceAmountValue,
             clearName = ::clearName,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             updateAccount = ::updateAccount,
             updateBalanceAmountValue = ::updateBalanceAmountValue,
             updateMinimumAccountBalanceAmountValue = ::updateMinimumAccountBalanceAmountValue,
@@ -268,7 +267,7 @@ internal class EditAccountScreenViewModel(
                 name = nameTextFieldState.text.toString(),
             )
             if (isAccountUpdated) {
-                navigateUp()
+                navigationKit.navigateUp()
             } else {
                 completeLoading()
                 // TODO: Show Error

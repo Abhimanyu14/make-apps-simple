@@ -47,7 +47,6 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AccountsScreenViewModel(
-    navigationKit: NavigationKit,
     private val coroutineScope: CoroutineScope,
     private val deleteAccountByIdUseCase: DeleteAccountByIdUseCase,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
@@ -56,11 +55,11 @@ internal class AccountsScreenViewModel(
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
     private val getAllAccountsListItemDataListUseCase: GetAllAccountsListItemDataListUseCase,
     private val getDefaultAccountIdFlowUseCase: GetDefaultAccountIdFlowUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var isLoading: Boolean = true
     private var allAccounts: ImmutableList<Account> = persistentListOf()
@@ -87,9 +86,9 @@ internal class AccountsScreenViewModel(
     internal val uiStateEvents: AccountsScreenUIStateEvents =
         AccountsScreenUIStateEvents(
             deleteAccount = ::deleteAccount,
-            navigateToAddAccountScreen = ::navigateToAddAccountScreen,
-            navigateToEditAccountScreen = ::navigateToEditAccountScreen,
-            navigateUp = ::navigateUp,
+            navigateToAddAccountScreen = navigationKit::navigateToAddAccountScreen,
+            navigateToEditAccountScreen = navigationKit::navigateToEditAccountScreen,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateClickedItemId = ::updateClickedItemId,
             updateDefaultAccountIdInDataStore = ::updateDefaultAccountIdInDataStore,

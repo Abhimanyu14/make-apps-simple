@@ -46,16 +46,15 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class TransactionForValuesScreenViewModel(
-    navigationKit: NavigationKit,
     private val coroutineScope: CoroutineScope,
-    private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
     private val checkIfTransactionForValuesAreUsedInTransactionsUseCase: CheckIfTransactionForValuesAreUsedInTransactionsUseCase,
     private val deleteTransactionForByIdUseCase: DeleteTransactionForByIdUseCase,
+    private val getAllTransactionForValuesFlowUseCase: GetAllTransactionForValuesFlowUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var isLoading: Boolean = true
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
@@ -78,9 +77,9 @@ internal class TransactionForValuesScreenViewModel(
     internal val uiStateEvents: TransactionForValuesScreenUIStateEvents =
         TransactionForValuesScreenUIStateEvents(
             deleteTransactionFor = ::deleteTransactionFor,
-            navigateToAddTransactionForScreen = ::navigateToAddTransactionForScreen,
-            navigateToEditTransactionForScreen = ::navigateToEditTransactionForScreen,
-            navigateUp = ::navigateUp,
+            navigateToAddTransactionForScreen = navigationKit::navigateToAddTransactionForScreen,
+            navigateToEditTransactionForScreen = navigationKit::navigateToEditTransactionForScreen,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateTransactionForIdToDelete = ::updateTransactionForIdToDelete,

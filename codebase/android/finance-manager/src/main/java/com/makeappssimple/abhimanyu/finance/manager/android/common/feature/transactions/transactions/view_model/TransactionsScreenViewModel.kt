@@ -66,19 +66,18 @@ import java.time.LocalDate
 
 @KoinViewModel
 internal class TransactionsScreenViewModel(
-    navigationKit: NavigationKit,
     private val coroutineScope: CoroutineScope,
     private val dispatcherProvider: DispatcherProvider,
     private val dateTimeKit: DateTimeKit,
     private val duplicateTransactionUseCase: DuplicateTransactionUseCase,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
+    private val navigationKit: NavigationKit,
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var isInSelectionMode: Boolean = false
     private var isLoading: Boolean = true
@@ -121,9 +120,9 @@ internal class TransactionsScreenViewModel(
             addToSelectedTransactions = ::addToSelectedTransactions,
             clearSelectedTransactions = ::clearSelectedTransactions,
             duplicateTransaction = ::duplicateTransaction,
-            navigateToAddTransactionScreen = ::navigateToAddTransactionScreen,
-            navigateToViewTransactionScreen = ::navigateToViewTransactionScreen,
-            navigateUp = ::navigateUp,
+            navigateToAddTransactionScreen = navigationKit::navigateToAddTransactionScreen,
+            navigateToViewTransactionScreen = navigationKit::navigateToViewTransactionScreen,
+            navigateUp = navigationKit::navigateUp,
             removeFromSelectedTransactions = ::removeFromSelectedTransactions,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             selectAllTransactions = ::selectAllTransactions,

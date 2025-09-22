@@ -44,20 +44,19 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class SettingsScreenViewModel(
-    navigationKit: NavigationKit,
     private val alarmKit: AlarmKit,
     private val appVersionKit: AppVersionKit,
     private val backupDataUseCase: BackupDataUseCase,
     private val coroutineScope: CoroutineScope,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+    private val navigationKit: NavigationKit,
     private val recalculateTotalUseCase: RecalculateTotalUseCase,
     private val restoreDataUseCase: RestoreDataUseCase,
     internal val dateTimeKit: DateTimeKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region initial data
     private var isLoading: Boolean = true
     private var appVersion: String = ""
@@ -80,11 +79,11 @@ internal class SettingsScreenViewModel(
         SettingsScreenUIStateEvents(
             disableReminder = ::disableReminder,
             enableReminder = ::enableReminder,
-            navigateToAccountsScreen = ::navigateToAccountsScreen,
-            navigateToCategoriesScreen = ::navigateToCategoriesScreen,
-            navigateToOpenSourceLicensesScreen = ::navigateToOpenSourceLicensesScreen,
-            navigateToTransactionForValuesScreen = ::navigateToTransactionForValuesScreen,
-            navigateUp = ::navigateUp,
+            navigateToAccountsScreen = navigationKit::navigateToAccountsScreen,
+            navigateToCategoriesScreen = navigationKit::navigateToCategoriesScreen,
+            navigateToOpenSourceLicensesScreen = navigationKit::navigateToOpenSourceLicensesScreen,
+            navigateToTransactionForValuesScreen = navigationKit::navigateToTransactionForValuesScreen,
+            navigateUp = navigationKit::navigateUp,
             recalculateTotal = ::recalculateTotal,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateScreenSnackbarType = ::updateScreenSnackbarType,
@@ -156,7 +155,7 @@ internal class SettingsScreenViewModel(
                 uri = uri,
             )
             if (isBackupSuccessful) {
-                navigateUp()
+                navigationKit.navigateUp()
             } else {
                 completeLoading()
                 // TODO(Abhi): use the result to show snackbar to the user
@@ -175,7 +174,7 @@ internal class SettingsScreenViewModel(
                 uri = uri,
             )
             if (isDataRestored) {
-                navigateUp()
+                navigationKit.navigateUp()
             } else {
                 completeLoading()
                 updateScreenSnackbarType(
@@ -211,7 +210,7 @@ internal class SettingsScreenViewModel(
         return coroutineScope.launch {
             startLoading()
             recalculateTotalUseCase()
-            navigateUp()
+            navigationKit.navigateUp()
         }
     }
 

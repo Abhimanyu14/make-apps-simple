@@ -80,7 +80,6 @@ import java.time.LocalTime
 
 @KoinViewModel
 internal class AddTransactionScreenViewModel(
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val addTransactionScreenDataValidationUseCase: AddTransactionScreenDataValidationUseCase,
@@ -94,11 +93,11 @@ internal class AddTransactionScreenViewModel(
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
     private val getMaxRefundAmountUseCase: GetMaxRefundAmountUseCase,
     private val insertTransactionUseCase: InsertTransactionUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region screen args
     private val screenArgs = AddTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -163,7 +162,7 @@ internal class AddTransactionScreenViewModel(
             clearAmount = ::clearAmount,
             clearTitle = ::clearTitle,
             insertTransaction = ::insertTransaction,
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateAccountFrom = ::updateAccountFrom,
@@ -358,7 +357,7 @@ internal class AddTransactionScreenViewModel(
             )
             if (isTransactionInserted) {
                 updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionSuccessful)
-                navigateUp()
+                navigationKit.navigateUp()
             } else {
                 updateScreenSnackbarType(AddTransactionScreenSnackbarType.AddTransactionFailed)
             }

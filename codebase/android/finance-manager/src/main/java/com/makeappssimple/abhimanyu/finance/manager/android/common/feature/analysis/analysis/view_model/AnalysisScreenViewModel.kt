@@ -57,15 +57,14 @@ private object AnalysisScreenViewModelConstants {
 
 @KoinViewModel
 internal class AnalysisScreenViewModel(
-    navigationKit: NavigationKit,
     private val coroutineScope: CoroutineScope,
     private val dateTimeKit: DateTimeKit,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region data
     private var isLoading: Boolean = true
     private val validTransactionTypes: ImmutableList<TransactionType> =
@@ -103,7 +102,7 @@ internal class AnalysisScreenViewModel(
     // region uiStateEvents
     internal val uiStateEvents: AnalysisScreenUIStateEvents =
         AnalysisScreenUIStateEvents(
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateSelectedFilter = ::updateSelectedFilter,

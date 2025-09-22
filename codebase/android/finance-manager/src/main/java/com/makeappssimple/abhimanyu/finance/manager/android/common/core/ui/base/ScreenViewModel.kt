@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -28,12 +27,10 @@ import kotlinx.coroutines.launch
 public abstract class ScreenViewModel(
     private val coroutineScope: CoroutineScope,
     private val logKit: LogKit,
-    private val navigationKit: NavigationKit,
     private val screenUIStateDelegate: ScreenUIStateDelegate,
 ) : ViewModel(
     viewModelScope = coroutineScope,
 ), LogKit by logKit,
-    NavigationKit by navigationKit,
     ScreenUIStateDelegate by screenUIStateDelegate {
     internal fun initViewModel() {
         observeForRefreshSignal()

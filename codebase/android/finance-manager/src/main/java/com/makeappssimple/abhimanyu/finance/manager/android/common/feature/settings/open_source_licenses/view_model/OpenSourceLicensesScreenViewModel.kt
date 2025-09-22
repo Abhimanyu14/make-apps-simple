@@ -26,16 +26,15 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class OpenSourceLicensesScreenViewModel(
     coroutineScope: CoroutineScope,
-    navigationKit: NavigationKit,
+    private val navigationKit: NavigationKit,
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit,
-    NavigationKit by navigationKit {
+), LogKit by logKit {
     // region uiState
     internal val uiStateEvents: OpenSourceLicensesScreenUIStateEvents =
         OpenSourceLicensesScreenUIStateEvents(
-            navigateUp = ::navigateUp,
+            navigateUp = navigationKit::navigateUp,
         )
     // endregion
 }
