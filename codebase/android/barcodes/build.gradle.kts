@@ -84,6 +84,9 @@ android {
         disable += "AndroidGradlePluginVersion"
     }
 
+    /**
+     * Reference: https://stackoverflow.com/a/76462186/9636037
+     */
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
