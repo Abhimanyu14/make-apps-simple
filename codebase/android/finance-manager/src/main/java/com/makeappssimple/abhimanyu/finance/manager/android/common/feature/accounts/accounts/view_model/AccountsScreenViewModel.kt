@@ -98,10 +98,8 @@ internal class AccountsScreenViewModel(
 
     // region initViewModel
     internal fun initViewModel() {
-        coroutineScope.launch {
-            observeData()
-            completeLoading()
-        }
+        completeLoading()
+        observeData()
     }
     // endregion
 

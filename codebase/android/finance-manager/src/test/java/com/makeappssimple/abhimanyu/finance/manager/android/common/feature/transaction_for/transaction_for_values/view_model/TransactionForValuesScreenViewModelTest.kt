@@ -19,6 +19,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transaction_for.transaction_for_values.view_model
 
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction_for.TransactionForListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
@@ -61,10 +62,28 @@ internal class TransactionForValuesScreenViewModelTest {
     @Test
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         transactionForValuesScreenViewModel.uiState.test {
+            val initialState = awaitItem()
+            initialState.isLoading.shouldBeFalse()
+
             val result = awaitItem()
             result.isBottomSheetVisible.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
-            result.transactionForListItemDataList.shouldBeEmpty()
+            result.isLoading.shouldBeFalse()
+            result.transactionForListItemDataList.shouldBe(
+                expected = listOf(
+                    TransactionForListItemData(
+                        transactionForId = 101,
+                        isMoreOptionsIconButtonVisible = true,
+                        isDeleteBottomSheetMenuItemVisible = false,
+                        title = "Test-transaction-for-101",
+                    ),
+                    TransactionForListItemData(
+                        transactionForId = 102,
+                        isMoreOptionsIconButtonVisible = true,
+                        isDeleteBottomSheetMenuItemVisible = false,
+                        title = "Test-transaction-for-102",
+                    ),
+                ),
+            )
             result.screenBottomSheetType.shouldBe(
                 expected = TransactionForValuesScreenBottomSheetType.None,
             )
@@ -110,14 +129,28 @@ internal class TransactionForValuesScreenViewModelTest {
     fun deleteTransactionFor_shouldDeleteAndResetId() =
         testDependencies.runTestWithTimeout {
             transactionForValuesScreenViewModel.uiState.test {
-                awaitItem().isLoading.shouldBeTrue()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-                fetchDataCompletedState.transactionForListItemDataList.shouldBeEmpty()
+                val initialState = awaitItem()
+                initialState.isLoading.shouldBeFalse()
                 val observeDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse() // TODO(Abhi): This seems to be a bug, should be observeDataCompletedState.isLoading
+                observeDataCompletedState.isLoading.shouldBeFalse()
                 observeDataCompletedState.transactionForListItemDataList.size.shouldBe(
                     expected = 2,
+                )
+                observeDataCompletedState.transactionForListItemDataList.shouldBe(
+                    expected = listOf(
+                        TransactionForListItemData(
+                            transactionForId = 101,
+                            isMoreOptionsIconButtonVisible = true,
+                            isDeleteBottomSheetMenuItemVisible = false,
+                            title = "Test-transaction-for-101",
+                        ),
+                        TransactionForListItemData(
+                            transactionForId = 102,
+                            isMoreOptionsIconButtonVisible = true,
+                            isDeleteBottomSheetMenuItemVisible = false,
+                            title = "Test-transaction-for-102",
+                        ),
+                    ),
                 )
 
                 transactionForValuesScreenViewModel.uiStateEvents.updateTransactionForIdToDelete(

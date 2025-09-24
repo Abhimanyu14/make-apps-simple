@@ -71,9 +71,6 @@ internal class AddAccountScreenViewModelTest {
     @Test
     fun uiState_initialState() = testDependencies.runTestWithTimeout {
         addAccountScreenViewModel.uiState.test {
-            val initialState = awaitItem()
-            initialState.isLoading.shouldBeTrue()
-
             val result = awaitItem()
 
             result.selectedAccountType.shouldBe(
@@ -116,8 +113,6 @@ internal class AddAccountScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
             addAccountScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
                 val previousResult = awaitItem()
                 previousResult.isLoading.shouldBeFalse()
                 previousResult.minimumAccountBalanceTextFieldState.text.toString()
@@ -142,10 +137,8 @@ internal class AddAccountScreenViewModelTest {
         val updatedName = "test-account"
         addAccountScreenViewModel.uiState.test {
             val initialState = awaitItem()
-            initialState.isLoading.shouldBeTrue()
-            val fetchDataCompleted = awaitItem()
-            fetchDataCompleted.isLoading.shouldBeFalse()
-            fetchDataCompleted.nameTextFieldState.text.toString()
+            initialState.isLoading.shouldBeFalse()
+            initialState.nameTextFieldState.text.toString()
                 .shouldBeEmpty()
             addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
             awaitItem().nameTextFieldState.text.toString().shouldBe(
@@ -186,9 +179,7 @@ internal class AddAccountScreenViewModelTest {
                     name = testAccountName,
                 )
                 val initialState = uiStateTurbine.awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = uiStateTurbine.awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
+                initialState.isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateName(
                     testAccountName,
                 )
@@ -255,9 +246,7 @@ internal class AddAccountScreenViewModelTest {
                     name = testAccountName,
                 )
                 val initialState = uiStateTurbine.awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = uiStateTurbine.awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
+                initialState.isLoading.shouldBeFalse()
                 addAccountScreenViewModel.uiStateEvents.updateName(
                     testAccountName,
                 )
@@ -313,8 +302,6 @@ internal class AddAccountScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val updatedMinimumAccountBalanceAmountValue = "1000"
             addAccountScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
                 val previousResult = awaitItem()
                 previousResult.isLoading.shouldBeFalse()
                 previousResult.minimumAccountBalanceTextFieldState.text.toString()
@@ -336,8 +323,6 @@ internal class AddAccountScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val updatedName = "  "
             addAccountScreenViewModel.uiState.test {
-                val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
                 val previousResult = awaitItem()
                 previousResult.isLoading.shouldBeFalse()
                 previousResult.nameTextFieldState.text.toString()
@@ -367,10 +352,8 @@ internal class AddAccountScreenViewModelTest {
             val updatedName = "Cash"
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
-                fetchDataCompleted.nameTextFieldState.text.toString()
+                initialState.isLoading.shouldBeFalse()
+                initialState.nameTextFieldState.text.toString()
                     .shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
@@ -398,10 +381,8 @@ internal class AddAccountScreenViewModelTest {
             val updatedName = "cash"
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
-                fetchDataCompleted.nameTextFieldState.text.toString()
+                initialState.isLoading.shouldBeFalse()
+                initialState.nameTextFieldState.text.toString()
                     .shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
@@ -429,10 +410,8 @@ internal class AddAccountScreenViewModelTest {
             val updatedName = "  Cash   "
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
-                fetchDataCompleted.nameTextFieldState.text.toString()
+                initialState.isLoading.shouldBeFalse()
+                initialState.nameTextFieldState.text.toString()
                     .shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
@@ -460,10 +439,8 @@ internal class AddAccountScreenViewModelTest {
             val updatedName = testDependencies.testAccountName1
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
-                fetchDataCompleted.nameTextFieldState.text.toString()
+                initialState.isLoading.shouldBeFalse()
+                initialState.nameTextFieldState.text.toString()
                     .shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
@@ -491,10 +468,8 @@ internal class AddAccountScreenViewModelTest {
             val updatedName = "test-account"
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
-                fetchDataCompleted.nameTextFieldState.text.toString()
+                initialState.isLoading.shouldBeFalse()
+                initialState.nameTextFieldState.text.toString()
                     .shouldBeEmpty()
 
                 addAccountScreenViewModel.uiStateEvents.updateName(updatedName)
@@ -522,12 +497,10 @@ internal class AddAccountScreenViewModelTest {
             val updatedIndex = 1
             addAccountScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
+                initialState.isLoading.shouldBeFalse()
                 initialState.selectedAccountTypeIndex.shouldBe(
                     expected = 0,
                 )
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
 
                 addAccountScreenViewModel.uiStateEvents.updateSelectedAccountTypeIndex(
                     updatedIndex,

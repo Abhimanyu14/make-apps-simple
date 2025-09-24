@@ -76,9 +76,8 @@ internal class AddTransactionForScreenViewModel(
 
     // region initViewModel
     internal fun initViewModel() {
-        coroutineScope.launch {
-            observeData()
-        }
+        completeLoading()
+        observeData()
     }
     // endregion
 

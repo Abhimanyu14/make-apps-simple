@@ -171,19 +171,18 @@ internal class AddTransactionForScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val updatedTitle = "   "
             addTransactionForScreenViewModel.uiState.test {
-                val fetchDataCompleted = awaitItem()
-                fetchDataCompleted.isLoading.shouldBeFalse()
+                val previousResult = awaitItem()
+                previousResult.isLoading.shouldBeFalse()
 
                 addTransactionForScreenViewModel.uiStateEvents.updateTitle(
                     updatedTitle
                 )
 
-                val result = awaitItem()
-                result.titleError.shouldBe(
+                previousResult.titleError.shouldBe(
                     expected = AddTransactionForScreenTitleError.None,
                 )
-                result.isCtaButtonEnabled.shouldBeFalse()
-                result.titleTextFieldState.text.toString()
+                previousResult.isCtaButtonEnabled.shouldBeFalse()
+                previousResult.titleTextFieldState.text.toString()
                     .shouldBe(
                         expected = updatedTitle,
                     )

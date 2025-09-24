@@ -19,12 +19,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.feature.categories.categories.view_model
 
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.tab_row.MyTabData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.maps.shouldBeEmpty
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -66,15 +66,33 @@ internal class CategoriesScreenViewModelTest {
         categoriesScreenViewModel.uiState.test {
             val result = awaitItem()
             result.isBottomSheetVisible.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
+            result.isLoading.shouldBeFalse()
             result.screenBottomSheetType.shouldBe(
                 expected = CategoriesScreenBottomSheetType.None,
             )
             result.screenSnackbarType.shouldBe(
                 expected = CategoriesScreenSnackbarType.None,
             )
-            result.tabData.shouldBeEmpty()
-            result.transactionTypeTabs.shouldBeEmpty()
+            result.tabData.shouldBe(
+                expected = listOf(
+                    MyTabData(
+                        title = "Expense",
+                    ),
+                    MyTabData(
+                        title = "Income",
+                    ),
+                    MyTabData(
+                        title = "Investment",
+                    ),
+                ),
+            )
+            result.transactionTypeTabs.shouldBe(
+                expected = listOf(
+                    TransactionType.EXPENSE,
+                    TransactionType.INCOME,
+                    TransactionType.INVESTMENT,
+                ),
+            )
             result.categoriesGridItemDataMap.shouldBeEmpty()
         }
     }
@@ -89,10 +107,8 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-                fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                initialState.isLoading.shouldBeFalse()
+                initialState.screenBottomSheetType.shouldBe(
                     expected = CategoriesScreenBottomSheetType.None,
                 )
                 categoriesScreenViewModel.uiStateEvents.updateScreenBottomSheetType(
@@ -115,10 +131,8 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-                fetchDataCompletedState.screenSnackbarType.shouldBe(
+                initialState.isLoading.shouldBeFalse()
+                initialState.screenSnackbarType.shouldBe(
                     expected = CategoriesScreenSnackbarType.None,
                 )
                 categoriesScreenViewModel.uiStateEvents.updateScreenSnackbarType(
@@ -141,10 +155,8 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-                fetchDataCompletedState.screenBottomSheetType.shouldBe(
+                initialState.isLoading.shouldBeFalse()
+                initialState.screenBottomSheetType.shouldBe(
                     expected = CategoriesScreenBottomSheetType.None,
                 )
 
@@ -163,10 +175,8 @@ internal class CategoriesScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             categoriesScreenViewModel.uiState.test {
                 val initialState = awaitItem()
-                initialState.isLoading.shouldBeTrue()
-                val fetchDataCompletedState = awaitItem()
-                fetchDataCompletedState.isLoading.shouldBeFalse()
-                fetchDataCompletedState.screenSnackbarType.shouldBe(
+                initialState.isLoading.shouldBeFalse()
+                initialState.screenSnackbarType.shouldBe(
                     expected = CategoriesScreenSnackbarType.None,
                 )
 

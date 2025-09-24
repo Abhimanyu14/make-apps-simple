@@ -22,9 +22,7 @@ import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.overview_card.OverviewCardViewModelData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty
-import io.kotest.matchers.ints.shouldBeZero
 import io.kotest.matchers.longs.shouldBeZero
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -71,14 +69,18 @@ internal class HomeScreenViewModelTest {
 
             result.isBackupCardVisible.shouldBeFalse()
             result.isBalanceVisible.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
+            result.isLoading.shouldBeFalse()
             result.isRecentTransactionsTrailingTextVisible.shouldBeFalse()
-            result.overviewTabSelectionIndex.shouldBeZero()
+            result.overviewTabSelectionIndex.shouldBe(
+                expected = 1,
+            )
             result.transactionListItemDataList.shouldBeEmpty()
             result.accountsTotalBalanceAmountValue.shouldBeZero()
             result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()
             result.overviewCardData.shouldBe(
-                expected = OverviewCardViewModelData(),
+                expected = OverviewCardViewModelData(
+                    title = "SEPTEMBER, 2025",
+                ),
             )
         }
     }

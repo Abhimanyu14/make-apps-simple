@@ -93,10 +93,10 @@ internal class SettingsScreenViewModel(
     // region initViewModel
     internal fun initViewModel() {
         coroutineScope.launch {
-            observeData()
             fetchData()
             completeLoading()
         }
+        observeData()
     }
     // endregion
 

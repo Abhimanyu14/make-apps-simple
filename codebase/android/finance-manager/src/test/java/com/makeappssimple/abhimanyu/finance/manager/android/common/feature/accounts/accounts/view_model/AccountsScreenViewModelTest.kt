@@ -20,7 +20,6 @@ import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.longs.shouldBeZero
 import io.kotest.matchers.shouldBe
@@ -68,7 +67,7 @@ internal class AccountsScreenViewModelTest {
                 expected = AccountsScreenBottomSheetType.None,
             )
             result.isBottomSheetVisible.shouldBeFalse()
-            result.isLoading.shouldBeTrue()
+            result.isLoading.shouldBeFalse()
             result.accountsListItemDataList.shouldBeEmpty()
             result.accountsTotalBalanceAmountValue.shouldBeZero()
             result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()

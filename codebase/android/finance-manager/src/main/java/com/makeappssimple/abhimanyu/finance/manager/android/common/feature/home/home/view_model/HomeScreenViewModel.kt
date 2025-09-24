@@ -115,10 +115,8 @@ internal class HomeScreenViewModel(
 
     // region initViewModel
     internal fun initViewModel() {
-        coroutineScope.launch {
-            observeData()
-            completeLoading()
-        }
+        completeLoading()
+        observeData()
     }
     // endregion
 

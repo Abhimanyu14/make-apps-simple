@@ -138,10 +138,10 @@ internal class TransactionsScreenViewModel(
     // region initViewModel
     internal fun initViewModel() {
         coroutineScope.launch {
-            observeData()
             fetchData()
             completeLoading()
         }
+        observeData()
     }
     // endregion
 

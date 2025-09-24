@@ -120,10 +120,10 @@ internal class EditCategoryScreenViewModel(
     // region initViewModel
     internal fun initViewModel() {
         coroutineScope.launch {
-            observeData()
             fetchData()
             completeLoading()
         }
+        observeData()
     }
     // endregion
 
