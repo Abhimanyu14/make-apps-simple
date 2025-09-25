@@ -31,11 +31,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.MimeTypeConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.util.document.CreateJsonDocument
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.settings.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.settings.settings.state.SettingsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.settings.settings.view_model.SettingsScreenViewModel
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.document.CreateJsonDocument
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

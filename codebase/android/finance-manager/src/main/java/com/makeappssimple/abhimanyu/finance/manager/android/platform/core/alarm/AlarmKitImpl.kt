@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.core.alarm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Reminder

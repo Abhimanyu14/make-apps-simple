@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.core.notification
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -24,6 +24,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.graphics.toColorInt
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.app.AppKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationKit
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 public class NotificationKitImpl(
@@ -40,32 +42,31 @@ public class NotificationKitImpl(
             flags =
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent =
-            PendingIntent.getActivity(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE
-            )
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE,
+        )
 
         logKit.logError(
             message = "Sending Notification : ${System.currentTimeMillis()}",
         )
-        val notification =
-            NotificationCompat.Builder(
+        val notification = NotificationCompat
+            .Builder(
                 context,
                 NotificationConstants.CHANNEL_ID_REMINDER
             )
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setSmallIcon(R.drawable.notification)
-                .setColor("#DAF5D7".toColorInt())
-                .setColorized(true)
-                .setContentTitle(context.getString(R.string.finance_manager_notification_title))
-                .setContentText(context.getString(R.string.finance_manager_notification_text))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .build()
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setSmallIcon(R.drawable.notification)
+            .setColor("#DAF5D7".toColorInt())
+            .setColorized(true)
+            .setContentTitle(context.getString(R.string.finance_manager_notification_title))
+            .setContentText(context.getString(R.string.finance_manager_notification_text))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
         notificationManager.notify(1, notification)
         logKit.logError(
             message = "Notification : ${System.currentTimeMillis()}",

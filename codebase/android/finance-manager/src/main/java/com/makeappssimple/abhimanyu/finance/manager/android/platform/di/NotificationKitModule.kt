@@ -14,30 +14,27 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.di
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.di
 
 import android.content.Context
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm.AlarmKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm.AlarmKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.date_time.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.app.AppKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.notification.NotificationKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class AlarmKitModule {
+public class NotificationKitModule {
     @Single
-    internal fun providesAlarmKit(
+    internal fun providesNotificationKit(
+        appKit: AppKit,
         context: Context,
-        dateTimeKit: DateTimeKit,
         logKit: LogKit,
-        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
-    ): AlarmKit {
-        return AlarmKitImpl(
+    ): NotificationKit {
+        return NotificationKitImpl(
+            appKit = appKit,
             context = context,
-            dateTimeKit = dateTimeKit,
-            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
             logKit = logKit,
         )
     }

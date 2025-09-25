@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.util.document
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.core.document
 
 import android.content.Context
 import android.content.Intent

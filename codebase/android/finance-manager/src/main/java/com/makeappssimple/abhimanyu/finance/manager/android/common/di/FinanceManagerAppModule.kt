@@ -25,6 +25,8 @@ import com.makeappssimple.abhimanyu.common.di.JsonWriterKitModule
 import com.makeappssimple.abhimanyu.common.di.LogKitModule
 import com.makeappssimple.abhimanyu.common.di.UriDecoderModule
 import com.makeappssimple.abhimanyu.common.di.UriEncoderModule
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.di.AlarmKitModule
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.di.NotificationKitModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
