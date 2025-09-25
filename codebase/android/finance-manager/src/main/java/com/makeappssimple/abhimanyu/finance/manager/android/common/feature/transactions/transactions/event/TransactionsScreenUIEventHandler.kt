@@ -63,6 +63,10 @@ internal class TransactionsScreenUIEventHandler internal constructor(
                 uiStateEvents.clearSelectedTransactions()
             }
 
+            is TransactionsScreenUIEvent.OnSnackbarDismissed -> {
+                uiStateEvents.resetScreenSnackbarType()
+            }
+
             is TransactionsScreenUIEvent.OnTransactionListItem.Click -> {
                 if (uiEvent.isInSelectionMode) {
                     if (uiEvent.isSelected) {

@@ -281,6 +281,7 @@ internal class TransactionsScreenViewModelTest {
             transactionsScreenViewModel.uiStateEvents.duplicateTransaction()
 
             val updateScreenBottomSheetTypeCompletedState = awaitItem()
+            val updateScreenSnackbarTypeCompletedState = awaitItem()
             val result = awaitItem()
             result.accounts.shouldBe(
                 expected = listOf(

@@ -33,6 +33,7 @@ internal sealed class TransactionsScreenUIEvent : ScreenUIEvent {
     data object OnFloatingActionButtonClick : TransactionsScreenUIEvent()
     data object OnTopAppBarNavigationButtonClick : TransactionsScreenUIEvent()
     data object OnNavigationBackButtonClick : TransactionsScreenUIEvent()
+    data object OnSnackbarDismissed : TransactionsScreenUIEvent()
     data object OnSortActionButtonClick : TransactionsScreenUIEvent()
     data object OnFilterActionButtonClick : TransactionsScreenUIEvent()
 

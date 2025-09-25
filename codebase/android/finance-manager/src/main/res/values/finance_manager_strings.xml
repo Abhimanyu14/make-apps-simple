@@ -368,6 +368,7 @@
     <string name="finance_manager_screen_transactions_search_button_content_description">Search</string>
     <string name="finance_manager_screen_transactions_sort_button_content_description">Sort</string>
     <string name="finance_manager_screen_transactions_filter_button_content_description">Filter</string>
+    <string name="finance_manager_screen_transactions_duplicate_transaction_successful">Duplicate Transaction Successful 🙂</string>
     <!-- endregion -->
 
     <!-- region view transaction screen -->

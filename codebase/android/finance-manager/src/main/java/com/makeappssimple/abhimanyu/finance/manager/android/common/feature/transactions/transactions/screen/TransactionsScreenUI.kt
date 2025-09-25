@@ -35,7 +35,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -80,8 +82,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.compo
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.event.TransactionsScreenUIEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.state.TransactionsScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import kotlinx.coroutines.launch
 
 private object TransactionsScreenUIConstants {
     val searchSortAndFilterBarMinHeight = 48.dp
@@ -102,6 +106,10 @@ internal fun TransactionsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: TransactionsScreenUIEvent) -> Unit = {},
 ) {
+    val duplicateTransactionSuccessfulSnackbarText = stringResource(
+        id = R.string.finance_manager_screen_transactions_duplicate_transaction_successful,
+    )
+
     BottomSheetHandler(
         isBottomSheetVisible = uiState.isBottomSheetVisible,
         screenBottomSheetType = uiState.screenBottomSheetType,
@@ -109,6 +117,29 @@ internal fun TransactionsScreenUI(
         modalBottomSheetState = state.modalBottomSheetState,
         keyboardController = state.keyboardController,
     )
+
+    LaunchedEffect(
+        key1 = uiState.screenSnackbarType,
+        key2 = handleUIEvent,
+    ) {
+        when (uiState.screenSnackbarType) {
+            TransactionsScreenSnackbarType.DuplicateTransactionSuccessful -> {
+                launch {
+                    val result = state.snackbarHostState.showSnackbar(
+                        message = duplicateTransactionSuccessfulSnackbarText,
+                    )
+                    when (result) {
+                        SnackbarResult.ActionPerformed -> {}
+                        SnackbarResult.Dismissed -> {
+                            handleUIEvent(TransactionsScreenUIEvent.OnSnackbarDismissed)
+                        }
+                    }
+                }
+            }
+
+            TransactionsScreenSnackbarType.None -> {}
+        }
+    }
 
     BackHandler(
         enabled = uiState.isBackHandlerEnabled,

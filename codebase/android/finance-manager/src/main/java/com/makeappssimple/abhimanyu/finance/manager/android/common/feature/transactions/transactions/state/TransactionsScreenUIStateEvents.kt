@@ -33,6 +33,7 @@ internal class TransactionsScreenUIStateEvents(
     val navigateUp: () -> Job,
     val removeFromSelectedTransactions: (transactionId: Int) -> Job,
     val resetScreenBottomSheetType: () -> Job,
+    val resetScreenSnackbarType: () -> Job,
     val selectAllTransactions: () -> Job,
     val updateIsInSelectionMode: (Boolean) -> Job,
     val updateScreenBottomSheetType: (TransactionsScreenBottomSheetType) -> Job,

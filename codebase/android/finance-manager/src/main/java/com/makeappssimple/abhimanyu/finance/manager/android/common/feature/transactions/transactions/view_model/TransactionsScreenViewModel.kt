@@ -46,6 +46,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigati
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.state.TransactionsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.state.TransactionsScreenUIStateEvents
 import kotlinx.collections.immutable.ImmutableList
@@ -103,6 +104,8 @@ internal class TransactionsScreenViewModel(
     private var searchTextFieldState: TextFieldState = TextFieldState()
     private var screenBottomSheetType: TransactionsScreenBottomSheetType =
         TransactionsScreenBottomSheetType.None
+    private var screenSnackbarType: TransactionsScreenSnackbarType =
+        TransactionsScreenSnackbarType.None
     // endregion
 
     // region uiState
@@ -125,6 +128,7 @@ internal class TransactionsScreenViewModel(
             navigateUp = navigationKit::navigateUp,
             removeFromSelectedTransactions = ::removeFromSelectedTransactions,
             resetScreenBottomSheetType = ::resetScreenBottomSheetType,
+            resetScreenSnackbarType = ::resetScreenSnackbarType,
             selectAllTransactions = ::selectAllTransactions,
             updateIsInSelectionMode = ::updateIsInSelectionMode,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
@@ -187,6 +191,7 @@ internal class TransactionsScreenViewModel(
                 selectedSortOption = selectedSortOption.orDefault(),
                 searchTextFieldState = searchTextFieldState,
                 screenBottomSheetType = screenBottomSheetType,
+                screenSnackbarType = screenSnackbarType,
             )
         }
     }
@@ -500,10 +505,13 @@ internal class TransactionsScreenViewModel(
                 "transaction id must not be null"
             },
         )
-        return coroutineScope.launch {
+        return coroutineScope.launch(
+            context = dispatcherProvider.io,
+        ) {
             duplicateTransactionUseCase(
                 transactionId = transactionId,
             )
+            updateScreenSnackbarType(TransactionsScreenSnackbarType.DuplicateTransactionSuccessful)
         }
     }
 
@@ -549,11 +557,29 @@ internal class TransactionsScreenViewModel(
         )
     }
 
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
+            updatedTransactionsScreenSnackbarType = TransactionsScreenSnackbarType.None,
+        )
+    }
+
     private fun updateScreenBottomSheetType(
         updatedTransactionsScreenBottomSheetType: TransactionsScreenBottomSheetType,
         shouldRefresh: Boolean = true,
     ): Job {
         screenBottomSheetType = updatedTransactionsScreenBottomSheetType
+        return if (shouldRefresh) {
+            refreshUiState()
+        } else {
+            getCompletedJob()
+        }
+    }
+
+    private fun updateScreenSnackbarType(
+        updatedTransactionsScreenSnackbarType: TransactionsScreenSnackbarType,
+        shouldRefresh: Boolean = true,
+    ): Job {
+        screenSnackbarType = updatedTransactionsScreenSnackbarType
         return if (shouldRefresh) {
             refreshUiState()
         } else {

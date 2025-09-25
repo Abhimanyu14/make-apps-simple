@@ -27,6 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.fe
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate
@@ -54,4 +55,5 @@ internal data class TransactionsScreenUIState(
     val selectedSortOption: SortOption = SortOption.LATEST_FIRST,
     val searchTextFieldState: TextFieldState = TextFieldState(),
     val screenBottomSheetType: TransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
+    val screenSnackbarType: TransactionsScreenSnackbarType = TransactionsScreenSnackbarType.None,
 ) : ScreenUIState
