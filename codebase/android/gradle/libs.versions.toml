@@ -28,6 +28,8 @@ androidx-core-ktx = "1.17.0"
 androidx-core-testing = "2.2.0"
 androidx-compose-material3 = "1.4.0-beta03"
 androidx-datastore = "1.1.7"
+androidx-paging-compose = "3.3.6"
+androidx-paging-runtime = "3.4.0-alpha04"
 androidx-room = "2.7.2"
 androidx-sqlite-bundled = "2.5.2"
 androidx-test-core = "1.7.0"
@@ -107,6 +109,8 @@ androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision",
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidx-camera" }
 androidx-camera-viewfinder-compose = { module = "androidx.camera:camera-viewfinder-compose", version.ref = "androidx-camera-viewfinder-compose" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "androidx-paging-compose" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "androidx-paging-runtime" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
