@@ -307,7 +307,7 @@ private fun HomeScreenList(
         actionOnSwipeToEnd = onSwipeToEnd,
         backgroundContent = { dismissState: MySwipeToDismissState ->
             val color by animateColorAsState(
-                when (dismissState.targetValue) {
+                targetValue = when (dismissState.targetValue) {
                     MySwipeToDismissValue.Default -> BarcodesAppTheme.colorScheme.surfaceVariant
                     MySwipeToDismissValue.DismissedToEnd -> BarcodesAppTheme.colorScheme.error
                     MySwipeToDismissValue.DismissedToStart -> BarcodesAppTheme.colorScheme.background
@@ -315,7 +315,7 @@ private fun HomeScreenList(
                 label = "swipe_to_dismiss_background_color",
             )
             val scale by animateFloatAsState(
-                if (dismissState.targetValue == MySwipeToDismissValue.Default) {
+                targetValue = if (dismissState.targetValue == MySwipeToDismissValue.Default) {
                     1F
                 } else {
                     1.25F
