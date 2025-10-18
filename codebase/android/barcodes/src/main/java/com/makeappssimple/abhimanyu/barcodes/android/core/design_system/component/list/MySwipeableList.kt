@@ -82,7 +82,9 @@ internal fun MySwipeableList(
                     backgroundContent = {
                         backgroundContent?.invoke(
                             this,
-                            MySwipeToDismissState(dismissState)
+                            MySwipeToDismissState(
+                                dismissState = dismissState,
+                            ),
                         )
                     },
                     enableDismissFromStartToEnd = actionOnSwipeToEnd != null,
