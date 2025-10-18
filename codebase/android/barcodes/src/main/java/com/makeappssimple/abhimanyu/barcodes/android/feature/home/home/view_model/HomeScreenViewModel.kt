@@ -69,9 +69,9 @@ internal class HomeScreenViewModel(
 
     // region uiState and uiStateEvents
     val uiState: StateFlow<HomeScreenUIState> = combine(
-        allBarcodes,
-        isDeleteBarcodeDialogVisible,
-        homeScreenBottomSheetType,
+        flow = allBarcodes,
+        flow2 = isDeleteBarcodeDialogVisible,
+        flow3 = homeScreenBottomSheetType,
     ) {
             allBarcodes,
             isDeleteBarcodeDialogVisible,
