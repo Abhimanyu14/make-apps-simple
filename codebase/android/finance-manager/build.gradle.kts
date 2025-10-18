@@ -111,6 +111,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.leakcanary.android)
 
     implementation(libs.about.libraries.compose)
     // implementation(libs.about.libraries.core)
