@@ -282,7 +282,7 @@ internal fun HomeScreenUI(
         // TODO(Abhi): Empty screen UI
         HomeScreenList(
             listItemsDataAndEventHandler = listItemsDataAndEventHandler,
-            onSwipeToEnd = {
+            actionOnSwipeToEnd = {
                 handleUIEvent(
                     HomeScreenUIEvent.OnListItem.SwipeToEnd(
                         barcodes = listOf(uiState.allBarcodes[it]),
@@ -297,14 +297,14 @@ internal fun HomeScreenUI(
 @Composable
 private fun HomeScreenList(
     listItemsDataAndEventHandler: List<MyListItemDataEventDataAndEventHandler>,
-    onSwipeToEnd: (Int) -> Unit,
+    actionOnSwipeToEnd: (Int) -> Unit,
 ) {
     MySwipeableList(
         listItemsDataAndEventHandler = listItemsDataAndEventHandler,
         contentPadding = PaddingValues(
             bottom = 80.dp,
         ),
-        actionOnSwipeToEnd = onSwipeToEnd,
+        actionOnSwipeToEnd = actionOnSwipeToEnd,
         backgroundContent = { dismissState: MySwipeToDismissState ->
             val color by animateColorAsState(
                 targetValue = when (dismissState.targetValue) {
