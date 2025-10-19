@@ -21,12 +21,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.CurrencyCodeConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.serializer.CurrencySerializer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import java.util.Currency
-import kotlin.math.abs
 
 @Serializable
 internal data class Amount(
@@ -37,19 +35,6 @@ internal data class Amount(
     @EncodeDefault
     val value: Long = 0,
 ) : Comparable<Amount> {
-    override fun toString(): String {
-        val formattedValue = formattedCurrencyValue(
-            value = abs(
-                n = value,
-            ),
-        )
-        return if (value >= 0) {
-            "${currency.symbol}$formattedValue"
-        } else {
-            "- ${currency.symbol}$formattedValue"
-        }
-    }
-
     override fun compareTo(
         other: Amount,
     ): Int {

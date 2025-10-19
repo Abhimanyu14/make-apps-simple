@@ -41,6 +41,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUI
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIEvent
@@ -129,7 +130,7 @@ private fun TotalBalanceCardUI(
                     .fillMaxWidth(),
                 text = Amount(
                     value = data.totalBalanceAmount,
-                ).toString(),
+                ).toDefaultString(),
                 style = FinanceManagerAppTheme.typography.displayLarge
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onTertiary,
@@ -154,7 +155,7 @@ private fun TotalBalanceCardUI(
                 MyText(
                     text = Amount(
                         value = data.totalMinimumBalanceAmount,
-                    ).toString(),
+                    ).toDefaultString(),
                     style = FinanceManagerAppTheme.typography.bodySmall
                         .copy(
                             fontWeight = FontWeight.Bold,

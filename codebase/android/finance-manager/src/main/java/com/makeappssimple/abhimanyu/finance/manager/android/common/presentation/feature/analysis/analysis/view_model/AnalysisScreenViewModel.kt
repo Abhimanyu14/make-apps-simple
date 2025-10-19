@@ -36,6 +36,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.analysis.AnalysisListItemData
@@ -189,7 +190,7 @@ internal class AnalysisScreenViewModel(
             AnalysisListItemData(
                 amountText = Amount(
                     value = it.amountValue,
-                ).toString(),
+                ).toDefaultString(),
                 emoji = it.category.emoji,
                 percentage = percentage,
                 percentageText = "%.2f".format((percentage * AnalysisScreenViewModelConstants.FULL_PERCENTAGE))

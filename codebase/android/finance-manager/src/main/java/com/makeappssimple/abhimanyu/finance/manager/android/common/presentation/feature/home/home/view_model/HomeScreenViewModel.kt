@@ -32,7 +32,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetTransactionByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
@@ -129,13 +128,6 @@ internal class HomeScreenViewModel(
     }
 
     private fun updateUiState() {
-        Amount(
-            value = overviewCardData?.income?.toLong().orZero(),
-        )
-        Amount(
-            value = overviewCardData?.expense?.toLong().orZero(),
-        )
-
         _uiState.update {
             HomeScreenUIState(
                 isBackupCardVisible = isBackupCardVisible,

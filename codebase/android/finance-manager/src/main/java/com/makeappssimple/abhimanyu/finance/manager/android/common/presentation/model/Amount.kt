@@ -28,19 +28,6 @@ internal fun AmountEntity.toNonSignedString(): String {
     )
 }
 
-internal fun AmountEntity.toString(): String {
-    val formattedValue = formattedCurrencyValue(
-        value = abs(
-            n = value,
-        ),
-    )
-    return if (value >= 0) {
-        "${currency.symbol}$formattedValue"
-    } else {
-        "- ${currency.symbol}$formattedValue"
-    }
-}
-
 internal fun AmountEntity.toSignedString(
     isPositive: Boolean = false,
     isNegative: Boolean = false,
@@ -82,4 +69,17 @@ internal fun Amount.toSignedString(
         return "- ${currency.symbol}$formattedValue"
     }
     return "${currency.symbol}$formattedValue"
+}
+
+internal fun Amount.toDefaultString(): String {
+    val formattedValue = formattedCurrencyValue(
+        value = abs(
+            n = value,
+        ),
+    )
+    return if (value >= 0) {
+        "${currency.symbol}$formattedValue"
+    } else {
+        "- ${currency.symbol}$formattedValue"
+    }
 }

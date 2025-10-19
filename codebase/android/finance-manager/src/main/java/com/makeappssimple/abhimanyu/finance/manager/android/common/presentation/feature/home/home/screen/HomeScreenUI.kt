@@ -44,6 +44,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.event.HomeScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.state.HomeScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toNonSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.rememberCommonScreenUIState
@@ -175,7 +176,7 @@ internal fun HomeScreenUI(
                                     id = R.string.finance_manager_screen_home_overview_card_income,
                                     Amount(
                                         value = uiState.overviewCardData.income.toLong(),
-                                    ),
+                                    ).toDefaultString(),
                                 ),
                                 color = MyColor.TERTIARY,
                             ),
