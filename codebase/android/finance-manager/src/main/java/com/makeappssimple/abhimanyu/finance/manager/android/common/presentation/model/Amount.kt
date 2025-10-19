@@ -16,35 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AmountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlin.math.abs
-
-internal fun AmountEntity.toNonSignedString(): String {
-    return toSignedString(
-        isPositive = false,
-        isNegative = false
-    )
-}
-
-internal fun AmountEntity.toSignedString(
-    isPositive: Boolean = false,
-    isNegative: Boolean = false,
-): String {
-    val formattedValue = formattedCurrencyValue(
-        value = abs(
-            n = value,
-        ),
-    )
-    if (isPositive) {
-        return "+ ${currency.symbol}$formattedValue"
-    }
-    if (isNegative) {
-        return "- ${currency.symbol}$formattedValue"
-    }
-    return "${currency.symbol}$formattedValue"
-}
 
 internal fun Amount.toNonSignedString(): String {
     return toSignedString(

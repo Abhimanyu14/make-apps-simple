@@ -22,13 +22,11 @@ import androidx.room.ColumnInfo
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.CurrencyCodeConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.serializer.CurrencySerializer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.Currency
-import kotlin.math.abs
 
 @Serializable
 internal data class AmountEntity(
@@ -42,20 +40,7 @@ internal data class AmountEntity(
     @EncodeDefault
     @SerialName(value = "value")
     val value: Long = 0,
-) {
-    override fun toString(): String {
-        val formattedValue = formattedCurrencyValue(
-            value = abs(
-                n = value,
-            ),
-        )
-        return if (value >= 0) {
-            "${currency.symbol}$formattedValue"
-        } else {
-            "- ${currency.symbol}$formattedValue"
-        }
-    }
-}
+)
 
 internal operator fun AmountEntity.plus(
     amount: AmountEntity,
