@@ -192,14 +192,14 @@ kover {
                     "com.makeappssimple.abhimanyu.finance.manager.android.common.*.fake",
 
                     // Room
-                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database",
 
                     // UI
-                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system*",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart*",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component*",
-                    "com.makeappssimple.abhimanyu.finance.manager.android.common.feature.*.screen",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component*",
+                    "com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.*.screen",
                 )
             }
             includes {

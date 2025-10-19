@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.database.dao
+package com.makeappssimple.abhimanyu.finance.manager.android.data.database.dao
 
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
