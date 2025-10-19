@@ -234,25 +234,27 @@ internal class TransactionsScreenViewModel(
                             .toImmutableList(),
                     )
                 }
-                .sortedWith(compareBy {
-                    when (selectedSortOption) {
-                        SortOption.AMOUNT_ASC -> {
-                            it.transaction.amount.value
-                        }
+                .sortedWith(
+                    comparator = compareBy {
+                        when (selectedSortOption) {
+                            SortOption.AMOUNT_ASC -> {
+                                it.transaction.amount.value
+                            }
 
-                        SortOption.AMOUNT_DESC -> {
-                            -1 * it.transaction.amount.value
-                        }
+                            SortOption.AMOUNT_DESC -> {
+                                -1 * it.transaction.amount.value
+                            }
 
-                        SortOption.LATEST_FIRST -> {
-                            -1 * it.transaction.transactionTimestamp
-                        }
+                            SortOption.LATEST_FIRST -> {
+                                -1 * it.transaction.transactionTimestamp
+                            }
 
-                        SortOption.OLDEST_FIRST -> {
-                            it.transaction.transactionTimestamp
+                            SortOption.OLDEST_FIRST -> {
+                                it.transaction.transactionTimestamp
+                            }
                         }
-                    }
-                })
+                    },
+                )
                 .groupBy {
                     if (selectedSortOption == SortOption.LATEST_FIRST ||
                         selectedSortOption == SortOption.OLDEST_FIRST
