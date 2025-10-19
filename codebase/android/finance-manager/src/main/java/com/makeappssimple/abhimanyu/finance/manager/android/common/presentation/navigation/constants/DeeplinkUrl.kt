@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants
 
 public object DeeplinkUrl {
     public const val BASE_URL: String = "makeappssimple://finance.manager"

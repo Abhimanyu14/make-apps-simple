@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.Screen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.navigation.accountsNavGraph
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.navigation.analysisNavGraph
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.navigation.categoriesNavGraph

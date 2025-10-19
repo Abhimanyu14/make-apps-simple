@@ -21,8 +21,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue

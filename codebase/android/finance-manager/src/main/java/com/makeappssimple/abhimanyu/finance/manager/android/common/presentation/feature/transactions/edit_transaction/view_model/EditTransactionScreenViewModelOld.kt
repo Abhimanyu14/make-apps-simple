@@ -58,12 +58,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Tr
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.plus
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.sortOrder
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.navigation.EditTransactionScreenArgs
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultIncomeCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultInvestmentCategory
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.navigation.EditTransactionScreenArgs
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList

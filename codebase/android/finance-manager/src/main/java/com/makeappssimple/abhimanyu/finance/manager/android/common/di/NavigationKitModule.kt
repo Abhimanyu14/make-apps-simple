@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKitImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKitImpl
 import kotlinx.coroutines.CoroutineScope
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

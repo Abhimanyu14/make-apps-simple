@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel

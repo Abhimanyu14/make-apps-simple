@@ -20,8 +20,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenTitleError
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavigationDirections
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue

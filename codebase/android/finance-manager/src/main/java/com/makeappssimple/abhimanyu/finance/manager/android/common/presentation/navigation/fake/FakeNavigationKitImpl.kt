@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.fake
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.fake
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationCommand
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationCommand
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

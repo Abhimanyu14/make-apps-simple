@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenArgs
 
 internal class ViewTransactionScreenArgs(

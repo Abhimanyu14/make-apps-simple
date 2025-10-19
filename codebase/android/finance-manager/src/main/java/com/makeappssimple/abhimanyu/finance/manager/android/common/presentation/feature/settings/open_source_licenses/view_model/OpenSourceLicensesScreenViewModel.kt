@@ -18,8 +18,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import kotlinx.coroutines.CoroutineScope
 import org.koin.android.annotation.KoinViewModel
 

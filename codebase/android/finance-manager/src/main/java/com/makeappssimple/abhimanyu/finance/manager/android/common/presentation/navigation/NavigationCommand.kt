@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation
 
 public enum class Command {
     CLEAR_BACKSTACK_AND_NAVIGATE,

@@ -28,10 +28,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.rep
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common.BackupDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common.RecalculateTotalUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common.RestoreDataUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

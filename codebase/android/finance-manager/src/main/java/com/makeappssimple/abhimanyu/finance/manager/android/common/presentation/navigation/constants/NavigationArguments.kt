@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants
 
 public object NavigationArguments {
     public const val ACCOUNT_ID: String = "accountId"

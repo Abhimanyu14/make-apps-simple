@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.navigation
 
 import androidx.lifecycle.SavedStateHandle
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenArgs
 
 internal class EditTransactionForScreenArgs(

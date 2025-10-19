@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation
 
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.SharedFlow
