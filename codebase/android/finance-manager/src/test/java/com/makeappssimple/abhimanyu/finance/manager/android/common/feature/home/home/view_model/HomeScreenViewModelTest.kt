@@ -79,7 +79,7 @@ internal class HomeScreenViewModelTest {
             result.allAccountsTotalMinimumBalanceAmountValue.shouldBeZero()
             result.overviewCardData.shouldBe(
                 expected = OverviewCardViewModelData(
-                    title = "SEPTEMBER, 2025",
+                    title = "OCTOBER, 2025",
                 ),
             )
         }

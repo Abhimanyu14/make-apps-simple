@@ -25,8 +25,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.makeappssimple.abhimanyu.finance.manager.android.common.app.FinanceManagerActivityViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.Command
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app.FinanceManagerActivityViewModel
 
 @Composable
 internal fun FinanceManagerNavGraph(

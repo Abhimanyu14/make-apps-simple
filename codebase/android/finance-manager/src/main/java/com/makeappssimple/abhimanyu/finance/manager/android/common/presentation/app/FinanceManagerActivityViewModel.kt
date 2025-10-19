@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.app
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app
 
-import androidx.compose.runtime.Composable
-import org.koin.compose.viewmodel.koinViewModel
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
+import org.koin.android.annotation.KoinViewModel
 
-@Composable
-internal fun FinanceManagerApp(
-    financeManagerActivityViewModel: FinanceManagerActivityViewModel = koinViewModel(),
-) {
-    FinanceManagerAppUI(
-        financeManagerActivityViewModel = financeManagerActivityViewModel,
-    )
-}
+@KoinViewModel
+internal class FinanceManagerActivityViewModel(
+    val logKit: LogKit,
+    val navigationKit: NavigationKit,
+) : ViewModel()
