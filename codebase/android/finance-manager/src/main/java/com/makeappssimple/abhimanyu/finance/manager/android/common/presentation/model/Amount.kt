@@ -20,7 +20,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlin.math.abs
 
-internal fun Amount.toNonSignedString(): String {
+internal fun Amount.toUnsignedString(): String {
     return toSignedString(
         isPositive = false,
         isNegative = false

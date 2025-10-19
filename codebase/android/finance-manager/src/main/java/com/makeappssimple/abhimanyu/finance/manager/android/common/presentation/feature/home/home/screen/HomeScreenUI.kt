@@ -45,6 +45,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.event.HomeScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toUnsignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.backup_card.BackupCard
@@ -185,7 +186,7 @@ internal fun HomeScreenUI(
                                     id = R.string.finance_manager_screen_home_overview_card_expense,
                                     Amount(
                                         value = uiState.overviewCardData.expense.toLong(),
-                                    ).toNonSignedString(),
+                                    ).toUnsignedString(),
                                 ),
                                 color = MyColor.ERROR,
                             ),
