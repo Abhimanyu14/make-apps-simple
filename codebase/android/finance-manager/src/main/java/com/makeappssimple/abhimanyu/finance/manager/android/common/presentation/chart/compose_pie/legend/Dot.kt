@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.legend
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.legend
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

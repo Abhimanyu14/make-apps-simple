@@ -14,20 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.renderer
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data
 
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Canvas
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.PieChartItemData
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
 
-public interface SliceDrawer {
-    public fun drawSlice(
-        drawScope: DrawScope,
-        canvas: Canvas,
-        area: Size,
-        startAngle: Float,
-        sweepAngle: Float,
-        slice: PieChartItemData,
-    )
-}
+@Immutable
+public data class PieChartItemData(
+    val text: String,
+    val value: Float,
+    val color: MyColor,
+)

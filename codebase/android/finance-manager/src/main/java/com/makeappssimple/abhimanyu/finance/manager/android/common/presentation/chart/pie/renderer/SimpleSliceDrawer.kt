@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.renderer
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.PieChartItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.PieChartItemData
 
 public class SimpleSliceDrawer(private val sliceThickness: Float = 25f) :
     SliceDrawer {

@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data
 
-internal object PieChartUtil {
-    fun calculateAngle(
-        sliceLength: Float,
-        totalLength: Float,
-        progress: Float,
-    ): Float {
-        return 360.0F * (sliceLength * progress) / totalLength
-    }
-}
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
+
+@Immutable
+public data class PieChartLegendItemData(
+    val text: String,
+    val color: MyColor,
+)

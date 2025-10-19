@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec
@@ -26,9 +26,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.PieChartUtil.calculateAngle
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.renderer.SimpleSliceDrawer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.renderer.SliceDrawer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.PieChartUtil.calculateAngle
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer.SimpleSliceDrawer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer.SliceDrawer
 
 public fun simpleChartAnimation(): TweenSpec<Float> = TweenSpec(
     durationMillis = 500,

@@ -14,10 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.data
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie
 
-// TODO(Abhi): Check why this can not be immutable
-// @Immutable
+import androidx.compose.runtime.Immutable
+
+@Immutable
 public data class PieChartData(
-    val items: List<PieChartItemData> = emptyList(),
-)
+    val items: List<PieChartItemData>,
+) {
+    internal val totalSize: Float
+        get() {
+            return items.sumOf {
+                it.value.toDouble()
+            }.toFloat()
+        }
+}

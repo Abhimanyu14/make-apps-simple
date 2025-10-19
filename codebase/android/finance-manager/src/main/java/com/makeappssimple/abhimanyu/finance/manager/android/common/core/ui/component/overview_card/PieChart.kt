@@ -23,9 +23,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.PieChart
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.PieChartData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie.renderer.SimpleSliceDrawer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.PieChart
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.PieChartData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer.SimpleSliceDrawer
 
 private object PieChartConstants {
     const val SLICE_THICKNESS = 30F

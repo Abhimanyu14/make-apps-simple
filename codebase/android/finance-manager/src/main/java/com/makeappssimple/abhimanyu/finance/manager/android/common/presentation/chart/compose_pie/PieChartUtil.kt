@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie
 
 import androidx.compose.ui.geometry.Offset
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.data.PieChartData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.data.PieChartLegendItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data.PieChartData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data.PieChartLegendItemData
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin

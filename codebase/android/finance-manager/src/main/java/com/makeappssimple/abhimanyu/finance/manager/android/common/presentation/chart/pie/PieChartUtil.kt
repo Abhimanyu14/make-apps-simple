@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.data
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie
 
-import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
-
-@Immutable
-public data class PieChartItemData(
-    val text: String,
-    val value: Float,
-    val color: MyColor,
-)
+internal object PieChartUtil {
+    fun calculateAngle(
+        sliceLength: Float,
+        totalLength: Float,
+        progress: Float,
+    ): Float {
+        return 360.0F * (sliceLength * progress) / totalLength
+    }
+}

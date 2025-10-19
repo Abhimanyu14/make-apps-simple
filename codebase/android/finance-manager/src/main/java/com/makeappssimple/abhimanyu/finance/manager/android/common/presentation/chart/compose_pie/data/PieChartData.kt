@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data
 
-import androidx.compose.runtime.Immutable
-import androidx.compose.ui.graphics.Color
-
-@Immutable
-public data class PieChartItemData(
-    val value: Float,
-    val color: Color,
+// TODO(Abhi): Check why this can not be immutable
+// @Immutable
+public data class PieChartData(
+    val items: List<PieChartItemData> = emptyList(),
 )

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.data
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
+import androidx.compose.ui.graphics.Color
 
 @Immutable
-public data class PieChartLegendItemData(
-    val text: String,
-    val color: MyColor,
+public data class PieChartItemData(
+    val value: Float,
+    val color: Color,
 )

@@ -34,7 +34,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.compose_pie.ComposePieChart
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.COMPONENT_OVERVIEW_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.VerticalSpacer
@@ -43,6 +42,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_s
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.extensions.shimmer.shimmer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.ComposePieChart
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable

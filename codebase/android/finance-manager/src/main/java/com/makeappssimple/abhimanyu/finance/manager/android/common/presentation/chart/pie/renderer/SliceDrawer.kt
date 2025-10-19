@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.chart.pie
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer
 
-import androidx.compose.runtime.Immutable
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Canvas
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.PieChartItemData
 
-@Immutable
-public data class PieChartData(
-    val items: List<PieChartItemData>,
-) {
-    internal val totalSize: Float
-        get() {
-            return items.sumOf {
-                it.value.toDouble()
-            }.toFloat()
-        }
+public interface SliceDrawer {
+    public fun drawSlice(
+        drawScope: DrawScope,
+        canvas: Canvas,
+        area: Size,
+        startAngle: Float,
+        sweepAngle: Float,
+        slice: PieChartItemData,
+    )
 }
