@@ -20,7 +20,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class DefaultDataId(
+internal data class DefaultDataId(
     @SerialName(value = "expense_category")
     val expenseCategory: Int = 0,
 

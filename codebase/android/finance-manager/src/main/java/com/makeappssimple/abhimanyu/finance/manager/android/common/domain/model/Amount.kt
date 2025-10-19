@@ -29,13 +29,13 @@ import java.util.Currency
 import kotlin.math.abs
 
 @Serializable
-public data class Amount(
+internal data class Amount(
     @EncodeDefault
     @Serializable(CurrencySerializer::class)
-    public val currency: Currency = Currency.getInstance(CurrencyCodeConstants.INR),
+    val currency: Currency = Currency.getInstance(CurrencyCodeConstants.INR),
 
     @EncodeDefault
-    public val value: Long = 0,
+    val value: Long = 0,
 ) : Comparable<Amount> {
     override fun toString(): String {
         val formattedValue = formattedCurrencyValue(
@@ -57,7 +57,7 @@ public data class Amount(
     }
 }
 
-public operator fun Amount.plus(
+internal operator fun Amount.plus(
     amount: Amount,
 ): Amount {
     return Amount(
@@ -66,7 +66,7 @@ public operator fun Amount.plus(
     )
 }
 
-public operator fun Amount.minus(
+internal operator fun Amount.minus(
     amount: Amount,
 ): Amount {
     return Amount(
@@ -75,7 +75,7 @@ public operator fun Amount.minus(
     )
 }
 
-public fun Amount?.orEmpty(): Amount {
+internal fun Amount?.orEmpty(): Amount {
     return if (this.isNull()) {
         Amount()
     } else {

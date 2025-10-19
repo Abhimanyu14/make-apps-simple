@@ -14,38 +14,38 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public interface AccountRepository {
-    public suspend fun deleteAccountById(
+internal interface AccountRepository {
+    suspend fun deleteAccountById(
         id: Int,
     ): Int
 
-    public suspend fun getAccountById(
+    suspend fun getAccountById(
         id: Int,
     ): Account?
 
-    public suspend fun getAccountsByIds(
+    suspend fun getAccountsByIds(
         ids: ImmutableList<Int>,
     ): ImmutableList<Account>
 
-    public suspend fun getAllAccounts(): ImmutableList<Account>
+    suspend fun getAllAccounts(): ImmutableList<Account>
 
-    public fun getAllAccountsFlow(): Flow<ImmutableList<Account>>
+    fun getAllAccountsFlow(): Flow<ImmutableList<Account>>
 
-    public suspend fun insertAccounts(
+    suspend fun insertAccounts(
         vararg accounts: Account,
     ): ImmutableList<Long>
 
-    public suspend fun updateAccountBalanceAmount(
+    suspend fun updateAccountBalanceAmount(
         accountsBalanceAmountChange: ImmutableList<Pair<Int, Long>>,
     ): Int
 
-    public suspend fun updateAccounts(
+    suspend fun updateAccounts(
         vararg accounts: Account,
     ): Int
 }

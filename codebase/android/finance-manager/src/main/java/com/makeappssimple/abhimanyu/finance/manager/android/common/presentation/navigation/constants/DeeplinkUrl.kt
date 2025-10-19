@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants
 
-public object DeeplinkUrl {
-    public const val BASE_URL: String = "makeappssimple://finance.manager"
-    public const val BROWSER_BASE_URL: String =
+internal object DeeplinkUrl {
+    const val BASE_URL: String = "makeappssimple://finance.manager"
+    const val BROWSER_BASE_URL: String =
         "https://www.makeappssimple.finance.manager.com"
 }

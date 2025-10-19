@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orEmpty
@@ -32,10 +32,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-public class GetAllAccountsListItemDataListUseCase(
+internal class GetAllAccountsListItemDataListUseCase(
     private val checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         allAccounts: ImmutableList<Account>,
         defaultAccountId: Int?,
     ): ImmutableList<AccountsListItemData> {

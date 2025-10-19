@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIEvent
 
 @Composable
-public fun MyRadioGroup(
+internal fun MyRadioGroup(
     modifier: Modifier = Modifier,
     data: MyRadioGroupData,
     handleEvent: (event: MyRadioGroupEvent) -> Unit = {},

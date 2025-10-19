@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.app
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.app
 
 import android.content.Intent
 
-public interface AppKit {
-    public fun getMainActivityIntent(): Intent
+internal interface AppKit {
+    fun getMainActivityIntent(): Intent
 }

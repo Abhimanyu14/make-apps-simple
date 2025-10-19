@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 
-public class SetDefaultCategoryUseCase(
+internal class SetDefaultCategoryUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         defaultCategoryId: Int,
         transactionType: TransactionType,
     ): Boolean {

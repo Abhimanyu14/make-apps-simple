@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class TotalBalanceCardEvent {
-    public data object OnClick : TotalBalanceCardEvent()
-    public data object OnViewBalanceClick : TotalBalanceCardEvent()
+internal sealed class TotalBalanceCardEvent {
+    data object OnClick : TotalBalanceCardEvent()
+    data object OnViewBalanceClick : TotalBalanceCardEvent()
 }

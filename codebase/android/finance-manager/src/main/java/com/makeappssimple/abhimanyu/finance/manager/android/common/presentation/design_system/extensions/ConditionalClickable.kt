@@ -27,7 +27,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.semantics.Role
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 
-public fun Modifier.conditionalClickable(
+internal fun Modifier.conditionalClickable(
     role: Role? = null,
     onClickLabel: String? = null,
     onLongClickLabel: String? = null,
@@ -51,7 +51,7 @@ public fun Modifier.conditionalClickable(
     }
 }
 
-public fun Modifier.conditionalClickable(
+internal fun Modifier.conditionalClickable(
     indication: Indication?,
     interactionSource: MutableInteractionSource,
     role: Role? = null,

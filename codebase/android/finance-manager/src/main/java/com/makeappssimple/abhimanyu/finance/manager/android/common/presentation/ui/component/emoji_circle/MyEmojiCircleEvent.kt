@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MyEmojiCircleEvent {
-    public data object OnClick : MyEmojiCircleEvent()
+internal sealed class MyEmojiCircleEvent {
+    data object OnClick : MyEmojiCircleEvent()
 }

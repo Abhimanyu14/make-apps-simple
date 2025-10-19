@@ -40,7 +40,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.MyEmojiCircleData
 
 @Composable
-public fun AnalysisListItem(
+internal fun AnalysisListItem(
     modifier: Modifier = Modifier,
     data: AnalysisListItemData,
 ) {

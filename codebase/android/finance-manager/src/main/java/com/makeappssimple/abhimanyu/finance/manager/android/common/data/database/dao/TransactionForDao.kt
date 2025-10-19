@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for transaction_for_table.
  */
 @Dao
-public interface TransactionForDao {
+internal interface TransactionForDao {
     /**
      * Delete all transaction for values from the table.
      * @return Number of rows deleted
@@ -42,7 +42,7 @@ public interface TransactionForDao {
             FROM transaction_for_table
         """
     )
-    public suspend fun deleteAllTransactionForValues(): Int
+    suspend fun deleteAllTransactionForValues(): Int
 
     /**
      * Delete a transaction for value by id.
@@ -57,7 +57,7 @@ public interface TransactionForDao {
             WHERE id = :id
         """
     )
-    public suspend fun deleteTransactionForById(
+    suspend fun deleteTransactionForById(
         id: Int,
     ): Int
 
@@ -73,7 +73,7 @@ public interface TransactionForDao {
             ORDER BY id ASC
         """
     )
-    public suspend fun getAllTransactionForValues(): List<TransactionForEntity>
+    suspend fun getAllTransactionForValues(): List<TransactionForEntity>
 
     /**
      * Get all transaction for values as a Flow.
@@ -87,7 +87,7 @@ public interface TransactionForDao {
             ORDER BY id ASC
         """
     )
-    public fun getAllTransactionForValuesFlow(): Flow<List<TransactionForEntity>>
+    fun getAllTransactionForValuesFlow(): Flow<List<TransactionForEntity>>
 
     /**
      * Get a transaction for value by id.
@@ -102,7 +102,7 @@ public interface TransactionForDao {
             WHERE id = :id
         """
     )
-    public suspend fun getTransactionForById(
+    suspend fun getTransactionForById(
         id: Int,
     ): TransactionForEntity?
 
@@ -114,7 +114,7 @@ public interface TransactionForDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    public suspend fun insertTransactionForValues(
+    suspend fun insertTransactionForValues(
         vararg transactionForValues: TransactionForEntity,
     ): List<Long>
 
@@ -126,7 +126,7 @@ public interface TransactionForDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Update
-    public suspend fun updateTransactionForValues(
+    suspend fun updateTransactionForValues(
         vararg transactionForValues: TransactionForEntity,
     ): Int
 }

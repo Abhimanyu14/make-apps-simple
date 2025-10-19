@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.composeemojipicker.ComposeEmojiPickerBottomS
 import com.makeappssimple.abhimanyu.composeemojipicker.Emoji
 
 @Composable
-public fun EditCategorySelectEmojiBottomSheet(
+internal fun EditCategorySelectEmojiBottomSheet(
     searchTextFieldState: TextFieldState = TextFieldState(),
     resetBottomSheetType: () -> Unit,
     updateEmoji: (updatedEmoji: String) -> Unit,

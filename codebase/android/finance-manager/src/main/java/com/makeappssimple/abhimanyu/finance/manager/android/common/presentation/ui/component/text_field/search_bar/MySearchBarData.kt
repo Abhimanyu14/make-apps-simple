@@ -20,7 +20,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class MySearchBarData(
+internal data class MySearchBarData(
     val autoFocus: Boolean = true,
     val isLoading: Boolean = false,
     val placeholderText: String = "",
@@ -28,7 +28,7 @@ public data class MySearchBarData(
 )
 
 @Immutable
-public data class MySearchBarDataV2(
+internal data class MySearchBarDataV2(
     val autoFocus: Boolean = true,
     val isLoading: Boolean = false,
     val placeholderText: String = "",

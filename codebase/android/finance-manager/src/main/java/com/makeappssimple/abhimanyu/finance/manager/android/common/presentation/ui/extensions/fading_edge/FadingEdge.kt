@@ -35,7 +35,7 @@ private object FadingEdgeConstants {
     val defaultEnd = 8.dp
 }
 
-public fun Modifier.fadingEdge(
+internal fun Modifier.fadingEdge(
     start: Dp = FadingEdgeConstants.defaultStart,
     end: Dp = FadingEdgeConstants.defaultEnd,
 ): Modifier {

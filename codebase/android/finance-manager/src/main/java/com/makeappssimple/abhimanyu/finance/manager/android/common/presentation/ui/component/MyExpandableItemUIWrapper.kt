@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.typealiases.ColumnScopedComposableContent
 
 @Composable
-public fun MyExpandableItemUIWrapper(
+internal fun MyExpandableItemUIWrapper(
     modifier: Modifier = Modifier,
     isExpanded: Boolean = false,
     isSelected: Boolean = false,

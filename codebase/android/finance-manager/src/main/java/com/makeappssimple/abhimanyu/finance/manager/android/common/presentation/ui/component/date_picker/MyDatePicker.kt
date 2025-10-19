@@ -42,7 +42,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 
 @Composable
-public fun MyDatePicker(
+internal fun MyDatePicker(
     modifier: Modifier = Modifier,
     data: MyDatePickerData,
     handleEvent: (event: MyDatePickerEvent) -> Unit = {},

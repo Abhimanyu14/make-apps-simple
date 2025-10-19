@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Composable
-public fun SettingsListItemAppVersion(
+internal fun SettingsListItemAppVersion(
     modifier: Modifier = Modifier,
     data: SettingsListItemAppVersionData,
 ) {

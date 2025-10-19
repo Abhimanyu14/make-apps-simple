@@ -32,7 +32,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
 
 @Composable
-public fun SaveButton(
+internal fun SaveButton(
     modifier: Modifier = Modifier,
     data: SaveButtonData,
     handleEvent: (event: SaveButtonEvent) -> Unit = {},

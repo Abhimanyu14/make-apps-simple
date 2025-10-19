@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Outlined.Schedule: ImageVector
+internal val Icons.Outlined.Schedule: ImageVector
     get() {
         if (_schedule != null) {
             return _schedule!!

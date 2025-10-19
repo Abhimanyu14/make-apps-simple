@@ -39,7 +39,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun BackupCard(
+internal fun BackupCard(
     modifier: Modifier = Modifier,
     data: BackupCardData,
     handleEvent: (event: BackupCardEvent) -> Unit = {},

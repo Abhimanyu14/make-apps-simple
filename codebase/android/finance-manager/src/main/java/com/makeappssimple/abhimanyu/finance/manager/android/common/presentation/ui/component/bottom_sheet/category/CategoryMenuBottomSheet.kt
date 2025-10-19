@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-public fun CategoryMenuBottomSheet(
+internal fun CategoryMenuBottomSheet(
     data: CategoryMenuBottomSheetData,
     onDeleteClick: () -> Unit,
     onEditClick: () -> Unit,

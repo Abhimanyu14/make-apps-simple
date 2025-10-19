@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Constraints
 /**
  * Source - https://stackoverflow.com/a/72428903/9636037
  */
-public fun Modifier.matchRowSize(): Modifier {
+internal fun Modifier.matchRowSize(): Modifier {
     return layout { measurable, constraints ->
         if (constraints.maxHeight == Constraints.Infinity) {
             layout(0, 0) {}

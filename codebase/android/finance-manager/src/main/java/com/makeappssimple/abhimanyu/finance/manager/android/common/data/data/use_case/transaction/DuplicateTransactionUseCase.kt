@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 
-public class DuplicateTransactionUseCase(
+internal class DuplicateTransactionUseCase(
     private val dateTimeKit: DateTimeKit,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,
     private val insertTransactionsUseCase: InsertTransactionsUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         transactionId: Int,
     ): Long {
         val transaction: Transaction? = getTransactionByIdUseCase(

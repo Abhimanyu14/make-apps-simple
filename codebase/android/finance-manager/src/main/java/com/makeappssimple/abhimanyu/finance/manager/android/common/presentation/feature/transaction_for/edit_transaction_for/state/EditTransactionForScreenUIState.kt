@@ -29,9 +29,9 @@ internal data class EditTransactionForScreenUIState(
     val titleTextFieldState: TextFieldState = TextFieldState(),
 ) : ScreenUIState
 
-public sealed class EditTransactionForScreenTitleError {
-    public data object None : EditTransactionForScreenTitleError()
-    public data object TransactionForExists :
+internal sealed class EditTransactionForScreenTitleError {
+    data object None : EditTransactionForScreenTitleError()
+    data object TransactionForExists :
         EditTransactionForScreenTitleError()
 }
 

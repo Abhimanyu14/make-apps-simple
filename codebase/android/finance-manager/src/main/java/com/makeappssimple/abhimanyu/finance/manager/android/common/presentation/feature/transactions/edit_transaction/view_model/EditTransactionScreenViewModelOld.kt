@@ -38,14 +38,14 @@ import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.util.defaultImmutableListStateIn
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.UpdateAccountBalanceAmountUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetAllCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetTitleSuggestionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetTransactionDataByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.UpdateTransactionUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.UpdateAccountBalanceAmountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetAllCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetTitleSuggestionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetTransactionDataByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -83,7 +83,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import kotlin.math.abs
 
-public class EditTransactionScreenViewModelOld(
+internal class EditTransactionScreenViewModelOld(
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
     private val coroutineScope: CoroutineScope,

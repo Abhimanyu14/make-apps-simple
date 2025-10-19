@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-public fun CategoriesGrid(
+internal fun CategoriesGrid(
     modifier: Modifier = Modifier,
     bottomPadding: Dp = 0.dp,
     topPadding: Dp = 0.dp,

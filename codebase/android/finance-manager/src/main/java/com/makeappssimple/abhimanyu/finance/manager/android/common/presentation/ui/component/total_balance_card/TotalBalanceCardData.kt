@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class TotalBalanceCardData(
+internal data class TotalBalanceCardData(
     val isBalanceVisible: Boolean = false,
     val isClickable: Boolean = false,
     val isLoading: Boolean = false,

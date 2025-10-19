@@ -21,19 +21,19 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
 
-public interface CommonDataSource {
-    public suspend fun deleteTransactionById(
+internal interface CommonDataSource {
+    suspend fun deleteTransactionById(
         id: Int,
     ): Boolean
 
-    public suspend fun insertTransaction(
+    suspend fun insertTransaction(
         accountFrom: AccountEntity?,
         accountTo: AccountEntity?,
         transaction: TransactionEntity,
         originalTransaction: TransactionEntity?,
     ): Long
 
-    public suspend fun restoreData(
+    suspend fun restoreData(
         categories: Array<CategoryEntity>,
         accounts: Array<AccountEntity>,
         transactions: Array<TransactionEntity>,

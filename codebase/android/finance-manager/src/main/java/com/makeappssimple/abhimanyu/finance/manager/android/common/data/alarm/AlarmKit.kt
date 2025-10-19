@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm
 
-public interface AlarmKit {
-    public suspend fun cancelReminderAlarm(): Boolean
+internal interface AlarmKit {
+    suspend fun cancelReminderAlarm(): Boolean
 
-    public suspend fun scheduleReminderAlarm(): Boolean
+    suspend fun scheduleReminderAlarm(): Boolean
 }

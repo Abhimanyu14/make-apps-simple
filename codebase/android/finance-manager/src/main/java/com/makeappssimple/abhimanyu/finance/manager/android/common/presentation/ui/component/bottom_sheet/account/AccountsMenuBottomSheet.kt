@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-public fun AccountsMenuBottomSheet(
+internal fun AccountsMenuBottomSheet(
     isDeleteVisible: Boolean,
     isEditVisible: Boolean,
     isSetAsDefaultVisible: Boolean,

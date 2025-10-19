@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data.PieChartData
 
 @Immutable
-public data class OverviewCardData(
+internal data class OverviewCardData(
     val isLoading: Boolean = false,
     val overviewTabSelectionIndex: Int = 0,
     val title: String = "",

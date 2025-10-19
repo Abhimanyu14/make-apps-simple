@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
 
 @Immutable
-public data class PieChartLegendItemData(
+internal data class PieChartLegendItemData(
     val text: String,
     val color: MyColor,
 )

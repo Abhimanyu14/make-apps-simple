@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.fading_edge.fadingEdge
 
 @Composable
-public fun MyHorizontalScrollingRadioGroup(
+internal fun MyHorizontalScrollingRadioGroup(
     modifier: Modifier = Modifier,
     data: MyHorizontalScrollingRadioGroupData,
     handleEvent: (event: MyHorizontalScrollingRadioGroupEvent) -> Unit = {},

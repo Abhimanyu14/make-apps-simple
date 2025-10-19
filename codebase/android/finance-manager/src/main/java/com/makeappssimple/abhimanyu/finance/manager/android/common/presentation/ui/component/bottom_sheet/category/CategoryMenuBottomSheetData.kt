@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class CategoryMenuBottomSheetData(
+internal data class CategoryMenuBottomSheetData(
     val isDeleteVisible: Boolean,
     val isEditVisible: Boolean,
     val isSetAsDefaultVisible: Boolean,

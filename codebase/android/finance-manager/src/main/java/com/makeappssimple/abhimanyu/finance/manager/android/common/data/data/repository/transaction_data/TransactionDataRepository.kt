@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction_data
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_data
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -24,35 +24,35 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public interface TransactionDataRepository {
-    public suspend fun deleteTransactionById(
+internal interface TransactionDataRepository {
+    suspend fun deleteTransactionById(
         id: Int,
     ): Boolean
 
-    public suspend fun getAllTransactionData(): ImmutableList<TransactionData>
+    suspend fun getAllTransactionData(): ImmutableList<TransactionData>
 
-    public fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>>
+    fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>>
 
-    public fun getRecentTransactionDataFlow(
+    fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<ImmutableList<TransactionData>>
 
-    public suspend fun getSearchedTransactionData(
+    suspend fun getSearchedTransactionData(
         searchText: String,
     ): ImmutableList<TransactionData>
 
-    public suspend fun getTransactionDataById(
+    suspend fun getTransactionDataById(
         id: Int,
     ): TransactionData?
 
-    public suspend fun insertTransaction(
+    suspend fun insertTransaction(
         accountFrom: Account?,
         accountTo: Account?,
         transaction: Transaction,
         originalTransaction: Transaction?,
     ): Long
 
-    public suspend fun restoreData(
+    suspend fun restoreData(
         categories: ImmutableList<Category>,
         accounts: ImmutableList<Account>,
         transactions: ImmutableList<Transaction>,

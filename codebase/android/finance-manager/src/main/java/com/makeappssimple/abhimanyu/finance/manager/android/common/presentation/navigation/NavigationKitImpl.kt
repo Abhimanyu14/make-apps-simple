@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
-public class NavigationKitImpl(
+internal class NavigationKitImpl(
     private val coroutineScope: CoroutineScope,
 ) : NavigationKit {
     private val _command: MutableSharedFlow<NavigationCommand> =

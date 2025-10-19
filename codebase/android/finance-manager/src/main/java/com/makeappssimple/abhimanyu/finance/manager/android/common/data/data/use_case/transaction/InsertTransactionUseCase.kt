@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -28,12 +28,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import java.time.LocalDate
 import java.time.LocalTime
 
-public class InsertTransactionUseCase(
+internal class InsertTransactionUseCase(
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionRepository: TransactionRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         selectedAccountFrom: Account?,
         selectedAccountTo: Account?,
         selectedCategoryId: Int?,

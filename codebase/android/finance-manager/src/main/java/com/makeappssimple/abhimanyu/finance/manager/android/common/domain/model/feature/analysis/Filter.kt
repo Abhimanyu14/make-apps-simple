@@ -20,16 +20,16 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import java.time.LocalDate
 
-public data class Filter(
+internal data class Filter(
     private val selectedExpenseCategoryIndices: List<Int> = emptyList(),
     private val selectedIncomeCategoryIndices: List<Int> = emptyList(),
     private val selectedInvestmentCategoryIndices: List<Int> = emptyList(),
     private val selectedAccountsIndices: List<Int> = emptyList(),
     private val selectedTransactionTypeIndices: List<Int> = emptyList(),
-    public val fromLocalDate: LocalDate? = null,
-    public val toLocalDate: LocalDate? = null,
+    val fromLocalDate: LocalDate? = null,
+    val toLocalDate: LocalDate? = null,
 ) {
-    public fun areFiltersSelected(): Boolean {
+    internal fun areFiltersSelected(): Boolean {
         return selectedExpenseCategoryIndices.isNotEmpty() ||
                 selectedIncomeCategoryIndices.isNotEmpty() ||
                 selectedInvestmentCategoryIndices.isNotEmpty() ||
@@ -39,7 +39,7 @@ public data class Filter(
     }
 }
 
-public fun Filter?.orEmpty(): Filter {
+internal fun Filter?.orEmpty(): Filter {
     return if (this.isNull()) {
         Filter()
     } else {

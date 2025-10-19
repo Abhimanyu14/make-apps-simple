@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Immutable
-public data class AccountsListItemHeaderData(
+internal data class AccountsListItemHeaderData(
     override val type: AccountsListItemType = AccountsListItemType.HEADER,
     val isDefault: Boolean = false,
     val isDeleteEnabled: Boolean = false,

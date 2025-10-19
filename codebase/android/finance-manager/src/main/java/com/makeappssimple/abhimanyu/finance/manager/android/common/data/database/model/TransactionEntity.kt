@@ -32,7 +32,7 @@ import kotlinx.serialization.Serializable
 
 @Entity(tableName = "transaction_table")
 @Serializable
-public data class TransactionEntity(
+internal data class TransactionEntity(
     @ColumnInfo(name = "amount")
     @EncodeDefault
     @SerialName(value = "amount")
@@ -101,7 +101,7 @@ public data class TransactionEntity(
     val transactionType: TransactionType = TransactionType.EXPENSE,
 )
 
-public fun TransactionEntity.asExternalModel(): Transaction {
+internal fun TransactionEntity.asExternalModel(): Transaction {
     return Transaction(
         amount = amount.asExternalModel(),
         categoryId = categoryId,

@@ -17,13 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.app.AppKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.app.AppKitImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.app.AppKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.app.AppKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class AppKitModule {
+internal class AppKitModule {
     @Single
     internal fun providesAppKit(
         context: Context,

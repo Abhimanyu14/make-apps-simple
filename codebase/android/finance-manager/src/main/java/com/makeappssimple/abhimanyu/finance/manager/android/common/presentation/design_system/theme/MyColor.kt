@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-public enum class MyColor {
+internal enum class MyColor {
     PRIMARY,
     ON_PRIMARY,
     PRIMARY_CONTAINER,
@@ -57,7 +57,7 @@ public enum class MyColor {
     OUTLINE,
 }
 
-public val MyColor.composeColor: Color
+internal val MyColor.composeColor: Color
     @Composable
     get() = when (this) {
         MyColor.PRIMARY -> {

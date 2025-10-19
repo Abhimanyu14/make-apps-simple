@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 
-public data class AddAccountScreenDataValidationState(
+internal data class AddAccountScreenDataValidationState(
     val isCtaButtonEnabled: Boolean = false,
     val nameError: AddAccountScreenNameError = AddAccountScreenNameError.None,
 )

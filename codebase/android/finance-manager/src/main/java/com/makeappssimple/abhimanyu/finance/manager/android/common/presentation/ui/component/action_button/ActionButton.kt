@@ -38,7 +38,7 @@ private object ActionButtonConstants {
 }
 
 @Composable
-public fun ActionButton(
+internal fun ActionButton(
     modifier: Modifier = Modifier,
     data: ActionButtonData,
     handleEvent: (event: ActionButtonEvent) -> Unit = {},

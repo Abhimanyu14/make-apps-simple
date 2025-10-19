@@ -19,8 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class TransactionForListItemEvent {
-    public data object OnClick : TransactionForListItemEvent()
-    public data object OnMoreOptionsIconButtonClick :
+internal sealed class TransactionForListItemEvent {
+    data object OnClick : TransactionForListItemEvent()
+    data object OnMoreOptionsIconButtonClick :
         TransactionForListItemEvent()
 }

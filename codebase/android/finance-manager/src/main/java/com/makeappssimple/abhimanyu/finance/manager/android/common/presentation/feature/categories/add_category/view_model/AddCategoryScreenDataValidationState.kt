@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenTitleError
 
-public data class AddCategoryScreenDataValidationState(
+internal data class AddCategoryScreenDataValidationState(
     val isCtaButtonEnabled: Boolean = false,
     val titleError: AddCategoryScreenTitleError = AddCategoryScreenTitleError.None,
 )

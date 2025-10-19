@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import kotlinx.collections.immutable.ImmutableList
 
-public fun sanitizeAccounts(
+internal fun sanitizeAccounts(
     accounts: ImmutableList<AccountEntity>,
 ): ImmutableList<AccountEntity> {
     return accounts.map {

@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.Close: ImageVector
+internal val Icons.Rounded.Close: ImageVector
     get() {
         if (_close != null) {
             return _close!!

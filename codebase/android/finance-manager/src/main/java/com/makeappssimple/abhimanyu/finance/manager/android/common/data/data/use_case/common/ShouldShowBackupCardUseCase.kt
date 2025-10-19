@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-public class ShouldShowBackupCardUseCase(
+internal class ShouldShowBackupCardUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
-    public operator fun invoke(): Flow<Boolean> {
+    operator fun invoke(): Flow<Boolean> {
         return financeManagerPreferencesRepository.getDataTimestampFlow().map {
             it.isNotNull() && (it.lastBackup < it.lastChange)
         }

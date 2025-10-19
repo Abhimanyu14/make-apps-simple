@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class TransactionsSortBottomSheetData(
+internal data class TransactionsSortBottomSheetData(
     val data: TransactionsSortBottomSheetItemData,
     val handleEvent: (event: TransactionsSortBottomSheetItemEvent) -> Unit = {},
 )

@@ -55,14 +55,14 @@ import java.util.concurrent.Executors
     IntListConverter::class,
     CategoryConverter::class,
 )
-public abstract class FinanceManagerRoomDatabase : RoomDatabase() {
-    public abstract fun accountDao(): AccountDao
-    public abstract fun categoryDao(): CategoryDao
-    public abstract fun transactionDao(): TransactionDao
-    public abstract fun transactionDataDao(): TransactionDataDao
-    public abstract fun transactionForDao(): TransactionForDao
+internal abstract class FinanceManagerRoomDatabase : RoomDatabase() {
+    abstract fun accountDao(): AccountDao
+    abstract fun categoryDao(): CategoryDao
+    abstract fun transactionDao(): TransactionDao
+    abstract fun transactionDataDao(): TransactionDataDao
+    abstract fun transactionForDao(): TransactionForDao
 
-    public companion object {
+    companion object {
         @Volatile
         private var instance: FinanceManagerRoomDatabase? = null
 
@@ -70,7 +70,7 @@ public abstract class FinanceManagerRoomDatabase : RoomDatabase() {
          * Reference
          * https://github.com/android/app-actions-samples/blob/fea0f48a6d7f1c43d47c3ad14bfd11ace4b5629c/fitness-biis/starter/app/src/main/java/com/devrel/android/fitactions/model/FitDatabase.kt#L34
          */
-        public fun getDatabase(
+        internal fun getDatabase(
             context: Context,
             initialDatabasePopulator: InitialDatabasePopulator? = null,
         ): FinanceManagerRoomDatabase {

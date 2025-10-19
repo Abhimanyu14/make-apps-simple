@@ -16,6 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants
 
-public object CurrencyCodeConstants {
-    public const val INR: String = "INR"
+internal object CurrencyCodeConstants {
+    const val INR: String = "INR"
 }

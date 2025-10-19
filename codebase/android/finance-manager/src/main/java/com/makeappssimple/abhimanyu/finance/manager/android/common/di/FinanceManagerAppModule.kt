@@ -59,4 +59,4 @@ import org.koin.core.annotation.Module
     ],
 )
 @ComponentScan("com.makeappssimple.abhimanyu.finance.manager.android")
-public class FinanceManagerAppModule
+internal class FinanceManagerAppModule

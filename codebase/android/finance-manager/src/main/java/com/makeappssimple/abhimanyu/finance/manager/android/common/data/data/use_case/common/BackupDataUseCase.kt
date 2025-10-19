@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common
 
 import android.net.Uri
 import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.BackupData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.DatabaseData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.DatastoreData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetAllCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetAllTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.BackupData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatabaseData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatastoreData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetAllCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
@@ -35,7 +35,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
 
-public class BackupDataUseCase(
+internal class BackupDataUseCase(
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
@@ -44,7 +44,7 @@ public class BackupDataUseCase(
     private val getAllTransactionsUseCase: GetAllTransactionsUseCase,
     private val jsonWriterKit: JsonWriterKit,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         uri: Uri,
     ): Boolean {
         val backupData = BackupData(

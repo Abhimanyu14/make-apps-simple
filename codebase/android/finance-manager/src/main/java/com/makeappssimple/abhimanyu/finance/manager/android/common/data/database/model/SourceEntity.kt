@@ -36,7 +36,7 @@ import kotlinx.serialization.Serializable
 )
 @Entity(tableName = "source_table")
 @Serializable
-public data class SourceEntity(
+internal data class SourceEntity(
     @EncodeDefault
     @ColumnInfo(name = "balance_amount")
     @SerialName(value = "balance_amount")

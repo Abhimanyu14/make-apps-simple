@@ -64,7 +64,7 @@ private val overviewTextHorizontalPadding = 12.dp
 private val overviewTextVerticalPadding = 8.dp
 
 @Composable
-public fun OverviewTab(
+internal fun OverviewTab(
     modifier: Modifier = Modifier,
     data: OverviewTabData,
     handleEvent: (event: OverviewTabEvent) -> Unit = {},
@@ -113,7 +113,7 @@ public fun OverviewTab(
 }
 
 @Composable
-public fun OverviewTabText(
+internal fun OverviewTabText(
     modifier: Modifier = Modifier,
     text: String,
     textStyle: TextStyle,

@@ -31,7 +31,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun MySelectionModeTopAppBar(
+internal fun MySelectionModeTopAppBar(
     modifier: Modifier = Modifier,
     appBarActions: RowScopedComposableContent = {},
     onNavigationButtonClick: () -> Unit = {},
@@ -46,7 +46,7 @@ public fun MySelectionModeTopAppBar(
 }
 
 @Composable
-public fun MySelectionModeTopAppBarUI(
+internal fun MySelectionModeTopAppBarUI(
     modifier: Modifier = Modifier,
     appBarActions: RowScopedComposableContent,
     onNavigationButtonClick: () -> Unit,

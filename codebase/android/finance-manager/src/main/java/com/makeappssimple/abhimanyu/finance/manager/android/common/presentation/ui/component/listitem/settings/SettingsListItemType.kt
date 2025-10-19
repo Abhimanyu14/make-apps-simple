@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.settings
 
-public enum class SettingsListItemType(
-    public val title: String,
+internal enum class SettingsListItemType(
+    val title: String,
 ) {
     APP_VERSION(
         title = "App Version"

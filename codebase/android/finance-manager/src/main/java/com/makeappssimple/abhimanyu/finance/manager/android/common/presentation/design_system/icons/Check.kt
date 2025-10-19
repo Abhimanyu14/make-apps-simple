@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Filled.Check: ImageVector
+internal val Icons.Filled.Check: ImageVector
     get() {
         if (_check != null) {
             return _check!!

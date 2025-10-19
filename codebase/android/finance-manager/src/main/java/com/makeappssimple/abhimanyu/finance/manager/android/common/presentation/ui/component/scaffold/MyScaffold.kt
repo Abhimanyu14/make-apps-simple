@@ -65,7 +65,7 @@ private object MyScaffoldConstants {
 }
 
 @Composable
-public fun MyScaffold(
+internal fun MyScaffold(
     modifier: Modifier = Modifier,
 
     // ModalBottomSheetLayout

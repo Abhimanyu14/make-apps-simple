@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -22,10 +22,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.plus
 
-public class GetMaxRefundAmountUseCase(
+internal class GetMaxRefundAmountUseCase(
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         id: Int,
     ): Amount? {
         val originalTransactionData: TransactionData =

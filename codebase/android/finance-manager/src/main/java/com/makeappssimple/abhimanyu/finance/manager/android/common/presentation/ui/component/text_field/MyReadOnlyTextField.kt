@@ -30,7 +30,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
 
 @Composable
-public fun MyReadOnlyTextField(
+internal fun MyReadOnlyTextField(
     modifier: Modifier = Modifier,
     data: MyReadOnlyTextFieldData,
     handleEvent: (event: MyReadOnlyTextFieldEvent) -> Unit = {},

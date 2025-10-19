@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
 
 @Composable
-public fun MyBottomSheetList(
+internal fun MyBottomSheetList(
     modifier: Modifier = Modifier,
     data: MyBottomSheetListData,
 ) {

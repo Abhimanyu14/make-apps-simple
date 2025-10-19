@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun AccountsDeleteConfirmationBottomSheet(
+internal fun AccountsDeleteConfirmationBottomSheet(
     handleEvent: (event: AccountsDeleteConfirmationBottomSheetEvent) -> Unit = {},
 ) {
     MyConfirmationBottomSheet(

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MyConfirmationBottomSheetEvent {
-    public data object OnNegativeButtonClick : MyConfirmationBottomSheetEvent()
-    public data object OnPositiveButtonClick : MyConfirmationBottomSheetEvent()
+internal sealed class MyConfirmationBottomSheetEvent {
+    data object OnNegativeButtonClick : MyConfirmationBottomSheetEvent()
+    data object OnPositiveButtonClick : MyConfirmationBottomSheetEvent()
 }

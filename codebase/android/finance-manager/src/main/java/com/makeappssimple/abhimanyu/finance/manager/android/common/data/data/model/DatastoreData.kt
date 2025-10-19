@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
@@ -24,7 +24,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class DatastoreData(
+internal data class DatastoreData(
     @SerialName(value = "default_data_id")
     val defaultDataId: DefaultDataId = DefaultDataId(),
 

@@ -41,7 +41,7 @@ private object AccountsListItemHeaderConstants {
 }
 
 @Composable
-public fun AccountsListItemHeader(
+internal fun AccountsListItemHeader(
     modifier: Modifier = Modifier,
     data: AccountsListItemHeaderData,
 ) {
@@ -100,7 +100,7 @@ private fun AccountsListItemHeaderUI(
 }
 
 @Composable
-public fun AccountsListItemHeaderLoadingUI(
+internal fun AccountsListItemHeaderLoadingUI(
     modifier: Modifier = Modifier,
 ) {
     Box(

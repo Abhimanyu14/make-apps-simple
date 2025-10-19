@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Outlined.Keyboard: ImageVector
+internal val Icons.Outlined.Keyboard: ImageVector
     get() {
         if (_keyboard != null) {
             return _keyboard!!

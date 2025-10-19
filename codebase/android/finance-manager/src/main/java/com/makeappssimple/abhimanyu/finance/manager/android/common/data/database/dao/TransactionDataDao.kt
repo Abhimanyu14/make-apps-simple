@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for TransactionDataEntity combining multiple tables.
  */
 @Dao
-public interface TransactionDataDao {
+internal interface TransactionDataDao {
     /**
      * Get all transaction data as a list, ordered by timestamp descending.
      * @return List of all transaction data
@@ -41,7 +41,7 @@ public interface TransactionDataDao {
         """
     )
     @Transaction
-    public suspend fun getAllTransactionData(): List<TransactionDataEntity>
+    suspend fun getAllTransactionData(): List<TransactionDataEntity>
 
     /**
      * Get all transaction data as a Flow, ordered by timestamp descending.
@@ -56,7 +56,7 @@ public interface TransactionDataDao {
         """
     )
     @Transaction
-    public fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
+    fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
 
     /**
      * Get recent transaction data as a Flow.
@@ -73,7 +73,7 @@ public interface TransactionDataDao {
         """
     )
     @Transaction
-    public fun getRecentTransactionDataFlow(
+    fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<List<TransactionDataEntity>>
 
@@ -95,7 +95,7 @@ public interface TransactionDataDao {
         """
     )
     @Transaction
-    public suspend fun getSearchedTransactionData(
+    suspend fun getSearchedTransactionData(
         searchText: String,
     ): List<TransactionDataEntity>
 
@@ -113,7 +113,7 @@ public interface TransactionDataDao {
         """
     )
     @Transaction
-    public suspend fun getTransactionDataById(
+    suspend fun getTransactionDataById(
         id: Int,
     ): TransactionDataEntity?
 }

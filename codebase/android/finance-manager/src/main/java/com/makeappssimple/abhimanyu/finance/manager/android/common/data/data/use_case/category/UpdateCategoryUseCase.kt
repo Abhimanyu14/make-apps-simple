@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 
-public class UpdateCategoryUseCase(
+internal class UpdateCategoryUseCase(
     private val updateCategoriesUseCase: UpdateCategoriesUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         currentCategory: Category,
         emoji: String,
         title: String,

@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Composable
-public fun SettingsListItemContent(
+internal fun SettingsListItemContent(
     modifier: Modifier = Modifier,
     data: SettingsListItemContentData,
     handleEvent: (event: SettingsListItemContentEvent) -> Unit = {},

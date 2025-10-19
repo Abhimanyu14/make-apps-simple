@@ -18,8 +18,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 
-public enum class SortOption(
-    public val title: String,
+internal enum class SortOption(
+    val title: String,
 ) {
     AMOUNT_ASC(
         title = "Amount Asc",
@@ -35,7 +35,7 @@ public enum class SortOption(
     ),
 }
 
-public fun SortOption?.orDefault(): SortOption {
+internal fun SortOption?.orDefault(): SortOption {
     return if (this.isNull()) {
         SortOption.LATEST_FIRST
     } else {

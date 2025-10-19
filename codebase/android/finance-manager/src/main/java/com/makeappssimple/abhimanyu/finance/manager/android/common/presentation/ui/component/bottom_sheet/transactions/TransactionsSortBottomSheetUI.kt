@@ -43,7 +43,7 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-public fun TransactionsSortBottomSheetUI(
+internal fun TransactionsSortBottomSheetUI(
     modifier: Modifier = Modifier,
     data: ImmutableList<TransactionsSortBottomSheetData>,
 ) {

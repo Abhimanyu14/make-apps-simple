@@ -37,7 +37,7 @@ private object DateTimeUtilImplConstants {
     const val LAST_MONTH_OF_YEAR = 12
 }
 
-public class DateTimeKitImpl() : DateTimeKit {
+internal class DateTimeKitImpl() : DateTimeKit {
     override fun getCurrentFormattedDateAndTime(): String {
         return getFormattedDateAndTime()
     }
@@ -333,7 +333,7 @@ public class DateTimeKitImpl() : DateTimeKit {
     }
 }
 
-public fun getLocalDate(
+internal fun getLocalDate(
     timestamp: Long,
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): LocalDate {
@@ -345,7 +345,7 @@ public fun getLocalDate(
         .toLocalDate()
 }
 
-public fun getTimestamp(
+internal fun getTimestamp(
     localDate: LocalDate,
     zoneId: ZoneId = getSystemDefaultZoneId(),
 ): Long {
@@ -354,6 +354,6 @@ public fun getTimestamp(
         .toEpochMilli()
 }
 
-public fun getSystemDefaultZoneId(): ZoneId {
+internal fun getSystemDefaultZoneId(): ZoneId {
     return ZoneId.systemDefault()
 }

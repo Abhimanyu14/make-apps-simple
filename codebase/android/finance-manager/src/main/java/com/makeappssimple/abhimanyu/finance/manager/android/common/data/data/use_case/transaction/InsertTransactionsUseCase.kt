@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import kotlinx.collections.immutable.ImmutableList
 
-public class InsertTransactionsUseCase(
+internal class InsertTransactionsUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionRepository: TransactionRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         vararg transactions: Transaction,
     ): ImmutableList<Long> {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()

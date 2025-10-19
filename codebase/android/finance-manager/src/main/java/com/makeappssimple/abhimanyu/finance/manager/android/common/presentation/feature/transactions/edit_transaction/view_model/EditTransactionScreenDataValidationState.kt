@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.view_model
 
-public data class EditTransactionScreenDataValidationState(
+internal data class EditTransactionScreenDataValidationState(
     val isCtaButtonEnabled: Boolean = false,
     val amountErrorText: String? = null,
 )

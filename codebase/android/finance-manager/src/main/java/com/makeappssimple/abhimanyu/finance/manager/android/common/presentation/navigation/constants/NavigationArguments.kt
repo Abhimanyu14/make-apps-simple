@@ -16,11 +16,11 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants
 
-public object NavigationArguments {
-    public const val ACCOUNT_ID: String = "accountId"
-    public const val CATEGORY_ID: String = "categoryId"
-    public const val TRANSACTION_FOR_ID: String = "transactionForId"
-    public const val TRANSACTION_ID: String = "transactionId"
-    public const val TRANSACTION_TYPE: String = "transactionType"
-    public const val WEBPAGE_URL: String = "webpageUrl"
+internal object NavigationArguments {
+    const val ACCOUNT_ID: String = "accountId"
+    const val CATEGORY_ID: String = "categoryId"
+    const val TRANSACTION_FOR_ID: String = "transactionForId"
+    const val TRANSACTION_ID: String = "transactionId"
+    const val TRANSACTION_TYPE: String = "transactionType"
+    const val WEBPAGE_URL: String = "webpageUrl"
 }

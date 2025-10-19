@@ -52,7 +52,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun TransactionListItem(
+internal fun TransactionListItem(
     modifier: Modifier = Modifier,
     data: TransactionListItemData,
     handleEvent: (event: TransactionListItemEvent) -> Unit = {},

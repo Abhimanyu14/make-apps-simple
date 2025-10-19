@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class TransactionsSortBottomSheetItemEvent {
-    public data object OnClick : TransactionsSortBottomSheetItemEvent()
+internal sealed class TransactionsSortBottomSheetItemEvent {
+    data object OnClick : TransactionsSortBottomSheetItemEvent()
 }

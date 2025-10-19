@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class BackupData(
+internal data class BackupData(
     @SerialName(value = "last_backup_time")
     val lastBackupTime: String? = null,
 

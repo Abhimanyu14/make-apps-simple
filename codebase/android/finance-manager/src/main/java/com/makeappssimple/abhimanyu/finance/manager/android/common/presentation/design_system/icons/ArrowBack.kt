@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.AutoMirrored.Rounded.ArrowBack: ImageVector
+internal val Icons.AutoMirrored.Rounded.ArrowBack: ImageVector
     get() {
         if (_arrowBack != null) {
             return _arrowBack!!

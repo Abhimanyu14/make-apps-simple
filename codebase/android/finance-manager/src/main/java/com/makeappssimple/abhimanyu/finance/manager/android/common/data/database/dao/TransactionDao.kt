@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for transaction_table.
  */
 @Dao
-public interface TransactionDao {
+internal interface TransactionDao {
     /**
      * Check if an account is used in any transactions.
      * @param accountId ID of the account to check
@@ -47,7 +47,7 @@ public interface TransactionDao {
             )
         """
     )
-    public suspend fun checkIfAccountIsUsedInTransactions(
+    suspend fun checkIfAccountIsUsedInTransactions(
         accountId: Int,
     ): Boolean
 
@@ -66,7 +66,7 @@ public interface TransactionDao {
             )
         """
     )
-    public suspend fun checkIfCategoryIsUsedInTransactions(
+    suspend fun checkIfCategoryIsUsedInTransactions(
         categoryId: Int,
     ): Boolean
 
@@ -85,7 +85,7 @@ public interface TransactionDao {
             )
         """
     )
-    public suspend fun checkIfTransactionForIsUsedInTransactions(
+    suspend fun checkIfTransactionForIsUsedInTransactions(
         transactionForId: Int,
     ): Boolean
 
@@ -100,7 +100,7 @@ public interface TransactionDao {
             FROM transaction_table
         """
     )
-    public suspend fun deleteAllTransactions(): Int
+    suspend fun deleteAllTransactions(): Int
 
     /**
      * Delete a transaction by id.
@@ -115,7 +115,7 @@ public interface TransactionDao {
             WHERE id = :id
         """
     )
-    public suspend fun deleteTransactionById(
+    suspend fun deleteTransactionById(
         id: Int,
     ): Int
 
@@ -131,7 +131,7 @@ public interface TransactionDao {
             ORDER BY transaction_timestamp DESC
         """
     )
-    public suspend fun getAllTransactions(): List<TransactionEntity>
+    suspend fun getAllTransactions(): List<TransactionEntity>
 
     /**
      * Get all transactions as a Flow, ordered by timestamp descending.
@@ -145,7 +145,7 @@ public interface TransactionDao {
             ORDER BY transaction_timestamp DESC
         """
     )
-    public fun getAllTransactionsFlow(): Flow<List<TransactionEntity>>
+    fun getAllTransactionsFlow(): Flow<List<TransactionEntity>>
 
     /**
      * Get title suggestions for a category based on existing transactions.
@@ -166,7 +166,7 @@ public interface TransactionDao {
             LIMIT :numberOfSuggestions
         """
     )
-    public suspend fun getTitleSuggestions(
+    suspend fun getTitleSuggestions(
         categoryId: Int,
         numberOfSuggestions: Int,
         enteredTitle: String,
@@ -185,7 +185,7 @@ public interface TransactionDao {
             WHERE id = :id
         """
     )
-    public suspend fun getTransactionById(
+    suspend fun getTransactionById(
         id: Int,
     ): TransactionEntity?
 
@@ -204,7 +204,7 @@ public interface TransactionDao {
             ORDER BY transaction_timestamp DESC
         """
     )
-    public suspend fun getTransactionsBetweenTimestamps(
+    suspend fun getTransactionsBetweenTimestamps(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): List<TransactionEntity>
@@ -224,7 +224,7 @@ public interface TransactionDao {
             ORDER BY transaction_timestamp DESC
         """
     )
-    public fun getTransactionsBetweenTimestampsFlow(
+    fun getTransactionsBetweenTimestampsFlow(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): Flow<List<TransactionEntity>>
@@ -237,7 +237,7 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    public suspend fun insertTransaction(
+    suspend fun insertTransaction(
         transaction: TransactionEntity,
     ): Long
 
@@ -249,7 +249,7 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    public suspend fun insertTransactions(
+    suspend fun insertTransactions(
         vararg transactions: TransactionEntity,
     ): List<Long>
 
@@ -261,7 +261,7 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Update
-    public suspend fun updateTransaction(
+    suspend fun updateTransaction(
         transaction: TransactionEntity,
     ): Int
 
@@ -273,7 +273,7 @@ public interface TransactionDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Update
-    public suspend fun updateTransactions(
+    suspend fun updateTransactions(
         vararg transactions: TransactionEntity,
     ): Int
 }

@@ -26,17 +26,17 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Immutable
-public data class MyListItemSectionTitleDataAndEventHandler(
+internal data class MyListItemSectionTitleDataAndEventHandler(
     val data: MyListItemSectionTitleData,
 )
 
 @Immutable
-public data class MyListItemSectionTitleData(
+internal data class MyListItemSectionTitleData(
     val text: String,
 )
 
 @Composable
-public fun MyListItemSectionTitle(
+internal fun MyListItemSectionTitle(
     modifier: Modifier = Modifier,
     data: MyListItemSectionTitleData,
 ) {

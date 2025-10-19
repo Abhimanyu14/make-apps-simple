@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
 @Immutable
-public data class PieChartItemData(
+internal data class PieChartItemData(
     val value: Float,
     val color: Color,
 )

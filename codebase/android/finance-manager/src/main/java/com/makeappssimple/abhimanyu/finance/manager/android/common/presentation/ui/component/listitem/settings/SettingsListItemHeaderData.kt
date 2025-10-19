@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.annotation.StringRes
 
-public data class SettingsListItemHeaderData(
+internal data class SettingsListItemHeaderData(
     override val type: SettingsListItemType = SettingsListItemType.HEADER,
     @StringRes val textStringResourceId: Int,
 ) : SettingsListItemData

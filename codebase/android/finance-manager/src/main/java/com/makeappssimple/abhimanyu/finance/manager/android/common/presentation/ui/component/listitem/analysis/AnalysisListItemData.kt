@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class AnalysisListItemData(
+internal data class AnalysisListItemData(
     val maxEndTextWidth: Int = 0,
     val amountText: String,
     val emoji: String,

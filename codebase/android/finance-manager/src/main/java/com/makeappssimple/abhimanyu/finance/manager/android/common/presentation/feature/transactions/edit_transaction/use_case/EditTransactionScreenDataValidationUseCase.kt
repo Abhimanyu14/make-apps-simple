@@ -26,8 +26,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.view_model.EditTransactionScreenDataValidationState
 
-public class EditTransactionScreenDataValidationUseCase() {
-    public operator fun invoke(
+internal class EditTransactionScreenDataValidationUseCase() {
+    operator fun invoke(
         accountFrom: Account?,
         accountTo: Account?,
         maxRefundAmount: Amount?,

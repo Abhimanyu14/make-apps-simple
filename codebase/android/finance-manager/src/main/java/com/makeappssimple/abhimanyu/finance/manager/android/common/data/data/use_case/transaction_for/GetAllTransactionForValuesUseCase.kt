@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction_for
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction_for.TransactionForRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 
-public class GetAllTransactionForValuesUseCase(
+internal class GetAllTransactionForValuesUseCase(
     private val transactionForRepository: TransactionForRepository,
 ) {
-    public suspend operator fun invoke(): ImmutableList<TransactionFor> {
+    suspend operator fun invoke(): ImmutableList<TransactionFor> {
         return transactionForRepository.getAllTransactionForValues()
     }
 }

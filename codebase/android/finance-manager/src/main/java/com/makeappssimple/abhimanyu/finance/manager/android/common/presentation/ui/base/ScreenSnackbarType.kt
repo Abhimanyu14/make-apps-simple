@@ -16,4 +16,4 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base
 
-public interface ScreenSnackbarType
+internal interface ScreenSnackbarType

@@ -23,7 +23,7 @@ import androidx.work.WorkerParameters
 import org.koin.android.annotation.KoinWorker
 
 @KoinWorker
-public class InitialDatabasePopulationWorker(
+internal class InitialDatabasePopulationWorker(
     context: Context,
     workerParams: WorkerParameters,
 ) : CoroutineWorker(

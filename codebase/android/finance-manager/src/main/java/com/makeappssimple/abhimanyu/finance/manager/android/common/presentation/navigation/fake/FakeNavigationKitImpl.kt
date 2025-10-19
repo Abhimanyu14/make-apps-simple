@@ -22,7 +22,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
-public class FakeNavigationKitImpl : NavigationKit {
+internal class FakeNavigationKitImpl : NavigationKit {
     private val _command: MutableSharedFlow<NavigationCommand> =
         MutableSharedFlow()
     override val command: SharedFlow<NavigationCommand> = _command

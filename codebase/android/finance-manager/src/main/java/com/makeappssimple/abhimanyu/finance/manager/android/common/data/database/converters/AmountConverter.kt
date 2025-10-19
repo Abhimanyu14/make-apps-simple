@@ -22,9 +22,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
-public class AmountConverter {
+internal class AmountConverter {
     @TypeConverter
-    public fun stringToAmount(
+    internal fun stringToAmount(
         value: String?,
     ): AmountEntity? {
         if (value.isNullOrBlank()) {
@@ -48,7 +48,7 @@ public class AmountConverter {
     }
 
     @TypeConverter
-    public fun amountToString(
+    internal fun amountToString(
         amount: AmountEntity?,
     ): String {
         if (amount.isNull()) {

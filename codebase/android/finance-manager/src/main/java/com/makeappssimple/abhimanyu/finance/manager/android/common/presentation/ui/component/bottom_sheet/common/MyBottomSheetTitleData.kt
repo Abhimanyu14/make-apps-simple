@@ -20,6 +20,6 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class MyBottomSheetTitleData(
+internal data class MyBottomSheetTitleData(
     @StringRes val textStringResourceId: Int,
 )

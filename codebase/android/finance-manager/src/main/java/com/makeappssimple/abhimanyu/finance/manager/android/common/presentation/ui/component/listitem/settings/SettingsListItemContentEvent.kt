@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class SettingsListItemContentEvent {
-    public data object OnClick : SettingsListItemContentEvent()
-    public data object OnCheckedChange : SettingsListItemContentEvent()
+internal sealed class SettingsListItemContentEvent {
+    data object OnClick : SettingsListItemContentEvent()
+    data object OnCheckedChange : SettingsListItemContentEvent()
 }

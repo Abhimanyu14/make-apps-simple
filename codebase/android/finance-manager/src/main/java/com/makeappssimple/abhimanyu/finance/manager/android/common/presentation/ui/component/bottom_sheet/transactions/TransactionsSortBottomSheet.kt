@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-public fun TransactionsSortBottomSheet(
+internal fun TransactionsSortBottomSheet(
     selectedSortOptionIndex: Int,
     sortOptions: ImmutableList<SortOption>,
     resetBottomSheetType: () -> Unit,

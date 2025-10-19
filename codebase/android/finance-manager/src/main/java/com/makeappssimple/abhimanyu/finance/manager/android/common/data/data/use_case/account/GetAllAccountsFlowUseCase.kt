@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account.AccountRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public class GetAllAccountsFlowUseCase(
+internal class GetAllAccountsFlowUseCase(
     private val accountRepository: AccountRepository,
 ) {
-    public operator fun invoke(): Flow<ImmutableList<Account>> {
+    operator fun invoke(): Flow<ImmutableList<Account>> {
         return accountRepository.getAllAccountsFlow()
     }
 }

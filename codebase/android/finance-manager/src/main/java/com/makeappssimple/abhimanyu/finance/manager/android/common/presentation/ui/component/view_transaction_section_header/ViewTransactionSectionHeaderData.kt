@@ -20,6 +20,6 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class ViewTransactionSectionHeaderData(
+internal data class ViewTransactionSectionHeaderData(
     @StringRes val textStringResourceId: Int,
 )

@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class MyBottomSheetListData(
+internal data class MyBottomSheetListData(
     val items: List<MyBottomSheetListItemDataAndEventHandler>,
 )

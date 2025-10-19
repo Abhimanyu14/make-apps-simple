@@ -34,7 +34,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
 
 @Composable
-public fun MyConfirmationBottomSheet(
+internal fun MyConfirmationBottomSheet(
     modifier: Modifier = Modifier,
     data: MyConfirmationBottomSheetData,
     handleEvent: (event: MyConfirmationBottomSheetEvent) -> Unit = {},

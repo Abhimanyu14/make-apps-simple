@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common
 
 import com.makeappssimple.abhimanyu.common.core.extensions.filterIsInstance
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.UpdateAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetAllTransactionDataUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.UpdateAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.updateBalanceAmount
@@ -30,13 +30,13 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 
-public class RecalculateTotalUseCase(
+internal class RecalculateTotalUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
     private val getAllTransactionDataUseCase: GetAllTransactionDataUseCase,
     private val updateAccountsUseCase: UpdateAccountsUseCase,
 ) {
-    public suspend operator fun invoke() {
+    suspend operator fun invoke() {
         return coroutineScope {
             val deferredList = awaitAll(
                 async {

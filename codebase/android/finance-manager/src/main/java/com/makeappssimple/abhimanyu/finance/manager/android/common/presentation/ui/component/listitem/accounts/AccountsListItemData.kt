@@ -16,6 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts
 
-public sealed interface AccountsListItemData {
-    public val type: AccountsListItemType
+internal sealed interface AccountsListItemData {
+    val type: AccountsListItemType
 }

@@ -33,8 +33,8 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.FileNotFoundException
 
-public interface InitialDatabasePopulator {
-    public fun populateInitialDatabaseData(
+internal interface InitialDatabasePopulator {
+    fun populateInitialDatabaseData(
         financeManagerRoomDatabase: FinanceManagerRoomDatabase,
     )
 }

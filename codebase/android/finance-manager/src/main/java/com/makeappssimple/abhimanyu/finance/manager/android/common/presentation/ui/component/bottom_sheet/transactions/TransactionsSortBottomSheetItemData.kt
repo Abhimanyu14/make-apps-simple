@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
 
 @Immutable
-public data class TransactionsSortBottomSheetItemData(
+internal data class TransactionsSortBottomSheetItemData(
     val sortOption: SortOption,
     val isSelected: Boolean,
 )

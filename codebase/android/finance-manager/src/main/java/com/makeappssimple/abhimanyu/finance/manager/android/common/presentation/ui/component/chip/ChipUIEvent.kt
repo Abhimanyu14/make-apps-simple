@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class ChipUIEvent {
-    public data object OnClick : ChipUIEvent()
+internal sealed class ChipUIEvent {
+    data object OnClick : ChipUIEvent()
 }

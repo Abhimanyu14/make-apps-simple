@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MyReadOnlyTextFieldEvent {
-    public data object OnClick : MyReadOnlyTextFieldEvent()
+internal sealed class MyReadOnlyTextFieldEvent {
+    data object OnClick : MyReadOnlyTextFieldEvent()
 }

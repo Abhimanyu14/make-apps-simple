@@ -39,9 +39,9 @@ internal data class EditCategoryScreenUIState(
     val titleTextFieldState: TextFieldState = TextFieldState(),
 ) : ScreenUIState
 
-public sealed class EditCategoryScreenTitleError {
-    public data object CategoryExists : EditCategoryScreenTitleError()
-    public data object None : EditCategoryScreenTitleError()
+internal sealed class EditCategoryScreenTitleError {
+    data object CategoryExists : EditCategoryScreenTitleError()
+    data object None : EditCategoryScreenTitleError()
 }
 
 internal val EditCategoryScreenTitleError.stringResourceId: Int?

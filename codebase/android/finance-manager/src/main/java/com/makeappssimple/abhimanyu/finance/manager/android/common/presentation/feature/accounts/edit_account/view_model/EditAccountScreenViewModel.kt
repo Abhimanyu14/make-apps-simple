@@ -26,8 +26,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAccountByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.UpdateAccountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAccountByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.UpdateAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData

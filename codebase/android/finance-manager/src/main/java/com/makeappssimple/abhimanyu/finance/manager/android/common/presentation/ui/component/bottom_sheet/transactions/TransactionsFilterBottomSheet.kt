@@ -26,7 +26,7 @@ import kotlinx.collections.immutable.ImmutableList
 import java.time.LocalDate
 
 @Composable
-public fun TransactionsFilterBottomSheet(
+internal fun TransactionsFilterBottomSheet(
     expenseCategories: ImmutableList<Category>,
     incomeCategories: ImmutableList<Category>,
     investmentCategories: ImmutableList<Category>,

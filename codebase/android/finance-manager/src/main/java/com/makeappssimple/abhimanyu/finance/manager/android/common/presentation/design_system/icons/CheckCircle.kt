@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.CheckCircle: ImageVector
+internal val Icons.Rounded.CheckCircle: ImageVector
     get() {
         if (_checkCircle != null) {
             return _checkCircle!!

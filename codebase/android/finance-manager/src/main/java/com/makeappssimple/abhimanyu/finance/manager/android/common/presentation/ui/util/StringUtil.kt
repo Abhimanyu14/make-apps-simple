@@ -26,7 +26,7 @@ private object DefaultConstants {
     const val TRANSACTION_FOR = "Self"
 }
 
-public fun isDefaultExpenseCategory(
+internal fun isDefaultExpenseCategory(
     category: String,
 ): Boolean {
     return category.trim().equalsIgnoringCase(
@@ -34,7 +34,7 @@ public fun isDefaultExpenseCategory(
     )
 }
 
-public fun isDefaultIncomeCategory(
+internal fun isDefaultIncomeCategory(
     category: String,
 ): Boolean {
     return category.trim().equalsIgnoringCase(
@@ -42,7 +42,7 @@ public fun isDefaultIncomeCategory(
     )
 }
 
-public fun isDefaultInvestmentCategory(
+internal fun isDefaultInvestmentCategory(
     category: String,
 ): Boolean {
     return category.trim().equalsIgnoringCase(
@@ -50,7 +50,7 @@ public fun isDefaultInvestmentCategory(
     )
 }
 
-public fun isDefaultAccount(
+internal fun isDefaultAccount(
     account: String,
 ): Boolean {
     return account.trim().equalsIgnoringCase(
@@ -58,7 +58,7 @@ public fun isDefaultAccount(
     )
 }
 
-public fun isDefaultTransactionFor(
+internal fun isDefaultTransactionFor(
     transactionFor: String,
 ): Boolean {
     return transactionFor.trim().equalsIgnoringCase(

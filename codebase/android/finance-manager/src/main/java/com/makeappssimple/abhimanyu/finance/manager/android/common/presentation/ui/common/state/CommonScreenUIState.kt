@@ -34,7 +34,7 @@ import androidx.compose.ui.platform.SoftwareKeyboardController
 import kotlinx.coroutines.CoroutineScope
 
 @Immutable
-public data class CommonScreenUIState(
+internal data class CommonScreenUIState(
     val coroutineScope: CoroutineScope,
     val focusManager: FocusManager,
     val focusRequester: FocusRequester,
@@ -44,7 +44,7 @@ public data class CommonScreenUIState(
 )
 
 @Composable
-public fun rememberCommonScreenUIState(
+internal fun rememberCommonScreenUIState(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     focusManager: FocusManager = LocalFocusManager.current,
     focusRequester: FocusRequester = remember {

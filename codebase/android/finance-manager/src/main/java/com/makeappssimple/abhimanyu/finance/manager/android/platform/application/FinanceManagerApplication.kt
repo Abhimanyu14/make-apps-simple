@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.platform.applicatio
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification.NotificationConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.di.initKoin
 import org.koin.android.ext.koin.androidContext
 

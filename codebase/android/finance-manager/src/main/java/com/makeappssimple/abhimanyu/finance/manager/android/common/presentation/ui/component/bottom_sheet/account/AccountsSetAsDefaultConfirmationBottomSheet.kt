@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun AccountsSetAsDefaultConfirmationBottomSheet(
+internal fun AccountsSetAsDefaultConfirmationBottomSheet(
     handleEvent: (event: AccountsSetAsDefaultConfirmationBottomSheetEvent) -> Unit = {},
 ) {
     MyConfirmationBottomSheet(

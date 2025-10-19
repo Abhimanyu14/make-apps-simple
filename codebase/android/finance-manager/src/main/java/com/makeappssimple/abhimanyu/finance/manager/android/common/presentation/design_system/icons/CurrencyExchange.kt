@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.CurrencyExchange: ImageVector
+internal val Icons.Rounded.CurrencyExchange: ImageVector
     get() {
         if (_currencyExchange != null) {
             return _currencyExchange!!

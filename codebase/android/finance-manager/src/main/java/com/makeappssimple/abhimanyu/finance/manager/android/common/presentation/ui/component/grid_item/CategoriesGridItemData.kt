@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 
-public data class CategoriesGridItemData(
+internal data class CategoriesGridItemData(
     val isDeleteVisible: Boolean? = null,
     val isEditVisible: Boolean? = null,
     val isSetAsDefaultVisible: Boolean? = null,

@@ -77,7 +77,7 @@ import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
 
 @Composable
-public fun TransactionsFiltersBottomSheetUI(
+internal fun TransactionsFiltersBottomSheetUI(
     modifier: Modifier = Modifier,
     expenseCategories: ImmutableList<Category>,
     incomeCategories: ImmutableList<Category>,
@@ -423,7 +423,7 @@ public fun TransactionsFiltersBottomSheetUI(
 }
 
 @Composable
-public fun TransactionFilterBottomSheetDateFilter(
+internal fun TransactionFilterBottomSheetDateFilter(
     modifier: Modifier = Modifier,
     isExpanded: Boolean,
     @StringRes headingTextStringResourceId: Int,

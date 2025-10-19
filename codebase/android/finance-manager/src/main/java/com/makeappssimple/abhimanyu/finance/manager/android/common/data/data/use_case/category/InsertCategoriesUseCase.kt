@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.category.CategoryRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.category.CategoryRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import kotlinx.collections.immutable.ImmutableList
 
-public class InsertCategoriesUseCase(
+internal class InsertCategoriesUseCase(
     private val categoryRepository: CategoryRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         vararg categories: Category,
     ): ImmutableList<Long> {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()

@@ -14,30 +14,30 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction_for
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_for
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public interface TransactionForRepository {
-    public suspend fun deleteTransactionForById(
+internal interface TransactionForRepository {
+    suspend fun deleteTransactionForById(
         id: Int,
     ): Boolean
 
-    public suspend fun getAllTransactionForValues(): ImmutableList<TransactionFor>
+    suspend fun getAllTransactionForValues(): ImmutableList<TransactionFor>
 
-    public fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>>
+    fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>>
 
-    public suspend fun getTransactionForById(
+    suspend fun getTransactionForById(
         id: Int,
     ): TransactionFor?
 
-    public suspend fun insertTransactionForValues(
+    suspend fun insertTransactionForValues(
         vararg transactionForValues: TransactionFor,
     ): ImmutableList<Long>
 
-    public suspend fun updateTransactionForValues(
+    suspend fun updateTransactionForValues(
         vararg transactionForValues: TransactionFor,
     ): Boolean
 }

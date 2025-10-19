@@ -20,10 +20,10 @@ import java.time.Instant
 import java.time.LocalTime
 import java.time.ZoneId
 
-public interface TimeKit {
-    public fun getCurrentLocalTime(): LocalTime
+internal interface TimeKit {
+    fun getCurrentLocalTime(): LocalTime
 
-    public fun getLocalTime(
+    fun getLocalTime(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): LocalTime

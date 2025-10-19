@@ -25,21 +25,21 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
-public data class SelectCategoryBottomSheetData(
+internal data class SelectCategoryBottomSheetData(
     val filteredCategories: ImmutableList<Category> = persistentListOf(),
     val selectedCategoryId: Int? = null,
 )
 
 @Immutable
-public sealed class SelectCategoryBottomSheetEvent {
-    public data object ResetBottomSheetType : SelectCategoryBottomSheetEvent()
-    public data class UpdateCategory(
+internal sealed class SelectCategoryBottomSheetEvent {
+    data object ResetBottomSheetType : SelectCategoryBottomSheetEvent()
+    internal data class UpdateCategory(
         val updatedCategory: Category,
     ) : SelectCategoryBottomSheetEvent()
 }
 
 @Composable
-public fun SelectCategoryBottomSheet(
+internal fun SelectCategoryBottomSheet(
     modifier: Modifier = Modifier,
     data: SelectCategoryBottomSheetData,
     handleEvent: (event: SelectCategoryBottomSheetEvent) -> Unit = {},

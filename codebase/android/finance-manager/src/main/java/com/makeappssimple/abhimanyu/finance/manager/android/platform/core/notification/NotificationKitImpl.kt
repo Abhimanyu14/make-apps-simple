@@ -23,12 +23,12 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.toColorInt
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.app.AppKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.app.AppKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification.NotificationConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification.NotificationKit
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
-public class NotificationKitImpl(
+internal class NotificationKitImpl(
     private val appKit: AppKit,
     private val context: Context,
     private val logKit: LogKit,

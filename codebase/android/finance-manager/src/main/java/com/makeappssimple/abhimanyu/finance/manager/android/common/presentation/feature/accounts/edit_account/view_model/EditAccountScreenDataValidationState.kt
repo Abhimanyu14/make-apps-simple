@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
 
-public data class EditAccountScreenDataValidationState(
+internal data class EditAccountScreenDataValidationState(
     val isCashAccount: Boolean = false,
     val isCtaButtonEnabled: Boolean = false,
     val nameError: EditAccountScreenNameError = EditAccountScreenNameError.None,

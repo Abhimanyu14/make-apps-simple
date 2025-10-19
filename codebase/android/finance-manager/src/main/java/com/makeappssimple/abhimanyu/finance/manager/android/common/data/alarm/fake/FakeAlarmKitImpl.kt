@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm.fake
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.fake
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm.AlarmKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
 
-public class FakeAlarmKitImpl : AlarmKit {
-    public override suspend fun cancelReminderAlarm(): Boolean {
+internal class FakeAlarmKitImpl : AlarmKit {
+    override suspend fun cancelReminderAlarm(): Boolean {
         return true
     }
 
-    public override suspend fun scheduleReminderAlarm(): Boolean {
+    override suspend fun scheduleReminderAlarm(): Boolean {
         return true
     }
 }

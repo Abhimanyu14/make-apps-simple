@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.typealiases.NullableComposableContent
 
 @Immutable
-public data class MyOutlinedTextFieldData(
+internal data class MyOutlinedTextFieldData(
     val isError: Boolean = false,
     val isLoading: Boolean = false,
     @StringRes val labelTextStringResourceId: Int,
@@ -40,7 +40,7 @@ public data class MyOutlinedTextFieldData(
 )
 
 @Immutable
-public data class MyOutlinedTextFieldDataV2(
+internal data class MyOutlinedTextFieldDataV2(
     val isError: Boolean = false,
     val isLoading: Boolean = false,
     @StringRes val labelTextStringResourceId: Int,

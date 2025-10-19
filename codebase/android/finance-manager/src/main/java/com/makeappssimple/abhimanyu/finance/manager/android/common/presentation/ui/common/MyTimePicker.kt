@@ -61,21 +61,21 @@ private object MyTimePickerConstants {
 }
 
 @Immutable
-public data class MyTimePickerData(
+internal data class MyTimePickerData(
     val isVisible: Boolean = false,
     val selectedLocalDate: LocalTime? = null,
 )
 
 @Immutable
-public sealed class MyTimePickerEvent {
-    public data object OnNegativeButtonClick : MyTimePickerEvent()
-    public data class OnPositiveButtonClick(
+internal sealed class MyTimePickerEvent {
+    data object OnNegativeButtonClick : MyTimePickerEvent()
+    internal data class OnPositiveButtonClick(
         val selectedTime: LocalTime,
     ) : MyTimePickerEvent()
 }
 
 @Composable
-public fun MyTimePicker(
+internal fun MyTimePicker(
     modifier: Modifier = Modifier,
     data: MyTimePickerData,
     handleEvent: (event: MyTimePickerEvent) -> Unit = {},

@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.ui.Modifier
 
-public fun Modifier.ifTrue(
+internal fun Modifier.ifTrue(
     condition: Boolean,
     getModifier: () -> Modifier,
 ): Modifier {

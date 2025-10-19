@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -24,7 +24,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class DatabaseData(
+internal data class DatabaseData(
     val categories: List<Category> = listOf(),
 
     val accounts: List<Account> = listOf(),

@@ -23,7 +23,7 @@ import androidx.room.Relation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import kotlinx.serialization.ExperimentalSerializationApi
 
-public data class TransactionDataEntity(
+internal data class TransactionDataEntity(
     @Embedded
     val transaction: TransactionEntity,
 
@@ -52,7 +52,7 @@ public data class TransactionDataEntity(
     val transactionFor: TransactionForEntity,
 )
 
-public fun TransactionDataEntity.asExternalModel(): TransactionData {
+internal fun TransactionDataEntity.asExternalModel(): TransactionData {
     return TransactionData(
         transaction = transaction.asExternalModel(),
         category = category?.asExternalModel(),

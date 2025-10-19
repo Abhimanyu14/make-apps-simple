@@ -46,7 +46,7 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import java.time.LocalDate
 
 @Composable
-public fun AnalysisFilterBottomSheetUI(
+internal fun AnalysisFilterBottomSheetUI(
     modifier: Modifier = Modifier,
     data: AnalysisFilterBottomSheetUIData,
     onClearButtonClick: () -> Unit,

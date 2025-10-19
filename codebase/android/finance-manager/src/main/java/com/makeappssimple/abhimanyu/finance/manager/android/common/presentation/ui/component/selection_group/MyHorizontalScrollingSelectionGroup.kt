@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.fading_edge.fadingEdge
 
 @Composable
-public fun MyHorizontalScrollingSelectionGroup(
+internal fun MyHorizontalScrollingSelectionGroup(
     modifier: Modifier = Modifier,
     data: MyHorizontalScrollingSelectionGroupData,
     handleEvent: (event: MyHorizontalScrollingSelectionGroupEvent) -> Unit = {},

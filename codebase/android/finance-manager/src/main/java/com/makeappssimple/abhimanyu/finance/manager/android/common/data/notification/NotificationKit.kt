@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification
 
-public interface NotificationKit {
-    public fun scheduleNotification()
+internal interface NotificationKit {
+    fun scheduleNotification()
 }

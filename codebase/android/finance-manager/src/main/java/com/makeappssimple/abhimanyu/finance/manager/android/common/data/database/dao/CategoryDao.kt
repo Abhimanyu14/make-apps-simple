@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for category_table.
  */
 @Dao
-public interface CategoryDao {
+internal interface CategoryDao {
     /**
      * Delete all categories from the table.
      * @return Number of rows deleted
@@ -43,7 +43,7 @@ public interface CategoryDao {
             FROM category_table
         """
     )
-    public suspend fun deleteAllCategories(): Int
+    suspend fun deleteAllCategories(): Int
 
     /**
      * Delete categories from the table.
@@ -52,7 +52,7 @@ public interface CategoryDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Delete
-    public suspend fun deleteCategories(
+    suspend fun deleteCategories(
         vararg categories: CategoryEntity,
     ): Int
 
@@ -69,7 +69,7 @@ public interface CategoryDao {
             WHERE id = :id
         """
     )
-    public suspend fun deleteCategoryById(
+    suspend fun deleteCategoryById(
         id: Int,
     ): Int
 
@@ -85,7 +85,7 @@ public interface CategoryDao {
             ORDER BY id ASC
         """
     )
-    public suspend fun getAllCategories(): List<CategoryEntity>
+    suspend fun getAllCategories(): List<CategoryEntity>
 
     /**
      * Get all categories as a Flow.
@@ -99,7 +99,7 @@ public interface CategoryDao {
             ORDER BY id ASC
         """
     )
-    public fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
+    fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
 
     /**
      * Get a category by id.
@@ -114,7 +114,7 @@ public interface CategoryDao {
             WHERE id = :id
         """
     )
-    public suspend fun getCategoryById(
+    suspend fun getCategoryById(
         id: Int,
     ): CategoryEntity?
 
@@ -126,7 +126,7 @@ public interface CategoryDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    public suspend fun insertCategories(
+    suspend fun insertCategories(
         vararg categories: CategoryEntity,
     ): List<Long>
 
@@ -138,7 +138,7 @@ public interface CategoryDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Update
-    public suspend fun updateCategories(
+    suspend fun updateCategories(
         vararg categories: CategoryEntity,
     ): Int
 }

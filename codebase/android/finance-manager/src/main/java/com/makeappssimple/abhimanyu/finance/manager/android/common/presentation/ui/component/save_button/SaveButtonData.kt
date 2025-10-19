@@ -20,7 +20,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class SaveButtonData(
+internal data class SaveButtonData(
     val isEnabled: Boolean,
     val isLoading: Boolean = false,
     @StringRes val textStringResourceId: Int,

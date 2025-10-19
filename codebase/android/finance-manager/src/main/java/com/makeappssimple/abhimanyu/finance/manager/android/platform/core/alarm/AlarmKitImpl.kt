@@ -23,8 +23,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.alarm.AlarmKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Reminder
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.alarm.AlarmReceiver
@@ -32,7 +32,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_r
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.time.TimeChangedReceiver
 import java.time.LocalTime
 
-public class AlarmKitImpl(
+internal class AlarmKitImpl(
     private val context: Context,
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class SaveButtonEvent {
-    public data object OnClick : SaveButtonEvent()
+internal sealed class SaveButtonEvent {
+    data object OnClick : SaveButtonEvent()
 }

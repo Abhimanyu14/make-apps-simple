@@ -19,10 +19,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class TransactionListItemEvent {
-    public data object OnClick : TransactionListItemEvent()
-    public data object OnDeleteButtonClick : TransactionListItemEvent()
-    public data object OnEditButtonClick : TransactionListItemEvent()
-    public data object OnLongClick : TransactionListItemEvent()
-    public data object OnRefundButtonClick : TransactionListItemEvent()
+internal sealed class TransactionListItemEvent {
+    data object OnClick : TransactionListItemEvent()
+    data object OnDeleteButtonClick : TransactionListItemEvent()
+    data object OnEditButtonClick : TransactionListItemEvent()
+    data object OnLongClick : TransactionListItemEvent()
+    data object OnRefundButtonClick : TransactionListItemEvent()
 }

@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 
 @Composable
-public fun getDismissState(
+internal fun getDismissState(
     dismissedToEndAction: (() -> Unit)? = null,
     dismissedToStart: (() -> Unit)? = null,
     defaultAction: (() -> Unit)? = null,

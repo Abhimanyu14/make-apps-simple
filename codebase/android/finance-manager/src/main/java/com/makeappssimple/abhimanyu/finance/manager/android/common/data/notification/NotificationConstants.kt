@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification
 
-public object NotificationConstants {
-    public const val CHANNEL_ID_REMINDER: String = "channel_reminder"
-    public const val CHANNEL_NAME_REMINDER: String = "Reminder"
+internal object NotificationConstants {
+    const val CHANNEL_ID_REMINDER: String = "channel_reminder"
+    const val CHANNEL_NAME_REMINDER: String = "Reminder"
 }

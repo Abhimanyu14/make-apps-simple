@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-public fun MyTabRow(
+internal fun MyTabRow(
     modifier: Modifier = Modifier,
     selectedTabIndex: Int,
     tabDataList: ImmutableList<MyTabData>,

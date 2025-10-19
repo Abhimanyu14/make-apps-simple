@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class SettingsListItemAppVersionData(
+internal data class SettingsListItemAppVersionData(
     override val type: SettingsListItemType = SettingsListItemType.APP_VERSION,
     val appVersionText: String,
 ) : SettingsListItemData

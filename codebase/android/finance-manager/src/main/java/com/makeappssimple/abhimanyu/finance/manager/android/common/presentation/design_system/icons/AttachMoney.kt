@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.AttachMoney: ImageVector
+internal val Icons.Rounded.AttachMoney: ImageVector
     get() {
         if (_attachMoney != null) {
             return _attachMoney!!

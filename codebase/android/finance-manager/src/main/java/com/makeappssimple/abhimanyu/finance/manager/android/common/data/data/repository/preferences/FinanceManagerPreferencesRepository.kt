@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
@@ -22,56 +22,56 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Reminder
 import kotlinx.coroutines.flow.Flow
 
-public interface FinanceManagerPreferencesRepository {
-    public fun getDataTimestampFlow(): Flow<DataTimestamp?>
+internal interface FinanceManagerPreferencesRepository {
+    fun getDataTimestampFlow(): Flow<DataTimestamp?>
 
-    public fun getDefaultDataIdFlow(): Flow<DefaultDataId?>
+    fun getDefaultDataIdFlow(): Flow<DefaultDataId?>
 
-    public fun getInitialDataVersionNumberFlow(): Flow<InitialDataVersionNumber?>
+    fun getInitialDataVersionNumberFlow(): Flow<InitialDataVersionNumber?>
 
-    public fun getReminderFlow(): Flow<Reminder?>
+    fun getReminderFlow(): Flow<Reminder?>
 
-    public suspend fun getDataTimestamp(): DataTimestamp?
+    suspend fun getDataTimestamp(): DataTimestamp?
 
-    public suspend fun getDefaultDataId(): DefaultDataId?
+    suspend fun getDefaultDataId(): DefaultDataId?
 
-    public suspend fun getInitialDataVersionNumber(): InitialDataVersionNumber?
+    suspend fun getInitialDataVersionNumber(): InitialDataVersionNumber?
 
-    public suspend fun getReminder(): Reminder?
+    suspend fun getReminder(): Reminder?
 
-    public suspend fun updateCategoryDataVersionNumber(
+    suspend fun updateCategoryDataVersionNumber(
         categoryDataVersionNumber: Int,
     ): Boolean
 
-    public suspend fun updateDefaultExpenseCategoryId(
+    suspend fun updateDefaultExpenseCategoryId(
         defaultExpenseCategoryId: Int,
     ): Boolean
 
-    public suspend fun updateDefaultIncomeCategoryId(
+    suspend fun updateDefaultIncomeCategoryId(
         defaultIncomeCategoryId: Int,
     ): Boolean
 
-    public suspend fun updateDefaultInvestmentCategoryId(
+    suspend fun updateDefaultInvestmentCategoryId(
         defaultInvestmentCategoryId: Int,
     ): Boolean
 
-    public suspend fun updateDefaultAccountId(
+    suspend fun updateDefaultAccountId(
         accountId: Int,
     ): Boolean
 
-    public suspend fun updateIsReminderEnabled(
+    suspend fun updateIsReminderEnabled(
         isReminderEnabled: Boolean,
     ): Boolean
 
-    public suspend fun updateLastDataBackupTimestamp(): Boolean
+    suspend fun updateLastDataBackupTimestamp(): Boolean
 
-    public suspend fun updateLastDataChangeTimestamp(): Boolean
+    suspend fun updateLastDataChangeTimestamp(): Boolean
 
-    public suspend fun updateTransactionsDataVersionNumber(
+    suspend fun updateTransactionsDataVersionNumber(
         transactionsDataVersionNumber: Int,
     ): Boolean
 
-    public suspend fun updateReminderTime(
+    suspend fun updateReminderTime(
         hour: Int,
         min: Int,
     ): Boolean

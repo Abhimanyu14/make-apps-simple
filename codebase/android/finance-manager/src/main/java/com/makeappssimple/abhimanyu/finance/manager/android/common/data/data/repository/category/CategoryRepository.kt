@@ -14,34 +14,34 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.category
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.category
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public interface CategoryRepository {
-    public suspend fun deleteCategories(
+internal interface CategoryRepository {
+    suspend fun deleteCategories(
         vararg categories: Category,
     ): Boolean
 
-    public suspend fun deleteCategoryById(
+    suspend fun deleteCategoryById(
         id: Int,
     ): Int
 
-    public suspend fun getAllCategories(): ImmutableList<Category>
+    suspend fun getAllCategories(): ImmutableList<Category>
 
-    public fun getAllCategoriesFlow(): Flow<ImmutableList<Category>>
+    fun getAllCategoriesFlow(): Flow<ImmutableList<Category>>
 
-    public suspend fun getCategoryById(
+    suspend fun getCategoryById(
         id: Int,
     ): Category?
 
-    public suspend fun insertCategories(
+    suspend fun insertCategories(
         vararg categories: Category,
     ): ImmutableList<Long>
 
-    public suspend fun updateCategories(
+    suspend fun updateCategories(
         vararg categories: Category,
     ): Int
 }

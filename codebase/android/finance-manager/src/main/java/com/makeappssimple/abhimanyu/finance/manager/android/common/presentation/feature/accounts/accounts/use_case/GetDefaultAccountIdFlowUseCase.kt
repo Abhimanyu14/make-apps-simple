@@ -16,14 +16,14 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-public class GetDefaultAccountIdFlowUseCase(
+internal class GetDefaultAccountIdFlowUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
-    public operator fun invoke(): Flow<Int?> {
+    operator fun invoke(): Flow<Int?> {
         return financeManagerPreferencesRepository.getDefaultDataIdFlow().map {
             it?.account
         }

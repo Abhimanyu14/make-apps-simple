@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.config
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.config
 
-public class ConfigKitImpl : ConfigKit {
+internal class ConfigKitImpl : ConfigKit {
     override fun isEnabled(): Boolean {
         return true
     }

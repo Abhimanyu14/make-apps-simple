@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.ChevronLeft: ImageVector
+internal val Icons.Rounded.ChevronLeft: ImageVector
     get() {
         if (_chevronLeft != null) {
             return _chevronLeft!!

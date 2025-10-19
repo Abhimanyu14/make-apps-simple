@@ -28,7 +28,7 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class DataSourceModule {
+internal class DataSourceModule {
     @Single
     internal fun providesCommonDataSource(
         accountDao: AccountDao,

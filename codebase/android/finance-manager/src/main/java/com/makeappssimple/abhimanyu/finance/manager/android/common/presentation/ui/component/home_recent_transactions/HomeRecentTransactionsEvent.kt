@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class HomeRecentTransactionsEvent {
-    public data object OnClick : HomeRecentTransactionsEvent()
+internal sealed class HomeRecentTransactionsEvent {
+    data object OnClick : HomeRecentTransactionsEvent()
 }

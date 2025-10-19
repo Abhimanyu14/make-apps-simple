@@ -22,11 +22,12 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.constants.DatastoreConstants
 
-public val preferencesDataMigrations: List<DataMigration<Preferences>> = listOf(
-    PreferencesDataMigration.MIGRATION_3_TO_4,
-    PreferencesDataMigration.MIGRATION_2_TO_3,
-    PreferencesDataMigration.MIGRATION_1_TO_2,
-)
+internal val preferencesDataMigrations: List<DataMigration<Preferences>> =
+    listOf(
+        PreferencesDataMigration.MIGRATION_3_TO_4,
+        PreferencesDataMigration.MIGRATION_2_TO_3,
+        PreferencesDataMigration.MIGRATION_1_TO_2,
+    )
 
 private object PreferencesDataMigration {
     val MIGRATION_3_TO_4 = object : DataMigration<Preferences> {

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class TransactionFor(
+internal data class TransactionFor(
     val id: Int = 0,
     val title: String,
 )

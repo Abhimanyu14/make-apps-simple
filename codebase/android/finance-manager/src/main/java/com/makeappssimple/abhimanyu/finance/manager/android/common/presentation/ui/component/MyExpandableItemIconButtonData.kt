@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Immutable
-public data class MyExpandableItemIconButtonData(
+internal data class MyExpandableItemIconButtonData(
     val isClickable: Boolean,
     val isEnabled: Boolean,
     val iconImageVector: ImageVector,

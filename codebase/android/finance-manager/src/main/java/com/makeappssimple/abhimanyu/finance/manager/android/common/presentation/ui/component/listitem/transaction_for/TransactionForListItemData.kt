@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class TransactionForListItemData(
+internal data class TransactionForListItemData(
     val transactionForId: Int = -1,
     val isMoreOptionsIconButtonVisible: Boolean = false,
     val isDeleteBottomSheetMenuItemVisible: Boolean = false,

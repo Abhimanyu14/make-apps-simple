@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-public class GetIsAccountsUsedInTransactionFlowUseCase(
+internal class GetIsAccountsUsedInTransactionFlowUseCase(
     private val getAllAccountsFlowUseCase: GetAllAccountsFlowUseCase,
     private val checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,
 ) {
-    public operator fun invoke(): Flow<ImmutableMap<Int, Boolean>> {
+    operator fun invoke(): Flow<ImmutableMap<Int, Boolean>> {
         return getAllAccountsFlowUseCase().map { accounts ->
             accounts.associate { account ->
                 account.id to checkIfAccountIsUsedInTransactionsUseCase(

@@ -22,9 +22,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
-public class CategoryConverter {
+internal class CategoryConverter {
     @TypeConverter
-    public fun stringToCategory(
+    internal fun stringToCategory(
         value: String?,
     ): CategoryEntity? {
         if (value.isNullOrBlank()) {
@@ -48,7 +48,7 @@ public class CategoryConverter {
     }
 
     @TypeConverter
-    public fun categoryToString(
+    internal fun categoryToString(
         categoryEntity: CategoryEntity?,
     ): String {
         if (categoryEntity.isNull()) {

@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.MoreVert: ImageVector
+internal val Icons.Rounded.MoreVert: ImageVector
     get() {
         if (_moreVert != null) {
             return _moreVert!!

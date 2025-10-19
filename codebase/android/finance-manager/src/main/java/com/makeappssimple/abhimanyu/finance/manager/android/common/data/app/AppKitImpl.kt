@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.app
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.app
 
 import android.content.Context
 import android.content.Intent
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.activity.FinanceManagerActivity
 
-public class AppKitImpl(
+internal class AppKitImpl(
     private val context: Context,
 ) : AppKit {
     override fun getMainActivityIntent(): Intent {

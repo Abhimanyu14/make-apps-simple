@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIEvent
 
 @Composable
-public fun MySelectionGroup(
+internal fun MySelectionGroup(
     modifier: Modifier = Modifier,
     data: MySelectionGroupData,
     handleEvent: (event: MySelectionGroupEvent) -> Unit = {},

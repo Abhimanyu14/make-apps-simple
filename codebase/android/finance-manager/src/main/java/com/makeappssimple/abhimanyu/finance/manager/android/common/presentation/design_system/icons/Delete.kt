@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.Delete: ImageVector
+internal val Icons.Rounded.Delete: ImageVector
     get() {
         if (_delete != null) {
             return _delete!!

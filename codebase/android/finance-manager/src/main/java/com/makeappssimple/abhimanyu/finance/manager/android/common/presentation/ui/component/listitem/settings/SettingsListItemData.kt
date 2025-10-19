@@ -16,6 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.settings
 
-public sealed interface SettingsListItemData {
-    public val type: SettingsListItemType
+internal sealed interface SettingsListItemData {
+    val type: SettingsListItemType
 }

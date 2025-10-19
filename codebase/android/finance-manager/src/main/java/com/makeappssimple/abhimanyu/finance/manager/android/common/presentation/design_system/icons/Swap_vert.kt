@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-public val Swap_vert: ImageVector
+internal val Swap_vert: ImageVector
     get() {
         if (_Swap_vert != null) return _Swap_vert!!
 

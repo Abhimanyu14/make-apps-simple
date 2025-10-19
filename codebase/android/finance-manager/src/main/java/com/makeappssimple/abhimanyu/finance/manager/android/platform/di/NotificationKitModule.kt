@@ -18,14 +18,14 @@ package com.makeappssimple.abhimanyu.finance.manager.android.platform.di
 
 import android.content.Context
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.app.AppKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.notification.NotificationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.app.AppKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification.NotificationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.notification.NotificationKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class NotificationKitModule {
+internal class NotificationKitModule {
     @Single
     internal fun providesNotificationKit(
         appKit: AppKit,

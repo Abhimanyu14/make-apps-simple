@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 
 @Immutable
-public data class MySelectionGroupData(
+internal data class MySelectionGroupData(
     val isLoading: Boolean = false,
     val loadingItemSize: Int = 3,
     val items: List<ChipUIData>,

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 
-public fun TransactionData.asEntity(): TransactionDataEntity {
+internal fun TransactionData.asEntity(): TransactionDataEntity {
     return TransactionDataEntity(
         transaction = transaction.asEntity(),
         category = category?.asEntity(),

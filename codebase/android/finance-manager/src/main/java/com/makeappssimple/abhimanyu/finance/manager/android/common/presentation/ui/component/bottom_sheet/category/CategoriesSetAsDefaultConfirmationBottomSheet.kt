@@ -26,21 +26,21 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable
-public sealed class CategoriesSetAsDefaultConfirmationBottomSheetEvent {
-    public data object OnNegativeButtonClick :
+internal sealed class CategoriesSetAsDefaultConfirmationBottomSheetEvent {
+    data object OnNegativeButtonClick :
         CategoriesSetAsDefaultConfirmationBottomSheetEvent()
 
-    public data object OnPositiveButtonClick :
+    data object OnPositiveButtonClick :
         CategoriesSetAsDefaultConfirmationBottomSheetEvent()
 }
 
 @Immutable
-public data class CategoriesSetAsDefaultConfirmationBottomSheetData(
+internal data class CategoriesSetAsDefaultConfirmationBottomSheetData(
     val transactionType: TransactionType,
 )
 
 @Composable
-public fun CategoriesSetAsDefaultConfirmationBottomSheet(
+internal fun CategoriesSetAsDefaultConfirmationBottomSheet(
     data: CategoriesSetAsDefaultConfirmationBottomSheetData,
     handleEvent: (event: CategoriesSetAsDefaultConfirmationBottomSheetEvent) -> Unit = {},
 ) {

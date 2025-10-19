@@ -30,12 +30,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer.SimpleSliceDrawer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.renderer.SliceDrawer
 
-public fun simpleChartAnimation(): TweenSpec<Float> = TweenSpec(
+internal fun simpleChartAnimation(): TweenSpec<Float> = TweenSpec(
     durationMillis = 500,
 )
 
 @Composable
-public fun PieChart(
+internal fun PieChart(
     modifier: Modifier = Modifier,
     pieChartData: PieChartData,
     animation: AnimationSpec<Float> = simpleChartAnimation(),

@@ -37,7 +37,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.MyEmojiCircleData
 
 @Composable
-public fun CategoriesGridItem(
+internal fun CategoriesGridItem(
     modifier: Modifier = Modifier,
     isSelected: Boolean,
     category: Category,

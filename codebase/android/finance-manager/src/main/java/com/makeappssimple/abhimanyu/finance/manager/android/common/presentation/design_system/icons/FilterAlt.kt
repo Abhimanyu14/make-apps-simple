@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.FilterAlt: ImageVector
+internal val Icons.Rounded.FilterAlt: ImageVector
     get() {
         if (_filterAlt != null) {
             return _filterAlt!!

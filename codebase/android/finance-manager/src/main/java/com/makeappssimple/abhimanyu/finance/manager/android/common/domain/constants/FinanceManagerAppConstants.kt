@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants
 
-public object FinanceManagerAppConstants {
-    public const val APP_NAME: String = "finance_manager"
-    public const val INITIAL_DATA_FILE_NAME: String =
+internal object FinanceManagerAppConstants {
+    const val APP_NAME: String = "finance_manager"
+    const val INITIAL_DATA_FILE_NAME: String =
         "database/initial_data.json"
-    public const val ZONE_ID_GMT: String = "UTC"
+    const val ZONE_ID_GMT: String = "UTC"
 }

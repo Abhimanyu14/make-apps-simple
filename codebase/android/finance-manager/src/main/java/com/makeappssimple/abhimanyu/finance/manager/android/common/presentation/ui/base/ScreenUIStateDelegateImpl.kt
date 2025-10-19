@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 // TODO(Abhi): To delete
-public open class ScreenUIStateDelegateImpl(
+internal open class ScreenUIStateDelegateImpl(
     private val coroutineScope: CoroutineScope,
 ) : ScreenUIStateDelegate {
     override var isLoading: Boolean = true

@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts
 
-public enum class AccountsListItemType(
-    public val title: String,
+internal enum class AccountsListItemType(
+    val title: String,
 ) {
     CONTENT(
         title = "Content"

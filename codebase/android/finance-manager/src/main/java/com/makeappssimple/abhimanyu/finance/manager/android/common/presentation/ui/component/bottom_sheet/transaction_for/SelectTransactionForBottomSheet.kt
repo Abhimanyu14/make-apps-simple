@@ -26,19 +26,19 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable
-public data class SelectTransactionForBottomSheetData(
+internal data class SelectTransactionForBottomSheetData(
     val transactionForValues: List<TransactionFor> = emptyList(),
 )
 
 @Immutable
-public sealed class SelectTransactionForBottomSheetEvent {
-    public data class OnItemClick(
+internal sealed class SelectTransactionForBottomSheetEvent {
+    internal data class OnItemClick(
         val selectedTransactionFor: TransactionFor,
     ) : SelectTransactionForBottomSheetEvent()
 }
 
 @Composable
-public fun SelectTransactionForBottomSheet(
+internal fun SelectTransactionForBottomSheet(
     modifier: Modifier = Modifier,
     data: SelectTransactionForBottomSheetData,
     handleEvent: (event: SelectTransactionForBottomSheetEvent) -> Unit = {},

@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * In-memory fake implementation of [CategoryDao] for testing purposes.
  */
-public class FakeCategoryDaoImpl : CategoryDao {
+internal class FakeCategoryDaoImpl : CategoryDao {
     private val categories = mutableListOf<CategoryEntity>()
     private val categoriesFlow: MutableStateFlow<List<CategoryEntity>> =
         MutableStateFlow(

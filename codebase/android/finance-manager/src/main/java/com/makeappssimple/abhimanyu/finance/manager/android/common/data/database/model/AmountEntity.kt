@@ -31,17 +31,17 @@ import java.util.Currency
 import kotlin.math.abs
 
 @Serializable
-public data class AmountEntity(
+internal data class AmountEntity(
     @ColumnInfo(name = "currency")
     @EncodeDefault
     @Serializable(CurrencySerializer::class)
     @SerialName(value = "currency")
-    public val currency: Currency = Currency.getInstance(CurrencyCodeConstants.INR),
+    val currency: Currency = Currency.getInstance(CurrencyCodeConstants.INR),
 
     @ColumnInfo(name = "value")
     @EncodeDefault
     @SerialName(value = "value")
-    public val value: Long = 0,
+    val value: Long = 0,
 ) {
     override fun toString(): String {
         val formattedValue = formattedCurrencyValue(
@@ -57,7 +57,7 @@ public data class AmountEntity(
     }
 }
 
-public operator fun AmountEntity.plus(
+internal operator fun AmountEntity.plus(
     amount: AmountEntity,
 ): AmountEntity {
     return AmountEntity(
@@ -66,7 +66,7 @@ public operator fun AmountEntity.plus(
     )
 }
 
-public operator fun AmountEntity.minus(
+internal operator fun AmountEntity.minus(
     amount: AmountEntity,
 ): AmountEntity {
     return AmountEntity(
@@ -75,7 +75,7 @@ public operator fun AmountEntity.minus(
     )
 }
 
-public fun AmountEntity.asExternalModel(): Amount {
+internal fun AmountEntity.asExternalModel(): Amount {
     return Amount(
         currency = currency,
         value = value,

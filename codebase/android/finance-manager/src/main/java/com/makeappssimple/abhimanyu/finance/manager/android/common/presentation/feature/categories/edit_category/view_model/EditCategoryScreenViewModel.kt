@@ -24,8 +24,8 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetCategoryByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.UpdateCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetCategoryByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.UpdateCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType

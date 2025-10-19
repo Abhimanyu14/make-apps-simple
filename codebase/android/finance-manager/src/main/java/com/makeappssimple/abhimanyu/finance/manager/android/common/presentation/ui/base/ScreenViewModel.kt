@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 // TODO(Abhi): To delete
-public abstract class ScreenViewModel(
+internal abstract class ScreenViewModel(
     private val coroutineScope: CoroutineScope,
     private val logKit: LogKit,
     private val screenUIStateDelegate: ScreenUIStateDelegate,
@@ -46,12 +46,12 @@ public abstract class ScreenViewModel(
      * This method should be implemented by subclasses to define how the UI state
      * and state events are updated based on the current data.
      */
-    public abstract fun updateUiStateAndStateEvents()
+    abstract fun updateUiStateAndStateEvents()
 
     /**
      * Fetches initial data required for the screen.
      */
-    public open fun fetchData(): Job {
+    open fun fetchData(): Job {
         return getCompletedJob()
     }
 
@@ -60,7 +60,7 @@ public abstract class ScreenViewModel(
      * This method can be overridden to implement specific data observation logic.
      * By default, it does nothing.
      */
-    public open fun observeData() {}
+    open fun observeData() {}
 
     private fun observeForRefreshSignal(): Job {
         return coroutineScope.launch {

@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.flow
 /**
  * In-memory fake implementation of [TransactionDao] for testing purposes.
  */
-public class FakeTransactionDaoImpl : TransactionDao {
+internal class FakeTransactionDaoImpl : TransactionDao {
     private val transactions = mutableListOf<TransactionEntity>()
     private val transactionsFlow: MutableStateFlow<List<TransactionEntity>> =
         MutableStateFlow(

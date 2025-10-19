@@ -44,7 +44,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 private val defaultSpacerSize = 100.dp
 
 @Composable
-public fun HorizontalSpacer(
+internal fun HorizontalSpacer(
     modifier: Modifier = Modifier,
     width: Dp = defaultSpacerSize,
 ) {
@@ -57,7 +57,7 @@ public fun HorizontalSpacer(
 }
 
 @Composable
-public fun VerticalSpacer(
+internal fun VerticalSpacer(
     modifier: Modifier = Modifier,
     height: Dp = defaultSpacerSize,
 ) {
@@ -71,7 +71,7 @@ public fun VerticalSpacer(
 }
 
 @Composable
-public fun NonFillingVerticalSpacer(
+internal fun NonFillingVerticalSpacer(
     modifier: Modifier = Modifier,
     height: Dp = defaultSpacerSize,
 ) {
@@ -84,7 +84,7 @@ public fun NonFillingVerticalSpacer(
 }
 
 @Composable
-public fun StatusBarSpacer(
+internal fun StatusBarSpacer(
     modifier: Modifier = Modifier,
 ) {
     Spacer(
@@ -94,7 +94,7 @@ public fun StatusBarSpacer(
 }
 
 @Composable
-public fun NavigationBarsAndImeSpacer(
+internal fun NavigationBarsAndImeSpacer(
     modifier: Modifier = Modifier,
 ) {
     Spacer(
@@ -105,7 +105,7 @@ public fun NavigationBarsAndImeSpacer(
 }
 
 @Composable
-public fun NavigationBarsSpacer(
+internal fun NavigationBarsSpacer(
     modifier: Modifier = Modifier,
 ) {
     Spacer(
@@ -115,7 +115,7 @@ public fun NavigationBarsSpacer(
 }
 
 @Composable
-public fun ImeSpacer(
+internal fun ImeSpacer(
     modifier: Modifier = Modifier,
 ) {
     Spacer(
@@ -125,7 +125,7 @@ public fun ImeSpacer(
 }
 
 @SuppressLint("UnnecessaryComposedModifier")
-public fun Modifier.navigationBarLandscapeSpacer(): Modifier {
+internal fun Modifier.navigationBarLandscapeSpacer(): Modifier {
     return composed {
         Modifier
             .fillMaxSize()
@@ -137,7 +137,7 @@ public fun Modifier.navigationBarLandscapeSpacer(): Modifier {
     }
 }
 
-public fun Modifier.statusBarSpacer(): Modifier {
+internal fun Modifier.statusBarSpacer(): Modifier {
     return composed {
         if (WindowInsets.areStatusBarsVisible) {
             this
@@ -151,15 +151,15 @@ public fun Modifier.statusBarSpacer(): Modifier {
     }
 }
 
-public fun Modifier.navigationBarsSpacer(): Modifier {
+internal fun Modifier.navigationBarsSpacer(): Modifier {
     return this.navigationBarsPadding()
 }
 
-public fun Modifier.imeSpacer(): Modifier {
+internal fun Modifier.imeSpacer(): Modifier {
     return this.imePadding()
 }
 
 @Composable
-public fun navigationBarHeight(): Dp {
+internal fun navigationBarHeight(): Dp {
     return 0.dp // WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 }

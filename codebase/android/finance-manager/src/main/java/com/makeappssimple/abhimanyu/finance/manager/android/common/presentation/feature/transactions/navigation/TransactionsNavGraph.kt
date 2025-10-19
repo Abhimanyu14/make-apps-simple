@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
 
-public fun NavGraphBuilder.transactionsNavGraph() {
+internal fun NavGraphBuilder.transactionsNavGraph() {
     composable(
         route = "${Screen.AddTransaction.route}/{${NavigationArguments.TRANSACTION_ID}}",
         arguments = listOf(

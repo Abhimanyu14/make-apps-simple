@@ -46,20 +46,20 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable
-public sealed class OverviewCardEvent {
-    public data object OnClick : OverviewCardEvent()
+internal sealed class OverviewCardEvent {
+    data object OnClick : OverviewCardEvent()
 
-    public data class OnOverviewTabClick(
+    internal data class OnOverviewTabClick(
         val index: Int,
     ) : OverviewCardEvent()
 
-    public data class OnOverviewCardAction(
+    internal data class OnOverviewCardAction(
         val overviewCardAction: OverviewCardAction,
     ) : OverviewCardEvent()
 }
 
-public enum class OverviewTabOption(
-    public val title: String,
+internal enum class OverviewTabOption(
+    val title: String,
 ) {
     DAY(
         title = "DAY",
@@ -76,18 +76,18 @@ public enum class OverviewTabOption(
     ),
 }
 
-public enum class OverviewCardAction {
+internal enum class OverviewCardAction {
     NEXT,
     PREV,
 }
 
-public data class OverviewCardViewModelData(
+internal data class OverviewCardViewModelData(
     val income: Float = 0F,
     val expense: Float = 0F,
     val title: String = "",
 )
 
-public fun OverviewCardViewModelData?.orDefault(): OverviewCardViewModelData {
+internal fun OverviewCardViewModelData?.orDefault(): OverviewCardViewModelData {
     return if (this.isNull()) {
         OverviewCardViewModelData()
     } else {
@@ -96,7 +96,7 @@ public fun OverviewCardViewModelData?.orDefault(): OverviewCardViewModelData {
 }
 
 @Composable
-public fun OverviewCard(
+internal fun OverviewCard(
     modifier: Modifier = Modifier,
     data: OverviewCardData,
     handleEvent: (event: OverviewCardEvent) -> Unit = {},

@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Composable
-public fun MyFloatingActionButton(
+internal fun MyFloatingActionButton(
     modifier: Modifier = Modifier,
     iconImageVector: ImageVector,
     contentDescription: String,

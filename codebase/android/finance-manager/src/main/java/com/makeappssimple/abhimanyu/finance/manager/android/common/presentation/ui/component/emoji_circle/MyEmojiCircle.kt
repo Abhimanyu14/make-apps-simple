@@ -36,7 +36,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
 
 @Composable
-public fun MyEmojiCircle(
+internal fun MyEmojiCircle(
     modifier: Modifier = Modifier,
     data: MyEmojiCircleData,
     handleEvent: (event: MyEmojiCircleEvent) -> Unit = {},

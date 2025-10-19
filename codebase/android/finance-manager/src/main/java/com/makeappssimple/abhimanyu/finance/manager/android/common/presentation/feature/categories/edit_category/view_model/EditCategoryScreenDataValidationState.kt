@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenTitleError
 
-public data class EditCategoryScreenDataValidationState(
+internal data class EditCategoryScreenDataValidationState(
     val isCtaButtonEnabled: Boolean = false,
     val titleError: EditCategoryScreenTitleError = EditCategoryScreenTitleError.None,
 )

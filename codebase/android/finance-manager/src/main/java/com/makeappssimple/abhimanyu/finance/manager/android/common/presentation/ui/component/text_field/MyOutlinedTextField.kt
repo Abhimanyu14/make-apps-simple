@@ -37,7 +37,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
 
 @Composable
-public fun MyOutlinedTextField(
+internal fun MyOutlinedTextField(
     modifier: Modifier = Modifier,
     data: MyOutlinedTextFieldData,
     handleEvent: (event: MyOutlinedTextFieldEvent) -> Unit = {},
@@ -93,7 +93,7 @@ public fun MyOutlinedTextField(
 }
 
 @Composable
-public fun MyOutlinedTextFieldV2(
+internal fun MyOutlinedTextFieldV2(
     modifier: Modifier = Modifier,
     data: MyOutlinedTextFieldDataV2,
     handleEvent: (event: MyOutlinedTextFieldEventV2) -> Unit = {},

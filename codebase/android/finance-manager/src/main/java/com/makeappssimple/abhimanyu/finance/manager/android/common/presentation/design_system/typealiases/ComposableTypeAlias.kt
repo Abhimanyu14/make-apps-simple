@@ -21,9 +21,9 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 
-public typealias ComposableContent = @Composable () -> Unit
-public typealias NullableComposableContent = @Composable (() -> Unit)?
+internal typealias ComposableContent = @Composable () -> Unit
+internal typealias NullableComposableContent = @Composable (() -> Unit)?
 
-public typealias BoxScopedComposableContent = @Composable BoxScope.() -> Unit
-public typealias ColumnScopedComposableContent = @Composable ColumnScope.() -> Unit
-public typealias RowScopedComposableContent = @Composable RowScope.() -> Unit
+internal typealias BoxScopedComposableContent = @Composable BoxScope.() -> Unit
+internal typealias ColumnScopedComposableContent = @Composable ColumnScope.() -> Unit
+internal typealias RowScopedComposableContent = @Composable RowScope.() -> Unit

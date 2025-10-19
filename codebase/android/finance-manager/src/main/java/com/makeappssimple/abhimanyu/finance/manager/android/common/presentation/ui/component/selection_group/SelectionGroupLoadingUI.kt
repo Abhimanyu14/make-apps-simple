@@ -21,7 +21,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 
 @Composable
-public fun SelectionGroupLoadingUI(
+internal fun SelectionGroupLoadingUI(
     size: Int,
 ) {
     MutableList(

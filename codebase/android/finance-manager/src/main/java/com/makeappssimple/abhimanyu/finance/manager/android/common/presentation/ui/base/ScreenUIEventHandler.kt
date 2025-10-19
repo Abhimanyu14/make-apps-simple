@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base
 
-public interface ScreenUIEventHandler<T : ScreenUIEvent> {
-    public fun handleUIEvent(
+internal interface ScreenUIEventHandler<T : ScreenUIEvent> {
+    fun handleUIEvent(
         uiEvent: T,
     )
 }

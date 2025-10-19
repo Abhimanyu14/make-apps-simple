@@ -49,13 +49,13 @@ private object AccountsListItemContentConstants {
 }
 
 @Immutable
-public data class AccountsListItemContentDataAndEventHandler(
+internal data class AccountsListItemContentDataAndEventHandler(
     val data: AccountsListItemContentData,
     val handleEvent: (event: AccountsListItemContentEvent) -> Unit = {},
 )
 
 @Immutable
-public data class AccountsListItemContentData(
+internal data class AccountsListItemContentData(
     override val type: AccountsListItemType = AccountsListItemType.CONTENT,
     val isDefault: Boolean = false,
     val isDeleteEnabled: Boolean = false,
@@ -71,12 +71,12 @@ public data class AccountsListItemContentData(
 ) : AccountsListItemData
 
 @Immutable
-public sealed class AccountsListItemContentEvent {
-    public data object OnClick : AccountsListItemContentEvent()
+internal sealed class AccountsListItemContentEvent {
+    data object OnClick : AccountsListItemContentEvent()
 }
 
 @Composable
-public fun AccountsListItemContent(
+internal fun AccountsListItemContent(
     modifier: Modifier = Modifier,
     data: AccountsListItemContentData,
     handleEvent: (event: AccountsListItemContentEvent) -> Unit = {},
@@ -95,7 +95,7 @@ public fun AccountsListItemContent(
 }
 
 @Composable
-public fun AccountsListItemContentLoadingUI(
+internal fun AccountsListItemContentLoadingUI(
     modifier: Modifier = Modifier,
 ) {
     Box(

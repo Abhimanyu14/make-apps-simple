@@ -20,14 +20,14 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.input.TextFieldValue
 
 @Immutable
-public sealed class MyOutlinedTextFieldEvent {
-    public data object OnClickTrailingIcon : MyOutlinedTextFieldEvent()
-    public data class OnValueChange(
+internal sealed class MyOutlinedTextFieldEvent {
+    data object OnClickTrailingIcon : MyOutlinedTextFieldEvent()
+    data class OnValueChange(
         val updatedValue: TextFieldValue,
     ) : MyOutlinedTextFieldEvent()
 }
 
 @Immutable
-public sealed class MyOutlinedTextFieldEventV2 {
-    public data object OnClickTrailingIcon : MyOutlinedTextFieldEventV2()
+internal sealed class MyOutlinedTextFieldEventV2 {
+    data object OnClickTrailingIcon : MyOutlinedTextFieldEventV2()
 }

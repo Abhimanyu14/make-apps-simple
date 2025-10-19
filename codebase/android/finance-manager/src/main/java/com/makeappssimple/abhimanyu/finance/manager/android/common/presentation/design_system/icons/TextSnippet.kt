@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.AutoMirrored.Rounded.TextSnippet: ImageVector
+internal val Icons.AutoMirrored.Rounded.TextSnippet: ImageVector
     get() {
         if (_textSnippet != null) {
             return _textSnippet!!

@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-public fun CategoryMenuBottomSheetUI(
+internal fun CategoryMenuBottomSheetUI(
     modifier: Modifier = Modifier,
     items: ImmutableList<CategoryMenuBottomSheetItemData>,
 ) {

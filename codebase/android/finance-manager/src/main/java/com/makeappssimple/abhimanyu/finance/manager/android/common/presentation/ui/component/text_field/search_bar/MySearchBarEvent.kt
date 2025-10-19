@@ -19,14 +19,14 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MySearchBarEvent {
-    public data object OnSearch : MySearchBarEvent()
-    public data class OnSearchTextChange(
+internal sealed class MySearchBarEvent {
+    data object OnSearch : MySearchBarEvent()
+    data class OnSearchTextChange(
         val updatedSearchText: String,
     ) : MySearchBarEvent()
 }
 
 @Immutable
-public sealed class MySearchBarEventV2 {
-    public data object OnSearch : MySearchBarEventV2()
+internal sealed class MySearchBarEventV2 {
+    data object OnSearch : MySearchBarEventV2()
 }

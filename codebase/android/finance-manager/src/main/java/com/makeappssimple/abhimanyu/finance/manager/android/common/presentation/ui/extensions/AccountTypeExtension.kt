@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
 
-public val AccountType.icon: ImageVector
+internal val AccountType.icon: ImageVector
     get() = when (this) {
         AccountType.BANK -> {
             MyIcons.AccountBalance

@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.getAmountTextColor
 
 @Immutable
-public data class TransactionListItemData(
+internal data class TransactionListItemData(
     val isDeleteButtonEnabled: Boolean = false,
     val isDeleteButtonVisible: Boolean = false,
     val isEditButtonVisible: Boolean = false,
@@ -46,7 +46,7 @@ public data class TransactionListItemData(
     val transactionForText: String = "",
 )
 
-public fun TransactionData.toTransactionListItemData(
+internal fun TransactionData.toTransactionListItemData(
     getReadableDateAndTime: (
         timestamp: Long
     ) -> String,

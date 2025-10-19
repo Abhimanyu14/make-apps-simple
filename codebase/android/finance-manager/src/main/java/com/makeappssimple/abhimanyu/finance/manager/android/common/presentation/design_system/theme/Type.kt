@@ -29,7 +29,7 @@ private val cosmosFontFamily: FontFamily = FontFamily(
         resId = R.font.lexend,
     )
 )
-public val Typography: Typography = Typography(
+internal val Typography: Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = cosmosFontFamily,
         fontSize = 32.sp,

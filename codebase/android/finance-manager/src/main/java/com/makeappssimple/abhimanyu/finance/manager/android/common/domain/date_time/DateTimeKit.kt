@@ -22,21 +22,21 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 
-public interface DateTimeKit : DateKit, TimeKit {
-    public fun getCurrentFormattedDateAndTime(): String
+internal interface DateTimeKit : DateKit, TimeKit {
+    fun getCurrentFormattedDateAndTime(): String
 
-    public fun getCurrentLocalDateTime(): LocalDateTime
+    fun getCurrentLocalDateTime(): LocalDateTime
 
-    public fun getCurrentInstant(): Instant
+    fun getCurrentInstant(): Instant
 
-    public fun getCurrentTimeMillis(): Long
+    fun getCurrentTimeMillis(): Long
 
-    public fun getSystemDefaultZoneId(): ZoneId
+    fun getSystemDefaultZoneId(): ZoneId
 
     /**
      * Sample format - 30 Mar, 2023.
      */
-    public fun getFormattedDate(
+    fun getFormattedDate(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -44,7 +44,7 @@ public interface DateTimeKit : DateKit, TimeKit {
     /**
      * Sample format - Monday.
      */
-    public fun getFormattedDayOfWeek(
+    fun getFormattedDayOfWeek(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -52,7 +52,7 @@ public interface DateTimeKit : DateKit, TimeKit {
     /**
      * Sample format - 30 Mar.
      */
-    public fun getFormattedDay(
+    fun getFormattedDay(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -60,7 +60,7 @@ public interface DateTimeKit : DateKit, TimeKit {
     /**
      * Sample format - March, 2023.
      */
-    public fun getFormattedMonth(
+    fun getFormattedMonth(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -68,7 +68,7 @@ public interface DateTimeKit : DateKit, TimeKit {
     /**
      * Sample format - 2023.
      */
-    public fun getFormattedYear(
+    fun getFormattedYear(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -76,7 +76,7 @@ public interface DateTimeKit : DateKit, TimeKit {
     /**
      * Sample format - 2023-Mar-30, 08-24 AM.
      */
-    public fun getFormattedDateAndTime(
+    fun getFormattedDateAndTime(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -84,42 +84,42 @@ public interface DateTimeKit : DateKit, TimeKit {
     /**
      * Sample format - 30 Mar, 2023 at 08:24 AM.
      */
-    public fun getReadableDateAndTime(
+    fun getReadableDateAndTime(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
 
-    public fun getTimestamp(
+    fun getTimestamp(
         date: LocalDate = getLocalDate(),
         time: LocalTime = getLocalTime(),
     ): Long
 
-    public fun getStartOfDayTimestamp(
+    fun getStartOfDayTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    public fun getEndOfDayTimestamp(
+    fun getEndOfDayTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    public fun getStartOfMonthTimestamp(
+    fun getStartOfMonthTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    public fun getEndOfMonthTimestamp(
+    fun getEndOfMonthTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    public fun getStartOfYearTimestamp(
+    fun getStartOfYearTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    public fun getEndOfYearTimestamp(
+    fun getEndOfYearTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long

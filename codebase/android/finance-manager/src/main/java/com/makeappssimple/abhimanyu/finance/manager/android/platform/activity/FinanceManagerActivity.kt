@@ -22,7 +22,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app.FinanceManagerApp
 
-public class FinanceManagerActivity : ComponentActivity() {
+internal class FinanceManagerActivity : ComponentActivity() {
     override fun onCreate(
         savedInstanceState: Bundle?,
     ) {

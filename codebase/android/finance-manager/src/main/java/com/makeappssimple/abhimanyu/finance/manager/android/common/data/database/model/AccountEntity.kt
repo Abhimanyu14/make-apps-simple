@@ -30,7 +30,7 @@ import kotlinx.serialization.Serializable
 
 @Entity(tableName = "account_table")
 @Serializable
-public data class AccountEntity(
+internal data class AccountEntity(
     @ColumnInfo(name = "balance_amount")
     @EncodeDefault
     @SerialName(value = "balance_amount")
@@ -65,7 +65,7 @@ public data class AccountEntity(
     val name: String,
 )
 
-public fun AccountEntity.updateBalanceAmount(
+internal fun AccountEntity.updateBalanceAmount(
     updatedBalanceAmount: Long,
 ): AccountEntity {
     return this.copy(
@@ -75,7 +75,7 @@ public fun AccountEntity.updateBalanceAmount(
     )
 }
 
-public fun AccountEntity.asExternalModel(): Account {
+internal fun AccountEntity.asExternalModel(): Account {
     return Account(
         balanceAmount = balanceAmount.asExternalModel(),
         id = id,

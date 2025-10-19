@@ -40,12 +40,12 @@ internal val Shapes = Shapes(
     ),
 )
 
-public val BottomSheetExpandedShape: Shape = RectangleShape
-public val BottomSheetShape: RoundedCornerShape = RoundedCornerShape(
+internal val BottomSheetExpandedShape: Shape = RectangleShape
+internal val BottomSheetShape: RoundedCornerShape = RoundedCornerShape(
     topStart = 16.dp,
     topEnd = 16.dp,
 )
-public val ExpandedListItemShape: RoundedCornerShape = RoundedCornerShape(
+internal val ExpandedListItemShape: RoundedCornerShape = RoundedCornerShape(
     topStart = 24.dp,
     topEnd = 24.dp,
 )

@@ -19,4 +19,4 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 /**
  * Screen events from UI to ViewModel.
  */
-public interface ScreenUIEvent
+internal interface ScreenUIEvent

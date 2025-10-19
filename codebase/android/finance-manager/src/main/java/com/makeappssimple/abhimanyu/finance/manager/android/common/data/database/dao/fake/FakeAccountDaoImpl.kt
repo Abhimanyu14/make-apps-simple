@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * In-memory fake implementation of [AccountDao] for testing purposes.
  */
-public class FakeAccountDaoImpl : AccountDao {
+internal class FakeAccountDaoImpl : AccountDao {
     private val accounts = mutableListOf<AccountEntity>()
     private val accountsFlow: MutableStateFlow<List<AccountEntity>> =
         MutableStateFlow(

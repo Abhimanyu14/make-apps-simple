@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import java.time.LocalDate
 
 @Immutable
-public data class MyDatePickerData(
+internal data class MyDatePickerData(
     val isVisible: Boolean = false,
     val endLocalDate: LocalDate? = null,
     val selectedLocalDate: LocalDate? = null,

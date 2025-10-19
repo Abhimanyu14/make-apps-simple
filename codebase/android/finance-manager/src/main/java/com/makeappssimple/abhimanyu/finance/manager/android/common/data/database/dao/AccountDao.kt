@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for account_table.
  */
 @Dao
-public interface AccountDao {
+internal interface AccountDao {
     /**
      * Delete an account by id.
      * @param id Account id
@@ -38,7 +38,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM account_table WHERE id = :id")
-    public suspend fun deleteAccountById(
+    suspend fun deleteAccountById(
         id: Int,
     ): Int
 
@@ -48,7 +48,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "DELETE FROM account_table")
-    public suspend fun deleteAllAccounts(): Int
+    suspend fun deleteAllAccounts(): Int
 
     /**
      * Get an account by id.
@@ -57,7 +57,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from account_table WHERE id = :id")
-    public suspend fun getAccountById(
+    suspend fun getAccountById(
         id: Int,
     ): AccountEntity?
 
@@ -67,7 +67,7 @@ public interface AccountDao {
      * @return List of accounts with the given ids
      */
     @Query(value = "SELECT * from account_table WHERE id IN (:ids)")
-    public suspend fun getAccountsByIds(
+    suspend fun getAccountsByIds(
         ids: List<Int>,
     ): List<AccountEntity>
 
@@ -77,7 +77,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from account_table ORDER BY id ASC")
-    public suspend fun getAllAccounts(): List<AccountEntity>
+    suspend fun getAllAccounts(): List<AccountEntity>
 
     /**
      * Get all accounts as a Flow.
@@ -85,7 +85,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Query(value = "SELECT * from account_table ORDER BY id ASC")
-    public fun getAllAccountsFlow(): Flow<List<AccountEntity>>
+    fun getAllAccountsFlow(): Flow<List<AccountEntity>>
 
     /**
      * Insert accounts into the table.
@@ -95,7 +95,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    public suspend fun insertAccounts(
+    suspend fun insertAccounts(
         vararg accounts: AccountEntity,
     ): List<Long>
 
@@ -107,7 +107,7 @@ public interface AccountDao {
      * @throws SQLiteException if there is a general SQLite error
      */
     @Update
-    public suspend fun updateAccounts(
+    suspend fun updateAccounts(
         vararg accounts: AccountEntity,
     ): Int
 }

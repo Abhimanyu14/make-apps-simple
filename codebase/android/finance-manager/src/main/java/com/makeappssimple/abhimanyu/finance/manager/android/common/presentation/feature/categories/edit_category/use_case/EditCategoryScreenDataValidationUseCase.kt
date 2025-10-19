@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetAllCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.view_model.EditCategoryScreenDataValidationState
@@ -27,10 +27,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultInvestmentCategory
 import kotlinx.collections.immutable.ImmutableList
 
-public class EditCategoryScreenDataValidationUseCase(
+internal class EditCategoryScreenDataValidationUseCase(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         enteredTitle: String,
         currentCategory: Category?,
     ): EditCategoryScreenDataValidationState {

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction_data.TransactionDataRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_data.TransactionDataRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
@@ -25,10 +25,10 @@ private object GetRecentTransactionDataFlowUseCaseConstants {
     const val DEFAULT_NUMBER_OF_RECENT_TRANSACTIONS = 10
 }
 
-public class GetRecentTransactionDataFlowUseCase(
+internal class GetRecentTransactionDataFlowUseCase(
     private val transactionDataRepository: TransactionDataRepository,
 ) {
-    public operator fun invoke(
+    operator fun invoke(
         numberOfTransactions: Int = GetRecentTransactionDataFlowUseCaseConstants.DEFAULT_NUMBER_OF_RECENT_TRANSACTIONS,
     ): Flow<ImmutableList<TransactionData>> {
         return transactionDataRepository.getRecentTransactionDataFlow(

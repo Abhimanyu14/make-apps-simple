@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public data class TransactionData(
+internal data class TransactionData(
     val transaction: Transaction,
     val category: Category?,
     val accountFrom: Account?,

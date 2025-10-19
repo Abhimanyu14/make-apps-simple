@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.map
  * Fake implementation of [TransactionDataDao] for testing purposes,
  * using other fake DAO implementations.
  */
-public class FakeTransactionDataDaoImpl(
+internal class FakeTransactionDataDaoImpl(
     private val accountDao: AccountDao,
     private val categoryDao: CategoryDao,
     private val transactionDao: TransactionDao,

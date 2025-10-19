@@ -19,40 +19,40 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public object MyIcons {
-    public val AccountBalance: ImageVector = Icons.Rounded.AccountBalance
-    public val AccountBalanceWallet: ImageVector =
+internal object MyIcons {
+    val AccountBalance: ImageVector = Icons.Rounded.AccountBalance
+    val AccountBalanceWallet: ImageVector =
         Icons.Rounded.AccountBalanceWallet
-    public val Add: ImageVector = Icons.Rounded.Add
-    public val ArrowBack: ImageVector = Icons.AutoMirrored.Rounded.ArrowBack
-    public val AttachMoney: ImageVector = Icons.Rounded.AttachMoney
-    public val Backup: ImageVector = Icons.Rounded.Backup
-    public val Calculate: ImageVector = Icons.Rounded.Calculate
-    public val Category: ImageVector = Icons.Rounded.Category
-    public val Check: ImageVector = Icons.Filled.Check
-    public val CheckCircle: ImageVector = Icons.Rounded.CheckCircle
-    public val Checklist: ImageVector = Icons.Rounded.Checklist
-    public val ChevronLeft: ImageVector = Icons.Rounded.ChevronLeft
-    public val ChevronRight: ImageVector = Icons.Rounded.ChevronRight
-    public val Clear: ImageVector = Icons.Rounded.Clear
-    public val Close: ImageVector = Icons.Rounded.Close
-    public val Copy: ImageVector = Icons.Rounded.ContentCopy
-    public val CurrencyExchange: ImageVector = Icons.Rounded.CurrencyExchange
-    public val Delete: ImageVector = Icons.Rounded.Delete
-    public val Done: ImageVector = Icons.Rounded.Done
-    public val Edit: ImageVector = Icons.Rounded.Edit
-    public val FilterAlt: ImageVector = Icons.Rounded.FilterAlt
-    public val Groups: ImageVector = Icons.Rounded.Groups
-    public val Keyboard: ImageVector = Icons.Outlined.Keyboard
-    public val Lock: ImageVector = Icons.Rounded.Lock
-    public val MoreVert: ImageVector = Icons.Rounded.MoreVert
-    public val Notifications: ImageVector = Icons.Rounded.Notifications
-    public val RadioButtonUnchecked: ImageVector =
+    val Add: ImageVector = Icons.Rounded.Add
+    val ArrowBack: ImageVector = Icons.AutoMirrored.Rounded.ArrowBack
+    val AttachMoney: ImageVector = Icons.Rounded.AttachMoney
+    val Backup: ImageVector = Icons.Rounded.Backup
+    val Calculate: ImageVector = Icons.Rounded.Calculate
+    val Category: ImageVector = Icons.Rounded.Category
+    val Check: ImageVector = Icons.Filled.Check
+    val CheckCircle: ImageVector = Icons.Rounded.CheckCircle
+    val Checklist: ImageVector = Icons.Rounded.Checklist
+    val ChevronLeft: ImageVector = Icons.Rounded.ChevronLeft
+    val ChevronRight: ImageVector = Icons.Rounded.ChevronRight
+    val Clear: ImageVector = Icons.Rounded.Clear
+    val Close: ImageVector = Icons.Rounded.Close
+    val Copy: ImageVector = Icons.Rounded.ContentCopy
+    val CurrencyExchange: ImageVector = Icons.Rounded.CurrencyExchange
+    val Delete: ImageVector = Icons.Rounded.Delete
+    val Done: ImageVector = Icons.Rounded.Done
+    val Edit: ImageVector = Icons.Rounded.Edit
+    val FilterAlt: ImageVector = Icons.Rounded.FilterAlt
+    val Groups: ImageVector = Icons.Rounded.Groups
+    val Keyboard: ImageVector = Icons.Outlined.Keyboard
+    val Lock: ImageVector = Icons.Rounded.Lock
+    val MoreVert: ImageVector = Icons.Rounded.MoreVert
+    val Notifications: ImageVector = Icons.Rounded.Notifications
+    val RadioButtonUnchecked: ImageVector =
         Icons.Rounded.RadioButtonUnchecked
-    public val Restore: ImageVector = Icons.Rounded.Restore
-    public val Schedule: ImageVector = Icons.Outlined.Schedule
-    public val Search: ImageVector = Icons.Rounded.Search
-    public val Settings: ImageVector = Icons.Rounded.Settings
-    public val SwapVert: ImageVector = Swap_vert
-    public val TextSnippet: ImageVector = Icons.AutoMirrored.Rounded.TextSnippet
+    val Restore: ImageVector = Icons.Rounded.Restore
+    val Schedule: ImageVector = Icons.Outlined.Schedule
+    val Search: ImageVector = Icons.Rounded.Search
+    val Settings: ImageVector = Icons.Rounded.Settings
+    val SwapVert: ImageVector = Swap_vert
+    val TextSnippet: ImageVector = Icons.AutoMirrored.Rounded.TextSnippet
 }

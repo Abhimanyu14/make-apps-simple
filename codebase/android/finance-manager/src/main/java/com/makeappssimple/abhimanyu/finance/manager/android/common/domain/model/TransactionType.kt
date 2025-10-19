@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public enum class TransactionType(
-    public val title: String,
+internal enum class TransactionType(
+    val title: String,
 ) {
     INCOME(
         title = "Income",

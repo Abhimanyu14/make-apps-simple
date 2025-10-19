@@ -33,7 +33,7 @@ import kotlinx.serialization.json.JsonNames
 
 @Serializable
 @Entity(tableName = "category_table")
-public data class CategoryEntity(
+internal data class CategoryEntity(
     @ColumnInfo(name = "id")
     @EncodeDefault
     @PrimaryKey(autoGenerate = true)
@@ -75,7 +75,7 @@ public data class CategoryEntity(
     val transactionType: TransactionType,
 )
 
-public fun CategoryEntity.asExternalModel(): Category {
+internal fun CategoryEntity.asExternalModel(): Category {
     return Category(
         id = id,
         parentCategoryId = parentCategoryId,

@@ -29,7 +29,7 @@ private object ConfigModuleConstants {
 }
 
 @Module
-public class ConfigKitModule {
+internal class ConfigKitModule {
     @Single
     internal fun providesFirebaseRemoteConfigSettings(): FirebaseRemoteConfigSettings {/*
         // TODO(Abhi): Use this after adding dependency on debug build checks

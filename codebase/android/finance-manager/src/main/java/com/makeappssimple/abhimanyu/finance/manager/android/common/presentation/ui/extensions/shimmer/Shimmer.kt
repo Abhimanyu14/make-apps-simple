@@ -46,7 +46,7 @@ private object ShimmerConstants {
     const val SHIMMER_SIZE_MULTIPLIER = 3
 }
 
-public fun Modifier.shimmer(
+internal fun Modifier.shimmer(
     isShimmerVisible: Boolean = true,
     backgroundColor: Color? = null,
     shimmerColor: Color? = null,
@@ -87,7 +87,7 @@ public fun Modifier.shimmer(
 }
 
 @Composable
-public fun rememberShimmerBrush(
+internal fun rememberShimmerBrush(
     isShimmerVisible: Boolean = true,
     targetValue: Float,
     backgroundColor: Color? = FinanceManagerAppTheme.colorScheme.surfaceVariant,

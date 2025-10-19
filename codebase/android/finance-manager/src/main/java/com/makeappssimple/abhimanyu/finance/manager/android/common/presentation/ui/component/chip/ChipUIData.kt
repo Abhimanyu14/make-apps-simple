@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Immutable
-public data class ChipUIData(
+internal data class ChipUIData(
     val isLoading: Boolean = false,
     val isMultiSelect: Boolean = false,
     val isSelected: Boolean = false,

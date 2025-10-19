@@ -19,13 +19,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class TransactionsMenuBottomSheetEvent {
-    public data object OnDuplicateTransactionClick :
+internal sealed class TransactionsMenuBottomSheetEvent {
+    data object OnDuplicateTransactionClick :
         TransactionsMenuBottomSheetEvent()
 
-    public data object OnSelectAllTransactionsClick :
+    data object OnSelectAllTransactionsClick :
         TransactionsMenuBottomSheetEvent()
 
-    public data object OnUpdateTransactionForClick :
+    data object OnUpdateTransactionForClick :
         TransactionsMenuBottomSheetEvent()
 }

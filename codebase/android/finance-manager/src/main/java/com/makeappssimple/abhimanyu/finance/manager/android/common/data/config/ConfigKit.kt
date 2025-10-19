@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.config
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.config
 
-public interface ConfigKit {
-    public fun isEnabled(): Boolean
+internal interface ConfigKit {
+    fun isEnabled(): Boolean
 }

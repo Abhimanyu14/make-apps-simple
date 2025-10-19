@@ -44,7 +44,8 @@ class NavigationTest {
     )
 
     @get:Rule(order = 1)
-    val composeTestRule = createAndroidComposeRule<FinanceManagerActivity>()
+    internal val composeTestRule =
+        createAndroidComposeRule<FinanceManagerActivity>()
 
     @Test
     fun navigationTest() {

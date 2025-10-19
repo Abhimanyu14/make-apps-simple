@@ -20,9 +20,9 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 
 @Immutable
-public sealed class SelectAccountBottomSheetEvent {
-    public data object ResetBottomSheetType : SelectAccountBottomSheetEvent()
-    public data class UpdateAccount(
+internal sealed class SelectAccountBottomSheetEvent {
+    data object ResetBottomSheetType : SelectAccountBottomSheetEvent()
+    internal data class UpdateAccount(
         val updatedAccount: Account?,
     ) : SelectAccountBottomSheetEvent()
 }

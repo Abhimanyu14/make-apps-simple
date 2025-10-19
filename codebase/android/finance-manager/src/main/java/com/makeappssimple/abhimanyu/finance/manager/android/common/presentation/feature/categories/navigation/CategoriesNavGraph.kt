@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
 
-public fun NavGraphBuilder.categoriesNavGraph() {
+internal fun NavGraphBuilder.categoriesNavGraph() {
     composable(
         route = "${Screen.AddCategory.route}/{${NavigationArguments.TRANSACTION_TYPE}}",
         arguments = listOf(

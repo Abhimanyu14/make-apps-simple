@@ -16,16 +16,16 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.toImmutableMap
 
-public class GetIsAccountsUsedInTransactionFlowUseCase(
+internal class GetIsAccountsUsedInTransactionFlowUseCase(
     private val checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         allAccounts: ImmutableList<Account>,
     ): ImmutableMap<Int, Boolean> {
         return allAccounts.associate { account ->

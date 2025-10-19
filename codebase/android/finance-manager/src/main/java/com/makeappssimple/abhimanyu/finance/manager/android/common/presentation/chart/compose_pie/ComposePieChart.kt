@@ -36,7 +36,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
  * Source - https://github.com/humawork/compose-charts
  */
 @Composable
-public fun ComposePieChart(
+internal fun ComposePieChart(
     data: PieChartData,
 ) {
     val fractions = remember(

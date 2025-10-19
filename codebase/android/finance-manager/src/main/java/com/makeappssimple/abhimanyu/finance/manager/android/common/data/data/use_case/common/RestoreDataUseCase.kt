@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.common
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common
 
 import android.net.Uri
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.BackupData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.DatabaseData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.DatastoreData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.asEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.BackupData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatabaseData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatastoreData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.asEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
@@ -40,13 +40,13 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
 
-public class RestoreDataUseCase(
+internal class RestoreDataUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val jsonReaderKit: JsonReaderKit,
     private val logKit: LogKit,
     private val transactionRepository: TransactionRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         uri: Uri,
     ): Boolean {
         val jsonString = jsonReaderKit.readJsonFromFile(

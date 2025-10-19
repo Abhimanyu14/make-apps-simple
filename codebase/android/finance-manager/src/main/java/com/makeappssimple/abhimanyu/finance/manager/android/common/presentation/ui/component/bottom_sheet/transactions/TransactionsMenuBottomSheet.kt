@@ -25,12 +25,12 @@ import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.toImmutableList
 
 @Immutable
-public data class TransactionsMenuBottomSheetData(
+internal data class TransactionsMenuBottomSheetData(
     val isDuplicateTransactionMenuOptionVisible: Boolean = false,
 )
 
 @Composable
-public fun TransactionsMenuBottomSheet(
+internal fun TransactionsMenuBottomSheet(
     modifier: Modifier = Modifier,
     data: TransactionsMenuBottomSheetData,
     handleEvent: (event: TransactionsMenuBottomSheetEvent) -> Unit = {},

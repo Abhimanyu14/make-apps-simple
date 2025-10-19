@@ -21,9 +21,9 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
-public class IntListConverter {
+internal class IntListConverter {
     @TypeConverter
-    public fun stringToIntList(
+    internal fun stringToIntList(
         value: String?,
     ): List<Int>? {
         if (value.isNullOrBlank()) {
@@ -47,7 +47,7 @@ public class IntListConverter {
     }
 
     @TypeConverter
-    public fun intListToString(
+    internal fun intListToString(
         intList: List<Int>?,
     ): String {
         if (intList.isNull()) {

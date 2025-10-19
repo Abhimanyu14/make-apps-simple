@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class PieChartData(
+internal data class PieChartData(
     val items: List<PieChartItemData>,
 ) {
     internal val totalSize: Float

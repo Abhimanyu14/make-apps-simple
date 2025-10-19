@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlin.math.abs
 
-public fun sanitizeTransactions(
+internal fun sanitizeTransactions(
     transactions: ImmutableList<TransactionEntity>,
 ): ImmutableList<TransactionEntity> {
     return transactions.map { transaction ->

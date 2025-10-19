@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AmountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 
-public fun Amount.asEntity(): AmountEntity {
+internal fun Amount.asEntity(): AmountEntity {
     return AmountEntity(
         currency = currency,
         value = value,

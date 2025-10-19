@@ -20,20 +20,20 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 
-public interface DateKit {
-    public fun getCurrentLocalDate(): LocalDate
+internal interface DateKit {
+    fun getCurrentLocalDate(): LocalDate
 
-    public fun getLocalDate(
+    fun getLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): LocalDate
 
-    public fun getStartOfMonthLocalDate(
+    fun getStartOfMonthLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): LocalDate
 
-    public fun getStartOfYearLocalDate(
+    fun getStartOfYearLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): LocalDate

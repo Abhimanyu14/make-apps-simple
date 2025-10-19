@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import java.time.LocalDate
 
 @Immutable
-public data class AnalysisFilterBottomSheetData(
+internal data class AnalysisFilterBottomSheetData(
     val selectedFilter: Filter,
     @StringRes val headingTextStringResourceId: Int,
     val defaultEndLocalDate: LocalDate,

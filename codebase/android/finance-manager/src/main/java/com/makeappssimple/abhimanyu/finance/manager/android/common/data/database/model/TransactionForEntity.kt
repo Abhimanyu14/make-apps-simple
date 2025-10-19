@@ -30,7 +30,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "transaction_for_table")
-public data class TransactionForEntity(
+internal data class TransactionForEntity(
     @ColumnInfo(name = "id")
     @EncodeDefault
     @PrimaryKey(autoGenerate = true)
@@ -43,10 +43,10 @@ public data class TransactionForEntity(
     val title: String,
 )
 
-public val TransactionForEntity.titleToDisplay: String
+internal val TransactionForEntity.titleToDisplay: String
     get() = title.capitalizeWords()
 
-public fun TransactionForEntity.asExternalModel(): TransactionFor {
+internal fun TransactionForEntity.asExternalModel(): TransactionFor {
     return TransactionFor(
         id = id,
         title = title,

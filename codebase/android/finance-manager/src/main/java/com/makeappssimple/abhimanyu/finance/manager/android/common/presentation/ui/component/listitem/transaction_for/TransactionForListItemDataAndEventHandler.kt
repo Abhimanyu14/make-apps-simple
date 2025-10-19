@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class TransactionForListItemDataAndEventHandler(
+internal data class TransactionForListItemDataAndEventHandler(
     val data: TransactionForListItemData,
     val handleEvent: (event: TransactionForListItemEvent) -> Unit = {},
 )

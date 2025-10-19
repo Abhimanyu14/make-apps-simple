@@ -64,7 +64,7 @@ private object ChipUIConstants {
 }
 
 @Composable
-public fun ChipUI(
+internal fun ChipUI(
     modifier: Modifier = Modifier,
     data: ChipUIData,
     handleEvent: (event: ChipUIEvent) -> Unit = {},
@@ -98,7 +98,7 @@ public fun ChipUI(
 }
 
 @Composable
-public fun ChipLoadingUI(
+internal fun ChipLoadingUI(
     modifier: Modifier = Modifier,
 ) {
     Box(

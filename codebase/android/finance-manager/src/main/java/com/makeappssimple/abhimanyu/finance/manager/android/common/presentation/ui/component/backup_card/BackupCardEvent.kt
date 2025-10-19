@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class BackupCardEvent {
-    public data object OnClick : BackupCardEvent()
+internal sealed class BackupCardEvent {
+    data object OnClick : BackupCardEvent()
 }

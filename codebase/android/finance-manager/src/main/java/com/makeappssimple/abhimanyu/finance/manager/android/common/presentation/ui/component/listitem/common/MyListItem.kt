@@ -28,23 +28,23 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Immutable
-public data class MyListItemDataAndEventHandler(
+internal data class MyListItemDataAndEventHandler(
     val data: MyListItemData,
     val handleEvent: (event: MyListItemEvent) -> Unit = {},
 )
 
 @Immutable
-public data class MyListItemData(
+internal data class MyListItemData(
     @StringRes val textStringResourceId: Int,
 )
 
 @Immutable
-public sealed class MyListItemEvent {
-    public data object OnClick : MyListItemEvent()
+internal sealed class MyListItemEvent {
+    data object OnClick : MyListItemEvent()
 }
 
 @Composable
-public fun MyListItem(
+internal fun MyListItem(
     modifier: Modifier = Modifier,
     data: MyListItemData,
     handleEvent: (event: MyListItemEvent) -> Unit = {},

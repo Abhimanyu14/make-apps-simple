@@ -24,7 +24,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class Account(
+internal data class Account(
     @EncodeDefault
     @SerialName(value = "balance_amount")
     val balanceAmount: Amount = Amount(
@@ -44,7 +44,7 @@ public data class Account(
     val name: String,
 )
 
-public fun Account.updateBalanceAmount(
+internal fun Account.updateBalanceAmount(
     updatedBalanceAmount: Long,
 ): Account {
     return this

@@ -19,8 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class OverviewTabEvent {
-    public data class OnClick(
+internal sealed class OverviewTabEvent {
+    internal data class OnClick(
         val index: Int,
     ) : OverviewTabEvent()
 }

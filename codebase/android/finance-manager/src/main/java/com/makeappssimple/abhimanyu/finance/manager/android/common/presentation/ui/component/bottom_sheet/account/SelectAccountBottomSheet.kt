@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun SelectAccountBottomSheet(
+internal fun SelectAccountBottomSheet(
     modifier: Modifier = Modifier,
     data: SelectAccountBottomSheetData,
     handleEvent: (event: SelectAccountBottomSheetEvent) -> Unit = {},

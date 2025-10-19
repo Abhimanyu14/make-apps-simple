@@ -22,61 +22,61 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Reminder
 import kotlinx.coroutines.flow.Flow
 
-public interface FinanceManagerPreferencesDataSource {
-    public fun getDataTimestamp(): Flow<DataTimestamp?>
+internal interface FinanceManagerPreferencesDataSource {
+    fun getDataTimestamp(): Flow<DataTimestamp?>
 
-    public fun getDefaultDataId(): Flow<DefaultDataId?>
+    fun getDefaultDataId(): Flow<DefaultDataId?>
 
-    public fun getInitialDataVersionNumber(): Flow<InitialDataVersionNumber?>
+    fun getInitialDataVersionNumber(): Flow<InitialDataVersionNumber?>
 
-    public fun getReminder(): Flow<Reminder?>
+    fun getReminder(): Flow<Reminder?>
 
-    public suspend fun updateAccountDataVersionNumber(
+    suspend fun updateAccountDataVersionNumber(
         accountDataVersionNumber: Int,
     ): Boolean
 
-    public suspend fun updateCategoryDataVersionNumber(
+    suspend fun updateCategoryDataVersionNumber(
         categoryDataVersionNumber: Int,
     ): Boolean
 
-    public suspend fun updateDefaultExpenseCategoryId(
+    suspend fun updateDefaultExpenseCategoryId(
         defaultExpenseCategoryId: Int,
     ): Boolean
 
-    public suspend fun updateDefaultIncomeCategoryId(
+    suspend fun updateDefaultIncomeCategoryId(
         defaultIncomeCategoryId: Int,
     ): Boolean
 
-    public suspend fun updateDefaultInvestmentCategoryId(
+    suspend fun updateDefaultInvestmentCategoryId(
         defaultInvestmentCategoryId: Int,
     ): Boolean
 
-    public suspend fun updateDefaultAccountId(
+    suspend fun updateDefaultAccountId(
         defaultAccountId: Int,
     ): Boolean
 
-    public suspend fun updateIsReminderEnabled(
+    suspend fun updateIsReminderEnabled(
         isReminderEnabled: Boolean,
     ): Boolean
 
-    public suspend fun updateLastDataBackupTimestamp(
+    suspend fun updateLastDataBackupTimestamp(
         lastDataBackupTimestamp: Long,
     ): Boolean
 
-    public suspend fun updateLastDataChangeTimestamp(
+    suspend fun updateLastDataChangeTimestamp(
         lastDataChangeTimestamp: Long,
     ): Boolean
 
-    public suspend fun updateReminderTime(
+    suspend fun updateReminderTime(
         hour: Int,
         min: Int,
     ): Boolean
 
-    public suspend fun updateTransactionDataVersionNumber(
+    suspend fun updateTransactionDataVersionNumber(
         transactionDataVersionNumber: Int,
     ): Boolean
 
-    public suspend fun updateTransactionForDataVersionNumber(
+    suspend fun updateTransactionForDataVersionNumber(
         transactionForDataVersionNumber: Int,
     ): Boolean
 }

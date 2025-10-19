@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class MyConfirmationBottomSheetData(
+internal data class MyConfirmationBottomSheetData(
     val message: String,
     val negativeButtonText: String,
     val positiveButtonText: String,

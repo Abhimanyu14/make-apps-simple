@@ -58,7 +58,7 @@ private object TotalBalanceCardConstants {
  * This is coupled with [Amount].
  */
 @Composable
-public fun TotalBalanceCard(
+internal fun TotalBalanceCard(
     modifier: Modifier = Modifier,
     data: TotalBalanceCardData,
     handleEvent: (event: TotalBalanceCardEvent) -> Unit = {},

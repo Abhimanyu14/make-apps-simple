@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.pie.PieChartItemData
 
-public class SimpleSliceDrawer(private val sliceThickness: Float = 25f) :
+internal class SimpleSliceDrawer(private val sliceThickness: Float = 25f) :
     SliceDrawer {
     init {
         require(sliceThickness in 10F..100F) {

@@ -20,7 +20,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class InitialDataVersionNumber(
+internal data class InitialDataVersionNumber(
     @SerialName(value = "account")
     val account: Int = 0,
 

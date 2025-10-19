@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account.AccountRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account.AccountRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 
-public class DeleteAccountByIdUseCase(
+internal class DeleteAccountByIdUseCase(
     private val accountRepository: AccountRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         id: Int,
     ): Int {
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()

@@ -21,7 +21,7 @@ import androidx.compose.runtime.Immutable
 import java.time.LocalDate
 
 @Immutable
-public data class AnalysisFilterBottomSheetUIData(
+internal data class AnalysisFilterBottomSheetUIData(
     val isFromDatePickerDialogVisible: Boolean,
     val isToDatePickerDialogVisible: Boolean,
     @StringRes val headingTextStringResourceId: Int,

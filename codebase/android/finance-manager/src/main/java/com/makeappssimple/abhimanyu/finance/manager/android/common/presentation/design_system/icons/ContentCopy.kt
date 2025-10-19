@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.ContentCopy: ImageVector
+internal val Icons.Rounded.ContentCopy: ImageVector
     get() {
         if (_contentCopy != null) {
             return _contentCopy!!

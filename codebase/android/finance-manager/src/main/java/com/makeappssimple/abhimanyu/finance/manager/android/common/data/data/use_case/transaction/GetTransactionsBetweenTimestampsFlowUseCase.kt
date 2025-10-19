@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public class GetTransactionsBetweenTimestampsFlowUseCase(
+internal class GetTransactionsBetweenTimestampsFlowUseCase(
     private val transactionRepository: TransactionRepository,
 ) {
-    public operator fun invoke(
+    operator fun invoke(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): Flow<ImmutableList<Transaction>> {

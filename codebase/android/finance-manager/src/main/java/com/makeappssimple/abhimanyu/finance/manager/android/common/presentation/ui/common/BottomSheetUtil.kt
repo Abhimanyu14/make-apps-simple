@@ -29,7 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-public fun BottomSheetHandler(
+internal fun BottomSheetHandler(
     isBottomSheetVisible: Boolean,
     screenBottomSheetType: ScreenBottomSheetType,
     coroutineScope: CoroutineScope,

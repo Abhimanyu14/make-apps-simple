@@ -34,7 +34,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.composeColor
 
 @Composable
-public fun PieChartLegend(
+internal fun PieChartLegend(
     modifier: Modifier = Modifier,
     items: List<PieChartLegendItemData>,
 ) {

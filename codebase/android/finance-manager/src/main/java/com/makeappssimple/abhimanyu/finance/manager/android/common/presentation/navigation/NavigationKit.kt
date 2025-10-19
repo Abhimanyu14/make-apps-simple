@@ -19,56 +19,56 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.SharedFlow
 
-public interface NavigationKit {
-    public val command: SharedFlow<NavigationCommand>
+internal interface NavigationKit {
+    val command: SharedFlow<NavigationCommand>
 
-    public fun navigateToAccountsScreen(): Job
+    fun navigateToAccountsScreen(): Job
 
-    public fun navigateToAddAccountScreen(): Job
+    fun navigateToAddAccountScreen(): Job
 
-    public fun navigateToAddCategoryScreen(
+    fun navigateToAddCategoryScreen(
         transactionType: String,
     ): Job
 
-    public fun navigateToAddTransactionScreen(
+    fun navigateToAddTransactionScreen(
         transactionId: Int? = null,
     ): Job
 
-    public fun navigateToAddTransactionForScreen(): Job
+    fun navigateToAddTransactionForScreen(): Job
 
-    public fun navigateToAnalysisScreen(): Job
+    fun navigateToAnalysisScreen(): Job
 
-    public fun navigateToCategoriesScreen(): Job
+    fun navigateToCategoriesScreen(): Job
 
-    public fun navigateToEditAccountScreen(
+    fun navigateToEditAccountScreen(
         accountId: Int,
     ): Job
 
-    public fun navigateToEditCategoryScreen(
+    fun navigateToEditCategoryScreen(
         categoryId: Int,
     ): Job
 
-    public fun navigateToEditTransactionScreen(
+    fun navigateToEditTransactionScreen(
         transactionId: Int,
     ): Job
 
-    public fun navigateToEditTransactionForScreen(
+    fun navigateToEditTransactionForScreen(
         transactionForId: Int,
     ): Job
 
-    public fun navigateToHomeScreen(): Job
+    fun navigateToHomeScreen(): Job
 
-    public fun navigateToOpenSourceLicensesScreen(): Job
+    fun navigateToOpenSourceLicensesScreen(): Job
 
-    public fun navigateToSettingsScreen(): Job
+    fun navigateToSettingsScreen(): Job
 
-    public fun navigateToTransactionForValuesScreen(): Job
+    fun navigateToTransactionForValuesScreen(): Job
 
-    public fun navigateToTransactionsScreen(): Job
+    fun navigateToTransactionsScreen(): Job
 
-    public fun navigateUp(): Job
+    fun navigateUp(): Job
 
-    public fun navigateToViewTransactionScreen(
+    fun navigateToViewTransactionScreen(
         transactionId: Int,
     ): Job
 }

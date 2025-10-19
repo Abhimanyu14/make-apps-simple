@@ -20,7 +20,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class DataTimestamp(
+internal data class DataTimestamp(
     @SerialName(value = "last_backup")
     val lastBackup: Long = 0L,
 

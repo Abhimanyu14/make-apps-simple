@@ -21,7 +21,7 @@ import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public val Icons.Rounded.Groups: ImageVector
+internal val Icons.Rounded.Groups: ImageVector
     get() {
         if (_groups != null) {
             return _groups!!

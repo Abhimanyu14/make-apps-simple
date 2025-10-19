@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
 
-public data class EditTransactionForScreenDataValidationState(
+internal data class EditTransactionForScreenDataValidationState(
     val isCtaButtonEnabled: Boolean = false,
     val titleError: EditTransactionForScreenTitleError = EditTransactionForScreenTitleError.None,
 )

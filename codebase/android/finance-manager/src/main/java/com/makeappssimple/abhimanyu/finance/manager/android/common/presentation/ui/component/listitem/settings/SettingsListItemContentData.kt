@@ -21,7 +21,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Immutable
-public data class SettingsListItemContentData(
+internal data class SettingsListItemContentData(
     override val type: SettingsListItemType = SettingsListItemType.CONTENT,
     val isChecked: Boolean? = null,
     val isEnabled: Boolean = false,

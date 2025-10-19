@@ -28,7 +28,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Composable
-public fun MyExpandableItemIconButton(
+internal fun MyExpandableItemIconButton(
     modifier: Modifier = Modifier,
     data: MyExpandableItemIconButtonData,
     handleEvent: (event: MyExpandableItemIconButtonEvent) -> Unit = {},

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class MyConfirmationBottomSheetDataAndEventHandler(
+internal data class MyConfirmationBottomSheetDataAndEventHandler(
     val data: MyConfirmationBottomSheetData,
     val handleEvent: (event: MyConfirmationBottomSheetEvent) -> Unit = {},
 )

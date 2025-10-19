@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account.AccountRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 
-public class GetAccountByIdUseCase(
+internal class GetAccountByIdUseCase(
     private val accountRepository: AccountRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         id: Int,
     ): Account? {
         return accountRepository.getAccountById(

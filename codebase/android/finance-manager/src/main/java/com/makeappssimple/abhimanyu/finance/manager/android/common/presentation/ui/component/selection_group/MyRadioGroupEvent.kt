@@ -19,8 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MyRadioGroupEvent {
-    public data class OnSelectionChange(
+internal sealed class MyRadioGroupEvent {
+    internal data class OnSelectionChange(
         val index: Int,
     ) : MyRadioGroupEvent()
 }

@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
 
-public fun NavGraphBuilder.settingsNavGraph() {
+internal fun NavGraphBuilder.settingsNavGraph() {
     composable(
         route = Screen.OpenSourceLicenses.route,
         deepLinks = listOf(

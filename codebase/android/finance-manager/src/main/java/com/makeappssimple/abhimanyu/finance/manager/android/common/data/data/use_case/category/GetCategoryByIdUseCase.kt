@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.category.CategoryRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 
-public class GetCategoryByIdUseCase(
+internal class GetCategoryByIdUseCase(
     private val categoryRepository: CategoryRepository,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         id: Int,
     ): Category? {
         return categoryRepository.getCategoryById(

@@ -31,7 +31,7 @@ private object PieChartConstants {
     const val SLICE_THICKNESS = 30F
 }
 /*
-public val pieChartData = PieChartData(
+internal val pieChartData = PieChartData(
     items = listOf(
         PieChartItemData(
             value = 10F,
@@ -46,7 +46,7 @@ public val pieChartData = PieChartData(
 */
 
 @Composable
-public fun PieChart(
+internal fun PieChart(
     modifier: Modifier = Modifier,
     pieChartData: PieChartData,
 ) {

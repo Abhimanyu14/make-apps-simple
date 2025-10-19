@@ -21,7 +21,7 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 
 @Immutable
-public data class MyHorizontalScrollingRadioGroupData(
+internal data class MyHorizontalScrollingRadioGroupData(
     val horizontalArrangement: Arrangement.Horizontal = Arrangement.SpaceBetween,
     val isLoading: Boolean = false,
     val loadingItemSize: Int = 3,

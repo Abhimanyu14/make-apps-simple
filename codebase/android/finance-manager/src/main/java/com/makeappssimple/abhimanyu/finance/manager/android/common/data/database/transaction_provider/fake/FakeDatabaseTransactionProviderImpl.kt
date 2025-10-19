@@ -21,7 +21,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 /**
  * In-memory fake implementation of [DatabaseTransactionProvider] for testing purposes.
  */
-public class FakeDatabaseTransactionProviderImpl : DatabaseTransactionProvider {
+internal class FakeDatabaseTransactionProviderImpl :
+    DatabaseTransactionProvider {
     override suspend fun <R> runAsTransaction(
         block: suspend () -> R,
     ): R {

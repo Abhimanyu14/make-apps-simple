@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 
-public fun Category.asEntity(): CategoryEntity {
+internal fun Category.asEntity(): CategoryEntity {
     return CategoryEntity(
         id = id,
         parentCategoryId = parentCategoryId,

@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Immutable
-public data class AccountsMenuBottomSheetItemData(
+internal data class AccountsMenuBottomSheetItemData(
     val imageVector: ImageVector? = null,
     val text: String,
     val onClick: () -> Unit,

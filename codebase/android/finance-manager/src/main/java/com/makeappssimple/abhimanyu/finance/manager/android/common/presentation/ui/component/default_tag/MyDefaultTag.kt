@@ -34,7 +34,7 @@ private object MyDefaultTagConstants {
 }
 
 @Composable
-public fun MyDefaultTag(
+internal fun MyDefaultTag(
     modifier: Modifier = Modifier,
 ) {
     MyText(

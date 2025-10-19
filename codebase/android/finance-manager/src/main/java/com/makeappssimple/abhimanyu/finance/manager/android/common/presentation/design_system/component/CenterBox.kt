@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.typealiases.BoxScopedComposableContent
 
 @Composable
-public fun CenterBox(
+internal fun CenterBox(
     modifier: Modifier = Modifier,
     content: BoxScopedComposableContent,
 ) {

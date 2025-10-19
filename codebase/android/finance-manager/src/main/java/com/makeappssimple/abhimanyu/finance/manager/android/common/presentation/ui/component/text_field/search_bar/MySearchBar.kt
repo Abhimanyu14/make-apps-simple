@@ -83,7 +83,7 @@ private object MySearchBarConstants {
 }
 
 @Composable
-public fun MySearchBar(
+internal fun MySearchBar(
     modifier: Modifier = Modifier,
     data: MySearchBarData,
     handleEvent: (event: MySearchBarEvent) -> Unit = {},
@@ -243,7 +243,7 @@ private fun MySearchBarUI(
 }
 
 @Composable
-public fun MySearchBarV2(
+internal fun MySearchBarV2(
     modifier: Modifier = Modifier,
     data: MySearchBarDataV2,
     handleEvent: (event: MySearchBarEventV2) -> Unit = {},

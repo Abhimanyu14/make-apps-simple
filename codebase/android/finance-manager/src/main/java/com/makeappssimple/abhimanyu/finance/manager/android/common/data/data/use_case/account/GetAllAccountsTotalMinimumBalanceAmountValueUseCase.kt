@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account.AccountRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account.AccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-public class GetAllAccountsTotalMinimumBalanceAmountValueUseCase(
+internal class GetAllAccountsTotalMinimumBalanceAmountValueUseCase(
     private val accountRepository: AccountRepository,
 ) {
-    public operator fun invoke(): Flow<Long> {
+    operator fun invoke(): Flow<Long> {
         return accountRepository.getAllAccountsFlow().map {
             it.sumOf { account ->
                 account.minimumAccountBalanceAmount?.value.orZero()

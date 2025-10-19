@@ -19,4 +19,4 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 /**
  * Screen navigation arguments.
  */
-public interface ScreenArgs
+internal interface ScreenArgs

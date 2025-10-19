@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
 import com.makeappssimple.abhimanyu.common.core.extensions.toIntOrZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.InsertTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.InsertTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
@@ -28,12 +28,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlin.math.abs
 
-public class UpdateAccountUseCase(
+internal class UpdateAccountUseCase(
     private val dateTimeKit: DateTimeKit,
     private val insertTransactionsUseCase: InsertTransactionsUseCase,
     private val updateAccountsUseCase: UpdateAccountsUseCase,
 ) {
-    public suspend operator fun invoke(
+    suspend operator fun invoke(
         currentAccount: Account,
         validAccountTypesForNewAccount: ImmutableList<AccountType>,
         selectedAccountTypeIndex: Int,

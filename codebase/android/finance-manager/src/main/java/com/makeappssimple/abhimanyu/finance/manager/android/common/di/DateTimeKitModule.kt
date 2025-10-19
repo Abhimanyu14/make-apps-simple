@@ -23,7 +23,7 @@ import org.koin.core.annotation.Single
 import kotlin.time.ExperimentalTime
 
 @Module
-public class DateTimeKitModule {
+internal class DateTimeKitModule {
     @OptIn(ExperimentalTime::class)
     @Single
     internal fun providesDateTimeKit(): DateTimeKit {

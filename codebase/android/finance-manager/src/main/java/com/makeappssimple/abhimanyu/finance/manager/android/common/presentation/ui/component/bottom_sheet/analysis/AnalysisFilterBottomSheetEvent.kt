@@ -20,9 +20,9 @@ import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 
 @Immutable
-public sealed class AnalysisFilterBottomSheetEvent {
-    public data object OnNegativeButtonClick : AnalysisFilterBottomSheetEvent()
-    public data class OnPositiveButtonClick(
+internal sealed class AnalysisFilterBottomSheetEvent {
+    data object OnNegativeButtonClick : AnalysisFilterBottomSheetEvent()
+    internal data class OnPositiveButtonClick(
         val updatedFilter: Filter,
     ) : AnalysisFilterBottomSheetEvent()
 }

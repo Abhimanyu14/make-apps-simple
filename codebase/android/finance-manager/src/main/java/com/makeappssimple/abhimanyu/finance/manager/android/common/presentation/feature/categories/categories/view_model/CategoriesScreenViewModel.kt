@@ -23,11 +23,11 @@ import com.makeappssimple.abhimanyu.common.core.extensions.groupBy
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.DeleteCategoryByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetAllCategoriesFlowUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.SetDefaultCategoryUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.DeleteCategoryByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetAllCategoriesFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.SetDefaultCategoryUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.CheckIfCategoryIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType

@@ -32,18 +32,18 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Immutable
-public data class MyBottomSheetListItemData(
+internal data class MyBottomSheetListItemData(
     val imageVector: ImageVector? = null,
     val text: String,
 )
 
 @Immutable
-public sealed class MyBottomSheetListItemEvent {
-    public data object OnClick : MyBottomSheetListItemEvent()
+internal sealed class MyBottomSheetListItemEvent {
+    data object OnClick : MyBottomSheetListItemEvent()
 }
 
 @Composable
-public fun MyBottomSheetListItem(
+internal fun MyBottomSheetListItem(
     modifier: Modifier = Modifier,
     data: MyBottomSheetListItemData,
     handleEvent: (event: MyBottomSheetListItemEvent) -> Unit = {},

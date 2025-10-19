@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -23,70 +23,70 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-public interface TransactionRepository {
-    public suspend fun checkIfAccountIsUsedInTransactions(
+internal interface TransactionRepository {
+    suspend fun checkIfAccountIsUsedInTransactions(
         accountId: Int,
     ): Boolean
 
-    public suspend fun checkIfCategoryIsUsedInTransactions(
+    suspend fun checkIfCategoryIsUsedInTransactions(
         categoryId: Int,
     ): Boolean
 
-    public suspend fun checkIfTransactionForIsUsedInTransactions(
+    suspend fun checkIfTransactionForIsUsedInTransactions(
         transactionForId: Int,
     ): Boolean
 
-    public suspend fun deleteAllTransactions(): Boolean
+    suspend fun deleteAllTransactions(): Boolean
 
-    public suspend fun deleteTransactionById(
+    suspend fun deleteTransactionById(
         id: Int,
     ): Boolean
 
-    public suspend fun getAllTransactions(): ImmutableList<Transaction>
+    suspend fun getAllTransactions(): ImmutableList<Transaction>
 
-    public suspend fun getTitleSuggestions(
+    suspend fun getTitleSuggestions(
         categoryId: Int,
         numberOfSuggestions: Int,
         enteredTitle: String,
     ): ImmutableList<String>
 
-    public suspend fun getTransactionById(
+    suspend fun getTransactionById(
         id: Int,
     ): Transaction?
 
-    public suspend fun getTransactionsBetweenTimestamps(
+    suspend fun getTransactionsBetweenTimestamps(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): ImmutableList<Transaction>
 
-    public fun getTransactionsBetweenTimestampsFlow(
+    fun getTransactionsBetweenTimestampsFlow(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): Flow<ImmutableList<Transaction>>
 
-    public suspend fun insertTransaction(
+    suspend fun insertTransaction(
         accountFrom: Account?,
         accountTo: Account?,
         transaction: Transaction,
         originalTransaction: Transaction?,
     ): Long
 
-    public suspend fun insertTransactions(
+    suspend fun insertTransactions(
         vararg transactions: Transaction,
     ): ImmutableList<Long>
 
-    public suspend fun restoreData(
+    suspend fun restoreData(
         categories: ImmutableList<Category>,
         accounts: ImmutableList<Account>,
         transactions: ImmutableList<Transaction>,
         transactionForValues: ImmutableList<TransactionFor>,
     ): Boolean
 
-    public suspend fun updateTransaction(
+    suspend fun updateTransaction(
         transaction: Transaction,
     ): Boolean
 
-    public suspend fun updateTransactions(
+    suspend fun updateTransactions(
         vararg transactions: Transaction,
     ): Boolean
 }

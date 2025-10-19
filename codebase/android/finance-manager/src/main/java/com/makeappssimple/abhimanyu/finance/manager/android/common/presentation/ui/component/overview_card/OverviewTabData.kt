@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class OverviewTabData(
+internal data class OverviewTabData(
     val items: List<String>,
     val selectedItemIndex: Int,
 )

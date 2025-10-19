@@ -32,7 +32,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
-public fun HomeRecentTransactions(
+internal fun HomeRecentTransactions(
     modifier: Modifier = Modifier,
     data: HomeRecentTransactionsData,
     handleEvent: (event: HomeRecentTransactionsEvent) -> Unit = {},

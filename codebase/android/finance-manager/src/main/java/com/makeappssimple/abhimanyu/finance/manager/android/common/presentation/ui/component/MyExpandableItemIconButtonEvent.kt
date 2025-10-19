@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MyExpandableItemIconButtonEvent {
-    public data object OnClick : MyExpandableItemIconButtonEvent()
+internal sealed class MyExpandableItemIconButtonEvent {
+    data object OnClick : MyExpandableItemIconButtonEvent()
 }

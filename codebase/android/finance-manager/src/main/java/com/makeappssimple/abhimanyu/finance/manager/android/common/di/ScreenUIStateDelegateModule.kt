@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
 
 // TODO(Abhi): To delete
 @Module
-public class ScreenUIStateDelegateModule {
+internal class ScreenUIStateDelegateModule {
     @Single
     internal fun providesScreenUIStateDelegate(
         coroutineScope: CoroutineScope,

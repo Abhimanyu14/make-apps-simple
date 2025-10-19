@@ -23,11 +23,11 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-public class AlarmReceiver : BroadcastReceiver(), KoinComponent {
-    public val logKit: LogKit by inject()
+internal class AlarmReceiver : BroadcastReceiver(), KoinComponent {
+    val logKit: LogKit by inject()
 
     // @Inject
-    // public lateinit var notificationKit: NotificationKit
+    // internal lateinit var notificationKit: NotificationKit
 
     override fun onReceive(
         context: Context,

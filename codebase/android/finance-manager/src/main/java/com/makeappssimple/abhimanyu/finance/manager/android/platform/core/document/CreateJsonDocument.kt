@@ -21,7 +21,7 @@ import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.MimeTypeConstants
 
-public class CreateJsonDocument(
+internal class CreateJsonDocument(
     private val getCurrentFormattedDateAndTime: () -> String,
 ) : ActivityResultContracts.CreateDocument(
     mimeType = MimeTypeConstants.JSON,

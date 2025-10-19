@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public data class TransactionDataMappedByCategory(
+internal data class TransactionDataMappedByCategory(
     val category: Category,
     val amountValue: Long,
     val percentage: Double,

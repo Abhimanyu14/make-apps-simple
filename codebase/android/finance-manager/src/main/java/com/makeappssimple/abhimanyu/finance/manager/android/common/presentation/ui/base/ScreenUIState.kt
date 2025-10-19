@@ -19,4 +19,4 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 /**
  * Screen state passed to the screen UI composable.
  */
-public interface ScreenUIState
+internal interface ScreenUIState

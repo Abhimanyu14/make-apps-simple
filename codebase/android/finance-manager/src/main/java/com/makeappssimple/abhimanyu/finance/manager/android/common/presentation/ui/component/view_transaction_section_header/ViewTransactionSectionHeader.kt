@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 
 @Composable
-public fun ViewTransactionSectionHeader(
+internal fun ViewTransactionSectionHeader(
     modifier: Modifier = Modifier,
     data: ViewTransactionSectionHeaderData,
 ) {

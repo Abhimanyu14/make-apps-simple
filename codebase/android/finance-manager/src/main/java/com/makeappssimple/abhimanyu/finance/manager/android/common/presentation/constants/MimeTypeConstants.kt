@@ -16,6 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants
 
-public object MimeTypeConstants {
-    public const val JSON: String = "application/json"
+internal object MimeTypeConstants {
+    const val JSON: String = "application/json"
 }

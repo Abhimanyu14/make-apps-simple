@@ -30,7 +30,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.typealiases.ColumnScopedComposableContent
 
 @Composable
-public fun MyScaffoldContentWrapper(
+internal fun MyScaffoldContentWrapper(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     onClick: () -> Unit,

@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 
 @Composable
-public fun AnalysisFilterBottomSheet(
+internal fun AnalysisFilterBottomSheet(
     data: AnalysisFilterBottomSheetData,
     handleEvent: (event: AnalysisFilterBottomSheetEvent) -> Unit = {},
 ) {

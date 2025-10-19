@@ -21,27 +21,27 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 
 // TODO(Abhi): To delete
-public interface ScreenUIStateDelegate {
-    public val isLoading: Boolean
-    public val refreshSignal: MutableSharedFlow<Unit>
+internal interface ScreenUIStateDelegate {
+    val isLoading: Boolean
+    val refreshSignal: MutableSharedFlow<Unit>
 
-    public fun completeLoading(
+    fun completeLoading(
         shouldRefresh: Boolean = true,
     ): Job
 
-    public fun getCompletedJob(): CompletableJob
+    fun getCompletedJob(): CompletableJob
 
-    public fun refresh(): Job
+    fun refresh(): Job
 
-    public fun startLoading(
+    fun startLoading(
         shouldRefresh: Boolean = true,
     ): Job
 
-    public fun <T> withLoading(
+    fun <T> withLoading(
         block: () -> T,
     ): T
 
-    public suspend fun <T> withLoadingSuspend(
+    suspend fun <T> withLoadingSuspend(
         block: suspend () -> T,
     ): T
 }

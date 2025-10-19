@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account.AccountRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.sortOrder
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-public class GetAllAccountsUseCase(
+internal class GetAllAccountsUseCase(
     private val accountRepository: AccountRepository,
 ) {
-    public suspend operator fun invoke(): ImmutableList<Account> {
+    suspend operator fun invoke(): ImmutableList<Account> {
         return accountRepository.getAllAccounts().sortedWith(
             comparator = compareBy<Account> {
                 it.type.sortOrder

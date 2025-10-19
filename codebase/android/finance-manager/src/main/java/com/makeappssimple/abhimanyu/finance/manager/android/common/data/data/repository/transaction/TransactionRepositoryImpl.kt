@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction
 
 import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.asEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
