@@ -28,9 +28,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.legend.Dot
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.legend.Dot
 
 private object ActionButtonConstants {
     val loadingUISize = 40.dp

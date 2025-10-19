@@ -40,7 +40,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.extensions.ifTrue
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.extensions.ifTrue
 
 private val defaultSpacerSize = 100.dp
 

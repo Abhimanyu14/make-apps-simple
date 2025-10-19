@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.view_model.AddAccountScreenDataValidationState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount
 
 internal class AddAccountScreenDataValidationUseCase(
     private val getAllAccountsUseCase: GetAllAccountsUseCase,

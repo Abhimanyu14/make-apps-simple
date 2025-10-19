@@ -28,10 +28,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.EmojiCircleSize
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.MyEmojiCircleData

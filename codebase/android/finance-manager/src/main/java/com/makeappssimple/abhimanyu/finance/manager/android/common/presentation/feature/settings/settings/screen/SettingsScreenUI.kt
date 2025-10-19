@@ -39,6 +39,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyLinearProgressIndicator
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.components.SettingsScreenListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.event.SettingsScreenUIEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.settings.SettingsListItemAppVersion
@@ -52,10 +56,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.settings.SettingsListItemHeaderData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.components.SettingsScreenListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.event.SettingsScreenUIEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

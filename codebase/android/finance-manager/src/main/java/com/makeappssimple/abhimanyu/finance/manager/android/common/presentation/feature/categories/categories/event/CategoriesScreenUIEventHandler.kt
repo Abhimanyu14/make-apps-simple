@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.state.CategoriesScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 
 internal class CategoriesScreenUIEventHandler internal constructor(
     private val uiStateEvents: CategoriesScreenUIStateEvents,

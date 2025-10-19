@@ -19,11 +19,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.data.databas
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.FinanceManagerAppConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.InitialDatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util.sanitizeTransactions
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.InitialDataVersionNumber
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.FinanceManagerAppConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.InitialDataVersionNumber
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

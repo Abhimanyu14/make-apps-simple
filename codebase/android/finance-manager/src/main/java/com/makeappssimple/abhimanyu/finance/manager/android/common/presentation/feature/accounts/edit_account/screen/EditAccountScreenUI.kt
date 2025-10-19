@@ -45,6 +45,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.event.EditAccountScreenUIEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.stringResourceId
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountCommaVisualTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.rememberCommonScreenUIState
@@ -59,9 +62,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.text_field.MyOutlinedTextFieldEventV2
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.event.EditAccountScreenUIEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.stringResourceId
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable

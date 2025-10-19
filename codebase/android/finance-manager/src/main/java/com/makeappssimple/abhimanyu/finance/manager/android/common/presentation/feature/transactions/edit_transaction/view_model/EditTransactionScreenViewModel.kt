@@ -41,6 +41,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetTransactionDataByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.UpdateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -50,7 +51,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orEmpty
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.snackbar.EditTransactionScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.AccountFromText
@@ -603,7 +603,7 @@ internal class EditTransactionScreenViewModel(
         val transactionForId =
             allTransactionForValues[uiState.value.selectedTransactionForIndex].id
         val transactionType = uiState.value.selectedTransactionType
-        val transaction = Transaction(
+        Transaction(
             amount = amount,
             categoryId = categoryId,
             originalTransactionId = originalTransactionId,
