@@ -57,31 +57,6 @@ public data class AmountEntity(
     }
 }
 
-public fun AmountEntity.toNonSignedString(): String {
-    return toSignedString(
-        isPositive = false,
-        isNegative = false
-    )
-}
-
-public fun AmountEntity.toSignedString(
-    isPositive: Boolean = false,
-    isNegative: Boolean = false,
-): String {
-    val formattedValue = formattedCurrencyValue(
-        value = abs(
-            n = value,
-        ),
-    )
-    if (isPositive) {
-        return "+ ${currency.symbol}$formattedValue"
-    }
-    if (isNegative) {
-        return "- ${currency.symbol}$formattedValue"
-    }
-    return "${currency.symbol}$formattedValue"
-}
-
 public operator fun AmountEntity.plus(
     amount: AmountEntity,
 ): AmountEntity {

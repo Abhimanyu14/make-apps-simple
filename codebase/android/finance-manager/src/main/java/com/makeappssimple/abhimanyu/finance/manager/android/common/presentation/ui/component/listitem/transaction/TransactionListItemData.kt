@@ -21,8 +21,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.toSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toSignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.getAmountTextColor
 
 @Immutable

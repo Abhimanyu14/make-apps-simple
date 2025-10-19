@@ -34,7 +34,7 @@ public class AmountCommaVisualTransformation : VisualTransformation {
     ): TransformedText {
         return TransformedText(
             text = AnnotatedString(
-                formattedCurrencyValue(
+                text = formattedCurrencyValue(
                     value = text.text.toLongOrZero(),
                 ),
             ),
