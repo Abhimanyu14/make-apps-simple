@@ -36,7 +36,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.datasource.CommonDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.datastore.FinanceManagerPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

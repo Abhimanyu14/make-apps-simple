@@ -22,8 +22,8 @@ import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.FinanceManagerAppConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.InitialDatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.util.sanitizeTransactions
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.InitialDataVersionNumber
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

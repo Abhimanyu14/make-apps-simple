@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.datastore
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.DefaultDataId

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.datastore.fake
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.fake
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.InitialDataVersionNumber
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Reminder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.ReminderConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

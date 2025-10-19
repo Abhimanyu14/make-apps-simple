@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.datastore.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.constants
 
 internal object DatastoreConstants {
     const val DATASTORE_FILE_NAME: String = "finance_manager"
