@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.util.currency.formattedCurrencyValue
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 
 /**
  * Format long to comma separated string.

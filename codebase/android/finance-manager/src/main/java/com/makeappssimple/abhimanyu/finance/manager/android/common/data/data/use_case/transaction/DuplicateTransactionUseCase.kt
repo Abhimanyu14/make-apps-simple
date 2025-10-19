@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 
 public class DuplicateTransactionUseCase(
     private val dateTimeKit: DateTimeKit,

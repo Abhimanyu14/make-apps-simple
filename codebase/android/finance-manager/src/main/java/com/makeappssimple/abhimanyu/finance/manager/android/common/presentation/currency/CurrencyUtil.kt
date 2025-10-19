@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.util.currency
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency
 
 import java.text.DecimalFormat
 

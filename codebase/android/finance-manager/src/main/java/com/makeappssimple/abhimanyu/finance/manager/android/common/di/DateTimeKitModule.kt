@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.date_time.DateTimeKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.date_time.DateTimeKitImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKitImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import kotlin.time.ExperimentalTime
