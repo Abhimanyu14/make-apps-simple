@@ -24,6 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.sortOrder
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemHeaderData
@@ -80,7 +81,7 @@ internal class GetAllAccountsListItemDataListUseCase(
                             isMoreOptionsIconButtonVisible = true,
                             icon = account.type.icon,
                             accountId = account.id,
-                            balance = account.balanceAmount.toString(),
+                            balance = account.balanceAmount.toDefaultString(),
                             name = account.name,
                         )
                     }.orEmpty()
