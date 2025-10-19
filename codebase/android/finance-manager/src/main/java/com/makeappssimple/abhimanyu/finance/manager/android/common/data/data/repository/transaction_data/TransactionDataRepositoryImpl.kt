@@ -31,6 +31,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 internal class TransactionDataRepositoryImpl(
@@ -73,39 +74,41 @@ internal class TransactionDataRepositoryImpl(
     }
 
     override fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>> {
-        return try {
-            transactionDataDao.getAllTransactionDataFlow().map {
+        return transactionDataDao
+            .getAllTransactionDataFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
                 it.map(
                     transform = TransactionDataEntity::asExternalModel,
                 )
             }
-        } catch (
-            sqliteException: SQLiteException,
-        ) {
-            error(
-                message = "Database Error: ${sqliteException.localizedMessage}",
-            )
-        }
     }
 
     override fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<ImmutableList<TransactionData>> {
-        return try {
-            transactionDataDao.getRecentTransactionDataFlow(
+        return transactionDataDao
+            .getRecentTransactionDataFlow(
                 numberOfTransactions = numberOfTransactions,
-            ).map {
+            )
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
                 it.map(
                     transform = TransactionDataEntity::asExternalModel,
                 )
             }
-        } catch (
-            sqliteException: SQLiteException,
-        ) {
-            error(
-                message = "Database Error: ${sqliteException.localizedMessage}",
-            )
-        }
     }
 
     override suspend fun getSearchedTransactionData(

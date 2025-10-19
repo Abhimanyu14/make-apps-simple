@@ -27,6 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 internal class TransactionForRepositoryImpl(
@@ -68,19 +69,20 @@ internal class TransactionForRepositoryImpl(
     }
 
     override fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>> {
-        return try {
-            transactionForDao.getAllTransactionForValuesFlow().map {
+        return transactionForDao
+            .getAllTransactionForValuesFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
                 it.map(
                     transform = TransactionForEntity::asExternalModel,
                 )
             }
-        } catch (
-            sqliteException: SQLiteException,
-        ) {
-            error(
-                message = "Database Error: ${sqliteException.localizedMessage}",
-            )
-        }
     }
 
     override suspend fun getTransactionForById(

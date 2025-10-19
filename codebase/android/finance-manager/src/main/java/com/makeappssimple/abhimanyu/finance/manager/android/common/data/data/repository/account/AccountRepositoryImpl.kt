@@ -28,6 +28,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 internal class AccountRepositoryImpl(
@@ -107,19 +108,20 @@ internal class AccountRepositoryImpl(
     }
 
     override fun getAllAccountsFlow(): Flow<ImmutableList<Account>> {
-        return try {
-            accountDao.getAllAccountsFlow().map {
+        return accountDao
+            .getAllAccountsFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
                 it.map(
                     transform = AccountEntity::asExternalModel,
                 )
             }
-        } catch (
-            sqliteException: SQLiteException,
-        ) {
-            error(
-                message = "Database Error: ${sqliteException.localizedMessage}",
-            )
-        }
     }
 
     override suspend fun insertAccounts(

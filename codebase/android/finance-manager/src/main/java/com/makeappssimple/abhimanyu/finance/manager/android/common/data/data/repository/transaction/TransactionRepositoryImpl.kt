@@ -31,6 +31,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 internal class TransactionRepositoryImpl(
@@ -206,22 +207,23 @@ internal class TransactionRepositoryImpl(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): Flow<ImmutableList<Transaction>> {
-        return try {
-            transactionDao.getTransactionsBetweenTimestampsFlow(
+        return transactionDao
+            .getTransactionsBetweenTimestampsFlow(
                 startingTimestamp = startingTimestamp,
                 endingTimestamp = endingTimestamp,
-            ).map {
+            )
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
                 it.map(
                     transform = TransactionEntity::asExternalModel,
                 )
             }
-        } catch (
-            sqliteException: SQLiteException,
-        ) {
-            error(
-                message = "Database Error: ${sqliteException.localizedMessage}",
-            )
-        }
     }
 
     override suspend fun insertTransaction(

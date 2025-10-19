@@ -27,6 +27,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 internal class CategoryRepositoryImpl(
@@ -88,19 +89,20 @@ internal class CategoryRepositoryImpl(
     }
 
     override fun getAllCategoriesFlow(): Flow<ImmutableList<Category>> {
-        return try {
-            categoryDao.getAllCategoriesFlow().map {
+        return categoryDao
+            .getAllCategoriesFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
                 it.map(
                     transform = CategoryEntity::asExternalModel,
                 )
             }
-        } catch (
-            sqliteException: SQLiteException,
-        ) {
-            error(
-                message = "Database Error: ${sqliteException.localizedMessage}",
-            )
-        }
     }
 
     override suspend fun getCategoryById(
