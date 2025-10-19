@@ -511,7 +511,9 @@ internal class TransactionsScreenViewModel(
             duplicateTransactionUseCase(
                 transactionId = transactionId,
             )
-            updateScreenSnackbarType(TransactionsScreenSnackbarType.DuplicateTransactionSuccessful)
+            updateScreenSnackbarType(
+                updatedTransactionsScreenSnackbarType = TransactionsScreenSnackbarType.DuplicateTransactionSuccessful,
+            )
         }
     }
 
