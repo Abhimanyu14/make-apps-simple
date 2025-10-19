@@ -107,8 +107,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.DatabaseTransactionProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.fake.FakeDatabaseTransactionProviderImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit

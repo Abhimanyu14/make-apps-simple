@@ -18,9 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType

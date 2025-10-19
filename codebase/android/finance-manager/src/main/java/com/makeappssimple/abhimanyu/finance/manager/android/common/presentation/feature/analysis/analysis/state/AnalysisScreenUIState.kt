@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.analysis.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.analysis.AnalysisListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate

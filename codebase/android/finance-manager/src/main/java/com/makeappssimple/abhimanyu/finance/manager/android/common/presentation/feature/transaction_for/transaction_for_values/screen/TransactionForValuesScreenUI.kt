@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.SCREEN_CONTENT_TRANSACTION_FOR_VALUES
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.SCREEN_TRANSACTION_FOR_VALUES
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_TRANSACTION_FOR_VALUES
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_TRANSACTION_FOR_VALUES
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.button.MyFloatingActionButton

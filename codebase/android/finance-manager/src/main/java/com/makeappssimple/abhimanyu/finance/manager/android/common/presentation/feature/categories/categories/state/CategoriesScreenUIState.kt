@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.tab_row.MyTabData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.grid_item.CategoriesGridItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType

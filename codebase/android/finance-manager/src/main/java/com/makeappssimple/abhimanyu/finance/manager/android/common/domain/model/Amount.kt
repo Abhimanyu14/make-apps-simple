@@ -16,11 +16,11 @@
 
 @file:OptIn(ExperimentalSerializationApi::class)
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.CurrencyCodeConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.serializer.CurrencySerializer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.CurrencyCodeConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.serializer.CurrencySerializer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi

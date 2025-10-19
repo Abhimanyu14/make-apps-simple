@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.toImmutableMap

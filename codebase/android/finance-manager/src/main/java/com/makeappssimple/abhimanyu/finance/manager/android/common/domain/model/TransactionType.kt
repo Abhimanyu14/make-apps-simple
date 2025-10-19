@@ -14,31 +14,36 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-
-public enum class SortOption(
+public enum class TransactionType(
     public val title: String,
 ) {
-    AMOUNT_ASC(
-        title = "Amount Asc",
+    INCOME(
+        title = "Income",
     ),
-    AMOUNT_DESC(
-        title = "Amount Desc",
+    EXPENSE(
+        title = "Expense",
     ),
-    LATEST_FIRST(
-        title = "Latest First",
+    TRANSFER(
+        title = "Transfer",
     ),
-    OLDEST_FIRST(
-        title = "Oldest First",
+    ADJUSTMENT(
+        title = "Adjustment",
     ),
-}
-
-public fun SortOption?.orDefault(): SortOption {
-    return if (this.isNull()) {
-        SortOption.LATEST_FIRST
-    } else {
-        this
-    }
+    INVESTMENT(
+        title = "Investment",
+    ),
+    REFUND(
+        title = "Refund",
+    ),
+    /*
+    // TODO(Abhi): Add Loans later
+    LOAN(
+        title = "Loan",
+    ),
+    REPAYMENT(
+        title = "Repayment",
+    ),
+    */
 }

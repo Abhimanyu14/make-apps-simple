@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.category
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 

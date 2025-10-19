@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.minus
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.plus
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.minus
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.plus
 
 public class GetMaxRefundAmountUseCase(
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,

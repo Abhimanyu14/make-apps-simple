@@ -18,11 +18,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.SortOption
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

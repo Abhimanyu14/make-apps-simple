@@ -32,8 +32,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util.sanitizeAccounts
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util.sanitizeTransactions
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

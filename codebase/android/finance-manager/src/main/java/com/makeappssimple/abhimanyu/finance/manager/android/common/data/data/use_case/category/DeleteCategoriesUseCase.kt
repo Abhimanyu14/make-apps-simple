@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.us
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 
 public class DeleteCategoriesUseCase(
     private val categoryRepository: CategoryRepository,

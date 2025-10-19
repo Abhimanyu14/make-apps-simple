@@ -19,11 +19,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.us
 import com.makeappssimple.abhimanyu.common.core.extensions.toIntOrZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.InsertTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import kotlinx.collections.immutable.ImmutableList
 import kotlin.math.abs

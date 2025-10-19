@@ -42,8 +42,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedTime
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.VerticalSpacer

@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public object FinanceManagerAppConstants {
-    public const val APP_NAME: String = "finance_manager"
-    public const val INITIAL_DATA_FILE_NAME: String =
-        "database/initial_data.json"
-    public const val ZONE_ID_GMT: String = "UTC"
-}
+public data class TransactionDataMappedByCategory(
+    val category: Category,
+    val amountValue: Long,
+    val percentage: Double,
+)

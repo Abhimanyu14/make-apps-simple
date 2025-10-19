@@ -20,7 +20,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.data.databas
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import kotlinx.serialization.ExperimentalSerializationApi
 
 public data class TransactionDataEntity(

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction_for.TransactionForListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction_for.TransactionForListItemDataAndEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction_for.TransactionForListItemEvent

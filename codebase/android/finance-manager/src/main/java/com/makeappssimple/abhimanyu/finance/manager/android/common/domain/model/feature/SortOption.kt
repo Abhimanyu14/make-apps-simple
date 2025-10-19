@@ -14,12 +14,31 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature
 
-public data class TransactionData(
-    val transaction: Transaction,
-    val category: Category?,
-    val accountFrom: Account?,
-    val accountTo: Account?,
-    val transactionFor: TransactionFor,
-)
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
+
+public enum class SortOption(
+    public val title: String,
+) {
+    AMOUNT_ASC(
+        title = "Amount Asc",
+    ),
+    AMOUNT_DESC(
+        title = "Amount Desc",
+    ),
+    LATEST_FIRST(
+        title = "Latest First",
+    ),
+    OLDEST_FIRST(
+        title = "Oldest First",
+    ),
+}
+
+public fun SortOption?.orDefault(): SortOption {
+    return if (this.isNull()) {
+        SortOption.LATEST_FIRST
+    } else {
+        this
+    }
+}

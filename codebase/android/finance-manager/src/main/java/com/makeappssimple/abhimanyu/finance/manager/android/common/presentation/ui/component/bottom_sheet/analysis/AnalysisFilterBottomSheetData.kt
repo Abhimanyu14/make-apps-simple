@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.analysis.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 import java.time.LocalDate
 
 @Immutable

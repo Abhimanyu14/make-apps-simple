@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
-public data class DataTimestamp(
-    @SerialName(value = "last_backup")
-    val lastBackup: Long = 0L,
-
-    @SerialName(value = "last_change")
-    val lastChange: Long = 0L,
-)
+public object EmojiConstants {
+    public const val HOURGLASS_NOT_DONE: String = "⏳"
+    public const val GRINNING_FACE_WITH_BIG_EYES: String = "😃"
+    public const val WORRIED_FACE: String = "😟"
+    public const val EXPRESSIONLESS_FACE: String = "😑️"
+    public const val LEFT_RIGHT_ARROW: String = "↔️"
+}

@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.view_model.EditTransactionForScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList

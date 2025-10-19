@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.SortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable

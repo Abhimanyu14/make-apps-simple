@@ -26,10 +26,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetAllTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.DataTimestamp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.DefaultDataId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.InitialDataVersionNumber
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Reminder
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.InitialDataVersionNumber
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Reminder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

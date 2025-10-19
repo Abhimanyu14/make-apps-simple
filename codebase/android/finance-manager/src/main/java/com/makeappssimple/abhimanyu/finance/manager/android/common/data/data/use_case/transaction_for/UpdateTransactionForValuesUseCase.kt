@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.us
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction_for.TransactionForRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 
 public class UpdateTransactionForValuesUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

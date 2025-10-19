@@ -18,8 +18,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 
 public fun Transaction.getAmountTextColor(): MyColor {
     return this.transactionType.getAmountTextColor(

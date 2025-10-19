@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 
 public fun Transaction.asEntity(): TransactionEntity {
     return TransactionEntity(

@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.orEmpty
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentDataAndEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentEvent

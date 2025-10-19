@@ -14,22 +14,8 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
-public data class InitialDataVersionNumber(
-    @SerialName(value = "account")
-    val account: Int = 0,
-
-    @SerialName(value = "category")
-    val category: Int = 0,
-
-    @SerialName(value = "transaction")
-    val transaction: Int = 0,
-
-    @SerialName(value = "transaction_for")
-    val transactionFor: Int = 0,
-)
+public object CurrencyCodeConstants {
+    public const val INR: String = "INR"
+}

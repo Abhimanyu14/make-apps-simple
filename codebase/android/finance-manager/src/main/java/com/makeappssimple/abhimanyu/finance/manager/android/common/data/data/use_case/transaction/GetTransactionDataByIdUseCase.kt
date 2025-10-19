@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction_data.TransactionDataRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 
 public class GetTransactionDataByIdUseCase(
     private val transactionDataRepository: TransactionDataRepository,

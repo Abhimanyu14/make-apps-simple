@@ -22,9 +22,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.rep
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetAllTransactionDataUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.updateBalanceAmount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.updateBalanceAmount
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

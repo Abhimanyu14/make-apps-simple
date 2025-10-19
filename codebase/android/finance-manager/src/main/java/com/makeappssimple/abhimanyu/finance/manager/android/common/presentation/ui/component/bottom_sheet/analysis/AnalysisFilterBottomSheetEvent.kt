@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.analysis
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.analysis.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 
 @Immutable
 public sealed class AnalysisFilterBottomSheetEvent {

@@ -16,42 +16,33 @@
 
 @file:OptIn(ExperimentalSerializationApi::class)
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 
 @Serializable
-public data class Account(
-    @EncodeDefault
-    @SerialName(value = "balance_amount")
-    val balanceAmount: Amount = Amount(
-        value = 0,
-    ),
-
+public data class Category(
     @EncodeDefault
     val id: Int = 0,
 
-    @EncodeDefault
-    val type: AccountType = AccountType.CASH,
+    @SerialName(value = "parent_category")
+    val parentCategoryId: Int? = null,
+
+    @SerialName(value = "sub_categories")
+    val subCategoryIds: List<Int>? = null,
 
     @EncodeDefault
-    @SerialName(value = "minimum_account_balance_amount")
-    val minimumAccountBalanceAmount: Amount? = null,
+    val description: String = "",
 
-    val name: String,
+    val emoji: String,
+
+    val title: String,
+
+    @SerialName(value = "transaction_type")
+    @JsonNames("transactionType")
+    val transactionType: TransactionType,
 )
-
-public fun Account.updateBalanceAmount(
-    updatedBalanceAmount: Long,
-): Account {
-    return this
-        .copy(
-            balanceAmount = this.balanceAmount
-                .copy(
-                    value = updatedBalanceAmount,
-                )
-        )
-}

@@ -18,9 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.us
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 
 internal class InsertAccountUseCase(
     private val accountRepository: AccountRepository,

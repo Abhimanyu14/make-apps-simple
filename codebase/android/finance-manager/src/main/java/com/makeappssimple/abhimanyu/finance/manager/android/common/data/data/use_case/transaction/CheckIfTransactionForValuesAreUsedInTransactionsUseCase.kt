@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.us
 
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 
 public class CheckIfTransactionForValuesAreUsedInTransactionsUseCase(

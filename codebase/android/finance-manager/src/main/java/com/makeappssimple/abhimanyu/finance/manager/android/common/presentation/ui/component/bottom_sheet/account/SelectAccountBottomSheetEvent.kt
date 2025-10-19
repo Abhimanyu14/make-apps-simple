@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.account
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 
 @Immutable
 public sealed class SelectAccountBottomSheetEvent {

@@ -16,10 +16,10 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 
 internal class TransactionsScreenUIEventHandler internal constructor(
     private val uiStateEvents: TransactionsScreenUIStateEvents,

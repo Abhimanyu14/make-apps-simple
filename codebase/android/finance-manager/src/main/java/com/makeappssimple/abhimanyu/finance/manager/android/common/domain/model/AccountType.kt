@@ -14,8 +14,33 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public object CurrencyCodeConstants {
-    public const val INR: String = "INR"
+public enum class AccountType(
+    public val title: String,
+) {
+    BANK(
+        title = "Bank",
+    ),
+    CASH(
+        title = "Cash",
+    ),
+    E_WALLET(
+        title = "E-Wallet",
+    ),
 }
+
+public val AccountType.sortOrder: Int
+    get() = when (this) {
+        AccountType.CASH -> {
+            1
+        }
+
+        AccountType.BANK -> {
+            2
+        }
+
+        AccountType.E_WALLET -> {
+            3
+        }
+    }

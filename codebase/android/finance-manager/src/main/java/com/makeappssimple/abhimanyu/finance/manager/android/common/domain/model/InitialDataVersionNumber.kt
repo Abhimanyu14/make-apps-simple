@@ -14,33 +14,22 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public enum class AccountType(
-    public val title: String,
-) {
-    BANK(
-        title = "Bank",
-    ),
-    CASH(
-        title = "Cash",
-    ),
-    E_WALLET(
-        title = "E-Wallet",
-    ),
-}
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-public val AccountType.sortOrder: Int
-    get() = when (this) {
-        AccountType.CASH -> {
-            1
-        }
+@Serializable
+public data class InitialDataVersionNumber(
+    @SerialName(value = "account")
+    val account: Int = 0,
 
-        AccountType.BANK -> {
-            2
-        }
+    @SerialName(value = "category")
+    val category: Int = 0,
 
-        AccountType.E_WALLET -> {
-            3
-        }
-    }
+    @SerialName(value = "transaction")
+    val transaction: Int = 0,
+
+    @SerialName(value = "transaction_for")
+    val transactionFor: Int = 0,
+)

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 
 public fun Account.asEntity(): AccountEntity {
     return AccountEntity(

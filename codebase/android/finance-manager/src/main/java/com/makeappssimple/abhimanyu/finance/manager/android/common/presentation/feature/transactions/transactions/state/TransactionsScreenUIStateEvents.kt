@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.SortOption
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import kotlinx.coroutines.Job
 
 @Stable

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.common.MyConfirmationBottomSheet
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.common.MyConfirmationBottomSheetData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.common.MyConfirmationBottomSheetEvent

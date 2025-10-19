@@ -22,7 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.analysis.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 
 @Composable
 public fun AnalysisFilterBottomSheet(

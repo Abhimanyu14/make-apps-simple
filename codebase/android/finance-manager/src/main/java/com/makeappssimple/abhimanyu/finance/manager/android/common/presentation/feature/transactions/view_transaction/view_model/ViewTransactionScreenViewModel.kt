@@ -23,8 +23,8 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.DeleteTransactionUseByIdCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetTransactionDataByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.navigation.ViewTransactionScreenArgs
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType

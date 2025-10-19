@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public data class TransactionDataMappedByCategory(
-    val category: Category,
-    val amountValue: Long,
-    val percentage: Double,
+public data class TransactionData(
+    val transaction: Transaction,
+    val category: Category?,
+    val accountFrom: Account?,
+    val accountTo: Account?,
+    val transactionFor: TransactionFor,
 )

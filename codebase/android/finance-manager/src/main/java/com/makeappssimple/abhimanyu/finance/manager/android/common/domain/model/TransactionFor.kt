@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-public object EmojiConstants {
-    public const val HOURGLASS_NOT_DONE: String = "⏳"
-    public const val GRINNING_FACE_WITH_BIG_EYES: String = "😃"
-    public const val WORRIED_FACE: String = "😟"
-    public const val EXPRESSIONLESS_FACE: String = "😑️"
-    public const val LEFT_RIGHT_ARROW: String = "↔️"
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+public data class TransactionFor(
+    val id: Int = 0,
+    val title: String,
+)

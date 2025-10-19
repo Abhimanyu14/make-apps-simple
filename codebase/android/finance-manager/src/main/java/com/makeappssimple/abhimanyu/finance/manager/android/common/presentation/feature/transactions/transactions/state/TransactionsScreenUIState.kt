@@ -18,16 +18,16 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionFor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.SortOption
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate

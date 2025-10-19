@@ -14,36 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants
 
-public enum class TransactionType(
-    public val title: String,
-) {
-    INCOME(
-        title = "Income",
-    ),
-    EXPENSE(
-        title = "Expense",
-    ),
-    TRANSFER(
-        title = "Transfer",
-    ),
-    ADJUSTMENT(
-        title = "Adjustment",
-    ),
-    INVESTMENT(
-        title = "Investment",
-    ),
-    REFUND(
-        title = "Refund",
-    ),
-    /*
-    // TODO(Abhi): Add Loans later
-    LOAN(
-        title = "Loan",
-    ),
-    REPAYMENT(
-        title = "Repayment",
-    ),
-    */
+public object FinanceManagerAppConstants {
+    public const val APP_NAME: String = "finance_manager"
+    public const val INITIAL_DATA_FILE_NAME: String =
+        "database/initial_data.json"
+    public const val ZONE_ID_GMT: String = "UTC"
 }

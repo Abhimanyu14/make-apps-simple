@@ -31,10 +31,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetTransactionByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.GetTransactionsBetweenTimestampsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.state.HomeScreenUIStateEvents

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 

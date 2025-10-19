@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.FinanceManagerAppConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.FinanceManagerAppConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText

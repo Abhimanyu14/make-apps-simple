@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 
 public val AccountType.icon: ImageVector
     get() = when (this) {

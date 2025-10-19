@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.updateBalanceAmount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.DatabaseTransactionProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 
 internal class CommonDataSourceImpl(
     private val accountDao: AccountDao,

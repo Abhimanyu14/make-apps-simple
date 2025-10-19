@@ -19,9 +19,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model
 
 import androidx.room.ColumnInfo
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.CurrencyCodeConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.serializer.CurrencySerializer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.CurrencyCodeConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.serializer.CurrencySerializer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi

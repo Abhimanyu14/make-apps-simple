@@ -30,7 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.MimeTypeConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.MimeTypeConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIStateEvents

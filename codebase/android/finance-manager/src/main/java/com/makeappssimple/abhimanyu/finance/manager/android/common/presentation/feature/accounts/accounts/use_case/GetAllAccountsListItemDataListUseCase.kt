@@ -20,10 +20,10 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.orEmpty
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.sortOrder
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orEmpty
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.sortOrder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemHeaderData

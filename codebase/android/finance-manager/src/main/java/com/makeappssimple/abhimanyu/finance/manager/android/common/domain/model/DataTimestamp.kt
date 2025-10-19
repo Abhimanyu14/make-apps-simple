@@ -14,27 +14,16 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * Daily 09:30 PM.
- */
-public object ReminderConstants {
-    public const val DEFAULT_REMINDER_HOUR: Int = 21
-    public const val DEFAULT_REMINDER_MIN: Int = 30
-}
-
 @Serializable
-public data class Reminder(
-    @SerialName(value = "is_enabled")
-    val isEnabled: Boolean = false,
+public data class DataTimestamp(
+    @SerialName(value = "last_backup")
+    val lastBackup: Long = 0L,
 
-    @SerialName(value = "hour")
-    val hour: Int = ReminderConstants.DEFAULT_REMINDER_HOUR,
-
-    @SerialName(value = "min")
-    val min: Int = ReminderConstants.DEFAULT_REMINDER_MIN,
+    @SerialName(value = "last_change")
+    val lastChange: Long = 0L,
 )

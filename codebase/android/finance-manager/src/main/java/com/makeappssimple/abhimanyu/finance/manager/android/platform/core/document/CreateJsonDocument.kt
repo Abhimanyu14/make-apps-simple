@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.platform.core.docum
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants.MimeTypeConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.MimeTypeConstants
 
 public class CreateJsonDocument(
     private val getCurrentFormattedDateAndTime: () -> String,

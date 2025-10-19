@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.mod
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
