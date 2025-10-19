@@ -31,6 +31,7 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAccountsInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetOldestTransactionTimestampUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
@@ -66,7 +67,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.annotation.KoinViewModel
-import java.lang.Long.min
 import java.time.LocalDate
 
 @KoinViewModel
@@ -78,6 +78,7 @@ internal class TransactionsScreenViewModel(
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
     private val getAccountsInTransactionsFlowUseCase: GetAccountsInTransactionsFlowUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
+    private val getOldestTransactionTimestampUseCase: GetOldestTransactionTimestampUseCase,
     private val navigationKit: NavigationKit,
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
     internal val logKit: LogKit,
@@ -427,6 +428,7 @@ internal class TransactionsScreenViewModel(
     private fun observeData() {
         observeForAccountsInTransactions()
         observeForAllTransactionData()
+        observeForOldestTransactionTimestamp()
     }
 
     private fun observeForAccountsInTransactions() {
@@ -443,14 +445,9 @@ internal class TransactionsScreenViewModel(
         coroutineScope.launch {
             getAllTransactionDataFlowUseCase()
                 .collectLatest { updatedAllTransactionData ->
-                    var oldestTransactionLocalDateValue = Long.MAX_VALUE
                     val categoriesInTransactionsMap =
                         mutableMapOf<TransactionType, MutableSet<Category>>()
                     updatedAllTransactionData.forEach { transactionData ->
-                        oldestTransactionLocalDateValue = min(
-                            oldestTransactionLocalDateValue,
-                            transactionData.transaction.transactionTimestamp,
-                        )
                         transactionData.category?.let {
                             categoriesInTransactionsMap.computeIfAbsent(
                                 it.transactionType,
@@ -461,11 +458,20 @@ internal class TransactionsScreenViewModel(
                             )
                         }
                     }
-                    oldestTransactionLocalDate = dateTimeKit.getLocalDate(
-                        timestamp = oldestTransactionLocalDateValue.orZero(),
-                    )
                     categoriesMap = categoriesInTransactionsMap.toMap()
                     allTransactionData = updatedAllTransactionData
+                    refreshUiState()
+                }
+        }
+    }
+
+    private fun observeForOldestTransactionTimestamp() {
+        coroutineScope.launch {
+            getOldestTransactionTimestampUseCase()
+                .collectLatest { oldestTransactionTimestamp: Long? ->
+                    oldestTransactionLocalDate = dateTimeKit.getLocalDate(
+                        timestamp = oldestTransactionTimestamp.orZero(),
+                    )
                     refreshUiState()
                 }
         }

@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 /**
@@ -54,6 +55,10 @@ internal class FakeTransactionDataDaoImpl(
                 transactions = transactions,
             )
         }
+    }
+
+    override fun getOldestTransactionTimestampFlow(): Flow<Long?> {
+        return emptyFlow()
     }
 
     override fun getRecentTransactionDataFlow(

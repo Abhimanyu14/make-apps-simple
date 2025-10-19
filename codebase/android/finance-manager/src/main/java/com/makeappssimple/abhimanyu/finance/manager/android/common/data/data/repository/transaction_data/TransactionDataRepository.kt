@@ -35,6 +35,8 @@ internal interface TransactionDataRepository {
 
     fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>>
 
+    suspend fun getOldestTransactionTimestampFlow(): Flow<Long?>
+
     fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<ImmutableList<TransactionData>>

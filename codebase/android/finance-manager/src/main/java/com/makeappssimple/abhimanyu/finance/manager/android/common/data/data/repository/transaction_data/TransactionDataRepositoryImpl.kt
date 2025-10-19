@@ -108,6 +108,18 @@ internal class TransactionDataRepositoryImpl(
             }
     }
 
+    override suspend fun getOldestTransactionTimestampFlow(): Flow<Long?> {
+        return transactionDataDao
+            .getOldestTransactionTimestampFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+    }
+
     override fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<ImmutableList<TransactionData>> {

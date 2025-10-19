@@ -85,6 +85,20 @@ internal interface TransactionDataDao {
     fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
 
     /**
+     * Get the timestamp of the oldest transaction.
+     *
+     * @return The timestamp of the oldest transaction, or null if there are no transactions.
+     * @throws SQLiteException if there is a general SQLite error.
+     */
+    @Query(
+        value = """
+            SELECT MIN(transaction_timestamp)
+            FROM transaction_table
+        """
+    )
+    fun getOldestTransactionTimestampFlow(): Flow<Long?>
+
+    /**
      * Get recent transaction data as a Flow.
      * @param numberOfTransactions Number of recent transactions to retrieve
      * @return Flow emitting the specified number of most recent transactions
