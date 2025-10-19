@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.constants
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants
 
 public object MimeTypeConstants {
     public const val JSON: String = "application/json"
