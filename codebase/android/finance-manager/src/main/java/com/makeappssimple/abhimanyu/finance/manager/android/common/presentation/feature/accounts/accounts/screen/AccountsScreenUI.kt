@@ -228,11 +228,15 @@ private fun LazyListScope.accountsList(
 }
 
 private fun LazyListScope.accountsListLoadingUI() {
-    repeat(3) {
+    repeat(
+        times = 3,
+    ) {
         item {
             AccountsListItemHeaderLoadingUI()
         }
-        repeat(5) {
+        repeat(
+            times = 5,
+        ) {
             item {
                 AccountsListItemContentLoadingUI()
             }
