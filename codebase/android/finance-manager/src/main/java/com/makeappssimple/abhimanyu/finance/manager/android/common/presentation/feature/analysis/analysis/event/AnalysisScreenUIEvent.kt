@@ -1,0 +1,38 @@
+/*
+ * Copyright 2025-2025 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.event
+
+import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.analysis.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEvent
+
+@Immutable
+internal sealed class AnalysisScreenUIEvent : ScreenUIEvent {
+    data object OnFilterActionButtonClick : AnalysisScreenUIEvent()
+    data object OnNavigationBackButtonClick : AnalysisScreenUIEvent()
+    data object OnTopAppBarNavigationButtonClick : AnalysisScreenUIEvent()
+
+    data class OnTransactionTypeChange(
+        val updatedSelectedTransactionTypeIndex: Int,
+    ) : AnalysisScreenUIEvent()
+
+    sealed class OnAnalysisFilterBottomSheet {
+        data class PositiveButtonClick(
+            val updatedSelectedFilter: Filter,
+        ) : AnalysisScreenUIEvent()
+    }
+}

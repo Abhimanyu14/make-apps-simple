@@ -20,13 +20,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.Screen
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.accounts.navigation.accountsNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.analysis.navigation.analysisNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.categories.navigation.categoriesNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.home.navigation.homeNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.settings.navigation.settingsNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transaction_for.navigation.transactionForNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.feature.transactions.navigation.transactionsNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.navigation.accountsNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.navigation.analysisNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.navigation.categoriesNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.navigation.homeNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.navigation.settingsNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.navigation.transactionForNavGraph
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.navigation.transactionsNavGraph
 
 @Composable
 internal fun FinanceManagerNavHost(
