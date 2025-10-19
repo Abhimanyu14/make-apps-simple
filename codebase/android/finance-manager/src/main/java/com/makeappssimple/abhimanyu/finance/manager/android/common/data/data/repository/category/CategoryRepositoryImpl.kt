@@ -20,9 +20,9 @@ import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.asEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.CategoryDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.CategoryEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList

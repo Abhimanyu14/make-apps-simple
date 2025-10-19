@@ -20,10 +20,10 @@ import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.asEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.datasource.CommonDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.TransactionEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction

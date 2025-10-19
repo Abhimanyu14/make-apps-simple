@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 import android.content.Context
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database.FinanceManagerRoomDatabase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database.InitialDatabasePopulator
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database.InitialDatabasePopulatorImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.FinanceManagerRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.InitialDatabasePopulator
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.InitialDatabasePopulatorImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

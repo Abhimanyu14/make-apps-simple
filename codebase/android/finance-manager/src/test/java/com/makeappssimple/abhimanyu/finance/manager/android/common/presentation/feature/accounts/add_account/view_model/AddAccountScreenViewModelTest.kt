@@ -21,7 +21,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount

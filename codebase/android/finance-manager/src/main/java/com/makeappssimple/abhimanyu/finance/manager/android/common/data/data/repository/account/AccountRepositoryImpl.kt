@@ -20,9 +20,9 @@ import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.asEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.AccountDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.AccountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.updateBalanceAmount
 import kotlinx.collections.immutable.ImmutableList

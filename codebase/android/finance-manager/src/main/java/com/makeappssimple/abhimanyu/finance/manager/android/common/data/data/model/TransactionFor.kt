@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.TransactionForEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionFor
 
 public fun TransactionFor.asEntity(): TransactionForEntity {

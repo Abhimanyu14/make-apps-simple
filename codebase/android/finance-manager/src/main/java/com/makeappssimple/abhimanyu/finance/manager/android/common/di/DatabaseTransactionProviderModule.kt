@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database.FinanceManagerRoomDatabase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.transaction_provider.DatabaseTransactionProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.transaction_provider.DatabaseTransactionProviderImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.FinanceManagerRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.DatabaseTransactionProvider
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.DatabaseTransactionProviderImpl
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

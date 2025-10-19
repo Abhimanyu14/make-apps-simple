@@ -27,11 +27,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.mod
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.repository.transaction.TransactionRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.AccountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.TransactionEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.asExternalModel
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.util.sanitizeAccounts
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.util.sanitizeTransactions
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util.sanitizeAccounts
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util.sanitizeTransactions
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Transaction
 import kotlinx.collections.immutable.toImmutableList

@@ -21,9 +21,9 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.CategoryDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database.FinanceManagerRoomDatabase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.CategoryEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.FinanceManagerRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty

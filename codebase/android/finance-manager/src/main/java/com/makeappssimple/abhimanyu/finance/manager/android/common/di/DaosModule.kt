@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.AccountDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.CategoryDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionDataDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionForDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.local.database.FinanceManagerRoomDatabase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionForDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.FinanceManagerRoomDatabase
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

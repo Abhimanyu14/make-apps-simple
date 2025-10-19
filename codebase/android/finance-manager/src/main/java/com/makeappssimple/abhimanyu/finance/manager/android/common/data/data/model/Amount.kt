@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.model.AmountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AmountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Amount
 
 public fun Amount.asEntity(): AmountEntity {

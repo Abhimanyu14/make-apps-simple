@@ -16,14 +16,14 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.AccountDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.CategoryDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionDataDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.dao.TransactionForDao
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.datasource.CommonDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.datasource.CommonDataSourceImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.database.transaction_provider.DatabaseTransactionProvider
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionForDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSourceImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.DatabaseTransactionProvider
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
