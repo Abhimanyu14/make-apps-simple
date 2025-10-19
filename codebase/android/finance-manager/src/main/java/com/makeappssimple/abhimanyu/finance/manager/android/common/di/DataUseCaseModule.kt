@@ -57,6 +57,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DeleteAllTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DeleteTransactionUseByIdCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAccountsInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionsUseCase
@@ -434,6 +435,15 @@ internal class DataUseCaseModule {
             dateTimeKit = dateTimeKit,
             getTransactionByIdUseCase = getTransactionByIdUseCase,
             insertTransactionsUseCase = insertTransactionsUseCase,
+        )
+    }
+
+    @Single
+    internal fun providesGetAccountsInTransactionsFlowUseCase(
+        transactionDataRepository: TransactionDataRepository,
+    ): GetAccountsInTransactionsFlowUseCase {
+        return GetAccountsInTransactionsFlowUseCase(
+            transactionDataRepository = transactionDataRepository,
         )
     }
 

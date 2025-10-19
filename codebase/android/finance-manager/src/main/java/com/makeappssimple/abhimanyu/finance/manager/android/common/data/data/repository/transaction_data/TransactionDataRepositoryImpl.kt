@@ -22,6 +22,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
@@ -39,6 +40,23 @@ internal class TransactionDataRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
     private val transactionDataDao: TransactionDataDao,
 ) : TransactionDataRepository {
+    override fun getAccountsInTransactionsFlow(): Flow<List<Account>> {
+        return transactionDataDao
+            .getAccountsInTransactionsFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map { accountEntities ->
+                accountEntities.map(
+                    transform = AccountEntity::asExternalModel,
+                )
+            }
+    }
+
     override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
@@ -83,8 +101,8 @@ internal class TransactionDataRepositoryImpl(
                     )
                 }
             }
-            .map {
-                it.map(
+            .map { transactionDataEntities ->
+                transactionDataEntities.map(
                     transform = TransactionDataEntity::asExternalModel,
                 )
             }
@@ -104,8 +122,8 @@ internal class TransactionDataRepositoryImpl(
                     )
                 }
             }
-            .map {
-                it.map(
+            .map { transactionDataEntities ->
+                transactionDataEntities.map(
                     transform = TransactionDataEntity::asExternalModel,
                 )
             }
@@ -116,11 +134,13 @@ internal class TransactionDataRepositoryImpl(
     ): ImmutableList<TransactionData> {
         return dispatcherProvider.executeOnIoDispatcher {
             try {
-                transactionDataDao.getSearchedTransactionData(
-                    searchText = searchText,
-                ).map(
-                    transform = TransactionDataEntity::asExternalModel,
-                )
+                transactionDataDao
+                    .getSearchedTransactionData(
+                        searchText = searchText,
+                    )
+                    .map(
+                        transform = TransactionDataEntity::asExternalModel,
+                    )
             } catch (
                 sqliteException: SQLiteException,
             ) {
@@ -182,18 +202,26 @@ internal class TransactionDataRepositoryImpl(
         return dispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.restoreData(
-                    categories = categories.map(
-                        transform = Category::asEntity,
-                    ).toTypedArray(),
-                    accounts = accounts.map(
-                        transform = Account::asEntity,
-                    ).toTypedArray(),
-                    transactions = transactions.map(
-                        transform = Transaction::asEntity,
-                    ).toTypedArray(),
-                    transactionForValues = transactionForValues.map(
-                        transform = TransactionFor::asEntity,
-                    ).toTypedArray(),
+                    categories = categories
+                        .map(
+                            transform = Category::asEntity,
+                        )
+                        .toTypedArray(),
+                    accounts = accounts
+                        .map(
+                            transform = Account::asEntity,
+                        )
+                        .toTypedArray(),
+                    transactions = transactions
+                        .map(
+                            transform = Transaction::asEntity,
+                        )
+                        .toTypedArray(),
+                    transactionForValues = transactionForValues
+                        .map(
+                            transform = TransactionFor::asEntity,
+                        )
+                        .toTypedArray(),
                 )
             } catch (
                 sqliteException: SQLiteException,

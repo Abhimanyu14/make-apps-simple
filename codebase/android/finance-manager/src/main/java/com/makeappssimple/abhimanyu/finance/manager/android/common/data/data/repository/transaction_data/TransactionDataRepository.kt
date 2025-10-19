@@ -25,6 +25,8 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 internal interface TransactionDataRepository {
+    fun getAccountsInTransactionsFlow(): Flow<List<Account>>
+
     suspend fun deleteTransactionById(
         id: Int,
     ): Boolean

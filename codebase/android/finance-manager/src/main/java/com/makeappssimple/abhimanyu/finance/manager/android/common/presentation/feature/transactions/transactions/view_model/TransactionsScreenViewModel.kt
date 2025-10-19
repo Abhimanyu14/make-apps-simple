@@ -29,6 +29,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAccountsInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
@@ -50,8 +51,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.toTransactionListItemData
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,6 +76,7 @@ internal class TransactionsScreenViewModel(
     private val dateTimeKit: DateTimeKit,
     private val duplicateTransactionUseCase: DuplicateTransactionUseCase,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
+    private val getAccountsInTransactionsFlowUseCase: GetAccountsInTransactionsFlowUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val navigationKit: NavigationKit,
     private val updateTransactionsUseCase: UpdateTransactionsUseCase,
@@ -99,7 +104,7 @@ internal class TransactionsScreenViewModel(
         mapOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
         mutableMapOf()
-    private var accounts: MutableSet<Account> = mutableSetOf()
+    private var accounts: ImmutableSet<Account> = persistentSetOf()
     private var selectedSortOption: SortOption = SortOption.LATEST_FIRST
     private var searchTextFieldState: TextFieldState = TextFieldState()
     private var screenBottomSheetType: TransactionsScreenBottomSheetType =
@@ -219,7 +224,7 @@ internal class TransactionsScreenViewModel(
                         transactionData = transactionData,
                     ) && isAvailableAfterAccountFilter(
                         selectedAccountsIndicesValue = selectedFilter.selectedAccountsIndices,
-                        accountsValue = accounts.toImmutableList(),
+                        accountsValue = accounts,
                         transactionData = transactionData,
                     ) && isAvailableAfterCategoryFilter(
                         selectedExpenseCategoryIndicesValue = selectedFilter.selectedExpenseCategoryIndices,
@@ -364,7 +369,7 @@ internal class TransactionsScreenViewModel(
 
     private fun isAvailableAfterAccountFilter(
         selectedAccountsIndicesValue: ImmutableList<Int>,
-        accountsValue: ImmutableList<Account>,
+        accountsValue: ImmutableSet<Account>,
         transactionData: TransactionData,
     ): Boolean {
         if (selectedAccountsIndicesValue.isEmpty()) {
@@ -420,28 +425,28 @@ internal class TransactionsScreenViewModel(
 
     // region observeData
     private fun observeData() {
+        observeForAccountsInTransactions()
         observeForAllTransactionData()
+    }
+
+    private fun observeForAccountsInTransactions() {
+        coroutineScope.launch {
+            getAccountsInTransactionsFlowUseCase()
+                .collectLatest { accountsInTransactions ->
+                    accounts = accountsInTransactions.toImmutableSet()
+                    refreshUiState()
+                }
+        }
     }
 
     private fun observeForAllTransactionData() {
         coroutineScope.launch {
             getAllTransactionDataFlowUseCase()
                 .collectLatest { updatedAllTransactionData ->
-                    val accountsInTransactions = mutableSetOf<Account>()
                     var oldestTransactionLocalDateValue = Long.MAX_VALUE
                     val categoriesInTransactionsMap =
                         mutableMapOf<TransactionType, MutableSet<Category>>()
                     updatedAllTransactionData.forEach { transactionData ->
-                        transactionData.accountFrom?.let {
-                            accountsInTransactions.add(
-                                element = it,
-                            )
-                        }
-                        transactionData.accountTo?.let {
-                            accountsInTransactions.add(
-                                element = it,
-                            )
-                        }
                         oldestTransactionLocalDateValue = min(
                             oldestTransactionLocalDateValue,
                             transactionData.transaction.transactionTimestamp,
@@ -456,7 +461,6 @@ internal class TransactionsScreenViewModel(
                             )
                         }
                     }
-                    accounts = accountsInTransactions
                     oldestTransactionLocalDate = dateTimeKit.getLocalDate(
                         timestamp = oldestTransactionLocalDateValue.orZero(),
                     )

@@ -21,6 +21,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionForDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
@@ -36,6 +37,10 @@ internal class FakeTransactionDataDaoImpl(
     private val transactionDao: TransactionDao,
     private val transactionForDao: TransactionForDao,
 ) : TransactionDataDao {
+    override fun getAccountsInTransactionsFlow(): Flow<List<AccountEntity>> {
+        return accountDao.getAllAccountsFlow()
+    }
+
     override suspend fun getAllTransactionData(): List<TransactionDataEntity> {
         val transactions = transactionDao.getAllTransactions()
         return getSortedTransactionDataEntity(

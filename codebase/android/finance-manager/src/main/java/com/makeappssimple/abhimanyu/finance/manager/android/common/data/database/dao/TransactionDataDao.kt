@@ -20,6 +20,7 @@ import android.database.sqlite.SQLiteException
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -28,6 +29,31 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 internal interface TransactionDataDao {
+    /**
+     * Get a flow of all accounts that are used in transactions.
+     *
+     * @return A flow emitting a list of account entities.
+     * @throws SQLiteException if there is a general SQLite error.
+     */
+    @Query(
+        value = """
+            SELECT all_accounts.*
+            FROM account_table all_accounts
+            INNER JOIN (
+                SELECT DISTINCT account_from_id as id 
+                FROM transaction_table 
+                WHERE account_from_id IS NOT NULL
+                
+                UNION ALL
+                
+                SELECT DISTINCT account_to_id 
+                FROM transaction_table 
+                WHERE account_to_id IS NOT NULL
+            ) accounts_in_transactions ON all_accounts.id = accounts_in_transactions.id
+        """
+    )
+    fun getAccountsInTransactionsFlow(): Flow<List<AccountEntity>>
+
     /**
      * Get all transaction data as a list, ordered by timestamp descending.
      * @return List of all transaction data
