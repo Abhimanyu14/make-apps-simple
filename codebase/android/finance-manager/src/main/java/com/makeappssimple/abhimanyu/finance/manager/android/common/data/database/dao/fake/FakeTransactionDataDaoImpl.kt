@@ -22,6 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionForDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import kotlinx.coroutines.flow.Flow
@@ -49,12 +50,18 @@ internal class FakeTransactionDataDaoImpl(
         )
     }
 
-    override fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>> {
+    override fun getAllTransactionDataFlow(
+        searchText: String,
+    ): Flow<List<TransactionDataEntity>> {
         return transactionDao.getAllTransactionsFlow().map { transactions ->
             getSortedTransactionDataEntity(
                 transactions = transactions,
             )
         }
+    }
+
+    override fun getCategoriesInTransactionsFlow(): Flow<List<CategoryEntity>> {
+        return emptyFlow()
     }
 
     override fun getOldestTransactionTimestampFlow(): Flow<Long?> {
@@ -64,7 +71,9 @@ internal class FakeTransactionDataDaoImpl(
     override fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,
     ): Flow<List<TransactionDataEntity>> {
-        return getAllTransactionDataFlow().map { transactionDataList ->
+        return getAllTransactionDataFlow(
+            searchText = "",
+        ).map { transactionDataList ->
             transactionDataList.take(
                 n = numberOfTransactions,
             )

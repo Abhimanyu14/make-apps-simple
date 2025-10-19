@@ -17,19 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_data.TransactionDataRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
-import kotlinx.collections.immutable.ImmutableList
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import kotlinx.coroutines.flow.Flow
 
-internal class GetAllTransactionDataFlowUseCase(
+internal class GetCategoriesInTransactionsFlowUseCase(
     private val transactionDataRepository: TransactionDataRepository,
 ) {
-    operator fun invoke(
-        transactionFilter: TransactionFilter,
-    ): Flow<ImmutableList<TransactionData>> {
-        return transactionDataRepository.getAllTransactionDataFlow(
-            transactionFilter = transactionFilter,
-        )
+    operator fun invoke(): Flow<List<Category>> {
+        return transactionDataRepository.getCategoriesInTransactionsFlow()
     }
 }

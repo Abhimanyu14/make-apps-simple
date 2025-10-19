@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
+@file:OptIn(
+    ExperimentalCoroutinesApi::class,
+    FlowPreview::class
+)
+
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.view_model
 
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
@@ -31,6 +37,7 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAccountsInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataFlowUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetCategoriesInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetOldestTransactionTimestampUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
@@ -38,6 +45,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_t
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
@@ -58,11 +66,16 @@ import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -77,6 +90,7 @@ internal class TransactionsScreenViewModel(
     private val duplicateTransactionUseCase: DuplicateTransactionUseCase,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
     private val getAccountsInTransactionsFlowUseCase: GetAccountsInTransactionsFlowUseCase,
+    private val getCategoriesInTransactionsFlowUseCase: GetCategoriesInTransactionsFlowUseCase,
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
     private val getOldestTransactionTimestampUseCase: GetOldestTransactionTimestampUseCase,
     private val navigationKit: NavigationKit,
@@ -89,6 +103,10 @@ internal class TransactionsScreenViewModel(
     private var isInSelectionMode: Boolean = false
     private var isLoading: Boolean = true
     private var selectedFilter = Filter()
+    private val transactionFilter: MutableStateFlow<TransactionFilter> =
+        MutableStateFlow(
+            value = TransactionFilter(),
+        )
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
     private var allTransactionForValues: ImmutableList<TransactionFor> =
@@ -101,7 +119,7 @@ internal class TransactionsScreenViewModel(
         TransactionType.entries.toImmutableList()
     private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
     private var oldestTransactionLocalDate: LocalDate? = null
-    private var categoriesMap: Map<TransactionType, MutableSet<Category>> =
+    private var categoriesMap: Map<TransactionType, List<Category>> =
         mapOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
         mutableMapOf()
@@ -428,7 +446,9 @@ internal class TransactionsScreenViewModel(
     private fun observeData() {
         observeForAccountsInTransactions()
         observeForAllTransactionData()
+        observeForCategoriesInTransactions()
         observeForOldestTransactionTimestamp()
+        observeForSearchText()
     }
 
     private fun observeForAccountsInTransactions() {
@@ -442,37 +462,67 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun observeForAllTransactionData() {
-        coroutineScope.launch {
-            getAllTransactionDataFlowUseCase()
+        coroutineScope.launch(
+            context = dispatcherProvider.default,
+        ) {
+            transactionFilter
+                .flatMapLatest { updatedTransactionFilter ->
+                    getAllTransactionDataFlowUseCase(
+                        transactionFilter = updatedTransactionFilter,
+                    )
+                }
                 .collectLatest { updatedAllTransactionData ->
-                    val categoriesInTransactionsMap =
-                        mutableMapOf<TransactionType, MutableSet<Category>>()
-                    updatedAllTransactionData.forEach { transactionData ->
-                        transactionData.category?.let {
-                            categoriesInTransactionsMap.computeIfAbsent(
-                                it.transactionType,
-                            ) {
-                                mutableSetOf()
-                            }.add(
-                                element = it,
-                            )
-                        }
-                    }
-                    categoriesMap = categoriesInTransactionsMap.toMap()
                     allTransactionData = updatedAllTransactionData
                     refreshUiState()
                 }
         }
     }
 
+    private fun observeForCategoriesInTransactions() {
+        coroutineScope.launch(
+            context = dispatcherProvider.default,
+        ) {
+            getCategoriesInTransactionsFlowUseCase()
+                .collectLatest { categoriesInTransactions: List<Category> ->
+                    categoriesMap = categoriesInTransactions.groupBy {
+                        it.transactionType
+                    }
+                    refreshUiState()
+                }
+        }
+    }
+
     private fun observeForOldestTransactionTimestamp() {
-        coroutineScope.launch {
+        coroutineScope.launch(
+            context = dispatcherProvider.default,
+        ) {
             getOldestTransactionTimestampUseCase()
                 .collectLatest { oldestTransactionTimestamp: Long? ->
                     oldestTransactionLocalDate = dateTimeKit.getLocalDate(
                         timestamp = oldestTransactionTimestamp.orZero(),
                     )
                     refreshUiState()
+                }
+        }
+    }
+
+    private fun observeForSearchText() {
+        coroutineScope.launch(
+            context = dispatcherProvider.default,
+        ) {
+            snapshotFlow {
+                searchTextFieldState.text.toString()
+            }
+                .debounce(
+                    timeoutMillis = 300L,
+                )
+                .distinctUntilChanged()
+                .collect { updatedSearchText ->
+                    transactionFilter.update {
+                        it.copy(
+                            searchText = updatedSearchText,
+                        )
+                    }
                 }
         }
     }

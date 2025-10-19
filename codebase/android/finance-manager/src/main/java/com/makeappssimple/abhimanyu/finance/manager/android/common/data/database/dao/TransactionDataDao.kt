@@ -21,6 +21,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -37,8 +38,8 @@ internal interface TransactionDataDao {
      */
     @Query(
         value = """
-            SELECT all_accounts.*
-            FROM account_table all_accounts
+            SELECT account_from_all_accounts.*
+            FROM account_table account_from_all_accounts
             INNER JOIN (
                 SELECT DISTINCT account_from_id as id 
                 FROM transaction_table 
@@ -49,7 +50,7 @@ internal interface TransactionDataDao {
                 SELECT DISTINCT account_to_id 
                 FROM transaction_table 
                 WHERE account_to_id IS NOT NULL
-            ) accounts_in_transactions ON all_accounts.id = accounts_in_transactions.id
+            ) account_in_transactions ON account_from_all_accounts.id = account_in_transactions.id
         """
     )
     fun getAccountsInTransactionsFlow(): Flow<List<AccountEntity>>
@@ -78,11 +79,32 @@ internal interface TransactionDataDao {
         value = """
             SELECT *
             FROM transaction_table
+            WHERE
+                lower(title) LIKE '%' || lower(:searchText) || '%' 
+                OR lower(CAST(amount AS TEXT)) LIKE '%' || lower(:searchText) || '%'
             ORDER BY transaction_timestamp DESC
         """
     )
     @Transaction
-    fun getAllTransactionDataFlow(): Flow<List<TransactionDataEntity>>
+    fun getAllTransactionDataFlow(
+        searchText: String,
+    ): Flow<List<TransactionDataEntity>>
+
+    /**
+     * Get a flow of all categories that are used in transactions.
+     *
+     * @return A flow emitting a list of category entities.
+     * @throws SQLiteException if there is a general SQLite error.
+     */
+    @Query(
+        value = """
+            SELECT DISTINCT category_from_all_categories.*
+            FROM category_table category_from_all_categories
+            INNER JOIN transaction_table transaction_from_all_transactions
+            ON category_from_all_categories.id = transaction_from_all_transactions.category_id
+        """
+    )
+    fun getCategoriesInTransactionsFlow(): Flow<List<CategoryEntity>>
 
     /**
      * Get the timestamp of the oldest transaction.

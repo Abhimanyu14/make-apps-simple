@@ -20,6 +20,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
@@ -33,9 +34,13 @@ internal interface TransactionDataRepository {
 
     suspend fun getAllTransactionData(): ImmutableList<TransactionData>
 
-    fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>>
+    fun getAllTransactionDataFlow(
+        transactionFilter: TransactionFilter,
+    ): Flow<ImmutableList<TransactionData>>
 
-    suspend fun getOldestTransactionTimestampFlow(): Flow<Long?>
+    fun getCategoriesInTransactionsFlow(): Flow<List<Category>>
+
+    fun getOldestTransactionTimestampFlow(): Flow<Long?>
 
     fun getRecentTransactionDataFlow(
         numberOfTransactions: Int,

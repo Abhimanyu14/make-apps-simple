@@ -23,12 +23,14 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.mod
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
@@ -91,9 +93,14 @@ internal class TransactionDataRepositoryImpl(
         }
     }
 
-    override fun getAllTransactionDataFlow(): Flow<ImmutableList<TransactionData>> {
+    override fun getAllTransactionDataFlow(
+        transactionFilter: TransactionFilter,
+    ): Flow<ImmutableList<TransactionData>> {
         return transactionDataDao
-            .getAllTransactionDataFlow()
+            .getAllTransactionDataFlow(
+                // TODO(Abhi): Main the search logic in viewmodel for now
+                searchText = "", // transactionFilter.searchText,
+            )
             .catch { throwable: Throwable ->
                 if (throwable is SQLiteException) {
                     error(
@@ -108,7 +115,24 @@ internal class TransactionDataRepositoryImpl(
             }
     }
 
-    override suspend fun getOldestTransactionTimestampFlow(): Flow<Long?> {
+    override fun getCategoriesInTransactionsFlow(): Flow<List<Category>> {
+        return transactionDataDao
+            .getCategoriesInTransactionsFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map { categoryEntities ->
+                categoryEntities.map(
+                    transform = CategoryEntity::asExternalModel,
+                )
+            }
+    }
+
+    override fun getOldestTransactionTimestampFlow(): Flow<Long?> {
         return transactionDataDao
             .getOldestTransactionTimestampFlow()
             .catch { throwable: Throwable ->

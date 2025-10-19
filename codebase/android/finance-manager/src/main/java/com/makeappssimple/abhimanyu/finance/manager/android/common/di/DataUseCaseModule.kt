@@ -61,6 +61,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetCategoriesInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetMaxRefundAmountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetOldestTransactionTimestampUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
@@ -472,6 +473,15 @@ internal class DataUseCaseModule {
     ): GetAllTransactionsUseCase {
         return GetAllTransactionsUseCase(
             transactionRepository = transactionRepository,
+        )
+    }
+
+    @Single
+    internal fun providesGetCategoriesInTransactionsFlowUseCase(
+        transactionDataRepository: TransactionDataRepository,
+    ): GetCategoriesInTransactionsFlowUseCase {
+        return GetCategoriesInTransactionsFlowUseCase(
+            transactionDataRepository = transactionDataRepository,
         )
     }
 
