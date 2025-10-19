@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import android.net.Uri
 import android.os.Build
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIStateEvents
 
 internal class SettingsScreenUIEventHandler internal constructor(

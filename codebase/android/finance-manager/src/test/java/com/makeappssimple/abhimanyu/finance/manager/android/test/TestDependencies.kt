@@ -113,8 +113,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Ac
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateDelegateImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateDelegate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateDelegateImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.fake.FakeFinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetAllAccountsListItemDataListUseCase

@@ -19,7 +19,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.transaction_for_values.view_model
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction_for.TransactionForListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction_for.TransactionForListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.transaction_for_values.bottom_sheet.TransactionForValuesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse

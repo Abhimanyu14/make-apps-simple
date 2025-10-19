@@ -30,9 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.util.fastForEachIndexed
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.FinanceManagerAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.composeColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.composeColor
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.max

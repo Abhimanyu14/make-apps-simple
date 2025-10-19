@@ -20,7 +20,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import kotlinx.coroutines.Job
 import java.time.LocalDate

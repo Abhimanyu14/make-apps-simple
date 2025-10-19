@@ -17,9 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.overview_card.OverviewCardViewModelData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.overview_card.OverviewCardViewModelData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

@@ -20,8 +20,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.icons.MyIcons
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies

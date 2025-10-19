@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.state.AccountsScreenUIStateEvents
 

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import kotlinx.coroutines.Job
 

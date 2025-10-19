@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.event
 
 import com.makeappssimple.abhimanyu.common.core.extensions.filterDigits
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIStateEvents
 
 internal class EditAccountScreenUIEventHandler internal constructor(

@@ -20,9 +20,9 @@ import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.util.isDefaultExpenseCategory
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.util.isDefaultIncomeCategory
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.util.isDefaultInvestmentCategory
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultExpenseCategory
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultIncomeCategory
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultInvestmentCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.view_model.EditCategoryScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import kotlinx.coroutines.Job
 

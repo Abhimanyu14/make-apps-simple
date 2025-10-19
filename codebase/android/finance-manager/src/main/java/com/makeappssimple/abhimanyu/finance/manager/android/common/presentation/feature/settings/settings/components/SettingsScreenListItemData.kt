@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.components
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.settings.SettingsListItemContentEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.settings.SettingsListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.settings.SettingsListItemContentEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.settings.SettingsListItemData
 
 @Immutable
 internal data class SettingsScreenListItemData(

@@ -27,8 +27,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.toTransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.navigation.ViewTransactionScreenArgs
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.state.ViewTransactionScreenUIState

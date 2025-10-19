@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.open_source_licenses.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 
 internal class OpenSourceLicensesScreenUIEventHandler internal constructor(

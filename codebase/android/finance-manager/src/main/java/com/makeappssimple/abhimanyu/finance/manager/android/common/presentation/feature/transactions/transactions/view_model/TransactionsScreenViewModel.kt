@@ -43,8 +43,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.fe
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.toTransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.toTransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIState

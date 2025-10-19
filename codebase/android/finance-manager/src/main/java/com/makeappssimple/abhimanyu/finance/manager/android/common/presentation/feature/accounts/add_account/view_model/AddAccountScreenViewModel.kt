@@ -28,8 +28,8 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.InsertAccountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.icon
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenUIStateEvents

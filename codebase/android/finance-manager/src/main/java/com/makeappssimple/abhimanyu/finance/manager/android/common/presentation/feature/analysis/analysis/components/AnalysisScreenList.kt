@@ -25,9 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.rememberTextMeasurer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.navigationBarLandscapeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.analysis.AnalysisListItem
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.navigationBarLandscapeSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.analysis.AnalysisListItem
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
 
 @Composable

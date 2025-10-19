@@ -20,7 +20,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies

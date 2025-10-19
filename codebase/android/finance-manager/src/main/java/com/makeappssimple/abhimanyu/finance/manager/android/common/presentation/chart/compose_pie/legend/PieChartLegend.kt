@@ -26,11 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.HorizontalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.component.NonFillingVerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.FinanceManagerAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.composeColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.HorizontalSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NonFillingVerticalSpacer
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.composeColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data.PieChartLegendItemData
 
 @Composable

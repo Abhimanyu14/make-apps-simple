@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEventHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenUIStateEvents
 

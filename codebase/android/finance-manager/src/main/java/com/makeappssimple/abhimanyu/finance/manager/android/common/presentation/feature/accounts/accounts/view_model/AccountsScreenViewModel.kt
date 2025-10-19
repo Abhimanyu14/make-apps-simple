@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.accounts.AccountsListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.state.AccountsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.state.AccountsScreenUIStateEvents

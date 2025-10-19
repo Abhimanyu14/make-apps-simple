@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.chart.compose_pie.data
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
 
 @Immutable
 public data class PieChartItemData(

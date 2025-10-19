@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateDelegateImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateDelegate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateDelegateImpl
 import kotlinx.coroutines.CoroutineScope
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

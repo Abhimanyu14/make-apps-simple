@@ -31,8 +31,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.icon
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIState

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 
 @Stable

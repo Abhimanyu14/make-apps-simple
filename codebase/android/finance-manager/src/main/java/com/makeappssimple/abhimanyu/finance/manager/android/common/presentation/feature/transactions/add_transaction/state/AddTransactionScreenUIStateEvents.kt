@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.bottom_sheet.AddTransactionScreenBottomSheetType
 import kotlinx.coroutines.Job
 import java.time.LocalDate

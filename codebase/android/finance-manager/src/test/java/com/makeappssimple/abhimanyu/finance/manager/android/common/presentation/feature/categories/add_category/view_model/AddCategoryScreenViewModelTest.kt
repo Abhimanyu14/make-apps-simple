@@ -23,7 +23,7 @@ import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies

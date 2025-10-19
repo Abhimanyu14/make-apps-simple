@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.constants.NavigationArguments
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenArgs
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenArgs
 
 internal class EditCategoryScreenArgs(
     val currentCategoryId: Int,

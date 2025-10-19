@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

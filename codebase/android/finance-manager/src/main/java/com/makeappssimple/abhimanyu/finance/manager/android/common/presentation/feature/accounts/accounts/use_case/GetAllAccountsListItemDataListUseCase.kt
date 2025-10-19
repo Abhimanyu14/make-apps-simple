@@ -24,11 +24,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Ac
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.sortOrder
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.accounts.AccountsListItemContentData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.accounts.AccountsListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.accounts.AccountsListItemHeaderData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.extensions.icon
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.util.isDefaultAccount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemHeaderData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

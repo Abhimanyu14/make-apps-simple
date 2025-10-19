@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.common.c
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.data.use_case.category.InsertCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenUIState

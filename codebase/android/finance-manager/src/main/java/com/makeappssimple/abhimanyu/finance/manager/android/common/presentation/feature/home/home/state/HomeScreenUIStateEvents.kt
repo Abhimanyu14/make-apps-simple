@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.overview_card.OverviewCardAction
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.overview_card.OverviewCardAction
 import kotlinx.coroutines.Job
 
 @Stable

@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.snackbar
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenSnackbarType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenSnackbarType
 
 internal sealed class CategoriesScreenSnackbarType : ScreenSnackbarType {
     data object None : CategoriesScreenSnackbarType()

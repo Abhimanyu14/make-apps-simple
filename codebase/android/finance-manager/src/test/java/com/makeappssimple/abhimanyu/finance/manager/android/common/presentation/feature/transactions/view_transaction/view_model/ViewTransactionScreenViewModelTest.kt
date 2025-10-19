@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.assertions.throwables.shouldThrow

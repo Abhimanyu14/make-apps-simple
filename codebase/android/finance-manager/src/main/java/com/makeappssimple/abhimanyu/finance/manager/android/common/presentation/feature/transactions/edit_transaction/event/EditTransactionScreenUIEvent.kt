@@ -20,7 +20,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEvent
 import java.time.LocalDate
 import java.time.LocalTime
 

@@ -1,0 +1,367 @@
+/*
+ * Copyright 2025-2025 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.ExpandedListItemShape
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.composeColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.MyExpandableItemIconButton
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.MyExpandableItemIconButtonData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.MyExpandableItemIconButtonEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.MyExpandableItemUIWrapper
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.MyEmojiCircle
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.emoji_circle.MyEmojiCircleData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+
+@Composable
+public fun TransactionListItem(
+    modifier: Modifier = Modifier,
+    data: TransactionListItemData,
+    handleEvent: (event: TransactionListItemEvent) -> Unit = {},
+) {
+    if (data.isLoading) {
+        TransactionListItemLoadingUI(
+            modifier = modifier,
+        )
+    } else {
+        TransactionListItemUI(
+            modifier = modifier,
+            data = data,
+            handleEvent = handleEvent,
+        )
+    }
+}
+
+@Composable
+private fun TransactionListItemUI(
+    modifier: Modifier = Modifier,
+    data: TransactionListItemData,
+    handleEvent: (event: TransactionListItemEvent) -> Unit = {},
+) {
+    val accountText: String = if (
+        data.accountFromName.isNotNull() &&
+        data.accountToName.isNotNull()
+    ) {
+        stringResource(
+            id = R.string.finance_manager_transaction_list_item_account,
+            data.accountFromName,
+            data.accountToName,
+        )
+    } else {
+        data.accountFromName ?: data.accountToName.orEmpty()
+    }
+
+    MyExpandableItemUIWrapper(
+        isExpanded = data.isExpanded,
+        isSelected = data.isSelected,
+        modifier = modifier
+            .padding(
+                vertical = 4.dp,
+            ),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(
+                    shape = if (data.isExpanded) {
+                        ExpandedListItemShape
+                    } else {
+                        FinanceManagerAppTheme.shapes.large
+                    },
+                )
+                .conditionalClickable(
+                    onClick = {
+                        handleEvent(TransactionListItemEvent.OnClick)
+                    },
+                    onLongClick = {
+                        handleEvent(TransactionListItemEvent.OnLongClick)
+                    },
+                )
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = if (data.isExpanded) {
+                        16.dp
+                    } else {
+                        4.dp
+                    },
+                    bottom = if (data.isExpanded) {
+                        16.dp
+                    } else {
+                        4.dp
+                    },
+                ),
+        ) {
+            if (data.isInSelectionMode) {
+                if (data.isSelected) {
+                    Icon(
+                        imageVector = MyIcons.CheckCircle,
+                        contentDescription = null,
+                        tint = FinanceManagerAppTheme.colorScheme.primary,
+                    )
+                } else {
+                    Icon(
+                        imageVector = MyIcons.RadioButtonUnchecked,
+                        contentDescription = null,
+                        tint = FinanceManagerAppTheme.colorScheme.outline,
+                    )
+                }
+            } else {
+                MyEmojiCircle(
+                    data = MyEmojiCircleData(
+                        backgroundColor = FinanceManagerAppTheme.colorScheme.outline,
+                        emoji = data.emoji,
+                    ),
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 8.dp,
+                    ),
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    MyText(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(
+                                weight = 1F,
+                            ),
+                        text = data.title,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1,
+                        style = FinanceManagerAppTheme.typography.headlineMedium
+                            .copy(
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                            ),
+                    )
+                    MyText(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(
+                                weight = 1F,
+                            ),
+                        text = data.amountText,
+                        style = FinanceManagerAppTheme.typography.headlineMedium
+                            .copy(
+                                color = data.amountColor.composeColor,
+                                textAlign = TextAlign.End,
+                            ),
+                    )
+                }
+                MyText(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = data.transactionForText,
+                    style = FinanceManagerAppTheme.typography.bodySmall
+                        .copy(
+                            color = FinanceManagerAppTheme.colorScheme.onBackground,
+                        ),
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    MyText(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(
+                                weight = 1F,
+                            ),
+                        text = data.dateAndTimeText,
+                        style = FinanceManagerAppTheme.typography.bodySmall
+                            .copy(
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                            ),
+                    )
+                    MyText(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(
+                                weight = 1F,
+                            ),
+                        text = accountText,
+                        style = FinanceManagerAppTheme.typography.bodySmall
+                            .copy(
+                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                textAlign = TextAlign.End,
+                            ),
+                    )
+                }
+                Spacer(
+                    modifier = Modifier
+                        .height(
+                            height = 2.dp,
+                        ),
+                )
+                AnimatedVisibility(
+                    visible = data.isExpanded.not(),
+                ) {
+                    HorizontalDivider(
+                        color = FinanceManagerAppTheme.colorScheme.outline,
+                        thickness = 0.5.dp,
+                    )
+                }
+            }
+        }
+        AnimatedVisibility(
+            visible = data.isExpanded,
+        ) {
+            HorizontalDivider(
+                color = FinanceManagerAppTheme.colorScheme.outline,
+                thickness = 0.5.dp,
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp,
+                    ),
+            ) {
+                // TODO(Abhi): Disable edit transaction feature
+                //  Fix this later.
+                /*
+                if (data.isEditButtonVisible) {
+                    MyExpandableItemIconButton(
+                        data = MyExpandableItemIconButtonData(
+                            isClickable = true,
+                            isEnabled = true,
+                            iconImageVector = MyIcons.Edit,
+                            labelText = stringResource(
+                                id = R.string.finance_manager_transaction_list_item_edit,
+                            ),
+                        ),
+                        handleEvent = { event ->
+                            when (event) {
+                                is MyExpandableItemIconButtonEvent.OnClick -> {
+                                    handleEvent(TransactionListItemEvent.OnEditButtonClick)
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .weight(
+                                weight = 1F,
+                            ),
+                    )
+                }
+                */
+                if (data.isRefundButtonVisible) {
+                    MyExpandableItemIconButton(
+                        data = MyExpandableItemIconButtonData(
+                            isClickable = true,
+                            isEnabled = true,
+                            iconImageVector = MyIcons.CurrencyExchange,
+                            labelText = stringResource(
+                                id = R.string.finance_manager_transaction_list_item_refund,
+                            ),
+                        ),
+                        handleEvent = { event ->
+                            when (event) {
+                                is MyExpandableItemIconButtonEvent.OnClick -> {
+                                    handleEvent(TransactionListItemEvent.OnRefundButtonClick)
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .weight(
+                                weight = 1F,
+                            ),
+                    )
+                }
+                if (data.isDeleteButtonVisible) {
+                    MyExpandableItemIconButton(
+                        data = MyExpandableItemIconButtonData(
+                            isClickable = true,
+                            isEnabled = data.isDeleteButtonEnabled,
+                            iconImageVector = MyIcons.Delete,
+                            labelText = stringResource(
+                                id = R.string.finance_manager_transaction_list_item_delete,
+                            ),
+                        ),
+                        handleEvent = { event ->
+                            when (event) {
+                                is MyExpandableItemIconButtonEvent.OnClick -> {
+                                    handleEvent(TransactionListItemEvent.OnDeleteButtonClick)
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .weight(
+                                weight = 1F,
+                            ),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TransactionListItemLoadingUI(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .padding(
+                horizontal = 8.dp,
+                vertical = 4.dp,
+            )
+            .fillMaxWidth()
+            .height(
+                height = 72.dp,
+            )
+            .clip(
+                shape = RoundedCornerShape(
+                    size = 24.dp,
+                ),
+            )
+            .shimmer(),
+    )
+}

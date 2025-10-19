@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.analysis.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIStateEvents
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import kotlinx.coroutines.Job
 

@@ -24,8 +24,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.Tr
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.core.model.feature.SortOption
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.core.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import kotlinx.collections.immutable.ImmutableList
