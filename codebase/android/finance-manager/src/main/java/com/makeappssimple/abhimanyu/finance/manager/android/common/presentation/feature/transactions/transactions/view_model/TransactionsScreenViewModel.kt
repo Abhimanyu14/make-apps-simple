@@ -60,11 +60,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.toTransactionListItemData
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -123,7 +120,7 @@ internal class TransactionsScreenViewModel(
         mapOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
         mutableMapOf()
-    private var accounts: ImmutableSet<Account> = persistentSetOf()
+    private var accounts: ImmutableList<Account> = persistentListOf()
     private var selectedSortOption: SortOption = SortOption.LATEST_FIRST
     private var searchTextFieldState: TextFieldState = TextFieldState()
     private var screenBottomSheetType: TransactionsScreenBottomSheetType =
@@ -388,7 +385,7 @@ internal class TransactionsScreenViewModel(
 
     private fun isAvailableAfterAccountFilter(
         selectedAccountsIndicesValue: ImmutableList<Int>,
-        accountsValue: ImmutableSet<Account>,
+        accountsValue: ImmutableList<Account>,
         transactionData: TransactionData,
     ): Boolean {
         if (selectedAccountsIndicesValue.isEmpty()) {
@@ -455,7 +452,7 @@ internal class TransactionsScreenViewModel(
         coroutineScope.launch {
             getAccountsInTransactionsFlowUseCase()
                 .collectLatest { accountsInTransactions ->
-                    accounts = accountsInTransactions.toImmutableSet()
+                    accounts = accountsInTransactions.toImmutableList()
                     refreshUiState()
                 }
         }
@@ -682,6 +679,13 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedFilter = updatedSelectedFilter
+        transactionFilter.update { currentTransactionFilter ->
+            currentTransactionFilter.copy(
+                selectedAccountIds = updatedSelectedFilter.selectedAccountsIndices.map {
+                    accounts[it].id
+                },
+            )
+        }
         return if (shouldRefresh) {
             refreshUiState()
         } else {

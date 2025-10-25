@@ -18,4 +18,5 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 internal data class TransactionFilter(
     val searchText: String = "",
+    val selectedAccountIds: List<Int> = emptyList(),
 )
