@@ -80,6 +80,19 @@ internal class DateTimeKitImpl() : DateTimeKit {
             )
     }
 
+    override fun getFormattedDateWithDayOfWeek(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): String {
+        val formattedDate = getFormattedDate(
+            timestamp = timestamp,
+        )
+        val formattedDayOfWeek = getFormattedDayOfWeek(
+            timestamp = timestamp,
+        )
+        return "$formattedDate ($formattedDayOfWeek)"
+    }
+
     /**
      * Sample format - Monday.
      */

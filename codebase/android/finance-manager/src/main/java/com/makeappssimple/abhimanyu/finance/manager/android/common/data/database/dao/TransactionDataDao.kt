@@ -38,19 +38,19 @@ internal interface TransactionDataDao {
      */
     @Query(
         value = """
-            SELECT account_from_all_accounts.*
-            FROM account_table account_from_all_accounts
-            INNER JOIN (
-                SELECT DISTINCT account_from_id as id 
-                FROM transaction_table 
+            SELECT *
+            FROM account_table
+            WHERE id IN (
+                SELECT DISTINCT account_from_id
+                FROM transaction_table
                 WHERE account_from_id IS NOT NULL
                 
-                UNION ALL
+                UNION
                 
-                SELECT DISTINCT account_to_id 
-                FROM transaction_table 
+                SELECT DISTINCT account_to_id
+                FROM transaction_table
                 WHERE account_to_id IS NOT NULL
-            ) account_in_transactions ON account_from_all_accounts.id = account_in_transactions.id
+            )
         """
     )
     fun getAccountsInTransactionsFlow(): Flow<List<AccountEntity>>
@@ -80,14 +80,25 @@ internal interface TransactionDataDao {
             SELECT *
             FROM transaction_table
             WHERE
+            (
+                :selectedAccountIds IS NULL
+                OR
+                account_from_id IN (:selectedAccountIds)
+                OR
+                account_to_id IN (:selectedAccountIds)
+            )
+            AND
+            (
                 lower(title) LIKE '%' || lower(:searchText) || '%' 
                 OR lower(CAST(amount AS TEXT)) LIKE '%' || lower(:searchText) || '%'
+            )
             ORDER BY transaction_timestamp DESC
         """
     )
     @Transaction
     fun getAllTransactionDataFlow(
         searchText: String,
+        selectedAccountIds: List<Int>?,
     ): Flow<List<TransactionDataEntity>>
 
     /**

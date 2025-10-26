@@ -42,6 +42,14 @@ internal interface DateTimeKit : DateKit, TimeKit {
     ): String
 
     /**
+     * Sample format - 30 Mar, 2023 (Monday).
+     */
+    fun getFormattedDateWithDayOfWeek(
+        timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): String
+
+    /**
      * Sample format - Monday.
      */
     fun getFormattedDayOfWeek(

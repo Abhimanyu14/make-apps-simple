@@ -100,6 +100,7 @@ internal class TransactionDataRepositoryImpl(
             .getAllTransactionDataFlow(
                 // TODO(Abhi): Main the search logic in viewmodel for now
                 searchText = "", // transactionFilter.searchText,
+                selectedAccountIds = null,
             )
             .catch { throwable: Throwable ->
                 if (throwable is SQLiteException) {

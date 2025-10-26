@@ -49,9 +49,9 @@ internal class IntListConverter {
     @TypeConverter
     internal fun intListToString(
         intList: List<Int>?,
-    ): String {
+    ): String? {
         if (intList.isNull()) {
-            return ""
+            return null
         }
         return try {
             Json.encodeToString(
@@ -61,12 +61,12 @@ internal class IntListConverter {
             serializationException: SerializationException,
         ) {
             serializationException.printStackTrace()
-            ""
+            null
         } catch (
             illegalArgumentException: IllegalArgumentException,
         ) {
             illegalArgumentException.printStackTrace()
-            ""
+            null
         }
     }
 }

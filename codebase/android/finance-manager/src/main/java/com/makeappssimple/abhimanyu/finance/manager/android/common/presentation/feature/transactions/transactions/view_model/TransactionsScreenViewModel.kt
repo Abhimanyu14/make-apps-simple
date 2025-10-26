@@ -171,11 +171,9 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region refreshUiState
-    private fun refreshUiState(): Job {
-        return coroutineScope.launch {
-            updateTransactionDetailsListItemViewData()
-            updateUiState()
-        }
+    private suspend fun refreshUiState() {
+        updateTransactionDetailsListItemViewData()
+        updateUiState()
     }
 
     private fun updateUiState() {
@@ -218,10 +216,10 @@ internal class TransactionsScreenViewModel(
     }
 
     private suspend fun updateTransactionDetailsListItemViewData() {
-        val updatedAllTransactionData = withContext(
+        withContext(
             context = dispatcherProvider.default,
         ) {
-            allTransactionData
+            val updatedAllTransactionData = allTransactionData
                 .filter { transactionData ->
                     isAvailableAfterSearch(
                         searchTextValue = searchTextFieldState.text.toString(),
@@ -256,22 +254,22 @@ internal class TransactionsScreenViewModel(
                     )
                 }
                 .sortedWith(
-                    comparator = compareBy {
+                    comparator = compareBy { transactionData ->
                         when (selectedSortOption) {
                             SortOption.AMOUNT_ASC -> {
-                                it.transaction.amount.value
+                                transactionData.transaction.amount.value
                             }
 
                             SortOption.AMOUNT_DESC -> {
-                                -1 * it.transaction.amount.value
+                                -1 * transactionData.transaction.amount.value
                             }
 
                             SortOption.LATEST_FIRST -> {
-                                -1 * it.transaction.transactionTimestamp
+                                -1 * transactionData.transaction.transactionTimestamp
                             }
 
                             SortOption.OLDEST_FIRST -> {
-                                it.transaction.transactionTimestamp
+                                transactionData.transaction.transactionTimestamp
                             }
                         }
                     },
@@ -280,20 +278,9 @@ internal class TransactionsScreenViewModel(
                     if (selectedSortOption == SortOption.LATEST_FIRST ||
                         selectedSortOption == SortOption.OLDEST_FIRST
                     ) {
-                        val dateTextBuilder = StringBuilder()
-                        dateTextBuilder.append(
-                            dateTimeKit.getFormattedDate(
-                                timestamp = it.transaction.transactionTimestamp,
-                            )
+                        dateTimeKit.getFormattedDateWithDayOfWeek(
+                            timestamp = it.transaction.transactionTimestamp,
                         )
-                        dateTextBuilder.append(" (")
-                        dateTextBuilder.append(
-                            dateTimeKit.getFormattedDayOfWeek(
-                                timestamp = it.transaction.transactionTimestamp,
-                            )
-                        )
-                        dateTextBuilder.append(")")
-                        dateTextBuilder.toString()
                     } else {
                         ""
                     }
@@ -313,10 +300,10 @@ internal class TransactionsScreenViewModel(
                             )
                     }
                 }
-        }
-        transactionDetailsListItemViewData = updatedAllTransactionData
-        if (allTransactionData.isNotEmpty()) {
-            completeLoading()
+            transactionDetailsListItemViewData = updatedAllTransactionData
+            if (allTransactionData.isNotEmpty() && isLoading) {
+                completeLoading()
+            }
         }
     }
 
@@ -539,7 +526,9 @@ internal class TransactionsScreenViewModel(
             }
             .toImmutableList()
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -550,7 +539,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         selectedTransactionIndices = persistentListOf()
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -589,7 +580,9 @@ internal class TransactionsScreenViewModel(
             }
             .toImmutableList()
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -606,7 +599,9 @@ internal class TransactionsScreenViewModel(
             }
             .toImmutableList()
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -630,7 +625,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         screenBottomSheetType = updatedTransactionsScreenBottomSheetType
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -642,7 +639,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         screenSnackbarType = updatedTransactionsScreenSnackbarType
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -654,7 +653,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         isInSelectionMode = updatedIsInSelectionMode
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -668,7 +669,9 @@ internal class TransactionsScreenViewModel(
             text = updatedSearchText,
         )
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -679,15 +682,20 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedFilter = updatedSelectedFilter
+
+        val updatedSelectedAccountIds =
+            updatedSelectedFilter.selectedAccountsIndices.map {
+                accounts[it].id
+            }
         transactionFilter.update { currentTransactionFilter ->
             currentTransactionFilter.copy(
-                selectedAccountIds = updatedSelectedFilter.selectedAccountsIndices.map {
-                    accounts[it].id
-                },
+                selectedAccountIds = updatedSelectedAccountIds,
             )
         }
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -699,7 +707,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         selectedSortOption = updatedSelectedSortOption
         return if (shouldRefresh) {
-            refreshUiState()
+            coroutineScope.launch {
+                refreshUiState()
+            }
         } else {
             getCompletedJob()
         }
@@ -733,14 +743,18 @@ internal class TransactionsScreenViewModel(
     // endregion
 
     // region loading
-    private fun completeLoading() {
+    private fun completeLoading(): Job {
         isLoading = false
-        refreshUiState()
+        return coroutineScope.launch {
+            refreshUiState()
+        }
     }
 
-    private fun startLoading() {
+    private fun startLoading(): Job {
         isLoading = true
-        refreshUiState()
+        return coroutineScope.launch {
+            refreshUiState()
+        }
     }
     // endregion
 }
