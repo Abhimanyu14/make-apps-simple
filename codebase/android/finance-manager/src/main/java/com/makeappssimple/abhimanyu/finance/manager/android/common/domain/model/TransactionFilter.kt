@@ -16,12 +16,13 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate
 
 internal data class TransactionFilter(
-    val searchText: String = "",
     val selectedAccountIds: ImmutableList<Int> = persistentListOf(),
     val selectedExpenseCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedIncomeCategoryIds: ImmutableList<Int> = persistentListOf(),
@@ -30,4 +31,24 @@ internal data class TransactionFilter(
     val selectedTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
     val fromDate: LocalDate? = null,
     val toDate: LocalDate? = null,
+    val searchText: String = "",
 )
+
+internal fun TransactionFilter.areFiltersSelected(): Boolean {
+    return selectedAccountIds.isNotEmpty() ||
+            selectedExpenseCategoryIds.isNotEmpty() ||
+            selectedIncomeCategoryIds.isNotEmpty() ||
+            selectedInvestmentCategoryIds.isNotEmpty() ||
+            selectedTransactionForIds.isNotEmpty() ||
+            selectedTransactionTypes.isNotEmpty() ||
+            toDate.isNotNull() ||
+            searchText.isNotBlank()
+}
+
+internal fun TransactionFilter?.orEmpty(): TransactionFilter {
+    return if (this.isNull()) {
+        TransactionFilter()
+    } else {
+        this
+    }
+}
