@@ -113,8 +113,8 @@ internal interface TransactionDataDao {
         areAccountFiltersSelected: Boolean = false,
         areTransactionForFiltersSelected: Boolean = false,
         areTransactionTypeFiltersSelected: Boolean = false,
-        selectedAccountIds: List<Int>? = null,
-        selectedTransactionForValueIds: List<Int>? = null,
+        selectedAccountIds: List<Int> = emptyList(),
+        selectedTransactionForValueIds: List<Int> = emptyList(),
         selectedTransactionTypes: List<TransactionType> = emptyList(),
         searchText: String = "",
     ): Flow<List<TransactionDataEntity>>

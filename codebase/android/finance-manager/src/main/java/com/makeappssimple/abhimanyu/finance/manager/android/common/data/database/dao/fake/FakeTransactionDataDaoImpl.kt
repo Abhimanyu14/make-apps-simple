@@ -55,8 +55,8 @@ internal class FakeTransactionDataDaoImpl(
         areAccountFiltersSelected: Boolean,
         areTransactionForFiltersSelected: Boolean,
         areTransactionTypeFiltersSelected: Boolean,
-        selectedAccountIds: List<Int>?,
-        selectedTransactionForValueIds: List<Int>?,
+        selectedAccountIds: List<Int>,
+        selectedTransactionForValueIds: List<Int>,
         selectedTransactionTypes: List<TransactionType>,
         searchText: String,
     ): Flow<List<TransactionDataEntity>> {
