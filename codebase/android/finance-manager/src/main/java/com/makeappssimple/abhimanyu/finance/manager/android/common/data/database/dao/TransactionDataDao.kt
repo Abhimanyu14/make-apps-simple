@@ -82,7 +82,7 @@ internal interface TransactionDataDao {
             FROM transaction_table
             WHERE
             (
-                :areAccountFiltersSelected = 0
+                NOT :areAccountFiltersSelected
                 OR
                 account_from_id IN (:selectedAccountIds)
                 OR
@@ -95,13 +95,13 @@ internal interface TransactionDataDao {
             )
             AND
             (
-                :areTransactionForFiltersSelected = 0
+                NOT :areTransactionForFiltersSelected
                 OR
                 transaction_for_id IN (:selectedTransactionForValueIds)
             )
             AND
             (
-                :areTransactionTypeFiltersSelected = 0
+                NOT :areTransactionTypeFiltersSelected
                 OR
                 transaction_type IN (:selectedTransactionTypes)
             )
