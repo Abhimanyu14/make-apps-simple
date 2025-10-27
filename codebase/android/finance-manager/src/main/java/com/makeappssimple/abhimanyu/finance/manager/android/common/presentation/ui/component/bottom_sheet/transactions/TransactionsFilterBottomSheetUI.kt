@@ -96,8 +96,8 @@ internal fun TransactionsFiltersBottomSheetUI(
             selectedFilter.selectedExpenseCategoryIds.isNotEmpty(),
             selectedFilter.selectedIncomeCategoryIds.isNotEmpty(),
             selectedFilter.selectedInvestmentCategoryIds.isNotEmpty(),
-            selectedFilter.selectedAccountsIds.isNotEmpty(),
-            selectedFilter.selectedTransactionForValuesIds.isNotEmpty(),
+            selectedFilter.selectedAccountIds.isNotEmpty(),
+            selectedFilter.selectedTransactionForValueIds.isNotEmpty(),
             selectedFilter.selectedTransactionTypes.isNotEmpty(),
             selectedFilter.toDate.isNotNull(),
         )
@@ -132,7 +132,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedAccountIndicesValue = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedAccountsIds.map { selectedAccountsId ->
+            elements = selectedFilter.selectedAccountIds.map { selectedAccountsId ->
                 accounts.indexOfFirst { account ->
                     account.id == selectedAccountsId
                 }
@@ -141,7 +141,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedTransactionForValuesIndicesValue = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedTransactionForValuesIds.map { selectedTransactionForValuesId ->
+            elements = selectedFilter.selectedTransactionForValueIds.map { selectedTransactionForValuesId ->
                 transactionForValues.indexOfFirst { transactionFor ->
                     transactionFor.id == selectedTransactionForValuesId
                 }
@@ -447,8 +447,8 @@ internal fun TransactionsFiltersBottomSheetUI(
                             selectedExpenseCategoryIds = selectedExpenseCategoryIds,
                             selectedIncomeCategoryIds = selectedIncomeCategoryIds,
                             selectedInvestmentCategoryIds = selectedInvestmentCategoryIds,
-                            selectedAccountsIds = selectedAccountsIds,
-                            selectedTransactionForValuesIds = selectedTransactionForValuesIds,
+                            selectedAccountIds = selectedAccountsIds,
+                            selectedTransactionForValueIds = selectedTransactionForValuesIds,
                             selectedTransactionTypes = selectedTransactionTypes,
                             fromDate = fromDate,
                             toDate = if (isDateFilterCleared) {

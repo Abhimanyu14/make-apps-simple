@@ -16,7 +16,18 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import java.time.LocalDate
+
 internal data class TransactionFilter(
     val searchText: String = "",
-    val selectedAccountIds: List<Int> = emptyList(),
+    val selectedAccountIds: ImmutableList<Int> = persistentListOf(),
+    val selectedExpenseCategoryIds: ImmutableList<Int> = persistentListOf(),
+    val selectedIncomeCategoryIds: ImmutableList<Int> = persistentListOf(),
+    val selectedInvestmentCategoryIds: ImmutableList<Int> = persistentListOf(),
+    val selectedTransactionForValueIds: ImmutableList<Int> = persistentListOf(),
+    val selectedTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
+    val fromDate: LocalDate? = null,
+    val toDate: LocalDate? = null,
 )

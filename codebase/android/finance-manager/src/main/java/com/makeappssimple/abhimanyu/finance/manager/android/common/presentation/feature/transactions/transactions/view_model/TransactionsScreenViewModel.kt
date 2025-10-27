@@ -229,13 +229,13 @@ internal class TransactionsScreenViewModel(
                         toDate = selectedFilter.toDate,
                         transactionData = transactionData,
                     ) && isAvailableAfterTransactionForFilter(
-                        selectedTransactionForValuesIds = selectedFilter.selectedTransactionForValuesIds,
+                        selectedTransactionForValuesIds = selectedFilter.selectedTransactionForValueIds,
                         transactionData = transactionData,
                     ) && isAvailableAfterTransactionTypeFilter(
                         selectedTransactionTypes = selectedFilter.selectedTransactionTypes,
                         transactionData = transactionData,
                     ) && isAvailableAfterAccountFilter(
-                        selectedAccountsIds = selectedFilter.selectedAccountsIds,
+                        selectedAccountsIds = selectedFilter.selectedAccountIds,
                         transactionData = transactionData,
                     ) && isAvailableAfterCategoryFilter(
                         selectedExpenseCategoryIds = selectedFilter.selectedExpenseCategoryIds,
@@ -656,7 +656,14 @@ internal class TransactionsScreenViewModel(
         selectedFilter = updatedSelectedFilter
         transactionFilter.update { currentTransactionFilter ->
             currentTransactionFilter.copy(
-                selectedAccountIds = updatedSelectedFilter.selectedAccountsIds,
+                selectedAccountIds = updatedSelectedFilter.selectedAccountIds,
+                selectedExpenseCategoryIds = updatedSelectedFilter.selectedExpenseCategoryIds,
+                selectedIncomeCategoryIds = updatedSelectedFilter.selectedIncomeCategoryIds,
+                selectedInvestmentCategoryIds = updatedSelectedFilter.selectedInvestmentCategoryIds,
+                selectedTransactionForValueIds = updatedSelectedFilter.selectedTransactionForValueIds,
+                selectedTransactionTypes = updatedSelectedFilter.selectedTransactionTypes,
+                fromDate = updatedSelectedFilter.fromDate,
+                toDate = updatedSelectedFilter.toDate,
             )
         }
         return if (shouldRefresh) {
