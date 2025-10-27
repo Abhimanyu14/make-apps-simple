@@ -228,9 +228,6 @@ internal class TransactionsScreenViewModel(
                         fromDate = selectedFilter.fromDate,
                         toDate = selectedFilter.toDate,
                         transactionData = transactionData,
-                    ) && isAvailableAfterTransactionTypeFilter(
-                        selectedTransactionTypes = selectedFilter.selectedTransactionTypes,
-                        transactionData = transactionData,
                     ) && isAvailableAfterAccountFilter(
                         selectedAccountsIds = selectedFilter.selectedAccountIds,
                         transactionData = transactionData,
@@ -326,18 +323,6 @@ internal class TransactionsScreenViewModel(
             .atEndOfDay()
             .toEpochMilli()
         return transactionData.transaction.transactionTimestamp in (fromDateStartOfDayTimestamp) until toDateStartOfDayTimestamp
-    }
-
-    private fun isAvailableAfterTransactionTypeFilter(
-        selectedTransactionTypes: ImmutableList<TransactionType>,
-        transactionData: TransactionData,
-    ): Boolean {
-        if (selectedTransactionTypes.isEmpty()) {
-            return true
-        }
-        return selectedTransactionTypes.contains(
-            element = transactionData.transaction.transactionType,
-        )
     }
 
     private fun isAvailableAfterAccountFilter(

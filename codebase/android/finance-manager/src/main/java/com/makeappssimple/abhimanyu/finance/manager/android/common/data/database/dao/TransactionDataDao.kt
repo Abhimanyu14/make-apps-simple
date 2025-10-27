@@ -23,6 +23,7 @@ import androidx.room.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -94,19 +95,27 @@ internal interface TransactionDataDao {
             )
             AND
             (
-                :isTransactionForFilterSelected = 0
+                :areTransactionForFiltersSelected = 0
                 OR
                 transaction_for_id IN (:selectedTransactionForValueIds)
+            )
+            AND
+            (
+                :areTransactionTypeFiltersSelected = 0
+                OR
+                transaction_type IN (:selectedTransactionTypes)
             )
             ORDER BY transaction_timestamp DESC
         """
     )
     @Transaction
     fun getAllTransactionDataFlow(
-        isTransactionForFilterSelected: Boolean = false,
+        areTransactionForFiltersSelected: Boolean = false,
+        areTransactionTypeFiltersSelected: Boolean = false,
         selectedAccountIds: List<Int>? = null,
         selectedTransactionForValueIds: List<Int>? = null,
-        searchText: String,
+        selectedTransactionTypes: List<TransactionType> = emptyList(),
+        searchText: String = "",
     ): Flow<List<TransactionDataEntity>>
 
     /**

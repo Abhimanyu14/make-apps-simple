@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
@@ -51,9 +52,11 @@ internal class FakeTransactionDataDaoImpl(
     }
 
     override fun getAllTransactionDataFlow(
-        areTransactionForFilterSelected: Boolean,
+        areTransactionForFiltersSelected: Boolean,
+        areTransactionTypeFiltersSelected: Boolean,
         selectedAccountIds: List<Int>?,
         selectedTransactionForValueIds: List<Int>?,
+        selectedTransactionTypes: List<TransactionType>,
         searchText: String,
     ): Flow<List<TransactionDataEntity>> {
         return transactionDao.getAllTransactionsFlow().map { transactions ->
