@@ -52,7 +52,10 @@ internal class TransactionsScreenViewModelTest {
             dateTimeKit = testDependencies.dateTimeKit,
             duplicateTransactionUseCase = testDependencies.duplicateTransactionUseCase,
             getAllTransactionDataFlowUseCase = testDependencies.getAllTransactionDataFlowUseCase,
+            getAccountsInTransactionsFlowUseCase = testDependencies.getAccountsInTransactionsFlowUseCase,
+            getCategoriesInTransactionsFlowUseCase = testDependencies.getCategoriesInTransactionsFlowUseCase,
             getAllTransactionForValuesUseCase = testDependencies.getAllTransactionForValuesUseCase,
+            getOldestTransactionTimestampUseCase = testDependencies.getOldestTransactionTimestampUseCase,
             updateTransactionsUseCase = testDependencies.updateTransactionsUseCase,
             logKit = testDependencies.logKit,
         )
@@ -158,7 +161,11 @@ internal class TransactionsScreenViewModelTest {
                 )
                 result.investmentCategories.shouldBeEmpty()
                 result.oldestTransactionLocalDate.shouldBe(
-                    expected = LocalDate.of(2024, 5, 20),
+                    expected = LocalDate.of(
+                        2024,
+                        5,
+                        20
+                    ),
                 )
                 result.transactionDetailsListItemViewData.size.shouldBe(
                     expected = 2,
@@ -301,7 +308,11 @@ internal class TransactionsScreenViewModelTest {
             )
             result.investmentCategories.shouldBeEmpty()
             result.oldestTransactionLocalDate.shouldBe(
-                expected = LocalDate.of(2024, 5, 20),
+                expected = LocalDate.of(
+                    2024,
+                    5,
+                    20
+                ),
             )
             result.transactionDetailsListItemViewData.size.shouldBe(
                 expected = 2,

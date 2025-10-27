@@ -69,10 +69,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DeleteTransactionUseByIdCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAccountsInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetCategoriesInTransactionsFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetMaxRefundAmountUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetOldestTransactionTimestampUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetRecentTransactionDataFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetTitleSuggestionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetTransactionByIdUseCase
@@ -397,6 +400,18 @@ internal class TestDependencies {
     val getAllTransactionForValuesUseCase = GetAllTransactionForValuesUseCase(
         transactionForRepository = transactionForRepository,
     )
+    val getOldestTransactionTimestampUseCase =
+        GetOldestTransactionTimestampUseCase(
+            transactionDataRepository = transactionDataRepository,
+        )
+    val getCategoriesInTransactionsFlowUseCase =
+        GetCategoriesInTransactionsFlowUseCase(
+            transactionDataRepository = transactionDataRepository,
+        )
+    val getAccountsInTransactionsFlowUseCase =
+        GetAccountsInTransactionsFlowUseCase(
+            transactionDataRepository = transactionDataRepository,
+        )
     val addTransactionForScreenDataValidationUseCase =
         AddTransactionForScreenDataValidationUseCase(
             getAllTransactionForValuesUseCase = getAllTransactionForValuesUseCase,

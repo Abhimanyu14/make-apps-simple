@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.Flow
 internal class GetOldestTransactionTimestampUseCase(
     private val transactionDataRepository: TransactionDataRepository,
 ) {
-    suspend operator fun invoke(): Flow<Long?> {
+    operator fun invoke(): Flow<Long?> {
         return transactionDataRepository.getOldestTransactionTimestampFlow()
     }
 }
