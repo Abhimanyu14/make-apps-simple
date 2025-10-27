@@ -23,9 +23,9 @@ import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate
 
 internal data class Filter(
-    val selectedExpenseCategoryIndices: ImmutableList<Int> = persistentListOf(),
-    val selectedIncomeCategoryIndices: ImmutableList<Int> = persistentListOf(),
-    val selectedInvestmentCategoryIndices: ImmutableList<Int> = persistentListOf(),
+    val selectedExpenseCategoryIds: ImmutableList<Int> = persistentListOf(),
+    val selectedIncomeCategoryIds: ImmutableList<Int> = persistentListOf(),
+    val selectedInvestmentCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedAccountsIndices: ImmutableList<Int> = persistentListOf(),
     val selectedTransactionForValuesIndices: ImmutableList<Int> = persistentListOf(),
     val selectedTransactionTypeIndices: ImmutableList<Int> = persistentListOf(),
@@ -34,9 +34,9 @@ internal data class Filter(
 )
 
 internal fun Filter.areFiltersSelected(): Boolean {
-    return selectedExpenseCategoryIndices.isNotEmpty() ||
-            selectedIncomeCategoryIndices.isNotEmpty() ||
-            selectedInvestmentCategoryIndices.isNotEmpty() ||
+    return selectedExpenseCategoryIds.isNotEmpty() ||
+            selectedIncomeCategoryIds.isNotEmpty() ||
+            selectedInvestmentCategoryIds.isNotEmpty() ||
             selectedAccountsIndices.isNotEmpty() ||
             selectedTransactionForValuesIndices.isNotEmpty() ||
             selectedTransactionTypeIndices.isNotEmpty() ||

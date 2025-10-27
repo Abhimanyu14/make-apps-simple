@@ -93,9 +93,9 @@ internal fun TransactionsFiltersBottomSheetUI(
 ) {
     val expandedItemsIndices = remember {
         mutableStateListOf(
-            selectedFilter.selectedExpenseCategoryIndices.isNotEmpty(),
-            selectedFilter.selectedIncomeCategoryIndices.isNotEmpty(),
-            selectedFilter.selectedInvestmentCategoryIndices.isNotEmpty(),
+            selectedFilter.selectedExpenseCategoryIds.isNotEmpty(),
+            selectedFilter.selectedIncomeCategoryIds.isNotEmpty(),
+            selectedFilter.selectedInvestmentCategoryIds.isNotEmpty(),
             selectedFilter.selectedAccountsIndices.isNotEmpty(),
             selectedFilter.selectedTransactionForValuesIndices.isNotEmpty(),
             selectedFilter.selectedTransactionTypeIndices.isNotEmpty(),
@@ -103,19 +103,31 @@ internal fun TransactionsFiltersBottomSheetUI(
         )
     }
 
-    val selectedExpenseCategoryIndicesValue = remember {
+    val selectedExpenseCategoryIndices = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedExpenseCategoryIndices.toTypedArray(),
+            elements = selectedFilter.selectedExpenseCategoryIds.map { selectedExpenseCategoryId ->
+                expenseCategories.indexOfFirst { expenseCategory ->
+                    expenseCategory.id == selectedExpenseCategoryId
+                }
+            }.toTypedArray(),
         )
     }
-    val selectedIncomeCategoryIndicesValue = remember {
+    val selectedIncomeCategoryIndices = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedIncomeCategoryIndices.toTypedArray(),
+            elements = selectedFilter.selectedIncomeCategoryIds.map { selectedIncomeCategoryId ->
+                incomeCategories.indexOfFirst { incomeCategory ->
+                    incomeCategory.id == selectedIncomeCategoryId
+                }
+            }.toTypedArray(),
         )
     }
-    val selectedInvestmentCategoryIndicesValue = remember {
+    val selectedInvestmentCategoryIndices = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedInvestmentCategoryIndices.toTypedArray(),
+            elements = selectedFilter.selectedInvestmentCategoryIds.map { selectedInvestmentCategoryId ->
+                investmentCategories.indexOfFirst { investmentCategory ->
+                    investmentCategory.id == selectedInvestmentCategoryId
+                }
+            }.toTypedArray(),
         )
     }
     val selectedAccountIndicesValue = remember {
@@ -155,12 +167,12 @@ internal fun TransactionsFiltersBottomSheetUI(
                                     text = category.title,
                                 )
                             },
-                            selectedItemsIndices = selectedExpenseCategoryIndicesValue,
+                            selectedItemsIndices = selectedExpenseCategoryIndices,
                         ),
                         handleEvent = { event ->
                             when (event) {
                                 is TransactionFilterBottomSheetFilterGroupEvent.OnClearButtonClick -> {
-                                    selectedExpenseCategoryIndicesValue.clear()
+                                    selectedExpenseCategoryIndices.clear()
                                 }
                             }
                         },
@@ -177,12 +189,12 @@ internal fun TransactionsFiltersBottomSheetUI(
                                     text = category.title,
                                 )
                             },
-                            selectedItemsIndices = selectedIncomeCategoryIndicesValue,
+                            selectedItemsIndices = selectedIncomeCategoryIndices,
                         ),
                         handleEvent = { event ->
                             when (event) {
                                 is TransactionFilterBottomSheetFilterGroupEvent.OnClearButtonClick -> {
-                                    selectedIncomeCategoryIndicesValue.clear()
+                                    selectedIncomeCategoryIndices.clear()
                                 }
                             }
                         },
@@ -199,12 +211,12 @@ internal fun TransactionsFiltersBottomSheetUI(
                                     text = category.title,
                                 )
                             },
-                            selectedItemsIndices = selectedInvestmentCategoryIndicesValue,
+                            selectedItemsIndices = selectedInvestmentCategoryIndices,
                         ),
                         handleEvent = { event ->
                             when (event) {
                                 is TransactionFilterBottomSheetFilterGroupEvent.OnClearButtonClick -> {
-                                    selectedInvestmentCategoryIndicesValue.clear()
+                                    selectedInvestmentCategoryIndices.clear()
                                 }
                             }
                         },
@@ -363,9 +375,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                         weight = 1F,
                     ),
                 onClick = {
-                    selectedExpenseCategoryIndicesValue.clear()
-                    selectedIncomeCategoryIndicesValue.clear()
-                    selectedInvestmentCategoryIndicesValue.clear()
+                    selectedExpenseCategoryIndices.clear()
+                    selectedIncomeCategoryIndices.clear()
+                    selectedInvestmentCategoryIndices.clear()
                     selectedAccountIndicesValue.clear()
                     selectedTransactionForValuesIndicesValue.clear()
                     selectedTransactionTypeIndicesValue.clear()
@@ -394,11 +406,23 @@ internal fun TransactionsFiltersBottomSheetUI(
                     val isDateFilterCleared =
                         isFromDateSameAsOldestTransactionDate &&
                                 isToDateSameAsCurrentDayDate
+                    val selectedExpenseCategoryIds =
+                        selectedExpenseCategoryIndices.map { selectedExpenseCategoryIndex ->
+                            expenseCategories[selectedExpenseCategoryIndex].id
+                        }.toImmutableList()
+                    val selectedIncomeCategoryIds =
+                        selectedIncomeCategoryIndices.map { selectedIncomeCategoryIndex ->
+                            incomeCategories[selectedIncomeCategoryIndex].id
+                        }.toImmutableList()
+                    val selectedInvestmentCategoryIds =
+                        selectedInvestmentCategoryIndices.map { selectedInvestmentCategoryIndex ->
+                            investmentCategories[selectedInvestmentCategoryIndex].id
+                        }.toImmutableList()
                     onPositiveButtonClick(
                         Filter(
-                            selectedExpenseCategoryIndices = selectedExpenseCategoryIndicesValue.toImmutableList(),
-                            selectedIncomeCategoryIndices = selectedIncomeCategoryIndicesValue.toImmutableList(),
-                            selectedInvestmentCategoryIndices = selectedInvestmentCategoryIndicesValue.toImmutableList(),
+                            selectedExpenseCategoryIds = selectedExpenseCategoryIds,
+                            selectedIncomeCategoryIds = selectedIncomeCategoryIds,
+                            selectedInvestmentCategoryIds = selectedInvestmentCategoryIds,
                             selectedAccountsIndices = selectedAccountIndicesValue.toImmutableList(),
                             selectedTransactionForValuesIndices = selectedTransactionForValuesIndicesValue.toImmutableList(),
                             selectedTransactionTypeIndices = selectedTransactionTypeIndicesValue.toImmutableList(),

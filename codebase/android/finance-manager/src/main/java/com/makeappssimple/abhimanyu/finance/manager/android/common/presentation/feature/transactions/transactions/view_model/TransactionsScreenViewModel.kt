@@ -241,16 +241,10 @@ internal class TransactionsScreenViewModel(
                         accountsValue = accounts,
                         transactionData = transactionData,
                     ) && isAvailableAfterCategoryFilter(
-                        selectedExpenseCategoryIndicesValue = selectedFilter.selectedExpenseCategoryIndices,
-                        selectedIncomeCategoryIndicesValue = selectedFilter.selectedIncomeCategoryIndices,
-                        selectedInvestmentCategoryIndicesValue = selectedFilter.selectedInvestmentCategoryIndices,
-                        expenseCategoriesValue = categoriesMap[TransactionType.EXPENSE].orEmpty()
-                            .toImmutableList(),
+                        selectedExpenseCategoryIds = selectedFilter.selectedExpenseCategoryIds,
+                        selectedIncomeCategoryIds = selectedFilter.selectedIncomeCategoryIds,
+                        selectedInvestmentCategoryIds = selectedFilter.selectedInvestmentCategoryIds,
                         transactionData = transactionData,
-                        incomeCategoriesValue = categoriesMap[TransactionType.INCOME].orEmpty()
-                            .toImmutableList(),
-                        investmentCategoriesValue = categoriesMap[TransactionType.INVESTMENT].orEmpty()
-                            .toImmutableList(),
                     )
                 }
                 .sortedWith(
@@ -390,32 +384,24 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun isAvailableAfterCategoryFilter(
-        expenseCategoriesValue: ImmutableList<Category>,
-        incomeCategoriesValue: ImmutableList<Category>,
-        investmentCategoriesValue: ImmutableList<Category>,
-        selectedExpenseCategoryIndicesValue: ImmutableList<Int>,
-        selectedIncomeCategoryIndicesValue: ImmutableList<Int>,
-        selectedInvestmentCategoryIndicesValue: ImmutableList<Int>,
+        selectedExpenseCategoryIds: ImmutableList<Int>,
+        selectedIncomeCategoryIds: ImmutableList<Int>,
+        selectedInvestmentCategoryIds: ImmutableList<Int>,
         transactionData: TransactionData,
     ): Boolean {
-        if (selectedExpenseCategoryIndicesValue.isEmpty() &&
-            selectedIncomeCategoryIndicesValue.isEmpty() &&
-            selectedInvestmentCategoryIndicesValue.isEmpty()
+        if (selectedExpenseCategoryIds.isEmpty() &&
+            selectedIncomeCategoryIds.isEmpty() &&
+            selectedInvestmentCategoryIds.isEmpty()
         ) {
             return true
         }
-        return selectedExpenseCategoryIndicesValue.contains(
-            element = expenseCategoriesValue.indexOf(
-                element = transactionData.category,
-            ),
-        ) || selectedIncomeCategoryIndicesValue.contains(
-            element = incomeCategoriesValue.indexOf(
-                element = transactionData.category,
-            ),
-        ) || selectedInvestmentCategoryIndicesValue.contains(
-            element = investmentCategoriesValue.indexOf(
-                element = transactionData.category,
-            ),
+        val transactionCategoryId = transactionData.category?.id ?: return false
+        return selectedExpenseCategoryIds.contains(
+            element = transactionCategoryId,
+        ) || selectedIncomeCategoryIds.contains(
+            element = transactionCategoryId,
+        ) || selectedInvestmentCategoryIds.contains(
+            element = transactionCategoryId,
         )
     }
     // endregion
