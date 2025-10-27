@@ -53,9 +53,11 @@ internal class FakeTransactionDataDaoImpl(
 
     override fun getAllTransactionDataFlow(
         areAccountFiltersSelected: Boolean,
+        areCategoryFiltersSelected: Boolean,
         areTransactionForFiltersSelected: Boolean,
         areTransactionTypeFiltersSelected: Boolean,
         selectedAccountIds: List<Int>,
+        selectedCategoryIds: List<Int>,
         selectedTransactionForValueIds: List<Int>,
         selectedTransactionTypes: List<TransactionType>,
         searchText: String,

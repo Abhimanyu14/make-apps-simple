@@ -228,11 +228,6 @@ internal class TransactionsScreenViewModel(
                         fromDate = selectedFilter.fromDate,
                         toDate = selectedFilter.toDate,
                         transactionData = transactionData,
-                    ) && isAvailableAfterCategoryFilter(
-                        selectedExpenseCategoryIds = selectedFilter.selectedExpenseCategoryIds,
-                        selectedIncomeCategoryIds = selectedFilter.selectedIncomeCategoryIds,
-                        selectedInvestmentCategoryIds = selectedFilter.selectedInvestmentCategoryIds,
-                        transactionData = transactionData,
                     )
                 }
                 .sortedWith(
@@ -320,28 +315,6 @@ internal class TransactionsScreenViewModel(
             .atEndOfDay()
             .toEpochMilli()
         return transactionData.transaction.transactionTimestamp in (fromDateStartOfDayTimestamp) until toDateStartOfDayTimestamp
-    }
-
-    private fun isAvailableAfterCategoryFilter(
-        selectedExpenseCategoryIds: ImmutableList<Int>,
-        selectedIncomeCategoryIds: ImmutableList<Int>,
-        selectedInvestmentCategoryIds: ImmutableList<Int>,
-        transactionData: TransactionData,
-    ): Boolean {
-        if (selectedExpenseCategoryIds.isEmpty() &&
-            selectedIncomeCategoryIds.isEmpty() &&
-            selectedInvestmentCategoryIds.isEmpty()
-        ) {
-            return true
-        }
-        val transactionCategoryId = transactionData.category?.id ?: return false
-        return selectedExpenseCategoryIds.contains(
-            element = transactionCategoryId,
-        ) || selectedIncomeCategoryIds.contains(
-            element = transactionCategoryId,
-        ) || selectedInvestmentCategoryIds.contains(
-            element = transactionCategoryId,
-        )
     }
     // endregion
 

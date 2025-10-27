@@ -105,15 +105,23 @@ internal interface TransactionDataDao {
                 OR
                 transaction_type IN (:selectedTransactionTypes)
             )
+            AND
+            (
+                NOT :areCategoryFiltersSelected
+                OR
+                category_id IN (:selectedCategoryIds)
+            )
             ORDER BY transaction_timestamp DESC
         """
     )
     @Transaction
     fun getAllTransactionDataFlow(
         areAccountFiltersSelected: Boolean = false,
+        areCategoryFiltersSelected: Boolean = false,
         areTransactionForFiltersSelected: Boolean = false,
         areTransactionTypeFiltersSelected: Boolean = false,
         selectedAccountIds: List<Int> = emptyList(),
+        selectedCategoryIds: List<Int> = emptyList(),
         selectedTransactionForValueIds: List<Int> = emptyList(),
         selectedTransactionTypes: List<TransactionType> = emptyList(),
         searchText: String = "",

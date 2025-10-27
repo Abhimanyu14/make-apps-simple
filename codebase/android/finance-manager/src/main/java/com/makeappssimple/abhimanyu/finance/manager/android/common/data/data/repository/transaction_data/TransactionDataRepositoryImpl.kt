@@ -96,16 +96,26 @@ internal class TransactionDataRepositoryImpl(
     override fun getAllTransactionDataFlow(
         transactionFilter: TransactionFilter,
     ): Flow<ImmutableList<TransactionData>> {
+        val areCategoryFiltersSelected =
+            transactionFilter.selectedExpenseCategoryIds.isNotEmpty() ||
+                    transactionFilter.selectedIncomeCategoryIds.isNotEmpty() ||
+                    transactionFilter.selectedInvestmentCategoryIds.isNotEmpty()
         val areTransactionForFiltersSelected =
             transactionFilter.selectedTransactionForIds.isNotEmpty()
         val areTransactionTypeFiltersSelected =
             transactionFilter.selectedTransactionTypes.isNotEmpty()
+        val selectedCategoryIds =
+            transactionFilter.selectedExpenseCategoryIds +
+                    transactionFilter.selectedIncomeCategoryIds +
+                    transactionFilter.selectedInvestmentCategoryIds
         return transactionDataDao
             .getAllTransactionDataFlow(
                 areAccountFiltersSelected = transactionFilter.selectedAccountIds.isNotEmpty(),
+                areCategoryFiltersSelected = areCategoryFiltersSelected,
                 areTransactionForFiltersSelected = areTransactionForFiltersSelected,
                 areTransactionTypeFiltersSelected = areTransactionTypeFiltersSelected,
                 selectedAccountIds = transactionFilter.selectedAccountIds,
+                selectedCategoryIds = selectedCategoryIds,
                 selectedTransactionForValueIds = transactionFilter.selectedTransactionForIds,
                 selectedTransactionTypes = transactionFilter.selectedTransactionTypes,
                 // TODO(Abhi): Main the search logic in viewmodel for now
