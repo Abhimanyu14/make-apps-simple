@@ -28,7 +28,7 @@ internal data class Filter(
     val selectedIncomeCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedInvestmentCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedAccountIds: ImmutableList<Int> = persistentListOf(),
-    val selectedTransactionForValueIds: ImmutableList<Int> = persistentListOf(),
+    val selectedTransactionForIds: ImmutableList<Int> = persistentListOf(),
     val selectedTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
     val fromDate: LocalDate? = null,
     val toDate: LocalDate? = null,
@@ -39,7 +39,7 @@ internal fun Filter.areFiltersSelected(): Boolean {
             selectedIncomeCategoryIds.isNotEmpty() ||
             selectedInvestmentCategoryIds.isNotEmpty() ||
             selectedAccountIds.isNotEmpty() ||
-            selectedTransactionForValueIds.isNotEmpty() ||
+            selectedTransactionForIds.isNotEmpty() ||
             selectedTransactionTypes.isNotEmpty() ||
             toDate.isNotNull()
 }

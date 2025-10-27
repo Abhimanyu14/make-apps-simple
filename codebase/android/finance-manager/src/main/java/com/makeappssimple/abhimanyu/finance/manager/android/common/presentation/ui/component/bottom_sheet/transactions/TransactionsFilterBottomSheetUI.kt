@@ -97,7 +97,7 @@ internal fun TransactionsFiltersBottomSheetUI(
             selectedFilter.selectedIncomeCategoryIds.isNotEmpty(),
             selectedFilter.selectedInvestmentCategoryIds.isNotEmpty(),
             selectedFilter.selectedAccountIds.isNotEmpty(),
-            selectedFilter.selectedTransactionForValueIds.isNotEmpty(),
+            selectedFilter.selectedTransactionForIds.isNotEmpty(),
             selectedFilter.selectedTransactionTypes.isNotEmpty(),
             selectedFilter.toDate.isNotNull(),
         )
@@ -141,7 +141,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedTransactionForValuesIndicesValue = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedTransactionForValueIds.map { selectedTransactionForValuesId ->
+            elements = selectedFilter.selectedTransactionForIds.map { selectedTransactionForValuesId ->
                 transactionForValues.indexOfFirst { transactionFor ->
                     transactionFor.id == selectedTransactionForValuesId
                 }
@@ -448,7 +448,7 @@ internal fun TransactionsFiltersBottomSheetUI(
                             selectedIncomeCategoryIds = selectedIncomeCategoryIds,
                             selectedInvestmentCategoryIds = selectedInvestmentCategoryIds,
                             selectedAccountIds = selectedAccountsIds,
-                            selectedTransactionForValueIds = selectedTransactionForValuesIds,
+                            selectedTransactionForIds = selectedTransactionForValuesIds,
                             selectedTransactionTypes = selectedTransactionTypes,
                             fromDate = fromDate,
                             toDate = if (isDateFilterCleared) {

@@ -98,9 +98,13 @@ internal class TransactionDataRepositoryImpl(
     ): Flow<ImmutableList<TransactionData>> {
         return transactionDataDao
             .getAllTransactionDataFlow(
+                isTransactionForFilterSelected = transactionFilter.selectedTransactionForIds.isNotEmpty(),
+                selectedAccountIds = null,
+                selectedTransactionForValueIds = transactionFilter.selectedTransactionForIds.ifEmpty {
+                    null
+                },
                 // TODO(Abhi): Main the search logic in viewmodel for now
                 searchText = "", // transactionFilter.searchText,
-                selectedAccountIds = null,
             )
             .catch { throwable: Throwable ->
                 if (throwable is SQLiteException) {

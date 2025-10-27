@@ -26,7 +26,7 @@ internal data class TransactionFilter(
     val selectedExpenseCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedIncomeCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedInvestmentCategoryIds: ImmutableList<Int> = persistentListOf(),
-    val selectedTransactionForValueIds: ImmutableList<Int> = persistentListOf(),
+    val selectedTransactionForIds: ImmutableList<Int> = persistentListOf(),
     val selectedTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
     val fromDate: LocalDate? = null,
     val toDate: LocalDate? = null,

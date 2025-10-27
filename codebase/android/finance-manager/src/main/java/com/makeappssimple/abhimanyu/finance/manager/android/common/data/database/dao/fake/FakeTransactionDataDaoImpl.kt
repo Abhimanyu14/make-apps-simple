@@ -51,8 +51,10 @@ internal class FakeTransactionDataDaoImpl(
     }
 
     override fun getAllTransactionDataFlow(
-        searchText: String,
+        areTransactionForFilterSelected: Boolean,
         selectedAccountIds: List<Int>?,
+        selectedTransactionForValueIds: List<Int>?,
+        searchText: String,
     ): Flow<List<TransactionDataEntity>> {
         return transactionDao.getAllTransactionsFlow().map { transactions ->
             getSortedTransactionDataEntity(
@@ -74,7 +76,6 @@ internal class FakeTransactionDataDaoImpl(
     ): Flow<List<TransactionDataEntity>> {
         return getAllTransactionDataFlow(
             searchText = "",
-            selectedAccountIds = null,
         ).map { transactionDataList ->
             transactionDataList.take(
                 n = numberOfTransactions,

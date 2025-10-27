@@ -92,13 +92,21 @@ internal interface TransactionDataDao {
                 lower(title) LIKE '%' || lower(:searchText) || '%' 
                 OR lower(CAST(amount AS TEXT)) LIKE '%' || lower(:searchText) || '%'
             )
+            AND
+            (
+                :isTransactionForFilterSelected = 0
+                OR
+                transaction_for_id IN (:selectedTransactionForValueIds)
+            )
             ORDER BY transaction_timestamp DESC
         """
     )
     @Transaction
     fun getAllTransactionDataFlow(
+        isTransactionForFilterSelected: Boolean = false,
+        selectedAccountIds: List<Int>? = null,
+        selectedTransactionForValueIds: List<Int>? = null,
         searchText: String,
-        selectedAccountIds: List<Int>?,
     ): Flow<List<TransactionDataEntity>>
 
     /**

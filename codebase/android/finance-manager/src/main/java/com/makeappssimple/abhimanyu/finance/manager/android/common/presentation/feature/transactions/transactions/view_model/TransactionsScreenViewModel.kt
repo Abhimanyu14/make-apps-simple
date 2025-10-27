@@ -228,9 +228,6 @@ internal class TransactionsScreenViewModel(
                         fromDate = selectedFilter.fromDate,
                         toDate = selectedFilter.toDate,
                         transactionData = transactionData,
-                    ) && isAvailableAfterTransactionForFilter(
-                        selectedTransactionForValuesIds = selectedFilter.selectedTransactionForValueIds,
-                        transactionData = transactionData,
                     ) && isAvailableAfterTransactionTypeFilter(
                         selectedTransactionTypes = selectedFilter.selectedTransactionTypes,
                         transactionData = transactionData,
@@ -329,18 +326,6 @@ internal class TransactionsScreenViewModel(
             .atEndOfDay()
             .toEpochMilli()
         return transactionData.transaction.transactionTimestamp in (fromDateStartOfDayTimestamp) until toDateStartOfDayTimestamp
-    }
-
-    private fun isAvailableAfterTransactionForFilter(
-        selectedTransactionForValuesIds: ImmutableList<Int>,
-        transactionData: TransactionData,
-    ): Boolean {
-        if (selectedTransactionForValuesIds.isEmpty()) {
-            return true
-        }
-        return selectedTransactionForValuesIds.contains(
-            element = transactionData.transactionFor.id,
-        )
     }
 
     private fun isAvailableAfterTransactionTypeFilter(
@@ -660,7 +645,7 @@ internal class TransactionsScreenViewModel(
                 selectedExpenseCategoryIds = updatedSelectedFilter.selectedExpenseCategoryIds,
                 selectedIncomeCategoryIds = updatedSelectedFilter.selectedIncomeCategoryIds,
                 selectedInvestmentCategoryIds = updatedSelectedFilter.selectedInvestmentCategoryIds,
-                selectedTransactionForValueIds = updatedSelectedFilter.selectedTransactionForValueIds,
+                selectedTransactionForIds = updatedSelectedFilter.selectedTransactionForIds,
                 selectedTransactionTypes = updatedSelectedFilter.selectedTransactionTypes,
                 fromDate = updatedSelectedFilter.fromDate,
                 toDate = updatedSelectedFilter.toDate,
