@@ -102,8 +102,10 @@ internal class TransactionDataRepositoryImpl(
             transactionFilter.selectedTransactionTypes.isNotEmpty()
         return transactionDataDao
             .getAllTransactionDataFlow(
+                areAccountFiltersSelected = transactionFilter.selectedAccountIds.isNotEmpty(),
                 areTransactionForFiltersSelected = areTransactionForFiltersSelected,
                 areTransactionTypeFiltersSelected = areTransactionTypeFiltersSelected,
+                selectedAccountIds = transactionFilter.selectedAccountIds,
                 selectedTransactionForValueIds = transactionFilter.selectedTransactionForIds,
                 selectedTransactionTypes = transactionFilter.selectedTransactionTypes,
                 // TODO(Abhi): Main the search logic in viewmodel for now

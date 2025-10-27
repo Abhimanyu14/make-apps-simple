@@ -228,9 +228,9 @@ internal class TransactionsScreenViewModel(
                         fromDate = selectedFilter.fromDate,
                         toDate = selectedFilter.toDate,
                         transactionData = transactionData,
-                    ) && isAvailableAfterAccountFilter(
-                        selectedAccountsIds = selectedFilter.selectedAccountIds,
-                        transactionData = transactionData,
+//                    ) && isAvailableAfterAccountFilter(
+//                        selectedAccountsIds = selectedFilter.selectedAccountIds,
+//                        transactionData = transactionData,
                     ) && isAvailableAfterCategoryFilter(
                         selectedExpenseCategoryIds = selectedFilter.selectedExpenseCategoryIds,
                         selectedIncomeCategoryIds = selectedFilter.selectedIncomeCategoryIds,
@@ -325,19 +325,19 @@ internal class TransactionsScreenViewModel(
         return transactionData.transaction.transactionTimestamp in (fromDateStartOfDayTimestamp) until toDateStartOfDayTimestamp
     }
 
-    private fun isAvailableAfterAccountFilter(
-        selectedAccountsIds: ImmutableList<Int>,
-        transactionData: TransactionData,
-    ): Boolean {
-        if (selectedAccountsIds.isEmpty()) {
-            return true
-        }
-        return selectedAccountsIds.contains(
-            element = transactionData.accountFrom?.id,
-        ) || selectedAccountsIds.contains(
-            element = transactionData.accountTo?.id,
-        )
-    }
+//    private fun isAvailableAfterAccountFilter(
+//        selectedAccountsIds: ImmutableList<Int>,
+//        transactionData: TransactionData,
+//    ): Boolean {
+//        if (selectedAccountsIds.isEmpty()) {
+//            return true
+//        }
+//        return selectedAccountsIds.contains(
+//            element = transactionData.accountFrom?.id,
+//        ) || selectedAccountsIds.contains(
+//            element = transactionData.accountTo?.id,
+//        )
+//    }
 
     private fun isAvailableAfterCategoryFilter(
         selectedExpenseCategoryIds: ImmutableList<Int>,

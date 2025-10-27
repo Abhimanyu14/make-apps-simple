@@ -82,7 +82,7 @@ internal interface TransactionDataDao {
             FROM transaction_table
             WHERE
             (
-                :selectedAccountIds IS NULL
+                :areAccountFiltersSelected = 0
                 OR
                 account_from_id IN (:selectedAccountIds)
                 OR
@@ -110,6 +110,7 @@ internal interface TransactionDataDao {
     )
     @Transaction
     fun getAllTransactionDataFlow(
+        areAccountFiltersSelected: Boolean = false,
         areTransactionForFiltersSelected: Boolean = false,
         areTransactionTypeFiltersSelected: Boolean = false,
         selectedAccountIds: List<Int>? = null,
