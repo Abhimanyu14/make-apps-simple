@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDate
@@ -26,9 +27,9 @@ internal data class Filter(
     val selectedExpenseCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedIncomeCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedInvestmentCategoryIds: ImmutableList<Int> = persistentListOf(),
-    val selectedAccountsIndices: ImmutableList<Int> = persistentListOf(),
-    val selectedTransactionForValuesIndices: ImmutableList<Int> = persistentListOf(),
-    val selectedTransactionTypeIndices: ImmutableList<Int> = persistentListOf(),
+    val selectedAccountsIds: ImmutableList<Int> = persistentListOf(),
+    val selectedTransactionForValuesIds: ImmutableList<Int> = persistentListOf(),
+    val selectedTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
     val fromDate: LocalDate? = null,
     val toDate: LocalDate? = null,
 )
@@ -37,9 +38,9 @@ internal fun Filter.areFiltersSelected(): Boolean {
     return selectedExpenseCategoryIds.isNotEmpty() ||
             selectedIncomeCategoryIds.isNotEmpty() ||
             selectedInvestmentCategoryIds.isNotEmpty() ||
-            selectedAccountsIndices.isNotEmpty() ||
-            selectedTransactionForValuesIndices.isNotEmpty() ||
-            selectedTransactionTypeIndices.isNotEmpty() ||
+            selectedAccountsIds.isNotEmpty() ||
+            selectedTransactionForValuesIds.isNotEmpty() ||
+            selectedTransactionTypes.isNotEmpty() ||
             toDate.isNotNull()
 }
 

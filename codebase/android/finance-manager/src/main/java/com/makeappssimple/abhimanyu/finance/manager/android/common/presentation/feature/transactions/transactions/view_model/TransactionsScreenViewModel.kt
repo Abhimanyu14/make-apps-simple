@@ -229,16 +229,13 @@ internal class TransactionsScreenViewModel(
                         toDate = selectedFilter.toDate,
                         transactionData = transactionData,
                     ) && isAvailableAfterTransactionForFilter(
-                        selectedTransactionForValuesIndices = selectedFilter.selectedTransactionForValuesIndices,
+                        selectedTransactionForValuesIds = selectedFilter.selectedTransactionForValuesIds,
                         transactionData = transactionData,
-                        transactionForValuesValue = allTransactionForValues,
                     ) && isAvailableAfterTransactionTypeFilter(
-                        transactionTypes = transactionTypes,
-                        selectedTransactionTypesIndicesValue = selectedFilter.selectedTransactionTypeIndices,
+                        selectedTransactionTypes = selectedFilter.selectedTransactionTypes,
                         transactionData = transactionData,
                     ) && isAvailableAfterAccountFilter(
-                        selectedAccountsIndicesValue = selectedFilter.selectedAccountsIndices,
-                        accountsValue = accounts,
+                        selectedAccountsIds = selectedFilter.selectedAccountsIds,
                         transactionData = transactionData,
                     ) && isAvailableAfterCategoryFilter(
                         selectedExpenseCategoryIds = selectedFilter.selectedExpenseCategoryIds,
@@ -335,51 +332,40 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun isAvailableAfterTransactionForFilter(
-        selectedTransactionForValuesIndices: ImmutableList<Int>,
+        selectedTransactionForValuesIds: ImmutableList<Int>,
         transactionData: TransactionData,
-        transactionForValuesValue: ImmutableList<TransactionFor>,
     ): Boolean {
-        if (selectedTransactionForValuesIndices.isEmpty()) {
+        if (selectedTransactionForValuesIds.isEmpty()) {
             return true
         }
-        return selectedTransactionForValuesIndices.contains(
-            element = transactionForValuesValue.indexOf(
-                element = transactionData.transactionFor,
-            ),
+        return selectedTransactionForValuesIds.contains(
+            element = transactionData.transactionFor.id,
         )
     }
 
     private fun isAvailableAfterTransactionTypeFilter(
-        transactionTypes: ImmutableList<TransactionType>,
-        selectedTransactionTypesIndicesValue: ImmutableList<Int>,
+        selectedTransactionTypes: ImmutableList<TransactionType>,
         transactionData: TransactionData,
     ): Boolean {
-        if (selectedTransactionTypesIndicesValue.isEmpty()) {
+        if (selectedTransactionTypes.isEmpty()) {
             return true
         }
-        return selectedTransactionTypesIndicesValue.contains(
-            element = transactionTypes.indexOf(
-                element = transactionData.transaction.transactionType,
-            ),
+        return selectedTransactionTypes.contains(
+            element = transactionData.transaction.transactionType,
         )
     }
 
     private fun isAvailableAfterAccountFilter(
-        selectedAccountsIndicesValue: ImmutableList<Int>,
-        accountsValue: ImmutableList<Account>,
+        selectedAccountsIds: ImmutableList<Int>,
         transactionData: TransactionData,
     ): Boolean {
-        if (selectedAccountsIndicesValue.isEmpty()) {
+        if (selectedAccountsIds.isEmpty()) {
             return true
         }
-        return selectedAccountsIndicesValue.contains(
-            element = accountsValue.indexOf(
-                element = transactionData.accountFrom,
-            ),
-        ) || selectedAccountsIndicesValue.contains(
-            element = accountsValue.indexOf(
-                element = transactionData.accountTo,
-            ),
+        return selectedAccountsIds.contains(
+            element = transactionData.accountFrom?.id,
+        ) || selectedAccountsIds.contains(
+            element = transactionData.accountTo?.id,
         )
     }
 
@@ -668,14 +654,9 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedFilter = updatedSelectedFilter
-
-        val updatedSelectedAccountIds =
-            updatedSelectedFilter.selectedAccountsIndices.map {
-                accounts[it].id
-            }
         transactionFilter.update { currentTransactionFilter ->
             currentTransactionFilter.copy(
-                selectedAccountIds = updatedSelectedAccountIds,
+                selectedAccountIds = updatedSelectedFilter.selectedAccountsIds,
             )
         }
         return if (shouldRefresh) {
