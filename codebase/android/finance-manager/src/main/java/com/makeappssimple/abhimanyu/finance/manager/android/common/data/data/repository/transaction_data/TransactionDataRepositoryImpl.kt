@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.re
 
 import androidx.sqlite.SQLiteException
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.asEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
@@ -96,6 +97,8 @@ internal class TransactionDataRepositoryImpl(
     override fun getAllTransactionDataFlow(
         transactionFilter: TransactionFilter,
     ): Flow<ImmutableList<TransactionData>> {
+        val areAccountFiltersSelected =
+            transactionFilter.selectedAccountIds.isNotEmpty()
         val areCategoryFiltersSelected =
             transactionFilter.selectedExpenseCategoryIds.isNotEmpty() ||
                     transactionFilter.selectedIncomeCategoryIds.isNotEmpty() ||
@@ -104,20 +107,33 @@ internal class TransactionDataRepositoryImpl(
             transactionFilter.selectedTransactionForIds.isNotEmpty()
         val areTransactionTypeFiltersSelected =
             transactionFilter.selectedTransactionTypes.isNotEmpty()
+        val isDateFilterSelected =
+            transactionFilter.fromTimestamp.isNotNull() &&
+                    transactionFilter.toTimestamp.isNotNull()
+        val selectedAccountIds = transactionFilter.selectedAccountIds
         val selectedCategoryIds =
             transactionFilter.selectedExpenseCategoryIds +
                     transactionFilter.selectedIncomeCategoryIds +
                     transactionFilter.selectedInvestmentCategoryIds
+        val selectedTransactionForValueIds =
+            transactionFilter.selectedTransactionForIds
+        val selectedTransactionTypes =
+            transactionFilter.selectedTransactionTypes
+        val fromTimestamp = transactionFilter.fromTimestamp
+        val toTimestamp = transactionFilter.toTimestamp
         return transactionDataDao
             .getAllTransactionDataFlow(
-                areAccountFiltersSelected = transactionFilter.selectedAccountIds.isNotEmpty(),
+                areAccountFiltersSelected = areAccountFiltersSelected,
                 areCategoryFiltersSelected = areCategoryFiltersSelected,
                 areTransactionForFiltersSelected = areTransactionForFiltersSelected,
                 areTransactionTypeFiltersSelected = areTransactionTypeFiltersSelected,
-                selectedAccountIds = transactionFilter.selectedAccountIds,
+                isDateFilterSelected = isDateFilterSelected,
+                selectedAccountIds = selectedAccountIds,
                 selectedCategoryIds = selectedCategoryIds,
-                selectedTransactionForValueIds = transactionFilter.selectedTransactionForIds,
-                selectedTransactionTypes = transactionFilter.selectedTransactionTypes,
+                selectedTransactionForValueIds = selectedTransactionForValueIds,
+                selectedTransactionTypes = selectedTransactionTypes,
+                fromTimestamp = fromTimestamp,
+                toTimestamp = toTimestamp,
                 // TODO(Abhi): Main the search logic in viewmodel for now
                 searchText = "", // transactionFilter.searchText,
             )

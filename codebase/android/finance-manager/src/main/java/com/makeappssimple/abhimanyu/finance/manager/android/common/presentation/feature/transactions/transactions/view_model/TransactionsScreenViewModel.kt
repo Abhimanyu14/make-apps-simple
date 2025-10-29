@@ -28,7 +28,6 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
@@ -224,10 +223,6 @@ internal class TransactionsScreenViewModel(
                     isAvailableAfterSearch(
                         searchTextValue = searchTextFieldState.text.toString(),
                         transactionData = transactionData,
-                    ) && isAvailableAfterDateFilter(
-                        fromDate = selectedFilter.fromDate,
-                        toDate = selectedFilter.toDate,
-                        transactionData = transactionData,
                     )
                 }
                 .sortedWith(
@@ -298,23 +293,6 @@ internal class TransactionsScreenViewModel(
             other = searchTextValue,
             ignoreCase = true,
         )
-    }
-
-    private fun isAvailableAfterDateFilter(
-        fromDate: LocalDate?,
-        toDate: LocalDate?,
-        transactionData: TransactionData,
-    ): Boolean {
-        if (fromDate.isNull() || toDate.isNull()) {
-            return true
-        }
-        val fromDateStartOfDayTimestamp = fromDate
-            .atStartOfDay()
-            .toEpochMilli()
-        val toDateStartOfDayTimestamp = toDate
-            .atEndOfDay()
-            .toEpochMilli()
-        return transactionData.transaction.transactionTimestamp in (fromDateStartOfDayTimestamp) until toDateStartOfDayTimestamp
     }
     // endregion
 
@@ -580,6 +558,12 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedFilter = updatedSelectedFilter
+        val fromTimestamp = updatedSelectedFilter.fromDate
+            ?.atStartOfDay()
+            ?.toEpochMilli()
+        val toDateStartOfDayTimestamp = updatedSelectedFilter.toDate
+            ?.atEndOfDay()
+            ?.toEpochMilli()
         transactionFilter.update { currentTransactionFilter ->
             currentTransactionFilter.copy(
                 selectedAccountIds = updatedSelectedFilter.selectedAccountIds,
@@ -588,8 +572,8 @@ internal class TransactionsScreenViewModel(
                 selectedInvestmentCategoryIds = updatedSelectedFilter.selectedInvestmentCategoryIds,
                 selectedTransactionForIds = updatedSelectedFilter.selectedTransactionForIds,
                 selectedTransactionTypes = updatedSelectedFilter.selectedTransactionTypes,
-                fromDate = updatedSelectedFilter.fromDate,
-                toDate = updatedSelectedFilter.toDate,
+                fromTimestamp = fromTimestamp,
+                toTimestamp = toDateStartOfDayTimestamp,
             )
         }
         return if (shouldRefresh) {

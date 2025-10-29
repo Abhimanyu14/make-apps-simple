@@ -111,6 +111,12 @@ internal interface TransactionDataDao {
                 OR
                 category_id IN (:selectedCategoryIds)
             )
+            AND
+            (
+                NOT :isDateFilterSelected
+                OR
+                transaction_timestamp BETWEEN :fromTimestamp AND :toTimestamp
+            )
             ORDER BY transaction_timestamp DESC
         """
     )
@@ -120,10 +126,13 @@ internal interface TransactionDataDao {
         areCategoryFiltersSelected: Boolean = false,
         areTransactionForFiltersSelected: Boolean = false,
         areTransactionTypeFiltersSelected: Boolean = false,
+        isDateFilterSelected: Boolean = false,
         selectedAccountIds: List<Int> = emptyList(),
         selectedCategoryIds: List<Int> = emptyList(),
         selectedTransactionForValueIds: List<Int> = emptyList(),
         selectedTransactionTypes: List<TransactionType> = emptyList(),
+        fromTimestamp: Long? = null,
+        toTimestamp: Long? = null,
         searchText: String = "",
     ): Flow<List<TransactionDataEntity>>
 

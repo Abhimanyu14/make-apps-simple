@@ -56,10 +56,13 @@ internal class FakeTransactionDataDaoImpl(
         areCategoryFiltersSelected: Boolean,
         areTransactionForFiltersSelected: Boolean,
         areTransactionTypeFiltersSelected: Boolean,
+        isDateFilterSelected: Boolean,
         selectedAccountIds: List<Int>,
         selectedCategoryIds: List<Int>,
         selectedTransactionForValueIds: List<Int>,
         selectedTransactionTypes: List<TransactionType>,
+        fromTimestamp: Long?,
+        toTimestamp: Long?,
         searchText: String,
     ): Flow<List<TransactionDataEntity>> {
         return transactionDao.getAllTransactionsFlow().map { transactions ->

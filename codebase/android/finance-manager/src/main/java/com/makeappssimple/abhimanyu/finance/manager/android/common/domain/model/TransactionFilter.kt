@@ -20,7 +20,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import java.time.LocalDate
 
 internal data class TransactionFilter(
     val selectedAccountIds: ImmutableList<Int> = persistentListOf(),
@@ -29,8 +28,8 @@ internal data class TransactionFilter(
     val selectedInvestmentCategoryIds: ImmutableList<Int> = persistentListOf(),
     val selectedTransactionForIds: ImmutableList<Int> = persistentListOf(),
     val selectedTransactionTypes: ImmutableList<TransactionType> = persistentListOf(),
-    val fromDate: LocalDate? = null,
-    val toDate: LocalDate? = null,
+    val fromTimestamp: Long? = null,
+    val toTimestamp: Long? = null,
     val searchText: String = "",
 )
 
@@ -41,7 +40,7 @@ internal fun TransactionFilter.areFiltersSelected(): Boolean {
             selectedInvestmentCategoryIds.isNotEmpty() ||
             selectedTransactionForIds.isNotEmpty() ||
             selectedTransactionTypes.isNotEmpty() ||
-            toDate.isNotNull() ||
+            toTimestamp.isNotNull() ||
             searchText.isNotBlank()
 }
 
