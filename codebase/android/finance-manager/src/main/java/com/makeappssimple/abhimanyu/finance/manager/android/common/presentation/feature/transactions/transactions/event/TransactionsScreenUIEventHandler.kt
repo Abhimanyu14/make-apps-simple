@@ -121,7 +121,7 @@ internal class TransactionsScreenUIEventHandler internal constructor(
             }
 
             is TransactionsScreenUIEvent.OnSelectedSortOptionUpdated -> {
-                uiStateEvents.updateSelectedSortOption(uiEvent.updatedSelectedSortOption)
+                uiStateEvents.updateSelectedTransactionSortOption(uiEvent.updatedSelectedTransactionSortOption)
             }
 
             is TransactionsScreenUIEvent.OnSelectTransactionForBottomSheet.ItemClick -> {

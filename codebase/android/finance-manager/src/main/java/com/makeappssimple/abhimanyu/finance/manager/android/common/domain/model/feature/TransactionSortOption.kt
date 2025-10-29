@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 
-internal enum class SortOption(
+internal enum class TransactionSortOption(
     val title: String,
 ) {
     AMOUNT_ASC(
@@ -35,9 +35,9 @@ internal enum class SortOption(
     ),
 }
 
-internal fun SortOption?.orDefault(): SortOption {
+internal fun TransactionSortOption?.orDefault(): TransactionSortOption {
     return if (this.isNull()) {
-        SortOption.LATEST_FIRST
+        TransactionSortOption.LATEST_FIRST
     } else {
         this
     }

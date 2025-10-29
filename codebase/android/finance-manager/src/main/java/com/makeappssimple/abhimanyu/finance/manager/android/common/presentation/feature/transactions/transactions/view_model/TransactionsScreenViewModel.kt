@@ -48,7 +48,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
@@ -109,8 +109,8 @@ internal class TransactionsScreenViewModel(
         persistentListOf()
     private var selectedTransactionIndices: ImmutableList<Int> =
         persistentListOf()
-    private val sortOptions: ImmutableList<SortOption> =
-        SortOption.entries.toImmutableList()
+    private val transactionSortOptions: ImmutableList<TransactionSortOption> =
+        TransactionSortOption.entries.toImmutableList()
     private val transactionTypes: ImmutableList<TransactionType> =
         TransactionType.entries.toImmutableList()
     private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
@@ -120,7 +120,8 @@ internal class TransactionsScreenViewModel(
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =
         mutableMapOf()
     private var accounts: ImmutableList<Account> = persistentListOf()
-    private var selectedSortOption: SortOption = SortOption.LATEST_FIRST
+    private var selectedTransactionSortOption: TransactionSortOption =
+        TransactionSortOption.LATEST_FIRST
     private var searchTextFieldState: TextFieldState = TextFieldState()
     private var screenBottomSheetType: TransactionsScreenBottomSheetType =
         TransactionsScreenBottomSheetType.None
@@ -154,7 +155,7 @@ internal class TransactionsScreenViewModel(
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateSearchText = ::updateSearchText,
             updateSelectedFilter = ::updateSelectedFilter,
-            updateSelectedSortOption = ::updateSelectedSortOption,
+            updateSelectedTransactionSortOption = ::updateSelectedTransactionSortOption,
             updateTransactionForValuesInTransactions = ::updateTransactionForValuesInTransactions,
         )
     // endregion
@@ -193,8 +194,8 @@ internal class TransactionsScreenViewModel(
                         ),
                 selectedFilter = selectedFilter,
                 selectedTransactions = selectedTransactionIndices.toImmutableList(),
-                sortOptions = sortOptions,
                 transactionForValues = allTransactionForValues,
+                transactionSortOptions = transactionSortOptions,
                 accounts = accounts.toImmutableList(),
                 expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
                     .toImmutableList(),
@@ -206,8 +207,8 @@ internal class TransactionsScreenViewModel(
                 currentLocalDate = currentLocalDate.orMin(),
                 oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
                 transactionDetailsListItemViewData = transactionDetailsListItemViewData,
-                selectedSortOption = selectedSortOption.orDefault(),
                 searchTextFieldState = searchTextFieldState,
+                selectedTransactionSortOption = selectedTransactionSortOption.orDefault(),
                 screenBottomSheetType = screenBottomSheetType,
                 screenSnackbarType = screenSnackbarType,
             )
@@ -227,28 +228,28 @@ internal class TransactionsScreenViewModel(
                 }
                 .sortedWith(
                     comparator = compareBy { transactionData ->
-                        when (selectedSortOption) {
-                            SortOption.AMOUNT_ASC -> {
+                        when (selectedTransactionSortOption) {
+                            TransactionSortOption.AMOUNT_ASC -> {
                                 transactionData.transaction.amount.value
                             }
 
-                            SortOption.AMOUNT_DESC -> {
+                            TransactionSortOption.AMOUNT_DESC -> {
                                 -1 * transactionData.transaction.amount.value
                             }
 
-                            SortOption.LATEST_FIRST -> {
+                            TransactionSortOption.LATEST_FIRST -> {
                                 -1 * transactionData.transaction.transactionTimestamp
                             }
 
-                            SortOption.OLDEST_FIRST -> {
+                            TransactionSortOption.OLDEST_FIRST -> {
                                 transactionData.transaction.transactionTimestamp
                             }
                         }
                     },
                 )
                 .groupBy {
-                    if (selectedSortOption == SortOption.LATEST_FIRST ||
-                        selectedSortOption == SortOption.OLDEST_FIRST
+                    if (selectedTransactionSortOption == TransactionSortOption.LATEST_FIRST ||
+                        selectedTransactionSortOption == TransactionSortOption.OLDEST_FIRST
                     ) {
                         dateTimeKit.getFormattedDateWithDayOfWeek(
                             timestamp = it.transaction.transactionTimestamp,
@@ -585,11 +586,11 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    private fun updateSelectedSortOption(
-        updatedSelectedSortOption: SortOption,
+    private fun updateSelectedTransactionSortOption(
+        updatedSelectedTransactionSortOption: TransactionSortOption,
         shouldRefresh: Boolean = true,
     ): Job {
-        selectedSortOption = updatedSelectedSortOption
+        selectedTransactionSortOption = updatedSelectedTransactionSortOption
         return if (shouldRefresh) {
             coroutineScope.launch {
                 refreshUiState()

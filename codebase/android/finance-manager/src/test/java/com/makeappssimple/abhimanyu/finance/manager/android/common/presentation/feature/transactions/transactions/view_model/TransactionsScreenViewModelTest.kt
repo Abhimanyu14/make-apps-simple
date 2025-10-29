@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
@@ -83,8 +83,8 @@ internal class TransactionsScreenViewModelTest {
                 expected = Filter(),
             )
             result.selectedTransactions.shouldBeEmpty()
-            result.sortOptions.shouldBeEmpty()
             result.transactionForValues.shouldBeEmpty()
+            result.transactionSortOptions.shouldBeEmpty()
             result.accounts.shouldBeEmpty()
             result.expenseCategories.shouldBeEmpty()
             result.incomeCategories.shouldBeEmpty()
@@ -97,10 +97,10 @@ internal class TransactionsScreenViewModelTest {
                 expected = LocalDate.MIN,
             )
             result.transactionDetailsListItemViewData.shouldBeEmpty()
-            result.selectedSortOption.shouldBe(
-                expected = SortOption.LATEST_FIRST,
-            )
             result.searchTextFieldState.text.toString().shouldBeEmpty()
+            result.selectedTransactionSortOption.shouldBe(
+                expected = TransactionSortOption.LATEST_FIRST,
+            )
             result.screenBottomSheetType.shouldBe(
                 expected = TransactionsScreenBottomSheetType.None,
             )

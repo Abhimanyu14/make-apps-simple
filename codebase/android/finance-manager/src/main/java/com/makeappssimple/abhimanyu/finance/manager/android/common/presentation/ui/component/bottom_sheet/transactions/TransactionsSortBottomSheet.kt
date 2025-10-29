@@ -18,23 +18,23 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.common.core.extensions.mapIndexed
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 internal fun TransactionsSortBottomSheet(
-    selectedSortOptionIndex: Int,
-    sortOptions: ImmutableList<SortOption>,
+    selectedTransactionSortOptionIndex: Int,
+    transactionSortOptions: ImmutableList<TransactionSortOption>,
     resetBottomSheetType: () -> Unit,
     updateSelectedSortOption: (updatedSortOptionIndex: Int) -> Unit,
 ) {
     TransactionsSortBottomSheetUI(
-        data = sortOptions
-            .mapIndexed { index, sortOption ->
+        data = transactionSortOptions
+            .mapIndexed { index, transactionSortOption ->
                 TransactionsSortBottomSheetData(
                     data = TransactionsSortBottomSheetItemData(
-                        sortOption = sortOption,
-                        isSelected = index == selectedSortOptionIndex,
+                        transactionSortOption = transactionSortOption,
+                        isSelected = index == selectedTransactionSortOptionIndex,
                     ),
                     handleEvent = { event ->
                         when (event) {

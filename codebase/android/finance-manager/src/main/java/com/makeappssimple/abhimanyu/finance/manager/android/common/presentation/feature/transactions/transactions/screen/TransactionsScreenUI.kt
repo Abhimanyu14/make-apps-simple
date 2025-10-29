@@ -227,17 +227,17 @@ internal fun TransactionsScreenUI(
 
                 TransactionsScreenBottomSheetType.Sort -> {
                     TransactionsSortBottomSheet(
-                        selectedSortOptionIndex = uiState.sortOptions.indexOf(
-                            uiState.selectedSortOption
+                        selectedTransactionSortOptionIndex = uiState.transactionSortOptions.indexOf(
+                            uiState.selectedTransactionSortOption
                         ),
-                        sortOptions = uiState.sortOptions,
+                        transactionSortOptions = uiState.transactionSortOptions,
                         resetBottomSheetType = {
                             handleUIEvent(TransactionsScreenUIEvent.OnBottomSheetDismissed)
                         },
                         updateSelectedSortOption = { index ->
                             handleUIEvent(
                                 TransactionsScreenUIEvent.OnSelectedSortOptionUpdated(
-                                    updatedSelectedSortOption = uiState.sortOptions[index],
+                                    updatedSelectedTransactionSortOption = uiState.transactionSortOptions[index],
                                 )
                             )
                         },

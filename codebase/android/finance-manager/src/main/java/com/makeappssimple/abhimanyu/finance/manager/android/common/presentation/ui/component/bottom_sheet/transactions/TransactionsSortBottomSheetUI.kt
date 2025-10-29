@@ -84,7 +84,7 @@ private fun TransactionsSortBottomSheetItem(
         modifier = Modifier
             .fillMaxWidth()
             .conditionalClickable(
-                onClickLabel = data.sortOption.title,
+                onClickLabel = data.transactionSortOption.title,
                 role = Role.Button,
                 onClick = {
                     handleEvent(TransactionsSortBottomSheetItemEvent.OnClick)
@@ -100,7 +100,7 @@ private fun TransactionsSortBottomSheetItem(
                 .padding(
                     vertical = 6.dp,
                 ),
-            text = data.sortOption.title,
+            text = data.transactionSortOption.title,
             style = FinanceManagerAppTheme.typography.headlineMedium
                 .copy(
                     color = if (data.isSelected) {

@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.SortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
@@ -42,8 +42,8 @@ internal data class TransactionsScreenUIState(
     val isSearchSortAndFilterVisible: Boolean = false,
     val selectedFilter: Filter = Filter(),
     val selectedTransactions: ImmutableList<Int> = persistentListOf(),
-    val sortOptions: ImmutableList<SortOption> = persistentListOf(),
     val transactionForValues: ImmutableList<TransactionFor> = persistentListOf(),
+    val transactionSortOptions: ImmutableList<TransactionSortOption> = persistentListOf(),
     val accounts: ImmutableList<Account> = persistentListOf(),
     val expenseCategories: ImmutableList<Category> = persistentListOf(),
     val incomeCategories: ImmutableList<Category> = persistentListOf(),
@@ -52,8 +52,8 @@ internal data class TransactionsScreenUIState(
     val currentLocalDate: LocalDate = LocalDate.MIN,
     val oldestTransactionLocalDate: LocalDate = LocalDate.MIN,
     val transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> = emptyMap(),
-    val selectedSortOption: SortOption = SortOption.LATEST_FIRST,
     val searchTextFieldState: TextFieldState = TextFieldState(),
+    val selectedTransactionSortOption: TransactionSortOption = TransactionSortOption.LATEST_FIRST,
     val screenBottomSheetType: TransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
     val screenSnackbarType: TransactionsScreenSnackbarType = TransactionsScreenSnackbarType.None,
 ) : ScreenUIState
