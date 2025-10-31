@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEvent
 
 @Immutable

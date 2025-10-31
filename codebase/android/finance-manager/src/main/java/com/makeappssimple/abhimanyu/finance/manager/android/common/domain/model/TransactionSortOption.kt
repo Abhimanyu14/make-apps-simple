@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 

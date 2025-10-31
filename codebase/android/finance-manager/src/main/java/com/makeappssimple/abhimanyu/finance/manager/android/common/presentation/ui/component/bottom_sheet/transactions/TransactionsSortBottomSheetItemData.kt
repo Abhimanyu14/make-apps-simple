@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.transactions
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 
 @Immutable
 internal data class TransactionsSortBottomSheetItemData(
