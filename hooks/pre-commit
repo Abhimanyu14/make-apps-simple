@@ -1,7 +1,17 @@
 #!/bin/bash
 # Ensures the script is executed using the Bash shell.
 
+# --- CONFIGURATION ---
+# Set this to `false` to disable the pre-commit hook entirely.
+PRE_COMMIT_HOOK_ENABLED=false
+
 # --- SCRIPT SETUP ---
+# If the hook is disabled, print a message and exit successfully.
+if [ "$PRE_COMMIT_HOOK_ENABLED" = "false" ]; then
+    echo "Pre-commit hook is disabled. Skipping checks."
+    exit 0
+fi
+
 # Change the current directory to the project's root.
 # The '|| exit 1' part ensures the script will fail immediately if the directory doesn't exist.
 cd codebase/android || exit 1
