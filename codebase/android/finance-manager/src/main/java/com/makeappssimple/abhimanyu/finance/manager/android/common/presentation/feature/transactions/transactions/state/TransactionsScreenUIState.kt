@@ -20,9 +20,9 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
@@ -40,7 +40,6 @@ internal data class TransactionsScreenUIState(
     val isInSelectionMode: Boolean = false,
     val isLoading: Boolean = true,
     val isSearchSortAndFilterVisible: Boolean = false,
-    val selectedFilter: Filter = Filter(),
     val selectedTransactions: ImmutableList<Int> = persistentListOf(),
     val transactionForValues: ImmutableList<TransactionFor> = persistentListOf(),
     val transactionSortOptions: ImmutableList<TransactionSortOption> = persistentListOf(),
@@ -54,6 +53,7 @@ internal data class TransactionsScreenUIState(
     val transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> = emptyMap(),
     val searchTextFieldState: TextFieldState = TextFieldState(),
     val selectedTransactionSortOption: TransactionSortOption = TransactionSortOption.LATEST_FIRST,
+    val selectedTransactionFilter: TransactionFilter = TransactionFilter(),
     val screenBottomSheetType: TransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
     val screenSnackbarType: TransactionsScreenSnackbarType = TransactionsScreenSnackbarType.None,
 ) : ScreenUIState

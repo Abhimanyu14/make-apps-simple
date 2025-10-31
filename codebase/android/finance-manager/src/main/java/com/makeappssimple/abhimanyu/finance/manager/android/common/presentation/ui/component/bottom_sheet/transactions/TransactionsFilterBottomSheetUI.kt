@@ -48,11 +48,13 @@ import com.makeappssimple.abhimanyu.common.core.extensions.addIfDoesNotContainIt
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.button.MyIconButton
@@ -87,25 +89,25 @@ internal fun TransactionsFiltersBottomSheetUI(
     transactionTypes: ImmutableList<TransactionType>,
     defaultMinDate: LocalDate,
     defaultMaxDate: LocalDate,
-    selectedFilter: Filter,
-    onPositiveButtonClick: (filter: Filter) -> Unit,
+    selectedTransactionFilter: TransactionFilter,
+    onPositiveButtonClick: (updatedTransactionFilter: TransactionFilter) -> Unit,
     onNegativeButtonClick: () -> Unit,
 ) {
     val expandedItemsIndices = remember {
         mutableStateListOf(
-            selectedFilter.selectedExpenseCategoryIds.isNotEmpty(),
-            selectedFilter.selectedIncomeCategoryIds.isNotEmpty(),
-            selectedFilter.selectedInvestmentCategoryIds.isNotEmpty(),
-            selectedFilter.selectedAccountIds.isNotEmpty(),
-            selectedFilter.selectedTransactionForIds.isNotEmpty(),
-            selectedFilter.selectedTransactionTypes.isNotEmpty(),
-            selectedFilter.toDate.isNotNull(),
+            selectedTransactionFilter.selectedExpenseCategoryIds.isNotEmpty(),
+            selectedTransactionFilter.selectedIncomeCategoryIds.isNotEmpty(),
+            selectedTransactionFilter.selectedInvestmentCategoryIds.isNotEmpty(),
+            selectedTransactionFilter.selectedAccountIds.isNotEmpty(),
+            selectedTransactionFilter.selectedTransactionForIds.isNotEmpty(),
+            selectedTransactionFilter.selectedTransactionTypes.isNotEmpty(),
+            selectedTransactionFilter.toTimestamp.isNotNull(),
         )
     }
 
     val selectedExpenseCategoryIndices = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedExpenseCategoryIds.map { selectedExpenseCategoryId ->
+            elements = selectedTransactionFilter.selectedExpenseCategoryIds.map { selectedExpenseCategoryId ->
                 expenseCategories.indexOfFirst { expenseCategory ->
                     expenseCategory.id == selectedExpenseCategoryId
                 }
@@ -114,7 +116,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedIncomeCategoryIndices = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedIncomeCategoryIds.map { selectedIncomeCategoryId ->
+            elements = selectedTransactionFilter.selectedIncomeCategoryIds.map { selectedIncomeCategoryId ->
                 incomeCategories.indexOfFirst { incomeCategory ->
                     incomeCategory.id == selectedIncomeCategoryId
                 }
@@ -123,7 +125,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedInvestmentCategoryIndices = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedInvestmentCategoryIds.map { selectedInvestmentCategoryId ->
+            elements = selectedTransactionFilter.selectedInvestmentCategoryIds.map { selectedInvestmentCategoryId ->
                 investmentCategories.indexOfFirst { investmentCategory ->
                     investmentCategory.id == selectedInvestmentCategoryId
                 }
@@ -132,7 +134,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedAccountIndicesValue = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedAccountIds.map { selectedAccountsId ->
+            elements = selectedTransactionFilter.selectedAccountIds.map { selectedAccountsId ->
                 accounts.indexOfFirst { account ->
                     account.id == selectedAccountsId
                 }
@@ -141,7 +143,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedTransactionForValuesIndicesValue = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedTransactionForIds.map { selectedTransactionForValuesId ->
+            elements = selectedTransactionFilter.selectedTransactionForIds.map { selectedTransactionForValuesId ->
                 transactionForValues.indexOfFirst { transactionFor ->
                     transactionFor.id == selectedTransactionForValuesId
                 }
@@ -150,7 +152,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     val selectedTransactionTypeIndicesValue = remember {
         mutableStateListOf(
-            elements = selectedFilter.selectedTransactionTypes.map { selectedTransactionType ->
+            elements = selectedTransactionFilter.selectedTransactionTypes.map { selectedTransactionType ->
                 transactionTypes.indexOfFirst { transactionType ->
                     transactionType == selectedTransactionType
                 }
@@ -159,12 +161,20 @@ internal fun TransactionsFiltersBottomSheetUI(
     }
     var fromDate by remember {
         mutableStateOf(
-            value = selectedFilter.fromDate ?: defaultMinDate,
+            value = selectedTransactionFilter.fromTimestamp?.let { fromTimestamp ->
+                getLocalDate(
+                    timestamp = fromTimestamp,
+                )
+            } ?: defaultMinDate,
         )
     }
     var toDate by remember {
         mutableStateOf(
-            value = selectedFilter.toDate ?: defaultMaxDate,
+            value = selectedTransactionFilter.toTimestamp?.let { toTimestamp ->
+                getLocalDate(
+                    timestamp = toTimestamp,
+                )
+            } ?: defaultMaxDate,
         )
     }
     val filters = remember {
@@ -443,18 +453,22 @@ internal fun TransactionsFiltersBottomSheetUI(
                             transactionTypes[selectedTransactionTypeIndex]
                         }.toImmutableList()
                     onPositiveButtonClick(
-                        Filter(
+                        TransactionFilter(
                             selectedExpenseCategoryIds = selectedExpenseCategoryIds,
                             selectedIncomeCategoryIds = selectedIncomeCategoryIds,
                             selectedInvestmentCategoryIds = selectedInvestmentCategoryIds,
                             selectedAccountIds = selectedAccountsIds,
                             selectedTransactionForIds = selectedTransactionForValuesIds,
                             selectedTransactionTypes = selectedTransactionTypes,
-                            fromDate = fromDate,
-                            toDate = if (isDateFilterCleared) {
+                            fromTimestamp = getTimestamp(
+                                localDate = fromDate,
+                            ),
+                            toTimestamp = if (isDateFilterCleared) {
                                 null
                             } else {
-                                toDate
+                                getTimestamp(
+                                    localDate = toDate,
+                                )
                             },
                         )
                     )

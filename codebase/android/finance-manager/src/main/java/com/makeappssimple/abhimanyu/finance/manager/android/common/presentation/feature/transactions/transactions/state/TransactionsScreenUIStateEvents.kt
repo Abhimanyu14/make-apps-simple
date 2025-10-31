@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state
 
 import androidx.compose.runtime.Stable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
@@ -38,7 +38,7 @@ internal class TransactionsScreenUIStateEvents(
     val updateIsInSelectionMode: (Boolean) -> Job,
     val updateScreenBottomSheetType: (TransactionsScreenBottomSheetType) -> Job,
     val updateSearchText: (updatedSearchText: String) -> Job,
-    val updateSelectedFilter: (updatedSelectedFilter: Filter) -> Job,
+    val updateSelectedTransactionFilter: (updatedSelectedTransactionFilter: TransactionFilter) -> Job,
     val updateSelectedTransactionSortOption: (updatedSelectedTransactionSortOption: TransactionSortOption) -> Job,
     val updateTransactionForValuesInTransactions: (transactionForId: Int) -> Job,
 ) : ScreenUIStateEvents

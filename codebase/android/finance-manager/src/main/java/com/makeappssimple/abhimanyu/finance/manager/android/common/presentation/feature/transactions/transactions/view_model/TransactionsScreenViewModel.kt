@@ -27,11 +27,9 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
-import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAccountsInTransactionsFlowUseCase
@@ -47,9 +45,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
@@ -98,7 +95,7 @@ internal class TransactionsScreenViewModel(
     // region data
     private var isInSelectionMode: Boolean = false
     private var isLoading: Boolean = true
-    private var selectedFilter = Filter()
+    private var selectedTransactionFilter = TransactionFilter()
     private val transactionFilter: MutableStateFlow<TransactionFilter> =
         MutableStateFlow(
             value = TransactionFilter(),
@@ -154,7 +151,7 @@ internal class TransactionsScreenViewModel(
             updateIsInSelectionMode = ::updateIsInSelectionMode,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateSearchText = ::updateSearchText,
-            updateSelectedFilter = ::updateSelectedFilter,
+            updateSelectedTransactionFilter = ::updateSelectedFilter,
             updateSelectedTransactionSortOption = ::updateSelectedTransactionSortOption,
             updateTransactionForValuesInTransactions = ::updateTransactionForValuesInTransactions,
         )
@@ -180,7 +177,7 @@ internal class TransactionsScreenViewModel(
         _uiState.update {
             TransactionsScreenUIState(
                 isBackHandlerEnabled = searchTextFieldState.text.isNotEmpty() ||
-                        selectedFilter.areFiltersSelected() ||
+                        selectedTransactionFilter.areFiltersSelected() ||
                         isInSelectionMode,
                 isBottomSheetVisible = screenBottomSheetType != TransactionsScreenBottomSheetType.None,
                 isDuplicateTransactionMenuOptionVisible = selectedTransactionIndices.size == 1,
@@ -189,10 +186,10 @@ internal class TransactionsScreenViewModel(
                 isSearchSortAndFilterVisible = isInSelectionMode.not() && (
                         transactionDetailsListItemViewData.isNotEmpty() ||
                                 searchTextFieldState.text.isNotEmpty() ||
-                                selectedFilter.areFiltersSelected() ||
+                                selectedTransactionFilter.areFiltersSelected() ||
                                 isLoading
                         ),
-                selectedFilter = selectedFilter,
+                selectedTransactionFilter = selectedTransactionFilter,
                 selectedTransactions = selectedTransactionIndices.toImmutableList(),
                 transactionForValues = allTransactionForValues,
                 transactionSortOptions = transactionSortOptions,
@@ -555,26 +552,20 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun updateSelectedFilter(
-        updatedSelectedFilter: Filter,
+        updatedSelectedTransactionFilter: TransactionFilter,
         shouldRefresh: Boolean = true,
     ): Job {
-        selectedFilter = updatedSelectedFilter
-        val fromTimestamp = updatedSelectedFilter.fromDate
-            ?.atStartOfDay()
-            ?.toEpochMilli()
-        val toDateStartOfDayTimestamp = updatedSelectedFilter.toDate
-            ?.atEndOfDay()
-            ?.toEpochMilli()
+        selectedTransactionFilter = updatedSelectedTransactionFilter
         transactionFilter.update { currentTransactionFilter ->
             currentTransactionFilter.copy(
-                selectedAccountIds = updatedSelectedFilter.selectedAccountIds,
-                selectedExpenseCategoryIds = updatedSelectedFilter.selectedExpenseCategoryIds,
-                selectedIncomeCategoryIds = updatedSelectedFilter.selectedIncomeCategoryIds,
-                selectedInvestmentCategoryIds = updatedSelectedFilter.selectedInvestmentCategoryIds,
-                selectedTransactionForIds = updatedSelectedFilter.selectedTransactionForIds,
-                selectedTransactionTypes = updatedSelectedFilter.selectedTransactionTypes,
-                fromTimestamp = fromTimestamp,
-                toTimestamp = toDateStartOfDayTimestamp,
+                selectedAccountIds = updatedSelectedTransactionFilter.selectedAccountIds,
+                selectedExpenseCategoryIds = updatedSelectedTransactionFilter.selectedExpenseCategoryIds,
+                selectedIncomeCategoryIds = updatedSelectedTransactionFilter.selectedIncomeCategoryIds,
+                selectedInvestmentCategoryIds = updatedSelectedTransactionFilter.selectedInvestmentCategoryIds,
+                selectedTransactionForIds = updatedSelectedTransactionFilter.selectedTransactionForIds,
+                selectedTransactionTypes = updatedSelectedTransactionFilter.selectedTransactionTypes,
+                fromTimestamp = updatedSelectedTransactionFilter.fromTimestamp,
+                toTimestamp = updatedSelectedTransactionFilter.toTimestamp,
             )
         }
         return if (shouldRefresh) {

@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
 import kotlinx.collections.immutable.ImmutableList
 import java.time.LocalDate
 
@@ -35,8 +35,8 @@ internal fun TransactionsFilterBottomSheet(
     transactionTypes: ImmutableList<TransactionType>,
     defaultMinDate: LocalDate,
     defaultMaxDate: LocalDate,
-    selectedFilter: Filter,
-    updateSelectedFilter: (updatedSelectedFilter: Filter) -> Unit,
+    selectedTransactionFilter: TransactionFilter,
+    updateSelectedTransactionFilter: (updatedSelectedTransactionFilter: TransactionFilter) -> Unit,
     resetBottomSheetType: () -> Unit,
 ) {
     TransactionsFiltersBottomSheetUI(
@@ -48,9 +48,9 @@ internal fun TransactionsFilterBottomSheet(
         transactionTypes = transactionTypes,
         defaultMinDate = defaultMinDate,
         defaultMaxDate = defaultMaxDate,
-        selectedFilter = selectedFilter,
+        selectedTransactionFilter = selectedTransactionFilter,
         onPositiveButtonClick = {
-            updateSelectedFilter(it)
+            updateSelectedTransactionFilter(it)
             resetBottomSheetType()
         },
         onNegativeButtonClick = {},

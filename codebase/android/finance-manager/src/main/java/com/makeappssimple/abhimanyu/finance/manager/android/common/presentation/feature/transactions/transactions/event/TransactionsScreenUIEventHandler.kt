@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.event
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
@@ -58,7 +58,7 @@ internal class TransactionsScreenUIEventHandler internal constructor(
             is TransactionsScreenUIEvent.OnNavigationBackButtonClick -> {
                 uiStateEvents.resetScreenBottomSheetType()
                 uiStateEvents.updateSearchText("")
-                uiStateEvents.updateSelectedFilter(Filter())
+                uiStateEvents.updateSelectedTransactionFilter(TransactionFilter())
                 uiStateEvents.updateIsInSelectionMode(false)
                 uiStateEvents.clearSelectedTransactions()
             }
@@ -116,8 +116,8 @@ internal class TransactionsScreenUIEventHandler internal constructor(
                 )
             }
 
-            is TransactionsScreenUIEvent.OnSelectedFilterUpdated -> {
-                uiStateEvents.updateSelectedFilter(uiEvent.updatedSelectedFilter)
+            is TransactionsScreenUIEvent.OnSelectedTransactionFilterUpdated -> {
+                uiStateEvents.updateSelectedTransactionFilter(uiEvent.updatedSelectedTransactionFilter)
             }
 
             is TransactionsScreenUIEvent.OnSelectedSortOptionUpdated -> {

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.event
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.Filter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEvent
 
@@ -37,8 +37,8 @@ internal sealed class TransactionsScreenUIEvent : ScreenUIEvent {
     data object OnSortActionButtonClick : TransactionsScreenUIEvent()
     data object OnFilterActionButtonClick : TransactionsScreenUIEvent()
 
-    data class OnSelectedFilterUpdated(
-        val updatedSelectedFilter: Filter,
+    data class OnSelectedTransactionFilterUpdated(
+        val updatedSelectedTransactionFilter: TransactionFilter,
     ) : TransactionsScreenUIEvent()
 
     data class OnSelectedSortOptionUpdated(

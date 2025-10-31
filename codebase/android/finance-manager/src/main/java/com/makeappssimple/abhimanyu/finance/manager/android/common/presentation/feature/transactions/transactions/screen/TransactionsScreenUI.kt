@@ -43,7 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.areFiltersSelected
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_TRANSACTIONS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_TRANSACTIONS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
@@ -165,11 +165,11 @@ internal fun TransactionsScreenUI(
                         transactionTypes = uiState.transactionTypes,
                         defaultMinDate = uiState.oldestTransactionLocalDate,
                         defaultMaxDate = uiState.currentLocalDate,
-                        selectedFilter = uiState.selectedFilter,
-                        updateSelectedFilter = { updatedSelectedFilter ->
+                        selectedTransactionFilter = uiState.selectedTransactionFilter,
+                        updateSelectedTransactionFilter = { updatedSelectedFilter ->
                             handleUIEvent(
-                                TransactionsScreenUIEvent.OnSelectedFilterUpdated(
-                                    updatedSelectedFilter = updatedSelectedFilter,
+                                TransactionsScreenUIEvent.OnSelectedTransactionFilterUpdated(
+                                    updatedSelectedTransactionFilter = updatedSelectedFilter,
                                 )
                             )
                         },
@@ -483,7 +483,7 @@ private fun SearchSortAndFilterBar(
             )
             ActionButton(
                 data = ActionButtonData(
-                    isIndicatorVisible = uiState.selectedFilter.areFiltersSelected(),
+                    isIndicatorVisible = uiState.selectedTransactionFilter.areFiltersSelected(),
                     isLoading = uiState.isLoading,
                     imageVector = MyIcons.FilterAlt,
                     contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_filter_button_content_description,
