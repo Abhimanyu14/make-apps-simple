@@ -38,6 +38,7 @@ internal object MyIcons {
     val Close: ImageVector = Icons.Rounded.Close
     val Copy: ImageVector = Icons.Rounded.ContentCopy
     val CurrencyExchange: ImageVector = Icons.Rounded.CurrencyExchange
+    val CurrencyRupee: ImageVector = Icons.Rounded.CurrencyRupee
     val Delete: ImageVector = Icons.Rounded.Delete
     val Done: ImageVector = Icons.Rounded.Done
     val Edit: ImageVector = Icons.Rounded.Edit

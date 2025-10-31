@@ -27,7 +27,7 @@ internal val AccountType.icon: ImageVector
         }
 
         AccountType.CASH -> {
-            MyIcons.AttachMoney
+            MyIcons.CurrencyRupee
         }
 
         AccountType.E_WALLET -> {

@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,8 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -31,12 +34,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.svg.SvgDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.getLogoUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.default_tag.MyDefaultTag
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumListItemHeight
@@ -138,16 +147,54 @@ private fun AccountsListItemContentUI(
                 end = 16.dp,
             ),
     ) {
-        data.icon?.let {
-            Icon(
-                imageVector = data.icon,
+        val logoUrl = getLogoUrl(
+            name = data.name,
+        )
+        if (logoUrl != null) {
+            val context = LocalPlatformContext.current
+            AsyncImage(
+                model = ImageRequest
+                    .Builder(
+                        context = context,
+                    )
+                    .data(
+                        data = logoUrl,
+                    )
+                    .decoderFactory(
+                        factory = SvgDecoder.Factory(),
+                    )
+                    .build(),
                 contentDescription = null,
-                tint = FinanceManagerAppTheme.colorScheme.primary,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .padding(
                         end = 8.dp,
+                    )
+                    .size(
+                        size = 28.dp,
+                    )
+                    .clip(
+                        shape = CircleShape,
+                    )
+                    .background(
+                        color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                    )
+                    .padding(
+                        all = 4.dp,
                     ),
             )
+        } else {
+            data.icon?.let {
+                Icon(
+                    imageVector = data.icon,
+                    contentDescription = null,
+                    tint = FinanceManagerAppTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .padding(
+                            end = 8.dp,
+                        ),
+                )
+            }
         }
         MyText(
             modifier = Modifier
