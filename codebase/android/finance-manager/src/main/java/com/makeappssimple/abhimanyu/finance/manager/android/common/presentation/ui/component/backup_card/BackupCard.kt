@@ -69,7 +69,7 @@ private fun BackupCardUI(
                 vertical = 4.dp,
             )
             .clip(
-                FinanceManagerAppTheme.shapes.medium,
+                shape = FinanceManagerAppTheme.shapes.medium,
             )
             .conditionalClickable(
                 onClick = {

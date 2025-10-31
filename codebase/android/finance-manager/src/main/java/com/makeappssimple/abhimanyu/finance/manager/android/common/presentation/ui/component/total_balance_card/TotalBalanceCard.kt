@@ -96,7 +96,7 @@ private fun TotalBalanceCardUI(
                 vertical = 16.dp,
             )
             .clip(
-                FinanceManagerAppTheme.shapes.medium,
+                shape = FinanceManagerAppTheme.shapes.medium,
             )
             .background(
                 color = FinanceManagerAppTheme.colorScheme.tertiary,
