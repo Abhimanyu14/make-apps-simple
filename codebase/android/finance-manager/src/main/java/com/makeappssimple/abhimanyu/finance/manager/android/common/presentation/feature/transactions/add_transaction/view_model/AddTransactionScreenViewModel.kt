@@ -40,6 +40,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -76,7 +77,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
-import java.time.LocalTime
 
 @KoinViewModel
 internal class AddTransactionScreenViewModel(
@@ -141,7 +141,7 @@ internal class AddTransactionScreenViewModel(
     private var accountFrom: Account? = null
     private var accountTo: Account? = null
     private var transactionDate: MyLocalDate = dateTimeKit.getCurrentLocalDate()
-    private var transactionTime: LocalTime = dateTimeKit.getCurrentLocalTime()
+    private var transactionTime: MyLocalTime = dateTimeKit.getCurrentLocalTime()
     private var isTransactionDatePickerDialogVisible: Boolean = false
     private var isTransactionTimePickerDialogVisible: Boolean = false
     private var isLoading: Boolean = true
@@ -537,7 +537,7 @@ internal class AddTransactionScreenViewModel(
     }
 
     private fun updateTransactionTime(
-        updatedTransactionTime: LocalTime,
+        updatedTransactionTime: MyLocalTime,
         shouldRefresh: Boolean = true,
     ): Job {
         transactionTime = updatedTransactionTime

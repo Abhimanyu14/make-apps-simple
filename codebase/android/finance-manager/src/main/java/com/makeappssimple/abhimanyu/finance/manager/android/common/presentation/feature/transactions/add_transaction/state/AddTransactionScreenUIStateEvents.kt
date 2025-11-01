@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.bottom_sheet.AddTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import kotlinx.coroutines.Job
-import java.time.LocalTime
 
 @Stable
 internal class AddTransactionScreenUIStateEvents(
@@ -44,5 +44,5 @@ internal class AddTransactionScreenUIStateEvents(
     val updateSelectedTransactionTypeIndex: (updatedSelectedTransactionTypeIndex: Int) -> Job,
     val updateTitle: (updatedTitle: String) -> Job,
     val updateTransactionDate: (updatedTransactionDate: MyLocalDate) -> Job,
-    val updateTransactionTime: (updatedTransactionTime: LocalTime) -> Job,
+    val updateTransactionTime: (updatedTransactionTime: MyLocalTime) -> Job,
 ) : ScreenUIStateEvents

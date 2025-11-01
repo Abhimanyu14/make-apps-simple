@@ -26,7 +26,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.formattedYear
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
 import java.time.Instant
-import java.time.LocalTime
 import java.time.YearMonth
 import java.time.ZoneId
 
@@ -43,8 +42,8 @@ internal class DateTimeKitImpl() : DateTimeKit {
         return MyLocalDate.now()
     }
 
-    override fun getCurrentLocalTime(): LocalTime {
-        return LocalTime.now()
+    override fun getCurrentLocalTime(): MyLocalTime {
+        return MyLocalTime.now()
     }
 
     override fun getCurrentLocalDateTime(): MyLocalDateTime {
@@ -176,7 +175,7 @@ internal class DateTimeKitImpl() : DateTimeKit {
 
     override fun getTimestamp(
         date: MyLocalDate,
-        time: LocalTime,
+        time: MyLocalTime,
     ): Long {
         return date
             .atTime(time)
@@ -198,13 +197,13 @@ internal class DateTimeKitImpl() : DateTimeKit {
     override fun getLocalTime(
         timestamp: Long,
         zoneId: ZoneId,
-    ): LocalTime {
+    ): MyLocalTime {
         return Instant
             .ofEpochMilli(timestamp)
             .toZonedDateTime(
                 zoneId = zoneId,
             )
-            .toLocalTime()
+            .toMyLocalTime()
     }
 
     override fun getStartOfDayTimestamp(

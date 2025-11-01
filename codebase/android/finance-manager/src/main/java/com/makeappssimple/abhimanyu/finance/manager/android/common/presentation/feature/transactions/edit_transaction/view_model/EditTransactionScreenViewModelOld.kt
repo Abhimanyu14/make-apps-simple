@@ -48,6 +48,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDateTime
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.toEpochMilli
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -80,7 +81,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalTime
 import kotlin.math.abs
 
 internal class EditTransactionScreenViewModelOld(
@@ -457,7 +457,7 @@ internal class EditTransactionScreenViewModelOld(
                 editingTransactionData?.transaction?.let { transaction ->
                     val transactionTimestamp = MyLocalDateTime
                         .of(
-                            date = uiStateValue.transactionDate.localDate,
+                            date = uiStateValue.transactionDate,
                             time = uiStateValue.transactionTime,
                         )
                         .toEpochMilli()
@@ -640,7 +640,7 @@ internal class EditTransactionScreenViewModelOld(
     }
 
     internal fun updateTransactionTime(
-        updatedTransactionTime: LocalTime,
+        updatedTransactionTime: MyLocalTime,
     ) {
         updateEditTransactionScreenUiState(
             updatedEditTransactionScreenUiStateData = uiState.value

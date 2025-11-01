@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
 import java.time.Instant
-import java.time.LocalTime
 import java.time.ZoneId
 
 internal interface DateTimeKit : DateKit, TimeKit {
@@ -97,7 +96,7 @@ internal interface DateTimeKit : DateKit, TimeKit {
 
     fun getTimestamp(
         date: MyLocalDate = getLocalDate(),
-        time: LocalTime = getLocalTime(),
+        time: MyLocalTime = getLocalTime(),
     ): Long
 
     fun getStartOfDayTimestamp(

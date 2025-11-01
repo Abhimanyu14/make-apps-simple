@@ -19,12 +19,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateEvents
 import kotlinx.coroutines.Job
-import java.time.LocalTime
 
 @Stable
 internal class EditTransactionScreenUIStateEvents(
@@ -45,5 +45,5 @@ internal class EditTransactionScreenUIStateEvents(
     val updateTitle: (updatedTitle: TextFieldValue) -> Job,
     val updateTransaction: () -> Job,
     val updateTransactionDate: (updatedTransactionDate: MyLocalDate) -> Job,
-    val updateTransactionTime: (updatedTransactionTime: LocalTime) -> Job,
+    val updateTransactionTime: (updatedTransactionTime: MyLocalTime) -> Job,
 ) : ScreenUIStateEvents

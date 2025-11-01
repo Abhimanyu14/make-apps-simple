@@ -59,10 +59,10 @@ internal class MyLocalDate(
     }
 
     fun atTime(
-        time: LocalTime,
+        time: MyLocalTime,
     ): MyLocalDateTime {
         return MyLocalDateTime(
-            localDateTime = localDate.atTime(time),
+            localDateTime = localDate.atTime(time.localTime),
         )
     }
 

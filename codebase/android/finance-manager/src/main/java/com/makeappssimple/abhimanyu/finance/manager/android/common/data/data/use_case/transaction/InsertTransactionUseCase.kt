@@ -22,11 +22,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.rep
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import java.time.LocalTime
 
 internal class InsertTransactionUseCase(
     private val dateTimeKit: DateTimeKit,
@@ -39,7 +39,7 @@ internal class InsertTransactionUseCase(
         selectedCategoryId: Int?,
         selectedTransactionForId: Int,
         selectedTransactionDate: MyLocalDate,
-        selectedTransactionTime: LocalTime,
+        selectedTransactionTime: MyLocalTime,
         enteredAmountValue: Long,
         enteredTitle: String,
         selectedTransactionType: TransactionType,

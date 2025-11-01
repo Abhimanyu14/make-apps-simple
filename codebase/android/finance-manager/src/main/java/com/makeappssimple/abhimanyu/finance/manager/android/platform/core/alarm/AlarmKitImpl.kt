@@ -26,11 +26,11 @@ import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Reminder
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.alarm.AlarmReceiver
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.boot.BootCompletedReceiver
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.broadcast_receivers.time.TimeChangedReceiver
-import java.time.LocalTime
 
 internal class AlarmKitImpl(
     private val context: Context,
@@ -122,7 +122,10 @@ internal class AlarmKitImpl(
     }
 
     private fun getAlarmReceiverIntent(): Intent {
-        return Intent(context, AlarmReceiver::class.java)
+        return Intent(
+            context,
+            AlarmReceiver::class.java
+        )
     }
     // endregion
 
@@ -139,7 +142,10 @@ internal class AlarmKitImpl(
 
     private fun enableBootCompleteReceiver() {
         context.packageManager.setComponentEnabledSetting(
-            ComponentName(context, BootCompletedReceiver::class.java),
+            ComponentName(
+                context,
+                BootCompletedReceiver::class.java
+            ),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP,
         )
@@ -147,7 +153,10 @@ internal class AlarmKitImpl(
 
     private fun disableBootCompleteReceiver() {
         context.packageManager.setComponentEnabledSetting(
-            ComponentName(context, BootCompletedReceiver::class.java),
+            ComponentName(
+                context,
+                BootCompletedReceiver::class.java
+            ),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
             PackageManager.DONT_KILL_APP,
         )
@@ -155,7 +164,10 @@ internal class AlarmKitImpl(
 
     private fun enableTimeChangedReceiver() {
         context.packageManager.setComponentEnabledSetting(
-            ComponentName(context, TimeChangedReceiver::class.java),
+            ComponentName(
+                context,
+                TimeChangedReceiver::class.java
+            ),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP,
         )
@@ -163,7 +175,10 @@ internal class AlarmKitImpl(
 
     private fun disableTimeChangedReceiver() {
         context.packageManager.setComponentEnabledSetting(
-            ComponentName(context, TimeChangedReceiver::class.java),
+            ComponentName(
+                context,
+                TimeChangedReceiver::class.java
+            ),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
             PackageManager.DONT_KILL_APP,
         )
@@ -185,7 +200,10 @@ internal class AlarmKitImpl(
         reminder: Reminder,
     ): Long {
         return dateTimeKit.getTimestamp(
-            time = LocalTime.of(reminder.hour, reminder.min),
+            time = MyLocalTime.of(
+                reminder.hour,
+                reminder.min
+            ),
         )
     }
     // endregion

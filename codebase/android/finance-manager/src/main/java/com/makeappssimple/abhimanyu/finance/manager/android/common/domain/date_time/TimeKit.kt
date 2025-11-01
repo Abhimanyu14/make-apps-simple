@@ -17,16 +17,15 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
 import java.time.Instant
-import java.time.LocalTime
 import java.time.ZoneId
 
 internal interface TimeKit {
-    fun getCurrentLocalTime(): LocalTime
+    fun getCurrentLocalTime(): MyLocalTime
 
     fun getLocalTime(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): LocalTime
+    ): MyLocalTime
 
     private fun getCurrentTimeMillis(): Long {
         return Instant.now().toEpochMilli()

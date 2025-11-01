@@ -42,6 +42,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDateTime
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.toEpochMilli
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
@@ -78,7 +79,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
-import java.time.LocalTime
 
 @KoinViewModel
 internal class EditTransactionScreenViewModel(
@@ -141,7 +141,7 @@ internal class EditTransactionScreenViewModel(
     private var originalTransactionData: TransactionData? = null
     private var selectedTransactionType: TransactionType? = null
     private var transactionDate: MyLocalDate = dateTimeKit.getCurrentLocalDate()
-    private var transactionTime: LocalTime = dateTimeKit.getCurrentLocalTime()
+    private var transactionTime: MyLocalTime = dateTimeKit.getCurrentLocalTime()
     // endregion
 
     // region uiState
@@ -491,7 +491,7 @@ internal class EditTransactionScreenViewModel(
     }
 
     private fun updateTransactionTime(
-        updatedTransactionTime: LocalTime,
+        updatedTransactionTime: MyLocalTime,
         shouldRefresh: Boolean = true,
     ): Job {
         transactionTime = updatedTransactionTime
@@ -597,7 +597,7 @@ internal class EditTransactionScreenViewModel(
         }
         val creationTimestamp = dateTimeKit.getCurrentTimeMillis()
         val transactionTimestamp = MyLocalDateTime.of(
-            date = uiState.value.transactionDate.localDate,
+            date = uiState.value.transactionDate,
             time = uiState.value.transactionTime,
         ).toEpochMilli()
         val transactionForId =

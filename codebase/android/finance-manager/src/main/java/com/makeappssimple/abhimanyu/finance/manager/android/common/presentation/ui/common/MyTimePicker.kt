@@ -45,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.button.MyTextButton
@@ -54,7 +55,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.myLightColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import java.time.LocalTime
 
 private object MyTimePickerConstants {
     const val MIN_SCREEN_HEIGHT_REQUIRED_FOR_TIMEPICKER = 400
@@ -63,14 +63,14 @@ private object MyTimePickerConstants {
 @Immutable
 internal data class MyTimePickerData(
     val isVisible: Boolean = false,
-    val selectedLocalDate: LocalTime? = null,
+    val selectedLocalDate: MyLocalTime? = null,
 )
 
 @Immutable
 internal sealed class MyTimePickerEvent {
     data object OnNegativeButtonClick : MyTimePickerEvent()
     internal data class OnPositiveButtonClick(
-        val selectedTime: LocalTime,
+        val selectedTime: MyLocalTime,
     ) : MyTimePickerEvent()
 }
 
@@ -104,7 +104,10 @@ internal fun MyTimePicker(
             onConfirm = {
                 handleEvent(
                     MyTimePickerEvent.OnPositiveButtonClick(
-                        selectedTime = LocalTime.of(state.hour, state.minute),
+                        selectedTime = MyLocalTime.of(
+                            state.hour,
+                            state.minute
+                        ),
                     )
                 )
             },

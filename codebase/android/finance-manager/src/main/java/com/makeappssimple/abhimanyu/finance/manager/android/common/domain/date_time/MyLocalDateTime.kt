@@ -16,9 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.ZoneId
 
 internal class MyLocalDateTime(
@@ -26,13 +24,13 @@ internal class MyLocalDateTime(
 ) {
     companion object {
         fun of(
-            date: LocalDate,
-            time: LocalTime,
+            date: MyLocalDate,
+            time: MyLocalTime,
         ): MyLocalDateTime {
             return MyLocalDateTime(
                 localDateTime = LocalDateTime.of(
-                    date,
-                    time,
+                    date.localDate,
+                    time.localTime,
                 ),
             )
         }
