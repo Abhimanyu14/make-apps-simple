@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-@file:Suppress("UNCHECKED_CAST", "MethodOverloading")
+@file:Suppress(
+    "UNCHECKED_CAST",
+    "MethodOverloading"
+)
 
 package com.makeappssimple.abhimanyu.common.core.extensions
 
@@ -26,7 +29,10 @@ public fun <T1, T2, R> combine(
     flow2: Flow<T2>,
     transform: suspend (T1, T2) -> R,
 ): Flow<R> {
-    return combine(flow, flow2) { args: Array<*> ->
+    return combine(
+        flow,
+        flow2
+    ) { args: Array<*> ->
         transform(
             args[0] as T1,
             args[1] as T2,
@@ -40,7 +46,11 @@ public fun <T1, T2, T3, R> combine(
     flow3: Flow<T3>,
     transform: suspend (T1, T2, T3) -> R,
 ): Flow<R> {
-    return combine(flow, flow2, flow3) { args: Array<*> ->
+    return combine(
+        flow,
+        flow2,
+        flow3
+    ) { args: Array<*> ->
         transform(
             args[0] as T1,
             args[1] as T2,
@@ -56,7 +66,12 @@ public fun <T1, T2, T3, T4, R> combine(
     flow4: Flow<T4>,
     transform: suspend (T1, T2, T3, T4) -> R,
 ): Flow<R> {
-    return combine(flow, flow2, flow3, flow4) { args: Array<*> ->
+    return combine(
+        flow,
+        flow2,
+        flow3,
+        flow4
+    ) { args: Array<*> ->
         transform(
             args[0] as T1,
             args[1] as T2,
@@ -74,7 +89,13 @@ public fun <T1, T2, T3, T4, T5, R> combine(
     flow5: Flow<T5>,
     transform: suspend (T1, T2, T3, T4, T5) -> R,
 ): Flow<R> {
-    return combine(flow, flow2, flow3, flow4, flow5) { args: Array<*> ->
+    return combine(
+        flow,
+        flow2,
+        flow3,
+        flow4,
+        flow5
+    ) { args: Array<*> ->
         transform(
             args[0] as T1,
             args[1] as T2,
@@ -94,7 +115,14 @@ public fun <T1, T2, T3, T4, T5, T6, R> combine(
     flow6: Flow<T6>,
     transform: suspend (T1, T2, T3, T4, T5, T6) -> R,
 ): Flow<R> {
-    return combine(flow, flow2, flow3, flow4, flow5, flow6) { args: Array<*> ->
+    return combine(
+        flow,
+        flow2,
+        flow3,
+        flow4,
+        flow5,
+        flow6
+    ) { args: Array<*> ->
         transform(
             args[0] as T1,
             args[1] as T2,

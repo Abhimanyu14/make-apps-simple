@@ -22,7 +22,10 @@ import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 internal class LogKitImpl(
     private val buildConfigKit: BuildConfigKit,
     private val logErrorMessage: (String, String) -> Unit = { tag, message ->
-        Log.e(tag, message)
+        Log.e(
+            tag,
+            message
+        )
     },
 ) : LogKit {
     override fun logError(
@@ -30,7 +33,10 @@ internal class LogKitImpl(
         tag: String,
     ) {
         if (buildConfigKit.isDebugBuild()) {
-            logErrorMessage(tag, message)
+            logErrorMessage(
+                tag,
+                message
+            )
         }
     }
 }

@@ -38,7 +38,10 @@ internal data class AccountEntity(
         value = 0,
     ),
 
-    @ColumnInfo(name = "is_archived", defaultValue = "0")
+    @ColumnInfo(
+        name = "is_archived",
+        defaultValue = "0"
+    )
     @EncodeDefault
     @SerialName(value = "is_archived")
     val isArchived: Boolean = false,

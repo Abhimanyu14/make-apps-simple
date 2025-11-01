@@ -40,8 +40,14 @@ public suspend fun <T1, T2> combineAndCollectLatest(
     flow2: Flow<T2>,
     action: suspend (value: Pair<T1, T2>) -> Unit,
 ) {
-    return combine(flow, flow2) { value1, value2 ->
-        Pair(value1, value2)
+    return combine(
+        flow,
+        flow2
+    ) { value1, value2 ->
+        Pair(
+            value1,
+            value2
+        )
     }.collectLatest {
         action(it)
     }
@@ -53,8 +59,16 @@ public suspend fun <T1, T2, T3> combineAndCollectLatest(
     flow3: Flow<T3>,
     action: suspend (value: Triple<T1, T2, T3>) -> Unit,
 ) {
-    return combine(flow, flow2, flow3) { value1, value2, value3 ->
-        Triple(value1, value2, value3)
+    return combine(
+        flow,
+        flow2,
+        flow3
+    ) { value1, value2, value3 ->
+        Triple(
+            value1,
+            value2,
+            value3
+        )
     }.collectLatest {
         action(it)
     }
@@ -73,7 +87,12 @@ public suspend fun <T1, T2, T3, T4> combineAndCollectLatest(
         flow3,
         flow4
     ) { value1, value2, value3, value4 ->
-        Quadruple(value1, value2, value3, value4)
+        Quadruple(
+            value1,
+            value2,
+            value3,
+            value4
+        )
     }.collectLatest {
         action(it)
     }
@@ -94,7 +113,13 @@ public suspend fun <T1, T2, T3, T4, T5> combineAndCollectLatest(
         flow4,
         flow5
     ) { value1, value2, value3, value4, value5 ->
-        Quintuple(value1, value2, value3, value4, value5)
+        Quintuple(
+            value1,
+            value2,
+            value3,
+            value4,
+            value5
+        )
     }.collectLatest {
         action(it)
     }
@@ -117,7 +142,14 @@ public suspend fun <T1, T2, T3, T4, T5, T6> combineAndCollectLatest(
         flow5,
         flow6
     ) { value1, value2, value3, value4, value5, value6 ->
-        Sextuple(value1, value2, value3, value4, value5, value6)
+        Sextuple(
+            value1,
+            value2,
+            value3,
+            value4,
+            value5,
+            value6
+        )
     }.collectLatest {
         action(it)
     }
@@ -142,7 +174,15 @@ public suspend fun <T1, T2, T3, T4, T5, T6, T7> combineAndCollectLatest(
         flow6,
         flow7
     ) { value1, value2, value3, value4, value5, value6, value7 ->
-        Septuple(value1, value2, value3, value4, value5, value6, value7)
+        Septuple(
+            value1,
+            value2,
+            value3,
+            value4,
+            value5,
+            value6,
+            value7
+        )
     }.collectLatest {
         action(it)
     }
@@ -159,7 +199,16 @@ public suspend fun <T1, T2, T3, T4, T5, T6, T7, T8> combineAndCollectLatest(
     flow8: Flow<T8>,
     action: suspend (value: Octuple<T1, T2, T3, T4, T5, T6, T7, T8>) -> Unit,
 ) {
-    return combine(flow, flow2, flow3, flow4, flow5, flow6, flow7, flow8) {
+    return combine(
+        flow,
+        flow2,
+        flow3,
+        flow4,
+        flow5,
+        flow6,
+        flow7,
+        flow8
+    ) {
             value1,
             value2,
             value3,

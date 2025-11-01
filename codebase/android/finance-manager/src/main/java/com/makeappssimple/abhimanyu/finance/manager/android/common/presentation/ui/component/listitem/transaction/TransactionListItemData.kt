@@ -49,7 +49,7 @@ internal data class TransactionListItemData(
 
 internal fun TransactionData.toTransactionListItemData(
     getReadableDateAndTime: (
-        timestamp: Long
+        timestamp: Long,
     ) -> String,
 ): TransactionListItemData {
     val amountText: String = when (transaction.transactionType) {

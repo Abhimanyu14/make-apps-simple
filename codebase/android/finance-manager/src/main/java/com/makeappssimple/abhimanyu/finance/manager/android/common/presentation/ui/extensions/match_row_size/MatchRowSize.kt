@@ -26,11 +26,20 @@ import androidx.compose.ui.unit.Constraints
 internal fun Modifier.matchRowSize(): Modifier {
     return layout { measurable, constraints ->
         if (constraints.maxHeight == Constraints.Infinity) {
-            layout(0, 0) {}
+            layout(
+                0,
+                0
+            ) {}
         } else {
             val placeable = measurable.measure(constraints)
-            layout(placeable.width, placeable.height) {
-                placeable.place(0, 0)
+            layout(
+                placeable.width,
+                placeable.height
+            ) {
+                placeable.place(
+                    0,
+                    0
+                )
             }
         }
     }

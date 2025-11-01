@@ -28,17 +28,62 @@ internal val Icons.Rounded.FilterAlt: ImageVector
         }
         _filterAlt = materialIcon(name = "Rounded.FilterAlt") {
             materialPath {
-                moveTo(4.25f, 5.61f)
-                curveTo(6.57f, 8.59f, 10.0f, 13.0f, 10.0f, 13.0f)
+                moveTo(
+                    4.25f,
+                    5.61f
+                )
+                curveTo(
+                    6.57f,
+                    8.59f,
+                    10.0f,
+                    13.0f,
+                    10.0f,
+                    13.0f
+                )
                 verticalLineToRelative(5.0f)
-                curveToRelative(0.0f, 1.1f, 0.9f, 2.0f, 2.0f, 2.0f)
+                curveToRelative(
+                    0.0f,
+                    1.1f,
+                    0.9f,
+                    2.0f,
+                    2.0f,
+                    2.0f
+                )
                 horizontalLineToRelative(0.0f)
-                curveToRelative(1.1f, 0.0f, 2.0f, -0.9f, 2.0f, -2.0f)
+                curveToRelative(
+                    1.1f,
+                    0.0f,
+                    2.0f,
+                    -0.9f,
+                    2.0f,
+                    -2.0f
+                )
                 verticalLineToRelative(-5.0f)
-                curveToRelative(0.0f, 0.0f, 3.43f, -4.41f, 5.75f, -7.39f)
-                curveTo(20.26f, 4.95f, 19.79f, 4.0f, 18.95f, 4.0f)
+                curveToRelative(
+                    0.0f,
+                    0.0f,
+                    3.43f,
+                    -4.41f,
+                    5.75f,
+                    -7.39f
+                )
+                curveTo(
+                    20.26f,
+                    4.95f,
+                    19.79f,
+                    4.0f,
+                    18.95f,
+                    4.0f
+                )
                 horizontalLineTo(5.04f)
-                curveTo(4.21f, 4.0f, 3.74f, 4.95f, 4.25f, 5.61f)
+                curveTo(
+                    4.21f,
+                    4.0f,
+                    3.74f,
+                    4.95f,
+                    4.25f,
+                    5.61f
+                )
                 close()
             }
         }

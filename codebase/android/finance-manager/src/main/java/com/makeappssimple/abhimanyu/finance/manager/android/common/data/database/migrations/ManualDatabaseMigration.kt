@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-@file:Suppress("MagicNumber", "LongMethod", "StringLiteralDuplication")
+@file:Suppress(
+    "MagicNumber",
+    "LongMethod",
+    "StringLiteralDuplication"
+)
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.migrations
 
@@ -46,7 +50,10 @@ private object ManualDatabaseMigration {
      *
      * 1. In account_table -> is_archived
      */
-    val MIGRATION_21_22 = object : Migration(21, 22) {
+    val MIGRATION_21_22 = object : Migration(
+        21,
+        22
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -66,7 +73,10 @@ private object ManualDatabaseMigration {
      *
      * 1. In account_table -> minimum_account_balance_amount
      */
-    val MIGRATION_19_20 = object : Migration(19, 20) {
+    val MIGRATION_19_20 = object : Migration(
+        19,
+        20
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -99,7 +109,10 @@ private object ManualDatabaseMigration {
      * 2. source_from_id to account_from_id
      * 3. source_to_id to account_to_id
      */
-    val MIGRATION_18_19 = object : Migration(18, 19) {
+    val MIGRATION_18_19 = object : Migration(
+        18,
+        19
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -205,7 +218,10 @@ private object ManualDatabaseMigration {
      * 1. originalTransactionId: Int? = null
      * 2. refundTransactionIds: List<Int>? = null
      */
-    val MIGRATION_17_18 = object : Migration(17, 18) {
+    val MIGRATION_17_18 = object : Migration(
+        17,
+        18
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -257,7 +273,10 @@ private object ManualDatabaseMigration {
      * 1. transactionForId from transactionFor in Transaction table
      * 2. New table for transaction for
      */
-    val MIGRATION_16_17 = object : Migration(16, 17) {
+    val MIGRATION_16_17 = object : Migration(
+        16,
+        17
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -361,7 +380,10 @@ private object ManualDatabaseMigration {
      * 2. sourceToId: Int -> sourceToId: Int?
      * 2. categoryId: Int -> categoryId: Int?
      */
-    val MIGRATION_15_16 = object : Migration(15, 16) {
+    val MIGRATION_15_16 = object : Migration(
+        15,
+        16
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -401,7 +423,10 @@ private object ManualDatabaseMigration {
      *
      * 1. sourceToId: Int? -> sourceToId: Int
      */
-    val MIGRATION_14_15 = object : Migration(14, 15) {
+    val MIGRATION_14_15 = object : Migration(
+        14,
+        15
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -440,7 +465,10 @@ private object ManualDatabaseMigration {
     /**
      * Column added.
      */
-    val MIGRATION_13_14 = object : Migration(13, 14) {
+    val MIGRATION_13_14 = object : Migration(
+        13,
+        14
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -456,7 +484,10 @@ private object ManualDatabaseMigration {
     /**
      * Adding new table.
      */
-    val MIGRATION_12_13 = object : Migration(12, 13) {
+    val MIGRATION_12_13 = object : Migration(
+        12,
+        13
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -473,7 +504,10 @@ private object ManualDatabaseMigration {
     /**
      * Column added.
      */
-    val MIGRATION_9_10 = object : Migration(9, 10) {
+    val MIGRATION_9_10 = object : Migration(
+        9,
+        10
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -488,7 +522,10 @@ private object ManualDatabaseMigration {
      * 1. parentCategory: Category? -> parentCategoryId: Int?
      * 2. parentCategoryId: Int? -> subCategoryIds: List<Int>?
      */
-    val MIGRATION_8_9 = object : Migration(8, 9) {
+    val MIGRATION_8_9 = object : Migration(
+        8,
+        9
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -526,7 +563,10 @@ private object ManualDatabaseMigration {
     /**
      * Column added.
      */
-    val MIGRATION_7_8 = object : Migration(7, 8) {
+    val MIGRATION_7_8 = object : Migration(
+        7,
+        8
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -543,7 +583,10 @@ private object ManualDatabaseMigration {
     /**
      * Column added.
      */
-    val MIGRATION_6_7 = object : Migration(6, 7) {
+    val MIGRATION_6_7 = object : Migration(
+        6,
+        7
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -559,7 +602,10 @@ private object ManualDatabaseMigration {
     /**
      * Column data type change.
      */
-    val MIGRATION_4_5 = object : Migration(4, 5) {
+    val MIGRATION_4_5 = object : Migration(
+        4,
+        5
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -592,7 +638,10 @@ private object ManualDatabaseMigration {
         }
     }
 
-    val MIGRATION_3_4 = object : Migration(3, 4) {
+    val MIGRATION_3_4 = object : Migration(
+        3,
+        4
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {
@@ -611,7 +660,10 @@ private object ManualDatabaseMigration {
     /**
      * Adding new table.
      */
-    val MIGRATION_2_3 = object : Migration(2, 3) {
+    val MIGRATION_2_3 = object : Migration(
+        2,
+        3
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {

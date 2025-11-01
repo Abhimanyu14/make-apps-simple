@@ -24,6 +24,9 @@ internal class AppKitImpl(
     private val context: Context,
 ) : AppKit {
     override fun getMainActivityIntent(): Intent {
-        return Intent(context, FinanceManagerActivity::class.java)
+        return Intent(
+            context,
+            FinanceManagerActivity::class.java
+        )
     }
 }

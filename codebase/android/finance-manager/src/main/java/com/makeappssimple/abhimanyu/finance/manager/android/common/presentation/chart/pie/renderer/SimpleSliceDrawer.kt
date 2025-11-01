@@ -61,7 +61,10 @@ internal class SimpleSliceDrawer(private val sliceThickness: Float = 25f) :
     }
 
     private fun calculateSectorThickness(area: Size): Float {
-        val minSize = minOf(area.width, area.height)
+        val minSize = minOf(
+            area.width,
+            area.height
+        )
 
         return minSize * (sliceThickness / 200F)
     }

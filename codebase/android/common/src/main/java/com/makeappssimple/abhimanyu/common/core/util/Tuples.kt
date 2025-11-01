@@ -44,7 +44,12 @@ public data class Quadruple<out A, out B, out C, out D>(
  * Converts this [Quadruple] into a list.
  */
 public fun <T> Quadruple<T, T, T, T>.toList(): List<T> {
-    return listOf(first, second, third, fourth)
+    return listOf(
+        first,
+        second,
+        third,
+        fourth
+    )
 }
 
 /**
@@ -70,7 +75,13 @@ public data class Quintuple<out A, out B, out C, out D, out E>(
  * Converts this [Quintuple] into a list.
  */
 public fun <T> Quintuple<T, T, T, T, T>.toList(): List<T> {
-    return listOf(first, second, third, fourth, fifth)
+    return listOf(
+        first,
+        second,
+        third,
+        fourth,
+        fifth
+    )
 }
 
 /**
@@ -97,7 +108,14 @@ public data class Sextuple<out A, out B, out C, out D, out E, out F>(
  * Converts this [Sextuple] into a list.
  */
 public fun <T> Sextuple<T, T, T, T, T, T>.toList(): List<T> {
-    return listOf(first, second, third, fourth, fifth, sixth)
+    return listOf(
+        first,
+        second,
+        third,
+        fourth,
+        fifth,
+        sixth
+    )
 }
 
 /**
@@ -125,7 +143,15 @@ public data class Septuple<out A, out B, out C, out D, out E, out F, out G>(
  * Converts this [Septuple] into a list.
  */
 public fun <T> Septuple<T, T, T, T, T, T, T>.toList(): List<T> {
-    return listOf(first, second, third, fourth, fifth, sixth, seventh)
+    return listOf(
+        first,
+        second,
+        third,
+        fourth,
+        fifth,
+        sixth,
+        seventh
+    )
 }
 
 /**
@@ -154,7 +180,16 @@ public data class Octuple<out A, out B, out C, out D, out E, out F, out G, out H
  * Converts this [Octuple] into a list.
  */
 public fun <T> Octuple<T, T, T, T, T, T, T, T>.toList(): List<T> {
-    return listOf(first, second, third, fourth, fifth, sixth, seventh, eighth)
+    return listOf(
+        first,
+        second,
+        third,
+        fourth,
+        fifth,
+        sixth,
+        seventh,
+        eighth
+    )
 }
 
 /**

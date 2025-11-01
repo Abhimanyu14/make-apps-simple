@@ -116,8 +116,14 @@ public fun Instant.formattedDateAndTime(
         .ofPattern("yyyy-MMM-dd, hh-mm a")
         .withZone(zoneId)
         .format(this)
-        .replace("am", "AM")
-        .replace("pm", "PM")
+        .replace(
+            "am",
+            "AM"
+        )
+        .replace(
+            "pm",
+            "PM"
+        )
 }
 
 /**
@@ -139,8 +145,14 @@ public fun Instant.formattedTime(
         .ofPattern("hh:mm a")
         .withZone(zoneId)
         .format(this)
-        .replace("am", "AM")
-        .replace("pm", "PM")
+        .replace(
+            "am",
+            "AM"
+        )
+        .replace(
+            "pm",
+            "PM"
+        )
 }
 
 /**

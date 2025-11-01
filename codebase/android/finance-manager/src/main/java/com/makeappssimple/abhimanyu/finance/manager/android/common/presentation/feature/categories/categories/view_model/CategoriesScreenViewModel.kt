@@ -163,10 +163,12 @@ internal class CategoriesScreenViewModel(
             combineAndCollectLatest(
                 flow = defaultDataId,
                 flow2 = categoriesTransactionTypeMap,
-            ) { (
-                    defaultDataId,
-                    categoriesTransactionTypeMap,
-                ) ->
+            ) {
+                    (
+                        defaultDataId,
+                        categoriesTransactionTypeMap,
+                    ),
+                ->
                 val expenseCategoriesGridItemDataList =
                     categoriesTransactionTypeMap[TransactionType.EXPENSE]
                         ?.sortedBy {

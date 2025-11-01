@@ -41,7 +41,10 @@ internal class ClipboardKitImpl(
         val clipboardManager =
             (context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)
                 ?: return false
-        val clipData = ClipData.newPlainText(label, text)
+        val clipData = ClipData.newPlainText(
+            label,
+            text
+        )
         clipboardManager.setPrimaryClip(clipData)
         return true
     }

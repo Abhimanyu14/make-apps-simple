@@ -28,72 +28,169 @@ internal val Icons.Outlined.Keyboard: ImageVector
         }
         _keyboard = materialIcon(name = "Outlined.Keyboard") {
             materialPath {
-                moveTo(20.0f, 7.0f)
+                moveTo(
+                    20.0f,
+                    7.0f
+                )
                 verticalLineToRelative(10.0f)
-                lineTo(4.0f, 17.0f)
-                lineTo(4.0f, 7.0f)
+                lineTo(
+                    4.0f,
+                    17.0f
+                )
+                lineTo(
+                    4.0f,
+                    7.0f
+                )
                 horizontalLineToRelative(16.0f)
-                moveToRelative(0.0f, -2.0f)
-                lineTo(4.0f, 5.0f)
-                curveToRelative(-1.1f, 0.0f, -1.99f, 0.9f, -1.99f, 2.0f)
-                lineTo(2.0f, 17.0f)
-                curveToRelative(0.0f, 1.1f, 0.9f, 2.0f, 2.0f, 2.0f)
+                moveToRelative(
+                    0.0f,
+                    -2.0f
+                )
+                lineTo(
+                    4.0f,
+                    5.0f
+                )
+                curveToRelative(
+                    -1.1f,
+                    0.0f,
+                    -1.99f,
+                    0.9f,
+                    -1.99f,
+                    2.0f
+                )
+                lineTo(
+                    2.0f,
+                    17.0f
+                )
+                curveToRelative(
+                    0.0f,
+                    1.1f,
+                    0.9f,
+                    2.0f,
+                    2.0f,
+                    2.0f
+                )
                 horizontalLineToRelative(16.0f)
-                curveToRelative(1.1f, 0.0f, 2.0f, -0.9f, 2.0f, -2.0f)
-                lineTo(22.0f, 7.0f)
-                curveToRelative(0.0f, -1.1f, -0.9f, -2.0f, -2.0f, -2.0f)
+                curveToRelative(
+                    1.1f,
+                    0.0f,
+                    2.0f,
+                    -0.9f,
+                    2.0f,
+                    -2.0f
+                )
+                lineTo(
+                    22.0f,
+                    7.0f
+                )
+                curveToRelative(
+                    0.0f,
+                    -1.1f,
+                    -0.9f,
+                    -2.0f,
+                    -2.0f,
+                    -2.0f
+                )
                 close()
-                moveTo(11.0f, 8.0f)
+                moveTo(
+                    11.0f,
+                    8.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
                 horizontalLineToRelative(-2.0f)
                 close()
-                moveTo(11.0f, 11.0f)
+                moveTo(
+                    11.0f,
+                    11.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
                 horizontalLineToRelative(-2.0f)
                 close()
-                moveTo(8.0f, 8.0f)
+                moveTo(
+                    8.0f,
+                    8.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
-                lineTo(8.0f, 10.0f)
+                lineTo(
+                    8.0f,
+                    10.0f
+                )
                 close()
-                moveTo(8.0f, 11.0f)
+                moveTo(
+                    8.0f,
+                    11.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
-                lineTo(8.0f, 13.0f)
+                lineTo(
+                    8.0f,
+                    13.0f
+                )
                 close()
-                moveTo(5.0f, 11.0f)
+                moveTo(
+                    5.0f,
+                    11.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
-                lineTo(5.0f, 13.0f)
+                lineTo(
+                    5.0f,
+                    13.0f
+                )
                 close()
-                moveTo(5.0f, 8.0f)
+                moveTo(
+                    5.0f,
+                    8.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
-                lineTo(5.0f, 10.0f)
+                lineTo(
+                    5.0f,
+                    10.0f
+                )
                 close()
-                moveTo(8.0f, 14.0f)
+                moveTo(
+                    8.0f,
+                    14.0f
+                )
                 horizontalLineToRelative(8.0f)
                 verticalLineToRelative(2.0f)
-                lineTo(8.0f, 16.0f)
+                lineTo(
+                    8.0f,
+                    16.0f
+                )
                 close()
-                moveTo(14.0f, 11.0f)
+                moveTo(
+                    14.0f,
+                    11.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
                 horizontalLineToRelative(-2.0f)
                 close()
-                moveTo(14.0f, 8.0f)
+                moveTo(
+                    14.0f,
+                    8.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
                 horizontalLineToRelative(-2.0f)
                 close()
-                moveTo(17.0f, 11.0f)
+                moveTo(
+                    17.0f,
+                    11.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
                 horizontalLineToRelative(-2.0f)
                 close()
-                moveTo(17.0f, 8.0f)
+                moveTo(
+                    17.0f,
+                    8.0f
+                )
                 horizontalLineToRelative(2.0f)
                 verticalLineToRelative(2.0f)
                 horizontalLineToRelative(-2.0f)

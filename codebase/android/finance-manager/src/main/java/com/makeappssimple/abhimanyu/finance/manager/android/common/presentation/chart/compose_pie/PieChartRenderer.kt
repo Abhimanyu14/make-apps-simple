@@ -51,7 +51,10 @@ internal fun PieChartRenderer(
     animate: Boolean,
 ) {
     val emptyChartColor = FinanceManagerAppTheme.colorScheme.surfaceVariant
-    var animationRan by rememberSaveable(fractions, animate) {
+    var animationRan by rememberSaveable(
+        fractions,
+        animate
+    ) {
         mutableStateOf(
             value = false,
         )
@@ -177,7 +180,10 @@ internal fun PieChartRenderer(
                         sweepAngle = sweepAngleOuter,
                     ).absoluteValue
 
-                    innerRadius = max(innerRadius, minSpacedRadius)
+                    innerRadius = max(
+                        innerRadius,
+                        minSpacedRadius
+                    )
                 }
 
                 val sliceSpaceAngleInner =

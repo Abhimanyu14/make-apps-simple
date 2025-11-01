@@ -67,7 +67,10 @@ internal class NotificationKitImpl(
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
-        notificationManager.notify(1, notification)
+        notificationManager.notify(
+            1,
+            notification
+        )
         logKit.logError(
             message = "Notification : ${System.currentTimeMillis()}",
         )

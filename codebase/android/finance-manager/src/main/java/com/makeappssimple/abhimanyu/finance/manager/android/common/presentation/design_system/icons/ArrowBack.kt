@@ -31,20 +31,82 @@ internal val Icons.AutoMirrored.Rounded.ArrowBack: ImageVector
             autoMirror = true
         ) {
             materialPath {
-                moveTo(19.0f, 11.0f)
+                moveTo(
+                    19.0f,
+                    11.0f
+                )
                 horizontalLineTo(7.83f)
-                lineToRelative(4.88f, -4.88f)
-                curveToRelative(0.39f, -0.39f, 0.39f, -1.03f, 0.0f, -1.42f)
-                curveToRelative(-0.39f, -0.39f, -1.02f, -0.39f, -1.41f, 0.0f)
-                lineToRelative(-6.59f, 6.59f)
-                curveToRelative(-0.39f, 0.39f, -0.39f, 1.02f, 0.0f, 1.41f)
-                lineToRelative(6.59f, 6.59f)
-                curveToRelative(0.39f, 0.39f, 1.02f, 0.39f, 1.41f, 0.0f)
-                curveToRelative(0.39f, -0.39f, 0.39f, -1.02f, 0.0f, -1.41f)
-                lineTo(7.83f, 13.0f)
+                lineToRelative(
+                    4.88f,
+                    -4.88f
+                )
+                curveToRelative(
+                    0.39f,
+                    -0.39f,
+                    0.39f,
+                    -1.03f,
+                    0.0f,
+                    -1.42f
+                )
+                curveToRelative(
+                    -0.39f,
+                    -0.39f,
+                    -1.02f,
+                    -0.39f,
+                    -1.41f,
+                    0.0f
+                )
+                lineToRelative(
+                    -6.59f,
+                    6.59f
+                )
+                curveToRelative(
+                    -0.39f,
+                    0.39f,
+                    -0.39f,
+                    1.02f,
+                    0.0f,
+                    1.41f
+                )
+                lineToRelative(
+                    6.59f,
+                    6.59f
+                )
+                curveToRelative(
+                    0.39f,
+                    0.39f,
+                    1.02f,
+                    0.39f,
+                    1.41f,
+                    0.0f
+                )
+                curveToRelative(
+                    0.39f,
+                    -0.39f,
+                    0.39f,
+                    -1.02f,
+                    0.0f,
+                    -1.41f
+                )
+                lineTo(
+                    7.83f,
+                    13.0f
+                )
                 horizontalLineTo(19.0f)
-                curveToRelative(0.55f, 0.0f, 1.0f, -0.45f, 1.0f, -1.0f)
-                reflectiveCurveToRelative(-0.45f, -1.0f, -1.0f, -1.0f)
+                curveToRelative(
+                    0.55f,
+                    0.0f,
+                    1.0f,
+                    -0.45f,
+                    1.0f,
+                    -1.0f
+                )
+                reflectiveCurveToRelative(
+                    -0.45f,
+                    -1.0f,
+                    -1.0f,
+                    -1.0f
+                )
                 close()
             }
         }

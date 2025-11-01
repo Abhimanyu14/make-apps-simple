@@ -31,6 +31,12 @@ public fun LocalTime.formattedTime(
         .ofPattern("hh:mm a")
         .withZone(zoneId)
         .format(this)
-        .replace("am", "AM")
-        .replace("pm", "PM")
+        .replace(
+            "am",
+            "AM"
+        )
+        .replace(
+            "pm",
+            "PM"
+        )
 }

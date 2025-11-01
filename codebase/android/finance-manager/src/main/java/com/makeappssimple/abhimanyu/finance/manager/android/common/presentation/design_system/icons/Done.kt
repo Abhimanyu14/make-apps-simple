@@ -28,16 +28,66 @@ internal val Icons.Rounded.Done: ImageVector
         }
         _done = materialIcon(name = "Rounded.Done") {
             materialPath {
-                moveTo(9.0f, 16.2f)
-                lineToRelative(-3.5f, -3.5f)
-                curveToRelative(-0.39f, -0.39f, -1.01f, -0.39f, -1.4f, 0.0f)
-                curveToRelative(-0.39f, 0.39f, -0.39f, 1.01f, 0.0f, 1.4f)
-                lineToRelative(4.19f, 4.19f)
-                curveToRelative(0.39f, 0.39f, 1.02f, 0.39f, 1.41f, 0.0f)
-                lineTo(20.3f, 7.7f)
-                curveToRelative(0.39f, -0.39f, 0.39f, -1.01f, 0.0f, -1.4f)
-                curveToRelative(-0.39f, -0.39f, -1.01f, -0.39f, -1.4f, 0.0f)
-                lineTo(9.0f, 16.2f)
+                moveTo(
+                    9.0f,
+                    16.2f
+                )
+                lineToRelative(
+                    -3.5f,
+                    -3.5f
+                )
+                curveToRelative(
+                    -0.39f,
+                    -0.39f,
+                    -1.01f,
+                    -0.39f,
+                    -1.4f,
+                    0.0f
+                )
+                curveToRelative(
+                    -0.39f,
+                    0.39f,
+                    -0.39f,
+                    1.01f,
+                    0.0f,
+                    1.4f
+                )
+                lineToRelative(
+                    4.19f,
+                    4.19f
+                )
+                curveToRelative(
+                    0.39f,
+                    0.39f,
+                    1.02f,
+                    0.39f,
+                    1.41f,
+                    0.0f
+                )
+                lineTo(
+                    20.3f,
+                    7.7f
+                )
+                curveToRelative(
+                    0.39f,
+                    -0.39f,
+                    0.39f,
+                    -1.01f,
+                    0.0f,
+                    -1.4f
+                )
+                curveToRelative(
+                    -0.39f,
+                    -0.39f,
+                    -1.01f,
+                    -0.39f,
+                    -1.4f,
+                    0.0f
+                )
+                lineTo(
+                    9.0f,
+                    16.2f
+                )
                 close()
             }
         }

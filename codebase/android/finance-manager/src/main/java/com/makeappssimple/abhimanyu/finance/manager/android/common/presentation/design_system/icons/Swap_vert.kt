@@ -36,25 +36,64 @@ internal val Swap_vert: ImageVector
             path(
                 fill = SolidColor(Color(0xFF000000))
             ) {
-                moveTo(320f, 520f)
+                moveTo(
+                    320f,
+                    520f
+                )
                 verticalLineToRelative(-287f)
-                lineTo(217f, 336f)
-                lineToRelative(-57f, -56f)
-                lineToRelative(200f, -200f)
-                lineToRelative(200f, 200f)
-                lineToRelative(-57f, 56f)
-                lineToRelative(-103f, -103f)
+                lineTo(
+                    217f,
+                    336f
+                )
+                lineToRelative(
+                    -57f,
+                    -56f
+                )
+                lineToRelative(
+                    200f,
+                    -200f
+                )
+                lineToRelative(
+                    200f,
+                    200f
+                )
+                lineToRelative(
+                    -57f,
+                    56f
+                )
+                lineToRelative(
+                    -103f,
+                    -103f
+                )
                 verticalLineToRelative(287f)
                 close()
-                moveTo(600f, 880f)
-                lineTo(400f, 680f)
-                lineToRelative(57f, -56f)
-                lineToRelative(103f, 103f)
+                moveTo(
+                    600f,
+                    880f
+                )
+                lineTo(
+                    400f,
+                    680f
+                )
+                lineToRelative(
+                    57f,
+                    -56f
+                )
+                lineToRelative(
+                    103f,
+                    103f
+                )
                 verticalLineToRelative(-287f)
                 horizontalLineToRelative(80f)
                 verticalLineToRelative(287f)
-                lineToRelative(103f, -103f)
-                lineToRelative(57f, 56f)
+                lineToRelative(
+                    103f,
+                    -103f
+                )
+                lineToRelative(
+                    57f,
+                    56f
+                )
                 close()
             }
         }.build()

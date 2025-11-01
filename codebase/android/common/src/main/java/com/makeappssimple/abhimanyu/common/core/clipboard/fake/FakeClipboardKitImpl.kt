@@ -26,7 +26,7 @@ public class FakeClipboardKitImpl : ClipboardKit {
 
     override fun copyToClipboard(
         label: String,
-        text: String
+        text: String,
     ): Boolean {
         copiedTexts.add(
             element = Pair(

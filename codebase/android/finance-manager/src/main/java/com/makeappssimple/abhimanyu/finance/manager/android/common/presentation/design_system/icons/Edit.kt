@@ -28,23 +28,85 @@ internal val Icons.Rounded.Edit: ImageVector
         }
         _edit = materialIcon(name = "Rounded.Edit") {
             materialPath {
-                moveTo(3.0f, 17.46f)
+                moveTo(
+                    3.0f,
+                    17.46f
+                )
                 verticalLineToRelative(3.04f)
-                curveToRelative(0.0f, 0.28f, 0.22f, 0.5f, 0.5f, 0.5f)
+                curveToRelative(
+                    0.0f,
+                    0.28f,
+                    0.22f,
+                    0.5f,
+                    0.5f,
+                    0.5f
+                )
                 horizontalLineToRelative(3.04f)
-                curveToRelative(0.13f, 0.0f, 0.26f, -0.05f, 0.35f, -0.15f)
-                lineTo(17.81f, 9.94f)
-                lineToRelative(-3.75f, -3.75f)
-                lineTo(3.15f, 17.1f)
-                curveToRelative(-0.1f, 0.1f, -0.15f, 0.22f, -0.15f, 0.36f)
+                curveToRelative(
+                    0.13f,
+                    0.0f,
+                    0.26f,
+                    -0.05f,
+                    0.35f,
+                    -0.15f
+                )
+                lineTo(
+                    17.81f,
+                    9.94f
+                )
+                lineToRelative(
+                    -3.75f,
+                    -3.75f
+                )
+                lineTo(
+                    3.15f,
+                    17.1f
+                )
+                curveToRelative(
+                    -0.1f,
+                    0.1f,
+                    -0.15f,
+                    0.22f,
+                    -0.15f,
+                    0.36f
+                )
                 close()
-                moveTo(20.71f, 7.04f)
-                curveToRelative(0.39f, -0.39f, 0.39f, -1.02f, 0.0f, -1.41f)
-                lineToRelative(-2.34f, -2.34f)
-                curveToRelative(-0.39f, -0.39f, -1.02f, -0.39f, -1.41f, 0.0f)
-                lineToRelative(-1.83f, 1.83f)
-                lineToRelative(3.75f, 3.75f)
-                lineToRelative(1.83f, -1.83f)
+                moveTo(
+                    20.71f,
+                    7.04f
+                )
+                curveToRelative(
+                    0.39f,
+                    -0.39f,
+                    0.39f,
+                    -1.02f,
+                    0.0f,
+                    -1.41f
+                )
+                lineToRelative(
+                    -2.34f,
+                    -2.34f
+                )
+                curveToRelative(
+                    -0.39f,
+                    -0.39f,
+                    -1.02f,
+                    -0.39f,
+                    -1.41f,
+                    0.0f
+                )
+                lineToRelative(
+                    -1.83f,
+                    1.83f
+                )
+                lineToRelative(
+                    3.75f,
+                    3.75f
+                )
+                lineToRelative(
+                    1.83f,
+                    -1.83f
+                )
                 close()
             }
         }

@@ -35,7 +35,10 @@ internal class AppVersionKitImpl(
                         PackageManager.PackageInfoFlags.of(0)
                     )
                 } else {
-                    packageManager.getPackageInfo(packageName, 0)
+                    packageManager.getPackageInfo(
+                        packageName,
+                        0
+                    )
                 }
             AppVersion(
                 versionName = packageInfo.versionName.orEmpty(),

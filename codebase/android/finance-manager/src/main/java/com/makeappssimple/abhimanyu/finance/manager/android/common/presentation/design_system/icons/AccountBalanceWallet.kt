@@ -29,35 +29,134 @@ internal val Icons.Rounded.AccountBalanceWallet: ImageVector
         _accountBalanceWallet =
             materialIcon(name = "Rounded.AccountBalanceWallet") {
                 materialPath {
-                    moveTo(10.0f, 16.0f)
-                    lineTo(10.0f, 8.0f)
-                    curveToRelative(0.0f, -1.1f, 0.89f, -2.0f, 2.0f, -2.0f)
+                    moveTo(
+                        10.0f,
+                        16.0f
+                    )
+                    lineTo(
+                        10.0f,
+                        8.0f
+                    )
+                    curveToRelative(
+                        0.0f,
+                        -1.1f,
+                        0.89f,
+                        -2.0f,
+                        2.0f,
+                        -2.0f
+                    )
                     horizontalLineToRelative(9.0f)
-                    lineTo(21.0f, 5.0f)
-                    curveToRelative(0.0f, -1.1f, -0.9f, -2.0f, -2.0f, -2.0f)
-                    lineTo(5.0f, 3.0f)
-                    curveToRelative(-1.11f, 0.0f, -2.0f, 0.9f, -2.0f, 2.0f)
+                    lineTo(
+                        21.0f,
+                        5.0f
+                    )
+                    curveToRelative(
+                        0.0f,
+                        -1.1f,
+                        -0.9f,
+                        -2.0f,
+                        -2.0f,
+                        -2.0f
+                    )
+                    lineTo(
+                        5.0f,
+                        3.0f
+                    )
+                    curveToRelative(
+                        -1.11f,
+                        0.0f,
+                        -2.0f,
+                        0.9f,
+                        -2.0f,
+                        2.0f
+                    )
                     verticalLineToRelative(14.0f)
-                    curveToRelative(0.0f, 1.1f, 0.89f, 2.0f, 2.0f, 2.0f)
+                    curveToRelative(
+                        0.0f,
+                        1.1f,
+                        0.89f,
+                        2.0f,
+                        2.0f,
+                        2.0f
+                    )
                     horizontalLineToRelative(14.0f)
-                    curveToRelative(1.1f, 0.0f, 2.0f, -0.9f, 2.0f, -2.0f)
+                    curveToRelative(
+                        1.1f,
+                        0.0f,
+                        2.0f,
+                        -0.9f,
+                        2.0f,
+                        -2.0f
+                    )
                     verticalLineToRelative(-1.0f)
                     horizontalLineToRelative(-9.0f)
-                    curveToRelative(-1.11f, 0.0f, -2.0f, -0.9f, -2.0f, -2.0f)
+                    curveToRelative(
+                        -1.11f,
+                        0.0f,
+                        -2.0f,
+                        -0.9f,
+                        -2.0f,
+                        -2.0f
+                    )
                     close()
-                    moveTo(13.0f, 8.0f)
-                    curveToRelative(-0.55f, 0.0f, -1.0f, 0.45f, -1.0f, 1.0f)
+                    moveTo(
+                        13.0f,
+                        8.0f
+                    )
+                    curveToRelative(
+                        -0.55f,
+                        0.0f,
+                        -1.0f,
+                        0.45f,
+                        -1.0f,
+                        1.0f
+                    )
                     verticalLineToRelative(6.0f)
-                    curveToRelative(0.0f, 0.55f, 0.45f, 1.0f, 1.0f, 1.0f)
+                    curveToRelative(
+                        0.0f,
+                        0.55f,
+                        0.45f,
+                        1.0f,
+                        1.0f,
+                        1.0f
+                    )
                     horizontalLineToRelative(9.0f)
-                    lineTo(22.0f, 8.0f)
+                    lineTo(
+                        22.0f,
+                        8.0f
+                    )
                     horizontalLineToRelative(-9.0f)
                     close()
-                    moveTo(16.0f, 13.5f)
-                    curveToRelative(-0.83f, 0.0f, -1.5f, -0.67f, -1.5f, -1.5f)
-                    reflectiveCurveToRelative(0.67f, -1.5f, 1.5f, -1.5f)
-                    reflectiveCurveToRelative(1.5f, 0.67f, 1.5f, 1.5f)
-                    reflectiveCurveToRelative(-0.67f, 1.5f, -1.5f, 1.5f)
+                    moveTo(
+                        16.0f,
+                        13.5f
+                    )
+                    curveToRelative(
+                        -0.83f,
+                        0.0f,
+                        -1.5f,
+                        -0.67f,
+                        -1.5f,
+                        -1.5f
+                    )
+                    reflectiveCurveToRelative(
+                        0.67f,
+                        -1.5f,
+                        1.5f,
+                        -1.5f
+                    )
+                    reflectiveCurveToRelative(
+                        1.5f,
+                        0.67f,
+                        1.5f,
+                        1.5f
+                    )
+                    reflectiveCurveToRelative(
+                        -0.67f,
+                        1.5f,
+                        -1.5f,
+                        1.5f
+                    )
                     close()
                 }
             }
