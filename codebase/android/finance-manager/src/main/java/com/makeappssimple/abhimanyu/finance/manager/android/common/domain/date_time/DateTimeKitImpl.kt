@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_
 
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedDateAndTime
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedDay
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedDayOfWeek
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedMonth
 import com.makeappssimple.abhimanyu.common.core.extensions.formattedReadableDateAndTime
@@ -28,7 +27,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
 import java.time.Instant
 import java.time.YearMonth
 import java.time.ZoneId
-import java.time.ZonedDateTime
 
 private object DateTimeUtilImplConstants {
     const val LAST_MONTH_OF_YEAR = 12
@@ -45,10 +43,6 @@ internal class DateTimeKitImpl() : DateTimeKit {
 
     override fun getCurrentLocalTime(): MyLocalTime {
         return MyLocalTime.now()
-    }
-
-    override fun getCurrentInstant(): Instant {
-        return Instant.now()
     }
 
     override fun getCurrentTimeMillis(): Long {
@@ -87,34 +81,6 @@ internal class DateTimeKitImpl() : DateTimeKit {
     }
 
     /**
-     * Sample format - Monday.
-     */
-    override fun getFormattedDayOfWeek(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedDayOfWeek(
-                zoneId = zoneId,
-            )
-    }
-
-    /**
-     * Sample format - 30 Mar.
-     */
-    override fun getFormattedDay(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedDay(
-                zoneId = zoneId,
-            )
-    }
-
-    /**
      * Sample format - March, 2023.
      */
     override fun getFormattedMonth(
@@ -138,20 +104,6 @@ internal class DateTimeKitImpl() : DateTimeKit {
         return Instant
             .ofEpochMilli(timestamp)
             .formattedYear(
-                zoneId = zoneId,
-            )
-    }
-
-    /**
-     * Sample format - 2023-Mar-30, 08-24 AM.
-     */
-    override fun getFormattedDateAndTime(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedDateAndTime(
                 zoneId = zoneId,
             )
     }
@@ -352,19 +304,36 @@ internal class DateTimeKitImpl() : DateTimeKit {
             )
     }
 
-    override fun getTimestamp(
-        date: MyLocalDate,
-        time: MyLocalTime,
-        zoneId: ZoneId,
-    ): Long {
-        return ZonedDateTime
-            .of(
-                date.localDate,
-                time.localTime,
-                zoneId
+    /**
+     * Sample format - Monday.
+     */
+    private fun getFormattedDayOfWeek(
+        timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): String {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .formattedDayOfWeek(
+                zoneId = zoneId,
             )
-            .toInstant()
-            .toEpochMilli()
+    }
+
+    /**
+     * Sample format - 2023-Mar-30, 08-24 AM.
+     */
+    private fun getFormattedDateAndTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): String {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .formattedDateAndTime(
+                zoneId = zoneId,
+            )
+    }
+
+    private fun getCurrentInstant(): Instant {
+        return Instant.now()
     }
 }
 

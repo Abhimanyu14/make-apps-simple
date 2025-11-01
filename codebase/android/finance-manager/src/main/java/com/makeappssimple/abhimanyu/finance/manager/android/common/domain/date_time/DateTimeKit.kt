@@ -16,13 +16,10 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
-import java.time.Instant
 import java.time.ZoneId
 
 internal interface DateTimeKit {
     fun getCurrentFormattedDateAndTime(): String
-
-    fun getCurrentInstant(): Instant
 
     fun getCurrentTimeMillis(): Long
 
@@ -45,22 +42,6 @@ internal interface DateTimeKit {
     ): String
 
     /**
-     * Sample format - Monday.
-     */
-    fun getFormattedDayOfWeek(
-        timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): String
-
-    /**
-     * Sample format - 30 Mar.
-     */
-    fun getFormattedDay(
-        timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): String
-
-    /**
      * Sample format - March, 2023.
      */
     fun getFormattedMonth(
@@ -73,14 +54,6 @@ internal interface DateTimeKit {
      */
     fun getFormattedYear(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): String
-
-    /**
-     * Sample format - 2023-Mar-30, 08-24 AM.
-     */
-    fun getFormattedDateAndTime(
-        timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
 
@@ -150,10 +123,4 @@ internal interface DateTimeKit {
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): MyLocalDate
-
-    fun getTimestamp(
-        date: MyLocalDate,
-        time: MyLocalTime,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
 }
