@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -41,12 +40,16 @@ internal class MyLocalDate(
         return localDate.compareTo(other.localDate)
     }
 
-    fun atEndOfDay(): LocalDateTime {
-        return localDate.atTime(LocalTime.MAX)
+    fun atEndOfDay(): MyLocalDateTime {
+        return MyLocalDateTime(
+            localDateTime = localDate.atTime(LocalTime.MAX),
+        )
     }
 
-    fun atStartOfDay(): LocalDateTime {
-        return localDate.atStartOfDay()
+    fun atStartOfDay(): MyLocalDateTime {
+        return MyLocalDateTime(
+            localDateTime = localDate.atStartOfDay(),
+        )
     }
 
     fun atStartOfDay(
@@ -57,8 +60,10 @@ internal class MyLocalDate(
 
     fun atTime(
         time: LocalTime,
-    ): LocalDateTime {
-        return localDate.atTime(time)
+    ): MyLocalDateTime {
+        return MyLocalDateTime(
+            localDateTime = localDate.atTime(time),
+        )
     }
 
     /**

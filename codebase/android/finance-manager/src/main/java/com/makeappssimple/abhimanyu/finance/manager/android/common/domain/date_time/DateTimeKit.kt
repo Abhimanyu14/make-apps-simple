@@ -17,14 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
 import java.time.Instant
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 
 internal interface DateTimeKit : DateKit, TimeKit {
     fun getCurrentFormattedDateAndTime(): String
 
-    fun getCurrentLocalDateTime(): LocalDateTime
+    fun getCurrentLocalDateTime(): MyLocalDateTime
 
     fun getCurrentInstant(): Instant
 

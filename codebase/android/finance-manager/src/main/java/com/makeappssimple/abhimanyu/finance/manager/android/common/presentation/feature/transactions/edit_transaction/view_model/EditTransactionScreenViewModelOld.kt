@@ -31,7 +31,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotZero
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.sortedWith
-import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.extensions.toImmutableList
 import com.makeappssimple.abhimanyu.common.core.extensions.toIntOrZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
@@ -48,6 +47,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDateTime
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.toEpochMilli
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -79,7 +80,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import java.time.LocalTime
 import kotlin.math.abs
 
@@ -455,10 +455,10 @@ internal class EditTransactionScreenViewModelOld(
                     }
 
                 editingTransactionData?.transaction?.let { transaction ->
-                    val transactionTimestamp = LocalDateTime
+                    val transactionTimestamp = MyLocalDateTime
                         .of(
-                            uiStateValue.transactionDate.localDate,
-                            uiStateValue.transactionTime
+                            date = uiStateValue.transactionDate.localDate,
+                            time = uiStateValue.transactionTime,
                         )
                         .toEpochMilli()
                     updateTransactionUseCase(
