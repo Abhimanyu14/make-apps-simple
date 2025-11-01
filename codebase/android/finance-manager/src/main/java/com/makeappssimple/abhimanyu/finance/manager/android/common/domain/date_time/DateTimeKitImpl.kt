@@ -28,6 +28,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
 import java.time.Instant
 import java.time.YearMonth
 import java.time.ZoneId
+import java.time.ZonedDateTime
 
 private object DateTimeUtilImplConstants {
     const val LAST_MONTH_OF_YEAR = 12
@@ -44,10 +45,6 @@ internal class DateTimeKitImpl() : DateTimeKit {
 
     override fun getCurrentLocalTime(): MyLocalTime {
         return MyLocalTime.now()
-    }
-
-    override fun getCurrentLocalDateTime(): MyLocalDateTime {
-        return MyLocalDateTime.now()
     }
 
     override fun getCurrentInstant(): Instant {
@@ -353,6 +350,21 @@ internal class DateTimeKitImpl() : DateTimeKit {
             .toEpochMilli(
                 zoneId = zoneId,
             )
+    }
+
+    override fun getTimestamp(
+        date: MyLocalDate,
+        time: MyLocalTime,
+        zoneId: ZoneId,
+    ): Long {
+        return ZonedDateTime
+            .of(
+                date.localDate,
+                time.localTime,
+                zoneId
+            )
+            .toInstant()
+            .toEpochMilli()
     }
 }
 

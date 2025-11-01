@@ -41,10 +41,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDateTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.toEpochMilli
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -596,10 +594,10 @@ internal class EditTransactionScreenViewModel(
             }
         }
         val creationTimestamp = dateTimeKit.getCurrentTimeMillis()
-        val transactionTimestamp = MyLocalDateTime.of(
+        val transactionTimestamp = dateTimeKit.getTimestamp(
             date = uiState.value.transactionDate,
             time = uiState.value.transactionTime,
-        ).toEpochMilli()
+        )
         val transactionForId =
             allTransactionForValues[uiState.value.selectedTransactionForIndex].id
         val transactionType = uiState.value.selectedTransactionType

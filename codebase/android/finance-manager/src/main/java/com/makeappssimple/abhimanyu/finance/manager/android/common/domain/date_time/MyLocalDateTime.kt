@@ -21,27 +21,7 @@ import java.time.ZoneId
 
 internal class MyLocalDateTime(
     val localDateTime: LocalDateTime,
-) {
-    companion object {
-        fun of(
-            date: MyLocalDate,
-            time: MyLocalTime,
-        ): MyLocalDateTime {
-            return MyLocalDateTime(
-                localDateTime = LocalDateTime.of(
-                    date.localDate,
-                    time.localTime,
-                ),
-            )
-        }
-
-        fun now(): MyLocalDateTime {
-            return MyLocalDateTime(
-                localDateTime = LocalDateTime.now(),
-            )
-        }
-    }
-}
+)
 
 internal fun MyLocalDateTime.toEpochMilli(
     zoneId: ZoneId = getSystemDefaultZoneId(),
