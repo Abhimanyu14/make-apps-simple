@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_
 import java.time.Instant
 import java.time.ZoneId
 
-internal interface DateTimeKit : DateKit, TimeKit {
+internal interface DateTimeKit {
     fun getCurrentFormattedDateAndTime(): String
 
     fun getCurrentLocalDateTime(): MyLocalDateTime
@@ -128,4 +128,28 @@ internal interface DateTimeKit : DateKit, TimeKit {
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
+
+    fun getCurrentLocalTime(): MyLocalTime
+
+    fun getLocalTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getSystemDefaultZoneId(),
+    ): MyLocalTime
+
+    fun getCurrentLocalDate(): MyLocalDate
+
+    fun getLocalDate(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getSystemDefaultZoneId(),
+    ): MyLocalDate
+
+    fun getStartOfMonthLocalDate(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getSystemDefaultZoneId(),
+    ): MyLocalDate
+
+    fun getStartOfYearLocalDate(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getSystemDefaultZoneId(),
+    ): MyLocalDate
 }
