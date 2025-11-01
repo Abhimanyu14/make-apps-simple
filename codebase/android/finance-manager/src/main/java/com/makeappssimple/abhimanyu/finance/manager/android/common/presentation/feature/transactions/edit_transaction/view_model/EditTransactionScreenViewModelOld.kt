@@ -47,6 +47,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -78,7 +79,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import kotlin.math.abs
@@ -152,7 +152,8 @@ internal class EditTransactionScreenViewModelOld(
         )
     // endregion
 
-    internal val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
+    internal val currentLocalDate: MyLocalDate =
+        dateTimeKit.getCurrentLocalDate()
 
 
     private val _uiState: MutableStateFlow<EditTransactionScreenUiStateData> =
@@ -456,7 +457,7 @@ internal class EditTransactionScreenViewModelOld(
                 editingTransactionData?.transaction?.let { transaction ->
                     val transactionTimestamp = LocalDateTime
                         .of(
-                            uiStateValue.transactionDate,
+                            uiStateValue.transactionDate.localDate,
                             uiStateValue.transactionTime
                         )
                         .toEpochMilli()
@@ -628,7 +629,7 @@ internal class EditTransactionScreenViewModelOld(
     }
 
     internal fun updateTransactionDate(
-        updatedTransactionDate: LocalDate,
+        updatedTransactionDate: MyLocalDate,
     ) {
         updateEditTransactionScreenUiState(
             updatedEditTransactionScreenUiStateData = uiState.value

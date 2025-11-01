@@ -29,16 +29,16 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.FinanceManagerAppConstants
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getTimestamp
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import java.time.LocalDate
 import java.time.ZoneId
 
 @Composable
@@ -57,7 +57,7 @@ internal fun MyDatePicker(
                 override fun isSelectableDate(
                     utcTimeMillis: Long,
                 ): Boolean {
-                    val localDate: LocalDate = getLocalDate(
+                    val localDate: MyLocalDate = getLocalDate(
                         timestamp = utcTimeMillis,
                     )
                     return if (data.startLocalDate.isNotNull() && data.endLocalDate.isNotNull()) {
@@ -97,7 +97,7 @@ internal fun MyDatePicker(
             confirmButton = {
                 MyTextButton(
                     onClick = {
-                        val startOfDayTimestamp: LocalDate = getLocalDate(
+                        val startOfDayTimestamp: MyLocalDate = getLocalDate(
                             timestamp = datePickerState.selectedDateMillis.orZero(),
                         )
                         handleEvent(

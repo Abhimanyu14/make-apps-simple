@@ -18,9 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.input.TextFieldValue
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
-import java.time.LocalDate
 import java.time.LocalTime
 
 @Immutable
@@ -33,7 +33,7 @@ internal data class EditTransactionScreenUiStateData(
     val selectedTransactionForIndex: Int = 0,
     val accountFrom: Account? = null,
     val accountTo: Account? = null,
-    val transactionDate: LocalDate = LocalDate.MIN,
+    val transactionDate: MyLocalDate = MyLocalDate.MIN,
     val transactionTime: LocalTime = LocalTime.MIN,
     val amountErrorText: String? = null,
 )

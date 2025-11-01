@@ -18,15 +18,15 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
-import com.makeappssimple.abhimanyu.common.core.extensions.atEndOfDay
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionDataMappedByCategory
@@ -50,7 +50,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
-import java.time.LocalDate
 
 private object AnalysisScreenViewModelConstants {
     const val FULL_PERCENTAGE = 100
@@ -84,7 +83,7 @@ internal class AnalysisScreenViewModel(
         persistentListOf()
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
-    private var oldestTransactionLocalDate: LocalDate? = null
+    private var oldestTransactionLocalDate: MyLocalDate? = null
     private var selectedFilter: Filter = Filter()
     private var screenBottomSheetType: AnalysisScreenBottomSheetType =
         AnalysisScreenBottomSheetType.None
@@ -203,8 +202,8 @@ internal class AnalysisScreenViewModel(
     }
 
     private fun isAvailableAfterDateFilter(
-        startLocalDate: LocalDate?,
-        endLocalDate: LocalDate?,
+        startLocalDate: MyLocalDate?,
+        endLocalDate: MyLocalDate?,
         transactionData: TransactionData,
     ): Boolean {
         if (startLocalDate.isNull() || endLocalDate.isNull()) {
@@ -272,7 +271,7 @@ internal class AnalysisScreenViewModel(
     // endregion
 
     // region getOldestTransactionLocalDate
-    private fun getOldestTransactionLocalDate(): LocalDate {
+    private fun getOldestTransactionLocalDate(): MyLocalDate {
         return dateTimeKit.getLocalDate(
             timestamp = allTransactionData.minOfOrNull { transactionData ->
                 transactionData.transaction.transactionTimestamp

@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
@@ -35,7 +36,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import java.time.LocalDate
 
 internal class TransactionsScreenViewModelTest {
     // region test setup
@@ -91,10 +91,10 @@ internal class TransactionsScreenViewModelTest {
             result.investmentCategories.shouldBeEmpty()
             result.transactionTypes.shouldBeEmpty()
             result.currentLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.oldestTransactionLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.transactionDetailsListItemViewData.shouldBeEmpty()
             result.searchTextFieldState.text.toString().shouldBeEmpty()
@@ -161,7 +161,7 @@ internal class TransactionsScreenViewModelTest {
                 )
                 result.investmentCategories.shouldBeEmpty()
                 result.oldestTransactionLocalDate.shouldBe(
-                    expected = LocalDate.of(
+                    expected = MyLocalDate.of(
                         2024,
                         5,
                         20
@@ -308,10 +308,10 @@ internal class TransactionsScreenViewModelTest {
             )
             result.investmentCategories.shouldBeEmpty()
             result.oldestTransactionLocalDate.shouldBe(
-                expected = LocalDate.of(
-                    2024,
-                    5,
-                    20
+                expected = MyLocalDate.of(
+                    year = 2024,
+                    month = 5,
+                    dayOfMonth = 20,
                 ),
             )
             result.transactionDetailsListItemViewData.size.shouldBe(

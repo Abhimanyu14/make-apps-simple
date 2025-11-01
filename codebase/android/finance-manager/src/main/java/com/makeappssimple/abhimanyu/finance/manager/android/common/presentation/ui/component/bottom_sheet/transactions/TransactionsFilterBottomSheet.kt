@@ -17,13 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.bottom_sheet.transactions
 
 import androidx.compose.runtime.Composable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.collections.immutable.ImmutableList
-import java.time.LocalDate
 
 @Composable
 internal fun TransactionsFilterBottomSheet(
@@ -33,8 +33,8 @@ internal fun TransactionsFilterBottomSheet(
     accounts: ImmutableList<Account>,
     transactionForValues: ImmutableList<TransactionFor>,
     transactionTypes: ImmutableList<TransactionType>,
-    defaultMinDate: LocalDate,
-    defaultMaxDate: LocalDate,
+    defaultMinDate: MyLocalDate,
+    defaultMaxDate: MyLocalDate,
     selectedTransactionFilter: TransactionFilter,
     updateSelectedTransactionFilter: (updatedSelectedTransactionFilter: TransactionFilter) -> Unit,
     resetBottomSheetType: () -> Unit,

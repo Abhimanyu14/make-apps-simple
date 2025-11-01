@@ -28,7 +28,6 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.DuplicateTransactionUseCase
@@ -39,6 +38,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
@@ -73,7 +74,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.annotation.KoinViewModel
-import java.time.LocalDate
 
 @KoinViewModel
 internal class TransactionsScreenViewModel(
@@ -110,8 +110,9 @@ internal class TransactionsScreenViewModel(
         TransactionSortOption.entries.toImmutableList()
     private val transactionTypes: ImmutableList<TransactionType> =
         TransactionType.entries.toImmutableList()
-    private val currentLocalDate: LocalDate = dateTimeKit.getCurrentLocalDate()
-    private var oldestTransactionLocalDate: LocalDate? = null
+    private val currentLocalDate: MyLocalDate =
+        dateTimeKit.getCurrentLocalDate()
+    private var oldestTransactionLocalDate: MyLocalDate? = null
     private var categoriesMap: Map<TransactionType, List<Category>> =
         mapOf()
     private var transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> =

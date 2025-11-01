@@ -45,9 +45,9 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.addIfDoesNotContainItemElseRemove
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
@@ -76,7 +76,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import java.time.LocalDate
 
 @Composable
 internal fun TransactionsFiltersBottomSheetUI(
@@ -87,8 +86,8 @@ internal fun TransactionsFiltersBottomSheetUI(
     accounts: ImmutableList<Account>,
     transactionForValues: ImmutableList<TransactionFor>,
     transactionTypes: ImmutableList<TransactionType>,
-    defaultMinDate: LocalDate,
-    defaultMaxDate: LocalDate,
+    defaultMinDate: MyLocalDate,
+    defaultMaxDate: MyLocalDate,
     selectedTransactionFilter: TransactionFilter,
     onPositiveButtonClick: (updatedTransactionFilter: TransactionFilter) -> Unit,
     onNegativeButtonClick: () -> Unit,
@@ -491,12 +490,12 @@ internal fun TransactionFilterBottomSheetDateFilter(
     @StringRes headingTextStringResourceId: Int,
     onClearButtonClick: () -> Unit,
     onExpandButtonClick: () -> Unit,
-    minDate: LocalDate,
-    maxDate: LocalDate,
-    fromDate: LocalDate,
-    toDate: LocalDate,
-    updateFromDate: (updatedFromDate: LocalDate) -> Unit,
-    updateToDate: (updatedToDate: LocalDate) -> Unit,
+    minDate: MyLocalDate,
+    maxDate: MyLocalDate,
+    fromDate: MyLocalDate,
+    toDate: MyLocalDate,
+    updateFromDate: (updatedFromDate: MyLocalDate) -> Unit,
+    updateToDate: (updatedToDate: MyLocalDate) -> Unit,
 ) {
     val chevronDegrees: Float by animateFloatAsState(
         targetValue = if (isExpanded) {

@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.date_picker
 
 import androidx.compose.runtime.Immutable
-import java.time.LocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 
 @Immutable
 internal sealed class MyDatePickerEvent {
     data object OnNegativeButtonClick : MyDatePickerEvent()
     internal data class OnPositiveButtonClick(
-        val selectedDate: LocalDate,
+        val selectedDate: MyLocalDate,
     ) : MyDatePickerEvent()
 }

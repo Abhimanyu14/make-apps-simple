@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.snackbar.EditTransactionScreenSnackbarType
@@ -38,7 +39,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import java.time.LocalDate
 import java.time.LocalTime
 
 internal class EditTransactionScreenViewModelTest {
@@ -118,10 +118,10 @@ internal class EditTransactionScreenViewModelTest {
             result.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
             result.titleSuggestions.shouldBeEmpty()
             result.currentLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.transactionDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.transactionTime.shouldBe(
                 expected = LocalTime.MIN,
@@ -174,10 +174,10 @@ internal class EditTransactionScreenViewModelTest {
             initialState.transactionTypesForNewTransactionChipUIData.shouldBeEmpty()
             initialState.titleSuggestions.shouldBeEmpty()
             initialState.currentLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             initialState.transactionDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             initialState.transactionTime.shouldBe(
                 expected = LocalTime.MIN,
@@ -244,7 +244,11 @@ internal class EditTransactionScreenViewModelTest {
 //                expected = LocalDate.of(2025, 9, 1),
 //            )
             initialState.transactionDate.shouldBe(
-                expected = LocalDate.of(2024, 5, 20),
+                expected = MyLocalDate.of(
+                    year = 2024,
+                    month = 5,
+                    dayOfMonth = 20,
+                ),
             )
 //            initialState.transactionTime.shouldBe(
 //                expected = LocalTime.of(16, 15, 10)

@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.event
 
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEvent
-import java.time.LocalDate
 import java.time.LocalTime
 
 @Immutable
@@ -69,7 +69,7 @@ internal sealed class AddTransactionScreenUIEvent : ScreenUIEvent {
     ) : AddTransactionScreenUIEvent()
 
     data class OnTransactionDateUpdated(
-        val updatedTransactionDate: LocalDate,
+        val updatedTransactionDate: MyLocalDate,
     ) : AddTransactionScreenUIEvent()
 
     data class OnTransactionTimeUpdated(

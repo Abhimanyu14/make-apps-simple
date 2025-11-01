@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.button.MyTextButton
@@ -43,7 +44,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.text_field.MyReadOnlyTextFieldData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.text_field.MyReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
-import java.time.LocalDate
 
 @Composable
 internal fun AnalysisFilterBottomSheetUI(
@@ -51,11 +51,11 @@ internal fun AnalysisFilterBottomSheetUI(
     data: AnalysisFilterBottomSheetUIData,
     onClearButtonClick: () -> Unit,
     onDateRangeOptionClick: (dateRangeOption: DateRangeOptions) -> Unit,
-    onFromDateSelected: (LocalDate) -> Unit,
+    onFromDateSelected: (MyLocalDate) -> Unit,
     onFromDateTextFieldClick: () -> Unit,
     onNegativeButtonClick: () -> Unit,
     onPositiveButtonClick: () -> Unit,
-    onToDateSelected: (LocalDate) -> Unit,
+    onToDateSelected: (MyLocalDate) -> Unit,
     onToDateTextFieldClick: () -> Unit,
     setFromDatePickerDialogVisible: (Boolean) -> Unit,
     setToDatePickerDialogVisible: (Boolean) -> Unit,

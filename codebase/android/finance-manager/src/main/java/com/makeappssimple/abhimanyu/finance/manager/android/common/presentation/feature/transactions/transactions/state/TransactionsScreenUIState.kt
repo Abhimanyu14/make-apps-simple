@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Stable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
@@ -30,7 +31,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import java.time.LocalDate
 
 @Stable
 internal data class TransactionsScreenUIState(
@@ -48,8 +48,8 @@ internal data class TransactionsScreenUIState(
     val incomeCategories: ImmutableList<Category> = persistentListOf(),
     val investmentCategories: ImmutableList<Category> = persistentListOf(),
     val transactionTypes: ImmutableList<TransactionType> = persistentListOf(),
-    val currentLocalDate: LocalDate = LocalDate.MIN,
-    val oldestTransactionLocalDate: LocalDate = LocalDate.MIN,
+    val currentLocalDate: MyLocalDate = MyLocalDate.MIN,
+    val oldestTransactionLocalDate: MyLocalDate = MyLocalDate.MIN,
     val transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> = emptyMap(),
     val searchTextFieldState: TextFieldState = TextFieldState(),
     val selectedTransactionSortOption: TransactionSortOption = TransactionSortOption.LATEST_FIRST,

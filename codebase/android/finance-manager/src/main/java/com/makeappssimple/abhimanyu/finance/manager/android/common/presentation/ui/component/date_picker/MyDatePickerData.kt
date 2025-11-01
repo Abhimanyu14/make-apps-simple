@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.date_picker
 
 import androidx.compose.runtime.Immutable
-import java.time.LocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 
 @Immutable
 internal data class MyDatePickerData(
     val isVisible: Boolean = false,
-    val endLocalDate: LocalDate? = null,
-    val selectedLocalDate: LocalDate? = null,
-    val startLocalDate: LocalDate? = null,
+    val endLocalDate: MyLocalDate? = null,
+    val selectedLocalDate: MyLocalDate? = null,
+    val startLocalDate: MyLocalDate? = null,
 )

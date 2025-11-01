@@ -18,19 +18,19 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import java.time.LocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 
 @Immutable
 internal data class AnalysisFilterBottomSheetUIData(
     val isFromDatePickerDialogVisible: Boolean,
     val isToDatePickerDialogVisible: Boolean,
     @StringRes val headingTextStringResourceId: Int,
-    val fromDatePickerEndLocalDate: LocalDate,
-    val fromDatePickerSelectedLocalDate: LocalDate,
-    val fromDatePickerStartLocalDate: LocalDate,
-    val toDatePickerEndLocalDate: LocalDate,
-    val toDatePickerSelectedLocalDate: LocalDate,
-    val toDatePickerStartLocalDate: LocalDate,
+    val fromDatePickerEndLocalDate: MyLocalDate,
+    val fromDatePickerSelectedLocalDate: MyLocalDate,
+    val fromDatePickerStartLocalDate: MyLocalDate,
+    val toDatePickerEndLocalDate: MyLocalDate,
+    val toDatePickerSelectedLocalDate: MyLocalDate,
+    val toDatePickerStartLocalDate: MyLocalDate,
     val fromDateText: String,
     val toDateText: String,
 )

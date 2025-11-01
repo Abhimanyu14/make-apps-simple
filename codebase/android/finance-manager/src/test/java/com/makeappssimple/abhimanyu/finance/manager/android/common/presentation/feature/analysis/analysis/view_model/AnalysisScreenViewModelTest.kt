@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.view_model
 
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
@@ -29,7 +30,6 @@ import kotlinx.coroutines.cancel
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.time.LocalDate
 
 internal class AnalysisScreenViewModelTest {
     // region test setup
@@ -73,16 +73,16 @@ internal class AnalysisScreenViewModelTest {
             result.transactionTypesChipUIData.shouldBeEmpty()
             result.selectedTransactionTypeIndex.shouldBeZero()
             result.defaultStartLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.defaultEndLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.startOfCurrentMonthLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
             result.startOfCurrentYearLocalDate.shouldBe(
-                expected = LocalDate.MIN,
+                expected = MyLocalDate.MIN,
             )
         }
     }

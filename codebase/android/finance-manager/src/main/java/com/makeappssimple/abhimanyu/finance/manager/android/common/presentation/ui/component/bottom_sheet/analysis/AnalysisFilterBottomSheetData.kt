@@ -18,15 +18,15 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
-import java.time.LocalDate
 
 @Immutable
 internal data class AnalysisFilterBottomSheetData(
     val selectedFilter: Filter,
     @StringRes val headingTextStringResourceId: Int,
-    val defaultEndLocalDate: LocalDate,
-    val defaultStartLocalDate: LocalDate,
-    val startOfCurrentMonthLocalDate: LocalDate,
-    val startOfCurrentYearLocalDate: LocalDate,
+    val defaultEndLocalDate: MyLocalDate,
+    val defaultStartLocalDate: MyLocalDate,
+    val startOfCurrentMonthLocalDate: MyLocalDate,
+    val startOfCurrentYearLocalDate: MyLocalDate,
 )

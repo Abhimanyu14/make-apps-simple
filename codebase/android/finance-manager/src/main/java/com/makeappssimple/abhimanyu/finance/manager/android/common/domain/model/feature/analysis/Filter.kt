@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-import java.time.LocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 
 internal data class Filter(
     private val selectedExpenseCategoryIndices: List<Int> = emptyList(),
@@ -26,8 +26,8 @@ internal data class Filter(
     private val selectedInvestmentCategoryIndices: List<Int> = emptyList(),
     private val selectedAccountsIndices: List<Int> = emptyList(),
     private val selectedTransactionTypeIndices: List<Int> = emptyList(),
-    val fromLocalDate: LocalDate? = null,
-    val toLocalDate: LocalDate? = null,
+    val fromLocalDate: MyLocalDate? = null,
+    val toLocalDate: MyLocalDate? = null,
 ) {
     internal fun areFiltersSelected(): Boolean {
         return selectedExpenseCategoryIndices.isNotEmpty() ||

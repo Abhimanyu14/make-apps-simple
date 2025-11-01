@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.input.TextFieldValue
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
@@ -29,7 +30,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import java.time.LocalDate
 import java.time.LocalTime
 
 @Stable
@@ -55,8 +55,8 @@ internal data class EditTransactionScreenUIState(
     val transactionForValuesChipUIData: ImmutableList<ChipUIData> = persistentListOf(),
     val transactionTypesForNewTransactionChipUIData: ImmutableList<ChipUIData> = persistentListOf(),
     val titleSuggestions: ImmutableList<String> = persistentListOf(),
-    val currentLocalDate: LocalDate = LocalDate.MIN,
-    val transactionDate: LocalDate = LocalDate.MIN,
+    val currentLocalDate: MyLocalDate = MyLocalDate.MIN,
+    val transactionDate: MyLocalDate = MyLocalDate.MIN,
     val transactionTime: LocalTime = LocalTime.MIN,
     val amountErrorText: String? = null,
     val amount: TextFieldValue = TextFieldValue(),

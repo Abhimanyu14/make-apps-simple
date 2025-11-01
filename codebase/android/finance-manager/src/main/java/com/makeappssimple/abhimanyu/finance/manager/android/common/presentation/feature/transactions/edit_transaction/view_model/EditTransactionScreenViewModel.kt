@@ -27,7 +27,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.filterDigits
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
-import com.makeappssimple.abhimanyu.common.core.extensions.orMin
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
@@ -42,6 +41,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.UpdateTransactionUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -76,7 +77,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
@@ -140,7 +140,7 @@ internal class EditTransactionScreenViewModel(
     private var currentTransactionData: TransactionData? = null
     private var originalTransactionData: TransactionData? = null
     private var selectedTransactionType: TransactionType? = null
-    private var transactionDate: LocalDate = dateTimeKit.getCurrentLocalDate()
+    private var transactionDate: MyLocalDate = dateTimeKit.getCurrentLocalDate()
     private var transactionTime: LocalTime = dateTimeKit.getCurrentLocalTime()
     // endregion
 
@@ -479,7 +479,7 @@ internal class EditTransactionScreenViewModel(
     }
 
     private fun updateTransactionDate(
-        updatedTransactionDate: LocalDate,
+        updatedTransactionDate: MyLocalDate,
         shouldRefresh: Boolean = true,
     ): Job {
         transactionDate = updatedTransactionDate
@@ -597,7 +597,7 @@ internal class EditTransactionScreenViewModel(
         }
         val creationTimestamp = dateTimeKit.getCurrentTimeMillis()
         val transactionTimestamp = LocalDateTime.of(
-            uiState.value.transactionDate,
+            uiState.value.transactionDate.localDate,
             uiState.value.transactionTime,
         ).toEpochMilli()
         val transactionForId =

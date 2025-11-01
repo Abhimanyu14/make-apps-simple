@@ -17,26 +17,25 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
 import java.time.Instant
-import java.time.LocalDate
 import java.time.ZoneId
 
 internal interface DateKit {
-    fun getCurrentLocalDate(): LocalDate
+    fun getCurrentLocalDate(): MyLocalDate
 
     fun getLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): LocalDate
+    ): MyLocalDate
 
     fun getStartOfMonthLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): LocalDate
+    ): MyLocalDate
 
     fun getStartOfYearLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): LocalDate
+    ): MyLocalDate
 
     private fun getCurrentTimeMillis(): Long {
         return Instant.now().toEpochMilli()

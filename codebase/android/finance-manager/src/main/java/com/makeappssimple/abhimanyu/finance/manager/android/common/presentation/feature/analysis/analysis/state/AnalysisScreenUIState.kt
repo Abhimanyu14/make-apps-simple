@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state
 
 import androidx.compose.runtime.Stable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis.Filter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIState
@@ -24,7 +25,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.analysis.AnalysisListItemData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import java.time.LocalDate
 
 @Stable
 internal data class AnalysisScreenUIState(
@@ -35,8 +35,8 @@ internal data class AnalysisScreenUIState(
     val analysisListItemData: ImmutableList<AnalysisListItemData> = persistentListOf(),
     val transactionTypesChipUIData: ImmutableList<ChipUIData> = persistentListOf(),
     val selectedTransactionTypeIndex: Int = 0,
-    val defaultStartLocalDate: LocalDate = LocalDate.MIN,
-    val defaultEndLocalDate: LocalDate = LocalDate.MIN,
-    val startOfCurrentMonthLocalDate: LocalDate = LocalDate.MIN,
-    val startOfCurrentYearLocalDate: LocalDate = LocalDate.MIN,
+    val defaultStartLocalDate: MyLocalDate = MyLocalDate.MIN,
+    val defaultEndLocalDate: MyLocalDate = MyLocalDate.MIN,
+    val startOfCurrentMonthLocalDate: MyLocalDate = MyLocalDate.MIN,
+    val startOfCurrentYearLocalDate: MyLocalDate = MyLocalDate.MIN,
 ) : ScreenUIState
