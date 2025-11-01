@@ -34,14 +34,7 @@ internal class MyLocalTime(
             .ofPattern("hh:mm a")
             .withZone(zoneId)
             .format(localTime)
-            .replace(
-                "am",
-                "AM"
-            )
-            .replace(
-                "pm",
-                "PM"
-            )
+            .uppercase()
     }
 
     companion object {
