@@ -26,23 +26,24 @@ import java.util.Currency
 
 internal object CurrencySerializer : KSerializer<Currency> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "Currency",
-        kind = STRING
+        serialName = "CurrencySerializer",
+        kind = STRING,
     )
 
     override fun deserialize(
         decoder: Decoder,
     ): Currency {
-        return Currency.getInstance(decoder.decodeString())
+        return Currency.getInstance(
+            decoder.decodeString(),
+        )
     }
 
     override fun serialize(
         encoder: Encoder,
         value: Currency,
     ) {
-        val encodedValue = value.currencyCode
         encoder.encodeString(
-            value = encodedValue,
+            value = value.currencyCode,
         )
     }
 }

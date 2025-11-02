@@ -21,7 +21,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.data.databas
 import androidx.room.ColumnInfo
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.CurrencyCodeConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.serializer.CurrencySerializer
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
@@ -32,9 +31,8 @@ import java.util.Currency
 internal data class AmountEntity(
     @ColumnInfo(name = "currency")
     @EncodeDefault
-    @Serializable(CurrencySerializer::class)
     @SerialName(value = "currency")
-    val currency: Currency = Currency.getInstance(CurrencyCodeConstants.INR),
+    val currency: String = CurrencyCodeConstants.INR,
 
     @ColumnInfo(name = "value")
     @EncodeDefault
@@ -62,7 +60,7 @@ internal operator fun AmountEntity.minus(
 
 internal fun AmountEntity.asExternalModel(): Amount {
     return Amount(
-        currency = currency,
+        currency = Currency.getInstance(currency),
         value = value,
     )
 }

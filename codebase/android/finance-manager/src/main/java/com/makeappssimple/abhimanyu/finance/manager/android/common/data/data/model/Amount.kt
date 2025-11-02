@@ -21,7 +21,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 
 internal fun Amount.asEntity(): AmountEntity {
     return AmountEntity(
-        currency = currency,
+        currency = currency.currencyCode,
         value = value,
     )
 }
