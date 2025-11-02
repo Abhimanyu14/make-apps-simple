@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.currency.formattedCurrencyValue
 import kotlin.math.abs
 
 internal fun Amount.toUnsignedString(): String {
@@ -31,11 +30,9 @@ internal fun Amount.toSignedString(
     isPositive: Boolean = false,
     isNegative: Boolean = false,
 ): String {
-    val formattedValue = formattedCurrencyValue(
-        value = abs(
-            n = value,
-        ),
-    )
+    val formattedValue = abs(
+        n = value,
+    ).toString().toIndianCurrencyFormat()
     if (isPositive) {
         return "+ ${currency.symbol}$formattedValue"
     }
@@ -46,14 +43,27 @@ internal fun Amount.toSignedString(
 }
 
 internal fun Amount.toDefaultString(): String {
-    val formattedValue = formattedCurrencyValue(
-        value = abs(
-            n = value,
-        ),
-    )
+    val formattedValue = abs(
+        n = value,
+    ).toString().toIndianCurrencyFormat()
     return if (value >= 0) {
         "${currency.symbol}$formattedValue"
     } else {
         "- ${currency.symbol}$formattedValue"
+    }
+}
+
+// TODO(Abhi): Extend for currencies other than INR
+private fun String.toIndianCurrencyFormat(): String {
+    return if (length > 3) {
+        val regex = "(\\d+?)(?=(\\d\\d)+(\\d)(?!\\d))(\\.\\d+)?"
+        replace(
+            regex = Regex(
+                pattern = regex,
+            ),
+            replacement = "$1,",
+        )
+    } else {
+        this
     }
 }

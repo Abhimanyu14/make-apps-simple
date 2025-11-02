@@ -51,7 +51,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.event.EditTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.EditTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountCommaVisualTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.MyTimePicker
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.MyTimePickerData
@@ -337,7 +336,6 @@ internal fun EditTransactionScreenUI(
                         null
                     },
                     isError = uiState.amountErrorText.isNotNull(),
-                    visualTransformation = AmountCommaVisualTransformation(),
                     keyboardActions = KeyboardActions(
                         onDone = {
                             clearFocus()
