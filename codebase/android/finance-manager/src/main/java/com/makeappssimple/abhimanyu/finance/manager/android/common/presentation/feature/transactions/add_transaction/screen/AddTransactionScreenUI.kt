@@ -52,7 +52,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.snackbar.AddTransactionScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.AddTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountCommaVisualTransformation
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountInputTransformation
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountOutputTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.MyTimePicker
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.MyTimePickerData
@@ -381,7 +382,8 @@ internal fun AddTransactionScreenUI(
                         null
                     },
                     isError = uiState.amountErrorText.isNotNull(),
-                    visualTransformation = AmountCommaVisualTransformation(),
+                    inputTransformation = AmountInputTransformation(),
+                    outputTransformation = AmountOutputTransformation(),
                     keyboardActions = {
                         clearFocus()
                     },

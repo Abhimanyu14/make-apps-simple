@@ -48,7 +48,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.event.EditAccountScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountCommaVisualTransformation
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountInputTransformation
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.AmountOutputTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.save_button.SaveButton
@@ -240,7 +241,8 @@ internal fun EditAccountScreenUI(
                         textFieldState = uiState.balanceAmountValueTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_balance_amount_value,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_balance_amount_value,
-                        visualTransformation = AmountCommaVisualTransformation(),
+                        inputTransformation = AmountInputTransformation(),
+                        outputTransformation = AmountOutputTransformation(),
                         keyboardActions = {
                             state.focusManager.clearFocus()
                         },
@@ -271,7 +273,8 @@ internal fun EditAccountScreenUI(
                         textFieldState = uiState.minimumBalanceAmountValueTextFieldState,
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value,
                         trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value,
-                        visualTransformation = AmountCommaVisualTransformation(),
+                        inputTransformation = AmountInputTransformation(),
+                        outputTransformation = AmountOutputTransformation(),
                         keyboardActions = {
                             state.focusManager.clearFocus()
                         },

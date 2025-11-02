@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.annotation.StringRes
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.KeyboardActionHandler
+import androidx.compose.foundation.text.input.OutputTransformation
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.input.TextFieldValue
@@ -48,6 +50,7 @@ internal data class MyOutlinedTextFieldDataV2(
     val keyboardActions: KeyboardActionHandler? = null,
     val keyboardOptions: KeyboardOptions = KeyboardOptions(),
     val textFieldState: TextFieldState = TextFieldState(),
-    val visualTransformation: VisualTransformation = VisualTransformation.None,
+    val inputTransformation: InputTransformation? = null,
+    val outputTransformation: OutputTransformation? = null,
     val supportingText: NullableComposableContent = null,
 )
