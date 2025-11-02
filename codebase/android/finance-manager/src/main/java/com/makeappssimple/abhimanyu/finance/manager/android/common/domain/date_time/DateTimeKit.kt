@@ -19,7 +19,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_
 import java.time.ZoneId
 
 internal interface DateTimeKit {
-    fun getCurrentFormattedDateAndTime(): String
+    fun getCurrentFormattedDateAndTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): String
 
     fun getCurrentTimeMillis(): Long
 
@@ -68,6 +71,7 @@ internal interface DateTimeKit {
     fun getTimestamp(
         date: MyLocalDate = getLocalDate(),
         time: MyLocalTime = getLocalTime(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getStartOfDayTimestamp(
@@ -111,26 +115,32 @@ internal interface DateTimeKit {
 
     fun getNextDayTimestamp(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getNextMonthTimestamp(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getNextYearTimestamp(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getPreviousDayTimestamp(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getPreviousMonthTimestamp(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getPreviousYearTimestamp(
         timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
     fun getLocalDate(

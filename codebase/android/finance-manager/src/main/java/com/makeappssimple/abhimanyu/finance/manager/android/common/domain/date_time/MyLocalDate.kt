@@ -28,7 +28,7 @@ internal class MyLocalDate(
 ) : Comparable<MyLocalDate> {
     internal constructor(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: ZoneId = DEFAULT_ZONE_ID,
     ) : this(
         localDate = Instant
             .ofEpochMilli(timestamp)
@@ -64,7 +64,7 @@ internal class MyLocalDate(
     }
 
     fun toStartOfDayEpochMilli(
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: ZoneId = DEFAULT_ZONE_ID,
     ): Long {
         return this.localDate
             .atStartOfDay(zoneId)
@@ -90,7 +90,7 @@ internal class MyLocalDate(
      * Sample format - 30 Mar, 2023.
      */
     fun formattedDate(
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: ZoneId = DEFAULT_ZONE_ID,
     ): String {
         return DateTimeFormatter
             .ofPattern("dd MMM, yyyy")
@@ -115,6 +115,10 @@ internal class MyLocalDate(
     }
 
     companion object {
+        private val DEFAULT_ZONE_ID: ZoneId by lazy {
+            ZoneId.systemDefault()
+        }
+
         val MIN: MyLocalDate = MyLocalDate(
             localDate = LocalDate.MIN,
         )

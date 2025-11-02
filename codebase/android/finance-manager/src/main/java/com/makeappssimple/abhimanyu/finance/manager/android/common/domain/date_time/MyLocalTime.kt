@@ -27,7 +27,7 @@ internal class MyLocalTime(
      * Sample format - 08:24 AM.
      */
     fun formattedTime(
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: ZoneId = DEFAULT_ZONE_ID,
     ): String {
         return DateTimeFormatter
             .ofPattern("hh:mm a")
@@ -37,6 +37,10 @@ internal class MyLocalTime(
     }
 
     companion object {
+        private val DEFAULT_ZONE_ID: ZoneId by lazy {
+            ZoneId.systemDefault()
+        }
+
         val MAX: MyLocalTime = MyLocalTime(
             localTime = LocalTime.MAX,
         )
