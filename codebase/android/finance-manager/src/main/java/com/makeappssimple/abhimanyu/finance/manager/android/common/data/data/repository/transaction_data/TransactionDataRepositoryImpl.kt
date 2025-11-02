@@ -33,6 +33,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -96,6 +97,7 @@ internal class TransactionDataRepositoryImpl(
 
     override fun getAllTransactionDataFlow(
         transactionFilter: TransactionFilter,
+        transactionSortOption: TransactionSortOption,
     ): Flow<ImmutableList<TransactionData>> {
         val areAccountFiltersSelected =
             transactionFilter.selectedAccountIds.isNotEmpty()
@@ -136,6 +138,7 @@ internal class TransactionDataRepositoryImpl(
                 toTimestamp = toTimestamp,
                 // TODO(Abhi): Main the search logic in viewmodel for now
                 searchText = "", // transactionFilter.searchText,
+                transactionSortOption = transactionSortOption,
             )
             .catch { throwable: Throwable ->
                 if (throwable is SQLiteException) {

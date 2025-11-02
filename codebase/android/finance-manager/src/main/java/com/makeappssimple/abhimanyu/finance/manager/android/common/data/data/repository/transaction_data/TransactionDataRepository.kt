@@ -22,6 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
@@ -36,6 +37,7 @@ internal interface TransactionDataRepository {
 
     fun getAllTransactionDataFlow(
         transactionFilter: TransactionFilter,
+        transactionSortOption: TransactionSortOption,
     ): Flow<ImmutableList<TransactionData>>
 
     fun getCategoriesInTransactionsFlow(): Flow<List<Category>>

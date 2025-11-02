@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -64,6 +65,7 @@ internal class FakeTransactionDataDaoImpl(
         fromTimestamp: Long?,
         toTimestamp: Long?,
         searchText: String,
+        transactionSortOption: TransactionSortOption,
     ): Flow<List<TransactionDataEntity>> {
         return transactionDao.getAllTransactionsFlow().map { transactions ->
             getSortedTransactionDataEntity(

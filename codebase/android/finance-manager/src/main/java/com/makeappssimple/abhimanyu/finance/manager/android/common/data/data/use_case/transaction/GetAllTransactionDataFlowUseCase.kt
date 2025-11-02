@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.us
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_data.TransactionDataRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
@@ -27,9 +28,11 @@ internal class GetAllTransactionDataFlowUseCase(
 ) {
     operator fun invoke(
         transactionFilter: TransactionFilter,
+        transactionSortOption: TransactionSortOption,
     ): Flow<ImmutableList<TransactionData>> {
         return transactionDataRepository.getAllTransactionDataFlow(
             transactionFilter = transactionFilter,
+            transactionSortOption = transactionSortOption,
         )
     }
 }

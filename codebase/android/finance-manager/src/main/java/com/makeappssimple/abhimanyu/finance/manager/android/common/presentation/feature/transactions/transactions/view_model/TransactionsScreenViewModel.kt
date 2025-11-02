@@ -219,27 +219,6 @@ internal class TransactionsScreenViewModel(
                         transactionData = transactionData,
                     )
                 }
-                .sortedWith(
-                    comparator = compareBy { transactionData ->
-                        when (selectedTransactionSortOption) {
-                            TransactionSortOption.AMOUNT_ASC -> {
-                                transactionData.transaction.amount.value
-                            }
-
-                            TransactionSortOption.AMOUNT_DESC -> {
-                                -1 * transactionData.transaction.amount.value
-                            }
-
-                            TransactionSortOption.LATEST_FIRST -> {
-                                -1 * transactionData.transaction.transactionTimestamp
-                            }
-
-                            TransactionSortOption.OLDEST_FIRST -> {
-                                transactionData.transaction.transactionTimestamp
-                            }
-                        }
-                    },
-                )
                 .groupBy {
                     if (selectedTransactionSortOption == TransactionSortOption.LATEST_FIRST ||
                         selectedTransactionSortOption == TransactionSortOption.OLDEST_FIRST
@@ -322,6 +301,7 @@ internal class TransactionsScreenViewModel(
         ) {
             getAllTransactionDataFlowUseCase(
                 transactionFilter = selectedTransactionFilter,
+                transactionSortOption = selectedTransactionSortOption,
             ).collectLatest { updatedAllTransactionData ->
                 allTransactionData = updatedAllTransactionData
                 refreshUiState()
@@ -564,6 +544,7 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionSortOption = updatedSelectedTransactionSortOption
+        observeForAllTransactionData()
         return if (shouldRefresh) {
             coroutineScope.launch {
                 refreshUiState()

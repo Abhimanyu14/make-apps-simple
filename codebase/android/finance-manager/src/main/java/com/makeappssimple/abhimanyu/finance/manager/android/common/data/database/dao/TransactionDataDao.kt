@@ -23,6 +23,7 @@ import androidx.room.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionDataEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.coroutines.flow.Flow
 
@@ -117,7 +118,13 @@ internal interface TransactionDataDao {
                 OR
                 transaction_timestamp BETWEEN :fromTimestamp AND :toTimestamp
             )
-            ORDER BY transaction_timestamp DESC
+            ORDER BY
+            CASE
+                WHEN :transactionSortOption = 'AMOUNT_ASC' THEN CAST(json_extract(amount, '$.value') AS INTEGER)
+                WHEN :transactionSortOption = 'AMOUNT_DESC' THEN -CAST(json_extract(amount, '$.value') AS INTEGER)
+                WHEN :transactionSortOption = 'LATEST_FIRST' THEN -transaction_timestamp
+                WHEN :transactionSortOption = 'OLDEST_FIRST' THEN transaction_timestamp
+            END
         """
     )
     @Transaction
@@ -134,6 +141,7 @@ internal interface TransactionDataDao {
         fromTimestamp: Long? = null,
         toTimestamp: Long? = null,
         searchText: String = "",
+        transactionSortOption: TransactionSortOption = TransactionSortOption.LATEST_FIRST,
     ): Flow<List<TransactionDataEntity>>
 
     /**
