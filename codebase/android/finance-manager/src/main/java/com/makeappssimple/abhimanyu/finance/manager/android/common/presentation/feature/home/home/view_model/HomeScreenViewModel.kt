@@ -21,8 +21,6 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
-import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsTotalBalanceAmountValueUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsTotalMinimumBalanceAmountValueUseCase
@@ -55,7 +53,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
-import java.time.Instant
 import kotlin.math.abs
 
 private const val DEFAULT_OVERVIEW_TAB_SELECTION = 1
@@ -206,27 +203,21 @@ internal class HomeScreenViewModel(
             OverviewCardAction.NEXT -> {
                 when (overviewTabOption) {
                     OverviewTabOption.DAY -> {
-                        selectedTimestamp =
-                            Instant.ofEpochMilli(selectedTimestamp)
-                                .toZonedDateTime()
-                                .plusDays(1)
-                                .toEpochMilli()
+                        selectedTimestamp = dateTimeKit.getNextDayTimestamp(
+                            timestamp = selectedTimestamp,
+                        )
                     }
 
                     OverviewTabOption.MONTH -> {
-                        selectedTimestamp =
-                            Instant.ofEpochMilli(selectedTimestamp)
-                                .toZonedDateTime()
-                                .plusMonths(1)
-                                .toEpochMilli()
+                        selectedTimestamp = dateTimeKit.getNextMonthTimestamp(
+                            timestamp = selectedTimestamp,
+                        )
                     }
 
                     OverviewTabOption.YEAR -> {
-                        selectedTimestamp =
-                            Instant.ofEpochMilli(selectedTimestamp)
-                                .toZonedDateTime()
-                                .plusYears(1)
-                                .toEpochMilli()
+                        selectedTimestamp = dateTimeKit.getNextYearTimestamp(
+                            timestamp = selectedTimestamp,
+                        )
                     }
                 }
             }
@@ -234,27 +225,23 @@ internal class HomeScreenViewModel(
             OverviewCardAction.PREV -> {
                 when (overviewTabOption) {
                     OverviewTabOption.DAY -> {
-                        selectedTimestamp =
-                            Instant.ofEpochMilli(selectedTimestamp)
-                                .toZonedDateTime()
-                                .minusDays(1)
-                                .toEpochMilli()
+                        selectedTimestamp = dateTimeKit.getPreviousDayTimestamp(
+                            timestamp = selectedTimestamp,
+                        )
                     }
 
                     OverviewTabOption.MONTH -> {
                         selectedTimestamp =
-                            Instant.ofEpochMilli(selectedTimestamp)
-                                .toZonedDateTime()
-                                .minusMonths(1)
-                                .toEpochMilli()
+                            dateTimeKit.getPreviousMonthTimestamp(
+                                timestamp = selectedTimestamp,
+                            )
                     }
 
                     OverviewTabOption.YEAR -> {
                         selectedTimestamp =
-                            Instant.ofEpochMilli(selectedTimestamp)
-                                .toZonedDateTime()
-                                .minusYears(1)
-                                .toEpochMilli()
+                            dateTimeKit.getPreviousYearTimestamp(
+                                timestamp = selectedTimestamp,
+                            )
                     }
                 }
             }

@@ -109,6 +109,30 @@ internal interface DateTimeKit {
 
     fun getCurrentLocalDate(): MyLocalDate
 
+    fun getNextDayTimestamp(
+        timestamp: Long,
+    ): Long
+
+    fun getNextMonthTimestamp(
+        timestamp: Long,
+    ): Long
+
+    fun getNextYearTimestamp(
+        timestamp: Long,
+    ): Long
+
+    fun getPreviousDayTimestamp(
+        timestamp: Long,
+    ): Long
+
+    fun getPreviousMonthTimestamp(
+        timestamp: Long,
+    ): Long
+
+    fun getPreviousYearTimestamp(
+        timestamp: Long,
+    ): Long
+
     fun getLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),

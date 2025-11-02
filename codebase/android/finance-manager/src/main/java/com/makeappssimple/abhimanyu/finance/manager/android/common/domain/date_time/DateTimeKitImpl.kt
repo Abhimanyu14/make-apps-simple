@@ -42,6 +42,72 @@ internal class DateTimeKitImpl() : DateTimeKit {
         return MyLocalDate.now()
     }
 
+    override fun getNextDayTimestamp(
+        timestamp: Long,
+    ): Long {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .plusDays(1)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    override fun getNextMonthTimestamp(
+        timestamp: Long,
+    ): Long {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .plusMonths(1)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    override fun getNextYearTimestamp(
+        timestamp: Long,
+    ): Long {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .plusYears(1)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    override fun getPreviousDayTimestamp(
+        timestamp: Long,
+    ): Long {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .minusDays(1)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    override fun getPreviousMonthTimestamp(
+        timestamp: Long,
+    ): Long {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .minusMonths(1)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    override fun getPreviousYearTimestamp(
+        timestamp: Long,
+    ): Long {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .minusYears(1)
+            .toInstant()
+            .toEpochMilli()
+    }
+
     override fun getCurrentLocalTime(): MyLocalTime {
         return MyLocalTime.now()
     }
