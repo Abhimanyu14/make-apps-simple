@@ -359,6 +359,15 @@ internal fun getTimestamp(
         .toEpochMilli()
 }
 
+private fun MyLocalDateTime.toEpochMilli(
+    zoneId: ZoneId = getSystemDefaultZoneId(),
+): Long {
+    return this.localDateTime
+        .atZone(zoneId)
+        .toInstant()
+        .toEpochMilli()
+}
+
 internal fun getSystemDefaultZoneId(): ZoneId {
     return ZoneId.systemDefault()
 }

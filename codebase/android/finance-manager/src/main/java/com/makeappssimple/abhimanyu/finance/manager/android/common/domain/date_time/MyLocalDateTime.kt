@@ -17,17 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
 import java.time.LocalDateTime
-import java.time.ZoneId
 
 internal class MyLocalDateTime(
     val localDateTime: LocalDateTime,
 )
-
-internal fun MyLocalDateTime.toEpochMilli(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Long {
-    return this.localDateTime
-        .atZone(zoneId)
-        .toInstant()
-        .toEpochMilli()
-}

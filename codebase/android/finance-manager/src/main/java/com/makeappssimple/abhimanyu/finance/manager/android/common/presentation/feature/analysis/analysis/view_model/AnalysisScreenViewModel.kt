@@ -26,7 +26,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.toEpochMilli
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionDataMappedByCategory
@@ -209,12 +208,9 @@ internal class AnalysisScreenViewModel(
         if (startLocalDate.isNull() || endLocalDate.isNull()) {
             return true
         }
-        val fromDateStartOfDayTimestamp = startLocalDate
-            .atStartOfDay()
-            .toEpochMilli()
-        val toDateStartOfDayTimestamp = endLocalDate
-            .atEndOfDay()
-            .toEpochMilli()
+        val fromDateStartOfDayTimestamp =
+            startLocalDate.toStartOfDayEpochMilli()
+        val toDateStartOfDayTimestamp = endLocalDate.toStartOfDayEpochMilli()
         return transactionData.transaction.transactionTimestamp in fromDateStartOfDayTimestamp until toDateStartOfDayTimestamp
     }
     // endregion

@@ -52,6 +52,15 @@ internal class MyLocalDate(
         )
     }
 
+    fun toStartOfDayEpochMilli(
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long {
+        return this.localDate
+            .atStartOfDay(zoneId)
+            .toInstant()
+            .toEpochMilli()
+    }
+
     fun atStartOfDay(
         zone: ZoneId,
     ): ZonedDateTime {
