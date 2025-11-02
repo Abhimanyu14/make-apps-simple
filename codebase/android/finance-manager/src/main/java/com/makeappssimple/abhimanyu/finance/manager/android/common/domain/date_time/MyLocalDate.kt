@@ -121,12 +121,6 @@ internal class MyLocalDate(
     }
 }
 
-internal fun ZonedDateTime.toMyLocalDate(): MyLocalDate {
-    return MyLocalDate(
-        localDate = this.toLocalDate(),
-    )
-}
-
 internal fun MyLocalDate?.orMin(): MyLocalDate {
     return this ?: MyLocalDate.MIN
 }

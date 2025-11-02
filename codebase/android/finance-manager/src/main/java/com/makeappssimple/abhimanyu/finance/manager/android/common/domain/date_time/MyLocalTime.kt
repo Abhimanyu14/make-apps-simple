@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_
 
 import java.time.LocalTime
 import java.time.ZoneId
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 internal class MyLocalTime(
@@ -64,10 +63,4 @@ internal class MyLocalTime(
             )
         }
     }
-}
-
-internal fun ZonedDateTime.toMyLocalTime(): MyLocalTime {
-    return MyLocalTime(
-        localTime = this.toLocalTime(),
-    )
 }

@@ -27,6 +27,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
 import java.time.Instant
 import java.time.YearMonth
 import java.time.ZoneId
+import java.time.ZonedDateTime
 
 private object DateTimeUtilImplConstants {
     const val LAST_MONTH_OF_YEAR = 12
@@ -360,4 +361,16 @@ internal fun getTimestamp(
 
 internal fun getSystemDefaultZoneId(): ZoneId {
     return ZoneId.systemDefault()
+}
+
+private fun ZonedDateTime.toMyLocalDate(): MyLocalDate {
+    return MyLocalDate(
+        localDate = this.toLocalDate(),
+    )
+}
+
+private fun ZonedDateTime.toMyLocalTime(): MyLocalTime {
+    return MyLocalTime(
+        localTime = this.toLocalTime(),
+    )
 }
