@@ -68,7 +68,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -95,10 +94,6 @@ internal class TransactionsScreenViewModel(
     private var isInSelectionMode: Boolean = false
     private var isLoading: Boolean = true
     private var selectedTransactionFilter = TransactionFilter()
-    private val transactionFilter: MutableStateFlow<TransactionFilter> =
-        MutableStateFlow(
-            value = TransactionFilter(),
-        )
     private var allTransactionData: ImmutableList<TransactionData> =
         persistentListOf()
     private var allTransactionForValues: ImmutableList<TransactionFor> =
@@ -124,6 +119,7 @@ internal class TransactionsScreenViewModel(
         TransactionsScreenBottomSheetType.None
     private var screenSnackbarType: TransactionsScreenSnackbarType =
         TransactionsScreenSnackbarType.None
+    private var allTransactionDataObserverJob: Job? = null
     // endregion
 
     // region uiState
@@ -320,19 +316,16 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun observeForAllTransactionData() {
-        coroutineScope.launch(
+        allTransactionDataObserverJob?.cancel()
+        allTransactionDataObserverJob = coroutineScope.launch(
             context = dispatcherProvider.default,
         ) {
-            transactionFilter
-                .flatMapLatest { updatedTransactionFilter ->
-                    getAllTransactionDataFlowUseCase(
-                        transactionFilter = updatedTransactionFilter,
-                    )
-                }
-                .collectLatest { updatedAllTransactionData ->
-                    allTransactionData = updatedAllTransactionData
-                    refreshUiState()
-                }
+            getAllTransactionDataFlowUseCase(
+                transactionFilter = selectedTransactionFilter,
+            ).collectLatest { updatedAllTransactionData ->
+                allTransactionData = updatedAllTransactionData
+                refreshUiState()
+            }
         }
     }
 
@@ -556,9 +549,7 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionFilter = updatedSelectedTransactionFilter
-        transactionFilter.update {
-            updatedSelectedTransactionFilter
-        }
+        observeForAllTransactionData()
         return if (shouldRefresh) {
             coroutineScope.launch {
                 refreshUiState()
