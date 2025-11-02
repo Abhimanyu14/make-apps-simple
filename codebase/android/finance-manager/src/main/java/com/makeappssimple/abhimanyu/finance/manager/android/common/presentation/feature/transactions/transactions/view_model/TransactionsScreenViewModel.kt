@@ -376,11 +376,11 @@ internal class TransactionsScreenViewModel(
                 )
                 .distinctUntilChanged()
                 .collect { updatedSearchText ->
-                    transactionFilter.update {
-                        it.copy(
+                    updateSelectedTransactionFilter(
+                        updatedSelectedTransactionFilter = selectedTransactionFilter.copy(
                             searchText = updatedSearchText,
-                        )
-                    }
+                        ),
+                    )
                 }
         }
     }
@@ -556,17 +556,8 @@ internal class TransactionsScreenViewModel(
         shouldRefresh: Boolean = true,
     ): Job {
         selectedTransactionFilter = updatedSelectedTransactionFilter
-        transactionFilter.update { currentTransactionFilter ->
-            currentTransactionFilter.copy(
-                selectedAccountIds = updatedSelectedTransactionFilter.selectedAccountIds,
-                selectedExpenseCategoryIds = updatedSelectedTransactionFilter.selectedExpenseCategoryIds,
-                selectedIncomeCategoryIds = updatedSelectedTransactionFilter.selectedIncomeCategoryIds,
-                selectedInvestmentCategoryIds = updatedSelectedTransactionFilter.selectedInvestmentCategoryIds,
-                selectedTransactionForIds = updatedSelectedTransactionFilter.selectedTransactionForIds,
-                selectedTransactionTypes = updatedSelectedTransactionFilter.selectedTransactionTypes,
-                fromTimestamp = updatedSelectedTransactionFilter.fromTimestamp,
-                toTimestamp = updatedSelectedTransactionFilter.toTimestamp,
-            )
+        transactionFilter.update {
+            updatedSelectedTransactionFilter
         }
         return if (shouldRefresh) {
             coroutineScope.launch {
