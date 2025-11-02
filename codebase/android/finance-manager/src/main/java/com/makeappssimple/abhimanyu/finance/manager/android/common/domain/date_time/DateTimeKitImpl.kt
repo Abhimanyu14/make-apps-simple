@@ -402,50 +402,29 @@ internal class DateTimeKitImpl() : DateTimeKit {
     private fun getCurrentInstant(): Instant {
         return Instant.now()
     }
-}
 
-internal fun getLocalDate(
-    timestamp: Long,
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): MyLocalDate {
-    return Instant
-        .ofEpochMilli(timestamp)
-        .toZonedDateTime(
-            zoneId = zoneId,
+    private fun MyLocalDateTime.toEpochMilli(
+        zoneId: ZoneId = com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getSystemDefaultZoneId(),
+    ): Long {
+        return this.localDateTime
+            .atZone(zoneId)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    private fun ZonedDateTime.toMyLocalDate(): MyLocalDate {
+        return MyLocalDate(
+            localDate = this.toLocalDate(),
         )
-        .toMyLocalDate()
-}
+    }
 
-internal fun getTimestamp(
-    localDate: MyLocalDate,
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Long {
-    return localDate
-        .atStartOfDay(zoneId)
-        .toEpochMilli()
-}
-
-private fun MyLocalDateTime.toEpochMilli(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Long {
-    return this.localDateTime
-        .atZone(zoneId)
-        .toInstant()
-        .toEpochMilli()
+    private fun ZonedDateTime.toMyLocalTime(): MyLocalTime {
+        return MyLocalTime(
+            localTime = this.toLocalTime(),
+        )
+    }
 }
 
 internal fun getSystemDefaultZoneId(): ZoneId {
     return ZoneId.systemDefault()
-}
-
-private fun ZonedDateTime.toMyLocalDate(): MyLocalDate {
-    return MyLocalDate(
-        localDate = this.toLocalDate(),
-    )
-}
-
-private fun ZonedDateTime.toMyLocalTime(): MyLocalTime {
-    return MyLocalTime(
-        localTime = this.toLocalTime(),
-    )
 }

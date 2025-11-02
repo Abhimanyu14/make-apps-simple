@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
 
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -25,6 +26,16 @@ import java.time.format.DateTimeFormatter
 internal class MyLocalDate(
     val localDate: LocalDate,
 ) : Comparable<MyLocalDate> {
+    internal constructor(
+        timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ) : this(
+        localDate = Instant
+            .ofEpochMilli(timestamp)
+            .atZone(zoneId)
+            .toLocalDate(),
+    )
+
     val year: Int
         get() = localDate.year
 

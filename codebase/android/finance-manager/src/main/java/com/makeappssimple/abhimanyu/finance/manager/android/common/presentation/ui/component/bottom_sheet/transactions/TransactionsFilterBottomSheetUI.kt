@@ -48,8 +48,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.addIfDoesNotContainIt
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.getTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
@@ -161,7 +159,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     var fromDate by remember {
         mutableStateOf(
             value = selectedTransactionFilter.fromTimestamp?.let { fromTimestamp ->
-                getLocalDate(
+                MyLocalDate(
                     timestamp = fromTimestamp,
                 )
             } ?: defaultMinDate,
@@ -170,7 +168,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     var toDate by remember {
         mutableStateOf(
             value = selectedTransactionFilter.toTimestamp?.let { toTimestamp ->
-                getLocalDate(
+                MyLocalDate(
                     timestamp = toTimestamp,
                 )
             } ?: defaultMaxDate,
@@ -459,15 +457,11 @@ internal fun TransactionsFiltersBottomSheetUI(
                             selectedAccountIds = selectedAccountsIds,
                             selectedTransactionForIds = selectedTransactionForValuesIds,
                             selectedTransactionTypes = selectedTransactionTypes,
-                            fromTimestamp = getTimestamp(
-                                localDate = fromDate,
-                            ),
+                            fromTimestamp = fromDate.toStartOfDayEpochMilli(),
                             toTimestamp = if (isDateFilterCleared) {
                                 null
                             } else {
-                                getTimestamp(
-                                    localDate = toDate,
-                                )
+                                toDate.toStartOfDayEpochMilli()
                             },
                         )
                     )
