@@ -16,8 +16,6 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-
 internal enum class TransactionSortOption(
     val title: String,
 ) {
@@ -33,12 +31,4 @@ internal enum class TransactionSortOption(
     OLDEST_FIRST(
         title = "Oldest First",
     ),
-}
-
-internal fun TransactionSortOption?.orDefault(): TransactionSortOption {
-    return if (this.isNull()) {
-        TransactionSortOption.LATEST_FIRST
-    } else {
-        this
-    }
 }

@@ -48,7 +48,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.areFiltersSelected
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orDefault
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIState
@@ -152,7 +151,7 @@ internal class TransactionsScreenViewModel(
             updateIsInSelectionMode = ::updateIsInSelectionMode,
             updateScreenBottomSheetType = ::updateScreenBottomSheetType,
             updateSearchText = ::updateSearchText,
-            updateSelectedTransactionFilter = ::updateSelectedFilter,
+            updateSelectedTransactionFilter = ::updateSelectedTransactionFilter,
             updateSelectedTransactionSortOption = ::updateSelectedTransactionSortOption,
             updateTransactionForValuesInTransactions = ::updateTransactionForValuesInTransactions,
         )
@@ -206,7 +205,7 @@ internal class TransactionsScreenViewModel(
                 oldestTransactionLocalDate = oldestTransactionLocalDate.orMin(),
                 transactionDetailsListItemViewData = transactionDetailsListItemViewData,
                 searchTextFieldState = searchTextFieldState,
-                selectedTransactionSortOption = selectedTransactionSortOption.orDefault(),
+                selectedTransactionSortOption = selectedTransactionSortOption,
                 screenBottomSheetType = screenBottomSheetType,
                 screenSnackbarType = screenSnackbarType,
             )
@@ -552,7 +551,7 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    private fun updateSelectedFilter(
+    private fun updateSelectedTransactionFilter(
         updatedSelectedTransactionFilter: TransactionFilter,
         shouldRefresh: Boolean = true,
     ): Job {
