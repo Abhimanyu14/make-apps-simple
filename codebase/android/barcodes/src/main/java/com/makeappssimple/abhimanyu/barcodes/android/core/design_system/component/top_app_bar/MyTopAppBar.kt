@@ -34,7 +34,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.COM
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.COMPONENT_MY_TOP_APP_BAR_NAVIGATION_BUTTON
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.COMPONENT_MY_TOP_APP_BAR_TITLE_TEXT
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.myicon.MyIcon
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull

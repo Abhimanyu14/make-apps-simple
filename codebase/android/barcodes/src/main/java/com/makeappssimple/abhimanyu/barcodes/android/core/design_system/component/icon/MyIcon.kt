@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.myicon
+package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.Icon

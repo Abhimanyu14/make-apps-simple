@@ -49,7 +49,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.MyDialogEvent
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dropdown.MyDropdownMenu
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dropdown.MyDropdownMenuItem
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.myicon.MyIcon
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.image.MyImage
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar

@@ -41,7 +41,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCR
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyElevatedButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.myicon.MyIcon
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text_field.MyOutlinedTextField
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
