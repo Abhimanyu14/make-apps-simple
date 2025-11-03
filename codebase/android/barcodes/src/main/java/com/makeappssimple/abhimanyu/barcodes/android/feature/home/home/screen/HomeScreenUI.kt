@@ -42,7 +42,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCR
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_HOME
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyFloatingActionButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.divider.MyHorizontalDivider
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.myicon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemData
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemDataEvent
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemDataEventDataAndEventHandler

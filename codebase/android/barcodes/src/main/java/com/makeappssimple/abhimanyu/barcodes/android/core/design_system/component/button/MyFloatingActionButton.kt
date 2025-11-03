@@ -21,7 +21,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.myicon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Composable
