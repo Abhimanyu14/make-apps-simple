@@ -108,6 +108,10 @@ internal class EditTransactionForScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "EditTransactionForScreenViewModel: updateUiState",
+        )
         _uiState.update {
             EditTransactionForScreenUIState(
                 isCtaButtonEnabled = editTransactionForScreenDataValidationState.isCtaButtonEnabled,

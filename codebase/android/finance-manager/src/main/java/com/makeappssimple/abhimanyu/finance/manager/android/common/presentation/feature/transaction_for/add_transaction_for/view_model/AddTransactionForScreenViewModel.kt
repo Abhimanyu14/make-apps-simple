@@ -93,6 +93,10 @@ internal class AddTransactionForScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "AddTransactionForScreenViewModel: updateUiState",
+        )
         _uiState.update {
             AddTransactionForScreenUIState(
                 titleError = addTransactionForScreenDataValidationState.titleError,

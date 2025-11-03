@@ -134,6 +134,10 @@ internal class CategoriesScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "CategoriesScreenViewModel: updateUiState",
+        )
         _uiState.update {
             CategoriesScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != CategoriesScreenBottomSheetType.None,

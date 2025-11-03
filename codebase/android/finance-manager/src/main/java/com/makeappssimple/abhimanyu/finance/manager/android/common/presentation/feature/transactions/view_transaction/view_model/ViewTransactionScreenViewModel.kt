@@ -116,6 +116,10 @@ internal class ViewTransactionScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "ViewTransactionScreenViewModel: updateUiState",
+        )
         _uiState.update {
             ViewTransactionScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != ViewTransactionScreenBottomSheetType.None,

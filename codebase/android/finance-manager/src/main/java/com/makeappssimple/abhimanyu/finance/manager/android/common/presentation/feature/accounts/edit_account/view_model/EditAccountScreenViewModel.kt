@@ -135,6 +135,10 @@ internal class EditAccountScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "EditAccountScreenViewModel: updateUiState",
+        )
         _uiState.update {
             EditAccountScreenUIState(
                 isLoading = isLoading,

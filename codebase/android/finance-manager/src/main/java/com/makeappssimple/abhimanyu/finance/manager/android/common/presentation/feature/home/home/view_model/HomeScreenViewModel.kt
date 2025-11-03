@@ -125,6 +125,10 @@ internal class HomeScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "HomeScreenViewModel: updateUiState",
+        )
         _uiState.update {
             HomeScreenUIState(
                 isBackupCardVisible = isBackupCardVisible,

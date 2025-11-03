@@ -140,6 +140,10 @@ internal class EditCategoryScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "EditCategoryScreenViewModel: updateUiState",
+        )
         _uiState.update {
             EditCategoryScreenUIState(
                 screenBottomSheetType = screenBottomSheetType,

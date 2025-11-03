@@ -123,6 +123,10 @@ internal class AddAccountScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "AddAccountScreenViewModel: updateUiState",
+        )
         _uiState.update {
             AddAccountScreenUIState(
                 selectedAccountType = selectedAccountType,

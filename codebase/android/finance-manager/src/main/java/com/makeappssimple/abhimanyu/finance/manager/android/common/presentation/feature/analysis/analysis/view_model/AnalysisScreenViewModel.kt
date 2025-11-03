@@ -131,6 +131,10 @@ internal class AnalysisScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "AnalysisScreenViewModel: updateUiState",
+        )
         _uiState.update {
             AnalysisScreenUIState(
                 screenBottomSheetType = screenBottomSheetType,

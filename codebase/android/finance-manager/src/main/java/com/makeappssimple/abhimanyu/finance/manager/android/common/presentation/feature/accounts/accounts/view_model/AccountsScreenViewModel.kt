@@ -111,6 +111,10 @@ internal class AccountsScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "AccountsScreenViewModel: updateUiState",
+        )
         _uiState.update {
             AccountsScreenUIState(
                 screenBottomSheetType = screenBottomSheetType,

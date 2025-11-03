@@ -101,6 +101,10 @@ internal class TransactionForValuesScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "TransactionForValuesScreenViewModel: updateUiState",
+        )
         _uiState.update {
             TransactionForValuesScreenUIState(
                 isBottomSheetVisible = screenBottomSheetType != TransactionForValuesScreenBottomSheetType.None,

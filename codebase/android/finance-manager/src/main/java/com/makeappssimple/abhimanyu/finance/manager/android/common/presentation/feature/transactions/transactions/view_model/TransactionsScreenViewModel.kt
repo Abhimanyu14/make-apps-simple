@@ -170,6 +170,10 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "TransactionsScreenViewModel: updateUiState",
+        )
         _uiState.update {
             TransactionsScreenUIState(
                 isBackHandlerEnabled = searchTextFieldState.text.isNotEmpty() ||

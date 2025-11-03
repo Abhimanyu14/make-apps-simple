@@ -108,6 +108,10 @@ internal class SettingsScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "SettingsScreenViewModel: updateUiState",
+        )
         _uiState.update {
             SettingsScreenUIState(
                 isLoading = isLoading,

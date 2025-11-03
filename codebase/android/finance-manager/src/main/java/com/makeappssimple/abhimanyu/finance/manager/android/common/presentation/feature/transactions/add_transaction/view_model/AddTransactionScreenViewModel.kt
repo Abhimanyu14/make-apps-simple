@@ -209,6 +209,10 @@ internal class AddTransactionScreenViewModel(
     }
 
     private fun updateUiState() {
+        logError(
+            tag = "Abhi",
+            message = "AddTransactionScreenViewModel: updateUiState",
+        )
         _uiState.update {
             AddTransactionScreenUIState(
                 accountFrom = accountFrom,
