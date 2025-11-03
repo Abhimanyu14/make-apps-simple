@@ -458,9 +458,12 @@ internal class TransactionsScreenViewModel(
         }
     }
 
-    private fun resetScreenBottomSheetType(): Job {
+    private fun resetScreenBottomSheetType(
+        shouldRefresh: Boolean = true,
+    ): Job {
         return updateScreenBottomSheetType(
             updatedTransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
+            shouldRefresh = shouldRefresh,
         )
     }
 
@@ -534,13 +537,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         selectedTransactionFilter = updatedSelectedTransactionFilter
         observeForAllTransactionData()
-        return if (shouldRefresh) {
-            coroutineScope.launch {
-                refreshUiState()
-            }
-        } else {
-            getCompletedJob()
-        }
+        return resetScreenBottomSheetType(
+            shouldRefresh = false,
+        )
     }
 
     private fun updateSelectedTransactionSortOption(
@@ -549,13 +548,9 @@ internal class TransactionsScreenViewModel(
     ): Job {
         selectedTransactionSortOption = updatedSelectedTransactionSortOption
         observeForAllTransactionData()
-        return if (shouldRefresh) {
-            coroutineScope.launch {
-                refreshUiState()
-            }
-        } else {
-            getCompletedJob()
-        }
+        return resetScreenBottomSheetType(
+            shouldRefresh = false,
+        )
     }
 
     private fun updateTransactionForValuesInTransactions(

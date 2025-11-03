@@ -25,7 +25,6 @@ import kotlinx.collections.immutable.ImmutableList
 internal fun TransactionsSortBottomSheet(
     selectedTransactionSortOptionIndex: Int,
     transactionSortOptions: ImmutableList<TransactionSortOption>,
-    resetBottomSheetType: () -> Unit,
     updateSelectedSortOption: (updatedSortOptionIndex: Int) -> Unit,
 ) {
     TransactionsSortBottomSheetUI(
@@ -40,7 +39,6 @@ internal fun TransactionsSortBottomSheet(
                         when (event) {
                             is TransactionsSortBottomSheetItemEvent.OnClick -> {
                                 updateSelectedSortOption(index)
-                                resetBottomSheetType()
                             }
                         }
                     },

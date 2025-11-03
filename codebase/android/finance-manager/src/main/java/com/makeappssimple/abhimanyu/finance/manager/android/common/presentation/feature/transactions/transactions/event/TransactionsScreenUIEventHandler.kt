@@ -28,10 +28,6 @@ internal class TransactionsScreenUIEventHandler internal constructor(
         uiEvent: TransactionsScreenUIEvent,
     ) {
         when (uiEvent) {
-            is TransactionsScreenUIEvent.OnBottomSheetDismissed -> {
-                uiStateEvents.resetScreenBottomSheetType()
-            }
-
             is TransactionsScreenUIEvent.OnSelectionModeTopAppBarMoreOptionsButtonClick -> {
                 uiStateEvents.updateScreenBottomSheetType(
                     TransactionsScreenBottomSheetType.Menu

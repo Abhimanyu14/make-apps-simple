@@ -173,9 +173,6 @@ internal fun TransactionsScreenUI(
                                 )
                             )
                         },
-                        resetBottomSheetType = {
-                            handleUIEvent(TransactionsScreenUIEvent.OnBottomSheetDismissed)
-                        },
                     )
                 }
 
@@ -231,9 +228,6 @@ internal fun TransactionsScreenUI(
                             uiState.selectedTransactionSortOption
                         ),
                         transactionSortOptions = uiState.transactionSortOptions,
-                        resetBottomSheetType = {
-                            handleUIEvent(TransactionsScreenUIEvent.OnBottomSheetDismissed)
-                        },
                         updateSelectedSortOption = { index ->
                             handleUIEvent(
                                 TransactionsScreenUIEvent.OnSelectedSortOptionUpdated(

@@ -37,7 +37,6 @@ internal fun TransactionsFilterBottomSheet(
     defaultMaxDate: MyLocalDate,
     selectedTransactionFilter: TransactionFilter,
     updateSelectedTransactionFilter: (updatedSelectedTransactionFilter: TransactionFilter) -> Unit,
-    resetBottomSheetType: () -> Unit,
 ) {
     TransactionsFiltersBottomSheetUI(
         expenseCategories = expenseCategories,
@@ -51,7 +50,6 @@ internal fun TransactionsFilterBottomSheet(
         selectedTransactionFilter = selectedTransactionFilter,
         onPositiveButtonClick = {
             updateSelectedTransactionFilter(it)
-            resetBottomSheetType()
         },
         onNegativeButtonClick = {},
     )

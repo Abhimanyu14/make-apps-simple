@@ -23,7 +23,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 
 @Immutable
 internal sealed class TransactionsScreenUIEvent : ScreenUIEvent {
-    data object OnBottomSheetDismissed : TransactionsScreenUIEvent()
     data object OnSelectionModeTopAppBarNavigationButtonClick :
         TransactionsScreenUIEvent()
 
