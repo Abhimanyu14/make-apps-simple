@@ -26,7 +26,6 @@ import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.filterDigits
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
@@ -216,7 +215,7 @@ internal class EditTransactionScreenViewModel(
                 category = category,
                 selectedTransactionForIndex = selectedTransactionForIndex,
                 selectedTransactionTypeIndex = selectedTransactionTypeIndex,
-                accounts = allAccounts.orEmpty(),
+                accounts = allAccounts,
                 filteredCategories = filteredCategories,
                 titleSuggestionsChipUIData = titleSuggestions
                     .map { title ->

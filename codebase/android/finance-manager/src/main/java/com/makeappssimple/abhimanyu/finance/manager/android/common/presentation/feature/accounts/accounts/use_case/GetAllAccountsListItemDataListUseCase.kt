@@ -58,33 +58,34 @@ internal class GetAllAccountsListItemDataListUseCase(
                     )
                 )
                 updatedAccountsListItemDataList.addAll(
-                    allAccountsGroupedByType[accountType]?.sortedByDescending { account ->
-                        account.balanceAmount.value
-                    }?.map { account ->
-                        val isDeleteEnabled =
-                            !checkIfAccountIsUsedInTransactionsUseCase(
+                    allAccountsGroupedByType[accountType]
+                        ?.sortedByDescending { account ->
+                            account.balanceAmount.value
+                        }?.map { account ->
+                            val isDeleteEnabled =
+                                !checkIfAccountIsUsedInTransactionsUseCase(
+                                    accountId = account.id,
+                                )
+                            val isDefault = if (defaultAccountId.isNull()) {
+                                isDefaultAccount(
+                                    account = account.name,
+                                )
+                            } else {
+                                defaultAccountId == account.id
+                            }
+                            AccountsListItemContentData(
+                                isDefault = isDefault,
+                                isDeleteEnabled = !isDefaultAccount(
+                                    account = account.name,
+                                ) && isDeleteEnabled,
+                                isLowBalance = account.balanceAmount < account.minimumAccountBalanceAmount.orEmpty(),
+                                isMoreOptionsIconButtonVisible = true,
+                                icon = account.type.icon,
                                 accountId = account.id,
+                                balance = account.balanceAmount.toDefaultString(),
+                                name = account.name,
                             )
-                        val isDefault = if (defaultAccountId.isNull()) {
-                            isDefaultAccount(
-                                account = account.name,
-                            )
-                        } else {
-                            defaultAccountId == account.id
-                        }
-                        AccountsListItemContentData(
-                            isDefault = isDefault,
-                            isDeleteEnabled = !isDefaultAccount(
-                                account = account.name,
-                            ) && isDeleteEnabled,
-                            isLowBalance = account.balanceAmount < account.minimumAccountBalanceAmount.orEmpty(),
-                            isMoreOptionsIconButtonVisible = true,
-                            icon = account.type.icon,
-                            accountId = account.id,
-                            balance = account.balanceAmount.toDefaultString(),
-                            name = account.name,
-                        )
-                    }.orEmpty()
+                        }.orEmpty()
                 )
             }
         }
