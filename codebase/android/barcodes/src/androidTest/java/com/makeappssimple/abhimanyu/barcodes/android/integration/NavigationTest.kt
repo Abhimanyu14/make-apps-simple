@@ -16,16 +16,22 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.integration
 
+import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.isDisplayed
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_HOME
+import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_SETTINGS
 import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodesAppModule
 import com.makeappssimple.abhimanyu.barcodes.android.test.KoinTestRule
+import kotlinx.coroutines.test.StandardTestDispatcher
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +40,9 @@ import org.koin.ksp.generated.module
 
 @RunWith(AndroidJUnit4::class)
 class NavigationTest {
+    private val testCoroutineDispatcher = StandardTestDispatcher()
+    private val settingsIconContentDescription = "Settings"
+
     @get:Rule(order = 0)
     val koinTestRule = KoinTestRule(
         modules = listOf(
@@ -44,41 +53,58 @@ class NavigationTest {
         ),
     )
 
+    @OptIn(ExperimentalTestApi::class)
     @get:Rule(order = 1)
-    val composeTestRule = createAndroidComposeRule<BarcodesActivity>()
+    val composeTestRule = createComposeRule(
+        effectContext = testCoroutineDispatcher,
+    )
+
+    @Before
+    fun setUp() {
+        ActivityScenario.launch(
+            BarcodesActivity::class.java,
+        )
+    }
 
     @Test
-    fun navigationTest() {
-        // Verify we start at home screen
+    fun settingsNavigationTest() {
+        assertHomeScreenIsDisplayed()
+        assertSettingsIconIsDisplayed()
+        clickSettingsIcon()
+        assertSettingsScreenIsDisplayed()
+    }
+
+    private fun clickSettingsIcon() {
+        composeTestRule
+            .onNodeWithContentDescription(
+                label = settingsIconContentDescription,
+            )
+            .performClick()
+    }
+
+    private fun assertSettingsIconIsDisplayed() {
+        composeTestRule.waitUntil {
+            composeTestRule
+                .onNodeWithContentDescription(
+                    label = settingsIconContentDescription,
+                )
+                .isDisplayed()
+        }
+    }
+
+    private fun assertHomeScreenIsDisplayed() {
         composeTestRule
             .onNodeWithTag(
                 testTag = SCREEN_HOME,
             )
             .assertIsDisplayed()
+    }
 
-        // Verify the top app bar is displayed
-        composeTestRule.waitUntil {
-            composeTestRule
-                .onNodeWithContentDescription(
-                    label = "Settings",
-                )
-                .isDisplayed()
-        }
-
-        // Click settings button and wait for navigation
-        // TODO(Abhi): Not working.
-        // References:
-        // https://youtrack.jetbrains.com/issue/CMP-8731/Compose-Navigation-is-throwing-an-Exception-in-the-Compose-UI-Test
-        // https://kotlinlang.slack.com/archives/CJLTWPH7S/p1754704904614679
-        /*
+    private fun assertSettingsScreenIsDisplayed() {
         composeTestRule
-            .onNodeWithContentDescription(
-                label = "Settings",
+            .onNodeWithTag(
+                testTag = SCREEN_SETTINGS,
             )
-            .performClick()
-        */
-
-        // Use waitForIdle to ensure navigation completes
-        composeTestRule.waitForIdle()
+            .assertIsDisplayed()
     }
 }
