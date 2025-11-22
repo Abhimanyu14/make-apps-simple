@@ -25,8 +25,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.mod
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatastoreData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.asEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction.TransactionRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel

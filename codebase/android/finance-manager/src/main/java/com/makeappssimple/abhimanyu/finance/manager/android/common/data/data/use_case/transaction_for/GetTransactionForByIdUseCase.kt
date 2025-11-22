@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_for.TransactionForRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_for.TransactionForRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 
 internal class GetTransactionForByIdUseCase(

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId

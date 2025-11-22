@@ -21,7 +21,7 @@ import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.BackupData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model.DatastoreData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetAllCategoriesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionsUseCase

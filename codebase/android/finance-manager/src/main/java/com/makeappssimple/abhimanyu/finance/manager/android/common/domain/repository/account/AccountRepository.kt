@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import kotlinx.collections.immutable.ImmutableList

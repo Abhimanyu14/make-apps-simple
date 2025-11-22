@@ -24,6 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow

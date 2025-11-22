@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.platform.di
 import android.content.Context
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.alarm.AlarmKitImpl
 import org.koin.core.annotation.Module

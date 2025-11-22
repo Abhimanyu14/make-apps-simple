@@ -24,6 +24,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_for.TransactionForRepository
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow

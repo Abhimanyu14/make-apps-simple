@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.us
 
 import com.makeappssimple.abhimanyu.common.core.extensions.filterIsInstance
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.UpdateAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.GetAllTransactionDataUseCase

@@ -14,34 +14,30 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.category
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_for
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
-internal interface CategoryRepository {
-    suspend fun deleteCategories(
-        vararg categories: Category,
+internal interface TransactionForRepository {
+    suspend fun deleteTransactionForById(
+        id: Int,
     ): Boolean
 
-    suspend fun deleteCategoryById(
+    suspend fun getAllTransactionForValues(): ImmutableList<TransactionFor>
+
+    fun getAllTransactionForValuesFlow(): Flow<ImmutableList<TransactionFor>>
+
+    suspend fun getTransactionForById(
         id: Int,
-    ): Int
+    ): TransactionFor?
 
-    suspend fun getAllCategories(): ImmutableList<Category>
-
-    fun getAllCategoriesFlow(): Flow<ImmutableList<Category>>
-
-    suspend fun getCategoryById(
-        id: Int,
-    ): Category?
-
-    suspend fun insertCategories(
-        vararg categories: Category,
+    suspend fun insertTransactionForValues(
+        vararg transactionForValues: TransactionFor,
     ): ImmutableList<Long>
 
-    suspend fun updateCategories(
-        vararg categories: Category,
-    ): Int
+    suspend fun updateTransactionForValues(
+        vararg transactionForValues: TransactionFor,
+    ): Boolean
 }
