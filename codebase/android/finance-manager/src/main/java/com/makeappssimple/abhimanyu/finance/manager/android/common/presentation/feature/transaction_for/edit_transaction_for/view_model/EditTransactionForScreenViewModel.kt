@@ -22,9 +22,9 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetTransactionForByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.GetTransactionForByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.UpdateTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase

@@ -24,11 +24,11 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetCategoryByIdUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.UpdateCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.GetCategoryByIdUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.UpdateCategoryUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenUIState

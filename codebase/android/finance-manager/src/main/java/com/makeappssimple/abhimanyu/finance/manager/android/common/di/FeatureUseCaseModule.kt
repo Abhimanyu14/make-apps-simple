@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.account.GetAllAccountsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.category.GetAllCategoriesUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.transaction_for.GetAllTransactionForValuesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.GetAllAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.GetAllCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetAllAccountsListItemDataListUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetDefaultAccountIdFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetIsAccountsUsedInTransactionFlowUseCase

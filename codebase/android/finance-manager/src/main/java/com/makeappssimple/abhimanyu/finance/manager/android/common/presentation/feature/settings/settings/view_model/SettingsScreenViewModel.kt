@@ -23,11 +23,11 @@ import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common.BackupDataUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common.RecalculateTotalUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.use_case.common.RestoreDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.common.BackupDataUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.common.RecalculateTotalUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.common.RestoreDataUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIStateEvents
