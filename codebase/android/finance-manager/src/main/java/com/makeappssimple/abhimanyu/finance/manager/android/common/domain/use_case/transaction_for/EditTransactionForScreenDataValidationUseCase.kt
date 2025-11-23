@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.use_case
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.view_model.EditTransactionForScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList

@@ -17,21 +17,21 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.AddAccountScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.EditAccountScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.GetAllAccountsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.AddCategoryScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.EditCategoryScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.GetAllCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.AddTransactionScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.EditTransactionScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.AddTransactionForScreenDataValidationUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.EditTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.GetAllTransactionForValuesUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetAllAccountsListItemDataListUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetDefaultAccountIdFlowUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case.GetIsAccountsUsedInTransactionFlowUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.use_case.AddAccountScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.use_case.EditAccountScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.use_case.AddCategoryScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.use_case.EditCategoryScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.add_transaction_for.use_case.AddTransactionForScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.use_case.EditTransactionForScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.use_case.AddTransactionScreenDataValidationUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.use_case.EditTransactionScreenDataValidationUseCase
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 

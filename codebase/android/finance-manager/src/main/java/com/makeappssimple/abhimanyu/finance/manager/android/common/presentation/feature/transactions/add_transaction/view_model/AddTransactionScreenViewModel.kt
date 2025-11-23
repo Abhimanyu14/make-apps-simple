@@ -44,6 +44,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.GetAllCategoriesUseCase
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.AddTransactionScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.GetMaxRefundAmountUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.GetTitleSuggestionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.GetTransactionDataByIdUseCase
@@ -55,7 +56,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.AccountToText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.AddTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.AddTransactionScreenUIStateEvents
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.use_case.AddTransactionScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.navigation.AddTransactionScreenArgs
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount

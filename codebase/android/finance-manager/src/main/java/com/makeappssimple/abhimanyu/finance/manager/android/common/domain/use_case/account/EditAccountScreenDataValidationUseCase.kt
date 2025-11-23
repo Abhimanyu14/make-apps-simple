@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.use_case
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account
 
 import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.GetAllAccountsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.view_model.EditAccountScreenDataValidationState
 

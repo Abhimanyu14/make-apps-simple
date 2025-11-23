@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.use_case
+package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotZero
