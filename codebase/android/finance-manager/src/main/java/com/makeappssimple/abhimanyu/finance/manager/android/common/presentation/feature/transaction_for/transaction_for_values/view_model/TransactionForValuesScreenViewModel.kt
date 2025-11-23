@@ -30,8 +30,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.transaction_for_values.state.TransactionForValuesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.transaction_for_values.state.TransactionForValuesScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction_for.TransactionForListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultTransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction_for.TransactionForListItemData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope

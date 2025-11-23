@@ -25,11 +25,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
@@ -237,7 +237,7 @@ internal class AddAccountScreenViewModelTest {
                 val testMinimumAccountBalanceAmount = "1000"
                 val testAccountType = AccountType.E_WALLET
                 val testSelectedAccountTypeIndex = 1
-                val testAccount = Account(
+                Account(
                     id = testAccountId,
                     type = testAccountType,
                     minimumAccountBalanceAmount = Amount(

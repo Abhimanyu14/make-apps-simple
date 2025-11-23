@@ -19,7 +19,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.view_model
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.component.tab_row.MyTabData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.tab_row.MyTabData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.snackbar.CategoriesScreenSnackbarType

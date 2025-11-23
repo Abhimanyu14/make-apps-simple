@@ -21,9 +21,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.transaction.TransactionListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
@@ -287,8 +287,8 @@ internal class TransactionsScreenViewModelTest {
             )
             transactionsScreenViewModel.uiStateEvents.duplicateTransaction()
 
-            val updateScreenBottomSheetTypeCompletedState = awaitItem()
-            val updateScreenSnackbarTypeCompletedState = awaitItem()
+            awaitItem()
+            awaitItem()
             val result = awaitItem()
             result.accounts.shouldBe(
                 expected = listOf(

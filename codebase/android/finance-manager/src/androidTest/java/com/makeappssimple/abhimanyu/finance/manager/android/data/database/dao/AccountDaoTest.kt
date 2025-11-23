@@ -192,7 +192,10 @@ internal class AccountDaoTest {
         )
 
         val result = accountDao.getAccountsByIds(
-            listOf(1, 3),
+            listOf(
+                1,
+                3
+            ),
         )
 
         result.size.shouldBe(

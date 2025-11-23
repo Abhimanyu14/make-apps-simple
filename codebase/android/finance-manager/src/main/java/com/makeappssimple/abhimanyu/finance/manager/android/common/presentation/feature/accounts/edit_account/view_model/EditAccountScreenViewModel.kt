@@ -37,8 +37,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.use_case.EditAccountScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.navigation.EditAccountScreenArgs
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.icon
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

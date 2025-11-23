@@ -25,11 +25,11 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.sortOrder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.CheckIfAccountIsUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemContentData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.listitem.accounts.AccountsListItemHeaderData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.extensions.icon
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemContentData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemHeaderData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.icon
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

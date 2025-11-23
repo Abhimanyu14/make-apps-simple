@@ -35,7 +35,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.use_case.AddCategoryScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.navigation.AddCategoryScreenArgs
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope

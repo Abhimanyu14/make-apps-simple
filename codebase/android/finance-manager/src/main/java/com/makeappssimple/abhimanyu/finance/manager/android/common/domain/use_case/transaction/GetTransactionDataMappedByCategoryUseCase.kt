@@ -17,9 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction
 
 import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_data.TransactionDataRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionDataMappedByCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_data.TransactionDataRepository
 import kotlinx.collections.immutable.ImmutableList
 
 internal class GetTransactionDataMappedByCategoryUseCase(
