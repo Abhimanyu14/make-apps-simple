@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.home.home.screen.HomeScreen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.home.home.screen.HomeScreen
 
 internal fun NavGraphBuilder.homeNavGraph() {
     composable(

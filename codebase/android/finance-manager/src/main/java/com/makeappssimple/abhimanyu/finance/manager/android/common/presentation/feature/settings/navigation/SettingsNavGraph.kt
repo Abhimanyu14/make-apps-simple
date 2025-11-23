@@ -19,10 +19,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.open_source_licenses.screen.OpenSourceLicensesScreen
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.screen.SettingsScreen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.settings.open_source_licenses.screen.OpenSourceLicensesScreen
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.settings.settings.screen.SettingsScreen
 
 internal fun NavGraphBuilder.settingsNavGraph() {
     composable(

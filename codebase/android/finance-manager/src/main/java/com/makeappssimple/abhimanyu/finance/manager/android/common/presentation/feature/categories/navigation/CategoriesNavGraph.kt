@@ -21,12 +21,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.screen.AddCategoryScreen
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.screen.CategoriesScreen
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.screen.EditCategoryScreen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.add_category.screen.AddCategoryScreen
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.categories.screen.CategoriesScreen
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.edit_category.screen.EditCategoryScreen
 
 internal fun NavGraphBuilder.categoriesNavGraph() {
     composable(

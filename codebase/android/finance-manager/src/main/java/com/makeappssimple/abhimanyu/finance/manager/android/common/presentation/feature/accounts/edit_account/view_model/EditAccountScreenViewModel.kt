@@ -30,13 +30,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.GetAccountByIdUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.UpdateAccountUseCase
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.use_case.EditAccountScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.navigation.EditAccountScreenArgs
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.icon
 import kotlinx.collections.immutable.ImmutableList

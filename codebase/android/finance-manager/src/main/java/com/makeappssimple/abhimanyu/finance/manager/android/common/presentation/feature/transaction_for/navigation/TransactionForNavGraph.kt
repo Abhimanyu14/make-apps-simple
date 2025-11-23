@@ -21,12 +21,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.add_transaction_for.screen.AddTransactionForScreen
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.screen.EditTransactionForScreen
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.transaction_for_values.screen.TransactionForValuesScreen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.DeeplinkUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.transaction_for.add_transaction_for.screen.AddTransactionForScreen
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.transaction_for.edit_transaction_for.screen.EditTransactionForScreen
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.transaction_for.transaction_for_values.screen.TransactionForValuesScreen
 
 internal fun NavGraphBuilder.transactionForNavGraph() {
     composable(
