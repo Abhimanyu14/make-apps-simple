@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.app
 
 import androidx.compose.runtime.Composable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app.FinanceManagerActivityViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

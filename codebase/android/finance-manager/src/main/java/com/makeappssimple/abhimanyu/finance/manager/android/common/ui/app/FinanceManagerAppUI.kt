@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.app
 
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app.FinanceManagerActivityViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavGraph
 
