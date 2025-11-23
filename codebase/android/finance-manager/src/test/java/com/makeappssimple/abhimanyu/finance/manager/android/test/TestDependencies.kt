@@ -128,8 +128,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.use_case.EditTransactionScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateDelegate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIStateDelegateImpl
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -158,10 +156,6 @@ internal class TestDependencies {
     val navigationKit: NavigationKit = NavigationKitImpl(
         coroutineScope = testScope.backgroundScope,
     )
-    val screenUIStateDelegate: ScreenUIStateDelegate =
-        ScreenUIStateDelegateImpl(
-            coroutineScope = testScope.backgroundScope,
-        )
     val uriDecoder: UriDecoder = FakeUriDecoderImpl()
     // endregion
 
