@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 
-internal fun TransactionFor.asEntity(): TransactionForEntity {
-    return TransactionForEntity(
+internal fun Account.asEntity(): AccountEntity {
+    return AccountEntity(
+        balanceAmount = balanceAmount.asEntity(),
         id = id,
-        title = title,
+        type = type,
+        minimumAccountBalanceAmount = minimumAccountBalanceAmount?.asEntity(),
+        name = name,
     )
 }

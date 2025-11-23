@@ -29,12 +29,6 @@ import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.fake.FakeUriDecoderImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.fake.FakeAlarmKitImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.account.AccountRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.category.CategoryRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction.TransactionRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_data.TransactionDataRepositoryImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.repository.transaction_for.TransactionForRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
@@ -56,6 +50,12 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.fake.FakeDatabaseTransactionProviderImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.fake.FakeFinanceManagerPreferencesDataSource
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.account.AccountRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.category.CategoryRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.preferences.FinanceManagerPreferencesRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction.TransactionRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction_data.TransactionDataRepositoryImpl
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction_for.TransactionForRepositoryImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType

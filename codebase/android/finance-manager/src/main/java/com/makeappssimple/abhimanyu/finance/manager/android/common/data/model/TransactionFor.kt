@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 
-internal fun Category.asEntity(): CategoryEntity {
-    return CategoryEntity(
+internal fun TransactionFor.asEntity(): TransactionForEntity {
+    return TransactionForEntity(
         id = id,
-        parentCategoryId = parentCategoryId,
-        subCategoryIds = subCategoryIds,
-        description = description,
-        emoji = emoji,
         title = title,
-        transactionType = transactionType,
     )
 }

@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.model
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-internal fun Account.asEntity(): AccountEntity {
-    return AccountEntity(
-        balanceAmount = balanceAmount.asEntity(),
-        id = id,
-        type = type,
-        minimumAccountBalanceAmount = minimumAccountBalanceAmount?.asEntity(),
-        name = name,
-    )
-}
+@Serializable
+internal data class BackupData(
+    @SerialName(value = "last_backup_time")
+    val lastBackupTime: String? = null,
+
+    @SerialName(value = "last_backup_timestamp")
+    val lastBackupTimestamp: String? = null,
+
+    @SerialName(value = "database_data")
+    val databaseData: DatabaseData? = null,
+
+    @SerialName(value = "datastore_data")
+    val datastoreData: DatastoreData? = null,
+)

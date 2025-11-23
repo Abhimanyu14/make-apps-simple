@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.data.data.model
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 
-@Serializable
-internal data class BackupData(
-    @SerialName(value = "last_backup_time")
-    val lastBackupTime: String? = null,
-
-    @SerialName(value = "last_backup_timestamp")
-    val lastBackupTimestamp: String? = null,
-
-    @SerialName(value = "database_data")
-    val databaseData: DatabaseData? = null,
-
-    @SerialName(value = "datastore_data")
-    val datastoreData: DatastoreData? = null,
-)
+internal fun Category.asEntity(): CategoryEntity {
+    return CategoryEntity(
+        id = id,
+        parentCategoryId = parentCategoryId,
+        subCategoryIds = subCategoryIds,
+        description = description,
+        emoji = emoji,
+        title = title,
+        transactionType = transactionType,
+    )
+}
