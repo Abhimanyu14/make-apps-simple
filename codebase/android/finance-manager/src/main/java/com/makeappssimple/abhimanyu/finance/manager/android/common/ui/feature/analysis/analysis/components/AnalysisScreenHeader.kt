@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.components
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.analysis.analysis.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
