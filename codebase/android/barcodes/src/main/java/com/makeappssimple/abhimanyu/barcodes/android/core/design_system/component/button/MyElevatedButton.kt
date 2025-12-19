@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
@@ -30,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 private object MyElevatedButtonConstants {
@@ -43,7 +43,7 @@ internal fun MyElevatedButton(
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     isLoading: Boolean = false,
-    @StringRes textStringResourceId: Int,
+    stringResource: StringResource,
     onClick: () -> Unit = {},
 ) {
     if (isLoading) {
@@ -66,7 +66,7 @@ internal fun MyElevatedButton(
                     .defaultMinSize(
                         minWidth = MyElevatedButtonConstants.contentMinimumWidth,
                     ),
-                textStringResourceId = textStringResourceId,
+                stringResource = stringResource,
                 style = BarcodesAppTheme.typography.labelLarge
                     .copy(
                         textAlign = TextAlign.Center,

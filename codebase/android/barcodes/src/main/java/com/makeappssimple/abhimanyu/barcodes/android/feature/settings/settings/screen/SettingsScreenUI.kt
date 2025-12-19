@@ -30,6 +30,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemDataEventDataAndEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MySimpleList
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
@@ -44,7 +45,9 @@ internal fun SettingsScreenUI(
     val listItemsDataAndEventHandler = arrayListOf(
         MyListItemDataEventDataAndEventHandler(
             data = MyListItemData(
-                stringResourceId = R.string.barcodes_screen_settings_credits,
+                stringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_settings_credits,
+                ),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -60,7 +63,9 @@ internal fun SettingsScreenUI(
         ),
         MyListItemDataEventDataAndEventHandler(
             data = MyListItemData(
-                stringResourceId = R.string.barcodes_screen_settings_open_source_licenses,
+                stringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_settings_open_source_licenses,
+                ),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -76,7 +81,9 @@ internal fun SettingsScreenUI(
         ),
         MyListItemDataEventDataAndEventHandler(
             data = MyListItemData(
-                stringResourceId = R.string.barcodes_screen_settings_privacy_policy,
+                stringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_settings_privacy_policy,
+                ),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -100,7 +107,9 @@ internal fun SettingsScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.barcodes_screen_settings,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_settings,
+                ),
                 navigationAction = {
                     handleUIEvent(SettingsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },

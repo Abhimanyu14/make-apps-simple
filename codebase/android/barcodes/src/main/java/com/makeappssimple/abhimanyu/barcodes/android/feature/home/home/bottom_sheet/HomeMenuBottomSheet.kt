@@ -28,6 +28,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MySimpleList
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.spacer.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 private object HomeMenuBottomSheetConstants {
@@ -54,7 +55,9 @@ internal fun HomeMenuBottomSheet(
             listItemsDataAndEventHandler = listOf(
                 MyListItemDataEventDataAndEventHandler(
                     data = MyListItemData(
-                        stringResourceId = R.string.barcodes_screen_home_bottom_sheet_scan_barcode,
+                        stringResource = StringResource.Id(
+                            id = R.string.barcodes_screen_home_bottom_sheet_scan_barcode,
+                        ),
                         iconResource = MyIcons.Scanner,
                     ),
                     handleEvent = { event ->
@@ -72,7 +75,9 @@ internal fun HomeMenuBottomSheet(
                 MyListItemDataEventDataAndEventHandler(
                     data =
                         MyListItemData(
-                            stringResourceId = R.string.barcodes_screen_home_bottom_sheet_create_barcode,
+                            stringResource = StringResource.Id(
+                                id = R.string.barcodes_screen_home_bottom_sheet_create_barcode,
+                            ),
                             iconResource = MyIcons.Barcode,
                         ),
                     handleEvent = { event ->

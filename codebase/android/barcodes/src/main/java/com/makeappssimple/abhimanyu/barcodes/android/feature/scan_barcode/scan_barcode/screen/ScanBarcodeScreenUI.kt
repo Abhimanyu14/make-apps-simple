@@ -34,6 +34,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberComm
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.scan_barcode.event.ScanBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.scan_barcode.state.ScanBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
@@ -51,7 +52,9 @@ internal fun ScanBarcodeScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.barcodes_screen_scan_barcode,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_scan_barcode,
+                ),
                 navigationAction = {
                     handleUIEvent(ScanBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },

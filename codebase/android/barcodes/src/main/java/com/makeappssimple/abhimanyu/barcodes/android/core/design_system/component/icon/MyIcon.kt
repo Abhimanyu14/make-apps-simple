@@ -16,43 +16,22 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon
 
-import androidx.annotation.StringRes
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
-
-@Composable
-internal fun MyIcon(
-    modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current,
-    iconResourceId: Int,
-    @StringRes contentDescriptionStringResourceId: Int? = null,
-) {
-    Icon(
-        modifier = modifier,
-        tint = tint,
-        painter = painterResource(
-            id = iconResourceId,
-        ),
-        contentDescription = contentDescriptionStringResourceId?.run {
-            stringResource(
-                id = this,
-            )
-        },
-    )
-}
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 
 @Composable
 internal fun MyIcon(
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
     iconResource: IconResource,
-    @StringRes contentDescriptionStringResourceId: Int? = null,
+    contentDescriptionStringResource: StringResource? = null,
 ) {
     when (iconResource) {
         is IconResource.Id -> {
@@ -62,16 +41,12 @@ internal fun MyIcon(
                 painter = painterResource(
                     id = iconResource.id,
                 ),
-                contentDescription = contentDescriptionStringResourceId?.run {
-                    stringResource(
-                        id = this,
-                    )
-                },
+                contentDescription = contentDescriptionStringResource?.text,
             )
         }
 
         is IconResource.ImageVector -> {
-
+            // TODO(Abhi): Add later
         }
     }
 }

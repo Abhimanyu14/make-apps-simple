@@ -23,14 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.DialogProperties
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.emptyStringResource
 
 @Immutable
 internal data class DialogData(
     val isVisible: Boolean = false,
-    val confirmButtonText: String? = null,
-    val dismissButtonText: String? = null,
-    val message: String = "",
-    val title: String = "",
+    val confirmButtonStringResource: StringResource? = null,
+    val dismissButtonStringResource: StringResource? = null,
+    val messageStringResource: StringResource = emptyStringResource,
+    val titleStringResource: StringResource = emptyStringResource,
 )
 
 @Immutable
@@ -58,38 +60,38 @@ internal fun MyDialog(
             ),
             title = {
                 MyText(
-                    text = dialogData.title,
+                    stringResource = dialogData.titleStringResource,
                 )
             },
             text = {
                 MyText(
-                    text = dialogData.message,
+                    stringResource = dialogData.messageStringResource,
                 )
             },
             confirmButton = {
-                dialogData.confirmButtonText?.let {
+                dialogData.confirmButtonStringResource?.let {
                     MyTextButton(
-                        onClickLabel = dialogData.confirmButtonText,
+                        onClickLabel = dialogData.confirmButtonStringResource,
                         onClick = {
                             handleEvent(MyDialogEvent.OnConfirmButtonClick)
                         },
                     ) {
                         MyText(
-                            text = dialogData.confirmButtonText,
+                            stringResource = dialogData.confirmButtonStringResource,
                         )
                     }
                 }
             },
             dismissButton = {
-                dialogData.dismissButtonText?.let {
+                dialogData.dismissButtonStringResource?.let {
                     MyTextButton(
-                        onClickLabel = dialogData.dismissButtonText,
+                        onClickLabel = dialogData.dismissButtonStringResource,
                         onClick = {
                             handleEvent(MyDialogEvent.OnDismissButtonClick)
                         },
                     ) {
                         MyText(
-                            text = dialogData.dismissButtonText,
+                            stringResource = dialogData.dismissButtonStringResource,
                         )
                     }
                 }

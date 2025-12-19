@@ -16,23 +16,19 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.image
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.stringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 
 @Composable
 internal fun MyImage(
     bitmap: ImageBitmap,
-    @StringRes contentDescriptionStringResourceId: Int?,
+    contentDescriptionStringResource: StringResource?,
 ) {
     Image(
         bitmap = bitmap,
-        contentDescription = contentDescriptionStringResourceId?.run {
-            stringResource(
-                id = this,
-            )
-        },
+        contentDescription = contentDescriptionStringResource?.text,
     )
 }

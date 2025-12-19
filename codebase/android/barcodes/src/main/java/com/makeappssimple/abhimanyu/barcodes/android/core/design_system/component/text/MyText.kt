@@ -16,32 +16,30 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text
 
-import androidx.annotation.StringRes
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Unspecified
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 
 @Composable
 internal fun MyText(
     modifier: Modifier = Modifier,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    @StringRes textStringResourceId: Int,
+    stringResource: StringResource,
     overflow: TextOverflow = TextOverflow.Clip,
     style: TextStyle = LocalTextStyle.current,
     onTextLayout: (TextLayoutResult) -> Unit = {},
 ) {
     Text(
-        text = stringResource(
-            id = textStringResourceId,
-        ),
+        text = stringResource.text,
         modifier = modifier,
         color = Unspecified,
         fontSize = TextUnit.Unspecified,
@@ -56,7 +54,7 @@ internal fun MyText(
         maxLines = maxLines,
         onTextLayout = onTextLayout,
         style = LocalTextStyle.current.merge(
-            style
+            other = style,
         ),
     )
 }
@@ -87,7 +85,7 @@ internal fun MyText(
         maxLines = maxLines,
         onTextLayout = onTextLayout,
         style = LocalTextStyle.current.merge(
-            style
+            other = style,
         ),
     )
 }

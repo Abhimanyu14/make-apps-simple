@@ -16,33 +16,33 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dropdown
 
-import androidx.annotation.StringRes
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 
 @Composable
 internal fun MyDropdownMenuItem(
     modifier: Modifier = Modifier,
-    @StringRes leadingIconContentDescriptionStringResourceId: Int,
-    @StringRes textStringResourceId: Int,
+    leadingIconContentDescriptionStringResource: StringResource,
+    stringResource: StringResource,
     onClick: () -> Unit,
     leadingIconResource: IconResource,
 ) {
     DropdownMenuItem(
         text = {
             MyText(
-                textStringResourceId = textStringResourceId,
+                stringResource = stringResource,
             )
         },
         onClick = onClick,
         leadingIcon = {
             MyIcon(
                 iconResource = leadingIconResource,
-                contentDescriptionStringResourceId = leadingIconContentDescriptionStringResourceId,
+                contentDescriptionStringResource = leadingIconContentDescriptionStringResource,
             )
         },
         modifier = modifier,

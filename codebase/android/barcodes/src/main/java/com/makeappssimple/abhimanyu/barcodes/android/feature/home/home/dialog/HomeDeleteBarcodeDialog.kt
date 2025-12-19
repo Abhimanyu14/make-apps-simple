@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.dialog
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
+
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.DialogData
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.MyDialog
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.dialog.MyDialogEvent
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
@@ -34,21 +34,21 @@ internal fun HomeDeleteBarcodeDialog(
     MyDialog(
         dialogData = DialogData(
             isVisible = true,
-            confirmButtonText = stringResource(
+            confirmButtonStringResource = StringResource.Id(
                 id = R.string.barcodes_screen_home_delete_barcode_dialog_confirm_button_label,
             ),
-            dismissButtonText = stringResource(
+            dismissButtonStringResource = StringResource.Id(
                 id = R.string.barcodes_screen_home_delete_barcode_dialog_dismiss_button_label,
             ),
-            title = pluralStringResource(
-                R.plurals.barcodes_screen_home_delete_barcode_dialog_title,
-                selectedBarcodesSize,
-                selectedBarcodesSize,
+            titleStringResource = StringResource.Plural(
+                id = R.plurals.barcodes_screen_home_delete_barcode_dialog_title,
+                count = selectedBarcodesSize,
+                args = listOf(selectedBarcodesSize),
             ),
-            message = pluralStringResource(
-                R.plurals.barcodes_screen_home_delete_barcode_dialog_message,
-                selectedBarcodesSize,
-                selectedBarcodesSize,
+            messageStringResource = StringResource.Plural(
+                id = R.plurals.barcodes_screen_home_delete_barcode_dialog_message,
+                count = selectedBarcodesSize,
+                args = listOf(selectedBarcodesSize),
             ),
         ),
         handleEvent = { event ->

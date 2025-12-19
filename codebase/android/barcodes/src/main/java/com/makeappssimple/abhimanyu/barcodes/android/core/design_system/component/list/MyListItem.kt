@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Immutable
@@ -42,8 +42,7 @@ internal data class MyListItemDataEventDataAndEventHandler(
 
 @Immutable
 internal data class MyListItemData(
-    @StringRes val stringResourceId: Int? = null,
-    val text: String? = null,
+    val stringResource: StringResource,
     val iconResource: IconResource? = null,
     val isSelectionMode: Boolean = false,
     val isSelected: Boolean = false,
@@ -81,17 +80,10 @@ internal fun MyListItem(
     ) {
         ListItem(
             headlineContent = {
-                if (data.stringResourceId != null) {
-                    MyText(
-                        textStringResourceId = data.stringResourceId,
-                        style = BarcodesAppTheme.typography.bodyMedium,
-                    )
-                } else {
-                    MyText(
-                        text = data.text.orEmpty(),
-                        style = BarcodesAppTheme.typography.bodyMedium,
-                    )
-                }
+                MyText(
+                    stringResource = data.stringResource,
+                    style = BarcodesAppTheme.typography.bodyMedium,
+                )
             },
             leadingContent = if (data.isSelectionMode) {
                 {

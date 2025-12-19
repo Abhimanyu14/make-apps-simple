@@ -37,7 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,6 +54,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBarActionButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
@@ -78,7 +78,9 @@ internal fun BarcodeDetailsScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.barcodes_screen_barcode_details,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_barcode_details,
+                ),
                 navigationAction = {
                     handleUIEvent(BarcodeDetailsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
@@ -89,8 +91,12 @@ internal fun BarcodeDetailsScreenUI(
                         }
                         MyTopAppBarActionButton(
                             iconResource = MyIcons.MoreVert,
-                            onClickLabelStringResourceId = R.string.barcodes_screen_barcode_details_content_description_options_menu,
-                            iconContentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_options_menu,
+                            onClickLabelStringResource = StringResource.Id(
+                                id = R.string.barcodes_screen_barcode_details_content_description_options_menu,
+                            ),
+                            iconContentDescriptionStringResource = StringResource.Id(
+                                id = R.string.barcodes_screen_barcode_details_content_description_options_menu,
+                            ),
                             onClick = {
                                 isExpanded = true
                             },
@@ -102,8 +108,12 @@ internal fun BarcodeDetailsScreenUI(
                             },
                         ) {
                             MyDropdownMenuItem(
-                                leadingIconContentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
-                                textStringResourceId = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                                leadingIconContentDescriptionStringResource = StringResource.Id(
+                                    id = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                                ),
+                                stringResource = StringResource.Id(
+                                    id = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                                ),
                                 onClick = {
                                     isExpanded = false
                                     handleUIEvent(
@@ -115,8 +125,12 @@ internal fun BarcodeDetailsScreenUI(
                                 leadingIconResource = MyIcons.Edit,
                             )
                             MyDropdownMenuItem(
-                                leadingIconContentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
-                                textStringResourceId = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
+                                leadingIconContentDescriptionStringResource = StringResource.Id(
+                                    id = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
+                                ),
+                                stringResource = StringResource.Id(
+                                    id = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
+                                ),
                                 onClick = {
                                     isExpanded = false
                                     handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick)
@@ -164,7 +178,9 @@ internal fun BarcodeDetailsScreenUI(
         ) {
             uiState.barcodeName?.let { barcodeName ->
                 MyText(
-                    textStringResourceId = R.string.barcodes_screen_barcode_details_barcode_name,
+                    stringResource = StringResource.Id(
+                        id = R.string.barcodes_screen_barcode_details_barcode_name,
+                    ),
                     style = BarcodesAppTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
@@ -192,7 +208,9 @@ internal fun BarcodeDetailsScreenUI(
             }
             uiState.formattedTimestampLabelId?.let {
                 MyText(
-                    textStringResourceId = uiState.formattedTimestampLabelId,
+                    stringResource = StringResource.Id(
+                        id = uiState.formattedTimestampLabelId,
+                    ),
                     style = BarcodesAppTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
@@ -219,7 +237,9 @@ internal fun BarcodeDetailsScreenUI(
                     ),
             )
             MyText(
-                textStringResourceId = R.string.barcodes_screen_barcode_details_barcode_value,
+                stringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_barcode_details_barcode_value,
+                ),
                 style = BarcodesAppTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
@@ -252,7 +272,9 @@ internal fun BarcodeDetailsScreenUI(
                         ),
                 )
                 MyIconButton(
-                    onClickLabelStringResourceId = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
+                    onClickLabelStringResource = StringResource.Id(
+                        id = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
+                    ),
                     onClick = {
                         handleUIEvent(
                             BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick(
@@ -263,7 +285,9 @@ internal fun BarcodeDetailsScreenUI(
                 ) {
                     MyIcon(
                         iconResource = MyIcons.ContentCopy,
-                        contentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
+                        contentDescriptionStringResource = StringResource.Id(
+                            id = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
+                        ),
                     )
                 }
             }
@@ -276,7 +300,9 @@ internal fun BarcodeDetailsScreenUI(
                     // TODO(Abhi): Change image dimensions for Barcode
                     MyImage(
                         bitmap = it,
-                        contentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_barcode_image,
+                        contentDescriptionStringResource = StringResource.Id(
+                            id = R.string.barcodes_screen_barcode_details_content_description_barcode_image,
+                        ),
                     )
                 }
             }
@@ -299,16 +325,16 @@ private fun BarcodeDetailsDeleteBarcodeDialog(
     MyDialog(
         dialogData = DialogData(
             isVisible = true,
-            confirmButtonText = stringResource(
+            confirmButtonStringResource = StringResource.Id(
                 id = R.string.barcodes_screen_barcode_details_delete_barcode_dialog_confirm_button_label,
             ),
-            dismissButtonText = stringResource(
+            dismissButtonStringResource = StringResource.Id(
                 id = R.string.barcodes_screen_barcode_details_delete_barcode_dialog_dismiss_button_label,
             ),
-            title = stringResource(
+            titleStringResource = StringResource.Id(
                 id = R.string.barcodes_screen_barcode_details_delete_barcode_dialog_title,
             ),
-            message = stringResource(
+            messageStringResource = StringResource.Id(
                 id = R.string.barcodes_screen_barcode_details_delete_barcode_dialog_message,
             ),
         ),

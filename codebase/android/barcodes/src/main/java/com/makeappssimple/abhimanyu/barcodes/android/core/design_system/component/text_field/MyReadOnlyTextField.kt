@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text_field
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,13 +28,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 
 @Composable
 internal fun MyReadOnlyTextField(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
     text: String,
-    @StringRes labelTextStringResourceId: Int,
+    labelStringResource: StringResource,
     onClick: () -> Unit = {},
 ) {
     if (isLoading) {
@@ -53,7 +53,7 @@ internal fun MyReadOnlyTextField(
                     .fillMaxWidth(),
                 label = {
                     MyOutlinedTextFieldLabelText(
-                        textStringResourceId = labelTextStringResourceId,
+                        stringResource = labelStringResource,
                     )
                 },
             )

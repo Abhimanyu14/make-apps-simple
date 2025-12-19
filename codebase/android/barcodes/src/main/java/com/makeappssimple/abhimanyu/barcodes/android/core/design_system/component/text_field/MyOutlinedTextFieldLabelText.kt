@@ -16,19 +16,19 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text_field
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 
 @Composable
 internal fun MyOutlinedTextFieldLabelText(
     modifier: Modifier = Modifier,
-    @StringRes textStringResourceId: Int,
+    stringResource: StringResource,
 ) {
     // Not providing style as the default style has font size change based on floating or not
     MyText(
-        textStringResourceId = textStringResourceId,
+        stringResource = stringResource,
         modifier = modifier,
         // style = BarcodesAppTheme.typography.labelSmall,
     )

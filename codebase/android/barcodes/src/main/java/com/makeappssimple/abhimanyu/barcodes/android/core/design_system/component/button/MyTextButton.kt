@@ -22,21 +22,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 
 @Composable
 internal fun MyTextButton(
     modifier: Modifier = Modifier,
-    onClickLabel: String,
+    onClickLabel: StringResource,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val onClickLabelText = onClickLabel.text
     TextButton(
         onClick = onClick,
         content = content,
         modifier = modifier
             .semantics {
                 onClick(
-                    label = onClickLabel,
+                    label = onClickLabelText,
                     action = null,
                 )
             },

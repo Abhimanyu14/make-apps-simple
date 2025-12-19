@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text_field
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -36,12 +35,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
@@ -52,8 +52,8 @@ internal fun MyOutlinedTextField(
     isLoading: Boolean = false,
     singleLine: Boolean = false,
     enabled: Boolean = true,
-    @StringRes labelTextStringResourceId: Int,
-    @StringRes trailingIconContentDescriptionTextStringResourceId: Int,
+    labelStringResource: StringResource,
+    trailingIconContentDescriptionStringResource: StringResource,
     keyboardActions: KeyboardActions = KeyboardActions(),
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     value: TextFieldValue = TextFieldValue(),
@@ -74,7 +74,7 @@ internal fun MyOutlinedTextField(
                 value = value,
                 label = {
                     MyOutlinedTextFieldLabelText(
-                        textStringResourceId = labelTextStringResourceId,
+                        stringResource = labelStringResource,
                     )
                 },
                 trailingIcon = {
@@ -84,21 +84,18 @@ internal fun MyOutlinedTextField(
                         exit = fadeOut(),
                     ) {
                         MyIconButton(
-                            onClickLabel = stringResource(
-                                id = trailingIconContentDescriptionTextStringResourceId,
-                            ),
+                            onClickLabelStringResource = trailingIconContentDescriptionStringResource,
                             onClick = onClickTrailingIcon,
                             modifier = Modifier
                                 .padding(
                                     end = 4.dp,
                                 ),
                         ) {
+                            // TODO(Abhi): Replace with MyIcon
                             Icon(
                                 imageVector = Icons.Rounded.Clear,
                                 tint = BarcodesAppTheme.colorScheme.onBackground,
-                                contentDescription = stringResource(
-                                    id = trailingIconContentDescriptionTextStringResourceId,
-                                ),
+                                contentDescription = trailingIconContentDescriptionStringResource.text,
                             )
                         }
                     }
@@ -125,8 +122,8 @@ internal fun MyOutlinedTextField(
     singleLine: Boolean = false,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    @StringRes labelTextStringResourceId: Int,
-    @StringRes trailingIconContentDescriptionTextStringResourceId: Int,
+    labelStringResource: StringResource,
+    trailingIconContentDescriptionStringResource: StringResource,
     keyboardActions: KeyboardActions = KeyboardActions(),
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     value: String,
@@ -144,7 +141,7 @@ internal fun MyOutlinedTextField(
             value = value,
             label = {
                 MyOutlinedTextFieldLabelText(
-                    textStringResourceId = labelTextStringResourceId,
+                    stringResource = labelStringResource,
                 )
             },
             trailingIcon = {
@@ -154,9 +151,7 @@ internal fun MyOutlinedTextField(
                     exit = fadeOut(),
                 ) {
                     MyIconButton(
-                        onClickLabel = stringResource(
-                            id = trailingIconContentDescriptionTextStringResourceId,
-                        ),
+                        onClickLabelStringResource = trailingIconContentDescriptionStringResource,
                         onClick = onTrailingIconClick,
                         modifier = Modifier
                             .padding(
@@ -166,9 +161,7 @@ internal fun MyOutlinedTextField(
                         Icon(
                             imageVector = Icons.Rounded.Clear,
                             tint = BarcodesAppTheme.colorScheme.onBackground,
-                            contentDescription = stringResource(
-                                id = trailingIconContentDescriptionTextStringResourceId,
-                            ),
+                            contentDescription = trailingIconContentDescriptionStringResource.text,
                         )
                     }
                 }

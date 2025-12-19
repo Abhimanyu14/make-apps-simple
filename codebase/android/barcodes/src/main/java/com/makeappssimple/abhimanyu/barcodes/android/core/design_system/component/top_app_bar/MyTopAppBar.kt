@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,7 +23,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.COMPONENT_MY_TOP_APP_BAR
@@ -35,6 +33,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
@@ -43,7 +43,7 @@ import com.makeappssimple.abhimanyu.library.barcodes.android.R
 internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
     navigationIconResource: IconResource? = null,
-    @StringRes titleStringResourceId: Int,
+    titleStringResource: StringResource,
     navigationLabel: String? = null,
     navigationAction: (() -> Unit)? = null,
     appBarActions: @Composable (() -> Unit)? = null,
@@ -51,9 +51,7 @@ internal fun MyTopAppBar(
     MyTopAppBar(
         modifier = modifier,
         navigationIconResource = navigationIconResource,
-        titleText = stringResource(
-            id = titleStringResourceId,
-        ),
+        titleText = titleStringResource.text,
         navigationLabel = navigationLabel,
         navigationAction = navigationAction,
         appBarActions = appBarActions,
@@ -76,9 +74,9 @@ internal fun MyTopAppBar(
         appBarActions = appBarActions,
         navigationButton = {
             MyTopAppBarNavigationButton(
-                onClickLabel = navigationLabel ?: stringResource(
+                onClickLabel = navigationLabel ?: StringResource.Id(
                     id = R.string.barcodes_navigation_back_button_navigation_icon_content_description,
-                ),
+                ).text,
                 iconResource = navigationIconResource,
                 onClick = {
                     navigationAction?.invoke()
@@ -132,12 +130,12 @@ private fun MyTopAppBarUI(
 @Composable
 internal fun MyTopAppBarActionButton(
     iconResource: IconResource,
-    @StringRes iconContentDescriptionStringResourceId: Int,
-    @StringRes onClickLabelStringResourceId: Int,
+    iconContentDescriptionStringResource: StringResource,
+    onClickLabelStringResource: StringResource,
     onClick: () -> Unit,
 ) {
     MyIconButton(
-        onClickLabelStringResourceId = onClickLabelStringResourceId,
+        onClickLabelStringResource = onClickLabelStringResource,
         onClick = onClick,
         modifier = Modifier
             .padding(
@@ -146,7 +144,7 @@ internal fun MyTopAppBarActionButton(
     ) {
         MyIcon(
             iconResource = iconResource,
-            contentDescriptionStringResourceId = iconContentDescriptionStringResourceId,
+            contentDescriptionStringResource = iconContentDescriptionStringResource,
         )
     }
 }

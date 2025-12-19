@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.screen
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -36,6 +35,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.LinkTextData
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
@@ -57,7 +57,9 @@ internal fun CreditsScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.barcodes_screen_credits,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_credits,
+                ),
                 navigationAction = {
                     handleUIEvent(CreditsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
@@ -82,7 +84,9 @@ internal fun CreditsScreenUI(
                 ),
         ) {
             TitleText(
-                titleTextStringResourceId = R.string.barcodes_screen_credits_icons_title,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_credits_icons_title,
+                ),
             )
             LinkText(
                 linkTextData = listOf(
@@ -164,7 +168,9 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleTextStringResourceId = R.string.barcodes_screen_credits_privacy_policy_title,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_credits_privacy_policy_title,
+                ),
             )
             LinkText(
                 linkTextData = listOf(
@@ -189,7 +195,9 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleTextStringResourceId = R.string.barcodes_screen_credits_terms_and_conditions_title,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_credits_terms_and_conditions_title,
+                ),
             )
             LinkText(
                 linkTextData = listOf(
@@ -218,10 +226,10 @@ internal fun CreditsScreenUI(
 
 @Composable
 private fun TitleText(
-    @StringRes titleTextStringResourceId: Int,
+    titleStringResource: StringResource,
 ) {
     MyText(
-        textStringResourceId = titleTextStringResourceId,
+        stringResource = titleStringResource,
         style = BarcodesAppTheme.typography.bodyMedium.copy(
             fontWeight = FontWeight.Bold,
         ),

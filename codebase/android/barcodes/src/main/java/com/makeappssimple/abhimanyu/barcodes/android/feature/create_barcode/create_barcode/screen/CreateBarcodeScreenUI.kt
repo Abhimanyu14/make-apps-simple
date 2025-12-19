@@ -45,6 +45,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text_field.MyOutlinedTextField
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
@@ -82,7 +83,9 @@ internal fun CreateBarcodeScreenUI(
             .fillMaxSize(),
         topBar = {
             MyTopAppBar(
-                titleStringResourceId = R.string.barcodes_screen_create_barcode,
+                titleStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_create_barcode,
+                ),
                 navigationAction = {
                     handleUIEvent(CreateBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
@@ -109,8 +112,12 @@ internal fun CreateBarcodeScreenUI(
         ) {
             MyOutlinedTextField(
                 value = uiState.barcodeName,
-                labelTextStringResourceId = R.string.barcodes_screen_create_barcode_barcode_name,
-                trailingIconContentDescriptionTextStringResourceId = R.string.barcodes_screen_create_barcode_clear_barcode_name,
+                labelStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_create_barcode_barcode_name,
+                ),
+                trailingIconContentDescriptionStringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_create_barcode_clear_barcode_name,
+                ),
                 onTrailingIconClick = {
                     handleUIEvent(
                         CreateBarcodeScreenUIEvent.OnBarcodeNameUpdated(
@@ -162,9 +169,13 @@ internal fun CreateBarcodeScreenUI(
             ) {
                 MyOutlinedTextField(
                     value = uiState.barcodeValue,
-                    labelTextStringResourceId = R.string.barcodes_screen_create_barcode_barcode_value,
+                    labelStringResource = StringResource.Id(
+                        id = R.string.barcodes_screen_create_barcode_barcode_value,
+                    ),
                     readOnly = !uiState.isBarcodeValueEditable,
-                    trailingIconContentDescriptionTextStringResourceId = R.string.barcodes_screen_create_barcode_clear_barcode_value,
+                    trailingIconContentDescriptionStringResource = StringResource.Id(
+                        id = R.string.barcodes_screen_create_barcode_clear_barcode_value,
+                    ),
                     onTrailingIconClick = {
                         handleUIEvent(
                             CreateBarcodeScreenUIEvent.OnBarcodeValueUpdated(
@@ -195,7 +206,9 @@ internal fun CreateBarcodeScreenUI(
                 )
                 if (!uiState.isBarcodeValueEditable) {
                     MyIconButton(
-                        onClickLabelStringResourceId = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
+                        onClickLabelStringResource = StringResource.Id(
+                            id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
+                        ),
                         onClick = {
                             handleUIEvent(
                                 CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick(
@@ -210,14 +223,18 @@ internal fun CreateBarcodeScreenUI(
                     ) {
                         MyIcon(
                             iconResource = MyIcons.ContentCopy,
-                            contentDescriptionStringResourceId = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
+                            contentDescriptionStringResource = StringResource.Id(
+                                id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
+                            ),
                         )
                     }
                 }
             }
             MyElevatedButton(
                 isEnabled = uiState.isSaveButtonEnabled,
-                textStringResourceId = R.string.barcodes_screen_create_barcode_cta_button_label,
+                stringResource = StringResource.Id(
+                    id = R.string.barcodes_screen_create_barcode_cta_button_label,
+                ),
                 onClick = {
                     handleUIEvent(CreateBarcodeScreenUIEvent.OnSaveButtonClick)
                 },

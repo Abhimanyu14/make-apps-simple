@@ -16,12 +16,14 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource
 
+import androidx.compose.ui.graphics.vector.ImageVector as ComposeImageVector
+
 internal sealed class IconResource() : Resource {
     data class Id(
         val id: Int,
     ) : IconResource()
 
     data class ImageVector(
-        val imageVector: androidx.compose.ui.graphics.vector.ImageVector,
+        val imageVector: ComposeImageVector,
     ) : IconResource()
 }
