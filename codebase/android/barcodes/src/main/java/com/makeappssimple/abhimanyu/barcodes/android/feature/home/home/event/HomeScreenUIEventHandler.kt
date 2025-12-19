@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.event
 
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeMenuBottomSheetEvent
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.view_model.HomeScreenViewModel
 
@@ -31,7 +31,7 @@ internal class HomeScreenUIEventHandler internal constructor(
         when (uiEvent) {
             is HomeScreenUIEvent.OnAddFloatingActionButtonClick -> {
                 uiStateEvents.updateScreenBottomSheetType(
-                    HomeScreenBottomSheetType.Menu
+                    HomeCosmosBottomSheetType.Menu
                 )
             }
 

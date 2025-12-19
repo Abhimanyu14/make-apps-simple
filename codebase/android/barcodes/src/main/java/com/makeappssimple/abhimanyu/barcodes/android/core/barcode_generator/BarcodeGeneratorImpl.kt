@@ -68,13 +68,19 @@ internal class BarcodeGeneratorImpl(
         data: String,
         visionBarcodeFormat: Int,
         height: Int,
-        width: Int
+        width: Int,
     ): BitMatrix? {
         val barcodeFormat = getZxingBarcodeFormat(
             visionBarcodeFormat = visionBarcodeFormat,
         )
         return try {
-            MultiFormatWriter().encode(data, barcodeFormat, width, height, null)
+            MultiFormatWriter().encode(
+                data,
+                barcodeFormat,
+                width,
+                height,
+                null
+            )
         } catch (
             _: IllegalArgumentException,
         ) {
@@ -85,7 +91,7 @@ internal class BarcodeGeneratorImpl(
     private fun getPixels(
         bitMatrix: BitMatrix,
         barcodeColor: Int,
-        backgroundColor: Int
+        backgroundColor: Int,
     ): IntArray {
         val bitMatrixWidth = bitMatrix.width
         val bitMatrixHeight = bitMatrix.height
@@ -107,10 +113,22 @@ internal class BarcodeGeneratorImpl(
         width: Int,
         height: Int,
         pixels: IntArray,
-    ): Bitmap? {
-        return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    ): Bitmap {
+        return Bitmap.createBitmap(
+            width,
+            height,
+            Bitmap.Config.ARGB_8888
+        )
             .also {
-                it.setPixels(pixels, 0, width, 0, 0, width, height)
+                it.setPixels(
+                    pixels,
+                    0,
+                    width,
+                    0,
+                    0,
+                    width,
+                    height
+                )
             }
     }
 

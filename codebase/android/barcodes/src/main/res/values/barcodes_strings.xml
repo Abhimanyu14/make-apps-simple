@@ -21,7 +21,7 @@
     <!-- endregion -->
 
     <!-- region navigation back button -->
-    <string name="barcodes_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
+    <string name="cosmos_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
     <!-- endregion -->
 
     <!-- region screen_scan_barcode -->

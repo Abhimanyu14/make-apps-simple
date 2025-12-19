@@ -31,7 +31,10 @@ private object ManualDatabaseMigration {
      * Required field
      * Set data for existing records to current timestamp when migrating
      */
-    val MIGRATION_19_20 = object : Migration(19, 20) {
+    val MIGRATION_19_20 = object : Migration(
+        19,
+        20
+    ) {
         override fun migrate(
             db: SupportSQLiteDatabase,
         ) {

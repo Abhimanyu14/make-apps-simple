@@ -24,7 +24,7 @@ internal class PlayStoreReviewHandler(
     private val context: Context,
 ) {
     fun triggerInAppReview(
-        onComplete: () -> Unit
+        onComplete: () -> Unit,
     ) {
         val reviewManager = ReviewManagerFactory.create(context)
         reviewManager
@@ -36,7 +36,10 @@ internal class PlayStoreReviewHandler(
 
                     (context as? Activity)?.let { activity ->
                         reviewManager
-                            .launchReviewFlow(activity, reviewInfo)
+                            .launchReviewFlow(
+                                activity,
+                                reviewInfo
+                            )
                             .addOnCompleteListener {
                                 onComplete()
                             }

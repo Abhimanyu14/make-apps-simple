@@ -39,19 +39,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CREATE_BARCODE
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyElevatedButton
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text_field.MyOutlinedTextField
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.create_barcode.create_barcode.event.CreateBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.create_barcode.create_barcode.state.CreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosElevatedButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosOutlinedTextField
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import kotlinx.coroutines.delay
 import org.jetbrains.annotations.VisibleForTesting
@@ -75,15 +75,15 @@ internal fun CreateBarcodeScreenUI(
         state.focusRequester.requestFocus()
     }
 
-    MyScaffold(
+    CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_CREATE_BARCODE,
             )
             .fillMaxSize(),
         topBar = {
-            MyTopAppBar(
-                titleStringResource = StringResource.Id(
+            CosmosTopAppBar(
+                titleStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_create_barcode,
                 ),
                 navigationAction = {
@@ -103,19 +103,19 @@ internal fun CreateBarcodeScreenUI(
                     tag = SCREEN_CONTENT_CREATE_BARCODE,
                 )
                 .background(
-                    color = BarcodesAppTheme.colorScheme.background,
+                    color = CosmosAppTheme.colorScheme.background,
                 )
                 .fillMaxSize()
                 .verticalScroll(
                     state = rememberScrollState(),
                 ),
         ) {
-            MyOutlinedTextField(
+            CosmosOutlinedTextField(
                 value = uiState.barcodeName,
-                labelStringResource = StringResource.Id(
+                labelStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_create_barcode_barcode_name,
                 ),
-                trailingIconContentDescriptionStringResource = StringResource.Id(
+                trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_create_barcode_clear_barcode_name,
                 ),
                 onTrailingIconClick = {
@@ -167,13 +167,13 @@ internal fun CreateBarcodeScreenUI(
                         vertical = 8.dp,
                     ),
             ) {
-                MyOutlinedTextField(
+                CosmosOutlinedTextField(
                     value = uiState.barcodeValue,
-                    labelStringResource = StringResource.Id(
+                    labelStringResource = CosmosStringResource.Id(
                         id = R.string.barcodes_screen_create_barcode_barcode_value,
                     ),
                     readOnly = !uiState.isBarcodeValueEditable,
-                    trailingIconContentDescriptionStringResource = StringResource.Id(
+                    trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
                         id = R.string.barcodes_screen_create_barcode_clear_barcode_value,
                     ),
                     onTrailingIconClick = {
@@ -205,8 +205,8 @@ internal fun CreateBarcodeScreenUI(
                         ),
                 )
                 if (!uiState.isBarcodeValueEditable) {
-                    MyIconButton(
-                        onClickLabelStringResource = StringResource.Id(
+                    CosmosIconButton(
+                        onClickLabelStringResource = CosmosStringResource.Id(
                             id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
                         ),
                         onClick = {
@@ -221,18 +221,18 @@ internal fun CreateBarcodeScreenUI(
                                 vertical = 0.dp,
                             ),
                     ) {
-                        MyIcon(
-                            iconResource = MyIcons.ContentCopy,
-                            contentDescriptionStringResource = StringResource.Id(
+                        CosmosIcon(
+                            iconResource = CosmosIcons.ContentCopy,
+                            contentDescriptionStringResource = CosmosStringResource.Id(
                                 id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
                             ),
                         )
                     }
                 }
             }
-            MyElevatedButton(
+            CosmosElevatedButton(
                 isEnabled = uiState.isSaveButtonEnabled,
-                stringResource = StringResource.Id(
+                stringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_create_barcode_cta_button_label,
                 ),
                 onClick = {

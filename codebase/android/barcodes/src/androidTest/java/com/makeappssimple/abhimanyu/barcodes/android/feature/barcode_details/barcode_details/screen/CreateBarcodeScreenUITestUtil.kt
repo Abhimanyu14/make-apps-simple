@@ -34,7 +34,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
-import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags
+import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.TestTags
 
 internal class CreateBarcodeScreenUITestUtil(
     private val composeTestRule: ComposeContentTestRule,
@@ -51,7 +52,7 @@ internal class CreateBarcodeScreenUITestUtil(
     // region Finders
     private fun findRootNode(): SemanticsNodeInteraction {
         return composeTestRule.onNodeWithTag(
-            testTag = TestTags.SCREEN_CONTENT_CREATE_BARCODE,
+            testTag = SCREEN_CONTENT_CREATE_BARCODE,
             useUnmergedTree = true,
         )
     }
@@ -94,19 +95,19 @@ internal class CreateBarcodeScreenUITestUtil(
 
     private fun findTopAppBar(): SemanticsNodeInteraction {
         return composeTestRule.onNodeWithTag(
-            testTag = TestTags.COMPONENT_MY_TOP_APP_BAR,
+            testTag = TestTags.COMPONENT_COSMOS_TOP_APP_BAR,
         )
     }
 
     private fun findTopAppBarNavigationButton(): SemanticsNodeInteraction {
         return composeTestRule.onNodeWithTag(
-            testTag = TestTags.COMPONENT_MY_TOP_APP_BAR_NAVIGATION_BUTTON,
+            testTag = TestTags.COMPONENT_COSMOS_TOP_APP_BAR_NAVIGATION_BUTTON,
         )
     }
 
     private fun findTopAppBarTitleText(): SemanticsNodeInteraction {
         return composeTestRule.onNodeWithTag(
-            testTag = TestTags.COMPONENT_MY_TOP_APP_BAR_TITLE_TEXT,
+            testTag = TestTags.COMPONENT_COSMOS_TOP_APP_BAR_TITLE_TEXT,
         )
     }
     // endregion

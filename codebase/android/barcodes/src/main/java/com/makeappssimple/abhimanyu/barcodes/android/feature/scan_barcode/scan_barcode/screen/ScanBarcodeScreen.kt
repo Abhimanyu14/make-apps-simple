@@ -136,7 +136,10 @@ internal fun ScanBarcodeScreen(
                     processCameraProvider.unbindAll()
                     BarcodeFormat.fromValue(barcode.format)
                         ?.let { barcodeFormat ->
-                            onBarcodeScanned(barcodeFormat, barcodeValue)
+                            onBarcodeScanned(
+                                barcodeFormat,
+                                barcodeValue
+                            )
                         }
                 }
             }
@@ -145,7 +148,10 @@ internal fun ScanBarcodeScreen(
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
             .also {
-                it.setAnalyzer(cameraExecutor, barcodeAnalyser)
+                it.setAnalyzer(
+                    cameraExecutor,
+                    barcodeAnalyser
+                )
             }
 
         try {
@@ -211,10 +217,19 @@ private fun handleActivityResult(
     barcodeValue: String,
 ) {
     val resultIntent = Intent().apply {
-        putExtra(BARCODE_VALUE, barcodeValue)
-        putExtra(BARCODE_FORMAT, barcodeFormat)
+        putExtra(
+            BARCODE_VALUE,
+            barcodeValue
+        )
+        putExtra(
+            BARCODE_FORMAT,
+            barcodeFormat
+        )
     }
-    activity.setResult(RESULT_OK, resultIntent)
+    activity.setResult(
+        RESULT_OK,
+        resultIntent
+    )
     activity.finish()
 }
 

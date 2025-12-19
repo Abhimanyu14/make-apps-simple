@@ -19,14 +19,14 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state
 import androidx.annotation.Keep
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIStateEvents
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
 
 @Immutable
 @Keep
 internal data class HomeScreenUIStateEvents(
-    val updateScreenBottomSheetType: (HomeScreenBottomSheetType) -> Unit,
+    val updateScreenBottomSheetType: (HomeCosmosBottomSheetType) -> Unit,
     val updateIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
     val resetScreenBottomSheetType: () -> Unit = {
-        updateScreenBottomSheetType(HomeScreenBottomSheetType.None)
+        updateScreenBottomSheetType(HomeCosmosBottomSheetType.None)
     },
 ) : ScreenUIStateEvents

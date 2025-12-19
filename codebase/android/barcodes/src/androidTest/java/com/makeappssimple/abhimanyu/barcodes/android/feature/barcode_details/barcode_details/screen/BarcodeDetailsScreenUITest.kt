@@ -26,8 +26,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.junit.Rule
 import org.junit.Test
@@ -51,7 +51,7 @@ internal class BarcodeDetailsScreenUITest {
     @Test
     fun barcodeDetailsScreenElementsAreDisplayed() {
         composeTestRule.setContent {
-            BarcodesAppTheme {
+            CosmosAppTheme {
                 BarcodeDetailsScreenUI(
                     uiState = uiState,
                 )
@@ -158,7 +158,12 @@ internal class BarcodeDetailsScreenUITest {
 
     private fun createRandomBitmap(): ImageBitmap {
         val size = 512
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(
+            size,
+            size,
+            Bitmap.Config.ARGB_8888
+        )
+
         fun getRandomColor(): Int {
             return if (Random.nextInt(2) == 0) {
                 Color.BLACK
@@ -168,7 +173,11 @@ internal class BarcodeDetailsScreenUITest {
         }
         for (x in 0..<size) {
             for (y in 0..<size) {
-                bitmap.setPixel(x, y, getRandomColor())
+                bitmap.setPixel(
+                    x,
+                    y,
+                    getRandomColor()
+                )
             }
         }
         return bitmap

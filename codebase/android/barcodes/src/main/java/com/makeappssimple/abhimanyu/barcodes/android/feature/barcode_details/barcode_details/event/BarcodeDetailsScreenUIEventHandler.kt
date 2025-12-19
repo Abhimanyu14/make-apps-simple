@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.bar
 internal class BarcodeDetailsScreenUIEventHandler internal constructor(
     private val uiStateEvents: BarcodeDetailsScreenUIStateEvents,
     private val screenViewModel: BarcodeDetailsScreenViewModel,
-    private val showBarcodeValueCopiedToastMessage: () -> Unit
+    private val showBarcodeValueCopiedToastMessage: () -> Unit,
 ) {
     fun handleUIEvent(
         uiEvent: BarcodeDetailsScreenUIEvent,

@@ -19,16 +19,16 @@ package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
 
 @Stable
 internal class HomeScreenUIState(
     val isDeleteBarcodeDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
-    val screenBottomSheetType: HomeScreenBottomSheetType = HomeScreenBottomSheetType.None,
+    val screenBottomSheetType: HomeCosmosBottomSheetType = HomeCosmosBottomSheetType.None,
     val allBarcodes: List<Barcode> = emptyList(),
     val barcodeFormattedTimestamps: List<String> = emptyList(),
 
-    val isModalBottomSheetVisible: Boolean = screenBottomSheetType != HomeScreenBottomSheetType.None,
-    val isBackHandlerEnabled: Boolean = screenBottomSheetType != HomeScreenBottomSheetType.None,
+    val isModalBottomSheetVisible: Boolean = screenBottomSheetType != HomeCosmosBottomSheetType.None,
+    val isBackHandlerEnabled: Boolean = screenBottomSheetType != HomeCosmosBottomSheetType.None,
 ) : ScreenUIState

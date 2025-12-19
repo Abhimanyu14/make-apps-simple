@@ -22,13 +22,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemData
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemDataEvent
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MyListItemDataEventDataAndEventHandler
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.list.MySimpleList
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.spacer.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.icons.BarcodesIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemDataEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemDataEventDataAndEventHandler
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosSimpleList
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 private object HomeMenuBottomSheetConstants {
@@ -51,49 +51,49 @@ internal fun HomeMenuBottomSheet(
                 minHeight = HomeMenuBottomSheetConstants.minimumBottomSheetHeight,
             ),
     ) {
-        MySimpleList(
+        CosmosSimpleList(
             listItemsDataAndEventHandler = listOf(
-                MyListItemDataEventDataAndEventHandler(
-                    data = MyListItemData(
-                        stringResource = StringResource.Id(
+                CosmosListItemDataEventDataAndEventHandler(
+                    data = CosmosListItemData(
+                        stringResource = CosmosStringResource.Id(
                             id = R.string.barcodes_screen_home_bottom_sheet_scan_barcode,
                         ),
-                        iconResource = MyIcons.Scanner,
+                        iconResource = BarcodesIcons.Scanner,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            MyListItemDataEvent.OnClick -> {
+                            CosmosListItemDataEvent.OnClick -> {
                                 handleEvent(HomeMenuBottomSheetEvent.OnScanBarcodeButtonClick)
                             }
 
-                            MyListItemDataEvent.OnLongClick -> {}
+                            CosmosListItemDataEvent.OnLongClick -> {}
 
-                            MyListItemDataEvent.OnToggleSelection -> {}
+                            CosmosListItemDataEvent.OnToggleSelection -> {}
                         }
                     },
                 ),
-                MyListItemDataEventDataAndEventHandler(
+                CosmosListItemDataEventDataAndEventHandler(
                     data =
-                        MyListItemData(
-                            stringResource = StringResource.Id(
+                        CosmosListItemData(
+                            stringResource = CosmosStringResource.Id(
                                 id = R.string.barcodes_screen_home_bottom_sheet_create_barcode,
                             ),
-                            iconResource = MyIcons.Barcode,
+                            iconResource = BarcodesIcons.Barcode,
                         ),
                     handleEvent = { event ->
                         when (event) {
-                            MyListItemDataEvent.OnClick -> {
+                            CosmosListItemDataEvent.OnClick -> {
                                 handleEvent(HomeMenuBottomSheetEvent.OnCreateBarcodeButtonClick)
                             }
 
-                            MyListItemDataEvent.OnLongClick -> {}
+                            CosmosListItemDataEvent.OnLongClick -> {}
 
-                            MyListItemDataEvent.OnToggleSelection -> {}
+                            CosmosListItemDataEvent.OnToggleSelection -> {}
                         }
                     },
                 ),
             ),
         )
-        NavigationBarsAndImeSpacer()
+        CosmosNavigationBarsAndImeSpacer()
     }
 }

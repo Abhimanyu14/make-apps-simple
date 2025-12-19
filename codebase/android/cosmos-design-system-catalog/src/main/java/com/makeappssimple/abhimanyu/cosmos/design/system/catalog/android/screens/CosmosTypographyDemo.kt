@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.text.CosmosText
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.text.CosmosTextStyle
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosTextStyle
 
 @Composable
 internal fun CosmosTypographyDemo() {

@@ -27,14 +27,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.viewinterop.AndroidView
-import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags
+import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CONTENT_WEB_VIEW
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
 @Composable
 internal fun WebView(
     modifier: Modifier = Modifier,
     url: String,
-    onPageLoadingCompleted: (title: String) -> Unit
+    onPageLoadingCompleted: (title: String) -> Unit,
 ) {
     var currentPageUrl by remember {
         mutableStateOf("")
@@ -62,7 +62,7 @@ internal fun WebView(
         modifier = modifier
             .fillMaxSize()
             .testTag(
-                tag = TestTags.SCREEN_CONTENT_WEB_VIEW,
+                tag = SCREEN_CONTENT_WEB_VIEW,
             ),
     )
 }

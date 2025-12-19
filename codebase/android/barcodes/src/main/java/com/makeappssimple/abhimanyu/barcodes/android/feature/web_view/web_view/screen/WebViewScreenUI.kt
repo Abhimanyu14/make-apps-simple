@@ -28,14 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_WEB_VIEW
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.progress_indicator.MyCircularProgressIndicator
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.core.web_view.WebView
 import com.makeappssimple.abhimanyu.barcodes.android.feature.web_view.web_view.event.WebViewScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.web_view.web_view.state.WebViewScreenUIState
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.progress_indicator.CosmosCircularProgressIndicator
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Composable
 internal fun WebViewScreenUI(
@@ -43,15 +44,17 @@ internal fun WebViewScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: WebViewScreenUIEvent) -> Unit = {},
 ) {
-    MyScaffold(
+    CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_WEB_VIEW,
             )
             .fillMaxSize(),
         topBar = {
-            MyTopAppBar(
-                titleText = uiState.screenTitle,
+            CosmosTopAppBar(
+                titleStringResource = CosmosStringResource.Text(
+                    text = uiState.screenTitle,
+                ),
                 navigationAction = {
                     handleUIEvent(WebViewScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
@@ -68,7 +71,7 @@ internal fun WebViewScreenUI(
                 modifier = Modifier
                     .fillMaxSize(),
             ) {
-                MyCircularProgressIndicator()
+                CosmosCircularProgressIndicator()
             }
         } else {
             WebView(

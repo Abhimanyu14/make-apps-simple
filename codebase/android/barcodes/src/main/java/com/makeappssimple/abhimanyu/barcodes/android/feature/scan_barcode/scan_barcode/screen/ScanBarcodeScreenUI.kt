@@ -28,13 +28,13 @@ import androidx.compose.ui.platform.testTag
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcode_scanner.camera.BarcodeScannerPreview
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CONTENT_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_SCAN_BARCODE
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.scan_barcode.event.ScanBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.feature.scan_barcode.scan_barcode.state.ScanBarcodeScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
@@ -44,15 +44,15 @@ internal fun ScanBarcodeScreenUI(
     surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
 ) {
-    MyScaffold(
+    CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_SCAN_BARCODE,
             )
             .fillMaxSize(),
         topBar = {
-            MyTopAppBar(
-                titleStringResource = StringResource.Id(
+            CosmosTopAppBar(
+                titleStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_scan_barcode,
                 ),
                 navigationAction = {

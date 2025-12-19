@@ -23,7 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeScreenBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
@@ -61,9 +61,9 @@ internal class HomeScreenViewModel(
     private val isDeleteBarcodeDialogVisible = MutableStateFlow(
         value = false,
     )
-    private val homeScreenBottomSheetType: MutableStateFlow<HomeScreenBottomSheetType> =
+    private val homeScreenBottomSheetType: MutableStateFlow<HomeCosmosBottomSheetType> =
         MutableStateFlow(
-            value = HomeScreenBottomSheetType.None,
+            value = HomeCosmosBottomSheetType.None,
         )
     // endregion
 
@@ -127,7 +127,7 @@ internal class HomeScreenViewModel(
     }
 
     private fun updateScreenBottomSheetType(
-        updatedHomeScreenBottomSheetType: HomeScreenBottomSheetType,
+        updatedHomeScreenBottomSheetType: HomeCosmosBottomSheetType,
     ) {
         homeScreenBottomSheetType.update {
             updatedHomeScreenBottomSheetType

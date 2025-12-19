@@ -25,12 +25,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.util.dpToPx
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.event.BarcodeDetailsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.view_model.BarcodeDetailsScreenViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.util.dpToPx
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.min
@@ -92,7 +92,10 @@ internal fun BarcodeDetailsScreen(
     ) {
         screenViewModel.initViewModel()
         uiStateEvents.updateBarcodeBitmapSize(
-            min(screenWidth, screenHeight).toInt()
+            min(
+                screenWidth,
+                screenHeight
+            ).toInt()
         )
     }
 

@@ -273,7 +273,7 @@ private fun TransactionListItemUI(
                         data = MyExpandableItemIconButtonData(
                             isClickable = true,
                             isEnabled = true,
-                            iconImageVector = MyIcons.Edit,
+                            iconImageVector = CosmosIcons.Edit,
                             labelText = stringResource(
                                 id = R.string.finance_manager_transaction_list_item_edit,
                             ),

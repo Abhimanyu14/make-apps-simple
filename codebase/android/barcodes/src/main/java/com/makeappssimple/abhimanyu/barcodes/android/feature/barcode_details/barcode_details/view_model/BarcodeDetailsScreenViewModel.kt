@@ -23,7 +23,6 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.barcode_generator.BarcodeGenerator
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepository
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.Screen
@@ -36,6 +35,7 @@ import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -95,8 +95,8 @@ internal class BarcodeDetailsScreenViewModel(
                 visionBarcodeFormat = barcode.format,
                 width = barcodeBitmapSize,
                 height = barcodeBitmapSize,
-                barcodeColor = MyColor.ON_BACKGROUND.color,
-                backgroundColor = MyColor.BACKGROUND.color,
+                barcodeColor = CosmosColor.ON_BACKGROUND.color,
+                backgroundColor = CosmosColor.BACKGROUND.color,
             )
         }
     }.defaultObjectStateIn(

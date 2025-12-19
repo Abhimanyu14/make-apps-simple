@@ -26,9 +26,9 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.feature.create_barcode.create_barcode.screen.CreateBarcodeScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.feature.create_barcode.create_barcode.state.CreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
@@ -156,7 +156,10 @@ internal class CreateBarcodeScreenUITest {
     fun barcodeNameTextFieldIsFocused_byDefault() = runUITest {
         setScreenContent()
 
-        composeTestRule.waitUntilNodeCount(isFocused(), 1)
+        composeTestRule.waitUntilNodeCount(
+            isFocused(),
+            1
+        )
         assertBarcodeNameTextFieldIsFocused()
     }
     // endregion
@@ -167,7 +170,10 @@ internal class CreateBarcodeScreenUITest {
     fun barcodeNameTextFieldHasGivenText_whenUserEntersText() = runUITest {
         setScreenContent()
 
-        composeTestRule.waitUntilNodeCount(isFocused(), 1)
+        composeTestRule.waitUntilNodeCount(
+            isFocused(),
+            1
+        )
         performBarcodeNameTextFieldTextInput(
             text = testBarcodeName,
         )
@@ -186,7 +192,10 @@ internal class CreateBarcodeScreenUITest {
     fun barcodeValueTextFieldHasGivenText_whenUserEntersText() = runUITest {
         setScreenContent()
 
-        composeTestRule.waitUntilNodeCount(isFocused(), 1)
+        composeTestRule.waitUntilNodeCount(
+            isFocused(),
+            1
+        )
         performBarcodeValueTextFieldTextInput(
             text = testBarcodeValue,
         )
@@ -206,7 +215,10 @@ internal class CreateBarcodeScreenUITest {
                 isBarcodeValueEditable = true,
             )
 
-            composeTestRule.waitUntilNodeCount(isFocused(), 1)
+            composeTestRule.waitUntilNodeCount(
+                isFocused(),
+                1
+            )
             assertBarcodeNameTextFieldIsFocused()
             performBarcodeNameTextFieldImeAction()
             composeTestRule.waitForIdle()
@@ -223,7 +235,10 @@ internal class CreateBarcodeScreenUITest {
                 isBarcodeValueEditable = false,
             )
 
-            composeTestRule.waitUntilNodeCount(isFocused(), 1)
+            composeTestRule.waitUntilNodeCount(
+                isFocused(),
+                1
+            )
             assertBarcodeNameTextFieldIsFocused()
             performBarcodeNameTextFieldImeAction()
             assertBarcodeNameTextFieldIsFocused()
@@ -235,8 +250,8 @@ internal class CreateBarcodeScreenUITest {
     @Test
     @Ignore("https://issuetracker.google.com/issues/317432140")
     fun barcodeCreationCompleteFlow() = runUITest {
-        val (barcodeName, setBarcodeName) = mutableStateOf("")
-        val (barcodeValue, setBarcodeValue) = mutableStateOf("")
+        val (barcodeName, _) = mutableStateOf("")
+        val (barcodeValue, _) = mutableStateOf("")
 
         setScreenContent(
             barcodeValue = barcodeValue,
@@ -282,7 +297,7 @@ internal class CreateBarcodeScreenUITest {
         barcodeValue: String = "",
     ) {
         composeTestRule.setContent {
-            BarcodesAppTheme {
+            CosmosAppTheme {
                 CreateBarcodeScreenUI(
                     uiState = CreateBarcodeScreenUIState(
                         isBarcodeValueEditable = isBarcodeValueEditable,

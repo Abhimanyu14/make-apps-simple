@@ -42,8 +42,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.text.CosmosText
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.text.CosmosTextStyle
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosTextStyle
 import com.makeappssimple.abhimanyu.makeappssimple.android.R
 
 @Composable

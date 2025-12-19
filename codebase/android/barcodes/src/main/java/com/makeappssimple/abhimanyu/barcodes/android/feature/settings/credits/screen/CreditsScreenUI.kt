@@ -31,16 +31,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CONTENT_CREDITS
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CREDITS
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.LinkText
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.LinkTextData
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.top_app_bar.MyTopAppBar
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.core.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.ui.scaffold.MyScaffold
 import com.makeappssimple.abhimanyu.barcodes.android.feature.settings.credits.event.CreditsScreenUIEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosLinkText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosLinkTextData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,15 +49,15 @@ internal fun CreditsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: CreditsScreenUIEvent) -> Unit = {},
 ) {
-    MyScaffold(
+    CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_CREDITS,
             )
             .fillMaxSize(),
         topBar = {
-            MyTopAppBar(
-                titleStringResource = StringResource.Id(
+            CosmosTopAppBar(
+                titleStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_credits,
                 ),
                 navigationAction = {
@@ -76,7 +76,7 @@ internal fun CreditsScreenUI(
                     tag = SCREEN_CONTENT_CREDITS,
                 )
                 .background(
-                    color = BarcodesAppTheme.colorScheme.background,
+                    color = CosmosAppTheme.colorScheme.background,
                 )
                 .fillMaxSize()
                 .verticalScroll(
@@ -84,16 +84,16 @@ internal fun CreditsScreenUI(
                 ),
         ) {
             TitleText(
-                titleStringResource = StringResource.Id(
+                titleStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_credits_icons_title,
                 ),
             )
-            LinkText(
-                linkTextData = listOf(
-                    LinkTextData(
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
                         text = "Icons made by ",
                     ),
-                    LinkTextData(
+                    CosmosLinkTextData(
                         text = "monkik",
                         tag = "icon_1_author",
                         annotation = "https://www.flaticon.com/free-icon/barcode_664456",
@@ -105,10 +105,10 @@ internal fun CreditsScreenUI(
                             )
                         },
                     ),
-                    LinkTextData(
+                    CosmosLinkTextData(
                         text = " from ",
                     ),
-                    LinkTextData(
+                    CosmosLinkTextData(
                         text = "Flaticon",
                         tag = "icon_1_source",
                         annotation = "https://www.flaticon.com/",
@@ -127,12 +127,12 @@ internal fun CreditsScreenUI(
                         vertical = 0.dp,
                     ),
             )
-            LinkText(
-                linkTextData = listOf(
-                    LinkTextData(
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
                         text = "Icons made by ",
                     ),
-                    LinkTextData(
+                    CosmosLinkTextData(
                         text = "smalllikeart",
                         tag = "icon_1_author",
                         annotation = "https://www.flaticon.com/authors/smalllikeart",
@@ -144,10 +144,10 @@ internal fun CreditsScreenUI(
                             )
                         },
                     ),
-                    LinkTextData(
+                    CosmosLinkTextData(
                         text = " from ",
                     ),
-                    LinkTextData(
+                    CosmosLinkTextData(
                         text = "Flaticon",
                         tag = "icon_1_source",
                         annotation = "https://www.flaticon.com/",
@@ -168,13 +168,13 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleStringResource = StringResource.Id(
+                titleStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_credits_privacy_policy_title,
                 ),
             )
-            LinkText(
-                linkTextData = listOf(
-                    LinkTextData(
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
                         text = "Privacy Policy Generator",
                         tag = "privacy_policy_generator",
                         annotation = "https://app-privacy-policy-generator.firebaseapp.com",
@@ -195,13 +195,13 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleStringResource = StringResource.Id(
+                titleStringResource = CosmosStringResource.Id(
                     id = R.string.barcodes_screen_credits_terms_and_conditions_title,
                 ),
             )
-            LinkText(
-                linkTextData = listOf(
-                    LinkTextData(
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
                         text = "Privacy Policy Generator",
                         tag = "privacy_policy_generator",
                         annotation = "https://app-privacy-policy-generator.firebaseapp.com",
@@ -226,11 +226,11 @@ internal fun CreditsScreenUI(
 
 @Composable
 private fun TitleText(
-    titleStringResource: StringResource,
+    titleStringResource: CosmosStringResource,
 ) {
-    MyText(
+    CosmosText(
         stringResource = titleStringResource,
-        style = BarcodesAppTheme.typography.bodyMedium.copy(
+        style = CosmosAppTheme.typography.bodyMedium.copy(
             fontWeight = FontWeight.Bold,
         ),
         modifier = Modifier
