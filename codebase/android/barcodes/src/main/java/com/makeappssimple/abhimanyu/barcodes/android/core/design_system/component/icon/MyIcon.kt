@@ -22,55 +22,26 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 
 @Composable
 internal fun MyIcon(
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
-    imageVector: ImageVector,
-    @StringRes contentDescriptionStringResourceId: Int?,
+    iconResourceId: Int,
+    @StringRes contentDescriptionStringResourceId: Int? = null,
 ) {
-    MyIcon(
+    Icon(
         modifier = modifier,
         tint = tint,
-        imageVector = imageVector,
+        painter = painterResource(
+            id = iconResourceId,
+        ),
         contentDescription = contentDescriptionStringResourceId?.run {
             stringResource(
                 id = this,
             )
         },
-    )
-}
-
-@Composable
-internal fun MyIcon(
-    modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current,
-    imageVector: ImageVector,
-    contentDescription: String? = null,
-) {
-    Icon(
-        modifier = modifier,
-        tint = tint,
-        imageVector = imageVector,
-        contentDescription = contentDescription,
-    )
-}
-
-@Composable
-internal fun MyIcon(
-    modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current,
-    painter: Painter,
-    contentDescription: String? = null,
-) {
-    Icon(
-        modifier = modifier,
-        tint = tint,
-        painter = painter,
-        contentDescription = contentDescription,
     )
 }

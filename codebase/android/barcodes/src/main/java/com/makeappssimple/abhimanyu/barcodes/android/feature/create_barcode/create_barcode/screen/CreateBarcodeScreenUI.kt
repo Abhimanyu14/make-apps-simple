@@ -209,7 +209,7 @@ internal fun CreateBarcodeScreenUI(
                             ),
                     ) {
                         MyIcon(
-                            imageVector = MyIcons.ContentCopy,
+                            iconResourceId = MyIcons.ContentCopy,
                             contentDescriptionStringResourceId = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
                         )
                     }

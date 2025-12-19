@@ -18,14 +18,11 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.design_system.compone
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -36,6 +33,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.COM
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
@@ -43,7 +41,7 @@ import com.makeappssimple.abhimanyu.library.barcodes.android.R
 @Composable
 internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
-    navigationIcon: ImageVector? = null,
+    navigationIconResourceId: Int? = null,
     @StringRes titleStringResourceId: Int,
     navigationLabel: String? = null,
     navigationAction: (() -> Unit)? = null,
@@ -51,7 +49,7 @@ internal fun MyTopAppBar(
 ) {
     MyTopAppBar(
         modifier = modifier,
-        navigationIcon = navigationIcon,
+        navigationIconResourceId = navigationIconResourceId,
         titleText = stringResource(
             id = titleStringResourceId,
         ),
@@ -65,7 +63,7 @@ internal fun MyTopAppBar(
 internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
     titleText: String,
-    navigationIcon: ImageVector? = null,
+    navigationIconResourceId: Int? = null,
     navigationLabel: String? = null,
     navigationAction: (() -> Unit)? = null,
     appBarActions: @Composable (() -> Unit)? = null,
@@ -80,8 +78,7 @@ internal fun MyTopAppBar(
                 onClickLabel = navigationLabel ?: stringResource(
                     id = R.string.barcodes_navigation_back_button_navigation_icon_content_description,
                 ),
-                iconImageVector = navigationIcon
-                    ?: Icons.AutoMirrored.Rounded.ArrowBack,
+                iconResourceId = navigationIconResourceId,
                 onClick = {
                     navigationAction?.invoke()
                 },
@@ -133,7 +130,7 @@ private fun MyTopAppBarUI(
 
 @Composable
 internal fun MyTopAppBarActionButton(
-    iconImageVector: ImageVector,
+    iconResourceId: Int,
     @StringRes iconContentDescriptionStringResourceId: Int,
     @StringRes onClickLabelStringResourceId: Int,
     onClick: () -> Unit,
@@ -147,7 +144,7 @@ internal fun MyTopAppBarActionButton(
             ),
     ) {
         MyIcon(
-            imageVector = iconImageVector,
+            iconResourceId = iconResourceId,
             contentDescriptionStringResourceId = iconContentDescriptionStringResourceId,
         )
     }
@@ -155,7 +152,7 @@ internal fun MyTopAppBarActionButton(
 
 @Composable
 private fun MyTopAppBarNavigationButton(
-    iconImageVector: ImageVector? = null,
+    iconResourceId: Int? = null,
     onClickLabel: String,
     onClick: () -> Unit,
 ) {
@@ -168,9 +165,9 @@ private fun MyTopAppBarNavigationButton(
             ),
     ) {
         MyIcon(
-            imageVector = iconImageVector
-                ?: Icons.AutoMirrored.Rounded.ArrowBack,
-            contentDescription = onClickLabel,
+            iconResourceId = iconResourceId ?: MyIcons.ArrowBack,
+            // TODO(Abhi): To update
+            // contentDescription = onClickLabel,
         )
     }
 }

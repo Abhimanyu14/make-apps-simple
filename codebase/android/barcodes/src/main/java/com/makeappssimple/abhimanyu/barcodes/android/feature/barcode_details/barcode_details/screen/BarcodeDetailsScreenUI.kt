@@ -88,7 +88,7 @@ internal fun BarcodeDetailsScreenUI(
                             mutableStateOf(false)
                         }
                         MyTopAppBarActionButton(
-                            iconImageVector = MyIcons.MoreVert,
+                            iconResourceId = MyIcons.MoreVert,
                             onClickLabelStringResourceId = R.string.barcodes_screen_barcode_details_content_description_options_menu,
                             iconContentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_options_menu,
                             onClick = {
@@ -112,7 +112,7 @@ internal fun BarcodeDetailsScreenUI(
                                         )
                                     )
                                 },
-                                leadingIconImageVector = MyIcons.Edit,
+                                leadingIconResourceId = MyIcons.Edit,
                             )
                             MyDropdownMenuItem(
                                 leadingIconContentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
@@ -121,7 +121,7 @@ internal fun BarcodeDetailsScreenUI(
                                     isExpanded = false
                                     handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick)
                                 },
-                                leadingIconImageVector = MyIcons.Delete,
+                                leadingIconResourceId = MyIcons.Delete,
                             )
                         }
                     }
@@ -262,7 +262,7 @@ internal fun BarcodeDetailsScreenUI(
                     },
                 ) {
                     MyIcon(
-                        imageVector = MyIcons.ContentCopy,
+                        iconResourceId = MyIcons.ContentCopy,
                         contentDescriptionStringResourceId = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
                     )
                 }

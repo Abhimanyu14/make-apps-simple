@@ -35,7 +35,6 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CONTENT_HOME
@@ -107,9 +106,7 @@ internal fun HomeScreenUI(
                     } else {
                         barcode.name
                     },
-                    painter = painterResource(
-                        id = R.drawable.barcodes_icon_barcode2_black_24dp,
-                    ),
+                    iconResourceId = MyIcons.Barcode2,
                     isSelectionMode = selectedBarcodes.isNotEmpty(),
                     isSelected = selectedBarcodes.contains(index),
                 ),
@@ -202,14 +199,14 @@ internal fun HomeScreenUI(
                         R.string.barcodes_screen_home_selection_mode_top_app_bar_title,
                         selectedBarcodes.size
                     ),
-                    navigationIcon = MyIcons.Close,
+                    navigationIconResourceId = MyIcons.Close,
                     navigationLabel = "Close Selection Mode",
                     navigationAction = {
                         selectedBarcodes.clear()
                     },
                     appBarActions = {
                         MyTopAppBarActionButton(
-                            iconImageVector = MyIcons.Delete,
+                            iconResourceId = MyIcons.Delete,
                             onClickLabelStringResourceId = R.string.barcodes_screen_home_content_description_delete_barcode,
                             iconContentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete_barcode,
                             onClick = {
@@ -223,7 +220,7 @@ internal fun HomeScreenUI(
                     titleStringResourceId = R.string.barcodes_screen_home,
                     appBarActions = {
                         MyTopAppBarActionButton(
-                            iconImageVector = MyIcons.Settings,
+                            iconResourceId = MyIcons.Settings,
                             onClickLabelStringResourceId = R.string.barcodes_screen_home_on_click_label_settings,
                             iconContentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_settings,
                             onClick = {
@@ -238,7 +235,7 @@ internal fun HomeScreenUI(
             MyFloatingActionButton(
                 modifier = Modifier
                     .navigationBarsSpacer(),
-                iconImageVector = MyIcons.Add,
+                iconResourceId = MyIcons.Add,
                 contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_add,
                 onClick = {
                     handleUIEvent(HomeScreenUIEvent.OnAddFloatingActionButtonClick)
@@ -331,7 +328,7 @@ private fun HomeScreenList(
                     ),
             ) {
                 MyIcon(
-                    imageVector = MyIcons.DeleteForever,
+                    iconResourceId = MyIcons.DeleteForever,
                     contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete,
                     tint = BarcodesAppTheme.colorScheme.onError,
                     modifier = Modifier

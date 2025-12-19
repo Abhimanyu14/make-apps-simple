@@ -27,8 +27,6 @@ import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
@@ -45,8 +43,7 @@ internal data class MyListItemDataEventDataAndEventHandler(
 internal data class MyListItemData(
     @StringRes val stringResourceId: Int? = null,
     val text: String? = null,
-    val iconVector: ImageVector? = null,
-    val painter: Painter? = null,
+    val iconResourceId: Int? = null,
     val isSelectionMode: Boolean = false,
     val isSelected: Boolean = false,
 )
@@ -109,20 +106,10 @@ internal fun MyListItem(
                     )
                 }
             } else {
-                if (data.iconVector != null) {
+                if (data.iconResourceId != null) {
                     {
                         MyIcon(
-                            imageVector = data.iconVector,
-                            modifier = Modifier
-                                .size(
-                                    size = 24.dp,
-                                ),
-                        )
-                    }
-                } else if (data.painter != null) {
-                    {
-                        MyIcon(
-                            painter = data.painter,
+                            iconResourceId = data.iconResourceId,
                             modifier = Modifier
                                 .size(
                                     size = 24.dp,

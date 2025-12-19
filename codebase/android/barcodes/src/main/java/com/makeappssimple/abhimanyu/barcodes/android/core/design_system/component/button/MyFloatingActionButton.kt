@@ -20,14 +20,13 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Composable
 internal fun MyFloatingActionButton(
     modifier: Modifier = Modifier,
-    iconImageVector: ImageVector,
+    iconResourceId: Int,
     @StringRes contentDescriptionStringResourceId: Int,
     onClick: () -> Unit,
 ) {
@@ -37,7 +36,7 @@ internal fun MyFloatingActionButton(
         modifier = modifier,
     ) {
         MyIcon(
-            imageVector = iconImageVector,
+            iconResourceId = iconResourceId,
             contentDescriptionStringResourceId = contentDescriptionStringResourceId,
             tint = BarcodesAppTheme.colorScheme.onPrimary,
         )
