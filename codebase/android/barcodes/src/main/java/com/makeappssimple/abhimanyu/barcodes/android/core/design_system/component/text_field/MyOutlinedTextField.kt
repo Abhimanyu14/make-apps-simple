@@ -26,9 +26,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
@@ -39,9 +36,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.button.MyIconButton
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.extensions.shimmer
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.StringResource
-import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.text
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 
@@ -91,11 +89,10 @@ internal fun MyOutlinedTextField(
                                     end = 4.dp,
                                 ),
                         ) {
-                            // TODO(Abhi): Replace with MyIcon
-                            Icon(
-                                imageVector = Icons.Rounded.Clear,
+                            MyIcon(
+                                iconResource = MyIcons.Clear,
                                 tint = BarcodesAppTheme.colorScheme.onBackground,
-                                contentDescription = trailingIconContentDescriptionStringResource.text,
+                                contentDescriptionStringResource = trailingIconContentDescriptionStringResource,
                             )
                         }
                     }
@@ -158,10 +155,10 @@ internal fun MyOutlinedTextField(
                                 end = 4.dp,
                             ),
                     ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Clear,
+                        MyIcon(
+                            iconResource = MyIcons.Clear,
                             tint = BarcodesAppTheme.colorScheme.onBackground,
-                            contentDescription = trailingIconContentDescriptionStringResource.text,
+                            contentDescriptionStringResource = trailingIconContentDescriptionStringResource,
                         )
                     }
                 }

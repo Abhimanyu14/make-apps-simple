@@ -32,6 +32,9 @@ internal object MyIcons {
     val Barcode2: IconResource = IconResource.Id(
         id = R.drawable.barcodes_icon_barcode2_black_24dp,
     )
+    val Clear: IconResource = IconResource.Id(
+        id = R.drawable.barcodes_icon_close_rounded_filled_24dp,
+    )
     val Close: IconResource = IconResource.Id(
         id = R.drawable.barcodes_icon_close_rounded_filled_24dp,
     )
