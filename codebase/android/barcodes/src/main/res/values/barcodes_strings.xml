@@ -20,14 +20,6 @@
     <string name="barcodes_app_name">Barcodes</string>
     <!-- endregion -->
 
-    <!-- region navigation back button -->
-    <string name="cosmos_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
-    <!-- endregion -->
-
-    <!-- region screen_scan_barcode -->
-    <string name="barcodes_permissions_camera_permissions_denied_message">Camera permission required for scanning</string>
-    <!-- endregion -->
-
     <!-- region screen_barcode_details -->
     <string name="barcodes_screen_barcode_details">Barcode Details</string>
     <string name="barcodes_screen_barcode_details_barcode_name">Barcode Name</string>
@@ -90,6 +82,12 @@
 
     <!-- region screen_scan_barcode -->
     <string name="barcodes_screen_scan_barcode">Scan Barcode</string>
+    <string name="barcodes_screen_scan_barcode_camera_permission_rationale">Camera permission is needed to scan barcodes.</string>
+    <string name="barcodes_screen_scan_barcode_camera_permission_action_label">Grant Permission</string>
+    <string name="barcodes_screen_scan_barcode_camera_permission_denied_dialog_title">Permission Required</string>
+    <string name="barcodes_screen_scan_barcode_camera_permission_denied_dialog_message">Camera permission is required to scan barcodes. Please enable it in settings.</string>
+    <string name="barcodes_screen_scan_barcode_camera_permission_denied_dialog_positive_button_text">Open Settings</string>
+    <string name="barcodes_screen_scan_barcode_camera_permission_denied_dialog_negative_button_text">Cancel</string>
     <!-- endregion -->
 
     <!-- region screen_settings -->

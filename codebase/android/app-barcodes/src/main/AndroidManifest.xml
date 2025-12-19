@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name="com.makeappssimple.abhimanyu.barcodes.android.application.BarcodesApplication"
+        android:name="com.makeappssimple.abhimanyu.barcodes.android.platform.application.BarcodesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/barcodes_ic_launcher"
         android:label="@string/barcodes_app_name"
@@ -28,7 +28,7 @@
         android:theme="@style/BarcodesTheme">
 
         <activity
-            android:name="com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity"
+            android:name="com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity"
             android:configChanges="allKnown"
             android:exported="true"
             android:theme="@style/BarcodesTheme"

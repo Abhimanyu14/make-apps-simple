@@ -32,7 +32,7 @@
     <application>
 
         <activity
-            android:name="com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity"
+            android:name="com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity"
             android:configChanges="allKnown"
             android:exported="false" />
 

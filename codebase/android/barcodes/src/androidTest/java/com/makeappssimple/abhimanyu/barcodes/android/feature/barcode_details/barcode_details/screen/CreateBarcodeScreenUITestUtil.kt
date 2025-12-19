@@ -40,14 +40,14 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.TestTags
 internal class CreateBarcodeScreenUITestUtil(
     private val composeTestRule: ComposeContentTestRule,
 ) {
-    private val barcodeNameTextFieldLabel = "Barcode Name"
-    private val barcodeValueTextFieldLabel = "Barcode Value"
+    private val barcodeNameTextFieldLabel = "BarcodeDomainModel Name"
+    private val barcodeValueTextFieldLabel = "BarcodeDomainModel Value"
     private val clearBarcodeNameButtonContentDescription = "Clear barcode name"
     private val clearBarcodeValueButtonContentDescription =
         "Clear barcode value"
     private val copyBarcodeValueButtonContentDescription = "Copy barcode value"
     private val ctaButtonLabel = "SAVE"
-    private val topAppbarTitleText = "Enter Barcode Details"
+    private val topAppbarTitleText = "Enter BarcodeDomainModel Details"
 
     // region Finders
     private fun findRootNode(): SemanticsNodeInteraction {

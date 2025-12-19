@@ -175,7 +175,7 @@ internal class BarcodeRepositoryTest {
             id = id,
             value = value,
             format = 256,
-            name = "Test Barcode",
+            name = "Test BarcodeDomainModel",
             source = BarcodeSource.SCANNED,
             timestamp = System.currentTimeMillis(),
         )

@@ -20,8 +20,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity
-import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodesAppModule
+import com.makeappssimple.abhimanyu.barcodes.android.common.di.BarcodesAppModule
+import com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.barcodes.android.test.KoinTestRule
 import org.junit.Before
 import org.junit.Rule

@@ -313,7 +313,7 @@ internal class BarcodeDaoTest {
             format = 256,
             id = id,
             timestamp = System.currentTimeMillis(),
-            name = "Test Barcode",
+            name = "Test BarcodeDomainModel",
             value = value,
         )
     }

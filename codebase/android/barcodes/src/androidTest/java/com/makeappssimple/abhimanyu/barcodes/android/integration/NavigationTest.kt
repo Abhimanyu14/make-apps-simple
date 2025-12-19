@@ -26,13 +26,13 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.makeappssimple.abhimanyu.barcodes.android.activity.BarcodesActivity
+import com.makeappssimple.abhimanyu.barcodes.android.common.di.BarcodesAppModule
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_CREDITS
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_HOME
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_SETTINGS
 import com.makeappssimple.abhimanyu.barcodes.android.core.constants.TestTags.SCREEN_WEB_VIEW
-import com.makeappssimple.abhimanyu.barcodes.android.di.BarcodesAppModule
+import com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.barcodes.android.test.KoinTestRule
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.After

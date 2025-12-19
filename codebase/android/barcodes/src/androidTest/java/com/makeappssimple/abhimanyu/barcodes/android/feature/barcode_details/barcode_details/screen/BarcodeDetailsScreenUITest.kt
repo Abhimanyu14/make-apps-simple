@@ -26,7 +26,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import com.makeappssimple.abhimanyu.barcodes.android.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.junit.Rule
@@ -58,7 +58,7 @@ internal class BarcodeDetailsScreenUITest {
             }
         }
 
-        // Barcode name
+        // BarcodeDomainModel name
         assertBarcodeNameLabelIsDisplayed()
         assertBarcodeNameTextIsDisplayed()
 
@@ -66,7 +66,7 @@ internal class BarcodeDetailsScreenUITest {
         assertBarcodeCreatedAtLabelIsDisplayed()
         assertBarcodeFormattedTimestampTextIsDisplayed()
 
-        // Barcode value
+        // BarcodeDomainModel value
         assertBarcodeValueLabelIsDisplayed()
         assertBarcodeValueTextIsDisplayed()
 
@@ -74,7 +74,7 @@ internal class BarcodeDetailsScreenUITest {
         assertCopyBarcodeValueButtonIsDisplayed()
         assertCopyBarcodeValueButtonIsClickable()
 
-        // Barcode image
+        // BarcodeDomainModel image
         assertBarcodeImageIsDisplayed()
     }
 
@@ -94,7 +94,7 @@ internal class BarcodeDetailsScreenUITest {
     private fun assertBarcodeNameLabelIsDisplayed() {
         composeTestRule
             .onNodeWithText(
-                text = "Barcode Name",
+                text = "BarcodeDomainModel Name",
             )
             .assertIsDisplayed()
     }
@@ -126,7 +126,7 @@ internal class BarcodeDetailsScreenUITest {
     private fun assertBarcodeValueLabelIsDisplayed() {
         composeTestRule
             .onNodeWithText(
-                text = "Barcode Value",
+                text = "BarcodeDomainModel Value",
             )
             .assertIsDisplayed()
     }
@@ -150,7 +150,7 @@ internal class BarcodeDetailsScreenUITest {
     private fun assertBarcodeImageIsDisplayed() {
         composeTestRule
             .onNodeWithContentDescription(
-                label = "Barcode image",
+                label = "BarcodeDomainModel image",
             )
             .assertIsDisplayed()
     }

@@ -139,7 +139,7 @@ class HomeScreenViewModelTest {
             format = BarcodeFormat.QrCode.value,
             id = 1,
             timestamp = 1680155040000L,
-            name = "Test Barcode",
+            name = "Test BarcodeDomainModel",
             value = "test-value",
         )
 
@@ -159,7 +159,7 @@ class HomeScreenViewModelTest {
             format = BarcodeFormat.QrCode.value,
             id = 1,
             timestamp = 1680155040000L,
-            name = "Test Barcode 1",
+            name = "Test BarcodeDomainModel 1",
             value = "test-value-1",
         )
         val barcode2 = Barcode(
@@ -167,10 +167,13 @@ class HomeScreenViewModelTest {
             format = BarcodeFormat.QrCode.value,
             id = 2,
             timestamp = 1680155040000L,
-            name = "Test Barcode 2",
+            name = "Test BarcodeDomainModel 2",
             value = "test-value-2",
         )
-        val barcodes = listOf(barcode1, barcode2)
+        val barcodes = listOf(
+            barcode1,
+            barcode2
+        )
 
         homeScreenViewModel.saveBarcode(
             barcode = barcode1,

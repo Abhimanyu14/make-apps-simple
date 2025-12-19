@@ -1,0 +1,252 @@
+/*
+ * Copyright 2025-2025 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.barcodes.android.common.ui.feature.settings.credits.screen
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.settings.credits.event.CreditsScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.CommonScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.rememberCommonScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.TestTags.SCREEN_CONTENT_CREDITS
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.TestTags.SCREEN_CREDITS
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosLinkText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosLinkTextData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.library.barcodes.android.R
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun CreditsScreenUI(
+    state: CommonScreenUIState = rememberCommonScreenUIState(),
+    handleUIEvent: (uiEvent: CreditsScreenUIEvent) -> Unit = {},
+) {
+    CosmosScaffold(
+        modifier = Modifier
+            .testTag(
+                tag = SCREEN_CREDITS,
+            )
+            .fillMaxSize(),
+        topBar = {
+            CosmosTopAppBar(
+                titleStringResource = CosmosStringResource.Id(
+                    id = R.string.barcodes_screen_credits,
+                ),
+                navigationAction = {
+                    handleUIEvent(CreditsScreenUIEvent.OnTopAppBarNavigationButtonClick)
+                },
+            )
+        },
+        onClick = {
+            state.focusManager.clearFocus()
+        },
+        coroutineScope = state.coroutineScope,
+    ) {
+        Column(
+            modifier = Modifier
+                .testTag(
+                    tag = SCREEN_CONTENT_CREDITS,
+                )
+                .background(
+                    color = CosmosAppTheme.colorScheme.background,
+                )
+                .fillMaxSize()
+                .verticalScroll(
+                    state = rememberScrollState(),
+                ),
+        ) {
+            TitleText(
+                titleStringResource = CosmosStringResource.Id(
+                    id = R.string.barcodes_screen_credits_icons_title,
+                ),
+            )
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
+                        text = "Icons made by ",
+                    ),
+                    CosmosLinkTextData(
+                        text = "monkik",
+                        tag = "icon_1_author",
+                        annotation = "https://www.flaticon.com/free-icon/barcode_664456",
+                        onClick = {
+                            handleUIEvent(
+                                CreditsScreenUIEvent.OnLinkClick(
+                                    url = "https://www.flaticon.com/free-icon/barcode_664456",
+                                )
+                            )
+                        },
+                    ),
+                    CosmosLinkTextData(
+                        text = " from ",
+                    ),
+                    CosmosLinkTextData(
+                        text = "Flaticon",
+                        tag = "icon_1_source",
+                        annotation = "https://www.flaticon.com/",
+                        onClick = {
+                            handleUIEvent(
+                                CreditsScreenUIEvent.OnLinkClick(
+                                    url = "https://www.flaticon.com/",
+                                )
+                            )
+                        },
+                    )
+                ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 0.dp,
+                    ),
+            )
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
+                        text = "Icons made by ",
+                    ),
+                    CosmosLinkTextData(
+                        text = "smalllikeart",
+                        tag = "icon_1_author",
+                        annotation = "https://www.flaticon.com/authors/smalllikeart",
+                        onClick = {
+                            handleUIEvent(
+                                CreditsScreenUIEvent.OnLinkClick(
+                                    url = "https://www.flaticon.com/authors/smalllikeart",
+                                )
+                            )
+                        },
+                    ),
+                    CosmosLinkTextData(
+                        text = " from ",
+                    ),
+                    CosmosLinkTextData(
+                        text = "Flaticon",
+                        tag = "icon_1_source",
+                        annotation = "https://www.flaticon.com/",
+                        onClick = {
+                            handleUIEvent(
+                                CreditsScreenUIEvent.OnLinkClick(
+                                    url = "https://www.flaticon.com/",
+                                )
+                            )
+                        },
+                    )
+                ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                    ),
+            )
+            SectionSpacer()
+
+            TitleText(
+                titleStringResource = CosmosStringResource.Id(
+                    id = R.string.barcodes_screen_credits_privacy_policy_title,
+                ),
+            )
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
+                        text = "Privacy Policy Generator",
+                        tag = "privacy_policy_generator",
+                        annotation = "https://app-privacy-policy-generator.firebaseapp.com",
+                        onClick = {
+                            handleUIEvent(
+                                CreditsScreenUIEvent.OnLinkClick(
+                                    url = "https://app-privacy-policy-generator.firebaseapp.com",
+                                )
+                            )
+                        },
+                    ),
+                ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                    ),
+            )
+            SectionSpacer()
+
+            TitleText(
+                titleStringResource = CosmosStringResource.Id(
+                    id = R.string.barcodes_screen_credits_terms_and_conditions_title,
+                ),
+            )
+            CosmosLinkText(
+                cosmosLinkTextData = listOf(
+                    CosmosLinkTextData(
+                        text = "Privacy Policy Generator",
+                        tag = "privacy_policy_generator",
+                        annotation = "https://app-privacy-policy-generator.firebaseapp.com",
+                        onClick = {
+                            handleUIEvent(
+                                CreditsScreenUIEvent.OnLinkClick(
+                                    url = "https://app-privacy-policy-generator.firebaseapp.com",
+                                )
+                            )
+                        },
+                    ),
+                ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                    ),
+            )
+            SectionSpacer()
+        }
+    }
+}
+
+@Composable
+private fun TitleText(
+    titleStringResource: CosmosStringResource,
+) {
+    CosmosText(
+        stringResource = titleStringResource,
+        style = CosmosAppTheme.typography.bodyMedium.copy(
+            fontWeight = FontWeight.Bold,
+        ),
+        modifier = Modifier
+            .padding(
+                horizontal = 16.dp,
+                vertical = 4.dp,
+            ),
+    )
+}
+
+@Composable
+private fun SectionSpacer() {
+    Spacer(
+        modifier = Modifier
+            .padding(
+                all = 8.dp,
+            ),
+    )
+}
