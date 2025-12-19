@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
 
 @Composable
 internal fun MyIcon(
@@ -44,4 +45,33 @@ internal fun MyIcon(
             )
         },
     )
+}
+
+@Composable
+internal fun MyIcon(
+    modifier: Modifier = Modifier,
+    tint: Color = LocalContentColor.current,
+    iconResource: IconResource,
+    @StringRes contentDescriptionStringResourceId: Int? = null,
+) {
+    when (iconResource) {
+        is IconResource.Id -> {
+            Icon(
+                modifier = modifier,
+                tint = tint,
+                painter = painterResource(
+                    id = iconResource.id,
+                ),
+                contentDescription = contentDescriptionStringResourceId?.run {
+                    stringResource(
+                        id = this,
+                    )
+                },
+            )
+        }
+
+        is IconResource.ImageVector -> {
+
+        }
+    }
 }

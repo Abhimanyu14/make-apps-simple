@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
 
 @Composable
 internal fun MyDropdownMenuItem(
@@ -29,7 +30,7 @@ internal fun MyDropdownMenuItem(
     @StringRes leadingIconContentDescriptionStringResourceId: Int,
     @StringRes textStringResourceId: Int,
     onClick: () -> Unit,
-    leadingIconResourceId: Int,
+    leadingIconResource: IconResource,
 ) {
     DropdownMenuItem(
         text = {
@@ -40,7 +41,7 @@ internal fun MyDropdownMenuItem(
         onClick = onClick,
         leadingIcon = {
             MyIcon(
-                iconResourceId = leadingIconResourceId,
+                iconResource = leadingIconResource,
                 contentDescriptionStringResourceId = leadingIconContentDescriptionStringResourceId,
             )
         },

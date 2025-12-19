@@ -31,6 +31,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 
 @Immutable
@@ -43,7 +44,7 @@ internal data class MyListItemDataEventDataAndEventHandler(
 internal data class MyListItemData(
     @StringRes val stringResourceId: Int? = null,
     val text: String? = null,
-    val iconResourceId: Int? = null,
+    val iconResource: IconResource? = null,
     val isSelectionMode: Boolean = false,
     val isSelected: Boolean = false,
 )
@@ -106,10 +107,10 @@ internal fun MyListItem(
                     )
                 }
             } else {
-                if (data.iconResourceId != null) {
+                if (data.iconResource != null) {
                     {
                         MyIcon(
-                            iconResourceId = data.iconResourceId,
+                            iconResource = data.iconResource,
                             modifier = Modifier
                                 .size(
                                     size = 24.dp,

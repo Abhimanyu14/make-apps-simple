@@ -106,7 +106,7 @@ internal fun HomeScreenUI(
                     } else {
                         barcode.name
                     },
-                    iconResourceId = MyIcons.Barcode2,
+                    iconResource = MyIcons.Barcode2,
                     isSelectionMode = selectedBarcodes.isNotEmpty(),
                     isSelected = selectedBarcodes.contains(index),
                 ),
@@ -199,14 +199,14 @@ internal fun HomeScreenUI(
                         R.string.barcodes_screen_home_selection_mode_top_app_bar_title,
                         selectedBarcodes.size
                     ),
-                    navigationIconResourceId = MyIcons.Close,
+                    navigationIconResource = MyIcons.Close,
                     navigationLabel = "Close Selection Mode",
                     navigationAction = {
                         selectedBarcodes.clear()
                     },
                     appBarActions = {
                         MyTopAppBarActionButton(
-                            iconResourceId = MyIcons.Delete,
+                            iconResource = MyIcons.Delete,
                             onClickLabelStringResourceId = R.string.barcodes_screen_home_content_description_delete_barcode,
                             iconContentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete_barcode,
                             onClick = {
@@ -220,7 +220,7 @@ internal fun HomeScreenUI(
                     titleStringResourceId = R.string.barcodes_screen_home,
                     appBarActions = {
                         MyTopAppBarActionButton(
-                            iconResourceId = MyIcons.Settings,
+                            iconResource = MyIcons.Settings,
                             onClickLabelStringResourceId = R.string.barcodes_screen_home_on_click_label_settings,
                             iconContentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_settings,
                             onClick = {
@@ -235,7 +235,7 @@ internal fun HomeScreenUI(
             MyFloatingActionButton(
                 modifier = Modifier
                     .navigationBarsSpacer(),
-                iconResourceId = MyIcons.Add,
+                iconResource = MyIcons.Add,
                 contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_add,
                 onClick = {
                     handleUIEvent(HomeScreenUIEvent.OnAddFloatingActionButtonClick)
@@ -328,7 +328,7 @@ private fun HomeScreenList(
                     ),
             ) {
                 MyIcon(
-                    iconResourceId = MyIcons.DeleteForever,
+                    iconResource = MyIcons.DeleteForever,
                     contentDescriptionStringResourceId = R.string.barcodes_screen_home_content_description_delete,
                     tint = BarcodesAppTheme.colorScheme.onError,
                     modifier = Modifier

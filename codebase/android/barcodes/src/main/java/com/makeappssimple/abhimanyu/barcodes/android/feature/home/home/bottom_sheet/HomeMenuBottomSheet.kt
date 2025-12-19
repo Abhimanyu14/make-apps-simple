@@ -55,7 +55,7 @@ internal fun HomeMenuBottomSheet(
                 MyListItemDataEventDataAndEventHandler(
                     data = MyListItemData(
                         stringResourceId = R.string.barcodes_screen_home_bottom_sheet_scan_barcode,
-                        iconResourceId = MyIcons.Scanner,
+                        iconResource = MyIcons.Scanner,
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -73,7 +73,7 @@ internal fun HomeMenuBottomSheet(
                     data =
                         MyListItemData(
                             stringResourceId = R.string.barcodes_screen_home_bottom_sheet_create_barcode,
-                            iconResourceId = MyIcons.Barcode,
+                            iconResource = MyIcons.Barcode,
                         ),
                     handleEvent = { event ->
                         when (event) {

@@ -34,6 +34,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.componen
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.icon.MyIcon
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.component.text.MyText
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.resource.IconResource
 import com.makeappssimple.abhimanyu.barcodes.android.core.design_system.theme.BarcodesAppTheme
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
@@ -41,7 +42,7 @@ import com.makeappssimple.abhimanyu.library.barcodes.android.R
 @Composable
 internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
-    navigationIconResourceId: Int? = null,
+    navigationIconResource: IconResource? = null,
     @StringRes titleStringResourceId: Int,
     navigationLabel: String? = null,
     navigationAction: (() -> Unit)? = null,
@@ -49,7 +50,7 @@ internal fun MyTopAppBar(
 ) {
     MyTopAppBar(
         modifier = modifier,
-        navigationIconResourceId = navigationIconResourceId,
+        navigationIconResource = navigationIconResource,
         titleText = stringResource(
             id = titleStringResourceId,
         ),
@@ -63,7 +64,7 @@ internal fun MyTopAppBar(
 internal fun MyTopAppBar(
     modifier: Modifier = Modifier,
     titleText: String,
-    navigationIconResourceId: Int? = null,
+    navigationIconResource: IconResource? = null,
     navigationLabel: String? = null,
     navigationAction: (() -> Unit)? = null,
     appBarActions: @Composable (() -> Unit)? = null,
@@ -78,7 +79,7 @@ internal fun MyTopAppBar(
                 onClickLabel = navigationLabel ?: stringResource(
                     id = R.string.barcodes_navigation_back_button_navigation_icon_content_description,
                 ),
-                iconResourceId = navigationIconResourceId,
+                iconResource = navigationIconResource,
                 onClick = {
                     navigationAction?.invoke()
                 },
@@ -130,7 +131,7 @@ private fun MyTopAppBarUI(
 
 @Composable
 internal fun MyTopAppBarActionButton(
-    iconResourceId: Int,
+    iconResource: IconResource,
     @StringRes iconContentDescriptionStringResourceId: Int,
     @StringRes onClickLabelStringResourceId: Int,
     onClick: () -> Unit,
@@ -144,7 +145,7 @@ internal fun MyTopAppBarActionButton(
             ),
     ) {
         MyIcon(
-            iconResourceId = iconResourceId,
+            iconResource = iconResource,
             contentDescriptionStringResourceId = iconContentDescriptionStringResourceId,
         )
     }
@@ -152,7 +153,7 @@ internal fun MyTopAppBarActionButton(
 
 @Composable
 private fun MyTopAppBarNavigationButton(
-    iconResourceId: Int? = null,
+    iconResource: IconResource? = null,
     onClickLabel: String,
     onClick: () -> Unit,
 ) {
@@ -165,7 +166,7 @@ private fun MyTopAppBarNavigationButton(
             ),
     ) {
         MyIcon(
-            iconResourceId = iconResourceId ?: MyIcons.ArrowBack,
+            iconResource = iconResource ?: MyIcons.ArrowBack,
             // TODO(Abhi): To update
             // contentDescription = onClickLabel,
         )
