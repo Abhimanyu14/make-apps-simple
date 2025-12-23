@@ -35,6 +35,7 @@ import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import kotlinx.coroutines.CoroutineScope
@@ -157,9 +158,19 @@ internal class BarcodeDetailsScreenViewModel(
     fun deleteBarcode() {
         viewModelScope.launch {
             barcode.value?.let {
-                deleteBarcodesUseCase(
+                val result = deleteBarcodesUseCase(
                     barcodes = arrayOf(it),
                 )
+                when (result) {
+                    is MyResult.Error -> {
+                        // TODO(Abhi): Handle failure
+                        result.exception?.printStackTrace()
+                    }
+
+                    is MyResult.Loading -> {}
+
+                    is MyResult.Success -> {}
+                }
             }
         }
         navigateToHomeScreen()
@@ -198,10 +209,22 @@ internal class BarcodeDetailsScreenViewModel(
     // endregion
 
     private suspend fun fetchBarcode() {
-        screenArgs.originalBarcodeId?.let {
-            barcode.value = getBarcodeByIdUseCase(
-                id = it,
+        screenArgs.originalBarcodeId?.let { originalBarcodeId ->
+            val result = getBarcodeByIdUseCase(
+                id = originalBarcodeId,
             )
+            when (result) {
+                is MyResult.Error -> {
+                    // TODO(Abhi): Handle failure
+                    result.exception?.printStackTrace()
+                }
+
+                is MyResult.Loading -> {}
+
+                is MyResult.Success -> {
+                    barcode.value = result.data
+                }
+            }
         }
     }
 }

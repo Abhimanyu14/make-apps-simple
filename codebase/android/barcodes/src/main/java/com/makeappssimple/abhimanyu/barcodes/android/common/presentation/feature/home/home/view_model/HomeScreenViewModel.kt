@@ -32,6 +32,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.Analyti
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -116,7 +117,7 @@ internal class HomeScreenViewModel(
         barcode: BarcodeUiModel,
     ): Job {
         return viewModelScope.launch {
-            insertBarcodesUseCase(
+            val result = insertBarcodesUseCase(
                 source = barcodeUiToDomainMapper.toDomainModel(
                     barcodeSourceUiModel = barcode.source,
                 ),
@@ -126,6 +127,10 @@ internal class HomeScreenViewModel(
                 name = barcode.name,
                 value = barcode.value,
             )
+            if (result is MyResult.Error) {
+                // TODO(Abhi): Handle failure
+                result.exception?.printStackTrace()
+            }
         }
     }
 
@@ -133,13 +138,17 @@ internal class HomeScreenViewModel(
         barcodes: List<BarcodeUiModel>,
     ): Job {
         return viewModelScope.launch {
-            deleteBarcodesUseCase(
+            val result = deleteBarcodesUseCase(
                 barcodes = barcodes.map {
                     barcodeUiToDomainMapper.toDomainModel(
                         barcodeUiModel = it,
                     )
                 }.toTypedArray(),
             )
+            if (result is MyResult.Error) {
+                // TODO(Abhi): Handle failure
+                result.exception?.printStackTrace()
+            }
         }
     }
 

@@ -37,6 +37,7 @@ import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import com.makeappssimple.abhimanyu.common.core.util.defaultObjectStateIn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -134,7 +135,7 @@ internal class CreateBarcodeScreenViewModel(
     fun saveBarcode() {
         viewModelScope.launch {
             val originalBarcodeValue = originalBarcode.value
-            if (originalBarcodeValue != null) {
+            val result = if (originalBarcodeValue != null) {
                 updateBarcodesUseCase(
                     originalBarcodeValue.copy(
                         name = barcodeName.value,
@@ -147,6 +148,10 @@ internal class CreateBarcodeScreenViewModel(
                     name = barcodeName.value,
                     value = barcodeValue.value,
                 )
+            }
+            if (result is MyResult.Error) {
+                // TODO(Abhi): Handle failure
+                result.exception?.printStackTrace()
             }
         }
     }
@@ -177,16 +182,29 @@ internal class CreateBarcodeScreenViewModel(
 
     private suspend fun fetchBarcode() {
         screenArgs.barcodeId?.let { barcodeId ->
-            originalBarcode.update {
-                getBarcodeByIdUseCase(
-                    id = barcodeId,
-                )
-            }
-            barcodeName.update {
-                originalBarcode.value?.name.orEmpty()
-            }
-            barcodeValue.update {
-                originalBarcode.value?.value.orEmpty()
+            val result = getBarcodeByIdUseCase(
+                id = barcodeId,
+            )
+            when (result) {
+                is MyResult.Error -> {
+                    // TODO(Abhi): Handle failure
+                    result.exception?.printStackTrace()
+                }
+
+                is MyResult.Loading -> {}
+
+                is MyResult.Success -> {
+                    val fetchedOriginalBarcode = result.data
+                    originalBarcode.update {
+                        fetchedOriginalBarcode
+                    }
+                    barcodeName.update {
+                        fetchedOriginalBarcode?.name.orEmpty()
+                    }
+                    barcodeValue.update {
+                        fetchedOriginalBarcode?.value.orEmpty()
+                    }
+                }
             }
         }
     }

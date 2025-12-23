@@ -72,9 +72,9 @@ internal interface BarcodeDao {
      * @throws [android.database.sqlite.SQLiteException]
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertBarcodes(
-        vararg barcodeEntities: BarcodeDataModel,
-    ): LongArray
+    suspend fun insertBarcode(
+        barcode: BarcodeDataModel,
+    ): Long
 
     /**
      * Update barcodes in the table.

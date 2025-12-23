@@ -23,8 +23,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.data.mapper.BarcodeD
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 internal class BarcodeRepositoryImpl(
@@ -35,31 +35,18 @@ internal class BarcodeRepositoryImpl(
 ) : BarcodeRepository {
     override suspend fun deleteBarcodes(
         vararg barcodes: BarcodeDomainModel,
-    ): Int {
+    ): MyResult<Int> {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.deleteBarcodes(
+                val deletedBarcodesCount = barcodeDao.deleteBarcodes(
                     barcodeEntities = barcodes
                         .map(
                             transform = barcodeDomainToDataMapper::toDataModel,
                         )
                         .toTypedArray(),
                 )
-            }
-        } catch (
-            sqLiteException: SQLiteException,
-        ) {
-            // TODO(Abhi): Handle error when SQL query fails
-            sqLiteException.printStackTrace()
-            0
-        }
-    }
-
-    override fun getAllBarcodesFlow(): Flow<List<BarcodeDomainModel>> {
-        return try {
-            barcodeDao.getAllBarcodesFlow().map {
-                it.map(
-                    transform = barcodeDataToDomainMapper::toDomainModel,
+                MyResult.Success(
+                    data = deletedBarcodesCount,
                 )
             }
         } catch (
@@ -67,44 +54,34 @@ internal class BarcodeRepositoryImpl(
         ) {
             // TODO(Abhi): Handle error when SQL query fails
             sqLiteException.printStackTrace()
-            emptyFlow()
+            MyResult.Error(
+                exception = sqLiteException,
+            )
+        }
+    }
+
+    override fun getAllBarcodesFlow(): Flow<List<BarcodeDomainModel>> {
+        return barcodeDao.getAllBarcodesFlow().map {
+            it.map(
+                transform = barcodeDataToDomainMapper::toDomainModel,
+            )
         }
     }
 
     override suspend fun getBarcodeById(
         id: Int,
-    ): BarcodeDomainModel? {
+    ): MyResult<BarcodeDomainModel?> {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
                 val barcodeDataModel = barcodeDao.getBarcodeById(
                     id = id,
                 )
-                barcodeDataModel?.let {
-                    barcodeDataToDomainMapper.toDomainModel(
-                        barcodeDataModel = barcodeDataModel,
-                    )
-                }
-            }
-        } catch (
-            sqLiteException: SQLiteException,
-        ) {
-            // TODO(Abhi): Handle error when SQL query fails
-            sqLiteException.printStackTrace()
-            null
-        }
-    }
-
-    override suspend fun insertBarcodes(
-        vararg barcodes: BarcodeDomainModel,
-    ): LongArray {
-        return try {
-            dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.insertBarcodes(
-                    barcodeEntities = barcodes
-                        .map(
-                            transform = barcodeDomainToDataMapper::toDataModel,
+                MyResult.Success(
+                    data = barcodeDataModel?.let {
+                        barcodeDataToDomainMapper.toDomainModel(
+                            barcodeDataModel = barcodeDataModel,
                         )
-                        .toTypedArray(),
+                    }
                 )
             }
         } catch (
@@ -112,21 +89,51 @@ internal class BarcodeRepositoryImpl(
         ) {
             // TODO(Abhi): Handle error when SQL query fails
             sqLiteException.printStackTrace()
-            longArrayOf()
+            MyResult.Error(
+                exception = sqLiteException,
+            )
+        }
+    }
+
+    override suspend fun insertBarcode(
+        barcode: BarcodeDomainModel,
+    ): MyResult<Long> {
+        return try {
+            dispatcherProvider.executeOnIoDispatcher {
+                val barcodeId = barcodeDao.insertBarcode(
+                    barcodeDomainToDataMapper.toDataModel(
+                        barcodeDomainModel = barcode,
+                    ),
+                )
+                MyResult.Success(
+                    data = barcodeId,
+                )
+            }
+        } catch (
+            sqLiteException: SQLiteException,
+        ) {
+            // TODO(Abhi): Handle error when SQL query fails
+            sqLiteException.printStackTrace()
+            MyResult.Error(
+                exception = sqLiteException,
+            )
         }
     }
 
     override suspend fun updateBarcodes(
         vararg barcodes: BarcodeDomainModel,
-    ): Int {
+    ): MyResult<Int> {
         return try {
             dispatcherProvider.executeOnIoDispatcher {
-                barcodeDao.updateBarcodes(
+                val updatedBarcodesCount = barcodeDao.updateBarcodes(
                     barcodeEntities = barcodes
                         .map(
                             transform = barcodeDomainToDataMapper::toDataModel,
                         )
                         .toTypedArray(),
+                )
+                MyResult.Success(
+                    data = updatedBarcodesCount,
                 )
             }
         } catch (
@@ -134,7 +141,9 @@ internal class BarcodeRepositoryImpl(
         ) {
             // TODO(Abhi): Handle error when SQL query fails
             sqLiteException.printStackTrace()
-            0
+            MyResult.Error(
+                exception = sqLiteException,
+            )
         }
     }
 }

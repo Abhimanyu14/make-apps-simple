@@ -18,13 +18,14 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.bar
 
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 
 internal class DeleteBarcodesUseCase(
     private val barcodeRepository: BarcodeRepository,
 ) {
     suspend operator fun invoke(
         vararg barcodes: BarcodeDomainModel,
-    ): Int {
+    ): MyResult<Int> {
         return barcodeRepository.deleteBarcodes(
             barcodes = barcodes,
         )

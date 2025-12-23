@@ -17,6 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository
 
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeDomainModel
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -30,7 +31,7 @@ internal interface BarcodeRepository {
      */
     suspend fun deleteBarcodes(
         vararg barcodes: BarcodeDomainModel,
-    ): Int
+    ): MyResult<Int>
 
     fun getAllBarcodesFlow(): Flow<List<BarcodeDomainModel>>
 
@@ -40,15 +41,15 @@ internal interface BarcodeRepository {
      */
     suspend fun getBarcodeById(
         id: Int,
-    ): BarcodeDomainModel?
+    ): MyResult<BarcodeDomainModel?>
 
     /**
      * @return Row id of inserted rows. First valid row id is 1.
      * Returns empty array if failed to insert.
      */
-    suspend fun insertBarcodes(
-        vararg barcodes: BarcodeDomainModel,
-    ): LongArray
+    suspend fun insertBarcode(
+        barcode: BarcodeDomainModel,
+    ): MyResult<Long>
 
     /**
      * Only updates the existing rows using the primary key
@@ -57,5 +58,5 @@ internal interface BarcodeRepository {
      */
     suspend fun updateBarcodes(
         vararg barcodes: BarcodeDomainModel,
-    ): Int
+    ): MyResult<Int>
 }

@@ -1,10 +1,7 @@
 # Prompt
 
-- Refer "InsertBarcodesUseCase" and its usages.
-- Since there is no requirement to insert multiple barcodes at once, update the use-case to insert a single barcode.
-- Get input for the use-case as properties instead of the whole model class so that only required properties are passed through.
-- Property like "timestamp" can be created in the use-case wherever applicable.
-- Maintain the existing logic as it is.
+- Refer "barcodes_clean_architecture_analysis".
+- Make changes for this item - "Consider adding Result types for better error propagation".
 
 # Scope
 

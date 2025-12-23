@@ -29,6 +29,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.Analyti
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -98,15 +99,27 @@ internal class ScanBarcodeScreenViewModel(
         barcodeValue: String,
     ) {
         viewModelScope.launch {
-            val barcodeId = insertBarcodesUseCase(
+            val result = insertBarcodesUseCase(
                 source = BarcodeSourceDomainModel.SCANNED,
                 format = barcodeFormat,
                 value = barcodeValue,
-            ).toInt()
-            navigateUp().join()
-            navigateToBarcodeDetailsScreen(
-                barcodeId = barcodeId,
             )
+            when (result) {
+                is MyResult.Error -> {
+                    // TODO(Abhi): Handle failure
+                    result.exception?.printStackTrace()
+                }
+
+                is MyResult.Loading -> {}
+                
+                is MyResult.Success -> {
+                    val barcodeId = result.data.toInt()
+                    navigateUp().join()
+                    navigateToBarcodeDetailsScreen(
+                        barcodeId = barcodeId,
+                    )
+                }
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeSourceDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.common.core.result.MyResult
 
 internal class InsertBarcodesUseCase(
     private val barcodeRepository: BarcodeRepository,
@@ -32,8 +33,8 @@ internal class InsertBarcodesUseCase(
         timestamp: Long? = null,
         name: String? = null,
         value: String,
-    ): Long {
-        return barcodeRepository.insertBarcodes(
+    ): MyResult<Long> {
+        return barcodeRepository.insertBarcode(
             BarcodeDomainModel(
                 source = source,
                 format = format,
@@ -42,6 +43,6 @@ internal class InsertBarcodesUseCase(
                 name = name,
                 value = value,
             ),
-        ).first()
+        )
     }
 }

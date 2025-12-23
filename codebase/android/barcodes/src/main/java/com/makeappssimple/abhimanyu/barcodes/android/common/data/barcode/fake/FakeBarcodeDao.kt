@@ -58,20 +58,14 @@ internal class FakeBarcodeDao : BarcodeDao {
         return fakeBarcodeEntities.find { it.id == id }
     }
 
-    override suspend fun insertBarcodes(
-        vararg barcodeEntities: BarcodeDataModel,
-    ): LongArray {
-        val insertedBarcodeIds = mutableListOf<Long>()
-        barcodeEntities.forEach { entity ->
-            fakeBarcodeEntities.removeAll { it.id == entity.id }
-            fakeBarcodeEntities.add(
-                element = entity,
-            )
-            insertedBarcodeIds.add(
-                element = entity.id.toLong(),
-            )
-        }
-        return insertedBarcodeIds.toLongArray()
+    override suspend fun insertBarcode(
+        barcode: BarcodeDataModel,
+    ): Long {
+        fakeBarcodeEntities.removeAll { it.id == barcode.id }
+        fakeBarcodeEntities.add(
+            element = barcode,
+        )
+        return barcode.id.toLong()
     }
 
     override suspend fun updateBarcodes(
