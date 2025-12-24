@@ -19,11 +19,12 @@ The package `com.makeappssimple.abhimanyu.barcodes.android.common` follows Clean
 - Proper use of mappers between layers
 - Dependency inversion is correctly implemented
 - Presentation and UI layers correctly depend only on Domain layer
+- **Improved Error Handling**: Repository now uses `MyResult` to propagate success/failure states.
 
 **Areas Requiring Attention:**
-1. Error handling in data repository implementation
-2. Use cases are simple pass-throughs without domain logic
-3. Potential runtime error in `ScanBarcodeScreenViewModel` when handling empty arrays
+1. **Logging**: `BarcodeRepositoryImpl` uses `printStackTrace()` instead of a standard logging mechanism (e.g., `LogKit`).
+2. **UI Error Handling**: While ViewModels receive error states, they currently log them to console (via TODOs) rather than surfacing them to the UI.
+3. **Use Case Logic**: Most use cases are simple pass-throughs. `InsertBarcodesUseCase` has minimal logic (timestamp generation).
 
 ---
 
@@ -31,27 +32,20 @@ The package `com.makeappssimple.abhimanyu.barcodes.android.common` follows Clean
 
 ### High Priority
 
-1.  **Refactor Error Handling**:
-    *   **Issue**: `BarcodeRepositoryImpl` catches `SQLiteException`, prints stack traces, and returns default values (e.g., `0` or `emptyFlow`). This prevents the domain and presentation layers from handling errors appropriately.
-    *   **Action**: Modify `BarcodeRepositoryImpl` and the `BarcodeRepository` interface to return a `Result<T>` or a sealed class (e.g., `DataResult`) instead of raw values.
-    *   **Action**: Replace `printStackTrace()` with a proper logging mechanism.
-    *   **Action**: Propagate exceptions or transform them into domain errors.
+1.  **Refactor Logging**:
+    *   **Issue**: `BarcodeRepositoryImpl` and `ScanBarcodeScreenViewModel` use `printStackTrace()` for error logging.
+    *   **Action**: Replace `printStackTrace()` with `LogKit` or a unified logging strategy to ensure errors are properly recorded in production.
+
+2.  **Implement UI Error Feedback**:
+    *   **Issue**: `ScanBarcodeScreenViewModel` catches errors (returning `MyResult.Error`) but currently only prints the stack trace. The user is not notified if an operation fails.
+    *   **Action**: Update `ScanBarcodeScreenUIState` to include error events (e.g., `Snackbar` messages) and handle them in the UI.
 
 ### Medium Priority
 
-2.  **Enhance Use Cases**:
-    *   **Issue**: All use cases (`GetAllBarcodesFlowUseCase`, `InsertBarcodesUseCase`, `DeleteBarcodesUseCase`, `UpdateBarcodesUseCase`, `GetBarcodeByIdUseCase`) are simple pass-throughs to the repository without any domain logic.
+3.  **Enhance Use Cases**:
+    *   **Issue**: `GetAllBarcodesFlowUseCase`, `DeleteBarcodesUseCase`, `UpdateBarcodesUseCase`, and `GetBarcodeByIdUseCase` are simple pass-throughs. `InsertBarcodesUseCase` contains minor logic (creating the domain model with a timestamp).
     *   **Location**: `domain/use_case/barcode/`
-    *   **Impact**: While use cases provide a clean abstraction boundary, they currently don't add value beyond indirection. This is acceptable for maintainability but could be enhanced.
-    *   **Action**: Evaluate adding domain logic to use cases (e.g., validation, sorting, business rules) to better justify their existence as architectural boundaries.
-    *   **Action**: Consider consolidating simple CRUD operations if no domain logic is needed, or document the architectural decision to keep them as thin wrappers.
-
-3.  **Potential Runtime Error in ScanBarcodeScreenViewModel**:
-    *   **Issue**: In `ScanBarcodeScreenViewModel.saveBarcode()`, line 109 calls `.first()` on a `LongArray` returned from `insertBarcodesUseCase()`. If the array is empty (insertion fails), this will throw a `NoSuchElementException`.
-    *   **Location**: `presentation/feature/scan_barcode/scan_barcode/view_model/ScanBarcodeScreenViewModel.kt:109`
-    *   **Impact**: Runtime crash when barcode insertion fails silently (due to error handling in repository).
-    *   **Action**: Add null/empty check before accessing the first element, or handle the error case appropriately.
-    *   **Action**: Consider returning a `Result<Long>` or similar from the use case to make error handling explicit.
+    *   **Action**: Evaluate adding more domain logic (validation, business rules) to better justify their existence, or document the decision to keep them as thin wrappers for architectural consistency.
 
 ---
 
@@ -101,7 +95,7 @@ common/
 **Location**: `domain/`
 
 - **Models**: `BarcodeDomainModel` is a pure Kotlin data class.
-- **Abstraction**: Repository interfaces use generic terms (e.g., "persistence errors").
+- **Abstraction**: Repository interfaces return `MyResult<T>` to abstract underlying implementation details.
 - **Independence**: The layer has no dependencies on outer layers.
 
 ### Data Layer
@@ -110,7 +104,7 @@ common/
 
 - **Decoupling**: Data models (`BarcodeDataModel`) are separate from domain models.
 - **Mapping**: Mappers (`BarcodeDataToDomainMapper`, `BarcodeDomainToDataMapper`) translate between layers.
-- **Organization**: The folder structure is consistent.
+- **Error Handling**: Catches exceptions and returns `MyResult.Error`.
 
 ### Presentation Layer
 
@@ -118,6 +112,7 @@ common/
 
 - **Separation of Concerns**: ViewModels interact with the Domain layer via Use Cases.
 - **State Management**: Manages state for the UI layer.
+- **Error Handling**: Consumes `MyResult` from use cases.
 
 ### UI Layer
 
@@ -134,15 +129,9 @@ The module follows the dependency rule correctly:
 
 **Verified:**
 *   **UI** depends on **Presentation** ✓
-*   **Presentation** depends on **Domain** ✓ (no direct dependencies on Data layer found)
+*   **Presentation** depends on **Domain** ✓
 *   **Data** depends on **Domain** ✓
-*   **Domain** depends on nothing ✓ (no Android framework dependencies found)
-
-**Analysis Method:**
-- Searched for imports of `com.makeappssimple.abhimanyu.barcodes.android.common.data.*` in presentation and UI layers: **None found**
-- Searched for Android framework imports (`import android.*`) in domain layer: **None found**
-- All ViewModels correctly use Use Cases from the domain layer
-- All repository implementations correctly implement domain repository interfaces
+*   **Domain** depends on nothing ✓
 
 ## Detailed Findings
 
@@ -152,84 +141,54 @@ The module follows the dependency rule correctly:
 
 **Strengths:**
 - ✅ Pure Kotlin models with no external dependencies
-- ✅ Repository interfaces use domain terminology
-- ✅ No Android framework dependencies
-- ✅ Models are simple data classes (`BarcodeDomainModel`, `BarcodeSourceDomainModel`, `BarcodeFormatDomainModel`)
+- ✅ Repository interfaces use `MyResult` for explicit error handling
+- ✅ Use cases isolate business logic
 
 **Use Cases:**
-- All 5 use cases are thin wrappers around repository calls:
-  - `GetAllBarcodesFlowUseCase` - Pass-through to `getAllBarcodesFlow()`
-  - `InsertBarcodesUseCase` - Pass-through to `insertBarcodes()`
-  - `DeleteBarcodesUseCase` - Pass-through to `deleteBarcodes()`
-  - `UpdateBarcodesUseCase` - Pass-through to `updateBarcodes()`
-  - `GetBarcodeByIdUseCase` - Pass-through to `getBarcodeById()`
-
-**Recommendation:** While thin use cases are acceptable for maintainability, consider adding domain logic (validation, business rules) if applicable.
+- `InsertBarcodesUseCase`: Handles creation of `BarcodeDomainModel` and default timestamp generation.
+- `GetAllBarcodesFlowUseCase`: Pass-through.
+- `DeleteBarcodesUseCase`: Pass-through.
+- `UpdateBarcodesUseCase`: Pass-through.
+- `GetBarcodeByIdUseCase`: Pass-through.
 
 ### Data Layer Analysis
 
 **Location**: `data/`
 
 **Strengths:**
-- ✅ Proper separation of data models from domain models
-- ✅ Mappers correctly translate between layers
-- ✅ Repository implementation correctly implements domain interface
-- ✅ Uses `DispatcherProvider` for thread safety
+- ✅ Correct usage of `DispatcherProvider` for thread safety.
+- ✅ Repository implements `BarcodeRepository` and returns `MyResult` for suspend functions.
+- ✅ Mappers are used consistently.
 
 **Issues:**
-
-1. **Error Handling (Critical):**
-   - `BarcodeRepositoryImpl` catches `SQLiteException` and:
-     - Prints stack traces using `printStackTrace()` (should use proper logging)
-     - Returns default values (`0`, `emptyFlow()`, `null`, `longArrayOf()`) that mask errors
-     - Prevents upper layers from handling errors appropriately
-   - **Files affected:**
-     - `data/repository/barcode/BarcodeRepositoryImpl.kt` (all methods)
-
-2. **Repository Interface Documentation:**
-   - Interface documentation mentions "To handle persistence errors" but the implementation swallows errors
-   - Consider updating interface to reflect actual error handling strategy
+1. **Logging**: `BarcodeRepositoryImpl` uses `printStackTrace()` which is not suitable for production logging.
 
 ### Presentation Layer Analysis
 
 **Location**: `presentation/`
 
 **Strengths:**
-- ✅ ViewModels correctly depend only on Domain layer (Use Cases)
-- ✅ Proper state management with StateFlow
-- ✅ Mappers correctly translate between Domain and UI models
-- ✅ No direct dependencies on Data layer
+- ✅ `ScanBarcodeScreenViewModel` correctly calls use cases and handles `MyResult`.
+- ✅ No potential runtime crashes from `LongArray` usage (issue resolved).
 
 **Issues:**
-
-1. **Error Handling:**
-   - ViewModels don't handle repository errors because errors are swallowed in the data layer
-   - Example: `HomeScreenViewModel.saveBarcode()` doesn't check if insertion succeeded
-
-2. **Potential Runtime Error:**
-   - `ScanBarcodeScreenViewModel.saveBarcode()` (line 109) calls `.first()` on `LongArray` without checking if it's empty
-   - If insertion fails, the array will be empty and `.first()` will throw `NoSuchElementException`
+1. **Incomplete Error Handling**: The ViewModel has `TODO(Abhi): Handle failure` in `saveBarcode`. Errors are caught but not shown to the user.
 
 ### UI Layer Analysis
 
 **Location**: `ui/`
 
 **Strengths:**
-- ✅ Composable screens are passive views
-- ✅ No business logic in UI layer
-- ✅ Proper separation from presentation layer
-
-**No violations found.**
+- ✅ Composable screens are passive views.
+- ✅ No business logic in UI layer.
 
 ## Code Quality Observations
 
 ### Positive Patterns
-1. Consistent naming conventions (suffixes: `DomainModel`, `DataModel`, `UiModel`, `UseCase`, `ViewModel`)
-2. Proper use of internal visibility modifiers
-3. Clear package structure following feature-based organization
-4. Dependency injection properly configured with Koin
+1. **Consistent Error Propagation**: The use of `MyResult` across Data, Domain, and Presentation layers provides a predictable way to handle success and failure.
+2. **Naming Conventions**: Clear distinction between `DomainModel` and `DataModel`.
+3. **Dependency Injection**: Koin is correctly used.
 
 ### Areas for Improvement
-1. Error handling strategy needs to be consistent across layers
-2. Use cases could benefit from domain logic if applicable
-3. Consider adding Result types for better error propagation
+1. **Logging Strategy**: Adopt `LogKit` in the Data layer.
+2. **User Feedback**: Implement error state handling in the UI (e.g., Snackbars) when repository operations fail.

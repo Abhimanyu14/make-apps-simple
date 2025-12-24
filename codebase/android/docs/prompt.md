@@ -1,7 +1,6 @@
 # Prompt
 
-- Refer "barcodes_clean_architecture_analysis".
-- Make changes for this item - "Consider adding Result types for better error propagation".
+- Review "barcodes_clean_architecture_analysis" and update it as per the latest codebase.
 
 # Scope
 
