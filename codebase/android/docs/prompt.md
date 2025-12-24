@@ -1,6 +1,7 @@
 # Prompt
 
-- Review "barcodes_clean_architecture_analysis" and update it as per the latest codebase.
+- In code_conventions.md, add a new section for XML coding conventions.
+- Refer existing XML files to infer the existing conventions.
 
 # Scope
 
