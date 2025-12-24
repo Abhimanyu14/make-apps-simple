@@ -21,6 +21,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barc
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.GetAllBarcodesFlowUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.InsertBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.snackbar.HomeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.mapper.BarcodeDomainToUiMapper
@@ -77,6 +78,10 @@ internal class HomeScreenViewModel(
     private val isDeleteBarcodeDialogVisible = MutableStateFlow(
         value = false,
     )
+    private val screenSnackbarType: MutableStateFlow<HomeScreenSnackbarType> =
+        MutableStateFlow(
+            value = HomeScreenSnackbarType.None,
+        )
     private val homeScreenBottomSheetType: MutableStateFlow<HomeCosmosBottomSheetType> =
         MutableStateFlow(
             value = HomeCosmosBottomSheetType.None,
@@ -88,10 +93,12 @@ internal class HomeScreenViewModel(
         flow = allBarcodes,
         flow2 = isDeleteBarcodeDialogVisible,
         flow3 = homeScreenBottomSheetType,
+        flow4 = screenSnackbarType,
     ) {
             allBarcodes,
             isDeleteBarcodeDialogVisible,
             homeScreenBottomSheetType,
+            screenSnackbarType,
         ->
         HomeScreenUIState(
             isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
@@ -102,18 +109,20 @@ internal class HomeScreenViewModel(
                 )
             },
             screenBottomSheetType = homeScreenBottomSheetType,
+            screenSnackbarType = screenSnackbarType,
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,
         initialValue = HomeScreenUIState(),
     )
     val uiStateEvents: HomeScreenUIStateEvents = HomeScreenUIStateEvents(
+        resetScreenSnackbarType = ::resetScreenSnackbarType,
         updateScreenBottomSheetType = ::updateScreenBottomSheetType,
         updateIsDeleteBarcodeDialogVisible = ::updateIsDeleteBarcodeDialogVisible,
     )
     // endregion
 
-    fun saveBarcode(
+    fun restoreBarcode(
         barcode: BarcodeUiModel,
     ): Job {
         return viewModelScope.launch {
@@ -128,8 +137,9 @@ internal class HomeScreenViewModel(
                 value = barcode.value,
             )
             if (result is MyResult.Error) {
-                // TODO(Abhi): Handle failure
-                result.exception?.printStackTrace()
+                updateScreenSnackbarType(
+                    updatedHomeScreenSnackbarType = HomeScreenSnackbarType.RestoreBarcodeFailed,
+                )
             }
         }
     }
@@ -146,13 +156,20 @@ internal class HomeScreenViewModel(
                 }.toTypedArray(),
             )
             if (result is MyResult.Error) {
-                // TODO(Abhi): Handle failure
-                result.exception?.printStackTrace()
+                updateScreenSnackbarType(
+                    updatedHomeScreenSnackbarType = HomeScreenSnackbarType.DeleteBarcodeFailed,
+                )
             }
         }
     }
 
     // region state events
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
+            updatedHomeScreenSnackbarType = HomeScreenSnackbarType.None,
+        )
+    }
+
     private fun updateIsDeleteBarcodeDialogVisible(
         updatedIsDeleteBarcodeDialogVisible: Boolean,
     ) {
@@ -166,6 +183,16 @@ internal class HomeScreenViewModel(
     ) {
         homeScreenBottomSheetType.update {
             updatedHomeScreenBottomSheetType
+        }
+    }
+
+    private fun updateScreenSnackbarType(
+        updatedHomeScreenSnackbarType: HomeScreenSnackbarType,
+    ): Job {
+        return viewModelScope.launch {
+            screenSnackbarType.update {
+                updatedHomeScreenSnackbarType
+            }
         }
     }
     // endregion

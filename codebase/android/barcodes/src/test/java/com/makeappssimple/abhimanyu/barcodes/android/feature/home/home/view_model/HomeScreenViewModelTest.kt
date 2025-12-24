@@ -133,7 +133,7 @@ class HomeScreenViewModelTest {
     }
 
     @Test
-    fun saveBarcode() = runTestWithTimeout {
+    fun restoreBarcode() = runTestWithTimeout {
         val barcode = Barcode(
             source = BarcodeSource.CREATED,
             format = BarcodeFormat.QrCode.value,

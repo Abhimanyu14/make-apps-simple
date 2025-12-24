@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.featur
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.snackbar.HomeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.model.BarcodeUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
 
@@ -26,6 +27,7 @@ internal class HomeScreenUIState(
     val isDeleteBarcodeDialogVisible: Boolean = false,
     val isLoading: Boolean = false,
     val screenBottomSheetType: HomeCosmosBottomSheetType = HomeCosmosBottomSheetType.None,
+    val screenSnackbarType: HomeScreenSnackbarType = HomeScreenSnackbarType.None,
     val allBarcodes: List<BarcodeUiModel> = emptyList(),
     val barcodeFormattedTimestamps: List<String> = emptyList(),
 

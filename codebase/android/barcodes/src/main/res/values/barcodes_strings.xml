@@ -58,8 +58,10 @@
 
     <!-- region screen_home -->
     <string name="barcodes_screen_home">Barcodes</string>
+    <string name="barcodes_screen_home_barcode_deleted_failed_snackbar_message">Failed to delete barcode(s)!</string>
     <string name="barcodes_screen_home_barcode_deleted_snackbar_action_label">Undo</string>
     <string name="barcodes_screen_home_barcode_deleted_snackbar_message">%1$s deleted!</string>
+    <string name="barcodes_screen_home_barcode_restore_failed_snackbar_message">Failed to restore barcode!</string>
     <string name="barcodes_screen_home_bottom_sheet_create_barcode">Create barcode</string>
     <string name="barcodes_screen_home_bottom_sheet_scan_barcode">Scan barcode</string>
     <string name="barcodes_screen_home_content_description_add">Add</string>

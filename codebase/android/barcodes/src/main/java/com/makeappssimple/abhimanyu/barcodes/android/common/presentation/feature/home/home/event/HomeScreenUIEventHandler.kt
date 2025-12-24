@@ -54,7 +54,7 @@ internal class HomeScreenUIEventHandler internal constructor(
             }
 
             is HomeScreenUIEvent.OnBarcodeDeletedSnackbar.ActionButtonClick -> {
-                screenViewModel.saveBarcode(
+                screenViewModel.restoreBarcode(
                     barcode = uiEvent.barcode,
                 )
             }
@@ -84,6 +84,10 @@ internal class HomeScreenUIEventHandler internal constructor(
                 screenViewModel.deleteBarcodes(
                     barcodes = uiEvent.barcodes,
                 )
+            }
+
+            is HomeScreenUIEvent.OnSnackbarDismissed -> {
+                uiStateEvents.resetScreenSnackbarType()
             }
 
             is HomeScreenUIEvent.OnTopAppBar.DeleteBarcodeButtonClick -> {

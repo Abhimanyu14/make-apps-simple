@@ -1,7 +1,7 @@
 # Prompt
 
-- In code_conventions.md, add a new section for XML coding conventions.
-- Refer existing XML files to infer the existing conventions.
+- In HomeScreenViewModel, make changes to display snackbars for error handling in saveBarcode and deleteBarcodes.
+- Make the complete end to end changes (including the UI changes).
 
 # Scope
 

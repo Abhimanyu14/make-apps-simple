@@ -20,10 +20,12 @@ import androidx.annotation.Keep
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.feature.home.home.bottom_sheet.HomeCosmosBottomSheetType
+import kotlinx.coroutines.Job
 
 @Immutable
 @Keep
 internal data class HomeScreenUIStateEvents(
+    val resetScreenSnackbarType: () -> Job,
     val updateScreenBottomSheetType: (HomeCosmosBottomSheetType) -> Unit,
     val updateIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
     val resetScreenBottomSheetType: () -> Unit = {

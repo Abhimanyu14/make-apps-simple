@@ -23,6 +23,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.ui.feature.home.home
 internal sealed class HomeScreenUIEvent : ScreenUIEvent {
     data object OnAddFloatingActionButtonClick : HomeScreenUIEvent()
     data object OnBottomSheetDismiss : HomeScreenUIEvent()
+    data object OnSnackbarDismissed : HomeScreenUIEvent()
 
     data class OnHomeMenuBottomSheetEvent(
         val event: HomeMenuBottomSheetEvent,

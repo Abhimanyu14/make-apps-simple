@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.saveable.listSaver
@@ -37,6 +38,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.event.HomeScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.snackbar.HomeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.state.HomeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.model.BarcodeUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.CommonScreenUIState
@@ -76,8 +78,14 @@ internal fun HomeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: HomeScreenUIEvent) -> Unit = {},
 ) {
+    val barcodeDeleteFailedSnackbarMessage = CosmosStringResource.Id(
+        id = R.string.barcodes_screen_home_barcode_deleted_failed_snackbar_message,
+    ).text
     val barcodeDeletedSnackbarActionLabel = CosmosStringResource.Id(
         id = R.string.barcodes_screen_home_barcode_deleted_snackbar_action_label,
+    ).text
+    val barcodeRestoreFailedSnackbarMessage = CosmosStringResource.Id(
+        id = R.string.barcodes_screen_home_barcode_restore_failed_snackbar_message,
     ).text
     // TODO(Abhi): Move to view model
     val selectedBarcodes = rememberSaveable(
@@ -161,6 +169,28 @@ internal fun HomeScreenUI(
             }
         }
     val isInSelectionMode = selectedBarcodes.isNotEmpty()
+
+    LaunchedEffect(
+        key1 = uiState.screenSnackbarType,
+    ) {
+        when (uiState.screenSnackbarType) {
+            HomeScreenSnackbarType.None -> {}
+
+            HomeScreenSnackbarType.DeleteBarcodeFailed -> {
+                state.snackbarHostState.showSnackbar(
+                    message = barcodeDeleteFailedSnackbarMessage,
+                )
+                handleUIEvent(HomeScreenUIEvent.OnSnackbarDismissed)
+            }
+
+            HomeScreenSnackbarType.RestoreBarcodeFailed -> {
+                state.snackbarHostState.showSnackbar(
+                    message = barcodeRestoreFailedSnackbarMessage,
+                )
+                handleUIEvent(HomeScreenUIEvent.OnSnackbarDismissed)
+            }
+        }
+    }
 
     CosmosBottomSheetHandler(
         isBottomSheetVisible = uiState.isModalBottomSheetVisible,
