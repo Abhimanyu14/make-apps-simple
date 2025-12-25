@@ -1,7 +1,8 @@
 # Prompt
 
-- In HomeScreenViewModel, make changes to display snackbars for error handling in saveBarcode and deleteBarcodes.
-- Make the complete end to end changes (including the UI changes).
+- Make changes in BarcodeDetailsScreenViewModel and other related files to handle the error scenario when the barcode fetching fails.
+- Product expectation: Show a full screen error to convey issue in fetching the barcode details.
+- Make complete end to end changes across all required layers.
 
 # Scope
 

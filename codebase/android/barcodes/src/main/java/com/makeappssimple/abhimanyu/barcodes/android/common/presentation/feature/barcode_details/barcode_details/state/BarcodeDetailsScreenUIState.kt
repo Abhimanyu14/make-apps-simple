@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.Sc
 internal data class BarcodeDetailsScreenUIState(
     val barcodeSource: BarcodeSourceDomainModel = BarcodeSourceDomainModel.CREATED,
     val isDeleteBarcodeDialogVisible: Boolean = false,
+    val isError: Boolean = false,
     val isLoading: Boolean = false,
     val barcodeId: Int = -1,
     val barcodeName: String? = null,

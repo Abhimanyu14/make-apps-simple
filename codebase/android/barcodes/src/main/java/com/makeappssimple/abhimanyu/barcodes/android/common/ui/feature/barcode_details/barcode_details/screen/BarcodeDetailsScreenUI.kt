@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.event.BarcodeDetailsScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.CommonScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.error_screen.ErrorScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.TestTags.SCREEN_BARCODE_DETAILS
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.TestTags.SCREEN_CONTENT_BARCODE_DETAILS
@@ -85,60 +86,62 @@ internal fun BarcodeDetailsScreenUI(
                     handleUIEvent(BarcodeDetailsScreenUIEvent.OnTopAppBarNavigationButtonClick)
                 },
                 appBarActions = {
-                    Box {
-                        var isExpanded by remember {
-                            mutableStateOf(
-                                value = false,
-                            )
-                        }
-                        CosmosTopAppBarActionButton(
-                            iconResource = CosmosIcons.MoreVert,
-                            onClickLabelStringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_barcode_details_content_description_options_menu,
-                            ),
-                            iconContentDescriptionStringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_barcode_details_content_description_options_menu,
-                            ),
-                            onClick = {
-                                isExpanded = true
-                            },
-                        )
-                        CosmosDropdownMenu(
-                            expanded = isExpanded,
-                            onDismissRequest = {
-                                isExpanded = false
-                            },
-                        ) {
-                            CosmosDropdownMenuItem(
-                                leadingIconContentDescriptionStringResource = CosmosStringResource.Id(
-                                    id = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                    if (!uiState.isError) {
+                        Box {
+                            var isExpanded by remember {
+                                mutableStateOf(
+                                    value = false,
+                                )
+                            }
+                            CosmosTopAppBarActionButton(
+                                iconResource = CosmosIcons.MoreVert,
+                                onClickLabelStringResource = CosmosStringResource.Id(
+                                    id = R.string.barcodes_screen_barcode_details_content_description_options_menu,
                                 ),
-                                stringResource = CosmosStringResource.Id(
-                                    id = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                                iconContentDescriptionStringResource = CosmosStringResource.Id(
+                                    id = R.string.barcodes_screen_barcode_details_content_description_options_menu,
                                 ),
                                 onClick = {
+                                    isExpanded = true
+                                },
+                            )
+                            CosmosDropdownMenu(
+                                expanded = isExpanded,
+                                onDismissRequest = {
                                     isExpanded = false
-                                    handleUIEvent(
-                                        BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick(
-                                            barcodeId = uiState.barcodeId,
+                                },
+                            ) {
+                                CosmosDropdownMenuItem(
+                                    leadingIconContentDescriptionStringResource = CosmosStringResource.Id(
+                                        id = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                                    ),
+                                    stringResource = CosmosStringResource.Id(
+                                        id = R.string.barcodes_screen_barcode_details_content_description_edit_barcode,
+                                    ),
+                                    onClick = {
+                                        isExpanded = false
+                                        handleUIEvent(
+                                            BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.EditBarcodeButtonClick(
+                                                barcodeId = uiState.barcodeId,
+                                            )
                                         )
-                                    )
-                                },
-                                leadingIconResource = CosmosIcons.Edit,
-                            )
-                            CosmosDropdownMenuItem(
-                                leadingIconContentDescriptionStringResource = CosmosStringResource.Id(
-                                    id = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
-                                ),
-                                stringResource = CosmosStringResource.Id(
-                                    id = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
-                                ),
-                                onClick = {
-                                    isExpanded = false
-                                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick)
-                                },
-                                leadingIconResource = CosmosIcons.Delete,
-                            )
+                                    },
+                                    leadingIconResource = CosmosIcons.Edit,
+                                )
+                                CosmosDropdownMenuItem(
+                                    leadingIconContentDescriptionStringResource = CosmosStringResource.Id(
+                                        id = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
+                                    ),
+                                    stringResource = CosmosStringResource.Id(
+                                        id = R.string.barcodes_screen_barcode_details_content_description_delete_barcode,
+                                    ),
+                                    onClick = {
+                                        isExpanded = false
+                                        handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsTopAppBar.DeleteBarcodeButtonClick)
+                                    },
+                                    leadingIconResource = CosmosIcons.Delete,
+                                )
+                            }
                         }
                     }
                 },
@@ -149,56 +152,96 @@ internal fun BarcodeDetailsScreenUI(
         },
         coroutineScope = state.coroutineScope,
     ) {
-        AnimatedVisibility(
-            visible = uiState.isDeleteBarcodeDialogVisible,
-        ) {
-            BarcodeDetailsDeleteBarcodeDialog(
-                onConfirmButtonClick = {
-                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick)
-                },
-                onDismiss = {
-                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.Dismiss)
-                },
-                onDismissButtonClick = {
-                    handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.DismissButtonClick)
-                },
-            )
-        }
-
-        Column(
-            modifier = Modifier
-                .testTag(
-                    tag = SCREEN_CONTENT_BARCODE_DETAILS,
-                )
-                .background(
-                    color = CosmosAppTheme.colorScheme.background,
-                )
-                .fillMaxSize()
-                .verticalScroll(
-                    state = rememberScrollState(),
+        if (uiState.isError) {
+            ErrorScreenUI(
+                errorTextStringResource = CosmosStringResource.Id(
+                    id = R.string.barcodes_screen_barcode_details_error_message,
                 ),
-        ) {
-            uiState.barcodeName?.let { barcodeName ->
-                CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.barcodes_screen_barcode_details_barcode_name,
-                    ),
-                    style = CosmosAppTheme.typography.bodyMedium.copy(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            top = 16.dp,
-                            start = 16.dp,
-                            end = 16.dp,
-                            bottom = 0.dp,
-                        ),
+            )
+        } else {
+            AnimatedVisibility(
+                visible = uiState.isDeleteBarcodeDialogVisible,
+            ) {
+                BarcodeDetailsDeleteBarcodeDialog(
+                    onConfirmButtonClick = {
+                        handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.ConfirmButtonClick)
+                    },
+                    onDismiss = {
+                        handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.Dismiss)
+                    },
+                    onDismissButtonClick = {
+                        handleUIEvent(BarcodeDetailsScreenUIEvent.OnBarcodeDetailsDeleteBarcodeDialog.DismissButtonClick)
+                    },
                 )
+            }
+
+            Column(
+                modifier = Modifier
+                    .testTag(
+                        tag = SCREEN_CONTENT_BARCODE_DETAILS,
+                    )
+                    .background(
+                        color = CosmosAppTheme.colorScheme.background,
+                    )
+                    .fillMaxSize()
+                    .verticalScroll(
+                        state = rememberScrollState(),
+                    ),
+            ) {
+                uiState.barcodeName?.let { barcodeName ->
+                    CosmosText(
+                        stringResource = CosmosStringResource.Id(
+                            id = R.string.barcodes_screen_barcode_details_barcode_name,
+                        ),
+                        style = CosmosAppTheme.typography.bodyMedium.copy(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = 16.dp,
+                                start = 16.dp,
+                                end = 16.dp,
+                                bottom = 0.dp,
+                            ),
+                    )
+                    CosmosText(
+                        stringResource = CosmosStringResource.Text(
+                            text = barcodeName,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = 0.dp,
+                                start = 16.dp,
+                                end = 16.dp,
+                                bottom = 8.dp,
+                            ),
+                    )
+                }
+                uiState.formattedTimestampLabelId?.let {
+                    CosmosText(
+                        stringResource = CosmosStringResource.Id(
+                            id = uiState.formattedTimestampLabelId,
+                        ),
+                        style = CosmosAppTheme.typography.bodyMedium.copy(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                top = 16.dp,
+                                start = 16.dp,
+                                end = 16.dp,
+                                bottom = 0.dp,
+                            ),
+                    )
+                }
                 CosmosText(
                     stringResource = CosmosStringResource.Text(
-                        text = barcodeName,
+                        text = uiState.formattedTimestamp,
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -209,11 +252,9 @@ internal fun BarcodeDetailsScreenUI(
                             bottom = 8.dp,
                         ),
                 )
-            }
-            uiState.formattedTimestampLabelId?.let {
                 CosmosText(
                     stringResource = CosmosStringResource.Id(
-                        id = uiState.formattedTimestampLabelId,
+                        id = R.string.barcodes_screen_barcode_details_barcode_value,
                     ),
                     style = CosmosAppTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
@@ -222,104 +263,74 @@ internal fun BarcodeDetailsScreenUI(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
-                            top = 16.dp,
+                            top = 8.dp,
                             start = 16.dp,
                             end = 16.dp,
                             bottom = 0.dp,
                         ),
                 )
-            }
-            CosmosText(
-                stringResource = CosmosStringResource.Text(
-                    text = uiState.formattedTimestamp,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 0.dp,
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 8.dp,
-                    ),
-            )
-            CosmosText(
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.barcodes_screen_barcode_details_barcode_value,
-                ),
-                style = CosmosAppTheme.typography.bodyMedium.copy(
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 8.dp,
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 0.dp,
-                    ),
-            )
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 0.dp,
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 24.dp,
-                    ),
-            ) {
-                CosmosText(
-                    stringResource = CosmosStringResource.Text(
-                        text = uiState.barcodeValue,
-                    ),
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = 0.dp,
+                            start = 16.dp,
+                            end = 16.dp,
+                            bottom = 24.dp,
+                        ),
+                ) {
+                    CosmosText(
+                        stringResource = CosmosStringResource.Text(
+                            text = uiState.barcodeValue,
+                        ),
+                        modifier = Modifier
+                            .weight(
+                                weight = 1F,
+                            ),
+                    )
+                    CosmosIconButton(
+                        onClickLabelStringResource = CosmosStringResource.Id(
+                            id = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
+                        ),
+                        onClick = {
+                            handleUIEvent(
+                                BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick(
+                                    barcodeValue = uiState.barcodeValue,
+                                )
+                            )
+                        },
+                    ) {
+                        CosmosIcon(
+                            iconResource = CosmosIcons.ContentCopy,
+                            contentDescriptionStringResource = CosmosStringResource.Id(
+                                id = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
+                            ),
+                        )
+                    }
+                }
+                uiState.barcodeImageBitmap?.let {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                    ) {
+                        // TODO(Abhi): Change image dimensions for BarcodeDomainModel
+                        CosmosImage(
+                            bitmap = it,
+                            contentDescriptionStringResource = CosmosStringResource.Id(
+                                id = R.string.barcodes_screen_barcode_details_content_description_barcode_image,
+                            ),
+                        )
+                    }
+                }
+                Spacer(
                     modifier = Modifier
                         .weight(
                             weight = 1F,
                         ),
                 )
-                CosmosIconButton(
-                    onClickLabelStringResource = CosmosStringResource.Id(
-                        id = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
-                    ),
-                    onClick = {
-                        handleUIEvent(
-                            BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick(
-                                barcodeValue = uiState.barcodeValue,
-                            )
-                        )
-                    },
-                ) {
-                    CosmosIcon(
-                        iconResource = CosmosIcons.ContentCopy,
-                        contentDescriptionStringResource = CosmosStringResource.Id(
-                            id = R.string.barcodes_screen_barcode_details_content_description_copy_barcode_value,
-                        ),
-                    )
-                }
             }
-            uiState.barcodeImageBitmap?.let {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                ) {
-                    // TODO(Abhi): Change image dimensions for BarcodeDomainModel
-                    CosmosImage(
-                        bitmap = it,
-                        contentDescriptionStringResource = CosmosStringResource.Id(
-                            id = R.string.barcodes_screen_barcode_details_content_description_barcode_image,
-                        ),
-                    )
-                }
-            }
-            Spacer(
-                modifier = Modifier
-                    .weight(
-                        weight = 1F,
-                    ),
-            )
         }
     }
 }

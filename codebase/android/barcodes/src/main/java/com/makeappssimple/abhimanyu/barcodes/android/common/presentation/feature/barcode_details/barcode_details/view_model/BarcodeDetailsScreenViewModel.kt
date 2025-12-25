@@ -84,6 +84,9 @@ internal class BarcodeDetailsScreenViewModel(
     private val isDeleteBarcodeDialogVisible = MutableStateFlow(
         value = false,
     )
+    private val isError = MutableStateFlow(
+        value = false,
+    )
     private val barcodeBitmap: StateFlow<ImageBitmap?> = combine(
         flow = barcode,
         flow2 = barcodeBitmapSize,
@@ -114,12 +117,18 @@ internal class BarcodeDetailsScreenViewModel(
         flow = barcode,
         flow2 = barcodeBitmap,
         flow3 = isDeleteBarcodeDialogVisible,
+        flow4 = isError,
     ) {
             barcode,
             barcodeBitmap,
             isDeleteBarcodeDialogVisible,
+            isError,
         ->
-        if (barcode == null) {
+        if (isError) {
+            BarcodeDetailsScreenUIState(
+                isError = true,
+            )
+        } else if (barcode == null) {
             BarcodeDetailsScreenUIState(
                 isLoading = true,
             )
@@ -213,10 +222,14 @@ internal class BarcodeDetailsScreenViewModel(
             val result = getBarcodeByIdUseCase(
                 id = originalBarcodeId,
             )
+            isError.update {
+                false
+            }
             when (result) {
                 is MyResult.Error -> {
-                    // TODO(Abhi): Handle failure
-                    result.exception?.printStackTrace()
+                    isError.update {
+                        true
+                    }
                 }
 
                 is MyResult.Loading -> {}
