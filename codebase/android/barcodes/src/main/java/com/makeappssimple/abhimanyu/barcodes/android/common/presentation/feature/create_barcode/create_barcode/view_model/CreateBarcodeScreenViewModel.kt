@@ -85,6 +85,10 @@ internal class CreateBarcodeScreenViewModel(
     private val barcodeValue = MutableStateFlow(
         value = "",
     )
+    private val isError: MutableStateFlow<Boolean> =
+        MutableStateFlow(
+            value = false,
+        )
     private val screenSnackbarType: MutableStateFlow<CreateBarcodeScreenSnackbarType> =
         MutableStateFlow(
             value = CreateBarcodeScreenSnackbarType.None,
@@ -97,14 +101,17 @@ internal class CreateBarcodeScreenViewModel(
         flow2 = barcodeName,
         flow3 = barcodeValue,
         flow4 = screenSnackbarType,
+        flow5 = isError,
     ) {
             originalBarcode,
             barcodeName,
             barcodeValue,
             screenSnackbarType,
+            isError,
         ->
         CreateBarcodeScreenUIState(
             isBarcodeValueEditable = originalBarcode == null,
+            isError = isError,
             isSaveButtonEnabled = barcodeName.isNotNullOrBlank() && barcodeValue.isNotNullOrBlank(),
             barcodeName = barcodeName,
             barcodeValue = barcodeValue,
@@ -204,13 +211,14 @@ internal class CreateBarcodeScreenViewModel(
 
     private suspend fun fetchBarcode() {
         screenArgs.barcodeId?.let { barcodeId ->
-            val result = getBarcodeByIdUseCase(
+            val result: MyResult<BarcodeDomainModel?> = getBarcodeByIdUseCase(
                 id = barcodeId,
             )
             when (result) {
                 is MyResult.Error -> {
-                    // TODO(Abhi): Handle failure
-                    result.exception?.printStackTrace()
+                    isError.update {
+                        true
+                    }
                 }
 
                 is MyResult.Loading -> {}
