@@ -184,24 +184,25 @@ internal fun ScanBarcodeScreen(
         val barcodeAnalyser = BarcodeAnalyser(
             logError = screenViewModel::logError,
             getCurrentTimeMillis = screenViewModel::getCurrentTimeMillis,
-        ) { barcodes ->
-            barcodes.forEach { barcode ->
-                barcode.rawValue?.let { barcodeValue ->
-                    screenViewModel.logError(
-                        message = "BarcodeDomainModel value detected: ${barcodeValue}.",
-                    )
+            onBarcodesDetected = { barcodes ->
+                barcodes.forEach { barcode ->
+                    barcode.rawValue?.let { barcodeValue ->
+                        screenViewModel.logError(
+                            message = "BarcodeDomainModel value detected: ${barcodeValue}.",
+                        )
 
-                    processCameraProvider.unbindAll()
-                    BarcodeFormatDomainModel.fromValue(barcode.format)
-                        ?.let { barcodeFormat ->
-                            onBarcodeScanned(
-                                barcodeFormat,
-                                barcodeValue
-                            )
-                        }
+                        processCameraProvider.unbindAll()
+                        BarcodeFormatDomainModel.fromValue(barcode.format)
+                            ?.let { barcodeFormat ->
+                                onBarcodeScanned(
+                                    barcodeFormat,
+                                    barcodeValue
+                                )
+                            }
+                    }
                 }
-            }
-        }
+            },
+        )
         val imageAnalysis: ImageAnalysis = ImageAnalysis.Builder()
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
