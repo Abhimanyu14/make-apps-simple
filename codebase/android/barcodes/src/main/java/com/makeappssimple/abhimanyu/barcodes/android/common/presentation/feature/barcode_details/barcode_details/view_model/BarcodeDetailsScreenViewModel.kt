@@ -196,7 +196,9 @@ internal class BarcodeDetailsScreenViewModel(
     }
 
     fun shouldShowCopiedToClipboardToastMessage(): Boolean {
-        return !buildConfigKit.isAndroidApiEqualToOrAbove(Build.VERSION_CODES.TIRAMISU)
+        return !buildConfigKit.isAndroidApiEqualToOrAbove(
+            buildVersionNumber = Build.VERSION_CODES.TIRAMISU,
+        )
     }
 
     // region state events
