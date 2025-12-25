@@ -52,10 +52,6 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
                 )
             }
 
-            is BarcodeDetailsScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
-                screenViewModel.navigateUp()
-            }
-
             is BarcodeDetailsScreenUIEvent.OnCopyBarcodeValueButtonClick -> {
                 if (
                     screenViewModel.copyToClipboard(
@@ -65,6 +61,14 @@ internal class BarcodeDetailsScreenUIEventHandler internal constructor(
                 ) {
                     showBarcodeValueCopiedToastMessage()
                 }
+            }
+
+            is BarcodeDetailsScreenUIEvent.OnSnackbarDismissed -> {
+                uiStateEvents.resetScreenSnackbarType()
+            }
+
+            is BarcodeDetailsScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
+                screenViewModel.navigateUp()
             }
         }
     }

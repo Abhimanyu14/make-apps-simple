@@ -1,8 +1,9 @@
 # Prompt
 
-- Make changes in BarcodeDetailsScreenViewModel and other related files to handle the error scenario when the barcode fetching fails.
-- Product expectation: Show a full screen error to convey issue in fetching the barcode details.
-- Make complete end to end changes across all required layers.
+- Make changes for the following in Barcode Details Screen
+
+1. If barcode deletion fails, show a snackbar. Refer Home screen for reference.
+2. Navigate back to the previous screen only if the deletion is successful.
 
 # Scope
 

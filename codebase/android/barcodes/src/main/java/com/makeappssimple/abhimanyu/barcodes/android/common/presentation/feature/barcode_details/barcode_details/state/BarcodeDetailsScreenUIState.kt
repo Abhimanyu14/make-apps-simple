@@ -20,6 +20,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.ImageBitmap
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeSourceDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.snackbar.BarcodeDetailsScreenSnackbarType
 
 @Stable
 internal data class BarcodeDetailsScreenUIState(
@@ -27,6 +28,7 @@ internal data class BarcodeDetailsScreenUIState(
     val isDeleteBarcodeDialogVisible: Boolean = false,
     val isError: Boolean = false,
     val isLoading: Boolean = false,
+    val screenSnackbarType: BarcodeDetailsScreenSnackbarType = BarcodeDetailsScreenSnackbarType.None,
     val barcodeId: Int = -1,
     val barcodeName: String? = null,
     val barcodeValue: String = "",

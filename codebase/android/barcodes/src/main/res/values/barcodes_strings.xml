@@ -37,6 +37,7 @@
     <string name="barcodes_screen_barcode_details_delete_barcode_dialog_message">Are you sure you want to delete the barcode?</string>
     <string name="barcodes_screen_barcode_details_delete_barcode_dialog_title">Delete Barcode</string>
     <string name="barcodes_screen_barcode_details_error_message">Error fetching barcode details</string>
+    <string name="barcodes_screen_barcode_details_delete_barcode_failed_snackbar_message">Failed to delete barcode!</string>
     <!-- endregion -->
 
     <!-- region screen_create_barcode -->

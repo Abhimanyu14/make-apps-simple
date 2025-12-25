@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.state
+package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.snackbar
 
-import androidx.annotation.Keep
-import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIStateEvents
-import kotlinx.coroutines.Job
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenSnackbarType
 
-@Immutable
-@Keep
-internal data class BarcodeDetailsScreenUIStateEvents(
-    val resetScreenSnackbarType: () -> Job,
-    val updateBarcodeBitmapSize: (Int) -> Unit,
-    val updateIsDeleteBarcodeDialogVisible: (Boolean) -> Unit,
-) : ScreenUIStateEvents
+internal sealed class BarcodeDetailsScreenSnackbarType : ScreenSnackbarType {
+    data object None : BarcodeDetailsScreenSnackbarType()
+    data object DeleteBarcodeFailed : BarcodeDetailsScreenSnackbarType()
+}

@@ -30,6 +30,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.event.BarcodeDetailsScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.snackbar.BarcodeDetailsScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.error_screen.ErrorScreenUI
@@ -61,6 +63,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBarActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
@@ -71,12 +74,32 @@ internal fun BarcodeDetailsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: BarcodeDetailsScreenUIEvent) -> Unit = {},
 ) {
+    val barcodeDeletedFailedSnackbarMessage = CosmosStringResource.Id(
+        id = R.string.barcodes_screen_barcode_details_delete_barcode_failed_snackbar_message,
+    ).text
+
+    LaunchedEffect(
+        key1 = uiState.screenSnackbarType,
+    ) {
+        when (uiState.screenSnackbarType) {
+            BarcodeDetailsScreenSnackbarType.None -> {}
+
+            BarcodeDetailsScreenSnackbarType.DeleteBarcodeFailed -> {
+                state.snackbarHostState.showSnackbar(
+                    message = barcodeDeletedFailedSnackbarMessage,
+                )
+                handleUIEvent(BarcodeDetailsScreenUIEvent.OnSnackbarDismissed)
+            }
+        }
+    }
+
     CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_BARCODE_DETAILS,
             )
             .fillMaxSize(),
+        snackbarHostState = state.snackbarHostState,
         topBar = {
             CosmosTopAppBar(
                 titleStringResource = CosmosStringResource.Id(

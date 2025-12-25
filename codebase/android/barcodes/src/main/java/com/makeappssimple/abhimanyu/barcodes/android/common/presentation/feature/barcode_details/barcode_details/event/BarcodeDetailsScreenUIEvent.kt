@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.featur
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIEvent
 
 internal sealed class BarcodeDetailsScreenUIEvent : ScreenUIEvent {
+    data object OnSnackbarDismissed : BarcodeDetailsScreenUIEvent()
     data object OnTopAppBarNavigationButtonClick : BarcodeDetailsScreenUIEvent()
 
     sealed class OnBarcodeDetailsTopAppBar {

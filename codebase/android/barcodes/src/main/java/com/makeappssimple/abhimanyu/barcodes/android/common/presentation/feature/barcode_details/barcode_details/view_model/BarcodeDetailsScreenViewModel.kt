@@ -24,6 +24,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.DeleteBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.GetBarcodeByIdUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.snackbar.BarcodeDetailsScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.barcode_details.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.barcode_details.navigation.BarcodeDetailsScreenArgs
@@ -87,6 +88,10 @@ internal class BarcodeDetailsScreenViewModel(
     private val isError = MutableStateFlow(
         value = false,
     )
+    private val screenSnackbarType: MutableStateFlow<BarcodeDetailsScreenSnackbarType> =
+        MutableStateFlow(
+            value = BarcodeDetailsScreenSnackbarType.None,
+        )
     private val barcodeBitmap: StateFlow<ImageBitmap?> = combine(
         flow = barcode,
         flow2 = barcodeBitmapSize,
@@ -118,24 +123,29 @@ internal class BarcodeDetailsScreenViewModel(
         flow2 = barcodeBitmap,
         flow3 = isDeleteBarcodeDialogVisible,
         flow4 = isError,
+        flow5 = screenSnackbarType,
     ) {
             barcode,
             barcodeBitmap,
             isDeleteBarcodeDialogVisible,
             isError,
+            screenSnackbarType,
         ->
         if (isError) {
             BarcodeDetailsScreenUIState(
                 isError = true,
+                screenSnackbarType = screenSnackbarType,
             )
         } else if (barcode == null) {
             BarcodeDetailsScreenUIState(
                 isLoading = true,
+                screenSnackbarType = screenSnackbarType,
             )
         } else {
             BarcodeDetailsScreenUIState(
                 barcodeSource = barcode.source,
                 isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
+                screenSnackbarType = screenSnackbarType,
                 barcodeId = barcode.id,
                 barcodeName = barcode.name,
                 barcodeValue = barcode.value,
@@ -153,6 +163,7 @@ internal class BarcodeDetailsScreenViewModel(
     )
     val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
         BarcodeDetailsScreenUIStateEvents(
+            resetScreenSnackbarType = ::resetScreenSnackbarType,
             updateBarcodeBitmapSize = ::updateBarcodeBitmapSize,
             updateIsDeleteBarcodeDialogVisible = ::updateIsDeleteBarcodeDialogVisible,
         )
@@ -172,17 +183,19 @@ internal class BarcodeDetailsScreenViewModel(
                 )
                 when (result) {
                     is MyResult.Error -> {
-                        // TODO(Abhi): Handle failure
-                        result.exception?.printStackTrace()
+                        updateScreenSnackbarType(
+                            updatedBarcodeDetailsScreenSnackbarType = BarcodeDetailsScreenSnackbarType.DeleteBarcodeFailed,
+                        )
                     }
 
                     is MyResult.Loading -> {}
 
-                    is MyResult.Success -> {}
+                    is MyResult.Success -> {
+                        navigateUp()
+                    }
                 }
             }
         }
-        navigateToHomeScreen()
     }
 
     fun copyToClipboard(
@@ -202,6 +215,12 @@ internal class BarcodeDetailsScreenViewModel(
     }
 
     // region state events
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
+            updatedBarcodeDetailsScreenSnackbarType = BarcodeDetailsScreenSnackbarType.None,
+        )
+    }
+
     private fun updateBarcodeBitmapSize(
         updatedBarcodeBitmapSize: Int,
     ) {
@@ -215,6 +234,16 @@ internal class BarcodeDetailsScreenViewModel(
     ) {
         isDeleteBarcodeDialogVisible.update {
             updatedIsDeleteBarcodeDialogVisible
+        }
+    }
+
+    private fun updateScreenSnackbarType(
+        updatedBarcodeDetailsScreenSnackbarType: BarcodeDetailsScreenSnackbarType,
+    ): Job {
+        return viewModelScope.launch {
+            screenSnackbarType.update {
+                updatedBarcodeDetailsScreenSnackbarType
+            }
         }
     }
     // endregion
