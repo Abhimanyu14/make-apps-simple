@@ -25,12 +25,13 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 internal class BarcodeAnalyser(
+    private val dispatcherProvider: DispatcherProvider,
     private val getCurrentTimeMillis: () -> Long,
     private val logError: (message: String) -> Unit,
     private val onBarcodesDetected: (barcodes: List<Barcode>) -> Unit,
@@ -68,7 +69,9 @@ internal class BarcodeAnalyser(
                     logError("BarcodeAnalyser: Something went wrong with exception: $exception")
                 }
                 .addOnCompleteListener {
-                    CoroutineScope(Dispatchers.IO).launch { // TODO(Abhi) - Inject this dispatcher
+                    CoroutineScope(
+                        context = dispatcherProvider.io,
+                    ).launch {
                         delay(
                             timeMillis = 1000 - (getCurrentTimeMillis() - currentTimestamp),
                         )

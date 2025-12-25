@@ -182,6 +182,7 @@ internal fun ScanBarcodeScreen(
         }
 
         val barcodeAnalyser = BarcodeAnalyser(
+            dispatcherProvider = screenViewModel.dispatcherProvider,
             logError = screenViewModel::logError,
             getCurrentTimeMillis = screenViewModel::getCurrentTimeMillis,
             onBarcodesDetected = { barcodes ->
