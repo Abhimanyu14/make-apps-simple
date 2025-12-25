@@ -24,7 +24,7 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class FirebaseModule {
+internal class FirebaseModule {
     @Single
     internal fun provideFirebaseAnalytics(): FirebaseAnalytics {
         return Firebase.analytics

@@ -26,7 +26,7 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
-public class BarcodeRepositoryModule {
+internal class BarcodeRepositoryModule {
     @Single
     internal fun provideBarcodeDataToDomainMapper(): BarcodeDataToDomainMapper {
         return BarcodeDataToDomainMapper()
