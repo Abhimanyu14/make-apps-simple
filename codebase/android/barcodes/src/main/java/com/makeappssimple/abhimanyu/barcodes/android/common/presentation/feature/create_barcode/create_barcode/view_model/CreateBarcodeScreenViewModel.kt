@@ -156,7 +156,7 @@ internal class CreateBarcodeScreenViewModel(
     ): Job {
         return viewModelScope.launch {
             val originalBarcodeValue = originalBarcode.value
-            val result: MyResult<Any> = if (originalBarcodeValue != null) {
+            val result = if (originalBarcodeValue != null) {
                 updateBarcodesUseCase(
                     originalBarcodeValue.copy(
                         name = barcodeName.value,

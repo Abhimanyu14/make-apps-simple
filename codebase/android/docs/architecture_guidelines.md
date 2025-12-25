@@ -8,7 +8,8 @@ The codebase is structured to facilitate potential future migration to Kotlin Mu
 *   **`common`**: Contains platform-agnostic code (intended `commonMain`), following Clean Architecture principles. This is where the majority of the application logic and UI resides.
 
 ## 2. Clean Architecture Layers (inside `common`)
-The `common` package is further divided into the standard Clean Architecture layers:
+The `common` package is further divided into the standard Clean Architecture layers.
+**Dependency Rule**: `UI → Presentation → Domain ← Data`
 
 ### a. Domain (`domain`)
 *   **Responsibility**: The core business logic of the application.
@@ -25,11 +26,12 @@ The `common` package is further divided into the standard Clean Architecture lay
     *   `repository`: Implementation of domain repository interfaces.
     *   `source`: Data sources (e.g., `database`, `network`).
     *   `model`: Data entities (suffix: `DataModel`).
-    *   `mapper`: Mappers to convert between `DataModel` and `DomainModel`.
+    *   `mapper`: Mappers to convert between `DataModel` and `DomainModel` to ensure decoupling.
 
 ### c. Presentation (`presentation`)
 *   **Responsibility**: State management, navigation, and preparing data for the UI.
 *   **Dependencies**: Depends on `domain`.
+*   **Interaction**: ViewModels interact with the Domain layer exclusively via **Use Cases**.
 *   **Contents**:
     *   `view_model`: ViewModels (suffix: `ViewModel`).
     *   `model`: UI state models (suffix: `UiModel`).
@@ -37,7 +39,7 @@ The `common` package is further divided into the standard Clean Architecture lay
     *   `navigation`: Navigation logic and definitions.
 
 ### d. UI (`ui`)
-*   **Responsibility**: Rendering the user interface.
+*   **Responsibility**: Rendering the user interface as a **Passive View**.
 *   **Dependencies**: Depends on `presentation`.
 *   **Contents**:
     *   `feature`: Composable screens and feature-specific components.

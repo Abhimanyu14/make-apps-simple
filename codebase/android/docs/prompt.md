@@ -1,10 +1,9 @@
 # Prompt
 
-Make changes in Create Barcode Screen
-
-1. To show full screen error when barcode fetching fails.
-2. Make end to end changes.
-3. Ensure that the app compiles and builds successfully by building the app till there is no compilation error.
+1. Reevaluate "barcodes_clean_architecture_analysis.md" as per the updated codebase.
+2. Document ONLY what is to be improved.
+3. If there are any guidelines/conventions mentioned in this doc that is already followed correctly as per clean architecture, move them into "architecture_guidelines.md". e.g. - The module follows the dependency rule correctly:
+   `UI → Presentation → Domain ← Data`.
 
 # Scope
 
