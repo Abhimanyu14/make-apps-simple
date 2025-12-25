@@ -26,6 +26,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barc
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.InsertBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.UpdateBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.snackbar.CreateBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.navigation.CreateBarcodeScreenArgs
@@ -84,6 +85,10 @@ internal class CreateBarcodeScreenViewModel(
     private val barcodeValue = MutableStateFlow(
         value = "",
     )
+    private val screenSnackbarType: MutableStateFlow<CreateBarcodeScreenSnackbarType> =
+        MutableStateFlow(
+            value = CreateBarcodeScreenSnackbarType.None,
+        )
     // endregion
 
     // region uiState and uiStateEvents
@@ -91,16 +96,19 @@ internal class CreateBarcodeScreenViewModel(
         flow = originalBarcode,
         flow2 = barcodeName,
         flow3 = barcodeValue,
+        flow4 = screenSnackbarType,
     ) {
             originalBarcode,
             barcodeName,
             barcodeValue,
+            screenSnackbarType,
         ->
         CreateBarcodeScreenUIState(
             isBarcodeValueEditable = originalBarcode == null,
             isSaveButtonEnabled = barcodeName.isNotNullOrBlank() && barcodeValue.isNotNullOrBlank(),
             barcodeName = barcodeName,
             barcodeValue = barcodeValue,
+            screenSnackbarType = screenSnackbarType,
         )
     }.defaultObjectStateIn(
         scope = viewModelScope,
@@ -129,11 +137,19 @@ internal class CreateBarcodeScreenViewModel(
         )
     }
 
+    fun onSnackbarDismissed() {
+        screenSnackbarType.update {
+            CreateBarcodeScreenSnackbarType.None
+        }
+    }
+
     @OptIn(ExperimentalTime::class)
-    fun saveBarcode() {
-        viewModelScope.launch {
+    fun saveBarcode(
+        onSuccess: () -> Unit = {},
+    ): Job {
+        return viewModelScope.launch {
             val originalBarcodeValue = originalBarcode.value
-            val result = if (originalBarcodeValue != null) {
+            val result: MyResult<Any> = if (originalBarcodeValue != null) {
                 updateBarcodesUseCase(
                     originalBarcodeValue.copy(
                         name = barcodeName.value,
@@ -147,9 +163,17 @@ internal class CreateBarcodeScreenViewModel(
                     value = barcodeValue.value,
                 )
             }
-            if (result is MyResult.Error) {
-                // TODO(Abhi): Handle failure
-                result.exception?.printStackTrace()
+            when (result) {
+                is MyResult.Error -> {
+                    screenSnackbarType.update {
+                        CreateBarcodeScreenSnackbarType.SaveBarcodeFailed
+                    }
+                }
+
+                is MyResult.Loading -> {}
+                is MyResult.Success -> {
+                    onSuccess()
+                }
             }
         }
     }

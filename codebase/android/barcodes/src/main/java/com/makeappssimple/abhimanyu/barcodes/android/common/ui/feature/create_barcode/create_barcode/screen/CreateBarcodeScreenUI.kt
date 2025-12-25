@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
@@ -38,8 +39,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.event.CreateBarcodeScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.snackbar.CreateBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.CommonScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.error_screen.ErrorScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.TestTags.SCREEN_CREATE_BARCODE
@@ -51,6 +54,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import kotlinx.coroutines.delay
@@ -66,6 +70,10 @@ internal fun CreateBarcodeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: CreateBarcodeScreenUIEvent) -> Unit = {},
 ) {
+    val saveBarcodeFailedSnackbarMessage = CosmosStringResource.Id(
+        id = R.string.barcodes_screen_create_barcode_save_barcode_failed_snackbar_message,
+    ).text
+
     LaunchedEffect(
         key1 = Unit,
     ) {
@@ -75,12 +83,29 @@ internal fun CreateBarcodeScreenUI(
         state.focusRequester.requestFocus()
     }
 
+    LaunchedEffect(
+        key1 = uiState.screenSnackbarType,
+    ) {
+        when (uiState.screenSnackbarType) {
+            CreateBarcodeScreenSnackbarType.None -> {}
+
+            CreateBarcodeScreenSnackbarType.SaveBarcodeFailed -> {
+                state.snackbarHostState.showSnackbar(
+                    message = saveBarcodeFailedSnackbarMessage,
+                )
+                handleUIEvent(CreateBarcodeScreenUIEvent.OnSnackbarDismissed)
+            }
+        }
+    }
+
     CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_CREATE_BARCODE,
             )
-            .fillMaxSize(),
+            .fillMaxSize()
+            .imePadding(),
+        snackbarHostState = state.snackbarHostState,
         topBar = {
             CosmosTopAppBar(
                 titleStringResource = CosmosStringResource.Id(
@@ -96,97 +121,46 @@ internal fun CreateBarcodeScreenUI(
         },
         coroutineScope = state.coroutineScope,
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .testTag(
-                    tag = SCREEN_CONTENT_CREATE_BARCODE,
-                )
-                .background(
-                    color = CosmosAppTheme.colorScheme.background,
-                )
-                .fillMaxSize()
-                .verticalScroll(
-                    state = rememberScrollState(),
+        if (uiState.isError) {
+            ErrorScreenUI(
+                errorTextStringResource = CosmosStringResource.Id(
+                    id = R.string.barcodes_screen_create_barcode_error_message,
                 ),
-        ) {
-            CosmosOutlinedTextField(
-                value = uiState.barcodeName,
-                labelStringResource = CosmosStringResource.Id(
-                    id = R.string.barcodes_screen_create_barcode_barcode_name,
-                ),
-                trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.barcodes_screen_create_barcode_clear_barcode_name,
-                ),
-                onTrailingIconClick = {
-                    handleUIEvent(
-                        CreateBarcodeScreenUIEvent.OnBarcodeNameUpdated(
-                            updatedBarcodeName = "",
-                        )
-                    )
-                },
-                onValueChange = {
-                    handleUIEvent(
-                        CreateBarcodeScreenUIEvent.OnBarcodeNameUpdated(
-                            updatedBarcodeName = it,
-                        )
-                    )
-                },
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        state.focusManager.clearFocus()
-                    },
-                    onNext = {
-                        state.focusManager.moveFocus(FocusDirection.Down)
-                    },
-                ),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = if (uiState.isBarcodeValueEditable) {
-                        ImeAction.Next
-                    } else {
-                        ImeAction.Done
-                    },
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .focusRequester(
-                        focusRequester = state.focusRequester,
-                    )
-                    .padding(
-                        horizontal = 16.dp,
-                        vertical = 8.dp,
-                    ),
             )
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+        } else {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 16.dp,
-                        vertical = 8.dp,
+                    .testTag(
+                        tag = SCREEN_CONTENT_CREATE_BARCODE,
+                    )
+                    .background(
+                        color = CosmosAppTheme.colorScheme.background,
+                    )
+                    .fillMaxSize()
+                    .verticalScroll(
+                        state = rememberScrollState(),
                     ),
             ) {
                 CosmosOutlinedTextField(
-                    value = uiState.barcodeValue,
+                    value = uiState.barcodeName,
                     labelStringResource = CosmosStringResource.Id(
-                        id = R.string.barcodes_screen_create_barcode_barcode_value,
+                        id = R.string.barcodes_screen_create_barcode_barcode_name,
                     ),
-                    readOnly = !uiState.isBarcodeValueEditable,
                     trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
-                        id = R.string.barcodes_screen_create_barcode_clear_barcode_value,
+                        id = R.string.barcodes_screen_create_barcode_clear_barcode_name,
                     ),
                     onTrailingIconClick = {
                         handleUIEvent(
-                            CreateBarcodeScreenUIEvent.OnBarcodeValueUpdated(
-                                updatedBarcodeValue = "",
+                            CreateBarcodeScreenUIEvent.OnBarcodeNameUpdated(
+                                updatedBarcodeName = "",
                             )
                         )
                     },
                     onValueChange = {
                         handleUIEvent(
-                            CreateBarcodeScreenUIEvent.OnBarcodeValueUpdated(
-                                updatedBarcodeValue = it,
+                            CreateBarcodeScreenUIEvent.OnBarcodeNameUpdated(
+                                updatedBarcodeName = it,
                             )
                         )
                     },
@@ -194,51 +168,110 @@ internal fun CreateBarcodeScreenUI(
                         onDone = {
                             state.focusManager.clearFocus()
                         },
+                        onNext = {
+                            state.focusManager.moveFocus(FocusDirection.Down)
+                        },
                     ),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Done,
+                        imeAction = if (uiState.isBarcodeValueEditable) {
+                            ImeAction.Next
+                        } else {
+                            ImeAction.Done
+                        },
                     ),
                     modifier = Modifier
-                        .weight(
-                            weight = 1F,
+                        .fillMaxWidth()
+                        .focusRequester(
+                            focusRequester = state.focusRequester,
+                        )
+                        .padding(
+                            horizontal = 16.dp,
+                            vertical = 8.dp,
                         ),
                 )
-                if (!uiState.isBarcodeValueEditable) {
-                    CosmosIconButton(
-                        onClickLabelStringResource = CosmosStringResource.Id(
-                            id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = 16.dp,
+                            vertical = 8.dp,
                         ),
-                        onClick = {
+                ) {
+                    CosmosOutlinedTextField(
+                        value = uiState.barcodeValue,
+                        labelStringResource = CosmosStringResource.Id(
+                            id = R.string.barcodes_screen_create_barcode_barcode_value,
+                        ),
+                        readOnly = !uiState.isBarcodeValueEditable,
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
+                            id = R.string.barcodes_screen_create_barcode_clear_barcode_value,
+                        ),
+                        onTrailingIconClick = {
                             handleUIEvent(
-                                CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick(
-                                    barcodeValue = uiState.barcodeValue,
+                                CreateBarcodeScreenUIEvent.OnBarcodeValueUpdated(
+                                    updatedBarcodeValue = "",
                                 )
                             )
                         },
+                        onValueChange = {
+                            handleUIEvent(
+                                CreateBarcodeScreenUIEvent.OnBarcodeValueUpdated(
+                                    updatedBarcodeValue = it,
+                                )
+                            )
+                        },
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                state.focusManager.clearFocus()
+                            },
+                        ),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Done,
+                        ),
                         modifier = Modifier
-                            .padding(
-                                vertical = 0.dp,
+                            .weight(
+                                weight = 1F,
                             ),
-                    ) {
-                        CosmosIcon(
-                            iconResource = CosmosIcons.ContentCopy,
-                            contentDescriptionStringResource = CosmosStringResource.Id(
+                    )
+                    if (!uiState.isBarcodeValueEditable) {
+                        CosmosIconButton(
+                            onClickLabelStringResource = CosmosStringResource.Id(
                                 id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
                             ),
-                        )
+                            onClick = {
+                                handleUIEvent(
+                                    CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick(
+                                        barcodeValue = uiState.barcodeValue,
+                                    )
+                                )
+                            },
+                            modifier = Modifier
+                                .padding(
+                                    vertical = 0.dp,
+                                ),
+                        ) {
+                            CosmosIcon(
+                                iconResource = CosmosIcons.ContentCopy,
+                                contentDescriptionStringResource = CosmosStringResource.Id(
+                                    id = R.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
+                                ),
+                            )
+                        }
                     }
                 }
+                CosmosElevatedButton(
+                    isEnabled = uiState.isSaveButtonEnabled,
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.barcodes_screen_create_barcode_cta_button_label,
+                    ),
+                    onClick = {
+                        handleUIEvent(CreateBarcodeScreenUIEvent.OnSaveButtonClick)
+                    },
+                )
             }
-            CosmosElevatedButton(
-                isEnabled = uiState.isSaveButtonEnabled,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.barcodes_screen_create_barcode_cta_button_label,
-                ),
-                onClick = {
-                    handleUIEvent(CreateBarcodeScreenUIEvent.OnSaveButtonClick)
-                },
-            )
         }
     }
 }

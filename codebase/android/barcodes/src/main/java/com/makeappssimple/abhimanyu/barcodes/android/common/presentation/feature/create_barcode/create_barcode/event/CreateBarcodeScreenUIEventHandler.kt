@@ -38,15 +38,6 @@ internal class CreateBarcodeScreenUIEventHandler internal constructor(
                 uiStateEvents.updateBarcodeValue(uiEvent.updatedBarcodeValue)
             }
 
-            is CreateBarcodeScreenUIEvent.OnSaveButtonClick -> {
-                screenViewModel.saveBarcode()
-                triggerInAppReview()
-            }
-
-            is CreateBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
-                screenViewModel.navigateUp()
-            }
-
             is CreateBarcodeScreenUIEvent.OnCopyBarcodeValueButtonClick -> {
                 if (
                     screenViewModel.copyToClipboard(
@@ -56,6 +47,22 @@ internal class CreateBarcodeScreenUIEventHandler internal constructor(
                 ) {
                     showBarcodeValueCopiedToastMessage()
                 }
+            }
+
+            is CreateBarcodeScreenUIEvent.OnSaveButtonClick -> {
+                screenViewModel.saveBarcode(
+                    onSuccess = {
+                        triggerInAppReview()
+                    },
+                )
+            }
+
+            is CreateBarcodeScreenUIEvent.OnSnackbarDismissed -> {
+                screenViewModel.onSnackbarDismissed()
+            }
+
+            is CreateBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
+                screenViewModel.navigateUp()
             }
         }
     }

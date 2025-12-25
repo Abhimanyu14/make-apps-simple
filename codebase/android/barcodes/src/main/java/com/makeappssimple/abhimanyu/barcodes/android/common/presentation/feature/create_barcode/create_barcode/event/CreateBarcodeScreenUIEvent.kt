@@ -20,6 +20,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.Sc
 
 internal sealed class CreateBarcodeScreenUIEvent : ScreenUIEvent {
     data object OnSaveButtonClick : CreateBarcodeScreenUIEvent()
+    data object OnSnackbarDismissed : CreateBarcodeScreenUIEvent()
     data object OnTopAppBarNavigationButtonClick : CreateBarcodeScreenUIEvent()
 
     data class OnBarcodeNameUpdated(

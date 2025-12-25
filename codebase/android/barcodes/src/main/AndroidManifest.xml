@@ -34,7 +34,8 @@
         <activity
             android:name="com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity"
             android:configChanges="allKnown"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- region OssLicensesActivity -->
         <activity

@@ -5,3 +5,4 @@
 4. Use [commands.md](/docs/commands.md) for commands to common actions in the project like building, testing, installation, lint checks, etc.
 5. Use [dictionary.md](/docs/dictionary.md) for language to use.
 6. Before editing any file, always read the file to get its updated state.
+7. Build the app after each change to ensure that there are no build issues.

@@ -18,11 +18,15 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.featur
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.create_barcode.create_barcode.snackbar.CreateBarcodeScreenSnackbarType
 
 @Stable
-internal class CreateBarcodeScreenUIState(
+internal data class CreateBarcodeScreenUIState(
     val isBarcodeValueEditable: Boolean = true,
+    val isError: Boolean = false,
+    val isLoading: Boolean = false,
     val isSaveButtonEnabled: Boolean = false,
     val barcodeName: String = "",
     val barcodeValue: String = "",
+    val screenSnackbarType: CreateBarcodeScreenSnackbarType = CreateBarcodeScreenSnackbarType.None,
 ) : ScreenUIState
