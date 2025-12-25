@@ -52,8 +52,6 @@ internal class BarcodeRepositoryImpl(
         } catch (
             sqLiteException: SQLiteException,
         ) {
-            // TODO(Abhi): Handle error when SQL query fails
-            sqLiteException.printStackTrace()
             MyResult.Error(
                 exception = sqLiteException,
             )
@@ -87,8 +85,6 @@ internal class BarcodeRepositoryImpl(
         } catch (
             sqLiteException: SQLiteException,
         ) {
-            // TODO(Abhi): Handle error when SQL query fails
-            sqLiteException.printStackTrace()
             MyResult.Error(
                 exception = sqLiteException,
             )
@@ -112,8 +108,6 @@ internal class BarcodeRepositoryImpl(
         } catch (
             sqLiteException: SQLiteException,
         ) {
-            // TODO(Abhi): Handle error when SQL query fails
-            sqLiteException.printStackTrace()
             MyResult.Error(
                 exception = sqLiteException,
             )
@@ -139,8 +133,6 @@ internal class BarcodeRepositoryImpl(
         } catch (
             sqLiteException: SQLiteException,
         ) {
-            // TODO(Abhi): Handle error when SQL query fails
-            sqLiteException.printStackTrace()
             MyResult.Error(
                 exception = sqLiteException,
             )
