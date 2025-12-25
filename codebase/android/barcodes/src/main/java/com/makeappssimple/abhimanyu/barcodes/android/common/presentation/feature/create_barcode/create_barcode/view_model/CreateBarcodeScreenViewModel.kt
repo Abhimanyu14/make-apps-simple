@@ -34,7 +34,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigat
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
-import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.result.MyResult
@@ -58,7 +57,6 @@ internal class CreateBarcodeScreenViewModel(
     savedStateHandle: SavedStateHandle,
     private val buildConfigKit: BuildConfigKit,
     private val clipboardKit: ClipboardKit,
-    private val dateTimeKit: DateTimeKit,
     private val getBarcodeByIdUseCase: GetBarcodeByIdUseCase,
     private val insertBarcodesUseCase: InsertBarcodesUseCase,
     private val updateBarcodesUseCase: UpdateBarcodesUseCase,
