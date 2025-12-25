@@ -18,10 +18,12 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.featur
 
 import androidx.compose.runtime.Stable
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.snackbar.ScanBarcodeScreenSnackbarType
 
 @Stable
 internal data class ScanBarcodeScreenUIState(
     val isCameraPermissionGranted: Boolean = false,
     val isDeeplink: Boolean = false,
     val showPermissionPermanentlyDeniedDialog: Boolean = false,
+    val screenSnackbarType: ScanBarcodeScreenSnackbarType = ScanBarcodeScreenSnackbarType.None,
 ) : ScreenUIState

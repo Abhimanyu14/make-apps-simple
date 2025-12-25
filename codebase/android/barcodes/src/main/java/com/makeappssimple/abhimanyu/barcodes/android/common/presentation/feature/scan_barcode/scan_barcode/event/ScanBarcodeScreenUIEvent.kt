@@ -27,5 +27,7 @@ internal sealed class ScanBarcodeScreenUIEvent : ScreenUIEvent {
         data object DismissButtonClick : ScanBarcodeScreenUIEvent()
     }
 
+    data object OnSnackbarDismissed : ScanBarcodeScreenUIEvent()
+
     data object OnTopAppBarNavigationButtonClick : ScanBarcodeScreenUIEvent()
 }

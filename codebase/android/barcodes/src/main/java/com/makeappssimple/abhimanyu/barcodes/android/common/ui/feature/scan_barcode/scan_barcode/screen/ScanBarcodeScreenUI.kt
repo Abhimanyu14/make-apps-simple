@@ -26,11 +26,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.event.ScanBarcodeScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.snackbar.ScanBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.state.ScanBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_scanner.camera.BarcodeScannerPreview
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.common.CommonScreenUIState
@@ -43,6 +45,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaf
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
@@ -53,12 +56,32 @@ internal fun ScanBarcodeScreenUI(
     surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
 ) {
+    val saveBarcodeFailedSnackbarMessage = CosmosStringResource.Id(
+        id = R.string.barcodes_screen_scan_barcode_save_barcode_failed_snackbar_message,
+    ).text
+
+    LaunchedEffect(
+        key1 = uiState.screenSnackbarType,
+    ) {
+        when (uiState.screenSnackbarType) {
+            ScanBarcodeScreenSnackbarType.None -> {}
+
+            ScanBarcodeScreenSnackbarType.SaveBarcodeFailed -> {
+                state.snackbarHostState.showSnackbar(
+                    message = saveBarcodeFailedSnackbarMessage,
+                )
+                handleUIEvent(ScanBarcodeScreenUIEvent.OnSnackbarDismissed)
+            }
+        }
+    }
+
     CosmosScaffold(
         modifier = Modifier
             .testTag(
                 tag = SCREEN_SCAN_BARCODE,
             )
             .fillMaxSize(),
+        snackbarHostState = state.snackbarHostState,
         topBar = {
             CosmosTopAppBar(
                 titleStringResource = CosmosStringResource.Id(

@@ -41,6 +41,10 @@ internal class ScanBarcodeScreenUIEventHandler(
                 onPermissionPermanentlyDeniedDialogDismissButtonClick()
             }
 
+            is ScanBarcodeScreenUIEvent.OnSnackbarDismissed -> {
+                screenViewModel.onSnackbarDismissed()
+            }
+
             is ScanBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick -> {
                 onTopAppBarNavigationButtonClick()
             }

@@ -1,7 +1,6 @@
 # Prompt
 
-- Check for violations from code_conventions.md in barcodes module.
-- Make necessary changes to fix them.
+- Make changes in Scan Barcode Screen to show error snackbar when barcode saving fails. Make end to end changes.
 
 # Scope
 

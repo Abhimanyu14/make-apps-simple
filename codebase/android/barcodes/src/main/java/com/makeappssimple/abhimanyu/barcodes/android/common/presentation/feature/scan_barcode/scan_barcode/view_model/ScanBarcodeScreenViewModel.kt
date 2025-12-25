@@ -22,6 +22,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.InsertBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.navigation.ScanBarcodeScreenArgs
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.snackbar.ScanBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.state.ScanBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.Screen
@@ -84,6 +85,14 @@ internal class ScanBarcodeScreenViewModel(
         }
     }
 
+    fun onSnackbarDismissed() {
+        _uiState.update {
+            it.copy(
+                screenSnackbarType = ScanBarcodeScreenSnackbarType.None,
+            )
+        }
+    }
+
     fun setPermissionPermanentlyDeniedDialogVisible(
         isVisible: Boolean,
     ) {
@@ -106,8 +115,11 @@ internal class ScanBarcodeScreenViewModel(
             )
             when (result) {
                 is MyResult.Error -> {
-                    // TODO(Abhi): Handle failure
-                    result.exception?.printStackTrace()
+                    _uiState.update {
+                        it.copy(
+                            screenSnackbarType = ScanBarcodeScreenSnackbarType.SaveBarcodeFailed,
+                        )
+                    }
                 }
 
                 is MyResult.Loading -> {}
