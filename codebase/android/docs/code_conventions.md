@@ -47,13 +47,13 @@
 
 2. Use K&R style (opening brace on the same line).
 
-## Function Expressions
+## Function Body Style
 
-1. Avoid using function expressions.
+1. Mandatory Block Bodies
+   Always use **block bodies** with curly braces `{}` for function declarations.
+   **Expression body syntax** (using `=`) is prohibited, even for simple one-line returns.
 
-   **Context:** Function expressions can lead to less readable code, especially when the function
-   body is complex or spans multiple lines. Use regular function declarations instead. Follow this
-   even for small function body to maintain consistency.
+   **Context:** To ensure code consistency and simplify future logic extensions.
    e.g.
    Use
 
@@ -66,7 +66,19 @@
    instead of
 
    ```kotlin
-   val doSomething = { /* implementation */ }
+   fun doSomething() = /* implementation */
+   ```
+
+2. Lambda Assignments
+   This rule does not apply to properties assigned to a lambda expression.
+   Since lambdas require curly braces by definition, they should remain as-is.
+
+   e.g.
+
+   ```kotlin
+   val doSomething = {
+       /* implementation */
+   }
    ```
 
 ## Line Breaks
@@ -348,7 +360,8 @@
     - Prefix resource files with the module name to avoid conflicts (e.g., `barcodes_`).
 
 2. **Resource IDs and Names:**
-    - Use snake_case for resource IDs and names (e.g., `barcodes_app_name`, `barcodes_launcher_background`).
+    - Use snake_case for resource IDs and names (e.g., `barcodes_app_name`,
+      `barcodes_launcher_background`).
     - Prefix string, color, and dimen resources with the module name.
     - Use PascalCase for style names (e.g., `BarcodesTheme`).
 
@@ -358,7 +371,8 @@
     - Use 4 spaces for indentation.
 
 2. **Attributes:**
-    - Place attributes on separate lines for complex elements (e.g., `<vector>`, `<path>`) or when there are multiple attributes.
+    - Place attributes on separate lines for complex elements (e.g., `<vector>`,
+      `<path>`) or when there are multiple attributes.
     - Indent attributes by 4 spaces relative to the element tag.
     - Place the closing tag `/>` on a new line for multi-line elements.
     - Single-line elements are acceptable for simple resources (e.g., `<string>`, `<color>`).
@@ -366,7 +380,8 @@
 ## Organization
 
 1. **Region Comments:**
-    - Use `<!-- region section_name -->` and `<!-- endregion -->` to group related resources in large files (e.g., `strings.xml`).
+    - Use `<!-- region section_name -->` and
+      `<!-- endregion -->` to group related resources in large files (e.g., `strings.xml`).
 
 2. **License Header:**
     - Include the project's copyright license header at the top of every XML file.
