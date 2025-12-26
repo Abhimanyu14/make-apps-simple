@@ -25,7 +25,13 @@ import com.google.zxing.common.BitMatrix
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.coroutines.withContext
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        BarcodeGenerator::class,
+    ],
+)
 internal class BarcodeGeneratorImpl(
     private val dispatcherProvider: DispatcherProvider,
 ) : BarcodeGenerator {

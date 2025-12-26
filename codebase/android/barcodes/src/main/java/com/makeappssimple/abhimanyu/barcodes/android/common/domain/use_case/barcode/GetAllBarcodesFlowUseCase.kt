@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.bar
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetAllBarcodesFlowUseCase(
     private val barcodeRepository: BarcodeRepository,
 ) {

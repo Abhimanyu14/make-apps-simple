@@ -20,7 +20,9 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeSourceDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.model.BarcodeSourceUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.model.BarcodeUiModel
+import org.koin.core.annotation.Single
 
+@Single
 internal class BarcodeUiToDomainMapper {
     fun toDomainModel(
         barcodeUiModel: BarcodeUiModel,

@@ -1,6 +1,7 @@
 # Prompt
 
-1. Review "BarcodeAnalyser" and suggest how it can be improved considering clear architecture, SOLID principles, DI and other general software guidelines.
+1. Review "barcodes" module. Make changes to enhance the DI aspects. Refer to Koin documentation for Koin specific details.
+2. Prefer koin annotations for compile time safety.
 
 # Scope
 

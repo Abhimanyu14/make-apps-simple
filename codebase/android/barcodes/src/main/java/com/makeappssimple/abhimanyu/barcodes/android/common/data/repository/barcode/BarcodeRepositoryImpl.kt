@@ -26,7 +26,13 @@ import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.result.MyResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        BarcodeRepository::class,
+    ],
+)
 internal class BarcodeRepositoryImpl(
     private val barcodeDao: BarcodeDao,
     private val dispatcherProvider: DispatcherProvider,

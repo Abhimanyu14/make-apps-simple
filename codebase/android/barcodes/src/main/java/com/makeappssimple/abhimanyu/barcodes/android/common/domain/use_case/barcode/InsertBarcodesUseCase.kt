@@ -21,7 +21,9 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.common.core.result.MyResult
+import org.koin.core.annotation.Single
 
+@Single
 internal class InsertBarcodesUseCase(
     private val barcodeRepository: BarcodeRepository,
     private val dateTimeKit: DateTimeKit,

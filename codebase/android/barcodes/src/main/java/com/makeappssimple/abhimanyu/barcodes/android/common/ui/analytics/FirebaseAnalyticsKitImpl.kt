@@ -16,7 +16,14 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics
 
+import org.koin.core.annotation.Single
+
 // TODO(Abhi): Implement Firebase Analytics
+@Single(
+    binds = [
+        AnalyticsKit::class,
+    ],
+)
 internal class FirebaseAnalyticsKitImpl(
     // private val firebaseAnalytics: FirebaseAnalytics,
 ) : AnalyticsKit {
