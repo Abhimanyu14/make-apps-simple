@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.common.core.json_writer
 
 import android.content.Context
 import android.net.Uri
+import org.koin.core.annotation.Single
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
@@ -26,6 +27,11 @@ private object MyJsonWriterImplConstants {
     const val WRITE_MODE = "w"
 }
 
+@Single(
+    binds = [
+        JsonWriterKit::class,
+    ],
+)
 public class JsonWriterKitImpl(
     private val context: Context,
 ) : JsonWriterKit {

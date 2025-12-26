@@ -19,13 +19,20 @@ package com.makeappssimple.abhimanyu.common.core.coroutines
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        DispatcherProvider::class,
+    ],
+)
 internal class DispatcherProviderImpl(
-    defaultCoroutineDispatcher: CoroutineDispatcher,
-    ioCoroutineDispatcher: CoroutineDispatcher,
-    mainCoroutineDispatcher: CoroutineDispatcher,
-    mainImmediateCoroutineDispatcher: CoroutineDispatcher,
-    unconfinedCoroutineDispatcher: CoroutineDispatcher,
+    @Named(DISPATCHER_DEFAULT) defaultCoroutineDispatcher: CoroutineDispatcher,
+    @Named(DISPATCHER_IO) ioCoroutineDispatcher: CoroutineDispatcher,
+    @Named(DISPATCHER_MAIN) mainCoroutineDispatcher: CoroutineDispatcher,
+    @Named(DISPATCHER_MAIN_IMMEDIATE) mainImmediateCoroutineDispatcher: CoroutineDispatcher,
+    @Named(DISPATCHER_UNCONFINED) unconfinedCoroutineDispatcher: CoroutineDispatcher,
 ) : DispatcherProvider {
     override val default: CoroutineDispatcher = defaultCoroutineDispatcher
     override val io: CoroutineDispatcher = ioCoroutineDispatcher

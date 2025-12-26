@@ -16,20 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKitImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class AppVersionKitModule {
-    @Single
-    internal fun providesAppVersionKit(
-        context: Context,
-    ): AppVersionKit {
-        return AppVersionKitImpl(
-            context = context,
-        )
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.app_version",
+)
+public class AppVersionKitModule

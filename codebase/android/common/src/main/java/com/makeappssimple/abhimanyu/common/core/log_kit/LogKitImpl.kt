@@ -18,7 +18,13 @@ package com.makeappssimple.abhimanyu.common.core.log_kit
 
 import android.util.Log
 import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        LogKit::class,
+    ],
+)
 internal class LogKitImpl(
     private val buildConfigKit: BuildConfigKit,
     private val logErrorMessage: (String, String) -> Unit = { tag, message ->

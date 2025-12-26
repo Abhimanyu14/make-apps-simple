@@ -20,7 +20,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        AppVersionKit::class,
+    ],
+)
 internal class AppVersionKitImpl(
     private val context: Context,
 ) : AppVersionKit {

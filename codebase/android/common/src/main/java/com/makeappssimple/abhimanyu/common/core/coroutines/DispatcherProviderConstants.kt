@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.di
+package com.makeappssimple.abhimanyu.common.core.coroutines
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-
-@Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.build_config",
-)
-public class BuildConfigKitModule
+public const val DISPATCHER_DEFAULT: String = "DISPATCHER_DEFAULT"
+public const val DISPATCHER_IO: String = "DISPATCHER_IO"
+public const val DISPATCHER_MAIN: String = "DISPATCHER_MAIN"
+public const val DISPATCHER_MAIN_IMMEDIATE: String = "DISPATCHER_MAIN_IMMEDIATE"
+public const val DISPATCHER_UNCONFINED: String = "DISPATCHER_UNCONFINED"

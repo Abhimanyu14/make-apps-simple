@@ -16,20 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
-import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKitImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class ClipboardKitModule {
-    @Single
-    internal fun providesClipboardKit(
-        context: Context,
-    ): ClipboardKit {
-        return ClipboardKitImpl(
-            context = context,
-        )
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.clipboard",
+)
+public class ClipboardKitModule

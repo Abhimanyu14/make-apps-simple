@@ -17,7 +17,13 @@
 package com.makeappssimple.abhimanyu.common.core.uri_encoder
 
 import android.net.Uri
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        UriEncoder::class,
+    ],
+)
 public class UriEncoderImpl(
     private val uriEncode: (String) -> String = { string ->
         Uri.encode(string)

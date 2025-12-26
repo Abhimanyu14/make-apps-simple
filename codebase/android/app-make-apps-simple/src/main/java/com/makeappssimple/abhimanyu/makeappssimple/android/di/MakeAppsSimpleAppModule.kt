@@ -28,5 +28,7 @@ import org.koin.core.annotation.Module
         PlatformModule::class,
     ],
 )
-@ComponentScan("com.makeappssimple.abhimanyu.makeappssimple.android")
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.makeappssimple.android",
+)
 public class MakeAppsSimpleAppModule

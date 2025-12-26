@@ -48,5 +48,7 @@ import org.koin.core.annotation.Module
         UriEncoderModule::class,
     ],
 )
-@ComponentScan("com.makeappssimple.abhimanyu.barcodes.android")
-internal class BarcodesAppModule
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.barcodes.android",
+)
+public class BarcodesAppModule

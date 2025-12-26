@@ -16,15 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class UriEncoderModule {
-    @Single
-    internal fun providesUriEncoder(): UriEncoder {
-        return UriEncoderImpl()
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.uri_encoder",
+)
+public class UriEncoderModule

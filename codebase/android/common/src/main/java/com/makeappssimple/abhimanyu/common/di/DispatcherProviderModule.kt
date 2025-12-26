@@ -16,21 +16,22 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.core.coroutines.DISPATCHER_DEFAULT
+import com.makeappssimple.abhimanyu.common.core.coroutines.DISPATCHER_IO
+import com.makeappssimple.abhimanyu.common.core.coroutines.DISPATCHER_MAIN
+import com.makeappssimple.abhimanyu.common.core.coroutines.DISPATCHER_MAIN_IMMEDIATE
+import com.makeappssimple.abhimanyu.common.core.coroutines.DISPATCHER_UNCONFINED
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 
-private const val DISPATCHER_DEFAULT = "DISPATCHER_DEFAULT"
-private const val DISPATCHER_IO = "DISPATCHER_IO"
-private const val DISPATCHER_MAIN = "DISPATCHER_MAIN"
-private const val DISPATCHER_MAIN_IMMEDIATE = "DISPATCHER_MAIN_IMMEDIATE"
-private const val DISPATCHER_UNCONFINED = "DISPATCHER_UNCONFINED"
-
 @Module
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.coroutines",
+)
 public class DispatcherProviderModule {
     @Single
     @Named(DISPATCHER_DEFAULT)
@@ -60,22 +61,5 @@ public class DispatcherProviderModule {
     @Named(DISPATCHER_UNCONFINED)
     internal fun providesUnconfinedCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.Unconfined
-    }
-
-    @Single
-    internal fun providesDispatcherProvider(
-        @Named(DISPATCHER_DEFAULT) defaultCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_IO) ioCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_MAIN) mainCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_MAIN_IMMEDIATE) mainImmediateCoroutineDispatcher: CoroutineDispatcher,
-        @Named(DISPATCHER_UNCONFINED) unconfinedCoroutineDispatcher: CoroutineDispatcher,
-    ): DispatcherProvider {
-        return DispatcherProviderImpl(
-            defaultCoroutineDispatcher = defaultCoroutineDispatcher,
-            ioCoroutineDispatcher = defaultCoroutineDispatcher,
-            mainCoroutineDispatcher = defaultCoroutineDispatcher,
-            mainImmediateCoroutineDispatcher = defaultCoroutineDispatcher,
-            unconfinedCoroutineDispatcher = defaultCoroutineDispatcher,
-        )
     }
 }

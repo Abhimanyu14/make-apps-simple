@@ -173,8 +173,14 @@ kover {
 
 ksp {
     // Koin
-    arg("KOIN_CONFIG_CHECK", "true")
-    arg("KOIN_DEFAULT_MODULE", "false")
+    arg(
+        k = "KOIN_CONFIG_CHECK",
+        v = "true",
+    )
+    arg(
+        k = "KOIN_DEFAULT_MODULE",
+        v = "false",
+    )
 }
 
 room {

@@ -16,20 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKitImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class JsonReaderKitModule {
-    @Single
-    internal fun providesJsonReader(
-        context: Context,
-    ): JsonReaderKit {
-        return JsonReaderKitImpl(
-            context = context,
-        )
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.json_reader",
+)
+public class JsonReaderKitModule

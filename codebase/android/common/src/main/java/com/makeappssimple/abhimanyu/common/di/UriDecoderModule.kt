@@ -16,15 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoderImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class UriDecoderModule {
-    @Single
-    internal fun providesUriDecoder(): UriDecoder {
-        return UriDecoderImpl()
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.uri_decoder",
+)
+public class UriDecoderModule

@@ -57,5 +57,7 @@ import org.koin.core.annotation.Module
         UriEncoderModule::class,
     ],
 )
-@ComponentScan("com.makeappssimple.abhimanyu.finance.manager.android")
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.finance.manager.android",
+)
 public class FinanceManagerAppModule

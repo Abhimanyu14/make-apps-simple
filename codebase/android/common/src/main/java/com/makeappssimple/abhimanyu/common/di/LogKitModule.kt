@@ -16,20 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKitImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class LogKitModule {
-    @Single
-    internal fun providesLogKit(
-        buildConfigKit: BuildConfigKit,
-    ): LogKit {
-        return LogKitImpl(
-            buildConfigKit = buildConfigKit,
-        )
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.log_kit",
+)
+public class LogKitModule

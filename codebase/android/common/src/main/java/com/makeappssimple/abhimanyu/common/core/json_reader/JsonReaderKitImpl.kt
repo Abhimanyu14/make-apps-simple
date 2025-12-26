@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.common.core.json_reader
 import android.content.Context
 import android.net.Uri
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import org.koin.core.annotation.Single
 import java.io.BufferedReader
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -26,6 +27,11 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.nio.charset.Charset
 
+@Single(
+    binds = [
+        JsonReaderKit::class,
+    ],
+)
 public class JsonReaderKitImpl(
     private val context: Context,
 ) : JsonReaderKit {

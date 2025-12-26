@@ -18,7 +18,13 @@ package com.makeappssimple.abhimanyu.common.core.build_config
 
 import android.os.Build
 import com.makeappssimple.abhimanyu.common.BuildConfig
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        BuildConfigKit::class,
+    ],
+)
 internal class BuildConfigKitImpl(
     private val isDebugBuild: Boolean = BuildConfig.DEBUG,
     private val buildVersion: Int = Build.VERSION.SDK_INT,

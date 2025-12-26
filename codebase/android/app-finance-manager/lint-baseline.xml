@@ -16,6 +16,7 @@
   ~ limitations under the License.
   -->
 
-<issues format="6" by="lint 8.10.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.1)" variant="fatal" version="8.10.1">
+<issues name="AGP (8.10.1)" by="lint 8.10.1" client="gradle" dependencies="false" format="6"
+    type="baseline" variant="fatal" version="8.10.1">
 
 </issues>

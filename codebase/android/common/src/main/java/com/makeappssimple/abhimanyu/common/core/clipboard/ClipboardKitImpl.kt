@@ -19,7 +19,13 @@ package com.makeappssimple.abhimanyu.common.core.clipboard
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        ClipboardKit::class,
+    ],
+)
 internal class ClipboardKitImpl(
     private val context: Context,
 ) : ClipboardKit {

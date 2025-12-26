@@ -16,20 +16,11 @@
 
 package com.makeappssimple.abhimanyu.common.di
 
-import android.content.Context
-import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
-import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKitImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 
 @Module
-public class JsonWriterKitModule {
-    @Single
-    internal fun providesJsonWriter(
-        context: Context,
-    ): JsonWriterKit {
-        return JsonWriterKitImpl(
-            context = context,
-        )
-    }
-}
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.common.core.json_writer",
+)
+public class JsonWriterKitModule
