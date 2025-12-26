@@ -24,6 +24,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.di.Barc
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.di.NavigationKitModule
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.di.AnalyticsModule
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_generator.di.BarcodeGeneratorModule
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_scanner.di.BarcodeScannerModule
 import com.makeappssimple.abhimanyu.common.di.AppVersionKitModule
 import com.makeappssimple.abhimanyu.common.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.common.di.ClipboardKitModule
@@ -41,6 +42,7 @@ import org.koin.core.annotation.Module
         AnalyticsModule::class,
         AppVersionKitModule::class,
         BarcodeGeneratorModule::class,
+        BarcodeScannerModule::class,
         BarcodePresentationModule::class,
         BarcodeRepositoryModule::class,
         BuildConfigKitModule::class,

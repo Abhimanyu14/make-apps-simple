@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeFormatDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.event.ScanBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.scan_barcode.scan_barcode.state.ScanBarcodeScreenUIState
@@ -49,6 +50,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.ui.constants.Deeplin
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.permissions.PermissionStatus
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.permissions.rememberCameraPermissionStatus
 import kotlinx.coroutines.awaitCancellation
+import org.koin.compose.getKoin
 import org.koin.compose.viewmodel.koinViewModel
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -163,6 +165,8 @@ internal fun ScanBarcodeScreen(
         )
     }
 
+    val koin = getKoin()
+
     LaunchedEffect(
         key1 = lifecycleOwner,
         key2 = cameraPermissionRequest.permissionStatus,
@@ -181,10 +185,12 @@ internal fun ScanBarcodeScreen(
             }
         }
 
+        val barcodeScanner: BarcodeScanner = koin.get()
         val barcodeAnalyser = BarcodeAnalyser(
             dispatcherProvider = screenViewModel.dispatcherProvider,
-            logError = screenViewModel::logError,
-            getCurrentTimeMillis = screenViewModel::getCurrentTimeMillis,
+            barcodeScanner = barcodeScanner,
+            dateTimeKit = screenViewModel.dateTimeKit,
+            logKit = screenViewModel.logKit,
             onBarcodesDetected = { barcodes ->
                 barcodes.forEach { barcode ->
                     barcode.rawValue?.let { barcodeValue ->

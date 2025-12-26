@@ -44,12 +44,12 @@ import org.koin.android.annotation.KoinViewModel
 internal class ScanBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
     coroutineScope: CoroutineScope,
-    logKit: LogKit,
     navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
-    private val dateTimeKit: DateTimeKit,
     private val insertBarcodesUseCase: InsertBarcodesUseCase,
+    val dateTimeKit: DateTimeKit,
     val dispatcherProvider: DispatcherProvider,
+    val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
@@ -72,10 +72,6 @@ internal class ScanBarcodeScreenViewModel(
         )
     val uiState: StateFlow<ScanBarcodeScreenUIState> = _uiState.asStateFlow()
     // endregion
-
-    fun getCurrentTimeMillis(): Long {
-        return dateTimeKit.getCurrentTimeMillis()
-    }
 
     fun onCameraPermissionChanged(
         isCameraPermissionGranted: Boolean,

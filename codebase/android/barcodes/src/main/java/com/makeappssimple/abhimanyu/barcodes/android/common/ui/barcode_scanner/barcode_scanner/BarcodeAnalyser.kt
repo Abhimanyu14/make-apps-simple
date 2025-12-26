@@ -21,63 +21,77 @@ import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanner
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+private const val MINIMUM_ANALYSIS_INTERVAL_MS = 1000L
+
 internal class BarcodeAnalyser(
-    private val dispatcherProvider: DispatcherProvider,
-    private val getCurrentTimeMillis: () -> Long,
-    private val logError: (message: String) -> Unit,
+    dispatcherProvider: DispatcherProvider,
+    private val barcodeScanner: BarcodeScanner,
+    private val dateTimeKit: DateTimeKit,
+    private val logKit: LogKit,
     private val onBarcodesDetected: (barcodes: List<Barcode>) -> Unit,
 ) : ImageAnalysis.Analyzer {
     private var currentTimestamp: Long = 0
-    private val barcodeScannerOptions: BarcodeScannerOptions =
-        BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
-            .build()
-    private val barcodeScanner: BarcodeScanner =
-        BarcodeScanning.getClient(barcodeScannerOptions)
+    private val coroutineScope: CoroutineScope = CoroutineScope(
+        context = SupervisorJob() + dispatcherProvider.io,
+    )
 
     @OptIn(ExperimentalGetImage::class)
     override fun analyze(
         imageProxy: ImageProxy,
     ) {
-        logError("Inside analyze")
+        val imageToAnalyze = imageProxy.image
+        if (imageToAnalyze == null) {
+            imageProxy.close()
+            return
+        }
 
-        currentTimestamp = getCurrentTimeMillis()
-        imageProxy.image?.let { imageToAnalyze ->
-            val imageToProcess = InputImage.fromMediaImage(
-                imageToAnalyze,
-                imageProxy.imageInfo.rotationDegrees,
-            )
-            barcodeScanner.process(imageToProcess)
-                .addOnSuccessListener { barcodes ->
-                    if (barcodes.isNotEmpty()) {
-                        logError("Scanned: $barcodes")
-                        onBarcodesDetected(barcodes)
-                    } else {
-                        logError("No barcode scanned")
-                    }
+        currentTimestamp = dateTimeKit.getCurrentTimeMillis()
+        val imageToProcess = InputImage.fromMediaImage(
+            imageToAnalyze,
+            imageProxy.imageInfo.rotationDegrees,
+        )
+
+        barcodeScanner.process(imageToProcess)
+            .addOnSuccessListener { barcodes ->
+                if (barcodes.isNotEmpty()) {
+                    onBarcodesDetected(barcodes)
                 }
-                .addOnFailureListener { exception ->
-                    logError("BarcodeAnalyser: Something went wrong with exception: $exception")
-                }
-                .addOnCompleteListener {
-                    CoroutineScope(
-                        context = dispatcherProvider.io,
-                    ).launch {
-                        delay(
-                            timeMillis = 1000 - (getCurrentTimeMillis() - currentTimestamp),
-                        )
-                        imageProxy.close()
-                    }
-                }
+            }
+            .addOnFailureListener { exception ->
+                logKit.logError(
+                    message = "BarcodeAnalyser: Failed to process image with exception: $exception",
+                )
+            }
+            .addOnCompleteListener {
+                closeImageProxyAfterDelay(
+                    imageProxy = imageProxy,
+                )
+            }
+    }
+
+    private fun closeImageProxyAfterDelay(
+        imageProxy: ImageProxy,
+    ) {
+        coroutineScope.launch {
+            val elapsedTime =
+                dateTimeKit.getCurrentTimeMillis() - currentTimestamp
+            val remainingDelay = MINIMUM_ANALYSIS_INTERVAL_MS - elapsedTime
+            if (remainingDelay > 0) {
+                delay(
+                    timeMillis = remainingDelay,
+                )
+            }
+            imageProxy.close()
         }
     }
 }
