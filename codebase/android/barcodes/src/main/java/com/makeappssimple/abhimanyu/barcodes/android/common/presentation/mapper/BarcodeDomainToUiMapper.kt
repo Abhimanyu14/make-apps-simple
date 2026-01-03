@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,13 @@ internal class BarcodeDomainToUiMapper {
         barcodeSourceDomainModel: BarcodeSourceDomainModel,
     ): BarcodeSourceUiModel {
         return when (barcodeSourceDomainModel) {
-            BarcodeSourceDomainModel.CREATED -> BarcodeSourceUiModel.CREATED
-            BarcodeSourceDomainModel.SCANNED -> BarcodeSourceUiModel.SCANNED
+            BarcodeSourceDomainModel.CREATED -> {
+                BarcodeSourceUiModel.CREATED
+            }
+
+            BarcodeSourceDomainModel.SCANNED -> {
+                BarcodeSourceUiModel.SCANNED
+            }
         }
     }
 }

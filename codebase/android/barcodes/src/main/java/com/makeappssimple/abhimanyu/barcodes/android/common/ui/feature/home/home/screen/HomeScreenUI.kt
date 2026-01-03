@@ -165,8 +165,7 @@ internal fun HomeScreenUI(
                         )
                     }
 
-                    SnackbarResult.Dismissed -> {
-                    }
+                    SnackbarResult.Dismissed -> {}
                 }
             }
         }
@@ -358,9 +357,17 @@ private fun HomeScreenList(
         backgroundContent = { dismissState: CosmosSwipeToDismissState ->
             val color by animateColorAsState(
                 targetValue = when (dismissState.targetValue) {
-                    CosmosSwipeToDismissValue.Default -> CosmosAppTheme.colorScheme.surfaceVariant
-                    CosmosSwipeToDismissValue.DismissedToEnd -> CosmosAppTheme.colorScheme.error
-                    CosmosSwipeToDismissValue.DismissedToStart -> CosmosAppTheme.colorScheme.background
+                    CosmosSwipeToDismissValue.Default -> {
+                        CosmosAppTheme.colorScheme.surfaceVariant
+                    }
+
+                    CosmosSwipeToDismissValue.DismissedToEnd -> {
+                        CosmosAppTheme.colorScheme.error
+                    }
+
+                    CosmosSwipeToDismissValue.DismissedToStart -> {
+                        CosmosAppTheme.colorScheme.background
+                    }
                 },
                 label = "swipe_to_dismiss_background_color",
             )

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.app.BarcodesActivityViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.viewmodel.koinActivityViewModel
 
 // TODO(Abhi): Change to 5 once we can set app update priority when releasing from console
 internal const val HIGH_PRIORITY_APP_UPDATE = 0
 
 @Composable
 internal fun BarcodesApp(
-    barcodesActivityViewModel: BarcodesActivityViewModel = koinViewModel(),
+    barcodesActivityViewModel: BarcodesActivityViewModel = koinActivityViewModel(),
 ) {
     rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),

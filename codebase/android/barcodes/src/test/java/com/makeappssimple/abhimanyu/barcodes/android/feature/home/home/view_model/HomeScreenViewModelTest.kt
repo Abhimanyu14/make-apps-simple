@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,16 @@
 package com.makeappssimple.abhimanyu.barcodes.android.feature.home.home.view_model
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.barcodes.android.core.analytics.FirebaseAnalyticsKitImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.BarcodeRepositoryImpl
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.common.data.barcode.fake.FakeBarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.common.data.repository.barcode.BarcodeRepositoryImpl
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature.home.home.view_model.HomeScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.BarcodesNavigationDirections
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.NavigationKitImpl
+import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.FirebaseAnalyticsKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.BarcodesNavigationDirections
-import com.makeappssimple.abhimanyu.barcodes.android.core.navigation.NavigationKitImpl
 import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
