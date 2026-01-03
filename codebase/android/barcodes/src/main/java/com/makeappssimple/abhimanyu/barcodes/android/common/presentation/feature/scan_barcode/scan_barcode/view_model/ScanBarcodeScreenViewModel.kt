@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,6 +91,16 @@ internal class ScanBarcodeScreenViewModel(
         }
     }
 
+    fun setIsScanning(
+        isScanning: Boolean,
+    ) {
+        _uiState.update {
+            it.copy(
+                isScanning = isScanning,
+            )
+        }
+    }
+
     fun setPermissionPermanentlyDeniedDialogVisible(
         isVisible: Boolean,
     ) {
@@ -106,7 +116,7 @@ internal class ScanBarcodeScreenViewModel(
         barcodeValue: String,
     ) {
         viewModelScope.launch {
-            val result = insertBarcodesUseCase(
+            val result: MyResult<Long> = insertBarcodesUseCase(
                 source = BarcodeSourceDomainModel.SCANNED,
                 format = barcodeFormat,
                 value = barcodeValue,
@@ -115,6 +125,7 @@ internal class ScanBarcodeScreenViewModel(
                 is MyResult.Error -> {
                     _uiState.update {
                         it.copy(
+                            isScanning = true,
                             screenSnackbarType = ScanBarcodeScreenSnackbarType.SaveBarcodeFailed,
                         )
                     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -170,8 +170,9 @@ internal fun ScanBarcodeScreen(
     LaunchedEffect(
         key1 = lifecycleOwner,
         key2 = cameraPermissionRequest.permissionStatus,
+        key3 = uiState.isScanning,
     ) {
-        if (cameraPermissionRequest.permissionStatus != PermissionStatus.GRANTED) {
+        if (cameraPermissionRequest.permissionStatus != PermissionStatus.GRANTED || !uiState.isScanning) {
             return@LaunchedEffect
         }
         val cameraExecutor: ExecutorService =
@@ -198,7 +199,7 @@ internal fun ScanBarcodeScreen(
                             message = "BarcodeDomainModel value detected: ${barcodeValue}.",
                         )
 
-                        processCameraProvider.unbindAll()
+                        screenViewModel.setIsScanning(false)
                         BarcodeFormatDomainModel.fromValue(barcode.format)
                             ?.let { barcodeFormat ->
                                 onBarcodeScanned(
