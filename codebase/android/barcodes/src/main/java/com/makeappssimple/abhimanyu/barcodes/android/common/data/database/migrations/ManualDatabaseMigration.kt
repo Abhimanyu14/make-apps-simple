@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.data.database.migra
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-internal val manualDatabaseMigrations: Array<Migration> = arrayOf(
-)
+internal val manualDatabaseMigrations: Array<Migration> = arrayOf()
 
 private object ManualDatabaseMigration {
     /**
