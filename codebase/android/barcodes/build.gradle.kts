@@ -137,7 +137,6 @@ dependencies {
     implementation(libs.play.services.mlkit.barcode.scanning)
     implementation(libs.play.services.oss.licenses)
     implementation(libs.play.services.vision)
-    implementation(libs.zxing.core)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.firebase.bom))
