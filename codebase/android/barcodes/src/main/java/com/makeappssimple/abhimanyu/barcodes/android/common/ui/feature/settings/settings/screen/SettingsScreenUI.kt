@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,13 +36,14 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaf
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun SettingsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: SettingsScreenUIEvent) -> Unit = {},
 ) {
-    val listItemsDataAndEventHandler = arrayListOf(
+    val listItemsDataAndEventHandler = persistentListOf(
         CosmosListItemDataEventDataAndEventHandler(
             data = CosmosListItemData(
                 stringResource = CosmosStringResource.Id(

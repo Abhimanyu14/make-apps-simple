@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ private fun CosmosTopAppBarUI(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = CosmosAppTheme.typography.titleLarge,
-                modifier = modifier
+                modifier = Modifier
                     .testTag(
                         tag = COMPONENT_COSMOS_TOP_APP_BAR_TITLE_TEXT,
                     ),
@@ -111,6 +111,7 @@ private fun CosmosTopAppBarUI(
 
 @Composable
 public fun CosmosTopAppBarActionButton(
+    modifier: Modifier = Modifier,
     iconResource: CosmosIconResource,
     iconContentDescriptionStringResource: CosmosStringResource,
     onClickLabelStringResource: CosmosStringResource,
@@ -119,7 +120,7 @@ public fun CosmosTopAppBarActionButton(
     CosmosIconButton(
         onClickLabelStringResource = onClickLabelStringResource,
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .padding(
                 end = 4.dp,
             ),

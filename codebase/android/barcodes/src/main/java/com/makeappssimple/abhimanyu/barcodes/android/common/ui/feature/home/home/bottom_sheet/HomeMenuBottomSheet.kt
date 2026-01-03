@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
+import kotlinx.collections.immutable.persistentListOf
 
 private object HomeMenuBottomSheetConstants {
     val minimumBottomSheetHeight = 24.dp
@@ -52,7 +53,7 @@ internal fun HomeMenuBottomSheet(
             ),
     ) {
         CosmosSimpleList(
-            listItemsDataAndEventHandler = listOf(
+            listItemsDataAndEventHandler = persistentListOf(
                 CosmosListItemDataEventDataAndEventHandler(
                     data = CosmosListItemData(
                         stringResource = CosmosStringResource.Id(

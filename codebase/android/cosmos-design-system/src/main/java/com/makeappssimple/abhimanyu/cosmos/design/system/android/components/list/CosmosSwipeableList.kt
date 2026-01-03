@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.swipe_to_dismiss.CosmosSwipeToDismissState
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 public fun CosmosSwipeableList(
     modifier: Modifier = Modifier,
-    listItemsDataAndEventHandler: List<CosmosListItemDataEventDataAndEventHandler>,
+    listItemsDataAndEventHandler: ImmutableList<CosmosListItemDataEventDataAndEventHandler>,
     contentPadding: PaddingValues = PaddingValues(),
     actionOnSwipeToEnd: ((position: Int) -> Unit)? = null,
     actionOnSwipeToStart: ((position: Int) -> Unit)? = null,

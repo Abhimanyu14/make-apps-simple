@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 public fun CosmosSimpleList(
     modifier: Modifier = Modifier,
-    listItemsDataAndEventHandler: List<CosmosListItemDataEventDataAndEventHandler>,
+    listItemsDataAndEventHandler: ImmutableList<CosmosListItemDataEventDataAndEventHandler>,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
     LazyColumn(

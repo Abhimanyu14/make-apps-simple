@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import kotlinx.collections.immutable.ImmutableList
 
 // TODO(Abhi): Remove data class
 public data class CosmosLinkTextData(
@@ -37,7 +38,7 @@ public data class CosmosLinkTextData(
 @Composable
 public fun CosmosLinkText(
     modifier: Modifier = Modifier,
-    cosmosLinkTextData: List<CosmosLinkTextData>,
+    cosmosLinkTextData: ImmutableList<CosmosLinkTextData>,
 ) {
     val annotatedString = createAnnotatedString(
         data = cosmosLinkTextData,
@@ -67,7 +68,7 @@ public fun CosmosLinkText(
 
 @Composable
 private fun createAnnotatedString(
-    data: List<CosmosLinkTextData>,
+    data: ImmutableList<CosmosLinkTextData>,
 ): AnnotatedString {
     return buildAnnotatedString {
         data.forEach { linkTextData ->

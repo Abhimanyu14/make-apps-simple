@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,19 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 
 @Composable
-public fun Dp.dpToPx(): Float = with(
-    receiver = LocalDensity.current,
-) {
-    this@dpToPx.toPx()
+public fun Dp.dpToPx(): Float {
+    return with(
+        receiver = LocalDensity.current,
+    ) {
+        this@dpToPx.toPx()
+    }
 }
 
 @Composable
-public fun Int.pxToDp(): Dp = with(
-    receiver = LocalDensity.current,
-) {
-    this@pxToDp.toDp()
+public fun Int.pxToDp(): Dp {
+    return with(
+        receiver = LocalDensity.current,
+    ) {
+        this@pxToDp.toDp()
+    }
 }

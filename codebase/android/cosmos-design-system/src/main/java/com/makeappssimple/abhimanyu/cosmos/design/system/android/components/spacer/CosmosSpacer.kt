@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,9 +70,11 @@ public fun CosmosNonFillingVerticalSpacer(
 }
 
 @Composable
-public fun CosmosNavigationBarsAndImeSpacer() {
+public fun CosmosNavigationBarsAndImeSpacer(
+    modifier: Modifier = Modifier,
+) {
     Spacer(
-        modifier = Modifier
+        modifier = modifier
             .navigationBarsPadding()
             .imePadding(),
     )

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,20 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.ima
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 
 @Composable
 public fun CosmosImage(
+    modifier: Modifier = Modifier,
     bitmap: ImageBitmap,
     contentDescriptionStringResource: CosmosStringResource?,
 ) {
     Image(
         bitmap = bitmap,
         contentDescription = contentDescriptionStringResource?.text,
+        modifier = modifier,
     )
 }

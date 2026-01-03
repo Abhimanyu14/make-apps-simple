@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -142,7 +144,7 @@ internal fun HomeScreenUI(
                     }
                 },
             )
-        }
+        }.toPersistentList()
     val showBarcodeDeletedSnackbar: (BarcodeUiModel) -> Unit =
         { barcodeUiModel ->
             state.coroutineScope.launch {
@@ -344,7 +346,7 @@ internal fun HomeScreenUI(
 
 @Composable
 private fun HomeScreenList(
-    listItemsDataAndEventHandler: List<CosmosListItemDataEventDataAndEventHandler>,
+    listItemsDataAndEventHandler: ImmutableList<CosmosListItemDataEventDataAndEventHandler>,
     actionOnSwipeToEnd: (Int) -> Unit,
 ) {
     CosmosSwipeableList(

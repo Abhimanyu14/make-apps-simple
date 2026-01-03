@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.barcodes.android.R
+import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,7 +90,7 @@ internal fun CreditsScreenUI(
                 ),
             )
             CosmosLinkText(
-                cosmosLinkTextData = listOf(
+                cosmosLinkTextData = persistentListOf(
                     CosmosLinkTextData(
                         text = "Icons made by ",
                     ),
@@ -128,7 +129,7 @@ internal fun CreditsScreenUI(
                     ),
             )
             CosmosLinkText(
-                cosmosLinkTextData = listOf(
+                cosmosLinkTextData = persistentListOf(
                     CosmosLinkTextData(
                         text = "Icons made by ",
                     ),
@@ -173,7 +174,7 @@ internal fun CreditsScreenUI(
                 ),
             )
             CosmosLinkText(
-                cosmosLinkTextData = listOf(
+                cosmosLinkTextData = persistentListOf(
                     CosmosLinkTextData(
                         text = "Privacy Policy Generator",
                         tag = "privacy_policy_generator",
@@ -200,7 +201,7 @@ internal fun CreditsScreenUI(
                 ),
             )
             CosmosLinkText(
-                cosmosLinkTextData = listOf(
+                cosmosLinkTextData = persistentListOf(
                     CosmosLinkTextData(
                         text = "Privacy Policy Generator",
                         tag = "privacy_policy_generator",

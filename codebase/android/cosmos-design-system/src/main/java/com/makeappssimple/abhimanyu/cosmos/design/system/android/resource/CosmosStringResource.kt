@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 
-public sealed class CosmosStringResource() : CosmosResource {
+public sealed class CosmosStringResource : CosmosResource {
     public data class Id(
         val id: Int,
     ) : CosmosStringResource()

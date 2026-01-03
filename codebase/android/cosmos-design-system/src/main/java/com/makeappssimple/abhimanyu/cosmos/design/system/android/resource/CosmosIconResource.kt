@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.resource
 
 import androidx.compose.ui.graphics.vector.ImageVector as ComposeImageVector
 
-public sealed class CosmosIconResource() : CosmosResource {
+public sealed class CosmosIconResource : CosmosResource {
     public data class Id(
         val id: Int,
     ) : CosmosIconResource()

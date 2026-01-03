@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ plugins {
 // region Detekt
 detekt {
     toolVersion = "1.23.8"
-    config.setFrom("$projectDir/config/detekt./detekt.yml")
+    config.setFrom("$projectDir/config/detekt/detekt.yml")
     buildUponDefaultConfig = true
     allRules = false
 }
