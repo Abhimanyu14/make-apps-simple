@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
+import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.model.BarcodeFormatUiModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.coroutines.withContext
@@ -65,7 +66,7 @@ internal class BarcodeGeneratorImpl(
                 width = bitMatrix.width,
                 height = bitMatrix.height,
                 pixels = pixels,
-            )?.asImageBitmap()
+            ).asImageBitmap()
         }
         return imageBitmap
     }
@@ -141,134 +142,62 @@ internal class BarcodeGeneratorImpl(
     private fun getZxingBarcodeFormat(
         visionBarcodeFormat: Int,
     ): BarcodeFormat {
-        when (visionBarcodeFormat) {
-            1 -> {
-                return BarcodeFormat.CODE_128
+        return when (visionBarcodeFormat) {
+            BarcodeFormatUiModel.Code128.value -> {
+                BarcodeFormat.CODE_128
             }
 
-            2 -> {
-                return BarcodeFormat.CODE_39
+            BarcodeFormatUiModel.Code39.value -> {
+                BarcodeFormat.CODE_39
             }
 
-            4 -> {
-                return BarcodeFormat.CODE_93
+            BarcodeFormatUiModel.Code93.value -> {
+                BarcodeFormat.CODE_93
             }
 
-            8 -> {
-                return BarcodeFormat.CODABAR
+            BarcodeFormatUiModel.Codabar.value -> {
+                BarcodeFormat.CODABAR
             }
 
-            16 -> {
-                return BarcodeFormat.DATA_MATRIX
+            BarcodeFormatUiModel.DataMatrix.value -> {
+                BarcodeFormat.DATA_MATRIX
             }
 
-            32 -> {
-                return BarcodeFormat.EAN_13
+            BarcodeFormatUiModel.Ean13.value -> {
+                BarcodeFormat.EAN_13
             }
 
-            64 -> {
-                return BarcodeFormat.EAN_8
+            BarcodeFormatUiModel.Ean8.value -> {
+                BarcodeFormat.EAN_8
             }
 
-            128 -> {
-                return BarcodeFormat.ITF
+            BarcodeFormatUiModel.Itf.value -> {
+                BarcodeFormat.ITF
             }
 
-            256 -> {
-                return BarcodeFormat.QR_CODE
+            BarcodeFormatUiModel.QrCode.value -> {
+                BarcodeFormat.QR_CODE
             }
 
-            512 -> {
-                return BarcodeFormat.UPC_A
+            BarcodeFormatUiModel.UpcA.value -> {
+                BarcodeFormat.UPC_A
             }
 
-            1024 -> {
-                return BarcodeFormat.UPC_E
+            BarcodeFormatUiModel.UpcE.value -> {
+                BarcodeFormat.UPC_E
             }
 
-            2048 -> {
-                return BarcodeFormat.PDF_417
+            BarcodeFormatUiModel.Pdf417.value -> {
+                BarcodeFormat.PDF_417
             }
 
-            4096 -> {
-                return BarcodeFormat.AZTEC
+            BarcodeFormatUiModel.Aztec.value -> {
+                BarcodeFormat.AZTEC
             }
 
             else -> {
-                return BarcodeFormat.QR_CODE
+                BarcodeFormat.QR_CODE
             }
         }
-    }
-
-    private fun getBarcodeFormatInt(
-        barcodeFormat: BarcodeFormat,
-    ): Int {
-        when (barcodeFormat) {
-            BarcodeFormat.CODE_128 -> {
-                return 1
-            }
-
-            BarcodeFormat.CODE_39 -> {
-                return 2
-            }
-
-            BarcodeFormat.CODE_93 -> {
-                return 4
-            }
-
-            BarcodeFormat.CODABAR -> {
-                return 8
-            }
-
-            BarcodeFormat.DATA_MATRIX -> {
-                return 16
-            }
-
-            BarcodeFormat.EAN_13 -> {
-                return 32
-            }
-
-            BarcodeFormat.EAN_8 -> {
-                return 64
-            }
-
-            BarcodeFormat.ITF -> {
-                return 128
-            }
-
-            BarcodeFormat.QR_CODE -> {
-                return 256
-            }
-
-            BarcodeFormat.UPC_A -> {
-                return 512
-            }
-
-            BarcodeFormat.UPC_E -> {
-                return 1024
-            }
-
-            BarcodeFormat.PDF_417 -> {
-                return 2048
-            }
-
-            BarcodeFormat.AZTEC -> {
-                return 4096
-            }
-
-            BarcodeFormat.MAXICODE -> {
-            }
-
-            BarcodeFormat.RSS_14 -> {
-            }
-
-            BarcodeFormat.RSS_EXPANDED -> {
-            }
-
-            BarcodeFormat.UPC_EAN_EXTENSION -> {
-            }
-        }
-
-        return 256
     }
 }

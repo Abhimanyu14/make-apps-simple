@@ -1,6 +1,6 @@
 # Prompt
 
-1. Analyze "barcodes" module code and add items in backlog.md to work on from engineering POV - architecture, naming, etc.
+1. Complete action items in [backlog.md](backlog.md)
 
 # Scope
 

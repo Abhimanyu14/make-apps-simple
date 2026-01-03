@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -267,7 +267,9 @@ private fun OverviewTabIndicator(
 @Composable
 private fun OverviewSelectionPreview() {
     var selectedIndex by remember {
-        mutableIntStateOf(0)
+        mutableIntStateOf(
+            value = 0,
+        )
     }
     FinanceManagerAppTheme {
         Box(
