@@ -1,6 +1,6 @@
 # Prompt
 
-1. Read the file and then, update [backlog](backlog.md) to a numbered list.
+1. Make changes for action item 18 in [backlog.md](backlog.md).
 
 # Scope
 

@@ -294,7 +294,7 @@
 
 ## End of files:
 
-1. Files should always end with an empty line.
+1. All files should always end with exactly a single empty line.
 
 ## Method Ordering
 
