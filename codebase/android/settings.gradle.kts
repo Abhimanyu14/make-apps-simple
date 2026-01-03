@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ include(":app-barcodes")
 include(":app-cosmos-design-system-catalog")
 include(":app-finance-manager")
 include(":app-make-apps-simple")
+include(":barcode-generator")
 include(":barcodes")
 include(":common")
 include(":cosmos-design-system")

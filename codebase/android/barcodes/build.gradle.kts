@@ -98,6 +98,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":barcode-generator"))
     implementation(project(":common"))
     implementation(project(":cosmos-design-system"))
 

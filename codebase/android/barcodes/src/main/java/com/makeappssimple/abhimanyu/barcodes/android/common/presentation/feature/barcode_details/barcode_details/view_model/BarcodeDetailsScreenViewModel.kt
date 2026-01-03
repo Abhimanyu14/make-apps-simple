@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import android.os.Build
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.makeappssimple.abhimanyu.barcode.generator.android.BarcodeGenerator
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.DeleteBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.use_case.barcode.GetBarcodeByIdUseCase
@@ -31,7 +32,6 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_generator.BarcodeGenerator
 import com.makeappssimple.abhimanyu.common.core.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.core.clipboard.ClipboardKit
 import com.makeappssimple.abhimanyu.common.core.date_time.DateTimeKit

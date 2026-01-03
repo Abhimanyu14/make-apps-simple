@@ -1,6 +1,6 @@
 # Prompt
 
-1. Make changes for action item 18 in [backlog.md](backlog.md).
+1. Review local code changes.
 
 # Scope
 

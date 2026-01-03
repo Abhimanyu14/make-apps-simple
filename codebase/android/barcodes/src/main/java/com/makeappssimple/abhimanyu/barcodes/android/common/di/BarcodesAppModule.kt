@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.common.di
 
+import com.makeappssimple.abhimanyu.barcode.generator.android.di.BarcodeGeneratorModule
 import com.makeappssimple.abhimanyu.barcodes.android.common.data.database.di.RoomModule
 import com.makeappssimple.abhimanyu.barcodes.android.common.data.di.DaosModule
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_scanner.di.BarcodeScannerModule
@@ -34,6 +35,7 @@ import org.koin.core.annotation.Module
 @Module(
     includes = [
         AppVersionKitModule::class,
+        BarcodeGeneratorModule::class,
         BarcodeScannerModule::class,
         BuildConfigKitModule::class,
         ClipboardKitModule::class,

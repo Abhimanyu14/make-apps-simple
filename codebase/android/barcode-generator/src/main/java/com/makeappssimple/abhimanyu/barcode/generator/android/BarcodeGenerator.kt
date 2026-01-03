@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_generator
+package com.makeappssimple.abhimanyu.barcode.generator.android
 
 import android.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
@@ -26,8 +26,8 @@ private object BarcodeDefault {
     const val BACKGROUND_COLOR: Int = Color.WHITE
 }
 
-internal interface BarcodeGenerator {
-    suspend fun generateBarcode(
+public interface BarcodeGenerator {
+    public suspend fun generateBarcode(
         data: String,
         visionBarcodeFormat: Int,
         width: Int = BarcodeDefault.WIDTH,

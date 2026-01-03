@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.common.ui.barcode_generator
+package com.makeappssimple.abhimanyu.barcode.generator.android
 
 import android.graphics.Bitmap
 import androidx.compose.ui.graphics.ImageBitmap
@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
-import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.model.BarcodeFormatUiModel
+import com.makeappssimple.abhimanyu.barcode.generator.android.model.BarcodeFormatModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import kotlinx.coroutines.withContext
@@ -143,55 +143,55 @@ internal class BarcodeGeneratorImpl(
         visionBarcodeFormat: Int,
     ): BarcodeFormat {
         return when (visionBarcodeFormat) {
-            BarcodeFormatUiModel.Code128.value -> {
+            BarcodeFormatModel.Code128.value -> {
                 BarcodeFormat.CODE_128
             }
 
-            BarcodeFormatUiModel.Code39.value -> {
+            BarcodeFormatModel.Code39.value -> {
                 BarcodeFormat.CODE_39
             }
 
-            BarcodeFormatUiModel.Code93.value -> {
+            BarcodeFormatModel.Code93.value -> {
                 BarcodeFormat.CODE_93
             }
 
-            BarcodeFormatUiModel.Codabar.value -> {
+            BarcodeFormatModel.Codabar.value -> {
                 BarcodeFormat.CODABAR
             }
 
-            BarcodeFormatUiModel.DataMatrix.value -> {
+            BarcodeFormatModel.DataMatrix.value -> {
                 BarcodeFormat.DATA_MATRIX
             }
 
-            BarcodeFormatUiModel.Ean13.value -> {
+            BarcodeFormatModel.Ean13.value -> {
                 BarcodeFormat.EAN_13
             }
 
-            BarcodeFormatUiModel.Ean8.value -> {
+            BarcodeFormatModel.Ean8.value -> {
                 BarcodeFormat.EAN_8
             }
 
-            BarcodeFormatUiModel.Itf.value -> {
+            BarcodeFormatModel.Itf.value -> {
                 BarcodeFormat.ITF
             }
 
-            BarcodeFormatUiModel.QrCode.value -> {
+            BarcodeFormatModel.QrCode.value -> {
                 BarcodeFormat.QR_CODE
             }
 
-            BarcodeFormatUiModel.UpcA.value -> {
+            BarcodeFormatModel.UpcA.value -> {
                 BarcodeFormat.UPC_A
             }
 
-            BarcodeFormatUiModel.UpcE.value -> {
+            BarcodeFormatModel.UpcE.value -> {
                 BarcodeFormat.UPC_E
             }
 
-            BarcodeFormatUiModel.Pdf417.value -> {
+            BarcodeFormatModel.Pdf417.value -> {
                 BarcodeFormat.PDF_417
             }
 
-            BarcodeFormatUiModel.Aztec.value -> {
+            BarcodeFormatModel.Aztec.value -> {
                 BarcodeFormat.AZTEC
             }
 
