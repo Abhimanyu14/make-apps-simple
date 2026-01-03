@@ -47,6 +47,33 @@
 
 2. Use K&R style (opening brace on the same line).
 
+3. When statements
+   Each statement in a when should be within a block using curly braces.
+
+   **Context:** This improves readability and maintains consistency.
+   e.g.
+   Use
+
+   ```kotlin
+   when (value) {
+       1 -> {
+           doSomething()
+       }
+       else -> {
+           doSomethingElse()
+       }
+   }
+   ```
+
+   instead of
+
+   ```kotlin
+   when (value) {
+       1 -> doSomething()
+       else -> doSomethingElse()
+   }
+   ```
+
 ## Function Body Style
 
 1. Mandatory Block Bodies

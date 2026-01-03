@@ -1,6 +1,6 @@
 # Prompt
 
-1. Complete action items in [backlog.md](backlog.md)
+1. Update BarcodeFormatDomainModel, BarcodeFormatUiModel and BarcodeFormatDataModel with named parameters wherever applicable following the code conventions.
 
 # Scope
 

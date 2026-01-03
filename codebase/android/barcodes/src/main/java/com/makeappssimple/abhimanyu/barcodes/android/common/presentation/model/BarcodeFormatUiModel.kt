@@ -22,41 +22,126 @@ import androidx.compose.runtime.Immutable
 internal sealed class BarcodeFormatUiModel(
     val value: Int,
 ) {
-    object AllFormats : BarcodeFormatUiModel(0)
-    object Code128 : BarcodeFormatUiModel(1)
-    object Code39 : BarcodeFormatUiModel(2)
-    object Code93 : BarcodeFormatUiModel(4)
-    object Codabar : BarcodeFormatUiModel(8)
-    object DataMatrix : BarcodeFormatUiModel(16)
-    object Ean13 : BarcodeFormatUiModel(32)
-    object Ean8 : BarcodeFormatUiModel(64)
-    object Itf : BarcodeFormatUiModel(128)
-    object QrCode : BarcodeFormatUiModel(256)
-    object UpcA : BarcodeFormatUiModel(512)
-    object UpcE : BarcodeFormatUiModel(1024)
-    object Pdf417 : BarcodeFormatUiModel(2048)
-    object Aztec : BarcodeFormatUiModel(4096)
+    object AllFormats : BarcodeFormatUiModel(
+        value = 0,
+    )
+
+    object Code128 : BarcodeFormatUiModel(
+        value = 1,
+    )
+
+    object Code39 : BarcodeFormatUiModel(
+        value = 2,
+    )
+
+    object Code93 : BarcodeFormatUiModel(
+        value = 4,
+    )
+
+    object Codabar : BarcodeFormatUiModel(
+        value = 8,
+    )
+
+    object DataMatrix : BarcodeFormatUiModel(
+        value = 16,
+    )
+
+    object Ean13 : BarcodeFormatUiModel(
+        value = 32,
+    )
+
+    object Ean8 : BarcodeFormatUiModel(
+        value = 64,
+    )
+
+    object Itf : BarcodeFormatUiModel(
+        value = 128,
+    )
+
+    object QrCode : BarcodeFormatUiModel(
+        value = 256,
+    )
+
+    object UpcA : BarcodeFormatUiModel(
+        value = 512,
+    )
+
+    object UpcE : BarcodeFormatUiModel(
+        value = 1024,
+    )
+
+    object Pdf417 : BarcodeFormatUiModel(
+        value = 2048,
+    )
+
+    object Aztec : BarcodeFormatUiModel(
+        value = 4096,
+    )
 
     companion object Companion {
         fun fromValue(
             value: Int,
         ): BarcodeFormatUiModel? {
             return when (value) {
-                0 -> AllFormats
-                1 -> Code128
-                2 -> Code39
-                4 -> Code93
-                8 -> Codabar
-                16 -> DataMatrix
-                32 -> Ean13
-                64 -> Ean8
-                128 -> Itf
-                256 -> QrCode
-                512 -> UpcA
-                1024 -> UpcE
-                2048 -> Pdf417
-                4096 -> Aztec
-                else -> null
+                0 -> {
+                    AllFormats
+                }
+
+                1 -> {
+                    Code128
+                }
+
+                2 -> {
+                    Code39
+                }
+
+                4 -> {
+                    Code93
+                }
+
+                8 -> {
+                    Codabar
+                }
+
+                16 -> {
+                    DataMatrix
+                }
+
+                32 -> {
+                    Ean13
+                }
+
+                64 -> {
+                    Ean8
+                }
+
+                128 -> {
+                    Itf
+                }
+
+                256 -> {
+                    QrCode
+                }
+
+                512 -> {
+                    UpcA
+                }
+
+                1024 -> {
+                    UpcE
+                }
+
+                2048 -> {
+                    Pdf417
+                }
+
+                4096 -> {
+                    Aztec
+                }
+
+                else -> {
+                    null
+                }
             }
         }
     }

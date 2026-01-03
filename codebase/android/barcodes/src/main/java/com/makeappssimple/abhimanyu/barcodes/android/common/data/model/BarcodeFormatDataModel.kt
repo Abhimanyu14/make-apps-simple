@@ -19,41 +19,126 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.data.model
 internal sealed class BarcodeFormatDataModel(
     val value: Int,
 ) {
-    object AllFormats : BarcodeFormatDataModel(0)
-    object Code128 : BarcodeFormatDataModel(1)
-    object Code39 : BarcodeFormatDataModel(2)
-    object Code93 : BarcodeFormatDataModel(4)
-    object Codabar : BarcodeFormatDataModel(8)
-    object DataMatrix : BarcodeFormatDataModel(16)
-    object Ean13 : BarcodeFormatDataModel(32)
-    object Ean8 : BarcodeFormatDataModel(64)
-    object Itf : BarcodeFormatDataModel(128)
-    object QrCode : BarcodeFormatDataModel(256)
-    object UpcA : BarcodeFormatDataModel(512)
-    object UpcE : BarcodeFormatDataModel(1024)
-    object Pdf417 : BarcodeFormatDataModel(2048)
-    object Aztec : BarcodeFormatDataModel(4096)
+    object AllFormats : BarcodeFormatDataModel(
+        value = 0,
+    )
+
+    object Code128 : BarcodeFormatDataModel(
+        value = 1,
+    )
+
+    object Code39 : BarcodeFormatDataModel(
+        value = 2,
+    )
+
+    object Code93 : BarcodeFormatDataModel(
+        value = 4,
+    )
+
+    object Codabar : BarcodeFormatDataModel(
+        value = 8,
+    )
+
+    object DataMatrix : BarcodeFormatDataModel(
+        value = 16,
+    )
+
+    object Ean13 : BarcodeFormatDataModel(
+        value = 32,
+    )
+
+    object Ean8 : BarcodeFormatDataModel(
+        value = 64,
+    )
+
+    object Itf : BarcodeFormatDataModel(
+        value = 128,
+    )
+
+    object QrCode : BarcodeFormatDataModel(
+        value = 256,
+    )
+
+    object UpcA : BarcodeFormatDataModel(
+        value = 512,
+    )
+
+    object UpcE : BarcodeFormatDataModel(
+        value = 1024,
+    )
+
+    object Pdf417 : BarcodeFormatDataModel(
+        value = 2048,
+    )
+
+    object Aztec : BarcodeFormatDataModel(
+        value = 4096,
+    )
 
     companion object Companion {
         fun fromValue(
             value: Int,
         ): BarcodeFormatDataModel? {
             return when (value) {
-                0 -> AllFormats
-                1 -> Code128
-                2 -> Code39
-                4 -> Code93
-                8 -> Codabar
-                16 -> DataMatrix
-                32 -> Ean13
-                64 -> Ean8
-                128 -> Itf
-                256 -> QrCode
-                512 -> UpcA
-                1024 -> UpcE
-                2048 -> Pdf417
-                4096 -> Aztec
-                else -> null
+                0 -> {
+                    AllFormats
+                }
+
+                1 -> {
+                    Code128
+                }
+
+                2 -> {
+                    Code39
+                }
+
+                4 -> {
+                    Code93
+                }
+
+                8 -> {
+                    Codabar
+                }
+
+                16 -> {
+                    DataMatrix
+                }
+
+                32 -> {
+                    Ean13
+                }
+
+                64 -> {
+                    Ean8
+                }
+
+                128 -> {
+                    Itf
+                }
+
+                256 -> {
+                    QrCode
+                }
+
+                512 -> {
+                    UpcA
+                }
+
+                1024 -> {
+                    UpcE
+                }
+
+                2048 -> {
+                    Pdf417
+                }
+
+                4096 -> {
+                    Aztec
+                }
+
+                else -> {
+                    null
+                }
             }
         }
     }

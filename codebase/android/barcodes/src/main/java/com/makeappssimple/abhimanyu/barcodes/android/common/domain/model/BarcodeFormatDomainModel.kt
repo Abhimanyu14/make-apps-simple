@@ -22,41 +22,126 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.domain.model
 internal sealed class BarcodeFormatDomainModel(
     val value: Int,
 ) {
-    object AllFormats : BarcodeFormatDomainModel(0)
-    object Code128 : BarcodeFormatDomainModel(1)
-    object Code39 : BarcodeFormatDomainModel(2)
-    object Code93 : BarcodeFormatDomainModel(4)
-    object Codabar : BarcodeFormatDomainModel(8)
-    object DataMatrix : BarcodeFormatDomainModel(16)
-    object Ean13 : BarcodeFormatDomainModel(32)
-    object Ean8 : BarcodeFormatDomainModel(64)
-    object Itf : BarcodeFormatDomainModel(128)
-    object QrCode : BarcodeFormatDomainModel(256)
-    object UpcA : BarcodeFormatDomainModel(512)
-    object UpcE : BarcodeFormatDomainModel(1024)
-    object Pdf417 : BarcodeFormatDomainModel(2048)
-    object Aztec : BarcodeFormatDomainModel(4096)
+    object AllFormats : BarcodeFormatDomainModel(
+        value = 0,
+    )
+
+    object Code128 : BarcodeFormatDomainModel(
+        value = 1,
+    )
+
+    object Code39 : BarcodeFormatDomainModel(
+        value = 2,
+    )
+
+    object Code93 : BarcodeFormatDomainModel(
+        value = 4,
+    )
+
+    object Codabar : BarcodeFormatDomainModel(
+        value = 8,
+    )
+
+    object DataMatrix : BarcodeFormatDomainModel(
+        value = 16,
+    )
+
+    object Ean13 : BarcodeFormatDomainModel(
+        value = 32,
+    )
+
+    object Ean8 : BarcodeFormatDomainModel(
+        value = 64,
+    )
+
+    object Itf : BarcodeFormatDomainModel(
+        value = 128,
+    )
+
+    object QrCode : BarcodeFormatDomainModel(
+        value = 256,
+    )
+
+    object UpcA : BarcodeFormatDomainModel(
+        value = 512,
+    )
+
+    object UpcE : BarcodeFormatDomainModel(
+        value = 1024,
+    )
+
+    object Pdf417 : BarcodeFormatDomainModel(
+        value = 2048,
+    )
+
+    object Aztec : BarcodeFormatDomainModel(
+        value = 4096,
+    )
 
     companion object Companion {
         fun fromValue(
             value: Int,
         ): BarcodeFormatDomainModel? {
             return when (value) {
-                0 -> AllFormats
-                1 -> Code128
-                2 -> Code39
-                4 -> Code93
-                8 -> Codabar
-                16 -> DataMatrix
-                32 -> Ean13
-                64 -> Ean8
-                128 -> Itf
-                256 -> QrCode
-                512 -> UpcA
-                1024 -> UpcE
-                2048 -> Pdf417
-                4096 -> Aztec
-                else -> null
+                0 -> {
+                    AllFormats
+                }
+
+                1 -> {
+                    Code128
+                }
+
+                2 -> {
+                    Code39
+                }
+
+                4 -> {
+                    Code93
+                }
+
+                8 -> {
+                    Codabar
+                }
+
+                16 -> {
+                    DataMatrix
+                }
+
+                32 -> {
+                    Ean13
+                }
+
+                64 -> {
+                    Ean8
+                }
+
+                128 -> {
+                    Itf
+                }
+
+                256 -> {
+                    QrCode
+                }
+
+                512 -> {
+                    UpcA
+                }
+
+                1024 -> {
+                    UpcE
+                }
+
+                2048 -> {
+                    Pdf417
+                }
+
+                4096 -> {
+                    Aztec
+                }
+
+                else -> {
+                    null
+                }
             }
         }
     }
