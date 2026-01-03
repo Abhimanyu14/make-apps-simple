@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-2025 Abhimanyu
+ * Copyright 2025-2026 Abhimanyu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,16 +79,22 @@ public fun CosmosScaffold(
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
 
     // Scaffold
-    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
+    snackbarHostState: SnackbarHostState = remember {
+        SnackbarHostState()
+    },
     topBar: ComposableContent = {},
     bottomBar: ComposableContent = {},
     snackbarHost: ComposableContent = {
-        SnackbarHost(snackbarHostState)
+        SnackbarHost(
+            hostState = snackbarHostState,
+        )
     },
     floatingActionButton: ComposableContent = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     backgroundColor: Color = CosmosAppTheme.colorScheme.background,
-    contentColor: Color = contentColorFor(backgroundColor),
+    contentColor: Color = contentColorFor(
+        backgroundColor = backgroundColor,
+    ),
 
     // MyScaffoldContentWrapper
     onClick: () -> Unit = {},
@@ -121,8 +127,12 @@ public fun CosmosScaffold(
         contentColor = contentColor,
         contentWindowInsets = ScaffoldDefaults
             .contentWindowInsets
-            .exclude(WindowInsets.navigationBars)
-            .exclude(WindowInsets.ime),
+            .exclude(
+                insets = WindowInsets.navigationBars,
+            )
+            .exclude(
+                insets = WindowInsets.ime,
+            ),
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -147,13 +157,16 @@ public fun CosmosScaffold(
             scrimColor = scrimColor,
             onDismissRequest = onBottomSheetDismiss,
             contentWindowInsets = {
-                WindowInsets.systemBars.only(WindowInsetsSides.Bottom)
+                WindowInsets.systemBars.only(
+                    sides = WindowInsetsSides.Bottom,
+                )
             },
         ) {
             val screenHeight = LocalWindowInfo.current.containerSize.height.dp
-            val navigationBarsHeight =
-                WindowInsets.navigationBars.asPaddingValues()
-                    .calculateBottomPadding()
+            val navigationBarsHeight = WindowInsets
+                .navigationBars
+                .asPaddingValues()
+                .calculateBottomPadding()
 
             val bottomSheetModifier =
                 if (sheetShape == CosmosBottomSheetExpandedShape) {
