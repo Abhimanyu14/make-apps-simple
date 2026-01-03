@@ -1,6 +1,6 @@
 # Prompt
 
-1. Update BarcodeFormatDomainModel, BarcodeFormatUiModel and BarcodeFormatDataModel with named parameters wherever applicable following the code conventions.
+1. Evaluate all the files in package "com.makeappssimple.abhimanyu.barcodes.android" and add action items to the [backlog](backlog.md) to fix discrepancies in [code_conventions.md](code_conventions.md)
 
 # Scope
 
