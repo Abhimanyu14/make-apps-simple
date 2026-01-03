@@ -35,6 +35,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CATEGORIES
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_CATEGORIES
@@ -43,11 +46,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.state.CategoriesScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyFloatingActionButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarsSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.tab_row.MyTabRow
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.categories.screen.CategoriesScreenUIConstants.PAGE_COUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
@@ -228,11 +229,11 @@ internal fun CategoriesScreenUI(
             )
         },
         floatingActionButton = {
-            MyFloatingActionButton(
+            CosmosCircularFloatingActionButton(
                 modifier = Modifier
                     .navigationBarsSpacer(),
-                iconImageVector = MyIcons.Add,
-                contentDescription = stringResource(
+                iconResource = CosmosIcons.Add,
+                contentDescriptionStringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_screen_categories_floating_action_button_content_description,
                 ),
                 onClick = {

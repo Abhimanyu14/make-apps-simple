@@ -14,33 +14,34 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
-internal fun MyFloatingActionButton(
+public fun CosmosCircularFloatingActionButton(
     modifier: Modifier = Modifier,
-    iconImageVector: ImageVector,
-    contentDescription: String,
+    iconResource: CosmosIconResource,
+    contentDescriptionStringResource: CosmosStringResource,
     onClick: () -> Unit,
 ) {
     FloatingActionButton(
-        containerColor = FinanceManagerAppTheme.colorScheme.primary,
+        containerColor = CosmosAppTheme.colorScheme.primary,
         shape = CircleShape,
         onClick = onClick,
         modifier = modifier,
     ) {
-        Icon(
-            imageVector = iconImageVector,
-            contentDescription = contentDescription,
-            tint = FinanceManagerAppTheme.colorScheme.onPrimary,
+        CosmosIcon(
+            iconResource = iconResource,
+            contentDescriptionStringResource = contentDescriptionStringResource,
+            tint = CosmosAppTheme.colorScheme.onPrimary,
         )
     }
 }
