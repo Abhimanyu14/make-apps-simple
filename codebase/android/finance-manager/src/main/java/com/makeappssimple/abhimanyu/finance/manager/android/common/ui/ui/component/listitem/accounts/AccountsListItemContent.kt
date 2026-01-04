@@ -27,24 +27,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.svg.SvgDecoder
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumListItemHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.getLogoUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.default_tag.MyDefaultTag
@@ -73,7 +73,7 @@ internal data class AccountsListItemContentData(
     val isLowBalance: Boolean = false,
     val isMoreOptionsIconButtonVisible: Boolean = false,
     val isSelected: Boolean = false,
-    val icon: ImageVector? = null,
+    val iconResource: CosmosIconResource? = null,
     val accountId: Int? = null,
     val balance: String? = null,
     val name: String,
@@ -184,10 +184,9 @@ private fun AccountsListItemContentUI(
                     ),
             )
         } else {
-            data.icon?.let {
-                Icon(
-                    imageVector = data.icon,
-                    contentDescription = null,
+            data.iconResource?.let {
+                CosmosIcon(
+                    iconResource = data.iconResource,
                     tint = FinanceManagerAppTheme.colorScheme.primary,
                     modifier = Modifier
                         .padding(
@@ -196,12 +195,14 @@ private fun AccountsListItemContentUI(
                 )
             }
         }
-        MyText(
+        CosmosText(
             modifier = Modifier
                 .padding(
                     end = 16.dp,
                 ),
-            text = data.name,
+            stringResource = CosmosStringResource.Text(
+                text = data.name,
+            ),
             style = FinanceManagerAppTheme.typography.headlineLarge
                 .copy(
                     color = if (data.isSelected) {
@@ -223,8 +224,10 @@ private fun AccountsListItemContentUI(
                 ),
         )
         data.balance?.let {
-            MyText(
-                text = data.balance,
+            CosmosText(
+                stringResource = CosmosStringResource.Text(
+                    text = data.balance,
+                ),
                 style = FinanceManagerAppTheme.typography.headlineLarge
                     .copy(
                         color = if (data.isSelected) {
@@ -238,9 +241,9 @@ private fun AccountsListItemContentUI(
             )
         }
         if (data.isMoreOptionsIconButtonVisible) {
-            Icon(
-                imageVector = MyIcons.MoreVert,
-                contentDescription = stringResource(
+            CosmosIcon(
+                iconResource = CosmosIcons.MoreVert,
+                contentDescriptionStringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_account_list_item_more_options_content_description,
                 ),
                 tint = FinanceManagerAppTheme.colorScheme.onBackground,

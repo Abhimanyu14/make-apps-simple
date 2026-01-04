@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Composable
@@ -30,7 +30,7 @@ internal fun SettingsListItemAppVersion(
     modifier: Modifier = Modifier,
     data: SettingsListItemAppVersionData,
 ) {
-    MyText(
+    CosmosText(
         modifier = modifier
             .fillMaxWidth()
             .padding(
@@ -39,7 +39,7 @@ internal fun SettingsListItemAppVersion(
                 end = 16.dp,
                 bottom = 8.dp,
             ),
-        text = data.appVersionText,
+        stringResource = data.appVersionStringResource,
         style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
                 color = FinanceManagerAppTheme.colorScheme.primary,

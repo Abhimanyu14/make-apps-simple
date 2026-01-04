@@ -25,11 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumListItemHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -57,22 +59,29 @@ internal fun TransactionForListItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        MyText(
-            text = data.title,
+        CosmosText(
+            stringResource = CosmosStringResource.Text(
+                text = data.title,
+            ),
             style = FinanceManagerAppTheme.typography.bodyLarge
                 .copy(
                     color = FinanceManagerAppTheme.colorScheme.onBackground,
                 ),
         )
         if (data.isMoreOptionsIconButtonVisible) {
-            MyIconButton(
-                tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                imageVector = MyIcons.MoreVert,
-                contentDescriptionStringResourceId = R.string.finance_manager_transaction_for_list_item_more_options_content_description,
+            CosmosIconButton(
+                onClickLabelStringResource = CosmosStringResource.Id(
+                    id = R.string.finance_manager_transaction_for_list_item_more_options_content_description,
+                ),
                 onClick = {
                     handleEvent(TransactionForListItemEvent.OnMoreOptionsIconButtonClick)
                 },
-            )
+            ) {
+                CosmosIcon(
+                    iconResource = CosmosIcons.MoreVert,
+                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                )
+            }
         }
     }
 }

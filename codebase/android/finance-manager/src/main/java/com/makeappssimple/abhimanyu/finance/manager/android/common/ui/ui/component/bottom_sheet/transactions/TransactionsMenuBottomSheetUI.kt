@@ -36,8 +36,8 @@ internal fun TransactionsMenuBottomSheetUI(
             items = items.map { itemData ->
                 MyBottomSheetListItemDataAndEventHandler(
                     data = MyBottomSheetListItemData(
-                        imageVector = itemData.imageVector,
-                        text = itemData.text,
+                        iconResource = itemData.iconResource,
+                        stringResource = itemData.stringResource,
                     ),
                     handleEvent = { event ->
                         when (event) {

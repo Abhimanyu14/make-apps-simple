@@ -21,7 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Composable
@@ -29,14 +30,16 @@ internal fun ViewTransactionSectionHeader(
     modifier: Modifier = Modifier,
     data: ViewTransactionSectionHeaderData,
 ) {
-    MyText(
+    CosmosText(
         modifier = modifier
             .padding(
                 top = 16.dp,
                 start = 16.dp,
             )
             .fillMaxWidth(),
-        textStringResourceId = data.textStringResourceId,
+        stringResource = CosmosStringResource.Id(
+            id = data.textStringResourceId,
+        ),
         style = FinanceManagerAppTheme.typography.headlineMedium
             .copy(
                 color = FinanceManagerAppTheme.colorScheme.onBackground,

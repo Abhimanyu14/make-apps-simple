@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
@@ -49,17 +49,16 @@ internal fun MyExpandableItemIconButton(
                 }
             ),
     ) {
-        Icon(
-            imageVector = data.iconImageVector,
-            contentDescription = null,
+        CosmosIcon(
+            iconResource = data.iconResource,
             tint = if (data.isEnabled) {
                 FinanceManagerAppTheme.colorScheme.onSurfaceVariant
             } else {
                 FinanceManagerAppTheme.colorScheme.surfaceVariant
             },
         )
-        MyText(
-            text = data.labelText,
+        CosmosText(
+            stringResource = data.labelStringResource,
             style = FinanceManagerAppTheme.typography.labelMedium
                 .copy(
                     color = if (data.isEnabled) {

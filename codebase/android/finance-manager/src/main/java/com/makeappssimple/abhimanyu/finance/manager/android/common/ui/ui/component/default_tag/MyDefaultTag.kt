@@ -22,9 +22,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -37,7 +37,7 @@ private object MyDefaultTagConstants {
 internal fun MyDefaultTag(
     modifier: Modifier = Modifier,
 ) {
-    MyText(
+    CosmosText(
         modifier = modifier
             .clip(
                 shape = CircleShape,
@@ -49,7 +49,7 @@ internal fun MyDefaultTag(
                 horizontal = MyDefaultTagConstants.paddingHorizontal,
                 vertical = MyDefaultTagConstants.paddingVertical,
             ),
-        text = stringResource(
+        stringResource = CosmosStringResource.Id(
             id = R.string.finance_manager_default_tag,
         ),
         style = FinanceManagerAppTheme.typography.labelSmall

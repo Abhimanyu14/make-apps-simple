@@ -31,8 +31,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
@@ -60,10 +62,10 @@ internal fun MyOutlinedTextField(
                     enter = fadeIn(),
                     exit = fadeOut(),
                 ) {
-                    MyIconButton(
-                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                        imageVector = MyIcons.Clear,
-                        contentDescriptionStringResourceId = data.trailingIconContentDescriptionTextStringResourceId,
+                    CosmosIconButton(
+                        onClickLabelStringResource = CosmosStringResource.Id(
+                            id = data.trailingIconContentDescriptionTextStringResourceId,
+                        ),
                         onClick = {
                             handleEvent(MyOutlinedTextFieldEvent.OnClickTrailingIcon)
                         },
@@ -71,7 +73,12 @@ internal fun MyOutlinedTextField(
                             .padding(
                                 end = 4.dp,
                             ),
-                    )
+                    ) {
+                        CosmosIcon(
+                            iconResource = CosmosIcons.Close,
+                            tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                        )
+                    }
                 }
             },
             onValueChange = {
@@ -117,10 +124,10 @@ internal fun MyOutlinedTextFieldV2(
                     enter = fadeIn(),
                     exit = fadeOut(),
                 ) {
-                    MyIconButton(
-                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                        imageVector = MyIcons.Clear,
-                        contentDescriptionStringResourceId = data.trailingIconContentDescriptionTextStringResourceId,
+                    CosmosIconButton(
+                        onClickLabelStringResource = CosmosStringResource.Id(
+                            id = data.trailingIconContentDescriptionTextStringResourceId,
+                        ),
                         onClick = {
                             handleEvent(MyOutlinedTextFieldEventV2.OnClickTrailingIcon)
                         },
@@ -128,7 +135,12 @@ internal fun MyOutlinedTextFieldV2(
                             .padding(
                                 end = 4.dp,
                             ),
-                    )
+                    ) {
+                        CosmosIcon(
+                            iconResource = CosmosIcons.Close,
+                            tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                        )
+                    }
                 }
             },
             supportingText = data.supportingText,

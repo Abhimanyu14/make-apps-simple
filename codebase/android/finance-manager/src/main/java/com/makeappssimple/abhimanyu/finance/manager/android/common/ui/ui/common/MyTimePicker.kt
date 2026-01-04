@@ -40,16 +40,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myDarkColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myLightColorScheme
@@ -91,12 +92,12 @@ internal fun MyTimePicker(
     if (data.isVisible) {
         TimePickerDialog(
             modifier = modifier,
-            title = stringResource(
+            titleStringResource = CosmosStringResource.Id(
                 id = if (showingPicker.value) {
                     R.string.finance_manager_time_picker_touch_input_title
                 } else {
                     R.string.finance_manager_time_picker_text_input_title
-                }
+                },
             ),
             onCancel = {
                 handleEvent(MyTimePickerEvent.OnNegativeButtonClick)
@@ -113,21 +114,26 @@ internal fun MyTimePicker(
             },
             toggle = {
                 if (configuration.screenHeightDp > 400) {
-                    MyIconButton(
-                        imageVector = if (showingPicker.value) {
-                            MyIcons.Keyboard
-                        } else {
-                            MyIcons.Schedule
-                        },
-                        contentDescriptionStringResourceId = if (showingPicker.value) {
-                            R.string.finance_manager_time_picker_touch_input_switch_icon_button_content_description
-                        } else {
-                            R.string.finance_manager_time_picker_text_input_switch_icon_button_content_description
-                        },
+                    CosmosIconButton(
+                        onClickLabelStringResource = CosmosStringResource.Id(
+                            id = if (showingPicker.value) {
+                                R.string.finance_manager_time_picker_touch_input_switch_icon_button_content_description
+                            } else {
+                                R.string.finance_manager_time_picker_text_input_switch_icon_button_content_description
+                            },
+                        ),
                         onClick = {
                             showingPicker.value = !showingPicker.value
-                        }
-                    )
+                        },
+                    ) {
+                        CosmosIcon(
+                            iconResource = if (showingPicker.value) {
+                                CosmosIcons.Keyboard
+                            } else {
+                                CosmosIcons.Schedule
+                            },
+                        )
+                    }
                 }
             }
         ) {
@@ -166,7 +172,7 @@ internal fun MyTimePicker(
 @Composable
 private fun TimePickerDialog(
     modifier: Modifier = Modifier,
-    title: String,
+    titleStringResource: CosmosStringResource,
     onCancel: () -> Unit,
     onConfirm: () -> Unit,
     toggle: ComposableContent = {},
@@ -200,13 +206,13 @@ private fun TimePickerDialog(
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                MyText(
+                CosmosText(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
                             bottom = 20.dp,
                         ),
-                    text = title,
+                    stringResource = titleStringResource,
                     style = FinanceManagerAppTheme.typography.labelMedium
                         .copy(
                             fontWeight = FontWeight.Bold,
@@ -230,15 +236,19 @@ private fun TimePickerDialog(
                     MyTextButton(
                         onClick = onCancel,
                     ) {
-                        MyText(
-                            textStringResourceId = R.string.finance_manager_time_picker_negative_button_text,
+                        CosmosText(
+                            stringResource = CosmosStringResource.Id(
+                                id = R.string.finance_manager_time_picker_negative_button_text,
+                            ),
                         )
                     }
                     MyTextButton(
                         onClick = onConfirm,
                     ) {
-                        MyText(
-                            textStringResourceId = R.string.finance_manager_time_picker_positive_button_text,
+                        CosmosText(
+                            stringResource = CosmosStringResource.Id(
+                                id = R.string.finance_manager_time_picker_positive_button_text,
+                            ),
                         )
                     }
                 }

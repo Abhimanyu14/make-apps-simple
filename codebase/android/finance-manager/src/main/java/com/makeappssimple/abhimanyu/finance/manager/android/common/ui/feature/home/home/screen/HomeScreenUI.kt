@@ -31,6 +31,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -42,10 +44,8 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toUnsignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarsSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
@@ -86,14 +86,19 @@ internal fun HomeScreenUI(
             MyTopAppBar(
                 titleTextStringResourceId = R.string.finance_manager_screen_home_appbar_title,
                 appBarActions = {
-                    MyIconButton(
-                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                        imageVector = MyIcons.Settings,
-                        contentDescriptionStringResourceId = R.string.finance_manager_screen_home_appbar_settings,
+                    CosmosIconButton(
+                        onClickLabelStringResource = CosmosStringResource.Id(
+                            id = R.string.finance_manager_screen_home_appbar_settings,
+                        ),
                         onClick = {
                             handleUIEvent(HomeScreenUIEvent.OnTopAppBarSettingsButtonClick)
                         },
-                    )
+                    ) {
+                        CosmosIcon(
+                            iconResource = CosmosIcons.Settings,
+                            tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                        )
+                    }
                 },
             )
         },
@@ -174,21 +179,25 @@ internal fun HomeScreenUI(
                         items = persistentListOf(
                             PieChartItemData(
                                 value = uiState.overviewCardData.income,
-                                text = stringResource(
-                                    id = R.string.finance_manager_screen_home_overview_card_income,
-                                    Amount(
-                                        value = uiState.overviewCardData.income.toLong(),
-                                    ).toDefaultString(),
+                                stringResource = CosmosStringResource.Text(
+                                    text = stringResource(
+                                        id = R.string.finance_manager_screen_home_overview_card_income,
+                                        Amount(
+                                            value = uiState.overviewCardData.income.toLong(),
+                                        ).toDefaultString(),
+                                    ),
                                 ),
                                 color = MyColor.TERTIARY,
                             ),
                             PieChartItemData(
                                 value = uiState.overviewCardData.expense,
-                                text = stringResource(
-                                    id = R.string.finance_manager_screen_home_overview_card_expense,
-                                    Amount(
-                                        value = uiState.overviewCardData.expense.toLong(),
-                                    ).toUnsignedString(),
+                                stringResource = CosmosStringResource.Text(
+                                    text = stringResource(
+                                        id = R.string.finance_manager_screen_home_overview_card_expense,
+                                        Amount(
+                                            value = uiState.overviewCardData.expense.toLong(),
+                                        ).toUnsignedString(),
+                                    ),
                                 ),
                                 color = MyColor.ERROR,
                             ),

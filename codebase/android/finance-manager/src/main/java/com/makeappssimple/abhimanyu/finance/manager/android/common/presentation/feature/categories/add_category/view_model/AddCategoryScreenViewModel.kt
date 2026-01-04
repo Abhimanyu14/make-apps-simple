@@ -25,6 +25,7 @@ import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.category.AddCategoryScreenDataValidationUseCase
@@ -148,7 +149,9 @@ internal class AddCategoryScreenViewModel(
                 selectedTransactionTypeIndex = selectedTransactionTypeIndex,
                 transactionTypesChipUIData = validTransactionTypes.map { transactionType ->
                     ChipUIData(
-                        text = transactionType.title,
+                        stringResource = CosmosStringResource.Text(
+                            text = transactionType.title,
+                        ),
                     )
                 },
                 emoji = emoji,

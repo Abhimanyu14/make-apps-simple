@@ -29,6 +29,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
@@ -242,19 +243,25 @@ internal class AddTransactionScreenViewModel(
                 titleSuggestionsChipUIData = titleSuggestions
                     .map { title ->
                         ChipUIData(
-                            text = title,
+                            stringResource = CosmosStringResource.Text(
+                                text = title,
+                            ),
                         )
                     },
                 transactionForValuesChipUIData = transactionForValues
                     .map { transactionFor ->
                         ChipUIData(
-                            text = transactionFor.title,
+                            stringResource = CosmosStringResource.Text(
+                                text = transactionFor.title,
+                            ),
                         )
                     },
                 transactionTypesForNewTransactionChipUIData = validTransactionTypesForNewTransaction
                     .map { transactionType ->
                         ChipUIData(
-                            text = transactionType.title,
+                            stringResource = CosmosStringResource.Text(
+                                text = transactionType.title,
+                            ),
                         )
                     },
                 titleSuggestions = titleSuggestions,

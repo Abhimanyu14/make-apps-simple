@@ -34,7 +34,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircleData
@@ -88,9 +89,11 @@ internal fun AnalysisListItem(
                             weight = 1F,
                         ),
                 ) {
-                    MyText(
+                    CosmosText(
                         modifier = Modifier,
-                        text = data.title,
+                        stringResource = CosmosStringResource.Text(
+                            text = data.title,
+                        ),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         style = FinanceManagerAppTheme.typography.headlineMedium
@@ -134,9 +137,11 @@ internal fun AnalysisListItem(
                             width = endTextWidth,
                         ),
                 ) {
-                    MyText(
+                    CosmosText(
                         modifier = Modifier,
-                        text = data.amountText,
+                        stringResource = CosmosStringResource.Text(
+                            text = data.amountText,
+                        ),
                         style = FinanceManagerAppTheme.typography.headlineMedium
                             .copy(
                                 textAlign = TextAlign.End,
@@ -148,9 +153,11 @@ internal fun AnalysisListItem(
                                 height = 4.dp,
                             ),
                     )
-                    MyText(
+                    CosmosText(
                         modifier = Modifier,
-                        text = data.percentageText,
+                        stringResource = CosmosStringResource.Text(
+                            text = data.percentageText,
+                        ),
                         style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onBackground,

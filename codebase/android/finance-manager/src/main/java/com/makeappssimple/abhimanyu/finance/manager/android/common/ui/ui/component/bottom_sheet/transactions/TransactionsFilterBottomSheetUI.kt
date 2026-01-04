@@ -47,6 +47,11 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.addIfDoesNotContainItemElseRemove
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -54,12 +59,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.statusBarSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.date_picker.MyDatePicker
@@ -183,7 +185,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_expense_categories,
                             items = expenseCategories.map { category ->
                                 ChipUIData(
-                                    text = category.title,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = category.title,
+                                    ),
                                 )
                             },
                             selectedItemsIndices = selectedExpenseCategoryIndices,
@@ -205,7 +209,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_income_categories,
                             items = incomeCategories.map { category ->
                                 ChipUIData(
-                                    text = category.title,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = category.title,
+                                    ),
                                 )
                             },
                             selectedItemsIndices = selectedIncomeCategoryIndices,
@@ -227,7 +233,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_investment_categories,
                             items = investmentCategories.map { category ->
                                 ChipUIData(
-                                    text = category.title,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = category.title,
+                                    ),
                                 )
                             },
                             selectedItemsIndices = selectedInvestmentCategoryIndices,
@@ -249,7 +257,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_accounts,
                             items = accounts.map { account ->
                                 ChipUIData(
-                                    text = account.name,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = account.name,
+                                    ),
                                 )
                             },
                             selectedItemsIndices = selectedAccountIndicesValue,
@@ -271,7 +281,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_transaction_for_values,
                             items = transactionForValues.map { transactionFor ->
                                 ChipUIData(
-                                    text = transactionFor.title,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = transactionFor.title,
+                                    ),
                                 )
                             },
                             selectedItemsIndices = selectedTransactionForValuesIndicesValue,
@@ -293,7 +305,9 @@ internal fun TransactionsFiltersBottomSheetUI(
                             headingTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_transaction_types,
                             items = transactionTypes.map { transactionType ->
                                 ChipUIData(
-                                    text = transactionType.title,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = transactionType.title,
+                                    ),
                                 )
                             },
                             selectedItemsIndices = selectedTransactionTypeIndicesValue,
@@ -405,8 +419,10 @@ internal fun TransactionsFiltersBottomSheetUI(
                     onNegativeButtonClick()
                 },
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_reset,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_transactions_filter_reset,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
@@ -467,8 +483,10 @@ internal fun TransactionsFiltersBottomSheetUI(
                     )
                 },
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_apply,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_transactions_filter_apply,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
@@ -569,26 +587,33 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         weight = 1F,
                     ),
             ) {
-                MyIconButton(
+                CosmosIconButton(
+                    onClickLabelStringResource = CosmosStringResource.Id(
+                        id = if (isExpanded) {
+                            R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
+                        } else {
+                            R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
+                        },
+                    ),
+                    onClick = onExpandButtonClick,
                     modifier = Modifier
                         .graphicsLayer {
                             rotationZ = chevronDegrees
                         },
-                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                    imageVector = MyIcons.ChevronRight,
-                    contentDescriptionStringResourceId = if (isExpanded) {
-                        R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
-                    } else {
-                        R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
-                    },
-                    onClick = onExpandButtonClick,
-                )
-                MyText(
+                ) {
+                    CosmosIcon(
+                        iconResource = CosmosIcons.ChevronRight,
+                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                    )
+                }
+                CosmosText(
                     modifier = Modifier
                         .weight(
                             weight = 1F,
                         ),
-                    textStringResourceId = headingTextStringResourceId,
+                    stringResource = CosmosStringResource.Id(
+                        id = headingTextStringResourceId,
+                    ),
                     style = FinanceManagerAppTheme.typography.headlineLarge
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -604,8 +629,10 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         end = 16.dp,
                     ),
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
@@ -706,26 +733,33 @@ private fun TransactionFilterBottomSheetFilterGroup(
                         weight = 1F,
                     ),
             ) {
-                MyIconButton(
-                    imageVector = MyIcons.ChevronRight,
-                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                    contentDescriptionStringResourceId = if (isExpanded) {
-                        R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
-                    } else {
-                        R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
-                    },
+                CosmosIconButton(
+                    onClickLabelStringResource = CosmosStringResource.Id(
+                        id = if (isExpanded) {
+                            R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
+                        } else {
+                            R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
+                        },
+                    ),
+                    onClick = onExpandButtonClick,
                     modifier = Modifier
                         .graphicsLayer {
                             rotationZ = chevronDegrees
                         },
-                    onClick = onExpandButtonClick,
-                )
-                MyText(
+                ) {
+                    CosmosIcon(
+                        iconResource = CosmosIcons.ChevronRight,
+                        tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                    )
+                }
+                CosmosText(
                     modifier = Modifier
                         .weight(
                             weight = 1F,
                         ),
-                    textStringResourceId = headingTextStringResourceId,
+                    stringResource = CosmosStringResource.Id(
+                        id = headingTextStringResourceId,
+                    ),
                     style = FinanceManagerAppTheme.typography.headlineLarge
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -741,8 +775,10 @@ private fun TransactionFilterBottomSheetFilterGroup(
                         end = 16.dp,
                     ),
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }

@@ -21,6 +21,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
@@ -28,7 +30,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
@@ -91,12 +92,16 @@ internal class AddAccountScreenViewModelTest {
             result.accountTypesChipUIDataList.shouldBe(
                 expected = listOf(
                     ChipUIData(
-                        text = "Bank",
-                        icon = MyIcons.AccountBalance,
+                        stringResource = CosmosStringResource.Text(
+                            text = "Bank",
+                        ),
+                        iconResource = CosmosIcons.AccountBalance,
                     ),
                     ChipUIData(
-                        text = "E-Wallet",
-                        icon = MyIcons.AccountBalanceWallet,
+                        stringResource = CosmosStringResource.Text(
+                            text = "E-Wallet",
+                        ),
+                        iconResource = CosmosIcons.AccountBalanceWallet,
                     ),
                 ),
             )

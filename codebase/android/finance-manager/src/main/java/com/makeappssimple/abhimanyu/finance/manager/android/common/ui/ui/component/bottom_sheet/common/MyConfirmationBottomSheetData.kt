@@ -17,11 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common
 
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class MyConfirmationBottomSheetData(
-    val message: String,
-    val negativeButtonText: String,
-    val positiveButtonText: String,
-    val title: String,
+    val messageStringResource: CosmosStringResource,
+    val negativeButtonTextStringResource: CosmosStringResource,
+    val positiveButtonTextStringResource: CosmosStringResource,
+    val titleStringResource: CosmosStringResource,
 )

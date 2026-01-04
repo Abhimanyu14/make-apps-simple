@@ -40,13 +40,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.event.EditTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.EditTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
@@ -320,10 +321,12 @@ internal fun EditTransactionScreenUI(
                             AnimatedVisibility(
                                 uiState.amountErrorText.isNotNullOrBlank(),
                             ) {
-                                MyText(
-                                    text = stringResource(
-                                        id = R.string.finance_manager_screen_add_or_edit_transaction_amount_error_text,
-                                        uiState.amountErrorText,
+                                CosmosText(
+                                    stringResource = CosmosStringResource.Text(
+                                        text = stringResource(
+                                            id = R.string.finance_manager_screen_add_or_edit_transaction_amount_error_text,
+                                            uiState.amountErrorText,
+                                        ),
                                     ),
                                     style = FinanceManagerAppTheme.typography.bodySmall
                                         .copy(
@@ -591,7 +594,9 @@ internal fun EditTransactionScreenUI(
                 data = SaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled,
                     isLoading = uiState.isLoading,
-                    textStringResourceId = R.string.finance_manager_screen_edit_transaction_floating_action_button_content_description,
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_screen_edit_transaction_floating_action_button_content_description,
+                    ),
                 ),
                 handleEvent = { event ->
                     when (event) {

@@ -17,10 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data
 
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.MyColor
 
 @Immutable
 internal data class PieChartLegendItemData(
-    val text: String,
+    val stringResource: CosmosStringResource,
     val color: MyColor,
 )

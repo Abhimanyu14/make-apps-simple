@@ -24,18 +24,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyBottomSheetTitle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyBottomSheetTitleData
@@ -95,12 +96,14 @@ private fun TransactionsSortBottomSheetItem(
                 vertical = 8.dp,
             ),
     ) {
-        MyText(
+        CosmosText(
             modifier = Modifier
                 .padding(
                     vertical = 6.dp,
                 ),
-            text = data.transactionSortOption.title,
+            stringResource = CosmosStringResource.Text(
+                text = data.transactionSortOption.title,
+            ),
             style = FinanceManagerAppTheme.typography.headlineMedium
                 .copy(
                     color = if (data.isSelected) {
@@ -117,9 +120,8 @@ private fun TransactionsSortBottomSheetItem(
                 ),
         )
         if (data.isSelected) {
-            Icon(
-                imageVector = MyIcons.Done,
-                contentDescription = null,
+            CosmosIcon(
+                iconResource = CosmosIcons.Check,
                 tint = FinanceManagerAppTheme.colorScheme.primary,
             )
         }

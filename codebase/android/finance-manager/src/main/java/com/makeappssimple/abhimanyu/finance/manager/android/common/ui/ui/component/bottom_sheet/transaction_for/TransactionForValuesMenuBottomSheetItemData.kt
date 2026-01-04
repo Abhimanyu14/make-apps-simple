@@ -17,11 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.transaction_for
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class TransactionForValuesMenuBottomSheetItemData(
-    val imageVector: ImageVector? = null,
-    val text: String,
+    val iconResource: CosmosIconResource? = null,
+    val stringResource: CosmosStringResource,
     val onClick: () -> Unit,
 )

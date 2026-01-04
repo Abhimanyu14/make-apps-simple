@@ -35,7 +35,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -56,9 +55,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -160,8 +161,10 @@ private fun MySearchBarUI(
                     MutableInteractionSource()
                 },
                 placeholder = {
-                    MyText(
-                        text = data.placeholderText,
+                    CosmosText(
+                        stringResource = CosmosStringResource.Text(
+                            text = data.placeholderText,
+                        ),
                         style = FinanceManagerAppTheme.typography.headlineLarge
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
@@ -169,9 +172,8 @@ private fun MySearchBarUI(
                     )
                 },
                 leadingIcon = {
-                    Icon(
-                        imageVector = MyIcons.Search,
-                        contentDescription = null,
+                    CosmosIcon(
+                        iconResource = CosmosIcons.Search,
                         modifier = Modifier
                             .padding(
                                 all = 0.dp,
@@ -183,9 +185,8 @@ private fun MySearchBarUI(
                 },
                 trailingIcon = if (data.searchText.isNotBlank()) {
                     {
-                        Icon(
-                            imageVector = MyIcons.Close,
-                            contentDescription = null,
+                        CosmosIcon(
+                            iconResource = CosmosIcons.Close,
                             modifier = Modifier
                                 .clip(
                                     shape = CircleShape,
@@ -301,9 +302,8 @@ private fun MySearchBarUIV2(
                 end = 8.dp,
             ),
     ) {
-        Icon(
-            imageVector = MyIcons.Search,
-            contentDescription = null,
+        CosmosIcon(
+            iconResource = CosmosIcons.Search,
             modifier = Modifier
                 .padding(
                     all = 0.dp,
@@ -346,8 +346,10 @@ private fun MySearchBarUIV2(
                 ),
             )
             if (data.searchTextFieldState.text.isEmpty()) {
-                MyText(
-                    text = data.placeholderText,
+                CosmosText(
+                    stringResource = CosmosStringResource.Text(
+                        text = data.placeholderText,
+                    ),
                     style = FinanceManagerAppTheme.typography.bodyLarge
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
@@ -379,18 +381,19 @@ private fun MySearchBarUIV2(
                     focusRequester.requestFocus()
                 },
             ) {
-                MyText(
-                    textStringResourceId = if (keyboardType == KeyboardType.Text) {
-                        R.string.finance_manager_search_bar_keyboard_type_number
-                    } else {
-                        R.string.finance_manager_search_bar_keyboard_type_text
-                    },
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = if (keyboardType == KeyboardType.Text) {
+                            R.string.finance_manager_search_bar_keyboard_type_number
+                        } else {
+                            R.string.finance_manager_search_bar_keyboard_type_text
+                        },
+                    ),
                 )
             }
         } else {
-            Icon(
-                imageVector = MyIcons.Close,
-                contentDescription = null,
+            CosmosIcon(
+                iconResource = CosmosIcons.Close,
                 modifier = Modifier
                     .clip(
                         shape = CircleShape,

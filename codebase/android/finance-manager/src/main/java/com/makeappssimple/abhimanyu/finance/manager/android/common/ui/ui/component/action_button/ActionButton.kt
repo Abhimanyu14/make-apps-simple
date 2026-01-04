@@ -21,13 +21,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.legend.Dot
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
@@ -69,12 +69,12 @@ private fun ActionButtonUI(
         modifier = modifier,
     ) {
         Box {
-            Icon(
-                imageVector = data.imageVector,
-                contentDescription = stringResource(
+            CosmosIcon(
+                iconResource = data.iconResource,
+                tint = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                contentDescriptionStringResource = CosmosStringResource.Id(
                     id = data.contentDescriptionStringResourceId,
                 ),
-                tint = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier
                     .background(
                         color = FinanceManagerAppTheme.colorScheme.primaryContainer,

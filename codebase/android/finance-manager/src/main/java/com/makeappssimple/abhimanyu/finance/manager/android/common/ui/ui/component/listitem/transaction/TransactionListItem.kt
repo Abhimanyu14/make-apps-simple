@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,9 +35,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.ExpandedListItemShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
@@ -133,15 +134,13 @@ private fun TransactionListItemUI(
         ) {
             if (data.isInSelectionMode) {
                 if (data.isSelected) {
-                    Icon(
-                        imageVector = MyIcons.CheckCircle,
-                        contentDescription = null,
+                    CosmosIcon(
+                        iconResource = CosmosIcons.CheckCircle,
                         tint = FinanceManagerAppTheme.colorScheme.primary,
                     )
                 } else {
-                    Icon(
-                        imageVector = MyIcons.RadioButtonUnchecked,
-                        contentDescription = null,
+                    CosmosIcon(
+                        iconResource = CosmosIcons.RadioButtonUnchecked,
                         tint = FinanceManagerAppTheme.colorScheme.outline,
                     )
                 }
@@ -164,13 +163,15 @@ private fun TransactionListItemUI(
                     modifier = Modifier
                         .fillMaxWidth(),
                 ) {
-                    MyText(
+                    CosmosText(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(
                                 weight = 1F,
                             ),
-                        text = data.title,
+                        stringResource = CosmosStringResource.Text(
+                            text = data.title,
+                        ),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         style = FinanceManagerAppTheme.typography.headlineMedium
@@ -178,13 +179,15 @@ private fun TransactionListItemUI(
                                 color = FinanceManagerAppTheme.colorScheme.onBackground,
                             ),
                     )
-                    MyText(
+                    CosmosText(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(
                                 weight = 1F,
                             ),
-                        text = data.amountText,
+                        stringResource = CosmosStringResource.Text(
+                            text = data.amountText,
+                        ),
                         style = FinanceManagerAppTheme.typography.headlineMedium
                             .copy(
                                 color = data.amountColor.composeColor,
@@ -192,10 +195,12 @@ private fun TransactionListItemUI(
                             ),
                     )
                 }
-                MyText(
+                CosmosText(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    text = data.transactionForText,
+                    stringResource = CosmosStringResource.Text(
+                        text = data.transactionForText,
+                    ),
                     style = FinanceManagerAppTheme.typography.bodySmall
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -205,25 +210,29 @@ private fun TransactionListItemUI(
                     modifier = Modifier
                         .fillMaxWidth(),
                 ) {
-                    MyText(
+                    CosmosText(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(
                                 weight = 1F,
                             ),
-                        text = data.dateAndTimeText,
+                        stringResource = CosmosStringResource.Text(
+                            text = data.dateAndTimeText,
+                        ),
                         style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onBackground,
                             ),
                     )
-                    MyText(
+                    CosmosText(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(
                                 weight = 1F,
                             ),
-                        text = accountText,
+                        stringResource = CosmosStringResource.Text(
+                            text = accountText,
+                        ),
                         style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -274,9 +283,9 @@ private fun TransactionListItemUI(
                             isClickable = true,
                             isEnabled = true,
                             iconImageVector = CosmosIcons.Edit,
-                            labelText = stringResource(
+                            labelText = CosmosStringResource.Id(
                                 id = R.string.finance_manager_transaction_list_item_edit,
-                            ),
+                            ).text,
                         ),
                         handleEvent = { event ->
                             when (event) {
@@ -297,8 +306,8 @@ private fun TransactionListItemUI(
                         data = MyExpandableItemIconButtonData(
                             isClickable = true,
                             isEnabled = true,
-                            iconImageVector = MyIcons.CurrencyExchange,
-                            labelText = stringResource(
+                            iconResource = CosmosIcons.CurrencyExchange,
+                            labelStringResource = CosmosStringResource.Id(
                                 id = R.string.finance_manager_transaction_list_item_refund,
                             ),
                         ),
@@ -320,8 +329,8 @@ private fun TransactionListItemUI(
                         data = MyExpandableItemIconButtonData(
                             isClickable = true,
                             isEnabled = data.isDeleteButtonEnabled,
-                            iconImageVector = MyIcons.Delete,
-                            labelText = stringResource(
+                            iconResource = CosmosIcons.Delete,
+                            labelStringResource = CosmosStringResource.Id(
                                 id = R.string.finance_manager_transaction_list_item_delete,
                             ),
                         ),

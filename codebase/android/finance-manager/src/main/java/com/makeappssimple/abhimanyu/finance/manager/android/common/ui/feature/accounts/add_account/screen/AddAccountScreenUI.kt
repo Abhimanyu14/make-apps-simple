@@ -35,16 +35,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.event.AddAccountScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.AmountInputTransformation
@@ -159,9 +159,9 @@ internal fun AddAccountScreenUI(
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_name,
                     supportingText = {
                         uiState.nameError.stringResourceId?.let { nameTextFieldErrorTextStringResourceId ->
-                            MyText(
-                                text = stringResource(
-                                    id = nameTextFieldErrorTextStringResourceId,
+                            CosmosText(
+                                stringResource = CosmosStringResource.Id(
+                                    nameTextFieldErrorTextStringResourceId,
                                 ),
                                 style = FinanceManagerAppTheme.typography.bodySmall.copy(
                                     color = FinanceManagerAppTheme.colorScheme.error,
@@ -227,7 +227,9 @@ internal fun AddAccountScreenUI(
                 data = SaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled,
                     isLoading = uiState.isLoading,
-                    textStringResourceId = R.string.finance_manager_screen_add_account_floating_action_button_content_description,
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_screen_add_account_floating_action_button_content_description,
+                    ),
                 ),
                 handleEvent = { event ->
                     when (event) {

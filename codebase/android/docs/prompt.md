@@ -1,11 +1,11 @@
 # Prompt
 
-1. Review local code changes.
+1. Make changes to migrate all text to CosmosStringResource. Use existing code as reference.
 
 # Scope
 
 - Contain all changes within these modules.
-    - "barcodes"
+    - "finance-manager"
 
 # General rules
 

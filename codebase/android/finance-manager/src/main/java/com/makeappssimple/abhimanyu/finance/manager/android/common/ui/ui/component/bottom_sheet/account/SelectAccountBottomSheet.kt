@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemContentData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemContentDataAndEventHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemContentEvent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.iconResource
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -41,7 +41,7 @@ internal fun SelectAccountBottomSheet(
                         data = AccountsListItemContentData(
                             isLowBalance = account.balanceAmount < account.minimumAccountBalanceAmount.orEmpty(),
                             isSelected = account.id == data.selectedAccountId,
-                            icon = account.type.icon,
+                            iconResource = account.type.iconResource,
                             accountId = account.id,
                             // TODO(Abhi): View Balance Feature
                             // balance = account.balanceAmount.toString(),

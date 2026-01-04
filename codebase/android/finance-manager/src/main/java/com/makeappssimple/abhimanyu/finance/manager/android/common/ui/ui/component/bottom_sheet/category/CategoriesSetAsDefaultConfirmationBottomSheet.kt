@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.res.stringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheet
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheetData
@@ -46,17 +47,19 @@ internal fun CategoriesSetAsDefaultConfirmationBottomSheet(
 ) {
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
-            message = stringResource(
-                id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_message,
-                data.transactionType.title.lowercase(),
+            messageStringResource = CosmosStringResource.Text(
+                text = stringResource(
+                    id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_message,
+                    data.transactionType.title.lowercase(),
+                ),
             ),
-            negativeButtonText = stringResource(
+            negativeButtonTextStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_negative_button_text,
             ),
-            positiveButtonText = stringResource(
+            positiveButtonTextStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_positive_button_text,
             ),
-            title = stringResource(
+            titleStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_title,
             ),
         ),

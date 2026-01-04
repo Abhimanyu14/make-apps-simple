@@ -28,19 +28,19 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
@@ -79,18 +79,18 @@ internal fun ChipUI(
             data = data,
             handleEvent = handleEvent,
         ) {
-            val icon: ImageVector? =
+            val iconResource: CosmosIconResource? =
                 if (data.isMultiSelect && data.isSelected) {
-                    MyIcons.Done
+                    CosmosIcons.Check
                 } else {
-                    data.icon
+                    data.iconResource
                 }
             ChipUIIcon(
-                icon = icon,
+                iconResource = iconResource,
                 isSelected = data.isSelected,
             )
             ChipUIText(
-                icon = icon,
+                iconResource = iconResource,
                 data = data,
             )
         }
@@ -163,18 +163,17 @@ private fun ChipUIContainer(
 
 @Composable
 private fun ChipUIIcon(
-    icon: ImageVector?,
+    iconResource: CosmosIconResource?,
     isSelected: Boolean,
 ) {
     AnimatedVisibility(
-        visible = icon.isNotNull(),
+        visible = iconResource.isNotNull(),
         enter = scaleIn(),
         exit = scaleOut(),
     ) {
-        icon?.let {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
+        iconResource?.let {
+            CosmosIcon(
+                iconResource = iconResource,
                 tint = if (isSelected) {
                     FinanceManagerAppTheme.colorScheme.onPrimary
                 } else {
@@ -197,22 +196,22 @@ private fun ChipUIIcon(
 
 @Composable
 private fun ChipUIText(
-    icon: ImageVector?,
+    iconResource: CosmosIconResource?,
     data: ChipUIData,
 ) {
-    MyText(
+    CosmosText(
         modifier = Modifier
             .padding(
                 top = ChipUIConstants.textPaddingTop,
                 bottom = ChipUIConstants.textPaddingBottom,
                 end = ChipUIConstants.textPaddingEnd,
-                start = if (icon.isNotNull()) {
+                start = if (iconResource.isNotNull()) {
                     ChipUIConstants.textPaddingStartWithIcon
                 } else {
                     ChipUIConstants.textPaddingStart
                 },
             ),
-        text = data.text,
+        stringResource = data.stringResource,
         style = FinanceManagerAppTheme.typography.labelMedium
             .copy(
                 color = if (data.textColor.isNotNull()) {

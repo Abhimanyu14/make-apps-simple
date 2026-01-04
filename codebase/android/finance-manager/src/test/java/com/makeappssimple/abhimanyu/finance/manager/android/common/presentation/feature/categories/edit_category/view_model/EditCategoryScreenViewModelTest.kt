@@ -20,6 +20,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
@@ -92,13 +93,19 @@ internal class EditCategoryScreenViewModelTest {
             result.transactionTypesChipUIData.shouldBe(
                 expected = listOf(
                     ChipUIData(
-                        text = "Income",
+                        stringResource = CosmosStringResource.Text(
+                            text = "Income",
+                        ),
                     ),
                     ChipUIData(
-                        text = "Expense",
+                        stringResource = CosmosStringResource.Text(
+                            text = "Expense",
+                        ),
                     ),
                     ChipUIData(
-                        text = "Investment",
+                        stringResource = CosmosStringResource.Text(
+                            text = "Investment",
+                        ),
                     ),
                 ),
             )

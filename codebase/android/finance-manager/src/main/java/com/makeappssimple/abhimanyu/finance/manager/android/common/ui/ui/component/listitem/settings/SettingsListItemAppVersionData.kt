@@ -17,9 +17,10 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.settings
 
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class SettingsListItemAppVersionData(
     override val type: SettingsListItemType = SettingsListItemType.APP_VERSION,
-    val appVersionText: String,
+    val appVersionStringResource: CosmosStringResource,
 ) : SettingsListItemData

@@ -22,6 +22,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.orMin
@@ -75,7 +76,9 @@ internal class AnalysisScreenViewModel(
     private val validTransactionTypesChipUIData: ImmutableList<ChipUIData> =
         validTransactionTypes.map {
             ChipUIData(
-                text = it.title,
+                stringResource = CosmosStringResource.Text(
+                    text = it.title,
+                ),
             )
         }
     private var analysisListItemData: ImmutableList<AnalysisListItemData> =

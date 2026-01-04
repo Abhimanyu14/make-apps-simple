@@ -30,8 +30,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -105,8 +106,10 @@ internal fun MyDatePicker(
                     },
                     enabled = confirmEnabled.value,
                 ) {
-                    MyText(
-                        textStringResourceId = R.string.finance_manager_date_picker_positive_button,
+                    CosmosText(
+                        stringResource = CosmosStringResource.Id(
+                            id = R.string.finance_manager_date_picker_positive_button,
+                        ),
                     )
                 }
             },
@@ -116,8 +119,10 @@ internal fun MyDatePicker(
                         handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
                     },
                 ) {
-                    MyText(
-                        textStringResourceId = R.string.finance_manager_date_picker_negative_button,
+                    CosmosText(
+                        stringResource = CosmosStringResource.Id(
+                            id = R.string.finance_manager_date_picker_negative_button,
+                        ),
                     )
                 }
             },

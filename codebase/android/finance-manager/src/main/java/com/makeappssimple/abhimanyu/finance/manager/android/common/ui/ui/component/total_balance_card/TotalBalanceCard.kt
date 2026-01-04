@@ -25,22 +25,22 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_TOTAL_BALANCE_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUI
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
@@ -115,22 +115,26 @@ private fun TotalBalanceCardUI(
             ),
     ) {
         if (data.isBalanceVisible) {
-            MyText(
+            CosmosText(
                 modifier = Modifier
                     .fillMaxWidth(),
-                textStringResourceId = R.string.finance_manager_total_balance_card_title,
+                stringResource = CosmosStringResource.Id(
+                    id = R.string.finance_manager_total_balance_card_title,
+                ),
                 style = FinanceManagerAppTheme.typography.displaySmall
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onTertiary,
                         textAlign = TextAlign.Center,
                     ),
             )
-            MyText(
+            CosmosText(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = Amount(
-                    value = data.totalBalanceAmount,
-                ).toDefaultString(),
+                stringResource = CosmosStringResource.Text(
+                    text = Amount(
+                        value = data.totalBalanceAmount,
+                    ).toDefaultString(),
+                ),
                 style = FinanceManagerAppTheme.typography.displayLarge
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onTertiary,
@@ -144,18 +148,21 @@ private fun TotalBalanceCardUI(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .matchRowSize(),
-                    imageVector = MyIcons.Lock,
-                    contentDescription = null,
+                CosmosIcon(
+                    iconResource = CosmosIcons.Lock,
                     tint = FinanceManagerAppTheme.colorScheme.onTertiary,
+                    modifier = Modifier
+                        .padding(
+                            all = 2.dp,
+                        )
+                        .matchRowSize(),
                 )
-                MyText(
-                    text = Amount(
-                        value = data.totalMinimumBalanceAmount,
-                    ).toDefaultString(),
+                CosmosText(
+                    stringResource = CosmosStringResource.Text(
+                        text = Amount(
+                            value = data.totalMinimumBalanceAmount,
+                        ).toDefaultString(),
+                    ),
                     style = FinanceManagerAppTheme.typography.bodySmall
                         .copy(
                             fontWeight = FontWeight.Bold,
@@ -170,7 +177,7 @@ private fun TotalBalanceCardUI(
                 data = ChipUIData(
                     borderColor = FinanceManagerAppTheme.colorScheme.onTertiary,
                     textColor = FinanceManagerAppTheme.colorScheme.onTertiary,
-                    text = stringResource(
+                    stringResource = CosmosStringResource.Id(
                         id = R.string.finance_manager_total_balance_card_view_balance,
                     ),
                 ),

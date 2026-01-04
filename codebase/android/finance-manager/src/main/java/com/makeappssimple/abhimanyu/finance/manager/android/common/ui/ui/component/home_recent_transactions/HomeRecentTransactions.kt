@@ -24,9 +24,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -51,9 +52,9 @@ internal fun HomeRecentTransactions(
                 shape = CircleShape,
             )
             .conditionalClickable(
-                onClickLabel = stringResource(
+                onClickLabel = CosmosStringResource.Id(
                     id = R.string.finance_manager_screen_home_view_all_transactions,
-                ),
+                ).text,
                 onClick = {
                     handleEvent(HomeRecentTransactionsEvent.OnClick)
                 },
@@ -65,21 +66,24 @@ internal fun HomeRecentTransactions(
                 bottom = 12.dp,
             ),
     ) {
-        MyText(
-            modifier = Modifier
-                .weight(
-                    weight = 1F,
-                ),
-            textStringResourceId = R.string.finance_manager_screen_home_recent_transactions,
+        CosmosText(
+            stringResource = CosmosStringResource.Id(
+                id = R.string.finance_manager_screen_home_recent_transactions,
+            ),
             style = FinanceManagerAppTheme.typography.headlineLarge
                 .copy(
                     color = FinanceManagerAppTheme.colorScheme.onBackground,
                 ),
+            modifier = Modifier
+                .weight(
+                    weight = 1F,
+                ),
         )
         if (data.isTrailingTextVisible) {
-            MyText(
-                modifier = Modifier,
-                textStringResourceId = R.string.finance_manager_screen_home_view_all_transactions,
+            CosmosText(
+                stringResource = CosmosStringResource.Id(
+                    id = R.string.finance_manager_screen_home_view_all_transactions,
+                ),
                 style = FinanceManagerAppTheme.typography.headlineMedium
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.primary,

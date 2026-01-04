@@ -19,7 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Composable
 internal fun MyOutlinedTextFieldLabelText(
@@ -27,8 +28,10 @@ internal fun MyOutlinedTextFieldLabelText(
     @StringRes textStringResourceId: Int,
 ) {
     // Not providing style as the default style has font size change based on floating or not
-    MyText(
-        textStringResourceId = textStringResourceId,
+    CosmosText(
+        stringResource = CosmosStringResource.Id(
+            id = textStringResourceId,
+        ),
         modifier = modifier,
         // style = FinanceManagerAppTheme.typography.labelSmall,
     )

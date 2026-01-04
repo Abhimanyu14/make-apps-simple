@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
@@ -83,7 +84,9 @@ internal class EditCategoryScreenViewModel(
     private val transactionTypesChipUIData: ImmutableList<ChipUIData> =
         validTransactionTypes.map { transactionType ->
             ChipUIData(
-                text = transactionType.title,
+                stringResource = CosmosStringResource.Text(
+                    text = transactionType.title,
+                ),
             )
         }
     private var selectedTransactionTypeIndex: Int =

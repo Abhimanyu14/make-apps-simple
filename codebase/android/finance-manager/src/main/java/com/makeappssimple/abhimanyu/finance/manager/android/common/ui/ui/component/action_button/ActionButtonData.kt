@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 
 @Immutable
 internal data class ActionButtonData(
     val isIndicatorVisible: Boolean = false,
     val isLoading: Boolean = false,
-    val imageVector: ImageVector,
+    val iconResource: CosmosIconResource,
     @StringRes val contentDescriptionStringResourceId: Int,
 )

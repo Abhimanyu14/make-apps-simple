@@ -16,21 +16,21 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions
 
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 
-internal val AccountType.icon: ImageVector
+internal val AccountType.iconResource: CosmosIconResource
     get() = when (this) {
         AccountType.BANK -> {
-            MyIcons.AccountBalance
+            CosmosIcons.AccountBalance
         }
 
         AccountType.CASH -> {
-            MyIcons.CurrencyRupee
+            CosmosIcons.CurrencyRupee
         }
 
         AccountType.E_WALLET -> {
-            MyIcons.AccountBalanceWallet
+            CosmosIcons.AccountBalanceWallet
         }
     }

@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.transaction_for
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.toImmutableList
 
@@ -31,8 +31,8 @@ internal fun TransactionForValuesMenuBottomSheet(
     val items = mutableListOf<TransactionForValuesMenuBottomSheetItemData>()
     items.add(
         element = TransactionForValuesMenuBottomSheetItemData(
-            imageVector = MyIcons.Edit,
-            text = stringResource(
+            iconResource = CosmosIcons.Edit,
+            stringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_edit,
             ),
             onClick = onEditClick,
@@ -41,8 +41,8 @@ internal fun TransactionForValuesMenuBottomSheet(
     if (isDeleteVisible) {
         items.add(
             element = TransactionForValuesMenuBottomSheetItemData(
-                imageVector = MyIcons.Delete,
-                text = stringResource(
+                iconResource = CosmosIcons.Delete,
+                stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_delete,
                 ),
                 onClick = onDeleteClick,

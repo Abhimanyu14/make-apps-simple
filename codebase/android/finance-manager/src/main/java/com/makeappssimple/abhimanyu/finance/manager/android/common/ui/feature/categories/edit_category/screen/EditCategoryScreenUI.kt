@@ -33,18 +33,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_CATEGORY
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_CATEGORY
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.bottom_sheet.EditCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.event.EditCategoryScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.EditCategoryScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.edit_category.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
@@ -228,8 +228,8 @@ internal fun EditCategoryScreenUI(
                         supportingText = if (uiState.isSupportingTextVisible) {
                             {
                                 uiState.titleError.stringResourceId?.let { titleTextFieldErrorTextStringResourceId ->
-                                    MyText(
-                                        text = stringResource(
+                                    CosmosText(
+                                        stringResource = CosmosStringResource.Id(
                                             id = titleTextFieldErrorTextStringResourceId,
                                         ),
                                         style = FinanceManagerAppTheme.typography.bodySmall.copy(
@@ -266,7 +266,9 @@ internal fun EditCategoryScreenUI(
                 data = SaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled.orFalse(),
                     isLoading = uiState.isLoading,
-                    textStringResourceId = R.string.finance_manager_screen_add_category_floating_action_button_content_description,
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_screen_add_category_floating_action_button_content_description,
+                    ),
                 ),
                 handleEvent = { event ->
                     when (event) {

@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.settings
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class SettingsListItemContentData(
@@ -26,6 +26,6 @@ internal data class SettingsListItemContentData(
     val isChecked: Boolean? = null,
     val isEnabled: Boolean = false,
     val hasToggle: Boolean = false,
-    val imageVector: ImageVector? = null,
-    @StringRes val textStringResourceId: Int,
+    val iconResource: CosmosIconResource? = null,
+    val stringResource: CosmosStringResource,
 ) : SettingsListItemData

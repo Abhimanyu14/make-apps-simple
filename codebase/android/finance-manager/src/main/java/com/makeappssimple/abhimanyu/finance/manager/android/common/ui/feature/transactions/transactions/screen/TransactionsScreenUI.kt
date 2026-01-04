@@ -44,8 +44,12 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_TRANSACTIONS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_TRANSACTIONS
@@ -53,13 +57,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.event.TransactionsScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarsSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
@@ -108,9 +109,9 @@ internal fun TransactionsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: TransactionsScreenUIEvent) -> Unit = {},
 ) {
-    val duplicateTransactionSuccessfulSnackbarText = stringResource(
+    val duplicateTransactionSuccessfulSnackbarText = CosmosStringResource.Id(
         id = R.string.finance_manager_screen_transactions_duplicate_transaction_successful,
-    )
+    ).text
 
     BottomSheetHandler(
         isBottomSheetVisible = uiState.isBottomSheetVisible,
@@ -260,23 +261,30 @@ internal fun TransactionsScreenUI(
             if (uiState.isInSelectionMode) {
                 MySelectionModeTopAppBar(
                     appBarActions = {
-                        MyIconButton(
-                            tint = FinanceManagerAppTheme.colorScheme.onBackground,
-                            imageVector = MyIcons.MoreVert,
-                            contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_selection_mode_appbar_menu_more_options,
+                        CosmosIconButton(
+                            onClickLabelStringResource = CosmosStringResource.Id(
+                                id = R.string.finance_manager_screen_transactions_selection_mode_appbar_menu_more_options,
+                            ),
                             onClick = {
                                 handleUIEvent(TransactionsScreenUIEvent.OnSelectionModeTopAppBarMoreOptionsButtonClick)
                             },
-                        )
+                        ) {
+                            CosmosIcon(
+                                iconResource = CosmosIcons.MoreVert,
+                                tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                            )
+                        }
                     },
                     onNavigationButtonClick = {
                         handleUIEvent(TransactionsScreenUIEvent.OnSelectionModeTopAppBarNavigationButtonClick)
                     },
                     title = {
-                        MyText(
-                            text = stringResource(
-                                id = R.string.finance_manager_screen_transactions_selection_mode_appbar_title,
-                                uiState.selectedTransactions.size,
+                        CosmosText(
+                            stringResource = CosmosStringResource.Text(
+                                text = stringResource(
+                                    id = R.string.finance_manager_screen_transactions_selection_mode_appbar_title,
+                                    uiState.selectedTransactions.size,
+                                ),
                             ),
                             style = FinanceManagerAppTheme.typography.titleLarge
                                 .copy(
@@ -449,9 +457,9 @@ private fun SearchSortAndFilterBar(
                     data = MySearchBarDataV2(
                         autoFocus = false,
                         isLoading = uiState.isLoading,
-                        placeholderText = stringResource(
+                        placeholderText = CosmosStringResource.Id(
                             id = R.string.finance_manager_screen_transactions_searchbar_placeholder,
-                        ),
+                        ).text,
                         searchTextFieldState = uiState.searchTextFieldState,
                     ),
                     handleEvent = { events ->
@@ -466,7 +474,7 @@ private fun SearchSortAndFilterBar(
             ActionButton(
                 data = ActionButtonData(
                     isLoading = uiState.isLoading,
-                    imageVector = MyIcons.SwapVert,
+                    iconResource = CosmosIcons.SwapVert,
                     contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_sort_button_content_description,
                 ),
                 handleEvent = { event ->
@@ -481,7 +489,7 @@ private fun SearchSortAndFilterBar(
                 data = ActionButtonData(
                     isIndicatorVisible = uiState.selectedTransactionFilter.areFiltersSelected(),
                     isLoading = uiState.isLoading,
-                    imageVector = MyIcons.FilterAlt,
+                    iconResource = CosmosIcons.FilterAlt,
                     contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_filter_button_content_description,
                 ),
                 handleEvent = { event ->
@@ -500,7 +508,7 @@ private fun SearchSortAndFilterBar(
 private fun StickyHeaderText(
     text: String,
 ) {
-    MyText(
+    CosmosText(
         modifier = Modifier
             .background(
                 color = FinanceManagerAppTheme.colorScheme.background,
@@ -512,7 +520,9 @@ private fun StickyHeaderText(
                 start = TransactionsScreenUIConstants.stickyHeaderTextPaddingStart,
                 top = TransactionsScreenUIConstants.stickyHeaderTextPaddingTop,
             ),
-        text = text,
+        stringResource = CosmosStringResource.Text(
+            text = text,
+        ),
         style = FinanceManagerAppTheme.typography.headlineSmall
             .copy(
                 color = FinanceManagerAppTheme.colorScheme.onBackground,

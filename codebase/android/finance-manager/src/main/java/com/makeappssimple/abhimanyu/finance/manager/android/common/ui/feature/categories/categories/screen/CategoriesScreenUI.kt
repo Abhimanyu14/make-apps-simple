@@ -31,13 +31,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CATEGORIES
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_CATEGORIES
@@ -83,12 +83,12 @@ internal fun CategoriesScreenUI(
         pageCount = { PAGE_COUNT },
     )
 
-    val setDefaultCategoryFailedSnackbarText = stringResource(
+    val setDefaultCategoryFailedSnackbarText = CosmosStringResource.Id(
         id = R.string.finance_manager_screen_categories_set_default_category_failed,
-    )
-    val setDefaultCategorySuccessfulSnackbarText = stringResource(
+    ).text
+    val setDefaultCategorySuccessfulSnackbarText = CosmosStringResource.Id(
         id = R.string.finance_manager_screen_categories_set_default_category_successful,
-    )
+    ).text
 
     LaunchedEffect(
         key1 = uiState.screenSnackbarType,

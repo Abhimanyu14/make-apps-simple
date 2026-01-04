@@ -26,9 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartLegendItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.HorizontalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NonFillingVerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
@@ -53,8 +53,8 @@ internal fun PieChartLegend(
                     HorizontalSpacer(
                         width = 8.dp,
                     )
-                    MyText(
-                        text = item.text,
+                    CosmosText(
+                        stringResource = item.stringResource,
                         style = FinanceManagerAppTheme.typography.headlineLarge
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onBackground,

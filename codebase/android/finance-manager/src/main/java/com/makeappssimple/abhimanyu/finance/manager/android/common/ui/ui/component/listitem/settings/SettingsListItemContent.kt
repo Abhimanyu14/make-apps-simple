@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.settings
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.toggle.Toggle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
@@ -34,20 +34,19 @@ internal fun SettingsListItemContent(
     handleEvent: (event: SettingsListItemContentEvent) -> Unit = {},
 ) {
     ListItem(
-        leadingContent = data.imageVector?.let {
+        leadingContent = data.iconResource?.let {
             {
-                Icon(
-                    imageVector = data.imageVector,
-                    contentDescription = null,
+                CosmosIcon(
+                    iconResource = data.iconResource,
                     tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 )
             }
         },
         headlineContent = {
-            MyText(
+            CosmosText(
                 modifier = Modifier
                     .fillMaxWidth(),
-                textStringResourceId = data.textStringResourceId,
+                stringResource = data.stringResource,
                 style = FinanceManagerAppTheme.typography.bodyLarge
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onBackground,

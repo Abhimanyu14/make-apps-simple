@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.emptyCosmosStringResource
 
 @Immutable
 internal data class ChipUIData(
@@ -27,6 +29,6 @@ internal data class ChipUIData(
     val isSelected: Boolean = false,
     val borderColor: Color? = null,
     val textColor: Color? = null,
-    val text: String = "",
-    val icon: ImageVector? = null,
+    val stringResource: CosmosStringResource = emptyCosmosStringResource,
+    val iconResource: CosmosIconResource? = null,
 )

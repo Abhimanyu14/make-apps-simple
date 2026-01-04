@@ -27,7 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
@@ -70,12 +71,14 @@ private fun AccountsListItemHeaderUI(
                 bottom = 0.dp,
             ),
     ) {
-        MyText(
+        CosmosText(
             modifier = Modifier
                 .padding(
                     end = 16.dp,
                 ),
-            text = data.name,
+            stringResource = CosmosStringResource.Text(
+                text = data.name,
+            ),
             style = FinanceManagerAppTheme.typography.headlineMedium
                 .copy(
                     color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -88,8 +91,10 @@ private fun AccountsListItemHeaderUI(
                 ),
         )
         data.balance?.let {
-            MyText(
-                text = data.balance,
+            CosmosText(
+                stringResource = CosmosStringResource.Text(
+                    text = data.balance,
+                ),
                 style = FinanceManagerAppTheme.typography.headlineMedium
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onBackground,

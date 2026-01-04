@@ -28,8 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
@@ -49,26 +49,26 @@ internal fun MyConfirmationBottomSheet(
                 minHeight = minimumBottomSheetHeight,
             ),
     ) {
-        MyText(
+        CosmosText(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     all = 16.dp,
                 ),
-            text = data.title,
+            stringResource = data.titleStringResource,
             style = FinanceManagerAppTheme.typography.headlineLarge
                 .copy(
                     color = FinanceManagerAppTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center,
                 ),
         )
-        MyText(
+        CosmosText(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     all = 16.dp,
                 ),
-            text = data.message,
+            stringResource = data.messageStringResource,
             style = FinanceManagerAppTheme.typography.bodyMedium
                 .copy(
                     color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -91,8 +91,8 @@ internal fun MyConfirmationBottomSheet(
                         weight = 1F,
                     ),
             ) {
-                MyText(
-                    text = data.negativeButtonText,
+                CosmosText(
+                    stringResource = data.negativeButtonTextStringResource,
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
@@ -108,8 +108,8 @@ internal fun MyConfirmationBottomSheet(
                         weight = 1F,
                     ),
             ) {
-                MyText(
-                    text = data.positiveButtonText,
+                CosmosText(
+                    stringResource = data.positiveButtonTextStringResource,
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }

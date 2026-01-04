@@ -34,13 +34,15 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_OVERVIEW_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.ComposePieChart
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -181,10 +183,10 @@ private fun OverviewCardUI(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 // TODO(Abhi): Disable the buttons conditionally
-                MyIconButton(
-                    tint = FinanceManagerAppTheme.colorScheme.primary,
-                    imageVector = MyIcons.ChevronLeft,
-                    contentDescriptionStringResourceId = R.string.finance_manager_overview_card_previous_button_content_description,
+                CosmosIconButton(
+                    onClickLabelStringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_overview_card_previous_button_content_description,
+                    ),
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(
@@ -192,8 +194,13 @@ private fun OverviewCardUI(
                             )
                         )
                     },
-                )
-                MyText(
+                ) {
+                    CosmosIcon(
+                        iconResource = CosmosIcons.ChevronLeft,
+                        tint = FinanceManagerAppTheme.colorScheme.primary,
+                    )
+                }
+                CosmosText(
                     modifier = Modifier
                         .padding(
                             horizontal = 8.dp,
@@ -202,17 +209,19 @@ private fun OverviewCardUI(
                         .weight(
                             weight = 1F,
                         ),
-                    text = data.title,
+                    stringResource = CosmosStringResource.Text(
+                        text = data.title,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onBackground,
                             textAlign = TextAlign.Center,
                         ),
                 )
-                MyIconButton(
-                    tint = FinanceManagerAppTheme.colorScheme.primary,
-                    imageVector = MyIcons.ChevronRight,
-                    contentDescriptionStringResourceId = R.string.finance_manager_overview_card_next_button_content_description,
+                CosmosIconButton(
+                    onClickLabelStringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_overview_card_next_button_content_description,
+                    ),
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(
@@ -220,7 +229,12 @@ private fun OverviewCardUI(
                             )
                         )
                     },
-                )
+                ) {
+                    CosmosIcon(
+                        iconResource = CosmosIcons.ChevronRight,
+                        tint = FinanceManagerAppTheme.colorScheme.primary,
+                    )
+                }
             }
             VerticalSpacer(
                 height = 8.dp,

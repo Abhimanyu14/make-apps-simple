@@ -28,8 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.EmojiCircleSize
@@ -72,14 +73,16 @@ internal fun CategoriesGridItem(
                 emoji = category.emoji,
             ),
         )
-        MyText(
+        CosmosText(
             modifier = Modifier
                 .padding(
                     start = 6.dp,
                     end = 6.dp,
                     bottom = 4.dp,
                 ),
-            text = category.title,
+            stringResource = CosmosStringResource.Text(
+                text = category.title,
+            ),
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
             style = FinanceManagerAppTheme.typography.headlineMedium

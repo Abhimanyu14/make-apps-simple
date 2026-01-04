@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.toggle
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Composable
@@ -36,9 +36,8 @@ internal fun Toggle(
         onCheckedChange = onCheckedChange,
         thumbContent = if (isChecked) {
             {
-                Icon(
-                    imageVector = MyIcons.Check,
-                    contentDescription = null,
+                CosmosIcon(
+                    iconResource = CosmosIcons.Check,
                     modifier = Modifier
                         .size(
                             size = SwitchDefaults.IconSize,

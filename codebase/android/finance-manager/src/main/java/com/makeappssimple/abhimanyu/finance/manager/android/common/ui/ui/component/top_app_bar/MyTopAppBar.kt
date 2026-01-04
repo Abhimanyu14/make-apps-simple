@@ -25,9 +25,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.NullableComposableContent
@@ -48,7 +48,7 @@ internal fun MyTopAppBar(
     }
 
     MyTopAppBarUI(
-        titleText = stringResource(
+        titleStringResource = CosmosStringResource.Id(
             id = titleTextStringResourceId,
         ),
         modifier = modifier,
@@ -72,14 +72,14 @@ internal fun MyTopAppBar(
 @Composable
 private fun MyTopAppBarUI(
     modifier: Modifier = Modifier,
-    titleText: String,
+    titleStringResource: CosmosStringResource,
     appBarActions: NullableComposableContent,
     navigationButton: ComposableContent,
 ) {
     CenterAlignedTopAppBar(
         title = {
-            MyText(
-                text = titleText,
+            CosmosText(
+                stringResource = titleStringResource,
                 style = FinanceManagerAppTheme.typography.titleLarge
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.primary,

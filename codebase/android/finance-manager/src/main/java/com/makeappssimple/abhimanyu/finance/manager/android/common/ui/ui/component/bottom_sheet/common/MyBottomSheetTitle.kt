@@ -22,7 +22,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Composable
@@ -30,7 +31,7 @@ internal fun MyBottomSheetTitle(
     data: MyBottomSheetTitleData,
     modifier: Modifier = Modifier,
 ) {
-    MyText(
+    CosmosText(
         modifier = modifier
             .fillMaxWidth()
             .background(
@@ -39,7 +40,9 @@ internal fun MyBottomSheetTitle(
             .padding(
                 all = 16.dp,
             ),
-        textStringResourceId = data.textStringResourceId,
+        stringResource = CosmosStringResource.Id(
+            id = data.textStringResourceId,
+        ),
         style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
                 color = FinanceManagerAppTheme.colorScheme.onBackground,

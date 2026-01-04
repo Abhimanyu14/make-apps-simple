@@ -24,9 +24,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.event.AnalysisScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.action_button.ActionButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.action_button.ActionButtonData
@@ -79,7 +79,7 @@ internal fun AnalysisScreenHeader(
             data = ActionButtonData(
                 isIndicatorVisible = uiState.selectedFilter.areFiltersSelected(),
                 isLoading = uiState.isLoading,
-                imageVector = MyIcons.FilterAlt,
+                iconResource = CosmosIcons.FilterAlt,
                 contentDescriptionStringResourceId = R.string.finance_manager_screen_analysis_filter_button_content_description,
             ),
             handleEvent = { event ->

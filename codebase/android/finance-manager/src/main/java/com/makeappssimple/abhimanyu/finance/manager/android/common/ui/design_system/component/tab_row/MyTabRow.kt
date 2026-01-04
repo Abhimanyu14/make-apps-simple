@@ -20,7 +20,8 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import kotlinx.collections.immutable.ImmutableList
 
@@ -62,8 +63,10 @@ private fun MyTabText(
     title: String,
     isSelected: Boolean,
 ) {
-    MyText(
-        text = title,
+    CosmosText(
+        stringResource = CosmosStringResource.Text(
+            text = title,
+        ),
         style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
                 color = if (isSelected) {

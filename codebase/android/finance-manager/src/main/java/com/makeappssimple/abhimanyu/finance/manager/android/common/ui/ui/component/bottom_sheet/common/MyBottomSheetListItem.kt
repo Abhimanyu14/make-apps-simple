@@ -19,22 +19,24 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Immutable
 internal data class MyBottomSheetListItemData(
-    val imageVector: ImageVector? = null,
-    val text: String,
+    val iconResource: CosmosIconResource? = null,
+    val stringResource: CosmosStringResource,
 )
 
 @Immutable
@@ -53,7 +55,7 @@ internal fun MyBottomSheetListItem(
         modifier = modifier
             .fillMaxWidth()
             .conditionalClickable(
-                onClickLabel = data.text,
+                onClickLabel = data.stringResource.text,
                 role = Role.Button,
                 onClick = {
                     handleEvent(MyBottomSheetListItemEvent.OnClick)
@@ -63,10 +65,9 @@ internal fun MyBottomSheetListItem(
                 all = 16.dp,
             ),
     ) {
-        data.imageVector?.let {
-            Icon(
-                imageVector = data.imageVector,
-                contentDescription = null,
+        data.iconResource?.let {
+            CosmosIcon(
+                iconResource = data.iconResource,
                 tint = FinanceManagerAppTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .padding(
@@ -74,9 +75,9 @@ internal fun MyBottomSheetListItem(
                     ),
             )
         }
-        MyText(
+        CosmosText(
             modifier = Modifier,
-            text = data.text,
+            stringResource = data.stringResource,
             style = FinanceManagerAppTheme.typography.headlineMedium
                 .copy(
                     color = FinanceManagerAppTheme.colorScheme.onBackground,

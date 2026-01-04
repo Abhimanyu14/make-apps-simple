@@ -17,12 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class MyExpandableItemIconButtonData(
     val isClickable: Boolean,
     val isEnabled: Boolean,
-    val iconImageVector: ImageVector,
-    val labelText: String,
+    val iconResource: CosmosIconResource,
+    val labelStringResource: CosmosStringResource,
 )

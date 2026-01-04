@@ -29,7 +29,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemContentData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts.AccountsListItemHeaderData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.iconResource
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -80,7 +80,7 @@ internal class GetAllAccountsListItemDataListUseCase(
                                 ) && isDeleteEnabled,
                                 isLowBalance = account.balanceAmount < account.minimumAccountBalanceAmount.orEmpty(),
                                 isMoreOptionsIconButtonVisible = true,
-                                icon = account.type.icon,
+                                iconResource = account.type.iconResource,
                                 accountId = account.id,
                                 balance = account.balanceAmount.toDefaultString(),
                                 name = account.name,

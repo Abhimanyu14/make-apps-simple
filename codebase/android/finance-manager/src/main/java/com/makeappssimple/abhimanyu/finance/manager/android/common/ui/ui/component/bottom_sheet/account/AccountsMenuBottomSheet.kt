@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.account
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.toImmutableList
 
@@ -35,8 +35,8 @@ internal fun AccountsMenuBottomSheet(
     if (isEditVisible) {
         items.add(
             AccountsMenuBottomSheetItemData(
-                imageVector = MyIcons.Edit,
-                text = stringResource(
+                iconResource = CosmosIcons.Edit,
+                stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_bottom_sheet_accounts_menu_edit,
                 ),
                 onClick = onEditClick,
@@ -46,8 +46,8 @@ internal fun AccountsMenuBottomSheet(
     if (isSetAsDefaultVisible) {
         items.add(
             AccountsMenuBottomSheetItemData(
-                imageVector = MyIcons.CheckCircle,
-                text = stringResource(
+                iconResource = CosmosIcons.CheckCircle,
+                stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_bottom_sheet_accounts_menu_set_as_default_account,
                 ),
                 onClick = onSetAsDefaultClick,
@@ -57,8 +57,8 @@ internal fun AccountsMenuBottomSheet(
     if (isDeleteVisible) {
         items.add(
             AccountsMenuBottomSheetItemData(
-                imageVector = MyIcons.Delete,
-                text = stringResource(
+                iconResource = CosmosIcons.Delete,
+                stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_bottom_sheet_accounts_menu_delete,
                 ),
                 onClick = onDeleteClick,

@@ -31,7 +31,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
@@ -69,15 +70,17 @@ internal fun MyEmojiCircle(
                     all = data.emojiCircleSize.padding,
                 ),
         ) {
-            MyText(
-                text = data.emoji,
+            CosmosText(
+                stringResource = CosmosStringResource.Text(
+                    text = data.emoji,
+                ),
                 style = TextStyle(
                     fontSize = data.emojiCircleSize.textSize.sp,
                     platformStyle = PlatformTextStyle(
                         emojiSupportMatch = EmojiSupportMatch.None
                     ),
                     textAlign = TextAlign.Center,
-                )
+                ),
             )
         }
     }

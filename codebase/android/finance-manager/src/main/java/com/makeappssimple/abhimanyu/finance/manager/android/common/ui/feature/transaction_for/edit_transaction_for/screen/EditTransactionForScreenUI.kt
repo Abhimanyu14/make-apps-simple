@@ -32,17 +32,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION_FOR
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION_FOR
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.event.EditTransactionForScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
@@ -113,8 +113,8 @@ internal fun EditTransactionForScreenUI(
                     trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_clear_title,
                     supportingText = {
                         uiState.titleError.stringResourceId?.let { titleTextFieldErrorTextStringResourceId ->
-                            MyText(
-                                text = stringResource(
+                            CosmosText(
+                                stringResource = CosmosStringResource.Id(
                                     id = titleTextFieldErrorTextStringResourceId,
                                 ),
                                 style = FinanceManagerAppTheme.typography.bodySmall
@@ -154,7 +154,9 @@ internal fun EditTransactionForScreenUI(
                 data = SaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled.orFalse(),
                     isLoading = uiState.isLoading,
-                    textStringResourceId = R.string.finance_manager_screen_edit_transaction_for_floating_action_button_content_description,
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_screen_edit_transaction_for_floating_action_button_content_description,
+                    ),
                 ),
                 handleEvent = { event ->
                     when (event) {

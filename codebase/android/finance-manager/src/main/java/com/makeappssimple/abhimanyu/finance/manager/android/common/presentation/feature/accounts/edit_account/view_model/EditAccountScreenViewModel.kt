@@ -26,6 +26,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.filter
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account.EditAccountScreenDataValidationUseCase
@@ -38,7 +39,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.icon
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.iconResource
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -148,8 +149,10 @@ internal class EditAccountScreenViewModel(
                 accountTypesChipUIDataList = validAccountTypesForNewAccount
                     .map { accountType ->
                         ChipUIData(
-                            text = accountType.title,
-                            icon = accountType.icon,
+                            stringResource = CosmosStringResource.Text(
+                                text = accountType.title,
+                            ),
+                            iconResource = accountType.iconResource,
                         )
                     },
                 balanceAmountValueTextFieldState = balanceAmountValueTextFieldState,

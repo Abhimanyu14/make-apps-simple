@@ -21,6 +21,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.bottom_sheet.AddCategoryScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenTitleError
@@ -97,13 +98,19 @@ internal class AddCategoryScreenViewModelTest {
             result.transactionTypesChipUIData.shouldBe(
                 expected = listOf(
                     ChipUIData(
-                        text = "Income",
+                        stringResource = CosmosStringResource.Text(
+                            text = "Income",
+                        ),
                     ),
                     ChipUIData(
-                        text = "Expense",
+                        stringResource = CosmosStringResource.Text(
+                            text = "Expense",
+                        ),
                     ),
                     ChipUIData(
-                        text = "Investment",
+                        stringResource = CosmosStringResource.Text(
+                            text = "Investment",
+                        ),
                     ),
                 )
             )

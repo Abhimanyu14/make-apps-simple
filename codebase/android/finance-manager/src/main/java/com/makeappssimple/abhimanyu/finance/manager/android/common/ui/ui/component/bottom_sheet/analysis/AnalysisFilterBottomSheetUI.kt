@@ -28,8 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
@@ -115,12 +116,14 @@ internal fun AnalysisFilterBottomSheetUI(
                 )
                 .fillMaxWidth(),
         ) {
-            MyText(
+            CosmosText(
                 modifier = Modifier
                     .weight(
                         weight = 1F,
                     ),
-                textStringResourceId = data.headingTextStringResourceId,
+                stringResource = CosmosStringResource.Id(
+                    id = data.headingTextStringResourceId,
+                ),
                 style = FinanceManagerAppTheme.typography.headlineLarge
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onBackground,
@@ -131,8 +134,10 @@ internal fun AnalysisFilterBottomSheetUI(
                 onClick = onClearButtonClick,
                 modifier = Modifier,
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_clear,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_analysis_filter_clear,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
@@ -197,7 +202,9 @@ internal fun AnalysisFilterBottomSheetUI(
             data = MyHorizontalScrollingSelectionGroupData(
                 items = DateRangeOptions.entries.map {
                     ChipUIData(
-                        text = it.title,
+                        stringResource = CosmosStringResource.Text(
+                            text = it.title,
+                        ),
                     )
                 },
             ),
@@ -224,8 +231,10 @@ internal fun AnalysisFilterBottomSheetUI(
                     ),
                 onClick = onNegativeButtonClick,
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_reset,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_analysis_filter_reset,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }
@@ -239,8 +248,10 @@ internal fun AnalysisFilterBottomSheetUI(
                     ),
                 onClick = onPositiveButtonClick,
             ) {
-                MyText(
-                    textStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_apply,
+                CosmosText(
+                    stringResource = CosmosStringResource.Id(
+                        id = R.string.finance_manager_bottom_sheet_analysis_filter_apply,
+                    ),
                     style = FinanceManagerAppTheme.typography.labelLarge,
                 )
             }

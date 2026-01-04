@@ -20,8 +20,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.accounts.edit_account.screen.EditAccountScreenUIVisibilityData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
@@ -128,12 +129,16 @@ internal class EditAccountScreenViewModelTest {
             result.accountTypesChipUIDataList.shouldBe(
                 expected = listOf(
                     ChipUIData(
-                        text = "Bank",
-                        icon = MyIcons.AccountBalance,
+                        stringResource = CosmosStringResource.Text(
+                            text = "Bank",
+                        ),
+                        iconResource = CosmosIcons.AccountBalance,
                     ),
                     ChipUIData(
-                        text = "E-Wallet",
-                        icon = MyIcons.AccountBalanceWallet,
+                        stringResource = CosmosStringResource.Text(
+                            text = "E-Wallet",
+                        ),
+                        iconResource = CosmosIcons.AccountBalanceWallet,
                     ),
                 ),
             )
@@ -182,12 +187,16 @@ internal class EditAccountScreenViewModelTest {
             result.accountTypesChipUIDataList.shouldBe(
                 expected = listOf(
                     ChipUIData(
-                        text = "Bank",
-                        icon = MyIcons.AccountBalance,
+                        stringResource = CosmosStringResource.Text(
+                            text = "Bank",
+                        ),
+                        iconResource = CosmosIcons.AccountBalance,
                     ),
                     ChipUIData(
-                        text = "E-Wallet",
-                        icon = MyIcons.AccountBalanceWallet,
+                        stringResource = CosmosStringResource.Text(
+                            text = "E-Wallet",
+                        ),
+                        iconResource = CosmosIcons.AccountBalanceWallet,
                     ),
                 ),
             )

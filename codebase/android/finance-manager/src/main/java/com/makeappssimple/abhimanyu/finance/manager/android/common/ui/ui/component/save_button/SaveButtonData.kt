@@ -16,12 +16,12 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.save_button
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class SaveButtonData(
     val isEnabled: Boolean,
     val isLoading: Boolean = false,
-    @StringRes val textStringResourceId: Int,
+    val stringResource: CosmosStringResource,
 )

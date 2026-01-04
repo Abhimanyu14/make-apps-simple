@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,9 +30,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -88,23 +89,24 @@ private fun BackupCardUI(
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                imageVector = MyIcons.Backup,
-                contentDescription = null,
+            CosmosIcon(
+                iconResource = CosmosIcons.Backup,
                 tint = FinanceManagerAppTheme.colorScheme.onBackground,
             )
-            MyText(
-                modifier = Modifier
-                    .padding(
-                        horizontal = 16.dp,
-                    )
-                    .fillMaxWidth(),
-                textStringResourceId = R.string.finance_manager_backup_card,
+            CosmosText(
+                stringResource = CosmosStringResource.Id(
+                    id = R.string.finance_manager_backup_card,
+                ),
                 style = FinanceManagerAppTheme.typography.bodyLarge
                     .copy(
                         color = FinanceManagerAppTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.Bold,
                     ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                    )
+                    .fillMaxWidth(),
             )
         }
     }

@@ -19,8 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.icons.MyIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 import kotlinx.collections.immutable.toImmutableList
 
@@ -39,8 +39,8 @@ internal fun TransactionsMenuBottomSheet(
     if (data.isDuplicateTransactionMenuOptionVisible) {
         menuItems.add(
             element = TransactionsMenuBottomSheetItemData(
-                imageVector = MyIcons.Copy,
-                text = stringResource(
+                iconResource = CosmosIcons.ContentCopy,
+                stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_bottom_sheet_transactions_menu_duplicate_transaction,
                 ),
                 onClick = {
@@ -51,8 +51,8 @@ internal fun TransactionsMenuBottomSheet(
     }
     menuItems.add(
         element = TransactionsMenuBottomSheetItemData(
-            imageVector = MyIcons.Edit,
-            text = stringResource(
+            iconResource = CosmosIcons.Edit,
+            stringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transactions_menu_update_transaction_for,
             ),
             onClick = {
@@ -62,8 +62,8 @@ internal fun TransactionsMenuBottomSheet(
     )
     menuItems.add(
         element = TransactionsMenuBottomSheetItemData(
-            imageVector = MyIcons.Checklist,
-            text = stringResource(
+            iconResource = CosmosIcons.Checklist,
+            stringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transactions_menu_select_all_transactions,
             ),
             onClick = {

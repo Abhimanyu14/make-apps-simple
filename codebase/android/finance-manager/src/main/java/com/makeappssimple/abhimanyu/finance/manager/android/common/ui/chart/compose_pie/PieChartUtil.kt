@@ -32,7 +32,7 @@ internal val FLOAT_EPSILON = Float.fromBits(1)
 internal fun PieChartData.createLegendEntries(): List<PieChartLegendItemData> {
     return items.map { item ->
         PieChartLegendItemData(
-            text = item.text,
+            stringResource = item.stringResource,
             color = item.color,
         )
     }

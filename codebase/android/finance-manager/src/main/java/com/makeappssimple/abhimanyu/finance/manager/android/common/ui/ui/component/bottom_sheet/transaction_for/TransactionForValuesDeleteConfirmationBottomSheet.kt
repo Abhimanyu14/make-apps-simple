@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.transaction_for
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheet
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheetData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheetEvent
@@ -29,16 +29,16 @@ internal fun TransactionForValuesDeleteConfirmationBottomSheet(
 ) {
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
-            message = stringResource(
+            messageStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_message,
             ),
-            negativeButtonText = stringResource(
+            negativeButtonTextStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_negative_button_text,
             ),
-            positiveButtonText = stringResource(
+            positiveButtonTextStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_positive_button_text,
             ),
-            title = stringResource(
+            titleStringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_delete_title,
             ),
         ),
