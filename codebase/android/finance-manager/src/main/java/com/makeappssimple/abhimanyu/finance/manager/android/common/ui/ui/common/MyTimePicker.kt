@@ -53,8 +53,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.financeManagerDarkColorScheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.financeManagerLightColorScheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.financeManagerDarkColorScheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.financeManagerLightColorScheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object MyTimePickerConstants {

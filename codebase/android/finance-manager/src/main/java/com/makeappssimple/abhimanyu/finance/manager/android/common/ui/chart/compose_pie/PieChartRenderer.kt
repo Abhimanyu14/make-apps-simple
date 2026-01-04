@@ -32,8 +32,8 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.util.fastForEachIndexed
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.MyColor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.composeColor
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.max

@@ -16,7 +16,7 @@
 
 @file:Suppress("unused")
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray

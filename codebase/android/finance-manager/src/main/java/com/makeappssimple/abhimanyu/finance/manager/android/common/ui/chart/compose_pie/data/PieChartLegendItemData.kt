@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.com
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.MyColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
 
 @Immutable
 internal data class PieChartLegendItemData(

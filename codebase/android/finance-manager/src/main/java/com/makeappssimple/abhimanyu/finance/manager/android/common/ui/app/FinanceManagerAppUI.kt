@@ -21,7 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app.FinanceManagerActivityViewModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavGraph
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.FinanceManagerAppTheme
 
 @Composable
 internal fun FinanceManagerAppUI(
