@@ -20,7 +20,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public data class MyReadOnlyTextFieldData(
+public data class CosmosReadOnlyTextFieldData(
     val isLoading: Boolean = false,
     val value: String,
     @StringRes val labelTextStringResourceId: Int,

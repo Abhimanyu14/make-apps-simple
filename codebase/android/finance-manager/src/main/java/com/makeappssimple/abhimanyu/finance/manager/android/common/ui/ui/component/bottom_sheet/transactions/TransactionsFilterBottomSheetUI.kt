@@ -57,9 +57,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosStatusBarSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -654,13 +654,13 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         .padding(
                             horizontal = 8.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         value = fromDate.formattedDate(),
                         labelTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_from_date,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 isFromDatePickerDialogVisible = true
                             }
                         }
@@ -674,13 +674,13 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         .padding(
                             horizontal = 8.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         value = toDate.formattedDate(),
                         labelTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_to_date,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 isToDatePickerDialogVisible = true
                             }
                         }

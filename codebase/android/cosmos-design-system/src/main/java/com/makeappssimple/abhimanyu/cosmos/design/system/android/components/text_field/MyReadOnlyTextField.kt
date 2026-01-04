@@ -32,8 +32,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosm
 @Composable
 public fun MyReadOnlyTextField(
     modifier: Modifier = Modifier,
-    data: MyReadOnlyTextFieldData,
-    handleEvent: (event: MyReadOnlyTextFieldEvent) -> Unit = {},
+    data: CosmosReadOnlyTextFieldData,
+    handleEvent: (event: CosmosReadOnlyTextFieldEvent) -> Unit = {},
 ) {
     if (data.isLoading) {
         MyReadOnlyTextFieldLoadingUI(
@@ -62,7 +62,7 @@ public fun MyReadOnlyTextField(
                     )
                     .conditionalClickable(
                         onClick = {
-                            handleEvent(MyReadOnlyTextFieldEvent.OnClick)
+                            handleEvent(CosmosReadOnlyTextFieldEvent.OnClick)
                         },
                     ),
             )

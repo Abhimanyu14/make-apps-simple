@@ -49,12 +49,12 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spac
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldDataV2
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldEventV2
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldV2
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
@@ -413,14 +413,14 @@ internal fun AddTransactionScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.category?.title.orEmpty(),
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_category,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 clearFocus()
                                 handleUIEvent(AddTransactionScreenUIEvent.OnCategoryTextFieldClick)
                             }
@@ -528,14 +528,14 @@ internal fun AddTransactionScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.accountFrom?.name.orEmpty(),
                         labelTextStringResourceId = uiState.accountFromText.stringResourceId,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 clearFocus()
                                 handleUIEvent(AddTransactionScreenUIEvent.OnAccountFromTextFieldClick)
                             }
@@ -553,14 +553,14 @@ internal fun AddTransactionScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.accountTo?.name.orEmpty(),
                         labelTextStringResourceId = uiState.accountToText.stringResourceId,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 clearFocus()
                                 handleUIEvent(AddTransactionScreenUIEvent.OnAccountToTextFieldClick)
                             }
@@ -575,14 +575,14 @@ internal fun AddTransactionScreenUI(
                         horizontal = 16.dp,
                         vertical = 4.dp,
                     ),
-                data = MyReadOnlyTextFieldData(
+                data = CosmosReadOnlyTextFieldData(
                     isLoading = uiState.isLoading,
                     value = uiState.transactionDate.formattedDate(),
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_transaction_date,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyReadOnlyTextFieldEvent.OnClick -> {
+                        is CosmosReadOnlyTextFieldEvent.OnClick -> {
                             clearFocus()
                             handleUIEvent(AddTransactionScreenUIEvent.OnTransactionDateTextFieldClick)
                         }
@@ -596,14 +596,14 @@ internal fun AddTransactionScreenUI(
                         horizontal = 16.dp,
                         vertical = 4.dp,
                     ),
-                data = MyReadOnlyTextFieldData(
+                data = CosmosReadOnlyTextFieldData(
                     isLoading = uiState.isLoading,
                     value = uiState.transactionTime.formattedTime(),
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_transaction_time,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        MyReadOnlyTextFieldEvent.OnClick -> {
+                        CosmosReadOnlyTextFieldEvent.OnClick -> {
                             clearFocus()
                             handleUIEvent(AddTransactionScreenUIEvent.OnTransactionTimeTextFieldClick)
                         }

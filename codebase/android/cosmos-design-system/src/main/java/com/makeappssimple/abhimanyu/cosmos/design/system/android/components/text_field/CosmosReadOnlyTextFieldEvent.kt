@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tex
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MyReadOnlyTextFieldEvent {
-    public data object OnClick : MyReadOnlyTextFieldEvent()
+public sealed class CosmosReadOnlyTextFieldEvent {
+    public data object OnClick : CosmosReadOnlyTextFieldEvent()
 }

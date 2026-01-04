@@ -49,12 +49,12 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spac
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextField
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
@@ -374,14 +374,14 @@ internal fun EditTransactionScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.category?.title.orEmpty(),
                         labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_category,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 clearFocus()
                                 handleUIEvent(EditTransactionScreenUIEvent.OnCategoryTextFieldClick)
                             }
@@ -503,14 +503,14 @@ internal fun EditTransactionScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.accountFrom?.name.orEmpty(),
                         labelTextStringResourceId = uiState.accountFromText.stringResourceId,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 clearFocus()
                                 handleUIEvent(EditTransactionScreenUIEvent.OnAccountFromTextFieldClick)
                             }
@@ -528,14 +528,14 @@ internal fun EditTransactionScreenUI(
                             horizontal = 16.dp,
                             vertical = 4.dp,
                         ),
-                    data = MyReadOnlyTextFieldData(
+                    data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.accountTo?.name.orEmpty(),
                         labelTextStringResourceId = uiState.accountToText.stringResourceId,
                     ),
                     handleEvent = { event ->
                         when (event) {
-                            is MyReadOnlyTextFieldEvent.OnClick -> {
+                            is CosmosReadOnlyTextFieldEvent.OnClick -> {
                                 clearFocus()
                                 handleUIEvent(EditTransactionScreenUIEvent.OnAccountToTextFieldClick)
                             }
@@ -550,14 +550,14 @@ internal fun EditTransactionScreenUI(
                         horizontal = 16.dp,
                         vertical = 4.dp,
                     ),
-                data = MyReadOnlyTextFieldData(
+                data = CosmosReadOnlyTextFieldData(
                     isLoading = uiState.isLoading,
                     value = uiState.transactionDate.formattedDate(),
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_transaction_date,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyReadOnlyTextFieldEvent.OnClick -> {
+                        is CosmosReadOnlyTextFieldEvent.OnClick -> {
                             clearFocus()
                             handleUIEvent(EditTransactionScreenUIEvent.OnTransactionDateTextFieldClick)
                         }
@@ -571,14 +571,14 @@ internal fun EditTransactionScreenUI(
                         horizontal = 16.dp,
                         vertical = 4.dp,
                     ),
-                data = MyReadOnlyTextFieldData(
+                data = CosmosReadOnlyTextFieldData(
                     isLoading = uiState.isLoading,
                     value = uiState.transactionTime.formattedTime(),
                     labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_transaction_time,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        MyReadOnlyTextFieldEvent.OnClick -> {
+                        CosmosReadOnlyTextFieldEvent.OnClick -> {
                             clearFocus()
                             handleUIEvent(EditTransactionScreenUIEvent.OnTransactionTimeTextFieldClick)
                         }

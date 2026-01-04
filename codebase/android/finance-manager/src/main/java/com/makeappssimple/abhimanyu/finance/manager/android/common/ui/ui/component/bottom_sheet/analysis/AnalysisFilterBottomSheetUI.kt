@@ -35,9 +35,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
@@ -159,13 +159,13 @@ internal fun AnalysisFilterBottomSheetUI(
                     .padding(
                         horizontal = 8.dp,
                     ),
-                data = MyReadOnlyTextFieldData(
+                data = CosmosReadOnlyTextFieldData(
                     value = data.fromDateText,
                     labelTextStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_from_date,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyReadOnlyTextFieldEvent.OnClick -> {
+                        is CosmosReadOnlyTextFieldEvent.OnClick -> {
                             onFromDateTextFieldClick()
                         }
                     }
@@ -179,13 +179,13 @@ internal fun AnalysisFilterBottomSheetUI(
                     .padding(
                         horizontal = 8.dp,
                     ),
-                data = MyReadOnlyTextFieldData(
+                data = CosmosReadOnlyTextFieldData(
                     value = data.toDateText,
                     labelTextStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_to_date,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is MyReadOnlyTextFieldEvent.OnClick -> {
+                        is CosmosReadOnlyTextFieldEvent.OnClick -> {
                             onToDateTextFieldClick()
                         }
                     }
