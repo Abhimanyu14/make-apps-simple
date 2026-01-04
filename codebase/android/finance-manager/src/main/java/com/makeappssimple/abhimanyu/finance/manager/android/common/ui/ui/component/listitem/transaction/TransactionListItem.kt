@@ -30,7 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -77,17 +76,21 @@ private fun TransactionListItemUI(
     data: TransactionListItemData,
     handleEvent: (event: TransactionListItemEvent) -> Unit = {},
 ) {
-    val accountText: String = if (
+    val accountTextStringResource: CosmosStringResource = if (
         data.accountFromName.isNotNull() &&
         data.accountToName.isNotNull()
     ) {
-        stringResource(
+        CosmosStringResource.Id(
             id = R.string.finance_manager_transaction_list_item_account,
-            data.accountFromName,
-            data.accountToName,
+            args = listOf(
+                data.accountFromName,
+                data.accountToName,
+            ),
         )
     } else {
-        data.accountFromName ?: data.accountToName.orEmpty()
+        CosmosStringResource.Text(
+            text = data.accountFromName ?: data.accountToName.orEmpty(),
+        )
     }
 
     MyExpandableItemUIWrapper(
@@ -230,9 +233,7 @@ private fun TransactionListItemUI(
                             .weight(
                                 weight = 1F,
                             ),
-                        stringResource = CosmosStringResource.Text(
-                            text = accountText,
-                        ),
+                        stringResource = accountTextStringResource,
                         style = FinanceManagerAppTheme.typography.bodySmall
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onBackground,

@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.makeappssimple.android.event.PlatformEvent
 import com.makeappssimple.abhimanyu.library.barcodes.android.R as BarcodesR
 import com.makeappssimple.abhimanyu.library.cosmos.design.system.catalog.android.R as CosmosDesignSystemR
@@ -32,11 +32,11 @@ internal fun LauncherApp(
     val launcherItems = listOf(
         LauncherItem(
             backgroundColor = colorResource(
-                BarcodesR.color.barcodes_launcher_background,
+                id = BarcodesR.color.barcodes_launcher_background,
             ),
             iconResourceId = BarcodesR.mipmap.barcodes_ic_launcher,
-            text = stringResource(
-                BarcodesR.string.barcodes_app_name,
+            stringResource = CosmosStringResource.Id(
+                id = BarcodesR.string.barcodes_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToBarcodesActivity)
@@ -44,11 +44,11 @@ internal fun LauncherApp(
         ),
         LauncherItem(
             backgroundColor = colorResource(
-                CosmosDesignSystemR.color.cosmos_launcher_background,
+                id = CosmosDesignSystemR.color.cosmos_launcher_background,
             ),
             iconResourceId = CosmosDesignSystemR.mipmap.cosmos_ic_launcher,
-            text = stringResource(
-                CosmosDesignSystemR.string.cosmos_design_system_catalog_app_name,
+            stringResource = CosmosStringResource.Id(
+                id = CosmosDesignSystemR.string.cosmos_design_system_catalog_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToCosmosDesignSystemCatalogActivity)
@@ -56,11 +56,11 @@ internal fun LauncherApp(
         ),
         LauncherItem(
             backgroundColor = colorResource(
-                FinanceManagerR.color.finance_manager_launcher_background,
+                id = FinanceManagerR.color.finance_manager_launcher_background,
             ),
             iconResourceId = FinanceManagerR.mipmap.finance_manager_ic_launcher,
-            text = stringResource(
-                FinanceManagerR.string.finance_manager_app_name,
+            stringResource = CosmosStringResource.Id(
+                id = FinanceManagerR.string.finance_manager_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToFinanceManagerActivity)

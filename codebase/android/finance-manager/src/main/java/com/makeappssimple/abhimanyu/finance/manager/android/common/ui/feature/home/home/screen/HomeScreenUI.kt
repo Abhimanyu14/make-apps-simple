@@ -28,7 +28,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
@@ -179,9 +178,9 @@ internal fun HomeScreenUI(
                         items = persistentListOf(
                             PieChartItemData(
                                 value = uiState.overviewCardData.income,
-                                stringResource = CosmosStringResource.Text(
-                                    text = stringResource(
-                                        id = R.string.finance_manager_screen_home_overview_card_income,
+                                stringResource = CosmosStringResource.Id(
+                                    id = R.string.finance_manager_screen_home_overview_card_income,
+                                    args = listOf(
                                         Amount(
                                             value = uiState.overviewCardData.income.toLong(),
                                         ).toDefaultString(),
@@ -191,9 +190,9 @@ internal fun HomeScreenUI(
                             ),
                             PieChartItemData(
                                 value = uiState.overviewCardData.expense,
-                                stringResource = CosmosStringResource.Text(
-                                    text = stringResource(
-                                        id = R.string.finance_manager_screen_home_overview_card_expense,
+                                stringResource = CosmosStringResource.Id(
+                                    id = R.string.finance_manager_screen_home_overview_card_expense,
+                                    args = listOf(
                                         Amount(
                                             value = uiState.overviewCardData.expense.toLong(),
                                         ).toUnsignedString(),

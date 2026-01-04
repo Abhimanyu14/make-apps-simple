@@ -38,12 +38,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosTextStyle
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.makeappssimple.android.R
 
 @Composable
@@ -51,12 +52,12 @@ internal fun LauncherAppUI(
     launcherItems: List<LauncherItem>,
 ) {
     Box(
-        modifier = Modifier.Companion
+        modifier = Modifier
             .fillMaxSize()
             .systemBarsPadding(),
     ) {
         Column(
-            horizontalAlignment = Alignment.Companion.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(
                 space = 8.dp,
             ),
@@ -68,9 +69,9 @@ internal fun LauncherAppUI(
                     ),
             )
             CosmosText(
-                text = stringResource(
+                text = CosmosStringResource.Id(
                     id = R.string.make_apps_simple_screen_launcher,
-                ),
+                ).text,
                 style = CosmosTextStyle.Heading1,
             )
             Spacer(
@@ -131,7 +132,7 @@ private fun LauncherItemUI(
                 launcherItem = launcherItem,
             )
             CosmosText(
-                text = launcherItem.text,
+                text = launcherItem.stringResource.text,
                 style = CosmosTextStyle.Footnote,
                 maxLines = 2,
                 minLines = 2,
@@ -148,7 +149,7 @@ private fun LauncherItemIcon(
 ) {
     AsyncImage(
         model = launcherItem.iconResourceId,
-        contentDescription = launcherItem.text,
+        contentDescription = launcherItem.stringResource.text,
         modifier = Modifier
             .size(
                 size = 60.dp,

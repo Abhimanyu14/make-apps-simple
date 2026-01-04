@@ -41,7 +41,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
@@ -280,9 +279,9 @@ internal fun TransactionsScreenUI(
                     },
                     title = {
                         CosmosText(
-                            stringResource = CosmosStringResource.Text(
-                                text = stringResource(
-                                    id = R.string.finance_manager_screen_transactions_selection_mode_appbar_title,
+                            stringResource = CosmosStringResource.Id(
+                                id = R.string.finance_manager_screen_transactions_selection_mode_appbar_title,
+                                args = listOf(
                                     uiState.selectedTransactions.size,
                                 ),
                             ),

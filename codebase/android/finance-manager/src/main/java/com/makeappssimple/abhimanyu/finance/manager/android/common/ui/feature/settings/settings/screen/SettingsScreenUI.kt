@@ -33,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
@@ -480,9 +479,9 @@ private fun getSettingsListItemData(
         ),
         SettingsScreenListItemData(
             data = SettingsListItemAppVersionData(
-                appVersionStringResource = CosmosStringResource.Text(
-                    text = stringResource(
-                        id = R.string.finance_manager_screen_settings_app_version,
+                appVersionStringResource = CosmosStringResource.Id(
+                    id = R.string.finance_manager_screen_settings_app_version,
+                    args = listOf(
                         uiState.appVersion.orEmpty(),
                     ),
                 ),

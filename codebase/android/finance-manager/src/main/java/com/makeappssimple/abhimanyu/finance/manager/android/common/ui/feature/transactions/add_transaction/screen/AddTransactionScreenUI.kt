@@ -34,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -370,9 +369,9 @@ internal fun AddTransactionScreenUI(
                                 visible = uiState.amountErrorText.isNotNullOrBlank(),
                             ) {
                                 CosmosText(
-                                    stringResource = CosmosStringResource.Text(
-                                        text = stringResource(
-                                            id = R.string.finance_manager_screen_add_or_edit_transaction_amount_error_text,
+                                    stringResource = CosmosStringResource.Id(
+                                        id = R.string.finance_manager_screen_add_or_edit_transaction_amount_error_text,
+                                        args = listOf(
                                             uiState.amountErrorText,
                                         ),
                                     ),

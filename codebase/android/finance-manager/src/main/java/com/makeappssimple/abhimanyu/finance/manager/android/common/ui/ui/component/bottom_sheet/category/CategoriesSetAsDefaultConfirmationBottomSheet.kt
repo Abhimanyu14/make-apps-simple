@@ -18,7 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.res.stringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheet
@@ -47,9 +46,9 @@ internal fun CategoriesSetAsDefaultConfirmationBottomSheet(
 ) {
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
-            messageStringResource = CosmosStringResource.Text(
-                text = stringResource(
-                    id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_message,
+            messageStringResource = CosmosStringResource.Id(
+                id = R.string.finance_manager_screen_categories_bottom_sheet_set_as_default_message,
+                args = listOf(
                     data.transactionType.title.lowercase(),
                 ),
             ),

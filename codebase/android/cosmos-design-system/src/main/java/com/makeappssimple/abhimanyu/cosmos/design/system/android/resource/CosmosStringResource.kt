@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 public sealed class CosmosStringResource : CosmosResource {
     public data class Id(
         val id: Int,
+        val args: List<Any> = emptyList(),
     ) : CosmosStringResource()
 
     public data class Plural(

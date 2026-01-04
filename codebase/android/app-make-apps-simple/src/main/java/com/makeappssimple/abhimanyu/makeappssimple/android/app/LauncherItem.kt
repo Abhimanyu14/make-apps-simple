@@ -17,10 +17,11 @@
 package com.makeappssimple.abhimanyu.makeappssimple.android.app
 
 import androidx.compose.ui.graphics.Color
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 internal data class LauncherItem(
     val backgroundColor: Color,
     val iconResourceId: Int,
-    val text: String,
+    val stringResource: CosmosStringResource,
     val onClick: () -> Unit,
 )

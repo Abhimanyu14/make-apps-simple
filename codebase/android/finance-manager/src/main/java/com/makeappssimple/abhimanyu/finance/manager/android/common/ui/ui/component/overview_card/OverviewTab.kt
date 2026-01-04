@@ -190,7 +190,9 @@ private fun OverviewTabIndicator(
         key1 = data.items,
     ) {
         data.items.map {
-            with(density) {
+            with(
+                receiver = density,
+            ) {
                 max(
                     a = overviewTabMinimumWidth,
                     b = textMeasurer.measure(
@@ -243,14 +245,18 @@ private fun OverviewTabIndicator(
                 drawRoundRect(
                     color = indicatorColor,
                     topLeft = Offset(
-                        x = with(density) {
+                        x = with(
+                            receiver = density,
+                        ) {
                             indicatorOffset.toPx()
                         },
                         y = 0F,
                     ),
                     size = size
                         .copy(
-                            width = with(density) {
+                            width = with(
+                                receiver = density,
+                            ) {
                                 indicatorWidth.toPx()
                             },
                         ),
