@@ -33,11 +33,10 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 @Composable
 internal fun MyOutlinedTextField(
@@ -171,6 +170,6 @@ private fun MyOutlinedTextFieldLoadingUI(
                     size = 8.dp,
                 ),
             )
-            .shimmer(),
+            .cosmosShimmer(),
     )
 }

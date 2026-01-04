@@ -27,11 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.legend.Dot
-
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 private object ActionButtonConstants {
     val loadingUISize = 40.dp
@@ -118,7 +117,7 @@ private fun ActionButtonLoadingUI(
                         height = ActionButtonConstants.loadingUISize,
                     ),
                 )
-                .shimmer(),
+                .cosmosShimmer(),
         )
     }
 }

@@ -39,10 +39,10 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 private object ChipUIConstants {
     val borderWidth = 1.dp
@@ -113,7 +113,7 @@ internal fun ChipLoadingUI(
             .clip(
                 shape = ChipUIConstants.shape,
             )
-            .shimmer(),
+            .cosmosShimmer(),
     )
 }
 

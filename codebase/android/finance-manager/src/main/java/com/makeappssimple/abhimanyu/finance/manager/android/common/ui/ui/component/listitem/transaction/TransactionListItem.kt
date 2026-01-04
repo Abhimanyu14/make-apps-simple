@@ -37,6 +37,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
@@ -48,7 +49,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compone
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.MyExpandableItemUIWrapper
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircleData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -372,6 +372,6 @@ private fun TransactionListItemLoadingUI(
                     size = 24.dp,
                 ),
             )
-            .shimmer(),
+            .cosmosShimmer(),
     )
 }

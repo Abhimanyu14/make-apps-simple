@@ -40,8 +40,11 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosApp
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-private const val DEFAULT_SHIMMER_DURATION = 1500
-private const val DEFAULT_SHIMMER_DELAY = 100
+private object ShimmerConstants {
+    const val DEFAULT_SHIMMER_DURATION = 1500
+    const val DEFAULT_SHIMMER_DELAY = 100
+    const val SHIMMER_SIZE_MULTIPLIER = 3
+}
 
 public fun Modifier.cosmosShimmer(
     isShimmerVisible: Boolean = true,
@@ -63,7 +66,7 @@ public fun Modifier.cosmosShimmer(
             other = Modifier
                 .onSizeChanged {
                     val newTargetValue =
-                        3 * sqrt(
+                        ShimmerConstants.SHIMMER_SIZE_MULTIPLIER * sqrt(
                             it.height
                                 .toFloat()
                                 .pow(2) + it.width
@@ -91,15 +94,18 @@ private fun rememberCosmosShimmerBrush(
     shimmerColor: Color? = CosmosAppTheme.colorScheme.primaryContainer,
 ): State<Brush> {
     val shimmerColors = listOf(
-        (backgroundColor ?: CosmosAppTheme.colorScheme.surfaceVariant).copy(
-            alpha = 0.4F,
-        ),
-        (shimmerColor ?: CosmosAppTheme.colorScheme.primaryContainer).copy(
-            alpha = 0.8F,
-        ),
-        (backgroundColor ?: CosmosAppTheme.colorScheme.surfaceVariant).copy(
-            alpha = 0.4F,
-        ),
+        (backgroundColor ?: CosmosAppTheme.colorScheme.surfaceVariant)
+            .copy(
+                alpha = 0.4F,
+            ),
+        (shimmerColor ?: CosmosAppTheme.colorScheme.primaryContainer)
+            .copy(
+                alpha = 0.8F,
+            ),
+        (backgroundColor ?: CosmosAppTheme.colorScheme.surfaceVariant)
+            .copy(
+                alpha = 0.4F,
+            ),
     )
     val transition = rememberInfiniteTransition(
         label = "shimmer_transition",
@@ -109,8 +115,8 @@ private fun rememberCosmosShimmerBrush(
         targetValue = targetValue,
         animationSpec = infiniteRepeatable(
             animation = tween(
-                durationMillis = DEFAULT_SHIMMER_DURATION,
-                delayMillis = DEFAULT_SHIMMER_DELAY,
+                durationMillis = ShimmerConstants.DEFAULT_SHIMMER_DURATION,
+                delayMillis = ShimmerConstants.DEFAULT_SHIMMER_DELAY,
                 easing = LinearEasing,
             ),
             repeatMode = RepeatMode.Restart,

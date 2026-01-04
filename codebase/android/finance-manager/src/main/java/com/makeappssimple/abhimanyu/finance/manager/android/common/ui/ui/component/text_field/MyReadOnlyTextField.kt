@@ -27,7 +27,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
 
 @Composable
 internal fun MyReadOnlyTextField(
@@ -85,6 +85,6 @@ private fun MyReadOnlyTextFieldLoadingUI(
                     size = 8.dp,
                 ),
             )
-            .shimmer(),
+            .cosmosShimmer(),
     )
 }
