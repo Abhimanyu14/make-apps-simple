@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.tab_row
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tab_row
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
-internal data class MyTabData(
+public data class MyTabData(
     val titleStringResource: CosmosStringResource,
 )

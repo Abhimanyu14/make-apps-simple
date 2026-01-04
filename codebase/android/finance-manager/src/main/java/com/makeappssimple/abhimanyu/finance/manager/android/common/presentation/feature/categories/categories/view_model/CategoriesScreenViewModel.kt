@@ -23,6 +23,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.groupBy
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tab_row.MyTabData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
@@ -40,7 +41,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultExpenseCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultIncomeCategory
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultInvestmentCategory
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.tab_row.MyTabData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.grid_item.CategoriesGridItemData
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap

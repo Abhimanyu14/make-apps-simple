@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.tab_row
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tab_row
 
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosApp
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-internal fun MyTabRow(
+public fun MyTabRow(
     modifier: Modifier = Modifier,
     selectedTabIndex: Int,
     tabDataList: ImmutableList<MyTabData>,
