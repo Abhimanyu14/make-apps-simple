@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.toggle.Toggle
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.toggle.CosmosToggle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
@@ -55,7 +55,7 @@ internal fun SettingsListItemContent(
         },
         trailingContent = if (data.hasToggle) {
             {
-                Toggle(
+                CosmosToggle(
                     isChecked = data.isChecked.orFalse(),
                     onCheckedChange = {
                         handleEvent(SettingsListItemContentEvent.OnCheckedChange)

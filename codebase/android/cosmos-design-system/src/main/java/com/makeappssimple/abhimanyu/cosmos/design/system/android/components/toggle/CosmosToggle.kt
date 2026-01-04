@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.toggle
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.toggle
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Switch
@@ -23,10 +23,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
-internal fun Toggle(
+public fun CosmosToggle(
     modifier: Modifier = Modifier,
     isChecked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
@@ -48,7 +48,7 @@ internal fun Toggle(
             null
         },
         colors = SwitchDefaults.colors(
-            uncheckedThumbColor = FinanceManagerAppTheme.colorScheme.background,
+            uncheckedThumbColor = CosmosAppTheme.colorScheme.background,
         ),
     )
 }
