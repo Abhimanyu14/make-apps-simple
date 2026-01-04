@@ -22,9 +22,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.cosmosTypography
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 
-internal val myLightColorScheme: ColorScheme = lightColorScheme(
+internal val financeManagerLightColorScheme: ColorScheme = lightColorScheme(
     primary = Primary,
     onPrimary = OnPrimary,
     primaryContainer = PrimaryContainer,
@@ -53,7 +54,7 @@ internal val myLightColorScheme: ColorScheme = lightColorScheme(
     outline = Outline,
 )
 
-internal val myDarkColorScheme: ColorScheme = darkColorScheme(
+internal val financeManagerDarkColorScheme: ColorScheme = darkColorScheme(
     primary = Primary,
     onPrimary = OnPrimary,
     primaryContainer = PrimaryContainer,
@@ -85,8 +86,8 @@ internal val myDarkColorScheme: ColorScheme = darkColorScheme(
 @Composable
 internal fun FinanceManagerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    darkColorScheme: ColorScheme = myDarkColorScheme,
-    lightColorScheme: ColorScheme = myLightColorScheme,
+    darkColorScheme: ColorScheme = financeManagerDarkColorScheme,
+    lightColorScheme: ColorScheme = financeManagerLightColorScheme,
     content: ComposableContent,
 ) {
     val colors = if (darkTheme) {
@@ -98,7 +99,7 @@ internal fun FinanceManagerAppTheme(
     MaterialTheme(
         colorScheme = colors,
         shapes = Shapes,
-        typography = Typography,
+        typography = cosmosTypography,
         content = content,
     )
 }

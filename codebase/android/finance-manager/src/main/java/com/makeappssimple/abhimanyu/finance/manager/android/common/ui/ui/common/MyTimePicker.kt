@@ -53,8 +53,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myDarkColorScheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myLightColorScheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.financeManagerDarkColorScheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.financeManagerLightColorScheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object MyTimePickerConstants {
@@ -262,11 +262,11 @@ private fun TimePickerTheme(
     content: ComposableContent,
 ) {
     CosmosAppTheme(
-        lightColorScheme = myLightColorScheme
+        lightColorScheme = financeManagerLightColorScheme
             .copy(
                 outline = CosmosAppTheme.colorScheme.onSurfaceVariant,
             ),
-        darkColorScheme = myDarkColorScheme
+        darkColorScheme = financeManagerDarkColorScheme
             .copy(
                 outline = CosmosAppTheme.colorScheme.onSurfaceVariant,
             ),
