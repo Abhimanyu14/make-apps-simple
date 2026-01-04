@@ -90,7 +90,7 @@ public fun CosmosOutlinedTextField(
                                 ),
                         ) {
                             CosmosIcon(
-                                iconResource = CosmosIcons.Clear,
+                                iconResource = CosmosIcons.Close,
                                 tint = CosmosAppTheme.colorScheme.onBackground,
                                 contentDescriptionStringResource = trailingIconContentDescriptionStringResource,
                             )
@@ -156,7 +156,7 @@ public fun CosmosOutlinedTextField(
                             ),
                     ) {
                         CosmosIcon(
-                            iconResource = CosmosIcons.Clear,
+                            iconResource = CosmosIcons.Close,
                             tint = CosmosAppTheme.colorScheme.onBackground,
                             contentDescriptionStringResource = trailingIconContentDescriptionStringResource,
                         )
