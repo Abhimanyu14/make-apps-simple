@@ -32,8 +32,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.butt
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.date_picker.MyDatePicker
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.date_picker.MyDatePickerData
@@ -124,9 +125,9 @@ internal fun AnalysisFilterBottomSheetUI(
                 stringResource = CosmosStringResource.Id(
                     id = data.headingTextStringResourceId,
                 ),
-                style = FinanceManagerAppTheme.typography.headlineLarge
+                style = CosmosAppTheme.typography.headlineLarge
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onBackground,
+                        color = CosmosAppTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Start,
                     ),
             )
@@ -137,7 +138,7 @@ internal fun AnalysisFilterBottomSheetUI(
                     stringResource = CosmosStringResource.Id(
                         id = R.string.finance_manager_bottom_sheet_analysis_filter_clear,
                     ),
-                    style = FinanceManagerAppTheme.typography.labelLarge,
+                    style = CosmosAppTheme.typography.labelLarge,
                 )
             }
         }
@@ -234,7 +235,7 @@ internal fun AnalysisFilterBottomSheetUI(
                     stringResource = CosmosStringResource.Id(
                         id = R.string.finance_manager_bottom_sheet_analysis_filter_reset,
                     ),
-                    style = FinanceManagerAppTheme.typography.labelLarge,
+                    style = CosmosAppTheme.typography.labelLarge,
                 )
             }
             Button(
@@ -251,7 +252,7 @@ internal fun AnalysisFilterBottomSheetUI(
                     stringResource = CosmosStringResource.Id(
                         id = R.string.finance_manager_bottom_sheet_analysis_filter_apply,
                     ),
-                    style = FinanceManagerAppTheme.typography.labelLarge,
+                    style = CosmosAppTheme.typography.labelLarge,
                 )
             }
         }

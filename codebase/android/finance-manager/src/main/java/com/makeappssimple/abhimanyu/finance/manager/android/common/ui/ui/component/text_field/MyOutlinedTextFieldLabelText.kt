@@ -33,6 +33,6 @@ internal fun MyOutlinedTextFieldLabelText(
             id = textStringResourceId,
         ),
         modifier = modifier,
-        // style = FinanceManagerAppTheme.typography.labelSmall,
+        // style = CosmosAppTheme.typography.labelSmall,
     )
 }

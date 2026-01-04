@@ -41,7 +41,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 private object ChipUIConstants {
@@ -138,9 +138,9 @@ private fun ChipUIContainer(
                 color = if (data.borderColor.isNotNull()) {
                     data.borderColor
                 } else if (data.isSelected) {
-                    FinanceManagerAppTheme.colorScheme.primary
+                    CosmosAppTheme.colorScheme.primary
                 } else {
-                    FinanceManagerAppTheme.colorScheme.outline
+                    CosmosAppTheme.colorScheme.outline
                 },
                 shape = ChipUIConstants.shape,
             )
@@ -151,7 +151,7 @@ private fun ChipUIContainer(
             )
             .background(
                 if (data.isSelected) {
-                    FinanceManagerAppTheme.colorScheme.primary
+                    CosmosAppTheme.colorScheme.primary
                 } else {
                     Color.Transparent
                 }
@@ -175,9 +175,9 @@ private fun ChipUIIcon(
             CosmosIcon(
                 iconResource = iconResource,
                 tint = if (isSelected) {
-                    FinanceManagerAppTheme.colorScheme.onPrimary
+                    CosmosAppTheme.colorScheme.onPrimary
                 } else {
-                    FinanceManagerAppTheme.colorScheme.primary
+                    CosmosAppTheme.colorScheme.primary
                 },
                 modifier = Modifier
                     .scale(
@@ -212,14 +212,14 @@ private fun ChipUIText(
                 },
             ),
         stringResource = data.stringResource,
-        style = FinanceManagerAppTheme.typography.labelMedium
+        style = CosmosAppTheme.typography.labelMedium
             .copy(
                 color = if (data.textColor.isNotNull()) {
                     data.textColor
                 } else if (data.isSelected) {
-                    FinanceManagerAppTheme.colorScheme.onPrimary
+                    CosmosAppTheme.colorScheme.onPrimary
                 } else {
-                    FinanceManagerAppTheme.colorScheme.onBackground
+                    CosmosAppTheme.colorScheme.onBackground
                 },
             ),
     )

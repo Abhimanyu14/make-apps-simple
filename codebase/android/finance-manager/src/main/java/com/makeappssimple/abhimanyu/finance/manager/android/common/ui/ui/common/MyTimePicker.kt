@@ -50,9 +50,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myDarkColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myLightColorScheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -138,18 +138,18 @@ internal fun MyTimePicker(
             }
         ) {
             val colors = TimePickerDefaults.colors(
-                clockDialColor = FinanceManagerAppTheme.colorScheme.background,
-                periodSelectorBorderColor = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
+                clockDialColor = CosmosAppTheme.colorScheme.background,
+                periodSelectorBorderColor = CosmosAppTheme.colorScheme.onSurfaceVariant,
 
-                periodSelectorSelectedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
-                periodSelectorUnselectedContainerColor = FinanceManagerAppTheme.colorScheme.surfaceVariant,
-                periodSelectorSelectedContentColor = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
-                periodSelectorUnselectedContentColor = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
+                periodSelectorSelectedContainerColor = CosmosAppTheme.colorScheme.primaryContainer,
+                periodSelectorUnselectedContainerColor = CosmosAppTheme.colorScheme.surfaceVariant,
+                periodSelectorSelectedContentColor = CosmosAppTheme.colorScheme.onPrimaryContainer,
+                periodSelectorUnselectedContentColor = CosmosAppTheme.colorScheme.onSurfaceVariant,
 
-                timeSelectorSelectedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
-                timeSelectorUnselectedContainerColor = FinanceManagerAppTheme.colorScheme.surfaceVariant,
-                timeSelectorSelectedContentColor = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
-                timeSelectorUnselectedContentColor = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
+                timeSelectorSelectedContainerColor = CosmosAppTheme.colorScheme.primaryContainer,
+                timeSelectorUnselectedContainerColor = CosmosAppTheme.colorScheme.surfaceVariant,
+                timeSelectorSelectedContentColor = CosmosAppTheme.colorScheme.onPrimaryContainer,
+                timeSelectorUnselectedContentColor = CosmosAppTheme.colorScheme.onSurfaceVariant,
             )
 
             TimePickerTheme {
@@ -185,7 +185,7 @@ private fun TimePickerDialog(
         ),
     ) {
         Surface(
-            shape = FinanceManagerAppTheme.shapes.extraLarge,
+            shape = CosmosAppTheme.shapes.extraLarge,
             tonalElevation = 6.dp,
             modifier = modifier
                 .width(
@@ -195,8 +195,8 @@ private fun TimePickerDialog(
                     intrinsicSize = IntrinsicSize.Min,
                 )
                 .background(
-                    shape = FinanceManagerAppTheme.shapes.extraLarge,
-                    color = FinanceManagerAppTheme.colorScheme.surface,
+                    shape = CosmosAppTheme.shapes.extraLarge,
+                    color = CosmosAppTheme.colorScheme.surface,
                 ),
         ) {
             Column(
@@ -213,7 +213,7 @@ private fun TimePickerDialog(
                             bottom = 20.dp,
                         ),
                     stringResource = titleStringResource,
-                    style = FinanceManagerAppTheme.typography.labelMedium
+                    style = CosmosAppTheme.typography.labelMedium
                         .copy(
                             fontWeight = FontWeight.Bold,
                         ),
@@ -261,14 +261,14 @@ private fun TimePickerDialog(
 private fun TimePickerTheme(
     content: ComposableContent,
 ) {
-    FinanceManagerAppTheme(
+    CosmosAppTheme(
         lightColorScheme = myLightColorScheme
             .copy(
-                outline = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
+                outline = CosmosAppTheme.colorScheme.onSurfaceVariant,
             ),
         darkColorScheme = myDarkColorScheme
             .copy(
-                outline = FinanceManagerAppTheme.colorScheme.onSurfaceVariant,
+                outline = CosmosAppTheme.colorScheme.onSurfaceVariant,
             ),
         content = content,
     )

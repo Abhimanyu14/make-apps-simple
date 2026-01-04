@@ -42,12 +42,12 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_ACCOUNT
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.event.EditAccountScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.AmountInputTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.AmountOutputTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
@@ -188,9 +188,9 @@ internal fun EditAccountScreenUI(
                                         stringResource = CosmosStringResource.Id(
                                             nameTextFieldErrorTextStringResourceId,
                                         ),
-                                        style = FinanceManagerAppTheme.typography.bodySmall
+                                        style = CosmosAppTheme.typography.bodySmall
                                             .copy(
-                                                color = FinanceManagerAppTheme.colorScheme.error,
+                                                color = CosmosAppTheme.colorScheme.error,
                                             ),
                                     )
                                 }

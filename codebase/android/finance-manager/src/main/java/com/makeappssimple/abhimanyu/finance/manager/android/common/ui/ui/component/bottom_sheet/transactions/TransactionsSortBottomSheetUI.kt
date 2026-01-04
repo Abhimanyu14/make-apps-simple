@@ -36,8 +36,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyBottomSheetTitle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyBottomSheetTitleData
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
@@ -104,12 +104,12 @@ private fun TransactionsSortBottomSheetItem(
             stringResource = CosmosStringResource.Text(
                 text = data.transactionSortOption.title,
             ),
-            style = FinanceManagerAppTheme.typography.headlineMedium
+            style = CosmosAppTheme.typography.headlineMedium
                 .copy(
                     color = if (data.isSelected) {
-                        FinanceManagerAppTheme.colorScheme.primary
+                        CosmosAppTheme.colorScheme.primary
                     } else {
-                        FinanceManagerAppTheme.colorScheme.onBackground
+                        CosmosAppTheme.colorScheme.onBackground
                     },
                 ),
         )
@@ -122,7 +122,7 @@ private fun TransactionsSortBottomSheetItem(
         if (data.isSelected) {
             CosmosIcon(
                 iconResource = CosmosIcons.Check,
-                tint = FinanceManagerAppTheme.colorScheme.primary,
+                tint = CosmosAppTheme.colorScheme.primary,
             )
         }
     }

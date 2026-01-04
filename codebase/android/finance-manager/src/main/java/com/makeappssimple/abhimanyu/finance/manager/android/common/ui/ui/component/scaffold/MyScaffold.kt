@@ -51,12 +51,13 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ColumnScopedComposableContent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyScaffoldContentWrapper
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetShape
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetBackHandler
 import kotlinx.coroutines.CoroutineScope
 
@@ -74,7 +75,7 @@ internal fun MyScaffold(
         skipPartiallyExpanded = true,
     ),
     sheetShape: Shape = BottomSheetShape,
-    sheetBackgroundColor: Color = FinanceManagerAppTheme.colorScheme.surface,
+    sheetBackgroundColor: Color = CosmosAppTheme.colorScheme.surface,
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
 
     // Scaffold
@@ -86,7 +87,7 @@ internal fun MyScaffold(
     },
     floatingActionButton: ComposableContent = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
-    backgroundColor: Color = FinanceManagerAppTheme.colorScheme.background,
+    backgroundColor: Color = CosmosAppTheme.colorScheme.background,
     contentColor: Color = contentColorFor(backgroundColor),
 
     // MyScaffoldContentWrapper

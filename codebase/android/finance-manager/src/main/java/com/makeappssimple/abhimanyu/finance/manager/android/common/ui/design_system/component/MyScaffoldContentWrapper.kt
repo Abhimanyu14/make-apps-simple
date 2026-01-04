@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ColumnScopedComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 internal fun MyScaffoldContentWrapper(
@@ -39,7 +39,7 @@ internal fun MyScaffoldContentWrapper(
     Column(
         modifier = modifier
             .background(
-                color = FinanceManagerAppTheme.colorScheme.background,
+                color = CosmosAppTheme.colorScheme.background,
             )
             .fillMaxSize()
             .conditionalClickable(

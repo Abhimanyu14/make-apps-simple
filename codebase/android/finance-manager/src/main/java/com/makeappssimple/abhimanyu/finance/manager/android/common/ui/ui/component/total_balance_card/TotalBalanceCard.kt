@@ -38,10 +38,10 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_TOTAL_BALANCE_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUI
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIEvent
@@ -96,10 +96,10 @@ private fun TotalBalanceCardUI(
                 vertical = 16.dp,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.medium,
+                shape = CosmosAppTheme.shapes.medium,
             )
             .background(
-                color = FinanceManagerAppTheme.colorScheme.tertiary,
+                color = CosmosAppTheme.colorScheme.tertiary,
             )
             .conditionalClickable(
                 onClick = if (data.isClickable) {
@@ -121,9 +121,9 @@ private fun TotalBalanceCardUI(
                 stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_total_balance_card_title,
                 ),
-                style = FinanceManagerAppTheme.typography.displaySmall
+                style = CosmosAppTheme.typography.displaySmall
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onTertiary,
+                        color = CosmosAppTheme.colorScheme.onTertiary,
                         textAlign = TextAlign.Center,
                     ),
             )
@@ -135,9 +135,9 @@ private fun TotalBalanceCardUI(
                         value = data.totalBalanceAmount,
                     ).toDefaultString(),
                 ),
-                style = FinanceManagerAppTheme.typography.displayLarge
+                style = CosmosAppTheme.typography.displayLarge
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onTertiary,
+                        color = CosmosAppTheme.colorScheme.onTertiary,
                         textAlign = TextAlign.Center,
                     ),
             )
@@ -150,7 +150,7 @@ private fun TotalBalanceCardUI(
             ) {
                 CosmosIcon(
                     iconResource = CosmosIcons.Lock,
-                    tint = FinanceManagerAppTheme.colorScheme.onTertiary,
+                    tint = CosmosAppTheme.colorScheme.onTertiary,
                     modifier = Modifier
                         .padding(
                             all = 2.dp,
@@ -163,10 +163,10 @@ private fun TotalBalanceCardUI(
                             value = data.totalMinimumBalanceAmount,
                         ).toDefaultString(),
                     ),
-                    style = FinanceManagerAppTheme.typography.bodySmall
+                    style = CosmosAppTheme.typography.bodySmall
                         .copy(
                             fontWeight = FontWeight.Bold,
-                            color = FinanceManagerAppTheme.colorScheme.onTertiary,
+                            color = CosmosAppTheme.colorScheme.onTertiary,
                             textAlign = TextAlign.End,
                         ),
                 )
@@ -175,8 +175,8 @@ private fun TotalBalanceCardUI(
             ChipUI(
                 modifier = Modifier,
                 data = ChipUIData(
-                    borderColor = FinanceManagerAppTheme.colorScheme.onTertiary,
-                    textColor = FinanceManagerAppTheme.colorScheme.onTertiary,
+                    borderColor = CosmosAppTheme.colorScheme.onTertiary,
+                    textColor = CosmosAppTheme.colorScheme.onTertiary,
                     stringResource = CosmosStringResource.Id(
                         id = R.string.finance_manager_total_balance_card_view_balance,
                     ),
@@ -208,7 +208,7 @@ private fun TotalBalanceCardLoadingUI(
                 vertical = TotalBalanceCardConstants.loadingUIVerticalPadding,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.medium,
+                shape = CosmosAppTheme.shapes.medium,
             )
             .shimmer(),
     )

@@ -44,13 +44,13 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spac
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.event.EditTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.EditTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.MyTimePicker
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.MyTimePickerData
@@ -327,9 +327,9 @@ internal fun EditTransactionScreenUI(
                                             uiState.amountErrorText,
                                         ),
                                     ),
-                                    style = FinanceManagerAppTheme.typography.bodySmall
+                                    style = CosmosAppTheme.typography.bodySmall
                                         .copy(
-                                            color = FinanceManagerAppTheme.colorScheme.error,
+                                            color = CosmosAppTheme.colorScheme.error,
                                         ),
                                 )
                             }

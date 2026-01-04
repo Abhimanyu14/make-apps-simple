@@ -31,8 +31,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumListItemHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -63,9 +64,9 @@ internal fun TransactionForListItem(
             stringResource = CosmosStringResource.Text(
                 text = data.title,
             ),
-            style = FinanceManagerAppTheme.typography.bodyLarge
+            style = CosmosAppTheme.typography.bodyLarge
                 .copy(
-                    color = FinanceManagerAppTheme.colorScheme.onBackground,
+                    color = CosmosAppTheme.colorScheme.onBackground,
                 ),
         )
         if (data.isMoreOptionsIconButtonVisible) {
@@ -79,7 +80,7 @@ internal fun TransactionForListItem(
             ) {
                 CosmosIcon(
                     iconResource = CosmosIcons.MoreVert,
-                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                    tint = CosmosAppTheme.colorScheme.onBackground,
                 )
             }
         }

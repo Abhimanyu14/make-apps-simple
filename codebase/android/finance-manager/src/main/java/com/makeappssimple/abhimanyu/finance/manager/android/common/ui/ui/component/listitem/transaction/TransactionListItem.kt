@@ -39,8 +39,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.ExpandedListItemShape
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.MyExpandableItemIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.MyExpandableItemIconButtonData
@@ -109,7 +109,7 @@ private fun TransactionListItemUI(
                     shape = if (data.isExpanded) {
                         ExpandedListItemShape
                     } else {
-                        FinanceManagerAppTheme.shapes.large
+                        CosmosAppTheme.shapes.large
                     },
                 )
                 .conditionalClickable(
@@ -139,18 +139,18 @@ private fun TransactionListItemUI(
                 if (data.isSelected) {
                     CosmosIcon(
                         iconResource = CosmosIcons.CheckCircle,
-                        tint = FinanceManagerAppTheme.colorScheme.primary,
+                        tint = CosmosAppTheme.colorScheme.primary,
                     )
                 } else {
                     CosmosIcon(
                         iconResource = CosmosIcons.RadioButtonUnchecked,
-                        tint = FinanceManagerAppTheme.colorScheme.outline,
+                        tint = CosmosAppTheme.colorScheme.outline,
                     )
                 }
             } else {
                 MyEmojiCircle(
                     data = MyEmojiCircleData(
-                        backgroundColor = FinanceManagerAppTheme.colorScheme.outline,
+                        backgroundColor = CosmosAppTheme.colorScheme.outline,
                         emoji = data.emoji,
                     ),
                 )
@@ -177,9 +177,9 @@ private fun TransactionListItemUI(
                         ),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = FinanceManagerAppTheme.typography.headlineMedium
+                        style = CosmosAppTheme.typography.headlineMedium
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                color = CosmosAppTheme.colorScheme.onBackground,
                             ),
                     )
                     CosmosText(
@@ -191,7 +191,7 @@ private fun TransactionListItemUI(
                         stringResource = CosmosStringResource.Text(
                             text = data.amountText,
                         ),
-                        style = FinanceManagerAppTheme.typography.headlineMedium
+                        style = CosmosAppTheme.typography.headlineMedium
                             .copy(
                                 color = data.amountColor.composeColor,
                                 textAlign = TextAlign.End,
@@ -204,9 +204,9 @@ private fun TransactionListItemUI(
                     stringResource = CosmosStringResource.Text(
                         text = data.transactionForText,
                     ),
-                    style = FinanceManagerAppTheme.typography.bodySmall
+                    style = CosmosAppTheme.typography.bodySmall
                         .copy(
-                            color = FinanceManagerAppTheme.colorScheme.onBackground,
+                            color = CosmosAppTheme.colorScheme.onBackground,
                         ),
                 )
                 Row(
@@ -222,9 +222,9 @@ private fun TransactionListItemUI(
                         stringResource = CosmosStringResource.Text(
                             text = data.dateAndTimeText,
                         ),
-                        style = FinanceManagerAppTheme.typography.bodySmall
+                        style = CosmosAppTheme.typography.bodySmall
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                color = CosmosAppTheme.colorScheme.onBackground,
                             ),
                     )
                     CosmosText(
@@ -234,9 +234,9 @@ private fun TransactionListItemUI(
                                 weight = 1F,
                             ),
                         stringResource = accountTextStringResource,
-                        style = FinanceManagerAppTheme.typography.bodySmall
+                        style = CosmosAppTheme.typography.bodySmall
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                color = CosmosAppTheme.colorScheme.onBackground,
                                 textAlign = TextAlign.End,
                             ),
                     )
@@ -251,7 +251,7 @@ private fun TransactionListItemUI(
                     visible = data.isExpanded.not(),
                 ) {
                     HorizontalDivider(
-                        color = FinanceManagerAppTheme.colorScheme.outline,
+                        color = CosmosAppTheme.colorScheme.outline,
                         thickness = 0.5.dp,
                     )
                 }
@@ -261,7 +261,7 @@ private fun TransactionListItemUI(
             visible = data.isExpanded,
         ) {
             HorizontalDivider(
-                color = FinanceManagerAppTheme.colorScheme.outline,
+                color = CosmosAppTheme.colorScheme.outline,
                 thickness = 0.5.dp,
             )
             Row(

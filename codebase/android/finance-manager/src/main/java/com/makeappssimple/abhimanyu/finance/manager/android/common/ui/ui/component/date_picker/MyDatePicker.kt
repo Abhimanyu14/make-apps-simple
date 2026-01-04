@@ -33,8 +33,9 @@ import com.makeappssimple.abhimanyu.common.core.extensions.orZero
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -127,13 +128,13 @@ internal fun MyDatePicker(
                 }
             },
             colors = DatePickerDefaults.colors(
-                containerColor = FinanceManagerAppTheme.colorScheme.background,
+                containerColor = CosmosAppTheme.colorScheme.background,
             ),
         ) {
             DatePicker(
                 state = datePickerState,
                 colors = DatePickerDefaults.colors(
-                    containerColor = FinanceManagerAppTheme.colorScheme.background,
+                    containerColor = CosmosAppTheme.colorScheme.background,
                 ),
             )
         }

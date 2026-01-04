@@ -61,7 +61,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -137,9 +137,9 @@ private fun MySearchBarUI(
             .focusRequester(
                 focusRequester = focusRequester,
             ),
-        textStyle = FinanceManagerAppTheme.typography.bodyLarge
+        textStyle = CosmosAppTheme.typography.bodyLarge
             .copy(
-                color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                color = CosmosAppTheme.colorScheme.onPrimaryContainer,
             ),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search,
@@ -150,7 +150,7 @@ private fun MySearchBarUI(
             },
         ),
         singleLine = true,
-        cursorBrush = SolidColor(FinanceManagerAppTheme.colorScheme.primary),
+        cursorBrush = SolidColor(CosmosAppTheme.colorScheme.primary),
         decorationBox = {
             TextFieldDefaults.DecorationBox(
                 value = data.searchTextStringResource.text,
@@ -164,9 +164,9 @@ private fun MySearchBarUI(
                 placeholder = {
                     CosmosText(
                         stringResource = data.placeholderStringResource,
-                        style = FinanceManagerAppTheme.typography.headlineLarge
+                        style = CosmosAppTheme.typography.headlineLarge
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                                color = CosmosAppTheme.colorScheme.onPrimaryContainer,
                             ),
                     )
                 },
@@ -211,9 +211,9 @@ private fun MySearchBarUI(
                 },
                 shape = CircleShape,
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
-                    unfocusedContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
-                    disabledContainerColor = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                    focusedContainerColor = CosmosAppTheme.colorScheme.primaryContainer,
+                    unfocusedContainerColor = CosmosAppTheme.colorScheme.primaryContainer,
+                    disabledContainerColor = CosmosAppTheme.colorScheme.primaryContainer,
                     focusedIndicatorColor = Transparent,
                     unfocusedIndicatorColor = Transparent,
                 ),
@@ -233,7 +233,7 @@ private fun MySearchBarUI(
                                 shape = CircleShape,
                             )
                             .background(
-                                color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                                color = CosmosAppTheme.colorScheme.primaryContainer,
                             )
                     )
                 },
@@ -294,7 +294,7 @@ private fun MySearchBarUIV2(
                 shape = CircleShape,
             )
             .background(
-                color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                color = CosmosAppTheme.colorScheme.primaryContainer,
             )
             .padding(
                 start = 16.dp,
@@ -328,9 +328,9 @@ private fun MySearchBarUIV2(
                     .padding(
                         horizontal = 8.dp,
                     ),
-                textStyle = FinanceManagerAppTheme.typography.bodyLarge
+                textStyle = CosmosAppTheme.typography.bodyLarge
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                        color = CosmosAppTheme.colorScheme.onPrimaryContainer,
                     ),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Search,
@@ -341,15 +341,15 @@ private fun MySearchBarUIV2(
                     handleEvent(MySearchBarEventV2.OnSearch)
                 },
                 cursorBrush = SolidColor(
-                    value = FinanceManagerAppTheme.colorScheme.primary,
+                    value = CosmosAppTheme.colorScheme.primary,
                 ),
             )
             if (data.searchTextFieldState.text.isEmpty()) {
                 CosmosText(
                     stringResource = data.placeholderStringResource,
-                    style = FinanceManagerAppTheme.typography.bodyLarge
+                    style = CosmosAppTheme.typography.bodyLarge
                         .copy(
-                            color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                            color = CosmosAppTheme.colorScheme.onPrimaryContainer,
                         ),
                     modifier = Modifier
                         .padding(

@@ -53,6 +53,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.areFiltersSelected
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_TRANSACTIONS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_TRANSACTIONS
@@ -62,7 +63,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetShape
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
@@ -270,7 +271,7 @@ internal fun TransactionsScreenUI(
                         ) {
                             CosmosIcon(
                                 iconResource = CosmosIcons.MoreVert,
-                                tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                                tint = CosmosAppTheme.colorScheme.onBackground,
                             )
                         }
                     },
@@ -285,9 +286,9 @@ internal fun TransactionsScreenUI(
                                     uiState.selectedTransactions.size,
                                 ),
                             ),
-                            style = FinanceManagerAppTheme.typography.titleLarge
+                            style = CosmosAppTheme.typography.titleLarge
                                 .copy(
-                                    color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                    color = CosmosAppTheme.colorScheme.onBackground,
                                 ),
                         )
                     }
@@ -510,7 +511,7 @@ private fun StickyHeaderText(
     CosmosText(
         modifier = Modifier
             .background(
-                color = FinanceManagerAppTheme.colorScheme.background,
+                color = CosmosAppTheme.colorScheme.background,
             )
             .fillMaxWidth()
             .padding(
@@ -522,9 +523,9 @@ private fun StickyHeaderText(
         stringResource = CosmosStringResource.Text(
             text = text,
         ),
-        style = FinanceManagerAppTheme.typography.headlineSmall
+        style = CosmosAppTheme.typography.headlineSmall
             .copy(
-                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                color = CosmosAppTheme.colorScheme.onBackground,
             ),
     )
 }

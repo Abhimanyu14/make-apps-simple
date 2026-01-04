@@ -25,7 +25,7 @@ import androidx.compose.ui.draw.clip
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
 internal fun MyExpandableItemIconButton(
@@ -52,19 +52,19 @@ internal fun MyExpandableItemIconButton(
         CosmosIcon(
             iconResource = data.iconResource,
             tint = if (data.isEnabled) {
-                FinanceManagerAppTheme.colorScheme.onSurfaceVariant
+                CosmosAppTheme.colorScheme.onSurfaceVariant
             } else {
-                FinanceManagerAppTheme.colorScheme.surfaceVariant
+                CosmosAppTheme.colorScheme.surfaceVariant
             },
         )
         CosmosText(
             stringResource = data.labelStringResource,
-            style = FinanceManagerAppTheme.typography.labelMedium
+            style = CosmosAppTheme.typography.labelMedium
                 .copy(
                     color = if (data.isEnabled) {
-                        FinanceManagerAppTheme.colorScheme.onSurfaceVariant
+                        CosmosAppTheme.colorScheme.onSurfaceVariant
                     } else {
-                        FinanceManagerAppTheme.colorScheme.surfaceVariant
+                        CosmosAppTheme.colorScheme.surfaceVariant
                     },
                 ),
         )

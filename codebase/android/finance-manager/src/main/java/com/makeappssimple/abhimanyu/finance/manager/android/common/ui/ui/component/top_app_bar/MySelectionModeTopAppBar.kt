@@ -27,9 +27,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.butt
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.RowScopedComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -65,13 +65,13 @@ internal fun MySelectionModeTopAppBarUI(
             ) {
                 CosmosIcon(
                     iconResource = CosmosIcons.Close,
-                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                    tint = CosmosAppTheme.colorScheme.onBackground,
                 )
             }
         },
         actions = appBarActions,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = FinanceManagerAppTheme.colorScheme.background,
+            containerColor = CosmosAppTheme.colorScheme.background,
         ),
         modifier = modifier,
     )

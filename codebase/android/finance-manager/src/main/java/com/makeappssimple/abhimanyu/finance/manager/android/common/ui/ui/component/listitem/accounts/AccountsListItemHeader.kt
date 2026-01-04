@@ -29,7 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 private object AccountsListItemHeaderConstants {
@@ -62,7 +62,7 @@ private fun AccountsListItemHeaderUI(
         modifier = modifier
             .fillMaxWidth()
             .clip(
-                shape = FinanceManagerAppTheme.shapes.large,
+                shape = CosmosAppTheme.shapes.large,
             )
             .padding(
                 start = 16.dp,
@@ -79,9 +79,9 @@ private fun AccountsListItemHeaderUI(
             stringResource = CosmosStringResource.Text(
                 text = data.name,
             ),
-            style = FinanceManagerAppTheme.typography.headlineMedium
+            style = CosmosAppTheme.typography.headlineMedium
                 .copy(
-                    color = FinanceManagerAppTheme.colorScheme.onBackground,
+                    color = CosmosAppTheme.colorScheme.onBackground,
                 ),
         )
         Spacer(
@@ -95,9 +95,9 @@ private fun AccountsListItemHeaderUI(
                 stringResource = CosmosStringResource.Text(
                     text = data.balance,
                 ),
-                style = FinanceManagerAppTheme.typography.headlineMedium
+                style = CosmosAppTheme.typography.headlineMedium
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onBackground,
+                        color = CosmosAppTheme.colorScheme.onBackground,
                     ),
             )
         }
@@ -121,7 +121,7 @@ internal fun AccountsListItemHeaderLoadingUI(
                 bottom = AccountsListItemHeaderConstants.loadingUIBottomPadding,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.small,
+                shape = CosmosAppTheme.shapes.small,
             )
             .shimmer(),
     )

@@ -31,7 +31,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cond
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 
 @Immutable
 internal data class MyBottomSheetListItemData(
@@ -68,7 +69,7 @@ internal fun MyBottomSheetListItem(
         data.iconResource?.let {
             CosmosIcon(
                 iconResource = data.iconResource,
-                tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                tint = CosmosAppTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .padding(
                         end = 12.dp,
@@ -78,9 +79,9 @@ internal fun MyBottomSheetListItem(
         CosmosText(
             modifier = Modifier,
             stringResource = data.stringResource,
-            style = FinanceManagerAppTheme.typography.headlineMedium
+            style = CosmosAppTheme.typography.headlineMedium
                 .copy(
-                    color = FinanceManagerAppTheme.colorScheme.onBackground,
+                    color = CosmosAppTheme.colorScheme.onBackground,
                 ),
         )
     }

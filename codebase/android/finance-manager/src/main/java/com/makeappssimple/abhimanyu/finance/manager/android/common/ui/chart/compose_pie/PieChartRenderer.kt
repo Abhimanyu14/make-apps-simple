@@ -30,7 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.util.fastForEachIndexed
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
 import kotlin.math.absoluteValue
@@ -50,7 +51,7 @@ internal fun PieChartRenderer(
     entryColors: List<MyColor>,
     animate: Boolean,
 ) {
-    val emptyChartColor = FinanceManagerAppTheme.colorScheme.surfaceVariant
+    val emptyChartColor = CosmosAppTheme.colorScheme.surfaceVariant
     var animationRan by rememberSaveable(
         fractions,
         animate

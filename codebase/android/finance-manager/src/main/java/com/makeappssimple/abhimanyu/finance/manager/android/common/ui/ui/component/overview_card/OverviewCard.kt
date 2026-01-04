@@ -41,9 +41,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_OVERVIEW_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.ComposePieChart
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -134,7 +134,7 @@ private fun OverviewCardUI(
                 vertical = 16.dp,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.medium,
+                shape = CosmosAppTheme.shapes.medium,
             )
             .conditionalClickable(
                 onClick = {
@@ -147,7 +147,7 @@ private fun OverviewCardUI(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                    color = CosmosAppTheme.colorScheme.primaryContainer,
                 )
                 .padding(
                     all = 12.dp,
@@ -197,7 +197,7 @@ private fun OverviewCardUI(
                 ) {
                     CosmosIcon(
                         iconResource = CosmosIcons.ChevronLeft,
-                        tint = FinanceManagerAppTheme.colorScheme.primary,
+                        tint = CosmosAppTheme.colorScheme.primary,
                     )
                 }
                 CosmosText(
@@ -212,9 +212,9 @@ private fun OverviewCardUI(
                     stringResource = CosmosStringResource.Text(
                         text = data.title,
                     ),
-                    style = FinanceManagerAppTheme.typography.labelLarge
+                    style = CosmosAppTheme.typography.labelLarge
                         .copy(
-                            color = FinanceManagerAppTheme.colorScheme.onBackground,
+                            color = CosmosAppTheme.colorScheme.onBackground,
                             textAlign = TextAlign.Center,
                         ),
                 )
@@ -232,7 +232,7 @@ private fun OverviewCardUI(
                 ) {
                     CosmosIcon(
                         iconResource = CosmosIcons.ChevronRight,
-                        tint = FinanceManagerAppTheme.colorScheme.primary,
+                        tint = CosmosAppTheme.colorScheme.primary,
                     )
                 }
             }
@@ -263,7 +263,7 @@ private fun OverviewCardLoadingUI(
                 vertical = 16.dp,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.medium,
+                shape = CosmosAppTheme.shapes.medium,
             )
             .shimmer(),
     )

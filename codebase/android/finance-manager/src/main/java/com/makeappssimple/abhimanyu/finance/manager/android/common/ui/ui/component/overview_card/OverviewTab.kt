@@ -57,7 +57,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 
 private val overviewTabMinimumWidth = 64.dp
 private val overviewTextHorizontalPadding = 12.dp
@@ -69,7 +70,7 @@ internal fun OverviewTab(
     data: OverviewTabData,
     handleEvent: (event: OverviewTabEvent) -> Unit = {},
 ) {
-    val textStyle = FinanceManagerAppTheme.typography.labelLarge
+    val textStyle = CosmosAppTheme.typography.labelLarge
 
     Box(
         modifier = modifier
@@ -77,7 +78,7 @@ internal fun OverviewTab(
                 shape = CircleShape,
             )
             .background(
-                color = FinanceManagerAppTheme.colorScheme.background,
+                color = CosmosAppTheme.colorScheme.background,
             )
             .height(
                 intrinsicSize = IntrinsicSize.Min,
@@ -120,8 +121,8 @@ internal fun OverviewTabText(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val defaultTextColor = FinanceManagerAppTheme.colorScheme.onBackground
-    val selectedTextColor = FinanceManagerAppTheme.colorScheme.onPrimary
+    val defaultTextColor = CosmosAppTheme.colorScheme.onBackground
+    val selectedTextColor = CosmosAppTheme.colorScheme.onPrimary
     val targetValue = remember(isSelected) {
         if (isSelected) {
             selectedTextColor
@@ -184,7 +185,7 @@ private fun OverviewTabIndicator(
 ) {
     val density = LocalDensity.current
     val textMeasurer = rememberTextMeasurer()
-    val indicatorColor = FinanceManagerAppTheme.colorScheme.primary
+    val indicatorColor = CosmosAppTheme.colorScheme.primary
 
     val tabWidths = remember(
         key1 = data.items,
@@ -277,12 +278,12 @@ private fun OverviewSelectionPreview() {
             value = 0,
         )
     }
-    FinanceManagerAppTheme {
+    CosmosAppTheme {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .background(
-                    color = FinanceManagerAppTheme.colorScheme.onBackground,
+                    color = CosmosAppTheme.colorScheme.onBackground,
                 )
                 .fillMaxSize(),
         ) {

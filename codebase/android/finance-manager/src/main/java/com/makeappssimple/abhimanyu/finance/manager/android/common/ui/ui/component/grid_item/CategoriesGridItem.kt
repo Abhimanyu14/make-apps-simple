@@ -31,8 +31,9 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.EmojiCircleSize
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircleData
@@ -58,7 +59,7 @@ internal fun CategoriesGridItem(
             )
             .background(
                 color = if (isSelected) {
-                    FinanceManagerAppTheme.colorScheme.primaryContainer
+                    CosmosAppTheme.colorScheme.primaryContainer
                 } else {
                     Color.Transparent
                 },
@@ -85,12 +86,12 @@ internal fun CategoriesGridItem(
             ),
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
-            style = FinanceManagerAppTheme.typography.headlineMedium
+            style = CosmosAppTheme.typography.headlineMedium
                 .copy(
                     color = if (isSelected) {
-                        FinanceManagerAppTheme.colorScheme.primary
+                        CosmosAppTheme.colorScheme.primary
                     } else {
-                        FinanceManagerAppTheme.colorScheme.onBackground
+                        CosmosAppTheme.colorScheme.onBackground
                     },
                     textAlign = TextAlign.Center,
                 ),

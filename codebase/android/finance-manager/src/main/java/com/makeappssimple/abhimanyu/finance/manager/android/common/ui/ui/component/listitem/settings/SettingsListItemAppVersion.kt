@@ -23,7 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 
 @Composable
 internal fun SettingsListItemAppVersion(
@@ -40,9 +41,9 @@ internal fun SettingsListItemAppVersion(
                 bottom = 8.dp,
             ),
         stringResource = data.appVersionStringResource,
-        style = FinanceManagerAppTheme.typography.headlineLarge
+        style = CosmosAppTheme.typography.headlineLarge
             .copy(
-                color = FinanceManagerAppTheme.colorScheme.primary,
+                color = CosmosAppTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
             ),
     )

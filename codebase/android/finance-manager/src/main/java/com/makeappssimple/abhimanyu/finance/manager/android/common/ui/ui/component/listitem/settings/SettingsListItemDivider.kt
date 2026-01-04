@@ -21,7 +21,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
 internal fun SettingsListItemDivider(
@@ -33,7 +33,7 @@ internal fun SettingsListItemDivider(
                 bottom = 24.dp,
                 start = 16.dp,
             ),
-        color = FinanceManagerAppTheme.colorScheme.outline,
+        color = CosmosAppTheme.colorScheme.outline,
         thickness = 1.dp,
     )
 }

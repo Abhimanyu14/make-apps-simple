@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_sy
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 internal enum class MyColor {
     PRIMARY,
@@ -61,106 +62,106 @@ internal val MyColor.composeColor: Color
     @Composable
     get() = when (this) {
         MyColor.PRIMARY -> {
-            FinanceManagerAppTheme.colorScheme.primary
+            CosmosAppTheme.colorScheme.primary
         }
 
         MyColor.ON_PRIMARY -> {
-            FinanceManagerAppTheme.colorScheme.onPrimary
+            CosmosAppTheme.colorScheme.onPrimary
         }
 
         MyColor.PRIMARY_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.primaryContainer
+            CosmosAppTheme.colorScheme.primaryContainer
         }
 
         MyColor.ON_PRIMARY_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.onPrimaryContainer
+            CosmosAppTheme.colorScheme.onPrimaryContainer
         }
 
         MyColor.INVERSE_PRIMARY -> {
-            FinanceManagerAppTheme.colorScheme.inversePrimary
+            CosmosAppTheme.colorScheme.inversePrimary
         }
 
         MyColor.SECONDARY -> {
-            FinanceManagerAppTheme.colorScheme.secondary
+            CosmosAppTheme.colorScheme.secondary
         }
 
         MyColor.ON_SECONDARY -> {
-            FinanceManagerAppTheme.colorScheme.onSecondary
+            CosmosAppTheme.colorScheme.onSecondary
         }
 
         MyColor.SECONDARY_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.secondaryContainer
+            CosmosAppTheme.colorScheme.secondaryContainer
         }
 
         MyColor.ON_SECONDARY_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.onSecondaryContainer
+            CosmosAppTheme.colorScheme.onSecondaryContainer
         }
 
         MyColor.TERTIARY -> {
-            FinanceManagerAppTheme.colorScheme.tertiary
+            CosmosAppTheme.colorScheme.tertiary
         }
 
         MyColor.ON_TERTIARY -> {
-            FinanceManagerAppTheme.colorScheme.onTertiary
+            CosmosAppTheme.colorScheme.onTertiary
         }
 
         MyColor.TERTIARY_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.tertiaryContainer
+            CosmosAppTheme.colorScheme.tertiaryContainer
         }
 
         MyColor.ON_TERTIARY_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.onTertiaryContainer
+            CosmosAppTheme.colorScheme.onTertiaryContainer
         }
 
         MyColor.BACKGROUND -> {
-            FinanceManagerAppTheme.colorScheme.background
+            CosmosAppTheme.colorScheme.background
         }
 
         MyColor.ON_BACKGROUND -> {
-            FinanceManagerAppTheme.colorScheme.onBackground
+            CosmosAppTheme.colorScheme.onBackground
         }
 
         MyColor.SURFACE -> {
-            FinanceManagerAppTheme.colorScheme.surface
+            CosmosAppTheme.colorScheme.surface
         }
 
         MyColor.ON_SURFACE -> {
-            FinanceManagerAppTheme.colorScheme.onSurface
+            CosmosAppTheme.colorScheme.onSurface
         }
 
         MyColor.SURFACE_VARIANT -> {
-            FinanceManagerAppTheme.colorScheme.surfaceVariant
+            CosmosAppTheme.colorScheme.surfaceVariant
         }
 
         MyColor.ON_SURFACE_VARIANT -> {
-            FinanceManagerAppTheme.colorScheme.onSurfaceVariant
+            CosmosAppTheme.colorScheme.onSurfaceVariant
         }
 
         MyColor.INVERSE_SURFACE -> {
-            FinanceManagerAppTheme.colorScheme.inverseSurface
+            CosmosAppTheme.colorScheme.inverseSurface
         }
 
         MyColor.INVERSE_ON_SURFACE -> {
-            FinanceManagerAppTheme.colorScheme.inverseOnSurface
+            CosmosAppTheme.colorScheme.inverseOnSurface
         }
 
         MyColor.ERROR -> {
-            FinanceManagerAppTheme.colorScheme.error
+            CosmosAppTheme.colorScheme.error
         }
 
         MyColor.ON_ERROR -> {
-            FinanceManagerAppTheme.colorScheme.onError
+            CosmosAppTheme.colorScheme.onError
         }
 
         MyColor.ERROR_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.errorContainer
+            CosmosAppTheme.colorScheme.errorContainer
         }
 
         MyColor.ON_ERROR_CONTAINER -> {
-            FinanceManagerAppTheme.colorScheme.onErrorContainer
+            CosmosAppTheme.colorScheme.onErrorContainer
         }
 
         MyColor.OUTLINE -> {
-            FinanceManagerAppTheme.colorScheme.outline
+            CosmosAppTheme.colorScheme.outline
         }
     }

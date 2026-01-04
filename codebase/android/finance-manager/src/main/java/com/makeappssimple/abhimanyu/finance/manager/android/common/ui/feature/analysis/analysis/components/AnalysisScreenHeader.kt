@@ -25,9 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.event.AnalysisScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.action_button.ActionButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.action_button.ActionButtonData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.action_button.ActionButtonEvent
@@ -45,7 +45,7 @@ internal fun AnalysisScreenHeader(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .background(
-                color = FinanceManagerAppTheme.colorScheme.background,
+                color = CosmosAppTheme.colorScheme.background,
             ),
     ) {
         MyHorizontalScrollingRadioGroup(

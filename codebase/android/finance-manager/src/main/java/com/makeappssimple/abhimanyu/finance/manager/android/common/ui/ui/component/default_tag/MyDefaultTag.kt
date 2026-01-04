@@ -25,7 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object MyDefaultTagConstants {
@@ -43,7 +44,7 @@ internal fun MyDefaultTag(
                 shape = CircleShape,
             )
             .background(
-                color = FinanceManagerAppTheme.colorScheme.primary,
+                color = CosmosAppTheme.colorScheme.primary,
             )
             .padding(
                 horizontal = MyDefaultTagConstants.paddingHorizontal,
@@ -52,9 +53,9 @@ internal fun MyDefaultTag(
         stringResource = CosmosStringResource.Id(
             id = R.string.finance_manager_default_tag,
         ),
-        style = FinanceManagerAppTheme.typography.labelSmall
+        style = CosmosAppTheme.typography.labelSmall
             .copy(
-                color = FinanceManagerAppTheme.colorScheme.onPrimary,
+                color = CosmosAppTheme.colorScheme.onPrimary,
             ),
     )
 }

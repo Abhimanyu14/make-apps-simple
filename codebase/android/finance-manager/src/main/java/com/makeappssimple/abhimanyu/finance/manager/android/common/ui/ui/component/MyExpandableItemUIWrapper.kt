@@ -25,8 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ColumnScopedComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Composable
 internal fun MyExpandableItemUIWrapper(
@@ -42,13 +42,13 @@ internal fun MyExpandableItemUIWrapper(
                 horizontal = 8.dp,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.large,
+                shape = CosmosAppTheme.shapes.large,
             )
             .background(
                 color = if (isExpanded || isSelected) {
-                    FinanceManagerAppTheme.colorScheme.primaryContainer
+                    CosmosAppTheme.colorScheme.primaryContainer
                 } else {
-                    FinanceManagerAppTheme.colorScheme.background
+                    CosmosAppTheme.colorScheme.background
                 },
             )
             .animateContentSize(),

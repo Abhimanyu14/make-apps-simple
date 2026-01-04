@@ -28,7 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 @Composable
@@ -64,8 +64,8 @@ private fun SaveButtonUI(
         enabled = data.isEnabled,
         colors = ButtonDefaults
             .buttonColors(
-                containerColor = FinanceManagerAppTheme.colorScheme.primary,
-                contentColor = FinanceManagerAppTheme.colorScheme.onPrimary,
+                containerColor = CosmosAppTheme.colorScheme.primary,
+                contentColor = CosmosAppTheme.colorScheme.onPrimary,
             ),
     ) {
         CosmosText(
@@ -74,7 +74,7 @@ private fun SaveButtonUI(
                     minWidth = 80.dp,
                 ),
             stringResource = data.stringResource,
-            style = FinanceManagerAppTheme.typography.labelLarge
+            style = CosmosAppTheme.typography.labelLarge
                 .copy(
                     textAlign = TextAlign.Center,
                 ),

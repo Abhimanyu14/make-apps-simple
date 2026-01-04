@@ -29,8 +29,9 @@ import androidx.compose.ui.util.fastForEachIndexed
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosHorizontalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNonFillingVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartLegendItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
 
 @Composable
@@ -55,9 +56,9 @@ internal fun PieChartLegend(
                     )
                     CosmosText(
                         stringResource = item.stringResource,
-                        style = FinanceManagerAppTheme.typography.headlineLarge
+                        style = CosmosAppTheme.typography.headlineLarge
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                color = CosmosAppTheme.colorScheme.onBackground,
                                 textAlign = TextAlign.Center,
                             ),
                     )

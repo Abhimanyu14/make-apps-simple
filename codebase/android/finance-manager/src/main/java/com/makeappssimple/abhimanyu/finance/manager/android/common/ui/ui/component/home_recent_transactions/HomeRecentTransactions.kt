@@ -29,7 +29,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Composable
@@ -70,9 +71,9 @@ internal fun HomeRecentTransactions(
             stringResource = CosmosStringResource.Id(
                 id = R.string.finance_manager_screen_home_recent_transactions,
             ),
-            style = FinanceManagerAppTheme.typography.headlineLarge
+            style = CosmosAppTheme.typography.headlineLarge
                 .copy(
-                    color = FinanceManagerAppTheme.colorScheme.onBackground,
+                    color = CosmosAppTheme.colorScheme.onBackground,
                 ),
             modifier = Modifier
                 .weight(
@@ -84,9 +85,9 @@ internal fun HomeRecentTransactions(
                 stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_screen_home_view_all_transactions,
                 ),
-                style = FinanceManagerAppTheme.typography.headlineMedium
+                style = CosmosAppTheme.typography.headlineMedium
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.primary,
+                        color = CosmosAppTheme.colorScheme.primary,
                     ),
             )
         }

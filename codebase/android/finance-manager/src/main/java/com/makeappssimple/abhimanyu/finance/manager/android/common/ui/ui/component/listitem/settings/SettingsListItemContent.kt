@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.toggle.CosmosToggle
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
 internal fun SettingsListItemContent(
@@ -38,7 +38,7 @@ internal fun SettingsListItemContent(
             {
                 CosmosIcon(
                     iconResource = data.iconResource,
-                    tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                    tint = CosmosAppTheme.colorScheme.onBackground,
                 )
             }
         },
@@ -47,9 +47,9 @@ internal fun SettingsListItemContent(
                 modifier = Modifier
                     .fillMaxWidth(),
                 stringResource = data.stringResource,
-                style = FinanceManagerAppTheme.typography.bodyLarge
+                style = CosmosAppTheme.typography.bodyLarge
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onBackground,
+                        color = CosmosAppTheme.colorScheme.onBackground,
                     ),
             )
         },

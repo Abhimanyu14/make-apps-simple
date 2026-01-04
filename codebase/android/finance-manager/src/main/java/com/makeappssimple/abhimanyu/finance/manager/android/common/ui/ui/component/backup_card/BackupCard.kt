@@ -35,7 +35,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -70,7 +70,7 @@ private fun BackupCardUI(
                 vertical = 4.dp,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.medium,
+                shape = CosmosAppTheme.shapes.medium,
             )
             .conditionalClickable(
                 onClick = {
@@ -82,7 +82,7 @@ private fun BackupCardUI(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                    color = CosmosAppTheme.colorScheme.primaryContainer,
                 )
                 .padding(
                     all = 16.dp,
@@ -91,15 +91,15 @@ private fun BackupCardUI(
         ) {
             CosmosIcon(
                 iconResource = CosmosIcons.Backup,
-                tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                tint = CosmosAppTheme.colorScheme.onBackground,
             )
             CosmosText(
                 stringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_backup_card,
                 ),
-                style = FinanceManagerAppTheme.typography.bodyLarge
+                style = CosmosAppTheme.typography.bodyLarge
                     .copy(
-                        color = FinanceManagerAppTheme.colorScheme.onBackground,
+                        color = CosmosAppTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.Bold,
                     ),
                 modifier = Modifier
@@ -125,7 +125,7 @@ private fun BackupCardLoadingUI(
                 ),
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.medium,
+                shape = CosmosAppTheme.shapes.medium,
             )
             .shimmer(),
     )

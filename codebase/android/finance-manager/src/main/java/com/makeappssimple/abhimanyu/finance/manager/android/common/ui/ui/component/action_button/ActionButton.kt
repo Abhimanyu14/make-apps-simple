@@ -28,8 +28,9 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.legend.Dot
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 private object ActionButtonConstants {
@@ -71,13 +72,13 @@ private fun ActionButtonUI(
         Box {
             CosmosIcon(
                 iconResource = data.iconResource,
-                tint = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
+                tint = CosmosAppTheme.colorScheme.onPrimaryContainer,
                 contentDescriptionStringResource = CosmosStringResource.Id(
                     id = data.contentDescriptionStringResourceId,
                 ),
                 modifier = Modifier
                     .background(
-                        color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                        color = CosmosAppTheme.colorScheme.primaryContainer,
                     )
                     .padding(
                         all = 8.dp,
@@ -92,7 +93,7 @@ private fun ActionButtonUI(
                         .padding(
                             all = 8.dp,
                         ),
-                    color = FinanceManagerAppTheme.colorScheme.error,
+                    color = CosmosAppTheme.colorScheme.error,
                 )
             }
         }

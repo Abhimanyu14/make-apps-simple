@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
 internal fun SettingsListItemHeader(
@@ -41,9 +41,9 @@ internal fun SettingsListItemHeader(
         stringResource = CosmosStringResource.Id(
             id = data.textStringResourceId,
         ),
-        style = FinanceManagerAppTheme.typography.headlineMedium
+        style = CosmosAppTheme.typography.headlineMedium
             .copy(
-                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                color = CosmosAppTheme.colorScheme.onBackground,
             ),
     )
 }

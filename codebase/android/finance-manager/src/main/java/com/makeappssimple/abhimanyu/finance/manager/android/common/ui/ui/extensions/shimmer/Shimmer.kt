@@ -36,7 +36,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -90,19 +91,19 @@ internal fun Modifier.shimmer(
 internal fun rememberShimmerBrush(
     isShimmerVisible: Boolean = true,
     targetValue: Float,
-    backgroundColor: Color? = FinanceManagerAppTheme.colorScheme.surfaceVariant,
-    shimmerColor: Color? = FinanceManagerAppTheme.colorScheme.primaryContainer,
+    backgroundColor: Color? = CosmosAppTheme.colorScheme.surfaceVariant,
+    shimmerColor: Color? = CosmosAppTheme.colorScheme.primaryContainer,
 ): State<Brush> {
     val shimmerColors = listOf(
-        (backgroundColor ?: FinanceManagerAppTheme.colorScheme.surfaceVariant)
+        (backgroundColor ?: CosmosAppTheme.colorScheme.surfaceVariant)
             .copy(
                 alpha = 0.4F,
             ),
-        (shimmerColor ?: FinanceManagerAppTheme.colorScheme.primaryContainer)
+        (shimmerColor ?: CosmosAppTheme.colorScheme.primaryContainer)
             .copy(
                 alpha = 0.8F,
             ),
-        (backgroundColor ?: FinanceManagerAppTheme.colorScheme.surfaceVariant)
+        (backgroundColor ?: CosmosAppTheme.colorScheme.surfaceVariant)
             .copy(
                 alpha = 0.4F,
             ),

@@ -22,7 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -35,8 +36,8 @@ internal fun MyTabRow(
     TabRow(
         selectedTabIndex = selectedTabIndex,
         modifier = modifier,
-        containerColor = FinanceManagerAppTheme.colorScheme.background,
-        contentColor = FinanceManagerAppTheme.colorScheme.primary,
+        containerColor = CosmosAppTheme.colorScheme.background,
+        contentColor = CosmosAppTheme.colorScheme.primary,
     ) {
         tabDataList.mapIndexed { index, tabData ->
             val isSelected = selectedTabIndex == index
@@ -51,8 +52,8 @@ internal fun MyTabRow(
                 onClick = {
                     updateSelectedTabIndex(index)
                 },
-                selectedContentColor = FinanceManagerAppTheme.colorScheme.primary,
-                unselectedContentColor = FinanceManagerAppTheme.colorScheme.primary,
+                selectedContentColor = CosmosAppTheme.colorScheme.primary,
+                unselectedContentColor = CosmosAppTheme.colorScheme.primary,
             )
         }
     }
@@ -65,12 +66,12 @@ private fun MyTabText(
 ) {
     CosmosText(
         stringResource = titleStringResource,
-        style = FinanceManagerAppTheme.typography.headlineLarge
+        style = CosmosAppTheme.typography.headlineLarge
             .copy(
                 color = if (isSelected) {
-                    FinanceManagerAppTheme.colorScheme.primary
+                    CosmosAppTheme.colorScheme.primary
                 } else {
-                    FinanceManagerAppTheme.colorScheme.onBackground
+                    CosmosAppTheme.colorScheme.onBackground
                 },
             ),
     )

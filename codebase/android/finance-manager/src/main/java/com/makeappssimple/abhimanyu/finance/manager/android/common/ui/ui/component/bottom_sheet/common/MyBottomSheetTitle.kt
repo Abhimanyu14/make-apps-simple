@@ -24,7 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 
 @Composable
 internal fun MyBottomSheetTitle(
@@ -35,7 +36,7 @@ internal fun MyBottomSheetTitle(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = FinanceManagerAppTheme.colorScheme.background,
+                color = CosmosAppTheme.colorScheme.background,
             )
             .padding(
                 all = 16.dp,
@@ -43,9 +44,9 @@ internal fun MyBottomSheetTitle(
         stringResource = CosmosStringResource.Id(
             id = data.textStringResourceId,
         ),
-        style = FinanceManagerAppTheme.typography.headlineLarge
+        style = CosmosAppTheme.typography.headlineLarge
             .copy(
-                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                color = CosmosAppTheme.colorScheme.onBackground,
             ),
     )
 }

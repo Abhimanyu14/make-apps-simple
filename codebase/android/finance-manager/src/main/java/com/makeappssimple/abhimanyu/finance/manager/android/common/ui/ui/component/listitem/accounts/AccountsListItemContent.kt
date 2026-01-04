@@ -44,8 +44,8 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cond
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumListItemHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.getLogoUrl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.default_tag.MyDefaultTag
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
@@ -118,7 +118,7 @@ internal fun AccountsListItemContentLoadingUI(
                 vertical = AccountsListItemContentConstants.loadingUIVerticalPadding,
             )
             .clip(
-                shape = FinanceManagerAppTheme.shapes.small,
+                shape = CosmosAppTheme.shapes.small,
             )
             .shimmer(),
     )
@@ -177,7 +177,7 @@ private fun AccountsListItemContentUI(
                         shape = CircleShape,
                     )
                     .background(
-                        color = FinanceManagerAppTheme.colorScheme.primaryContainer,
+                        color = CosmosAppTheme.colorScheme.primaryContainer,
                     )
                     .padding(
                         all = 4.dp,
@@ -187,7 +187,7 @@ private fun AccountsListItemContentUI(
             data.iconResource?.let {
                 CosmosIcon(
                     iconResource = data.iconResource,
-                    tint = FinanceManagerAppTheme.colorScheme.primary,
+                    tint = CosmosAppTheme.colorScheme.primary,
                     modifier = Modifier
                         .padding(
                             end = 8.dp,
@@ -203,12 +203,12 @@ private fun AccountsListItemContentUI(
             stringResource = CosmosStringResource.Text(
                 text = data.name,
             ),
-            style = FinanceManagerAppTheme.typography.headlineLarge
+            style = CosmosAppTheme.typography.headlineLarge
                 .copy(
                     color = if (data.isSelected) {
-                        FinanceManagerAppTheme.colorScheme.primary
+                        CosmosAppTheme.colorScheme.primary
                     } else {
-                        FinanceManagerAppTheme.colorScheme.onBackground
+                        CosmosAppTheme.colorScheme.onBackground
                     },
                 ),
         )
@@ -228,14 +228,14 @@ private fun AccountsListItemContentUI(
                 stringResource = CosmosStringResource.Text(
                     text = data.balance,
                 ),
-                style = FinanceManagerAppTheme.typography.headlineLarge
+                style = CosmosAppTheme.typography.headlineLarge
                     .copy(
                         color = if (data.isSelected) {
-                            FinanceManagerAppTheme.colorScheme.primary
+                            CosmosAppTheme.colorScheme.primary
                         } else if (data.isLowBalance) {
-                            FinanceManagerAppTheme.colorScheme.error
+                            CosmosAppTheme.colorScheme.error
                         } else {
-                            FinanceManagerAppTheme.colorScheme.onBackground
+                            CosmosAppTheme.colorScheme.onBackground
                         },
                     ),
             )
@@ -246,7 +246,7 @@ private fun AccountsListItemContentUI(
                 contentDescriptionStringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_account_list_item_more_options_content_description,
                 ),
-                tint = FinanceManagerAppTheme.colorScheme.onBackground,
+                tint = CosmosAppTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .padding(
                         start = 8.dp,

@@ -36,7 +36,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.emoji_circle.MyEmojiCircleData
 
@@ -50,7 +51,7 @@ internal fun AnalysisListItem(
         modifier = modifier
             .fillMaxWidth()
             .clip(
-                shape = FinanceManagerAppTheme.shapes.large,
+                shape = CosmosAppTheme.shapes.large,
             )
             .padding(
                 start = 16.dp,
@@ -61,7 +62,7 @@ internal fun AnalysisListItem(
     ) {
         MyEmojiCircle(
             data = MyEmojiCircleData(
-                backgroundColor = FinanceManagerAppTheme.colorScheme.outline,
+                backgroundColor = CosmosAppTheme.colorScheme.outline,
                 emoji = data.emoji,
             ),
         )
@@ -96,9 +97,9 @@ internal fun AnalysisListItem(
                         ),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = FinanceManagerAppTheme.typography.headlineMedium
+                        style = CosmosAppTheme.typography.headlineMedium
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                color = CosmosAppTheme.colorScheme.onBackground,
                             ),
                     )
                     Spacer(
@@ -111,8 +112,8 @@ internal fun AnalysisListItem(
                         progress = {
                             data.percentage
                         },
-                        color = FinanceManagerAppTheme.colorScheme.primary,
-                        trackColor = FinanceManagerAppTheme.colorScheme.surfaceVariant,
+                        color = CosmosAppTheme.colorScheme.primary,
+                        trackColor = CosmosAppTheme.colorScheme.surfaceVariant,
                         strokeCap = StrokeCap.Round,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -142,7 +143,7 @@ internal fun AnalysisListItem(
                         stringResource = CosmosStringResource.Text(
                             text = data.amountText,
                         ),
-                        style = FinanceManagerAppTheme.typography.headlineMedium
+                        style = CosmosAppTheme.typography.headlineMedium
                             .copy(
                                 textAlign = TextAlign.End,
                             ),
@@ -158,9 +159,9 @@ internal fun AnalysisListItem(
                         stringResource = CosmosStringResource.Text(
                             text = data.percentageText,
                         ),
-                        style = FinanceManagerAppTheme.typography.bodySmall
+                        style = CosmosAppTheme.typography.bodySmall
                             .copy(
-                                color = FinanceManagerAppTheme.colorScheme.onBackground,
+                                color = CosmosAppTheme.colorScheme.onBackground,
                                 textAlign = TextAlign.End,
                             ),
                     )
