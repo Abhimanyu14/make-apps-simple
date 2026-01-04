@@ -44,6 +44,7 @@ public val CosmosStringResource.text: String
             is CosmosStringResource.Id -> {
                 stringResource(
                     id = id,
+                    formatArgs = args.toTypedArray(),
                 )
             }
 
