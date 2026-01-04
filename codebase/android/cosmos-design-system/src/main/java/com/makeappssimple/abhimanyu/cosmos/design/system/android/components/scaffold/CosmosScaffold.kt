@@ -60,7 +60,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.Col
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import kotlinx.coroutines.CoroutineScope
 
-private object MyScaffoldConstants {
+private object CosmosScaffoldConstants {
     val topAppBarHeight = 64.dp
 }
 
@@ -96,7 +96,7 @@ public fun CosmosScaffold(
         backgroundColor = backgroundColor,
     ),
 
-    // MyScaffoldContentWrapper
+    // CosmosScaffoldContentWrapper
     onClick: () -> Unit = {},
 
     contentTestTagStringResource: CosmosStringResource = emptyCosmosStringResource,
@@ -175,7 +175,7 @@ public fun CosmosScaffold(
                 } else {
                     Modifier
                         .heightIn(
-                            max = screenHeight + navigationBarsHeight - MyScaffoldConstants.topAppBarHeight,
+                            max = screenHeight + navigationBarsHeight - CosmosScaffoldConstants.topAppBarHeight,
                         )
                 }
 
