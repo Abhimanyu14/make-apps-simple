@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
 
 @Immutable
-public data class ActionButtonData(
-    val isIndicatorVisible: Boolean = false,
-    val isLoading: Boolean = false,
-    val iconResource: CosmosIconResource,
-    @StringRes val contentDescriptionStringResourceId: Int,
+public data class CosmosDatePickerData(
+    val isVisible: Boolean = false,
+    val endLocalDate: MyLocalDate? = null,
+    val selectedLocalDate: MyLocalDate? = null,
+    val startLocalDate: MyLocalDate? = null,
 )

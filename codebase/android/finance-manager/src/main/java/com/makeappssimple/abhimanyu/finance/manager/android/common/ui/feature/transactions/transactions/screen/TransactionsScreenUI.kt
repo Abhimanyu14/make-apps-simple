@@ -42,9 +42,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.ActionButton
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.ActionButtonData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.ActionButtonEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButtonData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButtonEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
@@ -470,22 +470,22 @@ private fun SearchSortAndFilterBar(
                     },
                 )
             }
-            ActionButton(
-                data = ActionButtonData(
+            CosmosActionButton(
+                data = CosmosActionButtonData(
                     isLoading = uiState.isLoading,
                     iconResource = CosmosIcons.SwapVert,
                     contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_sort_button_content_description,
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is ActionButtonEvent.OnClick -> {
+                        is CosmosActionButtonEvent.OnClick -> {
                             handleUIEvent(TransactionsScreenUIEvent.OnSortActionButtonClick)
                         }
                     }
                 },
             )
-            ActionButton(
-                data = ActionButtonData(
+            CosmosActionButton(
+                data = CosmosActionButtonData(
                     isIndicatorVisible = uiState.selectedTransactionFilter.areFiltersSelected(),
                     isLoading = uiState.isLoading,
                     iconResource = CosmosIcons.FilterAlt,
@@ -493,7 +493,7 @@ private fun SearchSortAndFilterBar(
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is ActionButtonEvent.OnClick -> {
+                        is CosmosActionButtonEvent.OnClick -> {
                             handleUIEvent(TransactionsScreenUIEvent.OnFilterActionButtonClick)
                         }
                     }

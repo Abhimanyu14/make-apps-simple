@@ -24,9 +24,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.ActionButton
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.ActionButtonData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.ActionButtonEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButtonData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButtonEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.event.AnalysisScreenUIEvent
@@ -75,8 +75,8 @@ internal fun AnalysisScreenHeader(
                 }
             },
         )
-        ActionButton(
-            data = ActionButtonData(
+        CosmosActionButton(
+            data = CosmosActionButtonData(
                 isIndicatorVisible = uiState.selectedFilter.areFiltersSelected(),
                 isLoading = uiState.isLoading,
                 iconResource = CosmosIcons.FilterAlt,
@@ -84,7 +84,7 @@ internal fun AnalysisScreenHeader(
             ),
             handleEvent = { event ->
                 when (event) {
-                    is ActionButtonEvent.OnClick -> {
+                    is CosmosActionButtonEvent.OnClick -> {
                         handleUIEvent(AnalysisScreenUIEvent.OnFilterActionButtonClick)
                     }
                 }

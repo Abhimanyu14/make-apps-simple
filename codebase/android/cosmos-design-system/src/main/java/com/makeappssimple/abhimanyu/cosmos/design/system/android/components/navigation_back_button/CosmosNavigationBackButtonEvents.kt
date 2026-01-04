@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.navigation_back_button
 
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class SaveButtonEvent {
-    public data object OnClick : SaveButtonEvent()
+public sealed class CosmosNavigationBackButtonEvents {
+    public data object OnClick : CosmosNavigationBackButtonEvents()
 }

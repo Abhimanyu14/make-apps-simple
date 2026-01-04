@@ -39,12 +39,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePicker
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePickerData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePickerEvent
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.SaveButton
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.SaveButtonData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.SaveButtonEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePicker
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButtonData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButtonEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
@@ -266,19 +266,19 @@ internal fun AddTransactionScreenUI(
             handleUIEvent(AddTransactionScreenUIEvent.OnNavigationBackButtonClick)
         },
     ) {
-        MyDatePicker(
-            data = MyDatePickerData(
+        CosmosDatePicker(
+            data = CosmosDatePickerData(
                 isVisible = uiState.isTransactionDatePickerDialogVisible,
                 endLocalDate = uiState.currentLocalDate,
                 selectedLocalDate = uiState.transactionDate,
             ),
             handleEvent = { event ->
                 when (event) {
-                    is MyDatePickerEvent.OnNegativeButtonClick -> {
+                    is CosmosDatePickerEvent.OnNegativeButtonClick -> {
                         handleUIEvent(AddTransactionScreenUIEvent.OnTransactionDatePickerDismissed)
                     }
 
-                    is MyDatePickerEvent.OnPositiveButtonClick -> {
+                    is CosmosDatePickerEvent.OnPositiveButtonClick -> {
                         handleUIEvent(
                             AddTransactionScreenUIEvent.OnTransactionDateUpdated(
                                 updatedTransactionDate = event.selectedDate,
@@ -610,12 +610,12 @@ internal fun AddTransactionScreenUI(
                     }
                 },
             )
-            SaveButton(
+            CosmosSaveButton(
                 modifier = Modifier
                     .padding(
                         all = 8.dp,
                     ),
-                data = SaveButtonData(
+                data = CosmosSaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled,
                     isLoading = uiState.isLoading,
                     stringResource = CosmosStringResource.Id(
@@ -624,7 +624,7 @@ internal fun AddTransactionScreenUI(
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is SaveButtonEvent.OnClick -> {
+                        is CosmosSaveButtonEvent.OnClick -> {
                             handleUIEvent(AddTransactionScreenUIEvent.OnCtaButtonClick)
                         }
                     }

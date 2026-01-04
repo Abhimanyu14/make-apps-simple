@@ -37,9 +37,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.SaveButton
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.SaveButtonData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.SaveButtonEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButtonData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButtonEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
@@ -258,12 +258,12 @@ internal fun AddCategoryScreenUI(
                     },
                 )
             }
-            SaveButton(
+            CosmosSaveButton(
                 modifier = Modifier
                     .padding(
                         all = 8.dp,
                     ),
-                data = SaveButtonData(
+                data = CosmosSaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled.orFalse(),
                     isLoading = uiState.isLoading,
                     stringResource = CosmosStringResource.Id(
@@ -272,7 +272,7 @@ internal fun AddCategoryScreenUI(
                 ),
                 handleEvent = { event ->
                     when (event) {
-                        is SaveButtonEvent.OnClick -> {
+                        is CosmosSaveButtonEvent.OnClick -> {
                             handleUIEvent(AddCategoryScreenUIEvent.OnCtaButtonClick)
                         }
                     }

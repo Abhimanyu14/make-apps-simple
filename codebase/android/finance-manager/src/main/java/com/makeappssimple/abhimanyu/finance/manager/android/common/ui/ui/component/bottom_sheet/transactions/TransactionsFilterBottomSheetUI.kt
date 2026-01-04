@@ -50,9 +50,9 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePicker
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePickerData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePickerEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePicker
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosStatusBarSpacer
@@ -524,8 +524,8 @@ internal fun TransactionFilterBottomSheetDateFilter(
         mutableStateOf(false)
     }
 
-    MyDatePicker(
-        data = MyDatePickerData(
+    CosmosDatePicker(
+        data = CosmosDatePickerData(
             isVisible = isFromDatePickerDialogVisible,
             endLocalDate = toDate,
             selectedLocalDate = fromDate,
@@ -533,19 +533,19 @@ internal fun TransactionFilterBottomSheetDateFilter(
         ),
         handleEvent = { event ->
             when (event) {
-                is MyDatePickerEvent.OnNegativeButtonClick -> {
+                is CosmosDatePickerEvent.OnNegativeButtonClick -> {
                     isFromDatePickerDialogVisible = false
                 }
 
-                is MyDatePickerEvent.OnPositiveButtonClick -> {
+                is CosmosDatePickerEvent.OnPositiveButtonClick -> {
                     updateFromDate(event.selectedDate)
                     isFromDatePickerDialogVisible = false
                 }
             }
         },
     )
-    MyDatePicker(
-        data = MyDatePickerData(
+    CosmosDatePicker(
+        data = CosmosDatePickerData(
             isVisible = isToDatePickerDialogVisible,
             endLocalDate = maxDate,
             selectedLocalDate = toDate,
@@ -553,11 +553,11 @@ internal fun TransactionFilterBottomSheetDateFilter(
         ),
         handleEvent = { event ->
             when (event) {
-                is MyDatePickerEvent.OnNegativeButtonClick -> {
+                is CosmosDatePickerEvent.OnNegativeButtonClick -> {
                     isToDatePickerDialogVisible = false
                 }
 
-                is MyDatePickerEvent.OnPositiveButtonClick -> {
+                is CosmosDatePickerEvent.OnPositiveButtonClick -> {
                     updateToDate(event.selectedDate)
                     isToDatePickerDialogVisible = false
                 }

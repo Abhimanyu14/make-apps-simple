@@ -32,17 +32,17 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosm
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
-public fun SaveButton(
+public fun CosmosSaveButton(
     modifier: Modifier = Modifier,
-    data: SaveButtonData,
-    handleEvent: (event: SaveButtonEvent) -> Unit = {},
+    data: CosmosSaveButtonData,
+    handleEvent: (event: CosmosSaveButtonEvent) -> Unit = {},
 ) {
     if (data.isLoading) {
-        SaveButtonLoadingUI(
+        CosmosSaveButtonLoadingUI(
             modifier = modifier,
         )
     } else {
-        SaveButtonUI(
+        CosmosSaveButtonUI(
             modifier = modifier,
             data = data,
             handleEvent = handleEvent,
@@ -51,15 +51,15 @@ public fun SaveButton(
 }
 
 @Composable
-private fun SaveButtonUI(
+private fun CosmosSaveButtonUI(
     modifier: Modifier = Modifier,
-    data: SaveButtonData,
-    handleEvent: (event: SaveButtonEvent) -> Unit = {},
+    data: CosmosSaveButtonData,
+    handleEvent: (event: CosmosSaveButtonEvent) -> Unit = {},
 ) {
     ElevatedButton(
         modifier = modifier,
         onClick = {
-            handleEvent(SaveButtonEvent.OnClick)
+            handleEvent(CosmosSaveButtonEvent.OnClick)
         },
         enabled = data.isEnabled,
         colors = ButtonDefaults
@@ -83,7 +83,7 @@ private fun SaveButtonUI(
 }
 
 @Composable
-private fun SaveButtonLoadingUI(
+private fun CosmosSaveButtonLoadingUI(
     modifier: Modifier = Modifier,
 ) {
     Box(

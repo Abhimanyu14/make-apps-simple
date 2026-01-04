@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
-public sealed class MyDatePickerEvent {
-    public data object OnNegativeButtonClick : MyDatePickerEvent()
-    public data class OnPositiveButtonClick(
-        val selectedDate: MyLocalDate,
-    ) : MyDatePickerEvent()
-}
+public data class CosmosSaveButtonData(
+    val isEnabled: Boolean,
+    val isLoading: Boolean = false,
+    val stringResource: CosmosStringResource,
+)

@@ -26,16 +26,16 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosApp
 import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
 
 @Composable
-public fun MyNavigationBackButton(
+public fun CosmosNavigationBackButton(
     modifier: Modifier = Modifier,
-    handleEvent: (event: MyNavigationBackButtonEvents) -> Unit = {},
+    handleEvent: (event: CosmosNavigationBackButtonEvents) -> Unit = {},
 ) {
     CosmosIconButton(
         onClickLabelStringResource = CosmosStringResource.Id(
             id = R.string.cosmos_navigation_back_button_navigation_icon_content_description,
         ),
         onClick = {
-            handleEvent(MyNavigationBackButtonEvents.OnClick)
+            handleEvent(CosmosNavigationBackButtonEvents.OnClick)
         },
         modifier = modifier,
     ) {

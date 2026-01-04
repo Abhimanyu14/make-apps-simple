@@ -38,10 +38,10 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosApp
 import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
 
 @Composable
-public fun MyDatePicker(
+public fun CosmosDatePicker(
     modifier: Modifier = Modifier,
-    data: MyDatePickerData,
-    handleEvent: (event: MyDatePickerEvent) -> Unit = {},
+    data: CosmosDatePickerData,
+    handleEvent: (event: CosmosDatePickerEvent) -> Unit = {},
 ) {
     if (data.isVisible) {
         val datePickerState = rememberDatePickerState(
@@ -90,7 +90,7 @@ public fun MyDatePicker(
         DatePickerDialog(
             modifier = modifier,
             onDismissRequest = {
-                handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
+                handleEvent(CosmosDatePickerEvent.OnNegativeButtonClick)
             },
             confirmButton = {
                 CosmosTextButton(
@@ -99,7 +99,7 @@ public fun MyDatePicker(
                             timestamp = datePickerState.selectedDateMillis.orZero(),
                         )
                         handleEvent(
-                            MyDatePickerEvent.OnPositiveButtonClick(
+                            CosmosDatePickerEvent.OnPositiveButtonClick(
                                 selectedDate = startOfDayTimestamp,
                             )
                         )
@@ -116,7 +116,7 @@ public fun MyDatePicker(
             dismissButton = {
                 CosmosTextButton(
                     onClick = {
-                        handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
+                        handleEvent(CosmosDatePickerEvent.OnNegativeButtonClick)
                     },
                 ) {
                     CosmosText(

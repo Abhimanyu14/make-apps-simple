@@ -17,11 +17,8 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
-public data class SaveButtonData(
-    val isEnabled: Boolean,
-    val isLoading: Boolean = false,
-    val stringResource: CosmosStringResource,
-)
+public sealed class CosmosSaveButtonEvent {
+    public data object OnClick : CosmosSaveButtonEvent()
+}

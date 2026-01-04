@@ -30,9 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePicker
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePickerData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.MyDatePickerEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePicker
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker.CosmosDatePickerEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
@@ -61,8 +61,8 @@ internal fun AnalysisFilterBottomSheetUI(
     setFromDatePickerDialogVisible: (Boolean) -> Unit,
     setToDatePickerDialogVisible: (Boolean) -> Unit,
 ) {
-    MyDatePicker(
-        data = MyDatePickerData(
+    CosmosDatePicker(
+        data = CosmosDatePickerData(
             isVisible = data.isFromDatePickerDialogVisible,
             endLocalDate = data.fromDatePickerEndLocalDate,
             selectedLocalDate = data.fromDatePickerSelectedLocalDate,
@@ -70,19 +70,19 @@ internal fun AnalysisFilterBottomSheetUI(
         ),
         handleEvent = { event ->
             when (event) {
-                is MyDatePickerEvent.OnNegativeButtonClick -> {
+                is CosmosDatePickerEvent.OnNegativeButtonClick -> {
                     setFromDatePickerDialogVisible(false)
                 }
 
-                is MyDatePickerEvent.OnPositiveButtonClick -> {
+                is CosmosDatePickerEvent.OnPositiveButtonClick -> {
                     onFromDateSelected(event.selectedDate)
                     setFromDatePickerDialogVisible(false)
                 }
             }
         },
     )
-    MyDatePicker(
-        data = MyDatePickerData(
+    CosmosDatePicker(
+        data = CosmosDatePickerData(
             isVisible = data.isToDatePickerDialogVisible,
             endLocalDate = data.toDatePickerEndLocalDate,
             selectedLocalDate = data.toDatePickerSelectedLocalDate,
@@ -90,11 +90,11 @@ internal fun AnalysisFilterBottomSheetUI(
         ),
         handleEvent = { event ->
             when (event) {
-                is MyDatePickerEvent.OnNegativeButtonClick -> {
+                is CosmosDatePickerEvent.OnNegativeButtonClick -> {
                     setToDatePickerDialogVisible(false)
                 }
 
-                is MyDatePickerEvent.OnPositiveButtonClick -> {
+                is CosmosDatePickerEvent.OnPositiveButtonClick -> {
                     onToDateSelected(event.selectedDate)
                     setToDatePickerDialogVisible(false)
                 }

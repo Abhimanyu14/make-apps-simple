@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.navigation_back_button
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker
 
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
 
 @Immutable
-public sealed class MyNavigationBackButtonEvents {
-    public data object OnClick : MyNavigationBackButtonEvents()
+public sealed class CosmosDatePickerEvent {
+    public data object OnNegativeButtonClick : CosmosDatePickerEvent()
+    public data class OnPositiveButtonClick(
+        val selectedDate: MyLocalDate,
+    ) : CosmosDatePickerEvent()
 }

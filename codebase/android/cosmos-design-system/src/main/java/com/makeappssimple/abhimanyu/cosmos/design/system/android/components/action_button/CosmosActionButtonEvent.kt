@@ -19,6 +19,6 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.act
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class ActionButtonEvent {
-    public data object OnClick : ActionButtonEvent()
+public sealed class CosmosActionButtonEvent {
+    public data object OnClick : CosmosActionButtonEvent()
 }

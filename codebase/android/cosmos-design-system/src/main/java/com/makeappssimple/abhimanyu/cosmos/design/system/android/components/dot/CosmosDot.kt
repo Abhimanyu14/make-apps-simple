@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-public fun Dot(
+public fun CosmosDot(
     modifier: Modifier = Modifier,
     color: Color,
 ) {

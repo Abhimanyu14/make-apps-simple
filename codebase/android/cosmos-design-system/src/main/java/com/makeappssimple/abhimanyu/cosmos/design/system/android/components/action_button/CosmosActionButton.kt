@@ -26,29 +26,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dot.Dot
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dot.CosmosDot
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
-private object ActionButtonConstants {
+private object CosmosActionButtonConstants {
     val loadingUISize = 40.dp
     val loadingUIPadding = 4.dp
 }
 
 @Composable
-public fun ActionButton(
+public fun CosmosActionButton(
     modifier: Modifier = Modifier,
-    data: ActionButtonData,
-    handleEvent: (event: ActionButtonEvent) -> Unit = {},
+    data: CosmosActionButtonData,
+    handleEvent: (event: CosmosActionButtonEvent) -> Unit = {},
 ) {
     if (data.isLoading) {
-        ActionButtonLoadingUI(
+        CosmosActionButtonLoadingUI(
             modifier = modifier,
         )
     } else {
-        ActionButtonUI(
+        CosmosActionButtonUI(
             modifier = modifier,
             data = data,
             handleEvent = handleEvent,
@@ -57,14 +57,14 @@ public fun ActionButton(
 }
 
 @Composable
-private fun ActionButtonUI(
+private fun CosmosActionButtonUI(
     modifier: Modifier = Modifier,
-    data: ActionButtonData,
-    handleEvent: (event: ActionButtonEvent) -> Unit,
+    data: CosmosActionButtonData,
+    handleEvent: (event: CosmosActionButtonEvent) -> Unit,
 ) {
     ElevatedCard(
         onClick = {
-            handleEvent(ActionButtonEvent.OnClick)
+            handleEvent(CosmosActionButtonEvent.OnClick)
         },
         modifier = modifier,
     ) {
@@ -84,7 +84,7 @@ private fun ActionButtonUI(
                     ),
             )
             if (data.isIndicatorVisible) {
-                Dot(
+                CosmosDot(
                     modifier = Modifier
                         .align(
                             alignment = Alignment.TopEnd,
@@ -100,21 +100,21 @@ private fun ActionButtonUI(
 }
 
 @Composable
-private fun ActionButtonLoadingUI(
+private fun CosmosActionButtonLoadingUI(
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(
         modifier = modifier
             .padding(
-                all = ActionButtonConstants.loadingUIPadding,
+                all = CosmosActionButtonConstants.loadingUIPadding,
             ),
     ) {
         Box(
             modifier = modifier
                 .size(
                     size = DpSize(
-                        width = ActionButtonConstants.loadingUISize,
-                        height = ActionButtonConstants.loadingUISize,
+                        width = CosmosActionButtonConstants.loadingUISize,
+                        height = CosmosActionButtonConstants.loadingUISize,
                     ),
                 )
                 .cosmosShimmer(),
