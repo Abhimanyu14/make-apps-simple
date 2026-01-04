@@ -65,7 +65,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
 
-private object MySearchBarConstants {
+private object CosmosSearchBarConstants {
     val borderWidth = 1.dp
     val leadingIconPaddingBottom = 2.dp
     val leadingIconPaddingEnd = 2.dp
@@ -85,15 +85,15 @@ private object MySearchBarConstants {
 }
 
 @Composable
-public fun MySearchBar(
+public fun CosmosSearchBar(
     modifier: Modifier = Modifier,
-    data: MySearchBarData,
-    handleEvent: (event: MySearchBarEvent) -> Unit = {},
+    data: CosmosSearchBarData,
+    handleEvent: (event: CosmosSearchBarEvent) -> Unit = {},
 ) {
     if (data.isLoading) {
-        MySearchBarLoadingUI()
+        CosmosSearchBarLoadingUI()
     } else {
-        MySearchBarUI(
+        CosmosSearchBarUI(
             modifier = modifier,
             data = data,
             handleEvent = handleEvent,
@@ -102,10 +102,10 @@ public fun MySearchBar(
 }
 
 @Composable
-private fun MySearchBarUI(
+private fun CosmosSearchBarUI(
     modifier: Modifier = Modifier,
-    data: MySearchBarData,
-    handleEvent: (event: MySearchBarEvent) -> Unit = {},
+    data: CosmosSearchBarData,
+    handleEvent: (event: CosmosSearchBarEvent) -> Unit = {},
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester: FocusRequester = remember {
@@ -124,7 +124,7 @@ private fun MySearchBarUI(
         value = data.searchTextStringResource.text,
         onValueChange = {
             handleEvent(
-                MySearchBarEvent.OnSearchTextChange(
+                CosmosSearchBarEvent.OnSearchTextChange(
                     updatedSearchText = it,
                 )
             )
@@ -146,7 +146,7 @@ private fun MySearchBarUI(
         ),
         keyboardActions = KeyboardActions(
             onSearch = {
-                handleEvent(MySearchBarEvent.OnSearch)
+                handleEvent(CosmosSearchBarEvent.OnSearch)
             },
         ),
         singleLine = true,
@@ -193,7 +193,7 @@ private fun MySearchBarUI(
                                 .clickable {
                                     focusManager.clearFocus()
                                     handleEvent(
-                                        MySearchBarEvent.OnSearchTextChange(
+                                        CosmosSearchBarEvent.OnSearchTextChange(
                                             updatedSearchText = "",
                                         )
                                     )
@@ -243,15 +243,15 @@ private fun MySearchBarUI(
 }
 
 @Composable
-public fun MySearchBarV2(
+public fun CosmosSearchBarV2(
     modifier: Modifier = Modifier,
-    data: MySearchBarDataV2,
-    handleEvent: (event: MySearchBarEventV2) -> Unit = {},
+    data: CosmosSearchBarDataV2,
+    handleEvent: (event: CosmosSearchBarEventV2) -> Unit = {},
 ) {
     if (data.isLoading) {
-        MySearchBarLoadingUI()
+        CosmosSearchBarLoadingUI()
     } else {
-        MySearchBarUIV2(
+        CosmosSearchBarUIV2(
             modifier = modifier,
             data = data,
             handleEvent = handleEvent,
@@ -260,10 +260,10 @@ public fun MySearchBarV2(
 }
 
 @Composable
-private fun MySearchBarUIV2(
+private fun CosmosSearchBarUIV2(
     modifier: Modifier = Modifier,
-    data: MySearchBarDataV2,
-    handleEvent: (event: MySearchBarEventV2) -> Unit = {},
+    data: CosmosSearchBarDataV2,
+    handleEvent: (event: CosmosSearchBarEventV2) -> Unit = {},
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester: FocusRequester = remember {
@@ -338,7 +338,7 @@ private fun MySearchBarUIV2(
                 ),
                 lineLimits = TextFieldLineLimits.SingleLine,
                 onKeyboardAction = {
-                    handleEvent(MySearchBarEventV2.OnSearch)
+                    handleEvent(CosmosSearchBarEventV2.OnSearch)
                 },
                 cursorBrush = SolidColor(
                     value = CosmosAppTheme.colorScheme.primary,
@@ -411,17 +411,17 @@ private fun MySearchBarUIV2(
 }
 
 @Composable
-private fun MySearchBarLoadingUI(
+private fun CosmosSearchBarLoadingUI(
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .height(
-                MySearchBarConstants.loadingUIHeight,
+                CosmosSearchBarConstants.loadingUIHeight,
             )
             .fillMaxWidth()
             .clip(
-                shape = MySearchBarConstants.shape,
+                shape = CosmosSearchBarConstants.shape,
             )
             .cosmosShimmer(),
     )

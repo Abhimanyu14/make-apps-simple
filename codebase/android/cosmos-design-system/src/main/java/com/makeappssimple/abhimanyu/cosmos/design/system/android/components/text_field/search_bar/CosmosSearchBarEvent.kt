@@ -19,14 +19,14 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tex
 import androidx.compose.runtime.Immutable
 
 @Immutable
-public sealed class MySearchBarEvent {
-    public data object OnSearch : MySearchBarEvent()
+public sealed class CosmosSearchBarEvent {
+    public data object OnSearch : CosmosSearchBarEvent()
     public data class OnSearchTextChange(
         val updatedSearchText: String,
-    ) : MySearchBarEvent()
+    ) : CosmosSearchBarEvent()
 }
 
 @Immutable
-public sealed class MySearchBarEventV2 {
-    public data object OnSearch : MySearchBarEventV2()
+public sealed class CosmosSearchBarEventV2 {
+    public data object OnSearch : CosmosSearchBarEventV2()
 }

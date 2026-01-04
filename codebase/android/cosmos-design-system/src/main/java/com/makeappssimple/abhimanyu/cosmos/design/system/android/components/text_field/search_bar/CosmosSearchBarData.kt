@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.emptyCosmosStringResource
 
 @Immutable
-public data class MySearchBarData(
+public data class CosmosSearchBarData(
     val autoFocus: Boolean = true,
     val isLoading: Boolean = false,
     val placeholderStringResource: CosmosStringResource = emptyCosmosStringResource,
@@ -30,7 +30,7 @@ public data class MySearchBarData(
 )
 
 @Immutable
-public data class MySearchBarDataV2(
+public data class CosmosSearchBarDataV2(
     val autoFocus: Boolean = true,
     val isLoading: Boolean = false,
     val placeholderStringResource: CosmosStringResource = emptyCosmosStringResource,

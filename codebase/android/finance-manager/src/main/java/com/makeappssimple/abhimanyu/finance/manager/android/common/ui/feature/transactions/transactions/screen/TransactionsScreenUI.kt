@@ -53,9 +53,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spac
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarsSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.search_bar.MySearchBarDataV2
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.search_bar.MySearchBarEventV2
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.search_bar.MySearchBarV2
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.search_bar.CosmosSearchBarDataV2
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.search_bar.CosmosSearchBarEventV2
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.search_bar.CosmosSearchBarV2
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
@@ -452,8 +452,8 @@ private fun SearchSortAndFilterBar(
                         weight = 1F,
                     )
             ) {
-                MySearchBarV2(
-                    data = MySearchBarDataV2(
+                CosmosSearchBarV2(
+                    data = CosmosSearchBarDataV2(
                         autoFocus = false,
                         isLoading = uiState.isLoading,
                         placeholderStringResource = CosmosStringResource.Id(
@@ -463,7 +463,7 @@ private fun SearchSortAndFilterBar(
                     ),
                     handleEvent = { events ->
                         when (events) {
-                            is MySearchBarEventV2.OnSearch -> {
+                            is CosmosSearchBarEventV2.OnSearch -> {
                                 state.focusManager.clearFocus()
                             }
                         }
