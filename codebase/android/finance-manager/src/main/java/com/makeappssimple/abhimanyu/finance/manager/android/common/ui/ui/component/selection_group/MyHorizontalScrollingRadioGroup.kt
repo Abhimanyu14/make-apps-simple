@@ -20,9 +20,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUI
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIEvent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUI
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.fading_edge.fadingEdge
 
 @Composable

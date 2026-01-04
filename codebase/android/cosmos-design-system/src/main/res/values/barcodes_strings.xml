@@ -16,8 +16,18 @@
 
 <resources>
 
+    <!-- region date picker -->
+    <string name="cosmos_date_picker_negative_button">Cancel</string>
+    <string name="cosmos_date_picker_positive_button">OK</string>
+    <!-- endregion -->
+
     <!-- region navigation back button -->
     <string name="cosmos_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
+    <!-- endregion -->
+
+    <!-- region search bar -->
+    <string name="cosmos_search_bar_keyboard_type_number">123</string>
+    <string name="cosmos_search_bar_keyboard_type_text">ABC</string>
     <!-- endregion -->
 
 </resources>

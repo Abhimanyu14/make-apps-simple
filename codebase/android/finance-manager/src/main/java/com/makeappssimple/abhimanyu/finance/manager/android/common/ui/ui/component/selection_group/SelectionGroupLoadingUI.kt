@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.selection_group
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUI
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUI
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
 
 @Composable
 internal fun SelectionGroupLoadingUI(

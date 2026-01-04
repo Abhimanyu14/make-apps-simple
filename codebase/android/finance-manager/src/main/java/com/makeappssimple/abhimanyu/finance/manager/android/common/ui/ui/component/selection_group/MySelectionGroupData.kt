@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.selection_group
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
 
 @Immutable
 internal data class MySelectionGroupData(

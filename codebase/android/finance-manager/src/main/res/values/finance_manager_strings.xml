@@ -110,11 +110,6 @@
     <string name="finance_manager_screen_categories_bottom_sheet_set_as_default_negative_button_text">Cancel</string>
     <!-- endregion -->
 
-    <!-- region date picker -->
-    <string name="finance_manager_date_picker_negative_button">Cancel</string>
-    <string name="finance_manager_date_picker_positive_button">OK</string>
-    <!-- endregion -->
-
     <!-- region default tag -->
     <string name="finance_manager_default_tag">DEFAULT</string>
     <!-- endregion -->
@@ -125,7 +120,6 @@
     <!-- endregion -->
 
     <!-- region navigation back button -->
-    <string name="finance_manager_navigation_back_button_navigation_icon_content_description">Navigate Back</string>
     <string name="finance_manager_navigation_close_button_navigation_icon_content_description">Close</string>
     <!-- endregion -->
 

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable

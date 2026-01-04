@@ -52,7 +52,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIco
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.financeManagerDarkColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.financeManagerLightColorScheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R

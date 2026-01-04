@@ -33,6 +33,9 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUI
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
@@ -43,9 +46,6 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosApp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_TOTAL_BALANCE_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUI
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.match_row_size.matchRowSize
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
