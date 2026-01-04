@@ -457,9 +457,9 @@ private fun SearchSortAndFilterBar(
                     data = MySearchBarDataV2(
                         autoFocus = false,
                         isLoading = uiState.isLoading,
-                        placeholderText = CosmosStringResource.Id(
+                        placeholderStringResource = CosmosStringResource.Id(
                             id = R.string.finance_manager_screen_transactions_searchbar_placeholder,
-                        ).text,
+                        ),
                         searchTextFieldState = uiState.searchTextFieldState,
                     ),
                     handleEvent = { events ->

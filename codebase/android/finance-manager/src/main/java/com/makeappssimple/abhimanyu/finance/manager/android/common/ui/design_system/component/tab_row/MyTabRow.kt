@@ -43,7 +43,7 @@ internal fun MyTabRow(
             Tab(
                 text = {
                     MyTabText(
-                        title = tabData.title,
+                        titleStringResource = tabData.titleStringResource,
                         isSelected = isSelected,
                     )
                 },
@@ -60,13 +60,11 @@ internal fun MyTabRow(
 
 @Composable
 private fun MyTabText(
-    title: String,
+    titleStringResource: CosmosStringResource,
     isSelected: Boolean,
 ) {
     CosmosText(
-        stringResource = CosmosStringResource.Text(
-            text = title,
-        ),
+        stringResource = titleStringResource,
         style = FinanceManagerAppTheme.typography.headlineLarge
             .copy(
                 color = if (isSelected) {

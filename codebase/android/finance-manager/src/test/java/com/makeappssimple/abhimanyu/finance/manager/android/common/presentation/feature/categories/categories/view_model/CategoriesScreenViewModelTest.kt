@@ -19,6 +19,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.view_model
 
 import app.cash.turbine.test
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
@@ -76,13 +77,19 @@ internal class CategoriesScreenViewModelTest {
             result.tabData.shouldBe(
                 expected = listOf(
                     MyTabData(
-                        title = "Expense",
+                        titleStringResource = CosmosStringResource.Text(
+                            text = "Expense",
+                        ),
                     ),
                     MyTabData(
-                        title = "Income",
+                        titleStringResource = CosmosStringResource.Text(
+                            text = "Income",
+                        ),
                     ),
                     MyTabData(
-                        title = "Investment",
+                        titleStringResource = CosmosStringResource.Text(
+                            text = "Investment",
+                        ),
                     ),
                 ),
             )

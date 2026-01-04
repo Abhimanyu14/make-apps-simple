@@ -17,8 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.tab_row
 
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 
 @Immutable
 internal data class MyTabData(
-    val title: String,
+    val titleStringResource: CosmosStringResource,
 )

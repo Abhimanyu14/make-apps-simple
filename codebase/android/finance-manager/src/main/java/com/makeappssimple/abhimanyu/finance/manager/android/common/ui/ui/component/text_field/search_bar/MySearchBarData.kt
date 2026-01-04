@@ -18,19 +18,21 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Immutable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.emptyCosmosStringResource
 
 @Immutable
 internal data class MySearchBarData(
     val autoFocus: Boolean = true,
     val isLoading: Boolean = false,
-    val placeholderText: String = "",
-    val searchText: String = "",
+    val placeholderStringResource: CosmosStringResource = emptyCosmosStringResource,
+    val searchTextStringResource: CosmosStringResource = emptyCosmosStringResource,
 )
 
 @Immutable
 internal data class MySearchBarDataV2(
     val autoFocus: Boolean = true,
     val isLoading: Boolean = false,
-    val placeholderText: String = "",
+    val placeholderStringResource: CosmosStringResource = emptyCosmosStringResource,
     val searchTextFieldState: TextFieldState = TextFieldState(),
 )

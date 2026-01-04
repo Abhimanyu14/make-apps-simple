@@ -59,6 +59,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
@@ -120,7 +121,7 @@ private fun MySearchBarUI(
     }
 
     BasicTextField(
-        value = data.searchText,
+        value = data.searchTextStringResource.text,
         onValueChange = {
             handleEvent(
                 MySearchBarEvent.OnSearchTextChange(
@@ -152,7 +153,7 @@ private fun MySearchBarUI(
         cursorBrush = SolidColor(FinanceManagerAppTheme.colorScheme.primary),
         decorationBox = {
             TextFieldDefaults.DecorationBox(
-                value = data.searchText,
+                value = data.searchTextStringResource.text,
                 innerTextField = it,
                 enabled = true,
                 singleLine = true,
@@ -162,9 +163,7 @@ private fun MySearchBarUI(
                 },
                 placeholder = {
                     CosmosText(
-                        stringResource = CosmosStringResource.Text(
-                            text = data.placeholderText,
-                        ),
+                        stringResource = data.placeholderStringResource,
                         style = FinanceManagerAppTheme.typography.headlineLarge
                             .copy(
                                 color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
@@ -183,7 +182,7 @@ private fun MySearchBarUI(
                             ),
                     )
                 },
-                trailingIcon = if (data.searchText.isNotBlank()) {
+                trailingIcon = if (data.searchTextStringResource.text.isNotBlank()) {
                     {
                         CosmosIcon(
                             iconResource = CosmosIcons.Close,
@@ -347,9 +346,7 @@ private fun MySearchBarUIV2(
             )
             if (data.searchTextFieldState.text.isEmpty()) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Text(
-                        text = data.placeholderText,
-                    ),
+                    stringResource = data.placeholderStringResource,
                     style = FinanceManagerAppTheme.typography.bodyLarge
                         .copy(
                             color = FinanceManagerAppTheme.colorScheme.onPrimaryContainer,
