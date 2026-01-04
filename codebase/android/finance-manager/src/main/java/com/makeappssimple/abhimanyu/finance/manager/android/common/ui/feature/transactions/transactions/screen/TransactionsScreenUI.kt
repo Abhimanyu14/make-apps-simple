@@ -45,6 +45,10 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarsSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -56,10 +60,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.event.TransactionsScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.snackbar.TransactionsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.state.TransactionsScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarsSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
@@ -202,7 +202,7 @@ internal fun TransactionsScreenUI(
                 }
 
                 TransactionsScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
 
                 TransactionsScreenBottomSheetType.SelectTransactionFor -> {
@@ -309,7 +309,7 @@ internal fun TransactionsScreenUI(
             ) {
                 CosmosCircularFloatingActionButton(
                     modifier = Modifier
-                        .navigationBarsSpacer(),
+                        .cosmosNavigationBarsSpacer(),
                     iconResource = CosmosIcons.Add,
                     contentDescriptionStringResource = CosmosStringResource.Id(
                         id = R.string.finance_manager_screen_transactions_floating_action_button_content_description,
@@ -334,7 +334,7 @@ internal fun TransactionsScreenUI(
                     tag = SCREEN_CONTENT_TRANSACTIONS,
                 )
                 .fillMaxSize()
-                .navigationBarLandscapeSpacer(),
+                .cosmosNavigationBarLandscapeSpacer(),
         ) {
             SearchSortAndFilterBar(
                 uiState = uiState,
@@ -415,7 +415,7 @@ internal fun TransactionsScreenUI(
                     }
                 }
                 item {
-                    NavigationBarsAndImeSpacer()
+                    CosmosNavigationBarsAndImeSpacer()
                 }
             }
         }

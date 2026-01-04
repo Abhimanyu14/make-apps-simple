@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.progress_indicator.CosmosLinearProgressIndicator
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
@@ -43,7 +44,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.event.SettingsScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.snackbar.SettingsScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.settings.SettingsListItemAppVersion
@@ -174,7 +174,7 @@ internal fun SettingsScreenUI(
             SettingsScreenContent(
                 settingsScreenListItemData = settingsScreenListItemData,
             )
-            NavigationBarsAndImeSpacer()
+            CosmosNavigationBarsAndImeSpacer()
         }
     }
 }

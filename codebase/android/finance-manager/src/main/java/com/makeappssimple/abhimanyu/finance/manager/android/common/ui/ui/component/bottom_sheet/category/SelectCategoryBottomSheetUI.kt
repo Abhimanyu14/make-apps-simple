@@ -22,9 +22,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyBottomSheetTitle
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyBottomSheetTitleData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.grid.CategoriesGrid
@@ -59,8 +59,8 @@ internal fun SelectCategoryBottomSheetUI(
                 items[it].onClick()
             },
         )
-        NavigationBarsAndImeSpacer()
-        VerticalSpacer(
+        CosmosNavigationBarsAndImeSpacer()
+        CosmosVerticalSpacer(
             height = 16.dp,
         )
     }

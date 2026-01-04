@@ -30,14 +30,14 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.progress_indicator.CosmosLinearProgressIndicator
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_VIEW_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_VIEW_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.event.ViewTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.state.ViewTransactionScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
@@ -90,7 +90,7 @@ internal fun ViewTransactionScreenUI(
                 }
 
                 is ViewTransactionScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
             }
         },
@@ -118,7 +118,7 @@ internal fun ViewTransactionScreenUI(
                     tag = SCREEN_CONTENT_VIEW_TRANSACTION,
                 )
                 .fillMaxSize()
-                .navigationBarLandscapeSpacer(),
+                .cosmosNavigationBarLandscapeSpacer(),
         ) {
             item {
                 AnimatedVisibility(
@@ -284,7 +284,7 @@ internal fun ViewTransactionScreenUI(
                 }
             }
             item {
-                NavigationBarsAndImeSpacer()
+                CosmosNavigationBarsAndImeSpacer()
             }
         }
     }

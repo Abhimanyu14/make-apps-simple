@@ -37,6 +37,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_CATEGORY
@@ -45,9 +48,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.event.AddCategoryScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.AddCategoryScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.add_category.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetExpandedShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.BottomSheetShape
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
@@ -107,7 +107,7 @@ internal fun AddCategoryScreenUI(
         sheetContent = {
             when (uiState.screenBottomSheetType) {
                 AddCategoryScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
 
                 AddCategoryScreenBottomSheetType.SelectEmoji -> {
@@ -160,7 +160,7 @@ internal fun AddCategoryScreenUI(
                     tag = SCREEN_CONTENT_ADD_OR_EDIT_CATEGORY,
                 )
                 .fillMaxSize()
-                .navigationBarLandscapeSpacer()
+                .cosmosNavigationBarLandscapeSpacer()
                 .verticalScroll(
                     state = rememberScrollState(),
                 ),
@@ -278,7 +278,7 @@ internal fun AddCategoryScreenUI(
                     }
                 },
             )
-            NavigationBarsAndImeSpacer()
+            CosmosNavigationBarsAndImeSpacer()
         }
     }
 }

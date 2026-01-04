@@ -39,6 +39,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
@@ -47,9 +50,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.event.EditTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.EditTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.MyTimePicker
@@ -124,7 +124,7 @@ internal fun EditTransactionScreenUI(
         sheetContent = {
             when (uiState.screenBottomSheetType) {
                 is EditTransactionScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
 
                 is EditTransactionScreenBottomSheetType.SelectCategory -> {
@@ -268,7 +268,7 @@ internal fun EditTransactionScreenUI(
                     tag = SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION,
                 )
                 .fillMaxSize()
-                .navigationBarLandscapeSpacer()
+                .cosmosNavigationBarLandscapeSpacer()
                 .verticalScroll(
                     state = rememberScrollState(),
                 ),
@@ -605,7 +605,7 @@ internal fun EditTransactionScreenUI(
                     }
                 },
             )
-            NavigationBarsAndImeSpacer()
+            CosmosNavigationBarsAndImeSpacer()
         }
     }
 }

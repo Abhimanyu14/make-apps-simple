@@ -50,6 +50,8 @@ import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosStatusBarSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -60,8 +62,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.statusBarSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.date_picker.MyDatePicker
@@ -328,7 +328,7 @@ internal fun TransactionsFiltersBottomSheetUI(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .statusBarSpacer()
+            .cosmosStatusBarSpacer()
             .defaultMinSize(
                 minHeight = minimumBottomSheetHeight,
             ),
@@ -491,7 +491,7 @@ internal fun TransactionsFiltersBottomSheetUI(
                 )
             }
         }
-        NavigationBarsAndImeSpacer()
+        CosmosNavigationBarsAndImeSpacer()
     }
 }
 

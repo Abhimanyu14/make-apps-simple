@@ -24,13 +24,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ANALYSIS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ANALYSIS
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.bottom_sheet.AnalysisScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.event.AnalysisScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.analysis.analysis.components.AnalysisScreenHeader
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.analysis.analysis.components.AnalysisScreenList
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
@@ -91,7 +91,7 @@ internal fun AnalysisScreenUI(
                 }
 
                 is AnalysisScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
             }
         },
@@ -119,7 +119,7 @@ internal fun AnalysisScreenUI(
                     tag = SCREEN_CONTENT_ANALYSIS,
                 )
                 .fillMaxSize()
-                .navigationBarLandscapeSpacer(),
+                .cosmosNavigationBarLandscapeSpacer(),
         ) {
             AnalysisScreenHeader(
                 uiState = uiState,

@@ -29,6 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarsSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ACCOUNTS
@@ -36,10 +40,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.bottom_sheet.AccountsScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.event.AccountsScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.state.AccountsScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarsSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
@@ -100,7 +100,7 @@ internal fun AccountsScreenUI(
                 }
 
                 is AccountsScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
 
                 is AccountsScreenBottomSheetType.SetAsDefaultConfirmation -> {
@@ -164,7 +164,7 @@ internal fun AccountsScreenUI(
         floatingActionButton = {
             CosmosCircularFloatingActionButton(
                 modifier = Modifier
-                    .navigationBarsSpacer(),
+                    .cosmosNavigationBarsSpacer(),
                 iconResource = CosmosIcons.Add,
                 contentDescriptionStringResource = CosmosStringResource.Id(
                     id = R.string.finance_manager_screen_accounts_floating_action_button_content_description,
@@ -187,7 +187,7 @@ internal fun AccountsScreenUI(
                 .testTag(
                     tag = SCREEN_CONTENT_ACCOUNTS,
                 )
-                .navigationBarLandscapeSpacer(),
+                .cosmosNavigationBarLandscapeSpacer(),
             contentPadding = PaddingValues(
                 bottom = 80.dp,
             ),
@@ -207,7 +207,7 @@ internal fun AccountsScreenUI(
                 handleUIEvent = handleUIEvent,
             )
             item {
-                NavigationBarsAndImeSpacer()
+                CosmosNavigationBarsAndImeSpacer()
             }
         }
     }
@@ -242,7 +242,7 @@ private fun LazyListScope.accountsListLoadingUI() {
             }
         }
         item {
-            VerticalSpacer(
+            CosmosVerticalSpacer(
                 height = 16.dp,
             )
         }

@@ -39,6 +39,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNullOrBlank
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
@@ -49,9 +52,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.snackbar.AddTransactionScreenSnackbarType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.AddTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.state.stringResourceId
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.AmountInputTransformation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.AmountOutputTransformation
@@ -172,7 +172,7 @@ internal fun AddTransactionScreenUI(
         sheetContent = {
             when (uiState.screenBottomSheetType) {
                 is AddTransactionScreenBottomSheetType.None -> {
-                    VerticalSpacer()
+                    CosmosVerticalSpacer()
                 }
 
                 is AddTransactionScreenBottomSheetType.SelectCategory -> {
@@ -316,7 +316,7 @@ internal fun AddTransactionScreenUI(
                     tag = SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION,
                 )
                 .fillMaxSize()
-                .navigationBarLandscapeSpacer()
+                .cosmosNavigationBarLandscapeSpacer()
                 .verticalScroll(
                     state = rememberScrollState(),
                 ),
@@ -630,7 +630,7 @@ internal fun AddTransactionScreenUI(
                     }
                 },
             )
-            NavigationBarsAndImeSpacer()
+            CosmosNavigationBarsAndImeSpacer()
         }
     }
 }

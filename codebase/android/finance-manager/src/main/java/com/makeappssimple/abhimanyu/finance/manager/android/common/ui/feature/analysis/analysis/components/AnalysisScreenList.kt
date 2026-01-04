@@ -25,9 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.rememberTextMeasurer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.analysis.AnalysisListItem
 
 @Composable
@@ -51,7 +51,7 @@ internal fun AnalysisScreenList(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxSize()
-            .navigationBarLandscapeSpacer(),
+            .cosmosNavigationBarLandscapeSpacer(),
     ) {
         items(
             items = uiState.analysisListItemData,
@@ -66,7 +66,7 @@ internal fun AnalysisScreenList(
             )
         }
         item {
-            NavigationBarsAndImeSpacer()
+            CosmosNavigationBarsAndImeSpacer()
         }
     }
 }

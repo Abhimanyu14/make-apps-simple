@@ -26,10 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosHorizontalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNonFillingVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartLegendItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.HorizontalSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NonFillingVerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.composeColor
 
@@ -50,7 +50,7 @@ internal fun PieChartLegend(
                     Dot(
                         color = item.color.composeColor,
                     )
-                    HorizontalSpacer(
+                    CosmosHorizontalSpacer(
                         width = 8.dp,
                     )
                     CosmosText(
@@ -64,7 +64,7 @@ internal fun PieChartLegend(
                 }
 
                 if (index != items.lastIndex) {
-                    NonFillingVerticalSpacer(
+                    CosmosNonFillingVerticalSpacer(
                         height = 4.dp,
                     )
                 }

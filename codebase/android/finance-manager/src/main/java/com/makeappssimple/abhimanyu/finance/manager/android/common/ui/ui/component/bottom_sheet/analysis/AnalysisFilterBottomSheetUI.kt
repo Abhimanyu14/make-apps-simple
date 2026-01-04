@@ -29,10 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.date_picker.MyDatePicker
@@ -255,6 +255,6 @@ internal fun AnalysisFilterBottomSheetUI(
                 )
             }
         }
-        NavigationBarsAndImeSpacer()
+        CosmosNavigationBarsAndImeSpacer()
     }
 }
