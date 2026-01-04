@@ -26,7 +26,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.NullableComposableContent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.NullableComposableContent
 
 @Immutable
 internal data class MyOutlinedTextFieldData(

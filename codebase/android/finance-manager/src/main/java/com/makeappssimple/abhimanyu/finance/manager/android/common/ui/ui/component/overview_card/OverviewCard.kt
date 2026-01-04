@@ -38,11 +38,11 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.butt
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_OVERVIEW_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.ComposePieChart
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R

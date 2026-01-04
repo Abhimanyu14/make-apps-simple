@@ -50,11 +50,11 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myDarkColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myLightColorScheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object MyTimePickerConstants {

@@ -28,9 +28,9 @@ import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.NullableComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.ComposableContent
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.NullableComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.navigation_back_button.MyNavigationBackButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.navigation_back_button.MyNavigationBackButtonEvents
 

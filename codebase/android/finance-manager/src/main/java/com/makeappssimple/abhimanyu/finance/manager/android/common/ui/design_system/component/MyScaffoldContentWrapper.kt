@@ -25,9 +25,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ColumnScopedComposableContent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.ColumnScopedComposableContent
 
 @Composable
 internal fun MyScaffoldContentWrapper(

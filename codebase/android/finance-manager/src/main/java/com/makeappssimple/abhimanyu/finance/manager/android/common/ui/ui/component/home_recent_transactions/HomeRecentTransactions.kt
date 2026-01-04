@@ -26,9 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 

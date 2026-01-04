@@ -22,7 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 
 internal val myLightColorScheme: ColorScheme = lightColorScheme(
     primary = Primary,

@@ -27,10 +27,10 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 
 @Immutable

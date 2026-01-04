@@ -32,8 +32,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.shimmer.shimmer
 
 @Composable
