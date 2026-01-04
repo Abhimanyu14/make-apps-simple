@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.progress_indicator
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun MyLinearProgressIndicator(
+public fun CosmosLinearProgressIndicator(
     modifier: Modifier = Modifier,
 ) {
     LinearProgressIndicator(

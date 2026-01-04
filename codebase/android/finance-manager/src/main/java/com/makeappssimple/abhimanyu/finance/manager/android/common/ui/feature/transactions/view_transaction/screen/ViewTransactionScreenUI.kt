@@ -29,12 +29,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.progress_indicator.CosmosLinearProgressIndicator
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_VIEW_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_VIEW_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.event.ViewTransactionScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.state.ViewTransactionScreenUIState
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.MyLinearProgressIndicator
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.VerticalSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.navigationBarLandscapeSpacer
@@ -124,7 +124,7 @@ internal fun ViewTransactionScreenUI(
                 AnimatedVisibility(
                     visible = uiState.isLoading,
                 ) {
-                    MyLinearProgressIndicator()
+                    CosmosLinearProgressIndicator()
                 }
             }
             if (uiState.transactionListItemData.isNotNull()) {
