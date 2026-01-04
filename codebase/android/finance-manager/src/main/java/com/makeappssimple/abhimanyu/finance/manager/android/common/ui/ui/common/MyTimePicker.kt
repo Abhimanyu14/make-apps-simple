@@ -45,12 +45,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myDarkColorScheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.myLightColorScheme
@@ -233,7 +233,7 @@ private fun TimePickerDialog(
                                 weight = 1F,
                             ),
                     )
-                    MyTextButton(
+                    CosmosTextButton(
                         onClick = onCancel,
                     ) {
                         CosmosText(
@@ -242,7 +242,7 @@ private fun TimePickerDialog(
                             ),
                         )
                     }
-                    MyTextButton(
+                    CosmosTextButton(
                         onClick = onConfirm,
                     ) {
                         CosmosText(

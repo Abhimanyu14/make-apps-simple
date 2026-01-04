@@ -20,28 +20,17 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.onClick
-import androidx.compose.ui.semantics.semantics
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 
 @Composable
 public fun CosmosTextButton(
     modifier: Modifier = Modifier,
-    onClickLabel: CosmosStringResource,
+    enabled: Boolean = true,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val onClickLabelText = onClickLabel.text
     TextButton(
         onClick = onClick,
+        enabled = enabled,
         content = content,
-        modifier = modifier
-            .semantics {
-                onClick(
-                    label = onClickLabelText,
-                    action = null,
-                )
-            },
     )
 }

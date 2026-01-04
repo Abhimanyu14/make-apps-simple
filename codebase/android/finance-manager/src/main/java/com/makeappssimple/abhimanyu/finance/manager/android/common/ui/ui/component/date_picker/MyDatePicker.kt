@@ -30,10 +30,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.orZero
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
@@ -93,7 +93,7 @@ internal fun MyDatePicker(
                 handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
             },
             confirmButton = {
-                MyTextButton(
+                CosmosTextButton(
                     onClick = {
                         val startOfDayTimestamp = MyLocalDate(
                             timestamp = datePickerState.selectedDateMillis.orZero(),
@@ -114,7 +114,7 @@ internal fun MyDatePicker(
                 }
             },
             dismissButton = {
-                MyTextButton(
+                CosmosTextButton(
                     onClick = {
                         handleEvent(MyDatePickerEvent.OnNegativeButtonClick)
                     },

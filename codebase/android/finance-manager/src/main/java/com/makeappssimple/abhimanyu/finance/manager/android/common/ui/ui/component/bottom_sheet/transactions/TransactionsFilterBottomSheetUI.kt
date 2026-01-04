@@ -48,6 +48,7 @@ import com.makeappssimple.abhimanyu.common.core.extensions.addIfDoesNotContainIt
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.core.extensions.map
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
@@ -60,7 +61,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.minimumBottomSheetHeight
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.NavigationBarsAndImeSpacer
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.button.MyTextButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.component.statusBarSpacer
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.design_system.theme.FinanceManagerAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.chip.ChipUIData
@@ -621,7 +621,7 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         ),
                 )
             }
-            MyTextButton(
+            CosmosTextButton(
                 onClick = onClearButtonClick,
                 modifier = Modifier
                     .padding(
@@ -767,7 +767,7 @@ private fun TransactionFilterBottomSheetFilterGroup(
                         ),
                 )
             }
-            MyTextButton(
+            CosmosTextButton(
                 onClick = onClearButtonClick,
                 modifier = Modifier
                     .padding(

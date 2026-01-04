@@ -71,7 +71,6 @@ public fun CosmosDialog(
             confirmButton = {
                 cosmosDialogData.confirmButtonStringResource?.let {
                     CosmosTextButton(
-                        onClickLabel = cosmosDialogData.confirmButtonStringResource,
                         onClick = {
                             handleEvent(CosmosDialogEvent.OnConfirmButtonClick)
                         },
@@ -85,7 +84,6 @@ public fun CosmosDialog(
             dismissButton = {
                 cosmosDialogData.dismissButtonStringResource?.let {
                     CosmosTextButton(
-                        onClickLabel = cosmosDialogData.dismissButtonStringResource,
                         onClick = {
                             handleEvent(CosmosDialogEvent.OnDismissButtonClick)
                         },
