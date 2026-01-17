@@ -40,13 +40,13 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.cosmosShimmer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.match_row_size.matchRowSize
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_TOTAL_BALANCE_CARD
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.match_row_size.matchRowSize
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 private object TotalBalanceCardConstants {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.fading_edge
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.fading_edge
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotZero
 
 private object FadingEdgeConstants {
     const val DEFAULT_PERCENTAGE = 0.1F
@@ -35,7 +34,7 @@ private object FadingEdgeConstants {
     val defaultEnd = 8.dp
 }
 
-internal fun Modifier.fadingEdge(
+public fun Modifier.fadingEdge(
     start: Dp = FadingEdgeConstants.defaultStart,
     end: Dp = FadingEdgeConstants.defaultEnd,
 ): Modifier {
@@ -52,12 +51,12 @@ internal fun Modifier.fadingEdge(
                 ) {
                     size.width.toDp()
                 }
-                val startPercentage = if (size.width.isNotZero()) {
+                val startPercentage = if (size.width != 0F) {
                     start / widthInDp
                 } else {
                     FadingEdgeConstants.DEFAULT_PERCENTAGE
                 }
-                val endPercentage = if (size.width.isNotZero()) {
+                val endPercentage = if (size.width != 0F) {
                     end / widthInDp
                 } else {
                     FadingEdgeConstants.DEFAULT_PERCENTAGE

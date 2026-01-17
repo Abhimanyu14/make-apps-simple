@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.match_row_size
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.match_row_size
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
@@ -23,22 +23,24 @@ import androidx.compose.ui.unit.Constraints
 /**
  * Source - https://stackoverflow.com/a/72428903/9636037
  */
-internal fun Modifier.matchRowSize(): Modifier {
+public fun Modifier.matchRowSize(): Modifier {
     return layout { measurable, constraints ->
         if (constraints.maxHeight == Constraints.Infinity) {
             layout(
-                0,
-                0
+                width = 0,
+                height = 0,
             ) {}
         } else {
-            val placeable = measurable.measure(constraints)
+            val placeable = measurable.measure(
+                constraints = constraints,
+            )
             layout(
-                placeable.width,
-                placeable.height
+                width = placeable.width,
+                height = placeable.height,
             ) {
                 placeable.place(
-                    0,
-                    0
+                    x = 0,
+                    y = 0,
                 )
             }
         }
