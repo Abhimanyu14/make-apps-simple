@@ -16,7 +16,7 @@
 
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time_picker
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -34,7 +34,6 @@ import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -48,38 +47,22 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.butt
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.financeManagerDarkColorScheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.financeManagerLightColorScheme
-import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
 
-private object MyTimePickerConstants {
+private object CosmosTimePickerConstants {
     const val MIN_SCREEN_HEIGHT_REQUIRED_FOR_TIMEPICKER = 400
 }
 
-@Immutable
-internal data class MyTimePickerData(
-    val isVisible: Boolean = false,
-    val selectedLocalDate: MyLocalTime? = null,
-)
-
-@Immutable
-internal sealed class MyTimePickerEvent {
-    data object OnNegativeButtonClick : MyTimePickerEvent()
-    internal data class OnPositiveButtonClick(
-        val selectedTime: MyLocalTime,
-    ) : MyTimePickerEvent()
-}
-
 @Composable
-internal fun MyTimePicker(
+public fun CosmosTimePicker(
     modifier: Modifier = Modifier,
-    data: MyTimePickerData,
-    handleEvent: (event: MyTimePickerEvent) -> Unit = {},
+    data: CosmosTimePickerData,
+    handleEvent: (event: CosmosTimePickerEvent) -> Unit = {},
 ) {
     val configuration = LocalConfiguration.current
     val state = rememberTimePickerState(
@@ -90,21 +73,21 @@ internal fun MyTimePicker(
     }
 
     if (data.isVisible) {
-        TimePickerDialog(
+        CosmosTimePickerDialog(
             modifier = modifier,
             titleStringResource = CosmosStringResource.Id(
                 id = if (showingPicker.value) {
-                    R.string.finance_manager_time_picker_touch_input_title
+                    R.string.cosmos_time_picker_touch_input_title
                 } else {
-                    R.string.finance_manager_time_picker_text_input_title
+                    R.string.cosmos_time_picker_text_input_title
                 },
             ),
             onCancel = {
-                handleEvent(MyTimePickerEvent.OnNegativeButtonClick)
+                handleEvent(CosmosTimePickerEvent.OnNegativeButtonClick)
             },
             onConfirm = {
                 handleEvent(
-                    MyTimePickerEvent.OnPositiveButtonClick(
+                    CosmosTimePickerEvent.OnPositiveButtonClick(
                         selectedTime = MyLocalTime.of(
                             state.hour,
                             state.minute
@@ -117,9 +100,9 @@ internal fun MyTimePicker(
                     CosmosIconButton(
                         onClickLabelStringResource = CosmosStringResource.Id(
                             id = if (showingPicker.value) {
-                                R.string.finance_manager_time_picker_touch_input_switch_icon_button_content_description
+                                R.string.cosmos_time_picker_touch_input_switch_icon_button_content_description
                             } else {
-                                R.string.finance_manager_time_picker_text_input_switch_icon_button_content_description
+                                R.string.cosmos_time_picker_text_input_switch_icon_button_content_description
                             },
                         ),
                         onClick = {
@@ -152,8 +135,8 @@ internal fun MyTimePicker(
                 timeSelectorUnselectedContentColor = CosmosAppTheme.colorScheme.onSurfaceVariant,
             )
 
-            TimePickerTheme {
-                if (showingPicker.value && configuration.screenHeightDp > MyTimePickerConstants.MIN_SCREEN_HEIGHT_REQUIRED_FOR_TIMEPICKER) {
+            CosmosTimePickerTheme {
+                if (showingPicker.value && configuration.screenHeightDp > CosmosTimePickerConstants.MIN_SCREEN_HEIGHT_REQUIRED_FOR_TIMEPICKER) {
                     TimePicker(
                         state = state,
                         colors = colors,
@@ -170,7 +153,7 @@ internal fun MyTimePicker(
 }
 
 @Composable
-private fun TimePickerDialog(
+private fun CosmosTimePickerDialog(
     modifier: Modifier = Modifier,
     titleStringResource: CosmosStringResource,
     onCancel: () -> Unit,
@@ -238,7 +221,7 @@ private fun TimePickerDialog(
                     ) {
                         CosmosText(
                             stringResource = CosmosStringResource.Id(
-                                id = R.string.finance_manager_time_picker_negative_button_text,
+                                id = R.string.cosmos_time_picker_negative_button_text,
                             ),
                         )
                     }
@@ -247,7 +230,7 @@ private fun TimePickerDialog(
                     ) {
                         CosmosText(
                             stringResource = CosmosStringResource.Id(
-                                id = R.string.finance_manager_time_picker_positive_button_text,
+                                id = R.string.cosmos_time_picker_positive_button_text,
                             ),
                         )
                     }
@@ -258,15 +241,15 @@ private fun TimePickerDialog(
 }
 
 @Composable
-private fun TimePickerTheme(
+private fun CosmosTimePickerTheme(
     content: ComposableContent,
 ) {
     CosmosAppTheme(
-        lightColorScheme = financeManagerLightColorScheme
+        lightColorScheme = CosmosAppTheme.colorScheme
             .copy(
                 outline = CosmosAppTheme.colorScheme.onSurfaceVariant,
             ),
-        darkColorScheme = financeManagerDarkColorScheme
+        darkColorScheme = CosmosAppTheme.colorScheme
             .copy(
                 outline = CosmosAppTheme.colorScheme.onSurfaceVariant,
             ),

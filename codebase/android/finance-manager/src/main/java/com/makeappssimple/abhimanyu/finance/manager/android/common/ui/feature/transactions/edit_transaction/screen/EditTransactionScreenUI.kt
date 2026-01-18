@@ -55,6 +55,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyOutlinedTextFieldEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time_picker.CosmosTimePicker
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time_picker.CosmosTimePickerData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time_picker.CosmosTimePickerEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
@@ -64,9 +67,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.EditTransactionScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.state.stringResourceId
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.MyTimePicker
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.MyTimePickerData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.MyTimePickerEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.account.SelectAccountBottomSheet
@@ -240,18 +240,18 @@ internal fun EditTransactionScreenUI(
                 }
             },
         )
-        MyTimePicker(
-            data = MyTimePickerData(
+        CosmosTimePicker(
+            data = CosmosTimePickerData(
                 isVisible = uiState.isTransactionTimePickerDialogVisible,
                 selectedLocalDate = uiState.transactionTime,
             ),
             handleEvent = { event ->
                 when (event) {
-                    is MyTimePickerEvent.OnNegativeButtonClick -> {
+                    is CosmosTimePickerEvent.OnNegativeButtonClick -> {
                         handleUIEvent(EditTransactionScreenUIEvent.OnTransactionTimePickerDismissed)
                     }
 
-                    is MyTimePickerEvent.OnPositiveButtonClick -> {
+                    is CosmosTimePickerEvent.OnPositiveButtonClick -> {
                         handleUIEvent(
                             EditTransactionScreenUIEvent.OnTransactionTimeUpdated(
                                 updatedTransactionTime = event.selectedTime,
