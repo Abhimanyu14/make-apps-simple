@@ -26,10 +26,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
+private const val DEFAULT_TIMEOUT_MILLIS = 5000L
+
 public fun Flow<Boolean>.defaultBooleanStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
 ): StateFlow<Boolean> {
     return this.stateIn(
@@ -42,7 +44,7 @@ public fun Flow<Boolean>.defaultBooleanStateIn(
 public fun Flow<Long>.defaultLongStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
 ): StateFlow<Long> {
     return this.stateIn(
@@ -55,7 +57,7 @@ public fun Flow<Long>.defaultLongStateIn(
 public fun <T> Flow<ImmutableList<T>>.defaultImmutableListStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
 ): StateFlow<ImmutableList<T>> {
     return this.stateIn(
@@ -68,7 +70,7 @@ public fun <T> Flow<ImmutableList<T>>.defaultImmutableListStateIn(
 public fun <K, V> Flow<ImmutableMap<K, V>>.defaultMapStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
 ): StateFlow<ImmutableMap<K, V>> {
     return this.stateIn(
@@ -81,7 +83,7 @@ public fun <K, V> Flow<ImmutableMap<K, V>>.defaultMapStateIn(
 public fun <T> Flow<List<T>>.defaultListStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
 ): StateFlow<List<T>> {
     return this.stateIn(
@@ -94,7 +96,7 @@ public fun <T> Flow<List<T>>.defaultListStateIn(
 public fun <T> Flow<T>.defaultNullableObjectStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
     initialValue: T? = null,
 ): StateFlow<T?> {
@@ -108,7 +110,7 @@ public fun <T> Flow<T>.defaultNullableObjectStateIn(
 public fun <T> Flow<T>.defaultObjectStateIn(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(
-        stopTimeoutMillis = 5000,
+        stopTimeoutMillis = DEFAULT_TIMEOUT_MILLIS,
     ),
     initialValue: T,
 ): StateFlow<T> {
