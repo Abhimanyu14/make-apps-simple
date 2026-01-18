@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.expandable_item
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
