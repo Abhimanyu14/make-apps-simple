@@ -473,11 +473,11 @@ internal fun TransactionsFiltersBottomSheetUI(
                             selectedAccountIds = selectedAccountsIds,
                             selectedTransactionForIds = selectedTransactionForValuesIds,
                             selectedTransactionTypes = selectedTransactionTypes,
-                            fromTimestamp = fromDate.toStartOfDayEpochMilli(),
+                            fromTimestamp = fromDate.toStartOfLocalDayEpochMilli(),
                             toTimestamp = if (isDateFilterCleared) {
                                 null
                             } else {
-                                toDate.toStartOfDayEpochMilli()
+                                toDate.toStartOfLocalDayEpochMilli()
                             },
                         )
                     )

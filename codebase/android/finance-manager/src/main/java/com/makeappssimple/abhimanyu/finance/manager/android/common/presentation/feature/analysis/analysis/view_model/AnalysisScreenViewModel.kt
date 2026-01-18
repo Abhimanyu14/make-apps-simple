@@ -216,8 +216,9 @@ internal class AnalysisScreenViewModel(
             return true
         }
         val fromDateStartOfDayTimestamp =
-            startLocalDate.toStartOfDayEpochMilli()
-        val toDateStartOfDayTimestamp = endLocalDate.toStartOfDayEpochMilli()
+            startLocalDate.toStartOfLocalDayEpochMilli()
+        val toDateStartOfDayTimestamp =
+            endLocalDate.toStartOfLocalDayEpochMilli()
         return transactionData.transaction.transactionTimestamp in fromDateStartOfDayTimestamp until toDateStartOfDayTimestamp
     }
     // endregion

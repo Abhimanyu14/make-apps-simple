@@ -63,11 +63,18 @@ public class MyLocalDate(
         )
     }
 
-    public fun toStartOfDayEpochMilli(
+    public fun toStartOfLocalDayEpochMilli(
         zoneId: ZoneId = DEFAULT_ZONE_ID,
     ): Long {
-        return this.localDate
+        return localDate
             .atStartOfDay(zoneId)
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    public fun toStartOfDayEpochMilli(): Long {
+        return localDate
+            .atStartOfDay(ZoneId.of("UTC"))
             .toInstant()
             .toEpochMilli()
     }
