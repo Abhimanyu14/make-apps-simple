@@ -17,9 +17,9 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("makeappssimple.android.library")
-    id("makeappssimple.android.kover")
-    id("makeappssimple.android.ksp")
+    alias(libs.plugins.plugin.makeappssimple.android.library)
+    alias(libs.plugins.plugin.makeappssimple.android.kover)
+    alias(libs.plugins.plugin.makeappssimple.android.ksp)
 }
 
 android {

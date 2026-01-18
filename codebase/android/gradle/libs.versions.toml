@@ -191,6 +191,10 @@ plugin-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization"
 plugin-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "plugin-kotlinx-binary-compatibility-validator" }
 plugin-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "plugin-kotlin-kover" }
 plugin-ksp = { id = "com.google.devtools.ksp", version.ref = "plugin-ksp" }
+plugin-makeappssimple-android-application = { id = "makeappssimple.android.application" }
+plugin-makeappssimple-android-library = { id = "makeappssimple.android.library" }
+plugin-makeappssimple-android-kover = { id = "makeappssimple.android.kover" }
+plugin-makeappssimple-android-ksp = { id = "makeappssimple.android.ksp" }
 plugin-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "plugin-maven-publish" }
 plugin-room = { id = "androidx.room", version.ref = "androidx-room" }
 plugin-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }

@@ -21,7 +21,7 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(rootProject.file("key.properties")))
 
 plugins {
-    id("makeappssimple.android.application")
+    alias(libs.plugins.plugin.makeappssimple.android.application)
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
