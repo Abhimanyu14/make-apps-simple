@@ -29,11 +29,11 @@ class AndroidKspConventionPlugin : Plugin<Project> {
             extensions.configure<KspExtension> {
                 arg(
                     "KOIN_CONFIG_CHECK",
-                    "true"
+                    "true",
                 )
                 arg(
                     "KOIN_DEFAULT_MODULE",
-                    "false"
+                    "false",
                 )
             }
         }

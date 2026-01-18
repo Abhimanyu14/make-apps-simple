@@ -21,10 +21,10 @@ plugins {
 group = "com.makeappssimple.abhimanyu.convention"
 
 dependencies {
-    compileOnly("com.android.tools.build:gradle:8.10.1")
-    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.20")
-    compileOnly("org.jetbrains.kotlinx:kover-gradle-plugin:0.9.2")
-    compileOnly("com.google.devtools.ksp:symbol-processing-gradle-plugin:2.2.10-2.0.2")
+    compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.kotlin.gradle.plugin)
+    compileOnly(libs.kover.gradle.plugin)
+    compileOnly(libs.ksp.gradle.plugin)
 }
 
 gradlePlugin {
