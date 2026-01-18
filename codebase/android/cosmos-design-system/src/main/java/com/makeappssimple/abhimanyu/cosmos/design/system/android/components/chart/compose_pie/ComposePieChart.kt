@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -29,14 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.legend.PieChartLegend
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.data.PieChartData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.legend.PieChartLegend
 
 /**
  * Source - https://github.com/humawork/compose-charts
  */
 @Composable
-internal fun ComposePieChart(
+public fun ComposePieChart(
     data: PieChartData,
 ) {
     val fractions = remember(

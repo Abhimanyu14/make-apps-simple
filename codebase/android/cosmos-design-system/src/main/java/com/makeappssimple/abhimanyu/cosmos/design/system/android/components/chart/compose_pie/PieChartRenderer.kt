@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween

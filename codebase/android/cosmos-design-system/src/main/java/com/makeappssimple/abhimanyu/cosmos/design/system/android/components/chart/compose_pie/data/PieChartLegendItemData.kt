@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.data
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 
 @Immutable
-public data class PieChartItemData(
+internal data class PieChartLegendItemData(
     val stringResource: CosmosStringResource,
-    val value: Float,
     val color: CosmosColor,
 )

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.legend
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.legend
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,11 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.data.PieChartLegendItemData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosHorizontalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNonFillingVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartLegendItemData
 
 @Composable
 internal fun PieChartLegend(

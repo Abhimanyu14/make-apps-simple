@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.core.extensions.isNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.ComposePieChart
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
@@ -44,7 +45,6 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIco
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.COMPONENT_OVERVIEW_CARD
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.ComposePieChart
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
 
 @Immutable

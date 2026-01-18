@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data
+package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.data
 
 // TODO(Abhi): Check why this can not be immutable
 // @Immutable
