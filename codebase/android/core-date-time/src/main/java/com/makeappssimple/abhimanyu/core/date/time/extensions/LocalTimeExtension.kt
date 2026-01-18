@@ -14,10 +14,29 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time
+package com.makeappssimple.abhimanyu.core.date.time.extensions
 
-import java.time.LocalDateTime
+import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultZoneId
+import java.time.LocalTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
-public class MyLocalDateTime(
-    public val localDateTime: LocalDateTime,
-)
+/**
+ * Sample format - 08:24 AM.
+ */
+public fun LocalTime.formattedTime(
+    zoneId: ZoneId = getSystemDefaultZoneId(),
+): String {
+    return DateTimeFormatter
+        .ofPattern("hh:mm a")
+        .withZone(zoneId)
+        .format(this)
+        .replace(
+            "am",
+            "AM"
+        )
+        .replace(
+            "pm",
+            "PM"
+        )
+}

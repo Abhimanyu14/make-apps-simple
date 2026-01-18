@@ -43,11 +43,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme

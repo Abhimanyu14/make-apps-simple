@@ -18,7 +18,6 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.kotlin.android)
@@ -84,6 +83,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core-date-time"))
     implementation(project(":cosmos-design-system"))
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

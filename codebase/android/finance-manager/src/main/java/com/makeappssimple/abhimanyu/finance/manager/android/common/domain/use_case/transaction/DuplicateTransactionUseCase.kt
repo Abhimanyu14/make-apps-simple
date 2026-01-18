@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time.DateTimeKit
+import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 
 internal class DuplicateTransactionUseCase(

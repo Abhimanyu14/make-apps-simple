@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.core.date_time
+package com.makeappssimple.abhimanyu.core.time
 
+import com.makeappssimple.abhimanyu.core.date.time.DateTimeKitImpl
 import io.kotest.matchers.shouldBe
 import org.junit.Before
 import org.junit.Test

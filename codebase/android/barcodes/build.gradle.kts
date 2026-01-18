@@ -100,6 +100,7 @@ android {
 dependencies {
     implementation(project(":barcode-generator"))
     implementation(project(":common"))
+    implementation(project(":core-date-time"))
     implementation(project(":cosmos-design-system"))
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

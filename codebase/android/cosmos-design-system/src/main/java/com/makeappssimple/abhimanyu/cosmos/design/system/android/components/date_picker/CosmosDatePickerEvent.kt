@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.date_picker
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 
 @Immutable
 public sealed class CosmosDatePickerEvent {

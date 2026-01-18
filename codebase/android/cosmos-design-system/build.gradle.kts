@@ -83,6 +83,8 @@ composeCompiler {
 }
 
 dependencies {
+    implementation(project(":core-date-time"))
+    
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)

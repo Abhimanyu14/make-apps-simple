@@ -1,6 +1,6 @@
 # Prompt
 
-1. Make changes to migrate all text to CosmosStringResource. Use existing code as reference.
+1. Check all the usages of "java.time" in this codebase from all modules. If we are to move all of them into a new module, what would be an appropriate name for the new module?
 
 # Scope
 

@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time_picker
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
 
 @Immutable
 public data class CosmosTimePickerData(

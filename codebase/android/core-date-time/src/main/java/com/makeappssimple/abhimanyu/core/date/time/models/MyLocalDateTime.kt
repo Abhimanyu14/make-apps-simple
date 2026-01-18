@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.core.extensions
+package com.makeappssimple.abhimanyu.core.date.time.models
 
-import java.time.ZonedDateTime
+import java.time.LocalDateTime
 
-/**
- * [ZonedDateTime] to [Long].
- */
-public fun ZonedDateTime.toEpochMilli(): Long {
-    return this
-        .toInstant()
-        .toEpochMilli()
-}
+public class MyLocalDateTime(
+    public val localDateTime: LocalDateTime,
+)

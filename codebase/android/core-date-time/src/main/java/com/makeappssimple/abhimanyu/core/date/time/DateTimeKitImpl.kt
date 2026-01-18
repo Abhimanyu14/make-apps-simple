@@ -14,41 +14,151 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
+package com.makeappssimple.abhimanyu.core.date.time
 
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDateTime
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedDate
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedDateAndTime
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedDayOfWeek
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedMonth
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedReadableDateAndTime
-import com.makeappssimple.abhimanyu.common.core.extensions.formattedYear
-import com.makeappssimple.abhimanyu.common.core.extensions.toEpochMilli
-import com.makeappssimple.abhimanyu.common.core.extensions.toZonedDateTime
+import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedDate
+import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedDateAndTime
+import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedDayOfWeek
+import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedMonth
+import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedReadableDateAndTime
+import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedYear
+import com.makeappssimple.abhimanyu.core.date.time.extensions.toEpochMilli
+import com.makeappssimple.abhimanyu.core.date.time.extensions.toZonedDateTime
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDateTime
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
 import java.time.Instant
 import java.time.YearMonth
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 private object DateTimeUtilImplConstants {
     const val LAST_MONTH_OF_YEAR = 12
 }
 
-internal class DateTimeKitImpl() : DateTimeKit {
+@OptIn(ExperimentalTime::class)
+public class DateTimeKitImpl(
+    private val clock: Clock = Clock.System,
+    private val systemDefaultZoneId: ZoneId = ZoneId.systemDefault(),
+) : DateTimeKit {
     override fun getCurrentFormattedDateAndTime(
         timestamp: Long,
         zoneId: ZoneId,
     ): String {
-        return getFormattedDateAndTime(
-            timestamp = timestamp,
-            zoneId = zoneId,
-        )
+        return Instant
+            .ofEpochMilli(timestamp)
+            .formattedDateAndTime(
+                zoneId = zoneId,
+            )
     }
 
     override fun getCurrentLocalDate(): MyLocalDate {
         return MyLocalDate.now()
+    }
+
+    override fun getCurrentLocalTime(): MyLocalTime {
+        return MyLocalTime.now()
+    }
+
+    override fun getCurrentTimeMillis(): Long {
+        return clock.now().toEpochMilliseconds()
+    }
+
+    override fun getFormattedDate(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): String {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .formattedDate(
+                zoneId = zoneId,
+            )
+    }
+
+    override fun getFormattedDateAndTime(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): String {
+        val millis = Instant
+            .ofEpochMilli(timestamp)
+        val formattedDateAndTime = DateTimeFormatter
+            .ofPattern("yyyy-MMM-dd, hh:mm a")
+            .withZone(zoneId)
+            .format(millis)
+            .replace(
+                oldValue = "am",
+                newValue = "AM",
+            )
+            .replace(
+                oldValue = "pm",
+                newValue = "PM",
+            )
+        return formattedDateAndTime
+    }
+
+    override fun getFormattedDateWithDayOfWeek(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): String {
+        val formattedDate = getFormattedDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
+        val formattedDayOfWeek = Instant
+            .ofEpochMilli(timestamp)
+            .formattedDayOfWeek(
+                zoneId = zoneId,
+            )
+        return "$formattedDate ($formattedDayOfWeek)"
+    }
+
+    override fun getFormattedMonth(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): String {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .formattedMonth(
+                zoneId = zoneId,
+            )
+    }
+
+    override fun getFormattedYear(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): String {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .formattedYear(
+                zoneId = zoneId,
+            )
+    }
+
+    override fun getLocalDate(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): MyLocalDate {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .toZonedDateTime(
+                zoneId = zoneId,
+            )
+            .toMyLocalDate()
+    }
+
+    override fun getLocalTime(
+        timestamp: Long,
+        zoneId: ZoneId,
+    ): MyLocalTime {
+        return Instant
+            .ofEpochMilli(timestamp)
+            .toZonedDateTime(
+                zoneId = zoneId,
+            )
+            .toMyLocalTime()
     }
 
     override fun getNextDayTimestamp(
@@ -123,77 +233,6 @@ internal class DateTimeKitImpl() : DateTimeKit {
             .toEpochMilli()
     }
 
-    override fun getCurrentLocalTime(): MyLocalTime {
-        return MyLocalTime.now()
-    }
-
-    override fun getCurrentTimeMillis(): Long {
-        return getCurrentInstant().toEpochMilli()
-    }
-
-    override fun getSystemDefaultZoneId(): ZoneId {
-        return ZoneId.systemDefault()
-    }
-
-    /**
-     * Sample format - 30 Mar, 2023.
-     */
-    override fun getFormattedDate(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedDate(
-                zoneId = zoneId,
-            )
-    }
-
-    override fun getFormattedDateWithDayOfWeek(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        val formattedDate = getFormattedDate(
-            timestamp = timestamp,
-        )
-        val formattedDayOfWeek = getFormattedDayOfWeek(
-            timestamp = timestamp,
-            zoneId = zoneId,
-        )
-        return "$formattedDate ($formattedDayOfWeek)"
-    }
-
-    /**
-     * Sample format - March, 2023.
-     */
-    override fun getFormattedMonth(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedMonth(
-                zoneId = zoneId,
-            )
-    }
-
-    /**
-     * Sample format - 2023.
-     */
-    override fun getFormattedYear(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedYear(
-                zoneId = zoneId,
-            )
-    }
-
-    /**
-     * Sample format - 30 Mar, 2023 at 08:24 AM.
-     */
     override fun getReadableDateAndTime(
         timestamp: Long,
         zoneId: ZoneId,
@@ -203,42 +242,6 @@ internal class DateTimeKitImpl() : DateTimeKit {
             .formattedReadableDateAndTime(
                 zoneId = zoneId,
             )
-    }
-
-    override fun getTimestamp(
-        date: MyLocalDate,
-        time: MyLocalTime,
-        zoneId: ZoneId,
-    ): Long {
-        return date
-            .atTime(time)
-            .toEpochMilli(
-                zoneId = zoneId,
-            )
-    }
-
-    override fun getLocalDate(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): MyLocalDate {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalDate()
-    }
-
-    override fun getLocalTime(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): MyLocalTime {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalTime()
     }
 
     override fun getStartOfDayTimestamp(
@@ -390,36 +393,20 @@ internal class DateTimeKitImpl() : DateTimeKit {
             )
     }
 
-    /**
-     * Sample format - Monday.
-     */
-    private fun getFormattedDayOfWeek(
-        timestamp: Long,
-        zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedDayOfWeek(
-                zoneId = zoneId,
-            )
+    override fun getSystemDefaultZoneId(): ZoneId {
+        return systemDefaultZoneId
     }
 
-    /**
-     * Sample format - 2023-Mar-30, 08-24 AM.
-     */
-    private fun getFormattedDateAndTime(
-        timestamp: Long,
+    override fun getTimestamp(
+        date: MyLocalDate,
+        time: MyLocalTime,
         zoneId: ZoneId,
-    ): String {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .formattedDateAndTime(
+    ): Long {
+        return date
+            .atTime(time)
+            .toEpochMilli(
                 zoneId = zoneId,
             )
-    }
-
-    private fun getCurrentInstant(): Instant {
-        return Instant.now()
     }
 
     private fun MyLocalDateTime.toEpochMilli(

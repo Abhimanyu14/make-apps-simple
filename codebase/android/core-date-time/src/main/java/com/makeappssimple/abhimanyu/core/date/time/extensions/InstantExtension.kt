@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.core.extensions
+package com.makeappssimple.abhimanyu.core.date.time.extensions
 
-import com.makeappssimple.abhimanyu.common.core.date_time.getSystemDefaultZoneId
+import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultZoneId
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime

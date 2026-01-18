@@ -24,11 +24,11 @@ import com.makeappssimple.abhimanyu.common.di.AppVersionKitModule
 import com.makeappssimple.abhimanyu.common.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.common.di.ClipboardKitModule
 import com.makeappssimple.abhimanyu.common.di.CoroutineScopeModule
-import com.makeappssimple.abhimanyu.common.di.DateTimeKitModule
 import com.makeappssimple.abhimanyu.common.di.DispatcherProviderModule
 import com.makeappssimple.abhimanyu.common.di.LogKitModule
 import com.makeappssimple.abhimanyu.common.di.UriDecoderModule
 import com.makeappssimple.abhimanyu.common.di.UriEncoderModule
+import com.makeappssimple.abhimanyu.core.date.time.di.DateTimeKitModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 

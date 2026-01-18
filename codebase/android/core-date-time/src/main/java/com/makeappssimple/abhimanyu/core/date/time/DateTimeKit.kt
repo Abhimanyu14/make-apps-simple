@@ -14,26 +14,42 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.date_time
+package com.makeappssimple.abhimanyu.core.date.time
 
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalTime
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
 import java.time.ZoneId
 
-internal interface DateTimeKit {
-    fun getCurrentFormattedDateAndTime(
+/**
+ * Interface for date and time utilities.
+ *
+ * Provides methods to get the current time in milliseconds, format timestamps,
+ * and get the system's default time zone.
+ */
+public interface DateTimeKit {
+    public fun getCurrentFormattedDateAndTime(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
 
-    fun getCurrentTimeMillis(): Long
+    public fun getCurrentLocalDate(): MyLocalDate
 
-    fun getSystemDefaultZoneId(): ZoneId
+    public fun getCurrentLocalTime(): MyLocalTime
+
+    public fun getCurrentTimeMillis(): Long
 
     /**
      * Sample format - 30 Mar, 2023.
      */
-    fun getFormattedDate(
+    public fun getFormattedDate(
+        timestamp: Long,
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): String
+
+    /**
+     * Sample format - 2023-Mar-30, 08:24 AM (uses colon).
+     */
+    public fun getFormattedDateAndTime(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -41,7 +57,7 @@ internal interface DateTimeKit {
     /**
      * Sample format - 30 Mar, 2023 (Monday).
      */
-    fun getFormattedDateWithDayOfWeek(
+    public fun getFormattedDateWithDayOfWeek(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -49,7 +65,7 @@ internal interface DateTimeKit {
     /**
      * Sample format - March, 2023.
      */
-    fun getFormattedMonth(
+    public fun getFormattedMonth(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
@@ -57,106 +73,104 @@ internal interface DateTimeKit {
     /**
      * Sample format - 2023.
      */
-    fun getFormattedYear(
+    public fun getFormattedYear(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): String
 
-    /**
-     * Sample format - 30 Mar, 2023 at 08:24 AM.
-     */
-    fun getReadableDateAndTime(
+    public fun getLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): String
+    ): MyLocalDate
 
-    fun getTimestamp(
-        date: MyLocalDate = getLocalDate(),
-        time: MyLocalTime = getLocalTime(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getStartOfDayTimestamp(
-        timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getEndOfDayTimestamp(
-        timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getStartOfMonthTimestamp(
-        timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getEndOfMonthTimestamp(
-        timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getStartOfYearTimestamp(
-        timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getEndOfYearTimestamp(
-        timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): Long
-
-    fun getCurrentLocalTime(): MyLocalTime
-
-    fun getLocalTime(
+    public fun getLocalTime(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): MyLocalTime
 
-    fun getCurrentLocalDate(): MyLocalDate
-
-    fun getNextDayTimestamp(
+    public fun getNextDayTimestamp(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    fun getNextMonthTimestamp(
+    public fun getNextMonthTimestamp(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    fun getNextYearTimestamp(
+    public fun getNextYearTimestamp(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    fun getPreviousDayTimestamp(
+    public fun getPreviousDayTimestamp(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    fun getPreviousMonthTimestamp(
+    public fun getPreviousMonthTimestamp(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    fun getPreviousYearTimestamp(
+    public fun getPreviousYearTimestamp(
         timestamp: Long,
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): Long
 
-    fun getLocalDate(
+    /**
+     * Sample format - 30 Mar, 2023 at 08:24 AM.
+     */
+    public fun getReadableDateAndTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): String
+
+    public fun getStartOfDayTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long
+
+    public fun getEndOfDayTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long
+
+    public fun getStartOfMonthTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long
+
+    public fun getEndOfMonthTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long
+
+    public fun getStartOfYearTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long
+
+    public fun getEndOfYearTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: ZoneId = getSystemDefaultZoneId(),
+    ): Long
+
+    public fun getStartOfMonthLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): MyLocalDate
 
-    fun getStartOfMonthLocalDate(
+    public fun getStartOfYearLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
     ): MyLocalDate
 
-    fun getStartOfYearLocalDate(
-        timestamp: Long = getCurrentTimeMillis(),
+    public fun getSystemDefaultZoneId(): ZoneId
+
+    public fun getTimestamp(
+        date: MyLocalDate = getLocalDate(),
+        time: MyLocalTime = getLocalTime(),
         zoneId: ZoneId = getSystemDefaultZoneId(),
-    ): MyLocalDate
+    ): Long
 }

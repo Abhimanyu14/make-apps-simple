@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time
+package com.makeappssimple.abhimanyu.core.date.time.models
 
 import java.time.LocalTime
 import java.time.ZoneId
