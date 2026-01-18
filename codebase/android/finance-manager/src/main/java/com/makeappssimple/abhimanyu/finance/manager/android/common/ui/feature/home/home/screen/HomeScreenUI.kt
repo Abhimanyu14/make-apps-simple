@@ -37,6 +37,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spac
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_HOME
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_HOME
@@ -46,7 +47,6 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toUnsignedString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartItemData
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.backup_card.BackupCard
@@ -186,7 +186,7 @@ internal fun HomeScreenUI(
                                         ).toDefaultString(),
                                     ),
                                 ),
-                                color = MyColor.TERTIARY,
+                                color = CosmosColor.TERTIARY,
                             ),
                             PieChartItemData(
                                 value = uiState.overviewCardData.expense,
@@ -198,7 +198,7 @@ internal fun HomeScreenUI(
                                         ).toUnsignedString(),
                                     ),
                                 ),
-                                color = MyColor.ERROR,
+                                color = CosmosColor.ERROR,
                             ),
                         ),
                     ),

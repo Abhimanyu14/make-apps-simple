@@ -18,11 +18,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.com
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 
 @Immutable
-internal data class PieChartItemData(
+public data class PieChartItemData(
     val stringResource: CosmosStringResource,
     val value: Float,
-    val color: MyColor,
+    val color: CosmosColor,
 )

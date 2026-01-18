@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 
 import androidx.compose.runtime.Immutable
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toDefaultString
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model.toSignedString
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.getAmountTextColor
 
 @Immutable
@@ -37,7 +37,7 @@ internal data class TransactionListItemData(
     val isRefundButtonVisible: Boolean = false,
     val isSelected: Boolean = false,
     val transactionId: Int = 0,
-    val amountColor: MyColor = MyColor.ON_BACKGROUND,
+    val amountColor: CosmosColor = CosmosColor.ON_BACKGROUND,
     val amountText: String = "",
     val dateAndTimeText: String = "",
     val emoji: String = "",

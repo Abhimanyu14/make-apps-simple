@@ -32,8 +32,6 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.compose_pie.data.PieChartLegendItemData
 
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.composeColor
-
 @Composable
 internal fun PieChartLegend(
     modifier: Modifier = Modifier,

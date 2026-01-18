@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.view_model
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.date_time.MyLocalDate
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFilter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionSortOption
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.transactions.bottom_sheet.TransactionsScreenBottomSheetType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.matchers.booleans.shouldBeFalse
@@ -189,7 +189,7 @@ internal class TransactionsScreenViewModelTest {
                                 isRefundButtonVisible = false,
                                 isSelected = false,
                                 transactionId = 102,
-                                amountColor = MyColor.ERROR,
+                                amountColor = CosmosColor.ERROR,
                                 amountText = "- ₹1,000",
                                 dateAndTimeText = "23 Aug, 2025 at 08:29 AM",
                                 emoji = "💰",
@@ -210,7 +210,7 @@ internal class TransactionsScreenViewModelTest {
                                 isRefundButtonVisible = false,
                                 isSelected = false,
                                 transactionId = 101,
-                                amountColor = MyColor.ERROR,
+                                amountColor = CosmosColor.ERROR,
                                 amountText = "- ₹1,000",
                                 dateAndTimeText = "20 May, 2024 at 08:29 AM",
                                 emoji = "💳",
@@ -248,7 +248,7 @@ internal class TransactionsScreenViewModelTest {
                             isRefundButtonVisible = false,
                             isSelected = false,
                             transactionId = 102,
-                            amountColor = MyColor.ERROR,
+                            amountColor = CosmosColor.ERROR,
                             amountText = "- ₹1,000",
                             dateAndTimeText = "23 Aug, 2025 at 08:29 AM",
                             emoji = "💰",
@@ -269,7 +269,7 @@ internal class TransactionsScreenViewModelTest {
                             isRefundButtonVisible = false,
                             isSelected = false,
                             transactionId = 101,
-                            amountColor = MyColor.ERROR,
+                            amountColor = CosmosColor.ERROR,
                             amountText = "- ₹1,000",
                             dateAndTimeText = "20 May, 2024 at 08:29 AM",
                             emoji = "💳",
@@ -336,7 +336,7 @@ internal class TransactionsScreenViewModelTest {
                             isRefundButtonVisible = false,
                             isSelected = false,
                             transactionId = 102,
-                            amountColor = MyColor.ERROR,
+                            amountColor = CosmosColor.ERROR,
                             amountText = "- ₹1,000",
                             dateAndTimeText = "23 Aug, 2025 at 08:29 AM",
                             emoji = "💰",
@@ -357,7 +357,7 @@ internal class TransactionsScreenViewModelTest {
                             isRefundButtonVisible = false,
                             isSelected = false,
                             transactionId = 1,
-                            amountColor = MyColor.ERROR,
+                            amountColor = CosmosColor.ERROR,
                             amountText = "- ₹1,000",
                             dateAndTimeText = "20 May, 2024 at 08:29 AM",
                             emoji = "💳",
@@ -376,7 +376,7 @@ internal class TransactionsScreenViewModelTest {
                             isRefundButtonVisible = false,
                             isSelected = false,
                             transactionId = 101,
-                            amountColor = MyColor.ERROR,
+                            amountColor = CosmosColor.ERROR,
                             amountText = "- ₹1,000",
                             dateAndTimeText = "20 May, 2024 at 08:29 AM",
                             emoji = "💳",

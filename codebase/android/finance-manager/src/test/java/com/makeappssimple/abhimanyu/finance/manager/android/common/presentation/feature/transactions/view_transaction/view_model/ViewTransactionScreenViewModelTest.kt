@@ -19,9 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.view_transaction.bottom_sheet.ViewTransactionScreenBottomSheetType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.FinanceManagerNavigationDirections
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction.TransactionListItemData
 import com.makeappssimple.abhimanyu.finance.manager.android.test.TestDependencies
 import io.kotest.assertions.throwables.shouldThrow
@@ -91,7 +91,7 @@ internal class ViewTransactionScreenViewModelTest {
                     isRefundButtonVisible = true,
                     isSelected = false,
                     transactionId = testDependencies.testTransactionId1,
-                    amountColor = MyColor.ERROR,
+                    amountColor = CosmosColor.ERROR,
                     amountText = "- ₹1,000",
                     dateAndTimeText = "20 May, 2024 at 08:29 AM",
                     emoji = "💳",

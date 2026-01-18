@@ -31,9 +31,7 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.util.fastForEachIndexed
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.composeColor
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.max
@@ -48,7 +46,7 @@ internal fun PieChartRenderer(
     sliceWidthPx: Float,
     sliceSpacingPx: Float,
     fractions: List<Float>,
-    entryColors: List<MyColor>,
+    entryColors: List<CosmosColor>,
     animate: Boolean,
 ) {
     val emptyChartColor = CosmosAppTheme.colorScheme.surfaceVariant

@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions
 
 import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.MyColor
 
-internal fun Transaction.getAmountTextColor(): MyColor {
+internal fun Transaction.getAmountTextColor(): CosmosColor {
     return this.transactionType.getAmountTextColor(
         isBalanceReduced = this.accountFromId.isNotNull(),
     )
@@ -29,34 +29,34 @@ internal fun Transaction.getAmountTextColor(): MyColor {
 
 private fun TransactionType.getAmountTextColor(
     isBalanceReduced: Boolean,
-): MyColor {
+): CosmosColor {
     return when (this) {
         TransactionType.INCOME -> {
-            MyColor.ON_TERTIARY_CONTAINER
+            CosmosColor.ON_TERTIARY_CONTAINER
         }
 
         TransactionType.EXPENSE -> {
-            MyColor.ERROR
+            CosmosColor.ERROR
         }
 
         TransactionType.TRANSFER -> {
-            MyColor.ON_BACKGROUND
+            CosmosColor.ON_BACKGROUND
         }
 
         TransactionType.ADJUSTMENT -> {
             if (isBalanceReduced) {
-                MyColor.ERROR
+                CosmosColor.ERROR
             } else {
-                MyColor.ON_TERTIARY_CONTAINER
+                CosmosColor.ON_TERTIARY_CONTAINER
             }
         }
 
         TransactionType.INVESTMENT -> {
-            MyColor.PRIMARY
+            CosmosColor.PRIMARY
         }
 
         TransactionType.REFUND -> {
-            MyColor.ON_TERTIARY_CONTAINER
+            CosmosColor.ON_TERTIARY_CONTAINER
         }
     }
 }

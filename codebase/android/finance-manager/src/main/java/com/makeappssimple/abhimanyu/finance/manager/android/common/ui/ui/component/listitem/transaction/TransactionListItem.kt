@@ -42,7 +42,6 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIco
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.ExpandedListItemShape
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.theme.composeColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.MyExpandableItemIconButton
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.MyExpandableItemIconButtonData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.MyExpandableItemIconButtonEvent

@@ -18,6 +18,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.chart.com
 
 // TODO(Abhi): Check why this can not be immutable
 // @Immutable
-internal data class PieChartData(
+public data class PieChartData(
     val items: List<PieChartItemData> = emptyList(),
 )
