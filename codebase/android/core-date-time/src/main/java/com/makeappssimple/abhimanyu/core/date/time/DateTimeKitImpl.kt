@@ -41,20 +41,21 @@ import java.time.Instant as JavaInstant
 private fun Instant.toJava(): JavaInstant {
     return JavaInstant.ofEpochSecond(
         this.epochSeconds,
-        this.nanosecondsOfSecond.toLong(),
     )
 }
 
 public class DateTimeKitImpl(
     private val clock: Clock = Clock.System,
-    private val systemDefaultTimeZone: TimeZone = TimeZone.currentSystemDefault(),
+    private val systemDefaultTimeZone: TimeZone = getCurrentSystemDefaultTimeZone(),
 ) : DateTimeKit {
     override fun getCurrentFormattedDateAndTime(
         timestamp: Long,
         zoneId: TimeZone,
     ): String {
         return Instant
-            .fromEpochMilliseconds(timestamp)
+            .fromEpochMilliseconds(
+                epochMilliseconds = timestamp,
+            )
             .formattedDateAndTime(
                 zoneId = zoneId,
             )

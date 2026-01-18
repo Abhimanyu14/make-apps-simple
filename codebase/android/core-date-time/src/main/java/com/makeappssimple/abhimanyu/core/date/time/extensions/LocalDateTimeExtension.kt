@@ -18,7 +18,7 @@
 
 package com.makeappssimple.abhimanyu.core.date.time.extensions
 
-import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultTimeZone
+import com.makeappssimple.abhimanyu.core.date.time.getCurrentSystemDefaultTimeZone
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
@@ -27,7 +27,7 @@ import kotlinx.datetime.toInstant
  * [LocalDateTime] to [Long].
  */
 internal fun LocalDateTime.toEpochMilli(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): Long {
     return this
         .toInstant(

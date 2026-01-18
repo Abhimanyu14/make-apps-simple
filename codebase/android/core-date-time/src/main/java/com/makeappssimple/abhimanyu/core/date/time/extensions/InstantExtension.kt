@@ -18,7 +18,7 @@
 
 package com.makeappssimple.abhimanyu.core.date.time.extensions
 
-import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultTimeZone
+import com.makeappssimple.abhimanyu.core.date.time.getCurrentSystemDefaultTimeZone
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaZoneId
 import java.time.format.DateTimeFormatter
@@ -27,7 +27,6 @@ import kotlin.time.Instant
 private fun Instant.toJava(): java.time.Instant {
     return java.time.Instant.ofEpochSecond(
         this.epochSeconds,
-        this.nanosecondsOfSecond.toLong()
     )
 }
 
@@ -35,7 +34,7 @@ private fun Instant.toJava(): java.time.Instant {
  * Sample format - 30 Mar, 2023.
  */
 internal fun Instant.formattedDate(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("dd MMM, yyyy")
@@ -47,7 +46,7 @@ internal fun Instant.formattedDate(
  * Sample format - Monday.
  */
 internal fun Instant.formattedDayOfWeek(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("EEEE")
@@ -59,7 +58,7 @@ internal fun Instant.formattedDayOfWeek(
  * Sample format - 30 Mar.
  */
 internal fun Instant.formattedDay(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("dd MMM")
@@ -71,7 +70,7 @@ internal fun Instant.formattedDay(
  * Sample format - March, 2023.
  */
 internal fun Instant.formattedMonth(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("MMMM, yyyy")
@@ -83,7 +82,7 @@ internal fun Instant.formattedMonth(
  * Sample format - 2023.
  */
 internal fun Instant.formattedYear(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("yyyy")
@@ -95,7 +94,7 @@ internal fun Instant.formattedYear(
  * Sample format - 2023-Mar-30, 08-24 AM.
  */
 internal fun Instant.formattedDateAndTime(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("yyyy-MMM-dd, hh-mm a")
@@ -115,7 +114,7 @@ internal fun Instant.formattedDateAndTime(
  * Sample format - 30 Mar, 2023 at 08:24 AM.
  */
 internal fun Instant.formattedReadableDateAndTime(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return "${formattedDate(zoneId)} at ${formattedTime(zoneId)}"
 }
@@ -124,7 +123,7 @@ internal fun Instant.formattedReadableDateAndTime(
  * Sample format - 08:24 AM.
  */
 private fun Instant.formattedTime(
-    zoneId: TimeZone = getSystemDefaultTimeZone(),
+    zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("hh:mm a")

@@ -18,6 +18,7 @@
 
 package com.makeappssimple.abhimanyu.core.date.time.models
 
+import com.makeappssimple.abhimanyu.core.date.time.getCurrentSystemDefaultTimeZone
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
@@ -36,8 +37,12 @@ public class MyLocalDate(
         zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ) : this(
         localDate = Instant
-            .fromEpochMilliseconds(timestamp)
-            .toLocalDateTime(zoneId)
+            .fromEpochMilliseconds(
+                epochMilliseconds = timestamp,
+            )
+            .toLocalDateTime(
+                timeZone = zoneId,
+            )
             .date,
     )
 
@@ -59,11 +64,10 @@ public class MyLocalDate(
     internal fun atEndOfDay(): MyLocalDateTime {
         return MyLocalDateTime(
             localDateTime = localDate.atTime(
-                LocalTime(
-                    23,
-                    59,
-                    59,
-                    999_999_999
+                time = LocalTime(
+                    hour = 23,
+                    minute = 59,
+                    second = 59,
                 )
             ),
         )
@@ -72,11 +76,10 @@ public class MyLocalDate(
     public fun atStartOfDay(): MyLocalDateTime {
         return MyLocalDateTime(
             localDateTime = localDate.atTime(
-                LocalTime(
-                    0,
-                    0,
-                    0,
-                    0
+                time = LocalTime(
+                    hour = 0,
+                    minute = 0,
+                    second = 0,
                 )
             ),
         )
@@ -126,9 +129,9 @@ public class MyLocalDate(
     ): MyLocalDate {
         return MyLocalDate(
             localDate = LocalDate(
-                localDate.year,
-                localDate.monthNumber,
-                dayOfMonth,
+                year = localDate.year,
+                month = localDate.monthNumber,
+                day = dayOfMonth,
             ),
         )
     }
@@ -138,30 +141,30 @@ public class MyLocalDate(
     ): MyLocalDate {
         return MyLocalDate(
             localDate = LocalDate(
-                localDate.year,
-                month,
-                localDate.day,
+                year = localDate.year,
+                month = month,
+                day = localDate.day,
             ),
         )
     }
 
     public companion object {
         private val DEFAULT_TIME_ZONE: TimeZone by lazy {
-            TimeZone.currentSystemDefault()
+            getCurrentSystemDefaultTimeZone()
         }
 
         public val MIN: MyLocalDate = MyLocalDate(
             localDate = LocalDate(
-                1,
-                1,
-                1
+                year = 1,
+                month = 1,
+                day = 1,
             ),
         )
 
         public fun now(): MyLocalDate {
             return MyLocalDate(
                 timestamp = System.currentTimeMillis(),
-                zoneId = TimeZone.currentSystemDefault(),
+                zoneId = getCurrentSystemDefaultTimeZone(),
             )
         }
 
@@ -172,9 +175,9 @@ public class MyLocalDate(
         ): MyLocalDate {
             return MyLocalDate(
                 localDate = LocalDate(
-                    year,
-                    month,
-                    dayOfMonth,
+                    year = year,
+                    month = month,
+                    day = dayOfMonth,
                 ),
             )
         }

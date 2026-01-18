@@ -18,6 +18,7 @@
 
 package com.makeappssimple.abhimanyu.core.date.time.models
 
+import com.makeappssimple.abhimanyu.core.date.time.getCurrentSystemDefaultTimeZone
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalTime
@@ -42,24 +43,22 @@ public class MyLocalTime(
 
     public companion object {
         private val DEFAULT_TIME_ZONE: TimeZone by lazy {
-            TimeZone.currentSystemDefault()
+            getCurrentSystemDefaultTimeZone()
         }
 
         public val MAX: MyLocalTime = MyLocalTime(
             localTime = LocalTime(
-                23,
-                59,
-                59,
-                999_999_999
+                hour = 23,
+                minute = 59,
+                second = 59,
             ),
         )
 
         public val MIN: MyLocalTime = MyLocalTime(
             localTime = LocalTime(
-                0,
-                0,
-                0,
-                0
+                hour = 0,
+                minute = 0,
+                second = 0,
             ),
         )
 
@@ -67,7 +66,9 @@ public class MyLocalTime(
             val timestamp = System.currentTimeMillis()
             return MyLocalTime(
                 localTime = Instant.fromEpochMilliseconds(timestamp)
-                    .toLocalDateTime(TimeZone.currentSystemDefault())
+                    .toLocalDateTime(
+                        timeZone = getCurrentSystemDefaultTimeZone(),
+                    )
                     .time,
             )
         }

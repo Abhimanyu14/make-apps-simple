@@ -18,6 +18,6 @@ package com.makeappssimple.abhimanyu.core.date.time
 
 import kotlinx.datetime.TimeZone
 
-internal fun getSystemDefaultTimeZone(): TimeZone {
+internal fun getCurrentSystemDefaultTimeZone(): TimeZone {
     return TimeZone.currentSystemDefault()
 }
