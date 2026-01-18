@@ -16,19 +16,13 @@
 
 @file:Suppress("UnstableApiUsage")
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-
 plugins {
-    alias(libs.plugins.plugin.android.library)
-    alias(libs.plugins.plugin.kotlin.android)
-    alias(libs.plugins.plugin.ksp)
+    id("makeappssimple.android.library")
+    id("makeappssimple.android.ksp")
 }
 
 android {
     namespace = "com.makeappssimple.abhimanyu.barcode.generator.android"
-    compileSdk = libs.versions.compile.sdk.get().toInt()
-    ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "barcode_generator"
 
     buildTypes {
@@ -41,19 +35,9 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
     defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
-
         testInstrumentationRunner =
             "com.makeappssimple.abhimanyu.barcodes.android.test.InstrumentationTestRunner"
-
-        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
-        ndk.debugSymbolLevel = "FULL"
     }
 }
 
@@ -69,12 +53,4 @@ dependencies {
     implementation(platform(libs.koin.bom))
 
     ksp(libs.koin.ksp.compiler)
-}
-
-kotlin {
-    explicitApi()
-
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
 }

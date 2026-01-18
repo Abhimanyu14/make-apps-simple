@@ -16,23 +16,18 @@
 
 @file:Suppress("UnstableApiUsage")
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.plugin.android.library)
-    alias(libs.plugins.plugin.kotlin.android)
+    id("makeappssimple.android.library")
+    id("makeappssimple.android.kover")
+    id("makeappssimple.android.ksp")
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.serialization)
-    alias(libs.plugins.plugin.kotlinx.kover)
-    alias(libs.plugins.plugin.ksp)
     alias(libs.plugins.plugin.room)
     alias(libs.plugins.plugin.screenshot)
 }
 
 android {
     namespace = "com.makeappssimple.abhimanyu.common"
-    compileSdk = libs.versions.compile.sdk.get().toInt()
-    ndkVersion = libs.versions.ndk.get()
 
     // Screenshot testing
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
@@ -52,34 +47,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
-        ndk.debugSymbolLevel = "FULL"
-    }
-
-    kotlinOptions {
-        // Room schema for testing
-        sourceSets {
-            // Adds exported schema location as test app assets.
-            getByName("androidTest").assets.srcDir("$projectDir/schemas")
-        }
-    }
-
-    lint {
-        checkAllWarnings = true
-        warningsAsErrors = true
-        baseline = file("lint-baseline.xml")
-        disable += "AndroidGradlePluginVersion"
-    }
 }
 
 dependencies {
@@ -131,31 +98,11 @@ dependencies {
     testImplementation(libs.bundles.test)
 }
 
-kotlin {
-    explicitApi()
-
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-
 kover {
-    currentProject {
-        instrumentation {
-            disabledForTestTasks.add("testReleaseUnitTest")
-        }
-    }
     reports {
         filters {
             excludes {
-                // exclusion rules - classes to exclude from report
-                // classes(
-                //      "com.example.Class2",
-                // )
-
                 packages(
-                    // DI
-                    "org.koin.ksp.generated",
                     "com.makeappssimple.abhimanyu.barcodes.android.di.*",
 
                     // UI
@@ -163,24 +110,8 @@ kover {
                     "com.makeappssimple.abhimanyu.barcodes.android.core.design_system.*",
                 )
             }
-            includes {
-                // inclusion rules - classes only those that will be present in reports
-                // classes("com.example.Class1", "com.example.Class3")
-            }
         }
     }
-}
-
-ksp {
-    // Koin
-    arg(
-        k = "KOIN_CONFIG_CHECK",
-        v = "true",
-    )
-    arg(
-        k = "KOIN_DEFAULT_MODULE",
-        v = "false",
-    )
 }
 
 room {

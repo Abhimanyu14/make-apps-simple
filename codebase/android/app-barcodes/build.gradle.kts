@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -22,15 +21,12 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(rootProject.file("key.properties")))
 
 plugins {
-    alias(libs.plugins.plugin.android.application)
-    alias(libs.plugins.plugin.kotlin.android)
+    id("makeappssimple.android.application")
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
 android {
     namespace = "com.makeappssimple.abhimanyu.barcodes.android"
-    compileSdk = libs.versions.compile.sdk.get().toInt()
-    ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "cosmos"
 
     signingConfigs {
@@ -70,37 +66,15 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
     defaultConfig {
         applicationId = "com.makeappssimple.abhimanyu.barcodes.android"
-        minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = libs.versions.app.barcodes.version.code.get().toInt()
         versionName = libs.versions.app.barcodes.version.name.get()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    lint {
-        checkAllWarnings = true
-        warningsAsErrors = true
-        baseline = file("lint-baseline.xml")
-        disable += "AndroidGradlePluginVersion"
-    }
 }
 
 dependencies {
     implementation(project(":barcodes"))
-}
-
-kotlin {
-    explicitApi()
-
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
 }

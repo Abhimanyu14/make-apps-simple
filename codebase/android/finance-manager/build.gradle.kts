@@ -16,24 +16,19 @@
 
 @file:Suppress("UnstableApiUsage")
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.plugin.android.library)
+    id("makeappssimple.android.library")
+    id("makeappssimple.android.kover")
+    id("makeappssimple.android.ksp")
     alias(libs.plugins.plugin.about.libraries)
-    alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.serialization)
-    alias(libs.plugins.plugin.kotlinx.kover)
-    alias(libs.plugins.plugin.ksp)
     alias(libs.plugins.plugin.room)
     alias(libs.plugins.plugin.screenshot)
 }
 
 android {
     namespace = "com.makeappssimple.abhimanyu.library.finance.manager.android"
-    compileSdk = libs.versions.compile.sdk.get().toInt()
-    ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "finance_manager"
 
     // Screenshot testing
@@ -54,19 +49,9 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
     defaultConfig {
-        minSdk = libs.versions.min.sdk.get().toInt()
-
         testInstrumentationRunner =
             "com.makeappssimple.abhimanyu.finance.manager.android.test.InstrumentationTestRunner"
-
-        // Generate native debug symbols to allow Google Play to symbolicate our native crashes
-        ndk.debugSymbolLevel = "FULL"
     }
 
     kotlinOptions {
@@ -75,13 +60,6 @@ android {
             // Adds exported schema location as test app assets.
             getByName("androidTest").assets.srcDir("$projectDir/schemas")
         }
-    }
-
-    lint {
-        checkAllWarnings = true
-        warningsAsErrors = true
-        baseline = file("lint-baseline.xml")
-        disable += "AndroidGradlePluginVersion"
     }
 
     /**
@@ -160,20 +138,7 @@ dependencies {
     testImplementation(libs.bundles.test)
 }
 
-kotlin {
-    explicitApi()
-
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-
 kover {
-    currentProject {
-        instrumentation {
-            disabledForTestTasks.add("testReleaseUnitTest")
-        }
-    }
     reports {
         filters {
             excludes {
@@ -182,11 +147,6 @@ kover {
                     "com.makeappssimple.abhimanyu.finance.manager.android.common.*Dao_Impl",
                 )
                 packages(
-                    // Android
-                    "com.makeappssimple.abhimanyu.finance.manager.android.platform.*",
-
-                    // DI
-                    "org.koin.ksp.generated",
                     "com.makeappssimple.abhimanyu.finance.manager.android.common.di",
 
                     // Fake
@@ -203,24 +163,8 @@ kover {
                     "com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.*.screen",
                 )
             }
-            includes {
-                // inclusion rules - classes only those that will be present in reports
-                // classes("com.example.Class1", "com.example.Class3")
-            }
         }
     }
-}
-
-ksp {
-    // Koin
-    arg(
-        k = "KOIN_CONFIG_CHECK",
-        v = "true",
-    )
-    arg(
-        k = "KOIN_DEFAULT_MODULE",
-        v = "false",
-    )
 }
 
 room {

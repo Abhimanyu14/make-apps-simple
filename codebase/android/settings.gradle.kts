@@ -16,6 +16,8 @@
 
 @file:Suppress("UnstableApiUsage")
 
+includeBuild("build-logic")
+
 pluginManagement {
     repositories {
         google {
