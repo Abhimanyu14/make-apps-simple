@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.makeappssimple.abhimanyu.core.date.time.models
 
-import java.time.LocalTime
-import java.time.ZoneId
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalTime
+import kotlinx.datetime.toLocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.time.Instant
 
 public class MyLocalTime(
     public val localTime: LocalTime,
@@ -27,31 +32,43 @@ public class MyLocalTime(
      * Sample format - 08:24 AM.
      */
     public fun formattedTime(
-        zoneId: ZoneId = DEFAULT_ZONE_ID,
+        zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): String {
         return DateTimeFormatter
             .ofPattern("hh:mm a")
-            .withZone(zoneId)
-            .format(localTime)
+            .format(localTime.toJavaLocalTime())
             .uppercase()
     }
 
     public companion object {
-        private val DEFAULT_ZONE_ID: ZoneId by lazy {
-            ZoneId.systemDefault()
+        private val DEFAULT_TIME_ZONE: TimeZone by lazy {
+            TimeZone.currentSystemDefault()
         }
 
         public val MAX: MyLocalTime = MyLocalTime(
-            localTime = LocalTime.MAX,
+            localTime = LocalTime(
+                23,
+                59,
+                59,
+                999_999_999
+            ),
         )
 
         public val MIN: MyLocalTime = MyLocalTime(
-            localTime = LocalTime.MIN,
+            localTime = LocalTime(
+                0,
+                0,
+                0,
+                0
+            ),
         )
 
         public fun now(): MyLocalTime {
+            val timestamp = System.currentTimeMillis()
             return MyLocalTime(
-                localTime = LocalTime.now(),
+                localTime = Instant.fromEpochMilliseconds(timestamp)
+                    .toLocalDateTime(TimeZone.currentSystemDefault())
+                    .time,
             )
         }
 
@@ -60,9 +77,9 @@ public class MyLocalTime(
             minute: Int,
         ): MyLocalTime {
             return MyLocalTime(
-                localTime = LocalTime.of(
-                    hour,
-                    minute,
+                localTime = LocalTime(
+                    hour = hour,
+                    minute = minute,
                 ),
             )
         }

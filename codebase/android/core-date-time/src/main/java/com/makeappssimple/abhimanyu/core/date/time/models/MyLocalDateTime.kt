@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.core.date.time.models
 
-import java.time.LocalDateTime
+import kotlinx.datetime.LocalDateTime
 
 public class MyLocalDateTime(
     public val localDateTime: LocalDateTime,

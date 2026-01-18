@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.makeappssimple.abhimanyu.core.time
 
+import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKitImpl
 import io.kotest.matchers.shouldBe
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
 import org.junit.Before
 import org.junit.Test
-import java.time.ZoneId
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
-@OptIn(ExperimentalTime::class)
 internal class DateTimeKitTest {
     private val testEpochMilliseconds = 1680155040000L
-    private val testZoneId = ZoneId.of("Asia/Kolkata")
+    private val testTimeZone = TimeZone.of("Asia/Kolkata")
 
     private lateinit var dateTimeKit: DateTimeKit
 
@@ -42,7 +43,7 @@ internal class DateTimeKitTest {
         }
         dateTimeKit = DateTimeKitImpl(
             clock = fakeClock,
-            systemDefaultZoneId = testZoneId,
+            systemDefaultTimeZone = testTimeZone,
         )
     }
 
@@ -68,11 +69,11 @@ internal class DateTimeKitTest {
 
     @Test
     fun getFormattedDateAndTime_withDifferentZone_returnsExpectedFormat() {
-        val utcZoneId = ZoneId.of("UTC")
+        val utcTimeZone = TimeZone.of("UTC")
 
         val formatted = dateTimeKit.getFormattedDateAndTime(
             timestamp = testEpochMilliseconds,
-            zoneId = utcZoneId,
+            zoneId = utcTimeZone,
         )
 
         formatted.shouldBe(
@@ -82,11 +83,11 @@ internal class DateTimeKitTest {
 
     @Test
     fun getFormattedDateAndTime_withDifferentZone_returnsPmFormat() {
-        val tokyoZoneId = ZoneId.of("Asia/Tokyo")
+        val tokyoTimeZone = TimeZone.of("Asia/Tokyo")
 
         val formatted = dateTimeKit.getFormattedDateAndTime(
             timestamp = testEpochMilliseconds,
-            zoneId = tokyoZoneId,
+            zoneId = tokyoTimeZone,
         )
 
         formatted.shouldBe(
@@ -95,11 +96,11 @@ internal class DateTimeKitTest {
     }
 
     @Test
-    fun getSystemDefaultZoneId_returnsInjectedZoneId() {
-        val result = dateTimeKit.getSystemDefaultZoneId()
+    fun getSystemDefaultTimeZone_returnsInjectedTimeZone() {
+        val result = dateTimeKit.getSystemDefaultTimeZone()
 
         result.shouldBe(
-            expected = testZoneId,
+            expected = testTimeZone,
         )
     }
 }

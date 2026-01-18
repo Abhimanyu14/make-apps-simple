@@ -14,108 +14,93 @@
  * limitations under the License.
  */
 
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.makeappssimple.abhimanyu.core.date.time.extensions
 
-import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultZoneId
-import java.time.Instant
-import java.time.ZoneId
-import java.time.ZonedDateTime
+import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultTimeZone
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaZoneId
 import java.time.format.DateTimeFormatter
+import kotlin.time.Instant
 
-/**
- * [Instant] to [ZonedDateTime].
- */
-public fun Instant.toZonedDateTime(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): ZonedDateTime {
-    return this.atZone(zoneId)
-}
-
-/**
- * [Instant] to [Instant].
- */
-public fun Instant.atEndOfDay(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Instant {
-    return this
-        .atZone(zoneId)
-        .toLocalDate()
-        .atEndOfDay()
-        .toInstant(
-            zoneId = zoneId,
-        )
+private fun Instant.toJava(): java.time.Instant {
+    return java.time.Instant.ofEpochSecond(
+        this.epochSeconds,
+        this.nanosecondsOfSecond.toLong()
+    )
 }
 
 /**
  * Sample format - 30 Mar, 2023.
  */
-public fun Instant.formattedDate(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedDate(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("dd MMM, yyyy")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
 }
 
 /**
  * Sample format - Monday.
  */
-public fun Instant.formattedDayOfWeek(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedDayOfWeek(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("EEEE")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
 }
 
 /**
  * Sample format - 30 Mar.
  */
-public fun Instant.formattedDay(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedDay(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("dd MMM")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
 }
 
 /**
  * Sample format - March, 2023.
  */
-public fun Instant.formattedMonth(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedMonth(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("MMMM, yyyy")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
 }
 
 /**
  * Sample format - 2023.
  */
-public fun Instant.formattedYear(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedYear(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("yyyy")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
 }
 
 /**
  * Sample format - 2023-Mar-30, 08-24 AM.
  */
-public fun Instant.formattedDateAndTime(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedDateAndTime(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("yyyy-MMM-dd, hh-mm a")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
         .replace(
             "am",
             "AM"
@@ -129,8 +114,8 @@ public fun Instant.formattedDateAndTime(
 /**
  * Sample format - 30 Mar, 2023 at 08:24 AM.
  */
-public fun Instant.formattedReadableDateAndTime(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun Instant.formattedReadableDateAndTime(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return "${formattedDate(zoneId)} at ${formattedTime(zoneId)}"
 }
@@ -138,13 +123,13 @@ public fun Instant.formattedReadableDateAndTime(
 /**
  * Sample format - 08:24 AM.
  */
-public fun Instant.formattedTime(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+private fun Instant.formattedTime(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
         .ofPattern("hh:mm a")
-        .withZone(zoneId)
-        .format(this)
+        .withZone(zoneId.toJavaZoneId())
+        .format(this.toJava())
         .replace(
             "am",
             "AM"
@@ -152,20 +137,5 @@ public fun Instant.formattedTime(
         .replace(
             "pm",
             "PM"
-        )
-}
-
-/**
- * [Instant] to [Instant].
- */
-public fun Instant.atStartOfDay(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Instant {
-    return this
-        .atZone(zoneId)
-        .toLocalDate()
-        .atStartOfDay()
-        .toInstant(
-            zoneId = zoneId,
         )
 }

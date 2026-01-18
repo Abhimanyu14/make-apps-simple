@@ -14,36 +14,41 @@
  * limitations under the License.
  */
 
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.makeappssimple.abhimanyu.core.date.time.models
 
-import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
+import kotlinx.datetime.atTime
+import kotlinx.datetime.toJavaLocalDate
+import kotlinx.datetime.toLocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.time.Instant
 
 public class MyLocalDate(
     public val localDate: LocalDate,
 ) : Comparable<MyLocalDate> {
     public constructor(
         timestamp: Long,
-        zoneId: ZoneId = DEFAULT_ZONE_ID,
+        zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ) : this(
         localDate = Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .toLocalDate(),
+            .fromEpochMilliseconds(timestamp)
+            .toLocalDateTime(zoneId)
+            .date,
     )
 
     public val year: Int
         get() = localDate.year
 
     public val month: Int
-        get() = localDate.monthValue
+        get() = localDate.monthNumber
 
     public val day: Int
-        get() = localDate.dayOfMonth
+        get() = localDate.day
 
     override fun compareTo(
         other: MyLocalDate,
@@ -51,38 +56,50 @@ public class MyLocalDate(
         return localDate.compareTo(other.localDate)
     }
 
-    public fun atEndOfDay(): MyLocalDateTime {
+    internal fun atEndOfDay(): MyLocalDateTime {
         return MyLocalDateTime(
-            localDateTime = localDate.atTime(LocalTime.MAX),
+            localDateTime = localDate.atTime(
+                LocalTime(
+                    23,
+                    59,
+                    59,
+                    999_999_999
+                )
+            ),
         )
     }
 
     public fun atStartOfDay(): MyLocalDateTime {
         return MyLocalDateTime(
-            localDateTime = localDate.atStartOfDay(),
+            localDateTime = localDate.atTime(
+                LocalTime(
+                    0,
+                    0,
+                    0,
+                    0
+                )
+            ),
         )
     }
 
     public fun toStartOfLocalDayEpochMilli(
-        zoneId: ZoneId = DEFAULT_ZONE_ID,
+        zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): Long {
         return localDate
-            .atStartOfDay(zoneId)
-            .toInstant()
-            .toEpochMilli()
+            .atStartOfDayIn(zoneId)
+            .toEpochMilliseconds()
     }
 
     public fun toStartOfDayEpochMilli(): Long {
         return localDate
-            .atStartOfDay(ZoneId.of("UTC"))
-            .toInstant()
-            .toEpochMilli()
+            .atStartOfDayIn(TimeZone.UTC)
+            .toEpochMilliseconds()
     }
 
     public fun atStartOfDay(
-        zone: ZoneId,
-    ): ZonedDateTime {
-        return localDate.atStartOfDay(zone)
+        zone: TimeZone,
+    ): Instant {
+        return localDate.atStartOfDayIn(zone)
     }
 
     public fun atTime(
@@ -97,19 +114,22 @@ public class MyLocalDate(
      * Sample format - 30 Mar, 2023.
      */
     public fun formattedDate(
-        zoneId: ZoneId = DEFAULT_ZONE_ID,
+        zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): String {
         return DateTimeFormatter
             .ofPattern("dd MMM, yyyy")
-            .withZone(zoneId)
-            .format(localDate)
+            .format(localDate.toJavaLocalDate())
     }
 
     public fun withDayOfMonth(
         dayOfMonth: Int,
     ): MyLocalDate {
         return MyLocalDate(
-            localDate = localDate.withDayOfMonth(dayOfMonth),
+            localDate = LocalDate(
+                localDate.year,
+                localDate.monthNumber,
+                dayOfMonth,
+            ),
         )
     }
 
@@ -117,22 +137,31 @@ public class MyLocalDate(
         month: Int,
     ): MyLocalDate {
         return MyLocalDate(
-            localDate = localDate.withMonth(month),
+            localDate = LocalDate(
+                localDate.year,
+                month,
+                localDate.day,
+            ),
         )
     }
 
     public companion object {
-        private val DEFAULT_ZONE_ID: ZoneId by lazy {
-            ZoneId.systemDefault()
+        private val DEFAULT_TIME_ZONE: TimeZone by lazy {
+            TimeZone.currentSystemDefault()
         }
 
         public val MIN: MyLocalDate = MyLocalDate(
-            localDate = LocalDate.MIN,
+            localDate = LocalDate(
+                1,
+                1,
+                1
+            ),
         )
 
         public fun now(): MyLocalDate {
             return MyLocalDate(
-                localDate = LocalDate.now(),
+                timestamp = System.currentTimeMillis(),
+                zoneId = TimeZone.currentSystemDefault(),
             )
         }
 
@@ -142,10 +171,10 @@ public class MyLocalDate(
             dayOfMonth: Int,
         ): MyLocalDate {
             return MyLocalDate(
-                localDate = LocalDate.of(
+                localDate = LocalDate(
                     year,
                     month,
-                    dayOfMonth
+                    dayOfMonth,
                 ),
             )
         }

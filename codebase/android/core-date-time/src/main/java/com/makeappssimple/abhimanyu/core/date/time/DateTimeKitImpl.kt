@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.makeappssimple.abhimanyu.core.date.time
 
 import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedDate
@@ -23,33 +25,36 @@ import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedMonth
 import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedReadableDateAndTime
 import com.makeappssimple.abhimanyu.core.date.time.extensions.formattedYear
 import com.makeappssimple.abhimanyu.core.date.time.extensions.toEpochMilli
-import com.makeappssimple.abhimanyu.core.date.time.extensions.toZonedDateTime
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
-import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDateTime
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
-import java.time.Instant
-import java.time.YearMonth
-import java.time.ZoneId
-import java.time.ZonedDateTime
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
+import kotlinx.datetime.toJavaZoneId
+import kotlinx.datetime.toLocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
+import java.time.Instant as JavaInstant
 
-private object DateTimeUtilImplConstants {
-    const val LAST_MONTH_OF_YEAR = 12
+private fun Instant.toJava(): JavaInstant {
+    return JavaInstant.ofEpochSecond(
+        this.epochSeconds,
+        this.nanosecondsOfSecond.toLong(),
+    )
 }
 
-@OptIn(ExperimentalTime::class)
 public class DateTimeKitImpl(
     private val clock: Clock = Clock.System,
-    private val systemDefaultZoneId: ZoneId = ZoneId.systemDefault(),
+    private val systemDefaultTimeZone: TimeZone = TimeZone.currentSystemDefault(),
 ) : DateTimeKit {
     override fun getCurrentFormattedDateAndTime(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
         return Instant
-            .ofEpochMilli(timestamp)
+            .fromEpochMilliseconds(timestamp)
             .formattedDateAndTime(
                 zoneId = zoneId,
             )
@@ -64,15 +69,17 @@ public class DateTimeKitImpl(
     }
 
     override fun getCurrentTimeMillis(): Long {
-        return clock.now().toEpochMilliseconds()
+        return clock
+            .now()
+            .toEpochMilliseconds()
     }
 
     override fun getFormattedDate(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
         return Instant
-            .ofEpochMilli(timestamp)
+            .fromEpochMilliseconds(timestamp)
             .formattedDate(
                 zoneId = zoneId,
             )
@@ -80,14 +87,13 @@ public class DateTimeKitImpl(
 
     override fun getFormattedDateAndTime(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
-        val millis = Instant
-            .ofEpochMilli(timestamp)
+        val instant = Instant.fromEpochMilliseconds(timestamp)
         val formattedDateAndTime = DateTimeFormatter
             .ofPattern("yyyy-MMM-dd, hh:mm a")
-            .withZone(zoneId)
-            .format(millis)
+            .withZone(zoneId.toJavaZoneId())
+            .format(instant.toJava())
             .replace(
                 oldValue = "am",
                 newValue = "AM",
@@ -101,14 +107,14 @@ public class DateTimeKitImpl(
 
     override fun getFormattedDateWithDayOfWeek(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
         val formattedDate = getFormattedDate(
             timestamp = timestamp,
             zoneId = zoneId,
         )
         val formattedDayOfWeek = Instant
-            .ofEpochMilli(timestamp)
+            .fromEpochMilliseconds(timestamp)
             .formattedDayOfWeek(
                 zoneId = zoneId,
             )
@@ -117,10 +123,10 @@ public class DateTimeKitImpl(
 
     override fun getFormattedMonth(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
         return Instant
-            .ofEpochMilli(timestamp)
+            .fromEpochMilliseconds(timestamp)
             .formattedMonth(
                 zoneId = zoneId,
             )
@@ -128,10 +134,10 @@ public class DateTimeKitImpl(
 
     override fun getFormattedYear(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
         return Instant
-            .ofEpochMilli(timestamp)
+            .fromEpochMilliseconds(timestamp)
             .formattedYear(
                 zoneId = zoneId,
             )
@@ -139,106 +145,116 @@ public class DateTimeKitImpl(
 
     override fun getLocalDate(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): MyLocalDate {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalDate()
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
     }
 
     override fun getLocalTime(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): MyLocalTime {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalTime()
+        return MyLocalTime(
+            localTime = Instant
+                .fromEpochMilliseconds(timestamp)
+                .toLocalDateTime(zoneId)
+                .time,
+        )
     }
 
     override fun getNextDayTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .plusDays(1)
-            .toInstant()
-            .toEpochMilli()
+            .fromEpochMilliseconds(timestamp)
+            .plus(
+                value = 1,
+                unit = DateTimeUnit.DAY,
+                timeZone = zoneId,
+            )
+            .toEpochMilliseconds()
     }
 
     override fun getNextMonthTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .plusMonths(1)
-            .toInstant()
-            .toEpochMilli()
+            .fromEpochMilliseconds(timestamp)
+            .plus(
+                value = 1,
+                unit = DateTimeUnit.MONTH,
+                timeZone = zoneId,
+            )
+            .toEpochMilliseconds()
     }
 
     override fun getNextYearTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .plusYears(1)
-            .toInstant()
-            .toEpochMilli()
+            .fromEpochMilliseconds(timestamp)
+            .plus(
+                value = 1,
+                unit = DateTimeUnit.YEAR,
+                timeZone = zoneId,
+            )
+            .toEpochMilliseconds()
     }
 
     override fun getPreviousDayTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .minusDays(1)
-            .toInstant()
-            .toEpochMilli()
+            .fromEpochMilliseconds(timestamp)
+            .minus(
+                value = 1,
+                unit = DateTimeUnit.DAY,
+                timeZone = zoneId,
+            )
+            .toEpochMilliseconds()
     }
 
     override fun getPreviousMonthTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .minusMonths(1)
-            .toInstant()
-            .toEpochMilli()
+            .fromEpochMilliseconds(timestamp)
+            .minus(
+                value = 1,
+                unit = DateTimeUnit.MONTH,
+                timeZone = zoneId,
+            )
+            .toEpochMilliseconds()
     }
 
     override fun getPreviousYearTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return Instant
-            .ofEpochMilli(timestamp)
-            .atZone(zoneId)
-            .minusYears(1)
-            .toInstant()
-            .toEpochMilli()
+            .fromEpochMilliseconds(timestamp)
+            .minus(
+                value = 1,
+                unit = DateTimeUnit.YEAR,
+                timeZone = zoneId,
+            )
+            .toEpochMilliseconds()
     }
 
     override fun getReadableDateAndTime(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): String {
         return Instant
-            .ofEpochMilli(timestamp)
+            .fromEpochMilliseconds(timestamp)
             .formattedReadableDateAndTime(
                 zoneId = zoneId,
             )
@@ -246,31 +262,27 @@ public class DateTimeKitImpl(
 
     override fun getStartOfDayTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toLocalDate()
-            .atStartOfDay()
-            .toEpochMilli(
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
+            .toStartOfLocalDayEpochMilli(
                 zoneId = zoneId,
             )
     }
 
     override fun getEndOfDayTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalDate()
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
             .atEndOfDay()
+            .localDateTime
             .toEpochMilli(
                 zoneId = zoneId,
             )
@@ -278,31 +290,28 @@ public class DateTimeKitImpl(
 
     override fun getStartOfMonthTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
+            .withDayOfMonth(
+                dayOfMonth = 1,
             )
-            .toLocalDate()
-            .withDayOfMonth(1)
-            .atStartOfDay()
-            .toEpochMilli(
+            .toStartOfLocalDayEpochMilli(
                 zoneId = zoneId,
             )
     }
 
     override fun getStartOfMonthLocalDate(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): MyLocalDate {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalDate()
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
             .withDayOfMonth(
                 dayOfMonth = 1,
             )
@@ -310,23 +319,31 @@ public class DateTimeKitImpl(
 
     override fun getEndOfMonthTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
-        val localDate = MyLocalDate(
-            localDate = YearMonth
-                .from(
-                    Instant
-                        .ofEpochMilli(timestamp)
-                        .toZonedDateTime(
-                            zoneId = zoneId,
-                        )
-                        .toMyLocalDate()
-                        .localDate
-                )
-                .atEndOfMonth(),
+        val nextMonthFirstDay = MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
         )
-        return localDate
+            .withDayOfMonth(
+                dayOfMonth = 1,
+            )
+            .localDate
+            .plus(
+                value = 1,
+                unit = DateTimeUnit.MONTH,
+            )
+        val endOfMonth = nextMonthFirstDay
+            .minus(
+                value = 1,
+                unit = DateTimeUnit.DAY,
+            )
+
+        return MyLocalDate(
+            localDate = endOfMonth,
+        )
             .atEndOfDay()
+            .localDateTime
             .toEpochMilli(
                 zoneId = zoneId,
             )
@@ -334,32 +351,27 @@ public class DateTimeKitImpl(
 
     override fun getStartOfYearTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toLocalDate()
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
             .withMonth(1)
             .withDayOfMonth(1)
-            .atStartOfDay()
-            .toEpochMilli(
+            .toStartOfLocalDayEpochMilli(
                 zoneId = zoneId,
             )
     }
 
     override fun getStartOfYearLocalDate(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): MyLocalDate {
-        return Instant
-            .ofEpochMilli(timestamp)
-            .toZonedDateTime(
-                zoneId = zoneId,
-            )
-            .toMyLocalDate()
+        return MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
+        )
             .withMonth(
                 month = 1,
             )
@@ -370,63 +382,49 @@ public class DateTimeKitImpl(
 
     override fun getEndOfYearTimestamp(
         timestamp: Long,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
-        val localDate = MyLocalDate(
-            localDate = YearMonth
-                .from(
-                    Instant
-                        .ofEpochMilli(timestamp)
-                        .toZonedDateTime(
-                            zoneId = zoneId,
-                        )
-                        .toMyLocalDate()
-                        .withMonth(DateTimeUtilImplConstants.LAST_MONTH_OF_YEAR)
-                        .localDate,
-                )
-                .atEndOfMonth(),
+        val nextYearFirstDay = MyLocalDate(
+            timestamp = timestamp,
+            zoneId = zoneId,
         )
-        return localDate
+            .withMonth(1)
+            .withDayOfMonth(1)
+            .localDate
+            .plus(
+                value = 1,
+                unit = DateTimeUnit.YEAR,
+            )
+        val endOfYear = nextYearFirstDay
+            .minus(
+                value = 1,
+                unit = DateTimeUnit.DAY,
+            )
+
+        return MyLocalDate(
+            localDate = endOfYear,
+        )
             .atEndOfDay()
+            .localDateTime
             .toEpochMilli(
                 zoneId = zoneId,
             )
     }
 
-    override fun getSystemDefaultZoneId(): ZoneId {
-        return systemDefaultZoneId
+    override fun getSystemDefaultTimeZone(): TimeZone {
+        return systemDefaultTimeZone
     }
 
     override fun getTimestamp(
         date: MyLocalDate,
         time: MyLocalTime,
-        zoneId: ZoneId,
+        zoneId: TimeZone,
     ): Long {
         return date
             .atTime(time)
+            .localDateTime
             .toEpochMilli(
                 zoneId = zoneId,
             )
-    }
-
-    private fun MyLocalDateTime.toEpochMilli(
-        zoneId: ZoneId,
-    ): Long {
-        return this.localDateTime
-            .atZone(zoneId)
-            .toInstant()
-            .toEpochMilli()
-    }
-
-    private fun ZonedDateTime.toMyLocalDate(): MyLocalDate {
-        return MyLocalDate(
-            localDate = this.toLocalDate(),
-        )
-    }
-
-    private fun ZonedDateTime.toMyLocalTime(): MyLocalTime {
-        return MyLocalTime(
-            localTime = this.toLocalTime(),
-        )
     }
 }

@@ -14,33 +14,24 @@
  * limitations under the License.
  */
 
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.makeappssimple.abhimanyu.core.date.time.extensions
 
-import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultZoneId
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
+import com.makeappssimple.abhimanyu.core.date.time.getSystemDefaultTimeZone
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 
 /**
  * [LocalDateTime] to [Long].
  */
-public fun LocalDateTime.toEpochMilli(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
+internal fun LocalDateTime.toEpochMilli(
+    zoneId: TimeZone = getSystemDefaultTimeZone(),
 ): Long {
     return this
         .toInstant(
-            zoneId = zoneId,
+            timeZone = zoneId,
         )
-        .toEpochMilli()
-}
-
-/**
- * [LocalDateTime] to [Instant].
- */
-public fun LocalDateTime.toInstant(
-    zoneId: ZoneId = getSystemDefaultZoneId(),
-): Instant {
-    return this
-        .atZone(zoneId)
-        .toInstant()
+        .toEpochMilliseconds()
 }

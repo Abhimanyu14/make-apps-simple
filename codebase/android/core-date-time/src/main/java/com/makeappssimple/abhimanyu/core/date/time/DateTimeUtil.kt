@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.core.date.time
 
-import java.time.ZoneId
+import kotlinx.datetime.TimeZone
 
-public fun getSystemDefaultZoneId(): ZoneId {
-    return ZoneId.systemDefault()
+internal fun getSystemDefaultTimeZone(): TimeZone {
+    return TimeZone.currentSystemDefault()
 }

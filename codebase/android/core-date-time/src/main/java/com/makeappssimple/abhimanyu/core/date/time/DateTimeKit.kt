@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.core.date.time
 
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
-import java.time.ZoneId
+import kotlinx.datetime.TimeZone
 
 /**
  * Interface for date and time utilities.
@@ -29,7 +29,7 @@ import java.time.ZoneId
 public interface DateTimeKit {
     public fun getCurrentFormattedDateAndTime(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     public fun getCurrentLocalDate(): MyLocalDate
@@ -43,7 +43,7 @@ public interface DateTimeKit {
      */
     public fun getFormattedDate(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     /**
@@ -51,7 +51,7 @@ public interface DateTimeKit {
      */
     public fun getFormattedDateAndTime(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     /**
@@ -59,7 +59,7 @@ public interface DateTimeKit {
      */
     public fun getFormattedDateWithDayOfWeek(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     /**
@@ -67,7 +67,7 @@ public interface DateTimeKit {
      */
     public fun getFormattedMonth(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     /**
@@ -75,47 +75,47 @@ public interface DateTimeKit {
      */
     public fun getFormattedYear(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     public fun getLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): MyLocalDate
 
     public fun getLocalTime(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): MyLocalTime
 
     public fun getNextDayTimestamp(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getNextMonthTimestamp(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getNextYearTimestamp(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getPreviousDayTimestamp(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getPreviousMonthTimestamp(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getPreviousYearTimestamp(
         timestamp: Long,
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     /**
@@ -123,54 +123,54 @@ public interface DateTimeKit {
      */
     public fun getReadableDateAndTime(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): String
 
     public fun getStartOfDayTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getEndOfDayTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getStartOfMonthTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getEndOfMonthTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getStartOfYearTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getEndOfYearTimestamp(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 
     public fun getStartOfMonthLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): MyLocalDate
 
     public fun getStartOfYearLocalDate(
         timestamp: Long = getCurrentTimeMillis(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): MyLocalDate
 
-    public fun getSystemDefaultZoneId(): ZoneId
+    public fun getSystemDefaultTimeZone(): TimeZone
 
     public fun getTimestamp(
         date: MyLocalDate = getLocalDate(),
         time: MyLocalTime = getLocalTime(),
-        zoneId: ZoneId = getSystemDefaultZoneId(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
     ): Long
 }
