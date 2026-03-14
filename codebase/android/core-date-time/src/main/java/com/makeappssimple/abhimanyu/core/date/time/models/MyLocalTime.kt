@@ -36,8 +36,12 @@ public class MyLocalTime(
         zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): String {
         return DateTimeFormatter
-            .ofPattern("hh:mm a")
-            .format(localTime.toJavaLocalTime())
+            .ofPattern(
+                "hh:mm a",
+            )
+            .format(
+                localTime.toJavaLocalTime(),
+            )
             .uppercase()
     }
 
@@ -65,7 +69,10 @@ public class MyLocalTime(
         public fun now(): MyLocalTime {
             val timestamp = System.currentTimeMillis()
             return MyLocalTime(
-                localTime = Instant.fromEpochMilliseconds(timestamp)
+                localTime = Instant
+                    .fromEpochMilliseconds(
+                        epochMilliseconds = timestamp,
+                    )
                     .toLocalDateTime(
                         timeZone = getCurrentSystemDefaultTimeZone(),
                     )

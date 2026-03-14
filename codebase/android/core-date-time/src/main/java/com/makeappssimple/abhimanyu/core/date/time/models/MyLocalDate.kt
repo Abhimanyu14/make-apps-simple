@@ -68,7 +68,7 @@ public class MyLocalDate(
                     hour = 23,
                     minute = 59,
                     second = 59,
-                )
+                ),
             ),
         )
     }
@@ -80,7 +80,7 @@ public class MyLocalDate(
                     hour = 0,
                     minute = 0,
                     second = 0,
-                )
+                ),
             ),
         )
     }
@@ -89,27 +89,35 @@ public class MyLocalDate(
         zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): Long {
         return localDate
-            .atStartOfDayIn(zoneId)
+            .atStartOfDayIn(
+                timeZone = zoneId,
+            )
             .toEpochMilliseconds()
     }
 
     public fun toStartOfDayEpochMilli(): Long {
         return localDate
-            .atStartOfDayIn(TimeZone.UTC)
+            .atStartOfDayIn(
+                timeZone = TimeZone.UTC,
+            )
             .toEpochMilliseconds()
     }
 
     public fun atStartOfDay(
         zone: TimeZone,
     ): Instant {
-        return localDate.atStartOfDayIn(zone)
+        return localDate.atStartOfDayIn(
+            timeZone = zone,
+        )
     }
 
     public fun atTime(
         time: MyLocalTime,
     ): MyLocalDateTime {
         return MyLocalDateTime(
-            localDateTime = localDate.atTime(time.localTime),
+            localDateTime = localDate.atTime(
+                time = time.localTime,
+            ),
         )
     }
 
@@ -120,8 +128,12 @@ public class MyLocalDate(
         zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): String {
         return DateTimeFormatter
-            .ofPattern("dd MMM, yyyy")
-            .format(localDate.toJavaLocalDate())
+            .ofPattern(
+                "dd MMM, yyyy",
+            )
+            .format(
+                localDate.toJavaLocalDate(),
+            )
     }
 
     public fun withDayOfMonth(

@@ -29,7 +29,9 @@ import org.junit.Test
 
 internal class DateTimeKitTest {
     private val testEpochMilliseconds = 1680155040000L
-    private val testTimeZone = TimeZone.of("Asia/Kolkata")
+    private val testTimeZone = TimeZone.of(
+        zoneId = "Asia/Kolkata",
+    )
 
     private lateinit var dateTimeKit: DateTimeKit
 
@@ -69,7 +71,9 @@ internal class DateTimeKitTest {
 
     @Test
     fun getFormattedDateAndTime_withDifferentZone_returnsExpectedFormat() {
-        val utcTimeZone = TimeZone.of("UTC")
+        val utcTimeZone = TimeZone.of(
+            zoneId = "UTC",
+        )
 
         val formatted = dateTimeKit.getFormattedDateAndTime(
             timestamp = testEpochMilliseconds,
@@ -83,7 +87,9 @@ internal class DateTimeKitTest {
 
     @Test
     fun getFormattedDateAndTime_withDifferentZone_returnsPmFormat() {
-        val tokyoTimeZone = TimeZone.of("Asia/Tokyo")
+        val tokyoTimeZone = TimeZone.of(
+            zoneId = "Asia/Tokyo",
+        )
 
         val formatted = dateTimeKit.getFormattedDateAndTime(
             timestamp = testEpochMilliseconds,

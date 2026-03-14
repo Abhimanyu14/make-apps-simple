@@ -37,9 +37,15 @@ internal fun Instant.formattedDate(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("dd MMM, yyyy")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
+        .ofPattern(
+            "dd MMM, yyyy",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
+        )
 }
 
 /**
@@ -49,9 +55,15 @@ internal fun Instant.formattedDayOfWeek(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("EEEE")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
+        .ofPattern(
+            "EEEE",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
+        )
 }
 
 /**
@@ -61,9 +73,15 @@ internal fun Instant.formattedDay(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("dd MMM")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
+        .ofPattern(
+            "dd MMM",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
+        )
 }
 
 /**
@@ -73,9 +91,15 @@ internal fun Instant.formattedMonth(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("MMMM, yyyy")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
+        .ofPattern(
+            "MMMM, yyyy",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
+        )
 }
 
 /**
@@ -85,9 +109,15 @@ internal fun Instant.formattedYear(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("yyyy")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
+        .ofPattern(
+            "yyyy",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
+        )
 }
 
 /**
@@ -97,16 +127,22 @@ internal fun Instant.formattedDateAndTime(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("yyyy-MMM-dd, hh-mm a")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
-        .replace(
-            "am",
-            "AM"
+        .ofPattern(
+            "yyyy-MMM-dd, hh-mm a",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
         )
         .replace(
-            "pm",
-            "PM"
+            oldValue = "am",
+            newValue = "AM",
+        )
+        .replace(
+            oldValue = "pm",
+            newValue = "PM",
         )
 }
 
@@ -116,7 +152,7 @@ internal fun Instant.formattedDateAndTime(
 internal fun Instant.formattedReadableDateAndTime(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
-    return "${formattedDate(zoneId)} at ${formattedTime(zoneId)}"
+    return "${formattedDate(zoneId = zoneId)} at ${formattedTime(zoneId = zoneId)}"
 }
 
 /**
@@ -126,15 +162,21 @@ private fun Instant.formattedTime(
     zoneId: TimeZone = getCurrentSystemDefaultTimeZone(),
 ): String {
     return DateTimeFormatter
-        .ofPattern("hh:mm a")
-        .withZone(zoneId.toJavaZoneId())
-        .format(this.toJava())
-        .replace(
-            "am",
-            "AM"
+        .ofPattern(
+            "hh:mm a",
+        )
+        .withZone(
+            zoneId.toJavaZoneId(),
+        )
+        .format(
+            this.toJava(),
         )
         .replace(
-            "pm",
-            "PM"
+            oldValue = "am",
+            newValue = "AM",
+        )
+        .replace(
+            oldValue = "pm",
+            newValue = "PM",
         )
 }
