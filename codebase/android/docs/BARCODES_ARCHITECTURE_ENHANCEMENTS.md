@@ -83,10 +83,6 @@ com.makeappssimple.abhimanyu.barcodes.android
     - `HomeScreenUIState` uses `HomeBottomSheetType`; UI maps to
       `CosmosBottomSheetType` for Composables
 
-3. **`BARCODE_VALUE_CLIPBOARD_LABEL`
-   ** — Used by both Barcode Details and Create Barcode features, so it correctly lives in
-   `shared.ui.constants`. No move required; avoid duplicating it in a single feature.
-
 4. **Decouple `ImageBitmap` from Presentation**
     - Use an abstraction (e.g. `BarcodeImageProvider`) that returns a generic representation
     - Or keep bitmap generation in UI; ViewModel exposes domain data; UI generates the bitmap
@@ -98,15 +94,18 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 **Current:**
 
-- `BarcodeDetailsScreenViewModel`: `android.os.Build` (using `BuildConfigKit` for some checks),
+- `BarcodeDetailsScreenViewModel`: `BuildConfigKit` for platform checks,
   `androidx.compose.ui.graphics.ImageBitmap`, `CosmosColor`
-- `CreateBarcodeScreenViewModel`: `android.os.Build` (using `BuildConfigKit`)
+- `CreateBarcodeScreenViewModel`: `BuildConfigKit` for platform checks
+
+**Status:** ✅ BuildConfigKit is already used in barcodes module.
 
 **Enhancement:**
 
-1. **Abstract SDK version checks**
-    - Use `BuildConfigKit` (from common library) for platform capability checks
-    - Keep `Build.VERSION_CODES` usage in platform/impl
+1. **SDK version checks via BuildConfigKit**
+    - Already implemented: Use `BuildConfigKit` (from common library) for platform capability checks
+    - Recommendation: Pass platform capability checks via
+      `*UIStateEvents` to keep event handlers testable
 
 2. **Abstract bitmap/color**
     - Use domain-friendly types (e.g.
@@ -323,15 +322,19 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 #### Dependency Inversion (DIP)
 
-**Current:** ViewModels depend on `AnalyticsKit` (interface) ✓; `NavigationKit` (interface) ✓.
+**Current:** ViewModels depend on `AnalyticsKit` (interface) ✓; `NavigationKit` (interface) ✓;
+`BuildConfigKit` (interface) ✓.
 
 **Gaps:**
 
 - Presentation depending on `HomeCosmosBottomSheetType` (concrete UI type)
 - Presentation depending on `ImageBitmap`, `CosmosColor` (concrete framework types)
 
-**Enhancement:
-** Apply DIP: depend on abstractions (presentation/domain types), not UI/framework concretions.
+**Recommendation:**
+
+- For platform checks needed in event handlers, pass via `*UIStateEvents` (e.g.,
+  `isAndroidApiEqualToOrAboveApi33()`) to keep event handlers testable without DI in Composables
+- Apply DIP: depend on abstractions (presentation/domain types), not UI/framework concretions.
 
 ---
 
@@ -378,6 +381,10 @@ app-barcodes/           # Dep depends on barcodes-ui
 | P3       | Consistent UI state management                                                | Medium | Medium |
 | P3       | Centralized error handling (ScreenError)                                      | Medium | Medium |
 
+**Note:
+** BuildConfigKit is already implemented in barcodes module. Use the pattern of passing platform capability checks via
+`*UIStateEvents` for testability.
+
 ---
 
 ## 4. Refactoring Checklist
@@ -388,7 +395,8 @@ app-barcodes/           # Dep depends on barcodes-ui
   `FirebaseAnalyticsKitImpl` to platform (currently in `shared.ui.analytics`)
 - [ ] Update all ViewModels to depend on `AnalyticsKit` from domain
 - [ ] Add `FakeAnalyticsKit` for tests
-- [ ] Use `BuildConfigKit` for platform version checks
+- [ ] For event handlers needing platform checks, pass via
+  `*UIStateEvents` for testability (see finance-manager pattern)
 
 ### Phase 2: Presentation ↔ UI Decoupling (3–5 days)
 
@@ -400,7 +408,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ### Phase 3: Framework Decoupling (2–3 days)
 
-- [ ] Complete `Build.VERSION` abstraction: migrate remaining uses to `BuildConfigKit`
 - [ ] Remove `CosmosColor` from ViewModel; use opaque color representation or move to UI
 
 ### Phase 4: Structure (1–2 weeks)
@@ -428,19 +435,20 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ### Files Requiring Changes (Presentation → UI Decoupling)
 
-| File                                                               | Change                                                                   |
-|--------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `core/presentation/base/ScreenViewModel.kt`                        | Use `AnalyticsKit` from domain/analytics module                          |
-| `features/home/…/HomeScreenViewModel.kt`                           | Use `HomeBottomSheetType`; remove `HomeCosmosBottomSheetType`            |
-| `features/home/…/HomeScreenUIState.kt`                             | Use `HomeBottomSheetType`                                                |
-| `features/home/…/HomeScreenUIEventHandler.kt`                      | Use `HomeBottomSheetType`; map to `HomeCosmosBottomSheetType` only in UI |
-| `features/barcode_details/…/BarcodeDetailsScreenViewModel.kt`      | Remove `ImageBitmap`, `CosmosColor`, `Build`; use abstractions           |
-| `features/barcode_details/…/BarcodeDetailsScreenUIState.kt`        | Consider `BarcodeImageData` or move bitmap to UI                         |
-| `features/barcode_details/…/BarcodeDetailsScreenUIEventHandler.kt` | Use constant from presentation                                           |
-| `features/scan_barcode/…/ScanBarcodeScreenViewModel.kt`            | Use `AnalyticsKit` from domain                                           |
-| `features/web_view/…/WebViewScreenViewModel.kt`                    | Same                                                                     |
-| `features/settings/…/SettingsScreenViewModel.kt`                   | Same                                                                     |
-| `features/settings/…/CreditsScreenViewModel.kt`                    | Same                                                                     |
+| File                                                               | Change                                                                       |
+|--------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `core/presentation/base/ScreenViewModel.kt`                        | Use `AnalyticsKit` from domain/analytics module                              |
+| `features/home/…/HomeScreenViewModel.kt`                           | Use `HomeBottomSheetType`; remove `HomeCosmosBottomSheetType`                |
+| `features/home/…/HomeScreenUIState.kt`                             | Use `HomeBottomSheetType`                                                    |
+| `features/home/…/HomeScreenUIEventHandler.kt`                      | Use `HomeBottomSheetType`; map to `HomeCosmosBottomSheetType` only in UI     |
+| `features/barcode_details/…/BarcodeDetailsScreenViewModel.kt`      | ✅ BuildConfigKit done; Remove `ImageBitmap`, `CosmosColor`; use abstractions |
+| `features/barcode_details/…/BarcodeDetailsScreenUIState.kt`        | Consider `BarcodeImageData` or move bitmap to UI                             |
+| `features/barcode_details/…/BarcodeDetailsScreenUIEventHandler.kt` | Use constant from presentation                                               |
+| `features/create_barcode/…/CreateBarcodeScreenViewModel.kt`        | ✅ BuildConfigKit done                                                        |
+| `features/scan_barcode/…/ScanBarcodeScreenViewModel.kt`            | Use `AnalyticsKit` from domain                                               |
+| `features/web_view/…/WebViewScreenViewModel.kt`                    | Same                                                                         |
+| `features/settings/…/SettingsScreenViewModel.kt`                   | Same                                                                         |
+| `features/settings/…/CreditsScreenViewModel.kt`                    | Same                                                                         |
 
 ### New Files to Create
 
