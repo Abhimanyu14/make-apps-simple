@@ -163,20 +163,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ---
 
-#### Enhancement 7: Shared Navigation Contract
-
-**Current:** `BarcodesNavigationKit` has screen-specific methods (
-`navigateToBarcodeDetailsScreen`, etc.).
-
-**Enhancement:** For scalability:
-
-- Use a generic `navigate(route: Screen, args: Map<String, Any>?)` plus type-safe wrappers
-- Or keep explicit methods but ensure
-  `Screen` sealed class and routes are the single source of truth
-- Document navigation flow for new screens
-
----
-
 ### 2.3 Testability
 
 #### Enhancement 8: Inject AnalyticsKit as Interface
