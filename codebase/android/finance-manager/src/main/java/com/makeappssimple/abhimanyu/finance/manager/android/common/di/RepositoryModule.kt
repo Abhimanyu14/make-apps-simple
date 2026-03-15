@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
@@ -45,34 +45,34 @@ internal class RepositoryModule {
     @Single
     internal fun providesAccountRepository(
         accountDao: AccountDao,
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
     ): AccountRepository {
         return AccountRepositoryImpl(
             accountDao = accountDao,
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
         )
     }
 
     @Single
     internal fun providesCategoryRepository(
         categoryDao: CategoryDao,
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
     ): CategoryRepository {
         return CategoryRepositoryImpl(
             categoryDao = categoryDao,
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
         )
     }
 
     @Single
     internal fun providesFinanceManagerPreferencesRepository(
         dateTimeKit: DateTimeKit,
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
         financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
     ): FinanceManagerPreferencesRepository {
         return FinanceManagerPreferencesRepositoryImpl(
             dateTimeKit = dateTimeKit,
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
             financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
         )
     }
@@ -80,12 +80,12 @@ internal class RepositoryModule {
     @Single
     internal fun providesTransactionRepository(
         commonDataSource: CommonDataSource,
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
         transactionDao: TransactionDao,
     ): TransactionRepository {
         return TransactionRepositoryImpl(
             commonDataSource = commonDataSource,
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
             transactionDao = transactionDao,
         )
     }
@@ -93,23 +93,23 @@ internal class RepositoryModule {
     @Single
     internal fun providesTransactionDataRepository(
         commonDataSource: CommonDataSource,
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
         transactionDataDao: TransactionDataDao,
     ): TransactionDataRepository {
         return TransactionDataRepositoryImpl(
             commonDataSource = commonDataSource,
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
             transactionDataDao = transactionDataDao,
         )
     }
 
     @Single
     internal fun providesTransactionForRepository(
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
         transactionForDao: TransactionForDao,
     ): TransactionForRepository {
         return TransactionForRepositoryImpl(
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
             transactionForDao = transactionForDao,
         )
     }

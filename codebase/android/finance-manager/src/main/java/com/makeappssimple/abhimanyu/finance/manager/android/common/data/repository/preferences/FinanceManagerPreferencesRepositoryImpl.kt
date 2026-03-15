@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.preferences
 
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.first
 
 internal class FinanceManagerPreferencesRepositoryImpl(
     private val dateTimeKit: DateTimeKit,
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
 ) : FinanceManagerPreferencesRepository {
     override fun getDataTimestampFlow(): Flow<DataTimestamp?> {
@@ -49,26 +49,26 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     }
 
     override suspend fun getDataTimestamp(): DataTimestamp? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.getDataTimestamp().first()
         }
     }
 
     override suspend fun getDefaultDataId(): DefaultDataId? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.getDefaultDataId().first()
         }
     }
 
     override suspend fun getInitialDataVersionNumber(): InitialDataVersionNumber? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.getInitialDataVersionNumber()
                 .first()
         }
     }
 
     override suspend fun getReminder(): Reminder? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.getReminder().first()
         }
     }
@@ -76,7 +76,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateCategoryDataVersionNumber(
         categoryDataVersionNumber: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateCategoryDataVersionNumber(
                 categoryDataVersionNumber = categoryDataVersionNumber,
             )
@@ -86,7 +86,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateDefaultExpenseCategoryId(
         defaultExpenseCategoryId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateDefaultExpenseCategoryId(
                 defaultExpenseCategoryId = defaultExpenseCategoryId,
             )
@@ -96,7 +96,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateDefaultIncomeCategoryId(
         defaultIncomeCategoryId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateDefaultIncomeCategoryId(
                 defaultIncomeCategoryId = defaultIncomeCategoryId,
             )
@@ -106,7 +106,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateDefaultInvestmentCategoryId(
         defaultInvestmentCategoryId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateDefaultInvestmentCategoryId(
                 defaultInvestmentCategoryId = defaultInvestmentCategoryId,
             )
@@ -116,7 +116,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateDefaultAccountId(
         accountId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateDefaultAccountId(
                 defaultAccountId = accountId,
             )
@@ -126,7 +126,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateIsReminderEnabled(
         isReminderEnabled: Boolean,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateIsReminderEnabled(
                 isReminderEnabled = isReminderEnabled,
             )
@@ -134,7 +134,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     }
 
     override suspend fun updateLastDataBackupTimestamp(): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateLastDataBackupTimestamp(
                 lastDataBackupTimestamp = dateTimeKit.getCurrentTimeMillis(),
             )
@@ -142,7 +142,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     }
 
     override suspend fun updateLastDataChangeTimestamp(): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateLastDataChangeTimestamp(
                 lastDataChangeTimestamp = dateTimeKit.getCurrentTimeMillis(),
             )
@@ -153,7 +153,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
         hour: Int,
         min: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateReminderTime(
                 hour = hour,
                 min = min,
@@ -164,7 +164,7 @@ internal class FinanceManagerPreferencesRepositoryImpl(
     override suspend fun updateTransactionsDataVersionNumber(
         transactionsDataVersionNumber: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             financeManagerPreferencesDataSource.updateTransactionDataVersionNumber(
                 transactionDataVersionNumber = transactionsDataVersionNumber,
             )

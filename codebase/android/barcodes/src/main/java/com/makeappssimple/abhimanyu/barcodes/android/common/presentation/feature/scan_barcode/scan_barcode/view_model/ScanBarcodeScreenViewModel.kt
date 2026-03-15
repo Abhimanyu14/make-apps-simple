@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.feature
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.result.MyResult
@@ -48,7 +48,7 @@ internal class ScanBarcodeScreenViewModel(
     savedStateHandle: SavedStateHandle,
     private val insertBarcodesUseCase: InsertBarcodesUseCase,
     val dateTimeKit: DateTimeKit,
-    val dispatcherProvider: DispatcherProvider,
+    val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     val logKit: LogKit,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,

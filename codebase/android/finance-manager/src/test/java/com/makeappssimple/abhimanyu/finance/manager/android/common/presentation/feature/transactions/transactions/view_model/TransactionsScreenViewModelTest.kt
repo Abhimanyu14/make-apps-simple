@@ -48,7 +48,7 @@ internal class TransactionsScreenViewModelTest {
         transactionsScreenViewModel = TransactionsScreenViewModel(
             navigationKit = testDependencies.navigationKit,
             coroutineScope = testDependencies.testScope.backgroundScope,
-            dispatcherProvider = testDependencies.testDispatcherProvider,
+            coroutineDispatcherProvider = testDependencies.testDispatcherProvider,
             dateTimeKit = testDependencies.dateTimeKit,
             duplicateTransactionUseCase = testDependencies.duplicateTransactionUseCase,
             getAllTransactionDataFlowUseCase = testDependencies.getAllTransactionDataFlowUseCase,

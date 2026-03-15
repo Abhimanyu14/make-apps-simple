@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.data.mapper.BarcodeD
 import com.makeappssimple.abhimanyu.barcodes.android.common.data.mapper.BarcodeDomainToDataMapper
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.result.MyResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -35,7 +35,7 @@ import org.koin.core.annotation.Single
 )
 internal class BarcodeRepositoryImpl(
     private val barcodeDao: BarcodeDao,
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val barcodeDataToDomainMapper: BarcodeDataToDomainMapper,
     private val barcodeDomainToDataMapper: BarcodeDomainToDataMapper,
 ) : BarcodeRepository {
@@ -43,7 +43,7 @@ internal class BarcodeRepositoryImpl(
         vararg barcodes: BarcodeDomainModel,
     ): MyResult<Int> {
         return try {
-            dispatcherProvider.executeOnIoDispatcher {
+            coroutineDispatcherProvider.executeOnIoDispatcher {
                 val deletedBarcodesCount = barcodeDao.deleteBarcodes(
                     barcodeEntities = barcodes
                         .map(
@@ -76,7 +76,7 @@ internal class BarcodeRepositoryImpl(
         id: Int,
     ): MyResult<BarcodeDomainModel?> {
         return try {
-            dispatcherProvider.executeOnIoDispatcher {
+            coroutineDispatcherProvider.executeOnIoDispatcher {
                 val barcodeDataModel = barcodeDao.getBarcodeById(
                     id = id,
                 )
@@ -101,7 +101,7 @@ internal class BarcodeRepositoryImpl(
         barcode: BarcodeDomainModel,
     ): MyResult<Long> {
         return try {
-            dispatcherProvider.executeOnIoDispatcher {
+            coroutineDispatcherProvider.executeOnIoDispatcher {
                 val barcodeId = barcodeDao.insertBarcode(
                     barcodeDomainToDataMapper.toDataModel(
                         barcodeDomainModel = barcode,
@@ -124,7 +124,7 @@ internal class BarcodeRepositoryImpl(
         vararg barcodes: BarcodeDomainModel,
     ): MyResult<Int> {
         return try {
-            dispatcherProvider.executeOnIoDispatcher {
+            coroutineDispatcherProvider.executeOnIoDispatcher {
                 val updatedBarcodesCount = barcodeDao.updateBarcodes(
                     barcodeEntities = barcodes
                         .map(

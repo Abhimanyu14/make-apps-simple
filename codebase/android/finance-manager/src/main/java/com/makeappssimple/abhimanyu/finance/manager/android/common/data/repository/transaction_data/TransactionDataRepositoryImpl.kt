@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction_data
 
 import androidx.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.map
 
 internal class TransactionDataRepositoryImpl(
     private val commonDataSource: CommonDataSource,
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val transactionDataDao: TransactionDataDao,
 ) : TransactionDataRepository {
     override fun getAccountsInTransactionsFlow(): Flow<List<Account>> {
@@ -65,7 +65,7 @@ internal class TransactionDataRepositoryImpl(
     override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.deleteTransactionById(
                     id = id,
@@ -81,7 +81,7 @@ internal class TransactionDataRepositoryImpl(
     }
 
     override suspend fun getAllTransactionData(): ImmutableList<TransactionData> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDataDao.getAllTransactionData().map(
                     transform = TransactionDataEntity::asExternalModel,
@@ -208,7 +208,7 @@ internal class TransactionDataRepositoryImpl(
     override suspend fun getSearchedTransactionData(
         searchText: String,
     ): ImmutableList<TransactionData> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDataDao
                     .getSearchedTransactionData(
@@ -230,7 +230,7 @@ internal class TransactionDataRepositoryImpl(
     override suspend fun getTransactionDataById(
         id: Int,
     ): TransactionData? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDataDao.getTransactionDataById(
                     id = id,
@@ -251,7 +251,7 @@ internal class TransactionDataRepositoryImpl(
         transaction: Transaction,
         originalTransaction: Transaction?,
     ): Long {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.insertTransaction(
                     accountFrom = accountFrom?.asEntity(),
@@ -275,7 +275,7 @@ internal class TransactionDataRepositoryImpl(
         transactions: ImmutableList<Transaction>,
         transactionForValues: ImmutableList<TransactionFor>,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.restoreData(
                     categories = categories

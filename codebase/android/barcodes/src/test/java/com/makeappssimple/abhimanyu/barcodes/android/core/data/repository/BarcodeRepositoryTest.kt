@@ -22,8 +22,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.Ba
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.common.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.test.TestCoroutineDispatcherProviderImpl
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.Dispatchers
@@ -40,17 +40,17 @@ internal class BarcodeRepositoryTest {
 
     private lateinit var fakeBarcodeDao: FakeBarcodeDao
     private lateinit var barcodeRepository: BarcodeRepository
-    private lateinit var dispatcherProvider: DispatcherProvider
+    private lateinit var coroutineDispatcherProvider: CoroutineDispatcherProvider
 
     @Before
     fun setUp() {
         fakeBarcodeDao = FakeBarcodeDao()
-        dispatcherProvider = TestDispatcherProviderImpl(
+        coroutineDispatcherProvider = TestCoroutineDispatcherProviderImpl(
             testDispatcher = Dispatchers.Unconfined,
         )
         barcodeRepository = BarcodeRepositoryImpl(
             barcodeDao = fakeBarcodeDao,
-            dispatcherProvider = dispatcherProvider,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
         )
     }
 

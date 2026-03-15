@@ -20,7 +20,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.test
 
 import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
 import com.makeappssimple.abhimanyu.common.app_version.fake.FakeAppVersionKitImpl
-import com.makeappssimple.abhimanyu.common.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.coroutines.test.TestCoroutineDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
 import com.makeappssimple.abhimanyu.common.json_reader.fake.FakeJsonReaderKitImpl
 import com.makeappssimple.abhimanyu.common.json_writer.JsonWriterKit
@@ -144,7 +144,7 @@ internal class TestDependencies {
     val testScope = TestScope(
         context = testCoroutineDispatcher + Job(),
     )
-    val testDispatcherProvider = TestDispatcherProviderImpl(
+    val testDispatcherProvider = TestCoroutineDispatcherProviderImpl(
         testDispatcher = testCoroutineDispatcher,
     )
     // endregion
@@ -195,33 +195,33 @@ internal class TestDependencies {
     // region data
     val accountRepository: AccountRepository = AccountRepositoryImpl(
         accountDao = fakeAccountDao,
-        dispatcherProvider = testDispatcherProvider,
+        coroutineDispatcherProvider = testDispatcherProvider,
     )
     val categoryRepository: CategoryRepository = CategoryRepositoryImpl(
         categoryDao = fakeCategoryDao,
-        dispatcherProvider = testDispatcherProvider,
+        coroutineDispatcherProvider = testDispatcherProvider,
     )
     val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository =
         FinanceManagerPreferencesRepositoryImpl(
             dateTimeKit = dateTimeKit,
-            dispatcherProvider = testDispatcherProvider,
+            coroutineDispatcherProvider = testDispatcherProvider,
             financeManagerPreferencesDataSource = fakeFinanceManagerPreferencesDataSource,
         )
     val transactionRepository: TransactionRepository =
         TransactionRepositoryImpl(
             commonDataSource = commonDataSource,
-            dispatcherProvider = testDispatcherProvider,
+            coroutineDispatcherProvider = testDispatcherProvider,
             transactionDao = fakeTransactionDao,
         )
     val transactionDataRepository: TransactionDataRepository =
         TransactionDataRepositoryImpl(
             commonDataSource = commonDataSource,
-            dispatcherProvider = testDispatcherProvider,
+            coroutineDispatcherProvider = testDispatcherProvider,
             transactionDataDao = fakeTransactionDataDao,
         )
     val transactionForRepository: TransactionForRepository =
         TransactionForRepositoryImpl(
-            dispatcherProvider = testDispatcherProvider,
+            coroutineDispatcherProvider = testDispatcherProvider,
             transactionForDao = fakeTransactionForDao,
         )
     // endregion

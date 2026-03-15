@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database
 
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.orZero
 import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.InitialDatabaseData
@@ -40,7 +40,7 @@ internal interface InitialDatabasePopulator {
 }
 
 internal class InitialDatabasePopulatorImpl(
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val jsonReaderKit: JsonReaderKit,
     private val financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
 ) : InitialDatabasePopulator {
@@ -51,7 +51,7 @@ internal class InitialDatabasePopulatorImpl(
         // Reference - https://github.com/android/sunflower/blob/d7df7cb74b82a0c12064bca31acc2332e78c7c73/app/src/main/java/com/google/samples/apps/sunflower/data/AppDatabase.kt#L38
         financeManagerRoomDatabase.runInTransaction {
             CoroutineScope(
-                context = dispatcherProvider.io + SupervisorJob(),
+                context = coroutineDispatcherProvider.io + SupervisorJob(),
             ).launch {
                 try {
                     val jsonString = jsonReaderKit.readJsonFromAssets(

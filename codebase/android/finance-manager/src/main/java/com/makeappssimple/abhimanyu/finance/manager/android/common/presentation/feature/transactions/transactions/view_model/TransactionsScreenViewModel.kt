@@ -25,7 +25,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.common.extensions.orZero
@@ -76,7 +76,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class TransactionsScreenViewModel(
     private val coroutineScope: CoroutineScope,
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val dateTimeKit: DateTimeKit,
     private val duplicateTransactionUseCase: DuplicateTransactionUseCase,
     private val getAllTransactionDataFlowUseCase: GetAllTransactionDataFlowUseCase,
@@ -214,7 +214,7 @@ internal class TransactionsScreenViewModel(
 
     private suspend fun updateTransactionDetailsListItemViewData() {
         withContext(
-            context = dispatcherProvider.default,
+            context = coroutineDispatcherProvider.default,
         ) {
             val updatedAllTransactionData = allTransactionData
                 .filter { transactionData ->
@@ -301,7 +301,7 @@ internal class TransactionsScreenViewModel(
     private fun observeForAllTransactionData() {
         allTransactionDataObserverJob?.cancel()
         allTransactionDataObserverJob = coroutineScope.launch(
-            context = dispatcherProvider.default,
+            context = coroutineDispatcherProvider.default,
         ) {
             getAllTransactionDataFlowUseCase(
                 transactionFilter = selectedTransactionFilter,
@@ -315,7 +315,7 @@ internal class TransactionsScreenViewModel(
 
     private fun observeForCategoriesInTransactions() {
         coroutineScope.launch(
-            context = dispatcherProvider.default,
+            context = coroutineDispatcherProvider.default,
         ) {
             getCategoriesInTransactionsFlowUseCase()
                 .collectLatest { categoriesInTransactions: List<Category> ->
@@ -329,7 +329,7 @@ internal class TransactionsScreenViewModel(
 
     private fun observeForOldestTransactionTimestamp() {
         coroutineScope.launch(
-            context = dispatcherProvider.default,
+            context = coroutineDispatcherProvider.default,
         ) {
             getOldestTransactionTimestampUseCase()
                 .collectLatest { oldestTransactionTimestamp: Long? ->
@@ -343,7 +343,7 @@ internal class TransactionsScreenViewModel(
 
     private fun observeForSearchText() {
         coroutineScope.launch(
-            context = dispatcherProvider.default,
+            context = coroutineDispatcherProvider.default,
         ) {
             snapshotFlow {
                 searchTextFieldState.text.toString()
@@ -407,7 +407,7 @@ internal class TransactionsScreenViewModel(
             },
         )
         return coroutineScope.launch(
-            context = dispatcherProvider.io,
+            context = coroutineDispatcherProvider.io,
         ) {
             duplicateTransactionUseCase(
                 transactionId = transactionId,

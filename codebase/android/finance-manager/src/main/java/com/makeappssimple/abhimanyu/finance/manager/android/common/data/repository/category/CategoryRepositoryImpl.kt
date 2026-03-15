@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.category
 
 import androidx.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
@@ -33,12 +33,12 @@ import kotlinx.coroutines.flow.map
 
 internal class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao,
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
 ) : CategoryRepository {
     override suspend fun deleteCategories(
         vararg categories: Category,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.deleteCategories(
                     categories = categories.map(
@@ -58,7 +58,7 @@ internal class CategoryRepositoryImpl(
     override suspend fun deleteCategoryById(
         id: Int,
     ): Int {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.deleteCategoryById(
                     id = id,
@@ -74,7 +74,7 @@ internal class CategoryRepositoryImpl(
     }
 
     override suspend fun getAllCategories(): ImmutableList<Category> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.getAllCategories().map(
                     transform = CategoryEntity::asExternalModel,
@@ -109,7 +109,7 @@ internal class CategoryRepositoryImpl(
     override suspend fun getCategoryById(
         id: Int,
     ): Category? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.getCategoryById(
                     id = id,
@@ -127,7 +127,7 @@ internal class CategoryRepositoryImpl(
     override suspend fun insertCategories(
         vararg categories: Category,
     ): ImmutableList<Long> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.insertCategories(
                     categories = categories.map(
@@ -147,7 +147,7 @@ internal class CategoryRepositoryImpl(
     override suspend fun updateCategories(
         vararg categories: Category,
     ): Int {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 categoryDao.updateCategories(
                     categories = categories.map(

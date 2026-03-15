@@ -24,16 +24,16 @@ import org.koin.core.annotation.Single
 
 @Single(
     binds = [
-        DispatcherProvider::class,
+        CoroutineDispatcherProvider::class,
     ],
 )
-internal class DispatcherProviderImpl(
+internal class CoroutineDispatcherProviderImpl(
     @Named(DISPATCHER_DEFAULT) defaultCoroutineDispatcher: CoroutineDispatcher,
     @Named(DISPATCHER_IO) ioCoroutineDispatcher: CoroutineDispatcher,
     @Named(DISPATCHER_MAIN) mainCoroutineDispatcher: CoroutineDispatcher,
     @Named(DISPATCHER_MAIN_IMMEDIATE) mainImmediateCoroutineDispatcher: CoroutineDispatcher,
     @Named(DISPATCHER_UNCONFINED) unconfinedCoroutineDispatcher: CoroutineDispatcher,
-) : DispatcherProvider {
+) : CoroutineDispatcherProvider {
     override val default: CoroutineDispatcher = defaultCoroutineDispatcher
     override val io: CoroutineDispatcher = ioCoroutineDispatcher
     override val main: CoroutineDispatcher = mainCoroutineDispatcher

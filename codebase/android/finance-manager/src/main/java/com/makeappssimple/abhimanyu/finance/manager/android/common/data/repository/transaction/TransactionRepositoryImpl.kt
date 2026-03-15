@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction
 
 import androidx.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
@@ -37,13 +37,13 @@ import kotlinx.coroutines.flow.map
 
 internal class TransactionRepositoryImpl(
     private val commonDataSource: CommonDataSource,
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val transactionDao: TransactionDao,
 ) : TransactionRepository {
     override suspend fun checkIfAccountIsUsedInTransactions(
         accountId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.checkIfAccountIsUsedInTransactions(
                     accountId = accountId,
@@ -61,7 +61,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun checkIfCategoryIsUsedInTransactions(
         categoryId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.checkIfCategoryIsUsedInTransactions(
                     categoryId = categoryId,
@@ -79,7 +79,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun checkIfTransactionForIsUsedInTransactions(
         transactionForId: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.checkIfTransactionForIsUsedInTransactions(
                     transactionForId = transactionForId,
@@ -95,7 +95,7 @@ internal class TransactionRepositoryImpl(
     }
 
     override suspend fun deleteAllTransactions(): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.deleteAllTransactions() > 0
             } catch (
@@ -111,7 +111,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun deleteTransactionById(
         id: Int,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.deleteTransactionById(
                     id = id,
@@ -127,7 +127,7 @@ internal class TransactionRepositoryImpl(
     }
 
     override suspend fun getAllTransactions(): ImmutableList<Transaction> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.getAllTransactions().map(
                     transform = TransactionEntity::asExternalModel,
@@ -147,7 +147,7 @@ internal class TransactionRepositoryImpl(
         numberOfSuggestions: Int,
         enteredTitle: String,
     ): ImmutableList<String> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.getTitleSuggestions(
                     categoryId = categoryId,
@@ -167,7 +167,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun getTransactionById(
         id: Int,
     ): Transaction? {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.getTransactionById(
                     id = id,
@@ -186,7 +186,7 @@ internal class TransactionRepositoryImpl(
         startingTimestamp: Long,
         endingTimestamp: Long,
     ): ImmutableList<Transaction> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.getTransactionsBetweenTimestamps(
                     startingTimestamp = startingTimestamp,
@@ -233,7 +233,7 @@ internal class TransactionRepositoryImpl(
         transaction: Transaction,
         originalTransaction: Transaction?,
     ): Long {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.insertTransaction(
                     accountFrom = accountFrom?.asEntity(),
@@ -254,7 +254,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun insertTransactions(
         vararg transactions: Transaction,
     ): ImmutableList<Long> {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.insertTransactions(
                     transactions = transactions.map(
@@ -277,7 +277,7 @@ internal class TransactionRepositoryImpl(
         transactions: ImmutableList<Transaction>,
         transactionForValues: ImmutableList<TransactionFor>,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 commonDataSource.restoreData(
                     categories = categories.map(
@@ -306,7 +306,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun updateTransaction(
         transaction: Transaction,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.updateTransaction(
                     transaction = transaction.asEntity(),
@@ -324,7 +324,7 @@ internal class TransactionRepositoryImpl(
     override suspend fun updateTransactions(
         vararg transactions: Transaction,
     ): Boolean {
-        return dispatcherProvider.executeOnIoDispatcher {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
             try {
                 transactionDao.updateTransactions(
                     transactions = transactions.map(

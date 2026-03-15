@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.common.coroutines.di
 
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.core.annotation.Factory
@@ -26,10 +26,10 @@ import org.koin.core.annotation.Module
 public class CoroutineScopeModule {
     @Factory
     internal fun providesCoroutineScope(
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
     ): CoroutineScope {
         return CoroutineScope(
-            dispatcherProvider.mainImmediate + SupervisorJob(),
+            coroutineDispatcherProvider.mainImmediate + SupervisorJob(),
         )
     }
 }

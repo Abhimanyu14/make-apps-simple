@@ -23,7 +23,7 @@ import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import kotlinx.coroutines.CoroutineScope
@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 private const val MINIMUM_ANALYSIS_INTERVAL_MS = 1000L
 
 internal class BarcodeAnalyser(
-    dispatcherProvider: DispatcherProvider,
+    coroutineDispatcherProvider: CoroutineDispatcherProvider,
     private val barcodeScanner: BarcodeScanner,
     private val dateTimeKit: DateTimeKit,
     private val logKit: LogKit,
@@ -42,7 +42,7 @@ internal class BarcodeAnalyser(
 ) : ImageAnalysis.Analyzer {
     private var currentTimestamp: Long = 0
     private val coroutineScope: CoroutineScope = CoroutineScope(
-        context = SupervisorJob() + dispatcherProvider.io,
+        context = SupervisorJob() + coroutineDispatcherProvider.io,
     )
 
     @OptIn(ExperimentalGetImage::class)

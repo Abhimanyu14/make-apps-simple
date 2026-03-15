@@ -23,7 +23,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
 import com.makeappssimple.abhimanyu.barcode.generator.android.model.BarcodeFormatModel
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.isNull
 import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Single
@@ -34,7 +34,7 @@ import org.koin.core.annotation.Single
     ],
 )
 internal class BarcodeGeneratorImpl(
-    private val dispatcherProvider: DispatcherProvider,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
 ) : BarcodeGenerator {
     override suspend fun generateBarcode(
         data: String,
@@ -46,7 +46,7 @@ internal class BarcodeGeneratorImpl(
     ): ImageBitmap? {
         var imageBitmap: ImageBitmap? = null
         withContext(
-            context = dispatcherProvider.default,
+            context = coroutineDispatcherProvider.default,
         ) {
             val bitMatrix: BitMatrix? = getBitMatrix(
                 data = data,

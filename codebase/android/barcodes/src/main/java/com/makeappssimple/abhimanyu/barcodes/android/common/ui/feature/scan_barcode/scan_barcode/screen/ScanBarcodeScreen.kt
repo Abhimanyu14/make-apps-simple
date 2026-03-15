@@ -188,7 +188,7 @@ internal fun ScanBarcodeScreen(
 
         val barcodeScanner: BarcodeScanner = koin.get()
         val barcodeAnalyser = BarcodeAnalyser(
-            dispatcherProvider = screenViewModel.dispatcherProvider,
+            coroutineDispatcherProvider = screenViewModel.coroutineDispatcherProvider,
             barcodeScanner = barcodeScanner,
             dateTimeKit = screenViewModel.dateTimeKit,
             logKit = screenViewModel.logKit,

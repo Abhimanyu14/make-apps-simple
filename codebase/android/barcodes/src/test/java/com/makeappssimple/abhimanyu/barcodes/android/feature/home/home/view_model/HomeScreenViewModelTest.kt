@@ -27,7 +27,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.a
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.common.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.coroutines.test.TestCoroutineDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoderImpl
@@ -49,7 +49,7 @@ class HomeScreenViewModelTest {
     private val testCoroutineScope = CoroutineScope(
         context = testCoroutineDispatcher,
     )
-    private val testDispatcherProvider = TestDispatcherProviderImpl(
+    private val testDispatcherProvider = TestCoroutineDispatcherProviderImpl(
         testDispatcher = testCoroutineDispatcher,
     )
 
@@ -57,7 +57,7 @@ class HomeScreenViewModelTest {
     private val fakeBarcodeDao = FakeBarcodeDao()
     private val barcodeRepository = BarcodeRepositoryImpl(
         barcodeDao = fakeBarcodeDao,
-        dispatcherProvider = testDispatcherProvider,
+        coroutineDispatcherProvider = testDispatcherProvider,
     )
     private val dateTimeKit = DateTimeKitImpl()
     private val uriEncoder: UriEncoder = UriEncoderImpl()

@@ -23,7 +23,7 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSourceImpl
@@ -39,7 +39,7 @@ internal class PreferencesModule {
     @Single
     internal fun providesPreferencesDataStore(
         appContext: Context,
-        dispatcherProvider: DispatcherProvider,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(
@@ -49,7 +49,7 @@ internal class PreferencesModule {
             ),
             migrations = preferencesDataMigrations,
             scope = CoroutineScope(
-                context = dispatcherProvider.io + SupervisorJob(),
+                context = coroutineDispatcherProvider.io + SupervisorJob(),
             ),
             produceFile = {
                 appContext.preferencesDataStoreFile(

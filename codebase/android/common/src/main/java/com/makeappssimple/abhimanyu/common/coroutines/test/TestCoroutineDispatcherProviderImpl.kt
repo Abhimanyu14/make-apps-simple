@@ -16,14 +16,14 @@
 
 package com.makeappssimple.abhimanyu.common.coroutines.test
 
-import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 
-public class TestDispatcherProviderImpl(
+public class TestCoroutineDispatcherProviderImpl(
     testDispatcher: CoroutineDispatcher,
-) : DispatcherProvider {
+) : CoroutineDispatcherProvider {
     override val default: CoroutineDispatcher = testDispatcher
     override val io: CoroutineDispatcher = testDispatcher
     override val main: CoroutineDispatcher = testDispatcher

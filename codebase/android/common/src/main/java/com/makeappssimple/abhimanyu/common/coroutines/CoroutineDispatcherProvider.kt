@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.common.coroutines
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 
-public interface DispatcherProvider {
+public interface CoroutineDispatcherProvider {
     public val default: CoroutineDispatcher
     public val io: CoroutineDispatcher
     public val main: CoroutineDispatcher
