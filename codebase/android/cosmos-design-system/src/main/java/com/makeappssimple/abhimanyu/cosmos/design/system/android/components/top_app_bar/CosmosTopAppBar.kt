@@ -43,7 +43,6 @@ public fun CosmosTopAppBar(
     modifier: Modifier = Modifier,
     navigationIconResource: CosmosIconResource? = null,
     titleStringResource: CosmosStringResource,
-    // TODO(Abhi): Update to StringResource
     navigationLabelStringResource: CosmosStringResource? = null,
     navigationAction: (() -> Unit)? = null,
     appBarActions: @Composable (() -> Unit)? = null,
