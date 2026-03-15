@@ -10,14 +10,24 @@
 
 ### 1.1 Package Structure
 
+The barcodes module uses a **feature-first** layout with a shared **core** (Enhancement 6 completed):
+
 ```
 com.makeappssimple.abhimanyu.barcodes.android
-├── common/
-│   ├── data/           # Repository impls, DAOs, mappers, models
+├── core/               # Shared domain, data, presentation base, navigation, DI
+│   ├── data/           # Repository impls, DAOs, mappers, models, database
+│   ├── di/             # Koin app/room/firebase modules
 │   ├── domain/         # Models, use cases, repository interfaces
-│   ├── presentation/   # ViewModels, state, events, navigation, mappers
-│   ├── ui/             # Screens, components, analytics, icons, permissions
-│   └── di/             # Koin modules
+│   └── presentation/   # Base (ScreenViewModel, ScreenUIState, etc.), app VM, navigation, mappers
+├── features/           # Per-feature presentation + UI
+│   ├── barcode_details/
+│   ├── create_barcode/
+│   ├── home/
+│   ├── scan_barcode/
+│   ├── settings/
+│   └── web_view/
+├── shared/
+│   └── ui/             # Analytics, app shell, common components, constants, icons, permissions
 └── platform/           # Activity, Application
 ```
 
@@ -41,20 +51,20 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 #### Issue 1: Presentation Depends on UI (Dependency Rule Violation)
 
-**Current:** Presentation layer imports from `common.ui`:
+**Current:** Presentation layer imports from `shared.ui` (and some feature UI types):
 
 | File | UI Dependency |
 |------|---------------|
-| `ScreenViewModel.kt` | `AnalyticsKit` (from `ui.analytics`) |
-| `HomeScreenViewModel.kt` | `AnalyticsKit`, `HomeCosmosBottomSheetType` |
-| `HomeScreenUIState.kt` | `HomeCosmosBottomSheetType` |
-| `HomeScreenUIEventHandler.kt` | `HomeCosmosBottomSheetType`, `HomeMenuBottomSheetEvent` |
-| `BarcodeDetailsScreenViewModel.kt` | `AnalyticsKit`, `CosmosColor` |
-| `BarcodeDetailsScreenUIEventHandler.kt` | `BARCODE_VALUE_CLIPBOARD_LABEL` |
-| `BarcodeDetailsScreenUIState.kt` | `ImageBitmap` (Compose) |
-| `ScanBarcodeScreenViewModel.kt` | `AnalyticsKit` |
-| `WebViewScreenViewModel.kt` | `AnalyticsKit` |
-| `SettingsScreenViewModel.kt` | `AnalyticsKit` |
+| `core/presentation/base/ScreenViewModel.kt` | `AnalyticsKit` (from `shared.ui.analytics`) |
+| `features/home/…/HomeScreenViewModel.kt` | `AnalyticsKit`, `HomeCosmosBottomSheetType` |
+| `features/home/…/HomeScreenUIState.kt` | `HomeCosmosBottomSheetType` |
+| `features/home/…/HomeScreenUIEventHandler.kt` | `HomeCosmosBottomSheetType`, `HomeMenuBottomSheetEvent` |
+| `features/barcode_details/…/BarcodeDetailsScreenViewModel.kt` | `AnalyticsKit`, `CosmosColor` |
+| `features/barcode_details/…/BarcodeDetailsScreenUIEventHandler.kt` | `BARCODE_VALUE_CLIPBOARD_LABEL` |
+| `features/barcode_details/…/BarcodeDetailsScreenUIState.kt` | `ImageBitmap` (Compose) |
+| `features/scan_barcode/…/ScanBarcodeScreenViewModel.kt` | `AnalyticsKit` |
+| `features/web_view/…/WebViewScreenViewModel.kt` | `AnalyticsKit` |
+| `features/settings/…/SettingsScreenViewModel.kt` | `AnalyticsKit` |
 
 **Rule:** `UI → Presentation → Domain`. Presentation must not depend on UI.
 
@@ -66,12 +76,12 @@ com.makeappssimple.abhimanyu.barcodes.android
    - Presentation depends on the interface only
 
 2. **Introduce presentation-level bottom sheet type**
-   - Create `HomeBottomSheetType` (sealed class) in `presentation.feature.home.state`
+   - Create `HomeBottomSheetType` (sealed class) in `features.home.presentation.home.state`
    - Map `HomeBottomSheetType` → `HomeCosmosBottomSheetType` in UI layer
    - `HomeScreenUIState` uses `HomeBottomSheetType`; UI maps to `CosmosBottomSheetType` for Composables
 
 3. **Move `BARCODE_VALUE_CLIPBOARD_LABEL`**
-   - Place in `presentation.feature.barcode_details.constants` or pass as parameter
+   - Place in `features.barcode_details.presentation` constants or pass as parameter
    - Avoid Presentation importing UI constants
 
 4. **Decouple `ImageBitmap` from Presentation**
@@ -101,7 +111,7 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 #### Issue 3: Navigation Module Depends on Compose
 
-**Current:** `BarcodesNavGraph` is a `@Composable` in `presentation.navigation`, using `rememberNavController`, `LaunchedEffect`, `LocalLifecycleOwner`, etc.
+**Current:** `BarcodesNavGraph` is a `@Composable` in `core.presentation.navigation`, using `rememberNavController`, `LaunchedEffect`, `LocalLifecycleOwner`, etc.
 
 **Enhancement:**
 - Keep navigation *contract* (routes, `NavigationCommand`) in presentation
@@ -113,7 +123,7 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 #### Issue 4: Event Handlers Hold Direct ViewModel Reference
 
-**Current:** `HomeScreenUIEventHandler` receives `HomeScreenViewModel` and calls methods like `navigateToCreateBarcodeScreen()`, `deleteBarcodes()`, etc.
+**Current:** `features/home/…/HomeScreenUIEventHandler` receives `HomeScreenViewModel` and calls methods like `navigateToCreateBarcodeScreen()`, `deleteBarcodes()`, etc.
 
 **Implication:** Event handlers are tightly coupled to ViewModel and mix event routing with business calls.
 
@@ -144,24 +154,9 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ---
 
-#### Enhancement 6: Feature-First Directory Layout
+#### Enhancement 6: Feature-First Directory Layout ✅ Done
 
-**Current:** Layer-first (`presentation/feature/home/...`, `ui/feature/home/...`).
-
-**Enhancement:** Consider feature-first for large features:
-
-```
-features/
-  home/
-    domain/
-    data/
-    presentation/
-    ui/
-  scan_barcode/
-    ...
-```
-
-Or keep layer-first but add clear feature boundaries and avoid cross-feature imports in domain/data.
+**Current:** Feature-first layout is in place. Shared code lives under `core/` (domain, data, presentation base, navigation, DI). Each feature has `features/<name>/presentation/` and `features/<name>/ui/`. Cross-feature UI (analytics, app, common components, constants, icons, permissions) lives under `shared/ui/`. Platform remains under `platform/`.
 
 ---
 
@@ -228,11 +223,11 @@ Or keep layer-first but add clear feature boundaries and avoid cross-feature imp
 
 #### Enhancement 12: Centralize Screen-Specific Constants
 
-**Current:** `BARCODE_VALUE_CLIPBOARD_LABEL` in `ui.constants`.
+**Current:** `BARCODE_VALUE_CLIPBOARD_LABEL` in `shared.ui.constants`.
 
 **Enhancement:**
 - Keep feature constants in that feature’s package
-- `presentation.feature.barcode_details.BarcodeDetailsConstants` or similar
+- `features.barcode_details.presentation.…BarcodeDetailsConstants` or similar
 - Reduces scattering and clarifies ownership
 
 ---
@@ -352,22 +347,22 @@ Or keep layer-first but add clear feature boundaries and avoid cross-feature imp
 | P2 | Move BarcodesNavGraph Composable to UI | Medium | Medium |
 | P2 | Split into Gradle modules (domain, data, presentation, ui) | High | High |
 | P3 | Centralized error handling (ScreenError) | Medium | Medium |
-| P3 | Feature-first structure (optional) | High | Medium |
+| — | ~~Feature-first structure~~ | — | ✅ Done |
 
 ---
 
 ## 4. Refactoring Checklist
 
 ### Phase 1: Quick Wins (1–2 days)
-- [ ] Remove `logError("Inside MyNavGraph")` from `BarcodesNavGraph`
-- [ ] Create `AnalyticsKit` interface in `domain` or `common.analytics`; move `FirebaseAnalyticsKitImpl` to platform
+- [ ] Remove `logError("Inside MyNavGraph")` from `core/presentation/navigation/BarcodesNavGraph`
+- [ ] Create `AnalyticsKit` interface in `core.domain` or shared analytics; move `FirebaseAnalyticsKitImpl` to platform (currently in `shared.ui.analytics`)
 - [ ] Update all ViewModels to depend on `AnalyticsKit` from domain
 - [ ] Add `FakeAnalyticsKit` for tests
 
 ### Phase 2: Presentation ↔ UI Decoupling (3–5 days)
-- [ ] Create `HomeBottomSheetType` in presentation; map to `HomeCosmosBottomSheetType` in UI
-- [ ] Update `HomeScreenUIState`, `HomeScreenViewModel`, `HomeScreenUIEventHandler`
-- [ ] Move `BARCODE_VALUE_CLIPBOARD_LABEL` to presentation
+- [ ] Create `HomeBottomSheetType` in `features/home/presentation`; map to `HomeCosmosBottomSheetType` in UI
+- [ ] Update `HomeScreenUIState`, `HomeScreenViewModel`, `HomeScreenUIEventHandler` (under `features/home/`)
+- [ ] Move `BARCODE_VALUE_CLIPBOARD_LABEL` to presentation (`features/barcode_details/…` or core)
 - [ ] Abstract bitmap: introduce `BarcodeImageProvider` or move generation to UI
 
 ### Phase 3: Framework Decoupling (2–3 days)
@@ -375,6 +370,7 @@ Or keep layer-first but add clear feature boundaries and avoid cross-feature imp
 - [ ] Remove `CosmosColor` from ViewModel; use opaque color representation or move to UI
 
 ### Phase 4: Structure (1–2 weeks)
+- [x] Feature-first directory layout (core, features, shared, platform)
 - [ ] Evaluate Gradle module split (domain, data, presentation, ui)
 - [ ] Move `BarcodesNavGraph` Composable to UI package
 - [ ] Standardize event handling (handler → ViewModel.handleUIEvent)
@@ -387,25 +383,25 @@ Or keep layer-first but add clear feature boundaries and avoid cross-feature imp
 
 | File | Change |
 |------|--------|
-| `ScreenViewModel.kt` | Use `AnalyticsKit` from domain/analytics module |
-| `HomeScreenViewModel.kt` | Use `HomeBottomSheetType`; remove `HomeCosmosBottomSheetType` |
-| `HomeScreenUIState.kt` | Use `HomeBottomSheetType` |
-| `HomeScreenUIEventHandler.kt` | Use `HomeBottomSheetType`; map to `HomeCosmosBottomSheetType` only in UI |
-| `BarcodeDetailsScreenViewModel.kt` | Remove `ImageBitmap`, `CosmosColor`, `Build`; use abstractions |
-| `BarcodeDetailsScreenUIState.kt` | Consider `BarcodeImageData` or move bitmap to UI |
-| `BarcodeDetailsScreenUIEventHandler.kt` | Use constant from presentation |
-| `ScanBarcodeScreenViewModel.kt` | Use `AnalyticsKit` from domain |
-| `WebViewScreenViewModel.kt` | Same |
-| `SettingsScreenViewModel.kt` | Same |
+| `core/presentation/base/ScreenViewModel.kt` | Use `AnalyticsKit` from domain/analytics module |
+| `features/home/…/HomeScreenViewModel.kt` | Use `HomeBottomSheetType`; remove `HomeCosmosBottomSheetType` |
+| `features/home/…/HomeScreenUIState.kt` | Use `HomeBottomSheetType` |
+| `features/home/…/HomeScreenUIEventHandler.kt` | Use `HomeBottomSheetType`; map to `HomeCosmosBottomSheetType` only in UI |
+| `features/barcode_details/…/BarcodeDetailsScreenViewModel.kt` | Remove `ImageBitmap`, `CosmosColor`, `Build`; use abstractions |
+| `features/barcode_details/…/BarcodeDetailsScreenUIState.kt` | Consider `BarcodeImageData` or move bitmap to UI |
+| `features/barcode_details/…/BarcodeDetailsScreenUIEventHandler.kt` | Use constant from presentation |
+| `features/scan_barcode/…/ScanBarcodeScreenViewModel.kt` | Use `AnalyticsKit` from domain |
+| `features/web_view/…/WebViewScreenViewModel.kt` | Same |
+| `features/settings/…/SettingsScreenViewModel.kt` | Same |
 
 ### New Files to Create
 
 | File | Purpose |
 |------|---------|
-| `domain/analytics/AnalyticsKit.kt` (or `common.analytics`) | Analytics interface |
-| `presentation/feature/home/state/HomeBottomSheetType.kt` | Presentation-level bottom sheet type |
-| `presentation/feature/barcode_details/BarcodeDetailsConstants.kt` | Clipboard label, etc. |
-| `platform/analytics/FirebaseAnalyticsKitImpl.kt` | Move from ui.analytics |
+| `core/domain/analytics/AnalyticsKit.kt` (or shared analytics) | Analytics interface |
+| `features/home/presentation/home/state/HomeBottomSheetType.kt` | Presentation-level bottom sheet type |
+| `features/barcode_details/…/BarcodeDetailsConstants.kt` | Clipboard label, etc. |
+| `platform/analytics/FirebaseAnalyticsKitImpl.kt` | Move from `shared.ui.analytics` |
 | `test/fake/FakeAnalyticsKit.kt` | For unit tests |
 
 ---
