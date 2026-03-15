@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType

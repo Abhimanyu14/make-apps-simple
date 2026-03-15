@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction
 
 import androidx.compose.runtime.Immutable
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData

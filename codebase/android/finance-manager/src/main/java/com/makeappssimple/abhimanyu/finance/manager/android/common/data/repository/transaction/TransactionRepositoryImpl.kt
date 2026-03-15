@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction
 
 import androidx.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity

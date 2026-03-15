@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account
 
-import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.equalsIgnoringCase
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError

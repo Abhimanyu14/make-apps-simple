@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction
 
-import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.capitalizeWords
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime

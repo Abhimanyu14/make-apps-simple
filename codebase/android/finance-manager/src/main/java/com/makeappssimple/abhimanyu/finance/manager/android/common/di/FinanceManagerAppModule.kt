@@ -16,15 +16,15 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.common.di.AppVersionKitModule
-import com.makeappssimple.abhimanyu.common.di.BuildConfigKitModule
-import com.makeappssimple.abhimanyu.common.di.CoroutineScopeModule
-import com.makeappssimple.abhimanyu.common.di.DispatcherProviderModule
-import com.makeappssimple.abhimanyu.common.di.JsonReaderKitModule
-import com.makeappssimple.abhimanyu.common.di.JsonWriterKitModule
-import com.makeappssimple.abhimanyu.common.di.LogKitModule
-import com.makeappssimple.abhimanyu.common.di.UriDecoderModule
-import com.makeappssimple.abhimanyu.common.di.UriEncoderModule
+import com.makeappssimple.abhimanyu.common.app_version.di.AppVersionKitModule
+import com.makeappssimple.abhimanyu.common.build_config.di.BuildConfigKitModule
+import com.makeappssimple.abhimanyu.common.coroutines.di.CoroutineScopeModule
+import com.makeappssimple.abhimanyu.common.coroutines.di.DispatcherProviderModule
+import com.makeappssimple.abhimanyu.common.json_reader.di.JsonReaderKitModule
+import com.makeappssimple.abhimanyu.common.json_writer.di.JsonWriterKitModule
+import com.makeappssimple.abhimanyu.common.log_kit.di.LogKitModule
+import com.makeappssimple.abhimanyu.common.uri_decoder.di.UriDecoderModule
+import com.makeappssimple.abhimanyu.common.uri_encoder.di.UriEncoderModule
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.di.AlarmKitModule
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.di.NotificationKitModule
 import org.koin.core.annotation.ComponentScan

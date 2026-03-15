@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
-import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.common.extensions.isNull
+import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AmountEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType

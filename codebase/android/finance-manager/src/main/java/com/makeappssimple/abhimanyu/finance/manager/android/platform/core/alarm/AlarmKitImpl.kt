@@ -22,7 +22,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit

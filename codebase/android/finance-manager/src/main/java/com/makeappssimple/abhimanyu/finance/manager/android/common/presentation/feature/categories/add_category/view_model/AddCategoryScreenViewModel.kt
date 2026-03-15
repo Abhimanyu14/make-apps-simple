@@ -21,10 +21,10 @@ import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
-import com.makeappssimple.abhimanyu.common.core.extensions.map
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.common.coroutines.getCompletedJob
+import com.makeappssimple.abhimanyu.common.extensions.map
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants

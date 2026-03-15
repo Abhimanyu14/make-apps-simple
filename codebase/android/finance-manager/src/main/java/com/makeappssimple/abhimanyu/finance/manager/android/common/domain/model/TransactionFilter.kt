@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.isNull
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

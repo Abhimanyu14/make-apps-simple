@@ -27,10 +27,10 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.a
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeFormat
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoderImpl
+import com.makeappssimple.abhimanyu.common.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
+import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoder
+import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoderImpl
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKitImpl
 import io.kotest.matchers.ints.shouldBeZero
 import io.kotest.matchers.shouldBe

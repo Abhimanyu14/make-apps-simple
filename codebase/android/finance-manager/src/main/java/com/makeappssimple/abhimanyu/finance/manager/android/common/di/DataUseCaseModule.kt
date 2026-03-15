@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
+import com.makeappssimple.abhimanyu.common.json_writer.JsonWriterKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository

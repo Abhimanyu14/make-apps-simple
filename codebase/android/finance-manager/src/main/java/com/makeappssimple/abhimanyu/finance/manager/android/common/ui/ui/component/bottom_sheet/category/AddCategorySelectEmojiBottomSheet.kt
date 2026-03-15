@@ -21,7 +21,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.makeappssimple.abhimanyu.common.core.extensions.capitalizeWords
+import com.makeappssimple.abhimanyu.common.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.composeemojipicker.ComposeEmojiPickerBottomSheetUI
 import com.makeappssimple.abhimanyu.composeemojipicker.Emoji
 

@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource
 
-import com.makeappssimple.abhimanyu.common.core.extensions.orEmpty
+import com.makeappssimple.abhimanyu.common.extensions.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDao

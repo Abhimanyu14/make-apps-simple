@@ -16,12 +16,14 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.data.repository
 
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.dao.fake.FakeBarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.common.data.barcode.fake.FakeBarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.common.data.repository.barcode.BarcodeRepositoryImpl
+import com.makeappssimple.abhimanyu.barcodes.android.common.domain.repository.BarcodeRepository
 import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.asExternalModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.Barcode
 import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
-import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.coroutines.test.TestDispatcherProviderImpl
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.Dispatchers

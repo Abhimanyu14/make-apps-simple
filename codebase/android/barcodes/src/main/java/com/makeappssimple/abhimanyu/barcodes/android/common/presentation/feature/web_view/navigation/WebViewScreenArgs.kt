@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.common.presentation.featur
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.ScreenArgs
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.constants.NavigationArguments
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 
 internal class WebViewScreenArgs(
     val url: String?,

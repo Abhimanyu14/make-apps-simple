@@ -18,7 +18,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
+import com.makeappssimple.abhimanyu.common.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.CurrencyCodeConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.serializer.CurrencySerializer
 import kotlinx.serialization.EncodeDefault

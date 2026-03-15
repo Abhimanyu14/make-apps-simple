@@ -20,7 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
+import com.makeappssimple.abhimanyu.common.extensions.orFalse
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.toggle.CosmosToggle

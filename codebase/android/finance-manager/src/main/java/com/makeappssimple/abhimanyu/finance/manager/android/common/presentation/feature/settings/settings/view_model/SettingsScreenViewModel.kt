@@ -18,10 +18,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.core.coroutines.getCompletedJob
-import com.makeappssimple.abhimanyu.common.core.extensions.orFalse
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
+import com.makeappssimple.abhimanyu.common.coroutines.getCompletedJob
+import com.makeappssimple.abhimanyu.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository

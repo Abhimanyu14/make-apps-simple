@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account
 
-import com.makeappssimple.abhimanyu.common.core.extensions.equalsIgnoringCase
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.equalsIgnoringCase
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.view_model.AddAccountScreenDataValidationState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount

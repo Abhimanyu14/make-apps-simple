@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.navigation
 
 import app.cash.turbine.test
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.UriEncoder
-import com.makeappssimple.abhimanyu.common.core.uri_encoder.fake.FakeUriEncoderImpl
+import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoder
+import com.makeappssimple.abhimanyu.common.uri_encoder.fake.FakeUriEncoderImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope

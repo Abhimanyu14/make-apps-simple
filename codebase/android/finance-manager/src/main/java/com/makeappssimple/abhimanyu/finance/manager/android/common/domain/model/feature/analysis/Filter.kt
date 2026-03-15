@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis
 
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
-import com.makeappssimple.abhimanyu.common.core.extensions.isNull
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.isNull
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 
 internal data class Filter(

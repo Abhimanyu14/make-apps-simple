@@ -20,7 +20,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.AddTransactionForScreenDataValidationUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.InsertTransactionForUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenUIState

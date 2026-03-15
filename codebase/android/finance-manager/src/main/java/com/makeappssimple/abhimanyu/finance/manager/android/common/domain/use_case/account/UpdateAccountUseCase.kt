@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account
 
-import com.makeappssimple.abhimanyu.common.core.extensions.toIntOrZero
-import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
+import com.makeappssimple.abhimanyu.common.extensions.toIntOrZero
+import com.makeappssimple.abhimanyu.common.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType

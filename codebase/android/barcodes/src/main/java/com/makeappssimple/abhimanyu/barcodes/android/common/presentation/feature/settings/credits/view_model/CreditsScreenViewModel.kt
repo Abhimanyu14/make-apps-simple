@@ -20,7 +20,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.base.Sc
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.NavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.common.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.common.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import kotlinx.coroutines.CoroutineScope
 import org.koin.android.annotation.KoinViewModel
 

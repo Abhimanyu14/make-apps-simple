@@ -23,8 +23,8 @@ import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
-import com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

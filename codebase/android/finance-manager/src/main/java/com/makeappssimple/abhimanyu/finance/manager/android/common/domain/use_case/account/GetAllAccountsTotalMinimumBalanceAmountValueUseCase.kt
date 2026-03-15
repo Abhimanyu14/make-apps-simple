@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.account
 
-import com.makeappssimple.abhimanyu.common.core.extensions.orZero
+import com.makeappssimple.abhimanyu.common.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account.AccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

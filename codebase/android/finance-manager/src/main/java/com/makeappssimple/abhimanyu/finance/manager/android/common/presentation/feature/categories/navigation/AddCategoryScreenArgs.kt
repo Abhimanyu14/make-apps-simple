@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.navigation
 
 import androidx.lifecycle.SavedStateHandle
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenArgs
 

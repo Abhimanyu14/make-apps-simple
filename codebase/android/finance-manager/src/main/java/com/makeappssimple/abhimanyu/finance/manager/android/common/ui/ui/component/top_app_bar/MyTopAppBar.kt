@@ -25,7 +25,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.common.core.extensions.isNotNull
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.navigation_back_button.CosmosNavigationBackButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.navigation_back_button.CosmosNavigationBackButtonEvents
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText

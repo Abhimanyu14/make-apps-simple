@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
-import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

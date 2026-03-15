@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.util
 
-import com.makeappssimple.abhimanyu.common.core.extensions.map
+import com.makeappssimple.abhimanyu.common.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import kotlinx.collections.immutable.ImmutableList

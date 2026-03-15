@@ -18,17 +18,17 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.test
 
-import com.makeappssimple.abhimanyu.common.core.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.core.app_version.fake.FakeAppVersionKitImpl
-import com.makeappssimple.abhimanyu.common.core.coroutines.test.TestDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
-import com.makeappssimple.abhimanyu.common.core.json_reader.fake.FakeJsonReaderKitImpl
-import com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
-import com.makeappssimple.abhimanyu.common.core.json_writer.fake.FakeJsonWriterKitImpl
-import com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.core.log_kit.fake.FakeLogKitImpl
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
-import com.makeappssimple.abhimanyu.common.core.uri_decoder.fake.FakeUriDecoderImpl
+import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
+import com.makeappssimple.abhimanyu.common.app_version.fake.FakeAppVersionKitImpl
+import com.makeappssimple.abhimanyu.common.coroutines.test.TestDispatcherProviderImpl
+import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
+import com.makeappssimple.abhimanyu.common.json_reader.fake.FakeJsonReaderKitImpl
+import com.makeappssimple.abhimanyu.common.json_writer.JsonWriterKit
+import com.makeappssimple.abhimanyu.common.json_writer.fake.FakeJsonWriterKitImpl
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
+import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.common.uri_decoder.fake.FakeUriDecoderImpl
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKitImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit

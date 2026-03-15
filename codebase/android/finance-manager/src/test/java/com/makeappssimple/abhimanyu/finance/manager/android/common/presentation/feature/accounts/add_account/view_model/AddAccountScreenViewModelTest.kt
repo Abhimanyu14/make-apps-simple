@@ -20,7 +20,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import app.cash.turbine.test
 import app.cash.turbine.turbineScope
-import com.makeappssimple.abhimanyu.common.core.extensions.toLongOrZero
+import com.makeappssimple.abhimanyu.common.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
