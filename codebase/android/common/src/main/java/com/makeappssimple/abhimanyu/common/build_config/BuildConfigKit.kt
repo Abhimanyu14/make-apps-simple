@@ -16,14 +16,25 @@
 
 package com.makeappssimple.abhimanyu.common.build_config
 
+import androidx.annotation.ChecksSdkIntAtLeast
+
 public interface BuildConfigKit {
     public fun isDebugBuild(): Boolean
 
     public fun getBuildVersion(): Int
 
+    @ChecksSdkIntAtLeast(
+        api = 33,
+    )
     public fun isAndroidApiEqualToOrAboveApi33(): Boolean
 
+    @ChecksSdkIntAtLeast(
+        api = 34,
+    )
     public fun isAndroidApiEqualToOrAboveApi34(): Boolean
 
+    @ChecksSdkIntAtLeast(
+        api = 35,
+    )
     public fun isAndroidApiEqualToOrAboveApi35(): Boolean
 }
