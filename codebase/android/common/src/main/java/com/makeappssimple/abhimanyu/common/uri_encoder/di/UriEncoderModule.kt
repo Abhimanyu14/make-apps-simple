@@ -21,6 +21,6 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.uri_encoder",
+    "com.makeappssimple.abhimanyu.common.uri_encoder",
 )
 public class UriEncoderModule

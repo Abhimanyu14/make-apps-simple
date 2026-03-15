@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.platform.application
 
 import android.app.Application
-import com.makeappssimple.abhimanyu.barcodes.android.common.di.initKoin
+import com.makeappssimple.abhimanyu.barcodes.android.core.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
 internal class BarcodesApplication : Application() {

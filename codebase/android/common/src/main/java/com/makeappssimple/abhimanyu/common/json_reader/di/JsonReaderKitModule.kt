@@ -21,6 +21,6 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.json_reader",
+    "com.makeappssimple.abhimanyu.common.json_reader",
 )
 public class JsonReaderKitModule

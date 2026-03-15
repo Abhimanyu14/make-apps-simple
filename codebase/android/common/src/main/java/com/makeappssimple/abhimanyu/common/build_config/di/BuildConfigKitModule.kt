@@ -21,6 +21,6 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.build_config",
+    "com.makeappssimple.abhimanyu.common.build_config",
 )
 public class BuildConfigKitModule

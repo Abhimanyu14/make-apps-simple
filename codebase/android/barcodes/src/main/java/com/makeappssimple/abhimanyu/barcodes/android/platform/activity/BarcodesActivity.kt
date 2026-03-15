@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.barcodes.android.common.ui.app.BarcodesApp
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.app.BarcodesApp
 
 public class BarcodesActivity : ComponentActivity() {
     override fun onCreate(

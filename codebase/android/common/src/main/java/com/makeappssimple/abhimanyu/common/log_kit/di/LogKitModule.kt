@@ -21,6 +21,6 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.log_kit",
+    "com.makeappssimple.abhimanyu.common.log_kit",
 )
 public class LogKitModule

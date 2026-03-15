@@ -20,9 +20,10 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.local.BarcodesRoomDatabase
-import com.makeappssimple.abhimanyu.barcodes.android.core.database.placeholder.BarcodeEntity
-import com.makeappssimple.abhimanyu.barcodes.android.core.model.BarcodeSource
+import com.makeappssimple.abhimanyu.barcodes.android.core.data.barcode.BarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.core.data.model.BarcodeDataModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.data.model.BarcodeSourceDataModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.local.BarcodesRoomDatabase
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.ints.shouldBeZero
@@ -69,13 +70,15 @@ internal class BarcodeDaoTest {
 
     @Test
     fun deleteAllBarcodes_returnsCountOfBarcodesDeleted() = runTestWithTimeout {
-        barcodeDao.insertBarcodes(
-            getBarcodeEntity(
+        barcodeDao.insertBarcode(
+            getBarcodeDataModel(
                 value = "1",
-            ),
-            getBarcodeEntity(
+            )
+        )
+        barcodeDao.insertBarcode(
+            getBarcodeDataModel(
                 value = "2",
-            ),
+            )
         )
 
         val count = barcodeDao.deleteAllBarcodes()
@@ -90,19 +93,21 @@ internal class BarcodeDaoTest {
     @Test
     fun deleteBarcode_validBarcode_returnsCountOfBarcodesDeleted() =
         runTestWithTimeout {
-            val barcodeEntity1 = getBarcodeEntity(
+            val barcodeDataModel1 = getBarcodeDataModel(
                 id = 1,
             )
-            val barcodeEntity2 = getBarcodeEntity(
+            val barcodeDataModel2 = getBarcodeDataModel(
                 id = 2,
             )
-            barcodeDao.insertBarcodes(
-                barcodeEntity1,
-                barcodeEntity2,
+            barcodeDao.insertBarcode(
+                barcodeDataModel1,
+            )
+            barcodeDao.insertBarcode(
+                barcodeDataModel2,
             )
 
             val count = barcodeDao.deleteBarcodes(
-                barcodeEntity2,
+                barcodeDataModel2,
             )
             val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
@@ -113,29 +118,31 @@ internal class BarcodeDaoTest {
                 expected = 1,
             )
             allBarcodes.first().shouldBe(
-                expected = barcodeEntity1,
+                expected = barcodeDataModel1,
             )
         }
 
     @Test
     fun deleteBarcode_invalidBarcode_returnsCountOfBarcodesDeleted() =
         runTestWithTimeout {
-            val barcodeEntity1 = getBarcodeEntity(
+            val barcodeDataModel1 = getBarcodeDataModel(
                 id = 1,
             )
-            val barcodeEntity2 = getBarcodeEntity(
+            val barcodeDataModel2 = getBarcodeDataModel(
                 id = 2,
             )
-            val barcodeEntity3 = getBarcodeEntity(
+            val barcodeDataModel3 = getBarcodeDataModel(
                 id = 3,
             )
-            barcodeDao.insertBarcodes(
-                barcodeEntity1,
-                barcodeEntity2,
+            barcodeDao.insertBarcode(
+                barcodeDataModel1,
+            )
+            barcodeDao.insertBarcode(
+                barcodeDataModel2,
             )
 
             val count = barcodeDao.deleteBarcodes(
-                barcodeEntity3,
+                barcodeDataModel3,
             )
             val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
@@ -143,23 +150,25 @@ internal class BarcodeDaoTest {
             allBarcodes.size.shouldBe(
                 expected = 2,
             )
-            allBarcodes.any { it == barcodeEntity1 }.shouldBeTrue()
-            allBarcodes.any { it == barcodeEntity2 }.shouldBeTrue()
+            allBarcodes.any { it == barcodeDataModel1 }.shouldBeTrue()
+            allBarcodes.any { it == barcodeDataModel2 }.shouldBeTrue()
         }
 
     @Test
     fun getAllBarcodesFlow_returnsAllBarcodesInFlow() = runTestWithTimeout {
-        val barcodeEntity1 = getBarcodeEntity(
+        val barcodeDataModel1 = getBarcodeDataModel(
             id = 1,
             value = "1",
         )
-        val barcodeEntity2 = getBarcodeEntity(
+        val barcodeDataModel2 = getBarcodeDataModel(
             id = 2,
             value = "2",
         )
-        barcodeDao.insertBarcodes(
-            barcodeEntity1,
-            barcodeEntity2,
+        barcodeDao.insertBarcode(
+            barcodeDataModel1,
+        )
+        barcodeDao.insertBarcode(
+            barcodeDataModel2,
         )
 
         val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
@@ -167,23 +176,25 @@ internal class BarcodeDaoTest {
         allBarcodes.size.shouldBe(
             expected = 2,
         )
-        allBarcodes.any { it == barcodeEntity1 }.shouldBeTrue()
-        allBarcodes.any { it == barcodeEntity2 }.shouldBeTrue()
+        allBarcodes.any { it == barcodeDataModel1 }.shouldBeTrue()
+        allBarcodes.any { it == barcodeDataModel2 }.shouldBeTrue()
     }
 
     @Test
     fun getBarcodeById_validId_returnsBarcode() = runTestWithTimeout {
-        val barcodeEntity1 = getBarcodeEntity(
+        val barcodeDataModel1 = getBarcodeDataModel(
             id = 1,
             value = "1",
         )
-        val barcodeEntity2 = getBarcodeEntity(
+        val barcodeDataModel2 = getBarcodeDataModel(
             id = 2,
             value = "2",
         )
-        barcodeDao.insertBarcodes(
-            barcodeEntity1,
-            barcodeEntity2,
+        barcodeDao.insertBarcode(
+            barcodeDataModel1,
+        )
+        barcodeDao.insertBarcode(
+            barcodeDataModel2,
         )
 
         val result = barcodeDao.getBarcodeById(
@@ -191,23 +202,25 @@ internal class BarcodeDaoTest {
         )
 
         result.shouldBe(
-            expected = barcodeEntity1,
+            expected = barcodeDataModel1,
         )
     }
 
     @Test
     fun getBarcodeById_invalidId_returnsNull() = runTestWithTimeout {
-        val barcodeEntity1 = getBarcodeEntity(
+        val barcodeDataModel1 = getBarcodeDataModel(
             id = 1,
             value = "1",
         )
-        val barcodeEntity2 = getBarcodeEntity(
+        val barcodeDataModel2 = getBarcodeDataModel(
             id = 2,
             value = "2",
         )
-        barcodeDao.insertBarcodes(
-            barcodeEntity1,
-            barcodeEntity2,
+        barcodeDao.insertBarcode(
+            barcodeDataModel1,
+        )
+        barcodeDao.insertBarcode(
+            barcodeDataModel2,
         )
 
         val result = barcodeDao.getBarcodeById(
@@ -220,39 +233,38 @@ internal class BarcodeDaoTest {
     @Test
     fun insertBarcodes_returnsListOfIdsOfInsertedBarcodes() =
         runTestWithTimeout {
-            val barcodeEntity1 = getBarcodeEntity(
+            val barcodeDataModel1 = getBarcodeDataModel(
                 id = 1,
             )
-            val barcodeEntity2 = getBarcodeEntity(
+            val barcodeDataModel2 = getBarcodeDataModel(
                 id = 2,
             )
 
-            val insertedBarcodeIds = barcodeDao.insertBarcodes(
-                barcodeEntity1,
-                barcodeEntity2,
+            val insertedBarcodeId1 = barcodeDao.insertBarcode(
+                barcodeDataModel1,
+            )
+            val insertedBarcodeId2 = barcodeDao.insertBarcode(
+                barcodeDataModel2,
             )
             val allBarcodes = barcodeDao.getAllBarcodesFlow().first()
 
-            insertedBarcodeIds.size.shouldBe(
-                expected = 2,
-            )
-            insertedBarcodeIds.any { it == 1L }.shouldBeTrue()
-            insertedBarcodeIds.any { it == 2L }.shouldBeTrue()
+            insertedBarcodeId1.shouldBe(1L)
+            insertedBarcodeId2.shouldBe(2L)
             allBarcodes.size.shouldBe(
                 expected = 2,
             )
-            allBarcodes.any { it == barcodeEntity1 }.shouldBeTrue()
-            allBarcodes.any { it == barcodeEntity2 }.shouldBeTrue()
+            allBarcodes.any { it == barcodeDataModel1 }.shouldBeTrue()
+            allBarcodes.any { it == barcodeDataModel2 }.shouldBeTrue()
         }
 
     @Test
     fun updateBarcodes_validBarcode_returnsCountOfBarcodesUpdated() =
         runTestWithTimeout {
-            val barcodeEntity1 = getBarcodeEntity(
+            val barcodeDataModel1 = getBarcodeDataModel(
                 id = 1,
             )
-            barcodeDao.insertBarcodes(
-                barcodeEntity1,
+            barcodeDao.insertBarcode(
+                barcodeDataModel1,
             )
             val insertedBarcode =
                 barcodeDao.getAllBarcodesFlow().first().first()
@@ -278,11 +290,11 @@ internal class BarcodeDaoTest {
     @Test
     fun updateBarcodes_idUpdated_returnsCountOfBarcodesUpdated() =
         runTestWithTimeout {
-            val barcodeEntity1 = getBarcodeEntity(
+            val barcodeDataModel1 = getBarcodeDataModel(
                 id = 1,
             )
-            barcodeDao.insertBarcodes(
-                barcodeEntity1,
+            barcodeDao.insertBarcode(
+                barcodeDataModel1,
             )
             val insertedBarcode =
                 barcodeDao.getAllBarcodesFlow().first().first()
@@ -300,16 +312,16 @@ internal class BarcodeDaoTest {
 
             count.shouldBeZero()
             result.shouldBe(
-                expected = barcodeEntity1,
+                expected = barcodeDataModel1,
             )
         }
 
-    private fun getBarcodeEntity(
+    private fun getBarcodeDataModel(
         id: Int = 0,
         value: String = "test-value",
-    ): BarcodeEntity {
-        return BarcodeEntity(
-            source = BarcodeSource.SCANNED,
+    ): BarcodeDataModel {
+        return BarcodeDataModel(
+            source = BarcodeSourceDataModel.SCANNED,
             format = 256,
             id = id,
             timestamp = System.currentTimeMillis(),

@@ -149,9 +149,9 @@
 
 # region missing_rules
 -dontwarn com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
--dontwarn com.makeappssimple.abhimanyu.common.core.coroutines.DispatcherProvider
--dontwarn com.makeappssimple.abhimanyu.common.core.json_reader.JsonReaderKit
--dontwarn com.makeappssimple.abhimanyu.common.core.json_writer.JsonWriterKit
--dontwarn com.makeappssimple.abhimanyu.common.core.log_kit.LogKit
--dontwarn com.makeappssimple.abhimanyu.common.core.uri_decoder.UriDecoder
+-dontwarn com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
+-dontwarn com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
+-dontwarn com.makeappssimple.abhimanyu.common.json_writer.JsonWriterKit
+-dontwarn com.makeappssimple.abhimanyu.common.log_kit.LogKit
+-dontwarn com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 # endregion

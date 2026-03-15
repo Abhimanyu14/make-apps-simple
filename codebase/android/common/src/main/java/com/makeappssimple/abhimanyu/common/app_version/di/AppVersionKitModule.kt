@@ -21,6 +21,6 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.app_version",
+    "com.makeappssimple.abhimanyu.common.app_version",
 )
 public class AppVersionKitModule

@@ -21,6 +21,6 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.clipboard",
+    "com.makeappssimple.abhimanyu.common.clipboard",
 )
 public class ClipboardKitModule

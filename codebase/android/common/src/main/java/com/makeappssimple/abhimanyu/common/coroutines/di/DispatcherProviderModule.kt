@@ -30,7 +30,7 @@ import org.koin.core.annotation.Single
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.core.coroutines",
+    "com.makeappssimple.abhimanyu.common.coroutines",
 )
 public class DispatcherProviderModule {
     @Single
