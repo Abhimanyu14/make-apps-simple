@@ -109,20 +109,6 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 ---
 
-#### Issue 3: Navigation Module Depends on Compose
-
-**Current:** `BarcodesNavGraph` is a `@Composable` in `core.presentation.navigation`, using
-`rememberNavController`, `LaunchedEffect`, `LocalLifecycleOwner`, etc.
-
-**Enhancement:**
-
-- Keep navigation *contract* (routes, `NavigationCommand`) in presentation
-- Move `BarcodesNavGraph` Composable to UI layer (`ui.navigation` or `ui.app`)
-- UI observes `NavigationKit.command` and performs actual navigation
-- Presentation stays Compose-agnostic for core logic
-
----
-
 #### Issue 4: Event Handlers Hold Direct ViewModel Reference
 
 **Current:** `features/home/…/HomeScreenUIEventHandler` receives
@@ -344,7 +330,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 | P1       | Abstract Build.VERSION / platform capabilities                                | Low    | Medium |
 | P1       | FakeAnalyticsKit for unit tests                                               | Low    | High   |
 | P2       | Event handler → ViewModel.handleUIEvent only                                  | Medium | Medium |
-| P2       | Move BarcodesNavGraph Composable to UI                                        | Medium | Medium |
 | P2       | Split into Gradle modules (domain, data, presentation, ui)                    | High   | High   |
 | P3       | Consistent UI state management                                                | Medium | Medium |
 | P3       | Centralized error handling (ScreenError)                                      | Medium | Medium |
@@ -378,7 +363,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 - [ ] Feature-first directory layout (core, features, shared, platform)
 - [ ] Evaluate Gradle module split (domain, data, presentation, ui)
-- [ ] Move `BarcodesNavGraph` Composable to UI package
 - [ ] Standardize event handling (handler → ViewModel.handleUIEvent)
 
 ---

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation
+package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +26,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.app.BarcodesActivityViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesCommand
 
 @Composable
 internal fun BarcodesNavGraph(

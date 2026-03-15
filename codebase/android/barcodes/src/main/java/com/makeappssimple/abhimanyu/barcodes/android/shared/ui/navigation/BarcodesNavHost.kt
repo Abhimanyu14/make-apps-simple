@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation
+package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.navigation.barcodeDetailsNavGraph
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.navigation.createBarcodeNavGraph
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.navigation.homeNavGraph

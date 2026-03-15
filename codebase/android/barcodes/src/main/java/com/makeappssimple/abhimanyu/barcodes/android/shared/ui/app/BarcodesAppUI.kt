@@ -21,7 +21,7 @@ import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.app.BarcodesActivityViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavGraph
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.navigation.BarcodesNavGraph
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
