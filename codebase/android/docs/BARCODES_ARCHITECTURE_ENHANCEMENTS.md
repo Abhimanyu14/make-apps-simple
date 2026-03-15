@@ -82,9 +82,9 @@ com.makeappssimple.abhimanyu.barcodes.android
     - `HomeScreenUIState` uses `HomeBottomSheetType`; UI maps to
       `CosmosBottomSheetType` for Composables
 
-3. **Move `BARCODE_VALUE_CLIPBOARD_LABEL`**
-    - Place in `features.barcode_details.presentation` constants or pass as parameter
-    - Avoid Presentation importing UI constants
+3. **`BARCODE_VALUE_CLIPBOARD_LABEL`
+   ** — Used by both Barcode Details and Create Barcode features, so it correctly lives in
+   `shared.ui.constants`. No move required; avoid duplicating it in a single feature.
 
 4. **Decouple `ImageBitmap` from Presentation**
     - Use an abstraction (e.g. `BarcodeImageProvider`) that returns a generic representation
@@ -239,18 +239,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ### 2.4 Maintainability
 
-#### Enhancement 12: Centralize Screen-Specific Constants
-
-**Current:** `BARCODE_VALUE_CLIPBOARD_LABEL` in `shared.ui.constants`.
-
-**Enhancement:**
-
-- Keep feature constants in that feature’s package
-- `features.barcode_details.presentation.…BarcodeDetailsConstants` or similar
-- Reduces scattering and clarifies ownership
-
----
-
 #### Enhancement 13: Consistent Error Handling
 
 **Current:** `MyResult< T>` is used; ViewModels handle `MyResult.Error` with snackbar types.
@@ -260,18 +248,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 - Define a shared error model (e.g. `ScreenError`) for presentation
 - Map domain/data errors to `ScreenError` in one place
 - Use a single `handleError(error: ScreenError)` pattern across ViewModels
-
----
-
-#### Enhancement 14: Remove Debug Logging from Production Paths
-
-**Current:** `BarcodesNavGraph` contains
-`barcodesActivityViewModel.logKit.logError(message = "Inside MyNavGraph")`.
-
-**Enhancement:**
-
-- Remove or guard with `BuildConfig.DEBUG`
-- Avoid log calls in hot paths
 
 ---
 
@@ -363,20 +339,17 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ## 3. Implementation Priority Matrix
 
-| Priority | Enhancement                                                                   | Effort  | Impact |
-|----------|-------------------------------------------------------------------------------|---------|--------|
-| P0       | Move AnalyticsKit to domain/platform; Presentation depends on interface only  | Low     | High   |
-| P0       | Introduce presentation-level `HomeBottomSheetType`; remove UI type from state | Medium  | High   |
-| P0       | Remove debug log from BarcodesNavGraph                                        | Trivial | Medium |
-| P1       | Move BARCODE_VALUE_CLIPBOARD_LABEL to presentation                            | Low     | Medium |
-| P1       | Abstract bitmap generation (BarcodeImageProvider or move to UI)               | Medium  | High   |
-| P1       | Abstract Build.VERSION / platform capabilities                                | Low     | Medium |
-| P1       | FakeAnalyticsKit for unit tests                                               | Low     | High   |
-| P2       | Event handler → ViewModel.handleUIEvent only                                  | Medium  | Medium |
-| P2       | Move BarcodesNavGraph Composable to UI                                        | Medium  | Medium |
-| P2       | Split into Gradle modules (domain, data, presentation, ui)                    | High    | High   |
-| P3       | Centralized error handling (ScreenError)                                      | Medium  | Medium |
-| —        | ~~Feature-first structure~~                                                   | —       | ✅ Done |
+| Priority | Enhancement                                                                   | Effort | Impact |
+|----------|-------------------------------------------------------------------------------|--------|--------|
+| P0       | Move AnalyticsKit to domain/platform; Presentation depends on interface only  | Low    | High   |
+| P0       | Introduce presentation-level `HomeBottomSheetType`; remove UI type from state | Medium | High   |
+| P1       | Abstract bitmap generation (BarcodeImageProvider or move to UI)               | Medium | High   |
+| P1       | Abstract Build.VERSION / platform capabilities                                | Low    | Medium |
+| P1       | FakeAnalyticsKit for unit tests                                               | Low    | High   |
+| P2       | Event handler → ViewModel.handleUIEvent only                                  | Medium | Medium |
+| P2       | Move BarcodesNavGraph Composable to UI                                        | Medium | Medium |
+| P2       | Split into Gradle modules (domain, data, presentation, ui)                    | High   | High   |
+| P3       | Centralized error handling (ScreenError)                                      | Medium | Medium |
 
 ---
 
@@ -384,7 +357,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ### Phase 1: Quick Wins (1–2 days)
 
-- [ ] Remove `logError("Inside MyNavGraph")` from `core/presentation/navigation/BarcodesNavGraph`
 - [ ] Create `AnalyticsKit` interface in `core.domain` or shared analytics; move
   `FirebaseAnalyticsKitImpl` to platform (currently in `shared.ui.analytics`)
 - [ ] Update all ViewModels to depend on `AnalyticsKit` from domain
@@ -396,7 +368,6 @@ app-barcodes/           # Dep depends on barcodes-ui
   `HomeCosmosBottomSheetType` in UI
 - [ ] Update `HomeScreenUIState`, `HomeScreenViewModel`, `HomeScreenUIEventHandler` (under
   `features/home/`)
-- [ ] Move `BARCODE_VALUE_CLIPBOARD_LABEL` to presentation (`features/barcode_details/…` or core)
 - [ ] Abstract bitmap: introduce `BarcodeImageProvider` or move generation to UI
 
 ### Phase 3: Framework Decoupling (2–3 days)
@@ -436,7 +407,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 |----------------------------------------------------------------|--------------------------------------|
 | `core/domain/analytics/AnalyticsKit.kt` (or shared analytics)  | Analytics interface                  |
 | `features/home/presentation/home/state/HomeBottomSheetType.kt` | Presentation-level bottom sheet type |
-| `features/barcode_details/…/BarcodeDetailsConstants.kt`        | Clipboard label, etc.                |
 | `platform/analytics/FirebaseAnalyticsKitImpl.kt`               | Move from `shared.ui.analytics`      |
 | `test/fake/FakeAnalyticsKit.kt`                                | For unit tests                       |
 
