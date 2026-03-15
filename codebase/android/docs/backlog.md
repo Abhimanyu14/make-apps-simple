@@ -26,7 +26,7 @@
 12. [ ] **Code Conventions - Function Body Style**: Replace expression body functions (using
     `=`) with block bodies in test files. Found 44 instances in test files (e.g.,
     `HomeScreenViewModelTest.kt`, `BarcodeRepositoryTest.kt`, `BarcodeDaoTest.kt`,
-    `CreateBarcodeScreenUITest.kt`, `NavigationKitTest.kt`).
+    `CreateBarcodeScreenUITest.kt`, `BarcodesNavigationKitTest.kt`).
 13. [ ] **Code Conventions - Braces and Blocks
     **: Add curly braces to all if statements. Found 6 instances without braces (e.g.,
     `WebView.kt` line 59, `BarcodesApp.kt` lines 74, 78, 98, 108,
