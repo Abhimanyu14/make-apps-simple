@@ -20,34 +20,34 @@ internal const val DEEPLINK_BROWSER_BASE_URL: String =
     "https://www.makeappssimple.barcodes.com"
 internal const val DEEPLINK_BASE_URL: String = "makeappssimple://barcodes"
 
-internal sealed class Screen(
+internal sealed class BarcodesScreen(
     val route: String,
 ) {
-    data object BarcodeDetails : Screen(
+    data object BarcodeDetails : BarcodesScreen(
         route = "barcode_details",
     )
 
-    data object CreateBarcode : Screen(
+    data object CreateBarcode : BarcodesScreen(
         route = "create_barcode",
     )
 
-    data object Credits : Screen(
+    data object Credits : BarcodesScreen(
         route = "credits",
     )
 
-    data object Home : Screen(
+    data object Home : BarcodesScreen(
         route = "home",
     )
 
-    data object ScanBarcode : Screen(
+    data object ScanBarcode : BarcodesScreen(
         route = "scan_barcode",
     )
 
-    data object Settings : Screen(
+    data object Settings : BarcodesScreen(
         route = "settings",
     )
 
-    data object WebView : Screen(
+    data object WebView : BarcodesScreen(
         route = "web_view",
     )
 }

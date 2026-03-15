@@ -16,31 +16,16 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation
 
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.SharedFlow
+internal enum class BarcodesCommand {
+    CLEAR_BACKSTACK_AND_NAVIGATE,
+    CLEAR_TILL_ROOT,
+    NAVIGATE,
+    NAVIGATE_UP,
+    NOOP,
+}
 
-internal interface NavigationKit {
-    val command: SharedFlow<NavigationCommand>
-
-    fun navigateToBarcodeDetailsScreen(
-        barcodeId: Int,
-    ): Job
-
-    fun navigateToCreateBarcodeScreen(
-        barcodeId: Int? = null,
-    ): Job
-
-    fun navigateToCreditsScreen(): Job
-
-    fun navigateToHomeScreen(): Job
-
-    fun navigateToScanBarcodeScreen(): Job
-
-    fun navigateToSettingsScreen(): Job
-
-    fun navigateUp(): Job
-
-    fun navigateToWebViewScreen(
-        url: String,
-    ): Job
+internal interface BarcodesNavigationCommand {
+    val barcodesCommand: BarcodesCommand
+    val barcodesScreen: String
+    val destination: String
 }

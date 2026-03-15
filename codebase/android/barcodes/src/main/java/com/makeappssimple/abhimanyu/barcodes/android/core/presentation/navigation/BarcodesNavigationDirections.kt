@@ -20,80 +20,82 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigatio
 
 internal object BarcodesNavigationDirections {
     // Default
-    object Default : NavigationCommand {
-        override val command = Command.NOOP
+    object Default : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NOOP
+        override val barcodesScreen = ""
         override val destination = ""
-        override val screen = ""
     }
 
     // Navigate up
-    object NavigateUp : NavigationCommand {
-        override val command = Command.NAVIGATE_UP
+    object NavigateUp : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE_UP
+        override val barcodesScreen = ""
         override val destination = ""
-        override val screen = ""
     }
 
     // Clear backstack
-    object ClearBackstack : NavigationCommand {
-        override val command = Command.CLEAR_BACKSTACK_AND_NAVIGATE
+    object ClearBackstack : BarcodesNavigationCommand {
+        override val barcodesCommand =
+            BarcodesCommand.CLEAR_BACKSTACK_AND_NAVIGATE
+        override val barcodesScreen = ""
         override val destination = ""
-        override val screen = ""
     }
 
     // Clear till root
-    object ClearTillRoot : NavigationCommand {
-        override val command = Command.CLEAR_TILL_ROOT
+    object ClearTillRoot : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.CLEAR_TILL_ROOT
+        override val barcodesScreen = ""
         override val destination = ""
-        override val screen = ""
     }
 
     // App specific
     data class BarcodeDetails(
         private val barcodeId: Int,
-    ) : NavigationCommand {
-        override val command = Command.NAVIGATE
-        override val destination = "${Screen.BarcodeDetails.route}/${barcodeId}"
-        override val screen = Screen.BarcodeDetails.route
+    ) : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.BarcodeDetails.route
+        override val destination =
+            "${BarcodesScreen.BarcodeDetails.route}/${barcodeId}"
     }
 
     data class CreateBarcode(
         private val barcodeId: Int?,
-    ) : NavigationCommand {
-        override val command = Command.NAVIGATE
+    ) : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.CreateBarcode.route
         override val destination =
-            "${Screen.CreateBarcode.route}?${NavigationArguments.BARCODE_ID}=${barcodeId}"
-        override val screen = Screen.CreateBarcode.route
+            "${BarcodesScreen.CreateBarcode.route}?${NavigationArguments.BARCODE_ID}=${barcodeId}"
     }
 
-    object Credits : NavigationCommand {
-        override val command = Command.NAVIGATE
-        override val destination = Screen.Credits.route
-        override val screen = Screen.Credits.route
+    object Credits : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.Credits.route
+        override val destination = BarcodesScreen.Credits.route
     }
 
-    object Home : NavigationCommand {
-        override val command = Command.NAVIGATE
-        override val destination = Screen.Home.route
-        override val screen = Screen.Home.route
+    object Home : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.Home.route
+        override val destination = BarcodesScreen.Home.route
     }
 
-    object ScanBarcode : NavigationCommand {
-        override val command = Command.NAVIGATE
-        override val destination = Screen.ScanBarcode.route
-        override val screen = Screen.ScanBarcode.route
+    object ScanBarcode : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.ScanBarcode.route
+        override val destination = BarcodesScreen.ScanBarcode.route
     }
 
-    object Settings : NavigationCommand {
-        override val command = Command.NAVIGATE
-        override val destination = Screen.Settings.route
-        override val screen = Screen.Settings.route
+    object Settings : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.Settings.route
+        override val destination = BarcodesScreen.Settings.route
     }
 
     data class WebView(
         private val url: String,
-    ) : NavigationCommand {
-        override val command = Command.NAVIGATE
-        override val destination = "${Screen.WebView.route}/${url}"
-        override val screen = Screen.WebView.route
+    ) : BarcodesNavigationCommand {
+        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesScreen = BarcodesScreen.WebView.route
+        override val destination = "${BarcodesScreen.WebView.route}/${url}"
     }
 }

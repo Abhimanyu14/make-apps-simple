@@ -21,14 +21,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.DeeplinkUrl
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.ui.web_view.screen.WebViewScreen
 
 internal fun NavGraphBuilder.webViewNavGraph() {
     composable(
-        route = "${Screen.WebView.route}/{${NavigationArguments.URL}}",
+        route = "${BarcodesScreen.WebView.route}/{${NavigationArguments.URL}}",
         arguments = listOf(
             navArgument(NavigationArguments.URL) {
                 type = NavType.StringType
@@ -37,11 +37,11 @@ internal fun NavGraphBuilder.webViewNavGraph() {
         deepLinks = listOf(
             navDeepLink {
                 uriPattern =
-                    "${DeeplinkUrl.BROWSER_BASE_URL}/${Screen.WebView.route}/{${NavigationArguments.URL}}"
+                    "${DeeplinkUrl.BROWSER_BASE_URL}/${BarcodesScreen.WebView.route}/{${NavigationArguments.URL}}"
             },
             navDeepLink {
                 uriPattern =
-                    "${DeeplinkUrl.BASE_URL}/${Screen.WebView.route}/{${NavigationArguments.URL}}"
+                    "${DeeplinkUrl.BASE_URL}/${BarcodesScreen.WebView.route}/{${NavigationArguments.URL}}"
             },
         ),
     ) {

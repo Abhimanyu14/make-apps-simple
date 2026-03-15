@@ -26,22 +26,22 @@ import org.koin.core.annotation.Single
 
 @Single(
     binds = [
-        NavigationKit::class,
+        BarcodesNavigationKit::class,
     ],
 )
-internal class NavigationKitImpl(
+internal class BarcodesNavigationKitImpl(
     private val coroutineScope: CoroutineScope,
     private val uriEncoder: UriEncoder,
-) : NavigationKit {
-    private val _command: MutableSharedFlow<NavigationCommand> =
+) : BarcodesNavigationKit {
+    private val _command: MutableSharedFlow<BarcodesNavigationCommand> =
         MutableSharedFlow()
-    override val command: SharedFlow<NavigationCommand> = _command
+    override val command: SharedFlow<BarcodesNavigationCommand> = _command
 
     override fun navigateToBarcodeDetailsScreen(
         barcodeId: Int,
     ): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.BarcodeDetails(
+            barcodesNavigationCommand = BarcodesNavigationDirections.BarcodeDetails(
                 barcodeId = barcodeId,
             )
         )
@@ -51,7 +51,7 @@ internal class NavigationKitImpl(
         barcodeId: Int?,
     ): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.CreateBarcode(
+            barcodesNavigationCommand = BarcodesNavigationDirections.CreateBarcode(
                 barcodeId = barcodeId,
             )
         )
@@ -59,31 +59,31 @@ internal class NavigationKitImpl(
 
     override fun navigateToCreditsScreen(): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.Credits
+            barcodesNavigationCommand = BarcodesNavigationDirections.Credits
         )
     }
 
     override fun navigateToHomeScreen(): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.Home
+            barcodesNavigationCommand = BarcodesNavigationDirections.Home
         )
     }
 
     override fun navigateToScanBarcodeScreen(): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.ScanBarcode
+            barcodesNavigationCommand = BarcodesNavigationDirections.ScanBarcode
         )
     }
 
     override fun navigateToSettingsScreen(): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.Settings
+            barcodesNavigationCommand = BarcodesNavigationDirections.Settings
         )
     }
 
     override fun navigateUp(): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.NavigateUp
+            barcodesNavigationCommand = BarcodesNavigationDirections.NavigateUp
         )
     }
 
@@ -91,7 +91,7 @@ internal class NavigationKitImpl(
         url: String,
     ): Job {
         return navigate(
-            navigationCommand = BarcodesNavigationDirections.WebView(
+            barcodesNavigationCommand = BarcodesNavigationDirections.WebView(
                 url = uriEncoder.encode(
                     string = url,
                 ),
@@ -100,10 +100,12 @@ internal class NavigationKitImpl(
     }
 
     private fun navigate(
-        navigationCommand: NavigationCommand,
+        barcodesNavigationCommand: BarcodesNavigationCommand,
     ): Job {
         return coroutineScope.launch {
-            _command.emit(navigationCommand)
+            _command.emit(
+                value = barcodesNavigationCommand,
+            )
         }
     }
 }

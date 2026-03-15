@@ -20,13 +20,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.ui.barcode_details.screen.BarcodeDetailsScreen
 
 internal fun NavGraphBuilder.barcodeDetailsNavGraph() {
     composable(
-        route = "${Screen.BarcodeDetails.route}/{${NavigationArguments.BARCODE_ID}}",
+        route = "${BarcodesScreen.BarcodeDetails.route}/{${NavigationArguments.BARCODE_ID}}",
         arguments = listOf(
             navArgument(NavigationArguments.BARCODE_ID) {
                 type = NavType.IntType

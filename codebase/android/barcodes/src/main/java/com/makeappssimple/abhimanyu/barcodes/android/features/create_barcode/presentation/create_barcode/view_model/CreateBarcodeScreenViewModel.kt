@@ -26,12 +26,12 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcod
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.InsertBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.UpdateBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.snackbar.CreateBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.navigation.CreateBarcodeScreenArgs
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.clipboard.ClipboardKit
@@ -52,9 +52,9 @@ import kotlin.time.ExperimentalTime
 @KoinViewModel
 internal class CreateBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
+    barcodesNavigationKit: BarcodesNavigationKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     private val buildConfigKit: BuildConfigKit,
     private val clipboardKit: ClipboardKit,
@@ -64,9 +64,9 @@ internal class CreateBarcodeScreenViewModel(
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
+    barcodesNavigationKit = barcodesNavigationKit,
+    barcodesScreen = BarcodesScreen.CreateBarcode,
     logKit = logKit,
-    navigationKit = navigationKit,
-    screen = Screen.CreateBarcode,
 ) {
     // region screen args
     private val screenArgs = CreateBarcodeScreenArgs(

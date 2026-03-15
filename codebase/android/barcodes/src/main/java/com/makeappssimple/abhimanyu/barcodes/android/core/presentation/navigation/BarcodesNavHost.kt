@@ -32,7 +32,7 @@ internal fun BarcodesNavHost(
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Screen.Home.route,
+        startDestination = BarcodesScreen.Home.route,
     ) {
         barcodeDetailsNavGraph()
         createBarcodeNavGraph()

@@ -18,19 +18,19 @@ package com.makeappssimple.abhimanyu.barcodes.android.features.settings.presenta
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.credits.screen.CreditsScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.settings.screen.SettingsScreen
 
 internal fun NavGraphBuilder.settingsNavGraph() {
     composable(
-        route = Screen.Credits.route,
+        route = BarcodesScreen.Credits.route,
     ) {
         CreditsScreen()
     }
 
     composable(
-        route = Screen.Settings.route,
+        route = BarcodesScreen.Settings.route,
     ) {
         SettingsScreen()
     }

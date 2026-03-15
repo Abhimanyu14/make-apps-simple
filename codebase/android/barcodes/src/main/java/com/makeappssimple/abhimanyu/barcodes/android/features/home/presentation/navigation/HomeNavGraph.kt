@@ -18,12 +18,12 @@ package com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.screen.HomeScreen
 
 internal fun NavGraphBuilder.homeNavGraph() {
     composable(
-        route = Screen.Home.route,
+        route = BarcodesScreen.Home.route,
     ) {
         HomeScreen()
     }

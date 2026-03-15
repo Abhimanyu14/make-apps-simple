@@ -20,13 +20,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.ui.create_barcode.screen.CreateBarcodeScreen
 
 internal fun NavGraphBuilder.createBarcodeNavGraph() {
     composable(
-        route = "${Screen.CreateBarcode.route}?${NavigationArguments.BARCODE_ID}={${NavigationArguments.BARCODE_ID}}",
+        route = "${BarcodesScreen.CreateBarcode.route}?${NavigationArguments.BARCODE_ID}={${NavigationArguments.BARCODE_ID}}",
         arguments = listOf(
             navArgument(NavigationArguments.BARCODE_ID) {
                 // Note: Int cannot be nullable, so nullable string

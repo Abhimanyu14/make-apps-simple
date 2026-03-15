@@ -23,13 +23,13 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.DEEPLINK_BASE_URL
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.DEEPLINK_BROWSER_BASE_URL
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.scan_barcode.screen.ScanBarcodeScreen
 
 internal fun NavGraphBuilder.scanBarcodeNavGraph() {
     composable(
-        route = "${Screen.ScanBarcode.route}?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}",
+        route = "${BarcodesScreen.ScanBarcode.route}?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}",
         arguments = listOf(
             navArgument(NavigationArguments.DEEPLINK) {
                 type = NavType.BoolType
@@ -39,11 +39,11 @@ internal fun NavGraphBuilder.scanBarcodeNavGraph() {
         deepLinks = listOf(
             navDeepLink {
                 uriPattern =
-                    "$DEEPLINK_BROWSER_BASE_URL/${Screen.ScanBarcode.route}/?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}"
+                    "$DEEPLINK_BROWSER_BASE_URL/${BarcodesScreen.ScanBarcode.route}/?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}"
             },
             navDeepLink {
                 uriPattern =
-                    "$DEEPLINK_BASE_URL/${Screen.ScanBarcode.route}/?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}"
+                    "$DEEPLINK_BASE_URL/${BarcodesScreen.ScanBarcode.route}/?${NavigationArguments.DEEPLINK}={${NavigationArguments.DEEPLINK}}"
             },
         ),
     ) {

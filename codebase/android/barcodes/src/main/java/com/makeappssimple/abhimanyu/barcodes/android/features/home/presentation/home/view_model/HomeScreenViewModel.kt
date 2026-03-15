@@ -21,16 +21,16 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcod
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.GetAllBarcodesFlowUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.InsertBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base.ScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.snackbar.HomeScreenSnackbarType
-import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.state.HomeScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.mapper.BarcodeDomainToUiMapper
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.mapper.BarcodeUiToDomainMapper
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.model.BarcodeUiModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
+import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.snackbar.HomeScreenSnackbarType
+import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.state.HomeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.bottom_sheet.HomeCosmosBottomSheetType
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.result.MyResult
 import com.makeappssimple.abhimanyu.common.util.defaultObjectStateIn
@@ -49,10 +49,10 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class HomeScreenViewModel(
     analyticsKit: AnalyticsKit,
+    barcodesNavigationKit: BarcodesNavigationKit,
     coroutineScope: CoroutineScope,
     getAllBarcodesFlowUseCase: GetAllBarcodesFlowUseCase,
     logKit: LogKit,
-    navigationKit: NavigationKit,
     private val barcodeDomainToUiMapper: BarcodeDomainToUiMapper,
     private val barcodeUiToDomainMapper: BarcodeUiToDomainMapper,
     private val dateTimeKit: DateTimeKit,
@@ -61,9 +61,9 @@ internal class HomeScreenViewModel(
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
+    barcodesNavigationKit = barcodesNavigationKit,
+    barcodesScreen = BarcodesScreen.Home,
     logKit = logKit,
-    navigationKit = navigationKit,
-    screen = Screen.Home,
 ) {
     private var allBarcodes: Flow<List<BarcodeUiModel>> =
         getAllBarcodesFlowUseCase().map {

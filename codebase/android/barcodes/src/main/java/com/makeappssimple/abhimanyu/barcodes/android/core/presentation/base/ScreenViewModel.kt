@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import kotlinx.coroutines.CoroutineScope
@@ -27,12 +27,12 @@ import kotlinx.coroutines.Job
 internal abstract class ScreenViewModel(
     coroutineScope: CoroutineScope,
     private val analyticsKit: AnalyticsKit,
+    private val barcodesNavigationKit: BarcodesNavigationKit,
+    private val barcodesScreen: BarcodesScreen,
     private val logKit: LogKit,
-    private val navigationKit: NavigationKit,
-    private val screen: Screen,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit, NavigationKit by navigationKit {
+), LogKit by logKit, BarcodesNavigationKit by barcodesNavigationKit {
     open fun initViewModel() {
         trackScreen()
         fetchData()
@@ -49,7 +49,7 @@ internal abstract class ScreenViewModel(
 
     private fun trackScreen() {
         analyticsKit.trackScreen(
-            screenName = screen.route,
+            screenName = barcodesScreen.route,
         )
     }
 }

@@ -18,11 +18,11 @@ package com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presenta
 
 import androidx.lifecycle.SavedStateHandle
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.navigation.WebViewScreenArgs
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIStateEvents
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
@@ -37,17 +37,17 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class WebViewScreenViewModel(
     analyticsKit: AnalyticsKit,
+    barcodesNavigationKit: BarcodesNavigationKit,
     coroutineScope: CoroutineScope,
     logKit: LogKit,
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     uriDecoder: UriDecoder,
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
+    barcodesNavigationKit = barcodesNavigationKit,
+    barcodesScreen = BarcodesScreen.WebView,
     logKit = logKit,
-    navigationKit = navigationKit,
-    screen = Screen.WebView,
 ) {
     // region screen args
     private val screenArgs = WebViewScreenArgs(

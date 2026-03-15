@@ -21,11 +21,11 @@ import androidx.lifecycle.viewModelScope
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeSourceDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.InsertBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.navigation.ScanBarcodeScreenArgs
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.snackbar.ScanBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.state.ScanBarcodeScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.NavigationKit
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.Screen
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.orFalse
@@ -43,8 +43,8 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class ScanBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
+    barcodesNavigationKit: BarcodesNavigationKit,
     coroutineScope: CoroutineScope,
-    navigationKit: NavigationKit,
     savedStateHandle: SavedStateHandle,
     private val insertBarcodesUseCase: InsertBarcodesUseCase,
     val dateTimeKit: DateTimeKit,
@@ -53,9 +53,9 @@ internal class ScanBarcodeScreenViewModel(
 ) : ScreenViewModel(
     coroutineScope = coroutineScope,
     analyticsKit = analyticsKit,
+    barcodesNavigationKit = barcodesNavigationKit,
+    barcodesScreen = BarcodesScreen.ScanBarcode,
     logKit = logKit,
-    navigationKit = navigationKit,
-    screen = Screen.ScanBarcode,
 ) {
     // region screen args
     private val screenArgs = ScanBarcodeScreenArgs(
