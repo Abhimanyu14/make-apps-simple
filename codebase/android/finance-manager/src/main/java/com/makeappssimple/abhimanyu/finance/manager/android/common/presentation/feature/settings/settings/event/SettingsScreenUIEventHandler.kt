@@ -17,12 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.event
 
 import android.net.Uri
-import android.os.Build
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.settings.state.SettingsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.base.ScreenUIEventHandler
 
 internal class SettingsScreenUIEventHandler internal constructor(
-    private val hasNotificationPermission: Boolean,
+    private val shouldRequestNotificationPermission: Boolean,
     private val uiStateEvents: SettingsScreenUIStateEvents,
     private val backupData: ((uri: Uri?) -> Unit) -> Unit,
     private val requestNotificationsPermission: () -> Unit,
@@ -67,7 +66,7 @@ internal class SettingsScreenUIEventHandler internal constructor(
             }
 
             is SettingsScreenUIEvent.OnReminderDisabled -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !hasNotificationPermission) {
+                if (shouldRequestNotificationPermission) {
                     requestNotificationsPermission()
                 } else {
                     uiStateEvents.enableReminder()

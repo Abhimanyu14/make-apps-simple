@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.s
 import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -85,13 +84,13 @@ internal fun SettingsScreen(
                 uiStateEvents.enableReminder()
             }
         }
-    val notificationsPermissionLauncher: ManagedActivityResultLauncher<String, Boolean> =
+    val requestPermissionActivityResultLauncher: ManagedActivityResultLauncher<String, Boolean> =
         rememberLauncherForActivityResult(
             contract = ActivityResultContracts.RequestPermission(),
             onResult = onNotificationPermissionRequestResult,
         )
     val hasNotificationPermission: Boolean = remember {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (screenViewModel.buildConfigKit.isAndroidApiEqualToOrAboveApi33()) {
             ContextCompat.checkSelfPermission(
                 context,
                 Manifest.permission.POST_NOTIFICATIONS
@@ -105,7 +104,8 @@ internal fun SettingsScreen(
         key1 = uiStateEvents,
     ) {
         SettingsScreenUIEventHandler(
-            hasNotificationPermission = hasNotificationPermission,
+            shouldRequestNotificationPermission = !hasNotificationPermission &&
+                    screenViewModel.buildConfigKit.isAndroidApiEqualToOrAboveApi33(),
             uiStateEvents = uiStateEvents,
             backupData = { handler: (uri: Uri?) -> Unit ->
                 backupDataResultLauncher.launch(
@@ -113,8 +113,8 @@ internal fun SettingsScreen(
                 )
             },
             requestNotificationsPermission = {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    notificationsPermissionLauncher.launch(
+                if (screenViewModel.buildConfigKit.isAndroidApiEqualToOrAboveApi33()) {
+                    requestPermissionActivityResultLauncher.launch(
                         input = Manifest.permission.POST_NOTIFICATIONS,
                     )
                 }

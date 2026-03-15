@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
+import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
 import com.makeappssimple.abhimanyu.common.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.common.extensions.orFalse
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
@@ -52,6 +53,7 @@ internal class SettingsScreenViewModel(
     private val navigationKit: NavigationKit,
     private val recalculateTotalUseCase: RecalculateTotalUseCase,
     private val restoreDataUseCase: RestoreDataUseCase,
+    internal val buildConfigKit: BuildConfigKit,
     internal val dateTimeKit: DateTimeKit,
     internal val logKit: LogKit,
 ) : ViewModel(
