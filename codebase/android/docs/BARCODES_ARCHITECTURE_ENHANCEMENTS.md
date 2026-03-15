@@ -94,23 +94,18 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 **Current:**
 
-- `BarcodeDetailsScreenViewModel`: `BuildConfigKit` for platform checks,
-  `androidx.compose.ui.graphics.ImageBitmap`, `CosmosColor`
+- `BarcodeDetailsScreenViewModel`: `BuildConfigKit` for platform checks, `androidx.compose.ui.graphics.ImageBitmap`, `CosmosColor`
 - `CreateBarcodeScreenViewModel`: `BuildConfigKit` for platform checks
-
-**Status:** ✅ BuildConfigKit is already used in barcodes module.
 
 **Enhancement:**
 
-1. **SDK version checks via BuildConfigKit**
-    - Already implemented: Use `BuildConfigKit` (from common library) for platform capability checks
-    - Recommendation: Pass platform capability checks via
-      `*UIStateEvents` to keep event handlers testable
+1. **SDK version checks**
+   - Use `BuildConfigKit` (from common library) for platform capability checks
+   - Pass platform capability checks via `*UIStateEvents` to keep event handlers testable
 
 2. **Abstract bitmap/color**
-    - Use domain-friendly types (e.g.
-      `BarcodeImageData` or just raw bytes) or delegate bitmap generation to UI
-    - ViewModel should not depend on `ImageBitmap` or `CosmosColor`
+   - Use domain-friendly types (e.g. `BarcodeImageData` or raw bytes) or delegate bitmap generation to UI
+   - ViewModel should not depend on `ImageBitmap` or `CosmosColor`
 
 ---
 
@@ -165,18 +160,6 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 **Benefits:
 ** Compile-time enforcement of dependency rule, faster incremental builds, clearer ownership.
-
----
-
-#### Enhancement 6: Feature Navigation Graphs
-
-**Current:** Single `BarcodesNavGraph` in `core.presentation.navigation` for all screens.
-
-**Enhancement:**
-
-- Create per-feature navigation graphs: `HomeNavGraph`, `BarcodeDetailsNavGraph`, etc.
-- Feature modules own their navigation logic
-- Easier to extract features into separate modules later
 
 ---
 
@@ -376,14 +359,9 @@ app-barcodes/           # Dep depends on barcodes-ui
 | P1       | FakeAnalyticsKit for unit tests                                               | Low    | High   |
 | P2       | Event handler → ViewModel.handleUIEvent only                                  | Medium | Medium |
 | P2       | Move BarcodesNavGraph Composable to UI                                        | Medium | Medium |
-| P2       | Feature navigation graphs (per-feature NavGraphs)                             | Medium | Medium |
 | P2       | Split into Gradle modules (domain, data, presentation, ui)                    | High   | High   |
 | P3       | Consistent UI state management                                                | Medium | Medium |
 | P3       | Centralized error handling (ScreenError)                                      | Medium | Medium |
-
-**Note:
-** BuildConfigKit is already implemented in barcodes module. Use the pattern of passing platform capability checks via
-`*UIStateEvents` for testability.
 
 ---
 
@@ -441,10 +419,10 @@ app-barcodes/           # Dep depends on barcodes-ui
 | `features/home/…/HomeScreenViewModel.kt`                           | Use `HomeBottomSheetType`; remove `HomeCosmosBottomSheetType`                |
 | `features/home/…/HomeScreenUIState.kt`                             | Use `HomeBottomSheetType`                                                    |
 | `features/home/…/HomeScreenUIEventHandler.kt`                      | Use `HomeBottomSheetType`; map to `HomeCosmosBottomSheetType` only in UI     |
-| `features/barcode_details/…/BarcodeDetailsScreenViewModel.kt`      | ✅ BuildConfigKit done; Remove `ImageBitmap`, `CosmosColor`; use abstractions |
+| `features/barcode_details/…/BarcodeDetailsScreenViewModel.kt`      | Remove `ImageBitmap`, `CosmosColor`; use abstractions                       |
 | `features/barcode_details/…/BarcodeDetailsScreenUIState.kt`        | Consider `BarcodeImageData` or move bitmap to UI                             |
 | `features/barcode_details/…/BarcodeDetailsScreenUIEventHandler.kt` | Use constant from presentation                                               |
-| `features/create_barcode/…/CreateBarcodeScreenViewModel.kt`        | ✅ BuildConfigKit done                                                        |
+| `features/create_barcode/…/CreateBarcodeScreenViewModel.kt`        | Remove `Build`; use `BuildConfigKit`                                         |
 | `features/scan_barcode/…/ScanBarcodeScreenViewModel.kt`            | Use `AnalyticsKit` from domain                                               |
 | `features/web_view/…/WebViewScreenViewModel.kt`                    | Same                                                                         |
 | `features/settings/…/SettingsScreenViewModel.kt`                   | Same                                                                         |
