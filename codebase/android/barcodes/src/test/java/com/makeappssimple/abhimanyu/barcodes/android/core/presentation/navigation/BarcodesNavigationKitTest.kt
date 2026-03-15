@@ -28,29 +28,29 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.time.Duration.Companion.seconds
 
-internal class NavigationKitTest {
+internal class BarcodesNavigationKitTest {
     private val testCoroutineDispatcher = StandardTestDispatcher()
     private val testCoroutineScope = CoroutineScope(
         context = testCoroutineDispatcher,
     )
 
+    private lateinit var barcodesNavigationKit: BarcodesNavigationKit
     private lateinit var uriEncoder: UriEncoder
-    private lateinit var navigationKit: NavigationKit
 
     @Before
     fun setUp() {
-        uriEncoder = FakeUriEncoderImpl()
-        navigationKit = NavigationKitImpl(
+        barcodesNavigationKit = BarcodesNavigationKitImpl(
             coroutineScope = testCoroutineScope,
             uriEncoder = uriEncoder,
         )
+        uriEncoder = FakeUriEncoderImpl()
     }
 
     @Test
     fun navigateToBarcodeDetailsScreenTest() = runTestWithTimeout {
         val barcodeId = 1
-        navigationKit.command.test {
-            navigationKit.navigateToBarcodeDetailsScreen(
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToBarcodeDetailsScreen(
                 barcodeId = barcodeId,
             )
 
@@ -66,8 +66,8 @@ internal class NavigationKitTest {
     @Test
     fun navigateToCreateBarcodeScreen_barcodeIdIsNull() = runTestWithTimeout {
         val barcodeId = null
-        navigationKit.command.test {
-            navigationKit.navigateToCreateBarcodeScreen(
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToCreateBarcodeScreen(
                 barcodeId = barcodeId,
             )
 
@@ -84,8 +84,8 @@ internal class NavigationKitTest {
     fun navigateToCreateBarcodeScreen_barcodeIdIsNotNull() =
         runTestWithTimeout {
             val barcodeId = 1
-            navigationKit.command.test {
-                navigationKit.navigateToCreateBarcodeScreen(
+            barcodesNavigationKit.command.test {
+                barcodesNavigationKit.navigateToCreateBarcodeScreen(
                     barcodeId = barcodeId,
                 )
 
@@ -100,8 +100,8 @@ internal class NavigationKitTest {
 
     @Test
     fun navigateToCreditsScreenTest() = runTestWithTimeout {
-        navigationKit.command.test {
-            navigationKit.navigateToCreditsScreen()
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToCreditsScreen()
 
             Assert.assertEquals(
                 awaitItem(),
@@ -112,8 +112,8 @@ internal class NavigationKitTest {
 
     @Test
     fun navigateToHomeScreenTest() = runTestWithTimeout {
-        navigationKit.command.test {
-            navigationKit.navigateToHomeScreen()
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToHomeScreen()
 
             Assert.assertEquals(
                 awaitItem(),
@@ -124,8 +124,8 @@ internal class NavigationKitTest {
 
     @Test
     fun navigateToScanBarcodeScreenTest() = runTestWithTimeout {
-        navigationKit.command.test {
-            navigationKit.navigateToScanBarcodeScreen()
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToScanBarcodeScreen()
 
             Assert.assertEquals(
                 awaitItem(),
@@ -136,8 +136,8 @@ internal class NavigationKitTest {
 
     @Test
     fun navigateToSettingsScreenTest() = runTestWithTimeout {
-        navigationKit.command.test {
-            navigationKit.navigateToSettingsScreen()
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToSettingsScreen()
 
             Assert.assertEquals(
                 awaitItem(),
@@ -148,8 +148,8 @@ internal class NavigationKitTest {
 
     @Test
     fun navigateUpTest() = runTestWithTimeout {
-        navigationKit.command.test {
-            navigationKit.navigateUp()
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateUp()
 
             Assert.assertEquals(
                 awaitItem(),
@@ -161,8 +161,8 @@ internal class NavigationKitTest {
     @Test
     fun navigateToWebViewScreenTest() = runTestWithTimeout {
         val url = "testUrl"
-        navigationKit.command.test {
-            navigationKit.navigateToWebViewScreen(
+        barcodesNavigationKit.command.test {
+            barcodesNavigationKit.navigateToWebViewScreen(
                 url = url,
             )
 

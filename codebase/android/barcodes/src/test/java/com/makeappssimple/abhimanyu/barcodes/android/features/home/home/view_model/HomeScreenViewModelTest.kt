@@ -24,14 +24,13 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.data.repository.barcod
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.DeleteBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.GetAllBarcodesFlowUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.InsertBarcodesUseCase
-import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.UpdateBarcodesUseCase
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.mapper.BarcodeDomainToUiMapper
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.mapper.BarcodeUiToDomainMapper
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.model.BarcodeFormatUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.model.BarcodeSourceUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.model.BarcodeUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationDirections
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.NavigationKitImpl
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKitImpl
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.view_model.HomeScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.FirebaseAnalyticsKitImpl
 import com.makeappssimple.abhimanyu.common.coroutines.test.TestCoroutineDispatcherProviderImpl
@@ -76,7 +75,7 @@ class HomeScreenViewModelTest {
 
     private val dateTimeKit = DateTimeKitImpl()
     private val uriEncoder: UriEncoder = UriEncoderImpl()
-    private val navigationKit = NavigationKitImpl(
+    private val navigationKit = BarcodesNavigationKitImpl(
         coroutineScope = testCoroutineScope,
         uriEncoder = uriEncoder,
     )
@@ -92,9 +91,6 @@ class HomeScreenViewModelTest {
         barcodeRepository = barcodeRepository,
         dateTimeKit = dateTimeKit,
     )
-    private val updateBarcodesUseCase = UpdateBarcodesUseCase(
-        barcodeRepository = barcodeRepository,
-    )
 
     private lateinit var homeScreenViewModel: HomeScreenViewModel
 
@@ -103,9 +99,9 @@ class HomeScreenViewModelTest {
     fun setUp() {
         homeScreenViewModel = HomeScreenViewModel(
             analyticsKit = analyticsKit,
+            barcodesNavigationKit = navigationKit,
             coroutineScope = testCoroutineScope,
             getAllBarcodesFlowUseCase = getAllBarcodesFlowUseCase,
-            navigationKit = navigationKit,
             logKit = fakeLogKit,
             barcodeDomainToUiMapper = barcodeDomainToUiMapper,
             barcodeUiToDomainMapper = barcodeUiToDomainMapper,
