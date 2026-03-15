@@ -16,19 +16,28 @@
 
 package com.makeappssimple.abhimanyu.common.build_config.fake
 
-import android.os.Build
 import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
 
-public class FakeBuildConfigKitImpl : BuildConfigKit {
+public class FakeBuildConfigKitImpl(
+    private val buildVersion: Int,
+) : BuildConfigKit {
     override fun isDebugBuild(): Boolean {
         return true
     }
 
     override fun getBuildVersion(): Int {
-        return Build.VERSION.SDK_INT
+        return buildVersion
     }
 
-    override fun isAndroidApiEqualToOrAbove(buildVersionNumber: Int): Boolean {
-        return getBuildVersion() >= buildVersionNumber
+    override fun isAndroidApiEqualToOrAboveApi33(): Boolean {
+        return buildVersion >= 33
+    }
+
+    override fun isAndroidApiEqualToOrAboveApi34(): Boolean {
+        return buildVersion >= 34
+    }
+
+    override fun isAndroidApiEqualToOrAboveApi35(): Boolean {
+        return buildVersion >= 35
     }
 }

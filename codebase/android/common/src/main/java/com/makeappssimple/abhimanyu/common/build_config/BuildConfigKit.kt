@@ -21,7 +21,9 @@ public interface BuildConfigKit {
 
     public fun getBuildVersion(): Int
 
-    public fun isAndroidApiEqualToOrAbove(
-        buildVersionNumber: Int,
-    ): Boolean
+    public fun isAndroidApiEqualToOrAboveApi33(): Boolean
+
+    public fun isAndroidApiEqualToOrAboveApi34(): Boolean
+
+    public fun isAndroidApiEqualToOrAboveApi35(): Boolean
 }

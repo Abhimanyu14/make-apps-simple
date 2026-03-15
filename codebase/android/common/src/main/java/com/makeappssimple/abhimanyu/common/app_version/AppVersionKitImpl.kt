@@ -18,8 +18,8 @@ package com.makeappssimple.abhimanyu.common.app_version
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
+import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
 import org.koin.core.annotation.Single
 
 @Single(
@@ -29,13 +29,14 @@ import org.koin.core.annotation.Single
 )
 internal class AppVersionKitImpl(
     private val context: Context,
+    private val buildConfigKit: BuildConfigKit,
 ) : AppVersionKit {
     override fun getAppVersion(): AppVersion? {
         return try {
             val packageManager = context.packageManager
             val packageName = context.packageName
             val packageInfo =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (buildConfigKit.isAndroidApiEqualToOrAboveApi33()) {
                     packageManager.getPackageInfo(
                         packageName,
                         PackageManager.PackageInfoFlags.of(0)

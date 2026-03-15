@@ -37,7 +37,25 @@ internal class BuildConfigKitImpl(
         return buildVersion
     }
 
-    override fun isAndroidApiEqualToOrAbove(
+    override fun isAndroidApiEqualToOrAboveApi33(): Boolean {
+        return isAndroidApiEqualToOrAbove(
+            buildVersionNumber = Build.VERSION_CODES.TIRAMISU,
+        )
+    }
+
+    override fun isAndroidApiEqualToOrAboveApi34(): Boolean {
+        return isAndroidApiEqualToOrAbove(
+            buildVersionNumber = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        )
+    }
+
+    override fun isAndroidApiEqualToOrAboveApi35(): Boolean {
+        return isAndroidApiEqualToOrAbove(
+            buildVersionNumber = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        )
+    }
+
+    private fun isAndroidApiEqualToOrAbove(
         buildVersionNumber: Int,
     ): Boolean {
         return getBuildVersion() >= buildVersionNumber

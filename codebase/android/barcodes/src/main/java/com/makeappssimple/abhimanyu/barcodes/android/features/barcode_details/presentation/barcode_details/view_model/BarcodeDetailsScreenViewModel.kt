@@ -16,7 +16,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model
 
-import android.os.Build
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -209,9 +208,7 @@ internal class BarcodeDetailsScreenViewModel(
     }
 
     fun shouldShowCopiedToClipboardToastMessage(): Boolean {
-        return !buildConfigKit.isAndroidApiEqualToOrAbove(
-            buildVersionNumber = Build.VERSION_CODES.TIRAMISU,
-        )
+        return !buildConfigKit.isAndroidApiEqualToOrAboveApi33()
     }
 
     // region state events
