@@ -43,6 +43,7 @@ com.makeappssimple.abhimanyu.barcodes.android
 | **DI**                     | Koin with `@Single(binds = [])` for interfaces                                                   |
 | **State flow**             | Unidirectional flow with `uiState`, `uiStateEvents`, `*UIEvent`                                  |
 | **Navigation abstraction** | `NavigationKit` interface with command-based navigation                                          |
+| **Platform abstraction**   | `BuildConfigKit` (from common library) abstracts SDK version checks                              |
 
 ---
 
@@ -97,15 +98,14 @@ com.makeappssimple.abhimanyu.barcodes.android
 
 **Current:**
 
-- `BarcodeDetailsScreenViewModel`: `android.os.Build`, `androidx.compose.ui.graphics.ImageBitmap`,
-  `CosmosColor`
-- `CreateBarcodeScreenViewModel`: `android.os.Build`
+- `BarcodeDetailsScreenViewModel`: `android.os.Build` (using `BuildConfigKit` for some checks),
+  `androidx.compose.ui.graphics.ImageBitmap`, `CosmosColor`
+- `CreateBarcodeScreenViewModel`: `android.os.Build` (using `BuildConfigKit`)
 
 **Enhancement:**
 
 1. **Abstract SDK version checks**
-    - Inject `PlatformCapabilities` (e.g. `shouldShowCopiedToast: Boolean`) or
-      `BuildConfigKit` with platform-specific logic
+    - Use `BuildConfigKit` (from common library) for platform capability checks
     - Keep `Build.VERSION_CODES` usage in platform/impl
 
 2. **Abstract bitmap/color**
@@ -169,9 +169,22 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ---
 
+#### Enhancement 6: Feature Navigation Graphs
+
+**Current:** Single `BarcodesNavGraph` in `core.presentation.navigation` for all screens.
+
+**Enhancement:**
+
+- Create per-feature navigation graphs: `HomeNavGraph`, `BarcodeDetailsNavGraph`, etc.
+- Feature modules own their navigation logic
+- Easier to extract features into separate modules later
+
+---
+
 #### Enhancement 7: Shared Navigation Contract
 
-**Current:** `NavigationKit` has screen-specific methods (`navigateToBarcodeDetailsScreen`, etc.).
+**Current:** `BarcodesNavigationKit` has screen-specific methods (
+`navigateToBarcodeDetailsScreen`, etc.).
 
 **Enhancement:** For scalability:
 
@@ -238,6 +251,18 @@ app-barcodes/           # Dep depends on barcodes-ui
 ---
 
 ### 2.4 Maintainability
+
+#### Enhancement 12: Consistent UI State Management
+
+**Current:** Each screen has its own `ScreenUIState` implementation with varying patterns.
+
+**Enhancement:**
+
+- Define base `ScreenUIState` with common fields: `isLoading`, `isError`, `snackbarType`
+- Standardize how screens represent loading, error, and empty states
+- Use consistent state class hierarchy across features
+
+---
 
 #### Enhancement 13: Consistent Error Handling
 
@@ -348,7 +373,9 @@ app-barcodes/           # Dep depends on barcodes-ui
 | P1       | FakeAnalyticsKit for unit tests                                               | Low    | High   |
 | P2       | Event handler → ViewModel.handleUIEvent only                                  | Medium | Medium |
 | P2       | Move BarcodesNavGraph Composable to UI                                        | Medium | Medium |
+| P2       | Feature navigation graphs (per-feature NavGraphs)                             | Medium | Medium |
 | P2       | Split into Gradle modules (domain, data, presentation, ui)                    | High   | High   |
+| P3       | Consistent UI state management                                                | Medium | Medium |
 | P3       | Centralized error handling (ScreenError)                                      | Medium | Medium |
 
 ---
@@ -361,6 +388,7 @@ app-barcodes/           # Dep depends on barcodes-ui
   `FirebaseAnalyticsKitImpl` to platform (currently in `shared.ui.analytics`)
 - [ ] Update all ViewModels to depend on `AnalyticsKit` from domain
 - [ ] Add `FakeAnalyticsKit` for tests
+- [ ] Use `BuildConfigKit` for platform version checks
 
 ### Phase 2: Presentation ↔ UI Decoupling (3–5 days)
 
@@ -372,12 +400,12 @@ app-barcodes/           # Dep depends on barcodes-ui
 
 ### Phase 3: Framework Decoupling (2–3 days)
 
-- [ ] Abstract `Build.VERSION` checks behind `PlatformCapabilities` or `BuildConfigKit`
+- [ ] Complete `Build.VERSION` abstraction: migrate remaining uses to `BuildConfigKit`
 - [ ] Remove `CosmosColor` from ViewModel; use opaque color representation or move to UI
 
 ### Phase 4: Structure (1–2 weeks)
 
-- [x] Feature-first directory layout (core, features, shared, platform)
+- [ ] Feature-first directory layout (core, features, shared, platform)
 - [ ] Evaluate Gradle module split (domain, data, presentation, ui)
 - [ ] Move `BarcodesNavGraph` Composable to UI package
 - [ ] Standardize event handling (handler → ViewModel.handleUIEvent)
@@ -385,6 +413,18 @@ app-barcodes/           # Dep depends on barcodes-ui
 ---
 
 ## 5. File-Level Reference
+
+### Screens in Current Implementation
+
+| Screen         | Location                                   |
+|----------------|--------------------------------------------|
+| Home           | `features/home/`                           |
+| BarcodeDetails | `features/barcode_details/`                |
+| CreateBarcode  | `features/create_barcode/`                 |
+| ScanBarcode    | `features/scan_barcode/`                   |
+| Settings       | `features/settings/presentation/settings/` |
+| Credits        | `features/settings/presentation/credits/`  |
+| WebView        | `features/web_view/`                       |
 
 ### Files Requiring Changes (Presentation → UI Decoupling)
 
@@ -400,6 +440,7 @@ app-barcodes/           # Dep depends on barcodes-ui
 | `features/scan_barcode/…/ScanBarcodeScreenViewModel.kt`            | Use `AnalyticsKit` from domain                                           |
 | `features/web_view/…/WebViewScreenViewModel.kt`                    | Same                                                                     |
 | `features/settings/…/SettingsScreenViewModel.kt`                   | Same                                                                     |
+| `features/settings/…/CreditsScreenViewModel.kt`                    | Same                                                                     |
 
 ### New Files to Create
 
