@@ -117,7 +117,7 @@ internal class ScanBarcodeScreenViewModel(
     ) {
         viewModelScope.launch {
             val result: MyResult<Long> = insertBarcodesUseCase(
-                source = BarcodeSourceDomainModel.SCANNED,
+                source = BarcodeSourceDomainModel.Scanned,
                 format = barcodeFormat,
                 value = barcodeValue,
             )

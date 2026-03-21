@@ -163,7 +163,7 @@ internal class CreateBarcodeScreenViewModel(
                 )
             } else {
                 insertBarcodesUseCase(
-                    source = BarcodeSourceDomainModel.CREATED,
+                    source = BarcodeSourceDomainModel.Created,
                     format = BarcodeFormatDomainModel.QrCode.value,
                     name = barcodeName.value,
                     value = barcodeValue.value,

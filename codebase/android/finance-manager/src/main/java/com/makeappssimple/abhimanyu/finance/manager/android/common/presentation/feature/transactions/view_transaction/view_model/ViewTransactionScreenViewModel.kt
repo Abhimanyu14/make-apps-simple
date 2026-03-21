@@ -210,9 +210,9 @@ internal class ViewTransactionScreenViewModel(
             .copy(
                 isDeleteButtonEnabled = transaction.refundTransactionIds.isNullOrEmpty(),
                 isDeleteButtonVisible = true,
-                isEditButtonVisible = transaction.transactionType != TransactionType.ADJUSTMENT,
+                isEditButtonVisible = transaction.transactionType != TransactionType.Adjustment,
                 isExpanded = true,
-                isRefundButtonVisible = transaction.transactionType == TransactionType.EXPENSE,
+                isRefundButtonVisible = transaction.transactionType == TransactionType.Expense,
             )
     }
     // endregion

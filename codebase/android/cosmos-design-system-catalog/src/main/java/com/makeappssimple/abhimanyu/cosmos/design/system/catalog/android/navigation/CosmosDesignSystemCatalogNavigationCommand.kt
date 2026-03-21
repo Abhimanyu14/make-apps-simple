@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation
 
 internal enum class CosmosDesignSystemCatalogCommand {
-    CLEAR_BACKSTACK_AND_NAVIGATE,
-    CLEAR_TILL_ROOT,
-    NAVIGATE,
-    NAVIGATE_UP,
-    NOOP,
+    ClearBackStackAndNavigate,
+    ClearTillRoot,
+    Navigate,
+    NavigateUp,
+    NoOp,
 }
 
 internal interface CosmosDesignSystemCatalogNavigationCommand {

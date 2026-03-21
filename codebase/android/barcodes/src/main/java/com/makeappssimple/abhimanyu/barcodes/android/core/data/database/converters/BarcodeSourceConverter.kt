@@ -31,7 +31,7 @@ internal class BarcodeSourceConverter {
         } catch (
             exception: Exception,
         ) {
-            BarcodeSourceDataModel.CREATED
+            BarcodeSourceDataModel.Created
         }
     }
 

@@ -113,7 +113,7 @@ internal class TransactionsScreenViewModel(
         mutableMapOf()
     private var accounts: ImmutableList<Account> = persistentListOf()
     private var selectedTransactionSortOption: TransactionSortOption =
-        TransactionSortOption.LATEST_FIRST
+        TransactionSortOption.LatestFirst
     private var searchTextFieldState: TextFieldState = TextFieldState()
     private var screenBottomSheetType: TransactionsScreenBottomSheetType =
         TransactionsScreenBottomSheetType.None
@@ -194,11 +194,11 @@ internal class TransactionsScreenViewModel(
                 transactionForValues = allTransactionForValues,
                 transactionSortOptions = transactionSortOptions,
                 accounts = accounts.toImmutableList(),
-                expenseCategories = categoriesMap[TransactionType.EXPENSE].orEmpty()
+                expenseCategories = categoriesMap[TransactionType.Expense].orEmpty()
                     .toImmutableList(),
-                incomeCategories = categoriesMap[TransactionType.INCOME].orEmpty()
+                incomeCategories = categoriesMap[TransactionType.Income].orEmpty()
                     .toImmutableList(),
-                investmentCategories = categoriesMap[TransactionType.INVESTMENT].orEmpty()
+                investmentCategories = categoriesMap[TransactionType.Investment].orEmpty()
                     .toImmutableList(),
                 transactionTypes = transactionTypes,
                 currentLocalDate = currentLocalDate.orMin(),
@@ -224,8 +224,8 @@ internal class TransactionsScreenViewModel(
                     )
                 }
                 .groupBy {
-                    if (selectedTransactionSortOption == TransactionSortOption.LATEST_FIRST ||
-                        selectedTransactionSortOption == TransactionSortOption.OLDEST_FIRST
+                    if (selectedTransactionSortOption == TransactionSortOption.LatestFirst ||
+                        selectedTransactionSortOption == TransactionSortOption.OldestFirst
                     ) {
                         dateTimeKit.getFormattedDateWithDayOfWeek(
                             timestamp = it.transaction.transactionTimestamp,
@@ -564,7 +564,7 @@ internal class TransactionsScreenViewModel(
                     transactionData.transaction
                 }
                 .filter {
-                    it.transactionType == TransactionType.EXPENSE &&
+                    it.transactionType == TransactionType.Expense &&
                             selectedTransactions.contains(it.id)
                 }
                 .map {

@@ -27,13 +27,13 @@ internal fun sanitizeTransactions(
 ): ImmutableList<TransactionEntity> {
     return transactions.map { transaction ->
         when (transaction.transactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 transaction.copy(
                     accountFromId = null,
                 )
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 transaction.copy(
                     accountToId = null,
                     amount = transaction.amount.copy(
@@ -44,13 +44,13 @@ internal fun sanitizeTransactions(
                 )
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 transaction.copy(
                     categoryId = null,
                 )
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 val accountId = transaction.accountToId
                 transaction.copy(
                     categoryId = null,
@@ -72,13 +72,13 @@ internal fun sanitizeTransactions(
                 )
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 transaction.copy(
                     accountToId = null,
                 )
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 transaction.copy(
                     accountFromId = null,
                 )

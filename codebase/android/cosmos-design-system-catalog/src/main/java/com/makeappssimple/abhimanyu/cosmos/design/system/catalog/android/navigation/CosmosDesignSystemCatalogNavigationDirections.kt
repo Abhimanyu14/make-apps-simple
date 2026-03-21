@@ -19,14 +19,16 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.naviga
 internal object CosmosDesignSystemCatalogNavigationDirections {
     // Default
     object Default : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NOOP
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.NoOp
         override val cosmosDesignSystemCatalogScreen = ""
         override val destination = ""
     }
 
     // Navigate up
     object NavigateUp : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE_UP
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.NavigateUp
         override val cosmosDesignSystemCatalogScreen = ""
         override val destination = ""
     }
@@ -34,52 +36,67 @@ internal object CosmosDesignSystemCatalogNavigationDirections {
     // Clear backstack
     object ClearBackstack : CosmosDesignSystemCatalogNavigationCommand {
         override val cosmosDesignSystemCatalogCommand =
-            CosmosDesignSystemCatalogCommand.CLEAR_BACKSTACK_AND_NAVIGATE
+            CosmosDesignSystemCatalogCommand.ClearBackStackAndNavigate
         override val cosmosDesignSystemCatalogScreen = ""
         override val destination = ""
     }
 
     // Clear till root
     object ClearTillRoot : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.CLEAR_TILL_ROOT
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.ClearTillRoot
         override val cosmosDesignSystemCatalogScreen = ""
         override val destination = ""
     }
 
     // App specific
     object Colors : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE
-        override val cosmosDesignSystemCatalogScreen = CosmosDesignSystemCatalogScreen.Colors.route
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.Navigate
+        override val cosmosDesignSystemCatalogScreen =
+            CosmosDesignSystemCatalogScreen.Colors.route
         override val destination = CosmosDesignSystemCatalogScreen.Colors.route
     }
 
     object Components : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE
-        override val cosmosDesignSystemCatalogScreen = CosmosDesignSystemCatalogScreen.Components.route
-        override val destination = CosmosDesignSystemCatalogScreen.Components.route
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.Navigate
+        override val cosmosDesignSystemCatalogScreen =
+            CosmosDesignSystemCatalogScreen.Components.route
+        override val destination =
+            CosmosDesignSystemCatalogScreen.Components.route
     }
 
     object Home : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE
-        override val cosmosDesignSystemCatalogScreen = CosmosDesignSystemCatalogScreen.Home.route
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.Navigate
+        override val cosmosDesignSystemCatalogScreen =
+            CosmosDesignSystemCatalogScreen.Home.route
         override val destination = CosmosDesignSystemCatalogScreen.Home.route
     }
 
     object Icons : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE
-        override val cosmosDesignSystemCatalogScreen = CosmosDesignSystemCatalogScreen.Icons.route
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.Navigate
+        override val cosmosDesignSystemCatalogScreen =
+            CosmosDesignSystemCatalogScreen.Icons.route
         override val destination = CosmosDesignSystemCatalogScreen.Icons.route
     }
 
     object Shapes : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE
-        override val cosmosDesignSystemCatalogScreen = CosmosDesignSystemCatalogScreen.Shapes.route
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.Navigate
+        override val cosmosDesignSystemCatalogScreen =
+            CosmosDesignSystemCatalogScreen.Shapes.route
         override val destination = CosmosDesignSystemCatalogScreen.Shapes.route
     }
 
     object Typography : CosmosDesignSystemCatalogNavigationCommand {
-        override val cosmosDesignSystemCatalogCommand = CosmosDesignSystemCatalogCommand.NAVIGATE
-        override val cosmosDesignSystemCatalogScreen = CosmosDesignSystemCatalogScreen.Typography.route
-        override val destination = CosmosDesignSystemCatalogScreen.Typography.route
+        override val cosmosDesignSystemCatalogCommand =
+            CosmosDesignSystemCatalogCommand.Navigate
+        override val cosmosDesignSystemCatalogScreen =
+            CosmosDesignSystemCatalogScreen.Typography.route
+        override val destination =
+            CosmosDesignSystemCatalogScreen.Typography.route
     }
 }

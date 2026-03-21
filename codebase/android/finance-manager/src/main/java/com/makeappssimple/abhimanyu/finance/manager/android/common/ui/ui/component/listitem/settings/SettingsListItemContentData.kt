@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 
 @Immutable
 internal data class SettingsListItemContentData(
-    override val type: SettingsListItemType = SettingsListItemType.CONTENT,
+    override val type: SettingsListItemType = SettingsListItemType.Content,
     val isChecked: Boolean? = null,
     val isEnabled: Boolean = false,
     val hasToggle: Boolean = false,

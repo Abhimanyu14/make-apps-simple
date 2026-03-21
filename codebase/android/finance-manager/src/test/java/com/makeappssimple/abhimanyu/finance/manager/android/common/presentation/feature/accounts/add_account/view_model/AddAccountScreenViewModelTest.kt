@@ -75,7 +75,7 @@ internal class AddAccountScreenViewModelTest {
             val result = awaitItem()
 
             result.selectedAccountType.shouldBe(
-                expected = AccountType.BANK,
+                expected = AccountType.Bank,
             )
             result.nameError.shouldBe(
                 expected = AddAccountScreenNameError.None,
@@ -174,7 +174,7 @@ internal class AddAccountScreenViewModelTest {
                 val testAccountId = 1
                 val testAccountName = "test-bank"
                 val testMinimumAccountBalanceAmount = "1000"
-                val testAccountType = AccountType.BANK
+                val testAccountType = AccountType.Bank
                 val testAccount = Account(
                     id = testAccountId,
                     type = testAccountType,
@@ -240,7 +240,7 @@ internal class AddAccountScreenViewModelTest {
                 val testAccountId = 1
                 val testAccountName = "test-wallet"
                 val testMinimumAccountBalanceAmount = "1000"
-                val testAccountType = AccountType.E_WALLET
+                val testAccountType = AccountType.EWallet
                 val testSelectedAccountTypeIndex = 1
                 Account(
                     id = testAccountId,

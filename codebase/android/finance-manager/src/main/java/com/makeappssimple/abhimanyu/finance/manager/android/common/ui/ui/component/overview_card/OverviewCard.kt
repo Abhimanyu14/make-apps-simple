@@ -63,24 +63,24 @@ internal sealed class OverviewCardEvent {
 internal enum class OverviewTabOption(
     val title: String,
 ) {
-    DAY(
-        title = "DAY",
+    Day(
+        title = "Day",
     ),
 
     // TODO(Abhi): Enable week later
     // WEEK("Week"),
 
-    MONTH(
-        title = "MONTH",
+    Month(
+        title = "Month",
     ),
-    YEAR(
-        title = "YEAR",
+    Year(
+        title = "Year",
     ),
 }
 
 internal enum class OverviewCardAction {
-    NEXT,
-    PREV,
+    Next,
+    Prev,
 }
 
 internal data class OverviewCardViewModelData(
@@ -190,7 +190,7 @@ private fun OverviewCardUI(
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(
-                                overviewCardAction = OverviewCardAction.PREV,
+                                overviewCardAction = OverviewCardAction.Prev,
                             )
                         )
                     },
@@ -225,7 +225,7 @@ private fun OverviewCardUI(
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(
-                                overviewCardAction = OverviewCardAction.NEXT,
+                                overviewCardAction = OverviewCardAction.Next,
                             )
                         )
                     },

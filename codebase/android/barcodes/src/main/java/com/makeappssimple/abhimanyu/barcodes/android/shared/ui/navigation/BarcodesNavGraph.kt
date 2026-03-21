@@ -48,17 +48,17 @@ internal fun BarcodesNavGraph(
             barcodesActivityViewModel.barcodesNavigationKit.command.collect { command ->
                 keyboardController?.hide()
                 when (command.barcodesCommand) {
-                    BarcodesCommand.NAVIGATE -> {
+                    BarcodesCommand.Navigate -> {
                         navHostController.navigate(
                             route = command.destination,
                         )
                     }
 
-                    BarcodesCommand.NAVIGATE_UP -> {
+                    BarcodesCommand.NavigateUp -> {
                         navHostController.navigateUp()
                     }
 
-                    BarcodesCommand.CLEAR_BACKSTACK_AND_NAVIGATE -> {
+                    BarcodesCommand.ClearBackStackAndNavigate -> {
                         navHostController.navigate(
                             route = command.destination,
                         ) {
@@ -70,14 +70,14 @@ internal fun BarcodesNavGraph(
                         }
                     }
 
-                    BarcodesCommand.CLEAR_TILL_ROOT -> {
+                    BarcodesCommand.ClearTillRoot -> {
                         navHostController.popBackStack(
                             destinationId = navHostController.graph.findStartDestination().id,
                             inclusive = false,
                         )
                     }
 
-                    BarcodesCommand.NOOP -> {}
+                    BarcodesCommand.NoOp -> {}
                 }
             }
         }

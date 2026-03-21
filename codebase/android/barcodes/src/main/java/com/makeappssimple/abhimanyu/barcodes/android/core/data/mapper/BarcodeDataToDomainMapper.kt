@@ -43,12 +43,12 @@ internal class BarcodeDataToDomainMapper {
         barcodeSourceDataModel: BarcodeSourceDataModel,
     ): BarcodeSourceDomainModel {
         return when (barcodeSourceDataModel) {
-            BarcodeSourceDataModel.CREATED -> {
-                BarcodeSourceDomainModel.CREATED
+            BarcodeSourceDataModel.Created -> {
+                BarcodeSourceDomainModel.Created
             }
 
-            BarcodeSourceDataModel.SCANNED -> {
-                BarcodeSourceDomainModel.SCANNED
+            BarcodeSourceDataModel.Scanned -> {
+                BarcodeSourceDomainModel.Scanned
             }
         }
     }

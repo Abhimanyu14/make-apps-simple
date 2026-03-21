@@ -375,7 +375,7 @@ internal class CategoryDaoTest {
     private fun getCategoryEntity(
         id: Int = 0,
         title: String = "test-category",
-        transactionType: TransactionType = TransactionType.EXPENSE,
+        transactionType: TransactionType = TransactionType.Expense,
     ): CategoryEntity {
         return CategoryEntity(
             id = id,

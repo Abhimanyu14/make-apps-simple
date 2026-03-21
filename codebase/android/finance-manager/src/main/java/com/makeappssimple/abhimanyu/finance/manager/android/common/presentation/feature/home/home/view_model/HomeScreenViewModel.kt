@@ -204,21 +204,21 @@ internal class HomeScreenViewModel(
         val overviewTabOption =
             OverviewTabOption.entries[overviewTabSelectionIndex]
         when (overviewCardAction) {
-            OverviewCardAction.NEXT -> {
+            OverviewCardAction.Next -> {
                 when (overviewTabOption) {
-                    OverviewTabOption.DAY -> {
+                    OverviewTabOption.Day -> {
                         selectedTimestamp = dateTimeKit.getNextDayTimestamp(
                             timestamp = selectedTimestamp,
                         )
                     }
 
-                    OverviewTabOption.MONTH -> {
+                    OverviewTabOption.Month -> {
                         selectedTimestamp = dateTimeKit.getNextMonthTimestamp(
                             timestamp = selectedTimestamp,
                         )
                     }
 
-                    OverviewTabOption.YEAR -> {
+                    OverviewTabOption.Year -> {
                         selectedTimestamp = dateTimeKit.getNextYearTimestamp(
                             timestamp = selectedTimestamp,
                         )
@@ -226,22 +226,22 @@ internal class HomeScreenViewModel(
                 }
             }
 
-            OverviewCardAction.PREV -> {
+            OverviewCardAction.Prev -> {
                 when (overviewTabOption) {
-                    OverviewTabOption.DAY -> {
+                    OverviewTabOption.Day -> {
                         selectedTimestamp = dateTimeKit.getPreviousDayTimestamp(
                             timestamp = selectedTimestamp,
                         )
                     }
 
-                    OverviewTabOption.MONTH -> {
+                    OverviewTabOption.Month -> {
                         selectedTimestamp =
                             dateTimeKit.getPreviousMonthTimestamp(
                                 timestamp = selectedTimestamp,
                             )
                     }
 
-                    OverviewTabOption.YEAR -> {
+                    OverviewTabOption.Year -> {
                         selectedTimestamp =
                             dateTimeKit.getPreviousYearTimestamp(
                                 timestamp = selectedTimestamp,
@@ -328,38 +328,38 @@ internal class HomeScreenViewModel(
     ): ImmutableList<Transaction> {
         return getTransactionsBetweenTimestampsUseCase(
             startingTimestamp = when (overviewTabOption) {
-                OverviewTabOption.DAY -> {
+                OverviewTabOption.Day -> {
                     dateTimeKit.getStartOfDayTimestamp(
                         timestamp = timestamp,
                     )
                 }
 
-                OverviewTabOption.MONTH -> {
+                OverviewTabOption.Month -> {
                     dateTimeKit.getStartOfMonthTimestamp(
                         timestamp = timestamp,
                     )
                 }
 
-                OverviewTabOption.YEAR -> {
+                OverviewTabOption.Year -> {
                     dateTimeKit.getStartOfYearTimestamp(
                         timestamp = timestamp,
                     )
                 }
             },
             endingTimestamp = when (overviewTabOption) {
-                OverviewTabOption.DAY -> {
+                OverviewTabOption.Day -> {
                     dateTimeKit.getEndOfDayTimestamp(
                         timestamp = timestamp,
                     )
                 }
 
-                OverviewTabOption.MONTH -> {
+                OverviewTabOption.Month -> {
                     dateTimeKit.getEndOfMonthTimestamp(
                         timestamp = timestamp,
                     )
                 }
 
-                OverviewTabOption.YEAR -> {
+                OverviewTabOption.Year -> {
                     dateTimeKit.getEndOfYearTimestamp(
                         timestamp = timestamp,
                     )
@@ -372,7 +372,7 @@ internal class HomeScreenViewModel(
         transactionsInSelectedTimeRange: ImmutableList<Transaction>,
     ): Float {
         return transactionsInSelectedTimeRange.filter {
-            it.transactionType == TransactionType.INCOME
+            it.transactionType == TransactionType.Income
         }.sumOf {
             it.amount.value
         }.toFloat()
@@ -382,7 +382,7 @@ internal class HomeScreenViewModel(
         transactionsInSelectedTimeRange: ImmutableList<Transaction>,
     ): Float {
         val expenseTransactions = transactionsInSelectedTimeRange.filter {
-            it.transactionType == TransactionType.EXPENSE
+            it.transactionType == TransactionType.Expense
         }
         val expenseTransactionsWithRefund = mutableListOf<Transaction>()
         expenseTransactions.forEach { expenseTransaction ->
@@ -396,7 +396,7 @@ internal class HomeScreenViewModel(
             }
         }
         val expenseAmount = expenseTransactionsWithRefund.sumOf { transaction ->
-            if (transaction.transactionType == TransactionType.EXPENSE) {
+            if (transaction.transactionType == TransactionType.Expense) {
                 abs(
                     n = transaction.amount.value,
                 )
@@ -414,15 +414,15 @@ internal class HomeScreenViewModel(
         timestamp: Long,
     ): String {
         return when (overviewTabOption) {
-            OverviewTabOption.DAY -> {
+            OverviewTabOption.Day -> {
                 dateTimeKit.getFormattedDate(timestamp).uppercase()
             }
 
-            OverviewTabOption.MONTH -> {
+            OverviewTabOption.Month -> {
                 dateTimeKit.getFormattedMonth(timestamp).uppercase()
             }
 
-            OverviewTabOption.YEAR -> {
+            OverviewTabOption.Year -> {
                 dateTimeKit.getFormattedYear(timestamp).uppercase()
             }
         }

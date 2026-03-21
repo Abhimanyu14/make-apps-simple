@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation
 
 internal enum class Command {
-    CLEAR_BACKSTACK_AND_NAVIGATE,
-    CLEAR_TILL_ROOT,
-    NAVIGATE,
-    NAVIGATE_UP,
-    NOOP,
+    ClearBackStackAndNavigate,
+    ClearTillRoot,
+    Navigate,
+    NavigateUp,
+    NoOp,
 }
 
 internal interface NavigationCommand {

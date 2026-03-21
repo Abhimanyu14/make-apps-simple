@@ -66,11 +66,11 @@ internal fun BarcodeDetailsScreen(
         key1 = uiState.barcodeSource,
     ) {
         when (uiState.barcodeSource) {
-            BarcodeSourceDomainModel.CREATED -> {
+            BarcodeSourceDomainModel.Created -> {
                 R.string.barcodes_screen_barcode_details_barcode_timestamp_created
             }
 
-            BarcodeSourceDomainModel.SCANNED -> {
+            BarcodeSourceDomainModel.Scanned -> {
                 R.string.barcodes_screen_barcode_details_barcode_timestamp_scanned
             }
         }

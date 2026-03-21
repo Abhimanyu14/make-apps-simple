@@ -21,6 +21,6 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 
 @Immutable
 internal data class SettingsListItemAppVersionData(
-    override val type: SettingsListItemType = SettingsListItemType.APP_VERSION,
+    override val type: SettingsListItemType = SettingsListItemType.AppVersion,
     val appVersionStringResource: CosmosStringResource,
 ) : SettingsListItemData

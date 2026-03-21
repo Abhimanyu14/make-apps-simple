@@ -95,9 +95,9 @@ internal class CategoriesScreenViewModelTest {
             )
             result.transactionTypeTabs.shouldBe(
                 expected = listOf(
-                    TransactionType.EXPENSE,
-                    TransactionType.INCOME,
-                    TransactionType.INVESTMENT,
+                    TransactionType.Expense,
+                    TransactionType.Income,
+                    TransactionType.Investment,
                 ),
             )
             result.categoriesGridItemDataMap.shouldBeEmpty()

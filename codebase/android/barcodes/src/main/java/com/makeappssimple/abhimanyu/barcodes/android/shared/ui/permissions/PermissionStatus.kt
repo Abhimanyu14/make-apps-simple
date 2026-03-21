@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.permissions
 
 internal enum class PermissionStatus {
-    UNKNOWN,
-    GRANTED,
-    DENIED,
-    PERMANENTLY_DENIED,
+    Unknown,
+    Granted,
+    Denied,
+    PermanentlyDenied,
 }

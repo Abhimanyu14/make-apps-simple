@@ -241,15 +241,15 @@ internal fun CategoriesScreenUI(
                         CategoriesScreenUIEvent.OnFloatingActionButtonClick(
                             transactionType = when (pagerState.settledPage) {
                                 0 -> {
-                                    TransactionType.EXPENSE.title
+                                    TransactionType.Expense.title
                                 }
 
                                 1 -> {
-                                    TransactionType.INCOME.title
+                                    TransactionType.Income.title
                                 }
 
                                 else -> {
-                                    TransactionType.INVESTMENT.title
+                                    TransactionType.Investment.title
                                 }
                             },
                         )

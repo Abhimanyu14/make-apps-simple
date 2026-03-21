@@ -130,7 +130,7 @@ internal class EditTransactionScreenViewModelTest {
             result.amount.text.shouldBeEmpty()
             result.title.text.shouldBeEmpty()
             result.selectedTransactionType.shouldBe(
-                expected = TransactionType.EXPENSE,
+                expected = TransactionType.Expense,
             )
         }
     }
@@ -186,7 +186,7 @@ internal class EditTransactionScreenViewModelTest {
             initialState.amount.text.shouldBeEmpty()
             initialState.title.text.shouldBeEmpty()
             initialState.selectedTransactionType.shouldBe(
-                expected = TransactionType.EXPENSE,
+                expected = TransactionType.Expense,
             )
 
             // val fetchDataCompletedState = awaitItem()
@@ -261,7 +261,7 @@ internal class EditTransactionScreenViewModelTest {
                 expected = testDependencies.testTransactionEntity1.asExternalModel().title,
             )
             initialState.selectedTransactionType.shouldBe(
-                expected = TransactionType.EXPENSE,
+                expected = TransactionType.Expense,
             )
         }
 

@@ -99,7 +99,7 @@ internal class TransactionsScreenViewModelTest {
             result.transactionDetailsListItemViewData.shouldBeEmpty()
             result.searchTextFieldState.text.toString().shouldBeEmpty()
             result.selectedTransactionSortOption.shouldBe(
-                expected = TransactionSortOption.LATEST_FIRST,
+                expected = TransactionSortOption.LatestFirst,
             )
             result.screenBottomSheetType.shouldBe(
                 expected = TransactionsScreenBottomSheetType.None,

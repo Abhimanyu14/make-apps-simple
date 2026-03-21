@@ -20,9 +20,9 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeDo
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeFormatDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeSourceDomainModel
 
-internal val TEST_SOURCE_1 = BarcodeSourceDomainModel.CREATED
-internal val TEST_SOURCE_2 = BarcodeSourceDomainModel.SCANNED
-internal val TEST_SOURCE_3 = BarcodeSourceDomainModel.CREATED
+internal val TEST_SOURCE_1 = BarcodeSourceDomainModel.Created
+internal val TEST_SOURCE_2 = BarcodeSourceDomainModel.Scanned
+internal val TEST_SOURCE_3 = BarcodeSourceDomainModel.Created
 internal val TEST_FORMAT_1 = BarcodeFormatDomainModel.QrCode.value
 internal val TEST_FORMAT_2 = BarcodeFormatDomainModel.Code128.value
 internal val TEST_FORMAT_3 = BarcodeFormatDomainModel.Ean13.value

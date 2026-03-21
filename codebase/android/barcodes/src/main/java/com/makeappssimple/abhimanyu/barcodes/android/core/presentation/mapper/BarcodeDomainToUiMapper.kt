@@ -46,12 +46,12 @@ internal class BarcodeDomainToUiMapper {
         barcodeSourceDomainModel: BarcodeSourceDomainModel,
     ): BarcodeSourceUiModel {
         return when (barcodeSourceDomainModel) {
-            BarcodeSourceDomainModel.CREATED -> {
-                BarcodeSourceUiModel.CREATED
+            BarcodeSourceDomainModel.Created -> {
+                BarcodeSourceUiModel.Created
             }
 
-            BarcodeSourceDomainModel.SCANNED -> {
-                BarcodeSourceUiModel.SCANNED
+            BarcodeSourceDomainModel.Scanned -> {
+                BarcodeSourceUiModel.Scanned
             }
         }
     }

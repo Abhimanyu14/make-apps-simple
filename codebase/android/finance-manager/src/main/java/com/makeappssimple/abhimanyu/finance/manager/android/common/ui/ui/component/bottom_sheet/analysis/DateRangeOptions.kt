@@ -19,10 +19,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 internal enum class DateRangeOptions(
     val title: String,
 ) {
-    THIS_MONTH(
+    ThisMonth(
         title = "This Month",
     ),
-    THIS_YEAR(
+    ThisYear(
         title = "This Year",
     ),
 }

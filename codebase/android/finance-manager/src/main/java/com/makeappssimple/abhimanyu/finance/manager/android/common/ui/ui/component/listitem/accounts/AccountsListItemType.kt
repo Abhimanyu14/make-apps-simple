@@ -19,10 +19,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 internal enum class AccountsListItemType(
     val title: String,
 ) {
-    CONTENT(
+    Content(
         title = "Content"
     ),
-    HEADER(
+    Header(
         title = "Header"
     ),
 }

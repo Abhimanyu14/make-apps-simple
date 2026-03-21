@@ -93,7 +93,7 @@ private object ManualDatabaseMigration {
                 """
                     UPDATE account_table 
                     SET `minimum_account_balance_amount` = CASE type 
-                    WHEN 'BANK' THEN '{"currency":"INR","value":0}' 
+                    WHEN 'Bank' THEN '{"currency":"INR","value":0}' 
                     ELSE NULL
                     END
                 """.trimIndent()
@@ -574,7 +574,7 @@ private object ManualDatabaseMigration {
             db.execSQL(
                 """
                     ALTER TABLE category_table 
-                    ADD COLUMN transaction_type TEXT DEFAULT 'EXPENSE' NOT NULL
+                    ADD COLUMN transaction_type TEXT DEFAULT 'Expense' NOT NULL
                 """.trimIndent()
             )
         }

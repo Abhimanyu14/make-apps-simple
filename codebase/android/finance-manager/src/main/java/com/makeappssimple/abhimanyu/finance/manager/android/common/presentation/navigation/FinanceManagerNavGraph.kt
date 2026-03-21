@@ -47,17 +47,17 @@ internal fun FinanceManagerNavGraph(
             financeManagerActivityViewModel.navigationKit.command.collect { command ->
                 keyboardController?.hide()
                 when (command.command) {
-                    Command.NAVIGATE -> {
+                    Command.Navigate -> {
                         navHostController.navigate(
                             route = command.destination,
                         )
                     }
 
-                    Command.NAVIGATE_UP -> {
+                    Command.NavigateUp -> {
                         navHostController.navigateUp()
                     }
 
-                    Command.CLEAR_BACKSTACK_AND_NAVIGATE -> {
+                    Command.ClearBackStackAndNavigate -> {
                         navHostController.navigate(
                             route = command.destination,
                         ) {
@@ -69,14 +69,14 @@ internal fun FinanceManagerNavGraph(
                         }
                     }
 
-                    Command.CLEAR_TILL_ROOT -> {
+                    Command.ClearTillRoot -> {
                         navHostController.popBackStack(
                             destinationId = navHostController.graph.findStartDestination().id,
                             inclusive = false,
                         )
                     }
 
-                    Command.NOOP -> {}
+                    Command.NoOp -> {}
                 }
             }
         }

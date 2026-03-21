@@ -77,9 +77,9 @@ internal class EditCategoryScreenViewModel(
         EditCategoryScreenDataValidationState()
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
-            TransactionType.INCOME,
-            TransactionType.EXPENSE,
-            TransactionType.INVESTMENT,
+            TransactionType.Income,
+            TransactionType.Expense,
+            TransactionType.Investment,
         )
     private val transactionTypesChipUIData: ImmutableList<ChipUIData> =
         validTransactionTypes.map { transactionType ->
@@ -91,7 +91,7 @@ internal class EditCategoryScreenViewModel(
         }
     private var selectedTransactionTypeIndex: Int =
         validTransactionTypes.indexOf(
-            element = TransactionType.EXPENSE,
+            element = TransactionType.Expense,
         )
     private var emoji: String = EmojiConstants.GRINNING_FACE_WITH_BIG_EYES
     private var titleTextFieldState: TextFieldState = TextFieldState()

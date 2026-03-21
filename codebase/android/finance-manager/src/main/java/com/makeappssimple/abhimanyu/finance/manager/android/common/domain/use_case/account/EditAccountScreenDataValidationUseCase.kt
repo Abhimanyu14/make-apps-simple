@@ -32,7 +32,7 @@ internal class EditAccountScreenDataValidationUseCase(
     ): EditAccountScreenDataValidationState {
         val editAccountScreenDataValidationState =
             EditAccountScreenDataValidationState()
-        if (currentAccount?.type == AccountType.CASH) {
+        if (currentAccount?.type == AccountType.Cash) {
             return editAccountScreenDataValidationState
                 .copy(
                     isCashAccount = true,

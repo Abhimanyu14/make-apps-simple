@@ -55,7 +55,7 @@ internal data class AccountEntity(
     @ColumnInfo(name = "type")
     @EncodeDefault
     @SerialName(value = "type")
-    val type: AccountType = AccountType.CASH,
+    val type: AccountType = AccountType.Cash,
 
     @ColumnInfo(name = "minimum_account_balance_amount")
     @EncodeDefault

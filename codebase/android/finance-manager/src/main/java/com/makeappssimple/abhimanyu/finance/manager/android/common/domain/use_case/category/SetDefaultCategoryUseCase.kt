@@ -27,33 +27,33 @@ internal class SetDefaultCategoryUseCase(
         transactionType: TransactionType,
     ): Boolean {
         return when (transactionType) {
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 financeManagerPreferencesRepository.updateDefaultExpenseCategoryId(
                     defaultExpenseCategoryId = defaultCategoryId,
                 )
             }
 
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 financeManagerPreferencesRepository.updateDefaultIncomeCategoryId(
                     defaultIncomeCategoryId = defaultCategoryId,
                 )
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 financeManagerPreferencesRepository.updateDefaultInvestmentCategoryId(
                     defaultInvestmentCategoryId = defaultCategoryId,
                 )
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 false
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 false
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 false
             }
         }

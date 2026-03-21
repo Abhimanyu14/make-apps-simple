@@ -77,9 +77,9 @@ internal class CategoriesScreenViewModel(
         persistentMapOf()
     private val validTransactionTypes: PersistentList<TransactionType> =
         persistentListOf(
-            TransactionType.EXPENSE,
-            TransactionType.INCOME,
-            TransactionType.INVESTMENT,
+            TransactionType.Expense,
+            TransactionType.Income,
+            TransactionType.Investment,
         )
     private val tabData = validTransactionTypes.map {
         MyTabData(
@@ -177,7 +177,7 @@ internal class CategoriesScreenViewModel(
                     ),
                 ->
                 val expenseCategoriesGridItemDataList =
-                    categoriesTransactionTypeMap[TransactionType.EXPENSE]
+                    categoriesTransactionTypeMap[TransactionType.Expense]
                         ?.sortedBy {
                             it.title
                         }
@@ -204,7 +204,7 @@ internal class CategoriesScreenViewModel(
                             )
                         }
                 val incomeCategoriesGridItemDataList =
-                    categoriesTransactionTypeMap[TransactionType.INCOME]
+                    categoriesTransactionTypeMap[TransactionType.Income]
                         ?.sortedBy {
                             it.title
                         }
@@ -231,7 +231,7 @@ internal class CategoriesScreenViewModel(
                             )
                         }
                 val investmentCategoriesGridItemDataList =
-                    categoriesTransactionTypeMap[TransactionType.INVESTMENT]
+                    categoriesTransactionTypeMap[TransactionType.Investment]
                         ?.sortedBy {
                             it.title
                         }
@@ -258,9 +258,9 @@ internal class CategoriesScreenViewModel(
                             )
                         }
                 categoriesGridItemDataMap = persistentMapOf(
-                    TransactionType.EXPENSE to expenseCategoriesGridItemDataList,
-                    TransactionType.INCOME to incomeCategoriesGridItemDataList,
-                    TransactionType.INVESTMENT to investmentCategoriesGridItemDataList,
+                    TransactionType.Expense to expenseCategoriesGridItemDataList,
+                    TransactionType.Income to incomeCategoriesGridItemDataList,
+                    TransactionType.Investment to investmentCategoriesGridItemDataList,
                 )
                 refreshUiState()
             }

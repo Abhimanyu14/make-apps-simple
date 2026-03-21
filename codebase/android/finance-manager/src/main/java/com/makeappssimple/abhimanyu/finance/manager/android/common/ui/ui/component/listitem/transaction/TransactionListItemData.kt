@@ -53,10 +53,10 @@ internal fun TransactionData.toTransactionListItemData(
     ) -> String,
 ): TransactionListItemData {
     val amountText: String = when (transaction.transactionType) {
-        TransactionType.INCOME,
-        TransactionType.EXPENSE,
-        TransactionType.ADJUSTMENT,
-        TransactionType.REFUND,
+        TransactionType.Income,
+        TransactionType.Expense,
+        TransactionType.Adjustment,
+        TransactionType.Refund,
             -> {
             transaction.amount.toSignedString(
                 isPositive = accountTo.isNotNull(),
@@ -72,11 +72,11 @@ internal fun TransactionData.toTransactionListItemData(
         transaction.transactionTimestamp,
     )
     val emoji: String = when (transaction.transactionType) {
-        TransactionType.TRANSFER -> {
+        TransactionType.Transfer -> {
             EmojiConstants.LEFT_RIGHT_ARROW
         }
 
-        TransactionType.ADJUSTMENT -> {
+        TransactionType.Adjustment -> {
             EmojiConstants.EXPRESSIONLESS_FACE
         }
 

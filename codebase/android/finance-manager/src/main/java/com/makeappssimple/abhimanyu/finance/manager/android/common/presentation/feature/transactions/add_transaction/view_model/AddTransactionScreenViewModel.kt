@@ -216,13 +216,13 @@ internal class AddTransactionScreenViewModel(
         _uiState.update {
             AddTransactionScreenUIState(
                 accountFrom = accountFrom,
-                accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                accountFromText = if (selectedTransactionType == TransactionType.Transfer) {
                     AccountFromText.AccountFrom
                 } else {
                     AccountFromText.Account
                 },
                 accountTo = accountTo,
-                accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                accountToText = if (selectedTransactionType == TransactionType.Transfer) {
                     AccountToText.AccountTo
                 } else {
                     AccountToText.Account
@@ -634,24 +634,24 @@ internal class AddTransactionScreenViewModel(
         val validTransactionTypes = when {
             originalTransactionId != null -> {
                 listOf(
-                    TransactionType.REFUND,
+                    TransactionType.Refund,
                 )
             }
 
             accounts.size > 1 -> {
                 listOf(
-                    TransactionType.INCOME,
-                    TransactionType.EXPENSE,
-                    TransactionType.TRANSFER,
-                    TransactionType.INVESTMENT,
+                    TransactionType.Income,
+                    TransactionType.Expense,
+                    TransactionType.Transfer,
+                    TransactionType.Investment,
                 )
             }
 
             else -> {
                 listOf(
-                    TransactionType.INCOME,
-                    TransactionType.EXPENSE,
-                    TransactionType.INVESTMENT,
+                    TransactionType.Income,
+                    TransactionType.Expense,
+                    TransactionType.Investment,
                 )
             }
         }
@@ -699,7 +699,7 @@ internal class AddTransactionScreenViewModel(
     ) {
         updateSelectedTransactionTypeIndex(
             updatedSelectedTransactionTypeIndex = validTransactionTypesForNewTransaction.indexOf(
-                element = TransactionType.REFUND,
+                element = TransactionType.Refund,
             ),
             shouldRefresh = false,
         )
@@ -732,7 +732,7 @@ internal class AddTransactionScreenViewModel(
     private fun processInitialDataForOtherTransactions() {
         updateSelectedTransactionTypeIndex(
             updatedSelectedTransactionTypeIndex = validTransactionTypesForNewTransaction.indexOf(
-                element = TransactionType.EXPENSE,
+                element = TransactionType.Expense,
             ),
             shouldRefresh = false,
         )
@@ -770,25 +770,25 @@ internal class AddTransactionScreenViewModel(
             updatedSelectedTransactionType = updatedSelectedTransactionType,
         )
         when (updatedSelectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 handleSelectedTransactionTypeChangeToIncome()
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 handleSelectedTransactionTypeChangeToExpense()
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 handleSelectedTransactionTypeChangeToTransfer()
             }
 
-            TransactionType.ADJUSTMENT -> {}
+            TransactionType.Adjustment -> {}
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 handleSelectedTransactionTypeChangeToInvestment()
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 handleSelectedTransactionTypeChangeToRefund()
             }
         }
@@ -882,35 +882,35 @@ internal class AddTransactionScreenViewModel(
 
     private fun updateUiVisibilityState() {
         when (selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 uiVisibilityState =
                     AddTransactionScreenUiVisibilityState.Income(
                         isTitleSuggestionsVisible = titleSuggestions.isNotEmpty(),
                     )
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 uiVisibilityState =
                     AddTransactionScreenUiVisibilityState.Expense(
                         isTitleSuggestionsVisible = titleSuggestions.isNotEmpty(),
                     )
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 uiVisibilityState =
                     AddTransactionScreenUiVisibilityState.Transfer()
             }
 
-            TransactionType.ADJUSTMENT -> {}
+            TransactionType.Adjustment -> {}
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 uiVisibilityState =
                     AddTransactionScreenUiVisibilityState.Investment(
                         isTitleSuggestionsVisible = titleSuggestions.isNotEmpty(),
                     )
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 uiVisibilityState =
                     AddTransactionScreenUiVisibilityState.Refund()
             }

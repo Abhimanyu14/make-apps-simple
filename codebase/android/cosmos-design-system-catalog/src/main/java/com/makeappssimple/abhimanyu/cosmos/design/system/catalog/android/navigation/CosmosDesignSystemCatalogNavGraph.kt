@@ -26,6 +26,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivityViewModel
+
 @Composable
 internal fun CosmosDesignSystemCatalogNavGraph(
     cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel,
@@ -43,17 +44,17 @@ internal fun CosmosDesignSystemCatalogNavGraph(
             cosmosDesignSystemCatalogActivityViewModel.cosmosDesignSystemCatalogNavigationKit.command.collect { command ->
                 keyboardController?.hide()
                 when (command.cosmosDesignSystemCatalogCommand) {
-                    CosmosDesignSystemCatalogCommand.NAVIGATE -> {
+                    CosmosDesignSystemCatalogCommand.Navigate -> {
                         navHostController.navigate(
                             route = command.destination,
                         )
                     }
 
-                    CosmosDesignSystemCatalogCommand.NAVIGATE_UP -> {
+                    CosmosDesignSystemCatalogCommand.NavigateUp -> {
                         navHostController.navigateUp()
                     }
 
-                    CosmosDesignSystemCatalogCommand.CLEAR_BACKSTACK_AND_NAVIGATE -> {
+                    CosmosDesignSystemCatalogCommand.ClearBackStackAndNavigate -> {
                         navHostController.navigate(
                             route = command.destination,
                         ) {
@@ -65,14 +66,14 @@ internal fun CosmosDesignSystemCatalogNavGraph(
                         }
                     }
 
-                    CosmosDesignSystemCatalogCommand.CLEAR_TILL_ROOT -> {
+                    CosmosDesignSystemCatalogCommand.ClearTillRoot -> {
                         navHostController.popBackStack(
                             destinationId = navHostController.graph.findStartDestination().id,
                             inclusive = false,
                         )
                     }
 
-                    CosmosDesignSystemCatalogCommand.NOOP -> {}
+                    CosmosDesignSystemCatalogCommand.NoOp -> {}
                 }
             }
         }

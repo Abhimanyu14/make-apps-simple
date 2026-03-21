@@ -27,7 +27,7 @@ internal fun sanitizeAccounts(
     accounts: ImmutableList<AccountEntity>,
 ): ImmutableList<AccountEntity> {
     return accounts.map {
-        if (it.type == AccountType.BANK && it.minimumAccountBalanceAmount.isNull()) {
+        if (it.type == AccountType.Bank && it.minimumAccountBalanceAmount.isNull()) {
             it.copy(
                 minimumAccountBalanceAmount = AmountEntity(
                     value = 0,

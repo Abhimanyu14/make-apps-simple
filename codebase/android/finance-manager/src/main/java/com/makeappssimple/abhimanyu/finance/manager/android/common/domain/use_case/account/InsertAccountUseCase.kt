@@ -32,7 +32,7 @@ internal class InsertAccountUseCase(
         name: String,
     ): Long {
         val minimumAccountBalanceAmount =
-            if (accountType == AccountType.BANK) {
+            if (accountType == AccountType.Bank) {
                 Amount(
                     value = minimumAccountBalanceAmountValue,
                 )

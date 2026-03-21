@@ -63,7 +63,7 @@ internal class AddAccountScreenViewModel(
     private var isLoading: Boolean = true
     private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
-            it != AccountType.CASH
+            it != AccountType.Cash
         }
     private var selectedAccountType: AccountType = getSelectedAccountType()
     private val accountTypesChipUIDataList: ImmutableList<ChipUIData> =
@@ -78,7 +78,7 @@ internal class AddAccountScreenViewModel(
             }
     private var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
         .indexOf(
-            element = AccountType.BANK,
+            element = AccountType.Bank,
         )
     private var minimumAccountBalanceAmountValueTextFieldState: TextFieldState =
         TextFieldState()
@@ -135,7 +135,7 @@ internal class AddAccountScreenViewModel(
                 selectedAccountType = selectedAccountType,
                 nameError = addAccountScreenDataValidationState.nameError,
                 visibilityData = AddAccountScreenUIVisibilityData(
-                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                    minimumBalanceAmountTextField = selectedAccountType == AccountType.Bank,
                     nameTextFieldErrorText = addAccountScreenDataValidationState.nameError != AddAccountScreenNameError.None,
                 ),
                 isCtaButtonEnabled = addAccountScreenDataValidationState.isCtaButtonEnabled,

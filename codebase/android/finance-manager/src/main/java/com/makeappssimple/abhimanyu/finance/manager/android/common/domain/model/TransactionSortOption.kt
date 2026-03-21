@@ -19,16 +19,16 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 internal enum class TransactionSortOption(
     val title: String,
 ) {
-    AMOUNT_ASC(
+    AmountAsc(
         title = "Amount Asc",
     ),
-    AMOUNT_DESC(
+    AmountDesc(
         title = "Amount Desc",
     ),
-    LATEST_FIRST(
+    LatestFirst(
         title = "Latest First",
     ),
-    OLDEST_FIRST(
+    OldestFirst(
         title = "Oldest First",
     ),
 }

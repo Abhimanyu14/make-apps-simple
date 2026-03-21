@@ -98,7 +98,7 @@ internal data class TransactionEntity(
     @ColumnInfo(name = "transaction_type")
     @EncodeDefault
     @SerialName(value = "transaction_type")
-    val transactionType: TransactionType = TransactionType.EXPENSE,
+    val transactionType: TransactionType = TransactionType.Expense,
 )
 
 internal fun TransactionEntity.asExternalModel(): Transaction {

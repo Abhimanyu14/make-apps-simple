@@ -31,19 +31,19 @@ private fun TransactionType.getAmountTextColor(
     isBalanceReduced: Boolean,
 ): CosmosColor {
     return when (this) {
-        TransactionType.INCOME -> {
+        TransactionType.Income -> {
             CosmosColor.OnTertiaryContainer
         }
 
-        TransactionType.EXPENSE -> {
+        TransactionType.Expense -> {
             CosmosColor.Error
         }
 
-        TransactionType.TRANSFER -> {
+        TransactionType.Transfer -> {
             CosmosColor.OnBackground
         }
 
-        TransactionType.ADJUSTMENT -> {
+        TransactionType.Adjustment -> {
             if (isBalanceReduced) {
                 CosmosColor.Error
             } else {
@@ -51,11 +51,11 @@ private fun TransactionType.getAmountTextColor(
             }
         }
 
-        TransactionType.INVESTMENT -> {
+        TransactionType.Investment -> {
             CosmosColor.Primary
         }
 
-        TransactionType.REFUND -> {
+        TransactionType.Refund -> {
             CosmosColor.OnTertiaryContainer
         }
     }

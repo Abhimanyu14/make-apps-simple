@@ -21,14 +21,14 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigatio
 internal object BarcodesNavigationDirections {
     // Default
     object Default : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NOOP
+        override val barcodesCommand = BarcodesCommand.NoOp
         override val barcodesScreen = ""
         override val destination = ""
     }
 
     // Navigate up
     object NavigateUp : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE_UP
+        override val barcodesCommand = BarcodesCommand.NavigateUp
         override val barcodesScreen = ""
         override val destination = ""
     }
@@ -36,14 +36,14 @@ internal object BarcodesNavigationDirections {
     // Clear backstack
     object ClearBackstack : BarcodesNavigationCommand {
         override val barcodesCommand =
-            BarcodesCommand.CLEAR_BACKSTACK_AND_NAVIGATE
+            BarcodesCommand.ClearBackStackAndNavigate
         override val barcodesScreen = ""
         override val destination = ""
     }
 
     // Clear till root
     object ClearTillRoot : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.CLEAR_TILL_ROOT
+        override val barcodesCommand = BarcodesCommand.ClearTillRoot
         override val barcodesScreen = ""
         override val destination = ""
     }
@@ -52,7 +52,7 @@ internal object BarcodesNavigationDirections {
     data class BarcodeDetails(
         private val barcodeId: Int,
     ) : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.BarcodeDetails.route
         override val destination =
             "${BarcodesScreen.BarcodeDetails.route}/${barcodeId}"
@@ -61,32 +61,32 @@ internal object BarcodesNavigationDirections {
     data class CreateBarcode(
         private val barcodeId: Int?,
     ) : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.CreateBarcode.route
         override val destination =
             "${BarcodesScreen.CreateBarcode.route}?${NavigationArguments.BARCODE_ID}=${barcodeId}"
     }
 
     object Credits : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.Credits.route
         override val destination = BarcodesScreen.Credits.route
     }
 
     object Home : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.Home.route
         override val destination = BarcodesScreen.Home.route
     }
 
     object ScanBarcode : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.ScanBarcode.route
         override val destination = BarcodesScreen.ScanBarcode.route
     }
 
     object Settings : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.Settings.route
         override val destination = BarcodesScreen.Settings.route
     }
@@ -94,7 +94,7 @@ internal object BarcodesNavigationDirections {
     data class WebView(
         private val url: String,
     ) : BarcodesNavigationCommand {
-        override val barcodesCommand = BarcodesCommand.NAVIGATE
+        override val barcodesCommand = BarcodesCommand.Navigate
         override val barcodesScreen = BarcodesScreen.WebView.route
         override val destination = "${BarcodesScreen.WebView.route}/${url}"
     }

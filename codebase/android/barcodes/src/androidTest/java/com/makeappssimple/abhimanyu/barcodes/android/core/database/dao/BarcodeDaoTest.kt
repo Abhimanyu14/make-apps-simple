@@ -21,9 +21,9 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.barcode.BarcodeDao
+import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.local.BarcodesRoomDatabase
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.model.BarcodeDataModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.model.BarcodeSourceDataModel
-import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.local.BarcodesRoomDatabase
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.ints.shouldBeZero
@@ -321,7 +321,7 @@ internal class BarcodeDaoTest {
         value: String = "test-value",
     ): BarcodeDataModel {
         return BarcodeDataModel(
-            source = BarcodeSourceDataModel.SCANNED,
+            source = BarcodeSourceDataModel.Scanned,
             format = 256,
             id = id,
             timestamp = System.currentTimeMillis(),

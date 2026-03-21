@@ -20,5 +20,5 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 internal data class SettingsListItemDividerData(
-    override val type: SettingsListItemType = SettingsListItemType.DIVIDER,
+    override val type: SettingsListItemType = SettingsListItemType.Divider,
 ) : SettingsListItemData

@@ -194,13 +194,13 @@ internal class EditTransactionScreenViewModel(
         _uiState.update {
             EditTransactionScreenUIState(
                 accountFrom = accountFrom,
-                accountFromText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                accountFromText = if (selectedTransactionType == TransactionType.Transfer) {
                     AccountFromText.AccountFrom
                 } else {
                     AccountFromText.Account
                 },
                 accountTo = accountTo,
-                accountToText = if (selectedTransactionType == TransactionType.TRANSFER) {
+                accountToText = if (selectedTransactionType == TransactionType.Transfer) {
                     AccountToText.AccountTo
                 } else {
                     AccountToText.Account
@@ -511,88 +511,88 @@ internal class EditTransactionScreenViewModel(
             value = amount.text.toLongOrZero(),
         )
         val categoryId = when (uiState.value.selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 uiState.value.category?.id
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 uiState.value.category?.id
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 null
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 null
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 uiState.value.category?.id
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 uiState.value.category?.id
             }
         }
         val originalTransactionId = currentTransactionData?.transaction?.id
         val accountFromId = when (uiState.value.selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 null
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 uiState.value.accountFrom?.id
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 uiState.value.accountFrom?.id
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 null
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 uiState.value.accountFrom?.id
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 null
             }
         }
         val accountToId = when (uiState.value.selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 uiState.value.accountTo?.id
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 null
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 uiState.value.accountTo?.id
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 null
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 null
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 uiState.value.accountTo?.id
             }
         }
         val title = when (uiState.value.selectedTransactionType) {
-            TransactionType.TRANSFER -> {
-                TransactionType.TRANSFER.title
+            TransactionType.Transfer -> {
+                TransactionType.Transfer.title
             }
 
-            TransactionType.REFUND -> {
-                TransactionType.REFUND.title
+            TransactionType.Refund -> {
+                TransactionType.Refund.title
             }
 
             else -> {
@@ -728,7 +728,7 @@ internal class EditTransactionScreenViewModel(
                 id = originalTransactionId,
             )
             validTransactionTypesForNewTransaction = persistentListOf(
-                TransactionType.REFUND,
+                TransactionType.Refund,
             )
             processInitialDataForRefundTransaction(
                 currentTransactionData = fetchedCurrentTransactionData,
@@ -748,7 +748,7 @@ internal class EditTransactionScreenViewModel(
     ) {
         updateSelectedTransactionTypeIndex(
             updatedSelectedTransactionTypeIndex = validTransactionTypesForNewTransaction.indexOf(
-                element = TransactionType.REFUND,
+                element = TransactionType.Refund,
             ),
             shouldRefresh = false,
         )
@@ -782,18 +782,18 @@ internal class EditTransactionScreenViewModel(
         validTransactionTypesForNewTransaction = when {
             allAccounts.size > 1 -> {
                 persistentListOf(
-                    TransactionType.INCOME,
-                    TransactionType.EXPENSE,
-                    TransactionType.TRANSFER,
-                    TransactionType.INVESTMENT,
+                    TransactionType.Income,
+                    TransactionType.Expense,
+                    TransactionType.Transfer,
+                    TransactionType.Investment,
                 )
             }
 
             else -> {
                 persistentListOf(
-                    TransactionType.INCOME,
-                    TransactionType.EXPENSE,
-                    TransactionType.INVESTMENT,
+                    TransactionType.Income,
+                    TransactionType.Expense,
+                    TransactionType.Investment,
                 )
             }
         }
@@ -883,33 +883,33 @@ internal class EditTransactionScreenViewModel(
             updatedSelectedTransactionType = updatedSelectedTransactionType,
         )
         when (updatedSelectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 handleSelectedTransactionTypeChangeToIncome(
                     shouldRefresh = shouldRefresh,
                 )
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 handleSelectedTransactionTypeChangeToExpense(
                     shouldRefresh = shouldRefresh,
                 )
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 handleSelectedTransactionTypeChangeToTransfer(
                     shouldRefresh = shouldRefresh,
                 )
             }
 
-            TransactionType.ADJUSTMENT -> {}
+            TransactionType.Adjustment -> {}
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 handleSelectedTransactionTypeChangeToInvestment(
                     shouldRefresh = shouldRefresh,
                 )
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 handleSelectedTransactionTypeChangeToRefund(
                     shouldRefresh = shouldRefresh,
                 )

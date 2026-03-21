@@ -50,9 +50,9 @@ internal fun rememberRequiredPermissionStatus(
             selfPermissionStatus == PackageManager.PERMISSION_GRANTED
         mutableStateOf(
             value = if (isGranted) {
-                PermissionStatus.GRANTED
+                PermissionStatus.Granted
             } else {
-                PermissionStatus.UNKNOWN
+                PermissionStatus.Unknown
             },
         )
     }
@@ -70,9 +70,9 @@ internal fun rememberRequiredPermissionStatus(
                 ) == PackageManager.PERMISSION_GRANTED
 
                 if (isGranted) {
-                    permissionStatus = PermissionStatus.GRANTED
-                } else if (permissionStatus == PermissionStatus.GRANTED) {
-                    permissionStatus = PermissionStatus.UNKNOWN
+                    permissionStatus = PermissionStatus.Granted
+                } else if (permissionStatus == PermissionStatus.Granted) {
+                    permissionStatus = PermissionStatus.Unknown
                 }
             }
         }
@@ -86,7 +86,7 @@ internal fun rememberRequiredPermissionStatus(
         contract = ActivityResultContracts.RequestPermission(),
     ) { isPermissionGrantedValue: Boolean ->
         permissionStatus = if (isPermissionGrantedValue) {
-            PermissionStatus.GRANTED
+            PermissionStatus.Granted
         } else {
             activity?.let {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -94,11 +94,11 @@ internal fun rememberRequiredPermissionStatus(
                         requiredPermission
                     )
                 ) {
-                    PermissionStatus.DENIED
+                    PermissionStatus.Denied
                 } else {
-                    PermissionStatus.PERMANENTLY_DENIED
+                    PermissionStatus.PermanentlyDenied
                 }
-            } ?: PermissionStatus.DENIED
+            } ?: PermissionStatus.Denied
         }
     }
 

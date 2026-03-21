@@ -69,9 +69,9 @@ internal class AnalysisScreenViewModel(
     private var isLoading: Boolean = true
     private val validTransactionTypes: ImmutableList<TransactionType> =
         persistentListOf(
-            TransactionType.EXPENSE,
-            TransactionType.INCOME,
-            TransactionType.INVESTMENT,
+            TransactionType.Expense,
+            TransactionType.Income,
+            TransactionType.Investment,
         )
     private val validTransactionTypesChipUIData: ImmutableList<ChipUIData> =
         validTransactionTypes.map {

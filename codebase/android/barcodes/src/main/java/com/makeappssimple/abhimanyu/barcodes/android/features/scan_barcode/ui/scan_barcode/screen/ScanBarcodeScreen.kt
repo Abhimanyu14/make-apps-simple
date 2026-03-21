@@ -100,17 +100,17 @@ internal fun ScanBarcodeScreen(
     }
     val onCameraPermissionRequestButtonClick: () -> Unit = {
         when (cameraPermissionRequest.permissionStatus) {
-            PermissionStatus.UNKNOWN -> {
+            PermissionStatus.Unknown -> {
                 cameraPermissionRequest.requestPermission()
             }
 
-            PermissionStatus.GRANTED -> {}
+            PermissionStatus.Granted -> {}
 
-            PermissionStatus.DENIED -> {
+            PermissionStatus.Denied -> {
                 cameraPermissionRequest.requestPermission()
             }
 
-            PermissionStatus.PERMANENTLY_DENIED -> {
+            PermissionStatus.PermanentlyDenied -> {
                 screenViewModel.setPermissionPermanentlyDeniedDialogVisible(
                     isVisible = true,
                 )
@@ -161,7 +161,7 @@ internal fun ScanBarcodeScreen(
         key1 = cameraPermissionRequest.permissionStatus,
     ) {
         screenViewModel.onCameraPermissionChanged(
-            isCameraPermissionGranted = cameraPermissionRequest.permissionStatus == PermissionStatus.GRANTED
+            isCameraPermissionGranted = cameraPermissionRequest.permissionStatus == PermissionStatus.Granted
         )
     }
 
@@ -172,7 +172,7 @@ internal fun ScanBarcodeScreen(
         key2 = cameraPermissionRequest.permissionStatus,
         key3 = uiState.isScanning,
     ) {
-        if (cameraPermissionRequest.permissionStatus != PermissionStatus.GRANTED || !uiState.isScanning) {
+        if (cameraPermissionRequest.permissionStatus != PermissionStatus.Granted || !uiState.isScanning) {
             return@LaunchedEffect
         }
         val cameraExecutor: ExecutorService =

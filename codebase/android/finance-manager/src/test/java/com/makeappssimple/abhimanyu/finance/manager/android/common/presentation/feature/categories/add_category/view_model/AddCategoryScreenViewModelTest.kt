@@ -51,7 +51,7 @@ internal class AddCategoryScreenViewModelTest {
         testDependencies = TestDependencies()
         savedStateHandle = SavedStateHandle(
             initialState = mapOf(
-                "transactionType" to TransactionType.EXPENSE.title,
+                "transactionType" to TransactionType.Expense.title,
             ),
         )
         addCategoryScreenViewModel = AddCategoryScreenViewModel(
@@ -149,8 +149,8 @@ internal class AddCategoryScreenViewModelTest {
         testDependencies.runTestWithTimeout {
             val testEmoji = "🎁"
             val testTitle = "Gift"
-            val testTransactionTypeIndex = 0 // Corresponds to INCOME
-            val expectedTransactionType = TransactionType.INCOME
+            val testTransactionTypeIndex = 0 // Corresponds to Income
+            val expectedTransactionType = TransactionType.Income
             turbineScope {
                 val navigationCommandTurbine =
                     testDependencies.navigationKit.command.testIn(
@@ -368,7 +368,7 @@ internal class AddCategoryScreenViewModelTest {
             testDependencies.insertCategoryUseCase(
                 emoji = "💰",
                 title = updatedTitle,
-                transactionType = TransactionType.INCOME,
+                transactionType = TransactionType.Income,
             )
 
             addCategoryScreenViewModel.uiState.test {

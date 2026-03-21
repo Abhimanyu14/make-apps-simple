@@ -486,7 +486,7 @@ internal class TestDependencies {
             value = 1000,
         ),
         id = testAccountId1,
-        type = AccountType.E_WALLET,
+        type = AccountType.EWallet,
         name = testAccountName1,
     )
     val testAccountId2 = 102
@@ -496,7 +496,7 @@ internal class TestDependencies {
             value = 100000,
         ),
         id = testAccountId2,
-        type = AccountType.BANK,
+        type = AccountType.Bank,
         minimumAccountBalanceAmount = AmountEntity(
             value = 2000,
         ),
@@ -508,7 +508,7 @@ internal class TestDependencies {
         id = testCategoryId1,
         emoji = "💳",
         title = testCategoryTitle1,
-        transactionType = TransactionType.EXPENSE,
+        transactionType = TransactionType.Expense,
     )
     val testCategoryId2 = 102
     val testCategoryTitle2 = "test-category-102"
@@ -516,7 +516,7 @@ internal class TestDependencies {
         id = testCategoryId2,
         emoji = "💰",
         title = testCategoryTitle2,
-        transactionType = TransactionType.INCOME,
+        transactionType = TransactionType.Income,
     )
     val testTransactionForId1 = 101
     val testTransactionForTitle1 = "test-transaction-for-101"

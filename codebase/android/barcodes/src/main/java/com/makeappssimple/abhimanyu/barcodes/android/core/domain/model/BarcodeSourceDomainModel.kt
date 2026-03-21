@@ -19,10 +19,10 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.domain.model
 internal enum class BarcodeSourceDomainModel(
     val title: String,
 ) {
-    CREATED(
+    Created(
         title = "Created",
     ),
-    SCANNED(
+    Scanned(
         title = "Scanned",
     ),
 }

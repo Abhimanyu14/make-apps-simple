@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.view_model.AddTransactionScreenDataValidationState
 
-internal class AddTransactionScreenDataValidationUseCase() {
+internal class AddTransactionScreenDataValidationUseCase {
     operator fun invoke(
         accountFrom: Account?,
         accountTo: Account?,
@@ -41,28 +41,28 @@ internal class AddTransactionScreenDataValidationUseCase() {
         }
         var amountErrorText: String? = null
         val isCtaButtonEnabled = when (selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 title.isNotNullOrBlank() && amount.toIntOrZero().isNotZero()
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 title.isNotNullOrBlank() && amount.toIntOrZero().isNotZero()
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 accountFrom?.id != accountTo?.id && amount.toIntOrZero()
                     .isNotZero()
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 false
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 title.isNotNullOrBlank() && amount.toIntOrZero().isNotZero()
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 val maxRefundAmountValue = maxRefundAmount?.value.orZero()
                 val enteredAmountValue = amount.toLongOrZero()
                 if (enteredAmountValue > maxRefundAmountValue) {

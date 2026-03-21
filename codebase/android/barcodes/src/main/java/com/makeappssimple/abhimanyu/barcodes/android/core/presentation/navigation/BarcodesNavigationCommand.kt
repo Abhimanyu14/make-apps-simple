@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation
 
 internal enum class BarcodesCommand {
-    CLEAR_BACKSTACK_AND_NAVIGATE,
-    CLEAR_TILL_ROOT,
-    NAVIGATE,
-    NAVIGATE_UP,
-    NOOP,
+    ClearBackStackAndNavigate,
+    ClearTillRoot,
+    Navigate,
+    NavigateUp,
+    NoOp,
 }
 
 internal interface BarcodesNavigationCommand {

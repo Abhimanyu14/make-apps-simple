@@ -22,15 +22,15 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 
 internal val AccountType.iconResource: CosmosIconResource
     get() = when (this) {
-        AccountType.BANK -> {
+        AccountType.Bank -> {
             CosmosIcons.AccountBalance
         }
 
-        AccountType.CASH -> {
+        AccountType.Cash -> {
             CosmosIcons.CurrencyRupee
         }
 
-        AccountType.E_WALLET -> {
+        AccountType.EWallet -> {
             CosmosIcons.AccountBalanceWallet
         }
     }

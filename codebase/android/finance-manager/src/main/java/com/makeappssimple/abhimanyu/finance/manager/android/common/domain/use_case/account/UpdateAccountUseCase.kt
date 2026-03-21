@@ -43,12 +43,12 @@ internal class UpdateAccountUseCase(
     ): Boolean {
         val amountChangeValue =
             balanceAmountValue.toIntOrZero() - currentAccount.balanceAmount.value
-        val accountType = if (currentAccount.type != AccountType.CASH) {
+        val accountType = if (currentAccount.type != AccountType.Cash) {
             validAccountTypesForNewAccount[selectedAccountTypeIndex]
         } else {
             currentAccount.type
         }
-        val minimumAccountBalanceAmount = if (accountType == AccountType.BANK) {
+        val minimumAccountBalanceAmount = if (accountType == AccountType.Bank) {
             (currentAccount.minimumAccountBalanceAmount ?: Amount(
                 value = 0L,
             ))
@@ -93,10 +93,10 @@ internal class UpdateAccountUseCase(
                     accountFromId = accountFromId,
                     accountToId = accountToId,
                     description = "",
-                    title = TransactionType.ADJUSTMENT.title,
+                    title = TransactionType.Adjustment.title,
                     creationTimestamp = dateTimeKit.getCurrentTimeMillis(),
                     transactionTimestamp = dateTimeKit.getCurrentTimeMillis(),
-                    transactionType = TransactionType.ADJUSTMENT,
+                    transactionType = TransactionType.Adjustment,
                 ),
             )
         }

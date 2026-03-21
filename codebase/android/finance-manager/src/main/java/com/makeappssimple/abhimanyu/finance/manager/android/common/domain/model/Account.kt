@@ -35,7 +35,7 @@ internal data class Account(
     val id: Int = 0,
 
     @EncodeDefault
-    val type: AccountType = AccountType.CASH,
+    val type: AccountType = AccountType.Cash,
 
     @EncodeDefault
     @SerialName(value = "minimum_account_balance_amount")

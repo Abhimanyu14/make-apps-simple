@@ -66,12 +66,12 @@ internal fun AnalysisFilterBottomSheet(
         },
         onDateRangeOptionClick = { dateRangeOptions ->
             when (dateRangeOptions) {
-                DateRangeOptions.THIS_MONTH -> {
+                DateRangeOptions.ThisMonth -> {
                     fromSelectedLocalDate = data.startOfCurrentMonthLocalDate
                     toSelectedLocalDate = data.defaultEndLocalDate
                 }
 
-                DateRangeOptions.THIS_YEAR -> {
+                DateRangeOptions.ThisYear -> {
                     fromSelectedLocalDate = data.startOfCurrentYearLocalDate
                     toSelectedLocalDate = data.defaultEndLocalDate
                 }

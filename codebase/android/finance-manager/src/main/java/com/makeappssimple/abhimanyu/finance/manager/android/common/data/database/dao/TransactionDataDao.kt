@@ -120,10 +120,10 @@ internal interface TransactionDataDao {
             )
             ORDER BY
             CASE
-                WHEN :transactionSortOption = 'AMOUNT_ASC' THEN CAST(json_extract(amount, '$.value') AS INTEGER)
-                WHEN :transactionSortOption = 'AMOUNT_DESC' THEN -CAST(json_extract(amount, '$.value') AS INTEGER)
-                WHEN :transactionSortOption = 'LATEST_FIRST' THEN -transaction_timestamp
-                WHEN :transactionSortOption = 'OLDEST_FIRST' THEN transaction_timestamp
+                WHEN :transactionSortOption = 'AmountAsc' THEN CAST(json_extract(amount, '$.value') AS INTEGER)
+                WHEN :transactionSortOption = 'AmountDesc' THEN -CAST(json_extract(amount, '$.value') AS INTEGER)
+                WHEN :transactionSortOption = 'LatestFirst' THEN -transaction_timestamp
+                WHEN :transactionSortOption = 'OldestFirst' THEN transaction_timestamp
             END
         """
     )
@@ -141,7 +141,7 @@ internal interface TransactionDataDao {
         fromTimestamp: Long? = null,
         toTimestamp: Long? = null,
         searchText: String = "",
-        transactionSortOption: TransactionSortOption = TransactionSortOption.LATEST_FIRST,
+        transactionSortOption: TransactionSortOption = TransactionSortOption.LatestFirst,
     ): Flow<List<TransactionDataEntity>>
 
     /**

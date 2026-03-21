@@ -52,7 +52,7 @@ internal data class TransactionsScreenUIState(
     val oldestTransactionLocalDate: MyLocalDate = MyLocalDate.MIN,
     val transactionDetailsListItemViewData: Map<String, ImmutableList<TransactionListItemData>> = emptyMap(),
     val searchTextFieldState: TextFieldState = TextFieldState(),
-    val selectedTransactionSortOption: TransactionSortOption = TransactionSortOption.LATEST_FIRST,
+    val selectedTransactionSortOption: TransactionSortOption = TransactionSortOption.LatestFirst,
     val selectedTransactionFilter: TransactionFilter = TransactionFilter(),
     val screenBottomSheetType: TransactionsScreenBottomSheetType = TransactionsScreenBottomSheetType.None,
     val screenSnackbarType: TransactionsScreenSnackbarType = TransactionsScreenSnackbarType.None,

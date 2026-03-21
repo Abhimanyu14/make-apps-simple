@@ -71,7 +71,7 @@ internal class CommonDataSourceImpl(
                     )
                 }
 
-                if (transactionData.transaction.transactionType == TransactionType.REFUND) {
+                if (transactionData.transaction.transactionType == TransactionType.Refund) {
                     val originalTransactionId =
                         transactionData.transaction.originalTransactionId
                     requireNotNull(

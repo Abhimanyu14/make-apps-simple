@@ -73,7 +73,7 @@ internal class EditAccountScreenViewModel(
     private var currentAccount: Account? = null
     private val validAccountTypesForNewAccount: ImmutableList<AccountType> =
         AccountType.entries.filter {
-            it != AccountType.CASH
+            it != AccountType.Cash
         }
     private var validationState: EditAccountScreenDataValidationState =
         EditAccountScreenDataValidationState()
@@ -84,7 +84,7 @@ internal class EditAccountScreenViewModel(
         TextFieldState()
     private var selectedAccountTypeIndex: Int = validAccountTypesForNewAccount
         .indexOf(
-            element = AccountType.BANK,
+            element = AccountType.Bank,
         )
     private var selectedAccountType: AccountType = getSelectedAccountType()
     private var isLoading: Boolean = true
@@ -161,7 +161,7 @@ internal class EditAccountScreenViewModel(
                 visibilityData = EditAccountScreenUIVisibilityData(
                     accountTypesRadioGroup = validationState.isCashAccount.not(),
                     balanceAmountTextField = true,
-                    minimumBalanceAmountTextField = selectedAccountType == AccountType.BANK,
+                    minimumBalanceAmountTextField = selectedAccountType == AccountType.Bank,
                     nameTextField = validationState.isCashAccount.not(),
                     nameTextFieldErrorText = validationState.nameError != EditAccountScreenNameError.None,
                 ),

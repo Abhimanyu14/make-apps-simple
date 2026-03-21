@@ -19,28 +19,28 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 internal enum class AccountType(
     val title: String,
 ) {
-    BANK(
+    Bank(
         title = "Bank",
     ),
-    CASH(
+    Cash(
         title = "Cash",
     ),
-    E_WALLET(
+    EWallet(
         title = "E-Wallet",
     ),
 }
 
 internal val AccountType.sortOrder: Int
     get() = when (this) {
-        AccountType.CASH -> {
+        AccountType.Cash -> {
             1
         }
 
-        AccountType.BANK -> {
+        AccountType.Bank -> {
             2
         }
 
-        AccountType.E_WALLET -> {
+        AccountType.EWallet -> {
             3
         }
     }

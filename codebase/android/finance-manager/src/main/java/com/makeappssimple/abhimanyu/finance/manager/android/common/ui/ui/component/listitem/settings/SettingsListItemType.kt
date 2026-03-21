@@ -19,16 +19,16 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compon
 internal enum class SettingsListItemType(
     val title: String,
 ) {
-    APP_VERSION(
+    AppVersion(
         title = "App Version"
     ),
-    CONTENT(
+    Content(
         title = "Content"
     ),
-    DIVIDER(
+    Divider(
         title = "Divider"
     ),
-    HEADER(
+    Header(
         title = "Header"
     ),
 }

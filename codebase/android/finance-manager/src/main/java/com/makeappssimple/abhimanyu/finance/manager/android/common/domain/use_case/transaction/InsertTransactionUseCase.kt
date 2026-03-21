@@ -110,27 +110,27 @@ internal class InsertTransactionUseCase(
         selectedCategoryId: Int?,
     ): Int? {
         return when (selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 selectedCategoryId
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 selectedCategoryId
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 null
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 null
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 selectedCategoryId
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 selectedCategoryId
             }
         }
@@ -141,27 +141,27 @@ internal class InsertTransactionUseCase(
         selectedAccountFrom: Account?,
     ): Int? {
         return when (selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 null
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 selectedAccountFrom?.id
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 selectedAccountFrom?.id
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 null
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 selectedAccountFrom?.id
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 null
             }
         }
@@ -172,27 +172,27 @@ internal class InsertTransactionUseCase(
         selectedAccountTo: Account?,
     ): Int? {
         return when (selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 selectedAccountTo?.id
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 null
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 selectedAccountTo?.id
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 null
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 null
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 selectedAccountTo?.id
             }
         }
@@ -203,12 +203,12 @@ internal class InsertTransactionUseCase(
         enteredTitle: String,
     ): String {
         return when (selectedTransactionType) {
-            TransactionType.TRANSFER -> {
-                TransactionType.TRANSFER.title
+            TransactionType.Transfer -> {
+                TransactionType.Transfer.title
             }
 
-            TransactionType.REFUND -> {
-                TransactionType.REFUND.title
+            TransactionType.Refund -> {
+                TransactionType.Refund.title
             }
 
             else -> {
@@ -222,27 +222,27 @@ internal class InsertTransactionUseCase(
         selectedTransactionForId: Int,
     ): Int {
         return when (selectedTransactionType) {
-            TransactionType.INCOME -> {
+            TransactionType.Income -> {
                 1
             }
 
-            TransactionType.EXPENSE -> {
+            TransactionType.Expense -> {
                 selectedTransactionForId
             }
 
-            TransactionType.TRANSFER -> {
+            TransactionType.Transfer -> {
                 1
             }
 
-            TransactionType.ADJUSTMENT -> {
+            TransactionType.Adjustment -> {
                 1
             }
 
-            TransactionType.INVESTMENT -> {
+            TransactionType.Investment -> {
                 1
             }
 
-            TransactionType.REFUND -> {
+            TransactionType.Refund -> {
                 1
             }
         }

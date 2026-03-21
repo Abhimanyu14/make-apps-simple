@@ -22,10 +22,10 @@ import androidx.compose.runtime.Immutable
 internal enum class BarcodeSourceUiModel(
     val title: String,
 ) {
-    CREATED(
+    Created(
         title = "Created",
     ),
-    SCANNED(
+    Scanned(
         title = "Scanned",
     ),
 }

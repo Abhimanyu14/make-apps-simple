@@ -61,7 +61,7 @@ internal data class EditTransactionScreenUIState(
     val amountErrorText: String? = null,
     val amount: TextFieldValue = TextFieldValue(),
     val title: TextFieldValue = TextFieldValue(),
-    val selectedTransactionType: TransactionType = TransactionType.EXPENSE,
+    val selectedTransactionType: TransactionType = TransactionType.Expense,
 ) : ScreenUIState
 
 internal sealed class AccountFromText {

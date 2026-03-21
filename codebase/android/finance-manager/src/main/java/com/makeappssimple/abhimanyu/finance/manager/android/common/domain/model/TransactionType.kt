@@ -19,22 +19,22 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 internal enum class TransactionType(
     val title: String,
 ) {
-    INCOME(
+    Income(
         title = "Income",
     ),
-    EXPENSE(
+    Expense(
         title = "Expense",
     ),
-    TRANSFER(
+    Transfer(
         title = "Transfer",
     ),
-    ADJUSTMENT(
+    Adjustment(
         title = "Adjustment",
     ),
-    INVESTMENT(
+    Investment(
         title = "Investment",
     ),
-    REFUND(
+    Refund(
         title = "Refund",
     ),
     /*

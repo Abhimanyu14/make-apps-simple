@@ -165,7 +165,7 @@ class HomeScreenViewModelTest {
     @Test
     fun restoreBarcode() = runTestWithTimeout {
         val barcode = BarcodeUiModel(
-            source = BarcodeSourceUiModel.CREATED,
+            source = BarcodeSourceUiModel.Created,
             format = BarcodeFormatUiModel.QrCode,
             id = 1,
             timestamp = 1680155040000L,
@@ -191,7 +191,7 @@ class HomeScreenViewModelTest {
     @Test
     fun deleteBarcodes() = runTestWithTimeout {
         val barcode1 = BarcodeUiModel(
-            source = BarcodeSourceUiModel.CREATED,
+            source = BarcodeSourceUiModel.Created,
             format = BarcodeFormatUiModel.QrCode,
             id = 1,
             timestamp = 1680155040000L,
@@ -199,7 +199,7 @@ class HomeScreenViewModelTest {
             value = "test-value-1",
         )
         val barcode2 = BarcodeUiModel(
-            source = BarcodeSourceUiModel.CREATED,
+            source = BarcodeSourceUiModel.Created,
             format = BarcodeFormatUiModel.QrCode,
             id = 2,
             timestamp = 1680155040000L,

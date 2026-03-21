@@ -65,7 +65,7 @@ internal data class AccountsListItemContentDataAndEventHandler(
 
 @Immutable
 internal data class AccountsListItemContentData(
-    override val type: AccountsListItemType = AccountsListItemType.CONTENT,
+    override val type: AccountsListItemType = AccountsListItemType.Content,
     val isDefault: Boolean = false,
     val isDeleteEnabled: Boolean = false,
     val isHeading: Boolean = false,

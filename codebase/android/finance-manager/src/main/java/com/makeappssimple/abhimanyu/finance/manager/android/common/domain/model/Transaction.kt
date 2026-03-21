@@ -55,5 +55,5 @@ internal data class Transaction(
     val title: String,
 
     @SerialName(value = "transaction_type")
-    val transactionType: TransactionType = TransactionType.EXPENSE,
+    val transactionType: TransactionType = TransactionType.Expense,
 )
