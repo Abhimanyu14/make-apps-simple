@@ -16,17 +16,25 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.divider
 
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 
 @Composable
 public fun CosmosHorizontalDivider(
     modifier: Modifier = Modifier,
 ) {
-    HorizontalDivider(
-        modifier = modifier,
-        color = CosmosAppTheme.colorScheme.outline,
+    Spacer(
+        modifier = modifier
+            .height(
+                height = 1.dp,
+            )
+            .background(
+                color = CosmosAppTheme.colorScheme.outline,
+            ),
     )
 }

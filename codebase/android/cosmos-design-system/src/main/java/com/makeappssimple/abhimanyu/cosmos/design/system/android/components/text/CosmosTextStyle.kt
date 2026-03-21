@@ -21,7 +21,6 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tex
  * These styles represent different typographic hierarchies within the application.
  */
 public enum class CosmosTextStyle {
-
     /**
      * Large heading, typically used for prominent page titles.
      */
