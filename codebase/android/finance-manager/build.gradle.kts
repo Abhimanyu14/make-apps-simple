@@ -79,15 +79,15 @@ dependencies {
     implementation(project(":core-date-time"))
     implementation(project(":cosmos-design-system"))
 
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.test.compose.ui.junit4)
+    androidTestImplementation(libs.test.room)
     androidTestImplementation(libs.bundles.koin.test)
     androidTestImplementation(libs.bundles.test)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(platform(libs.koin.bom))
 
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.test.compose.ui.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.leakcanary.android)

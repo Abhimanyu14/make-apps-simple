@@ -85,9 +85,9 @@ composeCompiler {
 dependencies {
     implementation(project(":core-date-time"))
     
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.test.compose.ui.junit4)
 
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.test.compose.ui.manifest)
 
     detektPlugins(libs.bundles.detekt)
 
