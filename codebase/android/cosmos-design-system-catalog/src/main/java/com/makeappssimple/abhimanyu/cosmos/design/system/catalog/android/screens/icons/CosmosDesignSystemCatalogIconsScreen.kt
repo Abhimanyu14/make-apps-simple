@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 /*
  * Copyright 2025-2026 Abhimanyu
  *
@@ -16,15 +18,16 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.icons
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItem
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -70,7 +73,7 @@ internal fun CosmosDesignSystemCatalogIconsScreen(
         CosmosIcons.TextSnippet to "TextSnippet",
     )
 
-    Scaffold(
+    CosmosScaffold(
         topBar = {
             CosmosTopAppBar(
                 titleStringResource = CosmosStringResource.Text(
@@ -79,11 +82,10 @@ internal fun CosmosDesignSystemCatalogIconsScreen(
                 navigationAction = screenViewModel::navigateUp,
             )
         },
-    ) { innerPadding ->
+    ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+                .fillMaxSize(),
         ) {
             items(
                 items = icons,

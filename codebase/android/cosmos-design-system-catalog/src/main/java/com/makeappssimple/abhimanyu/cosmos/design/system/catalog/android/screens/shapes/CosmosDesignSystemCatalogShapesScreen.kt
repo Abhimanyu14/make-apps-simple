@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 /*
  * Copyright 2025-2026 Abhimanyu
  *
@@ -16,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.shapes
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,13 +30,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -52,7 +56,7 @@ internal fun CosmosDesignSystemCatalogShapesScreen(
         CosmosAppTheme.shapes.extraLarge to "Extra Large",
     )
 
-    Scaffold(
+    CosmosScaffold(
         topBar = {
             CosmosTopAppBar(
                 titleStringResource = CosmosStringResource.Text(
@@ -61,13 +65,10 @@ internal fun CosmosDesignSystemCatalogShapesScreen(
                 navigationAction = screenViewModel::navigateUp,
             )
         },
-    ) { innerPadding ->
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    paddingValues = innerPadding,
-                )
                 .verticalScroll(
                     state = rememberScrollState(),
                 ),

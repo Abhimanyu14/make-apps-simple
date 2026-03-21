@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 /*
  * Copyright 2025-2026 Abhimanyu
  *
@@ -16,16 +18,18 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.typography
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -54,7 +58,7 @@ internal fun CosmosDesignSystemCatalogTypographyScreen(
         CosmosAppTheme.typography.labelSmall to "Label Small",
     )
 
-    Scaffold(
+    CosmosScaffold(
         topBar = {
             CosmosTopAppBar(
                 titleStringResource = CosmosStringResource.Text(
@@ -63,13 +67,10 @@ internal fun CosmosDesignSystemCatalogTypographyScreen(
                 navigationAction = screenViewModel::navigateUp,
             )
         },
-    ) { innerPadding ->
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    paddingValues = innerPadding,
-                )
                 .padding(
                     horizontal = 16.dp,
                 )
