@@ -25,91 +25,91 @@ public enum class CosmosColor(
         color = color,
     ),
 ) {
-    PRIMARY(
+    Primary(
         color = Blue900,
     ),
-    ON_PRIMARY(
+    OnPrimary(
         color = White,
     ),
-    PRIMARY_CONTAINER(
+    PrimaryContainer(
         color = Blue50,
     ),
-    ON_PRIMARY_CONTAINER(
+    OnPrimaryContainer(
         color = DarkGray,
     ),
-    INVERSE_PRIMARY(
+    InversePrimary(
         color = Blue900,
     ),
 
-    SECONDARY(
+    Secondary(
         color = Brown900,
     ),
-    ON_SECONDARY(
+    OnSecondary(
         color = White,
     ),
-    SECONDARY_CONTAINER(
+    SecondaryContainer(
         color = Brown50,
     ),
-    ON_SECONDARY_CONTAINER(
+    OnSecondaryContainer(
         color = Brown1000,
     ),
 
-    TERTIARY(
+    Tertiary(
         color = Green900,
     ),
-    ON_TERTIARY(
+    OnTertiary(
         color = White,
     ),
-    TERTIARY_CONTAINER(
+    TertiaryContainer(
         color = Green100,
     ),
-    ON_TERTIARY_CONTAINER(
+    OnTertiaryContainer(
         color = Green1000,
     ),
 
-    BACKGROUND(
+    Background(
         color = White,
     ),
-    ON_BACKGROUND(
+    OnBackground(
         color = Black,
     ),
 
-    SURFACE(
+    Surface(
         color = White,
     ),
-    ON_SURFACE(
+    OnSurface(
         color = DarkGray,
     ),
 
-    SURFACE_VARIANT(
+    SurfaceVariant(
         color = LightGray,
     ),
-    ON_SURFACE_VARIANT(
+    OnSurfaceVariant(
         color = DarkGray,
     ),
 
-    INVERSE_SURFACE(
+    InverseSurface(
         color = DarkGray,
     ),
-    INVERSE_ON_SURFACE(
+    OnInverseSurface(
         color = White,
     ),
 
-    ERROR(
+    Error(
         color = Red,
     ),
-    ON_ERROR(
+    OnError(
         color = White,
     ),
 
-    ERROR_CONTAINER(
+    ErrorContainer(
         color = Error90,
     ),
-    ON_ERROR_CONTAINER(
+    OnErrorContainer(
         color = Error10,
     ),
 
-    OUTLINE(
+    Outline(
         color = LightGray,
     ),
 }

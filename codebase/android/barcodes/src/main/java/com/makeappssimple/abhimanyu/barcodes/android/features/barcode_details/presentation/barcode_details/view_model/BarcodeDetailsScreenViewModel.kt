@@ -106,8 +106,8 @@ internal class BarcodeDetailsScreenViewModel(
                 visionBarcodeFormat = barcode.format,
                 width = barcodeBitmapSize,
                 height = barcodeBitmapSize,
-                barcodeColor = CosmosColor.ON_BACKGROUND.color,
-                backgroundColor = CosmosColor.BACKGROUND.color,
+                barcodeColor = CosmosColor.OnBackground.color,
+                backgroundColor = CosmosColor.Background.color,
             )
         }
     }.defaultObjectStateIn(

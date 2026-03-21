@@ -91,7 +91,7 @@ internal class ViewTransactionScreenViewModelTest {
                     isRefundButtonVisible = true,
                     isSelected = false,
                     transactionId = testDependencies.testTransactionId1,
-                    amountColor = CosmosColor.ERROR,
+                    amountColor = CosmosColor.Error,
                     amountText = "- ₹1,000",
                     dateAndTimeText = "20 May, 2024 at 08:29 AM",
                     emoji = "💳",

@@ -107,7 +107,7 @@ private fun ShapeItem(
                     shape = shape,
                 )
                 .background(
-                    color = CosmosColor.PRIMARY.composeColor,
+                    color = CosmosColor.Primary.composeColor,
                 ),
         )
         CosmosText(

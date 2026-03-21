@@ -32,31 +32,31 @@ private fun TransactionType.getAmountTextColor(
 ): CosmosColor {
     return when (this) {
         TransactionType.INCOME -> {
-            CosmosColor.ON_TERTIARY_CONTAINER
+            CosmosColor.OnTertiaryContainer
         }
 
         TransactionType.EXPENSE -> {
-            CosmosColor.ERROR
+            CosmosColor.Error
         }
 
         TransactionType.TRANSFER -> {
-            CosmosColor.ON_BACKGROUND
+            CosmosColor.OnBackground
         }
 
         TransactionType.ADJUSTMENT -> {
             if (isBalanceReduced) {
-                CosmosColor.ERROR
+                CosmosColor.Error
             } else {
-                CosmosColor.ON_TERTIARY_CONTAINER
+                CosmosColor.OnTertiaryContainer
             }
         }
 
         TransactionType.INVESTMENT -> {
-            CosmosColor.PRIMARY
+            CosmosColor.Primary
         }
 
         TransactionType.REFUND -> {
-            CosmosColor.ON_TERTIARY_CONTAINER
+            CosmosColor.OnTertiaryContainer
         }
     }
 }

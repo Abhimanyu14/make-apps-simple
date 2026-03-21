@@ -186,7 +186,7 @@ internal fun HomeScreenUI(
                                         ).toDefaultString(),
                                     ),
                                 ),
-                                color = CosmosColor.TERTIARY,
+                                color = CosmosColor.Tertiary,
                             ),
                             PieChartItemData(
                                 value = uiState.overviewCardData.expense,
@@ -198,7 +198,7 @@ internal fun HomeScreenUI(
                                         ).toUnsignedString(),
                                     ),
                                 ),
-                                color = CosmosColor.ERROR,
+                                color = CosmosColor.Error,
                             ),
                         ),
                     ),

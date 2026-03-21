@@ -37,7 +37,7 @@ internal data class TransactionListItemData(
     val isRefundButtonVisible: Boolean = false,
     val isSelected: Boolean = false,
     val transactionId: Int = 0,
-    val amountColor: CosmosColor = CosmosColor.ON_BACKGROUND,
+    val amountColor: CosmosColor = CosmosColor.OnBackground,
     val amountText: String = "",
     val dateAndTimeText: String = "",
     val emoji: String = "",
