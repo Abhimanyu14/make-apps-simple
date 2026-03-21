@@ -17,17 +17,14 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivityViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavGraph
+import org.koin.compose.viewmodel.koinActivityViewModel
 
 @Composable
-internal fun CosmosDesignSystemAppUI(
-    cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel,
+internal fun CosmosDesignSystemCatalogApp(
+    cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel = koinActivityViewModel(),
 ) {
-    CosmosAppTheme {
-        CosmosDesignSystemCatalogNavGraph(
-            cosmosDesignSystemCatalogActivityViewModel = cosmosDesignSystemCatalogActivityViewModel,
-        )
-    }
+    CosmosDesignSystemAppUI(
+        cosmosDesignSystemCatalogActivityViewModel = cosmosDesignSystemCatalogActivityViewModel,
+    )
 }

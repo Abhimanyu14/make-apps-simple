@@ -26,11 +26,9 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivityViewModel
-import org.koin.compose.viewmodel.koinViewModel
-
 @Composable
 internal fun CosmosDesignSystemCatalogNavGraph(
-    cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel = koinViewModel(),
+    cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel,
     navHostController: NavHostController = rememberNavController(),
 ) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
