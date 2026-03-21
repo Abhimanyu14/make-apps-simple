@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation
 
-import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavGraph
+internal enum class CosmosDesignSystemCatalogCommand {
+    CLEAR_BACKSTACK_AND_NAVIGATE,
+    CLEAR_TILL_ROOT,
+    NAVIGATE,
+    NAVIGATE_UP,
+    NOOP,
+}
 
-@Composable
-internal fun CosmosDesignSystemAppUI() {
-    CosmosAppTheme {
-        CosmosDesignSystemCatalogNavGraph()
-    }
+internal interface CosmosDesignSystemCatalogNavigationCommand {
+    val cosmosDesignSystemCatalogCommand: CosmosDesignSystemCatalogCommand
+    val cosmosDesignSystemCatalogScreen: String
+    val destination: String
 }

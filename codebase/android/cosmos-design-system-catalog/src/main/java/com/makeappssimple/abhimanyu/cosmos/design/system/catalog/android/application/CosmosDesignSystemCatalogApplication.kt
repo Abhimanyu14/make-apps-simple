@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.application
 
-import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavGraph
+import android.app.Application
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.di.initKoin
+import org.koin.android.ext.koin.androidContext
 
-@Composable
-internal fun CosmosDesignSystemAppUI() {
-    CosmosAppTheme {
-        CosmosDesignSystemCatalogNavGraph()
+internal class CosmosDesignSystemCatalogApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        initKoin(
+            config = {
+                androidContext(
+                    androidContext = this@CosmosDesignSystemCatalogApplication,
+                )
+            },
+        )
     }
 }

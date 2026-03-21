@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.di
 
-import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavGraph
+import com.makeappssimple.abhimanyu.common.coroutines.di.CoroutineScopeModule
+import com.makeappssimple.abhimanyu.common.coroutines.di.DispatcherProviderModule
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-@Composable
-internal fun CosmosDesignSystemAppUI() {
-    CosmosAppTheme {
-        CosmosDesignSystemCatalogNavGraph()
-    }
-}
+@Module(
+    includes = [
+        CoroutineScopeModule::class,
+        DispatcherProviderModule::class,
+    ],
+)
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android",
+)
+internal class CosmosDesignSystemCatalogModule

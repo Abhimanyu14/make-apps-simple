@@ -36,6 +36,7 @@ plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.ksp)
 }
 
 android {
@@ -76,12 +77,20 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(project(":cosmos-design-system"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.bundles.koin)
+    implementation(libs.navigation.compose)
 
     implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.koin.bom))
+
+    ksp(libs.koin.ksp.compiler)
 }
 
 kotlin {
@@ -90,4 +99,16 @@ kotlin {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
     }
+}
+
+ksp {
+    // Koin
+    arg(
+        k = "KOIN_CONFIG_CHECK",
+        v = "true",
+    )
+    arg(
+        k = "KOIN_DEFAULT_MODULE",
+        v = "false",
+    )
 }

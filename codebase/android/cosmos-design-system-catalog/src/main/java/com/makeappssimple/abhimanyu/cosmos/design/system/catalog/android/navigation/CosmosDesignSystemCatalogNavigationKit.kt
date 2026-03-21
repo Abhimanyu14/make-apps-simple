@@ -14,15 +14,25 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation
 
-import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavGraph
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.SharedFlow
 
-@Composable
-internal fun CosmosDesignSystemAppUI() {
-    CosmosAppTheme {
-        CosmosDesignSystemCatalogNavGraph()
-    }
+internal interface CosmosDesignSystemCatalogNavigationKit {
+    val command: SharedFlow<CosmosDesignSystemCatalogNavigationCommand>
+
+    fun navigateToColorsScreen(): Job
+
+    fun navigateToComponentsScreen(): Job
+
+    fun navigateToHomeScreen(): Job
+
+    fun navigateToIconsScreen(): Job
+
+    fun navigateToShapesScreen(): Job
+
+    fun navigateToTypographyScreen(): Job
+
+    fun navigateUp(): Job
 }

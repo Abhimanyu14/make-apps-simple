@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.typography
 
-import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavGraph
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavigationKit
+import org.koin.android.annotation.KoinViewModel
 
-@Composable
-internal fun CosmosDesignSystemAppUI() {
-    CosmosAppTheme {
-        CosmosDesignSystemCatalogNavGraph()
+@KoinViewModel
+internal class CosmosDesignSystemCatalogTypographyScreenViewModel(
+    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
+) : ViewModel() {
+    fun navigateUp() {
+        cosmosDesignSystemCatalogNavigationKit.navigateUp()
     }
 }
