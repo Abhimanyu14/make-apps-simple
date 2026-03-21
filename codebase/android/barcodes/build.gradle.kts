@@ -130,8 +130,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.material.icons.core)
-    implementation(libs.material.icons.extended)
     implementation(libs.navigation.compose)
     implementation(libs.play.app.update)
     implementation(libs.play.review)
