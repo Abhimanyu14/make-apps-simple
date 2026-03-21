@@ -1,11 +1,32 @@
-# List of Apps
+# Make Apps Simple
 
-1. Make Apps Simple
-2. Cosmos Design System Catalog
+A collection of Android applications and shared modules.
 
-# Module Structure
+## List of Apps
 
-1. `app-cosmos-design-system-catalog` - App module for "Cosmos Catalog" app
-2. `app-make-apps-simple` - App module for "Make Apps Simple" app
-3. `cosmos-design-system` - Cosmos Design System source code
-4. `cosmos-design-system-catalog` - Cosmos Design System Launcher code
+1. **Barcodes**: An app to scan and generate barcodes.
+2. **Cosmos Design System Catalog**: A showcase app for the Cosmos Design System.
+3. **Finance Manager**: A comprehensive app to track and manage personal finances.
+4. **Make Apps Simple**: The main entry point or umbrella application.
+
+## Project Structure
+
+### Application Modules
+
+- `:app-barcodes`: Android application module for the Barcodes app.
+- `:app-cosmos-design-system-catalog`: Android application module for the Design System showcase.
+- `:app-finance-manager`: Android application module for the Finance Manager app.
+- `:app-make-apps-simple`: The primary application module for the project.
+
+### Feature Modules
+
+- `:barcodes`: Core logic and UI components specifically for barcode-related features.
+- `:cosmos-design-system-catalog`: Logic and screen implementations for the design system catalog.
+- `:finance-manager`: Core logic and UI components for finance tracking and management.
+
+### Shared Modules
+
+- `:barcode-generator`: Utility module for generating various barcode formats.
+- `:common`: Project-wide shared utilities, extensions, and base classes.
+- `:core-date-time`: Dedicated module for date and time manipulation using `kotlinx.datetime`.
+- `:cosmos-design-system`: The custom Design System component library used across all apps.
