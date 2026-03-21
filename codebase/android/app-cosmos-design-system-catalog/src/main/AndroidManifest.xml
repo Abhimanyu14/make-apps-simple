@@ -20,6 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.application.CosmosDesignSystemCatalogApplication"
         android:allowBackup="true"
         android:icon="@mipmap/cosmos_ic_launcher"
         android:label="@string/cosmos_design_system_catalog_app_name"

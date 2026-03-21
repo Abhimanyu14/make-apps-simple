@@ -30,4 +30,4 @@ import org.koin.core.annotation.Module
 @ComponentScan(
     "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android",
 )
-internal class CosmosDesignSystemCatalogModule
+public class CosmosDesignSystemCatalogModule
