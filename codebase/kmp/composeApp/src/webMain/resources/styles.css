@@ -16,21 +16,17 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+a,
+button,
+[role="button"] {
+    cursor: pointer;
+}
+
 a {
     color: #167DFF;
     text-decoration: none;
-    cursor: pointer;
 }
 
 a:hover {
     text-decoration: underline;
-}
-
-[role="button"],
-button {
-    cursor: pointer;
-}
-
-.clickable {
-    cursor: pointer;
 }
