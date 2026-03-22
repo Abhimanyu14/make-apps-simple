@@ -71,6 +71,10 @@ kotlin {
             implementation(libs.test.kotlin)
         }
 
+        jsMain.dependencies {
+            implementation(compose.html.core)
+        }
+
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)

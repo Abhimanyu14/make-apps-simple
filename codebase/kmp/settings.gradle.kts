@@ -1,4 +1,4 @@
-rootProject.name = "MakeAppsSimple"
+rootProject.name = "make-apps-simple"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
