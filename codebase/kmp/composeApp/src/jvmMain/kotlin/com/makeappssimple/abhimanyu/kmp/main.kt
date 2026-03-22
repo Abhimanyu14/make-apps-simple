@@ -7,7 +7,7 @@ fun main() {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            title = "MakeAppsSimple",
+            title = "Make Apps Simple",
         ) {
             App()
         }
