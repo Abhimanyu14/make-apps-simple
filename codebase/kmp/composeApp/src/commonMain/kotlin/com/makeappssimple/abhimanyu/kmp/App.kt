@@ -10,33 +10,49 @@ import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-
 import makeappssimple.composeapp.generated.resources.Res
 import makeappssimple.composeapp.generated.resources.compose_multiplatform
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
+        var showContent by remember {
+            mutableStateOf(
+                value = false,
+            )
+        }
+
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
+                .background(
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                )
                 .safeContentPadding()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(
-                onClick = { showContent = !showContent },
+                onClick = {
+                    showContent = !showContent
+                },
             ) {
-                Text("Click me!")
+                Text(
+                    text = "Click me!",
+                )
             }
-            AnimatedVisibility(showContent) {
+            AnimatedVisibility(
+                visible = showContent,
+            ) {
                 val greeting = remember {
                     Greeting()
                         .greet()
@@ -46,10 +62,14 @@ fun App() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(
-                        painter = painterResource(Res.drawable.compose_multiplatform),
+                        painter = painterResource(
+                            resource = Res.drawable.compose_multiplatform,
+                        ),
                         contentDescription = null,
                     )
-                    Text("Compose: $greeting")
+                    Text(
+                        text = "Compose: $greeting",
+                    )
                 }
             }
         }
