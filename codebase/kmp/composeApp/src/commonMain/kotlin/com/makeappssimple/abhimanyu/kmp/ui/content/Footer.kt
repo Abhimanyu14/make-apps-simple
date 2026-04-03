@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.kmp.ui.components.SocialIconLink
 import com.makeappssimple.abhimanyu.kmp.ui.theme.AppColors
-import com.makeappssimple.abhimanyu.kmp.ui.theme.AppTypography
 import make_apps_simple.composeapp.generated.resources.Res
 import make_apps_simple.composeapp.generated.resources.ic_github
 import make_apps_simple.composeapp.generated.resources.ic_google_play_store
@@ -125,7 +125,7 @@ fun PageFooter(
             ) {
                 Text(
                     text = "Social Links : ",
-                    style = AppTypography.bodyLarge,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = AppColors.TextDarkTheme,
                 )
                 Spacer(
@@ -163,7 +163,7 @@ fun PageFooter(
 
             Text(
                 text = "Developed using Compose Multiplatform",
-                style = AppTypography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 color = AppColors.TextPale,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(
