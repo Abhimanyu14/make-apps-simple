@@ -74,3 +74,18 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
 If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+
+### Build Production Web Application (with automatic fallback)
+
+To build the production version of the web app with automatic fallback (supporting both modern browsers via Wasm and older browsers via JS), run the following command from the `kmp` directory:
+- on macOS/Linux
+  ```shell
+  ./gradlew :composeApp:composeCompatibilityBrowserDistribution
+  ```
+- on Windows
+  ```shell
+  .\gradlew.bat :composeApp:composeCompatibilityBrowserDistribution
+  ```
+
+The generated files (HTML, Wasm, JS, and resources) will be located in:
+`composeApp/build/dist/compose/productionDistribution`
