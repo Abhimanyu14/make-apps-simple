@@ -142,7 +142,7 @@ fun PageFooter(
                                 ),
                                 contentDescription = socialLink.title,
                                 colorFilter = ColorFilter.tint(
-                                    color = AppColors.TextDarkTheme,
+                                    color = AppColors.White,
                                 ),
                                 modifier = Modifier
                                     .size(
