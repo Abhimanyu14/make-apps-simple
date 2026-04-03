@@ -32,5 +32,13 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
+includeBuild("build-logic")
+
 include(":androidApp")
 include(":composeApp")
+include(":app-cosmos-design-system-catalog")
+include(":app-make-apps-simple")
+include(":common")
+include(":core-date-time")
+include(":cosmos-design-system")
+include(":cosmos-design-system-catalog")

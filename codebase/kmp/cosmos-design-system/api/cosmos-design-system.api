@@ -1,0 +1,28 @@
+public final class com/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextKt {
+	public static final fun CosmosText-G_u8Q3M (Landroidx/compose/ui/Modifier;Ljava/lang/String;ZLcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;IIILandroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle : java/lang/Enum {
+	public static final field Body1 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Body2 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Body3 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Body4 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Caption Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Footnote Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Heading1 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Heading2 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Heading3 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Small1 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static final field Small2 Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+	public static fun values ()[Lcom/makeappssimple/abhimanyu/cosmos/design/system/android/text/CosmosTextStyle;
+}
+
+public final class com/makeappssimple/abhimanyu/library/cosmos/design/system/android/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
