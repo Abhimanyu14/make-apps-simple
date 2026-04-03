@@ -1,5 +1,6 @@
 package com.makeappssimple.abhimanyu.kmp.ui.content
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,21 +12,32 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.kmp.ui.components.SocialIconLink
 import com.makeappssimple.abhimanyu.kmp.ui.theme.AppColors
 import com.makeappssimple.abhimanyu.kmp.ui.theme.AppTypography
+import make_apps_simple.composeapp.generated.resources.Res
+import make_apps_simple.composeapp.generated.resources.ic_github
+import make_apps_simple.composeapp.generated.resources.ic_google_play_store
+import make_apps_simple.composeapp.generated.resources.ic_hashnode
+import make_apps_simple.composeapp.generated.resources.ic_leetcode
+import make_apps_simple.composeapp.generated.resources.ic_linkedin
+import make_apps_simple.composeapp.generated.resources.ic_medium
+import make_apps_simple.composeapp.generated.resources.ic_pdf
+import make_apps_simple.composeapp.generated.resources.ic_stackoverflow
+import make_apps_simple.composeapp.generated.resources.ic_threads
+import make_apps_simple.composeapp.generated.resources.ic_x
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 private data class SocialLink(
-    val id: String,
+    val icon: DrawableResource,
     val url: String,
     val title: String,
 )
@@ -33,52 +45,52 @@ private data class SocialLink(
 private fun getSocialLinks(): List<SocialLink> {
     return listOf(
         SocialLink(
-            id = "linkedin",
+            icon = Res.drawable.ic_linkedin,
             url = "https://www.linkedin.com/in/abhimanyu-n/",
             title = "Linkedin",
         ),
         SocialLink(
-            id = "googleplaystore",
+            icon = Res.drawable.ic_google_play_store,
             url = "https://play.google.com/store/apps/developer?id=Abhimanyu",
             title = "Google Play Store",
         ),
         SocialLink(
-            id = "github",
+            icon = Res.drawable.ic_github,
             url = "https://github.com/Abhimanyu14",
             title = "GitHub",
         ),
         SocialLink(
-            id = "stackoverflow",
+            icon = Res.drawable.ic_stackoverflow,
             url = "https://stackoverflow.com/users/9636037/abhimanyu",
             title = "StackOverflow",
         ),
         SocialLink(
-            id = "medium",
+            icon = Res.drawable.ic_medium,
             url = "https://abhimanyu14.medium.com/",
             title = "Medium",
         ),
         SocialLink(
-            id = "leetcode",
+            icon = Res.drawable.ic_leetcode,
             url = "https://leetcode.com/Abhimanyu14/",
             title = "Leetcode",
         ),
         SocialLink(
-            id = "resume",
+            icon = Res.drawable.ic_pdf,
             url = "https://my.visualcv.com/abhimanyu14/",
             title = "Resume",
         ),
         SocialLink(
-            id = "hashnode",
+            icon = Res.drawable.ic_hashnode,
             url = "https://abhimanyu14.hashnode.dev/",
             title = "hashnode",
         ),
         SocialLink(
-            id = "threads",
+            icon = Res.drawable.ic_threads,
             url = "https://www.threads.net/@abhimanyu.n14",
             title = "Threads",
         ),
         SocialLink(
-            id = "twitter",
+            icon = Res.drawable.ic_x,
             url = "https://twitter.com/AbhimanyuN14",
             title = "Twitter",
         ),
@@ -124,9 +136,18 @@ fun PageFooter(
                 getSocialLinks().forEach { socialLink ->
                     SocialIconLink(
                         icon = {
-                            SocialIconPlaceholder(
-                                iconId = socialLink.id,
+                            Image(
+                                painter = painterResource(
+                                    resource = socialLink.icon,
+                                ),
                                 contentDescription = socialLink.title,
+                                colorFilter = ColorFilter.tint(
+                                    color = AppColors.TextDarkTheme,
+                                ),
+                                modifier = Modifier
+                                    .size(
+                                        size = 24.dp,
+                                    ),
                             )
                         },
                         url = socialLink.url,
@@ -153,30 +174,3 @@ fun PageFooter(
     }
 }
 
-@Composable
-private fun SocialIconPlaceholder(
-    iconId: String,
-    contentDescription: String,
-) {
-    Box(
-        modifier = Modifier
-            .size(
-                size = 24.dp,
-            )
-            .clip(
-                shape = CircleShape,
-            )
-            .background(
-                color = AppColors.TextDarkTheme.copy(
-                    alpha = 0.5f,
-                ),
-            ),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = iconId.firstOrNull()?.uppercaseChar()?.toString() ?: "?",
-            style = AppTypography.bodyMedium,
-            color = Color.White,
-        )
-    }
-}
