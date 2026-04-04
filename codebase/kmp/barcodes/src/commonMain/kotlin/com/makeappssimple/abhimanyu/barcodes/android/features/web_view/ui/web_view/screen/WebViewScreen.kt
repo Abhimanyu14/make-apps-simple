@@ -18,24 +18,23 @@ package com.makeappssimple.abhimanyu.barcodes.android.features.web_view.ui.web_v
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.event.WebViewScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.view_model.WebViewScreenViewModel
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun WebViewScreen(
-    screenViewModel: WebViewScreenViewModel = koinViewModel(),
+    screenViewModel: WebViewScreenViewModel,
 ) {
     screenViewModel.logError(
         message = "Inside WebViewScreen",
     )
 
-    val uiState: WebViewScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiState: WebViewScreenUIState by screenViewModel.uiState.collectAsState()
     val uiStateEvents: WebViewScreenUIStateEvents =
         screenViewModel.uiStateEvents
 

@@ -24,7 +24,9 @@ import androidx.navigation.navDeepLink
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.DeeplinkUrl
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.view_model.WebViewScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.ui.web_view.screen.WebViewScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 internal fun NavGraphBuilder.webViewNavGraph() {
     composable(
@@ -45,6 +47,8 @@ internal fun NavGraphBuilder.webViewNavGraph() {
             },
         ),
     ) {
-        WebViewScreen()
+        WebViewScreen(
+            screenViewModel = koinViewModel<WebViewScreenViewModel>(),
+        )
     }
 }

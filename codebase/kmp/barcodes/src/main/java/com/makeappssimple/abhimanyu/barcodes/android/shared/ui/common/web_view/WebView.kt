@@ -31,8 +31,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTag
 import com.makeappssimple.abhimanyu.common.extensions.isNotNullOrBlank
 
 @Composable
-internal fun WebView(
-    modifier: Modifier = Modifier,
+internal actual fun WebView(
+    modifier: Modifier,
     url: String,
     onPageLoadingCompleted: (title: String) -> Unit,
 ) {
