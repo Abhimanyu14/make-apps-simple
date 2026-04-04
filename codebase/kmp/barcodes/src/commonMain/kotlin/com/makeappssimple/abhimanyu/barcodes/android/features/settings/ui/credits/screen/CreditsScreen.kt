@@ -21,11 +21,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.credits.event.CreditsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.credits.view_model.CreditsScreenViewModel
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun CreditsScreen(
-    screenViewModel: CreditsScreenViewModel = koinViewModel(),
+    screenViewModel: CreditsScreenViewModel,
 ) {
     screenViewModel.logError(
         message = "Inside CreditsScreen",

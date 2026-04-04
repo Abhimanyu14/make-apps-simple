@@ -16,38 +16,20 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.settings.screen
 
-import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.view_model.SettingsScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun SettingsScreen(
-    screenViewModel: SettingsScreenViewModel = koinViewModel(),
+    screenViewModel: SettingsScreenViewModel,
+    navigateToOpenSourceLicensesScreen: () -> Unit,
 ) {
     screenViewModel.logError(
         message = "Inside SettingsScreen",
     )
-
-    // region navigateToOpenSourceLicensesScreen
-    val context = LocalContext.current
-    val openSourceLicensesScreenTitle = BarcodesStrings.settingsOpenSourceLicenses
-    val navigateToOpenSourceLicensesScreen: () -> Unit = {
-        OssLicensesMenuActivity.setActivityTitle(openSourceLicensesScreenTitle)
-        context.startActivity(
-            Intent(
-                context,
-                OssLicensesMenuActivity::class.java
-            )
-        )
-    }
-    // endregion
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,

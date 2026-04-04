@@ -16,52 +16,33 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.ui.create_barcode.screen
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.rememberUpdatedState
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.event.CreateBarcodeScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.view_model.CreateBarcodeScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.play_store_review.PlayStoreReviewHandler
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun CreateBarcodeScreen(
-    screenViewModel: CreateBarcodeScreenViewModel = koinViewModel(),
+    screenViewModel: CreateBarcodeScreenViewModel,
+    showBarcodeValueCopiedToastMessage: (barcodeValue: String) -> Unit,
+    triggerInAppReview: ((onCompleted: () -> Unit) -> Unit),
 ) {
     screenViewModel.logError(
         message = "Inside CreateBarcodeScreen",
     )
 
-    val context = LocalContext.current
-    val playStoreReviewHandler = remember {
-        PlayStoreReviewHandler(context)
-    }
-
-    val uiState: CreateBarcodeScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiState: CreateBarcodeScreenUIState by screenViewModel.uiState.collectAsState()
     val uiStateEvents: CreateBarcodeScreenUIStateEvents =
         screenViewModel.uiStateEvents
-
-    val showBarcodeValueCopiedToastMessage: () -> Unit = {
-        Toast.makeText(
-            context,
-            BarcodesStrings.createBarcodeBarcodeValueCopiedToastMessage(
-                barcodeValue = uiState.barcodeValue,
-            ),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-    val triggerInAppReview: () -> Unit = {
-        playStoreReviewHandler.triggerInAppReview {
-            screenViewModel.navigateUp()
-        }
-    }
+    val currentBarcodeValue by rememberUpdatedState(
+        newValue = uiState.barcodeValue,
+    )
 
     val screenUIEventHandler = remember(
         key1 = screenViewModel,
@@ -71,8 +52,14 @@ internal fun CreateBarcodeScreen(
         CreateBarcodeScreenUIEventHandler(
             uiStateEvents = uiStateEvents,
             screenViewModel = screenViewModel,
-            showBarcodeValueCopiedToastMessage = showBarcodeValueCopiedToastMessage,
-            triggerInAppReview = triggerInAppReview,
+            showBarcodeValueCopiedToastMessage = {
+                showBarcodeValueCopiedToastMessage(currentBarcodeValue)
+            },
+            triggerInAppReview = {
+                triggerInAppReview(
+                    screenViewModel::navigateUp,
+                )
+            },
         )
     }
 

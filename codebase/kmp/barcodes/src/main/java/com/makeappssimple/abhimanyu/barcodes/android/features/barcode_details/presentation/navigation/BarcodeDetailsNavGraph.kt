@@ -16,13 +16,18 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.navigation
 
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model.BarcodeDetailsScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.ui.barcode_details.screen.BarcodeDetailsScreen
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import org.koin.compose.viewmodel.koinViewModel
 
 internal fun NavGraphBuilder.barcodeDetailsNavGraph() {
     composable(
@@ -33,6 +38,19 @@ internal fun NavGraphBuilder.barcodeDetailsNavGraph() {
             },
         ),
     ) {
-        BarcodeDetailsScreen()
+        val context = LocalContext.current
+
+        BarcodeDetailsScreen(
+            screenViewModel = koinViewModel<BarcodeDetailsScreenViewModel>(),
+            showBarcodeValueCopiedToastMessage = { barcodeValue ->
+                Toast.makeText(
+                    context,
+                    BarcodesStrings.barcodeDetailsBarcodeValueCopiedToastMessage(
+                        barcodeValue = barcodeValue,
+                    ),
+                    Toast.LENGTH_SHORT,
+                ).show()
+            },
+        )
     }
 }

@@ -16,51 +16,39 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.ui.barcode_details.screen
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeSourceDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.event.BarcodeDetailsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model.BarcodeDetailsScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.util.dpToPx
-import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.min
 
 @Composable
 internal fun BarcodeDetailsScreen(
-    screenViewModel: BarcodeDetailsScreenViewModel = koinViewModel(),
+    screenViewModel: BarcodeDetailsScreenViewModel,
+    showBarcodeValueCopiedToastMessage: (barcodeValue: String) -> Unit,
 ) {
     screenViewModel.logError(
         message = "Inside BarcodeDetailsScreen",
     )
 
-    val context = LocalContext.current
     val windowContainerSize = LocalWindowInfo.current.containerSize
-    val screenHeight = windowContainerSize.height.dp.dpToPx()
-    val screenWidth = windowContainerSize.width.dp.dpToPx()
 
-    val uiState: BarcodeDetailsScreenUIState by screenViewModel.uiState.collectAsStateWithLifecycle()
+    val uiState: BarcodeDetailsScreenUIState by screenViewModel.uiState.collectAsState()
     val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
         screenViewModel.uiStateEvents
+    val currentBarcodeValue by rememberUpdatedState(
+        newValue = uiState.barcodeValue,
+    )
 
-    val showBarcodeValueCopiedToastMessage: () -> Unit = {
-        Toast.makeText(
-            context,
-            BarcodesStrings.barcodeDetailsBarcodeValueCopiedToastMessage(
-                barcodeValue = uiState.barcodeValue,
-            ),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
     val formattedTimestampLabel = remember(
         key1 = uiState.barcodeSource,
     ) {
@@ -82,7 +70,9 @@ internal fun BarcodeDetailsScreen(
         BarcodeDetailsScreenUIEventHandler(
             screenViewModel = screenViewModel,
             uiStateEvents = uiStateEvents,
-            showBarcodeValueCopiedToastMessage = showBarcodeValueCopiedToastMessage,
+            showBarcodeValueCopiedToastMessage = {
+                showBarcodeValueCopiedToastMessage(currentBarcodeValue)
+            },
         )
     }
 
@@ -92,9 +82,9 @@ internal fun BarcodeDetailsScreen(
         screenViewModel.initViewModel()
         uiStateEvents.updateBarcodeBitmapSize(
             min(
-                screenWidth,
-                screenHeight
-            ).toInt()
+                windowContainerSize.width,
+                windowContainerSize.height,
+            )
         )
     }
 

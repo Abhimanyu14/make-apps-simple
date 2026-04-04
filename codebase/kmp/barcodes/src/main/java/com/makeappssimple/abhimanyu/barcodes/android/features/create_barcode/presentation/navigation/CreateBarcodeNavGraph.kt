@@ -16,13 +16,20 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.navigation
 
+import android.widget.Toast
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
+import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.view_model.CreateBarcodeScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.ui.create_barcode.screen.CreateBarcodeScreen
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.play_store_review.PlayStoreReviewHandler
+import org.koin.compose.viewmodel.koinViewModel
 
 internal fun NavGraphBuilder.createBarcodeNavGraph() {
     composable(
@@ -35,6 +42,23 @@ internal fun NavGraphBuilder.createBarcodeNavGraph() {
             },
         ),
     ) {
-        CreateBarcodeScreen()
+        val context = LocalContext.current
+        val playStoreReviewHandler = remember(context) {
+            PlayStoreReviewHandler(context)
+        }
+
+        CreateBarcodeScreen(
+            screenViewModel = koinViewModel<CreateBarcodeScreenViewModel>(),
+            showBarcodeValueCopiedToastMessage = { barcodeValue ->
+                Toast.makeText(
+                    context,
+                    BarcodesStrings.createBarcodeBarcodeValueCopiedToastMessage(
+                        barcodeValue = barcodeValue,
+                    ),
+                    Toast.LENGTH_SHORT,
+                ).show()
+            },
+            triggerInAppReview = playStoreReviewHandler::triggerInAppReview,
+        )
     }
 }

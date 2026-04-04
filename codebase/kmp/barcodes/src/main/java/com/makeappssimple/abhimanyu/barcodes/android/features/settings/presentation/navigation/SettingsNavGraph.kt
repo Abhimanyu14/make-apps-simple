@@ -16,22 +16,46 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.navigation
 
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
+import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.credits.view_model.CreditsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.view_model.SettingsScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.credits.screen.CreditsScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.settings.screen.SettingsScreen
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import org.koin.compose.viewmodel.koinViewModel
 
 internal fun NavGraphBuilder.settingsNavGraph() {
     composable(
         route = BarcodesScreen.Credits.route,
     ) {
-        CreditsScreen()
+        CreditsScreen(
+            screenViewModel = koinViewModel<CreditsScreenViewModel>(),
+        )
     }
 
     composable(
         route = BarcodesScreen.Settings.route,
     ) {
-        SettingsScreen()
+        val context = LocalContext.current
+
+        SettingsScreen(
+            screenViewModel = koinViewModel<SettingsScreenViewModel>(),
+            navigateToOpenSourceLicensesScreen = {
+                OssLicensesMenuActivity.setActivityTitle(
+                    BarcodesStrings.settingsOpenSourceLicenses,
+                )
+                context.startActivity(
+                    Intent(
+                        context,
+                        OssLicensesMenuActivity::class.java,
+                    ),
+                )
+            },
+        )
     }
 }
