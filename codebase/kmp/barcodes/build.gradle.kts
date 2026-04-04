@@ -18,17 +18,22 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.detekt)
-    alias(libs.plugins.plugin.kotlin.android)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.serialization)
     alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp)
     alias(libs.plugins.plugin.room)
     alias(libs.plugins.plugin.screenshot)
+}
+
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    metricsDestination = layout.buildDirectory.dir("compose_compiler")
 }
 
 android {
@@ -70,14 +75,11 @@ android {
         ndk.debugSymbolLevel = "FULL"
     }
 
-    kotlinOptions {
-        // Room schema for testing
-        sourceSets {
-            // Adds exported schema location as test app assets.
-            getByName("androidTest").assets.srcDir("$projectDir/schemas")
-        }
+    sourceSets {
+        getByName("main").java.setSrcDirs(emptyList<String>())
+        // Adds exported schema location as test app assets.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
     }
-
     lint {
         checkAllWarnings = true
         warningsAsErrors = true
@@ -98,11 +100,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":barcode-generator"))
-    implementation(project(":common"))
-    implementation(project(":core-date-time"))
-    implementation(project(":cosmos-design-system"))
-
     androidTestImplementation(libs.test.compose.ui.junit4)
     androidTestImplementation(libs.test.room)
     androidTestImplementation(libs.bundles.koin.test)
@@ -113,33 +110,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
 
     detektPlugins(libs.bundles.detekt)
-
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.bundles.camera)
-    implementation(libs.bundles.coil)
-    implementation(libs.bundles.compose)
-    implementation(libs.bundles.koin)
-    implementation(libs.bundles.lifecycle)
-    implementation(libs.bundles.room)
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
-    implementation(libs.kotlinx.collections.immutable)
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.datetime)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.navigation.compose)
-    implementation(libs.play.app.update)
-    implementation(libs.play.review)
-    implementation(libs.play.services.mlkit.barcode.scanning)
-    implementation(libs.play.services.oss.licenses)
-    implementation(libs.play.services.vision)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(platform(libs.firebase.bom))
-    implementation(platform(libs.koin.bom))
 
     ksp(libs.androidx.room.compiler)
     ksp(libs.koin.ksp.compiler)
@@ -153,8 +123,64 @@ dependencies {
 kotlin {
     explicitApi()
 
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.compose.runtime)
+                implementation(libs.kotlinx.coroutines.core)
+            }
+        }
+        val androidMain by getting {
+            kotlin.setSrcDirs(
+                listOf(
+                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/core/data",
+                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/core/domain",
+                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/core/presentation",
+                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/platform",
+                ),
+            )
+            kotlin.exclude(
+                "**/core/di/**",
+                "**/core/presentation/base/**",
+                "**/features/**/ui/**",
+                "**/shared/ui/**",
+            )
+            dependencies {
+                implementation(project(":barcode-generator"))
+                implementation(project(":common"))
+                implementation(project(":core-date-time"))
+                implementation(project(":cosmos-design-system"))
+
+                implementation(libs.androidx.compose.ui.tooling.preview)
+                implementation(libs.androidx.core.ktx)
+                implementation(libs.androidx.paging.compose)
+                implementation(libs.androidx.paging.runtime)
+                implementation(libs.bundles.camera)
+                implementation(libs.bundles.coil)
+                implementation(libs.bundles.compose)
+                implementation(libs.bundles.koin)
+                implementation(libs.bundles.lifecycle)
+                implementation(libs.bundles.room)
+                implementation(libs.firebase.analytics)
+                implementation(libs.firebase.crashlytics)
+                implementation(libs.kotlinx.collections.immutable)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.navigation.compose)
+                implementation(libs.play.app.update)
+                implementation(libs.play.review)
+                implementation(libs.play.services.mlkit.barcode.scanning)
+                implementation(libs.play.services.oss.licenses)
+                implementation(libs.play.services.vision)
+            }
+        }
     }
 }
 
