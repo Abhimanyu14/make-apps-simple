@@ -125,6 +125,7 @@ kotlin {
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
+                implementation(libs.ui.backhandler)
                 implementation(libs.compose.ui.tooling.preview)
                 implementation(libs.compose.components.resources)
                 implementation(libs.kotlinx.collections.immutable)
