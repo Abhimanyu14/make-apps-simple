@@ -110,6 +110,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":core-date-time"))
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
@@ -126,7 +127,6 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(project(":core-date-time"))
                 implementation(libs.androidx.activity.compose)
                 implementation(libs.androidx.compose.foundation)
                 implementation(libs.androidx.compose.material3)
