@@ -18,8 +18,8 @@ package com.makeappssimple.abhimanyu.core.date.time.extensions
 
 import com.makeappssimple.abhimanyu.core.date.time.formatInstant
 import com.makeappssimple.abhimanyu.core.date.time.getCurrentSystemDefaultTimeZone
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
+import kotlin.time.Instant
 
 /**
  * Sample format - 30 Mar, 2023.

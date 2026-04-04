@@ -16,8 +16,8 @@
 
 package com.makeappssimple.abhimanyu.core.date.time
 
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
+import kotlin.time.Instant
 
 public expect fun formatInstant(
     instant: Instant,

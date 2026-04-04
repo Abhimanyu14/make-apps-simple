@@ -16,13 +16,13 @@
 
 package com.makeappssimple.abhimanyu.core.date.time
 
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toNSDate
 import platform.Foundation.NSDateFormatter
 import platform.Foundation.NSTimeZone
 import platform.Foundation.systemTimeZone
 import platform.Foundation.timeZoneWithName
+import kotlin.time.Instant
 
 public actual fun formatInstant(
     instant: Instant,
