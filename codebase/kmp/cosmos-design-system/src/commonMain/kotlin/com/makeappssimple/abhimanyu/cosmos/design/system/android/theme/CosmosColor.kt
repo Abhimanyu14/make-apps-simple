@@ -16,11 +16,10 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.android.theme
 
-import androidx.annotation.ColorInt
 import androidx.compose.ui.graphics.Color
 
 public enum class CosmosColor(
-    @ColorInt public val color: Int,
+    public val color: Int,
     public val composeColor: Color = Color(
         color = color,
     ),

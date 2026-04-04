@@ -22,18 +22,18 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.plugin.android.library)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.detekt)
     alias(libs.plugins.plugin.dokka)
-    alias(libs.plugins.plugin.kotlin.android)
-    alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.plugin.screenshot)
     alias(libs.plugins.plugin.maven.publish)
 }
 
 android {
-    namespace =
-        "com.makeappssimple.abhimanyu.library.cosmos.design.system.android"
+    namespace = "com.makeappssimple.abhimanyu.library.cosmos.design.system.android"
     compileSdk = libs.versions.compile.sdk.get().toInt()
     ndkVersion = libs.versions.ndk.get()
     resourcePrefix = "cosmos"
@@ -83,62 +83,103 @@ composeCompiler {
 }
 
 dependencies {
-    implementation(project(":core-date-time"))
-    
-    androidTestImplementation(libs.test.compose.ui.junit4)
-
-    debugImplementation(libs.test.compose.ui.manifest)
-
     detektPlugins(libs.bundles.detekt)
-
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.kotlinx.collections.immutable)
-
-    implementation(platform(libs.androidx.compose.bom))
 
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
     screenshotTestImplementation(libs.screenshot.validation.api)
 }
 
 kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+        publishAllLibraryVariants()
+    }
+    iosArm64()
+    iosSimulatorArm64()
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+    js(IR) {
+        browser()
+    }
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.compose.foundation)
+                implementation(libs.compose.material3)
+                implementation(libs.compose.runtime)
+                implementation(libs.compose.ui)
+                implementation(libs.compose.ui.tooling.preview)
+                implementation(libs.compose.components.resources)
+                implementation(libs.kotlinx.collections.immutable)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.test.kotlin)
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation(project(":core-date-time"))
+                implementation(libs.androidx.activity.compose)
+                implementation(libs.androidx.compose.foundation)
+                implementation(libs.androidx.compose.material3)
+                implementation(libs.androidx.compose.runtime)
+                implementation(libs.androidx.core.ktx)
+            }
+        }
+        val androidDebug by creating {
+            dependsOn(androidMain)
+            dependencies {
+                implementation(libs.test.compose.ui.manifest)
+                implementation(libs.androidx.compose.ui.tooling)
+                implementation(libs.androidx.compose.ui.tooling.preview)
+            }
+        }
+        val androidInstrumentedTest by getting {
+            dependencies {
+                implementation(libs.test.compose.ui.junit4)
+                implementation(libs.test.room)
+                implementation(libs.bundles.koin.test)
+                implementation(libs.bundles.test)
+            }
+        }
+    }
+
     explicitApi()
 
     compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
+        // Common compiler options go here
     }
 }
 
 mavenPublishing {
     configure(
         AndroidSingleVariantLibrary(
-            // whether to publish a javadoc jar
             publishJavadocJar = true,
-            // whether to publish a sources jar
             sourcesJar = true,
-            // the published variant
             variant = "release",
         )
     )
 
-    // Define coordinates for the published artifact
     coordinates(
         groupId = "io.github.abhimanyu14",
         artifactId = "cosmos-design-system",
         version = libs.versions.app.cosmos.design.system.catalog.version.name.get()
     )
 
-    // Configure POM metadata for the published artifact
     pom {
         name.set("Cosmos Design System")
         description.set("Cosmos Design System")
         inceptionYear.set("2025")
         url.set("https://github.com/Abhimanyu14/cosmos-design-system")
 
-        // Specify developers information
         developers {
             developer {
                 id.set("Abhimanyu14")
@@ -155,15 +196,12 @@ mavenPublishing {
             }
         }
 
-        // Specify SCM information
         scm {
             url.set("https://github.com/Abhimanyu14/cosmos-design-system")
         }
     }
 
-    // Configure publishing to Maven Central
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-    // Enable GPG signing for all publications
     signAllPublications()
 }
