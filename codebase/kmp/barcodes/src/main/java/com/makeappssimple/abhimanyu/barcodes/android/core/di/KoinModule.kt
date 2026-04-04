@@ -16,9 +16,19 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.di
 
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.app.BarcodesActivityViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model.BarcodeDetailsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.view_model.CreateBarcodeScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.view_model.HomeScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.view_model.ScanBarcodeScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.credits.view_model.CreditsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.view_model.SettingsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.view_model.WebViewScreenViewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.module
+import org.koin.dsl.module
 
 internal fun initKoin(
     config: (KoinApplication.() -> Unit)? = null,
@@ -26,7 +36,19 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            modules = BarcodesAppModule().module,
+            modules = listOf(
+                BarcodesAppModule().module,
+                module {
+                    viewModelOf(::BarcodesActivityViewModel)
+                    viewModelOf(::HomeScreenViewModel)
+                    viewModelOf(::CreateBarcodeScreenViewModel)
+                    viewModelOf(::BarcodeDetailsScreenViewModel)
+                    viewModelOf(::SettingsScreenViewModel)
+                    viewModelOf(::CreditsScreenViewModel)
+                    viewModelOf(::ScanBarcodeScreenViewModel)
+                    viewModelOf(::WebViewScreenViewModel)
+                },
+            ),
         )
     }
 }

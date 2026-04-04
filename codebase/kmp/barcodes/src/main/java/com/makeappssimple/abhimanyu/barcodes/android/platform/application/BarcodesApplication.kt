@@ -17,10 +17,16 @@
 package com.makeappssimple.abhimanyu.barcodes.android.platform.application
 
 import android.app.Application
+import com.makeappssimple.abhimanyu.barcodes.android.core.di.initKoin
+import org.koin.android.ext.koin.androidContext
 
 internal class BarcodesApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        // TODO: Reconnect Koin and platform bootstrap after the shared DI layer is moved to common code.
+        initKoin {
+            androidContext(
+                this@BarcodesApplication,
+            )
+        }
     }
 }

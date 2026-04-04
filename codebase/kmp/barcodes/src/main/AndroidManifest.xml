@@ -29,7 +29,8 @@
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
 
-    <application>
+    <application
+        android:name="com.makeappssimple.abhimanyu.barcodes.android.platform.application.BarcodesApplication">
 
         <activity
             android:name="com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity"

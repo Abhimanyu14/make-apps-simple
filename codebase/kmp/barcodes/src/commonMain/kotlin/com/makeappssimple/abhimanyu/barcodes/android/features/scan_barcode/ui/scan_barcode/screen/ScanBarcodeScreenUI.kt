@@ -18,7 +18,6 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.scan_barcode.screen
 
-import androidx.camera.core.SurfaceRequest
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.event.ScanBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.snackbar.ScanBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.state.ScanBarcodeScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.barcode_scanner.camera.BarcodeScannerPreview
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.components.CameraPermissionPermanentlyDeniedDialog
@@ -47,13 +45,15 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeFormatDomainModel
 
 @Composable
 internal fun ScanBarcodeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     uiState: ScanBarcodeScreenUIState = ScanBarcodeScreenUIState(),
-    surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
+    cameraContent: @Composable (isScanning: Boolean, onBarcodeScanned: (BarcodeFormatDomainModel, String) -> Unit) -> Unit,
+    onBarcodeScanned: (BarcodeFormatDomainModel, String) -> Unit,
 ) {
     val saveBarcodeFailedSnackbarMessage = BarcodesStrings.scanBarcodeSaveFailedSnackbarMessage
 
@@ -109,15 +109,10 @@ internal fun ScanBarcodeScreenUI(
         AnimatedVisibility(
             visible = uiState.isCameraPermissionGranted,
         ) {
-            surfaceRequest?.let {
-                BarcodeScannerPreview(
-                    surfaceRequest = surfaceRequest,
-                    modifier = Modifier
-                        .testTag(
-                            tag = SCREEN_CONTENT_SCAN_BARCODE,
-                        ),
-                )
-            }
+            cameraContent(
+                uiState.isScanning,
+                onBarcodeScanned,
+            )
         }
         AnimatedVisibility(
             visible = !uiState.isCameraPermissionGranted,
