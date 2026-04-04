@@ -19,7 +19,6 @@ package com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.bott
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.icons.BarcodesIcons
@@ -34,12 +33,6 @@ import kotlinx.collections.immutable.persistentListOf
 
 private object HomeMenuBottomSheetConstants {
     val minimumBottomSheetHeight = 24.dp
-}
-
-@Immutable
-internal sealed class HomeMenuBottomSheetEvent {
-    data object OnCreateBarcodeButtonClick : HomeMenuBottomSheetEvent()
-    data object OnScanBarcodeButtonClick : HomeMenuBottomSheetEvent()
 }
 
 @Composable

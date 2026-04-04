@@ -38,6 +38,7 @@ public class BarcodesActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
+            // TODO: Add non-Android entry-point wiring when the other platforms land.
             Surface(
                 color = MaterialTheme.colorScheme.background,
             ) {

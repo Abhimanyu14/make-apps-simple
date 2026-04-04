@@ -133,6 +133,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.compose.runtime)
+                implementation(libs.lifecycle.viewmodel)
+                implementation(libs.koin.annotations)
+                implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
             }
         }

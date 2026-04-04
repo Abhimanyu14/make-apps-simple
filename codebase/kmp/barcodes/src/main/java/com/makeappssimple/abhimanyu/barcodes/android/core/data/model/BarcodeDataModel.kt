@@ -25,23 +25,23 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.constant
  * Room entity for barcode_table.
  */
 @Entity(tableName = BarcodeEntityConstants.TABLE_NAME)
-internal data class BarcodeDataModel(
+internal actual data class BarcodeDataModel actual constructor(
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_SOURCE)
-    val source: BarcodeSourceDataModel,
+    actual val source: BarcodeSourceDataModel,
 
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_FORMAT)
-    val format: Int = BarcodeFormatDataModel.QrCode.value,
+    actual val format: Int,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_ID)
-    val id: Int = 0,
+    actual val id: Int,
 
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_TIMESTAMP)
-    val timestamp: Long,
+    actual val timestamp: Long,
 
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_NAME)
-    val name: String? = null,
+    actual val name: String?,
 
     @ColumnInfo(name = BarcodeEntityConstants.COLUMN_VALUE)
-    val value: String,
+    actual val value: String,
 )
