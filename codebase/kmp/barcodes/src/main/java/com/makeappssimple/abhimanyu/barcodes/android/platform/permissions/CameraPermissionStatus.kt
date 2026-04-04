@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics
+package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.permissions
 
-internal interface AnalyticsKit {
-    fun trackScreen(
-        screenName: String,
+import androidx.compose.runtime.Composable
+
+@Composable
+internal fun rememberCameraPermissionStatus(): PermissionRequest {
+    return rememberRequiredPermissionStatus(
+        requiredPermission = android.Manifest.permission.CAMERA,
     )
 }

@@ -37,17 +37,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.model.BarcodeUiModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.event.HomeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.snackbar.HomeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.state.HomeScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.model.BarcodeUiModel
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CONTENT_HOME
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_HOME
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.bottom_sheet.HomeCosmosBottomSheetType
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.bottom_sheet.HomeMenuBottomSheet
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.dialog.HomeDeleteBarcodeDialog
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CONTENT_HOME
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_HOME
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.icons.BarcodesIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.bottom_sheet.CosmosBottomSheetHandler
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosFloatingActionButton
@@ -66,9 +67,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBarActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
@@ -80,16 +79,9 @@ internal fun HomeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: HomeScreenUIEvent) -> Unit = {},
 ) {
-    val barcodeDeleteFailedSnackbarMessage = CosmosStringResource.Id(
-        id = R.string.barcodes_screen_home_barcode_deleted_failed_snackbar_message,
-    ).text
-    val barcodeDeletedSnackbarActionLabel = CosmosStringResource.Id(
-        id = R.string.barcodes_screen_home_barcode_deleted_snackbar_action_label,
-    ).text
-    val barcodeRestoreFailedSnackbarMessage = CosmosStringResource.Id(
-        id = R.string.barcodes_screen_home_barcode_restore_failed_snackbar_message,
-    ).text
-    // TODO(Abhi): Move to view model
+    val barcodeDeleteFailedSnackbarMessage = BarcodesStrings.homeBarcodeDeletedFailedSnackbarMessage
+    val barcodeDeletedSnackbarActionLabel = BarcodesStrings.homeBarcodeDeletedSnackbarActionLabel
+    val barcodeRestoreFailedSnackbarMessage = BarcodesStrings.homeBarcodeRestoreFailedSnackbarMessage
     val selectedBarcodes = rememberSaveable(
         saver = listSaver(
             save = {
@@ -103,7 +95,6 @@ internal fun HomeScreenUI(
         mutableStateListOf<Int>()
     }
     val listItemsDataAndEventHandler =
-        // TODO(Abhi): Remove this mapIndexed
         uiState.allBarcodes.mapIndexed { index, barcode ->
             val toggleIsSelected = {
                 if (!selectedBarcodes.remove(index)) {
@@ -150,9 +141,8 @@ internal fun HomeScreenUI(
             state.coroutineScope.launch {
                 val snackbarResult = state.snackbarHostState
                     .showSnackbar(
-                        message = state.context.getString(
-                            R.string.barcodes_screen_home_barcode_deleted_snackbar_message,
-                            barcodeUiModel.name,
+                        message = BarcodesStrings.homeBarcodeDeletedSnackbarMessage(
+                            barcodeName = barcodeUiModel.name.orEmpty(),
                         ),
                         actionLabel = barcodeDeletedSnackbarActionLabel,
                     )
@@ -232,14 +222,13 @@ internal fun HomeScreenUI(
             if (isInSelectionMode) {
                 CosmosTopAppBar(
                     titleStringResource = CosmosStringResource.Text(
-                        text = state.context.getString(
-                            R.string.barcodes_screen_home_selection_mode_top_app_bar_title,
-                            selectedBarcodes.size,
+                        text = BarcodesStrings.homeSelectionModeTopAppBarTitle(
+                            selectedCount = selectedBarcodes.size,
                         ),
                     ),
                     navigationIconResource = CosmosIcons.Close,
                     navigationLabelStringResource = CosmosStringResource.Text(
-                        text = "Close Selection Mode",
+                        text = BarcodesStrings.homeCloseSelectionMode,
                     ),
                     navigationAction = {
                         selectedBarcodes.clear()
@@ -247,11 +236,11 @@ internal fun HomeScreenUI(
                     appBarActions = {
                         CosmosTopAppBarActionButton(
                             iconResource = CosmosIcons.Delete,
-                            onClickLabelStringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_home_content_description_delete_barcode,
+                            onClickLabelStringResource = CosmosStringResource.Text(
+                                text = BarcodesStrings.homeDeleteBarcode,
                             ),
-                            iconContentDescriptionStringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_home_content_description_delete_barcode,
+                            iconContentDescriptionStringResource = CosmosStringResource.Text(
+                                text = BarcodesStrings.homeDeleteBarcode,
                             ),
                             onClick = {
                                 handleUIEvent(HomeScreenUIEvent.OnTopAppBar.DeleteBarcodeButtonClick)
@@ -261,17 +250,17 @@ internal fun HomeScreenUI(
                 )
             } else {
                 CosmosTopAppBar(
-                    titleStringResource = CosmosStringResource.Id(
-                        id = R.string.barcodes_screen_home,
+                    titleStringResource = CosmosStringResource.Text(
+                        text = BarcodesStrings.home,
                     ),
                     appBarActions = {
                         CosmosTopAppBarActionButton(
                             iconResource = CosmosIcons.Settings,
-                            onClickLabelStringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_home_on_click_label_settings,
+                            onClickLabelStringResource = CosmosStringResource.Text(
+                                text = BarcodesStrings.homeOpenSettings,
                             ),
-                            iconContentDescriptionStringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_home_content_description_settings,
+                            iconContentDescriptionStringResource = CosmosStringResource.Text(
+                                text = BarcodesStrings.homeSettings,
                             ),
                             onClick = {
                                 handleUIEvent(HomeScreenUIEvent.OnTopAppBar.SettingsButtonClick)
@@ -286,8 +275,8 @@ internal fun HomeScreenUI(
                 modifier = Modifier
                     .cosmosNavigationBarsSpacer(),
                 iconResource = CosmosIcons.Add,
-                contentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.barcodes_screen_home_content_description_add,
+                contentDescriptionStringResource = CosmosStringResource.Text(
+                    text = BarcodesStrings.homeAdd,
                 ),
                 onClick = {
                     handleUIEvent(HomeScreenUIEvent.OnAddFloatingActionButtonClick)
@@ -328,7 +317,6 @@ internal fun HomeScreenUI(
             )
         }
 
-        // TODO(Abhi): Empty screen UI
         HomeScreenList(
             listItemsDataAndEventHandler = listItemsDataAndEventHandler,
             actionOnSwipeToEnd = {
@@ -389,8 +377,8 @@ private fun HomeScreenList(
             ) {
                 CosmosIcon(
                     iconResource = CosmosIcons.DeleteForever,
-                    contentDescriptionStringResource = CosmosStringResource.Id(
-                        id = R.string.barcodes_screen_home_content_description_delete,
+                    contentDescriptionStringResource = CosmosStringResource.Text(
+                        text = BarcodesStrings.homeDelete,
                     ),
                     tint = CosmosAppTheme.colorScheme.onError,
                     modifier = Modifier

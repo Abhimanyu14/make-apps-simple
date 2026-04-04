@@ -131,8 +131,16 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
+            kotlin.setSrcDirs(
+                listOf(
+                    "src/commonMain/kotlin",
+                ),
+            )
             dependencies {
+                implementation(libs.compose.foundation)
+                implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
+                implementation(libs.compose.ui)
                 implementation(libs.lifecycle.viewmodel)
                 implementation(libs.koin.annotations)
                 implementation(libs.koin.core)
@@ -142,17 +150,8 @@ kotlin {
         val androidMain by getting {
             kotlin.setSrcDirs(
                 listOf(
-                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/core/data",
-                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/core/domain",
-                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/core/presentation",
-                    "src/main/java/com/makeappssimple/abhimanyu/barcodes/android/platform",
+                    "src/main/java",
                 ),
-            )
-            kotlin.exclude(
-                "**/core/di/**",
-                "**/core/presentation/base/**",
-                "**/features/**/ui/**",
-                "**/shared/ui/**",
             )
             dependencies {
                 implementation(project(":barcode-generator"))

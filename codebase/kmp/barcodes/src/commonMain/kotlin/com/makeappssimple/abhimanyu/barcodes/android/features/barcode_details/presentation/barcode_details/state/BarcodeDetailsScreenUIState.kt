@@ -33,6 +33,6 @@ internal data class BarcodeDetailsScreenUIState(
     val barcodeName: String? = null,
     val barcodeValue: String = "",
     val formattedTimestamp: String = "",
-    val formattedTimestampLabelId: Int? = null,
+    val formattedTimestampLabel: String? = null,
     val barcodeImageBitmap: ImageBitmap? = null,
 ) : ScreenUIState

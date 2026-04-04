@@ -27,8 +27,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.pre
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.view_model.CreateBarcodeScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.play_store_review.PlayStoreReviewHandler
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -51,9 +51,8 @@ internal fun CreateBarcodeScreen(
     val showBarcodeValueCopiedToastMessage: () -> Unit = {
         Toast.makeText(
             context,
-            context.getString(
-                R.string.barcodes_screen_create_barcode_barcode_value_copied_toast_message,
-                uiState.barcodeValue,
+            BarcodesStrings.createBarcodeBarcodeValueCopiedToastMessage(
+                barcodeValue = uiState.barcodeValue,
             ),
             Toast.LENGTH_SHORT
         ).show()

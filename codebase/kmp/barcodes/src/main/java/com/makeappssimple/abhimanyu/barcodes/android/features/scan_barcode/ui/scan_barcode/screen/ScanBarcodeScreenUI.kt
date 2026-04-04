@@ -38,6 +38,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.ba
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.components.CameraPermissionPermanentlyDeniedDialog
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CONTENT_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_SCAN_BARCODE
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosElevatedButton
@@ -45,9 +46,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaf
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
 internal fun ScanBarcodeScreenUI(
@@ -56,9 +55,7 @@ internal fun ScanBarcodeScreenUI(
     surfaceRequest: SurfaceRequest?,
     handleUIEvent: (uiEvent: ScanBarcodeScreenUIEvent) -> Unit = {},
 ) {
-    val saveBarcodeFailedSnackbarMessage = CosmosStringResource.Id(
-        id = R.string.barcodes_screen_scan_barcode_save_barcode_failed_snackbar_message,
-    ).text
+    val saveBarcodeFailedSnackbarMessage = BarcodesStrings.scanBarcodeSaveFailedSnackbarMessage
 
     LaunchedEffect(
         key1 = uiState.screenSnackbarType,
@@ -84,8 +81,8 @@ internal fun ScanBarcodeScreenUI(
         snackbarHostState = state.snackbarHostState,
         topBar = {
             CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Id(
-                    id = R.string.barcodes_screen_scan_barcode,
+                titleStringResource = CosmosStringResource.Text(
+                    text = BarcodesStrings.scanBarcode,
                 ),
                 navigationAction = {
                     handleUIEvent(ScanBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick)
@@ -138,8 +135,8 @@ internal fun ScanBarcodeScreenUI(
                 ) {
                     CosmosText(
                         modifier = Modifier,
-                        stringResource = CosmosStringResource.Id(
-                            id = R.string.barcodes_screen_scan_barcode_camera_permission_rationale,
+                        stringResource = CosmosStringResource.Text(
+                            text = BarcodesStrings.scanBarcodeCameraPermissionRationale,
                         ),
                         style = CosmosAppTheme.typography.bodyMedium,
                     )
@@ -148,8 +145,8 @@ internal fun ScanBarcodeScreenUI(
                             .padding(
                                 top = 16.dp,
                             ),
-                        stringResource = CosmosStringResource.Id(
-                            id = R.string.barcodes_screen_scan_barcode_camera_permission_action_label,
+                        stringResource = CosmosStringResource.Text(
+                            text = BarcodesStrings.scanBarcodeCameraPermissionActionLabel,
                         ),
                         onClick = {
                             handleUIEvent(ScanBarcodeScreenUIEvent.OnCameraPermissionRequestButtonClick)

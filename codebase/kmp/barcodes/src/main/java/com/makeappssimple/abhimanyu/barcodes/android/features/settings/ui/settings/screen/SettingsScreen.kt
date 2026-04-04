@@ -24,9 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.event.SettingsScreenUIEventHandler
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.view_model.SettingsScreenViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -39,9 +37,7 @@ internal fun SettingsScreen(
 
     // region navigateToOpenSourceLicensesScreen
     val context = LocalContext.current
-    val openSourceLicensesScreenTitle = CosmosStringResource.Id(
-        id = R.string.barcodes_screen_settings_open_source_licenses,
-    ).text
+    val openSourceLicensesScreenTitle = BarcodesStrings.settingsOpenSourceLicenses
     val navigateToOpenSourceLicensesScreen: () -> Unit = {
         OssLicensesMenuActivity.setActivityTitle(openSourceLicensesScreenTitle)
         context.startActivity(

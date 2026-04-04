@@ -28,8 +28,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.ui.barcode_details.screen.BarcodeDetailsScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
@@ -45,7 +45,7 @@ internal class BarcodeDetailsScreenUITest {
         barcodeName = testBarcodeName,
         barcodeValue = testBarcodeValue,
         formattedTimestamp = formattedTimestamp,
-        formattedTimestampLabelId = R.string.barcodes_screen_barcode_details_barcode_timestamp_created,
+        formattedTimestampLabel = BarcodesStrings.barcodeDetailsBarcodeTimestampCreated,
         barcodeImageBitmap = createRandomBitmap(),
     )
 

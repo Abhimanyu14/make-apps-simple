@@ -14,34 +14,36 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.components
+package com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.dialog
 
 import androidx.compose.runtime.Composable
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialog
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialogData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialogEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
-internal fun CameraPermissionPermanentlyDeniedDialog(
-    onConfirmButtonClick: () -> Unit,
-    onDismissButtonClick: () -> Unit,
+internal fun HomeDeleteBarcodeDialog(
+    selectedBarcodesSize: Int = 0,
+    onConfirmButtonClick: () -> Unit = {},
+    onDismiss: () -> Unit = {},
+    onDismissButtonClick: () -> Unit = {},
 ) {
     CosmosDialog(
         cosmosDialogData = CosmosDialogData(
             isVisible = true,
-            confirmButtonStringResource = CosmosStringResource.Id(
-                id = R.string.barcodes_screen_scan_barcode_camera_permission_denied_dialog_positive_button_text,
+            confirmButtonStringResource = CosmosStringResource.Text(
+                text = BarcodesStrings.homeDeleteBarcodeDialogConfirmButtonLabel,
             ),
-            dismissButtonStringResource = CosmosStringResource.Id(
-                id = R.string.barcodes_screen_scan_barcode_camera_permission_denied_dialog_negative_button_text,
+            dismissButtonStringResource = CosmosStringResource.Text(
+                text = BarcodesStrings.homeDeleteBarcodeDialogDismissButtonLabel,
             ),
-            titleStringResource = CosmosStringResource.Id(
-                id = R.string.barcodes_screen_scan_barcode_camera_permission_denied_dialog_title,
+            titleStringResource = CosmosStringResource.Text(
+                text = BarcodesStrings.homeDeleteBarcodeDialogTitle(selectedBarcodesSize),
             ),
-            messageStringResource = CosmosStringResource.Id(
-                id = R.string.barcodes_screen_scan_barcode_camera_permission_denied_dialog_message,
+            messageStringResource = CosmosStringResource.Text(
+                text = BarcodesStrings.homeDeleteBarcodeDialogMessage(selectedBarcodesSize),
             ),
         ),
         handleEvent = { event ->
@@ -51,7 +53,7 @@ internal fun CameraPermissionPermanentlyDeniedDialog(
                 }
 
                 CosmosDialogEvent.OnDismiss -> {
-                    onDismissButtonClick()
+                    onDismiss()
                 }
 
                 CosmosDialogEvent.OnDismissButtonClick -> {

@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.icons.BarcodesIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemDataEvent
@@ -28,7 +29,6 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosSimpleList
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosNavigationBarsAndImeSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import kotlinx.collections.immutable.persistentListOf
 
 private object HomeMenuBottomSheetConstants {
@@ -49,8 +49,8 @@ internal fun HomeMenuBottomSheet(
             listItemsDataAndEventHandler = persistentListOf(
                 CosmosListItemDataEventDataAndEventHandler(
                     data = CosmosListItemData(
-                        stringResource = CosmosStringResource.Id(
-                            id = R.string.barcodes_screen_home_bottom_sheet_scan_barcode,
+                        stringResource = CosmosStringResource.Text(
+                            text = BarcodesStrings.homeBottomSheetScanBarcode,
                         ),
                         iconResource = BarcodesIcons.Scanner,
                     ),
@@ -69,8 +69,8 @@ internal fun HomeMenuBottomSheet(
                 CosmosListItemDataEventDataAndEventHandler(
                     data =
                         CosmosListItemData(
-                            stringResource = CosmosStringResource.Id(
-                                id = R.string.barcodes_screen_home_bottom_sheet_create_barcode,
+                            stringResource = CosmosStringResource.Text(
+                                text = BarcodesStrings.homeBottomSheetCreateBarcode,
                             ),
                             iconResource = BarcodesIcons.Barcode,
                         ),

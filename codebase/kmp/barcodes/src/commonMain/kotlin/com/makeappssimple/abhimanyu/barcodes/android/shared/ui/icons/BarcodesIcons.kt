@@ -16,17 +16,11 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.icons
 
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosIconResource
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 internal object BarcodesIcons {
-    val Barcode: CosmosIconResource = CosmosIconResource.Id(
-        id = R.drawable.barcodes_icon_barcode_black_24dp,
-    )
-    val Barcode2: CosmosIconResource = CosmosIconResource.Id(
-        id = R.drawable.barcodes_icon_barcode2_black_24dp,
-    )
-    val Scanner: CosmosIconResource = CosmosIconResource.Id(
-        id = R.drawable.barcodes_icon_scanner,
-    )
+    val Barcode: CosmosIconResource = CosmosIcons.TextSnippet
+    val Barcode2: CosmosIconResource = CosmosIcons.TextSnippet
+    val Scanner: CosmosIconResource = CosmosIcons.Search
 }

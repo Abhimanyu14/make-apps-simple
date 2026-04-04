@@ -14,40 +14,33 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.dialog
+package com.makeappssimple.abhimanyu.barcodes.android.shared.ui.components
 
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialog
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialogData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialogEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 
 @Composable
-internal fun HomeDeleteBarcodeDialog(
-    selectedBarcodesSize: Int = 0,
-    onConfirmButtonClick: () -> Unit = {},
-    onDismiss: () -> Unit = {},
-    onDismissButtonClick: () -> Unit = {},
+internal fun CameraPermissionPermanentlyDeniedDialog(
+    onConfirmButtonClick: () -> Unit,
+    onDismissButtonClick: () -> Unit,
 ) {
     CosmosDialog(
         cosmosDialogData = CosmosDialogData(
             isVisible = true,
-            confirmButtonStringResource = CosmosStringResource.Id(
-                id = R.string.barcodes_screen_home_delete_barcode_dialog_confirm_button_label,
+            confirmButtonStringResource = CosmosStringResource.Text(
+                text = "Open Settings",
             ),
-            dismissButtonStringResource = CosmosStringResource.Id(
-                id = R.string.barcodes_screen_home_delete_barcode_dialog_dismiss_button_label,
+            dismissButtonStringResource = CosmosStringResource.Text(
+                text = "Cancel",
             ),
-            titleStringResource = CosmosStringResource.Plural(
-                id = R.plurals.barcodes_screen_home_delete_barcode_dialog_title,
-                count = selectedBarcodesSize,
-                args = listOf(selectedBarcodesSize),
+            titleStringResource = CosmosStringResource.Text(
+                text = "Permission Required",
             ),
-            messageStringResource = CosmosStringResource.Plural(
-                id = R.plurals.barcodes_screen_home_delete_barcode_dialog_message,
-                count = selectedBarcodesSize,
-                args = listOf(selectedBarcodesSize),
+            messageStringResource = CosmosStringResource.Text(
+                text = "Camera permission is required to scan barcodes. Please enable it in settings.",
             ),
         ),
         handleEvent = { event ->
@@ -57,7 +50,7 @@ internal fun HomeDeleteBarcodeDialog(
                 }
 
                 CosmosDialogEvent.OnDismiss -> {
-                    onDismiss()
+                    onDismissButtonClick()
                 }
 
                 CosmosDialogEvent.OnDismissButtonClick -> {

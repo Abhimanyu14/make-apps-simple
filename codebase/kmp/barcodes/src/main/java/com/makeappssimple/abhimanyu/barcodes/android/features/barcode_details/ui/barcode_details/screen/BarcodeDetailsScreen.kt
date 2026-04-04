@@ -30,8 +30,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.pr
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model.BarcodeDetailsScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.util.dpToPx
-import com.makeappssimple.abhimanyu.library.barcodes.android.R
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.min
 
@@ -55,23 +55,22 @@ internal fun BarcodeDetailsScreen(
     val showBarcodeValueCopiedToastMessage: () -> Unit = {
         Toast.makeText(
             context,
-            context.getString(
-                R.string.barcodes_screen_barcode_details_barcode_value_copied_toast_message,
-                uiState.barcodeValue,
+            BarcodesStrings.barcodeDetailsBarcodeValueCopiedToastMessage(
+                barcodeValue = uiState.barcodeValue,
             ),
             Toast.LENGTH_SHORT
         ).show()
     }
-    val formattedTimestampLabelId = remember(
+    val formattedTimestampLabel = remember(
         key1 = uiState.barcodeSource,
     ) {
         when (uiState.barcodeSource) {
             BarcodeSourceDomainModel.Created -> {
-                R.string.barcodes_screen_barcode_details_barcode_timestamp_created
+                BarcodesStrings.barcodeDetailsBarcodeTimestampCreated
             }
 
             BarcodeSourceDomainModel.Scanned -> {
-                R.string.barcodes_screen_barcode_details_barcode_timestamp_scanned
+                BarcodesStrings.barcodeDetailsBarcodeTimestampScanned
             }
         }
     }
@@ -101,7 +100,7 @@ internal fun BarcodeDetailsScreen(
 
     BarcodeDetailsScreenUI(
         uiState = uiState.copy(
-            formattedTimestampLabelId = formattedTimestampLabelId,
+            formattedTimestampLabel = formattedTimestampLabel,
         ),
         handleUIEvent = screenUIEventHandler::handleUIEvent,
     )
