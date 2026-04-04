@@ -21,3 +21,4 @@ public sealed class PlatformEvent {
     public object NavigateToCosmosDesignSystemCatalogActivity : PlatformEvent()
     public object NavigateToFinanceManagerActivity : PlatformEvent()
 }
+

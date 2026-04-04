@@ -1,0 +1,317 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:OptIn(ExperimentalMaterial3Api::class)
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.categories.screen
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
+import com.makeappssimple.abhimanyu.common.extensions.orEmpty
+import com.makeappssimple.abhimanyu.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarsSpacer
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tab_row.MyTabRow
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CATEGORIES
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_CATEGORIES
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.bottom_sheet.CategoriesScreenBottomSheetType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.event.CategoriesScreenUIEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.snackbar.CategoriesScreenSnackbarType
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.state.CategoriesScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.categories.screen.CategoriesScreenUIConstants.PAGE_COUNT
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.BottomSheetHandler
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.CommonScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common.state.rememberCommonScreenUIState
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoriesDeleteConfirmationBottomSheet
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoriesDeleteConfirmationBottomSheetEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoriesSetAsDefaultConfirmationBottomSheet
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoriesSetAsDefaultConfirmationBottomSheetData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoriesSetAsDefaultConfirmationBottomSheetEvent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoryMenuBottomSheet
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category.CategoryMenuBottomSheetData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.grid.CategoriesGrid
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.grid_item.CategoriesGridItemData
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.scaffold.MyScaffold
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.top_app_bar.MyTopAppBar
+import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.launch
+
+private object CategoriesScreenUIConstants {
+    const val PAGE_COUNT = 3
+}
+
+@Composable
+internal fun CategoriesScreenUI(
+    uiState: CategoriesScreenUIState,
+    state: CommonScreenUIState = rememberCommonScreenUIState(),
+    handleUIEvent: (uiEvent: CategoriesScreenUIEvent) -> Unit = {},
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val pagerState: PagerState = rememberPagerState(
+        pageCount = { PAGE_COUNT },
+    )
+
+    val setDefaultCategoryFailedSnackbarText = CosmosStringResource.Id(
+        id = R.string.finance_manager_screen_categories_set_default_category_failed,
+    ).text
+    val setDefaultCategorySuccessfulSnackbarText = CosmosStringResource.Id(
+        id = R.string.finance_manager_screen_categories_set_default_category_successful,
+    ).text
+
+    LaunchedEffect(
+        key1 = uiState.screenSnackbarType,
+        key2 = handleUIEvent,
+    ) {
+        when (uiState.screenSnackbarType) {
+            CategoriesScreenSnackbarType.None -> {}
+
+            CategoriesScreenSnackbarType.SetDefaultCategoryFailed -> {
+                launch {
+                    val result = state.snackbarHostState.showSnackbar(
+                        message = setDefaultCategoryFailedSnackbarText,
+                    )
+                    when (result) {
+                        SnackbarResult.ActionPerformed -> {}
+                        SnackbarResult.Dismissed -> {
+                            handleUIEvent(CategoriesScreenUIEvent.OnSnackbarDismissed)
+                        }
+                    }
+                }
+            }
+
+            CategoriesScreenSnackbarType.SetDefaultCategorySuccessful -> {
+                launch {
+                    val result = state.snackbarHostState.showSnackbar(
+                        message = setDefaultCategorySuccessfulSnackbarText,
+                    )
+                    when (result) {
+                        SnackbarResult.ActionPerformed -> {}
+                        SnackbarResult.Dismissed -> {
+                            handleUIEvent(CategoriesScreenUIEvent.OnSnackbarDismissed)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    BottomSheetHandler(
+        isBottomSheetVisible = uiState.isBottomSheetVisible,
+        screenBottomSheetType = uiState.screenBottomSheetType,
+        coroutineScope = state.coroutineScope,
+        modalBottomSheetState = state.modalBottomSheetState,
+        keyboardController = state.keyboardController,
+    )
+
+    MyScaffold(
+        modifier = Modifier
+            .testTag(
+                tag = SCREEN_CATEGORIES,
+            )
+            .fillMaxSize(),
+        sheetContent = {
+            when (uiState.screenBottomSheetType) {
+                is CategoriesScreenBottomSheetType.DeleteConfirmation -> {
+                    CategoriesDeleteConfirmationBottomSheet(
+                        handleEvent = { event ->
+                            when (event) {
+                                CategoriesDeleteConfirmationBottomSheetEvent.OnNegativeButtonClick -> {
+                                    handleUIEvent(CategoriesScreenUIEvent.OnCategoriesDeleteConfirmationBottomSheet.NegativeButtonClick)
+                                }
+
+                                CategoriesDeleteConfirmationBottomSheetEvent.OnPositiveButtonClick -> {
+                                    handleUIEvent(CategoriesScreenUIEvent.OnCategoriesDeleteConfirmationBottomSheet.PositiveButtonClick)
+                                }
+                            }
+                        },
+                    )
+                }
+
+                is CategoriesScreenBottomSheetType.None -> {
+                    CosmosVerticalSpacer()
+                }
+
+                is CategoriesScreenBottomSheetType.SetAsDefaultConfirmation -> {
+                    CategoriesSetAsDefaultConfirmationBottomSheet(
+                        data = CategoriesSetAsDefaultConfirmationBottomSheetData(
+                            transactionType = uiState.transactionTypeTabs[pagerState.settledPage],
+                        ),
+                        handleEvent = { event ->
+                            when (event) {
+                                CategoriesSetAsDefaultConfirmationBottomSheetEvent.OnNegativeButtonClick -> {
+                                    handleUIEvent(CategoriesScreenUIEvent.OnCategoriesSetAsDefaultConfirmationBottomSheet.NegativeButtonClick)
+                                }
+
+                                CategoriesSetAsDefaultConfirmationBottomSheetEvent.OnPositiveButtonClick -> {
+                                    handleUIEvent(
+                                        CategoriesScreenUIEvent.OnCategoriesSetAsDefaultConfirmationBottomSheet.PositiveButtonClick(
+                                            selectedTabIndex = pagerState.settledPage,
+                                        )
+                                    )
+                                }
+                            }
+                        },
+                    )
+                }
+
+                is CategoriesScreenBottomSheetType.Menu -> {
+                    CategoryMenuBottomSheet(
+                        data = CategoryMenuBottomSheetData(
+                            isDeleteVisible = uiState.screenBottomSheetType.isDeleteVisible,
+                            isEditVisible = uiState.screenBottomSheetType.isEditVisible,
+                            isSetAsDefaultVisible = uiState.screenBottomSheetType.isSetAsDefaultVisible,
+                        ),
+                        onDeleteClick = {
+                            handleUIEvent(
+                                CategoriesScreenUIEvent.OnCategoryMenuBottomSheet.DeleteButtonClick(
+                                    categoryId = uiState.screenBottomSheetType.categoryId,
+                                )
+                            )
+                        },
+                        onEditClick = {
+                            handleUIEvent(
+                                CategoriesScreenUIEvent.OnCategoryMenuBottomSheet.EditButtonClick(
+                                    categoryId = uiState.screenBottomSheetType.categoryId,
+                                )
+                            )
+                        },
+                        onSetAsDefaultClick = {
+                            handleUIEvent(
+                                CategoriesScreenUIEvent.OnCategoryMenuBottomSheet.SetAsDefaultButtonClick(
+                                    categoryId = uiState.screenBottomSheetType.categoryId,
+                                )
+                            )
+                        },
+                    )
+                }
+            }
+        },
+        sheetState = state.modalBottomSheetState,
+        snackbarHostState = state.snackbarHostState,
+        topBar = {
+            MyTopAppBar(
+                titleTextStringResourceId = R.string.finance_manager_screen_categories_appbar_title,
+                onNavigationButtonClick = {
+                    handleUIEvent(CategoriesScreenUIEvent.OnTopAppBarNavigationButtonClick)
+                },
+            )
+        },
+        floatingActionButton = {
+            CosmosCircularFloatingActionButton(
+                modifier = Modifier
+                    .cosmosNavigationBarsSpacer(),
+                iconResource = CosmosIcons.Add,
+                contentDescriptionStringResource = CosmosStringResource.Id(
+                    id = R.string.finance_manager_screen_categories_floating_action_button_content_description,
+                ),
+                onClick = {
+                    handleUIEvent(
+                        CategoriesScreenUIEvent.OnFloatingActionButtonClick(
+                            transactionType = when (pagerState.settledPage) {
+                                0 -> {
+                                    TransactionType.Expense.title
+                                }
+
+                                1 -> {
+                                    TransactionType.Income.title
+                                }
+
+                                else -> {
+                                    TransactionType.Investment.title
+                                }
+                            },
+                        )
+                    )
+                },
+            )
+        },
+        onClick = state.focusManager::clearFocus,
+        isModalBottomSheetVisible = uiState.isBottomSheetVisible,
+        isBackHandlerEnabled = uiState.screenBottomSheetType != CategoriesScreenBottomSheetType.None,
+        coroutineScope = state.coroutineScope,
+        onBottomSheetDismiss = {
+            handleUIEvent(CategoriesScreenUIEvent.OnNavigationBackButtonClick)
+        },
+    ) {
+        Column(
+            modifier = Modifier
+                .testTag(
+                    tag = SCREEN_CONTENT_CATEGORIES,
+                )
+                .fillMaxSize()
+                .cosmosNavigationBarLandscapeSpacer(),
+        ) {
+            MyTabRow(
+                selectedTabIndex = pagerState.currentPage,
+                tabDataList = uiState.tabData,
+                updateSelectedTabIndex = { updatedSelectedTabIndex ->
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(updatedSelectedTabIndex)
+                    }
+                },
+            )
+            HorizontalPager(
+                state = pagerState,
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier
+                    .weight(
+                        weight = 1F,
+                    ),
+            ) { pageIndex ->
+                uiState.transactionTypeTabs.getOrNull(
+                    index = pageIndex,
+                )?.let { transactionType ->
+                    val categoriesGridItemDataList: ImmutableList<CategoriesGridItemData> =
+                        uiState.categoriesGridItemDataMap[transactionType].orEmpty()
+                    CategoriesGrid(
+                        bottomPadding = 80.dp,
+                        topPadding = 8.dp,
+                        categoriesGridItemDataList = categoriesGridItemDataList,
+                        onItemClick = { index ->
+                            handleUIEvent(
+                                CategoriesScreenUIEvent.OnCategoriesGridItemClick(
+                                    isDeleteVisible = categoriesGridItemDataList[index].isDeleteVisible.orFalse(),
+                                    isEditVisible = categoriesGridItemDataList[index].isEditVisible.orFalse(),
+                                    isSetAsDefaultVisible = categoriesGridItemDataList[index].isSetAsDefaultVisible.orFalse(),
+                                    categoryId = categoriesGridItemDataList[index].category.id,
+                                )
+                            )
+                        },
+                    )
+                }
+            }
+        }
+    }
+}

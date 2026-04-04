@@ -1,0 +1,146 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.view_model
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
+import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeSourceDomainModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.InsertBarcodesUseCase
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
+import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.navigation.ScanBarcodeScreenArgs
+import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.snackbar.ScanBarcodeScreenSnackbarType
+import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.presentation.scan_barcode.state.ScanBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
+import com.makeappssimple.abhimanyu.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.result.MyResult
+import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
+
+@KoinViewModel
+internal class ScanBarcodeScreenViewModel(
+    analyticsKit: AnalyticsKit,
+    barcodesNavigationKit: BarcodesNavigationKit,
+    coroutineScope: CoroutineScope,
+    savedStateHandle: SavedStateHandle,
+    private val insertBarcodesUseCase: InsertBarcodesUseCase,
+    val dateTimeKit: DateTimeKit,
+    val coroutineDispatcherProvider: CoroutineDispatcherProvider,
+    val logKit: LogKit,
+) : ScreenViewModel(
+    coroutineScope = coroutineScope,
+    analyticsKit = analyticsKit,
+    barcodesNavigationKit = barcodesNavigationKit,
+    barcodesScreen = BarcodesScreen.ScanBarcode,
+    logKit = logKit,
+) {
+    // region screen args
+    private val screenArgs = ScanBarcodeScreenArgs(
+        savedStateHandle = savedStateHandle,
+    )
+    // endregion
+
+    // region uiState and uiStateEvents
+    private val _uiState: MutableStateFlow<ScanBarcodeScreenUIState> =
+        MutableStateFlow(
+            value = ScanBarcodeScreenUIState(
+                isDeeplink = screenArgs.isDeeplink.orFalse(),
+            ),
+        )
+    val uiState: StateFlow<ScanBarcodeScreenUIState> = _uiState.asStateFlow()
+    // endregion
+
+    fun onCameraPermissionChanged(
+        isCameraPermissionGranted: Boolean,
+    ) {
+        _uiState.update {
+            it.copy(
+                isCameraPermissionGranted = isCameraPermissionGranted,
+            )
+        }
+    }
+
+    fun onSnackbarDismissed() {
+        _uiState.update {
+            it.copy(
+                screenSnackbarType = ScanBarcodeScreenSnackbarType.None,
+            )
+        }
+    }
+
+    fun setIsScanning(
+        isScanning: Boolean,
+    ) {
+        _uiState.update {
+            it.copy(
+                isScanning = isScanning,
+            )
+        }
+    }
+
+    fun setPermissionPermanentlyDeniedDialogVisible(
+        isVisible: Boolean,
+    ) {
+        _uiState.update {
+            it.copy(
+                showPermissionPermanentlyDeniedDialog = isVisible,
+            )
+        }
+    }
+
+    fun saveBarcode(
+        barcodeFormat: Int,
+        barcodeValue: String,
+    ) {
+        viewModelScope.launch {
+            val result: MyResult<Long> = insertBarcodesUseCase(
+                source = BarcodeSourceDomainModel.Scanned,
+                format = barcodeFormat,
+                value = barcodeValue,
+            )
+            when (result) {
+                is MyResult.Error -> {
+                    _uiState.update {
+                        it.copy(
+                            isScanning = true,
+                            screenSnackbarType = ScanBarcodeScreenSnackbarType.SaveBarcodeFailed,
+                        )
+                    }
+                }
+
+                is MyResult.Loading -> {}
+
+                is MyResult.Success -> {
+                    val barcodeId = result.data.toInt()
+                    navigateUp().join()
+                    navigateToBarcodeDetailsScreen(
+                        barcodeId = barcodeId,
+                    )
+                }
+            }
+        }
+    }
+}

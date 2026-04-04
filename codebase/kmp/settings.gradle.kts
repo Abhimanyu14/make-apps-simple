@@ -25,6 +25,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
@@ -36,9 +37,14 @@ includeBuild("build-logic")
 
 include(":androidApp")
 include(":composeApp")
+include(":app-barcodes")
 include(":app-cosmos-design-system-catalog")
+include(":app-finance-manager")
 include(":app-make-apps-simple")
+include(":barcode-generator")
+include(":barcodes")
 include(":common")
 include(":core-date-time")
 include(":cosmos-design-system")
 include(":cosmos-design-system-catalog")
+include(":finance-manager")

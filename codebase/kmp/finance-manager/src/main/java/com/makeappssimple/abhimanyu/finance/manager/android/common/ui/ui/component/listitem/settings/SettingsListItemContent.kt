@@ -1,0 +1,79 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.settings
+
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ListItem
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.makeappssimple.abhimanyu.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.toggle.CosmosToggle
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions.conditionalClickable
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+
+@Composable
+internal fun SettingsListItemContent(
+    modifier: Modifier = Modifier,
+    data: SettingsListItemContentData,
+    handleEvent: (event: SettingsListItemContentEvent) -> Unit = {},
+) {
+    ListItem(
+        leadingContent = data.iconResource?.let {
+            {
+                CosmosIcon(
+                    iconResource = data.iconResource,
+                    tint = CosmosAppTheme.colorScheme.onBackground,
+                )
+            }
+        },
+        headlineContent = {
+            CosmosText(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                stringResource = data.stringResource,
+                style = CosmosAppTheme.typography.bodyLarge
+                    .copy(
+                        color = CosmosAppTheme.colorScheme.onBackground,
+                    ),
+            )
+        },
+        trailingContent = if (data.hasToggle) {
+            {
+                CosmosToggle(
+                    isChecked = data.isChecked.orFalse(),
+                    onCheckedChange = {
+                        handleEvent(SettingsListItemContentEvent.OnCheckedChange)
+                    },
+                )
+            }
+        } else {
+            null
+        },
+        modifier = modifier
+            .conditionalClickable(
+                onClick = if (data.isEnabled) {
+                    {
+                        handleEvent(SettingsListItemContentEvent.OnClick)
+                    }
+                } else {
+                    null
+                },
+            ),
+    )
+}

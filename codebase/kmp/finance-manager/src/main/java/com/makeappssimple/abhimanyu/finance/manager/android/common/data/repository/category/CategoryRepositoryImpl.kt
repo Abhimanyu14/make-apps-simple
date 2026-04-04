@@ -1,0 +1,166 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.category
+
+import androidx.sqlite.SQLiteException
+import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
+import com.makeappssimple.abhimanyu.common.extensions.map
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.model.asEntity
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+
+internal class CategoryRepositoryImpl(
+    private val categoryDao: CategoryDao,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
+) : CategoryRepository {
+    override suspend fun deleteCategories(
+        vararg categories: Category,
+    ): Boolean {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
+            try {
+                categoryDao.deleteCategories(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                ) == categories.size
+            } catch (
+                sqliteException: SQLiteException,
+            ) {
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
+            }
+        }
+    }
+
+    override suspend fun deleteCategoryById(
+        id: Int,
+    ): Int {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
+            try {
+                categoryDao.deleteCategoryById(
+                    id = id,
+                )
+            } catch (
+                sqliteException: SQLiteException,
+            ) {
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
+            }
+        }
+    }
+
+    override suspend fun getAllCategories(): ImmutableList<Category> {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
+            try {
+                categoryDao.getAllCategories().map(
+                    transform = CategoryEntity::asExternalModel,
+                )
+            } catch (
+                sqliteException: SQLiteException,
+            ) {
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
+            }
+        }
+    }
+
+    override fun getAllCategoriesFlow(): Flow<ImmutableList<Category>> {
+        return categoryDao
+            .getAllCategoriesFlow()
+            .catch { throwable: Throwable ->
+                if (throwable is SQLiteException) {
+                    error(
+                        message = "Database Error: ${throwable.localizedMessage}",
+                    )
+                }
+            }
+            .map {
+                it.map(
+                    transform = CategoryEntity::asExternalModel,
+                )
+            }
+    }
+
+    override suspend fun getCategoryById(
+        id: Int,
+    ): Category? {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
+            try {
+                categoryDao.getCategoryById(
+                    id = id,
+                )?.asExternalModel()
+            } catch (
+                sqliteException: SQLiteException,
+            ) {
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
+            }
+        }
+    }
+
+    override suspend fun insertCategories(
+        vararg categories: Category,
+    ): ImmutableList<Long> {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
+            try {
+                categoryDao.insertCategories(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                ).toImmutableList()
+            } catch (
+                sqliteException: SQLiteException,
+            ) {
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
+            }
+        }
+    }
+
+    override suspend fun updateCategories(
+        vararg categories: Category,
+    ): Int {
+        return coroutineDispatcherProvider.executeOnIoDispatcher {
+            try {
+                categoryDao.updateCategories(
+                    categories = categories.map(
+                        transform = Category::asEntity,
+                    ).toTypedArray(),
+                )
+            } catch (
+                sqliteException: SQLiteException,
+            ) {
+                error(
+                    message = "Database Error: ${sqliteException.localizedMessage}",
+                )
+            }
+        }
+    }
+}

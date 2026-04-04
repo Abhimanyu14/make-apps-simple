@@ -1,0 +1,101 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:OptIn(ExperimentalMaterial3Api::class)
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.top_app_bar
+
+import androidx.annotation.StringRes
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import com.makeappssimple.abhimanyu.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.navigation_back_button.CosmosNavigationBackButton
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.navigation_back_button.CosmosNavigationBackButtonEvents
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.NullableComposableContent
+
+@Composable
+internal fun MyTopAppBar(
+    modifier: Modifier = Modifier,
+    @StringRes titleTextStringResourceId: Int,
+    onNavigationButtonClick: (() -> Unit)? = null,
+    appBarActions: NullableComposableContent = null,
+) {
+    val isNavigationButtonVisible = remember(
+        key1 = onNavigationButtonClick,
+    ) {
+        onNavigationButtonClick.isNotNull()
+    }
+
+    MyTopAppBarUI(
+        titleStringResource = CosmosStringResource.Id(
+            id = titleTextStringResourceId,
+        ),
+        modifier = modifier,
+        appBarActions = appBarActions,
+        navigationButton = {
+            if (isNavigationButtonVisible) {
+                CosmosNavigationBackButton(
+                    handleEvent = { events ->
+                        when (events) {
+                            is CosmosNavigationBackButtonEvents.OnClick -> {
+                                onNavigationButtonClick?.invoke()
+                            }
+                        }
+                    },
+                )
+            }
+        },
+    )
+}
+
+@Composable
+private fun MyTopAppBarUI(
+    modifier: Modifier = Modifier,
+    titleStringResource: CosmosStringResource,
+    appBarActions: NullableComposableContent,
+    navigationButton: ComposableContent,
+) {
+    CenterAlignedTopAppBar(
+        title = {
+            CosmosText(
+                stringResource = titleStringResource,
+                style = CosmosAppTheme.typography.titleLarge
+                    .copy(
+                        color = CosmosAppTheme.colorScheme.primary,
+                    ),
+            )
+        },
+        navigationIcon = {
+            navigationButton()
+        },
+        actions = {
+            appBarActions?.invoke()
+        },
+        colors = TopAppBarDefaults
+            .centerAlignedTopAppBarColors(
+                containerColor = CosmosAppTheme.colorScheme.background,
+            ),
+        modifier = modifier,
+    )
+}

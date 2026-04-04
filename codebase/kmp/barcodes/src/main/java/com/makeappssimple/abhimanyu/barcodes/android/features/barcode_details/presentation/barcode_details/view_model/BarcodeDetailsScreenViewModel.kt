@@ -1,0 +1,271 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model
+
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
+import com.makeappssimple.abhimanyu.barcode.generator.android.BarcodeGenerator
+import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeDomainModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.DeleteBarcodesUseCase
+import com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barcode.GetBarcodeByIdUseCase
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.base.ScreenViewModel
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
+import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
+import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.snackbar.BarcodeDetailsScreenSnackbarType
+import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIStateEvents
+import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.navigation.BarcodeDetailsScreenArgs
+import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
+import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
+import com.makeappssimple.abhimanyu.common.clipboard.ClipboardKit
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.common.result.MyResult
+import com.makeappssimple.abhimanyu.common.util.defaultObjectStateIn
+import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
+
+@KoinViewModel
+internal class BarcodeDetailsScreenViewModel(
+    analyticsKit: AnalyticsKit,
+    barcodesNavigationKit: BarcodesNavigationKit,
+    coroutineScope: CoroutineScope,
+    logKit: LogKit,
+    savedStateHandle: SavedStateHandle,
+    private val barcodeGenerator: BarcodeGenerator,
+    private val buildConfigKit: BuildConfigKit,
+    private val clipboardKit: ClipboardKit,
+    private val dateTimeKit: DateTimeKit,
+    private val deleteBarcodesUseCase: DeleteBarcodesUseCase,
+    private val getBarcodeByIdUseCase: GetBarcodeByIdUseCase,
+) : ScreenViewModel(
+    coroutineScope = coroutineScope,
+    analyticsKit = analyticsKit,
+    barcodesNavigationKit = barcodesNavigationKit,
+    barcodesScreen = BarcodesScreen.BarcodeDetails,
+    logKit = logKit,
+) {
+    // region screen args
+    private val screenArgs = BarcodeDetailsScreenArgs(
+        savedStateHandle = savedStateHandle,
+    )
+    // endregion
+
+    // region state
+    private val barcodeBitmapSize = MutableStateFlow(
+        value = 0,
+    )
+    private val barcode: MutableStateFlow<BarcodeDomainModel?> =
+        MutableStateFlow(
+            value = null,
+        )
+    private val isDeleteBarcodeDialogVisible = MutableStateFlow(
+        value = false,
+    )
+    private val isError = MutableStateFlow(
+        value = false,
+    )
+    private val screenSnackbarType: MutableStateFlow<BarcodeDetailsScreenSnackbarType> =
+        MutableStateFlow(
+            value = BarcodeDetailsScreenSnackbarType.None,
+        )
+    private val barcodeBitmap: StateFlow<ImageBitmap?> = combine(
+        flow = barcode,
+        flow2 = barcodeBitmapSize,
+    ) {
+            barcode,
+            barcodeBitmapSize,
+        ->
+        if (barcode == null || barcodeBitmapSize == 0) {
+            null
+        } else {
+            barcodeGenerator.generateBarcode(
+                data = barcode.value,
+                visionBarcodeFormat = barcode.format,
+                width = barcodeBitmapSize,
+                height = barcodeBitmapSize,
+                barcodeColor = CosmosColor.OnBackground.color,
+                backgroundColor = CosmosColor.Background.color,
+            )
+        }
+    }.defaultObjectStateIn(
+        scope = viewModelScope,
+        initialValue = null,
+    )
+    // endregion
+
+    // region uiState and uiStateEvents
+    val uiState: StateFlow<BarcodeDetailsScreenUIState> = combine(
+        flow = barcode,
+        flow2 = barcodeBitmap,
+        flow3 = isDeleteBarcodeDialogVisible,
+        flow4 = isError,
+        flow5 = screenSnackbarType,
+    ) {
+            barcode,
+            barcodeBitmap,
+            isDeleteBarcodeDialogVisible,
+            isError,
+            screenSnackbarType,
+        ->
+        if (isError) {
+            BarcodeDetailsScreenUIState(
+                isError = true,
+                screenSnackbarType = screenSnackbarType,
+            )
+        } else if (barcode == null) {
+            BarcodeDetailsScreenUIState(
+                isLoading = true,
+                screenSnackbarType = screenSnackbarType,
+            )
+        } else {
+            BarcodeDetailsScreenUIState(
+                barcodeSource = barcode.source,
+                isDeleteBarcodeDialogVisible = isDeleteBarcodeDialogVisible,
+                screenSnackbarType = screenSnackbarType,
+                barcodeId = barcode.id,
+                barcodeName = barcode.name,
+                barcodeValue = barcode.value,
+                formattedTimestamp = dateTimeKit.getFormattedDateAndTime(
+                    timestamp = barcode.timestamp,
+                ),
+                barcodeImageBitmap = barcodeBitmap,
+            )
+        }
+    }.defaultObjectStateIn(
+        scope = viewModelScope,
+        initialValue = BarcodeDetailsScreenUIState(
+            isLoading = true,
+        ),
+    )
+    val uiStateEvents: BarcodeDetailsScreenUIStateEvents =
+        BarcodeDetailsScreenUIStateEvents(
+            resetScreenSnackbarType = ::resetScreenSnackbarType,
+            updateBarcodeBitmapSize = ::updateBarcodeBitmapSize,
+            updateIsDeleteBarcodeDialogVisible = ::updateIsDeleteBarcodeDialogVisible,
+        )
+    // endregion
+
+    override fun fetchData(): Job {
+        return viewModelScope.launch {
+            fetchBarcode()
+        }
+    }
+
+    fun deleteBarcode() {
+        viewModelScope.launch {
+            barcode.value?.let {
+                val result = deleteBarcodesUseCase(
+                    barcodes = arrayOf(it),
+                )
+                when (result) {
+                    is MyResult.Error -> {
+                        updateScreenSnackbarType(
+                            updatedBarcodeDetailsScreenSnackbarType = BarcodeDetailsScreenSnackbarType.DeleteBarcodeFailed,
+                        )
+                    }
+
+                    is MyResult.Loading -> {}
+
+                    is MyResult.Success -> {
+                        navigateUp()
+                    }
+                }
+            }
+        }
+    }
+
+    fun copyToClipboard(
+        label: String,
+        text: String,
+    ): Boolean {
+        return clipboardKit.copyToClipboard(
+            label = label,
+            text = text,
+        )
+    }
+
+    fun shouldShowCopiedToClipboardToastMessage(): Boolean {
+        return !buildConfigKit.isAndroidApiEqualToOrAboveApi33()
+    }
+
+    // region state events
+    private fun resetScreenSnackbarType(): Job {
+        return updateScreenSnackbarType(
+            updatedBarcodeDetailsScreenSnackbarType = BarcodeDetailsScreenSnackbarType.None,
+        )
+    }
+
+    private fun updateBarcodeBitmapSize(
+        updatedBarcodeBitmapSize: Int,
+    ) {
+        barcodeBitmapSize.update {
+            updatedBarcodeBitmapSize
+        }
+    }
+
+    private fun updateIsDeleteBarcodeDialogVisible(
+        updatedIsDeleteBarcodeDialogVisible: Boolean,
+    ) {
+        isDeleteBarcodeDialogVisible.update {
+            updatedIsDeleteBarcodeDialogVisible
+        }
+    }
+
+    private fun updateScreenSnackbarType(
+        updatedBarcodeDetailsScreenSnackbarType: BarcodeDetailsScreenSnackbarType,
+    ): Job {
+        return viewModelScope.launch {
+            screenSnackbarType.update {
+                updatedBarcodeDetailsScreenSnackbarType
+            }
+        }
+    }
+    // endregion
+
+    private suspend fun fetchBarcode() {
+        screenArgs.originalBarcodeId?.let { originalBarcodeId ->
+            val result = getBarcodeByIdUseCase(
+                id = originalBarcodeId,
+            )
+            isError.update {
+                false
+            }
+            when (result) {
+                is MyResult.Error -> {
+                    isError.update {
+                        true
+                    }
+                }
+
+                is MyResult.Loading -> {}
+
+                is MyResult.Success -> {
+                    barcode.value = result.data
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.model
+
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
+import kotlin.math.abs
+
+internal fun Amount.toUnsignedString(): String {
+    return toSignedString(
+        isPositive = false,
+        isNegative = false
+    )
+}
+
+internal fun Amount.toSignedString(
+    isPositive: Boolean = false,
+    isNegative: Boolean = false,
+): String {
+    val formattedValue = abs(
+        n = value,
+    ).toString().toIndianCurrencyFormat()
+    if (isPositive) {
+        return "+ ${currency.symbol}$formattedValue"
+    }
+    if (isNegative) {
+        return "- ${currency.symbol}$formattedValue"
+    }
+    return "${currency.symbol}$formattedValue"
+}
+
+internal fun Amount.toDefaultString(): String {
+    val formattedValue = abs(
+        n = value,
+    ).toString().toIndianCurrencyFormat()
+    return if (value >= 0) {
+        "${currency.symbol}$formattedValue"
+    } else {
+        "- ${currency.symbol}$formattedValue"
+    }
+}
+
+// TODO(Abhi): Extend for currencies other than INR
+private fun String.toIndianCurrencyFormat(): String {
+    return if (length > 3) {
+        val regex = "(\\d+?)(?=(\\d\\d)+(\\d)(?!\\d))(\\.\\d+)?"
+        replace(
+            regex = Regex(
+                pattern = regex,
+            ),
+            replacement = "$1,",
+        )
+    } else {
+        this
+    }
+}

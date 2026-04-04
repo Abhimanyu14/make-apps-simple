@@ -1,91 +1,32 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
+# Make Apps Simple
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+A collection of Android applications and shared modules.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## List of Apps
 
-### Build and Run Android Application
+1. **Barcodes**: An app to scan and generate barcodes.
+2. **Cosmos Design System Catalog**: A showcase app for the Cosmos Design System.
+3. **Finance Manager**: A comprehensive app to track and manage personal finances.
+4. **Make Apps Simple**: The main entry point or umbrella application.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## Project Structure
 
-### Build and Run Desktop (JVM) Application
+### Application Modules
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+- `:app-barcodes`: Android application module for the Barcodes app.
+- `:app-cosmos-design-system-catalog`: Android application module for the Design System showcase.
+- `:app-finance-manager`: Android application module for the Finance Manager app.
+- `:app-make-apps-simple`: The primary application module for the project.
 
-### Build and Run Web Application
+### Feature Modules
 
-To build and run the development version of the web app, use the run configuration from the run widget
-in your IDE's toolbar or run it directly from the terminal:
-- for the Wasm target (faster, modern browsers):
-  - on macOS/Linux
-    ```shell
-    ./gradlew :composeApp:wasmJsBrowserDevelopmentRun
-    ```
-  - on Windows
-    ```shell
-    .\gradlew.bat :composeApp:wasmJsBrowserDevelopmentRun
-    ```
-- for the JS target (slower, supports older browsers):
-  - on macOS/Linux
-    ```shell
-    ./gradlew :composeApp:jsBrowserDevelopmentRun
-    ```
-  - on Windows
-    ```shell
-    .\gradlew.bat :composeApp:jsBrowserDevelopmentRun
-    ```
+- `:barcodes`: Core logic and UI components specifically for barcode-related features.
+- `:cosmos-design-system-catalog`: Logic and screen implementations for the design system catalog.
+- `:finance-manager`: Core logic and UI components for finance tracking and management.
 
-### Build and Run iOS Application
+### Shared Modules
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
----
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
-
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
-
-### Build Production Web Application (with automatic fallback)
-
-To build the production version of the web app with automatic fallback (supporting both modern browsers via Wasm and older browsers via JS), run the following command from the `kmp` directory:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:composeCompatibilityBrowserDistribution
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:composeCompatibilityBrowserDistribution
-  ```
-
-The generated files (HTML, Wasm, JS, and resources) will be located in:
-`composeApp/build/dist/compose/productionDistribution`
+- `:barcode-generator`: Utility module for generating various barcode formats.
+- `:common`: Project-wide shared utilities, extensions, and base classes.
+- `:core-date-time`: Dedicated module for date and time manipulation using `kotlinx.datetime`.
+- `:cosmos-design-system`: The custom Design System component library used across all apps.

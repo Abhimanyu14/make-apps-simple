@@ -1,0 +1,44 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.finance.manager.android.platform.di
+
+import android.content.Context
+import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
+import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.alarm.AlarmKitImpl
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
+
+@Module
+internal class AlarmKitModule {
+    @Single
+    internal fun providesAlarmKit(
+        context: Context,
+        dateTimeKit: DateTimeKit,
+        logKit: LogKit,
+        financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
+    ): AlarmKit {
+        return AlarmKitImpl(
+            context = context,
+            dateTimeKit = dateTimeKit,
+            financeManagerPreferencesRepository = financeManagerPreferencesRepository,
+            logKit = logKit,
+        )
+    }
+}
