@@ -6,8 +6,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import make_apps_simple.composeapp.generated.resources.Res
-import make_apps_simple.composeapp.generated.resources.lexend
+import com.makeappssimple.abhimanyu.cosmos.design.system.resources.Res
+import com.makeappssimple.abhimanyu.cosmos.design.system.resources.lexend
 import org.jetbrains.compose.resources.Font
 
 @Composable

@@ -18,6 +18,7 @@
 
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -82,6 +83,11 @@ composeCompiler {
     metricsDestination = layout.buildDirectory.dir("compose_compiler")
 }
 
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.makeappssimple.abhimanyu.cosmos.design.system.resources"
+}
+
 dependencies {
     detektPlugins(libs.bundles.detekt)
 
@@ -104,6 +110,10 @@ kotlin {
         }
     }
     js(IR) {
+        browser()
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
         browser()
     }
 

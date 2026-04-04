@@ -16,6 +16,7 @@
 
 @file:Suppress("UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -63,15 +64,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.bundles.koin)
-    implementation(libs.navigation.compose)
-
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.koin.bom))
 
@@ -84,15 +76,28 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
-    iosArm64()
-    iosSimulatorArm64()
+    listOf(
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "CosmosDesignSystemCatalog"
+            isStatic = true
+        }
+    }
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
-    js(IR) {
+    js {
         browser()
+        binaries.executable()
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        binaries.executable()
     }
 
     sourceSets {
@@ -103,12 +108,30 @@ kotlin {
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
-                implementation(libs.compose.ui.tooling.preview)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(libs.test.kotlin)
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation(project(":common"))
+
+                implementation(libs.androidx.activity.compose)
+                implementation(libs.androidx.compose.foundation)
+                implementation(libs.androidx.compose.material3)
+                implementation(libs.androidx.compose.runtime)
+                implementation(libs.androidx.compose.ui.tooling.preview)
+                implementation(libs.bundles.koin)
+                implementation(libs.navigation.compose)
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(libs.kotlinx.coroutines.swing)
             }
         }
     }

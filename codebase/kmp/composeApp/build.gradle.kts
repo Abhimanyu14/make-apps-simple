@@ -57,6 +57,7 @@ kotlin {
         }
 
         commonMain.dependencies {
+            implementation(project(":cosmos-design-system"))
             implementation(libs.compose.components.resources)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)

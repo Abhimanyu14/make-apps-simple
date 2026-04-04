@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Unspecified
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
+
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,7 +33,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.library.cosmos.design.system.android.R
+import com.makeappssimple.abhimanyu.cosmos.design.system.resources.Res
+import com.makeappssimple.abhimanyu.cosmos.design.system.resources.lexend
+import org.jetbrains.compose.resources.Font
 
 @Composable
 public fun CosmosText(
@@ -88,9 +90,7 @@ public fun CosmosText(
         modifier = modifier,
         style = TextStyle.Default.merge(
             fontFamily = FontFamily(
-                Font(
-                    resId = R.font.lexend,
-                )
+                Font(Res.font.lexend)
             ),
             fontSize = style.fontSize,
             fontWeight = style.fontWeight,
