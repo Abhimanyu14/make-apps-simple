@@ -18,9 +18,9 @@ package com.makeappssimple.abhimanyu.makeappssimple.android.event
 
 import android.app.Activity
 import android.content.Intent
-//import com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity
+import com.makeappssimple.abhimanyu.barcodes.android.platform.activity.BarcodesActivity
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivity
-//import com.makeappssimple.abhimanyu.finance.manager.android.platform.activity.FinanceManagerActivity
+import com.makeappssimple.abhimanyu.finance.manager.android.platform.activity.FinanceManagerActivity
 
 internal class PlatformEventHandlerImpl : PlatformEventHandler {
     override fun handlePlatformEvent(
@@ -29,12 +29,12 @@ internal class PlatformEventHandlerImpl : PlatformEventHandler {
     ) {
         when (platformEvent) {
             PlatformEvent.NavigateToBarcodesActivity -> {
-//                activity.startActivity(
-//                    Intent(
-//                        activity,
-//                        BarcodesActivity::class.java,
-//                    ),
-//                )
+                activity.startActivity(
+                    Intent(
+                        activity,
+                        BarcodesActivity::class.java,
+                    ),
+                )
             }
 
             PlatformEvent.NavigateToCosmosDesignSystemCatalogActivity -> {
@@ -47,12 +47,12 @@ internal class PlatformEventHandlerImpl : PlatformEventHandler {
             }
 
             PlatformEvent.NavigateToFinanceManagerActivity -> {
-//                activity.startActivity(
-//                    Intent(
-//                        activity,
-//                        FinanceManagerActivity::class.java,
-//                    ),
-//                )
+                activity.startActivity(
+                    Intent(
+                        activity,
+                        FinanceManagerActivity::class.java,
+                    ),
+                )
             }
         }
     }

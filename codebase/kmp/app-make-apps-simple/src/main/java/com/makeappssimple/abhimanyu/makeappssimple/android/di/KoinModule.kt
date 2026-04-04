@@ -26,7 +26,9 @@ internal fun initKoin(
     startKoin {
         config?.invoke(this)
         modules(
-            modules = MakeAppsSimpleAppModule().module,
+            modules = listOf(
+                MakeAppsSimpleAppModule().module,
+            ),
         )
     }
 }
