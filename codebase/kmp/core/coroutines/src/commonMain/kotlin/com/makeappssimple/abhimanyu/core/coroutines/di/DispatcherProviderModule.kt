@@ -42,7 +42,10 @@ public class DispatcherProviderModule {
     @Single
     @Named(DISPATCHER_IO)
     internal fun providesIoCoroutineDispatcher(): CoroutineDispatcher {
-        return Dispatchers.IO
+        // TODO(Abhi): This is a fallback for Android to CMP migration
+        //  This has to be fixed for the app to be production ready for Android
+        //  Dispatchers.IO is not available on JS/Wasm; Default is a safe shared fallback.
+        return Dispatchers.Default
     }
 
     @Single

@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.core.date.time
 
 import kotlinx.datetime.TimeZone
-import kotlin.js.Date
 import kotlin.time.Instant
 
 public actual fun formatInstant(
@@ -25,9 +24,8 @@ public actual fun formatInstant(
     zoneId: TimeZone,
     pattern: String,
 ): String {
-    // Limited wasm/JS implementation to keep the shared module compiling.
-    val date = Date(
-        milliseconds = instant.toEpochMilliseconds().toDouble(),
-    )
-    return date.toDateString()
+    // TODO(Abhi): This is a fallback for Android to CMP migration
+    // Keep wasm implementation dependency-free and portable.
+    // We intentionally ignore zone/pattern here as a fallback.
+    return instant.toString()
 }

@@ -19,14 +19,15 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.components.cha
 import androidx.compose.ui.geometry.Offset
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.data.PieChartData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chart.compose_pie.data.PieChartLegendItemData
+import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
 
-private const val DEG2RAD = Math.PI / 180.0
-internal const val FDEG2RAD = Math.PI.toFloat() / 180F
+private const val DEG2RAD = PI / 180.0
+internal val FDEG2RAD = (PI / 180.0).toFloat()
 internal val FLOAT_EPSILON = Float.fromBits(1)
 
 internal fun PieChartData.createLegendEntries(): List<PieChartLegendItemData> {
