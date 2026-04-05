@@ -16,36 +16,36 @@
 
 package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 internal class AnyExtensionTest {
     @Test
     fun isNull_returnsTrueForNull() {
         val value: Any? = null
 
-        assertTrue(value.isNull())
+        value.isNull().shouldBeTrue()
     }
 
     @Test
     fun isNull_returnsFalseForNonNull() {
         val value: Any? = "not null"
 
-        assertFalse(value.isNull())
+        value.isNull().shouldBeFalse()
     }
 
     @Test
     fun isNotNull_returnsTrueForNonNull() {
         val value: Any? = 123
 
-        assertTrue(value.isNotNull())
+        value.isNotNull().shouldBeTrue()
     }
 
     @Test
     fun isNotNull_returnsFalseForNull() {
         val value: Any? = null
 
-        assertFalse(value.isNotNull())
+        value.isNotNull().shouldBeFalse()
     }
 }

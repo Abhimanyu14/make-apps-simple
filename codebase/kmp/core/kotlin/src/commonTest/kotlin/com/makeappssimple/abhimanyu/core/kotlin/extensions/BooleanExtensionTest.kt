@@ -16,16 +16,16 @@
 
 package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 internal class BooleanExtensionTest {
     @Test
     fun isTrue_returnsTrueForTrue() {
         val value: Boolean? = true
 
-        assertTrue(value.isTrue())
+        value.isTrue().shouldBeTrue()
     }
 
     @Test
@@ -33,15 +33,15 @@ internal class BooleanExtensionTest {
         val valueFalse: Boolean? = false
         val valueNull: Boolean? = null
 
-        assertFalse(valueFalse.isTrue())
-        assertFalse(valueNull.isTrue())
+        valueFalse.isTrue().shouldBeFalse()
+        valueNull.isTrue().shouldBeFalse()
     }
 
     @Test
     fun isFalse_returnsTrueForFalse() {
         val value: Boolean? = false
 
-        assertTrue(value.isFalse())
+        value.isFalse().shouldBeTrue()
     }
 
     @Test
@@ -49,8 +49,8 @@ internal class BooleanExtensionTest {
         val valueTrue: Boolean? = true
         val valueNull: Boolean? = null
 
-        assertFalse(valueTrue.isFalse())
-        assertFalse(valueNull.isFalse())
+        valueTrue.isFalse().shouldBeFalse()
+        valueNull.isFalse().shouldBeFalse()
     }
 
     @Test
@@ -58,14 +58,14 @@ internal class BooleanExtensionTest {
         val valueNull: Boolean? = null
         val valueFalse: Boolean? = false
 
-        assertFalse(valueNull.orFalse())
-        assertFalse(valueFalse.orFalse())
+        valueNull.orFalse().shouldBeFalse()
+        valueFalse.orFalse().shouldBeFalse()
     }
 
     @Test
     fun orFalse_returnsTrueForTrue() {
         val value: Boolean? = true
 
-        assertTrue(value.orFalse())
+        value.orFalse().shouldBeTrue()
     }
 }

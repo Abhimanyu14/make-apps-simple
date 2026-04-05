@@ -95,6 +95,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(libs.test.kotlin)
+                implementation(libs.test.kotest)
             }
         }
     }

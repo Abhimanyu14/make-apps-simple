@@ -16,43 +16,37 @@
 
 package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 internal class FloatExtensionTest {
     @Test
     fun isNotZero_returnsTrueForNonZero() {
         val value = 1.23F
 
-        assertTrue(value.isNotZero())
+        value.isNotZero().shouldBeTrue()
     }
 
     @Test
     fun isNotZero_returnsFalseForZero() {
         val value = 0F
 
-        assertFalse(value.isNotZero())
+        value.isNotZero().shouldBeFalse()
     }
 
     @Test
     fun orZero_returnsZeroForNull() {
         val value: Float? = null
 
-        assertEquals(
-            expected = 0F,
-            actual = value.orZero(),
-        )
+        value.orZero() shouldBe 0F
     }
 
     @Test
     fun orZero_returnsValueForNonNull() {
         val value: Float? = 2.5F
 
-        assertEquals(
-            expected = 2.5F,
-            actual = value.orZero(),
-        )
+        value.orZero() shouldBe 2.5F
     }
 }
