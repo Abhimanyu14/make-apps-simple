@@ -76,6 +76,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     listOf(
         iosArm64(),
         iosSimulatorArm64(),
@@ -85,15 +86,18 @@ kotlin {
             isStatic = true
         }
     }
+
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     js {
         browser()
         binaries.executable()
     }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
@@ -115,11 +119,13 @@ kotlin {
                 implementation(libs.compose.ui)
             }
         }
+
         val commonTest by getting {
             dependencies {
                 implementation(libs.test.kotlin)
             }
         }
+
         val androidMain by getting {
             dependencies {
                 implementation(project(":common"))
@@ -133,6 +139,7 @@ kotlin {
                 implementation(libs.navigation.compose)
             }
         }
+
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
