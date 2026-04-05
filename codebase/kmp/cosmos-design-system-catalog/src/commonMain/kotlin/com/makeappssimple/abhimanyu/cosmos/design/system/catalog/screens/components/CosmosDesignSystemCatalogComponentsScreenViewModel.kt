@@ -14,25 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.components
 
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.SharedFlow
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
 
-internal interface CosmosDesignSystemCatalogNavigationKit {
-    val command: SharedFlow<CosmosDesignSystemCatalogNavigationCommand>
-
-    fun navigateToColorsScreen(): Job
-
-    fun navigateToComponentsScreen(): Job
-
-    fun navigateToHomeScreen(): Job
-
-    fun navigateToIconsScreen(): Job
-
-    fun navigateToShapesScreen(): Job
-
-    fun navigateToTypographyScreen(): Job
-
-    fun navigateUp(): Job
+public class CosmosDesignSystemCatalogComponentsScreenViewModel(
+    private val navigationState: CosmosDesignSystemCatalogNavigationState,
+) : ViewModel() {
+    public fun navigateUp() {
+        navigationState.navigateUp()
+    }
 }

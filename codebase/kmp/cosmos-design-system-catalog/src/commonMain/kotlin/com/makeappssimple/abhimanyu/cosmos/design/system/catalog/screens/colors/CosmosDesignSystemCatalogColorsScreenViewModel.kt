@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.di
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.colors
 
-import com.makeappssimple.abhimanyu.core.coroutines.di.CoroutineScopeModule
-import com.makeappssimple.abhimanyu.core.coroutines.di.DispatcherProviderModule
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
+import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
 
-@Module(
-    includes = [
-        CoroutineScopeModule::class,
-        DispatcherProviderModule::class,
-    ],
-)
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android",
-)
-public class CosmosDesignSystemCatalogModule
+public class CosmosDesignSystemCatalogColorsScreenViewModel(
+    private val navigationState: CosmosDesignSystemCatalogNavigationState,
+) : ViewModel() {
+    public fun navigateUp() {
+        navigationState.navigateUp()
+    }
+}

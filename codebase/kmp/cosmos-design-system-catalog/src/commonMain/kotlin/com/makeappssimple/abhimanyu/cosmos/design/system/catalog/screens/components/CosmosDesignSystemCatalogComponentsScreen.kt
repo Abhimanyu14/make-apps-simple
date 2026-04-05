@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 /*
  * Copyright 2025-2026 Abhimanyu
  *
@@ -16,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.components
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +24,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosElevatedButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
@@ -46,37 +49,47 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.prog
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.progress_indicator.CosmosLinearProgressIndicator
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.save_button.CosmosSaveButtonData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosOutlinedTextField
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.CosmosReadOnlyTextField
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.toggle.CosmosToggle
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import org.koin.compose.viewmodel.koinViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun CosmosDesignSystemCatalogComponentsScreen(
-    screenViewModel: CosmosDesignSystemCatalogComponentsScreenViewModel = koinViewModel(),
+public fun CosmosDesignSystemCatalogComponentsScreen(
+    navigationState: CosmosDesignSystemCatalogNavigationState,
+    screenViewModel: CosmosDesignSystemCatalogComponentsScreenViewModel = viewModel {
+        CosmosDesignSystemCatalogComponentsScreenViewModel(navigationState)
+    },
 ) {
-    CosmosScaffold(
+    Scaffold(
         topBar = {
-            CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Text(
-                    text = "Components",
-                ),
-                navigationAction = screenViewModel::navigateUp,
+            TopAppBar(
+                title = {
+                    Text(text = "Components")
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { screenViewModel.navigateUp() },
+                    ) {
+                        CosmosIcon(
+                            iconResource = CosmosIcons.ArrowBack,
+                        )
+                    }
+                },
             )
         },
-    ) {
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     all = 16.dp,
                 )
+                .padding(paddingValues)
                 .verticalScroll(
                     state = rememberScrollState(),
                 ),
@@ -84,7 +97,6 @@ internal fun CosmosDesignSystemCatalogComponentsScreen(
                 space = 24.dp,
             ),
         ) {
-            // Buttons Section
             ComponentSection(title = "Buttons") {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -121,7 +133,6 @@ internal fun CosmosDesignSystemCatalogComponentsScreen(
                 }
             }
 
-            // Chips Section
             ComponentSection(title = "Chips") {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -144,7 +155,6 @@ internal fun CosmosDesignSystemCatalogComponentsScreen(
                 }
             }
 
-            // Selection Section
             ComponentSection(title = "Selection") {
                 var isChecked by remember { mutableStateOf(false) }
                 CosmosToggle(
@@ -153,7 +163,6 @@ internal fun CosmosDesignSystemCatalogComponentsScreen(
                 )
             }
 
-            // Inputs Section
             ComponentSection(title = "Inputs") {
                 var textValue by remember { mutableStateOf("") }
                 CosmosOutlinedTextField(
@@ -171,7 +180,6 @@ internal fun CosmosDesignSystemCatalogComponentsScreen(
                 )
             }
 
-            // Feedback Section
             ComponentSection(title = "Feedback") {
                 CosmosLinearProgressIndicator(
                     modifier = Modifier.fillMaxWidth(),
@@ -179,7 +187,6 @@ internal fun CosmosDesignSystemCatalogComponentsScreen(
                 CosmosCircularProgressIndicator()
             }
 
-            // Visuals Section
             ComponentSection(title = "Visuals") {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -204,7 +211,7 @@ private fun ComponentSection(
     ) {
         CosmosText(
             stringResource = CosmosStringResource.Text(text = title),
-            style = CosmosAppTheme.typography.titleMedium,
+            style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
         )
         content()
     }

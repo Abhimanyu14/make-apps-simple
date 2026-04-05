@@ -14,41 +14,39 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.home
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.home
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavigationKit
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogScreen
-import org.koin.android.annotation.KoinViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogScreen
 
-@KoinViewModel
-internal class CosmosDesignSystemCatalogHomeScreenViewModel(
-    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
+public class CosmosDesignSystemCatalogHomeScreenViewModel(
+    private val navigationState: CosmosDesignSystemCatalogNavigationState,
 ) : ViewModel() {
-    fun handleRouteClick(
+    public fun handleRouteClick(
         screen: CosmosDesignSystemCatalogScreen,
     ) {
         when (screen) {
             CosmosDesignSystemCatalogScreen.Colors -> {
-                cosmosDesignSystemCatalogNavigationKit.navigateToColorsScreen()
+                navigationState.navigateToColorsScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Components -> {
-                cosmosDesignSystemCatalogNavigationKit.navigateToComponentsScreen()
+                navigationState.navigateToComponentsScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Home -> {}
 
             CosmosDesignSystemCatalogScreen.Icons -> {
-                cosmosDesignSystemCatalogNavigationKit.navigateToIconsScreen()
+                navigationState.navigateToIconsScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Shapes -> {
-                cosmosDesignSystemCatalogNavigationKit.navigateToShapesScreen()
+                navigationState.navigateToShapesScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Typography -> {
-                cosmosDesignSystemCatalogNavigationKit.navigateToTypographyScreen()
+                navigationState.navigateToTypographyScreen()
             }
         }
     }

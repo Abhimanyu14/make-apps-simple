@@ -106,6 +106,9 @@ kotlin {
                 implementation(project(":core:coroutines"))
                 implementation(project(":cosmos-design-system"))
 
+                implementation(libs.lifecycle.viewmodel)
+                implementation(libs.lifecycle.viewmodel.compose)
+
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)

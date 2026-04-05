@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 /*
  * Copyright 2025-2026 Abhimanyu
  *
@@ -16,26 +14,34 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.icons
-
-import androidx.compose.material3.ExperimentalMaterial3Api
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.icons
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.icon.CosmosIcon
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItem
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import org.koin.compose.viewmodel.koinViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun CosmosDesignSystemCatalogIconsScreen(
-    screenViewModel: CosmosDesignSystemCatalogIconsScreenViewModel = koinViewModel(),
+public fun CosmosDesignSystemCatalogIconsScreen(
+    navigationState: CosmosDesignSystemCatalogNavigationState,
+    screenViewModel: CosmosDesignSystemCatalogIconsScreenViewModel = viewModel {
+        CosmosDesignSystemCatalogIconsScreenViewModel(navigationState)
+    },
 ) {
     val icons = listOf(
         CosmosIcons.AccountBalance to "AccountBalance",
@@ -73,19 +79,28 @@ internal fun CosmosDesignSystemCatalogIconsScreen(
         CosmosIcons.TextSnippet to "TextSnippet",
     )
 
-    CosmosScaffold(
+    Scaffold(
         topBar = {
-            CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Text(
-                    text = "Icons",
-                ),
-                navigationAction = screenViewModel::navigateUp,
+            TopAppBar(
+                title = {
+                    Text(text = "Icons")
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { screenViewModel.navigateUp() },
+                    ) {
+                        CosmosIcon(
+                            iconResource = CosmosIcons.ArrowBack,
+                        )
+                    }
+                },
             )
         },
-    ) {
+    ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(paddingValues),
         ) {
             items(
                 items = icons,

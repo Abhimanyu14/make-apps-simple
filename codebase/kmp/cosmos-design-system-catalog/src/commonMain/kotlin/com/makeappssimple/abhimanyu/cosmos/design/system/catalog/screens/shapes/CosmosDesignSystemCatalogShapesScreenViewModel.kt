@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.icons
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.shapes
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogNavigationKit
-import org.koin.android.annotation.KoinViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
 
-@KoinViewModel
-internal class CosmosDesignSystemCatalogIconsScreenViewModel(
-    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
+public class CosmosDesignSystemCatalogShapesScreenViewModel(
+    private val navigationState: CosmosDesignSystemCatalogNavigationState,
 ) : ViewModel() {
-    fun navigateUp() {
-        cosmosDesignSystemCatalogNavigationKit.navigateUp()
+    public fun navigateUp() {
+        navigationState.navigateUp()
     }
 }

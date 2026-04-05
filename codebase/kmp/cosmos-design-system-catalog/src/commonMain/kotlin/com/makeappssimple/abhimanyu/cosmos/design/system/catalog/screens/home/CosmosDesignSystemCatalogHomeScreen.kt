@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 /*
  * Copyright 2025-2026 Abhimanyu
  *
@@ -16,27 +14,35 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.screens.home
-
-import androidx.compose.material3.ExperimentalMaterial3Api
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.home
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItem
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemDataEvent
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation.CosmosDesignSystemCatalogScreen
-import org.koin.compose.viewmodel.koinViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogScreen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun CosmosDesignSystemCatalogHomeScreen(
-    screenViewModel: CosmosDesignSystemCatalogHomeScreenViewModel = koinViewModel(),
+public fun CosmosDesignSystemCatalogHomeScreen(
+    navigationState: CosmosDesignSystemCatalogNavigationState,
+    screenViewModel: CosmosDesignSystemCatalogHomeScreenViewModel = viewModel {
+        CosmosDesignSystemCatalogHomeScreenViewModel(navigationState)
+    },
 ) {
     val screens = listOf(
         CosmosDesignSystemCatalogScreen.Typography,
@@ -45,18 +51,21 @@ internal fun CosmosDesignSystemCatalogHomeScreen(
         CosmosDesignSystemCatalogScreen.Icons,
         CosmosDesignSystemCatalogScreen.Components,
     )
-    CosmosScaffold(
+    Scaffold(
         topBar = {
-            CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Text(
-                    text = "Cosmos Design System Catalog",
-                ),
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Cosmos Design System Catalog",
+                    )
+                },
             )
         },
-    ) {
+    ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(paddingValues),
         ) {
             items(
                 items = screens,

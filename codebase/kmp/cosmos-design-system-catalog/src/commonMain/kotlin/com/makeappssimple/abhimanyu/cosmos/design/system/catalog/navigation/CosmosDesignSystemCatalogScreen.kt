@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.navigation
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation
 
-internal sealed class CosmosDesignSystemCatalogScreen(
-    val route: String,
+public sealed class CosmosDesignSystemCatalogScreen(
+    public val route: String,
 ) {
-    data object Colors : CosmosDesignSystemCatalogScreen(
+    public data object Colors : CosmosDesignSystemCatalogScreen(
         route = "colors",
     )
 
-    data object Components : CosmosDesignSystemCatalogScreen(
+    public data object Components : CosmosDesignSystemCatalogScreen(
         route = "components",
     )
 
-    data object Icons : CosmosDesignSystemCatalogScreen(
+    public data object Icons : CosmosDesignSystemCatalogScreen(
         route = "icons",
     )
 
-    data object Home : CosmosDesignSystemCatalogScreen(
+    public data object Home : CosmosDesignSystemCatalogScreen(
         route = "home",
     )
 
-    data object Shapes : CosmosDesignSystemCatalogScreen(
+    public data object Shapes : CosmosDesignSystemCatalogScreen(
         route = "shapes",
     )
 
-    data object Typography : CosmosDesignSystemCatalogScreen(
+    public data object Typography : CosmosDesignSystemCatalogScreen(
         route = "typography",
     )
 }

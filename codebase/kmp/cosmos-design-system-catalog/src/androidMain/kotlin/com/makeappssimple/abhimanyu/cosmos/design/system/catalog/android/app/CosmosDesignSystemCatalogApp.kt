@@ -17,14 +17,9 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.activity.CosmosDesignSystemCatalogActivityViewModel
-import org.koin.compose.viewmodel.koinActivityViewModel
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.common.CosmosDesignSystemCatalogCommonApp
 
 @Composable
-internal fun CosmosDesignSystemCatalogApp(
-    cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel = koinActivityViewModel(),
-) {
-    CosmosDesignSystemAppUI(
-        cosmosDesignSystemCatalogActivityViewModel = cosmosDesignSystemCatalogActivityViewModel,
-    )
+internal fun CosmosDesignSystemCatalogApp() {
+    CosmosDesignSystemCatalogCommonApp()
 }
