@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.di
+package com.makeappssimple.abhimanyu.core.coroutines
 
-import com.makeappssimple.abhimanyu.core.coroutines.di.CoroutineScopeModule
-import com.makeappssimple.abhimanyu.core.coroutines.di.DispatcherProviderModule
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-
-@Module(
-    includes = [
-        CoroutineScopeModule::class,
-        DispatcherProviderModule::class,
-    ],
-)
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android",
-)
-public class CosmosDesignSystemCatalogModule
+public const val DISPATCHER_DEFAULT: String = "DISPATCHER_DEFAULT"
+public const val DISPATCHER_IO: String = "DISPATCHER_IO"
+public const val DISPATCHER_MAIN: String = "DISPATCHER_MAIN"
+public const val DISPATCHER_MAIN_IMMEDIATE: String = "DISPATCHER_MAIN_IMMEDIATE"
+public const val DISPATCHER_UNCONFINED: String = "DISPATCHER_UNCONFINED"

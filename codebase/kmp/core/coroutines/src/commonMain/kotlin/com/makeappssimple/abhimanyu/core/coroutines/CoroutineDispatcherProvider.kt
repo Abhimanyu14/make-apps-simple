@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.coroutines
+package com.makeappssimple.abhimanyu.core.coroutines
 
-import kotlinx.coroutines.CompletableJob
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 
-public fun getCompletedJob(): CompletableJob {
-    return Job().apply {
-        complete()
-    }
+public interface CoroutineDispatcherProvider {
+    public val default: CoroutineDispatcher
+    public val io: CoroutineDispatcher
+    public val main: CoroutineDispatcher
+    public val mainImmediate: CoroutineDispatcher
+    public val unconfined: CoroutineDispatcher
+
+    public suspend fun <T> executeOnIoDispatcher(
+        block: suspend CoroutineScope.() -> T,
+    ): T
 }

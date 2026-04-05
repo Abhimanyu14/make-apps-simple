@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.coroutines.test
+package com.makeappssimple.abhimanyu.core.coroutines.test
 
-import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
+import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext

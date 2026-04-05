@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.coroutines
+package com.makeappssimple.abhimanyu.core.coroutines
 
-public const val DISPATCHER_DEFAULT: String = "DISPATCHER_DEFAULT"
-public const val DISPATCHER_IO: String = "DISPATCHER_IO"
-public const val DISPATCHER_MAIN: String = "DISPATCHER_MAIN"
-public const val DISPATCHER_MAIN_IMMEDIATE: String = "DISPATCHER_MAIN_IMMEDIATE"
-public const val DISPATCHER_UNCONFINED: String = "DISPATCHER_UNCONFINED"
+import kotlinx.coroutines.CompletableJob
+import kotlinx.coroutines.Job
+
+public fun getCompletedJob(): CompletableJob {
+    return Job().apply {
+        complete()
+    }
+}

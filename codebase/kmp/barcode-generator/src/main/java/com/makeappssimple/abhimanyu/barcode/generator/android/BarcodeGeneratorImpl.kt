@@ -23,8 +23,8 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
 import com.makeappssimple.abhimanyu.barcode.generator.android.model.BarcodeFormatModel
-import com.makeappssimple.abhimanyu.common.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.common.extensions.isNull
+import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Single
 

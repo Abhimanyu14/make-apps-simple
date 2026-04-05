@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.coroutines.di
+package com.makeappssimple.abhimanyu.core.coroutines.di
 
-import com.makeappssimple.abhimanyu.common.coroutines.DISPATCHER_DEFAULT
-import com.makeappssimple.abhimanyu.common.coroutines.DISPATCHER_IO
-import com.makeappssimple.abhimanyu.common.coroutines.DISPATCHER_MAIN
-import com.makeappssimple.abhimanyu.common.coroutines.DISPATCHER_MAIN_IMMEDIATE
-import com.makeappssimple.abhimanyu.common.coroutines.DISPATCHER_UNCONFINED
+import com.makeappssimple.abhimanyu.core.coroutines.DISPATCHER_DEFAULT
+import com.makeappssimple.abhimanyu.core.coroutines.DISPATCHER_IO
+import com.makeappssimple.abhimanyu.core.coroutines.DISPATCHER_MAIN
+import com.makeappssimple.abhimanyu.core.coroutines.DISPATCHER_MAIN_IMMEDIATE
+import com.makeappssimple.abhimanyu.core.coroutines.DISPATCHER_UNCONFINED
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.annotation.ComponentScan
@@ -30,7 +30,7 @@ import org.koin.core.annotation.Single
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.coroutines",
+    "com.makeappssimple.abhimanyu.core.coroutines",
 )
 public class DispatcherProviderModule {
     @Single

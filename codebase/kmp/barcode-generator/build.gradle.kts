@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":core:coroutines"))
 
     implementation(libs.bundles.compose)
     implementation(libs.bundles.koin)

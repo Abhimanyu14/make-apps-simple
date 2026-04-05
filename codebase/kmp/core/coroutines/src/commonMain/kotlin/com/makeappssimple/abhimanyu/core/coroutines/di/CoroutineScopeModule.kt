@@ -14,19 +14,22 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.coroutines
+package com.makeappssimple.abhimanyu.core.coroutines.di
 
-import kotlinx.coroutines.CoroutineDispatcher
+import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Module
 
-public interface CoroutineDispatcherProvider {
-    public val default: CoroutineDispatcher
-    public val io: CoroutineDispatcher
-    public val main: CoroutineDispatcher
-    public val mainImmediate: CoroutineDispatcher
-    public val unconfined: CoroutineDispatcher
-
-    public suspend fun <T> executeOnIoDispatcher(
-        block: suspend CoroutineScope.() -> T,
-    ): T
+@Module
+public class CoroutineScopeModule {
+    @Factory
+    internal fun providesCoroutineScope(
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
+    ): CoroutineScope {
+        return CoroutineScope(
+            coroutineDispatcherProvider.mainImmediate + SupervisorJob(),
+        )
+    }
 }
