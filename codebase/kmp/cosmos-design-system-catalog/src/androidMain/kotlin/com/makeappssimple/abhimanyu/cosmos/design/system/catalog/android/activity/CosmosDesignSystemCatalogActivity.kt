@@ -20,13 +20,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app.CosmosDesignSystemCatalogApp
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app.CosmosDesignSystemCatalogApp
 
 public class CosmosDesignSystemCatalogActivity : ComponentActivity() {
     override fun onCreate(
         savedInstanceState: Bundle?,
     ) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(
+            savedInstanceState = savedInstanceState,
+        )
         enableEdgeToEdge()
         setContent {
             CosmosDesignSystemCatalogApp()

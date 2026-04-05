@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.app
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.common.CosmosDesignSystemCatalogCommonApp
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavHost
 
 @Composable
-internal fun CosmosDesignSystemCatalogApp() {
-    CosmosDesignSystemCatalogCommonApp()
+public fun CosmosDesignSystemCatalogApp() {
+    CosmosAppTheme {
+        CosmosDesignSystemCatalogNavHost()
+    }
 }
