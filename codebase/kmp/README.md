@@ -28,5 +28,5 @@ A collection of Android applications and shared modules.
 
 - `:barcode-generator`: Utility module for generating various barcode formats.
 - `:common`: Project-wide shared utilities, extensions, and base classes.
-- `:core-date-time`: Dedicated module for date and time manipulation using `kotlinx.datetime`.
+- `:core:date-time`: Dedicated module for date and time manipulation using `kotlinx.datetime`.
 - `:cosmos-design-system`: The custom Design System component library used across all apps.

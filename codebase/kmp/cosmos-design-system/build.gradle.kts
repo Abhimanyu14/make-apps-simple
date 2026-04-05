@@ -126,8 +126,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":core:date-time"))
                 implementation(project(":core:kotlin"))
-                implementation(project(":core-date-time"))
 
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
