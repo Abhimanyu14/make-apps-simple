@@ -16,23 +16,33 @@
 
 @file:OptIn(ExperimentalContracts::class)
 
-package com.makeappssimple.abhimanyu.common.extensions
+package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-public fun Any?.isNull(): Boolean {
+public fun Boolean?.isTrue(): Boolean {
     contract {
-        returns(true) implies (this@isNull == null)
-        returns(false) implies (this@isNull != null)
+        returns(
+            value = true,
+        ) implies (this@isTrue != null)
     }
-    return this == null
+    return this == true
 }
 
-public fun Any?.isNotNull(): Boolean {
+public fun Boolean?.isFalse(): Boolean {
     contract {
-        returns(false) implies (this@isNotNull == null)
-        returns(true) implies (this@isNotNull != null)
+        returns(
+            value = true,
+        ) implies (this@isFalse != null)
     }
-    return this != null
+    return this == false
+}
+
+public fun Boolean?.orFalse(): Boolean {
+    return if (this.isNull()) {
+        false
+    } else {
+        this
+    }
 }

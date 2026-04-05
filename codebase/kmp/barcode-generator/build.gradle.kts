@@ -44,6 +44,7 @@ android {
 dependencies {
     implementation(project(":common"))
     implementation(project(":core:coroutines"))
+    implementation(project(":core:kotlin"))
 
     implementation(libs.bundles.compose)
     implementation(libs.bundles.koin)

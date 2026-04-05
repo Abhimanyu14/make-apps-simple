@@ -100,18 +100,24 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
+
         publishAllLibraryVariants()
     }
+
     iosArm64()
+
     iosSimulatorArm64()
+
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     js(IR) {
         browser()
     }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
@@ -120,7 +126,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":core:kotlin"))
                 implementation(project(":core-date-time"))
+
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
@@ -131,11 +139,13 @@ kotlin {
                 implementation(libs.kotlinx.collections.immutable)
             }
         }
+
         val commonTest by getting {
             dependencies {
                 implementation(libs.test.kotlin)
             }
         }
+
         val androidMain by getting {
             dependencies {
                 implementation(libs.androidx.activity.compose)
@@ -145,6 +155,7 @@ kotlin {
                 implementation(libs.androidx.core.ktx)
             }
         }
+
         val androidDebug by creating {
             dependsOn(androidMain)
             dependencies {
@@ -153,6 +164,7 @@ kotlin {
                 implementation(libs.androidx.compose.ui.tooling.preview)
             }
         }
+
         val androidInstrumentedTest by getting {
             dependencies {
                 implementation(libs.test.compose.ui.junit4)

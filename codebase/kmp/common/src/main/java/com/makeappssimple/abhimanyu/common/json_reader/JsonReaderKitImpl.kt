@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.common.json_reader
 
 import android.content.Context
 import android.net.Uri
-import com.makeappssimple.abhimanyu.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import org.koin.core.annotation.Single
 import java.io.BufferedReader
 import java.io.FileNotFoundException

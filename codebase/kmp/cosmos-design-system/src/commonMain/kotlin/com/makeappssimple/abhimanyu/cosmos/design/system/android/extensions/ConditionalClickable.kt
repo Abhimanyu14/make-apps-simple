@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.semantics.Role
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 
 public fun Modifier.conditionalClickable(
     role: Role? = null,

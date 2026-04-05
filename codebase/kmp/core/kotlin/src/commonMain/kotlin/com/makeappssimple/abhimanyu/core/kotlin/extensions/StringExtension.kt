@@ -16,14 +16,16 @@
 
 @file:OptIn(ExperimentalContracts::class)
 
-package com.makeappssimple.abhimanyu.common.extensions
+package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 public fun String?.isNotNullOrBlank(): Boolean {
     contract {
-        returns(true) implies (this@isNotNullOrBlank != null)
+        returns(
+            value = true,
+        ) implies (this@isNotNullOrBlank != null)
     }
     return !this.isNullOrBlank()
 }
@@ -43,7 +45,9 @@ public fun Any.padStartWithZero(
 public fun String.capitalizeWords(): String {
     return this
         .split(' ')
-        .joinToString(" ") { word ->
+        .joinToString(
+            separator = " ",
+        ) { word ->
             word.lowercase().replaceFirstChar {
                 it.uppercaseChar()
             }

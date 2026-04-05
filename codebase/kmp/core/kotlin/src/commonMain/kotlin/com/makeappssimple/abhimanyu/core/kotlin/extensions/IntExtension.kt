@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.extensions
+package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
-public fun Float.isNotZero(): Boolean {
-    return this.toInt() != 0
+public fun Int.isNotZero(): Boolean {
+    return this != 0
 }
 
-public fun Float?.orZero(): Float {
-    return this ?: 0F
+public fun Int?.orZero(): Int {
+    return this ?: 0
 }

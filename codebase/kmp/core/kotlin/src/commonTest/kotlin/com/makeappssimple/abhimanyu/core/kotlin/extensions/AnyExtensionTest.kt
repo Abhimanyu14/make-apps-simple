@@ -14,38 +14,38 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.extensions
+package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 internal class AnyExtensionTest {
     @Test
     fun isNull_returnsTrueForNull() {
         val value: Any? = null
 
-        value.isNull().shouldBeTrue()
+        assertTrue(value.isNull())
     }
 
     @Test
     fun isNull_returnsFalseForNonNull() {
         val value: Any? = "not null"
 
-        value.isNull().shouldBeFalse()
+        assertFalse(value.isNull())
     }
 
     @Test
     fun isNotNull_returnsTrueForNonNull() {
         val value: Any? = 123
 
-        value.isNotNull().shouldBeTrue()
+        assertTrue(value.isNotNull())
     }
 
     @Test
     fun isNotNull_returnsFalseForNull() {
         val value: Any? = null
 
-        value.isNotNull().shouldBeFalse()
+        assertFalse(value.isNotNull())
     }
 }

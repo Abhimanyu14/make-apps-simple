@@ -138,6 +138,7 @@ kotlin {
             )
             dependencies {
                 implementation(project(":core:coroutines"))
+                implementation(project(":core:kotlin"))
 
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)

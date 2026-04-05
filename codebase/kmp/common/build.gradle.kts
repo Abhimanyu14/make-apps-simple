@@ -51,6 +51,7 @@ android {
 
 dependencies {
     implementation(project(":core:coroutines"))
+    implementation(project(":core:kotlin"))
     implementation(project(":core-date-time"))
     implementation(project(":cosmos-design-system"))
 

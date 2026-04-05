@@ -26,7 +26,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.constant
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.converters.BarcodeSourceConverter
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.migrations.manualDatabaseMigrations
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.model.BarcodeDataModel
-import com.makeappssimple.abhimanyu.common.extensions.isNotNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 
 @Database(
     version = DatabaseConstants.DATABASE_CURRENT_VERSION_NUMBER,

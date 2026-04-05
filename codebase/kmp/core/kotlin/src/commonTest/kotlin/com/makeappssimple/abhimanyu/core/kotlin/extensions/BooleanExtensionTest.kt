@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.extensions
+package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 internal class BooleanExtensionTest {
     @Test
     fun isTrue_returnsTrueForTrue() {
         val value: Boolean? = true
 
-        value.isTrue().shouldBeTrue()
+        assertTrue(value.isTrue())
     }
 
     @Test
@@ -33,15 +33,15 @@ internal class BooleanExtensionTest {
         val valueFalse: Boolean? = false
         val valueNull: Boolean? = null
 
-        valueFalse.isTrue().shouldBeFalse()
-        valueNull.isTrue().shouldBeFalse()
+        assertFalse(valueFalse.isTrue())
+        assertFalse(valueNull.isTrue())
     }
 
     @Test
     fun isFalse_returnsTrueForFalse() {
         val value: Boolean? = false
 
-        value.isFalse().shouldBeTrue()
+        assertTrue(value.isFalse())
     }
 
     @Test
@@ -49,8 +49,8 @@ internal class BooleanExtensionTest {
         val valueTrue: Boolean? = true
         val valueNull: Boolean? = null
 
-        valueTrue.isFalse().shouldBeFalse()
-        valueNull.isFalse().shouldBeFalse()
+        assertFalse(valueTrue.isFalse())
+        assertFalse(valueNull.isFalse())
     }
 
     @Test
@@ -58,14 +58,14 @@ internal class BooleanExtensionTest {
         val valueNull: Boolean? = null
         val valueFalse: Boolean? = false
 
-        valueNull.orFalse().shouldBeFalse()
-        valueFalse.orFalse().shouldBeFalse()
+        assertFalse(valueNull.orFalse())
+        assertFalse(valueFalse.orFalse())
     }
 
     @Test
     fun orFalse_returnsTrueForTrue() {
         val value: Boolean? = true
 
-        value.orFalse().shouldBeTrue()
+        assertTrue(value.orFalse())
     }
 }

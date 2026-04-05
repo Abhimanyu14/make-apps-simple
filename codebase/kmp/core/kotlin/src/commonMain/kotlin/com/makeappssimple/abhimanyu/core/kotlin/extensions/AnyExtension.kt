@@ -16,14 +16,31 @@
 
 @file:OptIn(ExperimentalContracts::class)
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.android.extensions
+package com.makeappssimple.abhimanyu.core.kotlin.extensions
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-internal fun String?.isNotNullOrBlank(): Boolean {
+public fun Any?.isNull(): Boolean {
     contract {
-        returns(true) implies (this@isNotNullOrBlank != null)
+        returns(
+            value = true,
+        ) implies (this@isNull == null)
+        returns(
+            value = false,
+        ) implies (this@isNull != null)
     }
-    return !this.isNullOrBlank()
+    return this == null
+}
+
+public fun Any?.isNotNull(): Boolean {
+    contract {
+        returns(
+            value = false,
+        ) implies (this@isNotNull == null)
+        returns(
+            value = true,
+        ) implies (this@isNotNull != null)
+    }
+    return this != null
 }
