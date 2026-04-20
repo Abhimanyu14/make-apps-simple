@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.feature.analysis
 
-import com.makeappssimple.abhimanyu.common.extensions.isNotNull
-import com.makeappssimple.abhimanyu.common.extensions.isNull
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
 
 internal data class Filter(
     private val selectedExpenseCategoryIndices: List<Int> = emptyList(),

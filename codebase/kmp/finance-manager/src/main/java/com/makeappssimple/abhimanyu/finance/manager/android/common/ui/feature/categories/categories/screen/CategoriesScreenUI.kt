@@ -33,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.common.extensions.orEmpty
-import com.makeappssimple.abhimanyu.common.extensions.orFalse
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.orFalse
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosCircularFloatingActionButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.CosmosVerticalSpacer
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.spacer.cosmosNavigationBarLandscapeSpacer

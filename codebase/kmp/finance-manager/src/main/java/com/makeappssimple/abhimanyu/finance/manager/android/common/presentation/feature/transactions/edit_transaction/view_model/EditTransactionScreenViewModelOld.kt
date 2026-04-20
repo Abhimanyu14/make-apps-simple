@@ -20,26 +20,26 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.common.extensions.combine
 import com.makeappssimple.abhimanyu.common.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.extensions.filter
-import com.makeappssimple.abhimanyu.common.extensions.filterDigits
-import com.makeappssimple.abhimanyu.common.extensions.isNotNull
-import com.makeappssimple.abhimanyu.common.extensions.isNotNullOrBlank
-import com.makeappssimple.abhimanyu.common.extensions.isNotZero
-import com.makeappssimple.abhimanyu.common.extensions.isNull
-import com.makeappssimple.abhimanyu.common.extensions.orZero
 import com.makeappssimple.abhimanyu.common.extensions.sortedWith
 import com.makeappssimple.abhimanyu.common.extensions.toImmutableList
-import com.makeappssimple.abhimanyu.common.extensions.toIntOrZero
-import com.makeappssimple.abhimanyu.common.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.common.log_kit.LogKit
 import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.util.defaultImmutableListStateIn
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.capitalizeWords
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.filterDigits
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNullOrBlank
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotZero
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.orZero
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.toIntOrZero
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.toLongOrZero
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
@@ -525,7 +525,7 @@ internal class EditTransactionScreenViewModelOld(
                 .copy(
                     amount = updatedAmount
                         .copy(
-                            updatedAmount.text.filterDigits(),
+                            text = updatedAmount.text.filterDigits(),
                         ),
                 ),
         )

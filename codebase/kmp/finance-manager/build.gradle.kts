@@ -78,6 +78,7 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":core:coroutines"))
     implementation(project(":core:date-time"))
+    implementation(project(":core:kotlin"))
     implementation(project(":cosmos-design-system"))
 
     androidTestImplementation(libs.test.compose.ui.junit4)
