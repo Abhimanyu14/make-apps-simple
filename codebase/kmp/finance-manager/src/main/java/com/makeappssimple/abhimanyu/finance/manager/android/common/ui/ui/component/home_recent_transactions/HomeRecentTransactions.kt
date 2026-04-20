@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.home_recent_transactions
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -53,9 +55,7 @@ internal fun HomeRecentTransactions(
                 shape = CircleShape,
             )
             .conditionalClickable(
-                onClickLabel = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_home_view_all_transactions,
-                ).text,
+                onClickLabel = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_home_view_all_transactions)).text,
                 onClick = {
                     handleEvent(HomeRecentTransactionsEvent.OnClick)
                 },
@@ -68,9 +68,7 @@ internal fun HomeRecentTransactions(
             ),
     ) {
         CosmosText(
-            stringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_screen_home_recent_transactions,
-            ),
+            stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_home_recent_transactions)),
             style = CosmosAppTheme.typography.headlineLarge
                 .copy(
                     color = CosmosAppTheme.colorScheme.onBackground,
@@ -82,9 +80,7 @@ internal fun HomeRecentTransactions(
         )
         if (data.isTrailingTextVisible) {
             CosmosText(
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_home_view_all_transactions,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_home_view_all_transactions)),
                 style = CosmosAppTheme.typography.headlineMedium
                     .copy(
                         color = CosmosAppTheme.colorScheme.primary,

@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.home.home.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -86,9 +88,7 @@ internal fun HomeScreenUI(
                 titleTextStringResourceId = R.string.finance_manager_screen_home_appbar_title,
                 appBarActions = {
                     CosmosIconButton(
-                        onClickLabelStringResource = CosmosStringResource.Id(
-                            id = R.string.finance_manager_screen_home_appbar_settings,
-                        ),
+                        onClickLabelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_home_appbar_settings)),
                         onClick = {
                             handleUIEvent(HomeScreenUIEvent.OnTopAppBarSettingsButtonClick)
                         },
@@ -106,9 +106,7 @@ internal fun HomeScreenUI(
                 modifier = Modifier
                     .cosmosNavigationBarsSpacer(),
                 iconResource = CosmosIcons.Add,
-                contentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_home_floating_action_button_content_description,
-                ),
+                contentDescriptionStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_home_floating_action_button_content_description)),
                 onClick = {
                     handleUIEvent(HomeScreenUIEvent.OnFloatingActionButtonClick)
                 },
@@ -178,24 +176,28 @@ internal fun HomeScreenUI(
                         items = persistentListOf(
                             PieChartItemData(
                                 value = uiState.overviewCardData.income,
-                                stringResource = CosmosStringResource.Id(
-                                    id = R.string.finance_manager_screen_home_overview_card_income,
-                                    args = listOf(
-                                        Amount(
-                                            value = uiState.overviewCardData.income.toLong(),
-                                        ).toDefaultString(),
+                                stringResource = CosmosStringResource.Text(
+                                    text = FinanceManagerStrings.get(
+                                        template = FinanceManagerStrings.finance_manager_screen_home_overview_card_income,
+                                        args = listOf(
+                                            Amount(
+                                                value = uiState.overviewCardData.income.toLong(),
+                                            ).toDefaultString(),
+                                        ),
                                     ),
                                 ),
                                 color = CosmosColor.Tertiary,
                             ),
                             PieChartItemData(
                                 value = uiState.overviewCardData.expense,
-                                stringResource = CosmosStringResource.Id(
-                                    id = R.string.finance_manager_screen_home_overview_card_expense,
-                                    args = listOf(
-                                        Amount(
-                                            value = uiState.overviewCardData.expense.toLong(),
-                                        ).toUnsignedString(),
+                                stringResource = CosmosStringResource.Text(
+                                    text = FinanceManagerStrings.get(
+                                        template = FinanceManagerStrings.finance_manager_screen_home_overview_card_expense,
+                                        args = listOf(
+                                            Amount(
+                                                value = uiState.overviewCardData.expense.toLong(),
+                                            ).toUnsignedString(),
+                                        ),
                                     ),
                                 ),
                                 color = CosmosColor.Error,

@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.transaction_for
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -32,9 +34,7 @@ internal fun TransactionForValuesMenuBottomSheet(
     items.add(
         element = TransactionForValuesMenuBottomSheetItemData(
             iconResource = CosmosIcons.Edit,
-            stringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_edit,
-            ),
+            stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transaction_for_values_menu_edit)),
             onClick = onEditClick,
         ),
     )
@@ -42,9 +42,7 @@ internal fun TransactionForValuesMenuBottomSheet(
         items.add(
             element = TransactionForValuesMenuBottomSheetItemData(
                 iconResource = CosmosIcons.Delete,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_bottom_sheet_transaction_for_values_menu_delete,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transaction_for_values_menu_delete)),
                 onClick = onDeleteClick,
             ),
         )

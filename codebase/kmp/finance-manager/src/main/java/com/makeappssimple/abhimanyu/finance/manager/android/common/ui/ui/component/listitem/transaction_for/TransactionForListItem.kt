@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction_for
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
@@ -71,9 +73,7 @@ internal fun TransactionForListItem(
         )
         if (data.isMoreOptionsIconButtonVisible) {
             CosmosIconButton(
-                onClickLabelStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_transaction_for_list_item_more_options_content_description,
-                ),
+                onClickLabelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_transaction_for_list_item_more_options_content_description)),
                 onClick = {
                     handleEvent(TransactionForListItemEvent.OnMoreOptionsIconButtonClick)
                 },

@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.transactions.transactions.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
@@ -108,9 +110,7 @@ internal fun TransactionsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: TransactionsScreenUIEvent) -> Unit = {},
 ) {
-    val duplicateTransactionSuccessfulSnackbarText = CosmosStringResource.Id(
-        id = R.string.finance_manager_screen_transactions_duplicate_transaction_successful,
-    ).text
+    val duplicateTransactionSuccessfulSnackbarText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_transactions_duplicate_transaction_successful)).text
 
     BottomSheetHandler(
         isBottomSheetVisible = uiState.isBottomSheetVisible,
@@ -261,9 +261,7 @@ internal fun TransactionsScreenUI(
                 MySelectionModeTopAppBar(
                     appBarActions = {
                         CosmosIconButton(
-                            onClickLabelStringResource = CosmosStringResource.Id(
-                                id = R.string.finance_manager_screen_transactions_selection_mode_appbar_menu_more_options,
-                            ),
+                            onClickLabelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_transactions_selection_mode_appbar_menu_more_options)),
                             onClick = {
                                 handleUIEvent(TransactionsScreenUIEvent.OnSelectionModeTopAppBarMoreOptionsButtonClick)
                             },
@@ -279,10 +277,12 @@ internal fun TransactionsScreenUI(
                     },
                     title = {
                         CosmosText(
-                            stringResource = CosmosStringResource.Id(
-                                id = R.string.finance_manager_screen_transactions_selection_mode_appbar_title,
-                                args = listOf(
-                                    uiState.selectedTransactions.size,
+                            stringResource = CosmosStringResource.Text(
+                                text = FinanceManagerStrings.get(
+                                    template = FinanceManagerStrings.finance_manager_screen_transactions_selection_mode_appbar_title,
+                                    args = listOf(
+                                        uiState.selectedTransactions.size,
+                                    ),
                                 ),
                             ),
                             style = CosmosAppTheme.typography.titleLarge
@@ -311,9 +311,7 @@ internal fun TransactionsScreenUI(
                     modifier = Modifier
                         .cosmosNavigationBarsSpacer(),
                     iconResource = CosmosIcons.Add,
-                    contentDescriptionStringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_screen_transactions_floating_action_button_content_description,
-                    ),
+                    contentDescriptionStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_transactions_floating_action_button_content_description)),
                     onClick = {
                         handleUIEvent(TransactionsScreenUIEvent.OnFloatingActionButtonClick)
                     },
@@ -456,9 +454,7 @@ private fun SearchSortAndFilterBar(
                     data = CosmosSearchBarDataV2(
                         autoFocus = false,
                         isLoading = uiState.isLoading,
-                        placeholderStringResource = CosmosStringResource.Id(
-                            id = R.string.finance_manager_screen_transactions_searchbar_placeholder,
-                        ),
+                        placeholderStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_transactions_searchbar_placeholder)),
                         searchTextFieldState = uiState.searchTextFieldState,
                     ),
                     handleEvent = { events ->
@@ -474,7 +470,7 @@ private fun SearchSortAndFilterBar(
                 data = CosmosActionButtonData(
                     isLoading = uiState.isLoading,
                     iconResource = CosmosIcons.SwapVert,
-                    contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_sort_button_content_description,
+                    contentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_transactions_sort_button_content_description),
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -489,7 +485,7 @@ private fun SearchSortAndFilterBar(
                     isIndicatorVisible = uiState.selectedTransactionFilter.areFiltersSelected(),
                     isLoading = uiState.isLoading,
                     iconResource = CosmosIcons.FilterAlt,
-                    contentDescriptionStringResourceId = R.string.finance_manager_screen_transactions_filter_button_content_description,
+                    contentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_transactions_filter_button_content_description),
                 ),
                 handleEvent = { event ->
                     when (event) {

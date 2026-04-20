@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.transaction
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -79,11 +81,13 @@ private fun TransactionListItemUI(
         data.accountFromName.isNotNull() &&
         data.accountToName.isNotNull()
     ) {
-        CosmosStringResource.Id(
-            id = R.string.finance_manager_transaction_list_item_account,
-            args = listOf(
-                data.accountFromName,
-                data.accountToName,
+        CosmosStringResource.Text(
+            text = FinanceManagerStrings.get(
+                template = FinanceManagerStrings.finance_manager_transaction_list_item_account,
+                args = listOf(
+                    data.accountFromName,
+                    data.accountToName,
+                ),
             ),
         )
     } else {
@@ -283,9 +287,7 @@ private fun TransactionListItemUI(
                             isClickable = true,
                             isEnabled = true,
                             iconImageVector = CosmosIcons.Edit,
-                            labelText = CosmosStringResource.Id(
-                                id = R.string.finance_manager_transaction_list_item_edit,
-                            ).text,
+                            labelText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_transaction_list_item_edit)).text,
                         ),
                         handleEvent = { event ->
                             when (event) {
@@ -307,9 +309,7 @@ private fun TransactionListItemUI(
                             isClickable = true,
                             isEnabled = true,
                             iconResource = CosmosIcons.CurrencyExchange,
-                            labelStringResource = CosmosStringResource.Id(
-                                id = R.string.finance_manager_transaction_list_item_refund,
-                            ),
+                            labelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_transaction_list_item_refund)),
                         ),
                         handleEvent = { event ->
                             when (event) {
@@ -330,9 +330,7 @@ private fun TransactionListItemUI(
                             isClickable = true,
                             isEnabled = data.isDeleteButtonEnabled,
                             iconResource = CosmosIcons.Delete,
-                            labelStringResource = CosmosStringResource.Id(
-                                id = R.string.finance_manager_transaction_list_item_delete,
-                            ),
+                            labelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_transaction_list_item_delete)),
                         ),
                         handleEvent = { event ->
                             when (event) {

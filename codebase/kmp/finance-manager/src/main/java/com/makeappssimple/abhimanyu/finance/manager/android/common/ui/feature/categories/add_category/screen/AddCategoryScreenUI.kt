@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.add_category.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -223,14 +225,16 @@ internal fun AddCategoryScreenUI(
                     data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
                         textFieldState = uiState.titleTextFieldState,
-                        labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_category_title,
-                        trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_category_clear_title,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_category_title),
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_category_clear_title),
                         supportingText = if (uiState.isSupportingTextVisible) {
                             {
                                 uiState.titleError.stringResourceId?.let { titleTextFieldErrorTextStringResourceId ->
                                     CosmosText(
-                                        stringResource = CosmosStringResource.Id(
-                                            titleTextFieldErrorTextStringResourceId,
+                                        stringResource = CosmosStringResource.Text(
+                                            text = FinanceManagerStrings.fromResourceId(
+                                                id = titleTextFieldErrorTextStringResourceId,
+                                            ),
                                         ),
                                         style = CosmosAppTheme.typography.bodySmall.copy(
                                             color = CosmosAppTheme.colorScheme.error,
@@ -266,9 +270,7 @@ internal fun AddCategoryScreenUI(
                 data = CosmosSaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled.orFalse(),
                     isLoading = uiState.isLoading,
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_screen_add_category_floating_action_button_content_description,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_add_category_floating_action_button_content_description)),
                 ),
                 handleEvent = { event ->
                     when (event) {

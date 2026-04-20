@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.categories.categories.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -83,12 +85,8 @@ internal fun CategoriesScreenUI(
         pageCount = { PAGE_COUNT },
     )
 
-    val setDefaultCategoryFailedSnackbarText = CosmosStringResource.Id(
-        id = R.string.finance_manager_screen_categories_set_default_category_failed,
-    ).text
-    val setDefaultCategorySuccessfulSnackbarText = CosmosStringResource.Id(
-        id = R.string.finance_manager_screen_categories_set_default_category_successful,
-    ).text
+    val setDefaultCategoryFailedSnackbarText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_set_default_category_failed)).text
+    val setDefaultCategorySuccessfulSnackbarText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_set_default_category_successful)).text
 
     LaunchedEffect(
         key1 = uiState.screenSnackbarType,
@@ -233,9 +231,7 @@ internal fun CategoriesScreenUI(
                 modifier = Modifier
                     .cosmosNavigationBarsSpacer(),
                 iconResource = CosmosIcons.Add,
-                contentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_categories_floating_action_button_content_description,
-                ),
+                contentDescriptionStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_floating_action_button_content_description)),
                 onClick = {
                     handleUIEvent(
                         CategoriesScreenUIEvent.OnFloatingActionButtonClick(

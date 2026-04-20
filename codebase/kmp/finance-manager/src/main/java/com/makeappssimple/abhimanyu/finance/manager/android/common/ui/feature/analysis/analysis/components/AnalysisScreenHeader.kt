@@ -28,7 +28,9 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.acti
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButtonData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.action_button.CosmosActionButtonEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.event.AnalysisScreenUIEvent
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.state.AnalysisScreenUIState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.selection_group.MyHorizontalScrollingRadioGroup
@@ -80,7 +82,7 @@ internal fun AnalysisScreenHeader(
                 isIndicatorVisible = uiState.selectedFilter.areFiltersSelected(),
                 isLoading = uiState.isLoading,
                 iconResource = CosmosIcons.FilterAlt,
-                contentDescriptionStringResourceId = R.string.finance_manager_screen_analysis_filter_button_content_description,
+                contentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_analysis_filter_button_content_description),
             ),
             handleEvent = { event ->
                 when (event) {

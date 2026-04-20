@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.account
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
@@ -36,9 +38,7 @@ internal fun AccountsMenuBottomSheet(
         items.add(
             AccountsMenuBottomSheetItemData(
                 iconResource = CosmosIcons.Edit,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_bottom_sheet_accounts_menu_edit,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_accounts_menu_edit)),
                 onClick = onEditClick,
             )
         )
@@ -47,9 +47,7 @@ internal fun AccountsMenuBottomSheet(
         items.add(
             AccountsMenuBottomSheetItemData(
                 iconResource = CosmosIcons.CheckCircle,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_bottom_sheet_accounts_menu_set_as_default_account,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_accounts_menu_set_as_default_account)),
                 onClick = onSetAsDefaultClick,
             )
         )
@@ -58,9 +56,7 @@ internal fun AccountsMenuBottomSheet(
         items.add(
             AccountsMenuBottomSheetItemData(
                 iconResource = CosmosIcons.Delete,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_bottom_sheet_accounts_menu_delete,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_accounts_menu_delete)),
                 onClick = onDeleteClick,
             )
         )

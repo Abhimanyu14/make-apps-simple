@@ -44,8 +44,6 @@ import coil3.compose.AsyncImage
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosTextStyle
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
-import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
-import com.makeappssimple.abhimanyu.makeappssimple.android.R
 
 @Composable
 internal fun LauncherAppUI(
@@ -69,8 +67,8 @@ internal fun LauncherAppUI(
                     ),
             )
             CosmosText(
-                text = CosmosStringResource.Id(
-                    id = R.string.make_apps_simple_screen_launcher,
+                text = CosmosStringResource.Text(
+                    text = MakeAppsSimpleStrings.make_apps_simple_screen_launcher,
                 ).text,
                 style = CosmosTextStyle.Heading1,
             )

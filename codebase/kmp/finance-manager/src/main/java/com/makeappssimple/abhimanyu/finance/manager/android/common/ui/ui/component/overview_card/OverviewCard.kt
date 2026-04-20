@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.overview_card
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -184,9 +186,7 @@ private fun OverviewCardUI(
             ) {
                 // TODO(Abhi): Disable the buttons conditionally
                 CosmosIconButton(
-                    onClickLabelStringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_overview_card_previous_button_content_description,
-                    ),
+                    onClickLabelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_overview_card_previous_button_content_description)),
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(
@@ -219,9 +219,7 @@ private fun OverviewCardUI(
                         ),
                 )
                 CosmosIconButton(
-                    onClickLabelStringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_overview_card_next_button_content_description,
-                    ),
+                    onClickLabelStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_overview_card_next_button_content_description)),
                     onClick = {
                         handleEvent(
                             OverviewCardEvent.OnOverviewCardAction(

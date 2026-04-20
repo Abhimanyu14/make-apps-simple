@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.listitem.accounts
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -243,9 +245,7 @@ private fun AccountsListItemContentUI(
         if (data.isMoreOptionsIconButtonVisible) {
             CosmosIcon(
                 iconResource = CosmosIcons.MoreVert,
-                contentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_account_list_item_more_options_content_description,
-                ),
+                contentDescriptionStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_account_list_item_more_options_content_description)),
                 tint = CosmosAppTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .padding(

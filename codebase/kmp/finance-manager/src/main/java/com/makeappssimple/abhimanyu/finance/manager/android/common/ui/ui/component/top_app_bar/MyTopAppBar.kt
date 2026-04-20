@@ -33,6 +33,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.ComposableContent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.typealiases.NullableComposableContent
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
 
 @Composable
 internal fun MyTopAppBar(
@@ -48,8 +49,10 @@ internal fun MyTopAppBar(
     }
 
     MyTopAppBarUI(
-        titleStringResource = CosmosStringResource.Id(
-            id = titleTextStringResourceId,
+        titleStringResource = CosmosStringResource.Text(
+            text = FinanceManagerStrings.fromResourceId(
+                id = titleTextStringResourceId,
+            ),
         ),
         modifier = modifier,
         appBarActions = appBarActions,

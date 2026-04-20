@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.accounts.edit_account.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -179,14 +181,16 @@ internal fun EditAccountScreenUI(
                         isError = uiState.visibilityData.nameTextFieldErrorText,
                         isLoading = uiState.isLoading,
                         textFieldState = uiState.nameTextFieldState,
-                        labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_name,
-                        trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_name,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_account_name),
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_account_clear_name),
                         supportingText = if (uiState.visibilityData.nameTextFieldErrorText) {
                             {
                                 uiState.nameError.stringResourceId?.let { nameTextFieldErrorTextStringResourceId ->
                                     CosmosText(
-                                        stringResource = CosmosStringResource.Id(
-                                            nameTextFieldErrorTextStringResourceId,
+                                        stringResource = CosmosStringResource.Text(
+                                            text = FinanceManagerStrings.fromResourceId(
+                                                id = nameTextFieldErrorTextStringResourceId,
+                                            ),
                                         ),
                                         style = CosmosAppTheme.typography.bodySmall
                                             .copy(
@@ -239,8 +243,8 @@ internal fun EditAccountScreenUI(
                     data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
                         textFieldState = uiState.balanceAmountValueTextFieldState,
-                        labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_balance_amount_value,
-                        trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_balance_amount_value,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_account_balance_amount_value),
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_account_clear_balance_amount_value),
                         inputTransformation = AmountInputTransformation(),
                         outputTransformation = AmountOutputTransformation(),
                         keyboardActions = {
@@ -271,8 +275,8 @@ internal fun EditAccountScreenUI(
                     data = MyOutlinedTextFieldDataV2(
                         isLoading = uiState.isLoading,
                         textFieldState = uiState.minimumBalanceAmountValueTextFieldState,
-                        labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value,
-                        trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_account_minimum_account_balance_amount_value),
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_account_clear_minimum_account_balance_amount_value),
                         inputTransformation = AmountInputTransformation(),
                         outputTransformation = AmountOutputTransformation(),
                         keyboardActions = {
@@ -300,9 +304,7 @@ internal fun EditAccountScreenUI(
                 data = CosmosSaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled,
                     isLoading = uiState.isLoading,
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_screen_edit_account_floating_action_button_content_description,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_edit_account_floating_action_button_content_description)),
                 ),
                 handleEvent = { event ->
                     when (event) {

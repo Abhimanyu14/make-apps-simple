@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.transactions
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
@@ -40,9 +42,7 @@ internal fun TransactionsMenuBottomSheet(
         menuItems.add(
             element = TransactionsMenuBottomSheetItemData(
                 iconResource = CosmosIcons.ContentCopy,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_bottom_sheet_transactions_menu_duplicate_transaction,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_menu_duplicate_transaction)),
                 onClick = {
                     handleEvent(TransactionsMenuBottomSheetEvent.OnDuplicateTransactionClick)
                 },
@@ -52,9 +52,7 @@ internal fun TransactionsMenuBottomSheet(
     menuItems.add(
         element = TransactionsMenuBottomSheetItemData(
             iconResource = CosmosIcons.Edit,
-            stringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_bottom_sheet_transactions_menu_update_transaction_for,
-            ),
+            stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_menu_update_transaction_for)),
             onClick = {
                 handleEvent(TransactionsMenuBottomSheetEvent.OnUpdateTransactionForClick)
             },
@@ -63,9 +61,7 @@ internal fun TransactionsMenuBottomSheet(
     menuItems.add(
         element = TransactionsMenuBottomSheetItemData(
             iconResource = CosmosIcons.Checklist,
-            stringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_bottom_sheet_transactions_menu_select_all_transactions,
-            ),
+            stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_menu_select_all_transactions)),
             onClick = {
                 handleEvent(TransactionsMenuBottomSheetEvent.OnSelectAllTransactionsClick)
             },

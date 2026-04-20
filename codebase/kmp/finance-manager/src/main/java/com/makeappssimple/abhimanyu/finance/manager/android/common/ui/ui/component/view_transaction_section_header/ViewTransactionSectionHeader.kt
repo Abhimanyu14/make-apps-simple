@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
 
 
 @Composable
@@ -38,8 +39,10 @@ internal fun ViewTransactionSectionHeader(
                 start = 16.dp,
             )
             .fillMaxWidth(),
-        stringResource = CosmosStringResource.Id(
-            id = data.textStringResourceId,
+        stringResource = CosmosStringResource.Text(
+            text = FinanceManagerStrings.fromResourceId(
+                id = data.textStringResourceId,
+            ),
         ),
         style = CosmosAppTheme.typography.headlineMedium
             .copy(

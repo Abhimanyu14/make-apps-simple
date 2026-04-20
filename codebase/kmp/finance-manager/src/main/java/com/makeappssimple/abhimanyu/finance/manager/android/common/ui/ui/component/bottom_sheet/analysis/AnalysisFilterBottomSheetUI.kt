@@ -41,6 +41,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text_field.MyReadOnlyTextField
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.selection_group.MyHorizontalScrollingSelectionGroup
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.selection_group.MyHorizontalScrollingSelectionGroupData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.selection_group.MyHorizontalScrollingSelectionGroupEvent
@@ -121,8 +122,10 @@ internal fun AnalysisFilterBottomSheetUI(
                     .weight(
                         weight = 1F,
                     ),
-                stringResource = CosmosStringResource.Id(
-                    id = data.headingTextStringResourceId,
+                stringResource = CosmosStringResource.Text(
+                    text = FinanceManagerStrings.fromResourceId(
+                        id = data.headingTextStringResourceId,
+                    ),
                 ),
                 style = CosmosAppTheme.typography.headlineLarge
                     .copy(
@@ -134,9 +137,7 @@ internal fun AnalysisFilterBottomSheetUI(
                 onClick = onClearButtonClick,
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_analysis_filter_clear,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_analysis_filter_clear)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }
@@ -161,7 +162,7 @@ internal fun AnalysisFilterBottomSheetUI(
                     ),
                 data = CosmosReadOnlyTextFieldData(
                     value = data.fromDateText,
-                    labelTextStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_from_date,
+                    labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_bottom_sheet_analysis_filter_from_date),
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -181,7 +182,7 @@ internal fun AnalysisFilterBottomSheetUI(
                     ),
                 data = CosmosReadOnlyTextFieldData(
                     value = data.toDateText,
-                    labelTextStringResourceId = R.string.finance_manager_bottom_sheet_analysis_filter_to_date,
+                    labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_bottom_sheet_analysis_filter_to_date),
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -231,9 +232,7 @@ internal fun AnalysisFilterBottomSheetUI(
                 onClick = onNegativeButtonClick,
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_analysis_filter_reset,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_analysis_filter_reset)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }
@@ -248,9 +247,7 @@ internal fun AnalysisFilterBottomSheetUI(
                 onClick = onPositiveButtonClick,
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_analysis_filter_apply,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_analysis_filter_apply)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }

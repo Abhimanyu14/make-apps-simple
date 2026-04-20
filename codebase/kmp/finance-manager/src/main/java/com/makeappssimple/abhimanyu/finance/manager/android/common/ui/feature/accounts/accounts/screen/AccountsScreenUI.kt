@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.accounts.accounts.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -166,9 +168,7 @@ internal fun AccountsScreenUI(
                 modifier = Modifier
                     .cosmosNavigationBarsSpacer(),
                 iconResource = CosmosIcons.Add,
-                contentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_accounts_floating_action_button_content_description,
-                ),
+                contentDescriptionStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_accounts_floating_action_button_content_description)),
                 onClick = {
                     handleUIEvent(AccountsScreenUIEvent.OnFloatingActionButtonClick)
                 },

@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.backup_card
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -94,9 +96,7 @@ private fun BackupCardUI(
                 tint = CosmosAppTheme.colorScheme.onBackground,
             )
             CosmosText(
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_backup_card,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_backup_card)),
                 style = CosmosAppTheme.typography.bodyLarge
                     .copy(
                         color = CosmosAppTheme.colorScheme.onBackground,

@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.default_tag
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -50,9 +52,7 @@ internal fun MyDefaultTag(
                 horizontal = MyDefaultTagConstants.paddingHorizontal,
                 vertical = MyDefaultTagConstants.paddingVertical,
             ),
-        stringResource = CosmosStringResource.Id(
-            id = R.string.finance_manager_default_tag,
-        ),
+        stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_default_tag)),
         style = CosmosAppTheme.typography.labelSmall
             .copy(
                 color = CosmosAppTheme.colorScheme.onPrimary,

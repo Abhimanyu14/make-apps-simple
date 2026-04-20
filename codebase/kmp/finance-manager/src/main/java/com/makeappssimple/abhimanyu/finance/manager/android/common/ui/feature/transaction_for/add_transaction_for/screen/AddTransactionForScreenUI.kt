@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.transaction_for.add_transaction_for.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -110,16 +112,18 @@ internal fun AddTransactionForScreenUI(
                 data = MyOutlinedTextFieldDataV2(
                     isLoading = uiState.isLoading,
                     textFieldState = uiState.titleTextFieldState,
-                    labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_title,
-                    trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_for_clear_title,
+                    labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_for_title),
+                    trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_for_clear_title),
                     supportingText = {
                         AnimatedVisibility(
                             visible = uiState.titleError != AddTransactionForScreenTitleError.None,
                         ) {
                             uiState.titleError.stringResourceId?.let { titleTextFieldErrorTextStringResourceId ->
                                 CosmosText(
-                                    stringResource = CosmosStringResource.Id(
-                                        titleTextFieldErrorTextStringResourceId,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = FinanceManagerStrings.fromResourceId(
+                                            id = titleTextFieldErrorTextStringResourceId,
+                                        ),
                                     ),
                                     style = CosmosAppTheme.typography.bodySmall.copy(
                                         color = CosmosAppTheme.colorScheme.error,
@@ -158,9 +162,7 @@ internal fun AddTransactionForScreenUI(
                 data = CosmosSaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled,
                     isLoading = uiState.isLoading,
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_screen_add_transaction_for_floating_action_button_content_description,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_add_transaction_for_floating_action_button_content_description)),
                 ),
                 handleEvent = { event ->
                     when (event) {

@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.total_balance_card
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -118,9 +120,7 @@ private fun TotalBalanceCardUI(
             CosmosText(
                 modifier = Modifier
                     .fillMaxWidth(),
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_total_balance_card_title,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_total_balance_card_title)),
                 style = CosmosAppTheme.typography.displaySmall
                     .copy(
                         color = CosmosAppTheme.colorScheme.onTertiary,
@@ -177,9 +177,7 @@ private fun TotalBalanceCardUI(
                 data = ChipUIData(
                     borderColor = CosmosAppTheme.colorScheme.onTertiary,
                     textColor = CosmosAppTheme.colorScheme.onTertiary,
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_total_balance_card_view_balance,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_total_balance_card_view_balance)),
                 ),
                 handleEvent = { event ->
                     when (event) {

@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.transaction_for.transaction_for_values.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -132,9 +134,7 @@ internal fun TransactionForValuesScreenUI(
                 modifier = Modifier
                     .cosmosNavigationBarsSpacer(),
                 iconResource = CosmosIcons.Add,
-                contentDescriptionStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_transaction_for_values_floating_action_button_content_description,
-                ),
+                contentDescriptionStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_transaction_for_values_floating_action_button_content_description)),
                 onClick = {
                     handleUIEvent(TransactionForValuesScreenUIEvent.OnFloatingActionButtonClick)
                 },

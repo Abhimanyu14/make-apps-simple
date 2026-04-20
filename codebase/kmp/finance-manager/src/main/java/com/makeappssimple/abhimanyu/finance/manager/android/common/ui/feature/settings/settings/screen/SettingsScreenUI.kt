@@ -18,6 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.feature.settings.settings.screen
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -68,15 +70,9 @@ internal fun SettingsScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: SettingsScreenUIEvent) -> Unit = {},
 ) {
-    val restoreDataFailedSnackbarText = CosmosStringResource.Id(
-        id = R.string.finance_manager_screen_settings_restore_data_failed,
-    ).text
-    val cancelReminderFailedSnackbarText = CosmosStringResource.Id(
-        id = R.string.finance_manager_screen_settings_cancel_reminder_failed,
-    ).text
-    val cancelReminderSuccessfulSnackbarText = CosmosStringResource.Id(
-        id = R.string.finance_manager_screen_settings_cancel_reminder_successful,
-    ).text
+    val restoreDataFailedSnackbarText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_restore_data_failed)).text
+    val cancelReminderFailedSnackbarText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_cancel_reminder_failed)).text
+    val cancelReminderSuccessfulSnackbarText = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_cancel_reminder_successful)).text
 
     val settingsScreenListItemData: ImmutableList<SettingsScreenListItemData> =
         getSettingsListItemData(
@@ -189,9 +185,7 @@ private fun SettingsScreenLoader(
         CosmosLinearProgressIndicator(
             modifier = Modifier
                 .testTag(
-                    tag = CosmosStringResource.Id(
-                        id = R.string.finance_manager_screen_settings_linear_progress_indicator_test_tag,
-                    ).text,
+                    tag = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_linear_progress_indicator_test_tag)).text,
                 ),
         )
     }
@@ -260,9 +254,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.Category,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_categories,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_categories)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -280,9 +272,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.AccountBalance,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_accounts,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_accounts)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -300,9 +290,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.Groups,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_transaction_for,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_transaction_for)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -328,9 +316,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.Backup,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_backup,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_backup)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -348,9 +334,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.History,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_restore,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_restore)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -368,9 +352,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.Calculate,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_recalculate_total,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_recalculate_total)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -398,9 +380,7 @@ private fun getSettingsListItemData(
                 isEnabled = !uiState.isLoading,
                 hasToggle = true,
                 iconResource = CosmosIcons.Notifications,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_reminder,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_reminder)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -434,9 +414,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.TextSnippet,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_credits,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_credits)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -458,9 +436,7 @@ private fun getSettingsListItemData(
             data = SettingsListItemContentData(
                 isEnabled = !uiState.isLoading,
                 iconResource = CosmosIcons.TextSnippet,
-                stringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_open_source_licenses,
-                ),
+                stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_settings_open_source_licenses)),
             ),
             handleEvent = { event ->
                 when (event) {
@@ -479,10 +455,12 @@ private fun getSettingsListItemData(
         ),
         SettingsScreenListItemData(
             data = SettingsListItemAppVersionData(
-                appVersionStringResource = CosmosStringResource.Id(
-                    id = R.string.finance_manager_screen_settings_app_version,
-                    args = listOf(
-                        uiState.appVersion.orEmpty(),
+                appVersionStringResource = CosmosStringResource.Text(
+                    text = FinanceManagerStrings.get(
+                        template = FinanceManagerStrings.finance_manager_screen_settings_app_version,
+                        args = listOf(
+                            uiState.appVersion.orEmpty(),
+                        ),
                     ),
                 ),
             ),

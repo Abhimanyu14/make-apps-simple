@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.category
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.common.MyConfirmationBottomSheet
@@ -29,18 +31,10 @@ internal fun CategoriesDeleteConfirmationBottomSheet(
 ) {
     MyConfirmationBottomSheet(
         data = MyConfirmationBottomSheetData(
-            messageStringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_message,
-            ),
-            negativeButtonTextStringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_negative_button_text,
-            ),
-            positiveButtonTextStringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_positive_button_text,
-            ),
-            titleStringResource = CosmosStringResource.Id(
-                id = R.string.finance_manager_screen_categories_bottom_sheet_delete_title,
-            ),
+            messageStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_bottom_sheet_delete_message)),
+            negativeButtonTextStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_bottom_sheet_delete_negative_button_text)),
+            positiveButtonTextStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_bottom_sheet_delete_positive_button_text)),
+            titleStringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_categories_bottom_sheet_delete_title)),
         ),
         handleEvent = { event ->
             when (event) {

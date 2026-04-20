@@ -60,6 +60,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.time_picker.CosmosTimePickerEvent
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.TestTags.SCREEN_CONTENT_ADD_OR_EDIT_TRANSACTION
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.edit_transaction.bottom_sheet.EditTransactionScreenBottomSheetType
@@ -313,18 +314,20 @@ internal fun EditTransactionScreenUI(
                 data = MyOutlinedTextFieldData(
                     isLoading = uiState.isLoading,
                     textFieldValue = uiState.amount,
-                    labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_amount,
-                    trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_clear_amount,
+                    labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_amount),
+                    trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_clear_amount),
                     supportingText = if (uiState.amountErrorText.isNotNullOrBlank()) {
                         {
                             AnimatedVisibility(
                                 uiState.amountErrorText.isNotNullOrBlank(),
                             ) {
                                 CosmosText(
-                                    stringResource = CosmosStringResource.Id(
-                                        id = R.string.finance_manager_screen_add_or_edit_transaction_amount_error_text,
-                                        args = listOf(
-                                            uiState.amountErrorText,
+                                    stringResource = CosmosStringResource.Text(
+                                        text = FinanceManagerStrings.get(
+                                            template = FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_amount_error_text,
+                                            args = listOf(
+                                                uiState.amountErrorText,
+                                            ),
                                         ),
                                     ),
                                     style = CosmosAppTheme.typography.bodySmall
@@ -377,7 +380,7 @@ internal fun EditTransactionScreenUI(
                     data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.category?.title.orEmpty(),
-                        labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_category,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_category),
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -402,8 +405,8 @@ internal fun EditTransactionScreenUI(
                     data = MyOutlinedTextFieldData(
                         isLoading = uiState.isLoading,
                         textFieldValue = uiState.title,
-                        labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_title,
-                        trailingIconContentDescriptionTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_clear_title,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_title),
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_clear_title),
                         keyboardActions = KeyboardActions(
                             onDone = {
                                 clearFocus()
@@ -506,7 +509,7 @@ internal fun EditTransactionScreenUI(
                     data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.accountFrom?.name.orEmpty(),
-                        labelTextStringResourceId = uiState.accountFromText.stringResourceId,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.fromResourceId(uiState.accountFromText.stringResourceId)),
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -531,7 +534,7 @@ internal fun EditTransactionScreenUI(
                     data = CosmosReadOnlyTextFieldData(
                         isLoading = uiState.isLoading,
                         value = uiState.accountTo?.name.orEmpty(),
-                        labelTextStringResourceId = uiState.accountToText.stringResourceId,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.fromResourceId(uiState.accountToText.stringResourceId)),
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -553,7 +556,7 @@ internal fun EditTransactionScreenUI(
                 data = CosmosReadOnlyTextFieldData(
                     isLoading = uiState.isLoading,
                     value = uiState.transactionDate.formattedDate(),
-                    labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_transaction_date,
+                    labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_transaction_date),
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -574,7 +577,7 @@ internal fun EditTransactionScreenUI(
                 data = CosmosReadOnlyTextFieldData(
                     isLoading = uiState.isLoading,
                     value = uiState.transactionTime.formattedTime(),
-                    labelTextStringResourceId = R.string.finance_manager_screen_add_or_edit_transaction_transaction_time,
+                    labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_screen_add_or_edit_transaction_transaction_time),
                 ),
                 handleEvent = { event ->
                     when (event) {
@@ -593,9 +596,7 @@ internal fun EditTransactionScreenUI(
                 data = CosmosSaveButtonData(
                     isEnabled = uiState.isCtaButtonEnabled,
                     isLoading = uiState.isLoading,
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_screen_edit_transaction_floating_action_button_content_description,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_screen_edit_transaction_floating_action_button_content_description)),
                 ),
                 handleEvent = { event ->
                     when (event) {

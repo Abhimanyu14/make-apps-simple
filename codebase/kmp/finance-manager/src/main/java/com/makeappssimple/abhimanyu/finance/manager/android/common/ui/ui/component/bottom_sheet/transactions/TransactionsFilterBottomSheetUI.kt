@@ -16,6 +16,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.component.bottom_sheet.transactions
 
+import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.constants.FinanceManagerStrings
+
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
@@ -420,9 +422,7 @@ internal fun TransactionsFiltersBottomSheetUI(
                 },
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_transactions_filter_reset,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_filter_reset)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }
@@ -484,9 +484,7 @@ internal fun TransactionsFiltersBottomSheetUI(
                 },
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_transactions_filter_apply,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_filter_apply)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }
@@ -588,12 +586,14 @@ internal fun TransactionFilterBottomSheetDateFilter(
                     ),
             ) {
                 CosmosIconButton(
-                    onClickLabelStringResource = CosmosStringResource.Id(
-                        id = if (isExpanded) {
-                            R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
-                        } else {
-                            R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
-                        },
+                    onClickLabelStringResource = CosmosStringResource.Text(
+                        text = FinanceManagerStrings.fromResourceId(
+                            id = if (isExpanded) {
+                                R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
+                            } else {
+                                R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
+                            },
+                        ),
                     ),
                     onClick = onExpandButtonClick,
                     modifier = Modifier
@@ -611,8 +611,10 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         .weight(
                             weight = 1F,
                         ),
-                    stringResource = CosmosStringResource.Id(
-                        id = headingTextStringResourceId,
+                    stringResource = CosmosStringResource.Text(
+                        text = FinanceManagerStrings.fromResourceId(
+                            id = headingTextStringResourceId,
+                        ),
                     ),
                     style = CosmosAppTheme.typography.headlineLarge
                         .copy(
@@ -630,9 +632,7 @@ internal fun TransactionFilterBottomSheetDateFilter(
                     ),
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_filter_clear)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }
@@ -656,7 +656,7 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         ),
                     data = CosmosReadOnlyTextFieldData(
                         value = fromDate.formattedDate(),
-                        labelTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_from_date,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_bottom_sheet_transactions_filter_from_date),
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -676,7 +676,7 @@ internal fun TransactionFilterBottomSheetDateFilter(
                         ),
                     data = CosmosReadOnlyTextFieldData(
                         value = toDate.formattedDate(),
-                        labelTextStringResourceId = R.string.finance_manager_bottom_sheet_transactions_filter_to_date,
+                        labelStringResource = CosmosStringResource.Text(FinanceManagerStrings.finance_manager_bottom_sheet_transactions_filter_to_date),
                     ),
                     handleEvent = { event ->
                         when (event) {
@@ -734,12 +734,14 @@ private fun TransactionFilterBottomSheetFilterGroup(
                     ),
             ) {
                 CosmosIconButton(
-                    onClickLabelStringResource = CosmosStringResource.Id(
-                        id = if (isExpanded) {
-                            R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
-                        } else {
-                            R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
-                        },
+                    onClickLabelStringResource = CosmosStringResource.Text(
+                        text = FinanceManagerStrings.fromResourceId(
+                            id = if (isExpanded) {
+                                R.string.finance_manager_bottom_sheet_transactions_filter_collapse_group
+                            } else {
+                                R.string.finance_manager_bottom_sheet_transactions_filter_expand_group
+                            },
+                        ),
                     ),
                     onClick = onExpandButtonClick,
                     modifier = Modifier
@@ -757,8 +759,10 @@ private fun TransactionFilterBottomSheetFilterGroup(
                         .weight(
                             weight = 1F,
                         ),
-                    stringResource = CosmosStringResource.Id(
-                        id = headingTextStringResourceId,
+                    stringResource = CosmosStringResource.Text(
+                        text = FinanceManagerStrings.fromResourceId(
+                            id = headingTextStringResourceId,
+                        ),
                     ),
                     style = CosmosAppTheme.typography.headlineLarge
                         .copy(
@@ -776,9 +780,7 @@ private fun TransactionFilterBottomSheetFilterGroup(
                     ),
             ) {
                 CosmosText(
-                    stringResource = CosmosStringResource.Id(
-                        id = R.string.finance_manager_bottom_sheet_transactions_filter_clear,
-                    ),
+                    stringResource = CosmosStringResource.Text(text = FinanceManagerStrings.get(template = FinanceManagerStrings.finance_manager_bottom_sheet_transactions_filter_clear)),
                     style = CosmosAppTheme.typography.labelLarge,
                 )
             }

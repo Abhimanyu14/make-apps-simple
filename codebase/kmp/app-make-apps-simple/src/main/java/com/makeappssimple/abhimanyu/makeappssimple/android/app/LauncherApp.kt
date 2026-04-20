@@ -35,8 +35,8 @@ internal fun LauncherApp(
                 id = BarcodesR.color.barcodes_launcher_background,
             ),
             iconResourceId = BarcodesR.mipmap.barcodes_ic_launcher,
-            stringResource = CosmosStringResource.Id(
-                id = BarcodesR.string.barcodes_app_name,
+            stringResource = CosmosStringResource.Text(
+                text = MakeAppsSimpleStrings.barcodes_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToBarcodesActivity)
@@ -47,8 +47,8 @@ internal fun LauncherApp(
                 id = CosmosDesignSystemR.color.cosmos_launcher_background,
             ),
             iconResourceId = CosmosDesignSystemR.mipmap.cosmos_ic_launcher,
-            stringResource = CosmosStringResource.Id(
-                id = CosmosDesignSystemR.string.cosmos_design_system_catalog_app_name,
+            stringResource = CosmosStringResource.Text(
+                text = MakeAppsSimpleStrings.cosmos_design_system_catalog_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToCosmosDesignSystemCatalogActivity)
@@ -59,8 +59,8 @@ internal fun LauncherApp(
                 id = FinanceManagerR.color.finance_manager_launcher_background,
             ),
             iconResourceId = FinanceManagerR.mipmap.finance_manager_ic_launcher,
-            stringResource = CosmosStringResource.Id(
-                id = FinanceManagerR.string.finance_manager_app_name,
+            stringResource = CosmosStringResource.Text(
+                text = MakeAppsSimpleStrings.finance_manager_app_name,
             ),
             onClick = {
                 handlePlatformEvent(PlatformEvent.NavigateToFinanceManagerActivity)
