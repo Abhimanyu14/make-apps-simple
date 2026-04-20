@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.makeappssimple.android.di
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.di.BarcodesAppModule
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.di.CosmosDesignSystemCatalogModule
 import com.makeappssimple.abhimanyu.finance.manager.android.common.di.FinanceManagerAppModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
@@ -25,7 +24,6 @@ import org.koin.core.annotation.Module
 @Module(
     includes = [
         BarcodesAppModule::class,
-        CosmosDesignSystemCatalogModule::class,
         FinanceManagerAppModule::class,
         PlatformModule::class,
     ],

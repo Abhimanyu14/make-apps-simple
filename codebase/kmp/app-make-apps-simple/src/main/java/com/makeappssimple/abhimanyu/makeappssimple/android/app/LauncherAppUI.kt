@@ -44,6 +44,7 @@ import coil3.compose.AsyncImage
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosTextStyle
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.text
 
 @Composable
 internal fun LauncherAppUI(
