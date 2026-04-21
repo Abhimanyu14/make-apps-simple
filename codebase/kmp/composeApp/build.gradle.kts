@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform")
     alias(libs.plugins.compose.hot.reload)
     alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.plugin.kotlin.compose)
 }
 
 android {

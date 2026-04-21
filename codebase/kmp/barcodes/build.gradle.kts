@@ -144,7 +144,7 @@ kotlin {
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
-                implementation(libs.lifecycle.viewmodel)
+                implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.koin.annotations)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
