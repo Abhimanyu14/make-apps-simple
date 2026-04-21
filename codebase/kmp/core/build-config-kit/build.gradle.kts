@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.plugin.ksp)
+    alias(libs.plugins.plugin.makeappssimple.android.kover)
+    alias(libs.plugins.plugin.makeappssimple.android.ksp)
 }
 
 android {
@@ -34,15 +40,46 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     defaultConfig {
         minSdk = libs.versions.min.sdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+
+    lint {
+        checkAllWarnings = true
+        warningsAsErrors = true
+        baseline = file("lint-baseline.xml")
+        disable += "AndroidGradlePluginVersion"
+    }
 }
 
 kotlin {
-    androidTarget()
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    js(IR) {
+        browser()
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -69,4 +106,27 @@ kotlin {
     }
 
     explicitApi()
+}
+
+dependencies {
+    add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspJvm", libs.koin.ksp.compiler)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+    add("kspJs", libs.koin.ksp.compiler)
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                packages(
+                    // UI
+                    "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
+                    "com.makeappssimple.abhimanyu.barcodes.android.core.design_system.*",
+                )
+            }
+        }
+    }
 }
