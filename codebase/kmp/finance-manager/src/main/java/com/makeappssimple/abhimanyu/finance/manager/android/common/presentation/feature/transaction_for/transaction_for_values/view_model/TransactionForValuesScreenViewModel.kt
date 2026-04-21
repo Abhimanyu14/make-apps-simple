@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.extensions.mapIndexed
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orFalse

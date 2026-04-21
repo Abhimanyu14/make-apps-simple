@@ -34,7 +34,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigatio
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.view_model.HomeScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.FirebaseAnalyticsKitImpl
 import com.makeappssimple.abhimanyu.common.coroutines.test.TestCoroutineDispatcherProviderImpl
-import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
+import com.makeappssimple.abhimanyu.core.log.kit.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoder
 import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoderImpl
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKitImpl

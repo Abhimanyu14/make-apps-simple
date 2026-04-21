@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.app
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 
 internal class BarcodesActivityViewModel(
     val barcodesNavigationKit: BarcodesNavigationKit,

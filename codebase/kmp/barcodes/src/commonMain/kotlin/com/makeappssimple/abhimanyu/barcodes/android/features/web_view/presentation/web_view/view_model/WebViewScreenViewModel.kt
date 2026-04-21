@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentat
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.util.defaultObjectStateIn
 import kotlinx.coroutines.CoroutineScope

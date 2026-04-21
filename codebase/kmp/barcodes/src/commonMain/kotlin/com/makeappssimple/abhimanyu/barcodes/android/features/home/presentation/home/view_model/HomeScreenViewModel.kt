@@ -31,7 +31,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.presentation.home.state.HomeScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.bottom_sheet.HomeCosmosBottomSheetType
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.common.result.MyResult
 import com.makeappssimple.abhimanyu.common.util.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit

@@ -21,16 +21,17 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.di.RoomM
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.di.DaosModule
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.barcode_scanner.di.BarcodeScannerModule
 import com.makeappssimple.abhimanyu.common.app_version.di.AppVersionKitModule
-import com.makeappssimple.abhimanyu.common.build_config.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.common.clipboard.di.ClipboardKitModule
-import com.makeappssimple.abhimanyu.common.log_kit.di.LogKitModule
 import com.makeappssimple.abhimanyu.common.uri_decoder.di.UriDecoderModule
 import com.makeappssimple.abhimanyu.common.uri_encoder.di.UriEncoderModule
+import com.makeappssimple.abhimanyu.core.build_config.kit.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.core.coroutines.di.CoroutineScopeModule
 import com.makeappssimple.abhimanyu.core.coroutines.di.DispatcherProviderModule
 import com.makeappssimple.abhimanyu.core.date.time.di.DateTimeKitModule
+import com.makeappssimple.abhimanyu.core.log.kit.di.LogKitModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
+import org.koin.ksp.generated.module
 
 @Module(
     includes = [

@@ -25,8 +25,8 @@ import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
 import com.makeappssimple.abhimanyu.common.json_reader.fake.FakeJsonReaderKitImpl
 import com.makeappssimple.abhimanyu.common.json_writer.JsonWriterKit
 import com.makeappssimple.abhimanyu.common.json_writer.fake.FakeJsonWriterKitImpl
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
-import com.makeappssimple.abhimanyu.common.log_kit.fake.FakeLogKitImpl
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.FakeLogKitImpl
 import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.uri_decoder.fake.FakeUriDecoderImpl
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit

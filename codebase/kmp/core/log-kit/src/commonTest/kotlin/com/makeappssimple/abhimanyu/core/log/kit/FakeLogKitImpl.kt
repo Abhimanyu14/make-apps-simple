@@ -14,13 +14,23 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.log_kit
+package com.makeappssimple.abhimanyu.core.log.kit
 
-private const val DEFAULT_LOGGER_TAG = "Abhi"
+import org.jetbrains.annotations.VisibleForTesting
 
-public interface LogKit {
-    public fun logError(
+public class FakeLogKitImpl : LogKit {
+    @VisibleForTesting
+    internal val loggedMessages = mutableListOf<Pair<String, String>>()
+
+    override fun logError(
         message: String,
-        tag: String = DEFAULT_LOGGER_TAG,
-    )
+        tag: String,
+    ) {
+        loggedMessages.add(
+            Pair(
+                first = message,
+                second = tag,
+            ),
+        )
+    }
 }

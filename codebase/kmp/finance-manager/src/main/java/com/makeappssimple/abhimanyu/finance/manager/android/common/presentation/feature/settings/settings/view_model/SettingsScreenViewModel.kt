@@ -19,8 +19,8 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.build_config.kit.BuildConfigKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orFalse

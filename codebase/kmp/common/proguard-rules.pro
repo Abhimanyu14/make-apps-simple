@@ -152,6 +152,7 @@
 -dontwarn com.makeappssimple.abhimanyu.common.coroutines.DispatcherProvider
 -dontwarn com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
 -dontwarn com.makeappssimple.abhimanyu.common.json_writer.JsonWriterKit
--dontwarn com.makeappssimple.abhimanyu.common.log_kit.LogKit
+-dontwarn com.makeappssimple.abhimanyu.core.log.kit.LogKit
+-dontwarn com.makeappssimple.abhimanyu.core.build.config.kit.BuildConfigKit
 -dontwarn com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 # endregion

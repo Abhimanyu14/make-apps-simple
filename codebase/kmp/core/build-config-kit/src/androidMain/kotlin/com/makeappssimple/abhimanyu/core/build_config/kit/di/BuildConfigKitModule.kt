@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.log_kit.di
+package com.makeappssimple.abhimanyu.core.build_config.kit.di
 
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan(
-    "com.makeappssimple.abhimanyu.common.log_kit",
+    "com.makeappssimple.abhimanyu.core.build_config.kit",
 )
-public class LogKitModule
+public class BuildConfigKitModule

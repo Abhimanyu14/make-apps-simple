@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.extensions.groupBy
 import com.makeappssimple.abhimanyu.common.extensions.map
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.tab_row.MyTabData

@@ -25,7 +25,7 @@ import com.makeappssimple.abhimanyu.common.extensions.combineAndCollectLatest
 import com.makeappssimple.abhimanyu.common.extensions.filter
 import com.makeappssimple.abhimanyu.common.extensions.sortedWith
 import com.makeappssimple.abhimanyu.common.extensions.toImmutableList
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
 import com.makeappssimple.abhimanyu.common.util.defaultImmutableListStateIn
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit

@@ -100,6 +100,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:build-config-kit"))
+    implementation(project(":core:log-kit"))
+
     androidTestImplementation(libs.test.compose.ui.junit4)
     androidTestImplementation(libs.test.room)
     androidTestImplementation(libs.bundles.koin.test)

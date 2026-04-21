@@ -14,25 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.log_kit.fake
+package com.makeappssimple.abhimanyu.core.log.kit.di
 
-import androidx.annotation.VisibleForTesting
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-public class FakeLogKitImpl : LogKit {
-    // Pair<message, tag>
-    @VisibleForTesting
-    internal val loggedMessages = mutableListOf<Pair<String, String>>()
-
-    override fun logError(
-        message: String,
-        tag: String,
-    ) {
-        loggedMessages.add(
-            Pair(
-                first = message,
-                second = tag,
-            ),
-        )
-    }
-}
+@Module
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.core.log.kit",
+)
+public class LogKitModule

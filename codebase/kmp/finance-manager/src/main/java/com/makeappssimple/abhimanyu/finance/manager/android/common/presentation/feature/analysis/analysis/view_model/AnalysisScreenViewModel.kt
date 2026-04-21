@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.common.extensions.map
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate

@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesNavigationKit
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.BarcodesScreen
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.common.log_kit.LogKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 

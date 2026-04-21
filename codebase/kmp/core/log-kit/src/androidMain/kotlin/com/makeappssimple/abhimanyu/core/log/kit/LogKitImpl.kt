@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.log_kit
+package com.makeappssimple.abhimanyu.core.log.kit
 
 import android.util.Log
-import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
+import com.makeappssimple.abhimanyu.core.build_config.kit.BuildConfigKit
 import org.koin.core.annotation.Single
 
 @Single(
