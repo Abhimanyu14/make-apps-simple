@@ -59,14 +59,16 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
             }
         }
 
         commonTest {
             dependencies {
                 implementation(libs.test.kotlin)
+                implementation(libs.test.coroutines)
             }
         }
 
