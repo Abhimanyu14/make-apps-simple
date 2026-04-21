@@ -17,6 +17,8 @@ plugins {
     alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp) apply false
     alias(libs.plugins.plugin.maven.publish) apply false
+    alias(libs.plugins.plugin.android.kotlin.multiplatform.library) apply false
+    alias(libs.plugins.plugin.android.lint) apply false
 }
 
 // region Detekt
