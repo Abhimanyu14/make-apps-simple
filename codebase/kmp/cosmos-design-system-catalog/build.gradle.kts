@@ -129,6 +129,10 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":common"))
+                implementation(project(":core:clipboard-kit"))
+                implementation(project(":core:coroutines"))
+                implementation(project(":core:kotlin"))
+                implementation(project(":core:uri-kit"))
 
                 implementation(libs.androidx.activity.compose)
                 implementation(libs.androidx.compose.foundation)

@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
-import com.makeappssimple.abhimanyu.common.uri_decoder.UriDecoder
+import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData

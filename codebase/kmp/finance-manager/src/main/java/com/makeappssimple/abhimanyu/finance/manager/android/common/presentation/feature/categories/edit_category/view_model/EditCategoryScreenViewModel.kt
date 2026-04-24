@@ -21,7 +21,7 @@ import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.extensions.map
+import com.makeappssimple.abhimanyu.core.kotlin.map
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.chip.ChipUIData

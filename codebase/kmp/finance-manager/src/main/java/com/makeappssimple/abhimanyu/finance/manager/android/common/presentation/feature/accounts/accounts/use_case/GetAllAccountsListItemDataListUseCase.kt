@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case
 
-import com.makeappssimple.abhimanyu.common.extensions.orEmpty
+import com.makeappssimple.abhimanyu.core.kotlin.orEmpty
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account

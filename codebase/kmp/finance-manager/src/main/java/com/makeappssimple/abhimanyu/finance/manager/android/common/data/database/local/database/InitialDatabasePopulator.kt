@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database
 
-import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
+import com.makeappssimple.abhimanyu.core.json.kit.JsonReaderKit
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orZero
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.InitialDatabaseData

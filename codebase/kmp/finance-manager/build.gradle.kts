@@ -77,10 +77,13 @@ android {
 dependencies {
     implementation(project(":common"))
     implementation(project(":core:build-config-kit"))
+    implementation(project(":core:clipboard-kit"))
     implementation(project(":core:coroutines"))
     implementation(project(":core:date-time"))
+    implementation(project(":core:json-kit"))
     implementation(project(":core:kotlin"))
     implementation(project(":core:log-kit"))
+    implementation(project(":core:uri-kit"))
     implementation(project(":cosmos-design-system"))
 
     androidTestImplementation(libs.test.compose.ui.junit4)

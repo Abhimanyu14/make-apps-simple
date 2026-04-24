@@ -93,6 +93,9 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
+                implementation(libs.kotlinx.collections.immutable)
+
+                implementation(project(":core:kotlin"))
             }
         }
         val commonTest by getting {

@@ -21,9 +21,8 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.di.RoomM
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.di.DaosModule
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.barcode_scanner.di.BarcodeScannerModule
 import com.makeappssimple.abhimanyu.core.app_version.kit.di.AppVersionKitModule
-import com.makeappssimple.abhimanyu.common.clipboard.di.ClipboardKitModule
-import com.makeappssimple.abhimanyu.common.uri_decoder.di.UriDecoderModule
-import com.makeappssimple.abhimanyu.common.uri_encoder.di.UriEncoderModule
+import com.makeappssimple.abhimanyu.core.clipboard.kit.di.ClipboardKitModule
+import com.makeappssimple.abhimanyu.core.uri.kit.di.UriKitModule
 import com.makeappssimple.abhimanyu.core.build_config.kit.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.core.coroutines.di.CoroutineScopeModule
 import com.makeappssimple.abhimanyu.core.coroutines.di.DispatcherProviderModule
@@ -47,8 +46,7 @@ import org.koin.ksp.generated.module
         FirebaseModule::class,
         LogKitModule::class,
         RoomModule::class,
-        UriDecoderModule::class,
-        UriEncoderModule::class,
+        UriKitModule::class,
     ],
 )
 @ComponentScan(

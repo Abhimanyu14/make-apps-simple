@@ -163,7 +163,12 @@ kotlin {
                 implementation(project(":barcode-generator"))
                 implementation(project(":common"))
                 implementation(project(":core:app-version-kit"))
+                implementation(project(":core:clipboard-kit"))
+                implementation(project(":core:coroutines"))
                 implementation(project(":core:date-time"))
+                implementation(project(":core:json-kit"))
+                implementation(project(":core:kotlin"))
+                implementation(project(":core:uri-kit"))
                 implementation(project(":cosmos-design-system"))
 
                 implementation(libs.androidx.compose.ui.tooling.preview)

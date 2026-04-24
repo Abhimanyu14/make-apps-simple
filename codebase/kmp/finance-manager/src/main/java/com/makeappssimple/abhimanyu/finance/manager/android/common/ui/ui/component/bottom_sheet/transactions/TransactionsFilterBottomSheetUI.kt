@@ -46,8 +46,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.common.extensions.addIfDoesNotContainItemElseRemove
-import com.makeappssimple.abhimanyu.common.extensions.map
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.addIfDoesNotContainItemElseRemove
+import com.makeappssimple.abhimanyu.core.kotlin.map
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton

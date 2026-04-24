@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation
 
-import com.makeappssimple.abhimanyu.common.uri_encoder.UriEncoder
+import com.makeappssimple.abhimanyu.core.uri.kit.UriEncoder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow

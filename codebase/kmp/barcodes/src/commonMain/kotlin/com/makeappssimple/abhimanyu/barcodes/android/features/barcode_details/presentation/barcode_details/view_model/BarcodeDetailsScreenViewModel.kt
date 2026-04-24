@@ -31,10 +31,10 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.pr
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.navigation.BarcodeDetailsScreenArgs
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
-import com.makeappssimple.abhimanyu.common.clipboard.ClipboardKit
+import com.makeappssimple.abhimanyu.core.clipboard.kit.ClipboardKit
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.common.result.MyResult
-import com.makeappssimple.abhimanyu.common.util.defaultObjectStateIn
+import com.makeappssimple.abhimanyu.core.coroutines.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.core.build_config.kit.BuildConfigKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosColor

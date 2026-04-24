@@ -89,6 +89,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.kotlinx.collections.immutable)
             }
         }
 
@@ -96,6 +97,12 @@ kotlin {
             dependencies {
                 implementation(libs.test.kotlin)
                 implementation(libs.test.kotest)
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.compose.runtime)
             }
         }
     }

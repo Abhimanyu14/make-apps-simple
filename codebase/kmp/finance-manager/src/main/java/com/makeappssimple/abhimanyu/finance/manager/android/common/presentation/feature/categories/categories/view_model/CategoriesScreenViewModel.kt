@@ -17,9 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.categories.categories.view_model
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.common.extensions.combineAndCollectLatest
-import com.makeappssimple.abhimanyu.common.extensions.groupBy
-import com.makeappssimple.abhimanyu.common.extensions.map
+import com.makeappssimple.abhimanyu.core.coroutines.combineAndCollectLatest
+import com.makeappssimple.abhimanyu.core.kotlin.groupBy
+import com.makeappssimple.abhimanyu.core.kotlin.map
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
