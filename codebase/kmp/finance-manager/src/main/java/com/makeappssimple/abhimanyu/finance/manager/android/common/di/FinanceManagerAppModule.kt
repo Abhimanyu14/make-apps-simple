@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
 import com.makeappssimple.abhimanyu.core.app_version.kit.di.AppVersionKitModule
-import com.makeappssimple.abhimanyu.core.json.kit.di.JsonKitModule
-import com.makeappssimple.abhimanyu.core.uri.kit.di.UriKitModule
 import com.makeappssimple.abhimanyu.core.build_config.kit.di.BuildConfigKitModule
 import com.makeappssimple.abhimanyu.core.coroutines.di.CoroutineScopeModule
 import com.makeappssimple.abhimanyu.core.coroutines.di.DispatcherProviderModule
+import com.makeappssimple.abhimanyu.core.json.kit.di.JsonKitModule
 import com.makeappssimple.abhimanyu.core.log.kit.di.LogKitModule
+import com.makeappssimple.abhimanyu.core.uri.kit.di.UriKitModule
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.di.AlarmKitModule
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.di.NotificationKitModule
 import org.koin.core.annotation.ComponentScan

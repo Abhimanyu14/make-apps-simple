@@ -24,15 +24,17 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentat
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.web_view.presentation.web_view.state.WebViewScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
+import com.makeappssimple.abhimanyu.core.coroutines.defaultObjectStateIn
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
-import com.makeappssimple.abhimanyu.core.coroutines.defaultObjectStateIn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 internal class WebViewScreenViewModel(
     analyticsKit: AnalyticsKit,
     barcodesNavigationKit: BarcodesNavigationKit,

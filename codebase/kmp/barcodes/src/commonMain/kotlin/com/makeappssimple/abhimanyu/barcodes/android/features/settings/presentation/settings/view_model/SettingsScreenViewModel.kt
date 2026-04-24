@@ -22,7 +22,9 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigatio
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.analytics.AnalyticsKit
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import kotlinx.coroutines.CoroutineScope
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 internal class SettingsScreenViewModel(
     analyticsKit: AnalyticsKit,
     barcodesNavigationKit: BarcodesNavigationKit,

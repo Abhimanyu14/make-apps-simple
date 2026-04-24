@@ -45,8 +45,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import kotlin.time.ExperimentalTime
 
+@KoinViewModel
 internal class CreateBarcodeScreenViewModel(
     analyticsKit: AnalyticsKit,
     barcodesNavigationKit: BarcodesNavigationKit,

@@ -16,12 +16,11 @@
 
 package com.makeappssimple.abhimanyu.core.json.kit.di
 
-import com.makeappssimple.abhimanyu.core.json.kit.JsonReaderKitImpl
-import com.makeappssimple.abhimanyu.core.json.kit.JsonWriterKitImpl
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-public val JsonKitModule: Module = module {
-    single { JsonReaderKitImpl(get()) }
-    single { JsonWriterKitImpl(get()) }
-}
+@Module
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.core.json.kit",
+)
+public class JsonKitModule
