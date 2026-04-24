@@ -16,7 +16,7 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
-import com.makeappssimple.abhimanyu.common.app_version.di.AppVersionKitModule
+import com.makeappssimple.abhimanyu.core.app_version.kit.di.AppVersionKitModule
 import com.makeappssimple.abhimanyu.common.json_reader.di.JsonReaderKitModule
 import com.makeappssimple.abhimanyu.common.json_writer.di.JsonWriterKitModule
 import com.makeappssimple.abhimanyu.common.uri_decoder.di.UriDecoderModule

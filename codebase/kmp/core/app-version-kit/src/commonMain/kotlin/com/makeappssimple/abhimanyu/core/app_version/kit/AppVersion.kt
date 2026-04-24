@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.app_version
+package com.makeappssimple.abhimanyu.core.app_version.kit
 
-public interface AppVersionKit {
-    public fun getAppVersion(): AppVersion?
-}
+import androidx.annotation.Keep
+
+@Keep
+public data class AppVersion(
+    val versionName: String,
+    val versionNumber: Long,
+)

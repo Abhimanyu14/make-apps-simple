@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.app_version
+package com.makeappssimple.abhimanyu.core.app_version.kit
 
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.pm.PackageInfoCompat
-import com.makeappssimple.abhimanyu.common.build_config.BuildConfigKit
+import com.makeappssimple.abhimanyu.core.build_config.kit.BuildConfigKit
 import org.koin.core.annotation.Single
 
 @Single(

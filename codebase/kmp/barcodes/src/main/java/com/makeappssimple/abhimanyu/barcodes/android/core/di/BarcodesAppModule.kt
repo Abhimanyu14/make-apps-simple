@@ -20,7 +20,7 @@ import com.makeappssimple.abhimanyu.barcode.generator.android.di.BarcodeGenerato
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.database.di.RoomModule
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.di.DaosModule
 import com.makeappssimple.abhimanyu.barcodes.android.features.scan_barcode.ui.barcode_scanner.di.BarcodeScannerModule
-import com.makeappssimple.abhimanyu.common.app_version.di.AppVersionKitModule
+import com.makeappssimple.abhimanyu.core.app_version.kit.di.AppVersionKitModule
 import com.makeappssimple.abhimanyu.common.clipboard.di.ClipboardKitModule
 import com.makeappssimple.abhimanyu.common.uri_decoder.di.UriDecoderModule
 import com.makeappssimple.abhimanyu.common.uri_encoder.di.UriEncoderModule

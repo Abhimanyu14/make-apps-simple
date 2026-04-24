@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.app_version
+package com.makeappssimple.abhimanyu.core.app_version.kit
 
-import androidx.annotation.Keep
-import androidx.compose.runtime.Immutable
-
-@Immutable
-@Keep
-public data class AppVersion(
-    val versionName: String,
-    val versionNumber: Long,
-)
+public class FakeAppVersionKitImpl : AppVersionKit {
+    override fun getAppVersion(): AppVersion {
+        return AppVersion(
+            versionName = "1.2.3",
+            versionNumber = 123L,
+        )
+    }
+}

@@ -18,8 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.test
 
-import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
-import com.makeappssimple.abhimanyu.common.app_version.fake.FakeAppVersionKitImpl
+import com.makeappssimple.abhimanyu.core.app_version.kit.AppVersionKit
+import com.makeappssimple.abhimanyu.core.app_version.kit.FakeAppVersionKitImpl
 import com.makeappssimple.abhimanyu.common.coroutines.test.TestCoroutineDispatcherProviderImpl
 import com.makeappssimple.abhimanyu.common.json_reader.JsonReaderKit
 import com.makeappssimple.abhimanyu.common.json_reader.fake.FakeJsonReaderKitImpl

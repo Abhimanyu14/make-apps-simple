@@ -162,6 +162,7 @@ kotlin {
             dependencies {
                 implementation(project(":barcode-generator"))
                 implementation(project(":common"))
+                implementation(project(":core:app-version-kit"))
                 implementation(project(":core:date-time"))
                 implementation(project(":cosmos-design-system"))
 

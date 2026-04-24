@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.app_version.di
+package com.makeappssimple.abhimanyu.core.app_version.kit
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-
-@Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.common.app_version",
-)
-public class AppVersionKitModule
+public interface AppVersionKit {
+    public fun getAppVersion(): AppVersion?
+}

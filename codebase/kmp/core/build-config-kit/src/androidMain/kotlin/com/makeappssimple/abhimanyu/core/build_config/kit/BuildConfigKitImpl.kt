@@ -17,7 +17,6 @@
 package com.makeappssimple.abhimanyu.core.build_config.kit
 
 import android.os.Build
-import com.makeappssimple.abhimanyu.common.BuildConfig
 import org.koin.core.annotation.Single
 
 @Single(

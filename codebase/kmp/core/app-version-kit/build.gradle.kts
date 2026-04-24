@@ -27,12 +27,8 @@ plugins {
 }
 
 android {
-    namespace = "com.makeappssimple.abhimanyu.core.build_config.kit"
+    namespace = "com.makeappssimple.abhimanyu.core.app_version.kit"
     compileSdk = libs.versions.compile.sdk.get().toInt()
-
-    buildFeatures {
-        buildConfig = true
-    }
 
     buildTypes {
         release {
@@ -104,6 +100,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.androidx.core.ktx)
+                implementation(project(":core:build-config-kit"))
             }
         }
     }

@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.common.app_version.fake
+package com.makeappssimple.abhimanyu.core.app_version.kit.di
 
-import com.makeappssimple.abhimanyu.common.app_version.AppVersion
-import com.makeappssimple.abhimanyu.common.app_version.AppVersionKit
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-public class FakeAppVersionKitImpl : AppVersionKit {
-    override fun getAppVersion(): AppVersion {
-        return AppVersion(
-            versionName = "1.2.3",
-            versionNumber = 123L,
-        )
-    }
-}
+@Module
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.core.app_version.kit",
+)
+public class AppVersionKitModule
