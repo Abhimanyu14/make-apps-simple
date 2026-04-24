@@ -48,7 +48,9 @@ compose = "1.9.1"
 compose-emoji-picker = "1.0.0-alpha19"
 detekt-rules = "1.0.0"
 detekt-rules-compose-nlopez = "0.4.27"
+firebase-analytics = "23.0.0"
 firebase-bom = "34.4.0"
+firebase-crashlytics = "19.0.0"
 guava = "33.5.0-jre"
 jdk-desugaring = "2.1.5"
 koin-annotations-bom = "2.1.0"
@@ -127,10 +129,10 @@ coil-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
 compose-emoji-picker = { module = "com.github.Abhimanyu14:compose-emoji-picker", version.ref = "compose-emoji-picker" }
 detekt-rules = { module = "com.github.Abhimanyu14:detekt-rules", version.ref = "detekt-rules" }
 detekt-rules-compose-nlopez = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-rules-compose-nlopez" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-config = { module = "com.google.firebase:firebase-config" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebase-crashlytics" }
 firebase-perf = { module = "com.google.firebase:firebase-perf" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 jdk-desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref = "jdk-desugaring" }
