@@ -16,12 +16,11 @@
 
 package com.makeappssimple.abhimanyu.core.clipboard.kit.di
 
-import com.makeappssimple.abhimanyu.core.clipboard.kit.ClipboardKitImpl
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-public val ClipboardKitModule: Module = module {
-    single {
-        ClipboardKitImpl(get())
-    }
-}
+@Module
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.core.clipboard.kit",
+)
+public class ClipboardKitModule

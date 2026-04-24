@@ -16,12 +16,11 @@
 
 package com.makeappssimple.abhimanyu.core.uri.kit.di
 
-import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoderImpl
-import com.makeappssimple.abhimanyu.core.uri.kit.UriEncoderImpl
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-public val UriKitModule: Module = module {
-    single { UriEncoderImpl() }
-    single { UriDecoderImpl() }
-}
+@Module
+@ComponentScan(
+    "com.makeappssimple.abhimanyu.core.uri.kit",
+)
+public class UriKitModule
