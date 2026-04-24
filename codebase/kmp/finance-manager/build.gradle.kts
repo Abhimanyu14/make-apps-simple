@@ -76,6 +76,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":core:app-version-kit"))
     implementation(project(":core:build-config-kit"))
     implementation(project(":core:clipboard-kit"))
     implementation(project(":core:coroutines"))

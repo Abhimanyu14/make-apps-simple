@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.core.domain.use_case.barco
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.repository.BarcodeRepository
-import com.makeappssimple.abhimanyu.common.result.MyResult
+import com.makeappssimple.abhimanyu.core.coroutines.MyResult
 import org.koin.core.annotation.Single
 
 @Single

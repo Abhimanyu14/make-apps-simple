@@ -22,7 +22,7 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.data.mapper.BarcodeDat
 import com.makeappssimple.abhimanyu.barcodes.android.core.data.mapper.BarcodeDomainToDataMapper
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeDomainModel
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.repository.BarcodeRepository
-import com.makeappssimple.abhimanyu.common.result.MyResult
+import com.makeappssimple.abhimanyu.core.coroutines.MyResult
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

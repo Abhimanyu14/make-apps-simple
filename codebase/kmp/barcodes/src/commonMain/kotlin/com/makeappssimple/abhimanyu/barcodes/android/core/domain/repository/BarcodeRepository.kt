@@ -17,7 +17,7 @@
 package com.makeappssimple.abhimanyu.barcodes.android.core.domain.repository
 
 import com.makeappssimple.abhimanyu.barcodes.android.core.domain.model.BarcodeDomainModel
-import com.makeappssimple.abhimanyu.common.result.MyResult
+import com.makeappssimple.abhimanyu.core.coroutines.MyResult
 import kotlinx.coroutines.flow.Flow
 
 /**
