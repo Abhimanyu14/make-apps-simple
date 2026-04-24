@@ -42,7 +42,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
     implementation(project(":core:coroutines"))
     implementation(project(":core:kotlin"))
 
