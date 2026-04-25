@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.plugin.android.library)
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.compose.multiplatform)
     alias(libs.plugins.plugin.detekt)
     alias(libs.plugins.plugin.dokka)
+    alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.plugin.screenshot)
     alias(libs.plugins.plugin.maven.publish)

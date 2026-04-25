@@ -177,21 +177,20 @@ ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.r
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
 
 [plugins]
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
-compose-hot-reload = { id = "org.jetbrains.compose.hot-reload", version.ref = "compose-hot-reload" }
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-
 plugin-about-libraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "about-libraries" }
 plugin-android-application = { id = "com.android.application", version.ref = "agp" }
 plugin-android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 plugin-android-lint = { id = "com.android.lint", version.ref = "agp" }
 plugin-android-library = { id = "com.android.library", version.ref = "agp" }
+plugin-compose-hot-reload = { id = "org.jetbrains.compose.hot-reload", version.ref = "compose-hot-reload" }
+plugin-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 plugin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "plugin-detekt" }
 plugin-dokka = { id = "org.jetbrains.dokka", version.ref = "plugin-dokka" }
 plugin-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "plugin-firebase-crashlytics" }
 plugin-google-services = { id = "com.google.gms.google-services", version.ref = "plugin-google-services" }
 plugin-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 plugin-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+plugin-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 plugin-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 plugin-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "plugin-kotlinx-binary-compatibility-validator" }
 plugin-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "plugin-kotlin-kover" }

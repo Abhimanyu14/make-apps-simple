@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    alias(libs.plugins.compose.hot.reload)
-    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.plugin.android.library)
+    alias(libs.plugins.plugin.compose.hot.reload)
+    alias(libs.plugins.plugin.compose.multiplatform)
     alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.kotlin.multiplatform)
 }
 
 android {

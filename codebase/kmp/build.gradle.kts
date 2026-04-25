@@ -2,23 +2,22 @@ import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 
 plugins {
-    alias(libs.plugins.compose.hot.reload) apply false
-    alias(libs.plugins.compose.multiplatform) apply false
-    alias(libs.plugins.kotlin.multiplatform) apply false
-
     alias(libs.plugins.plugin.android.application) apply false
+    alias(libs.plugins.plugin.android.kotlin.multiplatform.library) apply false
     alias(libs.plugins.plugin.android.library) apply false
+    alias(libs.plugins.plugin.android.lint) apply false
+    alias(libs.plugins.plugin.compose.hot.reload) apply false
+    alias(libs.plugins.plugin.compose.multiplatform) apply false
     alias(libs.plugins.plugin.detekt)
     alias(libs.plugins.plugin.dokka)
     alias(libs.plugins.plugin.firebase.crashlytics) apply false
     alias(libs.plugins.plugin.google.services) apply false
     alias(libs.plugins.plugin.kotlin.android) apply false
     alias(libs.plugins.plugin.kotlin.compose) apply false
+    alias(libs.plugins.plugin.kotlin.multiplatform) apply false
     alias(libs.plugins.plugin.kotlinx.kover)
     alias(libs.plugins.plugin.ksp) apply false
     alias(libs.plugins.plugin.maven.publish) apply false
-    alias(libs.plugins.plugin.android.kotlin.multiplatform.library) apply false
-    alias(libs.plugins.plugin.android.lint) apply false
 }
 
 // region Detekt
