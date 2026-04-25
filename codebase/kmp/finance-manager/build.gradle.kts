@@ -84,7 +84,7 @@ dependencies {
     implementation(project(":core:kotlin"))
     implementation(project(":core:log-kit"))
     implementation(project(":core:uri-kit"))
-    implementation(project(":cosmos-design-system"))
+    implementation(project(":cosmos-design-system:library"))
 
     androidTestImplementation(libs.test.compose.ui.junit4)
     androidTestImplementation(libs.test.room)

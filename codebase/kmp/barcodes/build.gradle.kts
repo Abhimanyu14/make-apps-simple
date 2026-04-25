@@ -168,7 +168,7 @@ kotlin {
                 implementation(project(":core:json-kit"))
                 implementation(project(":core:kotlin"))
                 implementation(project(":core:uri-kit"))
-                implementation(project(":cosmos-design-system"))
+                implementation(project(":cosmos-design-system:library"))
 
                 implementation(libs.androidx.compose.ui.tooling.preview)
                 implementation(libs.androidx.core.ktx)

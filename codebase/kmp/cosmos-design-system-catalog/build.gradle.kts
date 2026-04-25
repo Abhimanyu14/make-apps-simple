@@ -108,7 +108,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":core:coroutines"))
-                implementation(project(":cosmos-design-system"))
+                implementation(project(":cosmos-design-system:library"))
 
                 implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.androidx.lifecycle.viewmodel.compose)
