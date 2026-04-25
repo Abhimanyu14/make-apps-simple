@@ -35,8 +35,7 @@ plugins {
 
 includeBuild("build-logic")
 
-include(":androidApp")
-include(":composeApp")
+include(":portfolio")
 include(":app-barcodes")
 include(":app-cosmos-design-system-catalog")
 include(":app-finance-manager")
