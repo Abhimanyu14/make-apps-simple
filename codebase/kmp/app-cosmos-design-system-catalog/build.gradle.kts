@@ -99,7 +99,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":cosmos-design-system-catalog"))
+    implementation(project(":cosmos-design-system:catalog"))
 }
 
 kotlin {

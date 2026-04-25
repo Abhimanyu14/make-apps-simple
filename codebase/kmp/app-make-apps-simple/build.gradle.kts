@@ -98,7 +98,7 @@ android {
 dependencies {
     implementation(project(":barcodes"))
     implementation(project(":cosmos-design-system:library"))
-    implementation(project(":cosmos-design-system-catalog"))
+    implementation(project(":cosmos-design-system:catalog"))
     implementation(project(":finance-manager"))
 
     implementation(libs.bundles.coil)

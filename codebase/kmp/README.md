@@ -21,7 +21,7 @@ A collection of Android applications and shared modules.
 ### Feature Modules
 
 - `:barcodes`: Core logic and UI components specifically for barcode-related features.
-- `:cosmos-design-system-catalog`: Logic and screen implementations for the design system catalog.
+- `:cosmos-design-system:catalog`: Logic and screen implementations for the design system catalog.
 - `:finance-manager`: Core logic and UI components for finance tracking and management.
 
 ### Shared Modules
