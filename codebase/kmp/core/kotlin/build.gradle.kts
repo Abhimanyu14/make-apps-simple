@@ -20,8 +20,9 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.plugin.android.library)
+    alias(libs.plugins.plugin.kotlin.serialization)
     alias(libs.plugins.plugin.makeappssimple.android.kover)
 }
 
@@ -90,6 +91,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.collections.immutable)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
 
