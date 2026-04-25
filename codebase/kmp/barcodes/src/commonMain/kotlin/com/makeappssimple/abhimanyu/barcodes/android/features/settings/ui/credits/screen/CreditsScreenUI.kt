@@ -30,9 +30,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.credits.event.CreditsScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_credits
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_credits_icons_title
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_credits_privacy_policy_title
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_credits_terms_and_conditions_title
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CONTENT_CREDITS
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CREDITS
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.scaffold.CosmosScaffold
@@ -58,8 +62,8 @@ internal fun CreditsScreenUI(
             .fillMaxSize(),
         topBar = {
             CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.credits,
+                titleStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_credits,
                 ),
                 navigationAction = {
                     handleUIEvent(CreditsScreenUIEvent.OnTopAppBarNavigationButtonClick)
@@ -85,8 +89,8 @@ internal fun CreditsScreenUI(
                 ),
         ) {
             TitleText(
-                titleStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.creditsIconsTitle,
+                titleStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_credits_icons_title,
                 ),
             )
             CosmosLinkText(
@@ -169,8 +173,8 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.creditsPrivacyPolicyTitle,
+                titleStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_credits_privacy_policy_title,
                 ),
             )
             CosmosLinkText(
@@ -196,8 +200,8 @@ internal fun CreditsScreenUI(
             SectionSpacer()
 
             TitleText(
-                titleStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.creditsTermsAndConditionsTitle,
+                titleStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_credits_terms_and_conditions_title,
                 ),
             )
             CosmosLinkText(

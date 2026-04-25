@@ -18,6 +18,7 @@ package com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.pr
 
 import android.widget.Toast
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -27,9 +28,12 @@ import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigatio
 import com.makeappssimple.abhimanyu.barcodes.android.core.presentation.navigation.constants.NavigationArguments
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.view_model.CreateBarcodeScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.ui.create_barcode.screen.CreateBarcodeScreen
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_barcode_value_copied_toast_message
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.play_store_review.PlayStoreReviewHandler
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
+import org.jetbrains.compose.resources.getString
 
 internal fun NavGraphBuilder.createBarcodeNavGraph() {
     composable(
@@ -43,6 +47,7 @@ internal fun NavGraphBuilder.createBarcodeNavGraph() {
         ),
     ) {
         val context = LocalContext.current
+        val coroutineScope = rememberCoroutineScope()
         val playStoreReviewHandler = remember(context) {
             PlayStoreReviewHandler(context)
         }
@@ -50,13 +55,16 @@ internal fun NavGraphBuilder.createBarcodeNavGraph() {
         CreateBarcodeScreen(
             screenViewModel = koinViewModel<CreateBarcodeScreenViewModel>(),
             showBarcodeValueCopiedToastMessage = { barcodeValue ->
-                Toast.makeText(
-                    context,
-                    BarcodesStrings.createBarcodeBarcodeValueCopiedToastMessage(
-                        barcodeValue = barcodeValue,
-                    ),
-                    Toast.LENGTH_SHORT,
-                ).show()
+                coroutineScope.launch {
+                    Toast.makeText(
+                        context,
+                        getString(
+                            Res.string.barcodes_screen_create_barcode_barcode_value_copied_toast_message,
+                            barcodeValue,
+                        ),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
             },
             triggerInAppReview = playStoreReviewHandler::triggerInAppReview,
         )

@@ -21,7 +21,9 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_home_bottom_sheet_create_barcode
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_home_bottom_sheet_scan_barcode
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.icons.BarcodesIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemDataEvent
@@ -49,8 +51,8 @@ internal fun HomeMenuBottomSheet(
             listItemsDataAndEventHandler = persistentListOf(
                 CosmosListItemDataEventDataAndEventHandler(
                     data = CosmosListItemData(
-                        stringResource = CosmosStringResource.Text(
-                            text = BarcodesStrings.homeBottomSheetScanBarcode,
+                        stringResource = CosmosStringResource.Id(
+                            resource = Res.string.barcodes_screen_home_bottom_sheet_scan_barcode,
                         ),
                         iconResource = BarcodesIcons.Scanner,
                     ),
@@ -69,8 +71,8 @@ internal fun HomeMenuBottomSheet(
                 CosmosListItemDataEventDataAndEventHandler(
                     data =
                         CosmosListItemData(
-                            stringResource = CosmosStringResource.Text(
-                                text = BarcodesStrings.homeBottomSheetCreateBarcode,
+                            stringResource = CosmosStringResource.Id(
+                                resource = Res.string.barcodes_screen_home_bottom_sheet_create_barcode,
                             ),
                             iconResource = BarcodesIcons.Barcode,
                         ),

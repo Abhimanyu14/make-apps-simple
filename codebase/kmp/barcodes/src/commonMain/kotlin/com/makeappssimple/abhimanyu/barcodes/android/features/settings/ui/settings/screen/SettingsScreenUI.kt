@@ -24,9 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.event.SettingsScreenUIEvent
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_settings
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_settings_credits
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_settings_open_source_licenses
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_settings_privacy_policy
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CONTENT_SETTINGS
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_SETTINGS
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
@@ -46,8 +50,8 @@ internal fun SettingsScreenUI(
     val listItemsDataAndEventHandler = persistentListOf(
         CosmosListItemDataEventDataAndEventHandler(
             data = CosmosListItemData(
-                stringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.settingsCredits,
+                stringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_settings_credits,
                 ),
             ),
             handleEvent = { event ->
@@ -64,8 +68,8 @@ internal fun SettingsScreenUI(
         ),
         CosmosListItemDataEventDataAndEventHandler(
             data = CosmosListItemData(
-                stringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.settingsOpenSourceLicenses,
+                stringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_settings_open_source_licenses,
                 ),
             ),
             handleEvent = { event ->
@@ -82,8 +86,8 @@ internal fun SettingsScreenUI(
         ),
         CosmosListItemDataEventDataAndEventHandler(
             data = CosmosListItemData(
-                stringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.settingsPrivacyPolicy,
+                stringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_settings_privacy_policy,
                 ),
             ),
             handleEvent = { event ->
@@ -108,8 +112,8 @@ internal fun SettingsScreenUI(
             .fillMaxSize(),
         topBar = {
             CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.settings,
+                titleStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_settings,
                 ),
                 navigationAction = {
                     handleUIEvent(SettingsScreenUIEvent.OnTopAppBarNavigationButtonClick)

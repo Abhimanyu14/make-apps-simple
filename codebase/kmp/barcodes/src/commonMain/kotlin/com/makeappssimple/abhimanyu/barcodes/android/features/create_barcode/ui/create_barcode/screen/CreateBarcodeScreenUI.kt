@@ -41,10 +41,19 @@ import androidx.compose.ui.unit.dp
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.event.CreateBarcodeScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.snackbar.CreateBarcodeScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.features.create_barcode.presentation.create_barcode.state.CreateBarcodeScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_barcode_name
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_barcode_value
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_clear_barcode_name
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_clear_barcode_value
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_content_description_copy_barcode_value
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_cta_button_label
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_error_message
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_create_barcode_save_barcode_failed_snackbar_message
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.error_screen.ErrorScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CONTENT_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.TestTags.SCREEN_CREATE_BARCODE
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosElevatedButton
@@ -58,6 +67,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.Cosmos
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
 import kotlinx.coroutines.delay
 import org.jetbrains.annotations.VisibleForTesting
+import org.jetbrains.compose.resources.stringResource
 
 @VisibleForTesting
 internal const val REQUEST_FOCUS_DELAY = 300L
@@ -69,7 +79,9 @@ internal fun CreateBarcodeScreenUI(
     state: CommonScreenUIState = rememberCommonScreenUIState(),
     handleUIEvent: (uiEvent: CreateBarcodeScreenUIEvent) -> Unit = {},
 ) {
-    val saveBarcodeFailedSnackbarMessage = BarcodesStrings.createBarcodeSaveFailedSnackbarMessage
+    val saveBarcodeFailedSnackbarMessage = stringResource(
+        resource = Res.string.barcodes_screen_create_barcode_save_barcode_failed_snackbar_message,
+    )
 
     LaunchedEffect(
         key1 = Unit,
@@ -105,8 +117,8 @@ internal fun CreateBarcodeScreenUI(
         snackbarHostState = state.snackbarHostState,
         topBar = {
             CosmosTopAppBar(
-                titleStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.createBarcode,
+                titleStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_create_barcode,
                 ),
                 navigationAction = {
                     handleUIEvent(CreateBarcodeScreenUIEvent.OnTopAppBarNavigationButtonClick)
@@ -120,8 +132,8 @@ internal fun CreateBarcodeScreenUI(
     ) {
         if (uiState.isError) {
             ErrorScreenUI(
-                errorTextStringResource = CosmosStringResource.Text(
-                    text = BarcodesStrings.createBarcodeErrorMessage,
+                errorTextStringResource = CosmosStringResource.Id(
+                    resource = Res.string.barcodes_screen_create_barcode_error_message,
                 ),
             )
         } else {
@@ -141,11 +153,11 @@ internal fun CreateBarcodeScreenUI(
             ) {
                 CosmosOutlinedTextField(
                     value = uiState.barcodeName,
-                    labelStringResource = CosmosStringResource.Text(
-                        text = BarcodesStrings.createBarcodeBarcodeName,
+                    labelStringResource = CosmosStringResource.Id(
+                        resource = Res.string.barcodes_screen_create_barcode_barcode_name,
                     ),
-                    trailingIconContentDescriptionStringResource = CosmosStringResource.Text(
-                        text = BarcodesStrings.createBarcodeClearBarcodeName,
+                    trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
+                        resource = Res.string.barcodes_screen_create_barcode_clear_barcode_name,
                     ),
                     onTrailingIconClick = {
                         handleUIEvent(
@@ -198,12 +210,12 @@ internal fun CreateBarcodeScreenUI(
                 ) {
                     CosmosOutlinedTextField(
                         value = uiState.barcodeValue,
-                        labelStringResource = CosmosStringResource.Text(
-                            text = BarcodesStrings.createBarcodeBarcodeValue,
+                        labelStringResource = CosmosStringResource.Id(
+                            resource = Res.string.barcodes_screen_create_barcode_barcode_value,
                         ),
                         readOnly = !uiState.isBarcodeValueEditable,
-                        trailingIconContentDescriptionStringResource = CosmosStringResource.Text(
-                            text = BarcodesStrings.createBarcodeClearBarcodeValue,
+                        trailingIconContentDescriptionStringResource = CosmosStringResource.Id(
+                            resource = Res.string.barcodes_screen_create_barcode_clear_barcode_value,
                         ),
                         onTrailingIconClick = {
                             handleUIEvent(
@@ -235,8 +247,8 @@ internal fun CreateBarcodeScreenUI(
                     )
                     if (!uiState.isBarcodeValueEditable) {
                         CosmosIconButton(
-                            onClickLabelStringResource = CosmosStringResource.Text(
-                                text = BarcodesStrings.createBarcodeCopyBarcodeValue,
+                            onClickLabelStringResource = CosmosStringResource.Id(
+                                resource = Res.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
                             ),
                             onClick = {
                                 handleUIEvent(
@@ -252,8 +264,8 @@ internal fun CreateBarcodeScreenUI(
                         ) {
                             CosmosIcon(
                                 iconResource = CosmosIcons.ContentCopy,
-                                contentDescriptionStringResource = CosmosStringResource.Text(
-                                    text = BarcodesStrings.createBarcodeCopyBarcodeValue,
+                                contentDescriptionStringResource = CosmosStringResource.Id(
+                                    resource = Res.string.barcodes_screen_create_barcode_content_description_copy_barcode_value,
                                 ),
                             )
                         }
@@ -261,8 +273,8 @@ internal fun CreateBarcodeScreenUI(
                 }
                 CosmosElevatedButton(
                     isEnabled = uiState.isSaveButtonEnabled,
-                    stringResource = CosmosStringResource.Text(
-                        text = BarcodesStrings.createBarcodeCtaButtonLabel,
+                    stringResource = CosmosStringResource.Id(
+                        resource = Res.string.barcodes_screen_create_barcode_cta_button_label,
                     ),
                     onClick = {
                         handleUIEvent(CreateBarcodeScreenUIEvent.OnSaveButtonClick)

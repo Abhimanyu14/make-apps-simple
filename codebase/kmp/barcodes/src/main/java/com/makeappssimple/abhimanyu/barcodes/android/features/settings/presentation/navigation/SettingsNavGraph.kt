@@ -26,8 +26,10 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentat
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.presentation.settings.view_model.SettingsScreenViewModel
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.credits.screen.CreditsScreen
 import com.makeappssimple.abhimanyu.barcodes.android.features.settings.ui.settings.screen.SettingsScreen
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_settings_open_source_licenses
 import org.koin.compose.viewmodel.koinViewModel
+import org.jetbrains.compose.resources.stringResource
 
 internal fun NavGraphBuilder.settingsNavGraph() {
     composable(
@@ -42,12 +44,13 @@ internal fun NavGraphBuilder.settingsNavGraph() {
         route = BarcodesScreen.Settings.route,
     ) {
         val context = LocalContext.current
+        val openSourceLicensesTitle = stringResource(Res.string.barcodes_screen_settings_open_source_licenses)
 
         SettingsScreen(
             screenViewModel = koinViewModel<SettingsScreenViewModel>(),
             navigateToOpenSourceLicensesScreen = {
                 OssLicensesMenuActivity.setActivityTitle(
-                    BarcodesStrings.settingsOpenSourceLicenses,
+                    openSourceLicensesTitle,
                 )
                 context.startActivity(
                     Intent(

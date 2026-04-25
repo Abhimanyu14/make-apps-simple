@@ -28,7 +28,10 @@ import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.pr
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIStateEvents
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.view_model.BarcodeDetailsScreenViewModel
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_barcode_details_barcode_timestamp_created
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_barcode_details_barcode_timestamp_scanned
+import org.jetbrains.compose.resources.stringResource
 import kotlin.math.min
 
 @Composable
@@ -49,17 +52,17 @@ internal fun BarcodeDetailsScreen(
         newValue = uiState.barcodeValue,
     )
 
-    val formattedTimestampLabel = remember(
-        key1 = uiState.barcodeSource,
-    ) {
-        when (uiState.barcodeSource) {
-            BarcodeSourceDomainModel.Created -> {
-                BarcodesStrings.barcodeDetailsBarcodeTimestampCreated
-            }
+    val formattedTimestampLabel = when (uiState.barcodeSource) {
+        BarcodeSourceDomainModel.Created -> {
+            stringResource(
+                resource = Res.string.barcodes_screen_barcode_details_barcode_timestamp_created,
+            )
+        }
 
-            BarcodeSourceDomainModel.Scanned -> {
-                BarcodesStrings.barcodeDetailsBarcodeTimestampScanned
-            }
+        BarcodeSourceDomainModel.Scanned -> {
+            stringResource(
+                resource = Res.string.barcodes_screen_barcode_details_barcode_timestamp_scanned,
+            )
         }
     }
 

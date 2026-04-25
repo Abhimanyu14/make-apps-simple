@@ -17,7 +17,11 @@
 package com.makeappssimple.abhimanyu.barcodes.android.features.home.ui.home.dialog
 
 import androidx.compose.runtime.Composable
-import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.constants.BarcodesStrings
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_home_delete_barcode_dialog_confirm_button_label
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_home_delete_barcode_dialog_dismiss_button_label
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_home_delete_barcode_dialog_message
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_home_delete_barcode_dialog_title
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialog
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialogData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.dialog.CosmosDialogEvent
@@ -33,17 +37,21 @@ internal fun HomeDeleteBarcodeDialog(
     CosmosDialog(
         cosmosDialogData = CosmosDialogData(
             isVisible = true,
-            confirmButtonStringResource = CosmosStringResource.Text(
-                text = BarcodesStrings.homeDeleteBarcodeDialogConfirmButtonLabel,
+            confirmButtonStringResource = CosmosStringResource.Id(
+                resource = Res.string.barcodes_screen_home_delete_barcode_dialog_confirm_button_label,
             ),
-            dismissButtonStringResource = CosmosStringResource.Text(
-                text = BarcodesStrings.homeDeleteBarcodeDialogDismissButtonLabel,
+            dismissButtonStringResource = CosmosStringResource.Id(
+                resource = Res.string.barcodes_screen_home_delete_barcode_dialog_dismiss_button_label,
             ),
-            titleStringResource = CosmosStringResource.Text(
-                text = BarcodesStrings.homeDeleteBarcodeDialogTitle(selectedBarcodesSize),
+            titleStringResource = CosmosStringResource.Plural(
+                resource = Res.plurals.barcodes_screen_home_delete_barcode_dialog_title,
+                count = selectedBarcodesSize,
+                args = listOf(selectedBarcodesSize),
             ),
-            messageStringResource = CosmosStringResource.Text(
-                text = BarcodesStrings.homeDeleteBarcodeDialogMessage(selectedBarcodesSize),
+            messageStringResource = CosmosStringResource.Plural(
+                resource = Res.plurals.barcodes_screen_home_delete_barcode_dialog_message,
+                count = selectedBarcodesSize,
+                args = listOf(selectedBarcodesSize),
             ),
         ),
         handleEvent = { event ->
