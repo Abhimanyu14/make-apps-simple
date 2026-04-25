@@ -16,6 +16,7 @@
 
 @file:Suppress("UnstableApiUsage")
 
+import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -34,6 +35,12 @@ plugins {
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
     metricsDestination = layout.buildDirectory.dir("compose_compiler")
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.makeappssimple.abhimanyu.barcodes.android.resources"
+    generateResClass = ResourcesExtension.ResourceClassGeneration.Always
 }
 
 android {
@@ -134,31 +141,24 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
-            kotlin.setSrcDirs(
-                listOf(
-                    "src/commonMain/kotlin",
-                ),
-            )
+            kotlin.srcDir("src/commonMain/kotlin")
             dependencies {
                 implementation(project(":core:coroutines"))
                 implementation(project(":core:kotlin"))
 
+                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(libs.compose.components.resources)
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
-                implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.koin.annotations)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
             }
         }
         val androidMain by getting {
-            kotlin.setSrcDirs(
-                listOf(
-                    "src/main/java",
-                ),
-            )
+            kotlin.srcDir("src/main/java")
             dependencies {
                 implementation(project(":barcode-generator"))
                 implementation(project(":core:app-version-kit"))

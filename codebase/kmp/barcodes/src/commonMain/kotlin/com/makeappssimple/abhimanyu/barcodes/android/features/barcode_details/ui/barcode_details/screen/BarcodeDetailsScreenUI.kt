@@ -44,6 +44,8 @@ import androidx.compose.ui.unit.sp
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.event.BarcodeDetailsScreenUIEvent
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.snackbar.BarcodeDetailsScreenSnackbarType
 import com.makeappssimple.abhimanyu.barcodes.android.features.barcode_details.presentation.barcode_details.state.BarcodeDetailsScreenUIState
+import com.makeappssimple.abhimanyu.barcodes.android.resources.Res
+import com.makeappssimple.abhimanyu.barcodes.android.resources.barcodes_screen_barcode_details_content_description_edit_barcode
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.CommonScreenUIState
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.error_screen.ErrorScreenUI
 import com.makeappssimple.abhimanyu.barcodes.android.shared.ui.common.rememberCommonScreenUIState
@@ -132,11 +134,11 @@ internal fun BarcodeDetailsScreenUI(
                                 },
                             ) {
                                 CosmosDropdownMenuItem(
-                                    leadingIconContentDescriptionStringResource = CosmosStringResource.Text(
-                                        text = BarcodesStrings.barcodeDetailsEditBarcode,
+                                    leadingIconContentDescriptionStringResource = CosmosStringResource.Id(
+                                        resource = Res.string.barcodes_screen_barcode_details_content_description_edit_barcode,
                                     ),
-                                    stringResource = CosmosStringResource.Text(
-                                        text = BarcodesStrings.barcodeDetailsEditBarcode,
+                                    stringResource = CosmosStringResource.Id(
+                                        resource = Res.string.barcodes_screen_barcode_details_content_description_edit_barcode,
                                     ),
                                     onClick = {
                                         isExpanded = false
