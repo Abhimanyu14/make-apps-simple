@@ -51,6 +51,22 @@ public class CosmosDesignSystemCatalogNavigationState {
         currentScreen = CosmosDesignSystemCatalogScreen.Shapes
     }
 
+    public fun navigateToScreen(screen: CosmosDesignSystemCatalogScreen) {
+        currentScreen = screen
+    }
+
+    public fun navigateToScreen(route: String) {
+        currentScreen = when (route) {
+            CosmosDesignSystemCatalogScreen.Colors.route -> CosmosDesignSystemCatalogScreen.Colors
+            CosmosDesignSystemCatalogScreen.Components.route -> CosmosDesignSystemCatalogScreen.Components
+            CosmosDesignSystemCatalogScreen.Home.route -> CosmosDesignSystemCatalogScreen.Home
+            CosmosDesignSystemCatalogScreen.Icons.route -> CosmosDesignSystemCatalogScreen.Icons
+            CosmosDesignSystemCatalogScreen.Shapes.route -> CosmosDesignSystemCatalogScreen.Shapes
+            CosmosDesignSystemCatalogScreen.Typography.route -> CosmosDesignSystemCatalogScreen.Typography
+            else -> CosmosDesignSystemCatalogScreen.Home
+        }
+    }
+
     public fun navigateToTypographyScreen() {
         currentScreen = CosmosDesignSystemCatalogScreen.Typography
     }
