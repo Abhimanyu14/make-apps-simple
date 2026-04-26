@@ -122,15 +122,3 @@ dependencies {
     add("kspJs", libs.koin.ksp.compiler)
     add("kspJvm", libs.koin.ksp.compiler)
 }
-
-kover {
-    reports {
-        filters {
-            excludes {
-                packages(
-                    "com.makeappssimple.abhimanyu.core.json.kit.di.*",
-                )
-            }
-        }
-    }
-}

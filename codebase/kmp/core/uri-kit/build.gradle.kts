@@ -115,15 +115,3 @@ dependencies {
     add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
     add("kspJs", libs.koin.ksp.compiler)
 }
-
-kover {
-    reports {
-        filters {
-            excludes {
-                packages(
-                    "com.makeappssimple.abhimanyu.core.uri.kit.di.*",
-                )
-            }
-        }
-    }
-}

@@ -111,15 +111,3 @@ kotlin {
 
     explicitApi()
 }
-
-kover {
-    reports {
-        filters {
-            excludes {
-                packages(
-                    "com.makeappssimple.abhimanyu.core.kotlin.di.*",
-                )
-            }
-        }
-    }
-}

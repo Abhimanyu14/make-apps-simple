@@ -135,15 +135,3 @@ dependencies {
         dependencyNotation = libs.koin.ksp.compiler,
     )
 }
-
-kover {
-    reports {
-        filters {
-            excludes {
-                packages(
-                    "com.makeappssimple.abhimanyu.core.coroutines.di.*",
-                )
-            }
-        }
-    }
-}

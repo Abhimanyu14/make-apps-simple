@@ -113,17 +113,3 @@ dependencies {
     add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
     add("kspJs", libs.koin.ksp.compiler)
 }
-
-kover {
-    reports {
-        filters {
-            excludes {
-                packages(
-                    // UI
-                    "com.makeappssimple.abhimanyu.barcodes.android.feature.*.*.screen",
-                    "com.makeappssimple.abhimanyu.barcodes.android.core.design_system.*",
-                )
-            }
-        }
-    }
-}
