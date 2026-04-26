@@ -1,5 +1,9 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnPlugin
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootExtension
 
 plugins {
     alias(libs.plugins.plugin.android.application) apply false
@@ -64,4 +68,14 @@ allprojects {
             }
         }
     }
+}
+
+rootProject.plugins.withType<YarnPlugin> {
+    rootProject.the<YarnRootExtension>().lockFileDirectory =
+        rootProject.rootDir.resolve(".kotlin/kotlin-js-store")
+}
+
+rootProject.plugins.withType<WasmYarnPlugin> {
+    rootProject.the<WasmYarnRootExtension>().lockFileDirectory =
+        rootProject.rootDir.resolve(".kotlin/kotlin-js-store/wasm")
 }
