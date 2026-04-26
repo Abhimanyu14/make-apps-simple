@@ -126,17 +126,17 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":core:date-time"))
-                implementation(project(":core:kotlin"))
-
+                implementation(libs.compose.components.resources)
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
-                implementation(libs.ui.backhandler)
                 implementation(libs.compose.ui.tooling.preview)
-                implementation(libs.compose.components.resources)
                 implementation(libs.kotlinx.collections.immutable)
+                implementation(libs.ui.backhandler)
+
+                implementation(project(":core:date-time"))
+                implementation(project(":core:kotlin"))
             }
         }
 
@@ -159,18 +159,18 @@ kotlin {
         val androidDebug by creating {
             dependsOn(androidMain)
             dependencies {
-                implementation(libs.test.compose.ui.manifest)
                 implementation(libs.androidx.compose.ui.tooling)
                 implementation(libs.androidx.compose.ui.tooling.preview)
+                implementation(libs.test.compose.ui.manifest)
             }
         }
 
         val androidInstrumentedTest by getting {
             dependencies {
-                implementation(libs.test.compose.ui.junit4)
-                implementation(libs.test.room)
                 implementation(libs.bundles.koin.test)
                 implementation(libs.bundles.test)
+                implementation(libs.test.compose.ui.junit4)
+                implementation(libs.test.room)
             }
         }
     }

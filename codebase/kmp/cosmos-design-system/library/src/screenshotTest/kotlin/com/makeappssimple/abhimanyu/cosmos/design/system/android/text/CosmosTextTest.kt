@@ -19,6 +19,7 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.android.text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.android.tools.screenshot.PreviewTest
+import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 
 @PreviewTest
 @Preview(showBackground = true)
