@@ -42,9 +42,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:coroutines"))
-    implementation(project(":core:kotlin"))
-
     implementation(libs.bundles.compose)
     implementation(libs.bundles.koin)
     implementation(libs.kotlinx.coroutines.core)
@@ -52,6 +49,9 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.koin.bom))
+
+    implementation(project(":core:coroutines"))
+    implementation(project(":core:kotlin"))
 
     ksp(libs.koin.ksp.compiler)
 }

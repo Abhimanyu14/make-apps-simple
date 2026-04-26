@@ -66,20 +66,20 @@ kotlin {
         }
     }
 
-    jvm {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-
-    iosX64()
-
     iosArm64()
 
     iosSimulatorArm64()
 
+    iosX64()
+
     js(IR) {
         browser()
+    }
+
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
 
     @OptIn(ExperimentalWasmDsl::class)
@@ -88,6 +88,12 @@ kotlin {
     }
 
     sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.compose.runtime)
+            }
+        }
+
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.collections.immutable)
@@ -97,14 +103,8 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(libs.test.kotlin)
                 implementation(libs.test.kotest)
-            }
-        }
-
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.compose.runtime)
+                implementation(libs.test.kotlin)
             }
         }
     }

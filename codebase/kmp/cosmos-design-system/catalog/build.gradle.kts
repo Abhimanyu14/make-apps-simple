@@ -107,16 +107,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":core:coroutines"))
-                implementation(project(":cosmos-design-system:library"))
-
                 implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.androidx.lifecycle.viewmodel.compose)
-
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
+
+                implementation(project(":core:coroutines"))
+                implementation(project(":cosmos-design-system:library"))
             }
         }
 
@@ -128,11 +127,6 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                implementation(project(":core:clipboard-kit"))
-                implementation(project(":core:coroutines"))
-                implementation(project(":core:kotlin"))
-                implementation(project(":core:uri-kit"))
-
                 implementation(libs.androidx.activity.compose)
                 implementation(libs.androidx.compose.foundation)
                 implementation(libs.androidx.compose.material3)
@@ -140,6 +134,11 @@ kotlin {
                 implementation(libs.androidx.compose.ui.tooling.preview)
                 implementation(libs.bundles.koin)
                 implementation(libs.navigation.compose)
+
+                implementation(project(":core:clipboard-kit"))
+                implementation(project(":core:coroutines"))
+                implementation(project(":core:kotlin"))
+                implementation(project(":core:uri-kit"))
             }
         }
 

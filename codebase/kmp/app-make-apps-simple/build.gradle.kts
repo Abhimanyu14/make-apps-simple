@@ -96,11 +96,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":barcodes"))
-    implementation(project(":cosmos-design-system:library"))
-    implementation(project(":cosmos-design-system:catalog"))
-    implementation(project(":finance-manager"))
-
     implementation(libs.bundles.coil)
     implementation(libs.bundles.compose)
     implementation(libs.bundles.koin)
@@ -108,6 +103,11 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.koin.bom))
+
+    implementation(project(":barcodes"))
+    implementation(project(":cosmos-design-system:library"))
+    implementation(project(":cosmos-design-system:catalog"))
+    implementation(project(":finance-manager"))
 
     ksp(libs.koin.ksp.compiler)
 }

@@ -65,20 +65,20 @@ kotlin {
         }
     }
 
-    jvm {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-
-    iosX64()
-
     iosArm64()
 
     iosSimulatorArm64()
 
+    iosX64()
+
     js(IR) {
         browser()
+    }
+
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
 
     @OptIn(ExperimentalWasmDsl::class)

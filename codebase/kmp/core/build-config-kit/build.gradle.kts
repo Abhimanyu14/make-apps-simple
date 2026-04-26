@@ -69,28 +69,40 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
+    iosArm64()
+
+    iosSimulatorArm64()
+
+    iosX64()
+
+    js(IR) {
+        browser()
+    }
+
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-    js(IR) {
-        browser()
-    }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
     }
 
     sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.core.ktx)
+            }
+        }
+
         val commonMain by getting {
             dependencies {
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
 
@@ -98,12 +110,6 @@ kotlin {
             dependencies {
                 implementation(libs.test.kotlin)
                 implementation(libs.test.coroutines)
-            }
-        }
-
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.androidx.core.ktx)
             }
         }
     }
