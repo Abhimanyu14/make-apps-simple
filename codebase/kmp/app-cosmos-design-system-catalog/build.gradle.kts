@@ -103,9 +103,9 @@ dependencies {
 }
 
 kotlin {
-    explicitApi()
-
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
     }
+
+    explicitApi()
 }

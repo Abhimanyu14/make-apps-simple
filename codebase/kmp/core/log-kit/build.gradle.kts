@@ -63,17 +63,23 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     iosX64()
+
     iosArm64()
+
     iosSimulatorArm64()
+
     js(IR) {
         browser()
     }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
@@ -82,16 +88,16 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(libs.test.kotlin)
                 implementation(libs.test.coroutines)
+                implementation(libs.test.kotlin)
             }
         }
 
@@ -106,10 +112,28 @@ kotlin {
 }
 
 dependencies {
-    add("kspAndroid", libs.koin.ksp.compiler)
-    add("kspJvm", libs.koin.ksp.compiler)
-    add("kspIosX64", libs.koin.ksp.compiler)
-    add("kspIosArm64", libs.koin.ksp.compiler)
-    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
-    add("kspJs", libs.koin.ksp.compiler)
+    add(
+        configurationName = "kspAndroid",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspIosArm64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspIosSimulatorArm64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspIosX64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspJs",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspJvm",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
 }

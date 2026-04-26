@@ -106,6 +106,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.androidx.core.ktx)
+
                 implementation(project(":core:kotlin"))
             }
         }
@@ -115,10 +116,28 @@ kotlin {
 }
 
 dependencies {
-    add("kspAndroid", libs.koin.ksp.compiler)
-    add("kspIosArm64", libs.koin.ksp.compiler)
-    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
-    add("kspIosX64", libs.koin.ksp.compiler)
-    add("kspJs", libs.koin.ksp.compiler)
-    add("kspJvm", libs.koin.ksp.compiler)
+    add(
+        configurationName = "kspAndroid",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspIosArm64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspIosSimulatorArm64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspIosX64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspJs",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspJvm",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
 }

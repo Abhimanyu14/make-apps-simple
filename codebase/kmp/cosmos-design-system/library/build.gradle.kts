@@ -176,10 +176,6 @@ kotlin {
     }
 
     explicitApi()
-
-    compilerOptions {
-        // Common compiler options go here
-    }
 }
 
 mavenPublishing {

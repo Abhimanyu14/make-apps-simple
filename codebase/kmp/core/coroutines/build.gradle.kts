@@ -115,14 +115,6 @@ dependencies {
         dependencyNotation = libs.koin.ksp.compiler,
     )
     add(
-        configurationName = "kspJvm",
-        dependencyNotation = libs.koin.ksp.compiler,
-    )
-    add(
-        configurationName = "kspIosX64",
-        dependencyNotation = libs.koin.ksp.compiler,
-    )
-    add(
         configurationName = "kspIosArm64",
         dependencyNotation = libs.koin.ksp.compiler,
     )
@@ -131,7 +123,15 @@ dependencies {
         dependencyNotation = libs.koin.ksp.compiler,
     )
     add(
+        configurationName = "kspIosX64",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
         configurationName = "kspJs",
+        dependencyNotation = libs.koin.ksp.compiler,
+    )
+    add(
+        configurationName = "kspJvm",
         dependencyNotation = libs.koin.ksp.compiler,
     )
 }

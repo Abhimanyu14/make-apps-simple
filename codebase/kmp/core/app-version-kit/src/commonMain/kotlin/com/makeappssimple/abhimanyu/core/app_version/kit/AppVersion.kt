@@ -16,9 +16,6 @@
 
 package com.makeappssimple.abhimanyu.core.app_version.kit
 
-import androidx.annotation.Keep
-
-@Keep
 public data class AppVersion(
     val versionName: String,
     val versionNumber: Long,
