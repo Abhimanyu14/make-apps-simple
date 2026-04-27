@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.core.coroutines.di
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di
 
-import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import org.koin.core.annotation.Factory
-import org.koin.core.annotation.Module
+import org.koin.core.KoinApplication
+import org.koin.core.context.startKoin
 
-@Module
-public class CoroutineScopeModule {
-    @Factory
-    internal fun providesCoroutineScope(
-        coroutineDispatcherProvider: CoroutineDispatcherProvider,
-    ): CoroutineScope {
-        return CoroutineScope(
-            context = coroutineDispatcherProvider.mainImmediate + SupervisorJob(),
+internal fun initKoin(
+    config: (KoinApplication.() -> Unit)? = null,
+) {
+    startKoin {
+        config?.invoke(this)
+        modules(
+            modules = cosmosDesignSystemCatalogAppModule,
         )
     }
 }

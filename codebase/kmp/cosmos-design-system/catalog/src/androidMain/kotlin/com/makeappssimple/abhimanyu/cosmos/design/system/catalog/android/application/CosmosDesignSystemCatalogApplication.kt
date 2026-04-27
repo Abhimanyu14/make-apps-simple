@@ -17,5 +17,16 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.android.application
 
 import android.app.Application
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di.initKoin
+import org.koin.android.ext.koin.androidContext
 
-internal class CosmosDesignSystemCatalogApplication : Application()
+internal class CosmosDesignSystemCatalogApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        initKoin {
+            androidContext(
+                this@CosmosDesignSystemCatalogApplication,
+            )
+        }
+    }
+}

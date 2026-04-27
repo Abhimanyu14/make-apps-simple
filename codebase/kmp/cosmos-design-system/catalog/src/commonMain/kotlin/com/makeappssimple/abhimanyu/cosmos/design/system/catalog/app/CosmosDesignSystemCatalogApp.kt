@@ -16,13 +16,25 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app
 
+import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavHost
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavGraph
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-public fun CosmosDesignSystemCatalogApp() {
+internal fun CosmosDesignSystemCatalogApp(
+    cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel = koinViewModel(),
+) {
     CosmosAppTheme {
-        CosmosDesignSystemCatalogNavHost()
+        // To remove overscroll effect globally
+        CompositionLocalProvider(
+            LocalOverscrollFactory provides null
+        ) {
+            CosmosDesignSystemCatalogNavGraph(
+                cosmosDesignSystemCatalogActivityViewModel = cosmosDesignSystemCatalogActivityViewModel,
+            )
+        }
     }
 }

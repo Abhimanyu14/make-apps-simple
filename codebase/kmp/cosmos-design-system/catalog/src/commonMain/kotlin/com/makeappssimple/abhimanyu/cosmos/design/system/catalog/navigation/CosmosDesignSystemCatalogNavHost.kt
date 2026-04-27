@@ -17,6 +17,9 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.colors.CosmosDesignSystemCatalogColorsScreen
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.components.CosmosDesignSystemCatalogComponentsScreen
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.home.CosmosDesignSystemCatalogHomeScreen
@@ -25,44 +28,47 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.shapes.
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.typography.CosmosDesignSystemCatalogTypographyScreen
 
 @Composable
-public fun CosmosDesignSystemCatalogNavHost(
-    navigationState: CosmosDesignSystemCatalogNavigationState = rememberCosmosDesignSystemCatalogNavigationState(),
+internal fun CosmosDesignSystemCatalogNavHost(
+    navHostController: NavHostController,
 ) {
-    when (navigationState.currentScreen) {
-        CosmosDesignSystemCatalogScreen.Colors -> {
-            CosmosDesignSystemCatalogColorsScreen(
-                navigationState = navigationState,
-            )
+    NavHost(
+        navController = navHostController,
+        startDestination = CosmosDesignSystemCatalogScreen.Home.route,
+    ) {
+        composable(
+            route = CosmosDesignSystemCatalogScreen.Home.route,
+        ) {
+            CosmosDesignSystemCatalogHomeScreen()
         }
 
-        CosmosDesignSystemCatalogScreen.Components -> {
-            CosmosDesignSystemCatalogComponentsScreen(
-                navigationState = navigationState,
-            )
+        composable(
+            route = CosmosDesignSystemCatalogScreen.Colors.route,
+        ) {
+            CosmosDesignSystemCatalogColorsScreen()
         }
 
-        CosmosDesignSystemCatalogScreen.Home -> {
-            CosmosDesignSystemCatalogHomeScreen(
-                navigationState = navigationState,
-            )
+        composable(
+            route = CosmosDesignSystemCatalogScreen.Components.route,
+        ) {
+            CosmosDesignSystemCatalogComponentsScreen()
         }
 
-        CosmosDesignSystemCatalogScreen.Icons -> {
-            CosmosDesignSystemCatalogIconsScreen(
-                navigationState = navigationState,
-            )
+        composable(
+            route = CosmosDesignSystemCatalogScreen.Icons.route,
+        ) {
+            CosmosDesignSystemCatalogIconsScreen()
         }
 
-        CosmosDesignSystemCatalogScreen.Shapes -> {
-            CosmosDesignSystemCatalogShapesScreen(
-                navigationState = navigationState,
-            )
+        composable(
+            route = CosmosDesignSystemCatalogScreen.Shapes.route,
+        ) {
+            CosmosDesignSystemCatalogShapesScreen()
         }
 
-        CosmosDesignSystemCatalogScreen.Typography -> {
-            CosmosDesignSystemCatalogTypographyScreen(
-                navigationState = navigationState,
-            )
+        composable(
+            route = CosmosDesignSystemCatalogScreen.Typography.route,
+        ) {
+            CosmosDesignSystemCatalogTypographyScreen()
         }
     }
 }

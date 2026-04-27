@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.colors
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
 
-public class CosmosDesignSystemCatalogColorsScreenViewModel(
-    private val navigationState: CosmosDesignSystemCatalogNavigationState,
+internal class CosmosDesignSystemCatalogColorsScreenViewModel(
+    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
 ) : ViewModel() {
-    public fun navigateUp() {
-        navigationState.navigateUp()
+    fun navigateUp() {
+        cosmosDesignSystemCatalogNavigationKit.navigateUp()
     }
 }

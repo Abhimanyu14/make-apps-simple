@@ -24,21 +24,17 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItem
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list.CosmosListItemData
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 public fun CosmosDesignSystemCatalogIconsScreen(
-    navigationState: CosmosDesignSystemCatalogNavigationState,
-    screenViewModel: CosmosDesignSystemCatalogIconsScreenViewModel = viewModel {
-        CosmosDesignSystemCatalogIconsScreenViewModel(navigationState)
-    },
+    screenViewModel: CosmosDesignSystemCatalogIconsScreenViewModel = koinViewModel(),
 ) {
     val icons = listOf(
         CosmosIcons.AccountBalance to "AccountBalance",

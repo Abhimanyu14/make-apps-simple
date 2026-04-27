@@ -17,36 +17,36 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.home
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogScreen
 
 public class CosmosDesignSystemCatalogHomeScreenViewModel(
-    private val navigationState: CosmosDesignSystemCatalogNavigationState,
+    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
 ) : ViewModel() {
     public fun handleRouteClick(
         screen: CosmosDesignSystemCatalogScreen,
     ) {
         when (screen) {
             CosmosDesignSystemCatalogScreen.Colors -> {
-                navigationState.navigateToColorsScreen()
+                cosmosDesignSystemCatalogNavigationKit.navigateToColorsScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Components -> {
-                navigationState.navigateToComponentsScreen()
+                cosmosDesignSystemCatalogNavigationKit.navigateToComponentsScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Home -> {}
 
             CosmosDesignSystemCatalogScreen.Icons -> {
-                navigationState.navigateToIconsScreen()
+                cosmosDesignSystemCatalogNavigationKit.navigateToIconsScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Shapes -> {
-                navigationState.navigateToShapesScreen()
+                cosmosDesignSystemCatalogNavigationKit.navigateToShapesScreen()
             }
 
             CosmosDesignSystemCatalogScreen.Typography -> {
-                navigationState.navigateToTypographyScreen()
+                cosmosDesignSystemCatalogNavigationKit.navigateToTypographyScreen()
             }
         }
     }

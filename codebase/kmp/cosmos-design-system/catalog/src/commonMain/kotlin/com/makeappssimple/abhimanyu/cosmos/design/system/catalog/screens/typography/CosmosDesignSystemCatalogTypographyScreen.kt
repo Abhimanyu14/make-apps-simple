@@ -27,19 +27,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 public fun CosmosDesignSystemCatalogTypographyScreen(
-    navigationState: CosmosDesignSystemCatalogNavigationState,
-    screenViewModel: CosmosDesignSystemCatalogTypographyScreenViewModel = viewModel {
-        CosmosDesignSystemCatalogTypographyScreenViewModel(navigationState)
-    },
+    screenViewModel: CosmosDesignSystemCatalogTypographyScreenViewModel = koinViewModel(),
 ) {
     val styles = listOf(
         CosmosAppTheme.typography.displayLarge to "Display Large",

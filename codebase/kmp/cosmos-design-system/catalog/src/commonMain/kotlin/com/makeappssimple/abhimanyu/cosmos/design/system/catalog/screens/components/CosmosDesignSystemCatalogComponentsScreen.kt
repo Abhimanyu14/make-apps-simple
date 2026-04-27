@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosElevatedButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosIconButton
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.button.CosmosTextButton
@@ -54,14 +53,11 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.icons.CosmosIcons
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 public fun CosmosDesignSystemCatalogComponentsScreen(
-    navigationState: CosmosDesignSystemCatalogNavigationState,
-    screenViewModel: CosmosDesignSystemCatalogComponentsScreenViewModel = viewModel {
-        CosmosDesignSystemCatalogComponentsScreenViewModel(navigationState)
-    },
+    screenViewModel: CosmosDesignSystemCatalogComponentsScreenViewModel = koinViewModel(),
 ) {
     Column(
         modifier = Modifier

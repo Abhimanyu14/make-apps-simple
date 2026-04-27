@@ -17,12 +17,12 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.typography
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
 
 public class CosmosDesignSystemCatalogTypographyScreenViewModel(
-    private val navigationState: CosmosDesignSystemCatalogNavigationState,
+    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
 ) : ViewModel() {
     public fun navigateUp() {
-        navigationState.navigateUp()
+        cosmosDesignSystemCatalogNavigationKit.navigateUp()
     }
 }

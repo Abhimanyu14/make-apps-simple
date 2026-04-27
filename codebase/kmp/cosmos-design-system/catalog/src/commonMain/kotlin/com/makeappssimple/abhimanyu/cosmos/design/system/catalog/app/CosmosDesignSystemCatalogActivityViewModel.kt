@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.shapes
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app
 
 import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
 
-public class CosmosDesignSystemCatalogShapesScreenViewModel(
-    private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
-) : ViewModel() {
-    public fun navigateUp() {
-        cosmosDesignSystemCatalogNavigationKit.navigateUp()
-    }
-}
+internal class CosmosDesignSystemCatalogActivityViewModel(
+    val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
+    val logKit: LogKit,
+) : ViewModel()

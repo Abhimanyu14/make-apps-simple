@@ -33,19 +33,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.text.CosmosText
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 public fun CosmosDesignSystemCatalogShapesScreen(
-    navigationState: CosmosDesignSystemCatalogNavigationState,
-    screenViewModel: CosmosDesignSystemCatalogShapesScreenViewModel = viewModel {
-        CosmosDesignSystemCatalogShapesScreenViewModel(navigationState)
-    },
+    screenViewModel: CosmosDesignSystemCatalogShapesScreenViewModel = koinViewModel(),
 ) {
     val shapes = listOf(
         CosmosAppTheme.shapes.extraSmall to "Extra Small",

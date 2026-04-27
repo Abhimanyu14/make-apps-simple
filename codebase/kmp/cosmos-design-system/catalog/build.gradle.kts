@@ -24,7 +24,6 @@ plugins {
     alias(libs.plugins.plugin.compose.multiplatform)
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.multiplatform)
-    alias(libs.plugins.plugin.ksp)
 }
 
 android {
@@ -66,8 +65,6 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.koin.bom))
-
-    ksp(libs.koin.ksp.compiler)
 }
 
 kotlin {
@@ -77,15 +74,11 @@ kotlin {
         }
     }
 
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "CosmosDesignSystemCatalog"
-            isStatic = true
-        }
-    }
+    iosArm64()
+
+    iosSimulatorArm64()
+
+    iosX64()
 
     jvm {
         compilerOptions {
@@ -109,13 +102,21 @@ kotlin {
             dependencies {
                 implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.androidx.lifecycle.viewmodel.compose)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+                implementation(libs.koin.compose.viewmodel.navigation)
+                implementation(libs.koin.core)
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.ui)
+                implementation(libs.navigation.compose)
 
                 implementation(project(":core:coroutines"))
+                implementation(project(":core:log-kit"))
                 implementation(project(":cosmos-design-system:library"))
+
+                implementation(project.dependencies.platform(libs.koin.bom))
             }
         }
 
@@ -132,7 +133,7 @@ kotlin {
                 implementation(libs.androidx.compose.material3)
                 implementation(libs.androidx.compose.runtime)
                 implementation(libs.androidx.compose.ui.tooling.preview)
-                implementation(libs.bundles.koin)
+                implementation(libs.koin.android)
                 implementation(libs.navigation.compose)
 
                 implementation(project(":core:clipboard-kit"))
@@ -151,15 +152,4 @@ kotlin {
     }
 
     explicitApi()
-}
-
-ksp {
-    arg(
-        k = "KOIN_CONFIG_CHECK",
-        v = "true",
-    )
-    arg(
-        k = "KOIN_DEFAULT_MODULE",
-        v = "false",
-    )
 }

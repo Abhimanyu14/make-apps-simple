@@ -31,15 +31,12 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.list
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.components.top_app_bar.CosmosTopAppBar
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.cosmos.design.system.android.theme.CosmosAppTheme
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationState
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 public fun CosmosDesignSystemCatalogHomeScreen(
-    navigationState: CosmosDesignSystemCatalogNavigationState,
-    screenViewModel: CosmosDesignSystemCatalogHomeScreenViewModel = viewModel {
-        CosmosDesignSystemCatalogHomeScreenViewModel(navigationState)
-    },
+    screenViewModel: CosmosDesignSystemCatalogHomeScreenViewModel = koinViewModel(),
 ) {
     val screens = listOf(
         CosmosDesignSystemCatalogScreen.Typography,
