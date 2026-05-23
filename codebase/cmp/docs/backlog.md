@@ -1,8 +1,10 @@
 # Backlog
 
-## Remaining Item
-
-1. Update `cat-fact/README.md` to reflect the monorepo module paths.
-   - Current README still references old task paths like `:android-app`, `:desktop-app`, and `:web-app`.
-   - It should use `:cat-fact:android-app`, `:cat-fact:desktop-app`, and `:cat-fact:web-app`.
-   - Verify iOS path wording is consistent with the moved location under `cat-fact/iosApp`.
+1. Update skills for build, install, unit test, snapshot test, compose test, and release.
+2. Git hooks for commit message pattern.
+3. Lint checks
+4. Add Cosmos Design System
+5. Add Cosmos Design System Catalog
+6. Add Finance Manager
+7. Add Barcodes
+8. Add Cat Fact
