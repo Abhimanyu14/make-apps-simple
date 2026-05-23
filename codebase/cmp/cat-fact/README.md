@@ -16,13 +16,13 @@ This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM
 
 Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
 
-- Android app: `./gradlew :androidApp:assembleDebug`
+- Android app: `./gradlew :cat-fact:android-app:assembleDebug`
 - Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
+  - Hot reload: `./gradlew :cat-fact:desktop-app:hotRun --auto`
+  - Standard run: `./gradlew :cat-fact:desktop-app:run`
 - Web app:
-  - Wasm target (faster, modern browsers): `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
-  - JS target (slower, supports older browsers): `./gradlew :webApp:jsBrowserDevelopmentRun`
+  - Wasm target (faster, modern browsers): `./gradlew :cat-fact:webApp:wasmJsBrowserDevelopmentRun`
+  - JS target (slower, supports older browsers): `./gradlew :cat-fact:webApp:jsBrowserDevelopmentRun`
 - iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
 
 ---

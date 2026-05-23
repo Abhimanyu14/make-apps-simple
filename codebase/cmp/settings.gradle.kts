@@ -32,7 +32,7 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-include(":cat-fact:androidApp")
-include(":cat-fact:desktopApp")
+include(":cat-fact:android-app")
+include(":cat-fact:desktop-app")
 include(":cat-fact:shared")
-include(":cat-fact:webApp")
+include(":cat-fact:web-app")
