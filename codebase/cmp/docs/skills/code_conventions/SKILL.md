@@ -14,6 +14,6 @@ description: General code conventions for the project.
 
 ## Programming Languages (Refer to Specific Skills)
 
-- **Kotlin**: See [Kotlin Code Conventions Skills](../code_conventions_kotlin/SKILL.md).
-- **TOML**: See [TOML Code Conventions Skills](../code_conventions_toml/SKILL.md).
-- **XML**: See [XML Code Conventions Skills](../code_conventions_xml/SKILL.md).
+- **Kotlin**: See [Kotlin Code Conventions Skills](kotlin.md).
+- **TOML**: See [TOML Code Conventions Skills](toml.md).
+- **XML**: See [XML Code Conventions Skills](xml.md).

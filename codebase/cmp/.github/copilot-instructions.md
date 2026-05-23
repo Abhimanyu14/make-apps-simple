@@ -1,0 +1,1 @@
+../docs/skills/agent_instructions_index.md
