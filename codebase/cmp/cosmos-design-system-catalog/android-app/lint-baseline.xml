@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.1.1" type="baseline" client="gradle" dependencies="false" name="AGP (9.1.1)" variant="all" version="9.1.1">
+
+    <issue
+        id="Registered"
+        message="The `&lt;activity> com.makeappssimple.abhimanyu.cosmos.design.system.catalog.MainActivity` is not registered in the manifest"
+        errorLine1="internal class MainActivity : ComponentActivity() {"
+        errorLine2="               ~~~~~~~~~~~~">
+        <location
+            file="${:cosmos-design-system-catalog:android-app*debug*MAIN*sourceProvider*0*javaDir*2}/com/makeappssimple/abhimanyu/cosmos/design/system/catalog/MainActivity.kt"
+            line="10"
+            column="16"/>
+    </issue>
+
+    <issue
+        id="ConvertToWebp"
+        message="One or more images in this project can be converted to the WebP format which typically results in smaller file sizes, even for lossless conversion">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"/>
+    </issue>
+
+</issues>

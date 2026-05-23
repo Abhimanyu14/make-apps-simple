@@ -33,6 +33,12 @@ android {
             libs.versions.app.cosmos.design.system.catalog.version.name.get()
     }
 
+    lint {
+        checkAllWarnings = true
+        warningsAsErrors = true
+        baseline = file("lint-baseline.xml")
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
