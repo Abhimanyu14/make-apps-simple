@@ -1,4 +1,4 @@
-package com.makeappssimple.abhimanyu.catfact
+package com.makeappssimple.abhimanyu.cat.fact
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image

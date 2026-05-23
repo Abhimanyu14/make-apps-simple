@@ -1,4 +1,4 @@
-package com.makeappssimple.abhimanyu.catfact
+package com.makeappssimple.abhimanyu.cat.fact
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

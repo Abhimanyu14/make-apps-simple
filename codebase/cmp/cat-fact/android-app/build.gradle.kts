@@ -22,11 +22,11 @@ dependencies {
 }
 
 android {
-    namespace = "com.makeappssimple.abhimanyu.catfact"
+    namespace = "com.makeappssimple.abhimanyu.cat.fact"
     compileSdk = libs.versions.android.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.makeappssimple.abhimanyu.catfact"
+        applicationId = "com.makeappssimple.abhimanyu.cat.fact"
         minSdk = libs.versions.android.min.sdk.get().toInt()
         targetSdk = libs.versions.android.target.sdk.get().toInt()
         versionCode = 1

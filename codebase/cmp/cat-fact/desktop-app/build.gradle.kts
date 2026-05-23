@@ -17,11 +17,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.makeappssimple.abhimanyu.catfact.MainKt"
+        mainClass = "com.makeappssimple.abhimanyu.cat.fact.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.makeappssimple.abhimanyu.catfact"
+            packageName = "com.makeappssimple.abhimanyu.cat.fact"
             packageVersion = "1.0.0"
         }
     }

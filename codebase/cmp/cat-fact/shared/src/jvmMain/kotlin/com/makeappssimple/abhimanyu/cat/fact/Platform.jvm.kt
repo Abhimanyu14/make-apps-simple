@@ -1,4 +1,4 @@
-package com.makeappssimple.abhimanyu.catfact
+package com.makeappssimple.abhimanyu.cat.fact
 
 class JVMPlatform: Platform {
     override val name: String = "Java ${System.getProperty("java.version")}"
