@@ -2,10 +2,14 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.plugin.kotlin.multiplatform)
-    alias(libs.plugins.plugin.kotlin.multiplatform.library)
     alias(libs.plugins.plugin.compose)
     alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.kotlin.multiplatform)
+    alias(libs.plugins.plugin.kotlin.multiplatform.library)
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.compose.ui.tooling)
 }
 
 kotlin {
@@ -47,6 +51,8 @@ kotlin {
            isIncludeAndroidResources = true
        }
     }
+
+    explicitApi()
     
     sourceSets {
         androidMain.dependencies {
@@ -72,8 +78,4 @@ kotlin {
             implementation(libs.kotlin.wrappers.browser)
         }
     }
-}
-
-dependencies {
-    androidRuntimeClasspath(libs.compose.ui.tooling)
 }

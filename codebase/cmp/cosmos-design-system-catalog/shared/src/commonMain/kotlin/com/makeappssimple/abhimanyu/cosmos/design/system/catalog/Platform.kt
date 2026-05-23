@@ -1,7 +1,7 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog
 
-interface Platform {
+internal interface Platform {
     val name: String
 }
 
-expect fun getPlatform(): Platform
+internal expect fun getPlatform(): Platform

@@ -7,12 +7,10 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.cosmosDesignSystemCatalog.shared)
-
     implementation(compose.desktop.currentOs)
     implementation(libs.kotlinx.coroutines.swing)
-
     implementation(libs.compose.ui.tooling.preview)
+    implementation(projects.cosmosDesignSystemCatalog.shared)
 }
 
 compose.desktop {
@@ -25,4 +23,8 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+kotlin {
+    explicitApi()
 }

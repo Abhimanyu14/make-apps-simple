@@ -2,7 +2,7 @@ package com.makeappssimple.abhimanyu.cat.fact
 
 import web.navigator.navigator
 
-class JsPlatform: Platform {
+private class JsPlatform: Platform {
     private val userAgent = navigator.userAgent
     private val browserList = listOf("Chrome", "Firefox", "Safari", "Edge")
 
@@ -11,4 +11,4 @@ class JsPlatform: Platform {
             ?: "Unknown"
 }
 
-actual fun getPlatform(): Platform = JsPlatform()
+internal actual fun getPlatform(): Platform = JsPlatform()

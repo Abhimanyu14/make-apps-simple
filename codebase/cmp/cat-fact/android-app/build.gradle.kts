@@ -6,24 +6,20 @@ plugins {
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget = JvmTarget.JVM_11
-    }
-}
-
-dependencies {
-    implementation(projects.catFact.shared)
-
-    implementation(libs.androidx.activity.compose)
-
-    implementation(libs.compose.ui.tooling.preview)
-    debugImplementation(libs.compose.ui.tooling)
-}
-
 android {
     namespace = "com.makeappssimple.abhimanyu.cat.fact"
     compileSdk = libs.versions.android.compile.sdk.get().toInt()
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 
     defaultConfig {
         applicationId = "com.makeappssimple.abhimanyu.cat.fact"
@@ -38,15 +34,20 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
 
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
+dependencies {
+    debugImplementation(libs.compose.ui.tooling)
+
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(projects.catFact.shared)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+    explicitApi()
 }

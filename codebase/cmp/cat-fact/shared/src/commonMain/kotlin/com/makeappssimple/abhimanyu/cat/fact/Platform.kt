@@ -1,7 +1,7 @@
 package com.makeappssimple.abhimanyu.cat.fact
 
-interface Platform {
+internal interface Platform {
     val name: String
 }
 
-expect fun getPlatform(): Platform
+internal expect fun getPlatform(): Platform

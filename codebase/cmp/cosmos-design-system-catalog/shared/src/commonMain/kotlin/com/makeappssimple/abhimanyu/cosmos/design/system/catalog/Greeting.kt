@@ -1,6 +1,6 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog
 
-class Greeting {
+internal class Greeting {
     private val platform = getPlatform()
 
     fun greet(): String {

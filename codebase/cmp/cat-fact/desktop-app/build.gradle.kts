@@ -7,12 +7,10 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.catFact.shared)
-
     implementation(compose.desktop.currentOs)
     implementation(libs.kotlinx.coroutines.swing)
-
     implementation(libs.compose.ui.tooling.preview)
+    implementation(projects.catFact.shared)
 }
 
 compose.desktop {
@@ -25,4 +23,8 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+kotlin {
+    explicitApi()
 }

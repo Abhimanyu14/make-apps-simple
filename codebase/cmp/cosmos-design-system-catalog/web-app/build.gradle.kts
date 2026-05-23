@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.compose)
     alias(libs.plugins.plugin.kotlin.compose)
+    alias(libs.plugins.plugin.kotlin.multiplatform)
 }
 
 kotlin {
@@ -20,9 +20,10 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.cosmosDesignSystemCatalog.shared)
-
             implementation(libs.compose.ui)
+            implementation(projects.cosmosDesignSystemCatalog.shared)
         }
     }
+
+    explicitApi()
 }

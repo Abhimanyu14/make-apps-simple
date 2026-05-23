@@ -1,7 +1,7 @@
 package com.makeappssimple.abhimanyu.cat.fact
 
-class WasmPlatform: Platform {
+private class WasmPlatform : Platform {
     override val name: String = "Web with Kotlin/Wasm"
 }
 
-actual fun getPlatform(): Platform = WasmPlatform()
+internal actual fun getPlatform(): Platform = WasmPlatform()
