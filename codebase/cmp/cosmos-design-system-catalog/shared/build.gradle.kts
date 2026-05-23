@@ -34,7 +34,7 @@ kotlin {
         browser()
     }
 
-    androidLibrary {
+    android {
         namespace =
             "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.shared"
         compileSdk = libs.versions.android.compile.sdk.get().toInt()

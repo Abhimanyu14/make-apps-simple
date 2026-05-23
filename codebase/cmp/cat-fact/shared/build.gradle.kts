@@ -34,7 +34,7 @@ kotlin {
         browser()
     }
 
-    androidLibrary {
+    android {
         namespace = "com.makeappssimple.abhimanyu.catfact.shared"
         compileSdk = libs.versions.android.compile.sdk.get().toInt()
         minSdk = libs.versions.android.min.sdk.get().toInt()
