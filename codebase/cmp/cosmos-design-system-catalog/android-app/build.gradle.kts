@@ -26,8 +26,11 @@ android {
         applicationId = "com.makeappssimple.abhimanyu.cosmos.design.system.catalog"
         minSdk = libs.versions.android.min.sdk.get().toInt()
         targetSdk = libs.versions.android.target.sdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode =
+            libs.versions.app.cosmos.design.system.catalog.version.code.get()
+                .toInt()
+        versionName =
+            libs.versions.app.cosmos.design.system.catalog.version.name.get()
     }
 
     packaging {

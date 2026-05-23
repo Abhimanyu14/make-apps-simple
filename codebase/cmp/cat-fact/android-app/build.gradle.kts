@@ -26,8 +26,8 @@ android {
         applicationId = "com.makeappssimple.abhimanyu.cat.fact"
         minSdk = libs.versions.android.min.sdk.get().toInt()
         targetSdk = libs.versions.android.target.sdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = libs.versions.app.cat.fact.version.code.get().toInt()
+        versionName = libs.versions.app.cat.fact.version.name.get()
     }
 
     packaging {
