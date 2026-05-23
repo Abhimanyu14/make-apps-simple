@@ -47,6 +47,12 @@ kotlin {
             jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
         }
 
+        lint {
+            checkAllWarnings = true
+            warningsAsErrors = true
+            baseline = file("lint-baseline.xml")
+        }
+
         withHostTest {
             isIncludeAndroidResources = true
         }
