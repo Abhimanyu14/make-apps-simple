@@ -49,6 +49,8 @@ android {
 dependencies {
     debugImplementation(libs.compose.ui.tooling)
 
+    detektPlugins(libs.detekt.compose.rules)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.compose.ui.tooling.preview)
     implementation(projects.cosmosDesignSystemCatalog.shared)

@@ -45,7 +45,7 @@ public fun App() {
                 ) {
                     Image(
                         painterResource(Res.drawable.compose_multiplatform),
-                        null
+                        null,
                     )
                     Text("Compose: $greeting")
                 }

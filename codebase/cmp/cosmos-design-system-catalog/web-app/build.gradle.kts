@@ -6,6 +6,10 @@ plugins {
     alias(libs.plugins.plugin.kotlin.multiplatform)
 }
 
+dependencies {
+    detektPlugins(libs.detekt.compose.rules)
+}
+
 kotlin {
     js {
         browser()

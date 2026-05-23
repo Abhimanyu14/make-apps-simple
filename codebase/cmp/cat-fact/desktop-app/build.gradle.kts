@@ -7,6 +7,8 @@ plugins {
 }
 
 dependencies {
+    detektPlugins(libs.detekt.compose.rules)
+
     implementation(compose.desktop.currentOs)
     implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.compose.ui.tooling.preview)

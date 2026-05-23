@@ -10,6 +10,8 @@ plugins {
 
 dependencies {
     androidRuntimeClasspath(libs.compose.ui.tooling)
+
+    detektPlugins(libs.detekt.compose.rules)
 }
 
 kotlin {

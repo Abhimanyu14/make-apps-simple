@@ -19,12 +19,16 @@ android-target-sdk = "36"
 androidx-activity = "1.13.0"
 androidx-lifecycle = "2.11.0-beta01"
 compose = "1.11.0"
+detekt = "1.23.8"
+detekt-compose-rules = "0.5.9"
 java = "11"
 kotlin = "2.3.21"
 kotlin-wrappers-browser = "2026.5.6"
 kotlinx-coroutines = "1.11.0"
+ktlint = "1.3.1"
 material3 = "1.11.0-alpha07"
 plugin-android-application = "9.1.1"
+spotless = "8.5.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -37,6 +41,7 @@ compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.re
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
+detekt-compose-rules = { module = "io.nlopez.compose.rules:detekt", version.ref = "detekt-compose-rules" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-wrappers-browser = { module = "org.jetbrains.kotlin-wrappers:kotlin-browser", version.ref = "kotlin-wrappers-browser" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
@@ -44,7 +49,9 @@ kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-
 [plugins]
 plugin-android-application = { id = "com.android.application", version.ref = "plugin-android-application" }
 plugin-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+plugin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 plugin-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 plugin-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 plugin-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 plugin-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "plugin-android-application" }
+plugin-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
