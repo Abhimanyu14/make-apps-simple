@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.plugin.android.lint)
     alias(libs.plugins.plugin.compose)
@@ -36,6 +39,7 @@ compose.resources {
 }
 
 kotlin {
+    // region Platforms
     // Target declarations - add or remove as needed below. These define
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
@@ -48,6 +52,10 @@ kotlin {
             }
         }
         minSdk = libs.versions.android.min.sdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
+        }
 
         lint {
             checkAllWarnings = true
@@ -62,6 +70,12 @@ kotlin {
         }.configure {
             instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
+    }
+
+    jvm()
+
+    js {
+        browser()
     }
 
     // For iOS targets, this is also where you should
@@ -80,6 +94,12 @@ kotlin {
             baseName = "cosmos-design-system"
         }
     }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+    }
+    // endregion
 
     explicitApi()
 

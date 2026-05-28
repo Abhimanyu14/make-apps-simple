@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
@@ -21,6 +24,7 @@ plugins {
 }
 
 kotlin {
+    // region Platforms
     android {
         namespace = "com.makeappssimple.abhimanyu.core.date.time"
         compileSdk {
@@ -29,6 +33,10 @@ kotlin {
             }
         }
         minSdk = libs.versions.android.min.sdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
+        }
 
         lint {
             checkAllWarnings = true
@@ -45,6 +53,12 @@ kotlin {
         }
     }
 
+    jvm()
+
+    js {
+        browser()
+    }
+
     listOf(
         iosArm64(),
         iosX64(),
@@ -56,9 +70,19 @@ kotlin {
         }
     }
 
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+    }
+    // endregion
+
     explicitApi()
 
     sourceSets {
+        androidMain {
+            dependencies {}
+        }
+
         commonMain {
             dependencies {
                 implementation(libs.koin.compose.viewmodel.navigation)
@@ -74,10 +98,6 @@ kotlin {
             dependencies {
                 implementation(libs.test.kotlin)
             }
-        }
-
-        androidMain {
-            dependencies {}
         }
 
         getByName("androidDeviceTest") {

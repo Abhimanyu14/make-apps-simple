@@ -18,29 +18,21 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.plugin.compose)
-    alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
-}
-
-dependencies {
-    androidRuntimeClasspath(libs.compose.ui.tooling)
-
-    detektPlugins(libs.detekt.compose.rules)
+    alias(libs.plugins.plugin.android.lint)
 }
 
 kotlin {
     // region Platforms
     android {
-        namespace =
-            "com.makeappssimple.abhimanyu.cosmos.design.system.catalog.shared"
-        compileSdk = libs.versions.android.compile.sdk.get().toInt()
-        minSdk = libs.versions.android.min.sdk.get().toInt()
-
-        androidResources {
-            enable = true
+        namespace = "com.makeappssimple.abhimanyu.core.log.kit"
+        compileSdk {
+            version = release(libs.versions.android.compile.sdk.get().toInt()) {
+                minorApiLevel = 1
+            }
         }
+        minSdk = libs.versions.android.min.sdk.get().toInt()
 
         compilerOptions {
             jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
@@ -52,8 +44,12 @@ kotlin {
             baseline = file("lint-baseline.xml")
         }
 
-        withHostTest {
-            isIncludeAndroidResources = true
+        withHostTestBuilder {}
+
+        withDeviceTestBuilder {
+            sourceSetTreeName = "test"
+        }.configure {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
 
@@ -65,10 +61,11 @@ kotlin {
 
     listOf(
         iosArm64(),
+        iosX64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "Shared"
+            baseName = "core:log-kit"
             isStatic = true
         }
     }
@@ -83,27 +80,12 @@ kotlin {
 
     sourceSets {
         androidMain {
-            dependencies {
-                implementation(libs.compose.ui.tooling.preview)
-            }
+            dependencies {}
         }
 
         commonMain {
             dependencies {
-                implementation(libs.androidx.lifecycle.runtime.compose)
-                implementation(libs.androidx.lifecycle.viewmodel.compose)
-                implementation(libs.compose.components.resources)
-                implementation(libs.compose.foundation)
-                implementation(libs.compose.material3)
-                implementation(libs.compose.runtime)
-                implementation(libs.compose.ui)
-                implementation(libs.compose.ui.tooling.preview)
-
-                implementation(project(":core:coroutines"))
-                implementation(project(":core:log-kit"))
-                // implementation(project(":cosmos-design-system"))
-
-                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.kotlin.stdlib)
             }
         }
 
@@ -113,10 +95,16 @@ kotlin {
             }
         }
 
-        jsMain {
+        getByName("androidDeviceTest") {
             dependencies {
-                implementation(libs.kotlin.wrappers.browser)
+                implementation(libs.androidx.test.core)
+                implementation(libs.androidx.test.ext.junit)
+                implementation(libs.androidx.test.runner)
             }
+        }
+
+        iosMain {
+            dependencies {}
         }
     }
 }
