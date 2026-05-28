@@ -61,7 +61,12 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(libs.koin.compose.viewmodel.navigation)
+                implementation(libs.koin.annotations)
                 implementation(libs.kotlin.stdlib)
+                implementation(libs.kotlinx.datetime)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
             }
         }
 

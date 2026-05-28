@@ -1,0 +1,176 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.core.date.time
+
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
+import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
+import kotlinx.datetime.TimeZone
+
+/**
+ * Interface for date and time utilities.
+ *
+ * Provides methods to get the current time in milliseconds, format timestamps,
+ * and get the system's default time zone.
+ */
+public interface DateTimeKit {
+    public fun getCurrentFormattedDateAndTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    public fun getCurrentLocalDate(): MyLocalDate
+
+    public fun getCurrentLocalTime(): MyLocalTime
+
+    public fun getCurrentTimeMillis(): Long
+
+    /**
+     * Sample format - 30 Mar, 2023.
+     */
+    public fun getFormattedDate(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    /**
+     * Sample format - 2023-Mar-30, 08:24 AM (uses colon).
+     */
+    public fun getFormattedDateAndTime(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    /**
+     * Sample format - 30 Mar, 2023 (Monday).
+     */
+    public fun getFormattedDateWithDayOfWeek(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    /**
+     * Sample format - March, 2023.
+     */
+    public fun getFormattedMonth(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    /**
+     * Sample format - 2023.
+     */
+    public fun getFormattedYear(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    public fun getLocalDate(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): MyLocalDate
+
+    public fun getLocalTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): MyLocalTime
+
+    public fun getNextDayTimestamp(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getNextMonthTimestamp(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getNextYearTimestamp(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getPreviousDayTimestamp(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getPreviousMonthTimestamp(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getPreviousYearTimestamp(
+        timestamp: Long,
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    /**
+     * Sample format - 30 Mar, 2023 at 08:24 AM.
+     */
+    public fun getReadableDateAndTime(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): String
+
+    public fun getStartOfDayTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getEndOfDayTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getStartOfMonthTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getEndOfMonthTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getStartOfYearTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getEndOfYearTimestamp(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+
+    public fun getStartOfMonthLocalDate(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): MyLocalDate
+
+    public fun getStartOfYearLocalDate(
+        timestamp: Long = getCurrentTimeMillis(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): MyLocalDate
+
+    public fun getSystemDefaultTimeZone(): TimeZone
+
+    public fun getTimestamp(
+        date: MyLocalDate = getLocalDate(),
+        time: MyLocalTime = getLocalTime(),
+        zoneId: TimeZone = getSystemDefaultTimeZone(),
+    ): Long
+}
