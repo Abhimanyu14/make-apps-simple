@@ -23,9 +23,11 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            implementation(libs.compose.ui)
-            implementation(projects.cosmosDesignSystemCatalog.shared)
+        commonMain {
+            dependencies {
+                implementation(libs.compose.ui)
+                implementation(projects.cosmosDesignSystemCatalog.shared)
+            }
         }
     }
 

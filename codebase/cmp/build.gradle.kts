@@ -2,15 +2,17 @@ import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
 plugins {
     alias(libs.plugins.plugin.android.application) apply false
-    alias(libs.plugins.plugin.kotlin.multiplatform.library) apply false
+    alias(libs.plugins.plugin.android.lint) apply false
     alias(libs.plugins.plugin.compose) apply false
+    alias(libs.plugins.plugin.detekt) apply false
     alias(libs.plugins.plugin.kotlin.compose) apply false
     alias(libs.plugins.plugin.kotlin.jvm) apply false
     alias(libs.plugins.plugin.kotlin.multiplatform) apply false
+    alias(libs.plugins.plugin.kotlin.multiplatform.library) apply false
     alias(libs.plugins.plugin.spotless) apply true
-    alias(libs.plugins.plugin.detekt) apply false
 }
 
+// region Spotless
 spotless {
     kotlin {
         target("**/src/**/*.kt")
@@ -36,7 +38,9 @@ spotless {
         ktlint(libs.versions.ktlint.get())
     }
 }
+// endregion
 
+// region Detekt
 subprojects {
     apply(
         plugin = "io.gitlab.arturbosch.detekt",
@@ -48,3 +52,4 @@ subprojects {
         allRules = true
     }
 }
+// endregion

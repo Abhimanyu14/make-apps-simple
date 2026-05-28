@@ -23,9 +23,11 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            implementation(libs.compose.ui)
-            implementation(projects.catFact.shared)
+        commonMain {
+            dependencies {
+                implementation(libs.compose.ui)
+                implementation(projects.catFact.shared)
+            }
         }
     }
 

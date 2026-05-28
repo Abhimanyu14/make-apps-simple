@@ -19,7 +19,7 @@
         errorLine2="                             ~~~~~~~">
         <location
             file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
-            line="30"
+            line="33"
             column="30"/>
     </issue>
 
@@ -30,8 +30,19 @@
         errorLine2="                             ~~~~~~~">
         <location
             file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
-            line="30"
+            line="33"
             column="30"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.lint than 9.1.1 is available: 9.2.1"
+        errorLine1="plugin-android-lint = &quot;9.1.1&quot;"
+        errorLine2="                      ~~~~~~~">
+        <location
+            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
+            line="34"
+            column="23"/>
     </issue>
 
     <issue
@@ -41,19 +52,19 @@
         errorLine2="                       ~~~~~~~~">
         <location
             file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
-            line="23"
+            line="24"
             column="24"/>
     </issue>
 
     <issue
         id="NewerVersionAvailable"
         message="A newer version of com.diffplug.spotless than 8.5.1 is available: 8.6.0"
-        errorLine1="spotless = &quot;8.5.1&quot;"
-        errorLine2="           ~~~~~~~">
+        errorLine1="plugin-spotless = &quot;8.5.1&quot;"
+        errorLine2="                  ~~~~~~~">
         <location
             file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
-            line="31"
-            column="12"/>
+            line="38"
+            column="19"/>
     </issue>
 
     <issue

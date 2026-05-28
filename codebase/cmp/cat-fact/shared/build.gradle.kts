@@ -20,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "Shared"
+            baseName = "cat-fact"
             isStatic = true
         }
     }
@@ -63,27 +63,35 @@ kotlin {
     explicitApi()
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
+        androidMain {
+            dependencies {
+                implementation(libs.compose.ui.tooling.preview)
+            }
         }
 
-        commonMain.dependencies {
-            implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
-            implementation(libs.compose.components.resources)
-            implementation(libs.compose.foundation)
-            implementation(libs.compose.material3)
-            implementation(libs.compose.runtime)
-            implementation(libs.compose.ui)
-            implementation(libs.compose.ui.tooling.preview)
+        commonMain {
+            dependencies {
+                implementation(libs.androidx.lifecycle.runtime.compose)
+                implementation(libs.androidx.lifecycle.viewmodel.compose)
+                implementation(libs.compose.components.resources)
+                implementation(libs.compose.foundation)
+                implementation(libs.compose.material3)
+                implementation(libs.compose.runtime)
+                implementation(libs.compose.ui)
+                implementation(libs.compose.ui.tooling.preview)
+            }
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        commonTest {
+            dependencies {
+                implementation(libs.kotlin.test)
+            }
         }
 
-        jsMain.dependencies {
-            implementation(libs.kotlin.wrappers.browser)
+        jsMain {
+            dependencies {
+                implementation(libs.kotlin.wrappers.browser)
+            }
         }
     }
 }
