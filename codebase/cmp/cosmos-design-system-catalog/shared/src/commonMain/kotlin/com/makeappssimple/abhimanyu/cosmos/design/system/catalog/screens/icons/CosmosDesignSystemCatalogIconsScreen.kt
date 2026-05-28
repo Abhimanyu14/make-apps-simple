@@ -1,0 +1,108 @@
+/*
+ * Copyright 2025-2026 Abhimanyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.icons
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.makeappssimple.abhimanyu.cosmos.design.system.components.list.CosmosListItem
+import com.makeappssimple.abhimanyu.cosmos.design.system.components.list.CosmosListItemData
+import com.makeappssimple.abhimanyu.cosmos.design.system.components.top_app_bar.CosmosTopAppBar
+import com.makeappssimple.abhimanyu.cosmos.design.system.icons.CosmosIcons
+import com.makeappssimple.abhimanyu.cosmos.design.system.resource.CosmosStringResource
+import com.makeappssimple.abhimanyu.cosmos.design.system.theme.CosmosAppTheme
+import org.koin.compose.viewmodel.koinViewModel
+
+@Composable
+public fun CosmosDesignSystemCatalogIconsScreen(
+    screenViewModel: CosmosDesignSystemCatalogIconsScreenViewModel = koinViewModel(),
+) {
+    val icons = listOf(
+        CosmosIcons.AccountBalance to "AccountBalance",
+        CosmosIcons.AccountBalanceWallet to "AccountBalanceWallet",
+        CosmosIcons.Add to "Add",
+        CosmosIcons.ArrowBack to "ArrowBack",
+        CosmosIcons.AttachMoney to "AttachMoney",
+        CosmosIcons.Backup to "Backup",
+        CosmosIcons.Calculate to "Calculate",
+        CosmosIcons.Category to "Category",
+        CosmosIcons.Check to "Check",
+        CosmosIcons.CheckCircle to "CheckCircle",
+        CosmosIcons.Checklist to "Checklist",
+        CosmosIcons.ChevronLeft to "ChevronLeft",
+        CosmosIcons.ChevronRight to "ChevronRight",
+        CosmosIcons.Close to "Close",
+        CosmosIcons.ContentCopy to "ContentCopy",
+        CosmosIcons.CurrencyExchange to "CurrencyExchange",
+        CosmosIcons.CurrencyRupee to "CurrencyRupee",
+        CosmosIcons.Delete to "Delete",
+        CosmosIcons.DeleteForever to "DeleteForever",
+        CosmosIcons.Edit to "Edit",
+        CosmosIcons.FilterAlt to "FilterAlt",
+        CosmosIcons.Groups to "Groups",
+        CosmosIcons.History to "History",
+        CosmosIcons.Keyboard to "Keyboard",
+        CosmosIcons.Lock to "Lock",
+        CosmosIcons.MoreVert to "MoreVert",
+        CosmosIcons.Notifications to "Notifications",
+        CosmosIcons.RadioButtonUnchecked to "RadioButtonUnchecked",
+        CosmosIcons.Schedule to "Schedule",
+        CosmosIcons.Search to "Search",
+        CosmosIcons.Settings to "Settings",
+        CosmosIcons.SwapVert to "SwapVert",
+        CosmosIcons.TextSnippet to "TextSnippet",
+    )
+
+    Column(
+        modifier = Modifier
+            .background(
+                color = CosmosAppTheme.colorScheme.background,
+            )
+            .fillMaxSize(),
+    ) {
+        CosmosTopAppBar(
+            // TODO(Abhi): Move to string resources
+            titleStringResource = CosmosStringResource.Text(
+                text = "Icons",
+            ),
+            navigationAction = screenViewModel::navigateUp,
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(
+                    state = rememberScrollState(),
+                ),
+        ) {
+            icons.forEach { icon ->
+                CosmosListItem(
+                    data = CosmosListItemData(
+                        stringResource = CosmosStringResource.Text(
+                            text = icon.second,
+                        ),
+                        iconResource = icon.first,
+                    ),
+                )
+            }
+        }
+    }
+}
