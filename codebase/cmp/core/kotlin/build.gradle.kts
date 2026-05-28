@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
@@ -21,6 +24,7 @@ plugins {
 }
 
 kotlin {
+    // region Platforms
     // Target declarations - add or remove as needed below. These define
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
@@ -32,6 +36,10 @@ kotlin {
             }
         }
         minSdk = libs.versions.android.min.sdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
+        }
 
         lint {
             checkAllWarnings = true
@@ -46,6 +54,12 @@ kotlin {
         }.configure {
             instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
+    }
+
+    jvm()
+
+    js {
+        browser()
     }
 
     // For iOS targets, this is also where you should
@@ -66,6 +80,12 @@ kotlin {
         }
     }
 
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+    }
+    // endregion
+
     explicitApi()
 
     // Source set declarations.
@@ -74,6 +94,10 @@ kotlin {
     // common to share sources between related targets.
     // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
+        androidMain {
+            dependencies {}
+        }
+
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
@@ -87,10 +111,6 @@ kotlin {
                 implementation(libs.test.kotlin)
                 implementation(libs.test.kotest.assertions.core)
             }
-        }
-
-        androidMain {
-            dependencies {}
         }
 
         getByName("androidDeviceTest") {
