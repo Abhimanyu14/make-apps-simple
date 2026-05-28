@@ -33,6 +33,12 @@ kotlin {
         }
         minSdk = libs.versions.android.min.sdk.get().toInt()
 
+        lint {
+            checkAllWarnings = true
+            warningsAsErrors = true
+            baseline = file("lint-baseline.xml")
+        }
+
         withHostTestBuilder {}
 
         withDeviceTestBuilder {
@@ -89,9 +95,9 @@ kotlin {
 
         getByName("androidDeviceTest") {
             dependencies {
-                implementation(libs.androidx.test.runner)
                 implementation(libs.androidx.test.core)
                 implementation(libs.androidx.test.ext.junit)
+                implementation(libs.androidx.test.runner)
             }
         }
 

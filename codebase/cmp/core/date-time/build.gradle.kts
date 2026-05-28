@@ -15,18 +15,14 @@
  */
 
 plugins {
-    alias(libs.plugins.plugin.android.lint)
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
+    alias(libs.plugins.plugin.android.lint)
 }
 
 kotlin {
-    // Target declarations - add or remove as needed below. These define
-    // which platforms this KMP module supports.
-    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     android {
-        namespace = "com.makeappssimple.abhimanyu.cosmos.design.system"
-
+        namespace = "com.makeappssimple.abhimanyu.core.date.time"
         compileSdk {
             version = release(libs.versions.android.compile.sdk.get().toInt()) {
                 minorApiLevel = 1
@@ -49,48 +45,23 @@ kotlin {
         }
     }
 
-    // For iOS targets, this is also where you should
-    // configure native binary output. For more information, see:
-    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
-
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
     listOf(
         iosArm64(),
         iosX64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "cosmos-design-system"
+            baseName = "core:date-time"
+            isStatic = true
         }
     }
 
     explicitApi()
 
-    // Source set declarations.
-    // Declaring a target automatically creates a source set with the same name. By default, the
-    // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
-    // common to share sources between related targets.
-    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
-        androidMain {
-            dependencies {}
-        }
-
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                implementation(libs.compose.components.resources)
-                implementation(libs.compose.foundation)
-                implementation(libs.compose.material3)
-                implementation(libs.compose.runtime)
-                implementation(libs.compose.ui)
-                implementation(libs.compose.ui.tooling.preview)
-                implementation(libs.kotlinx.collections.immutable)
-
-                implementation(project(":core:date-time"))
-                implementation(project(":core:kotlin"))
             }
         }
 
@@ -98,6 +69,10 @@ kotlin {
             dependencies {
                 implementation(libs.test.kotlin)
             }
+        }
+
+        androidMain {
+            dependencies {}
         }
 
         getByName("androidDeviceTest") {
