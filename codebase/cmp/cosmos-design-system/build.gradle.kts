@@ -16,8 +16,23 @@
 
 plugins {
     alias(libs.plugins.plugin.android.lint)
+    alias(libs.plugins.plugin.compose)
+    alias(libs.plugins.plugin.dokka)
+    alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
+    alias(libs.plugins.plugin.kotlinx.binary.compatibility.validator)
+}
+
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    metricsDestination = layout.buildDirectory.dir("compose_compiler")
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass =
+        "com.makeappssimple.abhimanyu.cosmos.design.system.resources"
 }
 
 kotlin {
