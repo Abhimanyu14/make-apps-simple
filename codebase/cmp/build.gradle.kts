@@ -24,6 +24,8 @@ spotless {
                 "ktlint_standard_filename" to "disabled",
             ),
         )
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 
     kotlinGradle {
