@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
   ~ Copyright 2025-2026 Abhimanyu
@@ -20,12 +20,11 @@
     type="baseline" variant="all" version="9.1.1">
 
     <issue errorLine1="internal class MainActivity : ComponentActivity() {"
-        errorLine2="               ~~~~~~~~~~~~"
-        id="Registered"
+        errorLine2="               ~~~~~~~~~~~~" id="Registered"
         message="The `&lt;activity> com.makeappssimple.abhimanyu.cosmos.design.system.catalog.MainActivity` is not registered in the manifest">
-        <location
-            column="16"
-            file="${:cosmos-design-system-catalog:android-app*debug*MAIN*sourceProvider*0*javaDir*2}/com/makeappssimple/abhimanyu/cosmos/design/system/catalog/MainActivity.kt" line="24" />
+        <location column="16"
+            file="${:cosmos-design-system-catalog:android-app*debug*MAIN*sourceProvider*0*javaDir*2}/com/makeappssimple/abhimanyu/cosmos/design/system/catalog/MainActivity.kt"
+            line="24" />
     </issue>
 
     <issue id="ConvertToWebp"

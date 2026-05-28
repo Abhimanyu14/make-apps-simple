@@ -6,6 +6,7 @@ description: Useful Gradle commands for linting, testing, and deployment.
 # Project Commands
 
 ## Linting and Code Quality
+
 - **Lint**: Run full Android lint checks.
   ```bash
   ./gradlew lint
@@ -16,6 +17,7 @@ description: Useful Gradle commands for linting, testing, and deployment.
   ```
 
 ## Testing and Reports
+
 - **Coverage**: Generate HTML test coverage report (using Kover).
   ```bash
   ./gradlew koverHtmlReportDebug
@@ -30,6 +32,7 @@ description: Useful Gradle commands for linting, testing, and deployment.
   ```
 
 ## API and Documentation
+
 - **API Dump**: Generate or update the public API surface area file.
   ```bash
   ./gradlew apiDump
@@ -44,6 +47,7 @@ description: Useful Gradle commands for linting, testing, and deployment.
   ```
 
 ## Release and Publishing
+
 - **Publish**: Publish and release libraries to Maven Central.
   ```bash
   ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache

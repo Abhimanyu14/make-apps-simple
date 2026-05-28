@@ -38,7 +38,11 @@ public class MyLocalTime(
     public fun formattedTime(
         zoneId: TimeZone = DEFAULT_TIME_ZONE,
     ): String {
-        val dummyDate = LocalDate(2023, 1, 1)
+        val dummyDate = LocalDate(
+            2023,
+            1,
+            1
+        )
         val instant = dummyDate.atTime(localTime).toInstant(zoneId)
         return formatInstant(
             instant = instant,

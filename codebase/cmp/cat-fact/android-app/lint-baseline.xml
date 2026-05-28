@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
   ~ Copyright 2025-2026 Abhimanyu
@@ -20,56 +20,51 @@
     type="baseline" variant="all" version="9.1.1">
 
     <issue errorLine1="internal class MainActivity : ComponentActivity() {"
-        errorLine2="               ~~~~~~~~~~~~"
-        id="Registered"
+        errorLine2="               ~~~~~~~~~~~~" id="Registered"
         message="The `&lt;activity> com.makeappssimple.abhimanyu.cat.fact.MainActivity` is not registered in the manifest">
-        <location
-            column="16"
-            file="${:cat-fact:android-app*debug*MAIN*sourceProvider*0*javaDir*2}/com/makeappssimple/abhimanyu/cat/fact/MainActivity.kt" line="24" />
+        <location column="16"
+            file="${:cat-fact:android-app*debug*MAIN*sourceProvider*0*javaDir*2}/com/makeappssimple/abhimanyu/cat/fact/MainActivity.kt"
+            line="24" />
     </issue>
 
     <issue errorLine1="plugin-android-application = &quot;9.1.1&quot;"
-        errorLine2="                             ~~~~~~~"
-        id="AndroidGradlePluginVersion"
+        errorLine2="                             ~~~~~~~" id="AndroidGradlePluginVersion"
         message="A newer version of com.android.application than 9.1.1 is available: 9.2.1">
-        <location
-            column="30"
-            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml" line="33" />
+        <location column="30"
+            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
+            line="33" />
     </issue>
 
     <issue errorLine1="plugin-android-application = &quot;9.1.1&quot;"
-        errorLine2="                             ~~~~~~~"
-        id="AndroidGradlePluginVersion"
+        errorLine2="                             ~~~~~~~" id="AndroidGradlePluginVersion"
         message="A newer version of com.android.kotlin.multiplatform.library than 9.1.1 is available: 9.2.1">
-        <location
-            column="30"
-            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml" line="33" />
+        <location column="30"
+            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
+            line="33" />
     </issue>
 
     <issue errorLine1="plugin-android-lint = &quot;9.1.1&quot;"
-        errorLine2="                      ~~~~~~~"
-        id="AndroidGradlePluginVersion"
+        errorLine2="                      ~~~~~~~" id="AndroidGradlePluginVersion"
         message="A newer version of com.android.lint than 9.1.1 is available: 9.2.1">
-        <location
-            column="23"
-            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml" line="34" />
+        <location column="23"
+            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
+            line="34" />
     </issue>
 
     <issue errorLine1="detekt-compose-rules = &quot;0.4.23&quot;"
-        errorLine2="                       ~~~~~~~~"
-        id="NewerVersionAvailable"
+        errorLine2="                       ~~~~~~~~" id="NewerVersionAvailable"
         message="A newer version of io.nlopez.compose.rules:detekt than 0.4.23 is available: 0.5.9">
-        <location
-            column="24"
-            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml" line="24" />
+        <location column="24"
+            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
+            line="24" />
     </issue>
 
-    <issue errorLine1="plugin-spotless = &quot;8.5.1&quot;"
-        errorLine2="                  ~~~~~~~"
-        id="NewerVersionAvailable" message="A newer version of com.diffplug.spotless than 8.5.1 is available: 8.6.0">
-        <location
-            column="19"
-            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml" line="38" />
+    <issue errorLine1="plugin-spotless = &quot;8.5.1&quot;" errorLine2="                  ~~~~~~~"
+        id="NewerVersionAvailable"
+        message="A newer version of com.diffplug.spotless than 8.5.1 is available: 8.6.0">
+        <location column="19"
+            file="$HOME/Documents/projects/make-apps-simple/codebase/cmp/gradle/libs.versions.toml"
+            line="38" />
     </issue>
 
     <issue id="ConvertToWebp"
