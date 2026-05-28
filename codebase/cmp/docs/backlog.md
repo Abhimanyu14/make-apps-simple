@@ -8,3 +8,4 @@
 6. Add Finance Manager
 7. Add Barcodes
 8. Add Cat Fact
+9. Update Detekt Project Conventions
