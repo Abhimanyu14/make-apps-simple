@@ -15,9 +15,9 @@
  */
 
 plugins {
-    alias(libs.plugins.plugin.android.lint)
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
+    alias(libs.plugins.plugin.android.lint)
 }
 
 kotlin {
@@ -25,20 +25,13 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     android {
-        namespace = "com.makeappssimple.abhimanyu.cosmos.design.system"
-
+        namespace = "com.makeappssimple.abhimanyu.core.kotlin"
         compileSdk {
             version = release(libs.versions.android.compile.sdk.get().toInt()) {
                 minorApiLevel = 1
             }
         }
         minSdk = libs.versions.android.min.sdk.get().toInt()
-
-        lint {
-            checkAllWarnings = true
-            warningsAsErrors = true
-            baseline = file("lint-baseline.xml")
-        }
 
         withHostTestBuilder {}
 
@@ -62,7 +55,8 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "cosmos-design-system"
+            baseName = "core:kotlin"
+            isStatic = true
         }
     }
 
@@ -74,36 +68,30 @@ kotlin {
     // common to share sources between related targets.
     // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
-        androidMain {
-            dependencies {}
-        }
-
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                implementation(libs.compose.components.resources)
-                implementation(libs.compose.foundation)
-                implementation(libs.compose.material3)
-                implementation(libs.compose.runtime)
-                implementation(libs.compose.ui)
-                implementation(libs.compose.ui.tooling.preview)
                 implementation(libs.kotlinx.collections.immutable)
-
-                implementation(project(":core:kotlin"))
+                implementation(libs.kotlinx.serialization.json)
             }
         }
 
         commonTest {
             dependencies {
                 implementation(libs.test.kotlin)
+                implementation(libs.test.kotest.assertions.core)
             }
+        }
+
+        androidMain {
+            dependencies {}
         }
 
         getByName("androidDeviceTest") {
             dependencies {
+                implementation(libs.androidx.test.runner)
                 implementation(libs.androidx.test.core)
                 implementation(libs.androidx.test.ext.junit)
-                implementation(libs.androidx.test.runner)
             }
         }
 
