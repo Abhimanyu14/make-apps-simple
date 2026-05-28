@@ -85,7 +85,10 @@ kotlin {
 
         commonMain {
             dependencies {
+                implementation(libs.koin.annotations)
+                implementation(libs.koin.core)
                 implementation(libs.kotlin.stdlib)
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
 
