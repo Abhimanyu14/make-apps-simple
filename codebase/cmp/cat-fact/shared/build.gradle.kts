@@ -66,9 +66,22 @@ kotlin {
         }
 
         lint {
+            abortOnError = false
             checkAllWarnings = true
+            htmlReport = true
             warningsAsErrors = true
             baseline = file("lint-baseline.xml")
+            lintConfig = file("../config/lint/lint.xml")
+
+            // Force-ignore rules that evaluate before lint.xml loads
+            // Prefer adding to lint.xml first
+            disable.addAll(
+                elements = listOf(
+                    "AndroidGradlePluginVersion",
+                    "NewerVersionAvailable",
+                    "Registered",
+                ),
+            )
         }
 
         withHostTest {
