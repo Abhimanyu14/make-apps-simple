@@ -24,7 +24,7 @@ import com.makeappssimple.abhimanyu.cosmos.design.system.theme.CosmosAppTheme
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-internal fun CosmosDesignSystemCatalogApp(
+public fun CosmosDesignSystemCatalogApp(
     cosmosDesignSystemCatalogActivityViewModel: CosmosDesignSystemCatalogActivityViewModel = koinViewModel(),
 ) {
     CosmosAppTheme {

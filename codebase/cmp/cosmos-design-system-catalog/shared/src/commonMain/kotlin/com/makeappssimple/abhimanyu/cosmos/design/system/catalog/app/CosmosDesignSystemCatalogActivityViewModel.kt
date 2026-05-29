@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
 
-internal class CosmosDesignSystemCatalogActivityViewModel(
-    val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
-    val logKit: LogKit,
+public class CosmosDesignSystemCatalogActivityViewModel(
+    internal val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
+    internal val logKit: LogKit,
 ) : ViewModel()

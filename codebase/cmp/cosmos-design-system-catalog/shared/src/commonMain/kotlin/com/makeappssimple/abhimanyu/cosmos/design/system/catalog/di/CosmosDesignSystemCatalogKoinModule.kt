@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 
-internal fun initKoin(
+public fun initKoin(
     config: (KoinApplication.() -> Unit)? = null,
 ) {
     startKoin {

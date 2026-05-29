@@ -18,12 +18,17 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.catalog
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app.CosmosDesignSystemCatalogApp
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di.initKoin
 
-internal fun main() = application {
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "Cosmos Design System Catalog",
-    ) {
-        App()
+internal fun main() {
+    return application {
+        initKoin()
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "Cosmos Design System Catalog",
+        ) {
+            CosmosDesignSystemCatalogApp()
+        }
     }
 }
