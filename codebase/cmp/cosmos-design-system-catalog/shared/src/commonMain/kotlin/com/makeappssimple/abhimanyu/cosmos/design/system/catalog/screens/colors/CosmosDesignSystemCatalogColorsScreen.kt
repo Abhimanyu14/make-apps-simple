@@ -77,7 +77,7 @@ internal fun CosmosDesignSystemCatalogColorsScreen(
         CosmosTopAppBar(
             // TODO(Abhi): Move to string resources
             titleStringResource = CosmosStringResource.Text(
-                text = "Colors",
+                value = "Colors",
             ),
             navigationAction = screenViewModel::navigateUp,
         )
@@ -122,7 +122,7 @@ private fun ColorItem(
     ) {
         CosmosText(
             stringResource = CosmosStringResource.Text(
-                text = name,
+                value = name,
             ),
             style = CosmosAppTheme.typography.bodyMedium,
         )

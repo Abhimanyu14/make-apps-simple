@@ -107,7 +107,7 @@ public fun CosmosDatePicker(
                 ) {
                     CosmosText(
                         stringResource = CosmosStringResource.Text(
-                            text = "OK",
+                            value = "OK",
                         ),
                     )
                 }
@@ -120,7 +120,7 @@ public fun CosmosDatePicker(
                 ) {
                     CosmosText(
                         stringResource = CosmosStringResource.Text(
-                            text = "Cancel",
+                            value = "Cancel",
                         ),
                     )
                 }

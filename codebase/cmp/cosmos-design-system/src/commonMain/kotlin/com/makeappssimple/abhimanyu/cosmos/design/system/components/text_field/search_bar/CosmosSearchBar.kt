@@ -379,7 +379,7 @@ private fun CosmosSearchBarUIV2(
             ) {
                 CosmosText(
                     stringResource = CosmosStringResource.Text(
-                        text = if (keyboardType == KeyboardType.Text) {
+                        value = if (keyboardType == KeyboardType.Text) {
                             "123"
                         } else {
                             "ABC"

@@ -31,7 +31,7 @@ public fun CosmosNavigationBackButton(
 ) {
     CosmosIconButton(
         onClickLabelStringResource = CosmosStringResource.Text(
-            text = "Navigate Back",
+            value = "Navigate Back",
         ),
         onClick = {
             handleEvent(CosmosNavigationBackButtonEvents.OnClick)

@@ -60,7 +60,7 @@ public fun CosmosDesignSystemCatalogShapesScreen(
     ) {
         CosmosTopAppBar(
             titleStringResource = CosmosStringResource.Text(
-                text = "Shapes",
+                value = "Shapes",
             ),
             navigationAction = screenViewModel::navigateUp,
         )
@@ -116,7 +116,7 @@ private fun ShapeItem(
         )
         CosmosText(
             stringResource = CosmosStringResource.Text(
-                text = name,
+                value = name,
             ),
             style = CosmosAppTheme.typography.bodyMedium,
         )

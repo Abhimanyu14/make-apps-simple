@@ -55,7 +55,7 @@ public fun CosmosDesignSystemCatalogHomeScreen(
         CosmosTopAppBar(
             // TODO(Abhi): Move to string resources
             titleStringResource = CosmosStringResource.Text(
-                text = "Cosmos Design System Catalog",
+                value = "Cosmos Design System Catalog",
             ),
         )
         Column(
@@ -69,7 +69,7 @@ public fun CosmosDesignSystemCatalogHomeScreen(
                 CosmosListItem(
                     data = CosmosListItemData(
                         stringResource = CosmosStringResource.Text(
-                            text = screen.route.replaceFirstChar {
+                            value = screen.route.replaceFirstChar {
                                 it.uppercase()
                             },
                         ),

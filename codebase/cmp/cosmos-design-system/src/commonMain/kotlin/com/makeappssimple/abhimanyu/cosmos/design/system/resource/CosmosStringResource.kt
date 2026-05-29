@@ -35,7 +35,7 @@ public sealed class CosmosStringResource : CosmosResource {
     ) : CosmosStringResource()
 
     public data class Text(
-        val text: String,
+        val value: String,
     ) : CosmosStringResource()
 }
 
@@ -59,14 +59,14 @@ public val CosmosStringResource.text: String
             }
 
             is CosmosStringResource.Text -> {
-                text
+                value
             }
         }
     }
 
 public val emptyCosmosStringResource: CosmosStringResource =
     CosmosStringResource.Text(
-        text = "",
+        value = "",
     )
 
 public fun CosmosStringResource?.orEmpty(): CosmosStringResource {

@@ -55,7 +55,7 @@ public fun CosmosTopAppBar(
             CosmosTopAppBarNavigationButton(
                 onClickLabelStringResource = navigationLabelStringResource
                     ?: CosmosStringResource.Text(
-                        text = "Navigate Back",
+                        value = "Navigate Back",
                     ),
                 iconResource = navigationIconResource,
                 onClick = {

@@ -65,7 +65,7 @@ public fun CosmosDesignSystemCatalogTypographyScreen(
         CosmosTopAppBar(
             // TODO(Abhi): Move to string resources
             titleStringResource = CosmosStringResource.Text(
-                text = "Typography",
+                value = "Typography",
             ),
             navigationAction = screenViewModel::navigateUp,
         )
@@ -86,7 +86,7 @@ public fun CosmosDesignSystemCatalogTypographyScreen(
             styles.forEach { style ->
                 CosmosText(
                     stringResource = CosmosStringResource.Text(
-                        text = style.second,
+                        value = style.second,
                     ),
                     style = style.first,
                 )

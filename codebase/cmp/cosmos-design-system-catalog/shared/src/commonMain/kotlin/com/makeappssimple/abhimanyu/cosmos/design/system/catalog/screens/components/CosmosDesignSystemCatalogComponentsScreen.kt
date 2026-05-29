@@ -69,7 +69,7 @@ public fun CosmosDesignSystemCatalogComponentsScreen(
         CosmosTopAppBar(
             // TODO(Abhi): Move to string resources
             titleStringResource = CosmosStringResource.Text(
-                text = "Components",
+                value = "Components",
             ),
             navigationAction = screenViewModel::navigateUp,
         )
@@ -85,14 +85,14 @@ public fun CosmosDesignSystemCatalogComponentsScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     CosmosElevatedButton(
-                        stringResource = CosmosStringResource.Text(text = "Elevated"),
+                        stringResource = CosmosStringResource.Text(value = "Elevated"),
                         onClick = {},
                     )
                     CosmosTextButton(
                         onClick = {},
                     ) {
                         CosmosText(
-                            stringResource = CosmosStringResource.Text(text = "Text Button"),
+                            stringResource = CosmosStringResource.Text(value = "Text Button"),
                         )
                     }
                 }
@@ -100,7 +100,7 @@ public fun CosmosDesignSystemCatalogComponentsScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     CosmosIconButton(
-                        onClickLabelStringResource = CosmosStringResource.Text(text = "Icon Button"),
+                        onClickLabelStringResource = CosmosStringResource.Text(value = "Icon Button"),
                         onClick = {},
                     ) {
                         CosmosIcon(
@@ -110,7 +110,7 @@ public fun CosmosDesignSystemCatalogComponentsScreen(
                     CosmosSaveButton(
                         data = CosmosSaveButtonData(
                             isEnabled = true,
-                            stringResource = CosmosStringResource.Text(text = "Save"),
+                            stringResource = CosmosStringResource.Text(value = "Save"),
                         ),
                     )
                 }
@@ -124,7 +124,7 @@ public fun CosmosDesignSystemCatalogComponentsScreen(
                     ChipUI(
                         data = ChipUIData(
                             isSelected = isSelected,
-                            stringResource = CosmosStringResource.Text(text = "Selectable"),
+                            stringResource = CosmosStringResource.Text(value = "Selectable"),
                         ),
                         handleEvent = {
                             isSelected = !isSelected
@@ -151,14 +151,14 @@ public fun CosmosDesignSystemCatalogComponentsScreen(
                 CosmosOutlinedTextField(
                     value = textValue,
                     onValueChange = { textValue = it },
-                    labelStringResource = CosmosStringResource.Text(text = "Outlined Text Field"),
-                    trailingIconContentDescriptionStringResource = CosmosStringResource.Text(text = "Clear"),
+                    labelStringResource = CosmosStringResource.Text(value = "Outlined Text Field"),
+                    trailingIconContentDescriptionStringResource = CosmosStringResource.Text(value = "Clear"),
                     onTrailingIconClick = { textValue = "" },
                     modifier = Modifier.fillMaxWidth(),
                 )
                 CosmosReadOnlyTextField(
                     text = "Read Only Text",
-                    labelStringResource = CosmosStringResource.Text(text = "Read Only"),
+                    labelStringResource = CosmosStringResource.Text(value = "Read Only"),
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
@@ -201,7 +201,7 @@ private fun ComponentSection(
     ) {
         CosmosText(
             stringResource = CosmosStringResource.Text(
-                text = title,
+                value = title,
             ),
             style = CosmosAppTheme.typography.titleMedium,
         )

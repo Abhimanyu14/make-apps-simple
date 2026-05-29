@@ -82,7 +82,7 @@ public fun CosmosDesignSystemCatalogIconsScreen(
         CosmosTopAppBar(
             // TODO(Abhi): Move to string resources
             titleStringResource = CosmosStringResource.Text(
-                text = "Icons",
+                value = "Icons",
             ),
             navigationAction = screenViewModel::navigateUp,
         )
@@ -97,7 +97,7 @@ public fun CosmosDesignSystemCatalogIconsScreen(
                 CosmosListItem(
                     data = CosmosListItemData(
                         stringResource = CosmosStringResource.Text(
-                            text = icon.second,
+                            value = icon.second,
                         ),
                         iconResource = icon.first,
                     ),

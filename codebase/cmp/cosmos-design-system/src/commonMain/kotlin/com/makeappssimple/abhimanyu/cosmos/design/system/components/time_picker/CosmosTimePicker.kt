@@ -69,7 +69,7 @@ public fun CosmosTimePicker(
         CosmosTimePickerDialog(
             modifier = modifier,
             titleStringResource = CosmosStringResource.Text(
-                text = if (showingPicker.value) {
+                value = if (showingPicker.value) {
                     "Select Time"
                 } else {
                     "Enter Time"
@@ -91,7 +91,7 @@ public fun CosmosTimePicker(
             toggle = {
                 CosmosIconButton(
                     onClickLabelStringResource = CosmosStringResource.Text(
-                        text = if (showingPicker.value) {
+                        value = if (showingPicker.value) {
                             "Switch to Text Input"
                         } else {
                             "Switch to Touch Input"
@@ -212,7 +212,7 @@ private fun CosmosTimePickerDialog(
                     ) {
                         CosmosText(
                             stringResource = CosmosStringResource.Text(
-                                text = "Cancel",
+                                value = "Cancel",
                             ),
                         )
                     }
@@ -221,7 +221,7 @@ private fun CosmosTimePickerDialog(
                     ) {
                         CosmosText(
                             stringResource = CosmosStringResource.Text(
-                                text = "OK",
+                                value = "OK",
                             ),
                         )
                     }
