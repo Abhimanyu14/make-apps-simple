@@ -25,6 +25,7 @@ import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.atTime
+import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 import kotlin.time.Instant
@@ -50,7 +51,7 @@ public class MyLocalDate(
         get() = localDate.year
 
     public val month: Int
-        get() = localDate.monthNumber
+        get() = localDate.month.number
 
     public val day: Int
         get() = localDate.day
@@ -136,7 +137,7 @@ public class MyLocalDate(
         return MyLocalDate(
             localDate = LocalDate(
                 year = localDate.year,
-                month = localDate.monthNumber,
+                month = localDate.month.number,
                 day = dayOfMonth,
             ),
         )
@@ -155,7 +156,7 @@ public class MyLocalDate(
     }
 
     public companion object {
-        private val DEFAULT_TIME_ZONE: TimeZone by lazy {
+        internal val DEFAULT_TIME_ZONE: TimeZone by lazy {
             getCurrentSystemDefaultTimeZone()
         }
 

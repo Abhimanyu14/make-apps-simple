@@ -52,7 +52,7 @@ public class MyLocalTime(
     }
 
     public companion object {
-        private val DEFAULT_TIME_ZONE: TimeZone by lazy {
+        internal val DEFAULT_TIME_ZONE: TimeZone by lazy {
             getCurrentSystemDefaultTimeZone()
         }
 
