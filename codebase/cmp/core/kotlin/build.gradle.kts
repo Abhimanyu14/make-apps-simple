@@ -71,7 +71,6 @@ kotlin {
     // https://developer.android.com/kotlin/multiplatform/migrate
     listOf(
         iosArm64(),
-        iosX64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
