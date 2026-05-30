@@ -16,6 +16,29 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+// region Lint Config
+val lintConfig: com.android.build.api.dsl.Lint.() -> Unit = {
+    abortOnError = false
+    checkAllWarnings = true
+    htmlReport = true
+    warningsAsErrors = true
+    baseline = file(
+        path = "lint-baseline.xml",
+    )
+    lintConfig = rootProject.file("config/lint/lint.xml")
+
+    // Force-ignore rules that evaluate before lint.xml loads
+    // Prefer adding to lint.xml first
+    disable.addAll(
+        elements = listOf(
+            "AndroidGradlePluginVersion",
+            "NewerVersionAvailable",
+            "Registered",
+        ),
+    )
+}
+// endregion
+
 plugins {
     alias(libs.plugins.plugin.android.application)
     alias(libs.plugins.plugin.compose)
@@ -46,24 +69,9 @@ android {
         versionName = libs.versions.app.cat.fact.version.name.get()
     }
 
-    lint {
-        abortOnError = false
-        checkAllWarnings = true
-        htmlReport = true
-        warningsAsErrors = true
-        baseline = file("lint-baseline.xml")
-        lintConfig = file("../config/lint/lint.xml")
-
-        // Force-ignore rules that evaluate before lint.xml loads
-        // Prefer adding to lint.xml first
-        disable.addAll(
-            elements = listOf(
-                "AndroidGradlePluginVersion",
-                "NewerVersionAvailable",
-                "Registered",
-            ),
-        )
-    }
+    lint(
+        action = lintConfig,
+    )
 
     packaging {
         resources {

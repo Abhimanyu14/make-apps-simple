@@ -17,6 +17,9 @@
   -->
 
 <lint>
-    <issue id="ComposableLambdaParameterNaming" severity="ignore" />
     <issue id="ComposableLambdaParameterPosition" severity="ignore" />
+    <issue id="ComposableLambdaParameterNaming" severity="ignore" />
+
+    <!-- Stops Lint from crashing when third-party libraries load rules in isolation -->
+    <issue id="UnknownIssueId" severity="ignore" />
 </lint>

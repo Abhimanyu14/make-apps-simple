@@ -17,6 +17,29 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+// region Lint Config
+val lintConfig: com.android.build.api.dsl.Lint.() -> Unit = {
+    abortOnError = false
+    checkAllWarnings = true
+    htmlReport = true
+    warningsAsErrors = true
+    baseline = file(
+        path = "lint-baseline.xml",
+    )
+    lintConfig = rootProject.file("config/lint/lint.xml")
+
+    // Force-ignore rules that evaluate before lint.xml loads
+    // Prefer adding to lint.xml first
+    disable.addAll(
+        elements = listOf(
+            "AndroidGradlePluginVersion",
+            "NewerVersionAvailable",
+            "Registered",
+        ),
+    )
+}
+// endregion
+
 plugins {
     alias(libs.plugins.plugin.compose)
     alias(libs.plugins.plugin.kotlin.compose)
@@ -46,24 +69,9 @@ kotlin {
             jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
         }
 
-        lint {
-            abortOnError = false
-            checkAllWarnings = true
-            htmlReport = true
-            warningsAsErrors = true
-            baseline = file("lint-baseline.xml")
-            lintConfig = file("../config/lint/lint.xml")
-
-            // Force-ignore rules that evaluate before lint.xml loads
-            // Prefer adding to lint.xml first
-            disable.addAll(
-                elements = listOf(
-                    "AndroidGradlePluginVersion",
-                    "NewerVersionAvailable",
-                    "Registered",
-                ),
-            )
-        }
+        lint(
+            action = lintConfig,
+        )
 
         withHostTest {
             isIncludeAndroidResources = true
@@ -138,3 +146,12 @@ kotlin {
         }
     }
 }
+
+// region JVM Lint
+// Apply lint to the JVM/iOS verification targets (Fixes the :updateLintBaselineJvm crash)
+plugins.withId("com.android.lint") {
+    extensions.configure<com.android.build.api.dsl.Lint> {
+        lintConfig()
+    }
+}
+// endregion
