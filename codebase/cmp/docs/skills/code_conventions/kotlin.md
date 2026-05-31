@@ -194,7 +194,8 @@ description: Kotlin coding conventions for the project.
     - Use lowercase with dots as separators (e.g., `com.makeappssimple.abhimanyu.app`).
 
 5. **File Names:**
-    - Use PascalCase for file names, matching the primary class name (e.g., `MainActivity.kt`).
+    - Use PascalCase for file names, matching the primary class name (e.g.,
+      `CosmosDesignSystemCatalogActivity.kt`).
 
 ## Code Organization
 

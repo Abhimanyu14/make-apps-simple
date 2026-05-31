@@ -16,13 +16,22 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog
 
-import platform.UIKit.UIDevice
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app.CosmosDesignSystemCatalogApp
 
-private class IOSPlatform : Platform {
-    override val name: String =
-        UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
-}
-
-internal actual fun getPlatform(): Platform {
-    return IOSPlatform()
+internal class CosmosDesignSystemCatalogActivity : ComponentActivity() {
+    override fun onCreate(
+        savedInstanceState: Bundle?,
+    ) {
+        super.onCreate(
+            savedInstanceState = savedInstanceState,
+        )
+        enableEdgeToEdge()
+        setContent {
+            CosmosDesignSystemCatalogApp()
+        }
+    }
 }

@@ -91,7 +91,11 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
     implementation(projects.cosmosDesignSystemCatalog.shared)
+
+    implementation(project.dependencies.platform(libs.koin.bom))
 }
 
 kotlin {

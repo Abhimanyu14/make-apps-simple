@@ -16,10 +16,17 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog
 
-private class JVMPlatform : Platform {
-    override val name: String = "Java ${System.getProperty("java.version")}"
-}
+import android.app.Application
+import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di.initKoin
+import org.koin.android.ext.koin.androidContext
 
-internal actual fun getPlatform(): Platform {
-    return JVMPlatform()
+internal class CosmosDesignSystemCatalogApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        initKoin {
+            androidContext(
+                this@CosmosDesignSystemCatalogApplication,
+            )
+        }
+    }
 }
