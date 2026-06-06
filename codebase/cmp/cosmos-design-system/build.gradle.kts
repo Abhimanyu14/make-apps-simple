@@ -76,6 +76,10 @@ kotlin {
         }
         minSdk = libs.versions.android.min.sdk.get().toInt()
 
+        androidResources {
+            enable = true
+        }
+
         compilerOptions {
             jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
         }
