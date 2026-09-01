@@ -115,7 +115,9 @@ kotlin {
     // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
         androidMain {
-            dependencies {}
+            dependencies {
+                implementation(libs.compose.runtime)
+            }
         }
 
         commonMain {

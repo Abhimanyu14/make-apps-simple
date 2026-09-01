@@ -41,6 +41,7 @@ val lintConfig: com.android.build.api.dsl.Lint.() -> Unit = {
 
 plugins {
     alias(libs.plugins.plugin.android.application)
+    alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.compose)
     alias(libs.plugins.plugin.kotlin.compose)
 }

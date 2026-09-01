@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
         LogKit::class,
     ],
 )
-internal class LogKitImpl(
+public class LogKitImpl(
     private val logErrorMessage: (String, String) -> Unit = { tag, message ->
         Log.e(
             tag,

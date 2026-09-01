@@ -27,7 +27,7 @@ import org.koin.core.annotation.Single
         CoroutineDispatcherProvider::class,
     ],
 )
-internal class CoroutineDispatcherProviderImpl(
+public class CoroutineDispatcherProviderImpl(
     @Named(DISPATCHER_DEFAULT)
     defaultCoroutineDispatcher: CoroutineDispatcher,
     @Named(DISPATCHER_IO)

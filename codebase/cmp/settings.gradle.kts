@@ -27,6 +27,7 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
         gradlePluginPortal()
     }
 }
@@ -41,6 +42,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
@@ -52,6 +54,7 @@ include(":cat-fact:android-app")
 include(":cat-fact:desktop-app")
 include(":cat-fact:shared")
 include(":cat-fact:web-app")
+include(":app-finance-manager")
 include(":core:app-version")
 include(":core:clipboard")
 include(":core:coroutines")
@@ -66,3 +69,4 @@ include(":cosmos-design-system-catalog:desktop-app")
 include(":cosmos-design-system-catalog:shared")
 include(":cosmos-design-system-catalog:web-app")
 include(":core:build-config")
+include(":finance-manager")

@@ -100,7 +100,8 @@ kotlin {
 
     sourceSets {
         androidMain {
-            dependencies {}
+            dependencies {
+            }
         }
 
         commonMain {

@@ -100,7 +100,10 @@ kotlin {
 
     sourceSets {
         androidMain {
-            dependencies {}
+            dependencies {
+                implementation(libs.androidx.core.ktx)
+                implementation(project(":core:build-config"))
+            }
         }
 
         commonMain {

@@ -1,0 +1,149 @@
+{
+  "default_accounts": {
+    "version_number": 1,
+    "versioned_accounts": [
+      {
+        "version_number": 1,
+        "accounts_data": [
+          {
+            "balance_amount": {
+              "currency": "INR",
+              "value": 0
+            },
+            "id": 1,
+            "type": "CASH",
+            "name": "Cash"
+          }
+        ]
+      }
+    ]
+  },
+  "default_categories": {
+    "version_number": 4,
+    "versioned_categories": [
+      {
+        "version_number": 2,
+        "categories_data": [
+          {
+            "id": 1,
+            "description": "",
+            "emoji": "🙁",
+            "title": "Default",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 2,
+            "description": "",
+            "emoji": "💸",
+            "title": "Salary",
+            "transaction_type": "INCOME"
+          },
+          {
+            "id": 3,
+            "description": "",
+            "emoji": "🍜",
+            "title": "Food",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 4,
+            "description": "",
+            "emoji": "👔",
+            "title": "Clothes",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 5,
+            "description": "",
+            "emoji": "💻",
+            "title": "Electronics",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 6,
+            "description": "",
+            "emoji": "🏠",
+            "title": "Household",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 7,
+            "description": "",
+            "emoji": "🚎",
+            "title": "Travel",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 8,
+            "description": "",
+            "emoji": "💊",
+            "title": "Medical",
+            "transaction_type": "EXPENSE"
+          },
+          {
+            "id": 9,
+            "description": "",
+            "emoji": "🔄",
+            "title": "Refund",
+            "transaction_type": "INCOME"
+          },
+          {
+            "id": 10,
+            "description": "",
+            "emoji": "🎁",
+            "title": "Rewards",
+            "transaction_type": "INCOME"
+          }
+        ]
+      },
+      {
+        "version_number": 3,
+        "categories_data": [
+          {
+            "description": "",
+            "emoji": "💵",
+            "title": "Provident Fund",
+            "transaction_type": "INVESTMENT"
+          },
+          {
+            "description": "",
+            "emoji": "⌛️",
+            "title": "Fixed Deposit",
+            "transaction_type": "INVESTMENT"
+          },
+          {
+            "description": "",
+            "emoji": "🚀",
+            "title": "Stock Market",
+            "transaction_type": "INVESTMENT"
+          }
+        ]
+      },
+      {
+        "version_number": 4,
+        "categories_data": [
+          {
+            "description": "",
+            "emoji": "💰",
+            "title": "Investment",
+            "transaction_type": "INVESTMENT"
+          }
+        ]
+      }
+    ]
+  },
+  "default_transaction_for_values": {
+    "version_number": 1,
+    "versioned_transaction_for_values": [
+      {
+        "version_number": 1,
+        "transaction_for_values_data": [
+          {
+            "id": 1,
+            "title": "SELF"
+          }
+        ]
+      }
+    ]
+  }
+}

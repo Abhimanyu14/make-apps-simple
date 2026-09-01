@@ -19,7 +19,7 @@ package com.makeappssimple.abhimanyu.core.app.version
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.pm.PackageInfoCompat
-import com.makeappssimple.abhimanyu.core.build_config.kit.BuildConfigKit
+import com.makeappssimple.abhimanyu.core.build_config.BuildConfigKit
 import org.koin.core.annotation.Single
 
 @Single(
@@ -27,7 +27,7 @@ import org.koin.core.annotation.Single
         AppVersionKit::class,
     ],
 )
-internal class AppVersionKitImpl(
+public class AppVersionKitImpl(
     private val context: Context,
     private val buildConfigKit: BuildConfigKit,
 ) : AppVersionKit {

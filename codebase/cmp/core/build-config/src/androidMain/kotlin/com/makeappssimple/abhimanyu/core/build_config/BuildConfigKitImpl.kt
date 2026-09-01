@@ -24,7 +24,7 @@ import org.koin.core.annotation.Single
         BuildConfigKit::class,
     ],
 )
-internal class BuildConfigKitImpl(
+public class BuildConfigKitImpl(
     private val isDebugBuild: Boolean = true,
     private val buildVersion: Int = Build.VERSION.SDK_INT,
 ) : BuildConfigKit {
