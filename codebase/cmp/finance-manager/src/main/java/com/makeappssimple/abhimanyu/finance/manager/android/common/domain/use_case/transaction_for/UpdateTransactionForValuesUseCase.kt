@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_for.TransactionForRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class UpdateTransactionForValuesUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionForRepository: TransactionForRepository,

@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account.AccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetAllAccountsTotalBalanceAmountValueUseCase(
     private val accountRepository: AccountRepository,
 ) {

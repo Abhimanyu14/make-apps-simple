@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.common
 
 import android.net.Uri
-import com.makeappssimple.abhimanyu.core.json.kit.JsonWriterKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
+import com.makeappssimple.abhimanyu.core.json.kit.JsonWriterKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.model.BackupData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.model.DatabaseData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.model.DatastoreData
@@ -34,7 +34,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_ca
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Single
 
+@Single
 internal class BackupDataUseCase(
     private val dateTimeKit: DateTimeKit,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

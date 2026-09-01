@@ -20,7 +20,9 @@ import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 
+@Single
 internal class ShouldShowBackupCardUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
 ) {

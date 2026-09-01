@@ -22,91 +22,35 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.common
 internal fun getLogoUrl(
     name: String,
 ): String? {
-    return when (name.trim()) {
-        "Airtel Credit Card" -> {
-            "https://makeappssimple.com/hosting/logos/airtel.svg"
+    val logoUrl = mapOf(
+        "Airtel Credit Card" to "https://abhimanyu14.github.io/hosting/finance_manager/airtel.svg",
+        "Amazon Credit Card" to "https://abhimanyu14.github.io/hosting/finance_manager/amazon.svg",
+        "Amazon Pay" to "https://abhimanyu14.github.io/hosting/finance_manager/amazon_pay.png",
+        "Amazon Prime" to "https://abhimanyu14.github.io/hosting/finance_manager/amazon.svg",
+        "Amazon Voucher" to "https://abhimanyu14.github.io/hosting/finance_manager/amazon.svg",
+        "Axis" to "https://abhimanyu14.github.io/hosting/finance_manager/axis.svg",
+        "Axis (Suja)" to "https://abhimanyu14.github.io/hosting/finance_manager/axis.svg",
+        "CUB" to "https://abhimanyu14.github.io/hosting/finance_manager/cub.png",
+        "FTH" to "https://abhimanyu14.github.io/hosting/finance_manager/fresh_to_home.png",
+        "HDFC" to "https://abhimanyu14.github.io/hosting/finance_manager/hdfc.svg",
+        "ICICI" to "https://abhimanyu14.github.io/hosting/finance_manager/icici.svg",
+        "IOB" to "https://abhimanyu14.github.io/hosting/finance_manager/iob.svg",
+        "Paytm" to "https://abhimanyu14.github.io/hosting/finance_manager/paytm.svg",
+        "Paytm UPI Lite" to "https://abhimanyu14.github.io/hosting/finance_manager/paytm.svg",
+        "PhonePe" to "https://abhimanyu14.github.io/hosting/finance_manager/phonepe.webp",
+        "PhonePe UPI Lite" to "https://abhimanyu14.github.io/hosting/finance_manager/phonepe.webp",
+        "RuPay Credit Card" to "https://abhimanyu14.github.io/hosting/finance_manager/icici.svg",
+        "R-Wallet" to "https://abhimanyu14.github.io/hosting/finance_manager/irctc.svg",
+        "Splitwise" to "https://abhimanyu14.github.io/hosting/finance_manager/splitwise.webp",
+        "Zerodha" to "https://abhimanyu14.github.io/hosting/finance_manager/kite.svg",
+        "Zomato" to "https://abhimanyu14.github.io/hosting/finance_manager/zomato.svg",
+    )
+    return logoUrl.entries
+        .firstOrNull {
+            it.key.equals(
+                name.trim(),
+                ignoreCase = true
+            )
         }
-
-        "Amazon Credit Card" -> {
-            "https://makeappssimple.com/hosting/logos/amazon.svg"
-        }
-
-        "Amazon Pay" -> {
-            "https://makeappssimple.com/hosting/logos/amazon_pay.png"
-        }
-
-        "Amazon Prime" -> {
-            "https://makeappssimple.com/hosting/logos/amazon.svg"
-        }
-
-        "Amazon Voucher" -> {
-            "https://makeappssimple.com/hosting/logos/amazon.svg"
-        }
-
-        "Axis" -> {
-            "https://makeappssimple.com/hosting/logos/axis.svg"
-        }
-
-        "Axis (Suja)" -> {
-            "https://makeappssimple.com/hosting/logos/axis.svg"
-        }
-
-        "CUB" -> {
-            "https://makeappssimple.com/hosting/logos/cub.png"
-        }
-
-        "FTH" -> {
-            "https://makeappssimple.com/hosting/logos/fresh_to_home.png"
-        }
-
-        "HDFC" -> {
-            "https://makeappssimple.com/hosting/logos/hdfc.svg"
-        }
-
-        "ICICI" -> {
-            "https://makeappssimple.com/hosting/logos/icici.svg"
-        }
-
-        "IOB" -> {
-            "https://makeappssimple.com/hosting/logos/iob.svg"
-        }
-
-        "Paytm" -> {
-            "https://makeappssimple.com/hosting/logos/paytm.svg"
-        }
-
-        "Paytm UPI Lite" -> {
-            "https://makeappssimple.com/hosting/logos/paytm.svg"
-        }
-
-        "PhonePe" -> {
-            "https://makeappssimple.com/hosting/logos/phonepe.webp"
-        }
-
-        "PhonePe UPI Lite" -> {
-            "https://makeappssimple.com/hosting/logos/phonepe.webp"
-        }
-
-        "RuPay Credit Card" -> {
-            "https://makeappssimple.com/hosting/logos/icici.svg"
-        }
-
-        "R-Wallet" -> {
-            "https://makeappssimple.com/hosting/logos/irctc.svg"
-        }
-
-        "Splitwise" -> {
-            "https://makeappssimple.com/hosting/logos/splitwise.webp"
-        }
-
-        "Zerodha" -> {
-            "https://makeappssimple.com/hosting/logos/kite.svg"
-        }
-
-        "Zomato" -> {
-            "https://makeappssimple.com/hosting/logos/zomato.svg"
-        }
-
-        else -> null
-    }
+        ?.value
 }

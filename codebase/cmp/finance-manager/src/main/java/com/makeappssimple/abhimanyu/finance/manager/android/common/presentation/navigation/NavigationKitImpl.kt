@@ -21,7 +21,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        NavigationKit::class,
+    ],
+)
 internal class NavigationKitImpl(
     private val coroutineScope: CoroutineScope,
 ) : NavigationKit {

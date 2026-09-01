@@ -28,7 +28,9 @@ private object MyJsonWriterImplConstants {
 }
 
 @Single(
-    binds = [JsonWriterKit::class],
+    binds = [
+        JsonWriterKit::class,
+    ],
 )
 public class JsonWriterKitImpl(
     private val context: Context,

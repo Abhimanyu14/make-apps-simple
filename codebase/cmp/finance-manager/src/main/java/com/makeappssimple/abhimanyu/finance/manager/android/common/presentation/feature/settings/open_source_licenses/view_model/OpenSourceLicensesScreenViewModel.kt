@@ -21,7 +21,7 @@ import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.settings.open_source_licenses.state.OpenSourceLicensesScreenUIStateEvents
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.navigation.NavigationKit
 import kotlinx.coroutines.CoroutineScope
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class OpenSourceLicensesScreenViewModel(
@@ -30,7 +30,7 @@ internal class OpenSourceLicensesScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region uiState
     internal val uiStateEvents: OpenSourceLicensesScreenUIStateEvents =
         OpenSourceLicensesScreenUIStateEvents(

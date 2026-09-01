@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.core.app.version.di
 
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 
 @Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.core.app_version.kit",
-)
+@ComponentScan("com.makeappssimple.abhimanyu.core.app.version")
+@Configuration
 public class AppVersionKitModule

@@ -19,6 +19,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     alias(libs.plugins.plugin.kotlin.jvm)
     alias(libs.plugins.plugin.compose)
+    alias(libs.plugins.plugin.koin.compiler)
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
@@ -26,8 +27,11 @@ dependencies {
     detektPlugins(libs.detekt.compose.rules)
 
     implementation(compose.desktop.currentOs)
+
     implementation(libs.kotlinx.coroutines.swing)
+    implementation(libs.koin.core)
     implementation(libs.compose.ui.tooling.preview)
+
     implementation(projects.cosmosDesignSystemCatalog.shared)
 }
 

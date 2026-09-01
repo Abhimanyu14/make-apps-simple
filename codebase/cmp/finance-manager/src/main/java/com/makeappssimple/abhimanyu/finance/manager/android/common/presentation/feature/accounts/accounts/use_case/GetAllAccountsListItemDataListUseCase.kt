@@ -16,9 +16,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.accounts.use_case
 
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.orEmpty
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.orEmpty
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.orEmpty
@@ -32,7 +32,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.compone
 import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.ui.extensions.iconResource
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetAllAccountsListItemDataListUseCase(
     private val checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,
 ) {

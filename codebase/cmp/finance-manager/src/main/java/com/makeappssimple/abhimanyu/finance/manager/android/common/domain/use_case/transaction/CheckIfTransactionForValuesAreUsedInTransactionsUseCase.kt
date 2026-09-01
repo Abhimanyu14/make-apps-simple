@@ -20,7 +20,9 @@ import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction.TransactionRepository
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class CheckIfTransactionForValuesAreUsedInTransactionsUseCase(
     private val transactionRepository: TransactionRepository,
 ) {

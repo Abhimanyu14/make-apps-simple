@@ -20,20 +20,10 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification.NotificationConstants
-import com.makeappssimple.abhimanyu.finance.manager.android.common.di.initKoin
-import org.koin.android.ext.koin.androidContext
 
 internal class FinanceManagerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        initKoin(
-            config = {
-                androidContext(
-                    androidContext = this@FinanceManagerApplication,
-                )
-            },
-        )
-
         initNotificationChannel()
     }
 

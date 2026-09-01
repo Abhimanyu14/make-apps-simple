@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.home
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogScreen
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 public class CosmosDesignSystemCatalogHomeScreenViewModel(
     private val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
 ) : ViewModel() {

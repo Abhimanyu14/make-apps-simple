@@ -20,7 +20,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction.TransactionRepository
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class InsertTransactionsUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val transactionRepository: TransactionRepository,

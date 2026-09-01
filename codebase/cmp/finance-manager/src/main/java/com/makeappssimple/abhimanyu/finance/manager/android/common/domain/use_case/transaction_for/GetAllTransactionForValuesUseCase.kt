@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_for.TransactionForRepository
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetAllTransactionForValuesUseCase(
     private val transactionForRepository: TransactionForRepository,
 ) {

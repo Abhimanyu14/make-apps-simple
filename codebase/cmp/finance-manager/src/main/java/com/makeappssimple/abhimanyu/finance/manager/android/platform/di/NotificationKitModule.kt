@@ -21,14 +21,18 @@ import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.app.AppKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.notification.NotificationKit
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.notification.NotificationKitImpl
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Module
+@Configuration
 internal class NotificationKitModule {
     @Single
     internal fun providesNotificationKit(
         appKit: AppKit,
+        @Provided
         context: Context,
         logKit: LogKit,
     ): NotificationKit {

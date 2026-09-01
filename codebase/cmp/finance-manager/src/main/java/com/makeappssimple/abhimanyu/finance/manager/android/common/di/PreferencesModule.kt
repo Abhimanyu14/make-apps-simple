@@ -23,21 +23,22 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSourceImpl
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.constants.DatastoreConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.preferencesDataMigrations
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Module
+@Configuration
 internal class PreferencesModule {
     @Single
-    internal fun providesPreferencesDataStore(
+    internal fun providesFinanceManagerPreferencesDataStore(
+        @Provided
         appContext: Context,
         coroutineDispatcherProvider: CoroutineDispatcherProvider,
     ): DataStore<Preferences> {
@@ -56,17 +57,6 @@ internal class PreferencesModule {
                     name = DatastoreConstants.DATASTORE_FILE_NAME,
                 )
             },
-        )
-    }
-
-    @Single
-    internal fun providesMyPreferencesDataSource(
-        dataStore: DataStore<Preferences>,
-        logKit: LogKit,
-    ): FinanceManagerPreferencesDataSource {
-        return FinanceManagerPreferencesDataSourceImpl(
-            dataStore = dataStore,
-            logKit = logKit,
         )
     }
 }

@@ -18,10 +18,10 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room3.ColumnInfo
+import androidx.room3.ColumnTypeConverters
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.converters.IntListConverter
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
@@ -50,7 +50,7 @@ internal data class CategoryEntity(
     @ColumnInfo(name = "sub_categories")
     @EncodeDefault
     @SerialName(value = "sub_categories")
-    @TypeConverters(IntListConverter::class)
+    @ColumnTypeConverters(IntListConverter::class)
     val subCategoryIds: List<Int>? = null,
 
     @ColumnInfo(name = "description")

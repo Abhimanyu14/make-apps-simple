@@ -76,7 +76,7 @@ fun PageFooter() {
                             classes(WtCols.wtColInline)
                         },
                     ) {
-                        getSocialLinks().map { socialLink ->
+                        getSocialLinks().forEach { socialLink ->
                             SocialIconLink(
                                 socialLink = socialLink,
                             )
@@ -186,12 +186,15 @@ private fun getSocialLinks(): List<SocialLink> {
             title = "Leetcode",
             iconSvg = "ic_leetcode.png",
         ),
+        /*
+        // TODO(Abhi): Revert after hosting resume
         SocialLink(
             id = "resume",
             url = "https://my.visualcv.com/abhimanyu14/",
             title = "Resume",
             iconSvg = "ic_pdf.png",
         ),
+        */
         SocialLink(
             id = "hashnode",
             url = "https://abhimanyu14.hashnode.dev/",

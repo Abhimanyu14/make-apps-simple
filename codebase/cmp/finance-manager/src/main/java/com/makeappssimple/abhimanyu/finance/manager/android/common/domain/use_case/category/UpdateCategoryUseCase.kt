@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
+import org.koin.core.annotation.Single
 
+@Single
 internal class UpdateCategoryUseCase(
     private val updateCategoriesUseCase: UpdateCategoriesUseCase,
 ) {
@@ -30,7 +32,7 @@ internal class UpdateCategoryUseCase(
     ): Int {
         val category = currentCategory.copy(
             emoji = emoji,
-            title = title,
+            title = title.trim(),
             transactionType = transactionType,
         )
         return updateCategoriesUseCase(category)

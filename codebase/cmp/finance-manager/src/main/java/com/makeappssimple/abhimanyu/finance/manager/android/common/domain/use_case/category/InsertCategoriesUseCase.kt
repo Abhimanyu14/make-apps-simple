@@ -20,7 +20,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class InsertCategoriesUseCase(
     private val categoryRepository: CategoryRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.core.uri.kit.di
 
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 
 @Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.core.uri.kit",
-)
+@ComponentScan("com.makeappssimple.abhimanyu.core.uri.kit")
+@Configuration
 public class UriKitModule

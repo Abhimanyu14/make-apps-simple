@@ -20,9 +20,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orFalse
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orZero
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DataTimestamp
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.DefaultDataId
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.InitialDataVersionNumber
@@ -31,6 +31,7 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import java.io.IOException
 
 private object FinanceManagerPreferencesDataSourceDefaultValues {
@@ -38,6 +39,11 @@ private object FinanceManagerPreferencesDataSourceDefaultValues {
     const val DEFAULT_TIMESTAMP = -1L
 }
 
+@Single(
+    binds = [
+        FinanceManagerPreferencesDataSource::class,
+    ],
+)
 internal class FinanceManagerPreferencesDataSourceImpl(
     private val dataStore: DataStore<Preferences>,
     private val logKit: LogKit,

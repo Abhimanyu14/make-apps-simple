@@ -22,8 +22,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.migrations
 
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.migration.Migration
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.execSQL
 
 internal val manualDatabaseMigrations = arrayOf(
     ManualDatabaseMigration.MIGRATION_21_22,
@@ -54,11 +55,11 @@ private object ManualDatabaseMigration {
         21,
         22
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Add column with a default value
-            db.execSQL(
+            connection.execSQL(
                 """
                     ALTER TABLE account_table 
                     ADD COLUMN `is_archived` INTEGER NOT NULL DEFAULT(0)
@@ -77,11 +78,11 @@ private object ManualDatabaseMigration {
         19,
         20
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Add column with a default value
-            db.execSQL(
+            connection.execSQL(
                 """
                     ALTER TABLE account_table 
                     ADD COLUMN `minimum_account_balance_amount` TEXT  DEFAULT NULL
@@ -89,7 +90,7 @@ private object ManualDatabaseMigration {
             )
 
             // Update data
-            db.execSQL(
+            connection.execSQL(
                 """
                     UPDATE account_table 
                     SET `minimum_account_balance_amount` = CASE type 
@@ -113,13 +114,13 @@ private object ManualDatabaseMigration {
         18,
         19
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // region Move data from source_table to account_table
 
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `account_table` (
                         `balance_amount` TEXT NOT NULL, 
@@ -131,7 +132,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO account_table (balance_amount, id, type, name) 
                     SELECT balance_amount, id, type, name 
@@ -140,14 +141,14 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE source_table")
+            connection.execSQL("DROP TABLE source_table")
 
             // endregion
 
             // region Update columns in transaction_table
 
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table_new` (
                         `amount` TEXT NOT NULL, 
@@ -168,7 +169,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_table_new (
                         amount, 
@@ -203,10 +204,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE transaction_table")
+            connection.execSQL("DROP TABLE transaction_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
+            connection.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
 
             // endregion
         }
@@ -222,11 +223,11 @@ private object ManualDatabaseMigration {
         17,
         18
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table_new` (
                         `amount` TEXT NOT NULL, 
@@ -247,7 +248,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_table_new (
                         amount, category_id, id, source_from_id, source_to_id, transaction_for_id, 
@@ -260,10 +261,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE transaction_table")
+            connection.execSQL("DROP TABLE transaction_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
+            connection.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
         }
     }
 
@@ -277,11 +278,11 @@ private object ManualDatabaseMigration {
         16,
         17
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_for_table` (
                         `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -291,7 +292,7 @@ private object ManualDatabaseMigration {
             )
 
             // Insert values
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_for_table  (id, title) 
                     VALUES (1, 'SELF'), (2, 'COMMON'), (3, 'OTHERS')
@@ -299,7 +300,7 @@ private object ManualDatabaseMigration {
             )
 
             // Add column with a default value
-            db.execSQL(
+            connection.execSQL(
                 """
                     ALTER TABLE transaction_table 
                     ADD COLUMN `transaction_for_id` INTEGER  DEFAULT -1 NOT NULL
@@ -307,7 +308,7 @@ private object ManualDatabaseMigration {
             )
 
             // Update data
-            db.execSQL(
+            connection.execSQL(
                 """
                     UPDATE transaction_table SET `transaction_for_id` = CASE transaction_for 
                     WHEN 'SELF' THEN 1 WHEN 'COMMON' THEN 2 WHEN 'OTHERS' THEN 3 END
@@ -315,7 +316,7 @@ private object ManualDatabaseMigration {
             )
 
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table_new` (
                         `amount` TEXT NOT NULL, 
@@ -334,7 +335,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_table_new (
                         amount, 
@@ -366,10 +367,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE transaction_table")
+            connection.execSQL("DROP TABLE transaction_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
+            connection.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
         }
     }
 
@@ -384,11 +385,11 @@ private object ManualDatabaseMigration {
         15,
         16
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table_new` (`amount` TEXT NOT NULL, 
                     `category_id` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -400,7 +401,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_table_new (amount, category_id, id, source_from_id, 
                     source_to_id, description, title, creation_timestamp, transaction_timestamp, 
@@ -411,10 +412,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE transaction_table")
+            connection.execSQL("DROP TABLE transaction_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
+            connection.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
         }
     }
 
@@ -427,11 +428,11 @@ private object ManualDatabaseMigration {
         14,
         15
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table_new` (`amount` TEXT NOT NULL, 
                     `category_id` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -444,7 +445,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_table_new (amount, category_id, id, source_from_id, 
                     source_to_id, description, title, creation_timestamp, transaction_timestamp, 
@@ -455,10 +456,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE transaction_table")
+            connection.execSQL("DROP TABLE transaction_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
+            connection.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
         }
     }
 
@@ -469,11 +470,11 @@ private object ManualDatabaseMigration {
         13,
         14
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Add column with a default value
-            db.execSQL(
+            connection.execSQL(
                 """
                     ALTER TABLE category_table ADD COLUMN `emoji` TEXT  DEFAULT '😟' NOT NULL
                 """.trimIndent()
@@ -488,10 +489,10 @@ private object ManualDatabaseMigration {
         12,
         13
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `emoji_table` (`character` TEXT NOT NULL, 
                     `code_point` TEXT NOT NULL, `group` TEXT NOT NULL, 
@@ -508,11 +509,11 @@ private object ManualDatabaseMigration {
         9,
         10
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Add column
-            db.execSQL("ALTER TABLE transaction_table ADD COLUMN `sourceToId` INTEGER")
+            connection.execSQL("ALTER TABLE transaction_table ADD COLUMN `sourceToId` INTEGER")
         }
     }
 
@@ -526,11 +527,11 @@ private object ManualDatabaseMigration {
         8,
         9
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `category_table_new` (
                         `parent_category` INTEGER, 
@@ -544,7 +545,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO category_table_new (id, sub_categories, description, title, 
                     transaction_type) SELECT id, sub_categories, description, title, 
@@ -553,10 +554,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE category_table")
+            connection.execSQL("DROP TABLE category_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE category_table_new RENAME TO category_table")
+            connection.execSQL("ALTER TABLE category_table_new RENAME TO category_table")
         }
     }
 
@@ -567,11 +568,11 @@ private object ManualDatabaseMigration {
         7,
         8
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Add column with a default value
-            db.execSQL(
+            connection.execSQL(
                 """
                     ALTER TABLE category_table 
                     ADD COLUMN transaction_type TEXT DEFAULT 'Expense' NOT NULL
@@ -587,11 +588,11 @@ private object ManualDatabaseMigration {
         6,
         7
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Add column with a default value
-            db.execSQL(
+            connection.execSQL(
                 """
                     ALTER TABLE transaction_table ADD COLUMN source_id INTEGER  DEFAULT 0 NOT NULL
                 """.trimIndent()
@@ -606,11 +607,11 @@ private object ManualDatabaseMigration {
         4,
         5
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
             // Create the new table
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table_new` (`amount` TEXT NOT NULL, 
                     `categoryId` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -621,7 +622,7 @@ private object ManualDatabaseMigration {
             )
 
             // Copy the data
-            db.execSQL(
+            connection.execSQL(
                 """
                     INSERT INTO transaction_table_new (amount, id, description, title, 
                     creation_timestamp, transaction_timestamp, transaction_for, transaction_type) 
@@ -631,10 +632,10 @@ private object ManualDatabaseMigration {
             )
 
             // Remove the old table
-            db.execSQL("DROP TABLE transaction_table")
+            connection.execSQL("DROP TABLE transaction_table")
 
             // Change the table name to the correct one
-            db.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
+            connection.execSQL("ALTER TABLE transaction_table_new RENAME TO transaction_table")
         }
     }
 
@@ -642,10 +643,10 @@ private object ManualDatabaseMigration {
         3,
         4
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `transaction_table` (`amount` TEXT NOT NULL, 
                     `category` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -664,10 +665,10 @@ private object ManualDatabaseMigration {
         2,
         3
     ) {
-        override fun migrate(
-            db: SupportSQLiteDatabase,
+        override suspend fun migrate(
+            connection: SQLiteConnection,
         ) {
-            db.execSQL(
+            connection.execSQL(
                 """
                     CREATE TABLE IF NOT EXISTS `category_table` (
                         `parent_category` TEXT, 

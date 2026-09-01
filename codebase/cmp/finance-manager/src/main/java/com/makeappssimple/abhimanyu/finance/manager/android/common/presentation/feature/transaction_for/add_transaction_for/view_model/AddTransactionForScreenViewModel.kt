@@ -34,7 +34,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddTransactionForScreenViewModel(
@@ -45,7 +45,7 @@ internal class AddTransactionForScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region data
     private var addTransactionForScreenDataValidationState: AddTransactionForScreenDataValidationState =
         AddTransactionForScreenDataValidationState()
@@ -93,7 +93,7 @@ internal class AddTransactionForScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "AddTransactionForScreenViewModel: updateUiState",
         )

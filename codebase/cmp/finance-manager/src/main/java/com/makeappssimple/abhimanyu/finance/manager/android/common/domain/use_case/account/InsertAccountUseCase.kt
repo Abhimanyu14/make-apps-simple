@@ -21,7 +21,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class InsertAccountUseCase(
     private val accountRepository: AccountRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
@@ -42,7 +44,7 @@ internal class InsertAccountUseCase(
         val newAccount = Account(
             type = accountType,
             minimumAccountBalanceAmount = minimumAccountBalanceAmount,
-            name = name,
+            name = name.trim(),
         )
         financeManagerPreferencesRepository.updateLastDataChangeTimestamp()
         return accountRepository.insertAccounts(newAccount).first()

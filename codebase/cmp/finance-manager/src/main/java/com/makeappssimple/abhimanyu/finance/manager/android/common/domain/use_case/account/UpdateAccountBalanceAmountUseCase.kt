@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account.AccountRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class UpdateAccountBalanceAmountUseCase(
     private val accountRepository: AccountRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

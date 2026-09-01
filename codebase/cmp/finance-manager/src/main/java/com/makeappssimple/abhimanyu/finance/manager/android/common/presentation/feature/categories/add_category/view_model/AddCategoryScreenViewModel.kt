@@ -21,10 +21,10 @@ import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
-import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.cosmos.design.system.components.chip.ChipUIData
 import com.makeappssimple.abhimanyu.cosmos.design.system.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.constants.EmojiConstants
@@ -47,7 +47,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddCategoryScreenViewModel(
@@ -60,7 +60,7 @@ internal class AddCategoryScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region screen args
     private val screenArgs = AddCategoryScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -134,7 +134,7 @@ internal class AddCategoryScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "AddCategoryScreenViewModel: updateUiState",
         )

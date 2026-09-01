@@ -21,7 +21,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_ca
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.toImmutableMap
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetIsAccountsUsedInTransactionFlowUseCase(
     private val checkIfAccountIsUsedInTransactionsUseCase: CheckIfAccountIsUsedInTransactionsUseCase,
 ) {

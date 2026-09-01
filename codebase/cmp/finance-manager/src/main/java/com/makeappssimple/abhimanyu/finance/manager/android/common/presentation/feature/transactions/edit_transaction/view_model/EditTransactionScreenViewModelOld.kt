@@ -98,7 +98,7 @@ internal class EditTransactionScreenViewModelOld(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region screen args
     private val screenArgs = EditTransactionScreenArgs(
         savedStateHandle = savedStateHandle,

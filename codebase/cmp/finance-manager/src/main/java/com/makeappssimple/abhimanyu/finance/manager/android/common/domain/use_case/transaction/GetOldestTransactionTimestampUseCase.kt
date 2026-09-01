@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction_data.TransactionDataRepository
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetOldestTransactionTimestampUseCase(
     private val transactionDataRepository: TransactionDataRepository,
 ) {

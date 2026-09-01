@@ -22,7 +22,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.state.EditAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.edit_account.view_model.EditAccountScreenDataValidationState
+import org.koin.core.annotation.Single
 
+@Single
 internal class EditAccountScreenDataValidationUseCase(
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
 ) {
@@ -30,18 +32,26 @@ internal class EditAccountScreenDataValidationUseCase(
         enteredName: String,
         currentAccount: Account?,
     ): EditAccountScreenDataValidationState {
-        val editAccountScreenDataValidationState =
-            EditAccountScreenDataValidationState()
         if (currentAccount?.type == AccountType.Cash) {
-            return editAccountScreenDataValidationState
-                .copy(
-                    isCashAccount = true,
-                    isCtaButtonEnabled = true,
-                )
+            return EditAccountScreenDataValidationState(
+                isCashAccount = true,
+                isCtaButtonEnabled = true,
+            )
         }
         if (enteredName.isBlank()) {
-            return editAccountScreenDataValidationState
+            return EditAccountScreenDataValidationState()
         }
+
+        if (
+            enteredName.equalsIgnoringCase(
+                other = currentAccount?.name?.trim().orEmpty(),
+            )
+        ) {
+            return EditAccountScreenDataValidationState(
+                isCtaButtonEnabled = true,
+            )
+        }
+
         val allAccounts = getAllAccountsUseCase()
         val isAccountNameAlreadyUsed: Boolean = allAccounts.find {
             it.name
@@ -50,16 +60,13 @@ internal class EditAccountScreenDataValidationUseCase(
                     other = enteredName,
                 )
         }.isNotNull()
-        val isAccountNameUpdate = enteredName != currentAccount?.name?.trim()
-        if (isAccountNameAlreadyUsed && isAccountNameUpdate) {
-            return editAccountScreenDataValidationState
-                .copy(
-                    nameError = EditAccountScreenNameError.AccountExists,
-                )
-        }
-        return editAccountScreenDataValidationState
-            .copy(
-                isCtaButtonEnabled = true,
+        if (isAccountNameAlreadyUsed) {
+            return EditAccountScreenDataValidationState(
+                nameError = EditAccountScreenNameError.AccountExists,
             )
+        }
+        return EditAccountScreenDataValidationState(
+            isCtaButtonEnabled = true,
+        )
     }
 }

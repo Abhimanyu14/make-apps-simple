@@ -18,11 +18,11 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.ui.app
 
 import androidx.compose.runtime.Composable
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.app.FinanceManagerActivityViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.viewmodel.koinActivityViewModel
 
 @Composable
 internal fun FinanceManagerApp(
-    financeManagerActivityViewModel: FinanceManagerActivityViewModel = koinViewModel(),
+    financeManagerActivityViewModel: FinanceManagerActivityViewModel = koinActivityViewModel(),
 ) {
     FinanceManagerAppUI(
         financeManagerActivityViewModel = financeManagerActivityViewModel,

@@ -17,9 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.transaction_data
 
 import androidx.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.TransactionDataDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.datasource.CommonDataSource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.AccountEntity
@@ -39,7 +39,13 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        TransactionDataRepository::class,
+    ],
+)
 internal class TransactionDataRepositoryImpl(
     private val commonDataSource: CommonDataSource,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider,

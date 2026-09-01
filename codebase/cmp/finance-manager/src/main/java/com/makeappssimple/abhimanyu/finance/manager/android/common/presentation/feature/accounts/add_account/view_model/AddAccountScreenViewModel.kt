@@ -20,11 +20,11 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
+import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.filter
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
-import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.toLongOrZero
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.components.chip.ChipUIData
 import com.makeappssimple.abhimanyu.cosmos.design.system.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.AccountType
@@ -45,7 +45,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddAccountScreenViewModel(
@@ -56,7 +56,7 @@ internal class AddAccountScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region data
     private var addAccountScreenDataValidationState: AddAccountScreenDataValidationState =
         AddAccountScreenDataValidationState()
@@ -126,7 +126,7 @@ internal class AddAccountScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "AddAccountScreenViewModel: updateUiState",
         )

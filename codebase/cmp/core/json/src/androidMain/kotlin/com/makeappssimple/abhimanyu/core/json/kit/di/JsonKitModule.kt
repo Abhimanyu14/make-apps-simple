@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.core.json.kit.di
 
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 
 @Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.core.json.kit",
-)
+@ComponentScan("com.makeappssimple.abhimanyu.core.json.kit")
+@Configuration
 public class JsonKitModule

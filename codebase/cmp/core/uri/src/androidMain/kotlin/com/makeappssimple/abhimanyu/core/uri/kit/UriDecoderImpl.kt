@@ -20,7 +20,9 @@ import android.net.Uri
 import org.koin.core.annotation.Single
 
 @Single(
-    binds = [UriDecoder::class],
+    binds = [
+        UriDecoder::class,
+    ],
 )
 public class UriDecoderImpl(
     private val uriDecode: (String) -> String = { string ->

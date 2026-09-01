@@ -26,8 +26,10 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.InsertTransactionsUseCase
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 import kotlin.math.abs
 
+@Single
 internal class UpdateAccountUseCase(
     private val dateTimeKit: DateTimeKit,
     private val insertTransactionsUseCase: InsertTransactionsUseCase,
@@ -66,8 +68,8 @@ internal class UpdateAccountUseCase(
                     ),
                 type = accountType,
                 minimumAccountBalanceAmount = minimumAccountBalanceAmount,
-                name = name.ifBlank {
-                    currentAccount.name
+                name = name.trim().ifBlank {
+                    currentAccount.name.trim()
                 },
             )
         val accountFromId = if (amountChangeValue < 0L) {

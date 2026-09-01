@@ -17,14 +17,14 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.analysis.analysis.view_model
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.date.time.models.orMin
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orZero
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.components.chip.ChipUIData
 import com.makeappssimple.abhimanyu.cosmos.design.system.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
@@ -49,7 +49,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 private object AnalysisScreenViewModelConstants {
     const val FULL_PERCENTAGE = 100
@@ -64,7 +64,7 @@ internal class AnalysisScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region data
     private var isLoading: Boolean = true
     private val validTransactionTypes: ImmutableList<TransactionType> =
@@ -134,7 +134,7 @@ internal class AnalysisScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "AnalysisScreenViewModel: updateUiState",
         )

@@ -22,33 +22,7 @@ object AppCSSVariables {
     val wtColCount by variable<StylePropertyNumber>()
 }
 
-
 object AppStylesheet : StyleSheet() {
-    val composeLogo by style {
-        maxWidth(100.percent)
-    }
-
-    val composeTitleTag by style {
-        padding(5.px, 12.px)
-        letterSpacing("normal")
-        fontWeight(400)
-        lineHeight(24.px)
-
-        position(Position.Relative)
-        top(-32.px)
-        marginLeft(8.px)
-        fontSize(15.px)
-        backgroundColor(rgba(39, 40, 44, .05))
-        color(rgba(39, 40, 44, .7))
-        borderRadius(4.px, 4.px, 4.px)
-
-        media(mediaMaxWidth(640.px)) {
-            self style {
-                top(-16.px)
-            }
-        }
-    }
-
     init {
         "label, a, button" style {
             property(

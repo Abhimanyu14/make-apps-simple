@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.makeappssimple.abhimanyu.finance.manager.android.core.database.migrations
+package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.migrations
 
-import androidx.room.DeleteTable
-import androidx.room.RenameColumn
-import androidx.room.migration.AutoMigrationSpec
+import androidx.room3.DeleteTable
+import androidx.room3.RenameColumn
+import androidx.room3.migration.AutoMigrationSpec
 
 /**
  * Room auto-migration

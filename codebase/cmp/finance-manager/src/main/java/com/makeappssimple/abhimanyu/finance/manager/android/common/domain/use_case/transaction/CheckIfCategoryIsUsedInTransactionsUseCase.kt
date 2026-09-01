@@ -17,7 +17,9 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction.TransactionRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class CheckIfCategoryIsUsedInTransactionsUseCase(
     private val transactionRepository: TransactionRepository,
 ) {

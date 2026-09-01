@@ -25,14 +25,14 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.date.time.models.orMin
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orZero
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
@@ -71,7 +71,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class TransactionsScreenViewModel(
@@ -89,7 +89,7 @@ internal class TransactionsScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region data
     private var isInSelectionMode: Boolean = false
     private var isLoading: Boolean = true
@@ -170,7 +170,7 @@ internal class TransactionsScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "TransactionsScreenViewModel: updateUiState",
         )

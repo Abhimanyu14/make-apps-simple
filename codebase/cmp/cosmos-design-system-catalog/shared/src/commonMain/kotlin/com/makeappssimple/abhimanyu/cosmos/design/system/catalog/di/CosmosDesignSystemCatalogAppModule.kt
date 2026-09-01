@@ -16,85 +16,12 @@
 
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di
 
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app.CosmosDesignSystemCatalogActivityViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKitImpl
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.colors.CosmosDesignSystemCatalogColorsScreenViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.components.CosmosDesignSystemCatalogComponentsScreenViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.home.CosmosDesignSystemCatalogHomeScreenViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.icons.CosmosDesignSystemCatalogIconsScreenViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.shapes.CosmosDesignSystemCatalogShapesScreenViewModel
-import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.screens.typography.CosmosDesignSystemCatalogTypographyScreenViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import org.koin.core.module.Module
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.core.annotation.Module
 
-internal val cosmosDesignSystemCatalogAppModule: Module = module {
-    single<CoroutineScope> {
-        CoroutineScope(
-            context = Dispatchers.Default + SupervisorJob(),
-        )
-    }
-
-    single<LogKit> {
-        object : LogKit {
-            override fun logError(
-                message: String,
-                tag: String,
-            ) = Unit
-        }
-    }
-
-    single<CosmosDesignSystemCatalogNavigationKit> {
-        CosmosDesignSystemCatalogNavigationKitImpl(
-            coroutineScope = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogActivityViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-            logKit = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogColorsScreenViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogComponentsScreenViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogHomeScreenViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogIconsScreenViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogShapesScreenViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-        )
-    }
-
-    viewModel {
-        CosmosDesignSystemCatalogTypographyScreenViewModel(
-            cosmosDesignSystemCatalogNavigationKit = get(),
-        )
-    }
-}
+@Module(
+    includes = [
+        CosmosDesignSystemCatalogActivityViewModelModule::class,
+        CosmosDesignSystemCatalogScreensViewModelModule::class,
+    ]
+)
+public class CosmosDesignSystemCatalogAppModule

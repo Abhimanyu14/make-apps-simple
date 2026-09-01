@@ -41,9 +41,10 @@ val lintConfig: com.android.build.api.dsl.Lint.() -> Unit = {
 // endregion
 
 plugins {
+    alias(libs.plugins.plugin.android.lint)
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
-    alias(libs.plugins.plugin.android.lint)
+    alias(libs.plugins.plugin.koin.compiler)
 }
 
 kotlin {

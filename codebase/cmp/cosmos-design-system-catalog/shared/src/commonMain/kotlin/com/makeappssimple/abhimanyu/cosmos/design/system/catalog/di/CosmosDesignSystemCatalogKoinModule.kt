@@ -17,15 +17,8 @@
 package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.di
 
 import org.koin.core.KoinApplication
-import org.koin.core.context.startKoin
+import org.koin.plugin.module.dsl.startKoin
 
-public fun initKoin(
-    config: (KoinApplication.() -> Unit)? = null,
-) {
-    startKoin {
-        config?.invoke(this)
-        modules(
-            modules = cosmosDesignSystemCatalogAppModule,
-        )
-    }
+public fun initKoin(): KoinApplication {
+    return startKoin<CosmosDesignSystemCatalogApp>()
 }

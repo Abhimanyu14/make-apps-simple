@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.account.AccountRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetAccountByIdUseCase(
     private val accountRepository: AccountRepository,
 ) {

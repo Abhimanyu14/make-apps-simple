@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class UpdateCategoriesUseCase(
     private val categoryRepository: CategoryRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

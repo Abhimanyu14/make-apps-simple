@@ -21,6 +21,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.remoteConfig
 import com.makeappssimple.abhimanyu.library.finance.manager.android.R
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -29,6 +30,7 @@ private object ConfigModuleConstants {
 }
 
 @Module
+@Configuration
 internal class ConfigKitModule {
     @Single
     internal fun providesFirebaseRemoteConfigSettings(): FirebaseRemoteConfigSettings {/*

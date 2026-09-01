@@ -24,14 +24,14 @@ import com.makeappssimple.abhimanyu.core.coroutines.DISPATCHER_UNCONFINED
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 
 @Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.core.coroutines",
-)
+@ComponentScan("com.makeappssimple.abhimanyu.core.coroutines")
+@Configuration
 public class DispatcherProviderModule {
     @Single
     @Named(DISPATCHER_DEFAULT)

@@ -22,7 +22,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.add_transaction_for.state.AddTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.add_transaction_for.view_model.AddTransactionForScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class AddTransactionForScreenDataValidationUseCase(
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
 ) {

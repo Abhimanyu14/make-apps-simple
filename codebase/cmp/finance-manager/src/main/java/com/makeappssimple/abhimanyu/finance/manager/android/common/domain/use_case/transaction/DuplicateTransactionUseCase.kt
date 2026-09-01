@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
+import org.koin.core.annotation.Single
 
+@Single
 internal class DuplicateTransactionUseCase(
     private val dateTimeKit: DateTimeKit,
     private val getTransactionByIdUseCase: GetTransactionByIdUseCase,

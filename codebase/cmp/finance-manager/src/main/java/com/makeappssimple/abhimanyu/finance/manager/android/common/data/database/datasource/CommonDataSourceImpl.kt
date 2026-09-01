@@ -30,7 +30,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.updateBalanceAmount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider.DatabaseTransactionProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        CommonDataSource::class,
+    ],
+)
 internal class CommonDataSourceImpl(
     private val accountDao: AccountDao,
     private val categoryDao: CategoryDao,

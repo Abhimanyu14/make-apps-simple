@@ -16,13 +16,13 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.converters
 
-import androidx.room.TypeConverter
+import androidx.room3.ColumnTypeConverter
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
 internal class IntListConverter {
-    @TypeConverter
+    @ColumnTypeConverter
     internal fun stringToIntList(
         value: String?,
     ): List<Int>? {
@@ -46,7 +46,7 @@ internal class IntListConverter {
         }
     }
 
-    @TypeConverter
+    @ColumnTypeConverter
     internal fun intListToString(
         intList: List<Int>?,
     ): String? {

@@ -19,10 +19,12 @@ package com.makeappssimple.abhimanyu.core.coroutines.di
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
 
 @Module
+@Configuration
 public class CoroutineScopeModule {
     @Factory
     internal fun providesCoroutineScope(

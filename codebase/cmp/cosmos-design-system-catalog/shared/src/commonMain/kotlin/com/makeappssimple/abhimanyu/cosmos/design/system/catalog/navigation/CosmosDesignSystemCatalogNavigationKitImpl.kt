@@ -21,13 +21,20 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        CosmosDesignSystemCatalogNavigationKit::class,
+    ],
+)
 public class CosmosDesignSystemCatalogNavigationKitImpl(
     private val coroutineScope: CoroutineScope,
 ) : CosmosDesignSystemCatalogNavigationKit {
     private val _command: MutableSharedFlow<CosmosDesignSystemCatalogNavigationCommand> =
         MutableSharedFlow()
-    override val command: SharedFlow<CosmosDesignSystemCatalogNavigationCommand> = _command
+    override val command: SharedFlow<CosmosDesignSystemCatalogNavigationCommand> =
+        _command
 
     override fun navigateToColorsScreen(): Job {
         return navigate(

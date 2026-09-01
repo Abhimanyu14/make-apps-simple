@@ -17,11 +17,13 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.ColumnTypeConverters
+import androidx.room3.Database
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.constants.DatabaseConstants
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.converters.AmountConverter
@@ -37,7 +39,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.TransactionForEntity
-import java.util.concurrent.Executors
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 @Database(
     version = DatabaseConstants.DATABASE_CURRENT_VERSION_NUMBER,
@@ -50,7 +54,7 @@ import java.util.concurrent.Executors
     autoMigrations = [],
     exportSchema = true,
 )
-@TypeConverters(
+@ColumnTypeConverters(
     AmountConverter::class,
     IntListConverter::class,
     CategoryConverter::class,
@@ -72,7 +76,8 @@ internal abstract class FinanceManagerRoomDatabase : RoomDatabase() {
          */
         internal fun getDatabase(
             context: Context,
-            initialDatabasePopulator: InitialDatabasePopulator? = null,
+            coroutineDispatcherProvider: CoroutineDispatcherProvider,
+            initialDatabasePopulator: InitialDatabasePopulator,
         ): FinanceManagerRoomDatabase {
             val tempInstance: FinanceManagerRoomDatabase? = instance
             if (tempInstance.isNotNull()) {
@@ -83,27 +88,38 @@ internal abstract class FinanceManagerRoomDatabase : RoomDatabase() {
             ) {
                 instance ?: buildDatabase(
                     context = context,
-                    initialDatabasePopulator = initialDatabasePopulator
                 ).also {
                     instance = it
+                    CoroutineScope(
+                        context = coroutineDispatcherProvider.io + SupervisorJob(),
+                    ).launch {
+                        initialDatabasePopulator?.populateInitialDatabaseData(
+                            financeManagerRoomDatabase = it,
+                        )
+                    }
                 }
             }
         }
 
         private fun buildDatabase(
             context: Context,
-            initialDatabasePopulator: InitialDatabasePopulator?,
         ): FinanceManagerRoomDatabase {
             val roomDatabaseCallback: Callback = object : Callback() {
-                override fun onCreate(
-                    db: SupportSQLiteDatabase,
+                override suspend fun onCreate(
+                    connection: SQLiteConnection,
                 ) {
+                    super.onCreate(
+                        connection = connection,
+                    )
                     // do something after database has been created
                 }
 
-                override fun onOpen(
-                    db: SupportSQLiteDatabase,
+                override suspend fun onOpen(
+                    connection: SQLiteConnection,
                 ) {
+                    super.onOpen(
+                        connection = connection,
+                    )
                     /*
                     // TODO-Abhi: Using Work Manager
                     val oneTimeWorkRequest: OneTimeWorkRequest =
@@ -114,25 +130,20 @@ internal abstract class FinanceManagerRoomDatabase : RoomDatabase() {
                         .getInstance(context)
                         .enqueue(oneTimeWorkRequest)
                     */
+                }
 
-                    // do something every time database is open
-                    Executors
-                        .newSingleThreadScheduledExecutor()
-                        .execute {
-                            val myRoomDatabase = getDatabase(
-                                context = context,
-                            )
-                            initialDatabasePopulator?.populateInitialDatabaseData(
-                                financeManagerRoomDatabase = myRoomDatabase,
-                            )
-                        }
+                override suspend fun onDestructiveMigration(
+                    connection: SQLiteConnection,
+                ) {
+                    super.onDestructiveMigration(
+                        connection = connection,
+                    )
                 }
             }
 
             return Room
-                .databaseBuilder(
+                .databaseBuilder<FinanceManagerRoomDatabase>(
                     context = context.applicationContext,
-                    klass = FinanceManagerRoomDatabase::class.java,
                     name = DatabaseConstants.DATABASE_NAME,
                 )
                 .addMigrations(
@@ -140,6 +151,9 @@ internal abstract class FinanceManagerRoomDatabase : RoomDatabase() {
                 )
                 .addCallback(
                     callback = roomDatabaseCallback,
+                )
+                .setDriver(
+                    driver = BundledSQLiteDriver(),
                 )
                 .build()
         }

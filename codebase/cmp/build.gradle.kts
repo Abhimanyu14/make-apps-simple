@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.plugin.android.lint) apply false
     alias(libs.plugins.plugin.compose) apply false
     alias(libs.plugins.plugin.detekt) apply false
+    alias(libs.plugins.plugin.koin.compiler) apply false
     alias(libs.plugins.plugin.kotlin.compose) apply false
     alias(libs.plugins.plugin.kotlin.jvm) apply false
     alias(libs.plugins.plugin.kotlin.multiplatform) apply false

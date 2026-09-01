@@ -25,7 +25,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Amount
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transactions.add_transaction.view_model.AddTransactionScreenDataValidationState
+import org.koin.core.annotation.Single
 
+@Single
 internal class AddTransactionScreenDataValidationUseCase {
     operator fun invoke(
         accountFrom: Account?,

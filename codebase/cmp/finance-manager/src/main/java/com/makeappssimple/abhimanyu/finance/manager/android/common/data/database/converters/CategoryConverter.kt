@@ -16,14 +16,14 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.converters
 
-import androidx.room.TypeConverter
+import androidx.room3.ColumnTypeConverter
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 
 internal class CategoryConverter {
-    @TypeConverter
+    @ColumnTypeConverter
     internal fun stringToCategory(
         value: String?,
     ): CategoryEntity? {
@@ -47,7 +47,7 @@ internal class CategoryConverter {
         }
     }
 
-    @TypeConverter
+    @ColumnTypeConverter
     internal fun categoryToString(
         categoryEntity: CategoryEntity?,
     ): String {

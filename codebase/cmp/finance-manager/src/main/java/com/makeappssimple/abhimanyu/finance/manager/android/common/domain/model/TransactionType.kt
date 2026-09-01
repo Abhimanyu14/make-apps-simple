@@ -16,24 +16,37 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
+import kotlinx.serialization.SerialName
+
 internal enum class TransactionType(
     val title: String,
 ) {
+    @SerialName(value = "INCOME")
     Income(
         title = "Income",
     ),
+
+    @SerialName(value = "EXPENSE")
     Expense(
         title = "Expense",
     ),
+
+    @SerialName(value = "TRANSFER")
     Transfer(
         title = "Transfer",
     ),
+
+    @SerialName(value = "ADJUSTMENT")
     Adjustment(
         title = "Adjustment",
     ),
+
+    @SerialName(value = "INVESTMENT")
     Investment(
         title = "Investment",
     ),
+
+    @SerialName(value = "REFUND")
     Refund(
         title = "Refund",
     ),

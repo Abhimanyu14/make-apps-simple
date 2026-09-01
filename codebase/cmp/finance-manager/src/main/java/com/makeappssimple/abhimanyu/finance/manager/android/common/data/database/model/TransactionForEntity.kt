@@ -18,9 +18,9 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.capitalizeWords
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import kotlinx.serialization.EncodeDefault

@@ -38,7 +38,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class EditTransactionForScreenViewModel(
@@ -51,7 +51,7 @@ internal class EditTransactionForScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region screen args
     private val screenArgs = EditTransactionForScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -108,7 +108,7 @@ internal class EditTransactionForScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "EditTransactionForScreenViewModel: updateUiState",
         )

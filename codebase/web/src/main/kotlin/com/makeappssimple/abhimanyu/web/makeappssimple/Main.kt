@@ -1,7 +1,6 @@
 package com.makeappssimple.abhimanyu.web.makeappssimple
 
 import com.makeappssimple.abhimanyu.web.makeappssimple.components.Layout
-import com.makeappssimple.abhimanyu.web.makeappssimple.components.MainContentLayout
 import com.makeappssimple.abhimanyu.web.makeappssimple.content.Header
 import com.makeappssimple.abhimanyu.web.makeappssimple.content.PageFooter
 import com.makeappssimple.abhimanyu.web.makeappssimple.style.AppStylesheet
@@ -17,13 +16,6 @@ fun main() {
         )
         Layout {
             Header()
-//            MainContentLayout {
-//                 Intro()
-//                 ComposeWebLibraries()
-//                 GetStarted()
-//                 CodeSamples()
-//                 JoinUs()
-//            }
             PageFooter()
         }
     }

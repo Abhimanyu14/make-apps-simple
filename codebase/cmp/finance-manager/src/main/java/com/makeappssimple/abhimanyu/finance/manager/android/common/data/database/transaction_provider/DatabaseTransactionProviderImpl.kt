@@ -16,12 +16,19 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.transaction_provider
 
-import androidx.room.withTransaction
+import androidx.room3.immediateTransaction
+import androidx.room3.useWriterConnection
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.FinanceManagerRoomDatabase
+import org.koin.core.annotation.Single
 
 /**
  * An implementation of [DatabaseTransactionProvider] that uses Room's `withTransaction`.
  */
+@Single(
+    binds = [
+        DatabaseTransactionProvider::class,
+    ],
+)
 internal class DatabaseTransactionProviderImpl(
     private val financeManagerRoomDatabase: FinanceManagerRoomDatabase,
 ) : DatabaseTransactionProvider {
@@ -44,8 +51,10 @@ internal class DatabaseTransactionProviderImpl(
             receiver = financeManagerRoomDatabase,
         ) {
             try {
-                withTransaction {
-                    block()
+                useWriterConnection { connection ->
+                    connection.immediateTransaction {
+                        block()
+                    }
                 }
             } catch (
                 exception: Exception,

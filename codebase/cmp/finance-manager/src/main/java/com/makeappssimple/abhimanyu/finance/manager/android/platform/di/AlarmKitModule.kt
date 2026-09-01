@@ -17,18 +17,22 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.platform.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.platform.core.alarm.AlarmKitImpl
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Module
+@Configuration
 internal class AlarmKitModule {
     @Single
     internal fun providesAlarmKit(
+        @Provided
         context: Context,
         dateTimeKit: DateTimeKit,
         logKit: LogKit,

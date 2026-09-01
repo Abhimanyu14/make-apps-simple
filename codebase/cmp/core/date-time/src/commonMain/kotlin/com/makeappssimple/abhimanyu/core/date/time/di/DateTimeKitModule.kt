@@ -18,11 +18,13 @@ package com.makeappssimple.abhimanyu.core.date.time.di
 
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKitImpl
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import kotlin.time.ExperimentalTime
 
 @Module
+@Configuration
 public class DateTimeKitModule {
     @OptIn(ExperimentalTime::class)
     @Single

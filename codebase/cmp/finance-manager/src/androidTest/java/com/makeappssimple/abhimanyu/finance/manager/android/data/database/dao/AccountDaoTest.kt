@@ -18,7 +18,7 @@ package com.makeappssimple.abhimanyu.finance.manager.android.data.database.dao
 
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
-import androidx.room.Room
+import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.AccountDao

@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.app.FinanceManagerApp
+import com.makeappssimple.abhimanyu.finance.manager.android.common.ui.app.FinanceManagerAppRoot
 
 public class FinanceManagerActivity : ComponentActivity() {
     override fun onCreate(
@@ -30,7 +30,7 @@ public class FinanceManagerActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            FinanceManagerApp()
+            FinanceManagerAppRoot()
         }
     }
 }

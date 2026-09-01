@@ -21,7 +21,9 @@ import com.makeappssimple.abhimanyu.core.kotlin.extensions.isNotNull
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.state.AddAccountScreenNameError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.accounts.add_account.view_model.AddAccountScreenDataValidationState
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.ui.util.isDefaultAccount
+import org.koin.core.annotation.Single
 
+@Single
 internal class AddAccountScreenDataValidationUseCase(
     private val getAllAccountsUseCase: GetAllAccountsUseCase,
 ) {

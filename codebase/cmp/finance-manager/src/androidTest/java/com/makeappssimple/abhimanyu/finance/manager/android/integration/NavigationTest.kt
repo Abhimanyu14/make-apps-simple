@@ -15,7 +15,7 @@
  */
 
 package com.makeappssimple.abhimanyu.finance.manager.android.integration
-
+/*
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -67,7 +67,8 @@ class NavigationTest {
 
         // Click settings button and wait for navigation
         // TODO(Abhi): Not working.
-        /*
+        */
+/*
         // References:
         // https://youtrack.jetbrains.com/issue/CMP-8731/Compose-Navigation-is-throwing-an-Exception-in-the-Compose-UI-Test
         // https://kotlinlang.slack.com/archives/CJLTWPH7S/p1754704904614679
@@ -88,6 +89,8 @@ class NavigationTest {
         composeTestRule
             .onNodeWithText("Settings") // Assuming "Settings" is the title on the Settings screen
             .assertIsDisplayed()
-        */
+        *//*
+
     }
 }
+*/

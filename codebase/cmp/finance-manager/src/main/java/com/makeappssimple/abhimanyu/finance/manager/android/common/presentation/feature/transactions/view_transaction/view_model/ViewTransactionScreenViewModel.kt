@@ -18,10 +18,10 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
-import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
+import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionType
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.DeleteTransactionUseByIdCase
@@ -43,7 +43,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class ViewTransactionScreenViewModel(
@@ -57,7 +57,7 @@ internal class ViewTransactionScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region screen args
     private val screenArgs = ViewTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -116,7 +116,7 @@ internal class ViewTransactionScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "ViewTransactionScreenViewModel: updateUiState",
         )

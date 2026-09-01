@@ -41,8 +41,9 @@ val lintConfig: com.android.build.api.dsl.Lint.() -> Unit = {
 
 plugins {
     alias(libs.plugins.plugin.android.application)
-    alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.compose)
+    alias(libs.plugins.plugin.koin.compiler)
+    alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
 }
 
@@ -94,7 +95,10 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+
     implementation(projects.cosmosDesignSystemCatalog.shared)
+
+    implementation(project(":core:log-kit"))
 
     implementation(project.dependencies.platform(libs.koin.bom))
 }

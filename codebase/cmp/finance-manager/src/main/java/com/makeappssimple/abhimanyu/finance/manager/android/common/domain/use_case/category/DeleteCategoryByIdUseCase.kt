@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class DeleteCategoryByIdUseCase(
     private val categoryRepository: CategoryRepository,
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,

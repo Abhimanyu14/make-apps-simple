@@ -21,7 +21,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.state.EditTransactionForScreenTitleError
 import com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.edit_transaction_for.view_model.EditTransactionForScreenDataValidationState
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
+@Single
 internal class EditTransactionForScreenDataValidationUseCase(
     private val getAllTransactionForValuesUseCase: GetAllTransactionForValuesUseCase,
 ) {

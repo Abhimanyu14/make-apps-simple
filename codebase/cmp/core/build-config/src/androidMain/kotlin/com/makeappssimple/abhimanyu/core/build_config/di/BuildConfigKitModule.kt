@@ -17,10 +17,10 @@
 package com.makeappssimple.abhimanyu.core.build_config.di
 
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 
 @Module
-@ComponentScan(
-    "com.makeappssimple.abhimanyu.core.build_config.kit",
-)
+@ComponentScan("com.makeappssimple.abhimanyu.core.build_config")
+@Configuration
 public class BuildConfigKitModule

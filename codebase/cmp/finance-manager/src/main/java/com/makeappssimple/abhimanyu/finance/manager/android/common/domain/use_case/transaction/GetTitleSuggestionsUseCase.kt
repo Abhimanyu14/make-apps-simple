@@ -18,11 +18,13 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction.TransactionRepository
 import kotlinx.collections.immutable.ImmutableList
+import org.koin.core.annotation.Single
 
 private object GetTitleSuggestionsUseCaseConstants {
     const val DEFAULT_NUMBER_OF_TITLE_SUGGESTIONS = 5
 }
 
+@Single
 internal class GetTitleSuggestionsUseCase(
     private val transactionRepository: TransactionRepository,
 ) {

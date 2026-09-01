@@ -20,10 +20,10 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.core.app.version.AppVersionKit
 import com.makeappssimple.abhimanyu.core.build_config.BuildConfigKit
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orFalse
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.alarm.AlarmKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.common.BackupDataUseCase
@@ -41,7 +41,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class SettingsScreenViewModel(
@@ -58,7 +58,7 @@ internal class SettingsScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region initial data
     private var isLoading: Boolean = true
     private var appVersion: String = ""
@@ -110,7 +110,7 @@ internal class SettingsScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "SettingsScreenViewModel: updateUiState",
         )

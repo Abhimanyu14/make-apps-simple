@@ -17,8 +17,8 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.repository.category
 
 import androidx.sqlite.SQLiteException
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.dao.CategoryDao
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.CategoryEntity
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model.asExternalModel
@@ -30,7 +30,13 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        CategoryRepository::class,
+    ],
+)
 internal class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider,

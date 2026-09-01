@@ -42,9 +42,16 @@ val lintConfig: com.android.build.api.dsl.Lint.() -> Unit = {
 
 plugins {
     alias(libs.plugins.plugin.compose)
+    alias(libs.plugins.plugin.koin.compiler)
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.multiplatform)
     alias(libs.plugins.plugin.kotlin.multiplatform.library)
+}
+
+koinCompiler {
+    compileSafety = true
+    strictSafety = false
+    userLogs = true
 }
 
 dependencies {
@@ -120,10 +127,8 @@ kotlin {
                 implementation(libs.compose.ui)
                 implementation(libs.compose.ui.backhandler)
                 implementation(libs.compose.ui.tooling.preview)
-                implementation(libs.koin.compose)
-                implementation(libs.koin.compose.viewmodel)
-                implementation(libs.koin.compose.viewmodel.navigation)
-                implementation(libs.koin.core)
+                implementation(libs.bundles.koin.common)
+                implementation(libs.bundles.lifecycle)
 
                 implementation(project(":core:coroutines"))
                 implementation(project(":core:log-kit"))

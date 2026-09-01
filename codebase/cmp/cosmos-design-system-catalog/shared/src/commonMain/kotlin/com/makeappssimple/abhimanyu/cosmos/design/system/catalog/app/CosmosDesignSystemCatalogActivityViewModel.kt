@@ -19,7 +19,9 @@ package com.makeappssimple.abhimanyu.cosmos.design.system.catalog.app
 import androidx.lifecycle.ViewModel
 import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.cosmos.design.system.catalog.navigation.CosmosDesignSystemCatalogNavigationKit
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 public class CosmosDesignSystemCatalogActivityViewModel(
     internal val cosmosDesignSystemCatalogNavigationKit: CosmosDesignSystemCatalogNavigationKit,
     internal val logKit: LogKit,

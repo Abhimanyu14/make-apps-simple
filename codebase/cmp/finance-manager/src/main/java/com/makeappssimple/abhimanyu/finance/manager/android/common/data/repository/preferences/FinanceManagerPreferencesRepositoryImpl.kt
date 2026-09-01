@@ -26,7 +26,13 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.preferences.FinanceManagerPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import org.koin.core.annotation.Single
 
+@Single(
+    binds = [
+        FinanceManagerPreferencesRepository::class,
+    ],
+)
 internal class FinanceManagerPreferencesRepositoryImpl(
     private val dateTimeKit: DateTimeKit,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider,

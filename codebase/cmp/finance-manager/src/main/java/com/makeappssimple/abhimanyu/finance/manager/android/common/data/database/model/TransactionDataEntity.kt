@@ -18,8 +18,8 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.model
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import androidx.room3.Embedded
+import androidx.room3.Relation
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import kotlinx.serialization.ExperimentalSerializationApi
 
@@ -28,26 +28,42 @@ internal data class TransactionDataEntity(
     val transaction: TransactionEntity,
 
     @Relation(
-        parentColumn = "category_id",
-        entityColumn = "id",
+        parentColumns = [
+            "category_id",
+        ],
+        entityColumns = [
+            "id",
+        ],
     )
     val category: CategoryEntity?,
 
     @Relation(
-        parentColumn = "account_from_id",
-        entityColumn = "id",
+        parentColumns = [
+            "account_from_id",
+        ],
+        entityColumns = [
+            "id",
+        ],
     )
     val accountFrom: AccountEntity?,
 
     @Relation(
-        parentColumn = "account_to_id",
-        entityColumn = "id",
+        parentColumns = [
+            "account_to_id",
+        ],
+        entityColumns = [
+            "id",
+        ],
     )
     val accountTo: AccountEntity?,
 
     @Relation(
-        parentColumn = "transaction_for_id",
-        entityColumn = "id",
+        parentColumns = [
+            "transaction_for_id",
+        ],
+        entityColumns = [
+            "id",
+        ],
     )
     val transactionFor: TransactionForEntity,
 )

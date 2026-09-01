@@ -16,15 +16,22 @@
 
 package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model
 
+import kotlinx.serialization.SerialName
+
 internal enum class AccountType(
     val title: String,
 ) {
+    @SerialName(value = "BANK")
     Bank(
         title = "Bank",
     ),
+
+    @SerialName(value = "CASH")
     Cash(
         title = "Cash",
     ),
+
+    @SerialName(value = "E_WALLET")
     EWallet(
         title = "E-Wallet",
     ),

@@ -21,18 +21,18 @@ import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.filter
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
-import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.date.time.DateTimeKit
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalDate
 import com.makeappssimple.abhimanyu.core.date.time.models.MyLocalTime
 import com.makeappssimple.abhimanyu.core.date.time.models.orMin
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.filter
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.filterDigits
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.map
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orZero
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.toLongOrZero
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
+import com.makeappssimple.abhimanyu.core.uri.kit.UriDecoder
 import com.makeappssimple.abhimanyu.cosmos.design.system.components.chip.ChipUIData
 import com.makeappssimple.abhimanyu.cosmos.design.system.resource.CosmosStringResource
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Account
@@ -76,7 +76,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class AddTransactionScreenViewModel(
@@ -97,7 +97,7 @@ internal class AddTransactionScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region screen args
     private val screenArgs = AddTransactionScreenArgs(
         savedStateHandle = savedStateHandle,
@@ -209,7 +209,7 @@ internal class AddTransactionScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "AddTransactionScreenViewModel: updateUiState",
         )

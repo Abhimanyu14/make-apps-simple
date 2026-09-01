@@ -29,7 +29,9 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import org.koin.core.annotation.Single
 
+@Single
 internal class RecalculateTotalUseCase(
     private val financeManagerPreferencesRepository: FinanceManagerPreferencesRepository,
     private val getAllAccountsUseCase: GetAllAccountsUseCase,

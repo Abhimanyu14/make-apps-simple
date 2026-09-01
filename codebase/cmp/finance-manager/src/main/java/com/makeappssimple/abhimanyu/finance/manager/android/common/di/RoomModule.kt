@@ -17,37 +17,27 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.di
 
 import android.content.Context
-import com.makeappssimple.abhimanyu.core.json.kit.JsonReaderKit
 import com.makeappssimple.abhimanyu.core.coroutines.CoroutineDispatcherProvider
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.FinanceManagerRoomDatabase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.InitialDatabasePopulator
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.database.local.database.InitialDatabasePopulatorImpl
-import com.makeappssimple.abhimanyu.finance.manager.android.common.data.datastore.FinanceManagerPreferencesDataSource
+import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Module
+@Configuration
 internal class RoomModule {
     @Single
-    internal fun providesInitialDatabasePopulator(
-        coroutineDispatcherProvider: CoroutineDispatcherProvider,
-        jsonReaderKit: JsonReaderKit,
-        financeManagerPreferencesDataSource: FinanceManagerPreferencesDataSource,
-    ): InitialDatabasePopulator {
-        return InitialDatabasePopulatorImpl(
-            coroutineDispatcherProvider = coroutineDispatcherProvider,
-            jsonReaderKit = jsonReaderKit,
-            financeManagerPreferencesDataSource = financeManagerPreferencesDataSource,
-        )
-    }
-
-    @Single
     internal fun providesMyRoomDatabase(
+        @Provided
         context: Context,
         initialDatabasePopulator: InitialDatabasePopulator,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider,
     ): FinanceManagerRoomDatabase {
         return FinanceManagerRoomDatabase.getDatabase(
             context = context,
+            coroutineDispatcherProvider = coroutineDispatcherProvider,
             initialDatabasePopulator = initialDatabasePopulator,
         )
     }

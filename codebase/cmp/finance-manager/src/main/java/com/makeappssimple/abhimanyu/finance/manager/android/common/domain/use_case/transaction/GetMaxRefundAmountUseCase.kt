@@ -21,7 +21,9 @@ import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionData
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.minus
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.plus
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetMaxRefundAmountUseCase(
     private val getTransactionDataByIdUseCase: GetTransactionDataByIdUseCase,
 ) {

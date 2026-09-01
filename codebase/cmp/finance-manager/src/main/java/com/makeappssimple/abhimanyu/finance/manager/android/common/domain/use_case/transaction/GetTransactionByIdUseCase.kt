@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Transaction
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.transaction.TransactionRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetTransactionByIdUseCase(
     private val transactionRepository: TransactionRepository,
 ) {

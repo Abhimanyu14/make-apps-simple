@@ -18,7 +18,9 @@ package com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_c
 
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.Category
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.repository.category.CategoryRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class GetCategoryByIdUseCase(
     private val categoryRepository: CategoryRepository,
 ) {

@@ -17,11 +17,11 @@
 package com.makeappssimple.abhimanyu.finance.manager.android.common.presentation.feature.transaction_for.transaction_for_values.view_model
 
 import androidx.lifecycle.ViewModel
-import com.makeappssimple.abhimanyu.core.kotlin.extensions.mapIndexed
-import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.core.coroutines.getCompletedJob
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.capitalizeWords
+import com.makeappssimple.abhimanyu.core.kotlin.extensions.mapIndexed
 import com.makeappssimple.abhimanyu.core.kotlin.extensions.orFalse
+import com.makeappssimple.abhimanyu.core.log.kit.LogKit
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.model.TransactionFor
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction.CheckIfTransactionForValuesAreUsedInTransactionsUseCase
 import com.makeappssimple.abhimanyu.finance.manager.android.common.domain.use_case.transaction_for.DeleteTransactionForByIdUseCase
@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 internal class TransactionForValuesScreenViewModel(
@@ -54,7 +54,7 @@ internal class TransactionForValuesScreenViewModel(
     internal val logKit: LogKit,
 ) : ViewModel(
     viewModelScope = coroutineScope,
-), LogKit by logKit {
+) {
     // region data
     private var isLoading: Boolean = true
     private var transactionForListItemDataList: ImmutableList<TransactionForListItemData> =
@@ -101,7 +101,7 @@ internal class TransactionForValuesScreenViewModel(
     }
 
     private fun updateUiState() {
-        logError(
+        logKit.logError(
             tag = "Abhi",
             message = "TransactionForValuesScreenViewModel: updateUiState",
         )

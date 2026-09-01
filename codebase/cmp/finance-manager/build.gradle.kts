@@ -21,11 +21,18 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.plugin.android.library)
     alias(libs.plugins.plugin.about.libraries)
+    alias(libs.plugins.plugin.koin.compiler)
     alias(libs.plugins.plugin.kotlin.android)
     alias(libs.plugins.plugin.kotlin.compose)
     alias(libs.plugins.plugin.kotlin.serialization)
     alias(libs.plugins.plugin.ksp)
-    alias(libs.plugins.plugin.room)
+    alias(libs.plugins.plugin.room3)
+}
+
+koinCompiler {
+    compileSafety = true
+    strictSafety = false
+    userLogs = true
 }
 
 android {
@@ -101,23 +108,26 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.navigation.compose)
 
     implementation(platform(libs.firebase.bom))
     implementation(platform(libs.koin.bom))
 
-    ksp(libs.androidx.room.compiler)
-    ksp(libs.koin.ksp.compiler)
+    ksp(libs.androidx.room3.compiler)
 
     testImplementation(libs.bundles.test)
 }
 
-configurations.configureEach {
-    exclude(group = "com.intellij", module = "annotations")
+configurations.all {
+    exclude(
+        group = "com.intellij",
+        module = "annotations"
+    )
 }
 
-room {
+room3 {
     schemaDirectory(
         path = "$projectDir/schemas",
     )
@@ -127,4 +137,6 @@ kotlin {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
     }
+
+    explicitApi()
 }
