@@ -38,7 +38,7 @@ internal fun getLogoUrl(
         "HDFC" to "${HOSTING_URL}/finance_manager/hdfc.svg",
         "ICICI" to "${HOSTING_URL}/finance_manager/icici.svg",
         "IOB" to "${HOSTING_URL}/finance_manager/iob.svg",
-        "Kiwi Credit Card" to "${HOSTING_URL}/finance_manager/kiwi_credit_card.webp",
+        "Kiwi Credit Card" to "${HOSTING_URL}/finance_manager/kiwi.webp",
         "Paytm" to "${HOSTING_URL}/finance_manager/paytm.svg",
         "Paytm UPI Lite" to "${HOSTING_URL}/finance_manager/paytm.svg",
         "PhonePe" to "${HOSTING_URL}/finance_manager/phonepe.webp",
