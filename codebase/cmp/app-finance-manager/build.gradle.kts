@@ -40,7 +40,9 @@ android {
         }
         release {
             isDebuggable = false
-            isMinifyEnabled = false
+            optimization {
+                enable = true // Enables code and resource optimizations.
+            }
         }
     }
 
